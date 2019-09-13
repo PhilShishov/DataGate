@@ -19,7 +19,7 @@ namespace Pharus.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(DbConfiguration.ConnectionString);
+                optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=PharusUsersDb;Trusted_Connection=true;");
             }
 
             base.OnConfiguring(optionsBuilder);

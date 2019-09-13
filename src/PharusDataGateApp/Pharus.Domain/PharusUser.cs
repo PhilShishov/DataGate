@@ -5,6 +5,6 @@ namespace Pharus.Domain
 
     public class PharusUser : IdentityUser
     {
-        
+        public PharusUserRole UserRole { get; set; }
     }
 }
