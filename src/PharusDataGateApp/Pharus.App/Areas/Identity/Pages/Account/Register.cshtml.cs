@@ -73,10 +73,18 @@ namespace Pharus.App.Areas.Identity.Pages.Account
                 var user = new PharusUser { UserName = Input.Username, Email = Input.Email };
 
                 // TODO: Make Admin
+                //if (_userManager.Users.Any())
+                //{
+                //    user.UserRole = await _roleManager.FindByNameAsync("Admin");
+                //}
+                //else
+                //{
+                //    user.UserRole = await _roleManager.FindByNameAsync("User");
+                //}
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
-                if (_userManager.Users.Count() == 1)
+                if (_userManager.Users.Count() <= 2)
                 {
                     await _userManager.AddToRoleAsync(user, "Admin");
                 }
