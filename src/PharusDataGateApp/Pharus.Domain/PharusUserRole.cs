@@ -3,7 +3,6 @@
     using Microsoft.AspNetCore.Identity;
 
     public class PharusUserRole : IdentityRole
-    {
-       
+    {       
     }
 }

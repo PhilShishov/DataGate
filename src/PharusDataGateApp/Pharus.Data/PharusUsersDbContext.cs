@@ -6,12 +6,12 @@ namespace Pharus.Data
 
     using Pharus.Domain;
 
-    public class PharusDbContext : IdentityDbContext<PharusUser, PharusUserRole, string>
+    public class PharusUsersDbContext : IdentityDbContext<PharusUser, PharusUserRole, string>
     {
-        public PharusDbContext()
+        public PharusUsersDbContext()
         {
         }
-        public PharusDbContext(DbContextOptions<PharusDbContext> options) : base(options)
+        public PharusUsersDbContext(DbContextOptions<PharusUsersDbContext> options) : base(options)
         {
         }
 
@@ -19,7 +19,7 @@ namespace Pharus.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=PharusDb;Trusted_Connection=true;");
+                optionsBuilder.UseSqlServer(DbConfiguration.ConnectionString);
             }
 
             base.OnConfiguring(optionsBuilder);
