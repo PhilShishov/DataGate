@@ -1,0 +1,49 @@
+.bg-pharus {
+    background-color: #202020;
+}
+
+.text-pharus {
+    color: #202020;
+}
+
+.border-pharus {
+    border: 2px solid #202020;
+    border-radius: 7px;
+}
+
+.nav-link-white {
+    color: #FFFFFF;
+}
+
+.text-right{
+    margin-left: auto
+}
+
+.hr-2 {
+    height: 2px;
+}
+
+a {
+    text-rendering: none;
+}
+
+a:hover {
+    outline: none;
+    text-decoration: none;
+}
+
+tr {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
+
+textarea {
+    resize: none;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    border: 0;
+    width: 98%;
+}
