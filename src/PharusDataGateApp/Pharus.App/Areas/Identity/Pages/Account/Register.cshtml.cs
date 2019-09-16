@@ -1,5 +1,6 @@
 ﻿namespace Pharus.App.Areas.Identity.Pages.Account
 {
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -8,8 +9,10 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.Logging;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.RazorPages;
 
+    using Pharus.Data;
     using Pharus.Domain;
 
     [AllowAnonymous]
@@ -19,23 +22,28 @@
         private readonly RoleManager<PharusUserRole> _roleManager;
         private readonly UserManager<PharusUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
+        private readonly PharusUsersDbContext _context;
 
         public RegisterModel(
             UserManager<PharusUser> userManager,
             RoleManager<PharusUserRole> roleManager,
             SignInManager<PharusUser> signInManager,
-            ILogger<RegisterModel> logger)
+            ILogger<RegisterModel> logger,
+            PharusUsersDbContext context)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
             _logger = logger;
+            _context = context;
         }
 
         [BindProperty]
         public InputModel Input { get; set; }
 
         public string ReturnUrl { get; set; }
+
+        public IEnumerable<SelectListItem> Roles { get; set; }
 
         public class InputModel
         {
@@ -61,11 +69,19 @@
             [Required]
             [Display(Name = "Role")]
             public string SelectedRole { get; set; }
-            public IEnumerable<PharusUserRole> Roles { get; set; }
         }
 
         public void OnGet(string returnUrl = null)
         {
+            Roles = _context
+                .Roles
+                .Select(r =>
+                new SelectListItem
+                {
+                    Value = r.Name,
+                    Text = r.Name
+                });
+
             ReturnUrl = returnUrl;
         }
 
@@ -77,7 +93,7 @@
                 var user = new PharusUser { UserName = Input.Username, Email = Input.Email };
                 var userResult = await _userManager.CreateAsync(user, Input.Password);
 
-                var roleResult = Input.SelectedRole;
+                var roleResult = Input.SelectedRole.ToString();
                 var roleExist = await _roleManager.RoleExistsAsync(roleResult);
 
                 if (roleExist)
@@ -87,26 +103,26 @@
                     //{
                     //    await _userManager.AddToRoleAsync(user, "Admin");
                     //}
-                    //if (roleResult == "Admin")
-                    //{
-                    //    await _userManager.AddToRoleAsync(user, "Admin");
-                    //}
-                    //else if (roleResult == "Legal")
-                    //{
-                    //    await _userManager.AddToRoleAsync(user, "Legal");
-                    //}
-                    //else if (roleResult == "Risk")
-                    //{
-                    //    await _userManager.AddToRoleAsync(user, "Risk");
-                    //}
-                    //else if (roleResult == "Investment")
-                    //{
-                    //    await _userManager.AddToRoleAsync(user, "Investment");
-                    //}
-                    //else if (roleResult == "Compliance")
-                    //{
-                    //    await _userManager.AddToRoleAsync(user, "Compliance");
-                    //}    
+                    if (roleResult == "Admin")
+                    {
+                        await _userManager.AddToRoleAsync(user, "Admin");
+                    }
+                    else if (roleResult == "Legal")
+                    {
+                        await _userManager.AddToRoleAsync(user, "Legal");
+                    }
+                    else if (roleResult == "Risk")
+                    {
+                        await _userManager.AddToRoleAsync(user, "Risk");
+                    }
+                    else if (roleResult == "Investment")
+                    {
+                        await _userManager.AddToRoleAsync(user, "Investment");
+                    }
+                    else if (roleResult == "Compliance")
+                    {
+                        await _userManager.AddToRoleAsync(user, "Compliance");
+                    }
                 }
 
                 if (userResult.Succeeded)
