@@ -11,6 +11,8 @@
     using Microsoft.AspNetCore.Mvc.RazorPages;
 
     using Pharus.Domain;
+    using Pharus.Domain.Enums;
+    using System;
 
     [AllowAnonymous]
     public class RegisterModel : PageModel
@@ -59,8 +61,8 @@
             public string ConfirmPassword { get; set; }
 
             [Required]
-            [Display(Name = "Choose User Role")]
-            public string UserRole { get; set; }
+            [Display(Name = "Choose Role")]
+            public RoleType? RoleType { get; set; }
         }
 
         public void OnGet(string returnUrl = null)
