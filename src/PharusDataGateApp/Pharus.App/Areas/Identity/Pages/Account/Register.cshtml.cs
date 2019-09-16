@@ -1,5 +1,4 @@
-﻿
-namespace Pharus.App.Areas.Identity.Pages.Account
+﻿namespace Pharus.App.Areas.Identity.Pages.Account
 {
     using System.Linq;
     using System.Threading.Tasks;
@@ -58,6 +57,10 @@ namespace Pharus.App.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [Display(Name = "Choose User Role")]
+            public string UserRole { get; set; }
         }
 
         public void OnGet(string returnUrl = null)
@@ -70,9 +73,7 @@ namespace Pharus.App.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new PharusUser { UserName = Input.Username, Email = Input.Email };
-
-                // TODO: Make Admin
+                var user = new PharusUser { UserName = Input.Username, Email = Input.Email };                
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
@@ -80,6 +81,8 @@ namespace Pharus.App.Areas.Identity.Pages.Account
                 {
                     await _userManager.AddToRoleAsync(user, "Admin");
                 }
+
+                //TODO create choice for different roles
                 else
                 {
                     await _userManager.AddToRoleAsync(user, "User");
