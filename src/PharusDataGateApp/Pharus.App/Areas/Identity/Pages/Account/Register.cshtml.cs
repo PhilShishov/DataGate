@@ -1,7 +1,7 @@
 ﻿namespace Pharus.App.Areas.Identity.Pages.Account
 {
-    using System.Linq;
     using System.Threading.Tasks;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     using Microsoft.AspNetCore.Mvc;
@@ -11,8 +11,6 @@
     using Microsoft.AspNetCore.Mvc.RazorPages;
 
     using Pharus.Domain;
-    using Pharus.Domain.Enums;
-    using System;
 
     [AllowAnonymous]
     public class RegisterModel : PageModel
@@ -61,8 +59,9 @@
             public string ConfirmPassword { get; set; }
 
             [Required]
-            [Display(Name = "Choose Role")]
-            public RoleType? RoleType { get; set; }
+            [Display(Name = "Role")]
+            public string SelectedRole { get; set; }
+            public IEnumerable<PharusUserRole> Roles { get; set; }
         }
 
         public void OnGet(string returnUrl = null)
@@ -75,36 +74,56 @@
             returnUrl = returnUrl ?? Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var user = new PharusUser { UserName = Input.Username, Email = Input.Email };                
+                var user = new PharusUser { UserName = Input.Username, Email = Input.Email };
+                var userResult = await _userManager.CreateAsync(user, Input.Password);
 
-                var result = await _userManager.CreateAsync(user, Input.Password);
+                var roleResult = Input.SelectedRole;
+                var roleExist = await _roleManager.RoleExistsAsync(roleResult);
 
-                if (_userManager.Users.Count() <= 2)
+                if (roleExist)
                 {
-                    await _userManager.AddToRoleAsync(user, "Admin");
+                    //First create
+                    //if (_userManager.Users.Count() <= 2)
+                    //{
+                    //    await _userManager.AddToRoleAsync(user, "Admin");
+                    //}
+                    //if (roleResult == "Admin")
+                    //{
+                    //    await _userManager.AddToRoleAsync(user, "Admin");
+                    //}
+                    //else if (roleResult == "Legal")
+                    //{
+                    //    await _userManager.AddToRoleAsync(user, "Legal");
+                    //}
+                    //else if (roleResult == "Risk")
+                    //{
+                    //    await _userManager.AddToRoleAsync(user, "Risk");
+                    //}
+                    //else if (roleResult == "Investment")
+                    //{
+                    //    await _userManager.AddToRoleAsync(user, "Investment");
+                    //}
+                    //else if (roleResult == "Compliance")
+                    //{
+                    //    await _userManager.AddToRoleAsync(user, "Compliance");
+                    //}    
                 }
 
-                //TODO create choice for different roles
-                else
-                {
-                    await _userManager.AddToRoleAsync(user, "User");
-                }
-
-                if (result.Succeeded)
+                if (userResult.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);
                 }
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
+                //foreach (var error in result.Errors)
+                //{
+                //    ModelState.AddModelError(string.Empty, error.Description);
+                //}
             }
 
             // If we got this far, something failed, redisplay form
             return Page();
         }
-    }
+    }    
 }

@@ -1,9 +1,7 @@
 ﻿
 namespace Pharus.App.Areas.Identity.Pages.Account
 {
-    using System.Linq;
     using System.Threading.Tasks;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     using Microsoft.AspNetCore.Mvc;
@@ -28,9 +26,7 @@ namespace Pharus.App.Areas.Identity.Pages.Account
         }
 
         [BindProperty]
-        public InputModel Input { get; set; }
-
-        public IList<AuthenticationScheme> ExternalLogins { get; set; }
+        public InputModel Input { get; set; }       
 
         public string ReturnUrl { get; set; }
 
@@ -57,9 +53,7 @@ namespace Pharus.App.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
 
             // Clear the existing external cookie to ensure a clean login process
-            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);            
 
             ReturnUrl = returnUrl;
         }

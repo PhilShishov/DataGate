@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewData["Title"] = "Welcome to ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (!this.User.Identity.IsAuthenticated)
+{
+    <div class="jumbotron mt-3 bg-pharus">
+            <h1 class="text-white">Welcome to Pharus Management DataGate Platform</h1>
+            <hr class="bg-white hr-2" />
+            <h3 class="text-white"><a href="/Identity/Account/Login">Login to Pharus DataGate</a> </h3>
+    </div>    
+}
+else
+{
+    if(this.User.IsInRole("Admin"))
+    {
+        <h1 class="text-center">Hello, Administrator @this.User.Identity.Name!</h1>
+    }
+
+    else
+    {
+        <h1 class="text-center">Hello, @this.User.Identity.Name!</h1>
+    }
+    
+    <hr class="hr-2 bg-pharus">
+    <div class="d-flex justify-content-between"></div>        
+}
