@@ -44,12 +44,11 @@
         <span asp-validation-for="Input.Email" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Input.UserRole" class="text-torshia">Choose User Role</label>
-        <input type="text"
-               class="form-control"
-               id="userrole"               
-               asp-for="Input.UserRole">
-        <span asp-validation-for="Input.UserRole" class="text-danger"></span>
+		<label asp-for="Input.RoleType" class="text-torshia">Choose Role</label><br>
+        <select asp-for="Input.RoleType" asp-items="Html.GetEnumSelectList<Pharus.Domain.Enums.RoleType>()">
+            <option value="">Pick one</option>
+        </select>
+        <span asp-validation-for="Input.RoleType" class="text-danger"></span>
     </div>
     <div class="button-holder d-flex justify-content-center">
         <button type="submit" class="btn bg-pharus text-white">Register</button>
