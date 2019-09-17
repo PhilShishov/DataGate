@@ -11,7 +11,7 @@ namespace Pharus.App.Areas.Identity.Pages.Account
 
     using Pharus.Domain;
 
-    [AllowAnonymous]
+    [Authorize]
     public class LogoutModel : PageModel
     {
         private readonly SignInManager<PharusUser> _signInManager;

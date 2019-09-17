@@ -15,7 +15,7 @@
     using Pharus.Data;
     using Pharus.Domain;
 
-    [AllowAnonymous]
+    [Authorize(Policy = "RequireAdminRole")]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<PharusUser> _signInManager;
