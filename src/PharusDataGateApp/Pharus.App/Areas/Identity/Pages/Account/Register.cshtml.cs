@@ -87,7 +87,7 @@
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl = returnUrl = "/Admin/Index";
             if (ModelState.IsValid)
             {
                 var user = new PharusUser { UserName = Input.Username, Email = Input.Email };
@@ -124,8 +124,7 @@
                         await _userManager.AddToRoleAsync(user, "Compliance");
                     }
                 }
-
-                //TODO Create user without logging in automatically
+              
                 if (userResult.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");                    
