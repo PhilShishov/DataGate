@@ -17,16 +17,21 @@ namespace Pharus.App.Areas.Identity.Pages.Account
     public class LoginModel : PageModel
     {
         private readonly SignInManager<PharusUser> _signInManager;
+        private readonly UserManager<PharusUser> _userManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<PharusUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(
+            SignInManager<PharusUser> signInManager,
+            UserManager<PharusUser> userManager,
+            ILogger<LoginModel> logger)
         {
             _signInManager = signInManager;
+            _userManager = userManager;
             _logger = logger;
         }
 
         [BindProperty]
-        public InputModel Input { get; set; }       
+        public InputModel Input { get; set; }
 
         public string ReturnUrl { get; set; }
 
@@ -53,14 +58,13 @@ namespace Pharus.App.Areas.Identity.Pages.Account
             returnUrl = returnUrl ?? Url.Content("~/");
 
             // Clear the existing external cookie to ensure a clean login process
-            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);            
+            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
             ReturnUrl = returnUrl;
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)   
+        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = "/Home/Index";
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
@@ -70,16 +74,30 @@ namespace Pharus.App.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    //TODO different returnUrl for admin
+
+                    var user = await _userManager.FindByNameAsync(Input.Username);
+                    var roles = await _userManager.GetRolesAsync(user);
+
+                    if (roles.Contains("Admin"))
+                    {
+                        returnUrl = "/Admin/Index";
+                    }
+                    else
+                    {
+                        returnUrl = "/Home/Index";
+                    }
+
                     return Redirect(returnUrl);
                 }
             }
 
             //TODO 
-            //else
-            //{
-            //    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-            //    return ViewComponent(model);
-            //}
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                return Page();
+            }
 
             // If we got this far, something failed, redisplay form
             return Page();
