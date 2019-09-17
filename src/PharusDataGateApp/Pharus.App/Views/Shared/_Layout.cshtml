@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="~/css/reset-css.css"/>
     <link rel="stylesheet" href="~/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="~/css/style.css"/>
+    <link rel="stylesheet" href="custom.css">
 </head>
 <body>
     <div class="container-fluid" justify-content-between>
@@ -48,7 +49,7 @@
         else if(this.User.IsInRole("Admin"))
         {
             <nav class="navbar navbar-expand-lg navbar-dark bg-pharus">
-                    <a class="navbar-brand nav-link-white" href="/">Pharus</a>
+                    <a class="navbar-brand nav-link-white" href="/Admin/Index">Pharus</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -59,11 +60,11 @@
                                 <a class="nav-link nav-link-white active" href="/Admin/Index">Home</a>
                             </li>                           
                             <li class="nav-item">
+                                <a class="nav-link nav-link-white active" href="">View Calendar</a>
+                            </li>  	
+                            <li class="nav-item">
                                 <a class="nav-link nav-link-white active" href="/Identity/Account/Logout">Logout</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link nav-link-white active" href="/Identity/Account/Register">Create User</a>
-                            </li>  	
                         </ul>
                         </div>
                     </div>
@@ -72,7 +73,7 @@
         else
         {
             <nav class="navbar navbar-expand-lg navbar-dark bg-pharus">
-                    <a class="navbar-brand nav-link-white" href="/">Pharus</a>
+                    <a class="navbar-brand nav-link-white" href="/Home/Index">Pharus</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>

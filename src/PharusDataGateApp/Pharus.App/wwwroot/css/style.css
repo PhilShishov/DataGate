@@ -19,6 +19,10 @@
     margin-left: auto
 }
 
+.form-group{
+    width: 20%;
+}
+
 .hr-2 {
     height: 2px;
 }
