@@ -16,19 +16,19 @@
     using Pharus.Domain;
 
     [Authorize(Policy = "RequireAdminRole")]
-    public class RegisterModel : PageModel
+    public class CreateUserModel : PageModel
     {
         private readonly SignInManager<PharusUser> _signInManager;
         private readonly RoleManager<PharusUserRole> _roleManager;
         private readonly UserManager<PharusUser> _userManager;
-        private readonly ILogger<RegisterModel> _logger;
+        private readonly ILogger<CreateUserModel> _logger;
         private readonly PharusUsersDbContext _context;
 
-        public RegisterModel(
+        public CreateUserModel(
             UserManager<PharusUser> userManager,
             RoleManager<PharusUserRole> roleManager,
             SignInManager<PharusUser> signInManager,
-            ILogger<RegisterModel> logger,
+            ILogger<CreateUserModel> logger,
             PharusUsersDbContext context)
         {
             _userManager = userManager;

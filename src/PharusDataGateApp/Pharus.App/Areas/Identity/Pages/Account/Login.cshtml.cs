@@ -1,6 +1,8 @@
 ﻿
 namespace Pharus.App.Areas.Identity.Pages.Account
 {
+    using Pharus.Domain;
+
     using System.Threading.Tasks;
     using System.ComponentModel.DataAnnotations;
 
@@ -10,8 +12,6 @@ namespace Pharus.App.Areas.Identity.Pages.Account
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Mvc.RazorPages;
-
-    using Pharus.Domain;
 
     [AllowAnonymous]
     public class LoginModel : PageModel
@@ -74,7 +74,6 @@ namespace Pharus.App.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    //TODO different returnUrl for admin
 
                     var user = await _userManager.FindByNameAsync(Input.Username);
                     var roles = await _userManager.GetRolesAsync(user);
@@ -84,7 +83,7 @@ namespace Pharus.App.Areas.Identity.Pages.Account
                         returnUrl = "/Admin/Index";
                     }
                     else
-                    {
+                    { 
                         returnUrl = "/Home/Index";
                     }
 
@@ -92,7 +91,6 @@ namespace Pharus.App.Areas.Identity.Pages.Account
                 }
             }
 
-            //TODO 
             else
             {
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
