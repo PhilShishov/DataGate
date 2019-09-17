@@ -74,6 +74,13 @@ namespace Pharus.App.Areas.Identity.Pages.Account
                 }
             }
 
+            //TODO 
+            //else
+            //{
+            //    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+            //    return ViewComponent(model);
+            //}
+
             // If we got this far, something failed, redisplay form
             return Page();
         }
