@@ -23,7 +23,7 @@
         public AdminController(
             UserManager<PharusUser> userManager,
             RoleManager<PharusUserRole> roleManager,
-            ILogger<UserCreateBindingModel> logger, 
+            ILogger<UserCreateBindingModel> logger,
             PharusUsersDbContext context)
         {
             _userManager = userManager;
@@ -37,7 +37,7 @@
             return this.View();
         }
 
-        public IActionResult Create()
+        public IActionResult CreateUser()
         {
             this.ViewData["Roles"] = this.context.Roles.ToList();
 
@@ -45,7 +45,8 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(UserCreateBindingModel bindingModel, string returnUrl = null)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateUser(UserCreateBindingModel bindingModel, string returnUrl = null)
         {
             returnUrl = "/Admin/Index";
             if (!this.ModelState.IsValid)
@@ -59,42 +60,55 @@
                 Email = bindingModel.Email
             };
 
-            var userResult = await _userManager.CreateAsync(user, bindingModel.Password);
+            var result = await _userManager.CreateAsync(user, bindingModel.Password);
 
-            var role = bindingModel.RoleType.ToString();
-            var roleExist = await _roleManager.RoleExistsAsync(role);
-
-            if (roleExist)
-            {
-                if (role == "Admin")
-                {
-                    await _userManager.AddToRoleAsync(user, "Admin");
-                }
-                else if (role == "Legal")
-                {
-                    await _userManager.AddToRoleAsync(user, "Legal");
-                }
-                else if (role == "Risk")
-                {
-                    await _userManager.AddToRoleAsync(user, "Risk");
-                }
-                else if (role == "Investment")
-                {
-                    await _userManager.AddToRoleAsync(user, "Investment");
-                }
-                else if (role == "Compliance")
-                {
-                    await _userManager.AddToRoleAsync(user, "Compliance");
-                }
-            }
-
-            if (userResult.Succeeded)
+            if (result.Succeeded)
             {
                 _logger.LogInformation("User created a new account with password.");
+                var role = bindingModel.RoleType.ToString();
+                var roleExist = await _roleManager.RoleExistsAsync(role);
+
+                if (roleExist)
+                {
+                    if (role == "Admin")
+                    {
+                        await _userManager.AddToRoleAsync(user, "Admin");
+                    }
+                    else if (role == "Legal")
+                    {
+                        await _userManager.AddToRoleAsync(user, "Legal");
+                    }
+                    else if (role == "Risk")
+                    {
+                        await _userManager.AddToRoleAsync(user, "Risk");
+                    }
+                    else if (role == "Investment")
+                    {
+                        await _userManager.AddToRoleAsync(user, "Investment");
+                    }
+                    else if (role == "Compliance")
+                    {
+                        await _userManager.AddToRoleAsync(user, "Compliance");
+                    }
+                }
                 return LocalRedirect(returnUrl);
             }
 
-            return this.Redirect(returnUrl);
+            AddErrors(result);
+
+            return this.RedirectToPage("/Admin/CreateUser");
         }
+
+        #region Helpers
+
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+        }
+
+        #endregion
     }
 }
