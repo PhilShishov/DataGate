@@ -13,7 +13,8 @@
                class="form-control-pharus"
                id="username"
                placeholder="Username..."
-               asp-for="Input.Username">
+               asp-for="Input.Username"
+               autofocus>
         <span asp-validation-for="Input.Username" class="text-danger"></span>
     </div>
     <div class="form-group">
@@ -46,13 +47,14 @@
     <div class="form-group">
 		<label asp-for="Input.SelectedRole" class="text-torshia"></label><br>
         <select asp-for="Input.SelectedRole"
-				asp-items="Model.Roles">
-				<option value="">Choose a role</option>
+				asp-items="Model.Roles"
+                class="form-control-pharus">
+				<option value="">Select role</option>
 		</select>
         <span asp-validation-for="Input.SelectedRole" class="text-danger"></span>
     </div>
     <div class="button-holder d-flex justify-content-center">
-        <button type="submit" class="btn bg-pharus text-white">Create</button>
+        <button type="submit" class="btn bg-pharus text-white" id="btnCreateUser">CREATE</button>
     </div>
 </form>
 

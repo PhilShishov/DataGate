@@ -1,8 +1,35 @@
 
-.form-group-pharus{
-    width: 75% !important;
+.form-control-login-pharus{
+    width: 270px;
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+    border: 1px solid #ced4da;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
-hr.bg-pharus w-50 hr-2{
-    width: 75% !important;
+.form-control-pharus{
+    width: 270px;
+    border: 1px solid #ced4da;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    padding: 6px 12px;
 }
+
+#btnLogin, #btnCreateUser{
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+  }
+  
+#btnLogin:hover {
+    background-color: #555555;
+    color: white;
+  }
+
+#btnCreateUser:hover {
+    background-color: #555555;
+    color: white;
+  }
+
+/* .select-pharus{
+
+} */
