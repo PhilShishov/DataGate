@@ -1,8 +1,6 @@
 ﻿
 namespace Pharus.App.Areas.Identity.Pages.Account
 {
-    using Pharus.Domain;
-
     using System.Threading.Tasks;
     using System.ComponentModel.DataAnnotations;
 
@@ -12,6 +10,8 @@ namespace Pharus.App.Areas.Identity.Pages.Account
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Mvc.RazorPages;
+
+    using Pharus.Domain;
 
     [AllowAnonymous]
     public class LoginModel : PageModel
@@ -89,6 +89,12 @@ namespace Pharus.App.Areas.Identity.Pages.Account
 
                     return Redirect(returnUrl);
                 }
+                //TODO UnsuccessfulLogin view
+                //else
+                //{
+                //    returnUrl = "/Identity/Account/UnsuccessfulLogin";
+                //    return Redirect(returnUrl);
+                //}
             }
 
             else
