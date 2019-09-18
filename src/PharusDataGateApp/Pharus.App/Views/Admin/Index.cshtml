@@ -12,7 +12,7 @@
             <h3 class="text-white"><a href="/Identity/Account/Login">Login to Pharus DataGate</a> </h3>
     </div>    
 }
-else
+else if(this.User.IsInRole("Admin"))
 {
     <h1 class="text-center">Hello, Administrator @this.User.Identity.Name!</h1>       
     
@@ -22,9 +22,8 @@ else
             <h2 class="text-center">User Panel</h2>
             <div class="border-pharus p-3">               
                     <div class="p-2 d-flex justify-content-around">
-                       <a href="/Identity/Account/CreateUser" class="btn bg-pharus text-white w-25">Create User</a>
-                        <a href="/Identity/Account/EditUser" class="btn bg-pharus text-white w-25">Edit User</a>
-                        <a href="/Identity/Account/UserList" class="btn bg-pharus text-white w-25">User List</a>
+                        <a href="/Admin/Create" class="btn bg-pharus text-white">Create User</a>
+                        <a href="" class="btn bg-pharus text-white">User List</a>
                     </div>                
             </div>
         </div>
@@ -32,7 +31,7 @@ else
             <h2 class="text-center">Consult Reports</h2>
             <div class="border-pharus p-3">               
                     <div class="p-2 d-flex justify-content-around">                        
-                        <a href="" class="btn bg-pharus text-white w-25">Consult Reports</a>
+                        <a href="" class="btn bg-pharus text-white">Consult</a>
                     </div>
                 
             </div>
@@ -41,7 +40,7 @@ else
             <h2 class="text-center">View Projects</h2>
             <div class="border-pharus p-3">                
                     <div class="p-2 d-flex justify-content-around">                        
-                        <a href="" class="btn bg-pharus text-white w-25">View Projects</a>
+                        <a href="" class="btn bg-pharus text-white">View</a>
                     </div>
                 
             </div>
