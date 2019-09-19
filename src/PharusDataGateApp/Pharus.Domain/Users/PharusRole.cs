@@ -1,15 +1,11 @@
-﻿
-namespace Pharus.Domain
+﻿namespace Pharus.Domain.Users
 {
-    using System;
     using System.Collections.Generic;
 
     using Microsoft.AspNetCore.Identity;
 
-    public class PharusUser : IdentityUser
+    public class PharusRole : IdentityRole
     {
-        public DateTimeOffset? LastLoginTime { get; set; }
-
         public ICollection<PharusUserRole> UserRoles { get; set; }
     }
 }
