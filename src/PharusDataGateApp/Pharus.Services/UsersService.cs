@@ -9,23 +9,23 @@
 
     public class UsersService : IUsersService
     {
-        private readonly PharusUsersDbContext pharusDbContext;
+        private readonly PharusUsersDbContext context;
 
-        public UsersService(PharusUsersDbContext pandaDbContext)
+        public UsersService(PharusUsersDbContext context)
         {
-            this.pharusDbContext = pandaDbContext;
+            this.context = context;
         }
 
         public List<PharusUser> GetAllUsers()
         {
-            List<PharusUser> users = this.pharusDbContext.Users.ToList();
+            List<PharusUser> users = this.context.Users.ToList();
 
             return users;
         }
 
         public PharusUser GetUser(string username)
         {
-            PharusUser userDb = this.pharusDbContext.Users.SingleOrDefault(user => user.UserName == username);
+            PharusUser userDb = this.context.Users.SingleOrDefault(user => user.UserName == username);
 
             return userDb;
         }
