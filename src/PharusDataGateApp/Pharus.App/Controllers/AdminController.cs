@@ -86,7 +86,7 @@
             return this.RedirectToPage("/Admin/CreateUser");
         }
 
-        public IActionResult ViewUser(UserViewModel model)
+        public async Task<IActionResult> ViewUser(UserViewModel model)
         {
             var users = this.usersService.GetAllUsers();
 
@@ -94,11 +94,11 @@
 
             foreach (var user in users)
             {
-                //var roles = await _userManager.GetRolesAsync(user);
+                var roles = await _userManager.GetRolesAsync(user);
                 result = users.Select(u => new UserViewModel
                 {
                     Username = u.UserName,
-                    Role = u.UserRole.Name
+                    Roles = roles
                 })
                 .ToList();
             }
@@ -110,7 +110,7 @@
 
         private async Task AssignRoleToUser(UserCreateBindingModel bindingModel, PharusUser user)
         {
-            var role = bindingModel.RoleType;
+            var role = bindingModel.RoleType;            
             var roleExist = await _roleManager.RoleExistsAsync(role);
 
             if (roleExist)
