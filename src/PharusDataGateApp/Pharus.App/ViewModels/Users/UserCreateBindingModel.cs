@@ -1,6 +1,8 @@
 ﻿
 namespace Pharus.App.ViewModels.Users
 {
+    using Pharus.Domain;
+
     using System.ComponentModel.DataAnnotations;
 
     public class UserCreateBindingModel
