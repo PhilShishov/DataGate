@@ -1,4 +1,4 @@
-﻿@using Pharus.Domain
+﻿@using Pharus.Domain.Users
 @model Pharus.App.ViewModels.Users.UserCreateBindingModel
 @{
     ViewData["Title"] = "Create User";
@@ -49,7 +49,7 @@
 		<label for="RoleType" class="text-torshia"></label><br>
         <select class="custome-select" id="roletype" asp-for="RoleType">
             <option selected disabled>-- Choose Role --</option>
-            @foreach (var role in (List<PharusUserRole>) ViewData["Roles"])
+            @foreach (var role in (List<PharusRole>) ViewData["Roles"])
             {
                 <option value="@role.Name">@role</option>
             }

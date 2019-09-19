@@ -22,10 +22,7 @@
             {
             <tr class="row">
                 <th scope="row" class="col-lg-5 d-flex justify-content-center"><h5>@user.Username</h5></th>    
-                @foreach (var role in user.Roles) 
-                {
-                    <td class="col-lg-2 d-flex justify-content-center"><h5>@role</h5></td>            
-                }           
+                <td class="col-lg-2 d-flex justify-content-center"><h5>@user.Role</h5></td>                          
                 <td class="col-lg-2 d-flex justify-content-center"><h5></h5></td>
                 <td class="col-lg-2 d-flex justify-content-center"><h5></h5></td>    
                 <td class="col-lg-1 d-flex justify-content-center">Edit</td>            

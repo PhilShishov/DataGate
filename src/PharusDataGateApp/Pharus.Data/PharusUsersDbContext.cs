@@ -5,8 +5,12 @@ namespace Pharus.Data
 
     using Microsoft.EntityFrameworkCore;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Pharus.Domain.Users;
+    using Microsoft.AspNetCore.Identity;
 
-    public class PharusUsersDbContext : IdentityDbContext<PharusUser, PharusUserRole, string>
+    public class PharusUsersDbContext : IdentityDbContext<PharusUser, PharusRole, string, IdentityUserClaim<string>,
+                            PharusUserRole, IdentityUserLogin<string>,
+                            IdentityRoleClaim<string>, IdentityUserToken<string>>
     {
         public PharusUsersDbContext()
         {
@@ -28,10 +32,22 @@ namespace Pharus.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<PharusUser>()
-                .HasKey(user => user.Id);           
-
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<PharusUserRole>(userRole =>
+            {
+                userRole.HasKey(ur => new { ur.UserId, ur.RoleId });
+
+                userRole.HasOne(ur => ur.Role)
+                    .WithMany(r => r.UserRoles)
+                    .HasForeignKey(ur => ur.RoleId)
+                    .IsRequired();
+
+                userRole.HasOne(ur => ur.User)
+                    .WithMany(r => r.UserRoles)
+                    .HasForeignKey(ur => ur.UserId)
+                    .IsRequired();
+            });
         }
     }
 }

@@ -13,13 +13,14 @@
     using Pharus.App.ViewModels.Users;
     using System.Linq;
     using Pharus.Data;
+    using Pharus.Domain.Users;
 
     //[Authorize(Policy = "RequireAdminRole")]
     public class AdminController : Controller
     {
         private readonly IRolesService rolesService;
         private readonly IUsersService usersService;
-        private readonly RoleManager<PharusUserRole> _roleManager;
+        private readonly RoleManager<PharusRole> _roleManager;
         private readonly UserManager<PharusUser> _userManager;
         private readonly ILogger<UserCreateBindingModel> _logger;
         private readonly PharusUsersDbContext context;
@@ -28,7 +29,7 @@
             IRolesService rolesService,
             IUsersService usersService,
             UserManager<PharusUser> userManager,
-            RoleManager<PharusUserRole> roleManager,
+            RoleManager<PharusRole> roleManager,
             ILogger<UserCreateBindingModel> logger,
             PharusUsersDbContext context)
         {
@@ -86,31 +87,24 @@
             return this.RedirectToPage("/Admin/CreateUser");
         }
 
-        public async Task<IActionResult> ViewUser(UserViewModel model)
+        public IActionResult ViewUser(UserViewModel model)
         {
-            var users = this.usersService.GetAllUsers();
-
-            List<UserViewModel> result = null;
-
-            foreach (var user in users)
-            {
-                var roles = await _userManager.GetRolesAsync(user);
-                result = users.Select(u => new UserViewModel
+            List<UserViewModel> usersView = usersService.GetAllUserRoles()                
+                .Select(user => new UserViewModel
                 {
-                    Username = u.UserName,
-                    Roles = roles
+                    Username = user.UserName,
+                    Role = user.UserRoles.Select(ur => ur.Role.Name).FirstOrDefault()
                 })
                 .ToList();
-            }
 
-            return View(result);
+            return View(usersView);
         }
 
         #region Helpers
 
         private async Task AssignRoleToUser(UserCreateBindingModel bindingModel, PharusUser user)
         {
-            var role = bindingModel.RoleType;            
+            var role = bindingModel.RoleType;
             var roleExist = await _roleManager.RoleExistsAsync(role);
 
             if (roleExist)
@@ -136,8 +130,8 @@
                     await _userManager.AddToRoleAsync(user, "Compliance");
                 }
 
-                user.UserRole = this.rolesService.GetRole(role);
-                this.context.SaveChanges();
+                //user.UserRoles = this.rolesService.GetRole(role);
+                //this.context.SaveChanges();
             }
         }
 

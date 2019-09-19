@@ -8,7 +8,7 @@
     using System.Collections.Generic;
 
     using Microsoft.AspNetCore.Identity;
-    using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
 
     public class UsersService : IUsersService
     {
@@ -37,12 +37,11 @@
             return userDb;
         }
 
-        //public IList<string> GetAllUserRoles(string username)
-        //{
-        //    var user = this.context.Users.SingleOrDefault(u =>u.UserName == username);
-        //    var roles = (IList<string>)this._userManager.GetRolesAsync(user);
+        public List<PharusUser> GetAllUserRoles()
+        {
+            var users = this._userManager.Users.Include(u => u.UserRoles).ThenInclude(ur => ur.Role).ToList();
 
-        //    return roles;
-        //}
+            return users;
+        }
     }
 }

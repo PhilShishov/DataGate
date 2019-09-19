@@ -2,7 +2,6 @@
 {
     using Pharus.Domain;
 
-    using System.Threading.Tasks;
     using System.Collections.Generic;
 
     public interface IUsersService
@@ -11,6 +10,6 @@
 
         PharusUser GetUser(string username);
 
-        //IList<string> GetAllUserRoles(string username);
+        List<PharusUser> GetAllUserRoles();
     }
 }

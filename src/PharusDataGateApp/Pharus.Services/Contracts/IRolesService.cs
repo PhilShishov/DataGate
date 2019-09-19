@@ -1,13 +1,12 @@
 ﻿namespace Pharus.Services.Contracts
 {
-    using Pharus.Domain;
-
+    using Pharus.Domain.Users;
     using System.Collections.Generic;
 
     public interface IRolesService
     {
-        List<PharusUserRole> GetAllRoles();
+        List<PharusRole> GetAllRoles();
 
-        PharusUserRole GetRole(string roleName);
+        PharusRole GetRole(string roleName);
     }
 }

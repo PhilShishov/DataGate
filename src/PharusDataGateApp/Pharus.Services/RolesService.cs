@@ -1,11 +1,11 @@
 ﻿namespace Pharus.Services
 {
     using Pharus.Data;
-    using Pharus.Domain;
     using Pharus.Services.Contracts;
 
     using System.Linq;
     using System.Collections.Generic;
+    using Pharus.Domain.Users;
 
     public class RolesService : IRolesService
     {
@@ -20,14 +20,14 @@
             this.usersService = usersService;
             this.context = context;
         }
-        public List<PharusUserRole> GetAllRoles()
+        public List<PharusRole> GetAllRoles()
         {
             var roles = this.context.Roles.ToList();
 
             return roles;
         }
 
-        public PharusUserRole GetRole(string roleName)
+        public PharusRole GetRole(string roleName)
         {
             var role = this.context.Roles.SingleOrDefault(r => r.Name == roleName);
 
