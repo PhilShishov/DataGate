@@ -6,9 +6,8 @@
 
     public interface IRolesService
     {
-        List<PharusUserRole> GetAllRoles();        
+        List<PharusUserRole> GetAllRoles();
 
-        //TODO
-        //PharusUserRole GetUserRole(string roleName);
+        PharusUserRole GetRole(string roleName);
     }
 }

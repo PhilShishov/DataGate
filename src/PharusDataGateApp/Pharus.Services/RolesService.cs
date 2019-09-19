@@ -10,21 +10,28 @@
     public class RolesService : IRolesService
     {
         private readonly PharusUsersDbContext context;
+        private readonly IUsersService usersService;
 
-        public RolesService(PharusUsersDbContext context)
+
+        public RolesService(
+            PharusUsersDbContext context,
+            IUsersService usersService)
         {
+            this.usersService = usersService;
             this.context = context;
         }
         public List<PharusUserRole> GetAllRoles()
         {
-            List<PharusUserRole> roles = this.context.Roles.ToList();
+            var roles = this.context.Roles.ToList();
 
             return roles;
         }
 
-        //public PharusUserRole GetUserRole(string roleName)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public PharusUserRole GetRole(string roleName)
+        {
+            var role = this.context.Roles.SingleOrDefault(r => r.Name == roleName);
+
+            return role;
+        }
     }
 }
