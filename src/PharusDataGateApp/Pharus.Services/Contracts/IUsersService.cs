@@ -1,15 +1,18 @@
 ﻿namespace Pharus.Services.Contracts
 {
-    using Pharus.Domain;
-
     using System.Collections.Generic;
+
+    using Pharus.Domain;
 
     public interface IUsersService
     {
         List<PharusUser> GetAllUsers();
 
-        PharusUser GetUser(string username);
+        PharusUser GetUserByUserName(string username);
+
+        //PharusUser GetUserByID(string id);
 
         List<PharusUser> GetAllUserRoles();
+
     }
 }

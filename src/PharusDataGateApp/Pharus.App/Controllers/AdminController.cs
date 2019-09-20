@@ -88,9 +88,9 @@
             return this.RedirectToPage("/Admin/CreateUser");
         }
 
-        public IActionResult ViewUser(UserViewModel model)
+        public IActionResult ViewUser()
         {
-            List<UserViewModel> usersView = usersService.GetAllUserRoles()
+            List<UserViewModel> usersView = this.usersService.GetAllUserRoles()
                 .Select(user => new UserViewModel
                 {
                     Username = user.UserName,
@@ -109,39 +109,50 @@
         }
 
         [HttpGet("Admin/EditUser/{username}")]
-        public async Task<IActionResult> EditUser(EditUserViewModel model, string username)
-        {           
+        public IActionResult EditUser(string username)
+        {
+            EditUserViewModel editUserModel = this.usersService
+                .GetAllUserRoles()
+                .Where(u => u.UserName == username)
+                .Select(u => new EditUserViewModel
+                {
+                    Id = u.Id,
+                    Username = u.UserName,
+                    Email = u.Email,
+                    RoleType = u.UserRoles.Select(ur => ur.Role.Name).FirstOrDefault()
+                })
+                .FirstOrDefault();         
 
-            var user = await _userManager.FindByNameAsync(username);
-            var role = user.UserRoles.Select(ur => ur.Role.Name).FirstOrDefault();
-            user.UserName = model.Username;
-            user.Email = model.Email;
-            role = model.RoleType;
-
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
-
-
-
-            return View();
-        }        
+            return this.View(editUserModel);
+        }
 
         [HttpPost]
-        public IActionResult EditUser(string returnUrl = null)
+        public async Task<IActionResult> EditUser(EditUserViewModel model, string returnUrl = null)
         {
             returnUrl = "/Admin/Index";
 
-            //var user = await _userManager.FindByNameAsync(username);
-            //if (!ModelState.IsValid)
-            //{
-            //    return View();
-            //}
-            //await _userManager.UpdateAsync(user);
+            if (!ModelState.IsValid)
+            {
+                return View(model ?? new EditUserViewModel());
+            }
 
-            return View();
-        }     
+            var user = await this._userManager.FindByNameAsync(model.Id);
+
+            user.UserName = model.Username;
+            user.Email = model.Email;
+            //user.PasswordHash = checkUser.PasswordHash;
+
+            var result = await _userManager.UpdateAsync(user);
+
+            if (result.Succeeded)
+            {
+                _logger.LogInformation("User updated.");
+
+                return LocalRedirect(returnUrl);
+            }
+
+            return this.RedirectToPage(returnUrl);
+        }
 
         #region Helpers
 
