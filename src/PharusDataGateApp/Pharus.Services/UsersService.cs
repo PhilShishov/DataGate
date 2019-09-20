@@ -33,13 +33,6 @@
             return userDb;
         }
 
-        //public PharusUser GetUserByID(string id)
-        //{
-        //    PharusUser userDb = this._userManager.FindByIdAsync()SingleOrDefault(user => user.Id == id);
-
-        //    return userDb;
-        //}
-
         public List<PharusUser> GetAllUserRoles()
         {
             var users = this._userManager.Users.Include(u => u.UserRoles).ThenInclude(ur => ur.Role).ToList();

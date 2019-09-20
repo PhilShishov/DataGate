@@ -10,8 +10,6 @@
 
         PharusUser GetUserByUserName(string username);
 
-        //PharusUser GetUserByID(string id);
-
         List<PharusUser> GetAllUserRoles();
 
     }
