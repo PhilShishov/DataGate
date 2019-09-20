@@ -140,7 +140,6 @@
                 .Where(u => u.UserName == model.Id)
                 .FirstOrDefault();
 
-
             user.UserName = model.Username;
             user.Email = model.Email;
 
@@ -156,7 +155,15 @@
                 }
             }
 
-            //user.PasswordHash = checkUser.PasswordHash;
+            //Save password as hash
+            PasswordHasher<PharusUser> hasher = new PasswordHasher<PharusUser>();
+
+            if (user.PasswordHash != model.PasswordHash && model.PasswordHash != null)
+            {
+                var newPassword = hasher.HashPassword(user, model.PasswordHash);
+                user.PasswordHash = newPassword;
+            }
+
             var resultUser = await _userManager.UpdateAsync(user);
 
             if (resultUser.Succeeded)

@@ -18,11 +18,11 @@
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
         [DataType(DataType.Password)]
         [Display(Name = "New Password")]
-        public string NewPassword { get; set; }
+        public string PasswordHash { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("NewPassword", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("PasswordHash", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
 }
