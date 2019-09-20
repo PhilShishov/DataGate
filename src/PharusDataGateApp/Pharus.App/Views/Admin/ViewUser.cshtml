@@ -25,7 +25,10 @@
                 <td class="col-lg-2 d-flex justify-content-center"><h5>@user.Role</h5></td>                          
                 <td class="col-lg-2 d-flex justify-content-center"><h5>@user.LastLogin</h5></td>
                 <td class="col-lg-2 d-flex justify-content-center"><h5></h5></td>    
-                <td class="col-lg-1 d-flex justify-content-center">Edit</td>            
+                <td class="col-lg-1 d-flex justify-content-center">
+                     <a href="/Admin/EditUser/@user.Username" class="btn bg-pharus text-white">Edit</a>  
+					  <a href="/Admin/DeleteUser/@user.Username" class="btn bg-pharus text-white">Delete</a>    
+                </td>            
             </tr> 
 			}
         </tbody>

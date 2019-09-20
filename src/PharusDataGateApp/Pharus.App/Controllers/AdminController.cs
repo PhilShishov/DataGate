@@ -1,5 +1,7 @@
 ﻿namespace Pharus.App.Controllers
 {
+    using System.Linq;
+    using System.Globalization;
     using System.Threading.Tasks;
     using System.Collections.Generic;
 
@@ -8,16 +10,13 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Authorization;
 
+    using Pharus.Data;
     using Pharus.Domain;
+    using Pharus.Domain.Users;
     using Pharus.Services.Contracts;
     using Pharus.App.ViewModels.Users;
-    using System.Linq;
-    using Pharus.Data;
-    using Pharus.Domain.Users;
-    using System;
-    using System.Globalization;
 
-    //[Authorize(Policy = "RequireAdminRole")]
+    [Authorize(Policy = "RequireAdminRole")]
     public class AdminController : Controller
     {
         private readonly IRolesService rolesService;
@@ -103,6 +102,47 @@
             return View(usersView);
         }
 
+        [HttpGet("/Admin/EditUserPanel/{username}")]
+        public IActionResult EditUserPanel()
+        {
+            return this.View();
+        }
+
+        [HttpGet("Admin/EditUser/{username}")]
+        public async Task<IActionResult> EditUser(EditUserViewModel model, string username)
+        {           
+
+            var user = await _userManager.FindByNameAsync(username);
+            var role = user.UserRoles.Select(ur => ur.Role.Name).FirstOrDefault();
+            user.UserName = model.Username;
+            user.Email = model.Email;
+            role = model.RoleType;
+
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
+
+
+            return View();
+        }        
+
+        [HttpPost]
+        public IActionResult EditUser(string returnUrl = null)
+        {
+            returnUrl = "/Admin/Index";
+
+            //var user = await _userManager.FindByNameAsync(username);
+            //if (!ModelState.IsValid)
+            //{
+            //    return View();
+            //}
+            //await _userManager.UpdateAsync(user);
+
+            return View();
+        }     
+
         #region Helpers
 
         private async Task AssignRoleToUser(UserCreateBindingModel bindingModel, PharusUser user)
@@ -132,9 +172,6 @@
                 {
                     await _userManager.AddToRoleAsync(user, "Compliance");
                 }
-
-                //user.UserRoles = this.rolesService.GetRole(role);
-                //this.context.SaveChanges();
             }
         }
 
