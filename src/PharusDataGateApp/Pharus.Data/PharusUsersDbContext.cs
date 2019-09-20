@@ -1,12 +1,11 @@
-﻿
-namespace Pharus.Data
+﻿namespace Pharus.Data
 {
-    using Pharus.Domain;
-
     using Microsoft.EntityFrameworkCore;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-    using Pharus.Domain.Users;
     using Microsoft.AspNetCore.Identity;
+
+    using Pharus.Domain;
+    using Pharus.Domain.Users;
 
     public class PharusUsersDbContext : IdentityDbContext<PharusUser, PharusRole, string, IdentityUserClaim<string>,
                             PharusUserRole, IdentityUserLogin<string>,
