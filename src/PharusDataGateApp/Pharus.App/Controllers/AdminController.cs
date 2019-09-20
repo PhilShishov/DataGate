@@ -121,7 +121,7 @@
                     Email = u.Email,
                     RoleType = u.UserRoles.Select(ur => ur.Role.Name).FirstOrDefault()
                 })
-                .FirstOrDefault();         
+                .FirstOrDefault();
 
             return this.View(editUserModel);
         }
@@ -136,15 +136,30 @@
                 return View(model ?? new EditUserViewModel());
             }
 
-            var user = await this._userManager.FindByNameAsync(model.Id);
+            var user = this.usersService.GetAllUserRoles()
+                .Where(u => u.UserName == model.Id)
+                .FirstOrDefault();
+
 
             user.UserName = model.Username;
             user.Email = model.Email;
+
+            //Role change management
+            var newRole = model.RoleType;
+            var oldRole = user.UserRoles.Select(ur => ur.Role.Name).FirstOrDefault();
+            if (this.rolesService.GetRole(newRole) != null)
+            {
+                if (newRole != oldRole)
+                {
+                    await this._userManager.RemoveFromRoleAsync(user, oldRole);
+                    await this._userManager.AddToRoleAsync(user, newRole);
+                }
+            }
+
             //user.PasswordHash = checkUser.PasswordHash;
+            var resultUser = await _userManager.UpdateAsync(user);
 
-            var result = await _userManager.UpdateAsync(user);
-
-            if (result.Succeeded)
+            if (resultUser.Succeeded)
             {
                 _logger.LogInformation("User updated.");
 
