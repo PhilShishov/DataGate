@@ -14,6 +14,8 @@
     using System.Linq;
     using Pharus.Data;
     using Pharus.Domain.Users;
+    using System;
+    using System.Globalization;
 
     //[Authorize(Policy = "RequireAdminRole")]
     public class AdminController : Controller
@@ -89,11 +91,12 @@
 
         public IActionResult ViewUser(UserViewModel model)
         {
-            List<UserViewModel> usersView = usersService.GetAllUserRoles()                
+            List<UserViewModel> usersView = usersService.GetAllUserRoles()
                 .Select(user => new UserViewModel
                 {
                     Username = user.UserName,
-                    Role = user.UserRoles.Select(ur => ur.Role.Name).FirstOrDefault()
+                    Role = user.UserRoles.Select(ur => ur.Role.Name).FirstOrDefault(),
+                    LastLogin = user.LastLoginTime?.ToString("dd.MM.yyyy HH:mm:ss", CultureInfo.InvariantCulture)
                 })
                 .ToList();
 

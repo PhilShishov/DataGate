@@ -7,10 +7,9 @@
     {
         public string Username { get; set; }
 
-        //public IList<string> Roles { get; set; }
         public string Role { get; set; }
 
-        public DateTime LastLogin { get; set; }
+        public string LastLogin { get; set; }
 
         public bool IsLogged { get; set; }
     }

@@ -1,6 +1,7 @@
 ﻿
 namespace Pharus.App.Areas.Identity.Pages.Account
 {
+    using System;
     using System.Threading.Tasks;
     using System.ComponentModel.DataAnnotations;
 
@@ -76,6 +77,23 @@ namespace Pharus.App.Areas.Identity.Pages.Account
                     _logger.LogInformation("User logged in.");
 
                     var user = await _userManager.FindByNameAsync(Input.Username);
+
+                    if (user == null)
+                    {
+                        return NotFound("Unable to load user for update last login.");
+                    }
+
+                    //Last Login Time
+                    user.LastLoginTime = DateTimeOffset.UtcNow;
+                    var lastLoginResult = await _userManager.UpdateAsync(user);
+
+                    if (!lastLoginResult.Succeeded)
+                    {
+                        throw new InvalidOperationException($"Unexpected error occurred setting the last login date" +
+                            $" ({lastLoginResult.ToString()}) for user with ID '{user.Id}'.");
+                    }
+
+                    //Get roles user
                     var roles = await _userManager.GetRolesAsync(user);
 
                     if (roles.Contains("Admin"))
