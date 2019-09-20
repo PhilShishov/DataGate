@@ -4,15 +4,14 @@
 
     public class EditUserViewModel
     {
-        [Required]
+        public string Id { get; set; }
+
         public string Username { get; set; }
 
-        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
         [Display(Name = "Role")]
         public string RoleType { get; set; }
 
