@@ -38,7 +38,16 @@
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
             <div class="button-holder d-flex justify-content-center">
-                <button type="submit" class="btn bg-pharus text-white">Save changes</button>
+                <button type="submit" 
+                        class="btn bg-pharus text-white" 
+                        name="save_button" 
+                        value="Update" 
+                        style="margin-right:40px">Save changes</button>
+                <button type="submit"
+                        class="btn bg-pharus text-white" 
+                        name="delete_button" 
+                        value="Delete"
+                        onclick="return confirm('Are you sure you want to delete this?')">Delete User</button>
             </div>
         </form>
     </div>
