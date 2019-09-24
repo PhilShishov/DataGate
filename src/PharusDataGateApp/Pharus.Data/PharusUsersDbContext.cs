@@ -22,7 +22,7 @@
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=PharusUsersDb;Trusted_Connection=true;");
+                optionsBuilder.UseSqlServer(DbConfiguration.ConnectionString);
             }
 
             base.OnConfiguring(optionsBuilder);
