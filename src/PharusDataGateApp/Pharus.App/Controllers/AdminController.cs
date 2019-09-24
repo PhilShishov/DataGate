@@ -140,37 +140,52 @@
                 .Where(u => u.UserName == model.Id)
                 .FirstOrDefault();
 
-            user.UserName = model.Username;
-            user.Email = model.Email;
-
-            //Role change management
-            var newRole = model.RoleType;
-            var oldRole = user.UserRoles.Select(ur => ur.Role.Name).FirstOrDefault();
-            if (this.rolesService.GetRole(newRole) != null)
+            if (HttpContext.Request.Form.ContainsKey("save_button"))
             {
-                if (newRole != oldRole)
+                user.UserName = model.Username;
+                user.Email = model.Email;
+
+                //Role change management
+                var newRole = model.RoleType;
+                var oldRole = user.UserRoles.Select(ur => ur.Role.Name).FirstOrDefault();
+                if (this.rolesService.GetRole(newRole) != null)
                 {
-                    await this._userManager.RemoveFromRoleAsync(user, oldRole);
-                    await this._userManager.AddToRoleAsync(user, newRole);
+                    if (newRole != oldRole)
+                    {
+                        await this._userManager.RemoveFromRoleAsync(user, oldRole);
+                        await this._userManager.AddToRoleAsync(user, newRole);
+                    }
+                }
+
+                //Save password as hash
+                PasswordHasher<PharusUser> hasher = new PasswordHasher<PharusUser>();
+
+                if (user.PasswordHash != model.PasswordHash && model.PasswordHash != null)
+                {
+                    var newPassword = hasher.HashPassword(user, model.PasswordHash);
+                    user.PasswordHash = newPassword;
+                }
+
+                var resultUser = await _userManager.UpdateAsync(user);
+
+                if (resultUser.Succeeded)
+                {
+                    _logger.LogInformation("User updated.");
+
+                    return LocalRedirect(returnUrl);
                 }
             }
 
-            //Save password as hash
-            PasswordHasher<PharusUser> hasher = new PasswordHasher<PharusUser>();
-
-            if (user.PasswordHash != model.PasswordHash && model.PasswordHash != null)
+            else if (HttpContext.Request.Form.ContainsKey("delete_button"))
             {
-                var newPassword = hasher.HashPassword(user, model.PasswordHash);
-                user.PasswordHash = newPassword;
-            }
+                //TODO javascript confirmation message box
+                var result = await this._userManager.DeleteAsync(user);
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation("User deleteds.");
 
-            var resultUser = await _userManager.UpdateAsync(user);
-
-            if (resultUser.Succeeded)
-            {
-                _logger.LogInformation("User updated.");
-
-                return LocalRedirect(returnUrl);
+                    return LocalRedirect(returnUrl);
+                }
             }
 
             return this.RedirectToPage(returnUrl);
