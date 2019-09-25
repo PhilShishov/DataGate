@@ -3871,13 +3871,14 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     }
 
 .navbar-brand {
+    FONT-WEIGHT: 600;
     display: inline-block;
-    padding-top: .3125rem;
+    padding-top: 0.3125rem;
     padding-bottom: .3125rem;
     margin-right: 1rem;
     font-size: 1.25rem;
     line-height: inherit;
-    white-space: nowrap
+    white-space: nowrap;
 }
 
     .navbar-brand:focus, .navbar-brand:hover {

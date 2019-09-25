@@ -10,7 +10,6 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Authorization;
 
-    using Pharus.Data;
     using Pharus.Domain;
     using Pharus.Domain.Users;
     using Pharus.Services.Contracts;
@@ -24,22 +23,19 @@
         private readonly RoleManager<PharusRole> _roleManager;
         private readonly UserManager<PharusUser> _userManager;
         private readonly ILogger<UserCreateBindingModel> _logger;
-        private readonly PharusUsersDbContext context;
 
         public AdminController(
             IRolesService rolesService,
             IUsersService usersService,
             UserManager<PharusUser> userManager,
             RoleManager<PharusRole> roleManager,
-            ILogger<UserCreateBindingModel> logger,
-            PharusUsersDbContext context)
+            ILogger<UserCreateBindingModel> logger)
         {
             this.rolesService = rolesService;
             this.usersService = usersService;
             _userManager = userManager;
             _roleManager = roleManager;
             _logger = logger;
-            this.context = context;
         }
 
         [HttpGet]
@@ -182,7 +178,7 @@
                 var result = await this._userManager.DeleteAsync(user);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User deleteds.");
+                    _logger.LogInformation("User deleted.");
 
                     return LocalRedirect(returnUrl);
                 }

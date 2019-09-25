@@ -1,32 +1,36 @@
 
-.form-control-login-pharus{
-    width: 270px;
-    margin: 0 auto;
-    text-align: center;
-    display: block;
-    border: 1px solid #ced4da;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    padding: 4px 8px;
-}
-
-.form-control-pharus{
-    width: 270px;
-    border: 1px solid #ced4da;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    padding: 4px 8px;
-}
-
-#btnLogin, #btnCreateUser{
+#btnLogin {
     -webkit-transition-duration: 0.5s;
     transition-duration: 0.5s;
-  }
-  
-#btnLogin:hover {
-    background-color: #555555;
-    color: white;
-  }
+}
 
-#btnCreateUser:hover {
-    background-color: #555555;
-    color: white;
-  }
+    #btnLogin:hover {
+        background-color: #555555;
+        color: white;
+    }
+
+.navbar a:hover, .dropdown:hover {
+    background-color: deepskyblue;
+}
+
+.dropdown-content {
+    display: none;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 8px;
+        display: block;
+    }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
