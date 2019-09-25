@@ -16,7 +16,7 @@
 }
 
 .text-right{
-    margin-left: auto
+    margin-left: auto;
 }
 
 .hr-2 {
@@ -24,7 +24,7 @@
 }
 
 a {
-    text-rendering: none;
+    text-rendering: unset;
 }
 
 a:hover {
