@@ -34,3 +34,11 @@
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
+.w-40 {
+    width: 40%;
+}
+
+.w-45 {
+    width: 45%;
+}
