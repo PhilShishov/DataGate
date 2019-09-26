@@ -13,6 +13,8 @@
     background-color: deepskyblue;
 }
 
+/*TODO Use dropdown for inside sidebar nav*/
+
 .dropdown-content {
     display: none;
     background-color: #f9f9f9;
@@ -22,6 +24,7 @@
 }
 
     .dropdown-content a {
+        font-size: 25px;
         color: black;
         padding: 12px 8px;
         display: block;
@@ -42,3 +45,42 @@
 .w-45 {
     width: 45%;
 }
+
+
+/*SideNav*/
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #f9f9f9;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+    .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: black;
+        display: block;
+        transition: 0.3s;
+        margin-bottom: 30%;
+    }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+            background-color: #f9f9f9;
+        }
+
+    .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
