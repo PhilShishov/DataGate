@@ -28,7 +28,7 @@
             @if (!this.User.Identity.IsAuthenticated)
             {
                 <nav class="navbar navbar-expand-lg navbar-dark bg-pharus">
-                    <a href="/Admin/Index"><img src="/images/Logo_Pharus.jpg" class="img-responsive" width="50" height="50" alt="Pharus Management"></a>
+                    <a href="/Home/Index"><img src="/images/Logo_Pharus.jpg" class="img-responsive" width="50" height="50" alt="Pharus Management"></a>
                     <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
                         <div id="intro" class="text-right">
                             <ul class="navbar-nav">
@@ -56,9 +56,10 @@
                                     <a href="" class="closebtn" onclick="closeNav()">&times;</a>
                                 </li>
                                 <li class="dropdown pt-5">
-                                    <button class="dropdown-btn">Funds<i class="fa fa-caret-down"></i>
+                                    <button class="dropdown-btn">
+                                        Funds<i class="fa fa-caret-down"></i>
                                     </button>
-                                    <div class="dropdown-container">
+                                    <div id="myDropdown" class="dropdown-container">
                                         <a class="dropdown-item font-weight-light" href="#">New</a>
                                         <a class="dropdown-item font-weight-light" href="#">Report</a>
                                     </div>

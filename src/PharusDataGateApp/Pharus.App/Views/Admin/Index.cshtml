@@ -7,42 +7,42 @@
 @if (!this.User.Identity.IsAuthenticated)
 {
     <div class="jumbotron mt-3 bg-pharus">
-            <h1 class="text-white">Welcome to Pharus Management DataGate Platform</h1>
-            <hr class="bg-white hr-2" />
-            <h3 class="text-white"><a href="/Identity/Account/Login">Login to Pharus DataGate</a> </h3>
-    </div>    
+        <h1 class="text-white">Welcome to Pharus Management DataGate Platform</h1>
+        <hr class="bg-white hr-2" />
+        <h3 class="text-white"><a href="/Identity/Account/Login">Login to Pharus DataGate</a> </h3>
+    </div>
 }
-else if(this.User.IsInRole("Admin"))
+else if (this.User.IsInRole("Admin"))
 {
-    <h1 class="text-center">Hello, Administrator @this.User.Identity.Name!</h1>       
-    
+    <h1 class="text-center">Hello, Administrator @this.User.Identity.Name!</h1>
+
     <hr class="hr-2 bg-pharus">
-    <div class="d-flex justify-content-between">    
-        <div class="w-25 bg-white">
+    <div class="w-100" id="adminMainContainer">
+        <div class="bg-white d-inline-block" id="adminUserPanel">
             <h2 class="text-center">User Panel</h2>
-            <div class="border-pharus p-3">               
-                    <div class="p-2 d-flex justify-content-around">
-                        <a href="/Admin/CreateUser" class="btn bg-pharus text-white">Create User</a>
-                        <a href="/Admin/ViewUser" class="btn bg-pharus text-white">View Users</a>
-                    </div>                
+            <div class="border-pharus p-3">
+                <div class="p-2 d-flex justify-content-between">
+                    <a href="/Admin/CreateUser" class="btn bg-pharus text-white mr-4">Create User</a>
+                    <a href="/Admin/ViewUser" class="btn bg-pharus text-white">View Users</a>
+                </div>
             </div>
         </div>
-        <div class="w-25 bg-white">
+        <div class="bg-white d-inline-block">
             <h2 class="text-center">Consult Reports</h2>
-            <div class="border-pharus p-3">               
-                    <div class="p-2 d-flex justify-content-around">                        
-                        <a href="" class="btn bg-pharus text-white">Consult</a>
-                    </div>                
+            <div class="border-pharus p-3">
+                <div class="p-2 d-flex justify-content-around">
+                    <a href="" class="btn bg-pharus text-white">Consult</a>
+                </div>
             </div>
         </div>
-        <div class="w-25 bg-white">
+        <div class="bg-white d-inline-block pr-5">
             <h2 class="text-center">View Projects</h2>
-            <div class="border-pharus p-3">                
-                    <div class="p-2 d-flex justify-content-around">                        
-                        <a href="" class="btn bg-pharus text-white">View</a>
-                    </div>
-                
+            <div class="border-pharus p-3">
+                <div class="p-2 d-flex justify-content-around">
+                    <a href="" class="btn bg-pharus text-white">View</a>
+                </div>
+
             </div>
         </div>
-    </div>     
+    </div>
 }
