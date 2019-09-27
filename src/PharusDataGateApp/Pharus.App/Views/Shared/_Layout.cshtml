@@ -18,8 +18,9 @@
 
     <link rel="stylesheet" href="~/css/reset-css.css" />
     <link rel="stylesheet" href="~/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/css/custom.css">
+    <link rel="stylesheet" href="~/css/style.css" />
 </head>
 <body>
     <div class="container-fluid" justify-content-between>
@@ -50,18 +51,27 @@
                         <li class="nav-item dropdown">
                             <span style="cursor:pointer" onclick="openNav()"><img src="/images/Logo_Pharus.jpg" class="img-responsive" width="50" alt="Pharus Management"></span>
 
-                            <div id="mySidenav" class="sidenav">
-                                <a href="" class="closebtn" onclick="closeNav()">&times;</a>
-                                    <a href="#" class="mt-5">Funds</a>
-                                    <a href="#">Subfunds</a>
-                                    <a href="#">ShareClasses</a>
-                            </div>
+                            <ul id="mySidenav" class="sidenav">
+                                <li>
+                                    <a href="" class="closebtn" onclick="closeNav()">&times;</a>
+                                </li>
+                                <li class="dropdown pt-5">
+                                    <button class="dropdown-btn">Funds<i class="fa fa-caret-down"></i>
+                                    </button>
+                                    <div class="dropdown-container">
+                                        <a class="dropdown-item font-weight-light" href="#">New</a>
+                                        <a class="dropdown-item font-weight-light" href="#">Report</a>
+                                    </div>
+                                </li>
 
-                            @*<div class="dropdown-content position-absolute">
-                                    <a href="#">Funds</a>
-                                    <a href="#">SubFunds</a>
+                                <li>
+                                    <a href="#">Subfunds</a>
+                                </li>
+                                <li>
                                     <a href="#">ShareClasses</a>
-                                </div>*@
+                                </li>
+                            </ul>
+
                         </li>
                     </ul>
                     <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
@@ -139,6 +149,7 @@
 </html>
 
 
+@* TODO send to js file *@
 <script>
     function openNav() {
         document.getElementById("mySidenav").style.width = "250px";
@@ -146,5 +157,24 @@
 
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0";
+    }
+
+</script>
+
+<script>
+    /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+    var dropdown = document.getElementsByClassName("dropdown-btn");
+    var i;
+
+    for (i = 0; i < dropdown.length; i++) {
+        dropdown[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var dropdownContent = this.nextElementSibling;
+            if (dropdownContent.style.display === "block") {
+                dropdownContent.style.display = "none";
+            } else {
+                dropdownContent.style.display = "block";
+            }
+        });
     }
 </script>
