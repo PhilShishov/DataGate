@@ -9,6 +9,10 @@
         color: white;
     }
 
+.navbar{
+    flex-wrap:unset;
+}
+
 .navbar a:hover, .dropdown-btn:hover {
     background-color: deepskyblue;
 }
@@ -85,6 +89,12 @@
 .mw-270 {
     max-width: 270px;
 }
+
+.mb-6{
+    margin-bottom: 20%;
+}
+
+/*Media queries*/
 
 @media only screen and (min-width: 768px) {
     #adminMainContainer {
