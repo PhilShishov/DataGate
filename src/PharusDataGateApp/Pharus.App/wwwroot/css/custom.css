@@ -82,10 +82,21 @@
     width: 45%;
 }
 
-.mw-270 {
+.maxw-270 {
     max-width: 270px;
 }
 
+.maxw-160 {
+    max-width: 160px;
+}
+
+.minw-160 {
+    min-width: 160px;
+}
+
+.minh-100 {
+    min-height: 100px;
+}
 .mb-6 {
     margin-bottom: 20%;
 }

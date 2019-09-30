@@ -30,7 +30,10 @@
             {
                 <nav class="navbar navbar-expand-lg navbar-dark bg-pharus">
                     <a href="/Home/Index"><img src="/images/Logo_Pharus.jpg" class="img-responsive" width="50" height="50" alt="Pharus Management"></a>
-                    <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
+                    <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse" id="navbarNav">
                         <div id="intro" class="text-right">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
@@ -48,6 +51,7 @@
             else if (this.User.IsInRole("Admin"))
             {
                 <nav class="navbar navbar-expand-lg navbar-dark bg-pharus">
+
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
                             <span style="cursor:pointer" onclick="openNav()"><img src="/images/Logo_Pharus.jpg" class="img-responsive" width="50" alt="Pharus Management"></span>
@@ -101,8 +105,12 @@
             else
             {
                 <nav class="navbar navbar-expand-lg navbar-dark bg-pharus">
+
                     <a href="/Home/Index"><img src="/images/Logo_Pharus.jpg" class="img-responsive" width="50" height="50" alt="Pharus Management"></a>
-                    <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarNav">
+                    <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse" id="navbarNav">
                         <div id="intro" class="text-right">
                             <ul class="navbar-nav">
                                 <li class="nav-item">

@@ -337,11 +337,11 @@ template {
 }
 
 .h1, h1 {
-    font-size: 2.5rem
+    font-size: 2rem
 }
 
 .h2, h2 {
-    font-size: 2rem
+    font-size: 1.5rem
 }
 
 .h3, h3 {
@@ -7672,9 +7672,9 @@ a.bg-dark:focus, a.bg-dark:hover, button.bg-dark:focus, button.bg-dark:hover {
     padding-top: 3rem !important
 }
 
-.pr-5, .px-5 {
+/*.pr-5, .px-5 {
     padding-right: 3rem !important
-}
+}*/
 
 .pb-5, .py-5 {
     padding-bottom: 3rem !important
