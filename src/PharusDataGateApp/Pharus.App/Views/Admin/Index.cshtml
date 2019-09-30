@@ -17,26 +17,29 @@ else if (this.User.IsInRole("Admin"))
     <h1 class="text-center">Hello, Administrator @this.User.Identity.Name!</h1>
 
     <hr class="hr-2 bg-pharus">
-    <div class="w-100" id="adminMainContainer">
-        <div class="bg-white d-inline-block" id="adminUserPanel">
-            <h2 class="text-center">User Panel</h2>
+    <div class="w-100 d-flex justify-content-between flex-wrap" id="adminMainContainer">
+        <div class="bg-white d-inline-block maxw-160 minh-100">
             <div class="border-pharus p-3">
                 <div class="p-2 d-flex justify-content-between">
                     <a href="/Admin/CreateUser" class="btn bg-pharus text-white mr-4">Create User</a>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white d-inline-block minw-160 minh-100">
+            <div class="border-pharus p-3">
+                <div class="p-2 d-flex justify-content-between">
                     <a href="/Admin/ViewUser" class="btn bg-pharus text-white">View Users</a>
                 </div>
             </div>
         </div>
-        <div class="bg-white d-inline-block">
-            <h2 class="text-center">Consult Reports</h2>
+        <div class="bg-white d-inline-block minw-160 minh-100">
             <div class="border-pharus p-3">
                 <div class="p-2 d-flex justify-content-around">
                     <a href="" class="btn bg-pharus text-white">Consult</a>
                 </div>
             </div>
         </div>
-        <div class="bg-white d-inline-block pr-5">
-            <h2 class="text-center">View Projects</h2>
+        <div class="bg-white d-inline-block minw-160 minh-100">
             <div class="border-pharus p-3">
                 <div class="p-2 d-flex justify-content-around">
                     <a href="" class="btn bg-pharus text-white">View</a>
