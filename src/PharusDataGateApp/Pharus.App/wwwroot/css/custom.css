@@ -9,10 +9,6 @@
         color: white;
     }
 
-.navbar {
-    flex-wrap: unset;
-}
-
     .navbar a:hover, .dropdown-btn:hover {
         background-color: deepskyblue;
     }
