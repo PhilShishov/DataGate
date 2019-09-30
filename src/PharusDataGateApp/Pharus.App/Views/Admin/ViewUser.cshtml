@@ -6,30 +6,30 @@
 
 <h1 class="text-center text-torshia">User List</h1>
 <hr class="bg-pharus w-50 hr-2" />
-<div class="d-flex justify-content-between">
-    <table class="table table-hover table-bordered">
+<div class="table-responsive border-0">
+    <table class="table table-hover">
         <thead>
-            <tr class="row">
-                <th scope="col" class="col-lg-5 d-flex justify-content-center"><h3>Username</h3></th>
-                <th scope="col" class="col-lg-2 d-flex justify-content-center"><h3>Roles</h3></th>
-                <th scope="col" class="col-lg-2 d-flex justify-content-center"><h3>Last Login</h3></th>
-                <th scope="col" class="col-lg-2 d-flex justify-content-center"><h3>Logged</h3></th>
-                <th scope="col" class="col-lg-1 d-flex justify-content-center"><h3>Actions</h3></th>
+            <tr>
+                <th scope="col"><h5>Username</h5></th>
+                <th scope="col"><h5>Roles</h5></th>
+                <th scope="col"><h5>Last Login</h5></th>
+                <th scope="col"><h5>Logged</h5></th>
+                <th scope="col"><h5>Actions</h5></th>
             </tr>
         </thead>
-        <tbody>           
-			@foreach (var user in Model)
+        <tbody>
+            @foreach (var user in Model)
             {
-            <tr class="row">
-                <th scope="row" class="col-lg-5 d-flex justify-content-center"><h5>@user.Username</h5></th>    
-                <td class="col-lg-2 d-flex justify-content-center"><h5>@user.Role</h5></td>                          
-                <td class="col-lg-2 d-flex justify-content-center"><h5>@user.LastLogin</h5></td>
-                <td class="col-lg-2 d-flex justify-content-center"><h5></h5></td>    
-                <td class="col-lg-1 d-flex justify-content-center">
-                     <a href="/Admin/EditUser/@user.Username" class="btn bg-pharus text-white">Edit</a>     
-                </td>            
-            </tr> 
-			}
+                <tr>
+                    <th scope="row">@user.Username</th>
+                    <td>@user.Role</td>
+                    <td>@user.LastLogin</td>
+                    <td></td>
+                    <td>
+                        <a href="/Admin/EditUser/@user.Username" class="btn bg-pharus text-white">Edit</a>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>
