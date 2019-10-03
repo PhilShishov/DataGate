@@ -23,21 +23,16 @@ namespace Pharus.App.Areas.Identity.Pages.Account
             _logger = logger;
         }
 
-        public async Task<IActionResult> OnGet(string returnUrl = null)
+        public async Task<IActionResult> OnGet()
         {
-            await _signInManager.SignOutAsync();
-            _logger.LogInformation("User logged out.");
-
-            returnUrl = "/Home/Index";
-
-            if (returnUrl != null)
+            if (User?.Identity.IsAuthenticated == true)
             {
-                return LocalRedirect(returnUrl);
+                await _signInManager.SignOutAsync();
+                _logger.LogInformation("User logged out.");
+                return RedirectToPage();
             }
-            else
-            {
-                return Page();
-            }
+
+            return Page();
         }
     }
 }

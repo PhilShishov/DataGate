@@ -9,9 +9,9 @@
         color: white;
     }
 
-    .navbar a:hover, .dropdown-btn:hover {
-        background-color: deepskyblue;
-    }
+.navbar a:hover, .dropdown-btn:hover {
+    background-color: deepskyblue;
+}
 
 /*SideNav*/
 
@@ -118,4 +118,12 @@
     #adminMainContainer {
         display: inline;
     }
+}
+
+h1{
+    text-align:center;
+}
+
+h3{
+    text-align:center;
 }

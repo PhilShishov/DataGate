@@ -174,7 +174,6 @@
 
             else if (HttpContext.Request.Form.ContainsKey("delete_button"))
             {
-                //TODO javascript confirmation message box
                 var result = await this._userManager.DeleteAsync(user);
                 if (result.Succeeded)
                 {
