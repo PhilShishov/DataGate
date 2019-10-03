@@ -1,18 +1,18 @@
-﻿  @using Pharus.Domain.Users
+﻿@using Pharus.Domain.Users
 @model Pharus.App.ViewModels.Users.UserCreateBindingModel
 @{
     ViewData["Title"] = "Create User";
-	Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
- 
+
 <h1 class="text-torshia">Create User</h1>
-<hr/>
+<hr />
 <form class="d-inline" method="post">
-	<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-group">
         <label for="Username" class="text-torshia">Username</label><br>
         <input type="text"
-               class="form-control mw-270"
+               class="form-control maxw-270"
                id="username"
                placeholder="Username..."
                asp-for="Username">
@@ -21,7 +21,7 @@
     <div class="form-group">
         <label for="Password" class="text-torshia">Password</label><br>
         <input type="password"
-               class="form-control mw-270"
+               class="form-control maxw-270"
                id="password"
                placeholder="Password..."
                asp-for="Password">
@@ -30,7 +30,7 @@
     <div class="form-group">
         <label for="ConfirmPassword" class="text-torshia">Confirm Password</label><br>
         <input type="password"
-               class="form-control mw-270"
+               class="form-control maxw-270"
                id="confirmPassword"
                placeholder="Confirm Password..."
                asp-for="ConfirmPassword">
@@ -39,17 +39,17 @@
     <div class="form-group">
         <label for="Email" class="text-torshia">Email</label><br>
         <input type="email"
-               class="form-control mw-270"
+               class="form-control maxw-270"
                id="email"
                placeholder="Email..."
                asp-for="Email">
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <div class="form-group">
-		<label for="RoleType" class="text-torshia">Role</label><br>
-        <select class="form-control mw-270" id="roletype" asp-for="RoleType">
+        <label for="RoleType" class="text-torshia">Role</label><br>
+        <select class="form-control maxw-270" id="roletype" asp-for="RoleType">
             <option selected disabled>-- Choose Role --</option>
-            @foreach (var role in (List<PharusRole>) ViewData["Roles"])
+            @foreach (var role in (List<PharusRole>)ViewData["Roles"])
             {
                 <option value="@role.Name">@role</option>
             }

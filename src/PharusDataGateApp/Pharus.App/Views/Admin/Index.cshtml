@@ -14,7 +14,7 @@
 }
 else if (this.User.IsInRole("Admin"))
 {
-    <h1 class="text-center">Hello, Administrator @this.User.Identity.Name!</h1>
+    <h2 class="text-center">Hello, Administrator @this.User.Identity.Name!</h2>
 
     <hr class="hr-2 bg-pharus">
     <div class="w-100 d-flex justify-content-between flex-wrap" id="adminMainContainer">
@@ -27,22 +27,22 @@ else if (this.User.IsInRole("Admin"))
         </div>
         <div class="bg-white d-inline-block minw-160 minh-100">
             <div class="border-pharus p-3">
-                <div class="p-2 d-flex justify-content-between">
-                    <a href="/Admin/ViewUser" class="btn bg-pharus text-white">View Users</a>
+                <div class="p-2 d-flex justify-content-around">
+                    <a href="/Admin/ViewUser" class="btn bg-pharus text-white">Users</a>
                 </div>
             </div>
         </div>
         <div class="bg-white d-inline-block minw-160 minh-100">
             <div class="border-pharus p-3">
                 <div class="p-2 d-flex justify-content-around">
-                    <a href="" class="btn bg-pharus text-white">Consult</a>
+                    <a href="" class="btn bg-pharus text-white">Reports</a>
                 </div>
             </div>
         </div>
         <div class="bg-white d-inline-block minw-160 minh-100">
             <div class="border-pharus p-3">
                 <div class="p-2 d-flex justify-content-around">
-                    <a href="" class="btn bg-pharus text-white">View</a>
+                    <a href="" class="btn bg-pharus text-white">Projects</a>
                 </div>
 
             </div>
