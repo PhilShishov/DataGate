@@ -6,14 +6,13 @@
 
 <h1 class="text-center text-torshia">User List</h1>
 <hr class="bg-pharus w-50 hr-2" />
-<div class="table-responsive border-0">
+<div class="table-responsive border-0 w-50 mx-auto">
     <table class="table table-hover">
         <thead>
             <tr>
                 <th scope="col"><h4>Username</h4></th>
                 <th scope="col"><h4>Roles</h4></th>
                 <th scope="col"><h4>Last Login</h4></th>
-                <th scope="col"><h4>Logged</h4></th>
                 <th scope="col"><h4>Actions</h4></th>
             </tr>
         </thead>
@@ -24,7 +23,6 @@
                     <th scope="row">@user.Username</th>
                     <td>@user.Role</td>
                     <td>@user.LastLogin</td>
-                    <td></td>
                     <td>
                         <a href="/Admin/EditUser/@user.Username" class="btn bg-pharus text-white">Edit</a>
                     </td>

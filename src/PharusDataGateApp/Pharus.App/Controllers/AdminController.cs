@@ -91,7 +91,8 @@
                 {
                     Username = user.UserName,
                     Role = user.UserRoles.Select(ur => ur.Role.Name).FirstOrDefault(),
-                    LastLogin = user.LastLoginTime?.ToString("dd.MM.yyyy HH:mm:ss", CultureInfo.InvariantCulture)
+                    LastLogin = user.LastLoginTime?.ToString("dd.MM.yyyy HH:mm", 
+                        CultureInfo.InvariantCulture)
                 })
                 .ToList();
 
@@ -195,7 +196,7 @@
 
             if (roleExist)
             {
-                if (role == "Admin")
+                if (role == "Admin" && _userManager.Users.Count() == 2)
                 {
                     await _userManager.AddToRoleAsync(user, "Admin");
                 }
