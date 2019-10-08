@@ -3,6 +3,7 @@ namespace Pharus.App
 {
     using Microsoft.AspNetCore;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Logging;
 
     public class Program
     {
@@ -13,6 +14,11 @@ namespace Pharus.App
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .ConfigureLogging((hostingContext, log) =>
+                {
+                    log.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+                    log.AddConsole();
+                })
                 .UseStartup<Startup>();
     }
 }

@@ -16,6 +16,11 @@ namespace Pharus.App.Extensions
         {
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
+                var context = serviceScope.ServiceProvider
+                    .GetRequiredService<PharusUsersDbContext>();
+
+                context.Database.EnsureCreated();
+
                 Assembly
                     .GetAssembly(typeof(PharusUsersDbContext))
                     .GetTypes()
@@ -23,7 +28,7 @@ namespace Pharus.App.Extensions
                     .Where(type => type.IsClass)
                     .Select(type => (ISeeder)serviceScope.ServiceProvider.GetRequiredService(type))
                     .ToList()
-                    .ForEach(seeder => seeder.Seed());               
+                    .ForEach(seeder => seeder.Seed());
             }
         }
     }
