@@ -15,7 +15,7 @@
     using Pharus.Services.Contracts;
     using Pharus.App.ViewModels.Users;
 
-    [Authorize(Policy = "RequireAdminRole")]
+    //[Authorize(Policy = "RequireAdminRole")]
     public class AdminController : Controller
     {
         private readonly IRolesService rolesService;

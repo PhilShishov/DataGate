@@ -23,13 +23,7 @@ namespace Pharus.App.Extensions
                     .Where(type => type.IsClass)
                     .Select(type => (ISeeder)serviceScope.ServiceProvider.GetRequiredService(type))
                     .ToList()
-                    .ForEach(seeder => seeder.Seed());
-                //using (var context = serviceScope.ServiceProvider.GetRequiredService<PharusUsersDbContext>())
-                //{
-                //    context.Database.EnsureCreated();
-
-
-                //}
+                    .ForEach(seeder => seeder.Seed());               
             }
         }
     }
