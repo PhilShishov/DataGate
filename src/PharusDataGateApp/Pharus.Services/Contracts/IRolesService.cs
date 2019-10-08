@@ -1,7 +1,8 @@
 ﻿namespace Pharus.Services.Contracts
 {
-    using Pharus.Domain.Users;
     using System.Collections.Generic;
+
+    using Pharus.Domain.Users;
 
     public interface IRolesService
     {
