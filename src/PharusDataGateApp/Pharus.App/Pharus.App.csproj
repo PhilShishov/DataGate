@@ -17,6 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ViewModels\Funds\" />
+    <Folder Include="ViewModels\ShareClasses\" />
+    <Folder Include="ViewModels\SubFunds\" />
     <Folder Include="ViewModels\Reports\" />
   </ItemGroup>
 
