@@ -15,8 +15,6 @@ namespace Pharus.Data.Seeding
         }
         public void Seed()
         {
-            this.context.Database.EnsureCreated();
-
             if (!this.context.Roles.Any())
             {
                 this.context.Roles.Add(new PharusRole { Name = "Admin", NormalizedName = "ADMIN" });
