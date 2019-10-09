@@ -1,8 +1,8 @@
-﻿namespace Pharus.App.ViewModels.Users
+﻿namespace Pharus.App.Models.BindingModels.Users
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class EditUserViewModel
+    public class EditUserBindingModel
     {
         public string Id { get; set; }
 

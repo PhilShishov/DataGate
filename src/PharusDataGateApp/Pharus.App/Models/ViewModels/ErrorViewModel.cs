@@ -1,4 +1,4 @@
-﻿namespace Pharus.App.ViewModels
+﻿namespace Pharus.App.Models.ViewModels
 {
     public class ErrorViewModel
     {
