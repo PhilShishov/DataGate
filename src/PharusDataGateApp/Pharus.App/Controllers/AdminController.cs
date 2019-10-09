@@ -13,7 +13,8 @@
     using Pharus.Domain;
     using Pharus.Domain.Users;
     using Pharus.Services.Contracts;
-    using Pharus.App.ViewModels.Users;
+    using Pharus.App.Models.ViewModels.Users;
+    using Pharus.App.Models.BindingModels.Users;
 
     [Authorize(Policy = "RequireAdminRole")]
     public class AdminController : Controller
@@ -108,10 +109,10 @@
         [HttpGet("Admin/EditUser/{username}")]
         public IActionResult EditUser(string username)
         {
-            EditUserViewModel editUserModel = this.usersService
+            EditUserBindingModel editUserModel = this.usersService
                 .GetAllUserRoles()
                 .Where(u => u.UserName == username)
-                .Select(u => new EditUserViewModel
+                .Select(u => new EditUserBindingModel
                 {
                     Id = u.Id,
                     Username = u.UserName,
@@ -124,13 +125,13 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditUser(EditUserViewModel model, string returnUrl = null)
+        public async Task<IActionResult> EditUser(EditUserBindingModel model, string returnUrl = null)
         {
             returnUrl = "/Admin/Index";
 
             if (!ModelState.IsValid)
             {
-                return View(model ?? new EditUserViewModel());
+                return View(model ?? new EditUserBindingModel());
             }
 
             var user = this.usersService.GetAllUserRoles()

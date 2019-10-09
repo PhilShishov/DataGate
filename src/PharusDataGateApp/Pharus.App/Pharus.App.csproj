@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\ViewModels\Reports\**" />
+    <Content Remove="Models\ViewModels\Reports\**" />
+    <EmbeddedResource Remove="Models\ViewModels\Reports\**" />
+    <None Remove="Models\ViewModels\Reports\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
@@ -17,10 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\Funds\" />
-    <Folder Include="ViewModels\ShareClasses\" />
-    <Folder Include="ViewModels\SubFunds\" />
-    <Folder Include="ViewModels\Reports\" />
+    <Folder Include="Models\ViewModels\Funds\" />
+    <Folder Include="Models\ViewModels\ShareClasses\" />
+    <Folder Include="Models\ViewModels\SubFunds\" />
+    <Folder Include="Views\Fund\" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>

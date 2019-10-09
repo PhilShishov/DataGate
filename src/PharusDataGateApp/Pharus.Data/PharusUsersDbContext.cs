@@ -16,13 +16,14 @@
         }
         public PharusUsersDbContext(DbContextOptions<PharusUsersDbContext> options) : base(options)
         {
+
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(DbConfiguration.ConnectionString);
+                optionsBuilder.UseSqlServer(DbConfiguration.ConnectionStringPharusUsers);
             }
 
             base.OnConfiguring(optionsBuilder);

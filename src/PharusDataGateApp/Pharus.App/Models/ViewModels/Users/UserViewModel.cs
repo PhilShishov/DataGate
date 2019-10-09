@@ -1,4 +1,4 @@
-﻿namespace Pharus.App.ViewModels.Users
+﻿namespace Pharus.App.Models.ViewModels.Users
 {
     public class UserViewModel
     {

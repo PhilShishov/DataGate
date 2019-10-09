@@ -1,12 +1,11 @@
 ﻿
 namespace Pharus.App.Controllers
 {
-    using System;
     using System.Diagnostics;
 
     using Microsoft.AspNetCore.Mvc;
-    
-    using Pharus.App.ViewModels;
+
+    using Pharus.App.Models.ViewModels;
 
     [Controller]
     public class HomeController : Controller
