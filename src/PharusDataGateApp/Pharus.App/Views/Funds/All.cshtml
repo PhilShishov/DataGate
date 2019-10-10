@@ -1,0 +1,24 @@
+﻿@model IEnumerable<object[]>
+
+@{
+    ViewData["Title"] = "All";
+}
+
+<h2 class="text-center text-torshia">All Active Funds</h2>
+
+<hr class="bg-pharus hr-2" />
+<div class="table-responsive border-0 mx-auto">
+    <table class="table table-hover">
+        <tbody>
+            @foreach (var row in Model)
+            {
+                <tr>
+                    @foreach (var col in row)
+                    {
+                        <td>@col</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
