@@ -18,9 +18,9 @@
         }
 
         [HttpGet]
-        public IActionResult All(string chosenDate)
+        public IActionResult All()
         {
-            var activeFundsView = this.fundsService.GetAllActiveFunds(chosenDate);
+            var activeFundsView = this.fundsService.GetAllActiveFunds();
           
             return View(activeFundsView);
         }

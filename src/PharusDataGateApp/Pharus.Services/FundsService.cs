@@ -25,7 +25,7 @@
             return funds;
         }
 
-        public IEnumerable<object[]> GetAllActiveFunds(string chosenDate)
+        public IEnumerable<object[]> GetAllActiveFunds()
         {
             using (SqlConnection connection = new SqlConnection(DbConfiguration.ConnectionStringPharus_vFinale.ToString()))
             {
@@ -36,6 +36,15 @@
                 using (var reader = command.ExecuteReader())
                 {
                     var model = Read(reader).ToList();
+                    object[] item = new object[reader.FieldCount];
+
+                    for (int j = 0; j < reader.FieldCount; j++)
+                    {
+                        item[j] = (reader.GetName(j));
+                    }
+
+                    model.Insert(0, item);
+
                     return model;
                 }
             }
@@ -53,10 +62,12 @@
             while (reader.Read())
             {
                 var values = new List<object>();
-                for (int i = 0; i < reader.FieldCount; i++)
+
+                for (int j = 0; j < reader.FieldCount; j++)
                 {
-                    values.Add(reader.GetValue(i));
+                    values.Add(reader.GetValue(j));
                 }
+
                 yield return values.ToArray();
             }
         }
