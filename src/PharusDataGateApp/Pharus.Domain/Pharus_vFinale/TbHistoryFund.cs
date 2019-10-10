@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 namespace Pharus.Domain.Pharus_vFinale
 {
+    using System;
+
     public partial class TbHistoryFund
     {
         public int FId { get; set; }
@@ -27,6 +27,6 @@ namespace Pharus.Domain.Pharus_vFinale
         public virtual TbDomCompanyType FCompanyTypeNavigation { get; set; }
         public virtual TbDomLegalForm FLegalFormNavigation { get; set; }
         public virtual TbDomLegalVehicle FLegalVehicleNavigation { get; set; }
-        public virtual TbDomFStatus FStatusNavigation { get; set; }
+        public virtual TbDomFStatus FStatusNavigation { get; set; }       
     }
 }
