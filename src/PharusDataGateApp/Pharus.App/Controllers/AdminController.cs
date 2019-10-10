@@ -143,7 +143,6 @@
                 user.UserName = model.Username;
                 user.Email = model.Email;
 
-                //Role change management
                 var newRole = model.RoleType;
                 var oldRole = user.UserRoles.Select(ur => ur.Role.Name).FirstOrDefault();
                 if (this.rolesService.GetRole(newRole) != null)
@@ -155,7 +154,6 @@
                     }
                 }
 
-                //Save password as hash
                 PasswordHasher<PharusUser> hasher = new PasswordHasher<PharusUser>();
 
                 if (user.PasswordHash != model.PasswordHash && model.PasswordHash != null)
