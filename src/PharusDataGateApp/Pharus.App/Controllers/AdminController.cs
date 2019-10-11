@@ -100,13 +100,13 @@
             return View(usersView);
         }
 
-        [HttpGet("/Admin/EditUserPanel/{username}")]
+        [HttpGet("/Admin/EditUserPanel")]
         public IActionResult EditUserPanel()
         {
             return this.View();
         }
 
-        [HttpGet("Admin/EditUser/{username}")]
+        [HttpGet("Admin/EditUser")]
         public IActionResult EditUser(string username)
         {
             EditUserBindingModel editUserModel = this.usersService

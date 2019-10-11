@@ -1,5 +1,7 @@
 ﻿namespace Pharus.App.Controllers
 {
+    using System;
+    using System.Collections.Generic;
 
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
@@ -9,7 +11,6 @@
     [Authorize]
     public class FundsController : Controller
     {
-
         private readonly IFundsService fundsService;
 
         public FundsController(IFundsService fundsService)
@@ -20,8 +21,28 @@
         [HttpGet]
         public IActionResult All()
         {
+            //DateTime? date = null;
+            //this.ViewBag["Date"] = date;
+
             var activeFundsView = this.fundsService.GetAllActiveFunds();
-          
+
+            return View(activeFundsView);
+        }
+
+        [HttpPost]
+        public IActionResult All(DateTime? chosenDate)
+        {
+            List<string[]> activeFundsView;
+
+            if (chosenDate != null)
+            {
+                activeFundsView = this.fundsService.GetAllActiveFunds(chosenDate);
+            }
+            else
+            {
+                activeFundsView = this.fundsService.GetAllActiveFunds();
+            }
+
             return View(activeFundsView);
         }
 

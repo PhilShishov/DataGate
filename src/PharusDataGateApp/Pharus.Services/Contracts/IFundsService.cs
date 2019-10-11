@@ -1,6 +1,7 @@
 ﻿
 namespace Pharus.Services.Contracts
 {
+    using System;
     using System.Collections.Generic;
 
     using Pharus.Domain.Pharus_vFinale;
@@ -9,7 +10,9 @@ namespace Pharus.Services.Contracts
     {
         List<TbHistoryFund> GetAllFunds();
 
-        List<string[]> GetAllActiveFunds( );
+        List<string[]> GetAllActiveFunds();
+
+        List<string[]> GetAllActiveFunds(DateTime? chosenDate);
 
         TbHistoryFund GetFund(string fundName);
     }
