@@ -7,6 +7,11 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
 
+function updateTableWithChosenDate(chosenDate) {
+    chosenDate = document.getElementById("fundDatetime").value;
+    //console.log(chosenDate);    
+}
+
 var dropdown = document.getElementsByClassName("dropdown-btn");
 var i;
 

@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\BindingModels\Funds\" />
     <Folder Include="Models\ViewModels\Funds\" />
     <Folder Include="Models\ViewModels\ShareClasses\" />
     <Folder Include="Models\ViewModels\SubFunds\" />

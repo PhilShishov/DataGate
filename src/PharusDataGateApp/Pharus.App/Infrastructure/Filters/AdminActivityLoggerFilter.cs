@@ -1,5 +1,4 @@
-﻿
-namespace Pharus.App.Infrastructure.Filters
+﻿namespace Pharus.App.Infrastructure.Filters
 {
     using Microsoft.Extensions.Logging;
     using Microsoft.AspNetCore.Mvc.Filters;

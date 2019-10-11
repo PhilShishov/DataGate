@@ -30,10 +30,46 @@
         {
             using (SqlConnection connection = new SqlConnection(DbConfiguration.ConnectionStringPharus_vFinale.ToString()))
             {
-                //var date = new SqlParameter("@date", chosenDate);
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
-                command.CommandText = $"select * from fn_active_fund('20191009')";
+
+                var defaultDate = DateTime.Today.ToString("yyyyMMdd");
+                command.CommandText = $"select * from fn_active_fund('{defaultDate}')";
+
+                using (var reader = command.ExecuteReader())
+                {
+                    var model = Read(reader).ToList();
+                    string[] item = new string[reader.FieldCount];
+
+                    for (int j = 0; j < reader.FieldCount; j++)
+                    {
+                        item[j] = (reader.GetName(j));
+                    }
+
+                    model.Insert(0, item);
+
+                    return model;
+                }
+            }
+        }
+
+        public List<string[]> GetAllActiveFunds(DateTime? chosenDate)
+        {
+            using (SqlConnection connection = new SqlConnection(DbConfiguration.ConnectionStringPharus_vFinale.ToString()))
+            {
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                if (chosenDate == null)
+                {
+                    var defaultDate = DateTime.Today.ToString("yyyyMMdd");
+                    command.CommandText = $"select * from fn_active_fund('{defaultDate}')";
+                }
+                else
+                {
+                    command.CommandText = $"select * from fn_active_fund('{chosenDate?.ToString("yyyyMMdd")}')";
+                }
+
                 using (var reader = command.ExecuteReader())
                 {
                     var model = Read(reader).ToList();
