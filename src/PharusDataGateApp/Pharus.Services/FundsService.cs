@@ -1,5 +1,6 @@
 ﻿namespace Pharus.Services
 {
+    using System;
     using System.Linq;
     using System.Data.Common;
     using System.Data.SqlClient;
@@ -25,7 +26,7 @@
             return funds;
         }
 
-        public IEnumerable<object[]> GetAllActiveFunds()
+        public List<string[]> GetAllActiveFunds()
         {
             using (SqlConnection connection = new SqlConnection(DbConfiguration.ConnectionStringPharus_vFinale.ToString()))
             {
@@ -36,7 +37,7 @@
                 using (var reader = command.ExecuteReader())
                 {
                     var model = Read(reader).ToList();
-                    object[] item = new object[reader.FieldCount];
+                    string[] item = new string[reader.FieldCount];
 
                     for (int j = 0; j < reader.FieldCount; j++)
                     {
@@ -57,15 +58,15 @@
             return fund;
         }
 
-        private static IEnumerable<object[]> Read(DbDataReader reader)
+        private static IEnumerable<string[]> Read(DbDataReader reader)
         {
             while (reader.Read())
             {
-                var values = new List<object>();
+                var values = new List<string>();
 
                 for (int j = 0; j < reader.FieldCount; j++)
                 {
-                    values.Add(reader.GetValue(j));
+                    values.Add(Convert.ToString(reader.GetValue(j)));
                 }
 
                 yield return values.ToArray();

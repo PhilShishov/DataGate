@@ -9,7 +9,7 @@ namespace Pharus.Services.Contracts
     {
         List<TbHistoryFund> GetAllFunds();
 
-        IEnumerable<object[]> GetAllActiveFunds( );
+        List<string[]> GetAllActiveFunds( );
 
         TbHistoryFund GetFund(string fundName);
     }
