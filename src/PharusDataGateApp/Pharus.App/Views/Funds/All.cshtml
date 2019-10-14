@@ -9,7 +9,7 @@
 <form class="d-inline" method="post">
     <div>
         <label for="datetime" class="text-torshia">SELECT DATE:</label>
-        <input type="date" name="chosenDate" id="fundDatetime"  value="@DateTime.Today.ToString("MM/dd/yyyy")">
+        <input type="date" name="chosenDate" id="fundDatetime"  value="@DateTime.Today.ToString("yyyy-MM-dd")">
         <button class="btn bg-pharus text-white" onclick="updateTableWithChosenDate(@date)">Update Table</button>
     </div>
 </form>

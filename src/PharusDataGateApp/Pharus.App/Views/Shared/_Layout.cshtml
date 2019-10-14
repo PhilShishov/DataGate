@@ -76,11 +76,33 @@
                                     </div>
                                 </li>
 
-                                <li>
-                                    <a href="#">Subfunds</a>
+                                <li class="dropdown">
+                                    <button class="dropdown-btn">
+                                        SubFunds<i class="fa fa-caret-down"></i>
+                                    </button>
+                                    <div id="myDropdown" class="dropdown-container">
+                                        <a class="dropdown-item font-weight-light" href="/SubFunds/All">List</a>
+                                        @if (this.User.IsInRole("Admin"))
+                                        {
+                                            <a class="dropdown-item font-weight-light" href="#">New</a>
+                                        }
+
+                                        <a class="dropdown-item font-weight-light" href="#">Report</a>
+                                    </div>
                                 </li>
-                                <li>
-                                    <a href="#">ShareClasses</a>
+                                <li class="dropdown">
+                                    <button class="dropdown-btn">
+                                        ShareClasses<i class="fa fa-caret-down"></i>
+                                    </button>
+                                    <div id="myDropdown" class="dropdown-container">
+                                        <a class="dropdown-item font-weight-light" href="/ShareClasses/All">List</a>
+                                        @if (this.User.IsInRole("Admin"))
+                                        {
+                                            <a class="dropdown-item font-weight-light" href="#">New</a>
+                                        }
+
+                                        <a class="dropdown-item font-weight-light" href="#">Report</a>
+                                    </div>
                                 </li>
                             </ul>
 
