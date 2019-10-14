@@ -2,11 +2,11 @@
 {
     using System;
     using System.Linq;
-    using System.Data.Common;
     using System.Data.SqlClient;
     using System.Collections.Generic;
 
     using Pharus.Data;
+    using Pharus.Services.Utilities;
     using Pharus.Services.Contracts;
     using Pharus.Domain.Pharus_vFinale;
 
@@ -36,20 +36,7 @@
                 var defaultDate = DateTime.Today.ToString("yyyyMMdd");
                 command.CommandText = $"select * from fn_active_fund('{defaultDate}')";
 
-                using (var reader = command.ExecuteReader())
-                {
-                    var model = Read(reader).ToList();
-                    string[] item = new string[reader.FieldCount];
-
-                    for (int j = 0; j < reader.FieldCount; j++)
-                    {
-                        item[j] = (reader.GetName(j));
-                    }
-
-                    model.Insert(0, item);
-
-                    return model;
-                }
+                return CreateModelWithHeadersAndValue(command);
             }
         }
 
@@ -65,28 +52,15 @@
                     var defaultDate = DateTime.Today.ToString("yyyyMMdd");
                     command.CommandText = $"select * from fn_active_fund('{defaultDate}')";
                 }
+
                 else
                 {
                     command.CommandText = $"select * from fn_active_fund('{chosenDate?.ToString("yyyyMMdd")}')";
                 }
 
-                using (var reader = command.ExecuteReader())
-                {
-                    var model = Read(reader).ToList();
-                    string[] item = new string[reader.FieldCount];
-
-                    for (int j = 0; j < reader.FieldCount; j++)
-                    {
-                        item[j] = (reader.GetName(j));
-                    }
-
-                    model.Insert(0, item);
-
-                    return model;
-                }
+                return CreateModelWithHeadersAndValue(command);
             }
         }
-
         public TbHistoryFund GetFund(string fundName)
         {
             var fund = this.context.TbHistoryFund.FirstOrDefault(f => f.FOfficialFundName == fundName);
@@ -94,18 +68,17 @@
             return fund;
         }
 
-        private static IEnumerable<string[]> Read(DbDataReader reader)
+        private static List<string[]> CreateModelWithHeadersAndValue(SqlCommand command)
         {
-            while (reader.Read())
+            using (var reader = command.ExecuteReader())
             {
-                var values = new List<string>();
+                var model = ReadTableData.ReadTableValue(reader).ToList();
 
-                for (int j = 0; j < reader.FieldCount; j++)
-                {
-                    values.Add(Convert.ToString(reader.GetValue(j)));
-                }
+                string[] item = ReadTableData.ReadTableHeader(reader);
 
-                yield return values.ToArray();
+                model.Insert(0, item);
+
+                return model;
             }
         }
     }

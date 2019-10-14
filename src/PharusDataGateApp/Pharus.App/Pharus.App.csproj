@@ -23,13 +23,6 @@
     <ProjectReference Include="..\Pharus.Services\Pharus.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\BindingModels\Funds\" />
-    <Folder Include="Models\ViewModels\Funds\" />
-    <Folder Include="Models\ViewModels\ShareClasses\" />
-    <Folder Include="Models\ViewModels\SubFunds\" />
-  </ItemGroup>
-
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>
