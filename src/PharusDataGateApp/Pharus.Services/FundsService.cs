@@ -12,6 +12,7 @@
 
     public class FundsService : IFundsService
     {
+        private string defaultDate = DateTime.Today.ToString("yyyyMMdd");
         private readonly Pharus_vFinaleContext context;
 
         public FundsService(
@@ -27,7 +28,6 @@
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                var defaultDate = DateTime.Today.ToString("yyyyMMdd");
                 command.CommandText = $"select * from fn_active_fund('{defaultDate}')";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
@@ -43,7 +43,6 @@
 
                 if (chosenDate == null)
                 {
-                    var defaultDate = DateTime.Today.ToString("yyyyMMdd");
                     command.CommandText = $"select * from fn_active_fund('{defaultDate}')";
                 }
 

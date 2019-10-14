@@ -12,6 +12,7 @@
 
     public class ShareClassesService : IShareClassesService
     {
+        private string defaultDate = DateTime.Today.ToString("yyyyMMdd");
         private readonly Pharus_vFinaleContext context;
 
         public ShareClassesService(
@@ -27,8 +28,7 @@
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                var defaultDate = DateTime.Today.ToString("yyyyMMdd");
-                command.CommandText = $"select * from fn_active_fund('{defaultDate}')";
+                command.CommandText = $"select * from fn_active_shareclasses('{defaultDate}')";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             };
@@ -43,13 +43,12 @@
 
                 if (chosenDate == null)
                 {
-                    var defaultDate = DateTime.Today.ToString("yyyyMMdd");
-                    command.CommandText = $"select * from fn_active_fund('{defaultDate}')";
+                    command.CommandText = $"select * from fn_active_shareclasses('{defaultDate}')";
                 }
 
                 else
                 {
-                    command.CommandText = $"select * from fn_active_fund('{chosenDate?.ToString("yyyyMMdd")}')";
+                    command.CommandText = $"select * from fn_active_shareclasses('{chosenDate?.ToString("yyyyMMdd")}')";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
