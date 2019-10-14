@@ -12,6 +12,7 @@
 
     public class SubFundsService : ISubFundsService
     {
+        private string defaultDate = DateTime.Today.ToString("yyyyMMdd");
         private readonly Pharus_vFinaleContext context;
 
         public SubFundsService(
@@ -27,8 +28,7 @@
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                var defaultDate = DateTime.Today.ToString("yyyyMMdd");
-                command.CommandText = $"select * from fn_active_fund('{defaultDate}')";
+                command.CommandText = $"select * from fn_active_subfund('{defaultDate}')";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
@@ -43,13 +43,12 @@
 
                 if (chosenDate == null)
                 {
-                    var defaultDate = DateTime.Today.ToString("yyyyMMdd");
-                    command.CommandText = $"select * from fn_active_fund('{defaultDate}')";
+                    command.CommandText = $"select * from fn_active_subfund('{defaultDate}')";
                 }
 
                 else
                 {
-                    command.CommandText = $"select * from fn_active_fund('{chosenDate?.ToString("yyyyMMdd")}')";
+                    command.CommandText = $"select * from fn_active_subfund('{chosenDate?.ToString("yyyyMMdd")}')";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);

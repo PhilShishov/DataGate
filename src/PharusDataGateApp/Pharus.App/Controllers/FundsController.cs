@@ -21,9 +21,6 @@
         [HttpGet]
         public IActionResult All()
         {
-            //DateTime? date = null;
-            //this.ViewBag["Date"] = date;
-
             var activeFundsView = this.fundsService.GetAllActiveFunds();
 
             return View(activeFundsView);
