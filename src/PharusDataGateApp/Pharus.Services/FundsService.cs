@@ -19,12 +19,6 @@
         {
             this.context = context;
         }
-        public List<TbHistoryFund> GetAllFunds()
-        {
-            var funds = this.context.TbHistoryFund.ToList();
-
-            return funds;
-        }
 
         public List<string[]> GetAllActiveFunds()
         {
@@ -36,7 +30,7 @@
                 var defaultDate = DateTime.Today.ToString("yyyyMMdd");
                 command.CommandText = $"select * from fn_active_fund('{defaultDate}')";
 
-                return CreateModelWithHeadersAndValue(command);
+                return CreateModel.CreateModelWithHeadersAndValue(command);
             }
         }
 
@@ -58,28 +52,21 @@
                     command.CommandText = $"select * from fn_active_fund('{chosenDate?.ToString("yyyyMMdd")}')";
                 }
 
-                return CreateModelWithHeadersAndValue(command);
+                return CreateModel.CreateModelWithHeadersAndValue(command);
             }
         }
+        public List<TbHistoryFund> GetAllFunds()
+        {
+            var funds = this.context.TbHistoryFund.ToList();
+
+            return funds;
+        }
+
         public TbHistoryFund GetFund(string fundName)
         {
             var fund = this.context.TbHistoryFund.FirstOrDefault(f => f.FOfficialFundName == fundName);
 
             return fund;
-        }
-
-        private static List<string[]> CreateModelWithHeadersAndValue(SqlCommand command)
-        {
-            using (var reader = command.ExecuteReader())
-            {
-                var model = ReadTableData.ReadTableValue(reader).ToList();
-
-                string[] item = ReadTableData.ReadTableHeader(reader);
-
-                model.Insert(0, item);
-
-                return model;
-            }
-        }
+        }       
     }
 }
