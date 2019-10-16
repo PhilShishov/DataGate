@@ -7,9 +7,16 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
 
+//TODO update value of input when refreshing
 function updateTableWithChosenDate(chosenDate) {
     chosenDate = document.getElementById("fundDatetime").value;
-    //console.log(chosenDate);    
+    //document.getElementById("fundDatetime").value = chosenDate;   
+    //console.log(document.getElementById("fundDatetime").value);
+    //console.log(chosenDate);
+}
+
+function updateTableInput() {
+    document.getElementById("fundDatetime").value = chosenDate;   
 }
 
 var dropdown = document.getElementsByClassName("dropdown-btn");
