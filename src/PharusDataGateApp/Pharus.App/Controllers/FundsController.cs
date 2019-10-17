@@ -27,15 +27,14 @@
         public IActionResult All()
         {
             //pass model
-            //this.ViewData["Roles"] = this.rolesService.GetAllRoles();
+            //this.ViewData["ActiveFunds"] = this.fundsService.GetAllActiveFunds();
 
             var activeFundsView = this.fundsService.GetAllActiveFunds();
 
-            return View(activeFundsView);
+            return this.View(activeFundsView);
         }
         [HttpPost]
-
-        public IActionResult All(DateTime? chosenDate, string command)
+        public IActionResult All(List<string[]> funds, DateTime? chosenDate, string command)
         {
             List<string[]> activeFundsView = null;
             FileStreamResult fileStreamResult = null;
@@ -44,7 +43,7 @@
             {
                 if (chosenDate != null)
                 {
-                    activeFundsView = this.fundsService.GetAllActiveFunds(chosenDate);
+                    activeFundsView = this.fundsService.GetAllActiveFunds(chosenDate); 
                 }
                 else
                 {
@@ -52,7 +51,7 @@
                 }
             }
 
-            else if (command.Equals("Extract Table"))
+            else if (command.Equals("Extract Table As Excel"))
             {
                 using (ExcelPackage package = new ExcelPackage())
                 {
@@ -68,9 +67,16 @@
                     package.SaveAs(stream);
                     stream.Position = 0;
 
-                    fileStreamResult = new FileStreamResult(stream, "application/excel");
-                    fileStreamResult.FileDownloadName = "ActiveFunds.xlsx";
+                    fileStreamResult = new FileStreamResult(stream, "application/excel")
+                    {
+                        FileDownloadName = "ActiveFunds.xlsx"
+                    };
                 }
+            }
+
+            else if (command.Equals("Extract Table As PDF"))
+            {
+
             }
 
             if (activeFundsView != null)
