@@ -97,6 +97,7 @@
 .minh-100 {
     min-height: 100px;
 }
+
 .mb-6 {
     margin-bottom: 20%;
 }
@@ -120,10 +121,29 @@
     }
 }
 
-h1{
-    text-align:center;
+h1 {
+    text-align: center;
 }
 
-h3{
-    text-align:center;
+h3 {
+    text-align: center;
 }
+
+.textBox-pharus {
+    border: none;
+    /*margin-left: auto;
+    margin-right: auto;*/
+    width: 100%;
+    max-width: 100%;
+}
+
+.textBoxHeader-pharus {
+    border: none;
+    /*margin-left: auto;
+    margin-right: auto;*/
+    width: 100%;
+    max-width: 100%;
+    text-align:center;
+
+}
+

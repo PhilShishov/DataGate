@@ -84,7 +84,6 @@
 
             return this.RedirectToPage("/Admin/CreateUser");
         }
-
         public IActionResult ViewUser()
         {
             List<UserViewModel> usersView = this.usersService.GetAllUserRoles()
@@ -225,7 +224,6 @@
                 ModelState.AddModelError(string.Empty, error.Description);
             }
         }
-
         #endregion
     }
 }
