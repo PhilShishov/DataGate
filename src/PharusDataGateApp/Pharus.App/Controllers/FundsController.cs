@@ -43,7 +43,7 @@
             {
                 if (chosenDate != null)
                 {
-                    activeFundsView = this.fundsService.GetAllActiveFunds(chosenDate); 
+                    activeFundsView = this.fundsService.GetAllActiveFunds(chosenDate);
                 }
                 else
                 {
@@ -74,9 +74,21 @@
                 }
             }
 
-            else if (command.Equals("Extract Table As PDF"))
+            else if (command.Equals("Delete Row 4"))
             {
-
+                for (int row = 1; row <= funds.Count; row++)
+                {
+                    for (int col = 0; col < funds[row].Length; col++)
+                    {
+                        if (row == 4)
+                        {
+                            string[] fund = funds.First();
+                            funds.Remove(fund);
+                            activeFundsView = funds;
+                            break;
+                        }
+                    }
+                }
             }
 
             if (activeFundsView != null)
