@@ -7,68 +7,78 @@
     using System.Collections.Generic;
 
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Authorization;
 
     using OfficeOpenXml;
+
     using Pharus.Services.Contracts;
 
     [Authorize]
     public class FundsController : Controller
     {
         private readonly IFundsService fundsService;
-        private IHostingEnvironment _hostingEnvironment;
 
-        public FundsController(IFundsService fundsService, IHostingEnvironment hostingEnvironment)
+        public FundsController(IFundsService fundsService)
         {
             this.fundsService = fundsService;
-            _hostingEnvironment = hostingEnvironment;
         }
 
         [HttpGet]
         public IActionResult All()
         {
+            //pass model
+            //this.ViewData["Roles"] = this.rolesService.GetAllRoles();
+
             var activeFundsView = this.fundsService.GetAllActiveFunds();
 
             return View(activeFundsView);
         }
-
         [HttpPost]
-        public IActionResult All(DateTime? chosenDate)
-        {
-            List<string[]> activeFundsView;
 
-            if (chosenDate != null)
+        public IActionResult All(DateTime? chosenDate, string command)
+        {
+            List<string[]> activeFundsView = null;
+            FileStreamResult fileStreamResult = null;
+
+            if (command.Equals("Update Table"))
             {
-                activeFundsView = this.fundsService.GetAllActiveFunds(chosenDate);
+                if (chosenDate != null)
+                {
+                    activeFundsView = this.fundsService.GetAllActiveFunds(chosenDate);
+                }
+                else
+                {
+                    activeFundsView = this.fundsService.GetAllActiveFunds();
+                }
+            }
+
+            else if (command.Equals("Extract Table"))
+            {
+                using (ExcelPackage package = new ExcelPackage())
+                {
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("ActiveFunds");
+
+                    DataSet dataSet = this.fundsService.GetAllActiveFundsWithDataSet(chosenDate);
+
+                    AddColumnNamesAndRecordsToWorkSheet(worksheet, dataSet);
+
+                    package.Save();
+
+                    MemoryStream stream = new MemoryStream();
+                    package.SaveAs(stream);
+                    stream.Position = 0;
+
+                    fileStreamResult = new FileStreamResult(stream, "application/excel");
+                    fileStreamResult.FileDownloadName = "ActiveFunds.xlsx";
+                }
+            }
+
+            if (activeFundsView != null)
+            {
+                return this.View(activeFundsView);
             }
             else
             {
-                activeFundsView = this.fundsService.GetAllActiveFunds();
-            }
-
-            return View(activeFundsView);
-        }
-
-        [HttpPost]
-        public IActionResult Export(DateTime? chosenDate)
-        {
-            using (ExcelPackage package = new ExcelPackage())
-            {
-                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("ActiveFunds");
-
-                DataSet dataSet = this.fundsService.GetAllActiveFundsWithDataSet(chosenDate);
-
-                AddColumnNamesAndRecordsToWorkSheet(worksheet, dataSet);
-
-                package.Save();
-
-                MemoryStream stream = new MemoryStream();
-                package.SaveAs(stream);
-                stream.Position = 0;
-
-                FileStreamResult fileStreamResult = new FileStreamResult(stream, "application/excel");
-                fileStreamResult.FileDownloadName = "ActiveFunds.xlsx";
                 return fileStreamResult;
             }
         }

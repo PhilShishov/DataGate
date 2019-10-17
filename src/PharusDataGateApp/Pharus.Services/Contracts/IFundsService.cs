@@ -2,8 +2,8 @@
 namespace Pharus.Services.Contracts
 {
     using System;
-    using System.Collections.Generic;
     using System.Data;
+    using System.Collections.Generic;
 
     using Pharus.Domain.Pharus_vFinale;
 

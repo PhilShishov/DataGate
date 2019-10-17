@@ -7,17 +7,13 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
 
-//TODO update value of input when refreshing
-function updateTableWithChosenDate(chosenDate) {
-    chosenDate = document.getElementById("fundDatetime").value;
-    //document.getElementById("fundDatetime").value = chosenDate;   
-    //console.log(document.getElementById("fundDatetime").value);
-    //console.log(chosenDate);
-}
-
-function updateTableInput() {
-    document.getElementById("fundDatetime").value = chosenDate;   
-}
+//TODO update value of input after submit
+//function updateTableWithChosenDate(chosenDate) {
+//    chosenDate = document.getElementById("fundDatetime").value;
+//    document.getElementById("fundDatetime").value = chosenDate;   
+//    console.log(document.getElementById("fundDatetime").value);
+//    console.log(chosenDate);
+//}
 
 var dropdown = document.getElementsByClassName("dropdown-btn");
 var i;

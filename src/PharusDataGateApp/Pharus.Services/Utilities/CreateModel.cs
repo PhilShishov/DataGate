@@ -12,7 +12,7 @@
             {
                 var model = ReadTableData.ReadTableValue(reader).ToList();
 
-                string[] item = ReadTableData.ReadTableHeader(reader);
+                var item = ReadTableData.ReadTableHeader(reader);
 
                 model.Insert(0, item);
 
