@@ -2,7 +2,6 @@
 {
     using System;
     using System.IO;
-    using System.Data;
     using System.Linq;
     using System.Collections.Generic;
 
@@ -38,11 +37,6 @@
         {
             FileStreamResult fileStreamResult = null;
 
-            if (searchString == null)
-            {
-                return this.View(funds);
-            }
-
             if (command.Equals("Update Table"))
             {
                 if (chosenDate != null)
@@ -57,29 +51,32 @@
 
             else if (command.Equals("Extract Table As Excel"))
             {
-                using (ExcelPackage package = new ExcelPackage())
-                {
-                    ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("ActiveFunds");
-
-                    DataSet dataSet = this.fundsService.GetAllActiveFundsWithDataSet(chosenDate);
-
-                    AddColumnNamesAndRecordsToWorkSheet(worksheet, dataSet);
-
-                    package.Save();
-
-                    MemoryStream stream = new MemoryStream();
-                    package.SaveAs(stream);
-                    stream.Position = 0;
-
-                    fileStreamResult = new FileStreamResult(stream, "application/excel")
-                    {
-                        FileDownloadName = "ActiveFunds.xlsx"
-                    };
-                }
+                fileStreamResult = ExtractTableAsExcel(funds);
             }
+
+            //        else if (command.Equals("Extract Table As PDF"))
+            //        {
+            //            MemoryStream ms = new MemoryStream();
+
+            //            byte[] byteInfo = pdf.Output();
+            //            ms.Write(byteInfo, 0, byteInfo.Length);
+            //            ms.Position = 0;
+
+            //            HttpContext.Response.Headers.Add("content-disposition",
+            //"attachment; filename=form.pdf");
+
+            //            return new FileStreamResult(ms, "application/pdf");
+            //        }
+
 
             else if (command.Equals("Filter"))
             {
+                if (searchString == null)
+                {
+                    return this.View(funds);
+                }
+                ModelState.Clear();
+
                 AddHeadersToView();
 
                 AddTableToView(searchString);
@@ -97,6 +94,49 @@
             else
             {
                 return this.View();
+            }
+        }
+
+        private FileStreamResult ExtractTableAsExcel(List<string[]> funds)
+        {
+            FileStreamResult fileStreamResult;
+            using (ExcelPackage package = new ExcelPackage())
+            {
+                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("ActiveFunds");
+
+                var tableHeaders = funds.Take(1);
+
+                int counter = 0;
+
+                foreach (var tableHeader in tableHeaders)
+                {
+                    foreach (var headerValue in tableHeader)
+                    {
+                        counter++;
+                        worksheet.Cells[1, counter].Value = headerValue;
+                    }
+                }
+
+                for (int row = 1; row < funds.Count; row++)
+                {
+                    for (int col = 0; col < funds[row].Length; col++)
+                    {
+                        worksheet.Cells[row + 1, col + 1].Value = Convert.ToString(funds[row][col]);
+                    }
+                }
+
+                package.Save();
+
+                MemoryStream stream = new MemoryStream();
+                package.SaveAs(stream);
+                stream.Position = 0;
+
+                fileStreamResult = new FileStreamResult(stream, "application/excel")
+                {
+                    FileDownloadName = "ActiveFunds.xlsx"
+                };
+
+                return fileStreamResult;
             }
         }
 
@@ -127,28 +167,28 @@
                 this.activeFundsView.Add(tableHeader);
             }
         }
-        private static void AddColumnNamesAndRecordsToWorkSheet(ExcelWorksheet worksheet, DataSet dataSet)
-        {
-            var columnName = dataSet.Tables[0].Columns.Cast<DataColumn>()
-                                 .Select(x => x.ColumnName)
-                                 .ToArray();
-            int i = 0;
+        //private static void AddColumnNamesAndRecordsToWorkSheet(ExcelWorksheet worksheet, DataSet dataSet)
+        //{
+        //    var columnName = dataSet.Tables[0].Columns.Cast<DataColumn>()
+        //                         .Select(x => x.ColumnName)
+        //                         .ToArray();
+        //    int i = 0;
 
-            foreach (var col in columnName)
-            {
-                i++;
-                worksheet.Cells[1, i].Value = col;
-            }
+        //    foreach (var col in columnName)
+        //    {
+        //        i++;
+        //        worksheet.Cells[1, i].Value = col;
+        //    }
 
-            int j;
-            for (i = 0; i < dataSet.Tables[0].Rows.Count; i++)
-            {
-                for (j = 0; j < dataSet.Tables[0].Columns.Count; j++)
-                {
-                    worksheet.Cells[i + 2, j + 1].Value = Convert.ToString(dataSet.Tables[0].Rows[i][j]);
-                }
-            }
-        }
+        //    int j;
+        //    for (i = 0; i < dataSet.Tables[0].Rows.Count; i++)
+        //    {
+        //        for (j = 0; j < dataSet.Tables[0].Columns.Count; j++)
+        //        {
+        //            worksheet.Cells[i + 2, j + 1].Value = Convert.ToString(dataSet.Tables[0].Rows[i][j]);
+        //        }
+        //    }
+        //}
         #endregion
     }
 }

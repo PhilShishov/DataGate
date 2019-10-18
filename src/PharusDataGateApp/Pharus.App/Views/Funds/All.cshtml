@@ -50,8 +50,9 @@
                             {
                                 <th class="text-secondary">
                                     <h5>
-                                        @Html.HiddenFor(m => m[row][col])
-                                        @Html.DisplayTextFor(m => @Model[row][col])
+                                        @*@Html.HiddenFor(m => m[row][col])*@
+                                        @Html.TextBoxFor(m => Model[row][col])
+
                                     </h5>
                                 </th>
                             }
@@ -65,8 +66,8 @@
                             @for (int col = 0; col < Model[row].Length; col++)
                             {
                                 <td>
-                                    @Html.HiddenFor(m => m[row][col])
-                                    @Html.DisplayTextFor(m => m[row][col])
+                                    @*@Html.HiddenFor(m => m[row][col])*@
+                                    @Html.TextBoxFor(m => Model[row][col])
                                 </td>
                             }
                         </tr>
