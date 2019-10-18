@@ -17,37 +17,41 @@
     public class FundsController : Controller
     {
         private readonly IFundsService fundsService;
+        private List<string[]> activeFundsView;
 
         public FundsController(IFundsService fundsService)
         {
+            this.activeFundsView = new List<string[]>();
             this.fundsService = fundsService;
         }
 
         [HttpGet]
         public IActionResult All()
         {
-            //pass model
-            //this.ViewData["ActiveFunds"] = this.fundsService.GetAllActiveFunds();
+            this.activeFundsView = this.fundsService.GetAllActiveFunds();
 
-            var activeFundsView = this.fundsService.GetAllActiveFunds();
-
-            return this.View(activeFundsView);
+            return this.View(this.activeFundsView);
         }
+
         [HttpPost]
-        public IActionResult All(List<string[]> funds, DateTime? chosenDate, string command)
+        public IActionResult All(List<string[]> funds, DateTime? chosenDate, string command, string searchString)
         {
-            List<string[]> activeFundsView = null;
             FileStreamResult fileStreamResult = null;
+
+            if (searchString == null)
+            {
+                return this.View(funds);
+            }
 
             if (command.Equals("Update Table"))
             {
                 if (chosenDate != null)
                 {
-                    activeFundsView = this.fundsService.GetAllActiveFunds(chosenDate);
+                    this.activeFundsView = this.fundsService.GetAllActiveFunds(chosenDate);
                 }
                 else
                 {
-                    activeFundsView = this.fundsService.GetAllActiveFunds();
+                    this.activeFundsView = this.fundsService.GetAllActiveFunds();
                 }
             }
 
@@ -74,34 +78,55 @@
                 }
             }
 
-            else if (command.Equals("Delete Row 4"))
+            else if (command.Equals("Filter"))
             {
-                for (int row = 1; row <= funds.Count; row++)
-                {
-                    for (int col = 0; col < funds[row].Length; col++)
-                    {
-                        if (row == 4)
-                        {
-                            string[] fund = funds.First();
-                            funds.Remove(fund);
-                            activeFundsView = funds;
-                            break;
-                        }
-                    }
-                }
+                AddHeadersToView();
+
+                AddTableToView(searchString);
             }
 
-            if (activeFundsView != null)
+            if (fileStreamResult != null)
             {
-                return this.View(activeFundsView);
+                return fileStreamResult;
+            }
+
+            if (this.activeFundsView != null)
+            {
+                return this.View(this.activeFundsView);
             }
             else
             {
-                return fileStreamResult;
+                return this.View();
             }
         }
 
         #region Helpers     
+        private void AddTableToView(string searchString)
+        {
+            var tableFundsWithoutHeaders = this.fundsService.GetAllActiveFunds().Skip(1);
+
+            foreach (var fund in tableFundsWithoutHeaders)
+            {
+                foreach (var stringValue in fund)
+                {
+                    if (stringValue != null && stringValue.ToLower().Contains(searchString))
+                    {
+                        this.activeFundsView.Add(fund);
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void AddHeadersToView()
+        {
+            var tableHeaders = this.fundsService.GetAllActiveFunds().Take(1);
+
+            foreach (var tableHeader in tableHeaders)
+            {
+                this.activeFundsView.Add(tableHeader);
+            }
+        }
         private static void AddColumnNamesAndRecordsToWorkSheet(ExcelWorksheet worksheet, DataSet dataSet)
         {
             var columnName = dataSet.Tables[0].Columns.Cast<DataColumn>()

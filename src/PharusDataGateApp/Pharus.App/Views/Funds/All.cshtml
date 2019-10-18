@@ -5,7 +5,7 @@
 }
 <h2 class="text-center text-torshia">All Active Funds</h2>
 
-<form asp-controller="Funds" class="d-inline" method="post">
+<form asp-action="All" class="d-inline" method="post">
     <div>
         <label for="date"
                class="text-torshia">SELECT DATE:</label>
@@ -21,13 +21,22 @@
 
         <input type="submit"
                name="command"
-               class="bg-pharus text-white"
-               value="Delete Row 4"></>
+               class="bg-pharus text-white center-block"
+               value="Extract Table As Excel" />
 
         <input type="submit"
                name="command"
                class="bg-pharus text-white center-block"
-               value="Extract Table As Excel" />
+               value="Extract Table As PDF" />
+
+        <div class="pharusSearchDiv position-absolute">
+            <input type="text" name="searchString" />
+
+            <input type="submit"
+                   name="command"
+                   class="bg-pharus text-white center-block"
+                   value="Filter" />
+        </div>
 
         <hr class="bg-pharus hr-2" />
 
@@ -39,7 +48,7 @@
                         <tr>
                             @for (int col = 0; col < Model[row].Length; col++)
                             {
-                                <th class="text-secondary text-center">
+                                <th class="text-secondary">
                                     <h5>
                                         @Html.HiddenFor(m => m[row][col])
                                         @Html.DisplayTextFor(m => @Model[row][col])
@@ -67,5 +76,3 @@
         </div>
     </div>
 </form>
-
-
