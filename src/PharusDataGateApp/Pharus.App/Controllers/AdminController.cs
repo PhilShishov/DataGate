@@ -84,7 +84,7 @@
 
             return this.RedirectToPage("/Admin/CreateUser");
         }
-        public IActionResult ViewUser()
+        public IActionResult ViewUsers()
         {
             List<UserViewModel> usersView = this.usersService.GetAllUserRoles()
                 .Select(user => new UserViewModel

@@ -46,8 +46,7 @@
         <hr class="bg-pharus hr-2" />
 
         <div class="table-responsive border-0 mx-auto">
-            <table class="table table-hover"
-                   name="ActiveFunds">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         @for (int row = 0; row < 1; row++)
@@ -67,12 +66,12 @@
                 <tbody>
                     @for (int row = 1; row < Model.ActiveFunds.Count; row++)
                     {
-                        <tr>
+                        <tr onclick="document.location = '/Funds/View/@Model.ActiveFunds[row][0]'">
                             @for (int col = 0; col < Model.ActiveFunds[row].Length; col++)
                             {
-                                <td class="p-1">
-                                    @Model.ActiveFunds[row][col]
-                                </td>
+                            <td class="p-1">
+                                @Model.ActiveFunds[row][col]
+                            </td>
                             }
                         </tr>
                     }
