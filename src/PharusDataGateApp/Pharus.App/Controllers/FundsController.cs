@@ -17,11 +17,9 @@
     public class FundsController : Controller
     {
         private readonly IFundsService fundsService;
-        private List<string[]> activeFundsView;
 
         public FundsController(IFundsService fundsService)
         {
-            this.activeFundsView = new List<string[]>();
             this.fundsService = fundsService;
         }
 
@@ -42,11 +40,11 @@
             {
                 if (viewModel.ChosenDate != null)
                 {
-                    this.activeFundsView = this.fundsService.GetAllActiveFunds(viewModel.ChosenDate);
+                    viewModel.ActiveFunds = this.fundsService.GetAllActiveFunds(viewModel.ChosenDate);
                 }
                 else
                 {
-                    this.activeFundsView = this.fundsService.GetAllActiveFunds();
+                    viewModel.ActiveFunds = this.fundsService.GetAllActiveFunds();
                 }
             }
 
@@ -73,13 +71,15 @@
             {
                 if (viewModel.SearchString == null)
                 {
-                    return this.View(viewModel.ActiveFunds);
+                    return this.View(viewModel);
                 }
                 ModelState.Clear();
 
-                AddHeadersToView();
+                viewModel.ActiveFunds = new List<string[]>();
 
-                AddTableToView(viewModel.SearchString.ToLower());
+                AddHeadersToView(viewModel.ActiveFunds);
+
+                AddTableToView(viewModel.ActiveFunds, viewModel.SearchString.ToLower());
             }
 
             if (fileStreamResult != null)
@@ -87,9 +87,9 @@
                 return fileStreamResult;
             }
 
-            if (this.activeFundsView != null)
+            if (viewModel.ActiveFunds != null)
             {
-                return this.View(this.activeFundsView);
+                return this.View(viewModel);
             }
             else
             {
@@ -141,7 +141,7 @@
         }
 
         #region Helpers     
-        private void AddTableToView(string searchString)
+        private void AddTableToView(List<string[]> activeFunds, string searchString)
         {
             var tableFundsWithoutHeaders = this.fundsService.GetAllActiveFunds().Skip(1);
 
@@ -151,20 +151,20 @@
                 {
                     if (stringValue != null && stringValue.ToLower().Contains(searchString.ToLower()))
                     {
-                        this.activeFundsView.Add(fund);
+                        activeFunds.Add(fund);
                         break;
                     }
                 }
             }
         }
 
-        private void AddHeadersToView()
+        private void AddHeadersToView(List<string[]> activeFunds)
         {
             var tableHeaders = this.fundsService.GetAllActiveFunds().Take(1);
 
             foreach (var tableHeader in tableHeaders)
             {
-                this.activeFundsView.Add(tableHeader);
+                activeFunds.Add(tableHeader);
             }
         }
         //private static void AddColumnNamesAndRecordsToWorkSheet(ExcelWorksheet worksheet, DataSet dataSet)
