@@ -11,6 +11,7 @@
     using OfficeOpenXml;
 
     using Pharus.Services.Contracts;
+    using Pharus.App.Models.ViewModels.Funds;
 
     [Authorize]
     public class FundsController : Controller
@@ -27,21 +28,21 @@
         [HttpGet]
         public IActionResult All()
         {
-            this.activeFundsView = this.fundsService.GetAllActiveFunds();
-
-            return this.View(this.activeFundsView);
+            var model = new ActiveFundsViewModel();
+            model.ActiveFunds = this.fundsService.GetAllActiveFunds();
+            return this.View(model);
         }
 
         [HttpPost]
-        public IActionResult All(List<string[]> funds, DateTime? chosenDate, string command, string searchString)
+        public IActionResult All(ActiveFundsViewModel viewModel)
         {
             FileStreamResult fileStreamResult = null;
 
-            if (command.Equals("Update Table"))
+            if (viewModel.Command.Equals("Update Table"))
             {
-                if (chosenDate != null)
+                if (viewModel.ChosenDate != null)
                 {
-                    this.activeFundsView = this.fundsService.GetAllActiveFunds(chosenDate);
+                    this.activeFundsView = this.fundsService.GetAllActiveFunds(viewModel.ChosenDate);
                 }
                 else
                 {
@@ -49,12 +50,12 @@
                 }
             }
 
-            else if (command.Equals("Extract Table As Excel"))
+            else if (viewModel.Command.Equals("Extract Table As Excel"))
             {
-                fileStreamResult = ExtractTableAsExcel(funds);
+                fileStreamResult = ExtractTableAsExcel(viewModel.ActiveFunds);
             }
 
-            //        else if (command.Equals("Extract Table As PDF"))
+            //        else if (viewModel.Command.Equals("Extract Table As PDF"))
             //        {
             //            MemoryStream ms = new MemoryStream();
 
@@ -68,18 +69,17 @@
             //            return new FileStreamResult(ms, "application/pdf");
             //        }
 
-
-            else if (command.Equals("Filter"))
+            else if (viewModel.Command.Equals("Filter"))
             {
-                if (searchString == null)
+                if (viewModel.SearchString == null)
                 {
-                    return this.View(funds);
+                    return this.View(viewModel.ActiveFunds);
                 }
                 ModelState.Clear();
 
                 AddHeadersToView();
 
-                AddTableToView(searchString);
+                AddTableToView(viewModel.SearchString.ToLower());
             }
 
             if (fileStreamResult != null)
@@ -149,7 +149,7 @@
             {
                 foreach (var stringValue in fund)
                 {
-                    if (stringValue != null && stringValue.ToLower().Contains(searchString))
+                    if (stringValue != null && stringValue.ToLower().Contains(searchString.ToLower()))
                     {
                         this.activeFundsView.Add(fund);
                         break;

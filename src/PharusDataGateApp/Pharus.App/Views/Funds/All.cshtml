@@ -1,73 +1,77 @@
-﻿@model List<string[]>
+﻿@model Pharus.App.Models.ViewModels.Funds.ActiveFundsViewModel
 
 @{
     ViewData["Title"] = "All";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 }
 <h2 class="text-center text-torshia">All Active Funds</h2>
 
-<form asp-action="All" class="d-inline" method="post">
+<form asp-action="All" class="justify-content-between" method="post">
     <div>
         <label for="date"
                class="text-torshia">SELECT DATE:</label>
         <input type="date"
                name="chosenDate"
                id="fundDatetime"
+               asp-for="ChosenDate"
                value="@DateTime.Today.ToString("yyyy-MM-dd")">
 
         <input type="submit"
-               name="command"
                class="bg-pharus text-white"
+               asp-for="Command"
                value="Update Table"></>
 
         <input type="submit"
-               name="command"
                class="bg-pharus text-white center-block"
+               asp-for="Command"
                value="Extract Table As Excel" />
 
         <input type="submit"
-               name="command"
                class="bg-pharus text-white center-block"
+               asp-for="Command"
                value="Extract Table As PDF" />
 
-        <div class="pharusSearchDiv position-absolute">
-            <input type="text" name="searchString" />
+        <div class="pharusSearchDiv float-xl-right">
+            <input type="text"
+                   name="searchString"
+                   asp-for="SearchString" />
 
             <input type="submit"
-                   name="command"
-                   class="bg-pharus text-white center-block"
+                   class="bg-pharus text-white"
+                   asp-for="Command"
                    value="Filter" />
         </div>
 
         <hr class="bg-pharus hr-2" />
 
         <div class="table-responsive border-0 mx-auto">
-            <table class="table table-hover" id="tableFunds" name="funds">
+            <table class="table table-hover"
+                   name="ActiveFunds">
                 <thead>
-                    @for (int row = 0; row < 1; row++)
-                    {
-                        <tr>
-                            @for (int col = 0; col < Model[row].Length; col++)
+                    <tr>
+                        @for (int row = 0; row < 1; row++)
+                        {
+                            @for (int col = 0; col < Model.ActiveFunds[row].Length; col++)
                             {
-                                <th class="text-secondary">
+                                <th class="text-secondary p-1">
                                     <h5>
-                                        @*@Html.HiddenFor(m => m[row][col])*@
-                                        @Html.TextBoxFor(m => Model[row][col])
-
+                                        @Model.ActiveFunds[row][col]
                                     </h5>
                                 </th>
                             }
-                        </tr>
-                    }
+                        }
+                    </tr>
                 </thead>
+
                 <tbody>
-                    @for (int row = 1; row < Model.Count; row++)
+                    @for (int row = 1; row < Model.ActiveFunds.Count; row++)
                     {
                         <tr>
-                            @for (int col = 0; col < Model[row].Length; col++)
+                            @for (int col = 0; col < Model.ActiveFunds[row].Length; col++)
                             {
-                                <td>
-                                    @*@Html.HiddenFor(m => m[row][col])*@
-                                    @Html.TextBoxFor(m => Model[row][col])
+                                <td class="p-1">
+                                    @Model.ActiveFunds[row][col]
                                 </td>
                             }
                         </tr>
