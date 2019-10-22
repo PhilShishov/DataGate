@@ -134,15 +134,10 @@ h3 {
     display: inline;
 }
 
-.pharusTableHeader, .pharusTableValue {
+/*.pharusTableHeader, .pharusTableValue {
     border: 0;
     width: 230px;
     outline: none;
     word-break: break-all;
     margin: 0;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-}
+}*/

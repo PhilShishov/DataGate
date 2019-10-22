@@ -8,6 +8,8 @@ namespace Pharus.App.Models.ViewModels.Funds
     {
         public List<string[]> ActiveFunds { get; set; }
 
+        public int FundID { get; set; }
+
         public DateTime? ChosenDate { get; set; }
 
         public string Command { get; set; }

@@ -26,8 +26,11 @@
         [HttpGet]
         public IActionResult All()
         {
-            var model = new ActiveFundsViewModel();
-            model.ActiveFunds = this.fundsService.GetAllActiveFunds();
+            var model = new ActiveFundsViewModel
+            {
+                ActiveFunds = this.fundsService.GetAllActiveFunds()
+            };
+
             return this.View(model);
         }
 
@@ -97,6 +100,26 @@
             }
         }
 
+        [HttpGet("Funds/View/{fundId}")]
+        public IActionResult View(int fundId)
+        {
+            SpecificFundViewModel viewModel = new SpecificFundViewModel();
+            viewModel.FundId = fundId;
+            viewModel.ActiveFund = this.fundsService.GetActiveFundById(fundId);
+            viewModel.AFSubFunds = this.fundsService.GetFundSubFunds(fundId);
+
+            return this.View(viewModel);
+        }
+
+        //[HttpPost]
+        //public IActionResult View(SpecificFundViewModel viewModel)
+        //{
+
+        //    viewModel.ActiveFund = this.fundsService.GetActiveFundById(viewModel);
+        //    viewModel.AFSubFunds = this.fundsService.GetFundSubFunds(fundId);
+        //}
+
+        #region Helpers     
         private FileStreamResult ExtractTableAsExcel(List<string[]> funds)
         {
             FileStreamResult fileStreamResult;
@@ -139,8 +162,6 @@
                 return fileStreamResult;
             }
         }
-
-        #region Helpers     
         private void AddTableToView(List<string[]> activeFunds, string searchString)
         {
             var tableFundsWithoutHeaders = this.fundsService.GetAllActiveFunds().Skip(1);

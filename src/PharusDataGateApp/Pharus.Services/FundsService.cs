@@ -1,25 +1,16 @@
 ﻿namespace Pharus.Services
 {
     using System;
-    using System.Data;
-    using System.Linq;
     using System.Data.SqlClient;
     using System.Collections.Generic;
 
     using Pharus.Data;
     using Pharus.Services.Contracts;
     using Pharus.Services.Utilities;
-    using Pharus.Domain.Pharus_vFinale;
 
     public class FundsService : IFundsService
     {
         private readonly string defaultDate = DateTime.Today.ToString("yyyyMMdd");
-        private readonly Pharus_vFinaleContext context;
-
-        public FundsService(Pharus_vFinaleContext context)
-        {
-            this.context = context;
-        }
 
         public List<string[]> GetAllActiveFunds()
         {
@@ -55,36 +46,48 @@
             }
         }
 
-        public DataSet GetAllActiveFundsWithDataSet(DateTime? chosenDate)
+        public List<string[]> GetActiveFundById(int Id)
         {
-            DataSet dataSet = new DataSet();
-
             using (SqlConnection connection = new SqlConnection(DbConfiguration.ConnectionStringPharus_vFinale.ToString()))
             {
-                SqlCommand cmd = new SqlCommand();
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = $"select * from fn_active_fund('{chosenDate?.ToString("yyyyMMdd")}')";
-                cmd.Connection = connection;
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
 
-                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
-                sqlDataAdapter.SelectCommand = cmd;
-                sqlDataAdapter.Fill(dataSet);
+                command.CommandText = $"select * from fn_active_fund('{defaultDate}') where [FUND ID PHARUS] = {Id}";
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
             }
-            return dataSet;
         }
 
-        public List<TbHistoryFund> GetAllFunds()
+        public List<string[]> GetFundSubFunds(int Id)
         {
-            var funds = this.context.TbHistoryFund.ToList();
+            using (SqlConnection connection = new SqlConnection(DbConfiguration.ConnectionStringPharus_vFinale.ToString()))
+            {
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
 
-            return funds;
+                command.CommandText = $"select * from ActivesubfundforSpecificFundAtDate('{defaultDate}', {Id})";
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
         }
 
-        public TbHistoryFund GetFund(string fundName)
-        {
-            var fund = this.context.TbHistoryFund.FirstOrDefault(f => f.FOfficialFundName == fundName);
+        //public DataSet GetAllActiveFundsWithDataSet(DateTime? chosenDate)
+        //{
+        //    DataSet dataSet = new DataSet();
 
-            return fund;
-        }
+        //    using (SqlConnection connection = new SqlConnection(DbConfiguration.ConnectionStringPharus_vFinale.ToString()))
+        //    {
+        //        SqlCommand cmd = new SqlCommand();
+        //        cmd.CommandType = CommandType.Text;
+        //        cmd.CommandText = $"select * from fn_active_fund('{chosenDate?.ToString("yyyyMMdd")}')";
+        //        cmd.Connection = connection;
+
+        //        SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
+        //        sqlDataAdapter.SelectCommand = cmd;
+        //        sqlDataAdapter.Fill(dataSet);
+        //    }
+        //    return dataSet;
+        //}
     }
 }
