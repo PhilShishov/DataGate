@@ -38,6 +38,7 @@
         public IActionResult All(ActiveFundsViewModel viewModel)
         {
             FileStreamResult fileStreamResult = null;
+            viewModel.ActiveFunds = this.fundsService.GetAllActiveFunds();
 
             if (viewModel.Command.Equals("Update Table"))
             {
@@ -45,38 +46,14 @@
                 {
                     viewModel.ActiveFunds = this.fundsService.GetAllActiveFunds(viewModel.ChosenDate);
                 }
-                else
-                {
-                    viewModel.ActiveFunds = this.fundsService.GetAllActiveFunds();
-                }                
             }
-
-            else if (viewModel.Command.Equals("Extract Table As Excel"))
-            {
-                fileStreamResult = ExtractTableAsExcel(viewModel.ActiveFunds);
-            }
-
-            //        else if (viewModel.Command.Equals("Extract Table As PDF"))
-            //        {
-            //            MemoryStream ms = new MemoryStream();
-
-            //            byte[] byteInfo = pdf.Output();
-            //            ms.Write(byteInfo, 0, byteInfo.Length);
-            //            ms.Position = 0;
-
-            //            HttpContext.Response.Headers.Add("content-disposition",
-            //"attachment; filename=form.pdf");
-
-            //            return new FileStreamResult(ms, "application/pdf");
-            //        }
 
             else if (viewModel.Command.Equals("Filter"))
             {
                 if (viewModel.SearchString == null)
-                {
+                {                   
                     return this.View(viewModel);
                 }
-                ModelState.Clear();
 
                 viewModel.ActiveFunds = new List<string[]>();
 
@@ -90,15 +67,6 @@
                 return fileStreamResult;
             }
 
-            //if (Request.IsAjaxRequest())
-            //{
-            //    viewModel.Posts = viewModel.Posts
-            //        .Where(a => a.Title.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0
-            //                 || a.Message.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0
-            //        );
-            //    return PartialView("_Posts", viewModel.Posts);
-            //}
-
             if (viewModel.ActiveFunds != null)
             {
                 return this.View(viewModel);
@@ -107,6 +75,38 @@
             {
                 return this.View();
             }
+        }
+
+        [HttpPost]
+        public IActionResult ExtractUpload(ActiveFundsViewModel viewModel)
+        {
+            FileStreamResult fileStreamResult = null;
+
+            if (HttpContext.Request.Form.ContainsKey("excel_button"))
+            {
+                fileStreamResult = ExtractTableAsExcel(viewModel.ActiveFunds);
+            }
+
+            else if (HttpContext.Request.Form.ContainsKey("command_Pdf"))
+            {
+                //            MemoryStream ms = new MemoryStream();
+
+                //            byte[] byteInfo = pdf.Output();
+                //            ms.Write(byteInfo, 0, byteInfo.Length);
+                //            ms.Position = 0;
+
+                //            HttpContext.Response.Headers.Add("content-disposition",
+                //"attachment; filename=form.pdf");
+
+                //            return new FileStreamResult(ms, "application/pdf");
+            }
+
+            if (fileStreamResult != null)
+            {
+                return fileStreamResult;
+            }
+
+            return this.View();
         }
 
         [HttpGet("Funds/View/{fundId}")]
