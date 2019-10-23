@@ -4,45 +4,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <form asp-action="View" class="justify-content-between" method="post">
+<form asp-action="View" class="justify-content-between" method="post">
 
-        <div class="table-responsive border-0 mx-auto">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        @for (int row = 0; row < 1; row++)
-                        {
-                            @for (int col = 0; col < Model.ActiveFund[row].Length; col++)
-                            {
-                                <th class="text-secondary p-1">
-                                    <h5>
-                                        @Model.ActiveFund[row][col]
-                                    </h5>
-                                </th>
-                            }
-                        }
-                    </tr>
-                </thead>
-
-                <tbody>
-                    @for (int row = 1; row < Model.ActiveFund.Count; row++)
-                    {
-                        <tr>
-                            @for (int col = 0; col < Model.ActiveFund[row].Length; col++)
-                            {
-                                <td class="p-1">
-                                    @Model.ActiveFund[row][col]
-                                </td>
-                            }
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-
-
+    <div class="w-100 flex-wrap my-5">
         <label for="date"
-               class="text-torshia">SELECT DATE:</label>
+               class="text-torshia m-1 pr-3">SELECT DATE:</label>
         <input type="date"
                name="chosenDate"
                id="fundDatetime"
@@ -53,18 +19,43 @@
                class="bg-pharus text-white"
                asp-for="Command"
                value="Update Table"></>
+    </div>
 
-        <input type="submit"
-               class="bg-pharus text-white center-block"
-               asp-for="Command"
-               value="Extract Table As Excel" />
+    <div class="d-flex justify-content-between">
+        <div class="table-responsive border-0 w-60">
+            <table class="table table-hover">
+                <tbody>
+                    @for (int row = 1; row < Model.ActiveFund.Count; row++)
+                    {
+                        @for (int col = 0; col < Model.ActiveFund[row].Length; col++)
+                        {
+                            <tr>
+                                <th class="text-secondary p-1">
+                                    <h5>
+                                        @Model.ActiveFund[0][col]
+                                    </h5>
+                                </th>
+                                <td class="p-1">
+                                    @Model.ActiveFund[row][col]
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
 
-        <input type="submit"
-               class="bg-pharus text-white center-block"
-               asp-for="Command"
-               value="Extract Table As PDF" />
+        <div class="w-35 float-right">
+            <p>List of prospectus</p>
+            <a href="#bottomOfPage">Document prospectus</a>
+            <p>List of agreements</p>
+            <a href="#bottomOfPage">Document manco offer</a>
+        </div>
+    </div>
 
-        <div class="pharusSubfundSearch float-xl-right">
+    <div class="w-75 d-flex justify-content-between flex-wrap my-5">
+
+        <div>
             <input type="text"
                    name="searchString"
                    asp-for="SearchString" />
@@ -75,41 +66,51 @@
                    value="Filter" />
         </div>
 
-        <hr class="bg-pharus hr-2" />
+        <input type="submit"
+               class="bg-pharus text-white"
+               asp-for="Command"
+               value="Extract Table As Excel" />
 
-        <div class="table-responsive border-0 mx-auto">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        @for (int row = 0; row < 1; row++)
+        <input type="submit"
+               class="bg-pharus text-white"
+               asp-for="Command"
+               value="Extract Table As PDF" />
+    </div>
+
+    <hr class="bg-pharus hr-2" />
+
+    <div class="table-responsive border-0 mx-auto">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    @for (int row = 0; row < 1; row++)
+                    {
+                        @for (int col = 0; col < Model.AFSubFunds[row].Length; col++)
                         {
-                            @for (int col = 0; col < Model.AFSubFunds[row].Length; col++)
-                            {
-                                <th class="text-secondary p-1">
-                                    <h5>
-                                        @Model.AFSubFunds[row][col]
-                                    </h5>
-                                </th>
-                            }
+                            <th class="text-secondary p-1">
+                                <h5>
+                                    @Model.AFSubFunds[row][col]
+                                </h5>
+                            </th>
+                        }
+                    }
+                </tr>
+            </thead>
+
+            <tbody>
+                @for (int row = 1; row < Model.AFSubFunds.Count; row++)
+                {
+                    <tr>
+                        @for (int col = 0; col < Model.AFSubFunds[row].Length; col++)
+                        {
+                            <td class="p-1">
+                                @Model.AFSubFunds[row][col]
+                            </td>
                         }
                     </tr>
-                </thead>
-
-                <tbody>
-                    @for (int row = 1; row < Model.AFSubFunds.Count; row++)
-                    {
-                        <tr>
-                            @for (int col = 0; col < Model.AFSubFunds[row].Length; col++)
-                            {
-                                <td class="p-1">
-                                    @Model.AFSubFunds[row][col]
-                                </td>
-                            }
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-
-    </form>
+                }
+            </tbody>
+        </table>
+    </div>
+</form>
 

@@ -9,14 +9,13 @@
 
 <form asp-action="All" class="justify-content-between" method="post">
     <div>
-        <div class="w-100 d-flex justify-content-between flex-wrap my-5">
+        <div class="w-100 d-flex justify-content-center flex-wrap my-5">
             <label for="date"
                    class="text-torshia m-1 pr-3">SELECT DATE:</label>
             <input type="date"
-                   name="chosenDate"
                    id="fundDatetime"
                    asp-for="ChosenDate"
-                   value="@DateTime.Today.ToString("yyyy-MM-dd")">
+                   min="2018-01-01" max=@DateTime.Today.ToString("yyyy-MM-dd")>
 
             <input type="submit"
                    class="bg-pharus text-white"
