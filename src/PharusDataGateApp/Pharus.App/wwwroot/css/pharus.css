@@ -129,15 +129,10 @@ h3 {
     text-align: center;
 }
 
-.pharusSearchDiv {
+/*.pharusSearchDiv {
     margin-top: -5%;
     display: inline;
 }
-
-/*.pharusTableHeader, .pharusTableValue {
-    border: 0;
-    width: 230px;
-    outline: none;
-    word-break: break-all;
-    margin: 0;
+.pharusSubfundSearch {
+    display: inline;
 }*/

@@ -6,19 +6,6 @@
 
     <form asp-action="View" class="justify-content-between" method="post">
 
-        <label for="date"
-               class="text-torshia">SELECT DATE:</label>
-        <input type="date"
-               name="chosenDate"
-               id="fundDatetime"
-               asp-for="ChosenDate"
-               value="@DateTime.Today.ToString("yyyy-MM-dd")">
-
-        <input type="submit"
-               class="bg-pharus text-white"
-               asp-for="Command"
-               value="Update Table"></>
-
         <div class="table-responsive border-0 mx-auto">
             <table class="table table-hover">
                 <thead>
@@ -51,6 +38,41 @@
                     }
                 </tbody>
             </table>
+        </div>
+
+
+        <label for="date"
+               class="text-torshia">SELECT DATE:</label>
+        <input type="date"
+               name="chosenDate"
+               id="fundDatetime"
+               asp-for="ChosenDate"
+               value="@DateTime.Today.ToString("yyyy-MM-dd")">
+
+        <input type="submit"
+               class="bg-pharus text-white"
+               asp-for="Command"
+               value="Update Table"></>
+
+        <input type="submit"
+               class="bg-pharus text-white center-block"
+               asp-for="Command"
+               value="Extract Table As Excel" />
+
+        <input type="submit"
+               class="bg-pharus text-white center-block"
+               asp-for="Command"
+               value="Extract Table As PDF" />
+
+        <div class="pharusSubfundSearch float-xl-right">
+            <input type="text"
+                   name="searchString"
+                   asp-for="SearchString" />
+
+            <input type="submit"
+                   class="bg-pharus text-white"
+                   asp-for="Command"
+                   value="Filter" />
         </div>
 
         <hr class="bg-pharus hr-2" />
