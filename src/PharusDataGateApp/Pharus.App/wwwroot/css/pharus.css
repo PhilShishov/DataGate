@@ -74,12 +74,20 @@
     padding-right: 8px;
 }
 
+.w-35 {
+    width: 35%;
+}
+
 .w-40 {
     width: 40%;
 }
 
 .w-45 {
     width: 45%;
+}
+
+.w-60 {
+    width: 60%;
 }
 
 .maxw-270 {

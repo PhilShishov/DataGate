@@ -7,13 +7,21 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
 
-//TODO update value of input after submit
-//function updateTableWithChosenDate(chosenDate) {
-//    chosenDate = document.getElementById("fundDatetime").value;
-//    document.getElementById("fundDatetime").value = chosenDate;   
-//    console.log(document.getElementById("fundDatetime").value);
-//    console.log(chosenDate);
-//}
+function loadDate() {
+    if (document.getElementById("fundDatetime").value == "") {
+        let date = (formatDate(new Date())).toString();
+
+        document.getElementById("fundDatetime").value = date;
+    }
+}
+
+function formatDate(date) {
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+
+    return year + '-' + month + '-' + day;
+}
 
 var dropdown = document.getElementsByClassName("dropdown-btn");
 var i;

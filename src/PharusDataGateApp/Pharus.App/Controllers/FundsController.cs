@@ -48,7 +48,7 @@
                 else
                 {
                     viewModel.ActiveFunds = this.fundsService.GetAllActiveFunds();
-                }
+                }                
             }
 
             else if (viewModel.Command.Equals("Extract Table As Excel"))
@@ -89,6 +89,15 @@
             {
                 return fileStreamResult;
             }
+
+            //if (Request.IsAjaxRequest())
+            //{
+            //    viewModel.Posts = viewModel.Posts
+            //        .Where(a => a.Title.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0
+            //                 || a.Message.IndexOf(term, StringComparison.OrdinalIgnoreCase) >= 0
+            //        );
+            //    return PartialView("_Posts", viewModel.Posts);
+            //}
 
             if (viewModel.ActiveFunds != null)
             {
