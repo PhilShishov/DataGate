@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<form asp-action="View" class="justify-content-between" method="post">
+<form asp-controller="Funds" asp-action="Update" class="justify-content-between" method="post">
 
     <div class="w-100 flex-wrap my-5">
         <label for="date"
@@ -20,7 +20,9 @@
                asp-for="Command"
                value="Update Table"></>
     </div>
+</form>
 
+<form>
     <div class="d-flex justify-content-between">
         <div class="table-responsive border-0 w-60">
             <table class="table table-hover">
@@ -52,8 +54,10 @@
             <a href="#bottomOfPage">Document manco offer</a>
         </div>
     </div>
+</form>
 
-    <div class="w-75 d-flex justify-content-between flex-wrap my-5">
+<div class="w-50 d-flex justify-content-between">
+    <form asp-controller="Funds" asp-action="Update" class="my-5">
         <div>
             <input type="text"
                    name="searchString"
@@ -64,52 +68,59 @@
                    asp-for="Command"
                    value="Filter" />
         </div>
+    </form>
 
-        <input type="submit"
-               class="bg-pharus text-white"
-               asp-for="Command"
-               value="Extract Table As Excel" />
+    <form asp-controller="Funds" asp-action="ExtractUpload" method="post">
+        <button type="submit"
+                name="excel_button">
+            <img src="~/images/Icon_Excel.ico"
+                 width="35"
+                 height="25" />
+        </button>
 
-        <input type="submit"
-               class="bg-pharus text-white"
-               asp-for="Command"
-               value="Extract Table As PDF" />
-    </div>
+        <button type="submit"
+                name="excel_button">
+            <img src="~/images/Icon_Pdf.ico"
+                 width="35"
+                 height="25" />
+        </button>
+    </form>
+</div>
 
-    <hr class="bg-pharus hr-2" />
+<hr class="bg-pharus hr-2" />
 
-    <div class="table-responsive border-0 mx-auto">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    @for (int row = 0; row < 1; row++)
+<div class="table-responsive border-0 mx-auto">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                @for (int row = 0; row < 1; row++)
+                {
+                    @for (int col = 0; col < Model.AFSubFunds[row].Length; col++)
                     {
-                        @for (int col = 0; col < Model.AFSubFunds[row].Length; col++)
-                        {
-                            <th class="text-secondary p-1">
-                                <h5>
-                                    @Model.AFSubFunds[row][col]
-                                </h5>
-                            </th>
-                        }
+                        <th class="text-secondary p-1">
+                            <h5>
+                                @Model.AFSubFunds[row][col]
+                            </h5>
+                        </th>
+                    }
+                }
+            </tr>
+        </thead>
+
+        <tbody>
+            @for (int row = 1; row < Model.AFSubFunds.Count; row++)
+            {
+                <tr>
+                    @for (int col = 0; col < Model.AFSubFunds[row].Length; col++)
+                    {
+                        <td class="p-1">
+                            @Model.AFSubFunds[row][col]
+                        </td>
                     }
                 </tr>
-            </thead>
+            }
+        </tbody>
+    </table>
+</div>
 
-            <tbody>
-                @for (int row = 1; row < Model.AFSubFunds.Count; row++)
-                {
-                    <tr>
-                        @for (int col = 0; col < Model.AFSubFunds[row].Length; col++)
-                        {
-                            <td class="p-1">
-                                @Model.AFSubFunds[row][col]
-                            </td>
-                        }
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-</form>
 

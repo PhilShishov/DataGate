@@ -37,7 +37,6 @@
         [HttpPost]
         public IActionResult All(ActiveFundsViewModel viewModel)
         {
-            FileStreamResult fileStreamResult = null;
             viewModel.ActiveFunds = this.fundsService.GetAllActiveFunds();
 
             if (viewModel.Command.Equals("Update Table"))
@@ -51,7 +50,7 @@
             else if (viewModel.Command.Equals("Filter"))
             {
                 if (viewModel.SearchString == null)
-                {                   
+                {
                     return this.View(viewModel);
                 }
 
@@ -62,19 +61,12 @@
                 AddTableToView(viewModel.ActiveFunds, viewModel.SearchString.ToLower());
             }
 
-            if (fileStreamResult != null)
-            {
-                return fileStreamResult;
-            }
-
             if (viewModel.ActiveFunds != null)
             {
                 return this.View(viewModel);
             }
-            else
-            {
-                return this.View();
-            }
+
+            return this.View();
         }
 
         [HttpPost]
@@ -105,28 +97,57 @@
             {
                 return fileStreamResult;
             }
-
             return this.View();
         }
 
         [HttpGet("Funds/View/{fundId}")]
         public IActionResult View(int fundId)
         {
-            SpecificFundViewModel viewModel = new SpecificFundViewModel();
-            viewModel.FundId = fundId;
-            viewModel.ActiveFund = this.fundsService.GetActiveFundById(fundId);
-            viewModel.AFSubFunds = this.fundsService.GetFundSubFunds(fundId);
+            SpecificFundViewModel viewModel = new SpecificFundViewModel
+            {
+                FundID = fundId,
+                ActiveFund = this.fundsService.GetActiveFundById(fundId),
+                AFSubFunds = this.fundsService.GetFundSubFunds(fundId)
+            };
 
             return this.View(viewModel);
         }
 
-        //[HttpPost]
-        //public IActionResult View(SpecificFundViewModel viewModel)
-        //{
+        [HttpPost]
+        public IActionResult Update(SpecificFundViewModel viewModel)
+        {
+            viewModel.ActiveFund = this.fundsService.GetActiveFundById(viewModel.FundID);
+            viewModel.AFSubFunds = this.fundsService.GetFundSubFunds(viewModel.FundID);
 
-        //    viewModel.ActiveFund = this.fundsService.GetActiveFundById(viewModel);
-        //    viewModel.AFSubFunds = this.fundsService.GetFundSubFunds(fundId);
-        //}
+            if (viewModel.Command.Equals("Update Table"))
+            {
+                if (viewModel.ChosenDate != null)
+                {
+                    viewModel.ActiveFund = this.fundsService.GetActiveFundById(viewModel.ChosenDate, viewModel.FundID);
+                }
+            }
+
+            //else if (viewModel.Command.Equals("Filter"))
+            //{
+            //    if (viewModel.SearchString == null)
+            //    {
+            //        return this.View(viewModel);
+            //    }
+
+            //    viewModel.ActiveFunds = new List<string[]>();
+
+            //    AddHeadersToView(viewModel.ActiveFunds);
+
+            //    AddTableToView(viewModel.ActiveFunds, viewModel.SearchString.ToLower());
+            //}
+
+            if (viewModel.ActiveFund != null && viewModel.AFSubFunds != null)
+            {
+                return this.View(viewModel);
+            }
+
+            return this.View();
+        }
 
         #region Helpers     
         private FileStreamResult ExtractTableAsExcel(List<string[]> funds)

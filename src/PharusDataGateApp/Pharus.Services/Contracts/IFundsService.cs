@@ -12,6 +12,8 @@ namespace Pharus.Services.Contracts
 
         List<string[]> GetActiveFundById(int Id);
 
+        List<string[]> GetActiveFundById(DateTime? chosenDate, int Id);
+
         List<string[]> GetFundSubFunds(int Id);
     }
 }

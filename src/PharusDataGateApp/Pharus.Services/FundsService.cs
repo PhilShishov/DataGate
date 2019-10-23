@@ -59,6 +59,27 @@
             }
         }
 
+        public List<string[]> GetActiveFundById(DateTime? chosenDate, int Id)
+        {
+            using (SqlConnection connection = new SqlConnection(DbConfiguration.ConnectionStringPharus_vFinale.ToString()))
+            {
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                if (chosenDate == null)
+                {
+                    command.CommandText = $"select * from fn_active_fund('{defaultDate}') where [FUND ID PHARUS] = {Id}";
+                }
+
+                else
+                {
+                    command.CommandText = $"select * from fn_active_fund('{chosenDate?.ToString("yyyyMMdd")}') where [FUND ID PHARUS] = {Id}";
+                }
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
         public List<string[]> GetFundSubFunds(int Id)
         {
             using (SqlConnection connection = new SqlConnection(DbConfiguration.ConnectionStringPharus_vFinale.ToString()))
