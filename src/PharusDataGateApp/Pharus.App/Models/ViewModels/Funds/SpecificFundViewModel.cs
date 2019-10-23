@@ -9,10 +9,11 @@
 
         public List<string[]> AFSubFunds { get; set; }
 
-        public int FundId { get; set; }
-
+        public string Command { get; set; }
         public DateTime? ChosenDate { get; set; }
 
-        public string Command { get; set; }
+        public int FundId { get; set; }
+
+        public string SearchString { get; set; }
     }
 }
