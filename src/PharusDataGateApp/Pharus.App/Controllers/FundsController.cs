@@ -1,6 +1,5 @@
 ﻿namespace Pharus.App.Controllers
 {
-    using System;
     using System.Linq;
     using System.Collections.Generic;
 
@@ -92,8 +91,8 @@
             return this.View();
         }
 
-        [HttpGet("Funds/View/{fundId}")]
-        public IActionResult View(int fundId)
+        [HttpGet("Funds/ViewFundSF/{fundId}")]
+        public IActionResult ViewFundSF(int fundId)
         {
             SpecificFundViewModel viewModel = new SpecificFundViewModel
             {
@@ -105,8 +104,8 @@
             return this.View(viewModel);
         }
 
-        [HttpPost("Funds/View/{fundId}")]
-        public IActionResult Update(SpecificFundViewModel viewModel)
+        [HttpPost("Funds/ViewFundSF/{fundId}")]
+        public IActionResult ViewFundSF(SpecificFundViewModel viewModel)
         {
             viewModel.ActiveFund = this.fundsService.GetActiveFundById(viewModel.FundID);
             viewModel.AFSubFunds = this.fundsService.GetFundSubFunds(viewModel.FundID);
@@ -119,19 +118,22 @@
                 }
             }
 
-            //else if (viewModel.Command.Equals("Filter"))
-            //{
-            //    if (viewModel.SearchString == null)
-            //    {
-            //        return this.View(viewModel);
-            //    }
+            else if (viewModel.Command.Equals("Filter"))
+            {
+                if (viewModel.SearchString == null)
+                {
+                    return this.View(viewModel);
+                }
 
-            //    viewModel.ActiveFunds = new List<string[]>();
+                viewModel.AFSubFunds = new List<string[]>();
 
-            //    AddHeadersToView(viewModel.ActiveFunds);
+                var tableHeaders = this.fundsService.GetFundSubFunds(viewModel.FundID).Take(1).ToList();
+                var tableFundsWithoutHeaders = this.fundsService.GetFundSubFunds(viewModel.FundID).Skip(1).ToList();
 
-            //    AddTableToView(viewModel.ActiveFunds, viewModel.SearchString.ToLower());
-            //}
+                CreateTableView.AddHeadersToView(viewModel.AFSubFunds, tableHeaders);
+
+                CreateTableView.AddTableToView(viewModel.AFSubFunds, tableFundsWithoutHeaders, viewModel.SearchString.ToLower());
+            }
 
             if (viewModel.ActiveFund != null && viewModel.AFSubFunds != null)
             {
