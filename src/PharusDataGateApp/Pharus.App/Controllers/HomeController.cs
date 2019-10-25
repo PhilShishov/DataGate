@@ -12,7 +12,7 @@ namespace Pharus.App.Controllers
     {
         public IActionResult Index()
         {
-            return this.View();
+            return this.View("Index");
         }
 
         public IActionResult Error()

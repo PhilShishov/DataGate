@@ -1,14 +1,18 @@
 ﻿namespace Pharus.App.Controllers
 {
+    using System;
     using System.Linq;
     using System.Collections.Generic;
 
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Authorization;
 
+    using Pharus.Domain.Enums;
     using Pharus.App.Utilities;
     using Pharus.Services.Contracts;
     using Pharus.App.Models.ViewModels.Funds;
+    using Pharus.App.Extensions;
 
     [Authorize]
     public class FundsController : Controller
@@ -81,7 +85,7 @@
 
             else if (HttpContext.Request.Form.ContainsKey("command_Pdf"))
             {
-                fileStreamResult = ExtractTable.ExtractTableAsPdf(viewModel.ActiveFunds);               
+                fileStreamResult = ExtractTable.ExtractTableAsPdf(viewModel.ActiveFunds);
             }
 
             if (fileStreamResult != null)
@@ -141,6 +145,52 @@
             }
 
             return this.View();
+        }
+
+        [HttpGet("Funds/EditFund/{fundId}")]
+        public IActionResult EditFund(int fundId)
+        {
+            this.ViewBag.Status = new SelectList(Enum.GetValues(typeof(TbDomFStatus)), TbDomFStatus.Active.GetStringValue());
+
+            var fund = this.fundsService.GetActiveFundById(fundId);
+
+            return this.View(fund);
+        }
+
+        [HttpPost]
+        public IActionResult EditFund(List<string[]> model)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View(model ?? new EditFundBindingModel());
+            //}
+
+            int fundId = int.Parse(model[1][0]);
+            string returnUrl = $"/Funds/ViewFundSF/{fundId}";
+
+            var fund = this.fundsService.GetActiveFundById(fundId);
+
+            if (HttpContext.Request.Form.ContainsKey("modify_button"))
+            {
+                for (int row = 1; row < fund.Count; row++)
+                {
+                    for (int col = 0; col < fund[row].Length; col++)
+                    {
+                        fund[row][col] = model[row][col];
+                    }
+                }
+
+                return LocalRedirect(returnUrl);
+            }
+
+            //else if (HttpContext.Request.Form.ContainsKey("delete_button"))
+            //{
+            //    var result = await this._userManager.DeleteAsync(user);
+
+            //    return LocalRedirect(returnUrl);
+            //}
+
+            return this.LocalRedirect(returnUrl);
         }
     }
 }
