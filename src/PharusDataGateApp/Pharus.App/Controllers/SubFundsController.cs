@@ -42,9 +42,5 @@
 
             return View(activeSubFundsView);
         }
-
-        #region Helpers        
-
-        #endregion
     }
 }

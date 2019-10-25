@@ -144,3 +144,7 @@ h3 {
 .pharusSubfundSearch {
     display: inline;
 }*/
+
+.pharusSearchForm{
+    display: contents;
+}
