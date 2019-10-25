@@ -1,24 +1,19 @@
 ﻿namespace Pharus.Services
 {
     using System;
-    using System.Linq;
     using System.Data.SqlClient;
     using System.Collections.Generic;
 
     using Pharus.Data;
     using Pharus.Services.Utilities;
     using Pharus.Services.Contracts;
-    using Pharus.Domain.Pharus_vFinale;
 
     public class SubFundsService : ISubFundsService
     {
-        private string defaultDate = DateTime.Today.ToString("yyyyMMdd");
-        private readonly Pharus_vFinaleContext context;
+        private readonly string defaultDate = DateTime.Today.ToString("yyyyMMdd");
 
-        public SubFundsService(
-            Pharus_vFinaleContext context)
+        public SubFundsService()
         {
-            this.context = context;
         }
 
         public List<string[]> GetAllActiveSubFunds()
@@ -55,18 +50,51 @@
             }
         }
 
-        public List<TbHistorySubFund> GetAllSubFunds()
+        public List<string[]> GetActiveSubFundById(int Id)
         {
-            var subFunds = this.context.TbHistorySubFund.ToList();
+            using (SqlConnection connection = new SqlConnection(DbConfiguration.ConnectionStringPharus_vFinale.ToString()))
+            {
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
 
-            return subFunds;
+                command.CommandText = $"select * from fn_active_fund('{defaultDate}') where [FUND ID PHARUS] = {Id}";
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
         }
 
-        public TbHistorySubFund GetSubFund(string subFundName)
+        public List<string[]> GetActiveSubFundById(DateTime? chosenDate, int Id)
         {
-            var subFund = this.context.TbHistorySubFund.FirstOrDefault(f => f.SfOfficialSubFundName == subFundName);
+            using (SqlConnection connection = new SqlConnection(DbConfiguration.ConnectionStringPharus_vFinale.ToString()))
+            {
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
 
-            return subFund;
-        }       
+                if (chosenDate == null)
+                {
+                    command.CommandText = $"select * from fn_active_fund('{defaultDate}') where [FUND ID PHARUS] = {Id}";
+                }
+
+                else
+                {
+                    command.CommandText = $"select * from fn_active_fund('{chosenDate?.ToString("yyyyMMdd")}') where [FUND ID PHARUS] = {Id}";
+                }
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
+        public List<string[]> GetSubFundShareClasses(int Id)
+        {
+            using (SqlConnection connection = new SqlConnection(DbConfiguration.ConnectionStringPharus_vFinale.ToString()))
+            {
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                command.CommandText = $"select * from ActivesubfundforSpecificFundAtDate('{defaultDate}', {Id})";
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
     }
 }

@@ -1,15 +1,13 @@
 ﻿namespace Pharus.App.Controllers
 {
     using System;
-    using System.IO;
     using System.Linq;
     using System.Collections.Generic;
 
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Authorization;
 
-    using OfficeOpenXml;
-
+    using Pharus.App.Utilities;
     using Pharus.Services.Contracts;
     using Pharus.App.Models.ViewModels.Funds;
 
@@ -56,9 +54,12 @@
 
                 viewModel.ActiveFunds = new List<string[]>();
 
-                AddHeadersToView(viewModel.ActiveFunds);
+                var tableHeaders = this.fundsService.GetAllActiveFunds().Take(1).ToList();
+                var tableFundsWithoutHeaders = this.fundsService.GetAllActiveFunds().Skip(1).ToList();
 
-                AddTableToView(viewModel.ActiveFunds, viewModel.SearchString.ToLower());
+                CreateTableView.AddHeadersToView(viewModel.ActiveFunds, tableHeaders);
+
+                CreateTableView.AddTableToView(viewModel.ActiveFunds, tableFundsWithoutHeaders, viewModel.SearchString.ToLower());
             }
 
             if (viewModel.ActiveFunds != null)
@@ -76,21 +77,12 @@
 
             if (HttpContext.Request.Form.ContainsKey("excel_button"))
             {
-                fileStreamResult = ExtractTableAsExcel(viewModel.ActiveFunds);
+                fileStreamResult = ExtractTable.ExtractTableAsExcel(viewModel.ActiveFunds);
             }
 
             else if (HttpContext.Request.Form.ContainsKey("command_Pdf"))
             {
-                //            MemoryStream ms = new MemoryStream();
-
-                //            byte[] byteInfo = pdf.Output();
-                //            ms.Write(byteInfo, 0, byteInfo.Length);
-                //            ms.Position = 0;
-
-                //            HttpContext.Response.Headers.Add("content-disposition",
-                //"attachment; filename=form.pdf");
-
-                //            return new FileStreamResult(ms, "application/pdf");
+                fileStreamResult = ExtractTable.ExtractTableAsPdf(viewModel.ActiveFunds);               
             }
 
             if (fileStreamResult != null)
@@ -113,7 +105,7 @@
             return this.View(viewModel);
         }
 
-        [HttpPost]
+        [HttpPost("Funds/View/{fundId}")]
         public IActionResult Update(SpecificFundViewModel viewModel)
         {
             viewModel.ActiveFund = this.fundsService.GetActiveFundById(viewModel.FundID);
@@ -148,98 +140,5 @@
 
             return this.View();
         }
-
-        #region Helpers     
-        private FileStreamResult ExtractTableAsExcel(List<string[]> funds)
-        {
-            FileStreamResult fileStreamResult;
-            using (ExcelPackage package = new ExcelPackage())
-            {
-                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("ActiveFunds");
-
-                var tableHeaders = funds.Take(1);
-
-                int counter = 0;
-
-                foreach (var tableHeader in tableHeaders)
-                {
-                    foreach (var headerValue in tableHeader)
-                    {
-                        counter++;
-                        worksheet.Cells[1, counter].Value = headerValue;
-                    }
-                }
-
-                for (int row = 1; row < funds.Count; row++)
-                {
-                    for (int col = 0; col < funds[row].Length; col++)
-                    {
-                        worksheet.Cells[row + 1, col + 1].Value = Convert.ToString(funds[row][col]);
-                    }
-                }
-
-                package.Save();
-
-                MemoryStream stream = new MemoryStream();
-                package.SaveAs(stream);
-                stream.Position = 0;
-
-                fileStreamResult = new FileStreamResult(stream, "application/excel")
-                {
-                    FileDownloadName = "ActiveFunds.xlsx"
-                };
-
-                return fileStreamResult;
-            }
-        }
-        private void AddTableToView(List<string[]> activeFunds, string searchString)
-        {
-            var tableFundsWithoutHeaders = this.fundsService.GetAllActiveFunds().Skip(1);
-
-            foreach (var fund in tableFundsWithoutHeaders)
-            {
-                foreach (var stringValue in fund)
-                {
-                    if (stringValue != null && stringValue.ToLower().Contains(searchString.ToLower()))
-                    {
-                        activeFunds.Add(fund);
-                        break;
-                    }
-                }
-            }
-        }
-
-        private void AddHeadersToView(List<string[]> activeFunds)
-        {
-            var tableHeaders = this.fundsService.GetAllActiveFunds().Take(1);
-
-            foreach (var tableHeader in tableHeaders)
-            {
-                activeFunds.Add(tableHeader);
-            }
-        }
-        //private static void AddColumnNamesAndRecordsToWorkSheet(ExcelWorksheet worksheet, DataSet dataSet)
-        //{
-        //    var columnName = dataSet.Tables[0].Columns.Cast<DataColumn>()
-        //                         .Select(x => x.ColumnName)
-        //                         .ToArray();
-        //    int i = 0;
-
-        //    foreach (var col in columnName)
-        //    {
-        //        i++;
-        //        worksheet.Cells[1, i].Value = col;
-        //    }
-
-        //    int j;
-        //    for (i = 0; i < dataSet.Tables[0].Rows.Count; i++)
-        //    {
-        //        for (j = 0; j < dataSet.Tables[0].Columns.Count; j++)
-        //        {
-        //            worksheet.Cells[i + 2, j + 1].Value = Convert.ToString(dataSet.Tables[0].Rows[i][j]);
-        //        }
-        //    }
-        //}
-        #endregion
     }
 }

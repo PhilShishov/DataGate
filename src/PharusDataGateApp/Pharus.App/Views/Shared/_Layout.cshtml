@@ -19,8 +19,8 @@
     <link rel="stylesheet" href="~/css/reset-css.css" />
     <link rel="stylesheet" href="~/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="~/css/pharus.css"/>
-    <link rel="stylesheet" href="~/css/style.css"/>
+    <link rel="stylesheet" href="~/css/pharus.css" />
+    <link rel="stylesheet" href="~/css/style.css" />
     <link href="http://cdn.syncfusion.com/17.3.0.9/js/web/flat-azure/ej.web.all.min.css"
           rel="stylesheet" />
 
@@ -60,10 +60,10 @@
 
                             <ul id="mySidenav" class="sidenav">
                                 <li>
-                                    <a href="" class="closebtn" onclick="closeNav()">&times;</a>
+                                    <a style="cursor:pointer" class="closebtn" onclick="closeNav()">&times;</a>
                                 </li>
                                 <li class="dropdown pt-5">
-                                    <button class="dropdown-btn">
+                                    <button class="dropdown-btn" onfocus="openDropdown()">
                                         Funds<i class="fa fa-caret-down"></i>
                                     </button>
                                     <div id="myDropdown" class="dropdown-container">
@@ -78,7 +78,7 @@
                                 </li>
 
                                 <li class="dropdown">
-                                    <button class="dropdown-btn">
+                                    <button class="dropdown-btn" onfocus="openDropdown()">
                                         SubFunds<i class="fa fa-caret-down"></i>
                                     </button>
                                     <div id="myDropdown" class="dropdown-container">
@@ -92,7 +92,7 @@
                                     </div>
                                 </li>
                                 <li class="dropdown">
-                                    <button class="dropdown-btn">
+                                    <button class="dropdown-btn" onfocus="openDropdown()">
                                         ShareClasses<i class="fa fa-caret-down"></i>
                                     </button>
                                     <div id="myDropdown" class="dropdown-container">
