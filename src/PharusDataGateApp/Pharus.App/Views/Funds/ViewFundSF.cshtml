@@ -51,6 +51,15 @@
             <a href="#bottomOfPage">Document prospectus</a>
             <p>List of agreements</p>
             <a href="#bottomOfPage">Document manco offer</a>
+
+            @if (this.User.IsInRole("Admin"))
+            {
+                <input type="submit"
+                       class="bg-pharus text-white"
+                       asp-for="Command"
+                       value="Edit Fund">
+                <input/>
+            }
         </div>
     </div>
 </form>
