@@ -56,7 +56,7 @@
 
 <hr class="bg-pharus hr-2" />
 
-@using (Html.BeginForm("View", "Funds", FormMethod.Get))
+@using (Html.BeginForm("ViewFundSF", "Funds", FormMethod.Get))
 {
     <div class="table-responsive border-0 mx-auto">
         <table class="table table-hover">
@@ -79,7 +79,7 @@
             <tbody>
                 @for (int row = 1; row < Model.ActiveFunds.Count; row++)
                 {
-                    <tr onclick="document.location = '/Funds/View/@Model.ActiveFunds[row][0]'">
+                    <tr onclick="document.location = '/Funds/ViewFundSF/@Model.ActiveFunds[row][0]'">
                         @for (int col = 0; col < Model.ActiveFunds[row].Length; col++)
                         {
                             <td class="p-1">
