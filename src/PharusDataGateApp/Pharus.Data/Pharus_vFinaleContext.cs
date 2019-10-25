@@ -1,6 +1,7 @@
 ﻿namespace Pharus.Data
 {
     using Microsoft.EntityFrameworkCore;
+
     using Pharus.Domain.Pharus_vFinale;
 
     public partial class Pharus_vFinaleContext : DbContext

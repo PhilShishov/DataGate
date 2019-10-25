@@ -54,11 +54,9 @@
 
             @if (this.User.IsInRole("Admin"))
             {
-                <input type="submit"
-                       class="bg-pharus text-white"
-                       asp-for="Command"
-                       value="Edit Fund">
-                <input/>
+                <div class="mt-5">
+                    <a href="/Funds/EditFund/@Model.FundID" class="btn bg-pharus text-white">Edit Fund</a>
+                </div>
             }
         </div>
     </div>

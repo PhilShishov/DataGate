@@ -55,9 +55,9 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateUser(UserCreateBindingModel bindingModel, string returnUrl = null)
+        public async Task<IActionResult> CreateUser(UserCreateBindingModel bindingModel)
         {
-            returnUrl = "/Admin/Index";
+            string returnUrl = "/Admin/Index";
             if (!this.ModelState.IsValid)
             {
                 return this.View(bindingModel ?? new UserCreateBindingModel());
