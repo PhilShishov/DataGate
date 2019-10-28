@@ -95,38 +95,51 @@
 
 <hr class="bg-pharus hr-2" />
 
-<div class="table-responsive border-0 mx-auto">
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                @for (int row = 0; row < 1; row++)
-                {
-                    @for (int col = 0; col < Model.AFSubFunds[row].Length; col++)
-                    {
-                        <th class="text-secondary p-1">
-                            <h5>
-                                @Model.AFSubFunds[row][col]
-                            </h5>
-                        </th>
-                    }
-                }
-            </tr>
-        </thead>
+<div class="dropdown pt-5" >
+    <button class="dropdown-btn maxw-270" onfocus="openDropdown()">
+        SubFunds<i class="fa fa-caret-down"></i>
+    </button>
+    <div id="myDropdown" class="dropdown-container">
+        <div class="table-responsive border-0 mx-auto">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        @for (int row = 0; row < 1; row++)
+                        {
+                            @for (int col = 0; col < Model.AFSubFunds[row].Length; col++)
+                            {
+                                <th class="text-secondary p-1">
+                                    <h5>
+                                        @Model.AFSubFunds[row][col]
+                                    </h5>
+                                </th>
+                            }
+                        }
+                    </tr>
+                </thead>
 
-        <tbody>
-            @for (int row = 1; row < Model.AFSubFunds.Count; row++)
-            {
-                <tr>
-                    @for (int col = 0; col < Model.AFSubFunds[row].Length; col++)
+                <tbody>
+                    @for (int row = 1; row < Model.AFSubFunds.Count; row++)
                     {
-                        <td class="p-1">
-                            @Model.AFSubFunds[row][col]
-                        </td>
+                        <tr>
+                            @for (int col = 0; col < Model.AFSubFunds[row].Length; col++)
+                            {
+                                <td class="p-1">
+                                    @Model.AFSubFunds[row][col]
+                                </td>
+                            }
+                        </tr>
                     }
-                </tr>
-            }
-        </tbody>
-    </table>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
+@*<a class="dropdown-item font-weight-light" href="/Funds/All">List</a>
+    @if (this.User.IsInRole("Admin"))
+    {
+        <a class="dropdown-item font-weight-light" href="#">New</a>
+    }
 
+    <a class="dropdown-item font-weight-light" href="#">Report</a>*@
