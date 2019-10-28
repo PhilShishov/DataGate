@@ -57,7 +57,7 @@
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
-        }
+        }        
 
         public List<string[]> GetActiveFundById(DateTime? chosenDate, int Id)
         {
@@ -75,6 +75,18 @@
                 {
                     command.CommandText = $"select * from fn_active_fund('{chosenDate?.ToString("yyyyMMdd")}') where [FUND ID PHARUS] = {Id}";
                 }
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+        public List<string[]> GetActiveFundWithDateById(int Id)
+        {
+            using (SqlConnection connection = new SqlConnection(DbConfiguration.ConnectionStringPharus_vFinale.ToString()))
+            {
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                command.CommandText = $"select * from fn_active_fund_modifyview('{defaultDate}') where [FUND ID PHARUS] = {Id}";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }

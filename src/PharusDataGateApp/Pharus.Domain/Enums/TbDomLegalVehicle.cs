@@ -2,7 +2,7 @@
 {
     public enum TbDomLegalVehicle
     {
-        UCITS = 0
+        UCITS = 1
        , SIF
        , UCIPartII
        , RAIF
