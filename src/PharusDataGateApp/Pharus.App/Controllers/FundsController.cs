@@ -181,13 +181,6 @@
                 return LocalRedirect(returnUrl);
             }
 
-            //else if (HttpContext.Request.Form.ContainsKey("delete_button"))
-            //{
-            //    var result = await this._userManager.DeleteAsync(user);
-
-            //    return LocalRedirect(returnUrl);
-            //}
-
             return this.LocalRedirect(returnUrl);
         }
     }

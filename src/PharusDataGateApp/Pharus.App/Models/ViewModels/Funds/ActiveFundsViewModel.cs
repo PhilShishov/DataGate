@@ -1,5 +1,4 @@
-﻿
-namespace Pharus.App.Models.ViewModels.Funds
+﻿namespace Pharus.App.Models.ViewModels.Funds
 {
     using System.Collections.Generic;
 

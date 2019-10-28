@@ -1,0 +1,14 @@
+﻿
+<div class="w-35 float-right">
+    <p>List of prospectus</p>
+    <a href="#bottomOfPage">Document prospectus</a>
+    <p>List of agreements</p>
+    <a href="#bottomOfPage">Document manco offer</a>
+
+    @if (this.User.IsInRole("Admin"))
+            {
+    <div class="mt-5">
+        <a href="/Funds/EditFund/@Model.FundID" class="btn bg-pharus text-white">Edit Fund</a>
+    </div>
+            }
+</div>
