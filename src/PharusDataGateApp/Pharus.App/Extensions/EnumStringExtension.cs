@@ -1,24 +1,24 @@
 ﻿namespace Pharus.App.Extensions
 {
     using System;
+    using System.Linq;
     using System.Reflection;
-
-    using Pharus.Domain.Attributes;
+    using System.ComponentModel;
 
     public static class EnumStringExtension
     {
-        public static string GetStringValue(this Enum value)
+        public static string GetDescription(this Enum e)
         {
-            string stringValue = value.ToString();
-            Type type = value.GetType();
-            FieldInfo fieldInfo = type.GetField(value.ToString());
-            StringValue[] attrs = fieldInfo.
-                GetCustomAttributes(typeof(StringValue), false) as StringValue[];
-            if (attrs.Length > 0)
-            {
-                stringValue = attrs[0].Value;
-            }
-            return stringValue;
+            var attribute =
+                e.GetType()
+                    .GetTypeInfo()
+                    .GetMember(e.ToString())
+                    .FirstOrDefault(member => member.MemberType == MemberTypes.Field)
+                    .GetCustomAttributes(typeof(DescriptionAttribute), false)
+                    .SingleOrDefault()
+                    as DescriptionAttribute;
+
+            return attribute?.Description ?? e.ToString();
         }
     }
 }

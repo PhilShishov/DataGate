@@ -1,51 +1,64 @@
-﻿@model List<string[]>
+﻿@model Pharus.App.Models.BindingModels.Funds.EditFundBindingModel
+@using Pharus.Domain.Enums;
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h4>Edit Fund @Model[1][1]</h4>
+<h4>Edit Fund @Model.FundProperties[1][1]</h4>
 
 <form asp-action="EditFund" method="post" class="d-inline">
     <div class="d-inline">
-        @for (int row = 1; row < Model.Count; row++)
+        @for (int row = 1; row < Model.FundProperties.Count; row++)
         {
-            @for (int col = 0; col < Model[row].Length; col++)
+            @for (int col = 0; col < Model.FundProperties[row].Length; col++)
             {
-                <div class="">
-                    <label class="control-label text-secondary">
-                        @*@Html.TextBoxFor(m => Model[0][col], new { @class = "", @style = "border:0" })*@
-                        @Model[0][col]
-                    </label>
-                    @if (Model[0][col] == "STATUS")
-                    {
-                        <select class="form-control maxw-270">
-                            @foreach (var status in ViewBag.Status)
-                            {
-                                <option value="@status.Value">@status.Text</option>
-                            }
-                        </select>
-                        @*@Html.DropDownList("Active", (ViewBag.Status as SelectList), new { @style = "form-control" })*@
-                    }
-                    else
-                    {
-                        <input type="text"
-                               class="form-control maxw-270"
-                               asp-for="@Model[row][col]" />
-                        @*@Html.TextBoxFor(m => Model[row][col], new { @class = "form-control" })*@
-                    }
-                </div>
+        <div>
+            <label class="control-label text-secondary">
+                @*@Html.TextBoxFor(m => Model[0][col], new { @class = "", @style = "border:0" })*@
+                @Model.FundProperties[0][col]
+            </label>
+            @if (Model.FundProperties[0][col] == "STATUS")
+            {
+                <select asp-for="FStatus" asp-items="Html.GetEnumSelectList<TbDomFStatus>()" class="form-control maxw-270"></select>
+            }
+
+            else if (Model.FundProperties[0][col] == "LEGAL FORM")
+            {
+                <select asp-for="FStatus" asp-items="Html.GetEnumSelectList<TbDomLegalForm>()" class="form-control maxw-270"></select>
+            }
+
+            else if (Model.FundProperties[0][col] == "LEGAL VEHICLE")
+            {
+                <select asp-for="FStatus" asp-items="Html.GetEnumSelectList<TbDomLegalVehicle>()" class="form-control maxw-270"></select>
+            }
+
+            else if (Model.FundProperties[0][col] == "LEGAL TYPE")
+            {
+                <select asp-for="FStatus" asp-items="Html.GetEnumSelectList<TbDomLegalType>()" class="form-control maxw-270"></select>
+            }
+
+            else if (Model.FundProperties[0][col] == "COMPANY DESCRIPTION")
+            {
+                <select asp-for="FStatus" asp-items="Html.GetEnumSelectList<TbDomCompanyTypeDesc>()" class="form-control maxw-270"></select>
+            }
+            else if (Model.FundProperties[0][col] == "COMPANY TYPE")
+            {
+                <select asp-for="FStatus" asp-items="Html.GetEnumSelectList<TbDomCompanyAcronym>()" class="form-control maxw-270"></select>
+            }
+            else
+            {
+                <input type="text"
+                       class="form-control maxw-270"
+                       asp-for="@Model.FundProperties[row][col]" />
+                @*@Html.TextBoxFor(m => Model[row][col], new { @class = "form-control" })*@
+            }
+        </div>
             }
         }
     </div>
 
-    <div class="button-holder">
-        <button type="submit"
-                class="btn bg-pharus text-white"
-                name="modify_button"
-                onclick="return confirm('Are you sure you want to modify this?')">
-            Modify Fund
-        </button>
+    <div class="button-holder mt-4">
         <button type="submit"
                 class="btn bg-pharus text-white"
                 name="update_button"

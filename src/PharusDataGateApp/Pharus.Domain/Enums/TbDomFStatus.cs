@@ -1,18 +1,22 @@
-﻿using Pharus.Domain.Attributes;
-
-namespace Pharus.Domain.Enums
+﻿namespace Pharus.Domain.Enums
 {
+    using System.ComponentModel.DataAnnotations;
+
     public enum TbDomFStatus
     {
-        [StringValue("Active")]
+        [Display(Name ="Active")]
         Active = 1,
-        [StringValue("Inactive - Liquidated")]
+
+        [Display(Name = "Inactive - Liquidated")]
         InactiveLiquidated = 2,
-        [StringValue("Inactive - Closed")]
+
+        [Display(Name = "Inactive - Closed")]
         InactiveClosed = 3,
-        [StringValue("Inactive - To Be Launched")]
+
+        [Display(Name = "Inactive - To Be Launched")]
         InactiveToBeLaunched = 4,
-        [StringValue("Inactive - Merged")]
+
+        [Display(Name = "Inactive - Merged")]
         InactiveMerged = 5
     }
 }

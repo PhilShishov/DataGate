@@ -1,18 +1,15 @@
 ﻿namespace Pharus.App.Controllers
 {
-    using System;
     using System.Linq;
     using System.Collections.Generic;
 
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Authorization;
 
-    using Pharus.Domain.Enums;
     using Pharus.App.Utilities;
     using Pharus.Services.Contracts;
     using Pharus.App.Models.ViewModels.Funds;
-    using Pharus.App.Extensions;
+    using Pharus.App.Models.BindingModels.Funds;
 
     [Authorize]
     public class FundsController : Controller
@@ -150,22 +147,23 @@
         [HttpGet("Funds/EditFund/{fundId}")]
         public IActionResult EditFund(int fundId)
         {
-            this.ViewBag.Status = new SelectList(Enum.GetValues(typeof(TbDomFStatus)), TbDomFStatus.Active.GetStringValue());
+            EditFundBindingModel model = new EditFundBindingModel
+            {
+                FundProperties = this.fundsService.GetActiveFundWithDateById(fundId)
+            };
 
-            var fund = this.fundsService.GetActiveFundById(fundId);
-
-            return this.View(fund);
+            return this.View(model);
         }
 
         [HttpPost]
-        public IActionResult EditFund(List<string[]> model)
+        public IActionResult EditFund(EditFundBindingModel model)
         {
             //if (!ModelState.IsValid)
             //{
             //    return View(model ?? new EditFundBindingModel());
             //}
 
-            int fundId = int.Parse(model[1][0]);
+            int fundId = int.Parse(model.FundProperties[1][0]);
             string returnUrl = $"/Funds/ViewFundSF/{fundId}";
 
             var fund = this.fundsService.GetActiveFundById(fundId);
@@ -176,7 +174,7 @@
                 {
                     for (int col = 0; col < fund[row].Length; col++)
                     {
-                        fund[row][col] = model[row][col];
+                        fund[row][col] = model.FundProperties[row][col];
                     }
                 }
 
