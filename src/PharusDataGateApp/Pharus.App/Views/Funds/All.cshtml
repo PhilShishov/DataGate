@@ -3,6 +3,13 @@
 @{
     ViewData["Title"] = "All";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<string[]> activeFunds = null;
+
+    if (this.User.Identity.IsAuthenticated)
+    {
+        activeFunds = Model.ActiveFunds;
+    }
 }
 
 <h2 class="text-center text-torshia">All Active Funds</h2>
@@ -25,9 +32,9 @@
             </div>
 
             <div>
-                <input type="text"
+                <input type="search"
                        name="searchString"
-                       asp-for="SearchString" />
+                       asp-for="SearchString"/>
 
                 <input type="submit"
                        class="bg-pharus text-white"
@@ -35,6 +42,51 @@
                        value="Filter" />
             </div>
         </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table" name="">
+            <thead>
+                <tr>
+                    @for (int row = 0; row < 1; row++)
+                    {
+                        @for (int col = 0; col < activeFunds[row].Length; col++)
+                        {
+                            <th class="text-secondary">
+                                <div class="d-inline">
+                                    <h5>
+                                        @Html.TextBoxFor(af => activeFunds[row][col],
+                                            new {
+                                                @class = "textBoxHeaderPharus",
+                                                @readonly = true
+                                            })
+                                    </h5>
+                                </div>
+                            </th>
+                        }
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @for (int row = 1; row < Model.ActiveFunds.Count; row++)
+                {
+                    <tr class="tableRowPharus" onclick="document.location = '/Funds/ViewFundSF/@activeFunds[row][0]'">
+                        @for (int col = 0; col < activeFunds[row].Length; col++)
+                        {
+                            <td class="">
+                                <div class="d-inline">
+                                    @Html.TextBoxFor(af => activeFunds[row][col],
+                                        new {
+                                            @class = "textBoxPharus",
+                                            @readonly = true
+                                        })
+                                </div>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </form>
 
@@ -58,38 +110,5 @@
 
 @using (Html.BeginForm("ViewFundSF", "Funds", FormMethod.Get))
 {
-    <div class="table-responsive border-0 mx-auto">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    @for (int row = 0; row < 1; row++)
-                    {
-                        @for (int col = 0; col < Model.ActiveFunds[row].Length; col++)
-                        {
-                            <th class="text-secondary p-1">
-                                <h5>
-                                    @Model.ActiveFunds[row][col]
-                                </h5>
-                            </th>
-                        }
-                    }
-                </tr>
-            </thead>
 
-            <tbody>
-                @for (int row = 1; row < Model.ActiveFunds.Count; row++)
-                {
-                    <tr onclick="document.location = '/Funds/ViewFundSF/@Model.ActiveFunds[row][0]'">
-                        @for (int col = 0; col < Model.ActiveFunds[row].Length; col++)
-                        {
-                            <td class="p-1">
-                                @Model.ActiveFunds[row][col]
-                            </td>
-                        }
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
 }
-

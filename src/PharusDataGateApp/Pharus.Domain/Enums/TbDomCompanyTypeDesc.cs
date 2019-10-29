@@ -7,21 +7,21 @@
         PublicLimitedCompany = 1,
 
         [Display(Name = "European company")]
-        EuropeanCompany,
+        EuropeanCompany = 2,
 
         [Display(Name = "Private limited liability company")]
-        PrivateLimitedLiabilityCompany,
+        PrivateLimitedLiabilityCompany = 3,
 
         [Display(Name = "Partnership limited by shares")]
-        PartnershipLimitedByShares,
+        PartnershipLimitedByShares = 4,
 
         [Display(Name = "Special limited partnership")]
-        SpecialLimitedPartnership,
+        SpecialLimitedPartnership = 5,
 
         [Display(Name = "Limited partnership")]
-        LimitedPartnership,
+        LimitedPartnership = 6,
 
         [Display(Name = "Cooperative company organized as a public limited company")]
-        CooperativeCompanyOrganizedAsAPublicLimitedCompany
+        CooperativeCompanyOrganizedAsAPublicLimitedCompany = 7
     }
 }

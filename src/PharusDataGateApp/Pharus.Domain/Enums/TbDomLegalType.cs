@@ -3,7 +3,7 @@
     public enum TbDomLegalType
     {
         UCITS = 1,
-        AIF,
-        OTHERS
+        AIF = 2,
+        OTHERS = 3
     }
 }
