@@ -11,6 +11,8 @@
     using Pharus.App.Models.ViewModels.Funds;
     using Pharus.App.Models.BindingModels.Funds;
 
+    using Rotativa.AspNetCore;
+
     [Authorize]
     public class FundsController : Controller
     {
@@ -71,18 +73,31 @@
         }
 
         [HttpPost]
-        public IActionResult ExtractUpload(ActiveFundsViewModel model)
+        public IActionResult ExtractExcel(ActiveFundsViewModel model)
         {
             FileStreamResult fileStreamResult = null;
 
-            if (HttpContext.Request.Form.ContainsKey("excel_button"))
+            if (HttpContext.Request.Form.ContainsKey("extract_Excel"))
             {
                 fileStreamResult = ExtractTable.ExtractTableAsExcel(model.ActiveFunds);
             }
 
-            else if (HttpContext.Request.Form.ContainsKey("command_Pdf"))
+            if (fileStreamResult != null)
             {
-                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.ActiveFunds);
+                return fileStreamResult;
+            }
+            return this.View();
+        }
+
+        [HttpPost]
+        public IActionResult ExtractPdf(ActiveFundsViewModel model)
+        {
+            FileStreamResult fileStreamResult = null;           
+
+            if (HttpContext.Request.Form.ContainsKey("extract_Pdf"))
+            {
+                //fileStreamResult = ExtractTable.ExtractTableAsPdf(model.ActiveFunds);
+                return new ViewAsPdf("All", model);  
             }
 
             if (fileStreamResult != null)
