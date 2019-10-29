@@ -7,16 +7,16 @@
         [Display(Name = "S.A.")]
         SA = 1,
         [Display(Name = "S.E.")]
-        SE,
+        SE = 2,
         [Display(Name = "S.à r.l.")]
-        Sàrl,
+        Sàrl = 3,
         [Display(Name = "S.C.A.")]
-        SCA,
+        SCA = 4,
         [Display(Name = "S.C.Sp.")]
-        SCSp,
+        SCSp = 5,
         [Display(Name = "S.C.S.")]
-        SCS,
+        SCS = 6,
         [Display(Name = "S.Co S.A.")]
-        SCoSA,
+        SCoSA = 7,
     }
 }

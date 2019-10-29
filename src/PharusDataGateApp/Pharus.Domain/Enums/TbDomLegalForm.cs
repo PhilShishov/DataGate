@@ -3,7 +3,7 @@
     public enum TbDomLegalForm
     {
         SICAV = 1,
-        FCP,
-        SICAF
+        FCP = 2,
+        SICAF = 3
     }
 }

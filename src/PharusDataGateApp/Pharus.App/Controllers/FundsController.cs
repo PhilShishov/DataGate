@@ -33,56 +33,56 @@
         }
 
         [HttpPost]
-        public IActionResult All(ActiveFundsViewModel viewModel)
+        public IActionResult All(ActiveFundsViewModel model)
         {
-            viewModel.ActiveFunds = this.fundsService.GetAllActiveFunds();
+            model.ActiveFunds = this.fundsService.GetAllActiveFunds();
 
-            if (viewModel.Command.Equals("Update Table"))
+            if (model.Command.Equals("Update Table"))
             {
-                if (viewModel.ChosenDate != null)
+                if (model.ChosenDate != null)
                 {
-                    viewModel.ActiveFunds = this.fundsService.GetAllActiveFunds(viewModel.ChosenDate);
+                    model.ActiveFunds = this.fundsService.GetAllActiveFunds(model.ChosenDate);
                 }
             }
 
-            else if (viewModel.Command.Equals("Filter"))
+            else if (model.Command.Equals("Filter"))
             {
-                if (viewModel.SearchString == null)
+                if (model.SearchString == null)
                 {
-                    return this.View(viewModel);
+                    return this.View(model);
                 }
 
-                viewModel.ActiveFunds = new List<string[]>();
+                model.ActiveFunds = new List<string[]>();
 
                 var tableHeaders = this.fundsService.GetAllActiveFunds().Take(1).ToList();
                 var tableFundsWithoutHeaders = this.fundsService.GetAllActiveFunds().Skip(1).ToList();
 
-                CreateTableView.AddHeadersToView(viewModel.ActiveFunds, tableHeaders);
+                CreateTableView.AddHeadersToView(model.ActiveFunds, tableHeaders);
 
-                CreateTableView.AddTableToView(viewModel.ActiveFunds, tableFundsWithoutHeaders, viewModel.SearchString.ToLower());
+                CreateTableView.AddTableToView(model.ActiveFunds, tableFundsWithoutHeaders, model.SearchString.ToLower());
             }
 
-            if (viewModel.ActiveFunds != null)
+            if (model.ActiveFunds != null)
             {
-                return this.View(viewModel);
+                return this.View(model);
             }
 
             return this.View();
         }
 
         [HttpPost]
-        public IActionResult ExtractUpload(ActiveFundsViewModel viewModel)
+        public IActionResult ExtractUpload(ActiveFundsViewModel model)
         {
             FileStreamResult fileStreamResult = null;
 
             if (HttpContext.Request.Form.ContainsKey("excel_button"))
             {
-                fileStreamResult = ExtractTable.ExtractTableAsExcel(viewModel.ActiveFunds);
+                fileStreamResult = ExtractTable.ExtractTableAsExcel(model.ActiveFunds);
             }
 
             else if (HttpContext.Request.Form.ContainsKey("command_Pdf"))
             {
-                fileStreamResult = ExtractTable.ExtractTableAsPdf(viewModel.ActiveFunds);
+                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.ActiveFunds);
             }
 
             if (fileStreamResult != null)
