@@ -34,7 +34,7 @@
             <div>
                 <input type="search"
                        name="searchString"
-                       asp-for="SearchString"/>
+                       asp-for="SearchString" />
 
                 <input type="submit"
                        class="bg-pharus text-white"
@@ -43,6 +43,30 @@
             </div>
         </div>
     </div>
+</form>
+
+<form method="post">
+
+    <div class="button-holder d-flex justify-content-center my-5">
+        <button class="mr-4"
+                type="submit"
+                formaction="/Funds/ExtractExcel"
+                name="extract_Excel">
+            <img src="~/images/Icon_Excel.ico"
+                 width="35"
+                 height="25" />
+        </button>
+
+        <button type="submit"
+                formaction="/Funds/ExtractPdf"
+                name="extract_Pdf">
+            <img src="~/images/Icon_Pdf.ico"
+                 width="35"
+                 height="25" />
+        </button>
+    </div>
+
+    <hr class="bg-pharus hr-2" />
 
     <div class="table-responsive">
         <table class="table" name="">
@@ -53,15 +77,15 @@
                         @for (int col = 0; col < activeFunds[row].Length; col++)
                         {
                             <th class="text-secondary">
-                                <div class="d-inline">
-                                    <h5>
-                                        @Html.TextBoxFor(af => activeFunds[row][col],
-                                            new {
-                                                @class = "textBoxHeaderPharus",
-                                                @readonly = true
-                                            })
-                                    </h5>
-                                </div>
+                                <h5>
+                                    @Html.TextBoxFor(af => activeFunds[row][col],
+                                        new
+                                             {
+                                            @class = "textBoxHeaderPharus",
+                                            @readonly = true
+                                        })
+                                </h5>
+
                             </th>
                         }
                     }
@@ -74,13 +98,13 @@
                         @for (int col = 0; col < activeFunds[row].Length; col++)
                         {
                             <td class="">
-                                <div class="d-inline">
-                                    @Html.TextBoxFor(af => activeFunds[row][col],
-                                        new {
-                                            @class = "textBoxPharus",
-                                            @readonly = true
-                                        })
-                                </div>
+                                @Html.TextBoxFor(af => activeFunds[row][col],
+                                    new
+                                         {
+                                        @class = "textBoxPharus",
+                                        @readonly = true
+                                    })
+
                             </td>
                         }
                     </tr>
@@ -89,26 +113,3 @@
         </table>
     </div>
 </form>
-
-<form asp-controller="Funds" asp-action="ExtractUpload" method="post">
-    <button type="submit"
-            name="excel_button">
-        <img src="~/images/Icon_Excel.ico"
-             width="35"
-             height="25" />
-    </button>
-
-    <button type="submit"
-            name="excel_button">
-        <img src="~/images/Icon_Pdf.ico"
-             width="35"
-             height="25" />
-    </button>
-</form>
-
-<hr class="bg-pharus hr-2" />
-
-@using (Html.BeginForm("ViewFundSF", "Funds", FormMethod.Get))
-{
-
-}

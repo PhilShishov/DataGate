@@ -55,20 +55,20 @@ namespace Pharus.App.Utilities
             }
         }
 
-        public static FileStreamResult ExtractTableAsPdf(List<string[]> funds)
-        {
-            throw new NotImplementedException();
+        //public static FileStreamResult ExtractTableAsPdf(List<string[]> funds)
+        //{
+        //    throw new NotImplementedException();
 
-            //            MemoryStream ms = new MemoryStream();
+        //    //            MemoryStream ms = new MemoryStream();
 
-            //            byte[] byteInfo = pdf.Output();
-            //            ms.Write(byteInfo, 0, byteInfo.Length);
-            //            ms.Position = 0;
+        //    //            byte[] byteInfo = pdf.Output();
+        //    //            ms.Write(byteInfo, 0, byteInfo.Length);
+        //    //            ms.Position = 0;
 
-            //            HttpContext.Response.Headers.Add("content-disposition",
-            //"attachment; filename=form.pdf");
+        //    //            HttpContext.Response.Headers.Add("content-disposition",
+        //    //"attachment; filename=form.pdf");
 
-            //            return new FileStreamResult(ms, "application/pdf");
-        }
+        //    //            return new FileStreamResult(ms, "application/pdf");
+        //}
     }
 }
