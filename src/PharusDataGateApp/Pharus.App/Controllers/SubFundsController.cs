@@ -37,6 +37,7 @@
         [HttpPost]
         public IActionResult All(ActiveEntitiesViewModel model)
         {
+            ModelState.Clear();
             model.ActiveEntities = this.subFundsService.GetAllActiveSubFunds();
 
             if (model.Command.Equals("Update Table"))
