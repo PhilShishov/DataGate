@@ -1,8 +1,11 @@
-﻿
+﻿@{
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
 <div class="button-holder d-flex justify-content-center my-5">
     <button class="extractbtn"
             type="submit"
-            formaction="/Funds/ExtractExcelSubEntities"
+            formaction="/@controllerName/ExtractExcelSubEntities"
             name="extract_Excel">
         <img src="~/images/Icon_Excel.ico"
              width="35"
@@ -11,7 +14,7 @@
 
     <button class="extractbtn"
             type="submit"
-            formaction="/Funds/ExtractPdfSubEntities"
+            formaction="/@controllerName/ExtractPdfSubEntities"
             name="extract_Pdf">
         <img src="~/images/Icon_Pdf.ico"
              width="35"

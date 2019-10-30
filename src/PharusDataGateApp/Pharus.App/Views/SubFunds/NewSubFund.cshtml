@@ -5,11 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h4>Edit Fund @Model.EntityProperties[1][3]</h4>
+<h4>Create New SubFund</h4>
 
-<form asp-action="EditFund" method="post" class="d-inline">
+<form asp-action="NewSubFund" method="post" class="d-inline">
     <div class="d-inline">
-        @for (int row = 1; row < Model.EntityProperties.Count; row++)
+        @for (int row = 0; row < 1; row++)
         {
             @for (int col = 0; col < Model.EntityProperties[row].Length; col++)
             {
@@ -18,10 +18,11 @@
                         @*@Html.TextBoxFor(m => Model[0][col], new { @class = "", @style = "border:0" })*@
                         @Model.EntityProperties[0][col]
                     </label>
+
                     <input type="text"
-                           class="form-control maxw-270"
-                           asp-for="@Model.EntityProperties[row][col]" />
+                           class="form-control maxw-270" />
                     @*@Html.TextBoxFor(m => Model[row][col], new { @class = "form-control" })*@
+
                 </div>
             }
         }
@@ -32,8 +33,8 @@
                 class="btn bg-pharus text-white"
                 name="update_button"
                 style="margin-right:40px"
-                onclick="return confirm('Are you sure you want to update this?')">
-            Update Fund
+                onclick="return confirm('Are you sure you want to create this?')">
+            Create Fund
         </button>
     </div>
 </form>
