@@ -9,23 +9,32 @@ namespace Pharus.App.Utilities
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Hosting;
 
-    using Pharus.App.Models.ViewModels.Funds;
-
     using OfficeOpenXml;
+
     using iText.Kernel.Pdf;
     using iText.Kernel.Geom;
     using iText.Layout;
     using iText.IO.Image;
     using iText.Layout.Element;
+    using System.Globalization;
 
     public class ExtractTable
     {
-        public static FileStreamResult ExtractTableAsExcel(List<string[]> funds)
+        private const string ActiveFunds = "ActiveFunds";
+        private const string ActiveSubFunds = "ActiveSubFunds";
+        private const string ActiveShareClasses = "ActiveShareClasses";
+
+        public static FileStreamResult ExtractTableAsExcel(List<string[]> funds, string typeName)
         {
             FileStreamResult fileStreamResult;
             using (ExcelPackage package = new ExcelPackage())
             {
-                ExcelWorksheet worksheet = package.Workbook.Worksheets.Add("ActiveFunds");
+                ExcelWorksheet worksheet = null;
+
+                var correctTypeName = typeName == "ActiveFundsViewModel" ? ActiveFunds : typeName == "SpecificFundViewModel" ?
+                                                   ActiveSubFunds : ActiveShareClasses;
+
+                worksheet = package.Workbook.Worksheets.Add($"{correctTypeName}");
 
                 var tableHeaders = funds.Take(1);
 
@@ -56,15 +65,19 @@ namespace Pharus.App.Utilities
 
                 fileStreamResult = new FileStreamResult(stream, "application/excel")
                 {
-                    FileDownloadName = "ActiveFunds.xlsx"
+                    FileDownloadName = $"{correctTypeName}.xlsx"
                 };
 
                 return fileStreamResult;
             }
         }
 
-        public static FileStreamResult ExtractTableAsPdf(ActiveFundsViewModel model, IHostingEnvironment _hostingEnvironment)
+        public static FileStreamResult ExtractTableAsPdf(List<string[]> funds, DateTime? chosenDate, IHostingEnvironment _hostingEnvironment, string typeName)
         {
+            var correctTypeName = typeName == "ActiveFundsViewModel" ? 
+                                  ActiveFunds : typeName == "SpecificFundViewModel" ?
+                                  ActiveSubFunds : ActiveShareClasses;
+
             FileStreamResult fileStreamResult;
             Stream stream = new MemoryStream();
             PdfWriter writer = new PdfWriter(stream);
@@ -80,14 +93,14 @@ namespace Pharus.App.Utilities
 
             Image img = new Image(data);
 
-            Table table = new Table(model.ActiveFunds[0].Length);
+            Table table = new Table(funds[0].Length);
             table.SetFontSize(10);
 
             for (int row = 0; row < 1; row++)
             {
-                for (int col = 0; col < model.ActiveFunds[0].Length; col++)
+                for (int col = 0; col < funds[0].Length; col++)
                 {
-                    string s = model.ActiveFunds[row][col];
+                    string s = funds[row][col];
                     if (s == null)
                     {
                         s = " ";
@@ -100,11 +113,11 @@ namespace Pharus.App.Utilities
                 }
             }
 
-            for (int row = 1; row < model.ActiveFunds.Count; row++)
+            for (int row = 1; row < funds.Count; row++)
             {
-                for (int col = 0; col < model.ActiveFunds[0].Length; col++)
+                for (int col = 0; col < funds[0].Length; col++)
                 {
-                    string s = model.ActiveFunds[row][col];
+                    string s = funds[row][col];
                     if (s == null)
                     {
                         s = " ";
@@ -116,7 +129,7 @@ namespace Pharus.App.Utilities
 
             document.Add(img);
             document.Add(new Paragraph(" "));
-            document.Add(new Paragraph("LIST OF ACTIVE FUNDS AS OF " + model.ChosenDate.ToString()));
+            document.Add(new Paragraph($"List of {correctTypeName} as of " + chosenDate?.ToString("dd MMMM yyyy")));
             document.Add(new Paragraph(" "));
             document.Add(table);
             document.Close();
@@ -124,7 +137,7 @@ namespace Pharus.App.Utilities
             stream.Position = 0;
             fileStreamResult = new FileStreamResult(stream, "application/pdf")
             {
-                FileDownloadName = "ActiveFunds.pdf"
+                FileDownloadName = $"{correctTypeName}.pdf"
             };
             return fileStreamResult;
         }
