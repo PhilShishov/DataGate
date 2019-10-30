@@ -1,4 +1,4 @@
-﻿namespace Pharus.App.Models.ViewModels.Funds
+﻿namespace Pharus.App.Models.ViewModels.Entities
 {
     using System.Collections.Generic;
 
