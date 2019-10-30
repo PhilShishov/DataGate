@@ -23,15 +23,29 @@ namespace Pharus.App.Utilities
         private const string ActiveSubFunds = "ActiveSubFunds";
         private const string ActiveShareClasses = "ActiveShareClasses";
 
-        public static FileStreamResult ExtractTableAsExcel(List<string[]> entities, string typeName)
+        public static FileStreamResult ExtractTableAsExcel(List<string[]> entities,
+                                                                    string typeName,
+                                                                    string controllerName)
         {
             FileStreamResult fileStreamResult;
             using (ExcelPackage package = new ExcelPackage())
             {
                 ExcelWorksheet worksheet = null;
+                string correctTypeName = string.Empty;
 
-                var correctTypeName = typeName == "ActiveEntitiesViewModel" ? ActiveFunds : typeName == "SpecificEntityViewModel" ?
-                                                   ActiveSubFunds : ActiveShareClasses;
+                if (controllerName == "Funds")
+                {
+                    correctTypeName = typeName == "ActiveEntitiesViewModel" ? ActiveFunds : ActiveSubFunds;
+                }
+                else if (controllerName == "SubFunds")
+                {
+                    correctTypeName = typeName == "ActiveEntitiesViewModel" ? ActiveSubFunds : ActiveShareClasses;
+                }
+
+                else if (controllerName == "ShareClasses")
+                {
+                    correctTypeName = ActiveShareClasses;
+                }
 
                 worksheet = package.Workbook.Worksheets.Add($"{correctTypeName}");
 
@@ -71,11 +85,27 @@ namespace Pharus.App.Utilities
             }
         }
 
-        public static FileStreamResult ExtractTableAsPdf(List<string[]> entities, DateTime? chosenDate, IHostingEnvironment _hostingEnvironment, string typeName)
+        public static FileStreamResult ExtractTableAsPdf(List<string[]> entities,
+                                                            DateTime? chosenDate,
+                                                            IHostingEnvironment _hostingEnvironment,
+                                                            string typeName,
+                                                            string controllerName)
         {
-            var correctTypeName = typeName == "ActiveEntitiesViewModel" ? 
-                                  ActiveFunds : typeName == "SpecificEntityViewModel" ?
-                                  ActiveSubFunds : ActiveShareClasses;
+            string correctTypeName = string.Empty;
+
+            if (controllerName == "Funds")
+            {
+                correctTypeName = typeName == "ActiveEntitiesViewModel" ? ActiveFunds : ActiveSubFunds;
+            }
+            else if (controllerName == "SubFunds")
+            {
+                correctTypeName = typeName == "ActiveEntitiesViewModel" ? ActiveSubFunds : ActiveShareClasses;
+            }
+
+            else if (controllerName == "ShareClasses")
+            {
+                correctTypeName = ActiveShareClasses;
+            }
 
             FileStreamResult fileStreamResult;
             Stream stream = new MemoryStream();

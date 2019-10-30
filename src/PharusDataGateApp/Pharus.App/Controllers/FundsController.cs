@@ -81,10 +81,11 @@
             FileStreamResult fileStreamResult = null;
 
             string typeName = model.GetType().Name;
+            string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
             if (HttpContext.Request.Form.ContainsKey("extract_Excel"))
             {
-                fileStreamResult = ExtractTable.ExtractTableAsExcel(model.ActiveEntities, typeName);
+                fileStreamResult = ExtractTable.ExtractTableAsExcel(model.ActiveEntities, typeName, controllerName);
             }
 
             return fileStreamResult;
@@ -96,10 +97,11 @@
             FileStreamResult fileStreamResult = null;
 
             string typeName = model.GetType().Name;
+            string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
             if (HttpContext.Request.Form.ContainsKey("extract_Excel"))
             {
-                fileStreamResult = ExtractTable.ExtractTableAsExcel(model.AESubEntities, typeName);
+                fileStreamResult = ExtractTable.ExtractTableAsExcel(model.AESubEntities, typeName, controllerName);
             }
 
             return fileStreamResult;
@@ -111,10 +113,11 @@
             FileStreamResult fileStreamResult = null;
 
             string typeName = model.GetType().Name;
+            string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
             if (HttpContext.Request.Form.ContainsKey("extract_Pdf"))
             {
-                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.ActiveEntities, model.ChosenDate, _hostingEnvironment, typeName);
+                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.ActiveEntities, model.ChosenDate, _hostingEnvironment, typeName, controllerName);
             }
 
             return fileStreamResult;
@@ -126,10 +129,11 @@
             FileStreamResult fileStreamResult = null;
 
             string typeName = model.GetType().Name;
+            string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
             if (HttpContext.Request.Form.ContainsKey("extract_Pdf"))
             {
-                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.AESubEntities, model.ChosenDate, _hostingEnvironment, typeName);
+                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.AESubEntities, model.ChosenDate, _hostingEnvironment, typeName, controllerName);
             }
 
             return fileStreamResult;
