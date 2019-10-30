@@ -4,6 +4,7 @@
     using System.Collections.Generic;
 
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Authorization;
 
     using Pharus.App.Utilities;
@@ -11,14 +12,6 @@
     using Pharus.App.Models.ViewModels.Funds;
     using Pharus.App.Models.BindingModels.Funds;
 
-    using iText.Kernel.Pdf;
-    using iText.Layout;
-    using iText.Layout.Element;
-    using iText.Kernel.Geom;
-    using System;
-    using iText.IO.Image;
-    using Microsoft.AspNetCore.Hosting;
-    using System.IO;
 
     [Authorize]
     public class FundsController : Controller
@@ -102,75 +95,11 @@
 
             if (HttpContext.Request.Form.ContainsKey("extract_Pdf"))
             {
-                //fileStreamResult = ExtractTable.ExtractTableAsPdf(model.ActiveFunds);
-                //return new ViewAsPdf("All", model);  
-
-                //string dest = "C:/scans/sample.pdf";
-
-                string sfile = _hostingEnvironment.WebRootPath + "/images/Logo_Pharus_small.jpg";
-                ImageData data = ImageDataFactory.Create(sfile);
-
-                Image img = new Image(data);
-
-                Table table = new Table(model.ActiveFunds[0].Length);
-                table.SetFontSize(10);
-
-                for (int row = 0; row < 1; row++)
-                {
-                    for (int col = 0; col < model.ActiveFunds[0].Length; col++)
-                    {
-                        string s = model.ActiveFunds[row][col];
-                        if (s == null)
-                        {
-                            s = " ";
-                        }
-                        Cell c1 = new Cell();
-                        c1.Add(new Paragraph(s));
-                        c1.SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER);
-                        c1.SetBold();
-                        table.AddHeaderCell(c1);
-                    }
-                }
-
-                for (int row = 1; row < model.ActiveFunds.Count; row++)
-                {
-                    for (int col = 0; col < model.ActiveFunds[0].Length; col++)
-                    {
-                        string s = model.ActiveFunds[row][col];
-                        if (s == null)
-                        {
-                            s = " ";
-                        }
-
-                        table.AddCell(new Paragraph(s));
-                    }
-                }
-
-                Stream stream = new MemoryStream();
-                PdfWriter writer = new PdfWriter(stream);
-                writer.SetCloseStream(false);
-
-                PdfDocument pdfDoc = new PdfDocument(writer);
-
-                pdfDoc.AddNewPage(PageSize.A4.Rotate());
-                Document document = new Document(pdfDoc);
-
-                document.Add(img);
-                document.Add(new Paragraph(" "));
-                document.Add(new Paragraph("LIST OF ACTIVE FUNDS AS OF " + model.ChosenDate.ToString()));
-                document.Add(new Paragraph(" "));
-                document.Add(table);
-                document.Close();
-
-                stream.Position = 0;
-                fileStreamResult = new FileStreamResult(stream, "application/pdf")
-                {
-                    FileDownloadName = "ActiveFunds.pdf"
-                };
+                fileStreamResult = ExtractTable.ExtractTableAsPdf(model, _hostingEnvironment);
             }
 
             return fileStreamResult;
-        }
+        }        
 
         [HttpGet("Funds/ViewFundSF/{fundId}")]
         public IActionResult ViewFundSF(int fundId)
