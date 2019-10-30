@@ -1,15 +1,14 @@
-﻿
-namespace Pharus.App.Models.ViewModels.Funds
+﻿namespace Pharus.App.Models.ViewModels.Contracts
 {
     using System;
 
-    public interface IBaseFundViewModel
+    public interface IBaseViewModel
     {
         DateTime? ChosenDate { get; set; }
 
         string Command { get; set; }
 
-        int FundID { get; set; }
+        int ID { get; set; }
 
         string SearchString { get; set; }
     }
