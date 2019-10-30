@@ -8,7 +8,7 @@
 
         string Command { get; set; }
 
-        int ID { get; set; }
+        int EntityId { get; set; }
 
         string SearchString { get; set; }
     }

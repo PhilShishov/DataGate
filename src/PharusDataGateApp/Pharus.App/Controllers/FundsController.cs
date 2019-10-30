@@ -134,30 +134,30 @@
             return fileStreamResult;
         }
 
-        [HttpGet("Funds/ViewFundSF/{fundId}")]
-        public IActionResult ViewFundSF(int fundId)
+        [HttpGet("Funds/ViewFundSF/{EntityId}")]
+        public IActionResult ViewFundSF(int entityId)
         {
             SpecificEntityViewModel viewModel = new SpecificEntityViewModel
             {
-                ID = fundId,
-                ActiveEntity = this.fundsService.GetActiveFundById(fundId),
-                AESubEntities = this.fundsService.GetFundSubFunds(fundId)
+                EntityId = entityId,
+                ActiveEntity = this.fundsService.GetActiveFundById(entityId),
+                AESubEntities = this.fundsService.GetFundSubFunds(entityId)
             };
 
             return this.View(viewModel);
         }
 
-        [HttpPost("Funds/ViewFundSF/{fundId}")]
+        [HttpPost("Funds/ViewFundSF/{EntityId}")]
         public IActionResult ViewFundSF(SpecificEntityViewModel viewModel)
         {
-            viewModel.ActiveEntity = this.fundsService.GetActiveFundById(viewModel.ID);
-            viewModel.AESubEntities = this.fundsService.GetFundSubFunds(viewModel.ID);
+            viewModel.ActiveEntity = this.fundsService.GetActiveFundById(viewModel.EntityId);
+            viewModel.AESubEntities = this.fundsService.GetFundSubFunds(viewModel.EntityId);
 
             if (viewModel.Command.Equals("Update Table"))
             {
                 if (viewModel.ChosenDate != null)
                 {
-                    viewModel.ActiveEntity = this.fundsService.GetActiveFundById(viewModel.ChosenDate, viewModel.ID);
+                    viewModel.ActiveEntity = this.fundsService.GetActiveFundById(viewModel.ChosenDate, viewModel.EntityId);
                 }
             }
 
@@ -170,8 +170,8 @@
 
                 viewModel.AESubEntities = new List<string[]>();
 
-                var tableHeaders = this.fundsService.GetFundSubFunds(viewModel.ID).Take(1).ToList();
-                var tableFundsWithoutHeaders = this.fundsService.GetFundSubFunds(viewModel.ID).Skip(1).ToList();
+                var tableHeaders = this.fundsService.GetFundSubFunds(viewModel.EntityId).Take(1).ToList();
+                var tableFundsWithoutHeaders = this.fundsService.GetFundSubFunds(viewModel.EntityId).Skip(1).ToList();
 
                 CreateTableView.AddHeadersToView(viewModel.AESubEntities, tableHeaders);
 
@@ -186,12 +186,12 @@
             return this.View();
         }
 
-        [HttpGet("Funds/EditFund/{fundId}")]
-        public IActionResult EditFund(int fundId)
+        [HttpGet("Funds/EditFund/{EntityId}")]
+        public IActionResult EditFund(int entityId)
         {
             EditFundBindingModel model = new EditFundBindingModel
             {
-                FundProperties = this.fundsService.GetActiveFundWithDateById(fundId)
+                EntityProperties = this.fundsService.GetActiveFundWithDateById(entityId)
             };
 
             return this.View(model);
@@ -205,10 +205,10 @@
             //    return View(model ?? new EditFundBindingModel());
             //}
 
-            int fundId = int.Parse(model.FundProperties[1][0]);
-            string returnUrl = $"/Funds/ViewFundSF/{fundId}";
+            int entityId = int.Parse(model.EntityProperties[1][0]);
+            string returnUrl = $"/Funds/ViewFundSF/{entityId}";
 
-            var fund = this.fundsService.GetActiveFundById(fundId);
+            var fund = this.fundsService.GetActiveFundById(entityId);
 
             if (HttpContext.Request.Form.ContainsKey("modify_button"))
             {
@@ -216,7 +216,7 @@
                 {
                     for (int col = 0; col < fund[row].Length; col++)
                     {
-                        fund[row][col] = model.FundProperties[row][col];
+                        fund[row][col] = model.EntityProperties[row][col];
                     }
                 }
 

@@ -1,4 +1,4 @@
-﻿namespace Pharus.Domain.Enums
+﻿namespace Pharus.Domain.Enums.Funds
 {
     public enum TbDomLegalForm
     {

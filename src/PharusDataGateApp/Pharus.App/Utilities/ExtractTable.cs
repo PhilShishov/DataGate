@@ -30,7 +30,7 @@ namespace Pharus.App.Utilities
             {
                 ExcelWorksheet worksheet = null;
 
-                var correctTypeName = typeName == "ActiveFundsViewModel" ? ActiveFunds : typeName == "SpecificFundViewModel" ?
+                var correctTypeName = typeName == "ActiveEntitiesViewModel" ? ActiveFunds : typeName == "SpecificEntityViewModel" ?
                                                    ActiveSubFunds : ActiveShareClasses;
 
                 worksheet = package.Workbook.Worksheets.Add($"{correctTypeName}");

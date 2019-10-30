@@ -1,0 +1,65 @@
+﻿@model Pharus.App.Models.ViewModels.Entities.SpecificEntityViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<partial name="ContainerSpecificEntityPartial" />
+
+<form asp-controller="Funds" method="post">
+
+    <partial name="ExtractButtonsViewPartial" />
+
+    <hr class="bg-pharus hr-2" />
+
+    <div class="dropdown pt-5">
+        <button type="button" class="dropdown-btn maxw-270" onfocus="openDropdown()">
+            SubFunds<i class="fa fa-caret-down"></i>
+        </button>
+        <div id="myDropdown" class="dropdown-container">
+
+            <div class="table-responsive">
+                <table class="table" name="">
+                    <thead>
+                        <tr>
+                            @for (int row = 0; row < 1; row++)
+                            {
+                                @for (int col = 0; col < Model.AESubEntities[row].Length; col++)
+                                {
+                                    <th class="text-secondary">
+                                        <h5>
+                                            @Html.TextBoxFor(af => Model.AESubEntities[row][col],
+                                                new
+                                                     {
+                                                    @class = "textBoxHeaderPharus",
+                                                    @readonly = true
+                                                })
+                                        </h5>
+                                    </th>
+                                }
+                            }
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int row = 1; row < Model.AESubEntities.Count; row++)
+                        {
+                            <tr class="tableRowPharus">
+                                @for (int col = 0; col < Model.AESubEntities[row].Length; col++)
+                                {
+                                    <td>
+                                        @Html.TextBoxFor(af => Model.AESubEntities[row][col],
+                                            new
+                                                 {
+                                                @class = "textBoxPharus",
+                                                @readonly = true
+                                            })
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</form>

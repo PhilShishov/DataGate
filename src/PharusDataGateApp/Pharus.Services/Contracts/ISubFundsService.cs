@@ -13,6 +13,8 @@
 
         List<string[]> GetActiveSubFundById(DateTime? chosenDate, int Id);
 
+        List<string[]> GetActiveSubFundWithDateById(int Id);
+
         List<string[]> GetSubFundShareClasses(int Id);
     }
 }
