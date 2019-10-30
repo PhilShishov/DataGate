@@ -18,6 +18,7 @@
     using System;
     using iText.IO.Image;
     using Microsoft.AspNetCore.Hosting;
+    using System.IO;
 
     [Authorize]
     public class FundsController : Controller
@@ -104,19 +105,13 @@
                 //fileStreamResult = ExtractTable.ExtractTableAsPdf(model.ActiveFunds);
                 //return new ViewAsPdf("All", model);  
 
-                string dest = "C:/scans/sample.pdf";
-                PdfWriter writer = new PdfWriter(dest);
+                //string dest = "C:/scans/sample.pdf";
 
-                PdfDocument pdfDoc = new PdfDocument(writer);
-
-                pdfDoc.AddNewPage(PageSize.A4.Rotate());
-                Document document = new Document(pdfDoc);
                 string sfile = _hostingEnvironment.WebRootPath + "/images/Logo_Pharus_small.jpg";
                 ImageData data = ImageDataFactory.Create(sfile);
 
                 Image img = new Image(data);
-             
-                //float[] pointColumnWidths = { 150F, 150F};
+
                 Table table = new Table(model.ActiveFunds[0].Length);
                 table.SetFontSize(10);
 
@@ -136,7 +131,7 @@
                         table.AddHeaderCell(c1);
                     }
                 }
-                
+
                 for (int row = 1; row < model.ActiveFunds.Count; row++)
                 {
                     for (int col = 0; col < model.ActiveFunds[0].Length; col++)
@@ -146,18 +141,32 @@
                         {
                             s = " ";
                         }
-                        
+
                         table.AddCell(new Paragraph(s));
                     }
-                }          
+                }
+
+                Stream stream = new MemoryStream();
+                PdfWriter writer = new PdfWriter(stream);
+                writer.SetCloseStream(false);
+
+                PdfDocument pdfDoc = new PdfDocument(writer);
+
+                pdfDoc.AddNewPage(PageSize.A4.Rotate());
+                Document document = new Document(pdfDoc);
 
                 document.Add(img);
                 document.Add(new Paragraph(" "));
                 document.Add(new Paragraph("LIST OF ACTIVE FUNDS AS OF " + model.ChosenDate.ToString()));
                 document.Add(new Paragraph(" "));
                 document.Add(table);
-
                 document.Close();
+
+                stream.Position = 0;
+                fileStreamResult = new FileStreamResult(stream, "application/pdf")
+                {
+                    FileDownloadName = "ActiveFunds.pdf"
+                };
             }
 
             return fileStreamResult;
