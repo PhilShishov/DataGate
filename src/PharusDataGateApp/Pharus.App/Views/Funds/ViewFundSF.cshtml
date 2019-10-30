@@ -63,7 +63,7 @@
                     <tbody>
                         @for (int row = 1; row < Model.AESubEntities.Count; row++)
                         {
-                            <tr class="tableRowPharus">
+                            <tr class="tableRowPharus" onclick="document.location = '/SubFunds/ViewSubFundSC/@Model.AESubEntities[row][0]'">
                                 @for (int col = 0; col < Model.AESubEntities[row].Length; col++)
                                 {
                                     <td>

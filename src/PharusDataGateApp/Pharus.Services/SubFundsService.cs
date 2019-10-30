@@ -54,7 +54,7 @@
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from fn_active_fund('{defaultDate}') where [FUND ID PHARUS] = {Id}";
+                command.CommandText = $"select * from fn_active_subfund('{defaultDate}') where [sf_id] = {Id}";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
@@ -69,12 +69,12 @@
 
                 if (chosenDate == null)
                 {
-                    command.CommandText = $"select * from fn_active_fund('{defaultDate}') where [FUND ID PHARUS] = {Id}";
+                    command.CommandText = $"select * from fn_active_subfund('{defaultDate}') where [sf_id] = {Id}";
                 }
 
                 else
                 {
-                    command.CommandText = $"select * from fn_active_fund('{chosenDate?.ToString("yyyyMMdd")}') where [FUND ID PHARUS] = {Id}";
+                    command.CommandText = $"select * from fn_active_subfund('{chosenDate?.ToString("yyyyMMdd")}') where [sf_id] = {Id}";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
@@ -88,7 +88,7 @@
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from fn_active_subfund_modifyview('{defaultDate}') where [FUND ID PHARUS] = {Id}";
+                command.CommandText = $"select * from fn_active_subfund_modifyview('{defaultDate}') where [sf_id] = {Id}";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
