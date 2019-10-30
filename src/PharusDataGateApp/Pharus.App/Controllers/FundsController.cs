@@ -226,5 +226,16 @@
 
             return this.LocalRedirect(returnUrl);
         }
+
+        [HttpGet]
+        public IActionResult NewFund()
+        {
+            EditFundBindingModel model = new EditFundBindingModel
+            {
+                EntityProperties = this.fundsService.GetAllActiveFunds()
+            };
+
+            return this.View(model);
+        }
     }
 }
