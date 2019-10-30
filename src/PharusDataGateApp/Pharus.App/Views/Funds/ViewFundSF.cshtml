@@ -2,6 +2,13 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    List<string[]> aFSubFunds = null;
+
+    if (this.User.Identity.IsAuthenticated)
+    {
+        aFSubFunds = Model.AFSubFunds;
+    }
 }
 
 <form asp-controller="Funds" asp-action="ViewFundSF" class="justify-content-between" method="post">
@@ -18,9 +25,7 @@
                asp-for="Command"
                value="Update Table"></>
     </div>
-</form>
 
-<form>
     <div class="d-flex justify-content-between">
         <div class="table-responsive border-0 w-35">
             <table class="table table-hover">
@@ -50,76 +55,91 @@
     </div>
 </form>
 
-<div class="w-50 d-flex justify-content-between">
-    <form asp-controller="Funds" asp-action="ViewFundSF" class="pharusSearchForm my-5">
-        <div>
-            <input type="text"
-                   name="searchString"
-                   asp-for="SearchString" />
+<form asp-controller="Funds" asp-action="ViewFundSF" class="pharusSearchForm my-5">
+    <div>
+        <input type="text"
+               name="searchString"
+               asp-for="SearchString" />
 
-            <input type="submit"
-                   class="bg-pharus text-white"
-                   asp-for="Command"
-                   value="Filter" />
-        </div>
-    </form>
+        <input type="submit"
+               class="bg-pharus text-white"
+               asp-for="Command"
+               value="Filter" />
+    </div>
+</form>
 
-    <form asp-controller="Funds" asp-action="ExtractUpload" method="post">
-        <button type="submit"
-                name="excel_button">
+<form asp-controller="Funds" method="post">
+
+    <div class="button-holder d-flex justify-content-center my-5">
+        <button class="extractbtn"
+                type="submit"
+                formaction="/Funds/ExtractExcelSubFunds"
+                name="extract_Excel">
             <img src="~/images/Icon_Excel.ico"
                  width="35"
-                 height="25" />
+                 height="35" />
         </button>
 
-        <button type="submit"
-                name="excel_button">
+        <button class="extractbtn"
+                type="submit"
+                formaction="/Funds/ExtractPdfSubFunds"
+                name="extract_Pdf">
             <img src="~/images/Icon_Pdf.ico"
                  width="35"
-                 height="25" />
+                 height="35" />
         </button>
-    </form>
-</div>
+    </div>
 
-<hr class="bg-pharus hr-2" />
+    <hr class="bg-pharus hr-2" />
 
-<div class="dropdown pt-5">
-    <button class="dropdown-btn maxw-270" onfocus="openDropdown()">
-        SubFunds<i class="fa fa-caret-down"></i>
-    </button>
-    <div id="myDropdown" class="dropdown-container">
-        <div class="table-responsive border-0 mx-auto">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        @for (int row = 0; row < 1; row++)
-                        {
-                            @for (int col = 0; col < Model.AFSubFunds[row].Length; col++)
+    <div class="dropdown pt-5">
+        <button type="button" class="dropdown-btn maxw-270" onfocus="openDropdown()">
+            SubFunds<i class="fa fa-caret-down"></i>
+        </button>
+        <div id="myDropdown" class="dropdown-container">
+
+            <div class="table-responsive">
+                <table class="table" name="">
+                    <thead>
+                        <tr>
+                            @for (int row = 0; row < 1; row++)
                             {
-                                <th class="text-secondary p-1">
-                                    <h5>
-                                        @Model.AFSubFunds[row][col]
-                                    </h5>
-                                </th>
-                            }
-                        }
-                    </tr>
-                </thead>
-
-                <tbody>
-                    @for (int row = 1; row < Model.AFSubFunds.Count; row++)
-                    {
-                        <tr onclick="document.location = '/Funds/ViewSubfundSC/@Model.AFSubFunds[row][0]'">
-                            @for (int col = 0; col < Model.AFSubFunds[row].Length; col++)
-                            {
-                                <td class="p-1">
-                                    @Model.AFSubFunds[row][col]
-                                </td>
+                                @for (int col = 0; col < aFSubFunds[row].Length; col++)
+                                {
+                                    <th class="text-secondary">
+                                        <h5>
+                                            @Html.TextBoxFor(af => aFSubFunds[row][col],
+                                                new
+                                                     {
+                                                    @class = "textBoxHeaderPharus",
+                                                    @readonly = true
+                                                })
+                                        </h5>
+                                    </th>
+                                }
                             }
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @for (int row = 1; row < aFSubFunds.Count; row++)
+                        {
+                            <tr class="tableRowPharus">
+                                @for (int col = 0; col < aFSubFunds[row].Length; col++)
+                                {
+                                    <td class="">
+                                        @Html.TextBoxFor(af => aFSubFunds[row][col],
+                                            new
+                                                 {
+                                                @class = "textBoxPharus",
+                                                @readonly = true
+                                            })
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
+</form>

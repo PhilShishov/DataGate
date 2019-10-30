@@ -45,12 +45,12 @@
     </div>
 </form>
 
-<form method="post">
+<form asp-controller="Funds" method="post">
 
     <div class="button-holder d-flex justify-content-center my-5">
         <button class="extractbtn"
-                type="submit" ;
-                formaction="/Funds/ExtractExcel"
+                type="submit"
+                formaction="/Funds/ExtractExcelFunds"
                 name="extract_Excel">
             <img src="~/images/Icon_Excel.ico"
                  width="35"
@@ -59,7 +59,7 @@
 
         <button class="extractbtn"
                 type="submit"
-                formaction="/Funds/ExtractPdf"
+                formaction="/Funds/ExtractPdfFunds"
                 name="extract_Pdf">
             <img src="~/images/Icon_Pdf.ico"
                  width="35"

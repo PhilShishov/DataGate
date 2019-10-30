@@ -12,7 +12,6 @@
     using Pharus.App.Models.ViewModels.Funds;
     using Pharus.App.Models.BindingModels.Funds;
 
-
     [Authorize]
     public class FundsController : Controller
     {
@@ -76,7 +75,7 @@
         }
 
         [HttpPost]
-        public FileStreamResult ExtractExcel(ActiveFundsViewModel model)
+        public FileStreamResult ExtractExcelFunds(ActiveFundsViewModel model)
         {
             FileStreamResult fileStreamResult = null;
 
@@ -89,7 +88,20 @@
         }
 
         [HttpPost]
-        public FileStreamResult ExtractPdf(ActiveFundsViewModel model)
+        public FileStreamResult ExtractExcelSubFunds(SpecificFundViewModel model)
+        {
+            FileStreamResult fileStreamResult = null;
+
+            if (HttpContext.Request.Form.ContainsKey("extract_Excel"))
+            {
+                fileStreamResult = ExtractTable.ExtractTableAsExcel(model.AFSubFunds);
+            }
+
+            return fileStreamResult;
+        }
+
+        [HttpPost]
+        public FileStreamResult ExtractPdfFunds(ActiveFundsViewModel model)
         {
             FileStreamResult fileStreamResult = null;
 
