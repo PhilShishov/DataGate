@@ -4,11 +4,20 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<partial name="ContainerSpecificEntityPartial" />
+<form class="justify-content-between" method="post">
+
+    <partial name="ContainerSpecificEntityPartial" />
+    @if (this.User.IsInRole("Admin"))
+    {
+        <div class="mt-5">
+            <a href="/Funds/EditFund/@Model.EntityId" class="btn bg-pharus text-white">Edit Fund</a>
+        </div>
+    }
+</form>
 
 <form asp-controller="Funds" method="post">
 
-    <partial name="ExtractButtonsViewPartial" />
+    <partial name="ExtractSubEntitiesViewPartial" />
 
     <hr class="bg-pharus hr-2" />
 

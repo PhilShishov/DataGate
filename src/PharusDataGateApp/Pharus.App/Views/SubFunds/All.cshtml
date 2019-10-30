@@ -5,14 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="text-center text-torshia">All Active Funds</h2>
+<h2 class="text-center text-torshia">All Active SubFunds</h2>
 
-<form asp-controller="Funds" asp-action="All" class="justify-content-between" method="post">
+<form asp-controller="SubFunds" asp-action="All" class="justify-content-between" method="post">
     <div>
         <partial name="ContainerActiveEntityPartial" />      
 
         <div class="table-responsive">
-            <table class="table" name="">
+            <table class="table">
                 <thead>
                     <tr>
                         @for (int row = 0; row < 1; row++)
@@ -36,7 +36,7 @@
                 <tbody>
                     @for (int row = 1; row < Model.ActiveEntities.Count; row++)
                     {
-                        <tr class="tableRowPharus" onclick="document.location = '/Funds/ViewFundSF/@Model.ActiveEntities[row][0]'">
+                        <tr class="tableRowPharus" onclick="document.location = '/SubFunds/ViewSubFundSC/@Model.ActiveEntities[row][0]'">
                             @for (int col = 0; col < Model.ActiveEntities[row].Length; col++)
                             {
                                 <td>
