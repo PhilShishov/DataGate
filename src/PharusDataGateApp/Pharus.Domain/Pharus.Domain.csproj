@@ -12,4 +12,9 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Enums\ShareClasses\" />
+    <Folder Include="Enums\SubFunds\" />
+  </ItemGroup>
+
 </Project>

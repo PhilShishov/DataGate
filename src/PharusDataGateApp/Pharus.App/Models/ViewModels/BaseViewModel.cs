@@ -10,7 +10,7 @@
 
         public string Command { get; set; }
 
-        public int ID { get; set; }
+        public int EntityId { get; set; }
 
         public string SearchString { get; set; }
     }

@@ -1,14 +1,9 @@
 ﻿namespace Pharus.App.Models.BindingModels.Funds
 {
-    using System.Collections.Generic;
+    using Pharus.Domain.Enums.Funds;
 
-    using Pharus.Domain.Enums;
-
-    public class EditFundBindingModel
+    public class EditFundBindingModel : BaseBindingModel
     {
-        //TODO data annotation checks
-        public List<string[]> FundProperties { get; set; }
-
         public TbDomFStatus FStatus { get; set; }
         public TbDomLegalForm LegalForm { get; set; }
 

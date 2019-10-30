@@ -1,0 +1,57 @@
+﻿@model Pharus.App.Models.ViewModels.Entities.ActiveEntitiesViewModel
+
+@{
+    ViewData["Title"] = "All";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center text-torshia">All Active Funds</h2>
+
+<form asp-controller="Funds" asp-action="All" class="justify-content-between" method="post">
+    <div>
+        <partial name="ContainerActiveEntityPartial" />      
+
+        <div class="table-responsive">
+            <table class="table" name="">
+                <thead>
+                    <tr>
+                        @for (int row = 0; row < 1; row++)
+                        {
+                            @for (int col = 0; col < Model.ActiveEntities[row].Length; col++)
+                            {
+                                <th class="text-secondary">
+                                    <h5>
+                                        @Html.TextBoxFor(af => Model.ActiveEntities[row][col],
+                                            new
+                                                 {
+                                                @class = "textBoxHeaderPharus",
+                                                @readonly = true
+                                            })
+                                    </h5>
+                                </th>
+                            }
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int row = 1; row < Model.ActiveEntities.Count; row++)
+                    {
+                        <tr class="tableRowPharus" onclick="document.location = '/Funds/ViewFundSF/@Model.ActiveEntities[row][0]'">
+                            @for (int col = 0; col < Model.ActiveEntities[row].Length; col++)
+                            {
+                                <td>
+                                    @Html.TextBoxFor(af => Model.ActiveEntities[row][col],
+                                        new
+                                             {
+                                            @class = "textBoxPharus",
+                                            @readonly = true
+                                        })
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</form>
