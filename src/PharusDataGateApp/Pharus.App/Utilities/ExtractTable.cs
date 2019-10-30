@@ -7,8 +7,16 @@ namespace Pharus.App.Utilities
     using System.Collections.Generic;
 
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Hosting;
+
+    using Pharus.App.Models.ViewModels.Funds;
 
     using OfficeOpenXml;
+    using iText.Kernel.Pdf;
+    using iText.Kernel.Geom;
+    using iText.Layout;
+    using iText.IO.Image;
+    using iText.Layout.Element;
 
     public class ExtractTable
     {
@@ -55,20 +63,70 @@ namespace Pharus.App.Utilities
             }
         }
 
-        //public static FileStreamResult ExtractTableAsPdf(List<string[]> funds)
-        //{
-        //    throw new NotImplementedException();
+        public static FileStreamResult ExtractTableAsPdf(ActiveFundsViewModel model, IHostingEnvironment _hostingEnvironment)
+        {
+            FileStreamResult fileStreamResult;
+            Stream stream = new MemoryStream();
+            PdfWriter writer = new PdfWriter(stream);
+            writer.SetCloseStream(false);
 
-        //    //            MemoryStream ms = new MemoryStream();
+            PdfDocument pdfDoc = new PdfDocument(writer);
 
-        //    //            byte[] byteInfo = pdf.Output();
-        //    //            ms.Write(byteInfo, 0, byteInfo.Length);
-        //    //            ms.Position = 0;
+            pdfDoc.AddNewPage(PageSize.A4.Rotate());
+            Document document = new Document(pdfDoc);
 
-        //    //            HttpContext.Response.Headers.Add("content-disposition",
-        //    //"attachment; filename=form.pdf");
+            string sfile = _hostingEnvironment.WebRootPath + "/images/Logo_Pharus_small.jpg";
+            ImageData data = ImageDataFactory.Create(sfile);
 
-        //    //            return new FileStreamResult(ms, "application/pdf");
-        //}
+            Image img = new Image(data);
+
+            Table table = new Table(model.ActiveFunds[0].Length);
+            table.SetFontSize(10);
+
+            for (int row = 0; row < 1; row++)
+            {
+                for (int col = 0; col < model.ActiveFunds[0].Length; col++)
+                {
+                    string s = model.ActiveFunds[row][col];
+                    if (s == null)
+                    {
+                        s = " ";
+                    }
+                    Cell c1 = new Cell();
+                    c1.Add(new Paragraph(s));
+                    c1.SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER);
+                    c1.SetBold();
+                    table.AddHeaderCell(c1);
+                }
+            }
+
+            for (int row = 1; row < model.ActiveFunds.Count; row++)
+            {
+                for (int col = 0; col < model.ActiveFunds[0].Length; col++)
+                {
+                    string s = model.ActiveFunds[row][col];
+                    if (s == null)
+                    {
+                        s = " ";
+                    }
+
+                    table.AddCell(new Paragraph(s));
+                }
+            }
+
+            document.Add(img);
+            document.Add(new Paragraph(" "));
+            document.Add(new Paragraph("LIST OF ACTIVE FUNDS AS OF " + model.ChosenDate.ToString()));
+            document.Add(new Paragraph(" "));
+            document.Add(table);
+            document.Close();
+
+            stream.Position = 0;
+            fileStreamResult = new FileStreamResult(stream, "application/pdf")
+            {
+                FileDownloadName = "ActiveFunds.pdf"
+            };
+            return fileStreamResult;
+        }
     }
 }
