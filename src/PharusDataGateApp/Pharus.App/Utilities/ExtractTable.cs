@@ -73,8 +73,8 @@ namespace Pharus.App.Utilities
 
         public static FileStreamResult ExtractTableAsPdf(List<string[]> entities, DateTime? chosenDate, IHostingEnvironment _hostingEnvironment, string typeName)
         {
-            var correctTypeName = typeName == "ActiveFundsViewModel" ? 
-                                  ActiveFunds : typeName == "SpecificFundViewModel" ?
+            var correctTypeName = typeName == "ActiveEntitiesViewModel" ? 
+                                  ActiveFunds : typeName == "SpecificEntityViewModel" ?
                                   ActiveSubFunds : ActiveShareClasses;
 
             FileStreamResult fileStreamResult;

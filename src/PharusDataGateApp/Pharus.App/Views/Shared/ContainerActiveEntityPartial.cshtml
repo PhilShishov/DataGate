@@ -27,24 +27,6 @@
     </div>
 </div>
 
-<div class="button-holder d-flex justify-content-center my-5">
-    <button class="extractbtn"
-            type="submit"
-            formaction="/Funds/ExtractExcelEntities"
-            name="extract_Excel">
-        <img src="~/images/Icon_Excel.ico"
-             width="35"
-             height="35" />
-    </button>
-
-    <button class="extractbtn"
-            type="submit"
-            formaction="/Funds/ExtractPdfEntities"
-            name="extract_Pdf">
-        <img src="~/images/Icon_Pdf.ico"
-             width="35"
-             height="35" />
-    </button>
-</div>
+<partial name="ExtractButtonsViewPartial" />
 
 <hr class="bg-pharus hr-2" />
