@@ -14,7 +14,7 @@
 
 <h2 class="text-center text-torshia">All Active Funds</h2>
 
-<form asp-controller="Funds" asp-action="All" class="justify-content-between" method="post">
+<form asp-controller="Funds" class="justify-content-between" method="post">
     <div>
         <div class="w-100 d-flex justify-content-between my-5">
             <div>
@@ -42,73 +42,70 @@
                        value="Filter" />
             </div>
         </div>
-    </div>
-</form>
 
-<form asp-controller="Funds" method="post">
+        <div class="button-holder d-flex justify-content-center my-5">
+            <button class="extractbtn"
+                    type="submit"
+                    formaction="/Funds/ExtractExcelFunds"
+                    name="extract_Excel">
+                <img src="~/images/Icon_Excel.ico"
+                     width="35"
+                     height="35" />
+            </button>
 
-    <div class="button-holder d-flex justify-content-center my-5">
-        <button class="extractbtn"
-                type="submit"
-                formaction="/Funds/ExtractExcelFunds"
-                name="extract_Excel">
-            <img src="~/images/Icon_Excel.ico"
-                 width="35"
-                 height="35" />
-        </button>
+            <button class="extractbtn"
+                    type="submit"
+                    formaction="/Funds/ExtractPdfFunds"
+                    name="extract_Pdf">
+                <img src="~/images/Icon_Pdf.ico"
+                     width="35"
+                     height="35" />
+            </button>
+        </div>
 
-        <button class="extractbtn"
-                type="submit"
-                formaction="/Funds/ExtractPdfFunds"
-                name="extract_Pdf">
-            <img src="~/images/Icon_Pdf.ico"
-                 width="35"
-                 height="35" />
-        </button>
-    </div>
+        <hr class="bg-pharus hr-2" />
 
-    <hr class="bg-pharus hr-2" />
-
-    <div class="table-responsive">
-        <table class="table" name="">
-            <thead>
-                <tr>
-                    @for (int row = 0; row < 1; row++)
-                    {
-                        @for (int col = 0; col < activeFunds[row].Length; col++)
+        <div class="table-responsive">
+            <table class="table" name="">
+                <thead>
+                    <tr>
+                        @for (int row = 0; row < 1; row++)
                         {
-                            <th class="text-secondary">
-                                <h5>
+                            @for (int col = 0; col < activeFunds[row].Length; col++)
+                            {
+                                <th class="text-secondary">
+                                    <h5>
+                                        @Html.TextBoxFor(af => activeFunds[row][col],
+                                            new
+                                                 {
+                                                @class = "textBoxHeaderPharus",
+                                                @readonly = true
+                                            })
+                                    </h5>
+                                </th>
+                            }
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int row = 1; row < Model.ActiveFunds.Count; row++)
+                    {
+                        <tr class="tableRowPharus" onclick="document.location = '/Funds/ViewFundSF/@activeFunds[row][0]'">
+                            @for (int col = 0; col < activeFunds[row].Length; col++)
+                            {
+                                <td class="">
                                     @Html.TextBoxFor(af => activeFunds[row][col],
                                         new
                                              {
-                                            @class = "textBoxHeaderPharus",
+                                            @class = "textBoxPharus",
                                             @readonly = true
                                         })
-                                </h5>
-                            </th>
-                        }
+                                </td>
+                            }
+                        </tr>
                     }
-                </tr>
-            </thead>
-            <tbody>
-                @for (int row = 1; row < Model.ActiveFunds.Count; row++)
-                {
-                    <tr class="tableRowPharus" onclick="document.location = '/Funds/ViewFundSF/@activeFunds[row][0]'">
-                        @for (int col = 0; col < activeFunds[row].Length; col++)
-                        {
-                            <td class="">
-                                @Html.TextBoxFor(af => activeFunds[row][col],
-                                    new
-                                         {
-                                        @class = "textBoxPharus",
-                                        @readonly = true
-                                    })
-                            </td>
-                        }
-                    </tr>
-                }
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
 </form>

@@ -79,9 +79,11 @@
         {
             FileStreamResult fileStreamResult = null;
 
+            string typeName = model.GetType().Name;
+
             if (HttpContext.Request.Form.ContainsKey("extract_Excel"))
             {
-                fileStreamResult = ExtractTable.ExtractTableAsExcel(model.ActiveFunds);
+                fileStreamResult = ExtractTable.ExtractTableAsExcel(model.ActiveFunds, typeName);
             }
 
             return fileStreamResult;
@@ -92,9 +94,11 @@
         {
             FileStreamResult fileStreamResult = null;
 
+            string typeName = model.GetType().Name;
+
             if (HttpContext.Request.Form.ContainsKey("extract_Excel"))
             {
-                fileStreamResult = ExtractTable.ExtractTableAsExcel(model.AFSubFunds);
+                fileStreamResult = ExtractTable.ExtractTableAsExcel(model.AFSubFunds, typeName);
             }
 
             return fileStreamResult;
@@ -105,13 +109,30 @@
         {
             FileStreamResult fileStreamResult = null;
 
+            string typeName = model.GetType().Name;
+
             if (HttpContext.Request.Form.ContainsKey("extract_Pdf"))
             {
-                fileStreamResult = ExtractTable.ExtractTableAsPdf(model, _hostingEnvironment);
+                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.ActiveFunds, model.ChosenDate, _hostingEnvironment, typeName);
             }
 
             return fileStreamResult;
-        }        
+        }
+
+        [HttpPost]
+        public FileStreamResult ExtractPdfSubFunds(SpecificFundViewModel model)
+        {
+            FileStreamResult fileStreamResult = null;
+
+            string typeName = model.GetType().Name;
+
+            if (HttpContext.Request.Form.ContainsKey("extract_Pdf"))
+            {
+                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.AFSubFunds, model.ChosenDate, _hostingEnvironment, typeName);
+            }
+
+            return fileStreamResult;
+        }
 
         [HttpGet("Funds/ViewFundSF/{fundId}")]
         public IActionResult ViewFundSF(int fundId)
