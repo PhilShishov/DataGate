@@ -1,0 +1,73 @@
+﻿@model Pharus.App.Models.BindingModels.Funds.EditFundBindingModel
+@using Pharus.Domain.Enums.Funds;
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Create New Fund</h4>
+
+<form asp-action="EditFund" method="post" class="d-inline">
+    <div class="d-inline">
+        @for (int row = 0; row < 1; row++)
+        {
+            @for (int col = 0; col < Model.EntityProperties[row].Length; col++)
+            {
+                <div>
+                    <label class="control-label text-secondary">
+                        @*@Html.TextBoxFor(m => Model[0][col], new { @class = "", @style = "border:0" })*@
+                        @Model.EntityProperties[0][col]
+                    </label>
+                    @if (Model.EntityProperties[0][col] == "STATUS")
+                    {
+                        <select asp-for="FStatus" asp-items="Html.GetEnumSelectList<TbDomFStatus>()" class="form-control maxw-270"></select>
+                    }
+
+                    else if (Model.EntityProperties[0][col] == "LEGAL FORM")
+                    {
+                        <select asp-for="FStatus" asp-items="Html.GetEnumSelectList<TbDomLegalForm>()" class="form-control maxw-270"></select>
+                    }
+
+                    else if (Model.EntityProperties[0][col] == "LEGAL VEHICLE")
+                    {
+                        <select asp-for="FStatus" asp-items="Html.GetEnumSelectList<TbDomLegalVehicle>()" class="form-control maxw-270"></select>
+                    }
+
+                    else if (Model.EntityProperties[0][col] == "LEGAL TYPE")
+                    {
+                        <select asp-for="FStatus" asp-items="Html.GetEnumSelectList<TbDomLegalType>()" class="form-control maxw-270"></select>
+                    }
+
+                    else if (Model.EntityProperties[0][col] == "COMPANY DESCRIPTION")
+                    {
+                        <select asp-for="FStatus" asp-items="Html.GetEnumSelectList<TbDomCompanyTypeDesc>()" class="form-control maxw-270"></select>
+                    }
+                    else if (Model.EntityProperties[0][col] == "COMPANY TYPE")
+                    {
+                        <select asp-for="FStatus" asp-items="Html.GetEnumSelectList<TbDomCompanyAcronym>()" class="form-control maxw-270"></select>
+                    }
+                    else
+                    {
+                        <input type="text"
+                               class="form-control maxw-270"/>
+                        @*@Html.TextBoxFor(m => Model[row][col], new { @class = "form-control" })*@
+                    }
+                </div>
+            }
+        }
+    </div>
+
+    <div class="button-holder mt-4">
+        <button type="submit"
+                class="btn bg-pharus text-white"
+                name="update_button"
+                style="margin-right:40px"
+                onclick="return confirm('Are you sure you want to create this?')">
+            Create Fund
+        </button>
+    </div>
+</form>
+
+<div>
+    <a asp-action="All">Back to List</a>
+</div>
