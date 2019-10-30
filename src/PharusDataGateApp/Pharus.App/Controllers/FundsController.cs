@@ -28,7 +28,7 @@
         [HttpGet]
         public IActionResult All()
         {
-            var model = new ActiveFundsViewModel
+            var model = new ActiveEntitiesViewModel
             {
                 ActiveFunds = this.fundsService.GetAllActiveFunds()
             };
@@ -37,7 +37,7 @@
         }
 
         [HttpPost]
-        public IActionResult All(ActiveFundsViewModel model)
+        public IActionResult All(ActiveEntitiesViewModel model)
         {
             model.ActiveFunds = this.fundsService.GetAllActiveFunds();
 
@@ -75,7 +75,7 @@
         }
 
         [HttpPost]
-        public FileStreamResult ExtractExcelFunds(ActiveFundsViewModel model)
+        public FileStreamResult ExtractExcelFunds(ActiveEntitiesViewModel model)
         {
             FileStreamResult fileStreamResult = null;
 
@@ -105,7 +105,7 @@
         }
 
         [HttpPost]
-        public FileStreamResult ExtractPdfFunds(ActiveFundsViewModel model)
+        public FileStreamResult ExtractPdfFunds(ActiveEntitiesViewModel model)
         {
             FileStreamResult fileStreamResult = null;
 
