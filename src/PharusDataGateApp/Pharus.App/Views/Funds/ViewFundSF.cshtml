@@ -1,95 +1,14 @@
 ﻿@model Pharus.App.Models.ViewModels.Entities.SpecificEntityViewModel
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-
-    List<string[]> aFSubFunds = null;
-    List<string[]> activeFund = null;
-
-    if (this.User.Identity.IsAuthenticated)
-    {
-        aFSubFunds = Model.AESubEntities;
-        activeFund = Model.ActiveEntity;
-    }
 }
 
-<form asp-controller="Funds" asp-action="ViewFundSF" class="justify-content-between" method="post">
-    <div class="w-100 flex-wrap my-5">
-        <label for="date"
-               class="text-torshia m-1 pr-3">SELECT DATE:</label>
-        <input type="date"
-               id="fundDatetime"
-               asp-for="ChosenDate"
-               min="2018-01-01" max=@DateTime.Today.ToString("yyyy-MM-dd")>
-
-        <input type="submit"
-               class="bg-pharus text-white"
-               asp-for="Command"
-               value="Update Table"></>
-    </div>
-
-    <div class="d-flex justify-content-between">
-        <div class="table-responsive border-0 w-35">
-            <table class="table table-hover">
-                <tbody>
-                    @for (int row = 1; row < activeFund.Count; row++)
-                    {
-                        @for (int col = 0; col < activeFund[row].Length; col++)
-                        {
-                            <tr>
-                                <th class="text-secondary p-1">
-                                    <h5>
-                                        @activeFund[0][col]
-                                    </h5>
-                                </th>
-                                <td class="p-1">
-                                    @activeFund[row][col]
-                                </td>
-                            </tr>
-                        }
-                    }
-                </tbody>
-            </table>
-        </div>
-
-        <partial name="ListOfProspectusPartial" />
-
-    </div>
-</form>
-
-<form asp-controller="Funds" asp-action="ViewFundSF" class="pharusSearchForm my-5">
-    <div>
-        <input type="text"
-               name="searchString"
-               asp-for="SearchString" />
-
-        <input type="submit"
-               class="bg-pharus text-white"
-               asp-for="Command"
-               value="Filter" />
-    </div>
-</form>
+<partial name="ContainerSpecificEntityPartial" />
 
 <form asp-controller="Funds" method="post">
 
-    <div class="button-holder d-flex justify-content-center my-5">
-        <button class="extractbtn"
-                type="submit"
-                formaction="/Funds/ExtractExcelSubFunds"
-                name="extract_Excel">
-            <img src="~/images/Icon_Excel.ico"
-                 width="35"
-                 height="35" />
-        </button>
-
-        <button class="extractbtn"
-                type="submit"
-                formaction="/Funds/ExtractPdfSubFunds"
-                name="extract_Pdf">
-            <img src="~/images/Icon_Pdf.ico"
-                 width="35"
-                 height="35" />
-        </button>
-    </div>
+    <partial name="ExtractButtonsViewPartial" />
 
     <hr class="bg-pharus hr-2" />
 
@@ -105,11 +24,11 @@
                         <tr>
                             @for (int row = 0; row < 1; row++)
                             {
-                                @for (int col = 0; col < aFSubFunds[row].Length; col++)
+                                @for (int col = 0; col < Model.AESubEntities[row].Length; col++)
                                 {
                                     <th class="text-secondary">
                                         <h5>
-                                            @Html.TextBoxFor(af => aFSubFunds[row][col],
+                                            @Html.TextBoxFor(af => Model.AESubEntities[row][col],
                                                 new
                                                      {
                                                     @class = "textBoxHeaderPharus",
@@ -122,13 +41,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @for (int row = 1; row < aFSubFunds.Count; row++)
+                        @for (int row = 1; row < Model.AESubEntities.Count; row++)
                         {
                             <tr class="tableRowPharus">
-                                @for (int col = 0; col < aFSubFunds[row].Length; col++)
+                                @for (int col = 0; col < Model.AESubEntities[row].Length; col++)
                                 {
-                                    <td class="">
-                                        @Html.TextBoxFor(af => aFSubFunds[row][col],
+                                    <td>
+                                        @Html.TextBoxFor(af => Model.AESubEntities[row][col],
                                             new
                                                  {
                                                 @class = "textBoxPharus",
