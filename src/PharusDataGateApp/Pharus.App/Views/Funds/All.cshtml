@@ -7,9 +7,13 @@
 
 <h2 class="text-center text-torshia">All Active Funds</h2>
 
-<form asp-controller="Funds" asp-action="All" class="justify-content-between" method="post">
+<form asp-controller="Funds" class="justify-content-between" method="post">
     <div>
-        <partial name="ContainerActiveEntityPartial" />      
+        <partial name="ContainerActiveEntityPartial" />
+
+        <partial name="ExtractEntitiesViewPartial" />
+
+        <hr class="bg-pharus hr-2" />
 
         <div class="table-responsive">
             <table class="table" name="">

@@ -11,10 +11,11 @@
     public class FundsService : IFundsService
     {
         private readonly string defaultDate = DateTime.Today.ToString("yyyyMMdd");
+        private readonly string ConnectionString = DbConfiguration.ConnectionStringPharus_vFinale.ToString();
 
         public List<string[]> GetAllActiveFunds()
         {
-            using (SqlConnection connection = new SqlConnection(DbConfiguration.ConnectionStringPharus_vFinale.ToString()))
+            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
             {
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
@@ -27,7 +28,7 @@
 
         public List<string[]> GetAllActiveFunds(DateTime? chosenDate)
         {
-            using (SqlConnection connection = new SqlConnection(DbConfiguration.ConnectionStringPharus_vFinale.ToString()))
+            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
             {
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
@@ -48,7 +49,7 @@
 
         public List<string[]> GetActiveFundById(int Id)
         {
-            using (SqlConnection connection = new SqlConnection(DbConfiguration.ConnectionStringPharus_vFinale.ToString()))
+            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
             {
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
@@ -61,7 +62,7 @@
 
         public List<string[]> GetActiveFundById(DateTime? chosenDate, int Id)
         {
-            using (SqlConnection connection = new SqlConnection(DbConfiguration.ConnectionStringPharus_vFinale.ToString()))
+            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
             {
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
@@ -81,7 +82,7 @@
         }
         public List<string[]> GetActiveFundWithDateById(int Id)
         {
-            using (SqlConnection connection = new SqlConnection(DbConfiguration.ConnectionStringPharus_vFinale.ToString()))
+            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
             {
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
@@ -94,7 +95,7 @@
 
         public List<string[]> GetFundSubFunds(int Id)
         {
-            using (SqlConnection connection = new SqlConnection(DbConfiguration.ConnectionStringPharus_vFinale.ToString()))
+            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
             {
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
@@ -104,23 +105,5 @@
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
         }
-
-        //public DataSet GetAllActiveFundsWithDataSet(DateTime? chosenDate)
-        //{
-        //    DataSet dataSet = new DataSet();
-
-        //    using (SqlConnection connection = new SqlConnection(DbConfiguration.ConnectionStringPharus_vFinale.ToString()))
-        //    {
-        //        SqlCommand cmd = new SqlCommand();
-        //        cmd.CommandType = CommandType.Text;
-        //        cmd.CommandText = $"select * from fn_active_fund('{chosenDate?.ToString("yyyyMMdd")}')";
-        //        cmd.Connection = connection;
-
-        //        SqlDataAdapter sqlDataAdapter = new SqlDataAdapter();
-        //        sqlDataAdapter.SelectCommand = cmd;
-        //        sqlDataAdapter.Fill(dataSet);
-        //    }
-        //    return dataSet;
-        //}
     }
 }
