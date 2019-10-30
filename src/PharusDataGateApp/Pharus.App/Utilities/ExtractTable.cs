@@ -16,7 +16,6 @@ namespace Pharus.App.Utilities
     using iText.Layout;
     using iText.IO.Image;
     using iText.Layout.Element;
-    using System.Globalization;
 
     public class ExtractTable
     {
@@ -24,7 +23,7 @@ namespace Pharus.App.Utilities
         private const string ActiveSubFunds = "ActiveSubFunds";
         private const string ActiveShareClasses = "ActiveShareClasses";
 
-        public static FileStreamResult ExtractTableAsExcel(List<string[]> funds, string typeName)
+        public static FileStreamResult ExtractTableAsExcel(List<string[]> entities, string typeName)
         {
             FileStreamResult fileStreamResult;
             using (ExcelPackage package = new ExcelPackage())
@@ -36,7 +35,7 @@ namespace Pharus.App.Utilities
 
                 worksheet = package.Workbook.Worksheets.Add($"{correctTypeName}");
 
-                var tableHeaders = funds.Take(1);
+                var tableHeaders = entities.Take(1);
 
                 int counter = 0;
 
@@ -49,11 +48,11 @@ namespace Pharus.App.Utilities
                     }
                 }
 
-                for (int row = 1; row < funds.Count; row++)
+                for (int row = 1; row < entities.Count; row++)
                 {
-                    for (int col = 0; col < funds[row].Length; col++)
+                    for (int col = 0; col < entities[row].Length; col++)
                     {
-                        worksheet.Cells[row + 1, col + 1].Value = Convert.ToString(funds[row][col]);
+                        worksheet.Cells[row + 1, col + 1].Value = Convert.ToString(entities[row][col]);
                     }
                 }
 
@@ -72,7 +71,7 @@ namespace Pharus.App.Utilities
             }
         }
 
-        public static FileStreamResult ExtractTableAsPdf(List<string[]> funds, DateTime? chosenDate, IHostingEnvironment _hostingEnvironment, string typeName)
+        public static FileStreamResult ExtractTableAsPdf(List<string[]> entities, DateTime? chosenDate, IHostingEnvironment _hostingEnvironment, string typeName)
         {
             var correctTypeName = typeName == "ActiveFundsViewModel" ? 
                                   ActiveFunds : typeName == "SpecificFundViewModel" ?
@@ -93,14 +92,14 @@ namespace Pharus.App.Utilities
 
             Image img = new Image(data);
 
-            Table table = new Table(funds[0].Length);
+            Table table = new Table(entities[0].Length);
             table.SetFontSize(10);
 
             for (int row = 0; row < 1; row++)
             {
-                for (int col = 0; col < funds[0].Length; col++)
+                for (int col = 0; col < entities[0].Length; col++)
                 {
-                    string s = funds[row][col];
+                    string s = entities[row][col];
                     if (s == null)
                     {
                         s = " ";
@@ -113,11 +112,11 @@ namespace Pharus.App.Utilities
                 }
             }
 
-            for (int row = 1; row < funds.Count; row++)
+            for (int row = 1; row < entities.Count; row++)
             {
-                for (int col = 0; col < funds[0].Length; col++)
+                for (int col = 0; col < entities[0].Length; col++)
                 {
-                    string s = funds[row][col];
+                    string s = entities[row][col];
                     if (s == null)
                     {
                         s = " ";

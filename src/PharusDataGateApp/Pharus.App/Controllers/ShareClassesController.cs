@@ -1,51 +1,16 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+
 namespace Pharus.App.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Authorization;
-
-    using Pharus.Services.Contracts;
-
-    [Authorize]
     public class ShareClassesController : Controller
     {
-        private readonly IShareClassesService shareClassesService;
-
-        public ShareClassesController(IShareClassesService shareClassesService)
+        public IActionResult Index()
         {
-            this.shareClassesService = shareClassesService;
+            return View();
         }
-
-        [HttpGet]
-        public IActionResult All()
-        {
-            var activeSubFundsView = this.shareClassesService.GetAllActiveShareClasses();
-
-            return View(activeSubFundsView);
-        }
-
-        [HttpPost]
-        public IActionResult All(DateTime? chosenDate)
-        {
-            List<string[]> activeSubFundsView;
-
-            if (chosenDate != null)
-            {
-                activeSubFundsView = this.shareClassesService.GetAllActiveShareClasses(chosenDate);
-            }
-            else
-            {
-                activeSubFundsView = this.shareClassesService.GetAllActiveShareClasses();
-            }
-
-            return View(activeSubFundsView);
-        }
-
-        #region Helpers        
-
-        #endregion
     }
 }
