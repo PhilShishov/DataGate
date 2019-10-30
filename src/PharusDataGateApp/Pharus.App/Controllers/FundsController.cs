@@ -11,16 +11,25 @@
     using Pharus.App.Models.ViewModels.Funds;
     using Pharus.App.Models.BindingModels.Funds;
 
-    using Rotativa.AspNetCore;
+    using iText.Kernel.Pdf;
+    using iText.Layout;
+    using iText.Layout.Element;
+    using iText.Kernel.Geom;
+    using System;
+    using iText.IO.Image;
+    using Microsoft.AspNetCore.Hosting;
 
     [Authorize]
     public class FundsController : Controller
     {
         private readonly IFundsService fundsService;
+        private readonly IHostingEnvironment _hostingEnvironment;
 
-        public FundsController(IFundsService fundsService)
+        public FundsController(IFundsService fundsService,
+            IHostingEnvironment hostingEnvironment)
         {
             this.fundsService = fundsService;
+            this._hostingEnvironment = hostingEnvironment;
         }
 
         [HttpGet]
@@ -73,7 +82,7 @@
         }
 
         [HttpPost]
-        public IActionResult ExtractExcel(ActiveFundsViewModel model)
+        public FileStreamResult ExtractExcel(ActiveFundsViewModel model)
         {
             FileStreamResult fileStreamResult = null;
 
@@ -82,29 +91,76 @@
                 fileStreamResult = ExtractTable.ExtractTableAsExcel(model.ActiveFunds);
             }
 
-            if (fileStreamResult != null)
-            {
-                return fileStreamResult;
-            }
-            return this.View();
+            return fileStreamResult;
         }
 
         [HttpPost]
-        public IActionResult ExtractPdf(ActiveFundsViewModel model)
+        public FileStreamResult ExtractPdf(ActiveFundsViewModel model)
         {
-            FileStreamResult fileStreamResult = null;           
+            FileStreamResult fileStreamResult = null;
 
             if (HttpContext.Request.Form.ContainsKey("extract_Pdf"))
             {
                 //fileStreamResult = ExtractTable.ExtractTableAsPdf(model.ActiveFunds);
-                return new ViewAsPdf("All", model);  
+                //return new ViewAsPdf("All", model);  
+
+                string dest = "C:/scans/sample.pdf";
+                PdfWriter writer = new PdfWriter(dest);
+
+                PdfDocument pdfDoc = new PdfDocument(writer);
+
+                pdfDoc.AddNewPage(PageSize.A4.Rotate());
+                Document document = new Document(pdfDoc);
+                string sfile = _hostingEnvironment.WebRootPath + "/images/Logo_Pharus_small.jpg";
+                ImageData data = ImageDataFactory.Create(sfile);
+
+                Image img = new Image(data);
+             
+                //float[] pointColumnWidths = { 150F, 150F};
+                Table table = new Table(model.ActiveFunds[0].Length);
+                table.SetFontSize(10);
+
+                for (int row = 0; row < 1; row++)
+                {
+                    for (int col = 0; col < model.ActiveFunds[0].Length; col++)
+                    {
+                        string s = model.ActiveFunds[row][col];
+                        if (s == null)
+                        {
+                            s = " ";
+                        }
+                        Cell c1 = new Cell();
+                        c1.Add(new Paragraph(s));
+                        c1.SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER);
+                        c1.SetBold();
+                        table.AddHeaderCell(c1);
+                    }
+                }
+                
+                for (int row = 1; row < model.ActiveFunds.Count; row++)
+                {
+                    for (int col = 0; col < model.ActiveFunds[0].Length; col++)
+                    {
+                        string s = model.ActiveFunds[row][col];
+                        if (s == null)
+                        {
+                            s = " ";
+                        }
+                        
+                        table.AddCell(new Paragraph(s));
+                    }
+                }          
+
+                document.Add(img);
+                document.Add(new Paragraph(" "));
+                document.Add(new Paragraph("LIST OF ACTIVE FUNDS AS OF " + model.ChosenDate.ToString()));
+                document.Add(new Paragraph(" "));
+                document.Add(table);
+
+                document.Close();
             }
 
-            if (fileStreamResult != null)
-            {
-                return fileStreamResult;
-            }
-            return this.View();
+            return fileStreamResult;
         }
 
         [HttpGet("Funds/ViewFundSF/{fundId}")]
