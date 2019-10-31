@@ -31,21 +31,7 @@ namespace Pharus.App.Utilities
             using (ExcelPackage package = new ExcelPackage())
             {
                 ExcelWorksheet worksheet = null;
-                string correctTypeName = string.Empty;
-
-                if (controllerName == "Funds")
-                {
-                    correctTypeName = typeName == "ActiveEntitiesViewModel" ? ActiveFunds : ActiveSubFunds;
-                }
-                else if (controllerName == "SubFunds")
-                {
-                    correctTypeName = typeName == "ActiveEntitiesViewModel" ? ActiveSubFunds : ActiveShareClasses;
-                }
-
-                else if (controllerName == "ShareClasses")
-                {
-                    correctTypeName = ActiveShareClasses;
-                }
+                string correctTypeName = GetCorrectTypeName(typeName, controllerName);
 
                 worksheet = package.Workbook.Worksheets.Add($"{correctTypeName}");
 
@@ -91,21 +77,7 @@ namespace Pharus.App.Utilities
                                                             string typeName,
                                                             string controllerName)
         {
-            string correctTypeName = string.Empty;
-
-            if (controllerName == "Funds")
-            {
-                correctTypeName = typeName == "ActiveEntitiesViewModel" ? ActiveFunds : ActiveSubFunds;
-            }
-            else if (controllerName == "SubFunds")
-            {
-                correctTypeName = typeName == "ActiveEntitiesViewModel" ? ActiveSubFunds : ActiveShareClasses;
-            }
-
-            else if (controllerName == "ShareClasses")
-            {
-                correctTypeName = ActiveShareClasses;
-            }
+            string correctTypeName = GetCorrectTypeName(typeName, controllerName);
 
             FileStreamResult fileStreamResult;
             Stream stream = new MemoryStream();
@@ -169,6 +141,27 @@ namespace Pharus.App.Utilities
                 FileDownloadName = $"{correctTypeName}.pdf"
             };
             return fileStreamResult;
+        }
+
+        private static string GetCorrectTypeName(string typeName, string controllerName)
+        {
+            string correctTypeName = string.Empty;
+
+            if (controllerName == "Funds")
+            {
+                correctTypeName = typeName == "ActiveEntitiesViewModel" ? ActiveFunds : ActiveSubFunds;
+            }
+            else if (controllerName == "SubFunds")
+            {
+                correctTypeName = typeName == "ActiveEntitiesViewModel" ? ActiveSubFunds : ActiveShareClasses;
+            }
+
+            else if (controllerName == "ShareClasses")
+            {
+                correctTypeName = ActiveShareClasses;
+            }
+
+            return correctTypeName;
         }
     }
 }
