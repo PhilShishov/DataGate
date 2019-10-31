@@ -9,53 +9,15 @@
 
 <form asp-controller="SubFunds" class="justify-content-between" method="post">
     <div>
-        <partial name="ContainerActiveEntityPartial"/>
+        <partial name="ContainerActiveEntityPartial" />
 
-        <partial name="ExtractEntitiesViewPartial"/>
+        <partial name="ExtractEntitiesViewPartial" />
 
         <hr class="bg-pharus hr-2" />
 
-        <div class="table-responsive">
-            <table class="table table-hover" name="activeEntities">
-                <thead>
-                    <tr>
-                        @for (int row = 0; row < 1; row++)
-                        {
-                            @for (int col = 0; col < Model.ActiveEntities[row].Length; col++)
-                            {
-                                <th class="text-secondary">
-                                    <h5>
-                                        @Html.TextBoxFor(af => Model.ActiveEntities[row][col],
-                                            new
-                                                 {
-                                                @class = "textBoxHeaderPharus",
-                                                @readonly = true
-                                            })
-                                    </h5>
-                                </th>
-                            }
-                        }
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (int row = 1; row < Model.ActiveEntities.Count; row++)
-                    {
-                        <tr class="tableRowPharus" onclick="document.location = '/SubFunds/ViewSubFundSC/@Model.ActiveEntities[row][0]'">
-                            @for (int col = 0; col < Model.ActiveEntities[row].Length; col++)
-                            {
-                                <td>
-                                    @Html.TextBoxFor(af => Model.ActiveEntities[row][col],
-                                        new
-                                             {
-                                            @class = "textBoxPharus",
-                                            @readonly = true
-                                        })
-                                </td>
-                            }
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+        <partial name="EntitiesBindingTablePartial" />
+
+        <partial name="EntitiesViewTablePartial" />
+
     </div>
 </form>
