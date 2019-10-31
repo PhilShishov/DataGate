@@ -1,0 +1,42 @@
+﻿@model Pharus.App.Models.ViewModels.Entities.ActiveEntitiesViewModel
+
+<div>
+    <table class="table" name="ActiveEntities" hidden>
+        <thead>
+            <tr>
+                @for (int row = 0; row < 1; row++)
+                {
+                    @for (int col = 0; col < Model.ActiveEntities[row].Length; col++)
+                    {
+                        <th>
+                            <h5>
+                                @Html.TextBoxFor(af => Model.ActiveEntities[row][col],
+                                    new
+                                         {
+                                        @readonly = true
+                                    })
+                            </h5>
+                        </th>
+                    }
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @for (int row = 1; row < Model.ActiveEntities.Count; row++)
+            {
+                <tr>
+                    @for (int col = 0; col < Model.ActiveEntities[row].Length; col++)
+                    {
+                        <td>
+                            @Html.TextBoxFor(af => Model.ActiveEntities[row][col],
+                                new
+                                     {
+                                    @readonly = true
+                                })
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
