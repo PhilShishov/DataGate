@@ -1,0 +1,36 @@
+﻿@{
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<div class="table-responsive border-0 mx-auto">
+    <table class="table table-hover" name="AESubEntities">
+        <thead>
+            <tr>
+                @for (int row = 0; row < 1; row++)
+                {
+                    @for (int col = 0; col < Model.AESubEntities[row].Length; col++)
+                    {
+                        <th class="text-secondary p-1">
+                            <h5>
+                                @Model.AESubEntities[row][col]
+                            </h5>
+                        </th>
+                    }
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @for (int row = 1; row < Model.AESubEntities.Count; row++)
+            {
+                <tr class="tableRowPharus" onclick="document.location = '/@controllerName/ViewEntitySE/@Model.AESubEntities[row][0]'">
+                    @for (int col = 0; col < Model.AESubEntities[row].Length; col++)
+                    {
+                        <td class="p-1">
+                            @Model.AESubEntities[row][col]
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

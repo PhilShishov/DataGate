@@ -137,8 +137,8 @@
             return fileStreamResult;
         }
 
-        [HttpGet("SubFunds/ViewSubFundSC/{EntityId}")]
-        public IActionResult ViewSubFundSC(int entityId)
+        [HttpGet("SubFunds/ViewEntitySE/{EntityId}")]
+        public IActionResult ViewEntitySE(int entityId)
         {
             SpecificEntityViewModel viewModel = new SpecificEntityViewModel
             {
@@ -150,8 +150,8 @@
             return this.View(viewModel);
         }
 
-        [HttpPost("SubFunds/ViewSubFundSC/{EntityId}")]
-        public IActionResult ViewSubFundSC(SpecificEntityViewModel viewModel)
+        [HttpPost("SubFunds/ViewEntitySE/{EntityId}")]
+        public IActionResult ViewEntitySE(SpecificEntityViewModel viewModel)
         {
             viewModel.ActiveEntity = this.subFundsService.GetActiveSubFundById(viewModel.EntityId);
             viewModel.AESubEntities = this.subFundsService.GetSubFundShareClasses(viewModel.EntityId);
