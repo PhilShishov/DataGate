@@ -159,17 +159,9 @@ h3 {
     cursor: pointer;
 }
 
-    /*.tableRowPharus:hover, .tableRowPharus a:hover {
-        background-color: #f5f5f5;        
-    }*/
-
 input[type=search]::-webkit-search-cancel-button {
     -webkit-appearance: searchfield-cancel-button;
 }
-
-/*table tbody tr:hover {
-    background-color: #f5f5f5;
-}*/
 
 .extractbtn {
     background-color: transparent;
@@ -179,4 +171,20 @@ input[type=search]::-webkit-search-cancel-button {
     overflow: hidden;
     outline: none;
     
+}
+
+.table tr:hover {
+    background-color: #FFF842;
+    color: #403E10;
+    font-weight: bold;
+    
+    transform: translate3d(6px, -6px, 0);
+    transition-delay: 0s;
+    transition-property: all;
+}
+
+#searchField {
+    padding: 4px;
+    outline: none;
+    border-radius: 15px;
 }
