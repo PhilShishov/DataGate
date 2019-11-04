@@ -1,4 +1,4 @@
-﻿namespace Pharus.Services
+﻿namespace Pharus.Services.SubFunds
 {
     using System;
     using System.Data.SqlClient;
