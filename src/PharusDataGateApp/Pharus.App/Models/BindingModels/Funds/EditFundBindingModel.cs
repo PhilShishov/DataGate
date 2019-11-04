@@ -1,16 +1,18 @@
 ﻿namespace Pharus.App.Models.BindingModels.Funds
 {
-    using Pharus.Domain.Enums.Funds;
+    using System.Collections.Generic;
 
     public class EditFundBindingModel : BaseBindingModel
     {
-        public TbDomFStatus FStatus { get; set; }
-        public TbDomLegalForm LegalForm { get; set; }
+        public List<string> FStatus { get; set; }
+        public List<string> LegalForm { get; set; }
 
-        public TbDomLegalVehicle LegalVehicle { get; set; }
+        public List<string> LegalVehicle { get; set; }
 
-        public TbDomCompanyTypeDesc CompanyTypeDesc { get; set; }
+        public List<string> LegalType { get; set; }
 
-        public TbDomCompanyAcronym CompanyAcronym { get; set; }
+        public List<string> CompanyTypeDesc { get; set; }
+
+        public List<string> CompanyAcronym { get; set; }
     }
 }

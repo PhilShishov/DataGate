@@ -1,4 +1,4 @@
-﻿namespace Pharus.Services
+﻿namespace Pharus.Services.ShareClasses
 {
     using System;
     using System.Linq;

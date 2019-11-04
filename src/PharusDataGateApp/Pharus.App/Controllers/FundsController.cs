@@ -16,12 +16,15 @@
     public class FundsController : Controller
     {
         private readonly IFundsService fundsService;
+        private readonly IFundsSelectListService fundsSelectListService;
         private readonly IHostingEnvironment _hostingEnvironment;
 
         public FundsController(IFundsService fundsService,
+            IFundsSelectListService fundsSelectListService,
             IHostingEnvironment hostingEnvironment)
         {
             this.fundsService = fundsService;
+            this.fundsSelectListService = fundsSelectListService;
             this._hostingEnvironment = hostingEnvironment;
         }
 
@@ -196,7 +199,13 @@
         {
             EditFundBindingModel model = new EditFundBindingModel
             {
-                EntityProperties = this.fundsService.GetActiveFundWithDateById(entityId)
+                EntityProperties = this.fundsService.GetActiveFundWithDateById(entityId),
+                FStatus = this.fundsSelectListService.GetAllTbDomFStatus(),
+                LegalForm = this.fundsSelectListService.GetAllTbDomLegalForm(),
+                LegalVehicle = this.fundsSelectListService.GetAllTbDomLegalVehicle(),
+                LegalType = this.fundsSelectListService.GetAllTbDomLegalType(),
+                CompanyTypeDesc = this.fundsSelectListService.GetAllTbDomCompanyDesc(),
+                CompanyAcronym = this.fundsSelectListService.GetAllTbDomCompanyAcronym(),
             };
 
             return this.View(model);

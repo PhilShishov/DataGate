@@ -1,4 +1,4 @@
-﻿namespace Pharus.Services
+﻿namespace Pharus.Services.Roles
 {
     using System.Linq;
     using System.Collections.Generic;
