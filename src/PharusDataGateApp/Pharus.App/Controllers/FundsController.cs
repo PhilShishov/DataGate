@@ -11,6 +11,7 @@
     using Pharus.Services.Contracts;
     using Pharus.App.Models.ViewModels.Entities;
     using Pharus.App.Models.BindingModels.Funds;
+    using Microsoft.AspNetCore.Mvc.Rendering;
 
     [Authorize]
     public class FundsController : Controller
@@ -200,12 +201,12 @@
             EditFundBindingModel model = new EditFundBindingModel
             {
                 EntityProperties = this.fundsService.GetActiveFundWithDateById(entityId),
-                FStatus = this.fundsSelectListService.GetAllTbDomFStatus(),
-                LegalForm = this.fundsSelectListService.GetAllTbDomLegalForm(),
-                LegalVehicle = this.fundsSelectListService.GetAllTbDomLegalVehicle(),
-                LegalType = this.fundsSelectListService.GetAllTbDomLegalType(),
-                CompanyTypeDesc = this.fundsSelectListService.GetAllTbDomCompanyDesc(),
-                CompanyAcronym = this.fundsSelectListService.GetAllTbDomCompanyAcronym(),
+                FStatus = new SelectList(this.fundsSelectListService.GetAllTbDomFStatus()),
+                LegalForm = new SelectList(this.fundsSelectListService.GetAllTbDomLegalForm()),
+                LegalVehicle = new SelectList(this.fundsSelectListService.GetAllTbDomLegalVehicle()),
+                LegalType = new SelectList(this.fundsSelectListService.GetAllTbDomLegalType()),
+                CompanyTypeDesc = new SelectList(this.fundsSelectListService.GetAllTbDomCompanyDesc()),
+                CompanyAcronym = new SelectList(this.fundsSelectListService.GetAllTbDomCompanyAcronym()),
             };
 
             return this.View(model);
