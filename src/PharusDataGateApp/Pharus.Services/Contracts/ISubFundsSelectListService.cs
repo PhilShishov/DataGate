@@ -7,7 +7,6 @@
         List<string> GetAllTbDomCalculationDate();
         List<string> GetAllTbDomCesrClass();
         List<string> GetAllTbDomCurrencyCode();
-        List<string> GetAllTbDomDerivatives();
         List<string> GetAllTbDomDerivMarket();
         List<string> GetAllTbDomDerivPurpose();
         List<string> GetAllTbDomFrequency();
