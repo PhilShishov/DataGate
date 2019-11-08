@@ -185,34 +185,21 @@
             }
 
             return this.LocalRedirect(returnUrl);
+        }
 
+        [HttpGet]
+        public IActionResult NewShareClass()
+        {
+            EditShareClassBindingModel model = new EditShareClassBindingModel
+            {
+                EntityProperties = this._shareClassesService.GetAllActiveShareClasses(),
+                InvestorType = new SelectList(this._shareClassesSelectListService.GetAllTbDomInvestorType()),
+                CurrencyCode = new SelectList(this._shareClassesSelectListService.GetAllTbDomCurrencyCode()),
+                ShareStatus = new SelectList(this._shareClassesSelectListService.GetAllTbDomShareStatus()),
+                ShareType = new SelectList(this._shareClassesSelectListService.GetAllTbDomShareType()),
+            };
 
-            //[HttpGet]
-            //public IActionResult NewSubFund()
-            //{
-            //    EditShareClassBindingModel model = new EditShareClassBindingModel
-            //    {
-            //        EntityProperties = this._shareClassesService.GetAllActiveSubFunds(),
-            //        CalculationDate = new SelectList(this._shareClassesSelectListService.GetAllTbDomCalculationDate()),
-            //        CesrClass = new SelectList(this._shareClassesSelectListService.GetAllTbDomCesrClass()),
-            //        CurrencyCode = new SelectList(this._shareClassesSelectListService.GetAllTbDomCurrencyCode()),
-            //        DerivMarket = new SelectList(this._shareClassesSelectListService.GetAllTbDomDerivMarket()),
-            //        DerivPurpose = new SelectList(this._shareClassesSelectListService.GetAllTbDomDerivPurpose()),
-            //        Frequency = new SelectList(this._shareClassesSelectListService.GetAllTbDomFrequency()),
-            //        GeographicalFocus = new SelectList(this._shareClassesSelectListService.GetAllTbDomGeographicalFocus()),
-            //        GlobalExposure = new SelectList(this._shareClassesSelectListService.GetAllTbDomGlobalExposure()),
-            //        PrincipalAssetClass = new SelectList(this._shareClassesSelectListService.GetAllTbDomPrincipalAssetClass()),
-            //        PrincipalInvestmentStrategy = new SelectList(this._shareClassesSelectListService.GetAllTbDomPrincipalInvestmentStrategy()),
-            //        SfCatBloomberg = new SelectList(this._shareClassesSelectListService.GetAllTbDomSfCatBloomberg()),
-            //        SfCatMorningStar = new SelectList(this._shareClassesSelectListService.GetAllTbDomSfCatMorningStar()),
-            //        SfCatSix = new SelectList(this._shareClassesSelectListService.GetAllTbDomSfCatSix()),
-            //        SfStatus = new SelectList(this._shareClassesSelectListService.GetAllTbDomSFStatus()),
-            //        TypeOfMarket = new SelectList(this._shareClassesSelectListService.GetAllTbDomTypeOfMarket()),
-            //        ValuationDate = new SelectList(this._shareClassesSelectListService.GetAllTbDomValuationDate())
-            //    };
-
-            //    return this.View(model);
-            //}
+            return this.View(model);
         }
     }
 }
