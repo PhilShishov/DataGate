@@ -173,15 +173,14 @@ input[type=search]::-webkit-search-cancel-button {
     
 }
 
-.table tr:hover {
+/*.table tr:hover {
     background-color: #FFF842;
     color: #403E10;
-    font-weight: bold;
-    
+    font-weight: bold;    
     transform: translate3d(6px, -6px, 0);
     transition-delay: 0s;
     transition-property: all;
-}
+}*/
 
 #searchField {
     padding: 4px;
