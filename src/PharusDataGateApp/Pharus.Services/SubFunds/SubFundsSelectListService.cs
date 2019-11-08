@@ -36,13 +36,6 @@
             return currencyCode;
         }
 
-        public List<string> GetAllTbDomDerivatives()
-        {
-            var derivatives = new List<string> { "No", "Yes" };
-
-            return derivatives;
-        }
-
         public List<string> GetAllTbDomDerivMarket()
         {
             var derivMarket = this.context.TbDomDerivMarket.Select(tb => tb.DmDesc).ToList();
