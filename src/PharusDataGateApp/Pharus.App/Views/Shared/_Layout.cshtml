@@ -17,6 +17,8 @@
     </environment>
 
     <script src="~/js/manageSideNavBar.js"></script>
+    <script src="~/js/loadDate.js"></script>
+    <script src="~/js/getDerivatives.js"></script>
 
     <link rel="stylesheet" href="~/css/reset-css.css" />
     <link rel="stylesheet" href="~/css/bootstrap.min.css" />
@@ -27,7 +29,7 @@
           rel="stylesheet" />
 
 </head>
-<body onload="loadDate()">
+<body>
     <div class="container-fluid justify-content-between mb-6">
         <header>
             @if (!this.User.Identity.IsAuthenticated)
@@ -158,14 +160,15 @@
 
     <environment include="Development">
         <script>
-            window.onload = function () {
+            //const oldWindowOnLoad = window.onload || function () { };
+            window.onload = () => {
                 manageSideNavBar();
-
+                loadDate();
+                getDerivatives();
             }
         </script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/js/site.js"></script>
         <script src="http://cdn.syncfusion.com/js/assets/external/jquery-1.11.3.min.js"></script>
         <script src="http://cdn.syncfusion.com/17.3.0.9/js/web/ej.web.all.min.js"></script>
     </environment>
