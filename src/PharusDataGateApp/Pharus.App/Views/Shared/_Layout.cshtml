@@ -16,6 +16,8 @@
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
 
+    <script src="~/js/manageSideNavBar.js"></script>
+
     <link rel="stylesheet" href="~/css/reset-css.css" />
     <link rel="stylesheet" href="~/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -56,14 +58,14 @@
 
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
-                            <span style="cursor:pointer" onclick="openNav()"><img src="/images/Logo_Pharus.jpg" class="img-responsive" width="50" alt="Pharus Management"></span>
+                            <span style="cursor:pointer" id="sideNavIcon"><img src="/images/Logo_Pharus.jpg" class="img-responsive" width="50" alt="Pharus Management"></span>
 
                             <ul id="mySidenav" class="sidenav">
                                 <li>
-                                    <a style="cursor:pointer" class="closebtn" onclick="closeNav()">&times;</a>
+                                    <a style="cursor:pointer" id="closeBtn" class="closebtn">&times;</a>
                                 </li>
                                 <li class="dropdown pt-5">
-                                    <button class="dropdown-btn" onfocus="openDropdown()">
+                                    <button class="dropdown-btn">
                                         Funds<i class="fa fa-caret-down"></i>
                                     </button>
                                     <div id="myDropdown" class="dropdown-container">
@@ -78,7 +80,7 @@
                                 </li>
 
                                 <li class="dropdown">
-                                    <button class="dropdown-btn" onfocus="openDropdown()">
+                                    <button class="dropdown-btn">
                                         SubFunds<i class="fa fa-caret-down"></i>
                                     </button>
                                     <div id="myDropdown" class="dropdown-container">
@@ -92,7 +94,7 @@
                                     </div>
                                 </li>
                                 <li class="dropdown">
-                                    <button class="dropdown-btn" onfocus="openDropdown()">
+                                    <button class="dropdown-btn">
                                         ShareClasses<i class="fa fa-caret-down"></i>
                                     </button>
                                     <div id="myDropdown" class="dropdown-container">
@@ -155,6 +157,12 @@
     </div>
 
     <environment include="Development">
+        <script>
+            window.onload = function () {
+                manageSideNavBar();
+
+            }
+        </script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/js/site.js"></script>
