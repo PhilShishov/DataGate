@@ -13,15 +13,110 @@
             @for (int col = 0; col < Model.EntityProperties[row].Length; col++)
             {
                 <div>
-                    <label class="control-label text-secondary">
-                        @*@Html.TextBoxFor(m => Model[0][col], new { @class = "", @style = "border:0" })*@
-                        @Model.EntityProperties[0][col]
-                    </label>
+                    @if (Model.EntityProperties[0][col] == "DERIV. MARKET")
+                    {
+                        <label class="control-label text-secondary" id="derivMarketLabel" hidden>
+                            @Model.EntityProperties[0][col]
+                        </label>
+                    }
 
-                    <input type="text"
-                           class="form-control maxw-270" />
-                    @*@Html.TextBoxFor(m => Model[row][col], new { @class = "form-control" })*@
+                    else if (Model.EntityProperties[0][col] == "DERIV. PURPOSE")
+                    {
+                        <label class="control-label text-secondary" id="derivPurposeLabel" hidden>
+                            @Model.EntityProperties[0][col]
+                        </label>
+                    }
 
+                    else
+                    {
+                        <label class="control-label text-secondary">
+                            @Model.EntityProperties[0][col]
+                        </label>
+                    }
+
+                    @if (Model.EntityProperties[0][col] == "STATUS")
+                    {
+                        <select asp-items="@Model.SfStatus" class="form-control maxw-270"></select>
+                    }
+
+                    else if (Model.EntityProperties[0][col] == "CESR CLASS")
+                    {
+                        <select asp-items="@Model.CesrClass" class="form-control maxw-270"></select>
+                    }
+
+                    else if (Model.EntityProperties[0][col] == "GEO FOCUS")
+                    {
+                        <select asp-items="@Model.GeographicalFocus" class="form-control maxw-270"></select>
+                    }
+
+                    else if (Model.EntityProperties[0][col] == "GLOBAL EXPOSURE")
+                    {
+                        <select asp-items="@Model.GlobalExposure" class="form-control maxw-270"></select>
+                    }
+
+                    else if (Model.EntityProperties[0][col] == "CURRENCY")
+                    {
+                        <select asp-items="@Model.CurrencyCode" class="form-control maxw-270"></select>
+                    }
+                    else if (Model.EntityProperties[0][col] == "FREQUENCY")
+                    {
+                        <select asp-items="@Model.Frequency" class="form-control maxw-270"></select>
+                    }
+                    else if (Model.EntityProperties[0][col] == "VALUATION DATE")
+                    {
+                        <select asp-items="@Model.ValuationDate" class="form-control maxw-270"></select>
+                    }
+
+                    else if (Model.EntityProperties[0][col] == "CALCULATION DATE")
+                    {
+                        <select asp-items="@Model.CalculationDate" class="form-control maxw-270"></select>
+                    }
+
+                    else if (Model.EntityProperties[0][col] == "DERIVATIVES")
+                    {
+                        <select id="derivatives" class="form-control maxw-270" onchange="getDerivatives()">
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+
+                    }
+                    else if (Model.EntityProperties[0][col] == "DERIV. MARKET")
+                    {
+                        <select asp-items="@Model.DerivMarket" id="derivMarket" class="form-control maxw-270" hidden></select>
+                    }
+                    else if (Model.EntityProperties[0][col] == "DERIV. PURPOSE")
+                    {
+                        <select asp-items="@Model.DerivPurpose" id="derivPurpose" class="form-control maxw-270" hidden></select>
+                    }
+                    else if (Model.EntityProperties[0][col] == "PRINCIPAL ASSET CLASS")
+                    {
+                        <select asp-items="@Model.PrincipalAssetClass" class="form-control maxw-270"></select>
+                    }
+                    else if (Model.EntityProperties[0][col] == "MARKET TYPE")
+                    {
+                        <select asp-items="@Model.TypeOfMarket" class="form-control maxw-270"></select>
+                    }
+                    else if (Model.EntityProperties[0][col] == "PRINCIPAL INVESTMENT STRATEGY")
+                    {
+                        <select asp-items="@Model.PrincipalInvestmentStrategy" class="form-control maxw-270"></select>
+                    }
+                    else if (Model.EntityProperties[0][col] == "MORNINGSTAR CATEGORY")
+                    {
+                        <select asp-items="@Model.SfCatMorningStar" class="form-control maxw-270"></select>
+                    }
+                    else if (Model.EntityProperties[0][col] == "SIX CATEGORY")
+                    {
+                        <select asp-items="@Model.SfCatSix" class="form-control maxw-270"></select>
+                    }
+                    else if (Model.EntityProperties[0][col] == "BLOOMBERG CATEGORY")
+                    {
+                        <select asp-items="@Model.SfCatBloomberg" class="form-control maxw-270"></select>
+                    }
+                    else
+                    {
+                        <input type="text"
+                               class="form-control maxw-270"/>
+                    }
                 </div>
             }
         }
