@@ -28,10 +28,6 @@
     <ProjectReference Include="..\Pharus.Services\Pharus.Services.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\ShareClasses\" />
-  </ItemGroup>
-
   <ProjectExtensions>
     <VisualStudio>
       <UserProperties appsettings_1json__JsonSchema="" />

@@ -92,23 +92,7 @@
             }
 
             return fileStreamResult;
-        }
-
-        [HttpPost]
-        public FileStreamResult ExtractExcelSubEntities(SpecificEntityViewModel model)
-        {
-            FileStreamResult fileStreamResult = null;
-
-            string typeName = model.GetType().Name;
-            string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
-
-            if (HttpContext.Request.Form.ContainsKey("extract_Excel"))
-            {
-                fileStreamResult = ExtractTable.ExtractTableAsExcel(model.AESubEntities, typeName, controllerName);
-            }
-
-            return fileStreamResult;
-        }
+        }       
 
         [HttpPost]
         public FileStreamResult ExtractPdfEntities(ActiveEntitiesViewModel model)
@@ -124,69 +108,33 @@
             }
 
             return fileStreamResult;
-        }
+        }       
 
-        [HttpPost]
-        public FileStreamResult ExtractPdfSubEntities(SpecificEntityViewModel model)
-        {
-            FileStreamResult fileStreamResult = null;
-
-            string typeName = model.GetType().Name;
-            string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
-
-            if (HttpContext.Request.Form.ContainsKey("extract_Pdf"))
-            {
-                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.AESubEntities, model.ChosenDate, _hostingEnvironment, typeName, controllerName);
-            }
-
-            return fileStreamResult;
-        }
-
-        [HttpGet("SubFunds/ViewEntitySE/{EntityId}")]
+        [HttpGet("ShareClasses/ViewEntitySE/{EntityId}")]
         public IActionResult ViewEntitySE(int entityId)
         {
-            SpecificEntityViewModel viewModel = new SpecificEntityViewModel
+            ActiveEntitiesViewModel viewModel = new ActiveEntitiesViewModel
             {
-                EntityId = entityId,
-                ActiveEntity = this._shareClassesService.GetActiveSubFundById(entityId),
-                AESubEntities = this._shareClassesService.GetSubFundShareClasses(entityId)
+                ActiveEntities = this._shareClassesService.GetActiveShareClassById(entityId)
             };
 
             return this.View(viewModel);
         }
 
-        [HttpPost("SubFunds/ViewEntitySE/{EntityId}")]
-        public IActionResult ViewEntitySE(SpecificEntityViewModel viewModel)
+        [HttpPost("ShareClasses/ViewEntitySE/{EntityId}")]
+        public IActionResult ViewEntitySE(ActiveEntitiesViewModel viewModel)
         {
-            viewModel.ActiveEntity = this._shareClassesService.GetActiveSubFundById(viewModel.EntityId);
-            viewModel.AESubEntities = this._shareClassesService.GetSubFundShareClasses(viewModel.EntityId);
+            viewModel.ActiveEntities = this._shareClassesService.GetActiveShareClassById(viewModel.EntityId);
 
             if (viewModel.Command.Equals("Update Table"))
             {
                 if (viewModel.ChosenDate != null)
                 {
-                    viewModel.ActiveEntity = this._shareClassesService.GetActiveSubFundById(viewModel.ChosenDate, viewModel.EntityId);
+                    viewModel.ActiveEntities = this._shareClassesService.GetActiveShareClassById(viewModel.ChosenDate, viewModel.EntityId);
                 }
-            }
+            }            
 
-            else if (viewModel.Command.Equals("Filter"))
-            {
-                if (viewModel.SearchString == null)
-                {
-                    return this.View(viewModel);
-                }
-
-                viewModel.AESubEntities = new List<string[]>();
-
-                var tableHeaders = this._shareClassesService.GetSubFundShareClasses(viewModel.EntityId).Take(1).ToList();
-                var tableFundsWithoutHeaders = this._shareClassesService.GetSubFundShareClasses(viewModel.EntityId).Skip(1).ToList();
-
-                CreateTableView.AddHeadersToView(viewModel.AESubEntities, tableHeaders);
-
-                CreateTableView.AddTableToView(viewModel.AESubEntities, tableFundsWithoutHeaders, viewModel.SearchString.ToLower());
-            }
-
-            if (viewModel.ActiveEntity != null && viewModel.AESubEntities != null)
+            if (viewModel.ActiveEntities != null)
             {
                 return this.View(viewModel);
             }
@@ -194,87 +142,87 @@
             return this.View();
         }
 
-        [HttpGet("SubFunds/EditSubFund/{EntityId}")]
-        public IActionResult EditSubFund(int entityId)
-        {
-            EditShareClassBindingModel model = new EditShareClassBindingModel
-            {
-                EntityProperties = this._shareClassesService.GetActiveSubFundWithDateById(entityId),
-                CalculationDate = new SelectList(this._shareClassesSelectListService.GetAllTbDomCalculationDate()),
-                CesrClass = new SelectList(this._shareClassesSelectListService.GetAllTbDomCesrClass()),
-                CurrencyCode = new SelectList(this._shareClassesSelectListService.GetAllTbDomCurrencyCode()),
-                DerivMarket = new SelectList(this._shareClassesSelectListService.GetAllTbDomDerivMarket()),
-                DerivPurpose = new SelectList(this._shareClassesSelectListService.GetAllTbDomDerivPurpose()),
-                Frequency = new SelectList(this._shareClassesSelectListService.GetAllTbDomFrequency()),
-                GeographicalFocus = new SelectList(this._shareClassesSelectListService.GetAllTbDomGeographicalFocus()),
-                GlobalExposure = new SelectList(this._shareClassesSelectListService.GetAllTbDomGlobalExposure()),
-                PrincipalAssetClass = new SelectList(this._shareClassesSelectListService.GetAllTbDomPrincipalAssetClass()),
-                PrincipalInvestmentStrategy = new SelectList(this._shareClassesSelectListService.GetAllTbDomPrincipalInvestmentStrategy()),
-                SfCatBloomberg = new SelectList(this._shareClassesSelectListService.GetAllTbDomSfCatBloomberg()),
-                SfCatMorningStar = new SelectList(this._shareClassesSelectListService.GetAllTbDomSfCatMorningStar()),
-                SfCatSix = new SelectList(this._shareClassesSelectListService.GetAllTbDomSfCatSix()),
-                SfStatus = new SelectList(this._shareClassesSelectListService.GetAllTbDomSFStatus()),
-                TypeOfMarket = new SelectList(this._shareClassesSelectListService.GetAllTbDomTypeOfMarket()),
-                ValuationDate = new SelectList(this._shareClassesSelectListService.GetAllTbDomValuationDate())
-            };
+        //[HttpGet("SubFunds/EditSubFund/{EntityId}")]
+        //public IActionResult EditSubFund(int entityId)
+        //{
+        //    EditShareClassBindingModel model = new EditShareClassBindingModel
+        //    {
+        //        EntityProperties = this._shareClassesService.GetActiveSubFundWithDateById(entityId),
+        //        CalculationDate = new SelectList(this._shareClassesSelectListService.GetAllTbDomCalculationDate()),
+        //        CesrClass = new SelectList(this._shareClassesSelectListService.GetAllTbDomCesrClass()),
+        //        CurrencyCode = new SelectList(this._shareClassesSelectListService.GetAllTbDomCurrencyCode()),
+        //        DerivMarket = new SelectList(this._shareClassesSelectListService.GetAllTbDomDerivMarket()),
+        //        DerivPurpose = new SelectList(this._shareClassesSelectListService.GetAllTbDomDerivPurpose()),
+        //        Frequency = new SelectList(this._shareClassesSelectListService.GetAllTbDomFrequency()),
+        //        GeographicalFocus = new SelectList(this._shareClassesSelectListService.GetAllTbDomGeographicalFocus()),
+        //        GlobalExposure = new SelectList(this._shareClassesSelectListService.GetAllTbDomGlobalExposure()),
+        //        PrincipalAssetClass = new SelectList(this._shareClassesSelectListService.GetAllTbDomPrincipalAssetClass()),
+        //        PrincipalInvestmentStrategy = new SelectList(this._shareClassesSelectListService.GetAllTbDomPrincipalInvestmentStrategy()),
+        //        SfCatBloomberg = new SelectList(this._shareClassesSelectListService.GetAllTbDomSfCatBloomberg()),
+        //        SfCatMorningStar = new SelectList(this._shareClassesSelectListService.GetAllTbDomSfCatMorningStar()),
+        //        SfCatSix = new SelectList(this._shareClassesSelectListService.GetAllTbDomSfCatSix()),
+        //        SfStatus = new SelectList(this._shareClassesSelectListService.GetAllTbDomSFStatus()),
+        //        TypeOfMarket = new SelectList(this._shareClassesSelectListService.GetAllTbDomTypeOfMarket()),
+        //        ValuationDate = new SelectList(this._shareClassesSelectListService.GetAllTbDomValuationDate())
+        //    };
 
-            return this.View(model);
-        }
+        //    return this.View(model);
+        //}
 
-        [HttpPost]
-        public IActionResult EditSubFund(EditShareClassBindingModel model)
-        {
-            //if (!ModelState.IsValid)
-            //{
-            //    return View(model ?? new EditFundBindingModel());
-            //}
+        //[HttpPost]
+        //public IActionResult EditSubFund(EditShareClassBindingModel model)
+        //{
+        //    //if (!ModelState.IsValid)
+        //    //{
+        //    //    return View(model ?? new EditFundBindingModel());
+        //    //}
 
-            int entityId = int.Parse(model.EntityProperties[1][0]);
-            string returnUrl = $"/SubFunds/ViewSubFundSC/{entityId}";
+        //    int entityId = int.Parse(model.EntityProperties[1][0]);
+        //    string returnUrl = $"/SubFunds/ViewSubFundSC/{entityId}";
 
-            var shareClass = this._shareClassesService.GetActiveSubFundById(entityId);
+        //    var shareClass = this._shareClassesService.GetActiveSubFundById(entityId);
 
-            if (HttpContext.Request.Form.ContainsKey("modify_button"))
-            {
-                for (int row = 1; row < shareClass.Count; row++)
-                {
-                    for (int col = 0; col < shareClass[row].Length; col++)
-                    {
-                        shareClass[row][col] = model.EntityProperties[row][col];
-                    }
-                }
+        //    if (HttpContext.Request.Form.ContainsKey("modify_button"))
+        //    {
+        //        for (int row = 1; row < shareClass.Count; row++)
+        //        {
+        //            for (int col = 0; col < shareClass[row].Length; col++)
+        //            {
+        //                shareClass[row][col] = model.EntityProperties[row][col];
+        //            }
+        //        }
 
-                return LocalRedirect(returnUrl);
-            }
+        //        return LocalRedirect(returnUrl);
+        //    }
 
-            return this.LocalRedirect(returnUrl);
-        }
+        //    return this.LocalRedirect(returnUrl);
+        //}
 
-        [HttpGet]
-        public IActionResult NewSubFund()
-        {
-            EditShareClassBindingModel model = new EditShareClassBindingModel
-            {
-                EntityProperties = this._shareClassesService.GetAllActiveSubFunds(),
-                CalculationDate = new SelectList(this._shareClassesSelectListService.GetAllTbDomCalculationDate()),
-                CesrClass = new SelectList(this._shareClassesSelectListService.GetAllTbDomCesrClass()),
-                CurrencyCode = new SelectList(this._shareClassesSelectListService.GetAllTbDomCurrencyCode()),
-                DerivMarket = new SelectList(this._shareClassesSelectListService.GetAllTbDomDerivMarket()),
-                DerivPurpose = new SelectList(this._shareClassesSelectListService.GetAllTbDomDerivPurpose()),
-                Frequency = new SelectList(this._shareClassesSelectListService.GetAllTbDomFrequency()),
-                GeographicalFocus = new SelectList(this._shareClassesSelectListService.GetAllTbDomGeographicalFocus()),
-                GlobalExposure = new SelectList(this._shareClassesSelectListService.GetAllTbDomGlobalExposure()),
-                PrincipalAssetClass = new SelectList(this._shareClassesSelectListService.GetAllTbDomPrincipalAssetClass()),
-                PrincipalInvestmentStrategy = new SelectList(this._shareClassesSelectListService.GetAllTbDomPrincipalInvestmentStrategy()),
-                SfCatBloomberg = new SelectList(this._shareClassesSelectListService.GetAllTbDomSfCatBloomberg()),
-                SfCatMorningStar = new SelectList(this._shareClassesSelectListService.GetAllTbDomSfCatMorningStar()),
-                SfCatSix = new SelectList(this._shareClassesSelectListService.GetAllTbDomSfCatSix()),
-                SfStatus = new SelectList(this._shareClassesSelectListService.GetAllTbDomSFStatus()),
-                TypeOfMarket = new SelectList(this._shareClassesSelectListService.GetAllTbDomTypeOfMarket()),
-                ValuationDate = new SelectList(this._shareClassesSelectListService.GetAllTbDomValuationDate())
-            };
+        //[HttpGet]
+        //public IActionResult NewSubFund()
+        //{
+        //    EditShareClassBindingModel model = new EditShareClassBindingModel
+        //    {
+        //        EntityProperties = this._shareClassesService.GetAllActiveSubFunds(),
+        //        CalculationDate = new SelectList(this._shareClassesSelectListService.GetAllTbDomCalculationDate()),
+        //        CesrClass = new SelectList(this._shareClassesSelectListService.GetAllTbDomCesrClass()),
+        //        CurrencyCode = new SelectList(this._shareClassesSelectListService.GetAllTbDomCurrencyCode()),
+        //        DerivMarket = new SelectList(this._shareClassesSelectListService.GetAllTbDomDerivMarket()),
+        //        DerivPurpose = new SelectList(this._shareClassesSelectListService.GetAllTbDomDerivPurpose()),
+        //        Frequency = new SelectList(this._shareClassesSelectListService.GetAllTbDomFrequency()),
+        //        GeographicalFocus = new SelectList(this._shareClassesSelectListService.GetAllTbDomGeographicalFocus()),
+        //        GlobalExposure = new SelectList(this._shareClassesSelectListService.GetAllTbDomGlobalExposure()),
+        //        PrincipalAssetClass = new SelectList(this._shareClassesSelectListService.GetAllTbDomPrincipalAssetClass()),
+        //        PrincipalInvestmentStrategy = new SelectList(this._shareClassesSelectListService.GetAllTbDomPrincipalInvestmentStrategy()),
+        //        SfCatBloomberg = new SelectList(this._shareClassesSelectListService.GetAllTbDomSfCatBloomberg()),
+        //        SfCatMorningStar = new SelectList(this._shareClassesSelectListService.GetAllTbDomSfCatMorningStar()),
+        //        SfCatSix = new SelectList(this._shareClassesSelectListService.GetAllTbDomSfCatSix()),
+        //        SfStatus = new SelectList(this._shareClassesSelectListService.GetAllTbDomSFStatus()),
+        //        TypeOfMarket = new SelectList(this._shareClassesSelectListService.GetAllTbDomTypeOfMarket()),
+        //        ValuationDate = new SelectList(this._shareClassesSelectListService.GetAllTbDomValuationDate())
+        //    };
 
-            return this.View(model);
-        }
+        //    return this.View(model);
+        //}
     }
 }

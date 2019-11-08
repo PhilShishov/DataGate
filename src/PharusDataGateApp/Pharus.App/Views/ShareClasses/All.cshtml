@@ -1,0 +1,23 @@
+﻿@model Pharus.App.Models.ViewModels.Entities.ActiveEntitiesViewModel
+
+@{
+    ViewData["Title"] = "All";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center text-torshia">All Active ShareClasses</h2>
+
+<form asp-controller="ShareClasses" class="justify-content-between" method="post">
+    <div>
+        <partial name="ContainerActiveEntityPartial" />
+
+        <partial name="ExtractEntitiesViewPartial" />
+
+        <hr class="bg-pharus hr-2" />
+
+        <partial name="EntitiesBindingTablePartial" />
+
+        <partial name="EntitiesViewTablePartial" />
+
+    </div>
+</form>
