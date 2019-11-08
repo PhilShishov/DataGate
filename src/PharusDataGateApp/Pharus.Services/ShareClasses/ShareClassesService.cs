@@ -1,29 +1,21 @@
 ﻿namespace Pharus.Services.ShareClasses
 {
     using System;
-    using System.Linq;
     using System.Data.SqlClient;
     using System.Collections.Generic;
 
     using Pharus.Data;
     using Pharus.Services.Contracts;
     using Pharus.Services.Utilities;
-    using Pharus.Domain.Pharus_vFinale;
 
     public class ShareClassesService : IShareClassesService
     {
         private string defaultDate = DateTime.Today.ToString("yyyyMMdd");
-        private readonly Pharus_vFinaleContext context;
-
-        public ShareClassesService(
-            Pharus_vFinaleContext context)
-        {
-            this.context = context;
-        }
+        private readonly string ConnectionString = DbConfiguration.ConnectionStringPharus_vFinale.ToString();        
 
         public List<string[]> GetAllActiveShareClasses()
         {
-            using (SqlConnection connection = new SqlConnection(DbConfiguration.ConnectionStringPharus_vFinale.ToString()))
+            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
             {
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
@@ -36,7 +28,7 @@
 
         public List<string[]> GetAllActiveShareClasses(DateTime? chosenDate)
         {
-            using (SqlConnection connection = new SqlConnection(DbConfiguration.ConnectionStringPharus_vFinale.ToString()))
+            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
             {
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
@@ -55,18 +47,51 @@
             }
         }
 
-        public List<TbHistoryShareClass> GetAllShareClasses()
+        public List<string[]> GetActiveShareClassById(int Id)
         {
-            var shareClasses = this.context.TbHistoryShareClass.ToList();
+            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
+            {
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
 
-            return shareClasses;
+                command.CommandText = $"select * from fn_active_shareclasses('{defaultDate}') where [ID] = {Id}";
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
         }
 
-        public TbHistoryShareClass GetShareClass(string shareClassName)
+        public List<string[]> GetActiveShareClassById(DateTime? chosenDate, int Id)
         {
-            var shareClass = this.context.TbHistoryShareClass.FirstOrDefault(f => f.ScOfficialShareClassName == shareClassName);
+            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
+            {
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
 
-            return shareClass;
+                if (chosenDate == null)
+                {
+                    command.CommandText = $"select * from fn_active_shareclasses('{defaultDate}') where [ID] = {Id}";
+                }
+
+                else
+                {
+                    command.CommandText = $"select * from fn_active_shareclasses('{chosenDate?.ToString("yyyyMMdd")}') where [ID] = {Id}";
+                }
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
+        public List<string[]> GetActiveShareClassWithDateById(int Id)
+        {
+            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
+            {
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                command.CommandText = $"select * from fn_active_shareclasses('{defaultDate}') where [ID] = {Id}";
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
         }
     }
 }
