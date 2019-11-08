@@ -1,7 +1,6 @@
 ﻿namespace Pharus.App.Models.BindingModels.Funds
 {
     using Microsoft.AspNetCore.Mvc.Rendering;
-    using System.Collections.Generic;
 
     public class EditFundBindingModel : BaseBindingModel
     {

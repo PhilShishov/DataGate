@@ -1,5 +1,4 @@
 ﻿@model Pharus.App.Models.BindingModels.Funds.EditFundBindingModel
-@using Pharus.Domain.Enums.Funds;
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -20,36 +19,36 @@
                     </label>
                     @if (Model.EntityProperties[0][col] == "STATUS")
                     {
-                        <select asp-for="FStatus" asp-items="Html.GetEnumSelectList<TbDomFStatus>()" class="form-control maxw-270"></select>
+                        <select asp-items="@Model.FStatus" class="form-control maxw-270"></select>
                     }
 
                     else if (Model.EntityProperties[0][col] == "LEGAL FORM")
                     {
-                        <select asp-for="FStatus" asp-items="Html.GetEnumSelectList<TbDomLegalForm>()" class="form-control maxw-270"></select>
+                        <select asp-items="@Model.LegalForm" class="form-control maxw-270"></select>
                     }
 
                     else if (Model.EntityProperties[0][col] == "LEGAL VEHICLE")
                     {
-                        <select asp-for="FStatus" asp-items="Html.GetEnumSelectList<TbDomLegalVehicle>()" class="form-control maxw-270"></select>
+                        <select asp-items="@Model.LegalVehicle" class="form-control maxw-270"></select>
                     }
 
                     else if (Model.EntityProperties[0][col] == "LEGAL TYPE")
                     {
-                        <select asp-for="FStatus" asp-items="Html.GetEnumSelectList<TbDomLegalType>()" class="form-control maxw-270"></select>
+                        <select asp-items="@Model.LegalType" class="form-control maxw-270"></select>
                     }
 
                     else if (Model.EntityProperties[0][col] == "COMPANY DESCRIPTION")
                     {
-                        <select asp-for="FStatus" asp-items="Html.GetEnumSelectList<TbDomCompanyTypeDesc>()" class="form-control maxw-270"></select>
+                        <select asp-items="@Model.CompanyTypeDesc" class="form-control maxw-270"></select>
                     }
                     else if (Model.EntityProperties[0][col] == "COMPANY TYPE")
                     {
-                        <select asp-for="FStatus" asp-items="Html.GetEnumSelectList<TbDomCompanyAcronym>()" class="form-control maxw-270"></select>
+                        <select asp-items="@Model.CompanyAcronym" class="form-control maxw-270"></select>
                     }
                     else
                     {
                         <input type="text"
-                               class="form-control maxw-270"/>
+                               class="form-control maxw-270" />
                         @*@Html.TextBoxFor(m => Model[row][col], new { @class = "form-control" })*@
                     }
                 </div>

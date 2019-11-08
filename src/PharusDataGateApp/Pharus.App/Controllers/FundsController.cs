@@ -206,7 +206,7 @@
                 LegalVehicle = new SelectList(this.fundsSelectListService.GetAllTbDomLegalVehicle()),
                 LegalType = new SelectList(this.fundsSelectListService.GetAllTbDomLegalType()),
                 CompanyTypeDesc = new SelectList(this.fundsSelectListService.GetAllTbDomCompanyDesc()),
-                CompanyAcronym = new SelectList(this.fundsSelectListService.GetAllTbDomCompanyAcronym()),
+                CompanyAcronym = new SelectList(this.fundsSelectListService.GetAllTbDomCompanyAcronym())
             };
 
             return this.View(model);
@@ -246,7 +246,13 @@
         {
             EditFundBindingModel model = new EditFundBindingModel
             {
-                EntityProperties = this.fundsService.GetAllActiveFunds()
+                EntityProperties = this.fundsService.GetAllActiveFunds(),
+                FStatus = new SelectList(this.fundsSelectListService.GetAllTbDomFStatus()),
+                LegalForm = new SelectList(this.fundsSelectListService.GetAllTbDomLegalForm()),
+                LegalVehicle = new SelectList(this.fundsSelectListService.GetAllTbDomLegalVehicle()),
+                LegalType = new SelectList(this.fundsSelectListService.GetAllTbDomLegalType()),
+                CompanyTypeDesc = new SelectList(this.fundsSelectListService.GetAllTbDomCompanyDesc()),
+                CompanyAcronym = new SelectList(this.fundsSelectListService.GetAllTbDomCompanyAcronym())
             };
 
             return this.View(model);

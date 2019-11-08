@@ -25,37 +25,37 @@
 
         public List<string> GetAllTbDomCompanyDesc()
         {
-            var companyAcronyms = this.context.TbDomCompanyType.Select(tb => tb.CtDesc).ToList();
+            var companyDesc = this.context.TbDomCompanyType.Select(tb => tb.CtDesc).ToList();
 
-            return companyAcronyms;
+            return companyDesc;
         }
 
         public List<string> GetAllTbDomFStatus()
         {
-            var companyAcronyms = this.context.TbDomFStatus.Select(tb => tb.StFDesc).ToList();
+            var fStatus = this.context.TbDomFStatus.Select(tb => tb.StFDesc).ToList();
 
-            return companyAcronyms;
+            return fStatus;
         }
 
         public List<string> GetAllTbDomLegalForm()
         {
-            var companyAcronyms = this.context.TbDomLegalForm.Select(tb => tb.LfAcronym).ToList();
+            var legalForms = this.context.TbDomLegalForm.Select(tb => tb.LfAcronym).ToList();
 
-            return companyAcronyms;
+            return legalForms;
         }
 
         public List<string> GetAllTbDomLegalType()
         {
-            var companyAcronyms = this.context.TbDomLegalType.Select(tb => tb.LtAcronym).ToList();
+            var legalTypes = this.context.TbDomLegalType.Select(tb => tb.LtAcronym).ToList();
 
-            return companyAcronyms;
+            return legalTypes;
         }
 
         public List<string> GetAllTbDomLegalVehicle()
         {
-            var companyAcronyms = this.context.TbDomLegalVehicle.Select(tb => tb.LvAcronym).ToList();
+            var legalVehicles = this.context.TbDomLegalVehicle.Select(tb => tb.LvAcronym).ToList();
 
-            return companyAcronyms;
+            return legalVehicles;
         }
     }
 }
