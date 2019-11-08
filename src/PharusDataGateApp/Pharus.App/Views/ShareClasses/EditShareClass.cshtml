@@ -1,0 +1,64 @@
+﻿@model Pharus.App.Models.BindingModels.ShareClasses.EditShareClassBindingModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>Edit ShareClass @Model.EntityProperties[1][3]</h4>
+
+<form asp-action="EditShareClass" method="post" class="d-inline">
+    <div class="d-inline">
+        @for (int row = 1; row < Model.EntityProperties.Count; row++)
+        {
+            @for (int col = 0; col < Model.EntityProperties[row].Length; col++)
+            {
+                <div>
+                    <label class="control-label text-secondary">
+                        @Model.EntityProperties[0][col]
+                    </label>
+
+                    @if (Model.EntityProperties[0][col] == "INVESTOR TYPE")
+                    {
+                        <select asp-items="@Model.InvestorType" class="form-control maxw-270"></select>
+                    }
+
+                    else if (Model.EntityProperties[0][col] == "SHARE TYPE")
+                    {
+                        <select asp-items="@Model.ShareType" class="form-control maxw-270"></select>
+                    }
+
+                    else if (Model.EntityProperties[0][col] == "CCY")
+                    {
+                        <select asp-items="@Model.CurrencyCode" class="form-control maxw-270"></select>
+                    }
+
+                    else if (Model.EntityProperties[0][col] == "SHARE STATUS")
+                    {
+                        <select asp-items="@Model.ShareStatus" class="form-control maxw-270"></select>
+                    }
+
+                    else
+                    {
+                        <input type="text"
+                               class="form-control maxw-270"
+                               asp-for="@Model.EntityProperties[row][col]" />
+                    }
+                </div>
+            }
+        }
+    </div>
+
+    <div class="button-holder mt-4">
+        <button type="submit"
+                class="btn bg-pharus text-white"
+                name="update_button"
+                style="margin-right:40px"
+                onclick="return confirm('Are you sure you want to update this?')">
+            Update Fund
+        </button>
+    </div>
+</form>
+
+<div>
+    <a asp-action="All">Back to List</a>
+</div>

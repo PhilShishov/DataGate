@@ -4,9 +4,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h4>Edit Fund @Model.EntityProperties[1][3]</h4>
+<h4>Edit SubFund @Model.EntityProperties[1][3]</h4>
 
-<form asp-action="EditFund" method="post" class="d-inline">
+<form asp-action="EditSubFund" method="post" class="d-inline">
     <div class="d-inline">
         @for (int row = 1; row < Model.EntityProperties.Count; row++)
         {
