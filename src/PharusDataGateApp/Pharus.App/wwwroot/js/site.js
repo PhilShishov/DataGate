@@ -1,7 +1,4 @@
-﻿
-//window.onload = loadDate();
-
-function getDerivatives() {
+﻿function getDerivatives() {
     const deriv = document.getElementById('derivatives');
 
     const derivMarket = document.getElementById('derivMarket');
@@ -24,14 +21,6 @@ function getDerivatives() {
     }
 }
 
-function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
-}
-
-function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
-}
-
 function loadDate() {
     if (document.getElementById("fundDatetime").value == "") {
         let date = (formatDate(new Date())).toString();
@@ -45,20 +34,4 @@ function loadDate() {
 
         return year + '-' + month + '-' + day;
     }
-}
-
-//TODO js function bug with bootstrap
-var dropdown = document.getElementsByClassName("dropdown-btn");
-var i;
-
-for (i = 0; i < dropdown.length; i++) {
-    dropdown[i].addEventListener("click", function () {
-        this.classList.toggle("active");
-        var dropdownContent = this.nextElementSibling;
-        if (dropdownContent.style.display === "block") {
-            dropdownContent.style.display = "none";
-        } else {
-            dropdownContent.style.display = "block";
-        }
-    });
 }
