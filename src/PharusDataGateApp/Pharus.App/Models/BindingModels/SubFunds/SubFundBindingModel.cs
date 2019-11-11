@@ -2,7 +2,7 @@
 
 namespace Pharus.App.Models.BindingModels.SubFunds
 {
-    public class EditSubFundBindingModel : BaseBindingModel
+    public class SubFundBindingModel : BaseBindingModel
     {
         public SelectList CalculationDate { get; set; }
 

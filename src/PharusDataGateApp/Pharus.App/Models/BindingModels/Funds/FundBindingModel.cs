@@ -2,7 +2,7 @@
 {
     using Microsoft.AspNetCore.Mvc.Rendering;
 
-    public class EditFundBindingModel : BaseBindingModel
+    public class FundBindingModel : BaseBindingModel
     {
         public SelectList FStatus { get; set; }
         public SelectList LegalForm { get; set; }

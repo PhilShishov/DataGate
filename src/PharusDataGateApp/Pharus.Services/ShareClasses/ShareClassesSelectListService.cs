@@ -15,6 +15,14 @@
         {
             this._context = context;
         }
+
+        public List<string> GetAllTbDomCountry()
+        {
+            var country = this._context.TbDomIsoCountry.Select(tb => tb.IsoCountryIso2 + "- " + tb.IsoCountryDesc).ToList();
+
+            return country;
+        }
+
         public List<string> GetAllTbDomCurrencyCode()
         {
             var currencyCode = this._context.TbDomIsoCurrency.Select(tb => tb.IsoCcyCode).ToList();

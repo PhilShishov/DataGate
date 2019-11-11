@@ -1,4 +1,4 @@
-﻿@model Pharus.App.Models.BindingModels.SubFunds.EditSubFundBindingModel
+﻿@model Pharus.App.Models.BindingModels.SubFunds.SubFundBindingModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,7 +6,7 @@
 
 <h4>Create New SubFund</h4>
 
-<form asp-action="NewSubFund" method="post" class="d-inline">
+<form asp-action="CreateSubFund" method="post" class="d-inline">
     <div class="d-inline">
         @for (int row = 0; row < 1; row++)
         {

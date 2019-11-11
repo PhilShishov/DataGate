@@ -1,12 +1,12 @@
-﻿@model Pharus.App.Models.BindingModels.ShareClasses.EditShareClassBindingModel
+﻿@model Pharus.App.Models.BindingModels.ShareClasses.ShareClassBindingModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h4>New ShareClass</h4>
+<h4>Create New ShareClass</h4>
 
-<form asp-action="NewShareClass" method="post" class="d-inline">
+<form asp-action="CreateShareClass" method="post" class="d-inline">
     <div class="d-inline">
         @for (int row = 0; row < 1; row++)
         {
@@ -32,15 +32,41 @@
                         <select asp-items="@Model.CurrencyCode" class="form-control maxw-270"></select>
                     }
 
+                    else if (Model.EntityProperties[0][col] == "COUNTRY ISSUE")
+                    {
+                        <select asp-items="@Model.CountryIssue" class="form-control maxw-270"></select>
+                    }
+
+                    else if (Model.EntityProperties[0][col] == "ULT PARENT COUNTRY OF RISK")
+                    {
+                        <select asp-items="@Model.CountryRisk" class="form-control maxw-270"></select>
+                    }
+
                     else if (Model.EntityProperties[0][col] == "SHARE STATUS")
                     {
                         <select asp-items="@Model.ShareStatus" class="form-control maxw-270"></select>
                     }
 
+                    else if (Model.EntityProperties[0][col] == "HEDGED")
+                    {
+                        <select id="derivatives" class="form-control maxw-270">
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                    }
+
+                    else if (Model.EntityProperties[0][col] == "LISTED")
+                    {
+                        <select id="derivatives" class="form-control maxw-270">
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                    }
+
                     else
                     {
                         <input type="text"
-                               class="form-control maxw-270"/>
+                               class="form-control maxw-270" />
                     }
                 </div>
             }

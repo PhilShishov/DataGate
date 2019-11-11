@@ -146,11 +146,13 @@
         [HttpGet("ShareClasses/EditShareClass/{EntityId}")]
         public IActionResult EditShareClass(int entityId)
         {
-            EditShareClassBindingModel model = new EditShareClassBindingModel
+            ShareClassBindingModel model = new ShareClassBindingModel
             {
                 EntityProperties = this._shareClassesService.GetActiveShareClassWithDateById(entityId),
                 InvestorType = new SelectList(this._shareClassesSelectListService.GetAllTbDomInvestorType()),
                 CurrencyCode = new SelectList(this._shareClassesSelectListService.GetAllTbDomCurrencyCode()),
+                CountryIssue = new SelectList(this._shareClassesSelectListService.GetAllTbDomCountry()),
+                CountryRisk = new SelectList(this._shareClassesSelectListService.GetAllTbDomCountry()),
                 ShareStatus = new SelectList(this._shareClassesSelectListService.GetAllTbDomShareStatus()),
                 ShareType = new SelectList(this._shareClassesSelectListService.GetAllTbDomShareType()),
             };
@@ -159,7 +161,7 @@
         }
 
         [HttpPost]
-        public IActionResult EditShareClass(EditShareClassBindingModel model)
+        public IActionResult EditShareClass(ShareClassBindingModel model)
         {
             //if (!ModelState.IsValid)
             //{
@@ -188,13 +190,15 @@
         }
 
         [HttpGet]
-        public IActionResult NewShareClass()
+        public IActionResult CreateShareClass()
         {
-            EditShareClassBindingModel model = new EditShareClassBindingModel
+            ShareClassBindingModel model = new ShareClassBindingModel
             {
                 EntityProperties = this._shareClassesService.GetAllActiveShareClasses(),
                 InvestorType = new SelectList(this._shareClassesSelectListService.GetAllTbDomInvestorType()),
                 CurrencyCode = new SelectList(this._shareClassesSelectListService.GetAllTbDomCurrencyCode()),
+                CountryIssue = new SelectList(this._shareClassesSelectListService.GetAllTbDomCountry()),
+                CountryRisk = new SelectList(this._shareClassesSelectListService.GetAllTbDomCountry()),
                 ShareStatus = new SelectList(this._shareClassesSelectListService.GetAllTbDomShareStatus()),
                 ShareType = new SelectList(this._shareClassesSelectListService.GetAllTbDomShareType()),
             };
