@@ -198,7 +198,7 @@
         [HttpGet("Funds/EditFund/{EntityId}")]
         public IActionResult EditFund(int entityId)
         {
-            EditFundBindingModel model = new EditFundBindingModel
+            FundBindingModel model = new FundBindingModel
             {
                 EntityProperties = this.fundsService.GetActiveFundWithDateById(entityId),
                 FStatus = new SelectList(this.fundsSelectListService.GetAllTbDomFStatus()),
@@ -213,7 +213,7 @@
         }
 
         [HttpPost]
-        public IActionResult EditFund(EditFundBindingModel model)
+        public IActionResult EditFund(FundBindingModel model)
         {
             //if (!ModelState.IsValid)
             //{
@@ -242,9 +242,9 @@
         }
 
         [HttpGet]
-        public IActionResult NewFund()
+        public IActionResult CreateFund()
         {
-            EditFundBindingModel model = new EditFundBindingModel
+            FundBindingModel model = new FundBindingModel
             {
                 EntityProperties = this.fundsService.GetAllActiveFunds(),
                 FStatus = new SelectList(this.fundsSelectListService.GetAllTbDomFStatus()),

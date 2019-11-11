@@ -1,4 +1,4 @@
-﻿@model Pharus.App.Models.BindingModels.ShareClasses.EditShareClassBindingModel
+﻿@model Pharus.App.Models.BindingModels.ShareClasses.ShareClassBindingModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -12,38 +12,64 @@
         {
             @for (int col = 0; col < Model.EntityProperties[row].Length; col++)
             {
-                <div>
-                    <label class="control-label text-secondary">
-                        @Model.EntityProperties[0][col]
-                    </label>
+        <div>
+            <label class="control-label text-secondary">
+                @Model.EntityProperties[0][col]
+            </label>
 
-                    @if (Model.EntityProperties[0][col] == "INVESTOR TYPE")
-                    {
-                        <select asp-items="@Model.InvestorType" class="form-control maxw-270"></select>
-                    }
+            @if (Model.EntityProperties[0][col] == "INVESTOR TYPE")
+            {
+                <select asp-items="@Model.InvestorType" class="form-control maxw-270"></select>
+            }
 
-                    else if (Model.EntityProperties[0][col] == "SHARE TYPE")
-                    {
-                        <select asp-items="@Model.ShareType" class="form-control maxw-270"></select>
-                    }
+            else if (Model.EntityProperties[0][col] == "SHARE TYPE")
+            {
+                <select asp-items="@Model.ShareType" class="form-control maxw-270"></select>
+            }
 
-                    else if (Model.EntityProperties[0][col] == "CCY")
-                    {
-                        <select asp-items="@Model.CurrencyCode" class="form-control maxw-270"></select>
-                    }
+            else if (Model.EntityProperties[0][col] == "CCY")
+            {
+                <select asp-items="@Model.CurrencyCode" class="form-control maxw-270"></select>
+            }
 
-                    else if (Model.EntityProperties[0][col] == "SHARE STATUS")
-                    {
-                        <select asp-items="@Model.ShareStatus" class="form-control maxw-270"></select>
-                    }
+            else if (Model.EntityProperties[0][col] == "COUNTRY ISSUE")
+            {
+                <select asp-items="@Model.CountryIssue" class="form-control maxw-270"></select>
+            }
 
-                    else
-                    {
-                        <input type="text"
-                               class="form-control maxw-270"
-                               asp-for="@Model.EntityProperties[row][col]" />
-                    }
-                </div>
+            else if (Model.EntityProperties[0][col] == "ULT PARENT COUNTRY OF RISK")
+            {
+                <select asp-items="@Model.CountryRisk" class="form-control maxw-270"></select>
+            }
+
+            else if (Model.EntityProperties[0][col] == "SHARE STATUS")
+            {
+                <select asp-items="@Model.ShareStatus" class="form-control maxw-270"></select>
+            }
+
+            else if (Model.EntityProperties[0][col] == "HEDGED")
+            {
+                <select id="derivatives" class="form-control maxw-270">
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+            }
+
+            else if (Model.EntityProperties[0][col] == "LISTED")
+            {
+                <select id="derivatives" class="form-control maxw-270">
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                </select>
+            }
+
+            else
+            {
+                <input type="text"
+                       class="form-control maxw-270"
+                       asp-for="@Model.EntityProperties[row][col]" />
+            }
+        </div>
             }
         }
     </div>

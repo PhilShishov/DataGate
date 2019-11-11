@@ -1,4 +1,4 @@
-﻿@model Pharus.App.Models.BindingModels.SubFunds.EditSubFundBindingModel
+﻿@model Pharus.App.Models.BindingModels.SubFunds.SubFundBindingModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -78,8 +78,8 @@
                             <option value="No">No</option>
                             <option value="Yes">Yes</option>
                         </select>
-
                     }
+
                     else if (Model.EntityProperties[0][col] == "DERIV. MARKET")
                     {
                         <select asp-items="@Model.DerivMarket" id="derivMarket" class="form-control maxw-270" hidden></select>

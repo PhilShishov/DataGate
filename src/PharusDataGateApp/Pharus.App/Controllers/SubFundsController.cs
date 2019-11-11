@@ -197,7 +197,7 @@
         [HttpGet("SubFunds/EditSubFund/{EntityId}")]
         public IActionResult EditSubFund(int entityId)
         {
-            EditSubFundBindingModel model = new EditSubFundBindingModel
+            SubFundBindingModel model = new SubFundBindingModel
             {
                 EntityProperties = this._subFundsService.GetActiveSubFundWithDateById(entityId),
                 CalculationDate = new SelectList(this._subfundsSelectListService.GetAllTbDomCalculationDate()),
@@ -222,7 +222,7 @@
         }
 
         [HttpPost]
-        public IActionResult EditSubFund(EditSubFundBindingModel model)
+        public IActionResult EditSubFund(SubFundBindingModel model)
         {
             //if (!ModelState.IsValid)
             //{
@@ -251,9 +251,9 @@
         }
 
         [HttpGet]
-        public IActionResult NewSubFund()
+        public IActionResult CreateSubFund()
         {
-            EditSubFundBindingModel model = new EditSubFundBindingModel
+            SubFundBindingModel model = new SubFundBindingModel
             {
                 EntityProperties = this._subFundsService.GetAllActiveSubFunds(),
                 CalculationDate = new SelectList(this._subfundsSelectListService.GetAllTbDomCalculationDate()),
