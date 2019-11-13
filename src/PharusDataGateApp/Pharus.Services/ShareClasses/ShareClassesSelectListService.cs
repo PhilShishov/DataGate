@@ -18,7 +18,7 @@
 
         public List<string> GetAllTbDomCountry()
         {
-            var country = this._context.TbDomIsoCountry.Select(tb => tb.IsoCountryIso2 + "- " + tb.IsoCountryDesc).ToList();
+            var country = this._context.TbDomIsoCountry.Select(tb => tb.IsoCountryIso2 + " - " + tb.IsoCountryDesc).ToList();
 
             return country;
         }

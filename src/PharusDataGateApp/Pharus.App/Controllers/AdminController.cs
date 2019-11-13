@@ -185,10 +185,11 @@
         {
             var role = bindingModel.RoleType;
             var roleExist = await _roleManager.RoleExistsAsync(role);
+            var admins = _userManager.GetUsersInRoleAsync("Admin").Result;
 
             if (roleExist)
             {
-                if (role == "Admin" && _userManager.Users.Count() == 2)
+                if (role == "Admin" && admins.Count <= 2)
                 {
                     await _userManager.AddToRoleAsync(user, "Admin");
                 }
