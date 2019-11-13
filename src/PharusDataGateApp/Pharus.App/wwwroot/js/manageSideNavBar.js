@@ -1,6 +1,6 @@
 ﻿function manageSideNavBar() {
     const sideNavIcon = document.getElementById("sideNavIcon");
-    sideNavIcon.addEventListener('click', openNav);
+    sideNavIcon.addEventListener('mouseover', openNav);
 
     const sideNav = document.getElementById("mySidenav");
     sideNav.addEventListener('mouseleave', closeNav);
