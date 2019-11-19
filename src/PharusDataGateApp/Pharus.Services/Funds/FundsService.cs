@@ -1,8 +1,6 @@
 ﻿namespace Pharus.Services.Funds
 {
     using System;
-    using System.Linq;
-    using System.Globalization;
     using System.Data.SqlClient;
     using System.Collections.Generic;
 
@@ -12,15 +10,9 @@
 
     public class FundsService : IFundsService
     {
-        private readonly PharusProdContext _context;
         private readonly string defaultDate = DateTime.Today.ToString("yyyyMMdd");
         private readonly string ConnectionString = DbConfiguration.ConnectionStringPharusProd.ToString();
-
-        public FundsService(
-            PharusProdContext context)
-        {
-            this._context = context;
-        }
+      
         public List<string[]> GetAllActiveFunds()
         {
             using (SqlConnection connection = new SqlConnection(this.ConnectionString))
@@ -114,7 +106,7 @@
             }
         }
 
-        public void ExecuteEditFund(List<string[]> fundsProperties)
+        public void ExecuteEditFund(List<string[]> fundsProperties, int fStatusId)
         {
             using (SqlConnection connection = new SqlConnection(this.ConnectionString))
             {

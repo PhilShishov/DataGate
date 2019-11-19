@@ -18,6 +18,6 @@ namespace Pharus.Services.Contracts
 
         List<string[]> GetFundSubFunds(int Id);
 
-        void ExecuteEditFund(List<string[]> fundsProperties);
+        void ExecuteEditFund(List<string[]> fundsProperties, int fStatusId);
     }
 }
