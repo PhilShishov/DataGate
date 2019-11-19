@@ -223,7 +223,9 @@
         {
             FundBindingModel model = new FundBindingModel
             {
-                EntityProperties = this.fundsService.GetActiveFundWithDateById(entityId)
+                EntityProperties = this.fundsService.GetActiveFundWithDateById(entityId),
+                ChosenDate = DateTime.Today,
+                FId = entityId
             };
 
             this.ViewData["FStatusList"] = this.fundsSelectListService.GetAllTbDomFStatus();
@@ -245,16 +247,27 @@
             //}
 
             string returnUrl = $"/Funds/All";
+            List<string> entityValues = new List<string>();
+            DateTime chosenDate = model.ChosenDate;
+
+            for (int row = 1; row < model.EntityProperties.Count; row++)
+            {
+                for (int col = 0; col < model.EntityProperties[row].Length; col++)
+                {
+                    entityValues.Add(model.EntityProperties[row][col]);
+                }
+            }
 
             if (HttpContext.Request.Form.ContainsKey("update_button"))
             {
+                int fundId = model.FId;
                 int fStatusId = this._context.TbDomFStatus.Where(s => s.StFDesc == model.FStatus).Select(s => s.StFId).FirstOrDefault();
                 int fLegalFormId = this._context.TbDomLegalForm.Where(lf => lf.LfAcronym == model.LegalForm).Select(lf => lf.LfId).FirstOrDefault();
                 int fLegalVehicleId = this._context.TbDomLegalVehicle.Where(lv => lv.LvAcronym == model.LegalVehicle).Select(lv => lv.LvId).FirstOrDefault();
                 int fLegalTypeId = this._context.TbDomLegalType.Where(lt => lt.LtAcronym == model.LegalType).Select(lt => lt.LtId).FirstOrDefault();
                 int fCompanyTypeId = this._context.TbDomCompanyType.Where(ct => ct.CtAcronym == model.CompanyAcronym).Select(ct => ct.CtId).FirstOrDefault();
 
-                this.fundsService.ExecuteEditFund(model.EntityProperties, fStatusId, fLegalFormId, fLegalTypeId, fLegalVehicleId, fCompanyTypeId);
+                this.fundsService.ExecuteEditFund(entityValues, fundId, chosenDate, fStatusId, fLegalFormId, fLegalTypeId, fLegalVehicleId, fCompanyTypeId);
 
                 return LocalRedirect(returnUrl);
             }
