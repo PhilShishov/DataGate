@@ -226,12 +226,12 @@
                 EntityProperties = this.fundsService.GetActiveFundWithDateById(entityId)
             };
 
-            this.ViewData["FStatus"] = this.fundsSelectListService.GetAllTbDomFStatus();
-            this.ViewData["LegalForm"] = this.fundsSelectListService.GetAllTbDomLegalForm();
-            this.ViewData["LegalVehicle"] = this.fundsSelectListService.GetAllTbDomLegalVehicle();
-            this.ViewData["LegalType"] = this.fundsSelectListService.GetAllTbDomLegalType();
-            this.ViewData["CompanyTypeDesc"] = this.fundsSelectListService.GetAllTbDomCompanyDesc();
-            this.ViewData["CompanyAcronym"] = this.fundsSelectListService.GetAllTbDomCompanyAcronym();
+            this.ViewData["FStatusList"] = this.fundsSelectListService.GetAllTbDomFStatus();
+            this.ViewData["LegalFormList"] = this.fundsSelectListService.GetAllTbDomLegalForm();
+            this.ViewData["LegalVehicleList"] = this.fundsSelectListService.GetAllTbDomLegalVehicle();
+            this.ViewData["LegalTypeList"] = this.fundsSelectListService.GetAllTbDomLegalType();
+            this.ViewData["CompanyTypeDescList"] = this.fundsSelectListService.GetAllTbDomCompanyDesc();
+            this.ViewData["CompanyAcronymList"] = this.fundsSelectListService.GetAllTbDomCompanyAcronym();
 
             return this.View(model);
         }
@@ -269,12 +269,12 @@
                 EntityProperties = this.fundsService.GetAllActiveFunds()
             };
 
-            this.ViewData["FStatus"] = this.fundsSelectListService.GetAllTbDomFStatus();
-            this.ViewData["LegalForm"] = this.fundsSelectListService.GetAllTbDomLegalForm();
-            this.ViewData["LegalVehicle"] = this.fundsSelectListService.GetAllTbDomLegalVehicle();
-            this.ViewData["LegalType"] = this.fundsSelectListService.GetAllTbDomLegalType();
-            this.ViewData["CompanyTypeDesc"] = this.fundsSelectListService.GetAllTbDomCompanyDesc();
-            this.ViewData["CompanyAcronym"] = this.fundsSelectListService.GetAllTbDomCompanyAcronym();
+            this.ViewData["FStatusList"] = this.fundsSelectListService.GetAllTbDomFStatus();
+            this.ViewData["LegalFormList"] = this.fundsSelectListService.GetAllTbDomLegalForm();
+            this.ViewData["LegalVehicleList"] = this.fundsSelectListService.GetAllTbDomLegalVehicle();
+            this.ViewData["LegalTypeList"] = this.fundsSelectListService.GetAllTbDomLegalType();
+            this.ViewData["CompanyTypeDescList"] = this.fundsSelectListService.GetAllTbDomCompanyDesc();
+            this.ViewData["CompanyAcronymList"] = this.fundsSelectListService.GetAllTbDomCompanyAcronym();
 
             return this.View(model);
         }

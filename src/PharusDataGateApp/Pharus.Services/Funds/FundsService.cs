@@ -115,7 +115,8 @@
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"EXEC sp_modify_fund{string.Join("", fundsProperties)}";
+                command.CommandText = $"EXEC sp_modify_fund{fundsProperties[1][2]}, {fundsProperties[1][0]}, " +
+                    $"{fStatusId}, {fundsProperties[1][1]}, {fundsProperties[1][3]}, {fundsProperties[1][3]}";                    
             }
         }
     }
