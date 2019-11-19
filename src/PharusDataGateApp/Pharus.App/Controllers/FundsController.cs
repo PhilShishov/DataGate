@@ -223,21 +223,15 @@
         {
             FundBindingModel model = new FundBindingModel
             {
-                EntityProperties = this.fundsService.GetActiveFundWithDateById(entityId),
-                //FStatus = this.fundsSelectListService.GetAllTbDomFStatus(),
-                //LegalForm = new SelectList(this.fundsSelectListService.GetAllTbDomLegalForm()),
-                //LegalVehicle = new SelectList(this.fundsSelectListService.GetAllTbDomLegalVehicle()),
-                //LegalType = new SelectList(this.fundsSelectListService.GetAllTbDomLegalType()),
-                //CompanyTypeDesc = new SelectList(this.fundsSelectListService.GetAllTbDomCompanyDesc()),
-                //CompanyAcronym = new SelectList(this.fundsSelectListService.GetAllTbDomCompanyAcronym())
+                EntityProperties = this.fundsService.GetActiveFundWithDateById(entityId)
             };
 
             this.ViewData["FStatus"] = this.fundsSelectListService.GetAllTbDomFStatus();
-            //this.ViewData["LegalForm"] = this.fundsSelectListService.GetAllTbDomLegalForm();
-            //this.ViewData["LegalVehicle"] = this.fundsSelectListService.GetAllTbDomLegalVehicle();
-            //this.ViewData["LegalType"] = this.fundsSelectListService.GetAllTbDomLegalType();
-            //this.ViewData["CompanyTypeDesc"] = this.fundsSelectListService.GetAllTbDomCompanyDesc();
-            //this.ViewData["CompanyAcronym"] = this.fundsSelectListService.GetAllTbDomCompanyAcronym();
+            this.ViewData["LegalForm"] = this.fundsSelectListService.GetAllTbDomLegalForm();
+            this.ViewData["LegalVehicle"] = this.fundsSelectListService.GetAllTbDomLegalVehicle();
+            this.ViewData["LegalType"] = this.fundsSelectListService.GetAllTbDomLegalType();
+            this.ViewData["CompanyTypeDesc"] = this.fundsSelectListService.GetAllTbDomCompanyDesc();
+            this.ViewData["CompanyAcronym"] = this.fundsSelectListService.GetAllTbDomCompanyAcronym();
 
             return this.View(model);
         }
@@ -262,17 +256,9 @@
                             {
                                 var statusDescs = this._context.TbDomFStatus.Select(s => s.StFDesc).ToList();
 
-                                //fStatusId = this._context.TbDomFStatus.Select(s => s.StFId).FirstOrDefault(s => s funds[row + 1][col]));
-
                                 var fStatusId = this._context.TbDomFStatus.Where(s => s.StFDesc == model.FStatus).Select(s => s.StFId).FirstOrDefault();
 
-                                //if (status.Contains(funds[row][col]))
-                                //{
-                                //    fStatusId = status.Where(s => s.)
-                                //}
-
-                                //var listOfRoleId = user.Roles.Select(r => r.RoleId);
-                                //var roles = db.Roles.Where(r => listOfRoleId.Contains(r.RoleId));
+                               
                             }                            
                             //else if (funds[row][col] == "LEGAL FORM")
                             //{
