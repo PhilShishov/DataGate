@@ -244,7 +244,8 @@
             //    return View(model ?? new EditFundBindingModel());
             //}
 
-            string returnUrl = $"/Funds/All";            
+            string returnUrl = $"/Funds/All";
+            int fStatusId;
 
             if (HttpContext.Request.Form.ContainsKey("update_button"))
             {
@@ -256,8 +257,7 @@
                             {
                                 var statusDescs = this._context.TbDomFStatus.Select(s => s.StFDesc).ToList();
 
-                                var fStatusId = this._context.TbDomFStatus.Where(s => s.StFDesc == model.FStatus).Select(s => s.StFId).FirstOrDefault();
-
+                                fStatusId = this._context.TbDomFStatus.Where(s => s.StFDesc == model.FStatus).Select(s => s.StFId).FirstOrDefault();
                                
                             }                            
                             //else if (funds[row][col] == "LEGAL FORM")
@@ -279,7 +279,7 @@
                         }    
                 }
 
-                this.fundsService.ExecuteEditFund(model.EntityProperties);                
+                this.fundsService.ExecuteEditFund(model.EntityProperties, fStatusId);                
 
                 return LocalRedirect(returnUrl);
             }

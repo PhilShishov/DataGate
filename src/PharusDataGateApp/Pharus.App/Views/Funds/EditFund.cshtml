@@ -7,85 +7,6 @@
 <h4>Edit Fund @Model.EntityProperties[1][3]</h4>
 
 <form asp-action="EditFund" method="post" class="d-inline">
-    <div class="d-none">
-        @for (int row = 1; row < Model.EntityProperties.Count; row++)
-        {
-            @for (int col = 0; col < Model.EntityProperties[row].Length; col++)
-            {
-                <div>
-                    <label class="control-label text-secondary">
-                        @Html.TextBoxFor(m => Model.EntityProperties[0][col])
-                    </label>
-
-                    @if (Model.EntityProperties[0][col] == "STATUS")
-                    {
-                        <select class="form-control maxw-270" id="fStatus" asp-for="FStatus">
-                            @foreach (var status in (List<string>)ViewData["FStatus"])
-                            {
-                                <option value="@status">@status</option>
-                            }
-                        </select>
-                    }
-
-                    else if (Model.EntityProperties[0][col] == "LEGAL FORM")
-                    {
-                        <select class="form-control maxw-270" id="fStatus" asp-for="LegalForm">
-                            @foreach (var status in (List<string>)ViewData["LegalForm"])
-                            {
-                                <option value="@status">@status</option>
-                            }
-                        </select>
-                    }
-
-                    else if (Model.EntityProperties[0][col] == "LEGAL VEHICLE")
-                    {
-                        <select class="form-control maxw-270" id="fStatus" asp-for="LegalVehicle">
-                            @foreach (var status in (List<string>)ViewData["LegalVehicle"])
-                            {
-                                <option value="@status">@status</option>
-                            }
-                        </select>
-                    }
-
-                    else if (Model.EntityProperties[0][col] == "LEGAL TYPE")
-                    {
-                        <select class="form-control maxw-270" id="fStatus" asp-for="LegalType">
-                            @foreach (var status in (List<string>)ViewData["LegalType"])
-                            {
-                                <option value="@status">@status</option>
-                            }
-                        </select>
-                    }
-
-                    else if (Model.EntityProperties[0][col] == "COMPANY DESCRIPTION")
-                    {
-                        <select class="form-control maxw-270" id="fStatus" asp-for="CompanyTypeDesc">
-                            @foreach (var status in (List<string>)ViewData["CompanyTypeDesc"])
-                            {
-                                <option value="@status">@status</option>
-                            }
-                        </select>
-                    }
-                    else if (Model.EntityProperties[0][col] == "COMPANY TYPE")
-                    {
-                        <select class="form-control maxw-270" id="fStatus" asp-for="CompanyAcronym">
-                            @foreach (var status in (List<string>)ViewData["CompanyAcronym"])
-                            {
-                                <option value="@status">@status</option>
-                            }
-                        </select>
-                    }
-                    else
-                    {
-                        <input type="text"
-                               class="form-control maxw-270"
-                               asp-for="@Model.EntityProperties[row][col]" />
-                    }
-                </div>
-            }
-        }
-    </div>
-
     <div class="d-inline">
         @for (int row = 1; row < Model.EntityProperties.Count; row++)
         {
@@ -93,7 +14,7 @@
             {
                 <div>
                     <label class="control-label text-secondary">
-                        @Model.EntityProperties[0][col]
+                        @Html.TextBoxFor(m => Model.EntityProperties[0][col], new {@class = "textBoxHeaderPharus", @readonly = true })
                     </label>
 
                     @if (Model.EntityProperties[0][col] == "STATUS")
