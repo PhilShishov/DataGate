@@ -12,7 +12,7 @@
     {
         private readonly string defaultDate = DateTime.Today.ToString("yyyyMMdd");
         private readonly string ConnectionString = DbConfiguration.ConnectionStringPharusProd.ToString();
-      
+
         public List<string[]> GetAllActiveFunds()
         {
             using (SqlConnection connection = new SqlConnection(this.ConnectionString))
@@ -106,7 +106,9 @@
             }
         }
 
-        public void ExecuteEditFund(List<string[]> fundsProperties, int fStatusId)
+        public void ExecuteEditFund(List<string[]> fundsProperties, int fStatusId,
+                                                int fLegalFormId, int fLegalTypeId,
+                                                int fLegalVehicleId, int fCompanyTypeId)
         {
             using (SqlConnection connection = new SqlConnection(this.ConnectionString))
             {

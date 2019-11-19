@@ -18,7 +18,7 @@
 
     [Authorize]
     public class FundsController : Controller
-    {       
+    {
         private readonly PharusProdContext _context;
         private readonly IFundsService fundsService;
         private readonly IFundsSelectListService fundsSelectListService;
@@ -59,7 +59,7 @@
         //            fundsValues.Add(funds[row][col]);
         //        }
         //    }
-           
+
         //    return Json(fundsValues);
         //}
 
@@ -245,45 +245,19 @@
             //}
 
             string returnUrl = $"/Funds/All";
-            int fStatusId;
 
             if (HttpContext.Request.Form.ContainsKey("update_button"))
             {
-                    for (int row = 1; row < model.EntityProperties.Count; row++)
-                    {
-                        for (int col = 0; col < model.EntityProperties[row].Length; col++)
-                        {                            
-                            if (model.EntityProperties[0][col] == "STATUS")
-                            {
-                                var statusDescs = this._context.TbDomFStatus.Select(s => s.StFDesc).ToList();
+                int fStatusId = this._context.TbDomFStatus.Where(s => s.StFDesc == model.FStatus).Select(s => s.StFId).FirstOrDefault();
+                int fLegalFormId = this._context.TbDomLegalForm.Where(lf => lf.LfAcronym == model.LegalForm).Select(lf => lf.LfId).FirstOrDefault();
+                int fLegalVehicleId = this._context.TbDomLegalVehicle.Where(lv => lv.LvAcronym == model.LegalVehicle).Select(lv => lv.LvId).FirstOrDefault();
+                int fLegalTypeId = this._context.TbDomLegalType.Where(lt => lt.LtAcronym == model.LegalType).Select(lt => lt.LtId).FirstOrDefault();
+                int fCompanyTypeId = this._context.TbDomCompanyType.Where(ct => ct.CtAcronym == model.CompanyAcronym).Select(ct => ct.CtId).FirstOrDefault();
 
-                                fStatusId = this._context.TbDomFStatus.Where(s => s.StFDesc == model.FStatus).Select(s => s.StFId).FirstOrDefault();
-                               
-                            }                            
-                            //else if (funds[row][col] == "LEGAL FORM")
-                            //{
-                            //    fLegalFormId = funds[row + 1][col];
-                            //}
-                            //else if (funds[row][col] == "LEGAL TYPE")
-                            //{
-                            //    fLegalTypeId = funds[row + 1][col];
-                            //}
-                            //else if (funds[row][col] == "LEGAL VEHICLE")
-                            //{
-                            //    fLegalVehicleId = funds[row + 1][col];
-                            //}
-                            //else if (funds[row][col] == "COMPANY TYPE")
-                            //{
-                            //    fCompanyTypeId = funds[row + 1][col];
-                            //}                            
-                        }    
-                }
-
-                this.fundsService.ExecuteEditFund(model.EntityProperties, fStatusId);                
+                this.fundsService.ExecuteEditFund(model.EntityProperties, fStatusId, fLegalFormId, fLegalTypeId, fLegalVehicleId, fCompanyTypeId);
 
                 return LocalRedirect(returnUrl);
             }
-
             return this.LocalRedirect(returnUrl);
         }
 
@@ -292,14 +266,15 @@
         {
             FundBindingModel model = new FundBindingModel
             {
-                EntityProperties = this.fundsService.GetAllActiveFunds(),
-                //FStatus = this.fundsSelectListService.GetAllTbDomFStatus(),
-                //LegalForm = new SelectList(this.fundsSelectListService.GetAllTbDomLegalForm()),
-                //LegalVehicle = new SelectList(this.fundsSelectListService.GetAllTbDomLegalVehicle()),
-                //LegalType = new SelectList(this.fundsSelectListService.GetAllTbDomLegalType()),
-                //CompanyTypeDesc = new SelectList(this.fundsSelectListService.GetAllTbDomCompanyDesc()),
-                //CompanyAcronym = new SelectList(this.fundsSelectListService.GetAllTbDomCompanyAcronym())
+                EntityProperties = this.fundsService.GetAllActiveFunds()
             };
+
+            this.ViewData["FStatus"] = this.fundsSelectListService.GetAllTbDomFStatus();
+            this.ViewData["LegalForm"] = this.fundsSelectListService.GetAllTbDomLegalForm();
+            this.ViewData["LegalVehicle"] = this.fundsSelectListService.GetAllTbDomLegalVehicle();
+            this.ViewData["LegalType"] = this.fundsSelectListService.GetAllTbDomLegalType();
+            this.ViewData["CompanyTypeDesc"] = this.fundsSelectListService.GetAllTbDomCompanyDesc();
+            this.ViewData["CompanyAcronym"] = this.fundsSelectListService.GetAllTbDomCompanyAcronym();
 
             return this.View(model);
         }
