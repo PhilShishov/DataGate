@@ -6,24 +6,30 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc.Rendering;
 
     using Pharus.App.Utilities;
     using Pharus.Services.Contracts;
     using Pharus.App.Models.ViewModels.Entities;
     using Pharus.App.Models.BindingModels.Funds;
-    using Microsoft.AspNetCore.Mvc.Rendering;
+    using System;
+    using System.Globalization;
+    using Pharus.Data;
 
     [Authorize]
     public class FundsController : Controller
-    {
+    {       
+        private readonly PharusProdContext _context;
         private readonly IFundsService fundsService;
         private readonly IFundsSelectListService fundsSelectListService;
         private readonly IHostingEnvironment _hostingEnvironment;
 
         public FundsController(IFundsService fundsService,
             IFundsSelectListService fundsSelectListService,
-            IHostingEnvironment hostingEnvironment)
+            IHostingEnvironment hostingEnvironment,
+            PharusProdContext context)
         {
+            this._context = context;
             this.fundsService = fundsService;
             this.fundsSelectListService = fundsSelectListService;
             this._hostingEnvironment = hostingEnvironment;
@@ -40,9 +46,26 @@
             return this.View(model);
         }
 
+        //[HttpPost]
+        //public JsonResult AutoComplete(string prefix)
+        //{
+        //    var funds = this.fundsService.GetAllActiveFunds();
+        //    List<string> fundsValues = new List<string>();
+
+        //    for (int row = 1; row < funds.Count; row++)
+        //    {
+        //        for (int col = 0; col < funds[row].Length; col++)
+        //        {
+        //            fundsValues.Add(funds[row][col]);
+        //        }
+        //    }
+           
+        //    return Json(fundsValues);
+        //}
+
         [HttpPost]
         public IActionResult All(ActiveEntitiesViewModel model)
-        {            
+        {
             ModelState.Clear();
             model.ActiveEntities = this.fundsService.GetAllActiveFunds();
 
@@ -201,13 +224,20 @@
             FundBindingModel model = new FundBindingModel
             {
                 EntityProperties = this.fundsService.GetActiveFundWithDateById(entityId),
-                FStatus = new SelectList(this.fundsSelectListService.GetAllTbDomFStatus()),
-                LegalForm = new SelectList(this.fundsSelectListService.GetAllTbDomLegalForm()),
-                LegalVehicle = new SelectList(this.fundsSelectListService.GetAllTbDomLegalVehicle()),
-                LegalType = new SelectList(this.fundsSelectListService.GetAllTbDomLegalType()),
-                CompanyTypeDesc = new SelectList(this.fundsSelectListService.GetAllTbDomCompanyDesc()),
-                CompanyAcronym = new SelectList(this.fundsSelectListService.GetAllTbDomCompanyAcronym())
+                //FStatus = this.fundsSelectListService.GetAllTbDomFStatus(),
+                //LegalForm = new SelectList(this.fundsSelectListService.GetAllTbDomLegalForm()),
+                //LegalVehicle = new SelectList(this.fundsSelectListService.GetAllTbDomLegalVehicle()),
+                //LegalType = new SelectList(this.fundsSelectListService.GetAllTbDomLegalType()),
+                //CompanyTypeDesc = new SelectList(this.fundsSelectListService.GetAllTbDomCompanyDesc()),
+                //CompanyAcronym = new SelectList(this.fundsSelectListService.GetAllTbDomCompanyAcronym())
             };
+
+            this.ViewData["FStatus"] = this.fundsSelectListService.GetAllTbDomFStatus();
+            //this.ViewData["LegalForm"] = this.fundsSelectListService.GetAllTbDomLegalForm();
+            //this.ViewData["LegalVehicle"] = this.fundsSelectListService.GetAllTbDomLegalVehicle();
+            //this.ViewData["LegalType"] = this.fundsSelectListService.GetAllTbDomLegalType();
+            //this.ViewData["CompanyTypeDesc"] = this.fundsSelectListService.GetAllTbDomCompanyDesc();
+            //this.ViewData["CompanyAcronym"] = this.fundsSelectListService.GetAllTbDomCompanyAcronym();
 
             return this.View(model);
         }
@@ -220,20 +250,50 @@
             //    return View(model ?? new EditFundBindingModel());
             //}
 
-            int entityId = int.Parse(model.EntityProperties[1][0]);
-            string returnUrl = $"/Funds/ViewFundSF/{entityId}";
+            string returnUrl = $"/Funds/All";            
 
-            var fund = this.fundsService.GetActiveFundById(entityId);
-
-            if (HttpContext.Request.Form.ContainsKey("modify_button"))
+            if (HttpContext.Request.Form.ContainsKey("update_button"))
             {
-                for (int row = 1; row < fund.Count; row++)
-                {
-                    for (int col = 0; col < fund[row].Length; col++)
+                    for (int row = 1; row < model.EntityProperties.Count; row++)
                     {
-                        fund[row][col] = model.EntityProperties[row][col];
-                    }
+                        for (int col = 0; col < model.EntityProperties[row].Length; col++)
+                        {                            
+                            if (model.EntityProperties[0][col] == "STATUS")
+                            {
+                                var statusDescs = this._context.TbDomFStatus.Select(s => s.StFDesc).ToList();
+
+                                //fStatusId = this._context.TbDomFStatus.Select(s => s.StFId).FirstOrDefault(s => s funds[row + 1][col]));
+
+                                var fStatusId = this._context.TbDomFStatus.Where(s => s.StFDesc == model.FStatus).Select(s => s.StFId).FirstOrDefault();
+
+                                //if (status.Contains(funds[row][col]))
+                                //{
+                                //    fStatusId = status.Where(s => s.)
+                                //}
+
+                                //var listOfRoleId = user.Roles.Select(r => r.RoleId);
+                                //var roles = db.Roles.Where(r => listOfRoleId.Contains(r.RoleId));
+                            }                            
+                            //else if (funds[row][col] == "LEGAL FORM")
+                            //{
+                            //    fLegalFormId = funds[row + 1][col];
+                            //}
+                            //else if (funds[row][col] == "LEGAL TYPE")
+                            //{
+                            //    fLegalTypeId = funds[row + 1][col];
+                            //}
+                            //else if (funds[row][col] == "LEGAL VEHICLE")
+                            //{
+                            //    fLegalVehicleId = funds[row + 1][col];
+                            //}
+                            //else if (funds[row][col] == "COMPANY TYPE")
+                            //{
+                            //    fCompanyTypeId = funds[row + 1][col];
+                            //}                            
+                        }    
                 }
+
+                this.fundsService.ExecuteEditFund(model.EntityProperties);                
 
                 return LocalRedirect(returnUrl);
             }
@@ -247,12 +307,12 @@
             FundBindingModel model = new FundBindingModel
             {
                 EntityProperties = this.fundsService.GetAllActiveFunds(),
-                FStatus = new SelectList(this.fundsSelectListService.GetAllTbDomFStatus()),
-                LegalForm = new SelectList(this.fundsSelectListService.GetAllTbDomLegalForm()),
-                LegalVehicle = new SelectList(this.fundsSelectListService.GetAllTbDomLegalVehicle()),
-                LegalType = new SelectList(this.fundsSelectListService.GetAllTbDomLegalType()),
-                CompanyTypeDesc = new SelectList(this.fundsSelectListService.GetAllTbDomCompanyDesc()),
-                CompanyAcronym = new SelectList(this.fundsSelectListService.GetAllTbDomCompanyAcronym())
+                //FStatus = this.fundsSelectListService.GetAllTbDomFStatus(),
+                //LegalForm = new SelectList(this.fundsSelectListService.GetAllTbDomLegalForm()),
+                //LegalVehicle = new SelectList(this.fundsSelectListService.GetAllTbDomLegalVehicle()),
+                //LegalType = new SelectList(this.fundsSelectListService.GetAllTbDomLegalType()),
+                //CompanyTypeDesc = new SelectList(this.fundsSelectListService.GetAllTbDomCompanyDesc()),
+                //CompanyAcronym = new SelectList(this.fundsSelectListService.GetAllTbDomCompanyAcronym())
             };
 
             return this.View(model);

@@ -14,15 +14,14 @@
             {
                 <div>
                     <label class="control-label text-secondary">
-                        @*@Html.TextBoxFor(m => Model[0][col], new { @class = "", @style = "border:0" })*@
                         @Model.EntityProperties[0][col]
                     </label>
-                    @if (Model.EntityProperties[0][col] == "STATUS")
+                    @*@if (Model.EntityProperties[0][col] == "STATUS")
                     {
                         <select asp-items="@Model.FStatus" class="form-control maxw-270"></select>
-                    }
+                    }*@
 
-                    else if (Model.EntityProperties[0][col] == "LEGAL FORM")
+                    @*else if (Model.EntityProperties[0][col] == "LEGAL FORM")
                     {
                         <select asp-items="@Model.LegalForm" class="form-control maxw-270"></select>
                     }
@@ -49,8 +48,7 @@
                     {
                         <input type="text"
                                class="form-control maxw-270" />
-                        @*@Html.TextBoxFor(m => Model[row][col], new { @class = "form-control" })*@
-                    }
+                    }*@
                 </div>
             }
         }

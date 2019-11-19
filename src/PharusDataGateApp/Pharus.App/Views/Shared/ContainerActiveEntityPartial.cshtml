@@ -17,8 +17,9 @@
     <div>
         <input id="searchField"
                type="search"
-               name="searchString"
                asp-for="SearchString" />
+
+        <input type="hidden" id="hsearchField" asp-for="HSearchString" />
 
         <input type="submit"
                class="bg-pharus text-white"
