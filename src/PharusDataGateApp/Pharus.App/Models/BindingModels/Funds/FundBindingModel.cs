@@ -1,18 +1,17 @@
 ﻿namespace Pharus.App.Models.BindingModels.Funds
 {
-    using Microsoft.AspNetCore.Mvc.Rendering;
-
     public class FundBindingModel : BaseBindingModel
     {
-        public SelectList FStatus { get; set; }
-        public SelectList LegalForm { get; set; }
+        public string FStatus { get; set; }
 
-        public SelectList LegalVehicle { get; set; }
+        public string LegalForm { get; set; }
 
-        public SelectList LegalType { get; set; }
-
-        public SelectList CompanyTypeDesc { get; set; }
-
-        public SelectList CompanyAcronym { get; set; }
+        public string LegalVehicle { get; set; }
+               
+        public string LegalType { get; set; }
+               
+        public string CompanyTypeDesc { get; set; }
+               
+        public string CompanyAcronym { get; set; }
     }
 }
