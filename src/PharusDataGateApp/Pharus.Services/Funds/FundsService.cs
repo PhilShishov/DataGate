@@ -1,6 +1,8 @@
 ﻿namespace Pharus.Services.Funds
 {
     using System;
+    using System.Linq;
+    using System.Globalization;
     using System.Data.SqlClient;
     using System.Collections.Generic;
 
@@ -10,9 +12,15 @@
 
     public class FundsService : IFundsService
     {
+        private readonly PharusProdContext _context;
         private readonly string defaultDate = DateTime.Today.ToString("yyyyMMdd");
-        private readonly string ConnectionString = DbConfiguration.ConnectionStringPharus_vFinale.ToString();
+        private readonly string ConnectionString = DbConfiguration.ConnectionStringPharusProd.ToString();
 
+        public FundsService(
+            PharusProdContext context)
+        {
+            this._context = context;
+        }
         public List<string[]> GetAllActiveFunds()
         {
             using (SqlConnection connection = new SqlConnection(this.ConnectionString))
@@ -58,7 +66,7 @@
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
-        }        
+        }
 
         public List<string[]> GetActiveFundById(DateTime? chosenDate, int Id)
         {
@@ -103,6 +111,17 @@
                 command.CommandText = $"select * from ActivesubfundforSpecificFundAtDate('{defaultDate}', {Id})";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
+        public void ExecuteEditFund(List<string[]> fundsProperties)
+        {
+            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
+            {
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                command.CommandText = $"EXEC sp_modify_fund{string.Join("", fundsProperties)}";
             }
         }
     }
