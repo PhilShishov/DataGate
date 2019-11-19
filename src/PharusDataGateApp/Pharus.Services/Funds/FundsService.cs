@@ -7,6 +7,7 @@
     using Pharus.Data;
     using Pharus.Services.Contracts;
     using Pharus.Services.Utilities;
+    using System.Globalization;
 
     public class FundsService : IFundsService
     {
@@ -106,17 +107,35 @@
             }
         }
 
-        public void ExecuteEditFund(List<string[]> fundsProperties, int fStatusId,
+        public void ExecuteEditFund(List<string> fundsValues, int fundId, DateTime chosenDate, int fStatusId,
                                                 int fLegalFormId, int fLegalTypeId,
                                                 int fLegalVehicleId, int fCompanyTypeId)
         {
+            //var nullValues = fundsValues.Where(fv => fv.IsNull)            
+
+            for (int i = 0; i < fundsValues.Count; i++)
+            {
+                if (string.IsNullOrEmpty(fundsValues[i]))
+                {
+                    fundsValues[i] = "null";
+                }               
+
+                else
+                {
+                    fundsValues[i] = "'" + $"{fundsValues[i]}" + "'";
+                }
+            }            
+
             using (SqlConnection connection = new SqlConnection(this.ConnectionString))
             {
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"EXEC sp_modify_fund{fundsProperties[1][2]}, {fundsProperties[1][0]}, " +
-                    $"{fStatusId}, {fundsProperties[1][1]}, {fundsProperties[1][3]}, {fundsProperties[1][3]}";                    
+                command.CommandText = $"EXEC sp_modify_fund {fundId}, '{chosenDate.ToString("yyyyMMdd")}', " +
+                    $"{fStatusId}, {fundsValues[16]}, {fundsValues[3]}, {fundsValues[3]}, " +
+                    $"{fundsValues[15]}, {fundsValues[4]}, {fundsValues[9]}, " +
+                    $"{fundsValues[10]}, {fundsValues[11]}, {fLegalFormId}, {fLegalTypeId}, {fLegalVehicleId}, " +
+                    $"{fCompanyTypeId}, {fundsValues[14]}";
             }
         }
     }
