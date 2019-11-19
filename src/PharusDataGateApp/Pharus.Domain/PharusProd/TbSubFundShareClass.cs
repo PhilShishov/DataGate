@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Pharus.Domain.Pharus_vFinale
+namespace Pharus.Domain.PharusProd
 {
     public partial class TbSubFundShareClass
     {

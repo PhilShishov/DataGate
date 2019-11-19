@@ -17,5 +17,7 @@ namespace Pharus.Services.Contracts
         List<string[]> GetActiveFundWithDateById(int Id);
 
         List<string[]> GetFundSubFunds(int Id);
+
+        void ExecuteEditFund(List<string[]> fundsProperties);
     }
 }
