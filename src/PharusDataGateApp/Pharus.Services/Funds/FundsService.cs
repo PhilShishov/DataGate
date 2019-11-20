@@ -120,21 +120,24 @@
         public void ExecuteEditFund(List<string> fundsValues, int fundId, DateTime chosenDate, int fStatusId,
                                                 int fLegalFormId, int fLegalTypeId,
                                                 int fLegalVehicleId, int fCompanyTypeId)
-        {
-            CheckIfNull(fundsValues);
-
-            string query = "EXEC sp_modify_fund @f_id, @f_initialDate, @f_status, @f_registrationNumber, " +
-                "@f_officialFundName, @f_shortFundName, @f_leiCode, @f_cssfCode, @f_faCode, @f_depCode, " +
-                "@f_taCode, @f_legalForm, @f_legalType, @f_legal_vehicle, @f_companyType, @f_tinNumber";
+        {     
+            string query = "EXEC sp_modify_fund @f_id, @f_initialDate, @f_status, " +
+                "@f_registrationNumber, @f_officialFundName, @f_shortFundName, " +
+                "@f_leiCode, @f_cssfCode, @f_faCode, @f_depCode, @f_taCode, " +
+                "@f_legalForm, @f_legalType, @f_legal_vehicle, @f_companyType, @f_tinNumber";
 
             using (SqlConnection connection = new SqlConnection(this.ConnectionString))
             {
                 using (SqlCommand command = new SqlCommand(query))
                 {
-
                     command.Parameters.Add("@f_id", SqlDbType.Int);
-                    command.Parameters.Add("@f_initialDate", SqlDbType.VarChar, 100);
                     command.Parameters.Add("@f_status", SqlDbType.Int);
+                    command.Parameters.Add("@f_legalForm", SqlDbType.Int);
+                    command.Parameters.Add("@f_legalType", SqlDbType.Int);
+                    command.Parameters.Add("@f_legal_vehicle", SqlDbType.Int);
+                    command.Parameters.Add("@f_companyType", SqlDbType.Int);
+
+                    command.Parameters.Add("@f_initialDate", SqlDbType.VarChar, 100);
                     command.Parameters.Add("@f_registrationNumber", SqlDbType.VarChar, 100);
                     command.Parameters.Add("@f_officialFundName", SqlDbType.VarChar, 100);
                     command.Parameters.Add("@f_shortFundName", SqlDbType.VarChar, 100);
@@ -143,11 +146,7 @@
                     command.Parameters.Add("@f_faCode", SqlDbType.VarChar, 100);
                     command.Parameters.Add("@f_depCode", SqlDbType.VarChar, 100);
                     command.Parameters.Add("@f_taCode", SqlDbType.VarChar, 100);
-                    command.Parameters.Add("@f_legalForm", SqlDbType.Int);
-                    command.Parameters.Add("@f_legalType", SqlDbType.Int);
-                    command.Parameters.Add("@f_legal_vehicle", SqlDbType.Int);
-                    command.Parameters.Add("@f_companyType", SqlDbType.Int);
-                    command.Parameters.Add("@f_tinNumber", SqlDbType.VarChar, 100);
+                    command.Parameters.Add("@f_tinNumber", SqlDbType.VarChar, 100);                    
 
                     command.Parameters["@f_id"].Value = fundId;
                     command.Parameters["@f_initialDate"].Value = chosenDate.ToString("yyyyMMdd");
@@ -166,11 +165,13 @@
                     command.Parameters["@f_companyType"].Value = fCompanyTypeId;
                     command.Parameters["@f_tinNumber"].Value = fundsValues[14];
 
-                    //command.CommandText = $"EXEC sp_modify_fund {fundId}, '{chosenDate.ToString("yyyyMMdd")}', " +
-                    //    $"{fStatusId}, {fundsValues[16]}, {fundsValues[3]}, {fundsValues[3]}, " +
-                    //    $"{fundsValues[15]}, {fundsValues[4]}, {fundsValues[9]}, " +
-                    //    $"{fundsValues[10]}, {fundsValues[11]}, {fLegalFormId}, {fLegalTypeId}, {fLegalVehicleId}, " +
-                    //    $"{fCompanyTypeId}, {fundsValues[14]}";
+                    foreach (SqlParameter parameter in command.Parameters)
+                    {
+                        if (parameter.Value == null)
+                        {
+                            parameter.Value = DBNull.Value;
+                        }
+                    }
 
                     command.Connection = connection;
 
@@ -182,27 +183,9 @@
                     catch (SqlException sx)
                     {
                         Console.WriteLine(sx.Message);
-                    }
-                    //command.ExecuteNonQuery();
-                    //connection.Close();
+                    }                    
                 }
             }
-        }
-
-        private static void CheckIfNull(List<string> fundsValues)
-        {
-            for (int i = 0; i < fundsValues.Count; i++)
-            {
-                if (string.IsNullOrEmpty(fundsValues[i]))
-                {
-                    fundsValues[i] = "null";
-                }
-
-                else
-                {
-                    fundsValues[i] = "'" + $"{fundsValues[i]}" + "'";
-                }
-            }
-        }
+        }      
     }
 }
