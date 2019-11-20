@@ -22,7 +22,7 @@
         <tbody>
             @for (int row = 1; row < Model.ActiveEntities.Count; row++)
             {
-                <tr class="tableRowPharus" onclick="document.location = '/@controllerName/ViewEntitySE/@Model.ActiveEntities[row][0]'">
+                <tr class="tableRowPharus" onclick="document.location = '/@controllerName/ViewEntitySE/@Model.ActiveEntities[row][2]'">
                     @for (int col = 0; col < Model.ActiveEntities[row].Length; col++)
                     {
                         <td class="p-1">
