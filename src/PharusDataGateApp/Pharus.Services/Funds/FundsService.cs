@@ -8,11 +8,21 @@
     using Pharus.Services.Contracts;
     using Pharus.Services.Utilities;
     using System.Globalization;
+    using System.Data;
+    using Microsoft.EntityFrameworkCore;
+    using System.Linq;
+    using Pharus.Domain.PharusProd;
 
     public class FundsService : IFundsService
     {
+        PharusProdContext context;
         private readonly string defaultDate = DateTime.Today.ToString("yyyyMMdd");
         private readonly string ConnectionString = DbConfiguration.ConnectionStringPharusProd.ToString();
+
+        public FundsService(PharusProdContext context)
+        {
+            context = this.context;
+        }
 
         public List<string[]> GetAllActiveFunds()
         {
@@ -111,31 +121,43 @@
                                                 int fLegalFormId, int fLegalTypeId,
                                                 int fLegalVehicleId, int fCompanyTypeId)
         {
-            //var nullValues = fundsValues.Where(fv => fv.IsNull)            
+            CheckIfNull(fundsValues);
 
+            string query = $"EXEC sp_modify_fund {fundId}, '{chosenDate.ToString("yyyyMMdd")}', " +
+                    $"{fStatusId}, {fundsValues[16]}, {fundsValues[3]}, {fundsValues[3]}, " +
+                    $"{fundsValues[15]}, {fundsValues[4]}, {fundsValues[9]}, " +
+                    $"{fundsValues[10]}, {fundsValues[11]}, {fLegalFormId}, {fLegalTypeId}, {fLegalVehicleId}, " +
+                    $"{fCompanyTypeId}, {fundsValues[14]}";
+
+            //using (SqlConnection connection = new SqlConnection(this.ConnectionString))
+            //{
+            //    SqlCommand command = connection.CreateCommand();
+            //    command.CommandType = CommandType.StoredProcedure;
+            //    command.CommandText = $"EXEC sp_modify_fund {fundId}, '{chosenDate.ToString("yyyyMMdd")}', " +
+            //        $"{fStatusId}, {fundsValues[16]}, {fundsValues[3]}, {fundsValues[3]}, " +
+            //        $"{fundsValues[15]}, {fundsValues[4]}, {fundsValues[9]}, " +
+            //        $"{fundsValues[10]}, {fundsValues[11]}, {fLegalFormId}, {fLegalTypeId}, {fLegalVehicleId}, " +
+            //        $"{fCompanyTypeId}, {fundsValues[14]}";
+
+            //    connection.Open();
+            //    command.ExecuteNonQuery();
+            //    connection.Close();
+            //}
+        }
+
+        private static void CheckIfNull(List<string> fundsValues)
+        {
             for (int i = 0; i < fundsValues.Count; i++)
             {
                 if (string.IsNullOrEmpty(fundsValues[i]))
                 {
                     fundsValues[i] = "null";
-                }               
+                }
 
                 else
                 {
                     fundsValues[i] = "'" + $"{fundsValues[i]}" + "'";
                 }
-            }            
-
-            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
-            {
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-
-                command.CommandText = $"EXEC sp_modify_fund {fundId}, '{chosenDate.ToString("yyyyMMdd")}', " +
-                    $"{fStatusId}, {fundsValues[16]}, {fundsValues[3]}, {fundsValues[3]}, " +
-                    $"{fundsValues[15]}, {fundsValues[4]}, {fundsValues[9]}, " +
-                    $"{fundsValues[10]}, {fundsValues[11]}, {fLegalFormId}, {fLegalTypeId}, {fLegalVehicleId}, " +
-                    $"{fCompanyTypeId}, {fundsValues[14]}";
             }
         }
     }
