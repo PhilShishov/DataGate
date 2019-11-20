@@ -123,26 +123,70 @@
         {
             CheckIfNull(fundsValues);
 
-            string query = $"EXEC sp_modify_fund {fundId}, '{chosenDate.ToString("yyyyMMdd")}', " +
-                    $"{fStatusId}, {fundsValues[16]}, {fundsValues[3]}, {fundsValues[3]}, " +
-                    $"{fundsValues[15]}, {fundsValues[4]}, {fundsValues[9]}, " +
-                    $"{fundsValues[10]}, {fundsValues[11]}, {fLegalFormId}, {fLegalTypeId}, {fLegalVehicleId}, " +
-                    $"{fCompanyTypeId}, {fundsValues[14]}";
+            string query = "EXEC sp_modify_fund @f_id, @f_initialDate, @f_status, @f_registrationNumber, " +
+                "@f_officialFundName, @f_shortFundName, @f_leiCode, @f_cssfCode, @f_faCode, @f_depCode, " +
+                "@f_taCode, @f_legalForm, @f_legalType, @f_legal_vehicle, @f_companyType, @f_tinNumber";
 
-            //using (SqlConnection connection = new SqlConnection(this.ConnectionString))
-            //{
-            //    SqlCommand command = connection.CreateCommand();
-            //    command.CommandType = CommandType.StoredProcedure;
-            //    command.CommandText = $"EXEC sp_modify_fund {fundId}, '{chosenDate.ToString("yyyyMMdd")}', " +
-            //        $"{fStatusId}, {fundsValues[16]}, {fundsValues[3]}, {fundsValues[3]}, " +
-            //        $"{fundsValues[15]}, {fundsValues[4]}, {fundsValues[9]}, " +
-            //        $"{fundsValues[10]}, {fundsValues[11]}, {fLegalFormId}, {fLegalTypeId}, {fLegalVehicleId}, " +
-            //        $"{fCompanyTypeId}, {fundsValues[14]}";
+            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand(query))
+                {
 
-            //    connection.Open();
-            //    command.ExecuteNonQuery();
-            //    connection.Close();
-            //}
+                    command.Parameters.Add("@f_id", SqlDbType.Int);
+                    command.Parameters.Add("@f_initialDate", SqlDbType.VarChar, 100);
+                    command.Parameters.Add("@f_status", SqlDbType.Int);
+                    command.Parameters.Add("@f_registrationNumber", SqlDbType.VarChar, 100);
+                    command.Parameters.Add("@f_officialFundName", SqlDbType.VarChar, 100);
+                    command.Parameters.Add("@f_shortFundName", SqlDbType.VarChar, 100);
+                    command.Parameters.Add("@f_leiCode", SqlDbType.VarChar, 100);
+                    command.Parameters.Add("@f_cssfCode", SqlDbType.VarChar, 100);
+                    command.Parameters.Add("@f_faCode", SqlDbType.VarChar, 100);
+                    command.Parameters.Add("@f_depCode", SqlDbType.VarChar, 100);
+                    command.Parameters.Add("@f_taCode", SqlDbType.VarChar, 100);
+                    command.Parameters.Add("@f_legalForm", SqlDbType.Int);
+                    command.Parameters.Add("@f_legalType", SqlDbType.Int);
+                    command.Parameters.Add("@f_legal_vehicle", SqlDbType.Int);
+                    command.Parameters.Add("@f_companyType", SqlDbType.Int);
+                    command.Parameters.Add("@f_tinNumber", SqlDbType.VarChar, 100);
+
+                    command.Parameters["@f_id"].Value = fundId;
+                    command.Parameters["@f_initialDate"].Value = chosenDate.ToString("yyyyMMdd");
+                    command.Parameters["@f_status"].Value = fStatusId;
+                    command.Parameters["@f_registrationNumber"].Value = fundsValues[16];
+                    command.Parameters["@f_officialFundName"].Value = fundsValues[3];
+                    command.Parameters["@f_shortFundName"].Value = fundsValues[3];
+                    command.Parameters["@f_leiCode"].Value = fundsValues[15];
+                    command.Parameters["@f_cssfCode"].Value = fundsValues[4];
+                    command.Parameters["@f_faCode"].Value = fundsValues[9];
+                    command.Parameters["@f_depCode"].Value = fundsValues[10];
+                    command.Parameters["@f_taCode"].Value = fundsValues[11];
+                    command.Parameters["@f_legalForm"].Value = fLegalFormId;
+                    command.Parameters["@f_legalType"].Value = fLegalTypeId;
+                    command.Parameters["@f_legal_vehicle"].Value = fLegalVehicleId;
+                    command.Parameters["@f_companyType"].Value = fCompanyTypeId;
+                    command.Parameters["@f_tinNumber"].Value = fundsValues[14];
+
+                    //command.CommandText = $"EXEC sp_modify_fund {fundId}, '{chosenDate.ToString("yyyyMMdd")}', " +
+                    //    $"{fStatusId}, {fundsValues[16]}, {fundsValues[3]}, {fundsValues[3]}, " +
+                    //    $"{fundsValues[15]}, {fundsValues[4]}, {fundsValues[9]}, " +
+                    //    $"{fundsValues[10]}, {fundsValues[11]}, {fLegalFormId}, {fLegalTypeId}, {fLegalVehicleId}, " +
+                    //    $"{fCompanyTypeId}, {fundsValues[14]}";
+
+                    command.Connection = connection;
+
+                    try
+                    {
+                        command.Connection.Open();
+                        command.ExecuteScalar();
+                    }
+                    catch (SqlException sx)
+                    {
+                        Console.WriteLine(sx.Message);
+                    }
+                    //command.ExecuteNonQuery();
+                    //connection.Close();
+                }
+            }
         }
 
         private static void CheckIfNull(List<string> fundsValues)
