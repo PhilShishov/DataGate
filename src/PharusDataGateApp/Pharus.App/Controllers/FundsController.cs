@@ -1,20 +1,18 @@
 ﻿namespace Pharus.App.Controllers
 {
+    using System;
     using System.Linq;
     using System.Collections.Generic;
 
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc.Rendering;
 
+    using Pharus.Data;
     using Pharus.App.Utilities;
     using Pharus.Services.Contracts;
     using Pharus.App.Models.ViewModels.Entities;
     using Pharus.App.Models.BindingModels.Funds;
-    using System;
-    using System.Globalization;
-    using Pharus.Data;
 
     [Authorize]
     public class FundsController : Controller
@@ -279,7 +277,8 @@
         {
             FundBindingModel model = new FundBindingModel
             {
-                EntityProperties = this.fundsService.GetAllActiveFunds()
+                EntityProperties = this.fundsService.GetAllActiveFunds(),
+                ChosenDate = DateTime.Today,
             };
 
             this.ViewData["FStatusList"] = this.fundsSelectListService.GetAllTbDomFStatus();
