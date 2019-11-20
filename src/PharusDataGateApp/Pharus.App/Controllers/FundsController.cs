@@ -75,7 +75,7 @@
                 }
             }
 
-            else if (model.Command.Equals("Filter"))
+            else if (model.Command.Equals("Search"))
             {
                 if (model.SearchString == null)
                 {
