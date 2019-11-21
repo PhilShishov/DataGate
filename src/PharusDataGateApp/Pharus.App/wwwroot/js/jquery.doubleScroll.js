@@ -3,7 +3,7 @@
     jQuery.fn.doubleScroll = function (userOptions) {
 
         // Default options
-        var options = {
+        let options = {
             contentElement: undefined, // Widest element, if not specified first child element will be used
             scrollCss: {
                 'overflow-x': 'auto',
@@ -29,17 +29,15 @@
             topScrollBarInnerSelector: '.doubleScroll-scroll'
         });
 
-        var _showScrollBar = function ($self, options) {
-
+        let _showScrollBar = function ($self, options) {
             if (options.onlyIfScroll && $self.get(0).scrollWidth <= $self.width()) {
                 // content doesn't scroll
                 // remove any existing occurrence...
                 $self.prev(options.topScrollBarWrapperSelector).remove();
                 return;
             }
-
             // add div that will act as an upper scroll only if not already added to the DOM
-            var $topScrollBar = $self.prev(options.topScrollBarWrapperSelector);
+            let $topScrollBar = $self.prev(options.topScrollBarWrapperSelector);
 
             if ($topScrollBar.length == 0) {
 
@@ -59,14 +57,14 @@
                 });
 
                 // bind bottom scroll to upper scroll
-                var selfScrollHandler = function () {
+                let selfScrollHandler = function () {
                     $topScrollBar.scrollLeft($self.scrollLeft());
                 };
                 $self.bind('scroll.doubleScroll', selfScrollHandler);
             }
 
             // find the content element (should be the widest one)	
-            var $contentElement;
+            let $contentElement;
 
             if (options.contentElement !== undefined && $self.find(options.contentElement).length !== 0) {
                 $contentElement = $self.find(options.contentElement);
@@ -78,21 +76,17 @@
             $(options.topScrollBarInnerSelector, $topScrollBar).width($contentElement.outerWidth());
             $topScrollBar.width($self.width());
             $topScrollBar.scrollLeft($self.scrollLeft());
-
         }
 
         return this.each(function () {
-
-            var $self = $(this);
+            let $self = $(this);
 
             _showScrollBar($self, options);
-
             // bind the resize handler 
             // do it once
             if (options.resetOnWindowResize) {
-
-                var id;
-                var handler = function (e) {
+                let id;
+                let handler = function (e) {
                     _showScrollBar($self, options);
                 };
 
@@ -102,11 +96,8 @@
                     clearTimeout(id);
                     id = setTimeout(handler, options.timeToWaitForResize);
                 });
-
             }
-
         });
-
     }
 
 }(jQuery));

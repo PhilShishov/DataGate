@@ -19,7 +19,7 @@
     const dropdown = document.getElementsByClassName("dropdown-btn");
 
     for (let i = 0; i < dropdown.length; i++) {
-        dropdown[i].addEventListener("click", function () {
+        dropdown[i].addEventListener("mouseover", function () {
             this.classList.toggle("active");
             let dropdownContent = this.nextElementSibling;
             if (dropdownContent.style.display === "block") {
