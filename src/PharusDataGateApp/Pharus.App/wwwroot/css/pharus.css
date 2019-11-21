@@ -187,3 +187,11 @@ input[type=search]::-webkit-search-cancel-button {
     outline: none;
     border-radius: 15px;
 }
+
+#tableDoubleScroll {
+    width: 100%;
+}
+
+.double-scroll {
+    width: 40%;
+}
