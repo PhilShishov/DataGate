@@ -9,15 +9,27 @@
 
 <form asp-controller="SubFunds" class="justify-content-between" method="post">
     <div>
-        <partial name="ContainerActiveEntityPartial"/>
+        <partial name="ContainerActiveEntityPartial" />
 
-        <partial name="ExtractEntitiesViewPartial"/>
+        <partial name="ExtractEntitiesViewPartial" />
 
         <hr class="bg-pharus hr-2" />
 
-        <partial name="EntitiesBindingTablePartial"/>
+        <partial name="EntitiesBindingTablePartial" />
 
-        <partial name="EntitiesViewTablePartial"/>
+        <partial name="EntitiesViewTablePartial" />
 
     </div>
 </form>
+
+@section Scripts
+        {
+    <script type="text/javascript" src="~/js/jquery.doubleScroll.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.double-scroll').doubleScroll();
+            $('#tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
+        });
+    </script>
+}

@@ -40,7 +40,7 @@
 
             <partial name="SpecificEntityBindingTablePartial" />
 
-            <div class="table-responsive border-0 mx-auto">
+            <div class="table-responsive border-0 mx-auto" id="tableDoubleScroll">
                 <table class="table table-hover" name="AESubEntities">
                     <thead>
                         <tr>
@@ -60,7 +60,7 @@
                     <tbody>
                         @for (int row = 1; row < Model.AESubEntities.Count; row++)
                         {
-                            <tr class="tableRowPharus" onclick="document.location = '/SubFunds/ViewEntitySE/@Model.AESubEntities[row][0]'">
+                            <tr class="tableRowPharus" onclick="document.location = '/SubFunds/ViewEntitySE/@Model.AESubEntities[row][2]'">
                                 @for (int col = 0; col < Model.AESubEntities[row].Length; col++)
                                 {
                                     <td class="p-1">
@@ -75,3 +75,15 @@
         </div>
     </div>
 </form>
+
+@section Scripts
+        {
+    <script type="text/javascript" src="~/js/jquery.doubleScroll.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.double-scroll').doubleScroll();
+            $('#tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
+        });
+    </script>
+}

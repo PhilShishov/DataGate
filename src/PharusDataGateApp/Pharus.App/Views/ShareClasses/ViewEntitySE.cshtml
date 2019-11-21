@@ -22,7 +22,7 @@
 
     <div class="d-flex justify-content-between">
 
-        <div class="table-responsive border-0 w-35">
+        <div class="table-responsive border-0 w-35" id="tableDoubleScroll">
             <table class="table table-hover">
                 <tbody>
                     @for (int row = 1; row < Model.ActiveEntities.Count; row++)
@@ -60,3 +60,15 @@
         </div>
     </div>
 </form>
+
+@section Scripts
+        {
+    <script type="text/javascript" src="~/js/jquery.doubleScroll.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.double-scroll').doubleScroll();
+            $('#tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
+        });
+    </script>
+}
