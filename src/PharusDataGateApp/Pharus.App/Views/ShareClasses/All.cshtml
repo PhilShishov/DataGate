@@ -21,3 +21,15 @@
 
     </div>
 </form>
+
+@section Scripts
+        {
+    <script type="text/javascript" src="~/js/jquery.doubleScroll.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.double-scroll').doubleScroll();
+            $('#tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
+        });
+    </script>
+}
