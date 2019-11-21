@@ -7,7 +7,14 @@
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="~/js/manageSideNavBar.js"></script>
+        <script src="~/js/loadDate.js"></script>
+        <script src="~/js/getDerivatives.js"></script>        
+
     </environment>
+
     <environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
@@ -16,9 +23,6 @@
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
 
-    <script src="~/js/manageSideNavBar.js"></script>
-    <script src="~/js/loadDate.js"></script>
-    <script src="~/js/getDerivatives.js"></script>
 
     <link rel="stylesheet" href="~/css/reset-css.css" />
     <link rel="stylesheet" href="~/css/bootstrap.min.css" />
@@ -173,40 +177,6 @@
         <script src="http://cdn.syncfusion.com/js/assets/external/jquery-1.11.3.min.js"></script>
         <script src="http://cdn.syncfusion.com/17.3.0.9/js/web/ej.web.all.min.js"></script>
 
-        @*<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.10.0.min.js" type="text/javascript"></script>
-<script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/jquery-ui.min.js" type="text/javascript"></script>
-<link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/themes/blitzer/jquery-ui.css"
-      rel="Stylesheet" type="text/css" />
-<script type="text/javascript">
-    $(function () {
-        $("#searchField").autocomplete({
-            source: function (request, response) {
-                $.ajax({
-                    url: '/Funds/AutoComplete',
-                    data: "{ 'prefix': '" + request.term + "'}",
-                    dataType: "json",
-                    type: "POST",
-                    contentType: "application/json; charset=utf-8",
-                    success: function (data) {
-                        response($.map(data, function (item) {
-                            return item;
-                        }))
-                    },
-                    error: function (response) {
-                        alert(response.responseText);
-                    },
-                    failure: function (response) {
-                        alert(response.responseText);
-                    }
-                });
-            },
-            select: function (e, i) {
-                $("#hsearchField").val(i.item.val);
-            },
-            minLength: 1
-        });
-    });
-</script>*@
     </environment>
     <environment exclude="Development">
         <script src="~/js/site.min.js" asp-append-version="true"></script>
