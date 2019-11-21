@@ -6,14 +6,16 @@
 
 @if (!this.User.Identity.IsAuthenticated)
 {
-    <div class="jumbotron mt-3 bg-pharus">
+    <div id="bg-one">
+        <div class="jumbotron mt-3 bg-pharus">
             <h1 class="text-white">Welcome to Pharus Management DataGate Platform</h1>
             <hr class="bg-white hr-2" />
             <h3 class="text-white"><a href="/Identity/Account/Login">Login to Pharus DataGate</a> </h3>
-    </div>    
+        </div>
+    </div>
 }
 else
-{      
+{
     <h1 class="text-center">Hello, @this.User.Identity.Name!</h1>
-    <!--TODO get roles for current user role principal <h2 class="text-center">Your role is: @this.User</h2> -->    
+    <!--TODO get roles for current user role principal <h2 class="text-center">Your role is: @this.User</h2> -->
 }
