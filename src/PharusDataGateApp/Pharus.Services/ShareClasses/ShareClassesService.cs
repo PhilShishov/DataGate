@@ -4,19 +4,25 @@
     using System.Data.SqlClient;
     using System.Collections.Generic;
 
-    using Pharus.Data;
     using Pharus.Services.Contracts;
     using Pharus.Services.Utilities;
+    using Microsoft.Extensions.Configuration;
 
     public class ShareClassesService : IShareClassesService
     {
-        private string defaultDate = DateTime.Today.ToString("yyyyMMdd");
-        private readonly string ConnectionString = DbConfiguration.ConnectionStringPharus_vFinale.ToString();        
+        private readonly string defaultDate = DateTime.Today.ToString("yyyyMMdd");
+        private readonly IConfiguration configuration;
+
+        public ShareClassesService(IConfiguration config)
+        {
+            this.configuration = config;
+        }
 
         public List<string[]> GetAllActiveShareClasses()
         {
-            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
+            using (SqlConnection connection = new SqlConnection())
             {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
@@ -28,8 +34,9 @@
 
         public List<string[]> GetAllActiveShareClasses(DateTime? chosenDate)
         {
-            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
+            using (SqlConnection connection = new SqlConnection())
             {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
@@ -49,8 +56,9 @@
 
         public List<string[]> GetActiveShareClassById(int Id)
         {
-            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
+            using (SqlConnection connection = new SqlConnection())
             {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
@@ -62,8 +70,9 @@
 
         public List<string[]> GetActiveShareClassById(DateTime? chosenDate, int Id)
         {
-            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
+            using (SqlConnection connection = new SqlConnection())
             {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
@@ -83,8 +92,9 @@
 
         public List<string[]> GetActiveShareClassWithDateById(int Id)
         {
-            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
+            using (SqlConnection connection = new SqlConnection())
             {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 

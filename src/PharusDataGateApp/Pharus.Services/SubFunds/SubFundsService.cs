@@ -4,19 +4,25 @@
     using System.Data.SqlClient;
     using System.Collections.Generic;
 
-    using Pharus.Data;
     using Pharus.Services.Utilities;
     using Pharus.Services.Contracts;
+    using Microsoft.Extensions.Configuration;
 
     public class SubFundsService : ISubFundsService
     {
         private readonly string defaultDate = DateTime.Today.ToString("yyyyMMdd");
-        private readonly string ConnectionString = DbConfiguration.ConnectionStringPharus_vFinale.ToString();
+        private readonly IConfiguration configuration;
+
+        public SubFundsService(IConfiguration config)
+        {
+            this.configuration = config;
+        }
 
         public List<string[]> GetAllActiveSubFunds()
         {
-            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
+            using (SqlConnection connection = new SqlConnection())
             {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
@@ -28,8 +34,9 @@
 
         public List<string[]> GetAllActiveSubFunds(DateTime? chosenDate)
         {
-            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
+            using (SqlConnection connection = new SqlConnection())
             {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
@@ -49,8 +56,9 @@
 
         public List<string[]> GetActiveSubFundById(int Id)
         {
-            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
+            using (SqlConnection connection = new SqlConnection())
             {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
@@ -62,8 +70,9 @@
 
         public List<string[]> GetActiveSubFundById(DateTime? chosenDate, int Id)
         {
-            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
+            using (SqlConnection connection = new SqlConnection())
             {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
@@ -83,8 +92,9 @@
 
         public List<string[]> GetActiveSubFundWithDateById(int Id)
         {
-            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
+            using (SqlConnection connection = new SqlConnection())
             {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
@@ -96,8 +106,9 @@
 
         public List<string[]> GetSubFundShareClasses(int Id)
         {
-            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
+            using (SqlConnection connection = new SqlConnection())
             {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 

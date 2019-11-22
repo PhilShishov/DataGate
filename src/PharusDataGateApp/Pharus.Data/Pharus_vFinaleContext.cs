@@ -1,11 +1,14 @@
 ﻿namespace Pharus.Data
 {
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
 
     using Pharus.Domain.Pharus_vFinale;
 
     public partial class Pharus_vFinaleContext : DbContext
     {
+        private readonly IConfiguration configuration;
+
         public Pharus_vFinaleContext()
         {
         }
@@ -55,10 +58,10 @@
         public virtual DbSet<TbSubFundShareClass> TbSubFundShareClass { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
+        { 
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(DbConfiguration.ConnectionStringPharus_vFinale);
+                optionsBuilder.UseSqlServer(this.configuration.GetConnectionString("Pharus_vFinaleConnection"));
             }
         }
 
