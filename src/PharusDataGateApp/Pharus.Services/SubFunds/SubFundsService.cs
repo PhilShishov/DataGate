@@ -11,7 +11,7 @@
     public class SubFundsService : ISubFundsService
     {
         private readonly string defaultDate = DateTime.Today.ToString("yyyyMMdd");
-        private readonly string ConnectionString = DbConfiguration.ConnectionStringPharusProd.ToString();
+        private readonly string ConnectionString = DbConfiguration.ConnectionStringPharus_vFinale.ToString();
 
         public List<string[]> GetAllActiveSubFunds()
         {

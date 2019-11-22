@@ -2,15 +2,15 @@
 {
     using Microsoft.EntityFrameworkCore;
 
-    using Pharus.Domain.PharusProd;
+    using Pharus.Domain.Pharus_vFinale;
 
-    public partial class PharusProdContext : DbContext
+    public partial class Pharus_vFinaleContext : DbContext
     {
-        public PharusProdContext()
+        public Pharus_vFinaleContext()
         {
         }
 
-        public PharusProdContext(DbContextOptions<PharusProdContext> options)
+        public Pharus_vFinaleContext(DbContextOptions<Pharus_vFinaleContext> options)
             : base(options)
         {
         }
@@ -58,7 +58,7 @@
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(DbConfiguration.ConnectionStringPharusProd);
+                optionsBuilder.UseSqlServer(DbConfiguration.ConnectionStringPharus_vFinale);
             }
         }
 

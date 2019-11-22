@@ -8,10 +8,10 @@
 
     public class SubFundsSelectListService : ISubFundsSelectListService
     {
-        private readonly PharusProdContext _context;
+        private readonly Pharus_vFinaleContext _context;
 
         public SubFundsSelectListService(
-            PharusProdContext context)
+            Pharus_vFinaleContext context)
         {
             this._context = context;
         }
