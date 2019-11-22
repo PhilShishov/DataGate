@@ -38,13 +38,14 @@
         {
             var model = new ActiveEntitiesViewModel
             {
-                ActiveEntities = new List<string[]>()
+                ActiveEntities = new List<string[]>(),
+                IsActive = true
             };
 
             GetAllActiveFundsWithHeaders(model);
 
             return this.View(model);
-        }       
+        }
 
         [HttpPost]
         public IActionResult All(ActiveEntitiesViewModel model)
@@ -56,7 +57,14 @@
             {
                 if (model.ChosenDate != null)
                 {
-                    GetAllActiveFundsWithHeaders(model);
+                    if (model.IsActive)
+                    {
+                        GetAllActiveFundsWithHeaders(model);
+                    }
+                    else
+                    {
+                        model.ActiveEntities = this.fundsService.GetAllActiveFunds();
+                    }
                 }
             }
 
@@ -68,13 +76,22 @@
                 }
 
                 model.ActiveEntities = new List<string[]>();
-
                 var tableHeaders = this.fundsService.GetAllActiveFunds().Take(1).ToList();
-                var tableFundsWithoutHeaders = this.fundsService.GetAllActiveFunds()
-                                                    .Skip(1)
-                                                    .ToList()
-                                                    .Where(f => f.Contains("Active"))
-                                                    .ToList();
+                List<string[]> tableFundsWithoutHeaders = null;
+
+                if (model.IsActive)
+                {
+                    tableFundsWithoutHeaders = this.fundsService.GetAllActiveFunds()
+                                                        .Skip(1)
+                                                        .Where(f => f.Contains("Active"))
+                                                        .ToList();
+                }
+                else
+                {
+                    tableFundsWithoutHeaders = this.fundsService.GetAllActiveFunds()
+                                                        .Skip(1)                                                        
+                                                        .ToList();
+                }
 
                 CreateTableView.AddHeadersToView(model.ActiveEntities, tableHeaders);
 
