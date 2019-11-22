@@ -15,9 +15,10 @@
                value="Update Table"></>
 
         <div class="text-dark pr-3 bg-info w-20 d-inline">
-            <label for="Status" class="pr-3">STATUS</label>
-            <input type="checkbox" asp-for="IsActive" id="status" name="Status"
-                   checked>Active
+            <label for="Status" class="pr-3">ACTIVE</label>
+            @*<input type="checkbox" asp-for="IsActive" value="@Model.IsActive" name="Status"
+                   checked>Active*@
+            @Html.CheckBoxFor(m => Model.IsActive)
         </div>
     </div>
     <div>
