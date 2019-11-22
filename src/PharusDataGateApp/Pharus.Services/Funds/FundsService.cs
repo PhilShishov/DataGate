@@ -5,19 +5,25 @@
     using System.Data.SqlClient;
     using System.Collections.Generic;
 
-    using Pharus.Data;
     using Pharus.Services.Contracts;
     using Pharus.Services.Utilities;
+    using Microsoft.Extensions.Configuration;
 
     public class FundsService : IFundsService
     {
         private readonly string defaultDate = DateTime.Today.ToString("yyyyMMdd");
-        private readonly string ConnectionString = DbConfiguration.ConnectionStringPharus_vFinale.ToString();
+        private readonly IConfiguration configuration;
+
+        public FundsService(IConfiguration config)
+        {
+            this.configuration = config;
+        }
 
         public List<string[]> GetAllActiveFunds()
         {
-            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
+            using (SqlConnection connection = new SqlConnection())
             {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
@@ -29,8 +35,9 @@
 
         public List<string[]> GetAllActiveFunds(DateTime? chosenDate)
         {
-            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
+            using (SqlConnection connection = new SqlConnection())
             {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
@@ -50,8 +57,9 @@
 
         public List<string[]> GetActiveFundById(int Id)
         {
-            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
+            using (SqlConnection connection = new SqlConnection())
             {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
@@ -63,8 +71,9 @@
 
         public List<string[]> GetActiveFundById(DateTime? chosenDate, int Id)
         {
-            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
+            using (SqlConnection connection = new SqlConnection())
             {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
@@ -83,8 +92,9 @@
         }
         public List<string[]> GetActiveFundWithDateById(int Id)
         {
-            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
+            using (SqlConnection connection = new SqlConnection())
             {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
@@ -96,8 +106,9 @@
 
         public List<string[]> GetFundSubFunds(int Id)
         {
-            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
+            using (SqlConnection connection = new SqlConnection())
             {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
@@ -116,8 +127,9 @@
                 "@f_leiCode, @f_cssfCode, @f_faCode, @f_depCode, @f_taCode, " +
                 "@f_legalForm, @f_legalType, @f_legal_vehicle, @f_companyType, @f_tinNumber";
 
-            using (SqlConnection connection = new SqlConnection(this.ConnectionString))
+            using (SqlConnection connection = new SqlConnection())
             {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
                 using (SqlCommand command = new SqlCommand(query))
                 {
                     command.Parameters.AddRange(new[]
@@ -138,7 +150,7 @@
                         new SqlParameter("@f_legal_vehicle", SqlDbType.Int) { Value = fLegalVehicleId},
                         new SqlParameter("@f_companyType", SqlDbType.Int) { Value = fCompanyTypeId},
                         new SqlParameter("@f_tinNumber", SqlDbType.VarChar, 100) { Value = fundsValues[14]}
-                    });                    
+                    });
 
                     foreach (SqlParameter parameter in command.Parameters)
                     {
