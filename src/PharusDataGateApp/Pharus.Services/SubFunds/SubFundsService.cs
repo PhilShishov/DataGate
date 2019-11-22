@@ -4,9 +4,10 @@
     using System.Data.SqlClient;
     using System.Collections.Generic;
 
+    using Microsoft.Extensions.Configuration;
+
     using Pharus.Services.Utilities;
     using Pharus.Services.Contracts;
-    using Microsoft.Extensions.Configuration;
 
     public class SubFundsService : ISubFundsService
     {

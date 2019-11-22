@@ -13,6 +13,12 @@
                class="bg-pharus text-white"
                asp-for="Command"
                value="Update Table"></>
+
+        <div class="text-dark pr-3 bg-info w-20 d-inline">
+            <label for="Status" class="pr-3">STATUS</label>
+            <input type="checkbox" asp-for="IsActive" id="status" name="Status"
+                   checked>Active
+        </div>
     </div>
     <div>
         <input id="searchField"
@@ -25,5 +31,5 @@
                class="bg-pharus text-white"
                asp-for="Command"
                value="Search" />
-    </div>
+    </div>   
 </div>
