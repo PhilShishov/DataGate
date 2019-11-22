@@ -7,12 +7,24 @@
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/reset-css.css" />
+        <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="~/css/pharus.css" />
+        <link rel="stylesheet" href="~/css/style.css" />
+        <link href="http://cdn.syncfusion.com/17.3.0.9/js/web/flat-azure/ej.web.all.min.css"
+              rel="stylesheet" />
+
+        <style>
+            body {
+                background-color: aquamarine;
+            }
+        </style>
 
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="~/js/manageSideNavBar.js"></script>
         <script src="~/js/loadDate.js"></script>
         <script src="~/js/getDerivatives.js"></script>
-
     </environment>
 
     <environment exclude="Development">
@@ -23,14 +35,23 @@
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
 
+    <environment include="Production">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/reset-css.css" />
+        <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="~/css/pharus.css" />
+        <link rel="stylesheet" href="~/css/style.css" />
+        <link href="http://cdn.syncfusion.com/17.3.0.9/js/web/flat-azure/ej.web.all.min.css"
+              rel="stylesheet" />
 
-    <link rel="stylesheet" href="~/css/reset-css.css" />
-    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="~/css/pharus.css" />
-    <link rel="stylesheet" href="~/css/style.css" />
-    <link href="http://cdn.syncfusion.com/17.3.0.9/js/web/flat-azure/ej.web.all.min.css"
-          rel="stylesheet" />
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="~/js/manageSideNavBar.js"></script>
+        <script src="~/js/loadDate.js"></script>
+        <script src="~/js/getDerivatives.js"></script>
+    </environment>
+
+    @RenderSection("Styles", required: false)
 </head>
 
 <body id="bg-one">
@@ -170,7 +191,6 @@
                 loadDate();
                 getDerivatives();
             }
-
         </script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -205,6 +225,21 @@
             });
             $('#datepicker').datepicker("setDate", new Date());
         </script>
+    </environment>
+
+    <environment include="Production">
+        <script>
+            //const oldWindowOnLoad = window.onload || function () { };
+            window.onload = () => {
+                manageSideNavBar();
+                loadDate();
+                getDerivatives();
+            }
+        </script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="http://cdn.syncfusion.com/js/assets/external/jquery-1.11.3.min.js"></script>
+        <script src="http://cdn.syncfusion.com/17.3.0.9/js/web/ej.web.all.min.js"></script>
     </environment>
 
     @RenderSection("Scripts", required: false)
