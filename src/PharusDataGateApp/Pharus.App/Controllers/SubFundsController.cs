@@ -62,7 +62,10 @@
 
                 model.ActiveEntities = new List<string[]>();
 
-                var tableHeaders = this._subFundsService.GetAllActiveSubFunds().Take(1).ToList();
+                var tableHeaders = this._subFundsService
+                    .GetAllActiveSubFunds()
+                    .Take(1)
+                    .ToList();
                 var tableFundsWithoutHeaders = this._subFundsService.GetAllActiveSubFunds().Skip(1).ToList();
 
                 CreateTableView.AddHeadersToView(model.ActiveEntities, tableHeaders);

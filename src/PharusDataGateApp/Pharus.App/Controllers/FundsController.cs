@@ -76,21 +76,26 @@
                 }
 
                 model.ActiveEntities = new List<string[]>();
-                var tableHeaders = this.fundsService.GetAllActiveFunds().Take(1).ToList();
+                var tableHeaders = this.fundsService
+                    .GetAllActiveFunds()
+                    .Take(1)
+                    .ToList();
                 List<string[]> tableFundsWithoutHeaders = null;
 
                 if (model.IsActive)
                 {
-                    tableFundsWithoutHeaders = this.fundsService.GetAllActiveFunds()
-                                                        .Skip(1)
-                                                        .Where(f => f.Contains("Active"))
-                                                        .ToList();
+                    tableFundsWithoutHeaders = this.fundsService
+                        .GetAllActiveFunds()
+                        .Skip(1)
+                        .Where(f => f.Contains("Active"))
+                        .ToList();
                 }
                 else
                 {
-                    tableFundsWithoutHeaders = this.fundsService.GetAllActiveFunds()
-                                                        .Skip(1)                                                        
-                                                        .ToList();
+                    tableFundsWithoutHeaders = this.fundsService
+                        .GetAllActiveFunds()
+                        .Skip(1)                                                        
+                        .ToList();
                 }
 
                 CreateTableView.AddHeadersToView(model.ActiveEntities, tableHeaders);
@@ -103,7 +108,7 @@
                 return this.View(model);
             }
 
-            return this.View();
+            return this.RedirectToPage("/Funds/All");
         }
 
         [HttpPost]
@@ -148,7 +153,8 @@
 
             if (HttpContext.Request.Form.ContainsKey("extract_Pdf"))
             {
-                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.ActiveEntities, model.ChosenDate, _hostingEnvironment, typeName, controllerName);
+                fileStreamResult = ExtractTable
+                    .ExtractTableAsPdf(model.ActiveEntities, model.ChosenDate, _hostingEnvironment, typeName, controllerName);
             }
 
             return fileStreamResult;
@@ -164,7 +170,8 @@
 
             if (HttpContext.Request.Form.ContainsKey("extract_Pdf"))
             {
-                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.AESubEntities, model.ChosenDate, _hostingEnvironment, typeName, controllerName);
+                fileStreamResult = ExtractTable
+                    .ExtractTableAsPdf(model.AESubEntities, model.ChosenDate, _hostingEnvironment, typeName, controllerName);
             }
 
             return fileStreamResult;
@@ -193,7 +200,8 @@
             {
                 if (viewModel.ChosenDate != null)
                 {
-                    viewModel.ActiveEntity = this.fundsService.GetActiveFundById(viewModel.ChosenDate, viewModel.EntityId);
+                    viewModel.ActiveEntity = this.fundsService
+                        .GetActiveFundById(viewModel.ChosenDate, viewModel.EntityId);
                 }
             }
 
@@ -206,8 +214,14 @@
 
                 viewModel.AESubEntities = new List<string[]>();
 
-                var tableHeaders = this.fundsService.GetFundSubFunds(viewModel.EntityId).Take(1).ToList();
-                var tableFundsWithoutHeaders = this.fundsService.GetFundSubFunds(viewModel.EntityId).Skip(1).ToList();
+                var tableHeaders = this.fundsService
+                    .GetFundSubFunds(viewModel.EntityId)
+                    .Take(1)
+                    .ToList();
+                var tableFundsWithoutHeaders = this.fundsService
+                    .GetFundSubFunds(viewModel.EntityId)
+                    .Skip(1)
+                    .ToList();
 
                 CreateTableView.AddHeadersToView(viewModel.AESubEntities, tableHeaders);
 
@@ -265,15 +279,28 @@
             if (HttpContext.Request.Form.ContainsKey("update_button"))
             {
                 int fundId = model.FId;
-                int fStatusId = this._context.TbDomFStatus.Where(s => s.StFDesc == model.FStatus).Select(s => s.StFId).FirstOrDefault();
-                int fLegalFormId = this._context.TbDomLegalForm.Where(lf => lf.LfAcronym == model.LegalForm).Select(lf => lf.LfId).FirstOrDefault();
-                int fLegalVehicleId = this._context.TbDomLegalVehicle.Where(lv => lv.LvAcronym == model.LegalVehicle).Select(lv => lv.LvId).FirstOrDefault();
-                int fLegalTypeId = this._context.TbDomLegalType.Where(lt => lt.LtAcronym == model.LegalType).Select(lt => lt.LtId).FirstOrDefault();
-                int fCompanyTypeId = this._context.TbDomCompanyType.Where(ct => ct.CtAcronym == model.CompanyAcronym).Select(ct => ct.CtId).FirstOrDefault();
+                int fStatusId = this._context.TbDomFStatus
+                    .Where(s => s.StFDesc == model.FStatus)
+                    .Select(s => s.StFId)
+                    .FirstOrDefault();
+                int fLegalFormId = this._context.TbDomLegalForm
+                    .Where(lf => lf.LfAcronym == model.LegalForm)
+                    .Select(lf => lf.LfId)
+                    .FirstOrDefault();
+                int fLegalVehicleId = this._context.TbDomLegalVehicle
+                    .Where(lv => lv.LvAcronym == model.LegalVehicle)
+                    .Select(lv => lv.LvId)
+                    .FirstOrDefault();
+                int fLegalTypeId = this._context.TbDomLegalType
+                    .Where(lt => lt.LtAcronym == model.LegalType)
+                    .Select(lt => lt.LtId)
+                    .FirstOrDefault();
+                int fCompanyTypeId = this._context.TbDomCompanyType
+                    .Where(ct => ct.CtAcronym == model.CompanyAcronym)
+                    .Select(ct => ct.CtId)
+                    .FirstOrDefault();
 
-                this.fundsService.ExecuteEditFund(entityValues, fundId, chosenDate, fStatusId, fLegalFormId, fLegalTypeId, fLegalVehicleId, fCompanyTypeId);
-
-                return LocalRedirect(returnUrl);
+                this.fundsService.ExecuteEditFund(entityValues, fundId, chosenDate, fStatusId, fLegalFormId, fLegalTypeId, fLegalVehicleId, fCompanyTypeId);               
             }
             return this.LocalRedirect(returnUrl);
         }
@@ -301,12 +328,16 @@
         {
             model.ActiveEntities = new List<string[]>();
 
-            var tableHeaders = this.fundsService.GetAllActiveFunds().Take(1).ToList();
-            var tableFundsWithoutHeaders = this.fundsService.GetAllActiveFunds()
-                                                .Skip(1)
-                                                .ToList()
-                                                .Where(f => f.Contains("Active"))
-                                                .ToList();
+            var tableHeaders = this.fundsService
+                .GetAllActiveFunds()
+                .Take(1)
+                .ToList();
+            var tableFundsWithoutHeaders = this.fundsService
+                .GetAllActiveFunds()
+                .Skip(1)
+                .ToList()
+                .Where(f => f.Contains("Active"))
+                .ToList();
 
             model.ActiveEntities.AddRange(tableHeaders);
             model.ActiveEntities.AddRange(tableFundsWithoutHeaders);

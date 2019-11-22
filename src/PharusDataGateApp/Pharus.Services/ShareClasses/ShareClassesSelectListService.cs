@@ -18,35 +18,45 @@
 
         public List<string> GetAllTbDomCountry()
         {
-            var country = this._context.TbDomIsoCountry.Select(tb => tb.IsoCountryIso2 + " - " + tb.IsoCountryDesc).ToList();
+            var country = this._context.TbDomIsoCountry
+                .Select(tb => tb.IsoCountryIso2 + " - " + tb.IsoCountryDesc)
+                .ToList();
 
             return country;
         }
 
         public List<string> GetAllTbDomCurrencyCode()
         {
-            var currencyCode = this._context.TbDomIsoCurrency.Select(tb => tb.IsoCcyCode).ToList();
+            var currencyCode = this._context.TbDomIsoCurrency
+                .Select(tb => tb.IsoCcyCode)
+                .ToList();
 
             return currencyCode;
         }
 
         public List<string> GetAllTbDomInvestorType()
         {
-            var investorType = this._context.TbDomInvestorType.Select(tb => tb.ItDesc).ToList();
+            var investorType = this._context.TbDomInvestorType
+                .Select(tb => tb.ItDesc)
+                .ToList();
 
             return investorType;
         }
 
         public List<string> GetAllTbDomShareStatus()
         {
-            var shareStatus = this._context.TbDomShareStatus.Select(tb => tb.ScSDesc).ToList();
+            var shareStatus = this._context.TbDomShareStatus
+                .Select(tb => tb.ScSDesc)
+                .ToList();
 
             return shareStatus;
         }
 
         public List<string> GetAllTbDomShareType()
         {
-            var shareType = this._context.TbDomShareType.Select(tb => tb.StDesc).ToList();
+            var shareType = this._context.TbDomShareType
+                .Select(tb => tb.StDesc)
+                .ToList();
 
             return shareType;
         }
