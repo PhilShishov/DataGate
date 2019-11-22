@@ -17,7 +17,7 @@
     [Authorize]
     public class FundsController : Controller
     {
-        private readonly PharusProdContext _context;
+        private readonly Pharus_vFinaleContext _context;
         private readonly IFundsService fundsService;
         private readonly IFundsSelectListService fundsSelectListService;
         private readonly IHostingEnvironment _hostingEnvironment;
@@ -25,7 +25,7 @@
         public FundsController(IFundsService fundsService,
             IFundsSelectListService fundsSelectListService,
             IHostingEnvironment hostingEnvironment,
-            PharusProdContext context)
+            Pharus_vFinaleContext context)
         {
             this._context = context;
             this.fundsService = fundsService;

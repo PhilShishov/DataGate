@@ -8,10 +8,10 @@
 
     public class ShareClassesSelectListService : IShareClassesSelectListService
     {
-        private readonly PharusProdContext _context;
+        private readonly Pharus_vFinaleContext _context;
 
         public ShareClassesSelectListService(
-            PharusProdContext context)
+            Pharus_vFinaleContext context)
         {
             this._context = context;
         }

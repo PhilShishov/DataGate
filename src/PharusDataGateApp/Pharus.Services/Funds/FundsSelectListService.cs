@@ -8,10 +8,10 @@
 
     public class FundsSelectListService : IFundsSelectListService
     {
-        private readonly PharusProdContext _context;
+        private readonly Pharus_vFinaleContext _context;
 
         public FundsSelectListService(
-            PharusProdContext context)
+            Pharus_vFinaleContext context)
         {
             this._context = context;
         }
