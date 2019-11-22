@@ -96,7 +96,7 @@
                 })
                 .ToList();
 
-            return View(usersView);
+            return this.View(usersView);
         }
 
         [HttpGet("Admin/EditUser/{username}")]

@@ -10,9 +10,12 @@
         {
             using (var reader = command.ExecuteReader())
             {
-                var model = ReadTableData.ReadTableValue(reader).ToList();
+                var model = ReadTableData
+                    .ReadTableValue(reader)
+                    .ToList();
 
-                var item = ReadTableData.ReadTableHeader(reader);
+                var item = ReadTableData
+                    .ReadTableHeader(reader);
 
                 model.Insert(0, item);
 
