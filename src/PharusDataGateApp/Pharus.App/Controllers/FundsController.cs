@@ -38,30 +38,25 @@
         {
             var model = new ActiveEntitiesViewModel
             {
-                ActiveEntities = this.fundsService
-                                    .GetAllActiveFunds()
-                                    .Where(f => f.Contains("Active"))
-                                    .ToList()
+                ActiveEntities = new List<string[]>()
             };
 
+            GetAllActiveFundsWithHeaders(model);
+
             return this.View(model);
-        }    
+        }       
 
         [HttpPost]
         public IActionResult All(ActiveEntitiesViewModel model)
         {
             ModelState.Clear();
-            model.ActiveEntities = this.fundsService.GetAllActiveFunds()
-                                                    .Where(f => f.Contains("Active"))
-                                                    .ToList(); ;
+            GetAllActiveFundsWithHeaders(model);
 
             if (model.Command.Equals("Update Table"))
             {
                 if (model.ChosenDate != null)
                 {
-                    model.ActiveEntities = this.fundsService.GetAllActiveFunds(model.ChosenDate)
-                                                        .Where(f => f.Contains("Active"))
-                                                        .ToList();
+                    GetAllActiveFundsWithHeaders(model);
                 }
             }
 
@@ -283,6 +278,21 @@
             this.ViewData["CompanyAcronymList"] = this.fundsSelectListService.GetAllTbDomCompanyAcronym();
 
             return this.View(model);
+        }
+
+        private void GetAllActiveFundsWithHeaders(ActiveEntitiesViewModel model)
+        {
+            model.ActiveEntities = new List<string[]>();
+
+            var tableHeaders = this.fundsService.GetAllActiveFunds().Take(1).ToList();
+            var tableFundsWithoutHeaders = this.fundsService.GetAllActiveFunds()
+                                                .Skip(1)
+                                                .ToList()
+                                                .Where(f => f.Contains("Active"))
+                                                .ToList();
+
+            model.ActiveEntities.AddRange(tableHeaders);
+            model.ActiveEntities.AddRange(tableFundsWithoutHeaders);
         }
     }
 }
