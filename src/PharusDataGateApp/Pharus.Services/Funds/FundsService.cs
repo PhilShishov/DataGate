@@ -5,9 +5,10 @@
     using System.Data.SqlClient;
     using System.Collections.Generic;
 
+    using Microsoft.Extensions.Configuration;
+
     using Pharus.Services.Contracts;
     using Pharus.Services.Utilities;
-    using Microsoft.Extensions.Configuration;
 
     public class FundsService : IFundsService
     {
@@ -90,6 +91,7 @@
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
         }
+
         public List<string[]> GetActiveFundWithDateById(int Id)
         {
             using (SqlConnection connection = new SqlConnection())

@@ -8,6 +8,8 @@
     {
         public DateTime? ChosenDate { get; set; }
 
+        public bool IsActive { get; set; }
+
         public string Command { get; set; }
 
         public int EntityId { get; set; }
