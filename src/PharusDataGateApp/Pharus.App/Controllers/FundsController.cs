@@ -33,7 +33,7 @@
             this._hostingEnvironment = hostingEnvironment;
         }      
 
-        public JsonResult AutoCompleteFundListWithFundName(string searchTerm)
+        public JsonResult AutoCompleteFundList(string searchTerm)
         {
             var result = _context.TbHistoryFund.ToList();
             if (searchTerm != null)
@@ -57,7 +57,7 @@
                 IsActive = true
             };
 
-            GetAllActiveFundsWithHeaders(model);
+            GetAllActiveEntitiesWithHeaders.GetAllActiveFundsWithHeaders(model, this.fundsService);
 
             return this.View(model);
         }
@@ -66,7 +66,8 @@
         public IActionResult All(ActiveEntitiesViewModel model)
         {
             ModelState.Clear();
-            GetAllActiveFundsWithHeaders(model);
+            GetAllActiveEntitiesWithHeaders.GetAllActiveFundsWithHeaders(model, this.fundsService);
+
 
             if (model.Command.Equals("Update Table"))
             {
@@ -74,7 +75,7 @@
                 {
                     if (model.IsActive)
                     {
-                        GetAllActiveFundsWithHeaders(model);
+                        GetAllActiveEntitiesWithHeaders.GetAllActiveFundsWithHeaders(model, this.fundsService);
                     }
                     else
                     {
@@ -337,25 +338,6 @@
             this.ViewData["CompanyAcronymList"] = this.fundsSelectListService.GetAllTbDomCompanyAcronym();
 
             return this.View(model);
-        }
-
-        private void GetAllActiveFundsWithHeaders(ActiveEntitiesViewModel model)
-        {
-            model.ActiveEntities = new List<string[]>();
-
-            var tableHeaders = this.fundsService
-                .GetAllActiveFunds()
-                .Take(1)
-                .ToList();
-            var tableFundsWithoutHeaders = this.fundsService
-                .GetAllActiveFunds()
-                .Skip(1)
-                .ToList()
-                .Where(f => f.Contains("Active"))
-                .ToList();
-
-            model.ActiveEntities.AddRange(tableHeaders);
-            model.ActiveEntities.AddRange(tableFundsWithoutHeaders);
         }
     }
 }
