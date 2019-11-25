@@ -31,24 +31,7 @@
             this.fundsService = fundsService;
             this.fundsSelectListService = fundsSelectListService;
             this._hostingEnvironment = hostingEnvironment;
-        }
-
-        [HttpGet]
-        public ActionResult AutoCompleteFundList()
-        {
-            return View();
-        }
-
-        public ActionResult AutoCompleteFundList(string FOfficialFundName)
-        {
-            var result = (from s in _context.TbHistoryFund.Where(s => s.FOfficialFundName == FOfficialFundName.Trim()) select s).ToList();
-            if (result.Count == 0)
-            {
-                TempData["NoDataFound"] = "No Data Found";
-                return View("AutoCompleteFundList");
-            }
-            return View(result);
-        }
+        }      
 
         public JsonResult AutoCompleteFundListWithFundName(string searchTerm)
         {

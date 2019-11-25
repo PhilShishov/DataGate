@@ -7,6 +7,11 @@
 
 <h2 class="text-center text-torshia">All Active ShareClasses</h2>
 
+@section Styles{
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+}
+
 <form asp-controller="ShareClasses" class="justify-content-between" method="post">
     <div>
         <partial name="ContainerActiveEntityPartial" />
@@ -22,8 +27,28 @@
     </div>
 </form>
 
-@section Scripts
-        {
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#SearchTerm").select2({
+                placeholder: "Select Funds",
+                theme: "classic",
+                ajax: {
+                    url: "/Funds/AutoCompleteFundListWithFundName",
+                    dataType: "json",
+                    delay: 250,
+                    data: function (params) {
+                        return { searchTerm: params.term };
+                    },
+                    processResults: function (data, params) {
+                        return { results: data }
+                    }
+                }
+            });
+        });
+    </script>
+
     <script type="text/javascript" src="~/js/jquery.doubleScroll.js"></script>
 
     <script type="text/javascript">
