@@ -10,7 +10,9 @@
             {
                 foreach (var stringValue in fund)
                 {
-                    if (stringValue != null && stringValue.ToLower().Contains(searchString.ToLower()))
+                    if (stringValue != null && stringValue
+                        .ToLower()
+                        .Contains(searchString.ToLower()))
                     {
                         activeFunds.Add(fund);
                         break;

@@ -55,7 +55,7 @@
 
             else if (model.Command.Equals("Search"))
             {
-                if (model.SearchString == null)
+                if (model.SearchTerm == null)
                 {
                     return this.View(model);
                 }
@@ -67,7 +67,7 @@
 
                 CreateTableView.AddHeadersToView(model.ActiveEntities, tableHeaders);
 
-                CreateTableView.AddTableToView(model.ActiveEntities, tableFundsWithoutHeaders, model.SearchString.ToLower());
+                CreateTableView.AddTableToView(model.ActiveEntities, tableFundsWithoutHeaders, model.SearchTerm.ToLower());
             }
 
             if (model.ActiveEntities != null)

@@ -147,10 +147,6 @@ h3 {
     text-align: center;
 }
 
-.pharusSearchForm {
-    display: contents;
-}
-
 .textBoxHeaderPharus {
     border: none;
     outline: none;
@@ -190,6 +186,11 @@ input[type=search]::-webkit-search-cancel-button {
     transition-delay: 0s;
     transition-property: all;
 }*/
+
+.pharusSearchDiv {
+    top: 14%;
+    right: 5%;
+}
 
 #searchField {
     padding: 4px;
