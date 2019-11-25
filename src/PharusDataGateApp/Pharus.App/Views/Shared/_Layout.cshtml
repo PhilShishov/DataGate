@@ -6,18 +6,16 @@
     <title>@ViewData["Title"] Pharus DataGate</title>
 
     <environment include="Development">
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/reset-css.css" />
         <link rel="stylesheet" href="~/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="~/css/pharus.css" />
         <link rel="stylesheet" href="~/css/style.css" />
-        <link href="http://cdn.syncfusion.com/17.3.0.9/js/web/flat-azure/ej.web.all.min.css"
-              rel="stylesheet" />
 
         <style>
             body {
-                background-color: aquamarine;
+                background-color: antiquewhite;
             }
         </style>
 
@@ -178,7 +176,7 @@
 
         <footer>
             <div class="container-fluid bg-pharus">
-                <div class="text-white p-2 text-center">&copy; Pharus Management Lux SA 16, Avenue de la Gare L- 1610 Luxembourg T. +352 28 55 69 - 1</div>
+                <div class="text-white text-center">&copy; Pharus Management Lux SA 16, Avenue de la Gare L- 1610 Luxembourg T. +352 28 55 69 - 1</div>
             </div>
         </footer>
     </div>
@@ -194,12 +192,8 @@
         </script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="http://cdn.syncfusion.com/js/assets/external/jquery-1.11.3.min.js"></script>
-        <script src="http://cdn.syncfusion.com/17.3.0.9/js/web/ej.web.all.min.js"></script>
-
     </environment>
     <environment exclude="Development">
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
                 asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
                 asp-fallback-test="window.jQuery"

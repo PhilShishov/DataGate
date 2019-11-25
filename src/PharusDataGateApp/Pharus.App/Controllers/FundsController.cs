@@ -34,6 +34,38 @@
         }
 
         [HttpGet]
+        public ActionResult AutoCompleteFundList()
+        {
+            return View();
+        }
+
+        public ActionResult AutoCompleteFundList(string FOfficialFundName)
+        {
+            var result = (from s in _context.TbHistoryFund.Where(s => s.FOfficialFundName == FOfficialFundName.Trim()) select s).ToList();
+            if (result.Count == 0)
+            {
+                TempData["NoDataFound"] = "No Data Found";
+                return View("AutoCompleteFundList");
+            }
+            return View(result);
+        }
+
+        public JsonResult AutoCompleteFundListWithFundName(string searchTerm)
+        {
+            var result = _context.TbHistoryFund.ToList();
+            if (searchTerm != null)
+            {
+                result = _context.TbHistoryFund.Where(s => s.FOfficialFundName.Contains(searchTerm)).ToList();
+            }
+            var modifiedData = result.Select(s => new
+            {
+                id = s.FOfficialFundName,
+                text = s.FOfficialFundName
+            });
+            return Json(modifiedData);
+        }
+
+        [HttpGet]
         public IActionResult All()
         {
             var model = new ActiveEntitiesViewModel
@@ -70,7 +102,7 @@
 
             else if (model.Command.Equals("Search"))
             {
-                if (model.SearchString == null)
+                if (model.SearchTerm == null)
                 {
                     return this.View(model);
                 }
@@ -100,7 +132,7 @@
 
                 CreateTableView.AddHeadersToView(model.ActiveEntities, tableHeaders);
 
-                CreateTableView.AddTableToView(model.ActiveEntities, tableFundsWithoutHeaders, model.SearchString.ToLower());
+                CreateTableView.AddTableToView(model.ActiveEntities, tableFundsWithoutHeaders, model.SearchTerm.ToLower());
             }
 
             if (model.ActiveEntities != null)
@@ -207,7 +239,7 @@
 
             else if (viewModel.Command.Equals("Filter"))
             {
-                if (viewModel.SearchString == null)
+                if (viewModel.SearchTerm == null)
                 {
                     return this.View(viewModel);
                 }
@@ -225,7 +257,7 @@
 
                 CreateTableView.AddHeadersToView(viewModel.AESubEntities, tableHeaders);
 
-                CreateTableView.AddTableToView(viewModel.AESubEntities, tableFundsWithoutHeaders, viewModel.SearchString.ToLower());
+                CreateTableView.AddTableToView(viewModel.AESubEntities, tableFundsWithoutHeaders, viewModel.SearchTerm.ToLower());
             }
 
             if (viewModel.ActiveEntity != null && viewModel.AESubEntities != null)

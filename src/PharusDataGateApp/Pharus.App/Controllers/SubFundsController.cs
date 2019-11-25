@@ -55,7 +55,7 @@
 
             else if (model.Command.Equals("Search"))
             {
-                if (model.SearchString == null)
+                if (model.SearchTerm == null)
                 {
                     return this.View(model);
                 }
@@ -70,7 +70,7 @@
 
                 CreateTableView.AddHeadersToView(model.ActiveEntities, tableHeaders);
 
-                CreateTableView.AddTableToView(model.ActiveEntities, tableFundsWithoutHeaders, model.SearchString.ToLower());
+                CreateTableView.AddTableToView(model.ActiveEntities, tableFundsWithoutHeaders, model.SearchTerm.ToLower());
             }
 
             if (model.ActiveEntities != null)
@@ -174,7 +174,7 @@
 
             else if (viewModel.Command.Equals("Filter"))
             {
-                if (viewModel.SearchString == null)
+                if (viewModel.SearchTerm == null)
                 {
                     return this.View(viewModel);
                 }
@@ -186,7 +186,7 @@
 
                 CreateTableView.AddHeadersToView(viewModel.AESubEntities, tableHeaders);
 
-                CreateTableView.AddTableToView(viewModel.AESubEntities, tableFundsWithoutHeaders, viewModel.SearchString.ToLower());
+                CreateTableView.AddTableToView(viewModel.AESubEntities, tableFundsWithoutHeaders, viewModel.SearchTerm.ToLower());
             }
 
             if (viewModel.ActiveEntity != null && viewModel.AESubEntities != null)

@@ -10,7 +10,7 @@
 
         int EntityId { get; set; }
 
-        string SearchString { get; set; }
+        string SearchTerm { get; set; }
 
         string HSearchString { get; set; }
     }
