@@ -5,27 +5,45 @@
 
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Mvc.Rendering;
 
+    using Pharus.Data;
     using Pharus.App.Utilities;
     using Pharus.Services.Contracts;
     using Pharus.App.Models.ViewModels.Entities;
     using Pharus.App.Models.BindingModels.SubFunds;
-    using Microsoft.AspNetCore.Mvc.Rendering;
 
     public class SubFundsController : Controller
     {
+        private readonly Pharus_vFinaleContext _context;
         private readonly ISubFundsService _subFundsService;
         private readonly ISubFundsSelectListService _subfundsSelectListService;
         private readonly IHostingEnvironment _hostingEnvironment;
 
         public SubFundsController(
+            Pharus_vFinaleContext context,
             ISubFundsService subFundsService,
             ISubFundsSelectListService subfundsSelectListService,
             IHostingEnvironment hostingEnvironment)
         {
+            this._context = context;
             this._subFundsService = subFundsService;
             this._subfundsSelectListService = subfundsSelectListService;
             this._hostingEnvironment = hostingEnvironment;
+        }
+        public JsonResult AutoCompleteFundListWithFundName(string searchTerm)
+        {
+            var result = _context.TbHistorySubFund.ToList();
+            if (searchTerm != null)
+            {
+                result = _context.TbHistorySubFund.Where(s => s.SfOfficialSubFundName.Contains(searchTerm)).ToList();
+            }
+            var modifiedData = result.Select(s => new
+            {
+                id = s.SfOfficialSubFundName,
+                text = s.SfOfficialSubFundName
+            });
+            return Json(modifiedData);
         }
 
         [HttpGet]
@@ -33,7 +51,8 @@
         {
             var model = new ActiveEntitiesViewModel
             {
-                ActiveEntities = this._subFundsService.GetAllActiveSubFunds()
+                ActiveEntities = this._subFundsService.GetAllActiveSubFunds(),
+                IsActive = true
             };
 
             return this.View(model);
