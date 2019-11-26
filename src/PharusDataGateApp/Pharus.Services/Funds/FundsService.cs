@@ -118,9 +118,15 @@
             }
         }
 
-        public void ExecuteEditFund(List<string> fundsValues, int fundId, DateTime chosenDate, int fStatusId,
-                                                int fLegalFormId, int fLegalTypeId,
-                                                int fLegalVehicleId, int fCompanyTypeId)
+        public void ExecuteEditFund(
+                                    List<string> fundsValues,
+                                    int fundId,
+                                    DateTime chosenDate,
+                                    int fStatusId,
+                                    int fLegalFormId,
+                                    int fLegalTypeId,
+                                    int fLegalVehicleId,
+                                    int fCompanyTypeId)
         {
             string query = "EXEC sp_modify_fund @f_id, @f_initialDate, @f_status, " +
                 "@f_registrationNumber, @f_officialFundName, @f_shortFundName, " +

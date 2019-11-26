@@ -15,7 +15,8 @@
         {
         }
 
-        public PharusUsersDbContext(DbContextOptions<PharusUsersDbContext> options) : base(options)
+        public PharusUsersDbContext(DbContextOptions<PharusUsersDbContext> options)
+            : base(options)
         {
         }
 

@@ -28,7 +28,7 @@
 
             for (int j = 0; j < reader.FieldCount; j++)
             {
-                item[j] = (reader.GetName(j));
+                item[j] = reader.GetName(j);
             }
 
             return item;
