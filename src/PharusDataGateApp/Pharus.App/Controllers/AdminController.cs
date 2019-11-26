@@ -21,9 +21,9 @@
     {
         private readonly IRolesService rolesService;
         private readonly IUsersService usersService;
-        private readonly RoleManager<PharusRole> _roleManager;
-        private readonly UserManager<PharusUser> _userManager;
-        private readonly ILogger<UserCreateBindingModel> _logger;
+        private readonly RoleManager<PharusRole> roleManager;
+        private readonly UserManager<PharusUser> userManager;
+        private readonly ILogger<UserCreateBindingModel> logger;
 
         public AdminController(
             IRolesService rolesService,
@@ -34,9 +34,9 @@
         {
             this.rolesService = rolesService;
             this.usersService = usersService;
-            _userManager = userManager;
-            _roleManager = roleManager;
-            _logger = logger;
+            this.userManager = userManager;
+            this.roleManager = roleManager;
+            this.logger = logger;
         }
 
         [HttpGet]
@@ -69,21 +69,21 @@
                 Email = bindingModel.Email
             };
 
-            var result = await _userManager.CreateAsync(user, bindingModel.Password);
+            var result = await userManager.CreateAsync(user, bindingModel.Password);
 
             if (result.Succeeded)
             {
-                _logger.LogInformation("User created a new account with password.");
+                this.logger.LogInformation("User created a new account with password.");
 
-                //Assign role to new user
-                await AssignRoleToUser(bindingModel, user);
-                return LocalRedirect(returnUrl);
+                await this.AssignRoleToUser(bindingModel, user);
+                return this.LocalRedirect(returnUrl);
             }
 
-            AddErrors(result);
+            this.AddErrors(result);
 
             return this.RedirectToPage("/Admin/CreateUser");
         }
+
         public IActionResult ViewUsers()
         {
             List<UserViewModel> usersView = this.usersService.GetAllUserRoles()
@@ -91,8 +91,9 @@
                 {
                     Username = user.UserName,
                     Role = user.UserRoles.Select(ur => ur.Role.Name).FirstOrDefault(),
-                    LastLogin = user.LastLoginTime?.ToString("dd.MM.yyyy HH:mm", 
-                        CultureInfo.InvariantCulture)
+                    LastLogin = user.LastLoginTime?.ToString(
+                        "dd.MM.yyyy HH:mm",
+                        CultureInfo.InvariantCulture),
                 })
                 .ToList();
 
@@ -110,7 +111,7 @@
                     Id = u.Id,
                     Username = u.UserName,
                     Email = u.Email,
-                    RoleType = u.UserRoles.Select(ur => ur.Role.Name).FirstOrDefault()
+                    RoleType = u.UserRoles.Select(ur => ur.Role.Name).FirstOrDefault(),
                 })
                 .FirstOrDefault();
 
@@ -122,16 +123,16 @@
         {
             returnUrl = "/Admin/Index";
 
-            if (!ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
-                return View(model ?? new EditUserBindingModel());
+                return this.View(model ?? new EditUserBindingModel());
             }
 
             var user = this.usersService.GetAllUserRoles()
                 .Where(u => u.UserName == model.Id)
                 .FirstOrDefault();
 
-            if (HttpContext.Request.Form.ContainsKey("save_button"))
+            if (this.HttpContext.Request.Form.ContainsKey("save_button"))
             {
                 user.UserName = model.Username;
                 user.Email = model.Email;
@@ -142,8 +143,8 @@
                 {
                     if (newRole != oldRole)
                     {
-                        await this._userManager.RemoveFromRoleAsync(user, oldRole);
-                        await this._userManager.AddToRoleAsync(user, newRole);
+                        await this.userManager.RemoveFromRoleAsync(user, oldRole);
+                        await this.userManager.AddToRoleAsync(user, newRole);
                     }
                 }
 
@@ -155,59 +156,56 @@
                     user.PasswordHash = newPassword;
                 }
 
-                var resultUser = await _userManager.UpdateAsync(user);
+                var resultUser = await this.userManager.UpdateAsync(user);
 
                 if (resultUser.Succeeded)
                 {
-                    _logger.LogInformation("User updated.");
+                    this.logger.LogInformation("User updated.");
 
-                    return LocalRedirect(returnUrl);
+                    return this.LocalRedirect(returnUrl);
                 }
             }
-
-            else if (HttpContext.Request.Form.ContainsKey("delete_button"))
+            else if (this.HttpContext.Request.Form.ContainsKey("delete_button"))
             {
-                var result = await this._userManager.DeleteAsync(user);
+                var result = await this.userManager.DeleteAsync(user);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User deleted.");
+                    this.logger.LogInformation("User deleted.");
 
-                    return LocalRedirect(returnUrl);
+                    return this.LocalRedirect(returnUrl);
                 }
             }
 
             return this.RedirectToPage(returnUrl);
         }
 
-        #region Helpers
-
         private async Task AssignRoleToUser(UserCreateBindingModel bindingModel, PharusUser user)
         {
             var role = bindingModel.RoleType;
-            var roleExist = await _roleManager.RoleExistsAsync(role);
-            var admins = _userManager.GetUsersInRoleAsync("Admin").Result;
+            var roleExist = await this.roleManager.RoleExistsAsync(role);
+            var admins = this.userManager.GetUsersInRoleAsync("Admin").Result;
 
             if (roleExist)
             {
                 if (role == "Admin" && admins.Count <= 2)
                 {
-                    await _userManager.AddToRoleAsync(user, "Admin");
+                    await this.userManager.AddToRoleAsync(user, "Admin");
                 }
                 else if (role == "Legal")
                 {
-                    await _userManager.AddToRoleAsync(user, "Legal");
+                    await this.userManager.AddToRoleAsync(user, "Legal");
                 }
                 else if (role == "Risk")
                 {
-                    await _userManager.AddToRoleAsync(user, "Risk");
+                    await this.userManager.AddToRoleAsync(user, "Risk");
                 }
                 else if (role == "Investment")
                 {
-                    await _userManager.AddToRoleAsync(user, "Investment");
+                    await this.userManager.AddToRoleAsync(user, "Investment");
                 }
                 else if (role == "Compliance")
                 {
-                    await _userManager.AddToRoleAsync(user, "Compliance");
+                    await this.userManager.AddToRoleAsync(user, "Compliance");
                 }
             }
         }
@@ -216,9 +214,8 @@
         {
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError(string.Empty, error.Description);
+                this.ModelState.AddModelError(string.Empty, error.Description);
             }
         }
-        #endregion
     }
 }

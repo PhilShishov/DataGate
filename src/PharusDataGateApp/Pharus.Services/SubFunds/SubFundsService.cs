@@ -27,7 +27,7 @@
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from fn_active_subfund('{defaultDate}')";
+                command.CommandText = $"select * from fn_active_subfund('{this.defaultDate}')";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
@@ -43,9 +43,8 @@
 
                 if (chosenDate == null)
                 {
-                    command.CommandText = $"select * from fn_active_subfund('{defaultDate}')";
+                    command.CommandText = $"select * from fn_active_subfund('{this.defaultDate}')";
                 }
-
                 else
                 {
                     command.CommandText = $"select * from fn_active_subfund('{chosenDate?.ToString("yyyyMMdd")}')";
@@ -55,7 +54,7 @@
             }
         }
 
-        public List<string[]> GetActiveSubFundById(int Id)
+        public List<string[]> GetActiveSubFundById(int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -63,13 +62,13 @@
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from fn_active_subfund('{defaultDate}') where [ID] = {Id}";
+                command.CommandText = $"select * from fn_active_subfund('{this.defaultDate}') where [ID] = {id}";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
         }
 
-        public List<string[]> GetActiveSubFundById(DateTime? chosenDate, int Id)
+        public List<string[]> GetActiveSubFundById(DateTime? chosenDate, int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -79,19 +78,18 @@
 
                 if (chosenDate == null)
                 {
-                    command.CommandText = $"select * from fn_active_subfund('{defaultDate}') where [ID] = {Id}";
+                    command.CommandText = $"select * from fn_active_subfund('{this.defaultDate}') where [ID] = {id}";
                 }
-
                 else
                 {
-                    command.CommandText = $"select * from fn_active_subfund('{chosenDate?.ToString("yyyyMMdd")}') where [ID] = {Id}";
+                    command.CommandText = $"select * from fn_active_subfund('{chosenDate?.ToString("yyyyMMdd")}') where [ID] = {id}";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
         }
 
-        public List<string[]> GetActiveSubFundWithDateById(int Id)
+        public List<string[]> GetActiveSubFundWithDateById(int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -99,13 +97,13 @@
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from fn_active_subfund_modifyview('{defaultDate}') where [ID] = {Id}";
+                command.CommandText = $"select * from fn_active_subfund_modifyview('{this.defaultDate}') where [ID] = {id}";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
         }
 
-        public List<string[]> GetSubFundShareClasses(int Id)
+        public List<string[]> GetSubFundShareClasses(int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -113,7 +111,7 @@
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from ActivesubfundforSpecificFundAtDate('{defaultDate}', {Id})";
+                command.CommandText = $"select * from ActivesubfundforSpecificFundAtDate('{this.defaultDate}', {id})";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }

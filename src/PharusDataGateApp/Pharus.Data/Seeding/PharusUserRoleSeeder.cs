@@ -1,5 +1,4 @@
-﻿
-namespace Pharus.Data.Seeding
+﻿namespace Pharus.Data.Seeding
 {
     using System.Linq;
 
@@ -13,6 +12,7 @@ namespace Pharus.Data.Seeding
         {
             this.context = context;
         }
+
         public void Seed()
         {
             if (!this.context.Roles.Any())

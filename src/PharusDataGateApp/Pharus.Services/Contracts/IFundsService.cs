@@ -1,5 +1,4 @@
-﻿
-namespace Pharus.Services.Contracts
+﻿namespace Pharus.Services.Contracts
 {
     using System;
     using System.Collections.Generic;
@@ -10,16 +9,15 @@ namespace Pharus.Services.Contracts
 
         List<string[]> GetAllActiveFunds(DateTime? chosenDate);
 
-        List<string[]> GetActiveFundById(int Id);
+        List<string[]> GetActiveFundById(int id);
 
-        List<string[]> GetActiveFundById(DateTime? chosenDate, int Id);
+        List<string[]> GetActiveFundById(DateTime? chosenDate, int id);
 
-        List<string[]> GetActiveFundWithDateById(int Id);
+        List<string[]> GetActiveFundWithDateById(int id);
 
-        List<string[]> GetFundSubFunds(int Id);
+        List<string[]> GetFundSubFunds(int id);
 
-        void ExecuteEditFund(List<string> fundsProperties, int fundId, DateTime chosenDate,
-            int fStatusId, int fLegalFormId, int fLegalTypeId, 
-            int fLegalVehicleId, int fCompanyTypeId);
+        void ExecuteEditFund(List<string> fundsProperties, int fundId, DateTime chosenDate, int fStatusId,
+                             int fLegalFormId, int fLegalTypeId, int fLegalVehicleId, int fCompanyTypeId);
     }
 }

@@ -1,5 +1,4 @@
-﻿
-namespace Pharus.App.Areas.Identity.Pages.Account
+﻿namespace Pharus.App.Areas.Identity.Pages.Account
 {
     using System;
     using System.Threading.Tasks;
@@ -17,18 +16,18 @@ namespace Pharus.App.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
-        private readonly SignInManager<PharusUser> _signInManager;
-        private readonly UserManager<PharusUser> _userManager;
-        private readonly ILogger<LoginModel> _logger;
+        private readonly SignInManager<PharusUser> signInManager;
+        private readonly UserManager<PharusUser> userManager;
+        private readonly ILogger<LoginModel> logger;
 
         public LoginModel(
             SignInManager<PharusUser> signInManager,
             UserManager<PharusUser> userManager,
             ILogger<LoginModel> logger)
         {
-            _signInManager = signInManager;
-            _userManager = userManager;
-            _logger = logger;
+            this.signInManager = signInManager;
+            this.userManager = userManager;
+            this.logger = logger;
         }
 
         [BindProperty]
@@ -54,41 +53,40 @@ namespace Pharus.App.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            if (!string.IsNullOrEmpty(ErrorMessage))
+            if (!string.IsNullOrEmpty(this.ErrorMessage))
             {
-                ModelState.AddModelError(string.Empty, ErrorMessage);
+                this.ModelState.AddModelError(string.Empty, this.ErrorMessage);
             }
 
-            returnUrl = returnUrl ?? Url.Content("~/");
+            returnUrl = returnUrl ?? this.Url.Content("~/");
 
             // Clear the existing external cookie to ensure a clean login process
-            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+            await this.HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
-            ReturnUrl = returnUrl;
+            this.ReturnUrl = returnUrl;
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Username, Input.Password, Input.RememberMe, lockoutOnFailure: true);
+                var result = await this.signInManager.PasswordSignInAsync(this.Input.Username, this.Input.Password, this.Input.RememberMe, lockoutOnFailure: true);
 
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
+                    this.logger.LogInformation("User logged in.");
 
-                    var user = await _userManager.FindByNameAsync(Input.Username);
+                    var user = await this.userManager.FindByNameAsync(this.Input.Username);
 
                     if (user == null)
                     {
-                        return NotFound("Unable to load user for update last login.");
+                        return this.NotFound("Unable to load user for update last login.");
                     }
 
-                    //Last Login Time
                     user.LastLoginTime = DateTimeOffset.UtcNow;
-                    var lastLoginResult = await _userManager.UpdateAsync(user);
+                    var lastLoginResult = await this.userManager.UpdateAsync(user);
 
                     if (!lastLoginResult.Succeeded)
                     {
@@ -96,36 +94,34 @@ namespace Pharus.App.Areas.Identity.Pages.Account
                             $" ({lastLoginResult.ToString()}) for user with ID '{user.Id}'.");
                     }
 
-                    //Get roles user
-                    var roles = await _userManager.GetRolesAsync(user);
+                    var roles = await this.userManager.GetRolesAsync(user);
 
                     if (roles.Contains("Admin"))
                     {
                         returnUrl = "/Admin/Index";
                     }
                     else
-                    { 
+                    {
                         returnUrl = "/Home/Index";
                     }
 
-                    return Redirect(returnUrl);
+                    return this.Redirect(returnUrl);
                 }
-                //TODO UnsuccessfulLogin view
-                //else
-                //{
+
+                // TODO UnsuccessfulLogin view
+                // else
+                // {
                 //    returnUrl = "/Identity/Account/UnsuccessfulLogin";
                 //    return Redirect(returnUrl);
-                //}
+                // }
             }
-
             else
             {
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                return Page();
+                this.ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                return this.Page();
             }
 
-            // If we got this far, something failed, redisplay form
-            return Page();
+            return this.Page();
         }
     }
 }

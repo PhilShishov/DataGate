@@ -1,5 +1,4 @@
-﻿
-namespace Pharus.App.Utilities
+﻿namespace Pharus.App.Utilities
 {
     using System;
     using System.IO;
@@ -71,11 +70,12 @@ namespace Pharus.App.Utilities
             }
         }
 
-        public static FileStreamResult ExtractTableAsPdf(List<string[]> entities,
-                                                            DateTime? chosenDate,
-                                                            IHostingEnvironment _hostingEnvironment,
-                                                            string typeName,
-                                                            string controllerName)
+        public static FileStreamResult ExtractTableAsPdf(
+                                                         List<string[]> entities,
+                                                         DateTime? chosenDate,
+                                                         IHostingEnvironment hostingEnvironment,
+                                                         string typeName,
+                                                         string controllerName)
         {
             string correctTypeName = GetCorrectTypeName(typeName, controllerName);
 
@@ -89,7 +89,7 @@ namespace Pharus.App.Utilities
             pdfDoc.AddNewPage(PageSize.A4.Rotate());
             Document document = new Document(pdfDoc);
 
-            string sfile = _hostingEnvironment.WebRootPath + "/images/Logo_Pharus_small.jpg";
+            string sfile = hostingEnvironment.WebRootPath + "/images/Logo_Pharus_small.jpg";
             ImageData data = ImageDataFactory.Create(sfile);
 
             Image img = new Image(data);
@@ -106,6 +106,7 @@ namespace Pharus.App.Utilities
                     {
                         s = " ";
                     }
+
                     Cell c1 = new Cell();
                     c1.Add(new Paragraph(s));
                     c1.SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER);
@@ -155,7 +156,6 @@ namespace Pharus.App.Utilities
             {
                 correctTypeName = typeName == "ActiveEntitiesViewModel" ? ActiveSubFunds : ActiveShareClasses;
             }
-
             else if (controllerName == "ShareClasses")
             {
                 correctTypeName = ActiveShareClasses;

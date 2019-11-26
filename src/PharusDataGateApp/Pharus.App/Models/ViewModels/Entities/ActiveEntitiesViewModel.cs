@@ -4,6 +4,6 @@
 
     public class ActiveEntitiesViewModel : BaseViewModel
     {
-        public List<string[]> ActiveEntities { get; set; }       
+        public List<string[]> ActiveEntities { get; set; }
     }
 }

@@ -8,17 +8,17 @@
 
     public class ShareClassesSelectListService : IShareClassesSelectListService
     {
-        private readonly Pharus_vFinaleContext _context;
+        private readonly Pharus_vFinaleContext context;
 
         public ShareClassesSelectListService(
             Pharus_vFinaleContext context)
         {
-            this._context = context;
+            this.context = context;
         }
 
         public List<string> GetAllTbDomCountry()
         {
-            var country = this._context.TbDomIsoCountry
+            var country = this.context.TbDomIsoCountry
                 .Select(tb => tb.IsoCountryIso2 + " - " + tb.IsoCountryDesc)
                 .ToList();
 
@@ -27,7 +27,7 @@
 
         public List<string> GetAllTbDomCurrencyCode()
         {
-            var currencyCode = this._context.TbDomIsoCurrency
+            var currencyCode = this.context.TbDomIsoCurrency
                 .Select(tb => tb.IsoCcyCode)
                 .ToList();
 
@@ -36,7 +36,7 @@
 
         public List<string> GetAllTbDomInvestorType()
         {
-            var investorType = this._context.TbDomInvestorType
+            var investorType = this.context.TbDomInvestorType
                 .Select(tb => tb.ItDesc)
                 .ToList();
 
@@ -45,7 +45,7 @@
 
         public List<string> GetAllTbDomShareStatus()
         {
-            var shareStatus = this._context.TbDomShareStatus
+            var shareStatus = this.context.TbDomShareStatus
                 .Select(tb => tb.ScSDesc)
                 .ToList();
 
@@ -54,7 +54,7 @@
 
         public List<string> GetAllTbDomShareType()
         {
-            var shareType = this._context.TbDomShareType
+            var shareType = this.context.TbDomShareType
                 .Select(tb => tb.StDesc)
                 .ToList();
 

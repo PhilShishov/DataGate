@@ -9,10 +9,10 @@
 
         List<string[]> GetAllActiveShareClasses(DateTime? chosenDate);
 
-        List<string[]> GetActiveShareClassById(int Id);
+        List<string[]> GetActiveShareClassById(int id);
 
-        List<string[]> GetActiveShareClassById(DateTime? chosenDate, int Id);
+        List<string[]> GetActiveShareClassById(DateTime? chosenDate, int id);
 
-        List<string[]> GetActiveShareClassWithDateById(int Id);
+        List<string[]> GetActiveShareClassWithDateById(int id);
     }
 }

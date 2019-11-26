@@ -46,6 +46,7 @@
             model.ActiveEntities.AddRange(tableHeaders);
             model.ActiveEntities.AddRange(tableFundsWithoutHeaders);
         }
+
         public static void GetAllActiveShareClassesWithHeaders(ActiveEntitiesViewModel model, IShareClassesService shareClassesService)
         {
             model.ActiveEntities = new List<string[]>();
