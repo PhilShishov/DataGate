@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Pharus.Domain.Pharus_vFinale
+﻿namespace Pharus.Domain.Pharus_vFinale
 {
+    using System;
+    using System.Collections.Generic;
+
     public partial class TbServiceAgreementShareclass
     {
         public int SaId { get; set; }

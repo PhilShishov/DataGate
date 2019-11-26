@@ -1,12 +1,24 @@
-﻿namespace Pharus.Services.Utilities
+﻿// Utility class for reading table data
+
+// Created: 09/2019
+// Author:  Philip Shishov, Fabio Martis
+
+// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+namespace Pharus.Services.Utilities
 {
     using System;
     using System.Data.Common;
     using System.Data.SqlClient;
     using System.Collections.Generic;
 
+    // _____________________________________________________________
     public class ReadTableData
     {
+        // ________________________________________________________
+        //
+        // Iterate through each value row
+        // of the query reader without headers
+        // and return their values
         public static IEnumerable<string[]> ReadTableValue(DbDataReader reader)
         {
             while (reader.Read())
@@ -22,6 +34,10 @@
             }
         }
 
+        // ________________________________________________________
+        //
+        // Iterate through each value of the header row
+        // and return their values
         public static string[] ReadTableHeader(SqlDataReader reader)
         {
             string[] item = new string[reader.FieldCount];

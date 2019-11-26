@@ -1,21 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Pharus.Domain.Pharus_vFinale
+﻿namespace Pharus.Domain.Pharus_vFinale
 {
+    using System.Collections.Generic;
+
     public partial class TbFund
     {
         public TbFund()
         {
-            TbFundSubFund = new HashSet<TbFundSubFund>();
-            TbHistoryFund = new HashSet<TbHistoryFund>();
-            TbServiceAgreementFund = new HashSet<TbServiceAgreementFund>();
+            this.TbFundSubFund = new HashSet<TbFundSubFund>();
+            this.TbHistoryFund = new HashSet<TbHistoryFund>();
+            this.TbServiceAgreementFund = new HashSet<TbServiceAgreementFund>();
         }
 
         public int FId { get; set; }
 
         public virtual ICollection<TbFundSubFund> TbFundSubFund { get; set; }
+
         public virtual ICollection<TbHistoryFund> TbHistoryFund { get; set; }
+
         public virtual ICollection<TbServiceAgreementFund> TbServiceAgreementFund { get; set; }
     }
 }
