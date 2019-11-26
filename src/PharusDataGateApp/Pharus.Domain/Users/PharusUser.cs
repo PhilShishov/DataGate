@@ -1,5 +1,4 @@
-﻿
-namespace Pharus.Domain
+﻿namespace Pharus.Domain
 {
     using System;
     using System.Collections.Generic;
