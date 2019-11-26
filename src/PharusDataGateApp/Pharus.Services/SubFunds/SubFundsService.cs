@@ -1,4 +1,10 @@
-﻿namespace Pharus.Services.SubFunds
+﻿// Service class for managing subfunds
+
+// Created: 09/2019
+// Author:  Philip Shishov
+
+// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+namespace Pharus.Services.SubFunds
 {
     using System;
     using System.Data.SqlClient;
@@ -9,16 +15,25 @@
     using Pharus.Services.Utilities;
     using Pharus.Services.Contracts;
 
+    // _____________________________________________________________
     public class SubFundsService : ISubFundsService
     {
         private readonly string defaultDate = DateTime.Today.ToString("yyyyMMdd");
         private readonly IConfiguration configuration;
 
+        // ________________________________________________________
+        //
+        // Constructor: initialize with DI IConfiguration
+        // to retrieve appsettings.json connection string
         public SubFundsService(IConfiguration config)
         {
             this.configuration = config;
         }
 
+        // ________________________________________________________
+        //
+        // Retrieve query table DB based entities
+        // with table functions
         public List<string[]> GetAllActiveSubFunds()
         {
             using (SqlConnection connection = new SqlConnection())

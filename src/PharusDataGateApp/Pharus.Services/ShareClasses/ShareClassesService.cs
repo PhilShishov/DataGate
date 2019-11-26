@@ -1,4 +1,10 @@
-﻿namespace Pharus.Services.ShareClasses
+﻿// Service class for managing shareclasses
+
+// Created: 09/2019
+// Author:  Philip Shishov
+
+// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+namespace Pharus.Services.ShareClasses
 {
     using System;
     using System.Data.SqlClient;
@@ -9,16 +15,25 @@
     using Pharus.Services.Contracts;
     using Pharus.Services.Utilities;
 
+    // _____________________________________________________________
     public class ShareClassesService : IShareClassesService
     {
         private readonly string defaultDate = DateTime.Today.ToString("yyyyMMdd");
         private readonly IConfiguration configuration;
 
+        // ________________________________________________________
+        //
+        // Constructor: initialize with DI IConfiguration
+        // to retrieve appsettings.json connection string
         public ShareClassesService(IConfiguration config)
         {
             this.configuration = config;
         }
 
+        // ________________________________________________________
+        //
+        // Retrieve query table DB based entities
+        // with table functions
         public List<string[]> GetAllActiveShareClasses()
         {
             using (SqlConnection connection = new SqlConnection())

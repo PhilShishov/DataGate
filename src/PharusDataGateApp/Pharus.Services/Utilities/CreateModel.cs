@@ -1,11 +1,22 @@
-﻿namespace Pharus.Services.Utilities
+﻿// Utility class for creating table model
+
+// Created: 09/2019
+// Author:  Philip Shishov
+
+// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+namespace Pharus.Services.Utilities
 {
     using System.Linq;
     using System.Data.SqlClient;
     using System.Collections.Generic;
 
+    // _____________________________________________________________
     public class CreateModel
     {
+        // ________________________________________________________
+        //
+        // Create a model by reading table data
+        // from SQL Server with headers and values
         public static List<string[]> CreateModelWithHeadersAndValue(SqlCommand command)
         {
             using (var reader = command.ExecuteReader())

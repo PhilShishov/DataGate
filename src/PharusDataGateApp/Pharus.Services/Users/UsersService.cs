@@ -1,4 +1,10 @@
-﻿namespace Pharus.Services.Users
+﻿// Service class for managing users
+
+// Created: 09/2019
+// Author:  Philip Shishov
+
+// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+namespace Pharus.Services.Users
 {
     using System.Linq;
     using System.Collections.Generic;
@@ -9,10 +15,14 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
+    // _____________________________________________________________
     public class UsersService : IUsersService
     {
         private readonly UserManager<PharusUser> userManager;
 
+        // ________________________________________________________
+        //
+        // Constructor: initialize with identity user manager
         public UsersService(
             UserManager<PharusUser> userManager)
         {
@@ -28,14 +38,20 @@
 
         public PharusUser GetUserByUserName(string username)
         {
-            PharusUser userDb = this.userManager.Users.SingleOrDefault(user => user.UserName == username);
+            PharusUser userDb = this.userManager
+                .Users
+                .SingleOrDefault(user => user.UserName == username);
 
             return userDb;
         }
 
         public List<PharusUser> GetAllUserRoles()
         {
-            var users = this.userManager.Users.Include(u => u.UserRoles).ThenInclude(ur => ur.Role).ToList();
+            var users = this.userManager
+                .Users
+                .Include(u => u.UserRoles)
+                .ThenInclude(ur => ur.Role)
+                .ToList();
 
             return users;
         }

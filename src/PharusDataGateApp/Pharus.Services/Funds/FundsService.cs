@@ -1,4 +1,10 @@
-﻿namespace Pharus.Services.Funds
+﻿// Service class for managing funds
+
+// Created: 09/2019
+// Author:  Philip Shishov
+
+// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+namespace Pharus.Services.Funds
 {
     using System;
     using System.Data;
@@ -10,16 +16,25 @@
     using Pharus.Services.Contracts;
     using Pharus.Services.Utilities;
 
+    // _____________________________________________________________
     public class FundsService : IFundsService
     {
         private readonly string defaultDate = DateTime.Today.ToString("yyyyMMdd");
         private readonly IConfiguration configuration;
 
+        // ________________________________________________________
+        //
+        // Constructor: initialize with DI IConfiguration
+        // to retrieve appsettings.json connection string
         public FundsService(IConfiguration config)
         {
             this.configuration = config;
         }
 
+        // ________________________________________________________
+        //
+        // Retrieve query table DB based entities
+        // with table functions
         public List<string[]> GetAllActiveFunds()
         {
             using (SqlConnection connection = new SqlConnection())
@@ -118,6 +133,10 @@
             }
         }
 
+        // ________________________________________________________
+        //
+        // Execute query table DB based stored procedure
+        // with fixed parameters
         public void ExecuteEditFund(
                                     List<string> fundsValues,
                                     int fundId,
