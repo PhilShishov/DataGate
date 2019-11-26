@@ -4,15 +4,20 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section Styles{
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+}
+
 <form class="justify-content-between" method="post">
 
-    <partial name="SpecificEntityUpdatePartial"/>
+    <partial name="SpecificEntityUpdatePartial" />
 
     <div class="d-flex justify-content-between">
 
-        <partial name="SpecificEntityInfoPartial"/>
+        <partial name="SpecificEntityInfoPartial" />
         <div class="w-35 float-right">
-            <partial name="SpecificEntityDocumentsPartial"/>
+            <partial name="SpecificEntityDocumentsPartial" />
 
             @if (this.User.IsInRole("Admin"))
             {
@@ -23,12 +28,12 @@
         </div>
     </div>
 
-    <partial name="SpecificEntitySearchPartial"/>
+    <partial name="SpecificEntitySearchPartial" />
 </form>
 
 <form asp-controller="Funds" method="post">
 
-    <partial name="ExtractSubEntitiesViewPartial"/>
+    <partial name="ExtractSubEntitiesViewPartial" />
 
     <hr class="bg-pharus hr-2" />
 
@@ -38,7 +43,7 @@
         </button>
         <div id="myDropdown" class="dropdown-container">
 
-            <partial name="SpecificEntityBindingTablePartial"/>
+            <partial name="SpecificEntityBindingTablePartial" />
 
             <div class="table-responsive border-0 mx-auto" id="tableDoubleScroll">
                 <table class="table table-hover" name="AESubEntities">
@@ -73,12 +78,45 @@
                 </table>
             </div>
         </div>
-
     </div>
 </form>
 
-@section Scripts
-            {
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            let url = "/Funds/AutoCompleteSubFundList";
+            let entityId = @Model.EntityId;
+
+            console.log(entityId);
+
+            $("#SearchTerm").select2({
+                placeholder: "Select Sub Funds",
+                theme: "classic",
+                ajax: {
+                    url: url,
+                    dataType: "json",
+                    delay: 250,
+                    id: entityId,
+                    data: function (params) {
+                        return {
+                            searchTerm: params.term
+                            };
+                    },
+                    processResults: function (data) {
+                        return {
+                            results: $.map(data, function (val, item) {
+                                return { id: val.id, text: val.Name }
+                            })
+                        }
+                    }
+                },
+                minimumInputLength: 1
+            });
+        });
+    </script>
+
     <script type="text/javascript" src="~/js/jquery.doubleScroll.js"></script>
 
     <script type="text/javascript">

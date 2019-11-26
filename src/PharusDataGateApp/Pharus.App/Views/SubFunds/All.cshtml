@@ -32,10 +32,10 @@
     <script>
         $(document).ready(function () {
             $("#SearchTerm").select2({
-                placeholder: "Select Funds",
+                placeholder: "Select SubFunds",
                 theme: "classic",
                 ajax: {
-                    url: "/Funds/AutoCompleteFundListWithFundName",
+                    url: "/Funds/AutoCompleteSubFundList",
                     dataType: "json",
                     delay: 250,
                     data: function (params) {
