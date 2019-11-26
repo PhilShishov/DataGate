@@ -31,7 +31,7 @@
             this._subfundsSelectListService = subfundsSelectListService;
             this._hostingEnvironment = hostingEnvironment;
         }
-        public JsonResult AutoCompleteFundListWithFundName(string searchTerm)
+        public JsonResult AutoCompleteFundList(string searchTerm)
         {
             var result = _context.TbHistorySubFund.ToList();
             if (searchTerm != null)
@@ -68,7 +68,14 @@
             {
                 if (model.ChosenDate != null)
                 {
-                    model.ActiveEntities = this._subFundsService.GetAllActiveSubFunds(model.ChosenDate);
+                    if (model.IsActive)
+                    {
+                        GetAllActiveEntitiesWithHeaders.GetAllActiveSubFundsWithHeaders(model, this._subFundsService);
+                    }
+                    else
+                    {
+                        model.ActiveEntities = this._subFundsService.GetAllActiveSubFunds(model.ChosenDate);
+                    }
                 }
             }
 
@@ -224,7 +231,7 @@
                 EntityProperties = this._subFundsService.GetActiveSubFundWithDateById(entityId),
                 CalculationDate = new SelectList(this._subfundsSelectListService.GetAllTbDomCalculationDate()),
                 CesrClass = new SelectList(this._subfundsSelectListService.GetAllTbDomCesrClass()),
-                CurrencyCode = new SelectList(this._subfundsSelectListService.GetAllTbDomCurrencyCode()),                
+                CurrencyCode = new SelectList(this._subfundsSelectListService.GetAllTbDomCurrencyCode()),
                 DerivMarket = new SelectList(this._subfundsSelectListService.GetAllTbDomDerivMarket()),
                 DerivPurpose = new SelectList(this._subfundsSelectListService.GetAllTbDomDerivPurpose()),
                 Frequency = new SelectList(this._subfundsSelectListService.GetAllTbDomFrequency()),

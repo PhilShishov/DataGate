@@ -46,7 +46,7 @@
                 text = s.FOfficialFundName
             });
             return Json(modifiedData);
-        }
+        }        
 
         [HttpGet]
         public IActionResult All()
@@ -68,7 +68,6 @@
             ModelState.Clear();
             GetAllActiveEntitiesWithHeaders.GetAllActiveFundsWithHeaders(model, this.fundsService);
 
-
             if (model.Command.Equals("Update Table"))
             {
                 if (model.ChosenDate != null)
@@ -79,7 +78,7 @@
                     }
                     else
                     {
-                        model.ActiveEntities = this.fundsService.GetAllActiveFunds();
+                        model.ActiveEntities = this.fundsService.GetAllActiveFunds(model.ChosenDate);
                     }
                 }
             }
@@ -106,6 +105,7 @@
                         .Where(f => f.Contains("Active"))
                         .ToList();
                 }
+
                 else
                 {
                     tableFundsWithoutHeaders = this.fundsService
@@ -193,6 +193,21 @@
             return fileStreamResult;
         }
 
+        public JsonResult AutoCompleteSubFundList(string searchTerm, int entityId)
+        {            
+            var result = this.fundsService.GetFundSubFunds(entityId).ToList();
+            if (searchTerm != null)
+            {
+                result = this.fundsService.GetFundSubFunds(entityId).Where(s => s[3].Contains(searchTerm)).ToList();
+            }
+            var modifiedData = result.Select(s => new
+            {
+                id = s[3],
+                text = s[3]
+            });
+            return Json(modifiedData);
+        }
+
         [HttpGet("Funds/ViewEntitySE/{EntityId}")]
         public IActionResult ViewEntitySE(int entityId)
         {
@@ -221,7 +236,7 @@
                 }
             }
 
-            else if (viewModel.Command.Equals("Filter"))
+            else if (viewModel.Command.Equals("Search"))
             {
                 if (viewModel.SearchTerm == null)
                 {
