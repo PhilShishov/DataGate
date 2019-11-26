@@ -54,7 +54,7 @@
             var model = new ActiveEntitiesViewModel
             {
                 ActiveEntities = this.subFundsService.GetAllActiveSubFunds(),
-                IsActive = true
+                IsActive = true,
             };
 
             return this.View(model);
@@ -63,7 +63,7 @@
         [HttpPost]
         public IActionResult All(ActiveEntitiesViewModel model)
         {
-            ModelState.Clear();
+            this.ModelState.Clear();
             model.ActiveEntities = this.subFundsService.GetAllActiveSubFunds();
 
             if (model.Command.Equals("Update Table"))
@@ -116,7 +116,7 @@
             string typeName = model.GetType().Name;
             string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
-            if (HttpContext.Request.Form.ContainsKey("extract_Excel"))
+            if (this.HttpContext.Request.Form.ContainsKey("extract_Excel"))
             {
                 fileStreamResult = ExtractTable.ExtractTableAsExcel(model.ActiveEntities, typeName, controllerName);
             }
@@ -132,7 +132,7 @@
             string typeName = model.GetType().Name;
             string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
-            if (HttpContext.Request.Form.ContainsKey("extract_Excel"))
+            if (this.HttpContext.Request.Form.ContainsKey("extract_Excel"))
             {
                 fileStreamResult = ExtractTable.ExtractTableAsExcel(model.AESubEntities, typeName, controllerName);
             }
@@ -148,9 +148,9 @@
             string typeName = model.GetType().Name;
             string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
-            if (HttpContext.Request.Form.ContainsKey("extract_Pdf"))
+            if (this.HttpContext.Request.Form.ContainsKey("extract_Pdf"))
             {
-                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.ActiveEntities, model.ChosenDate, hostingEnvironment, typeName, controllerName);
+                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.ActiveEntities, model.ChosenDate, this.hostingEnvironment, typeName, controllerName);
             }
 
             return fileStreamResult;
@@ -164,9 +164,9 @@
             string typeName = model.GetType().Name;
             string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
-            if (HttpContext.Request.Form.ContainsKey("extract_Pdf"))
+            if (this.HttpContext.Request.Form.ContainsKey("extract_Pdf"))
             {
-                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.AESubEntities, model.ChosenDate, hostingEnvironment, typeName, controllerName);
+                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.AESubEntities, model.ChosenDate, this.hostingEnvironment, typeName, controllerName);
             }
 
             return fileStreamResult;
@@ -179,7 +179,7 @@
             {
                 EntityId = entityId,
                 ActiveEntity = this.subFundsService.GetActiveSubFundById(entityId),
-                AESubEntities = this.subFundsService.GetSubFundShareClasses(entityId)
+                AESubEntities = this.subFundsService.GetSubFundShareClasses(entityId),
             };
 
             return this.View(viewModel);
@@ -244,7 +244,7 @@
                 SfCatSix = new SelectList(this.subfundsSelectListService.GetAllTbDomSfCatSix()),
                 SfStatus = new SelectList(this.subfundsSelectListService.GetAllTbDomSFStatus()),
                 TypeOfMarket = new SelectList(this.subfundsSelectListService.GetAllTbDomTypeOfMarket()),
-                ValuationDate = new SelectList(this.subfundsSelectListService.GetAllTbDomValuationDate())
+                ValuationDate = new SelectList(this.subfundsSelectListService.GetAllTbDomValuationDate()),
             };
 
             return this.View(model);
@@ -253,17 +253,16 @@
         [HttpPost]
         public IActionResult EditSubFund(SubFundBindingModel model)
         {
-            //if (!ModelState.IsValid)
-            //{
+            // if (!ModelState.IsValid)
+            // {
             //    return View(model ?? new EditFundBindingModel());
-            //}
-
+            // }
             int entityId = int.Parse(model.EntityProperties[1][0]);
             string returnUrl = $"/SubFunds/ViewSubFundSC/{entityId}";
 
             var subFund = this.subFundsService.GetActiveSubFundById(entityId);
 
-            if (HttpContext.Request.Form.ContainsKey("modify_button"))
+            if (this.HttpContext.Request.Form.ContainsKey("modify_button"))
             {
                 for (int row = 1; row < subFund.Count; row++)
                 {
@@ -273,7 +272,7 @@
                     }
                 }
 
-                return LocalRedirect(returnUrl);
+                return this.LocalRedirect(returnUrl);
             }
 
             return this.LocalRedirect(returnUrl);
@@ -300,7 +299,7 @@
                 SfCatSix = new SelectList(this.subfundsSelectListService.GetAllTbDomSfCatSix()),
                 SfStatus = new SelectList(this.subfundsSelectListService.GetAllTbDomSFStatus()),
                 TypeOfMarket = new SelectList(this.subfundsSelectListService.GetAllTbDomTypeOfMarket()),
-                ValuationDate = new SelectList(this.subfundsSelectListService.GetAllTbDomValuationDate())
+                ValuationDate = new SelectList(this.subfundsSelectListService.GetAllTbDomValuationDate()),
             };
 
             return this.View(model);

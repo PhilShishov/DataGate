@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-
-namespace Pharus.App.Models.BindingModels.SubFunds
+﻿namespace Pharus.App.Models.BindingModels.SubFunds
 {
+    using Microsoft.AspNetCore.Mvc.Rendering;
+
     public class SubFundBindingModel : BaseBindingModel
     {
         public SelectList CalculationDate { get; set; }

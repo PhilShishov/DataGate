@@ -66,10 +66,10 @@
             var user = new PharusUser
             {
                 UserName = bindingModel.Username,
-                Email = bindingModel.Email
+                Email = bindingModel.Email,
             };
 
-            var result = await userManager.CreateAsync(user, bindingModel.Password);
+            var result = await this.userManager.CreateAsync(user, bindingModel.Password);
 
             if (result.Succeeded)
             {

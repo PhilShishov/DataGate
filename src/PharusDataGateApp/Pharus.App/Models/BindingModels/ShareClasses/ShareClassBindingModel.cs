@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-
-namespace Pharus.App.Models.BindingModels.ShareClasses
+﻿namespace Pharus.App.Models.BindingModels.ShareClasses
 {
+    using Microsoft.AspNetCore.Mvc.Rendering;
+
     public class ShareClassBindingModel : BaseBindingModel
     {
         public SelectList InvestorType { get; set; }

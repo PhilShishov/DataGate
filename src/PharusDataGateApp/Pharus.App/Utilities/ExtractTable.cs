@@ -22,9 +22,10 @@
         private const string ActiveSubFunds = "ActiveSubFunds";
         private const string ActiveShareClasses = "ActiveShareClasses";
 
-        public static FileStreamResult ExtractTableAsExcel(List<string[]> entities,
-                                                                    string typeName,
-                                                                    string controllerName)
+        public static FileStreamResult ExtractTableAsExcel(
+                                                           List<string[]> entities,
+                                                           string typeName,
+                                                           string controllerName)
         {
             FileStreamResult fileStreamResult;
             using (ExcelPackage package = new ExcelPackage())
@@ -63,7 +64,7 @@
 
                 fileStreamResult = new FileStreamResult(stream, "application/excel")
                 {
-                    FileDownloadName = $"{correctTypeName}.xlsx"
+                    FileDownloadName = $"{correctTypeName}.xlsx",
                 };
 
                 return fileStreamResult;
@@ -139,7 +140,7 @@
             stream.Position = 0;
             fileStreamResult = new FileStreamResult(stream, "application/pdf")
             {
-                FileDownloadName = $"{correctTypeName}.pdf"
+                FileDownloadName = $"{correctTypeName}.pdf",
             };
             return fileStreamResult;
         }

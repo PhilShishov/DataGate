@@ -17,7 +17,14 @@
 
         List<string[]> GetFundSubFunds(int id);
 
-        void ExecuteEditFund(List<string> fundsProperties, int fundId, DateTime chosenDate, int fStatusId,
-                             int fLegalFormId, int fLegalTypeId, int fLegalVehicleId, int fCompanyTypeId);
+        void ExecuteEditFund(
+                             List<string> fundsProperties,
+                             int fundId,
+                             DateTime chosenDate,
+                             int fStatusId,
+                             int fLegalFormId,
+                             int fLegalTypeId,
+                             int fLegalVehicleId,
+                             int fCompanyTypeId);
     }
 }

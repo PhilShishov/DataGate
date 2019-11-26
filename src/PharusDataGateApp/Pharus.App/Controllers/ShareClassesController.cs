@@ -33,7 +33,7 @@
         {
             var model = new ActiveEntitiesViewModel
             {
-                ActiveEntities = this.shareClassesService.GetAllActiveShareClasses()
+                ActiveEntities = this.shareClassesService.GetAllActiveShareClasses(),
             };
 
             return this.View(model);
@@ -42,7 +42,7 @@
         [HttpPost]
         public IActionResult All(ActiveEntitiesViewModel model)
         {
-            ModelState.Clear();
+            this.ModelState.Clear();
             model.ActiveEntities = this.shareClassesService.GetAllActiveShareClasses();
 
             if (model.Command.Equals("Update Table"))
@@ -115,7 +115,7 @@
             ActiveEntitiesViewModel viewModel = new ActiveEntitiesViewModel
             {
                 EntityId = entityId,
-                ActiveEntities = this.shareClassesService.GetActiveShareClassById(entityId)
+                ActiveEntities = this.shareClassesService.GetActiveShareClassById(entityId),
             };
 
             return this.View(viewModel);
@@ -162,11 +162,10 @@
         [HttpPost]
         public IActionResult EditShareClass(ShareClassBindingModel model)
         {
-            //if (!ModelState.IsValid)
-            //{
+            // if (!ModelState.IsValid)
+            // {
             //    return View(model ?? new EditFundBindingModel());
-            //}
-
+            // }
             int entityId = int.Parse(model.EntityProperties[1][0]);
             string returnUrl = $"/ShareClasses/ViewEntitySE/{entityId}";
 
