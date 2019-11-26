@@ -7,15 +7,17 @@
     {
         public TbShareClass()
         {
-            TbHistoryShareClass = new HashSet<TbHistoryShareClass>();
-            TbServiceAgreementShareclass = new HashSet<TbServiceAgreementShareclass>();
-            TbSubFundShareClass = new HashSet<TbSubFundShareClass>();
+            this.TbHistoryShareClass = new HashSet<TbHistoryShareClass>();
+            this.TbServiceAgreementShareclass = new HashSet<TbServiceAgreementShareclass>();
+            this.TbSubFundShareClass = new HashSet<TbSubFundShareClass>();
         }
 
         public int IdSc { get; set; }
 
         public virtual ICollection<TbHistoryShareClass> TbHistoryShareClass { get; set; }
+
         public virtual ICollection<TbServiceAgreementShareclass> TbServiceAgreementShareclass { get; set; }
+
         public virtual ICollection<TbSubFundShareClass> TbSubFundShareClass { get; set; }
     }
 }

@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Pharus.Domain.Pharus_vFinale
+﻿namespace Pharus.Domain.Pharus_vFinale
 {
+    using System.Collections.Generic;
+
     public partial class TbDomLegalForm
     {
         public TbDomLegalForm()
         {
-            TbHistoryFund = new HashSet<TbHistoryFund>();
+            this.TbHistoryFund = new HashSet<TbHistoryFund>();
         }
 
         public int LfId { get; set; }
+
         public string LfAcronym { get; set; }
 
         public virtual ICollection<TbHistoryFund> TbHistoryFund { get; set; }
