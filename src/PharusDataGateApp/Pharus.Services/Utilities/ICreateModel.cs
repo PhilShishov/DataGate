@@ -1,4 +1,10 @@
-﻿namespace Pharus.Services.Utilities
+﻿// Utility interface for creating table model
+
+// Created: 09/2019
+// Author:  Philip Shishov
+
+// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+namespace Pharus.Services.Utilities
 {
     using System.Data.SqlClient;
     using System.Collections.Generic;

@@ -1,4 +1,4 @@
-﻿// Utility class for reading table data
+﻿// Utility class for reading DB table data
 
 // Created: 09/2019
 // Author:  Philip Shishov, Fabio Martis
@@ -36,8 +36,8 @@ namespace Pharus.Services.Utilities
 
         // ________________________________________________________
         //
-        // Iterate through each value of the header row
-        // and return their values
+        // Iterate through each value of the
+        // header row and return their values
         public static string[] ReadTableHeader(SqlDataReader reader)
         {
             string[] item = new string[reader.FieldCount];

@@ -1,4 +1,10 @@
-﻿namespace Pharus.Services.ShareClasses
+﻿// Service class for managing shareclasses selects
+
+// Created: 10/2019
+// Author:  Philip Shishov
+
+// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+namespace Pharus.Services.ShareClasses
 {
     using System.Linq;
     using System.Collections.Generic;

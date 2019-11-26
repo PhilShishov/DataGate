@@ -1,4 +1,10 @@
-﻿namespace Pharus.Services.SubFunds
+﻿// Service class for managing subfunds selects
+
+// Created: 10/2019
+// Author:  Philip Shishov
+
+// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+namespace Pharus.Services.SubFunds
 {
     using System.Linq;
     using System.Collections.Generic;

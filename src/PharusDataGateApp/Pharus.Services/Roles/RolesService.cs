@@ -1,4 +1,10 @@
-﻿namespace Pharus.Services.Roles
+﻿// Service class for managing user roles
+
+// Created: 09/2019
+// Author:  Philip Shishov
+
+// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+namespace Pharus.Services.Roles
 {
     using System.Linq;
     using System.Collections.Generic;
@@ -8,10 +14,14 @@
     using Pharus.Domain.Users;
     using Pharus.Services.Contracts;
 
+    // _____________________________________________________________
     public class RolesService : IRolesService
     {
         private readonly RoleManager<PharusRole> roleManager;
 
+        // ________________________________________________________
+        //
+        // Constructor: initialize with identity role manager
         public RolesService(
             RoleManager<PharusRole> roleManager)
         {
