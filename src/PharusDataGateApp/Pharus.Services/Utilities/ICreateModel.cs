@@ -1,5 +1,4 @@
-﻿
-namespace Pharus.Services.Utilities
+﻿namespace Pharus.Services.Utilities
 {
     using System.Data.SqlClient;
     using System.Collections.Generic;

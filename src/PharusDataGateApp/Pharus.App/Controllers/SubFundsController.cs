@@ -15,10 +15,10 @@
 
     public class SubFundsController : Controller
     {
-        private readonly Pharus_vFinaleContext _context;
-        private readonly ISubFundsService _subFundsService;
-        private readonly ISubFundsSelectListService _subfundsSelectListService;
-        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly Pharus_vFinaleContext context;
+        private readonly ISubFundsService subFundsService;
+        private readonly ISubFundsSelectListService subfundsSelectListService;
+        private readonly IHostingEnvironment hostingEnvironment;
 
         public SubFundsController(
             Pharus_vFinaleContext context,
@@ -26,24 +26,26 @@
             ISubFundsSelectListService subfundsSelectListService,
             IHostingEnvironment hostingEnvironment)
         {
-            this._context = context;
-            this._subFundsService = subFundsService;
-            this._subfundsSelectListService = subfundsSelectListService;
-            this._hostingEnvironment = hostingEnvironment;
+            this.context = context;
+            this.subFundsService = subFundsService;
+            this.subfundsSelectListService = subfundsSelectListService;
+            this.hostingEnvironment = hostingEnvironment;
         }
+
         public JsonResult AutoCompleteFundList(string searchTerm)
         {
-            var result = _context.TbHistorySubFund.ToList();
+            var result = this.context.TbHistorySubFund.ToList();
             if (searchTerm != null)
             {
-                result = _context.TbHistorySubFund.Where(s => s.SfOfficialSubFundName.Contains(searchTerm)).ToList();
+                result = this.context.TbHistorySubFund.Where(s => s.SfOfficialSubFundName.Contains(searchTerm)).ToList();
             }
+
             var modifiedData = result.Select(s => new
             {
                 id = s.SfOfficialSubFundName,
-                text = s.SfOfficialSubFundName
+                text = s.SfOfficialSubFundName,
             });
-            return Json(modifiedData);
+            return this.Json(modifiedData);
         }
 
         [HttpGet]
@@ -51,7 +53,7 @@
         {
             var model = new ActiveEntitiesViewModel
             {
-                ActiveEntities = this._subFundsService.GetAllActiveSubFunds(),
+                ActiveEntities = this.subFundsService.GetAllActiveSubFunds(),
                 IsActive = true
             };
 
@@ -62,7 +64,7 @@
         public IActionResult All(ActiveEntitiesViewModel model)
         {
             ModelState.Clear();
-            model.ActiveEntities = this._subFundsService.GetAllActiveSubFunds();
+            model.ActiveEntities = this.subFundsService.GetAllActiveSubFunds();
 
             if (model.Command.Equals("Update Table"))
             {
@@ -70,15 +72,14 @@
                 {
                     if (model.IsActive)
                     {
-                        GetAllActiveEntitiesWithHeaders.GetAllActiveSubFundsWithHeaders(model, this._subFundsService);
+                        GetAllActiveEntitiesWithHeaders.GetAllActiveSubFundsWithHeaders(model, this.subFundsService);
                     }
                     else
                     {
-                        model.ActiveEntities = this._subFundsService.GetAllActiveSubFunds(model.ChosenDate);
+                        model.ActiveEntities = this.subFundsService.GetAllActiveSubFunds(model.ChosenDate);
                     }
                 }
             }
-
             else if (model.Command.Equals("Search"))
             {
                 if (model.SearchTerm == null)
@@ -88,11 +89,11 @@
 
                 model.ActiveEntities = new List<string[]>();
 
-                var tableHeaders = this._subFundsService
+                var tableHeaders = this.subFundsService
                     .GetAllActiveSubFunds()
                     .Take(1)
                     .ToList();
-                var tableFundsWithoutHeaders = this._subFundsService.GetAllActiveSubFunds().Skip(1).ToList();
+                var tableFundsWithoutHeaders = this.subFundsService.GetAllActiveSubFunds().Skip(1).ToList();
 
                 CreateTableView.AddHeadersToView(model.ActiveEntities, tableHeaders);
 
@@ -149,7 +150,7 @@
 
             if (HttpContext.Request.Form.ContainsKey("extract_Pdf"))
             {
-                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.ActiveEntities, model.ChosenDate, _hostingEnvironment, typeName, controllerName);
+                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.ActiveEntities, model.ChosenDate, hostingEnvironment, typeName, controllerName);
             }
 
             return fileStreamResult;
@@ -165,7 +166,7 @@
 
             if (HttpContext.Request.Form.ContainsKey("extract_Pdf"))
             {
-                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.AESubEntities, model.ChosenDate, _hostingEnvironment, typeName, controllerName);
+                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.AESubEntities, model.ChosenDate, hostingEnvironment, typeName, controllerName);
             }
 
             return fileStreamResult;
@@ -177,8 +178,8 @@
             SpecificEntityViewModel viewModel = new SpecificEntityViewModel
             {
                 EntityId = entityId,
-                ActiveEntity = this._subFundsService.GetActiveSubFundById(entityId),
-                AESubEntities = this._subFundsService.GetSubFundShareClasses(entityId)
+                ActiveEntity = this.subFundsService.GetActiveSubFundById(entityId),
+                AESubEntities = this.subFundsService.GetSubFundShareClasses(entityId)
             };
 
             return this.View(viewModel);
@@ -187,17 +188,16 @@
         [HttpPost("SubFunds/ViewEntitySE/{EntityId}")]
         public IActionResult ViewEntitySE(SpecificEntityViewModel viewModel)
         {
-            viewModel.ActiveEntity = this._subFundsService.GetActiveSubFundById(viewModel.EntityId);
-            viewModel.AESubEntities = this._subFundsService.GetSubFundShareClasses(viewModel.EntityId);
+            viewModel.ActiveEntity = this.subFundsService.GetActiveSubFundById(viewModel.EntityId);
+            viewModel.AESubEntities = this.subFundsService.GetSubFundShareClasses(viewModel.EntityId);
 
             if (viewModel.Command.Equals("Update Table"))
             {
                 if (viewModel.ChosenDate != null)
                 {
-                    viewModel.ActiveEntity = this._subFundsService.GetActiveSubFundById(viewModel.ChosenDate, viewModel.EntityId);
+                    viewModel.ActiveEntity = this.subFundsService.GetActiveSubFundById(viewModel.ChosenDate, viewModel.EntityId);
                 }
             }
-
             else if (viewModel.Command.Equals("Filter"))
             {
                 if (viewModel.SearchTerm == null)
@@ -207,8 +207,8 @@
 
                 viewModel.AESubEntities = new List<string[]>();
 
-                var tableHeaders = this._subFundsService.GetSubFundShareClasses(viewModel.EntityId).Take(1).ToList();
-                var tableFundsWithoutHeaders = this._subFundsService.GetSubFundShareClasses(viewModel.EntityId).Skip(1).ToList();
+                var tableHeaders = this.subFundsService.GetSubFundShareClasses(viewModel.EntityId).Take(1).ToList();
+                var tableFundsWithoutHeaders = this.subFundsService.GetSubFundShareClasses(viewModel.EntityId).Skip(1).ToList();
 
                 CreateTableView.AddHeadersToView(viewModel.AESubEntities, tableHeaders);
 
@@ -228,23 +228,23 @@
         {
             SubFundBindingModel model = new SubFundBindingModel
             {
-                EntityProperties = this._subFundsService.GetActiveSubFundWithDateById(entityId),
-                CalculationDate = new SelectList(this._subfundsSelectListService.GetAllTbDomCalculationDate()),
-                CesrClass = new SelectList(this._subfundsSelectListService.GetAllTbDomCesrClass()),
-                CurrencyCode = new SelectList(this._subfundsSelectListService.GetAllTbDomCurrencyCode()),
-                DerivMarket = new SelectList(this._subfundsSelectListService.GetAllTbDomDerivMarket()),
-                DerivPurpose = new SelectList(this._subfundsSelectListService.GetAllTbDomDerivPurpose()),
-                Frequency = new SelectList(this._subfundsSelectListService.GetAllTbDomFrequency()),
-                GeographicalFocus = new SelectList(this._subfundsSelectListService.GetAllTbDomGeographicalFocus()),
-                GlobalExposure = new SelectList(this._subfundsSelectListService.GetAllTbDomGlobalExposure()),
-                PrincipalAssetClass = new SelectList(this._subfundsSelectListService.GetAllTbDomPrincipalAssetClass()),
-                PrincipalInvestmentStrategy = new SelectList(this._subfundsSelectListService.GetAllTbDomPrincipalInvestmentStrategy()),
-                SfCatBloomberg = new SelectList(this._subfundsSelectListService.GetAllTbDomSfCatBloomberg()),
-                SfCatMorningStar = new SelectList(this._subfundsSelectListService.GetAllTbDomSfCatMorningStar()),
-                SfCatSix = new SelectList(this._subfundsSelectListService.GetAllTbDomSfCatSix()),
-                SfStatus = new SelectList(this._subfundsSelectListService.GetAllTbDomSFStatus()),
-                TypeOfMarket = new SelectList(this._subfundsSelectListService.GetAllTbDomTypeOfMarket()),
-                ValuationDate = new SelectList(this._subfundsSelectListService.GetAllTbDomValuationDate())
+                EntityProperties = this.subFundsService.GetActiveSubFundWithDateById(entityId),
+                CalculationDate = new SelectList(this.subfundsSelectListService.GetAllTbDomCalculationDate()),
+                CesrClass = new SelectList(this.subfundsSelectListService.GetAllTbDomCesrClass()),
+                CurrencyCode = new SelectList(this.subfundsSelectListService.GetAllTbDomCurrencyCode()),
+                DerivMarket = new SelectList(this.subfundsSelectListService.GetAllTbDomDerivMarket()),
+                DerivPurpose = new SelectList(this.subfundsSelectListService.GetAllTbDomDerivPurpose()),
+                Frequency = new SelectList(this.subfundsSelectListService.GetAllTbDomFrequency()),
+                GeographicalFocus = new SelectList(this.subfundsSelectListService.GetAllTbDomGeographicalFocus()),
+                GlobalExposure = new SelectList(this.subfundsSelectListService.GetAllTbDomGlobalExposure()),
+                PrincipalAssetClass = new SelectList(this.subfundsSelectListService.GetAllTbDomPrincipalAssetClass()),
+                PrincipalInvestmentStrategy = new SelectList(this.subfundsSelectListService.GetAllTbDomPrincipalInvestmentStrategy()),
+                SfCatBloomberg = new SelectList(this.subfundsSelectListService.GetAllTbDomSfCatBloomberg()),
+                SfCatMorningStar = new SelectList(this.subfundsSelectListService.GetAllTbDomSfCatMorningStar()),
+                SfCatSix = new SelectList(this.subfundsSelectListService.GetAllTbDomSfCatSix()),
+                SfStatus = new SelectList(this.subfundsSelectListService.GetAllTbDomSFStatus()),
+                TypeOfMarket = new SelectList(this.subfundsSelectListService.GetAllTbDomTypeOfMarket()),
+                ValuationDate = new SelectList(this.subfundsSelectListService.GetAllTbDomValuationDate())
             };
 
             return this.View(model);
@@ -261,7 +261,7 @@
             int entityId = int.Parse(model.EntityProperties[1][0]);
             string returnUrl = $"/SubFunds/ViewSubFundSC/{entityId}";
 
-            var subFund = this._subFundsService.GetActiveSubFundById(entityId);
+            var subFund = this.subFundsService.GetActiveSubFundById(entityId);
 
             if (HttpContext.Request.Form.ContainsKey("modify_button"))
             {
@@ -284,23 +284,23 @@
         {
             SubFundBindingModel model = new SubFundBindingModel
             {
-                EntityProperties = this._subFundsService.GetAllActiveSubFunds(),
-                CalculationDate = new SelectList(this._subfundsSelectListService.GetAllTbDomCalculationDate()),
-                CesrClass = new SelectList(this._subfundsSelectListService.GetAllTbDomCesrClass()),
-                CurrencyCode = new SelectList(this._subfundsSelectListService.GetAllTbDomCurrencyCode()),
-                DerivMarket = new SelectList(this._subfundsSelectListService.GetAllTbDomDerivMarket()),
-                DerivPurpose = new SelectList(this._subfundsSelectListService.GetAllTbDomDerivPurpose()),
-                Frequency = new SelectList(this._subfundsSelectListService.GetAllTbDomFrequency()),
-                GeographicalFocus = new SelectList(this._subfundsSelectListService.GetAllTbDomGeographicalFocus()),
-                GlobalExposure = new SelectList(this._subfundsSelectListService.GetAllTbDomGlobalExposure()),
-                PrincipalAssetClass = new SelectList(this._subfundsSelectListService.GetAllTbDomPrincipalAssetClass()),
-                PrincipalInvestmentStrategy = new SelectList(this._subfundsSelectListService.GetAllTbDomPrincipalInvestmentStrategy()),
-                SfCatBloomberg = new SelectList(this._subfundsSelectListService.GetAllTbDomSfCatBloomberg()),
-                SfCatMorningStar = new SelectList(this._subfundsSelectListService.GetAllTbDomSfCatMorningStar()),
-                SfCatSix = new SelectList(this._subfundsSelectListService.GetAllTbDomSfCatSix()),
-                SfStatus = new SelectList(this._subfundsSelectListService.GetAllTbDomSFStatus()),
-                TypeOfMarket = new SelectList(this._subfundsSelectListService.GetAllTbDomTypeOfMarket()),
-                ValuationDate = new SelectList(this._subfundsSelectListService.GetAllTbDomValuationDate())
+                EntityProperties = this.subFundsService.GetAllActiveSubFunds(),
+                CalculationDate = new SelectList(this.subfundsSelectListService.GetAllTbDomCalculationDate()),
+                CesrClass = new SelectList(this.subfundsSelectListService.GetAllTbDomCesrClass()),
+                CurrencyCode = new SelectList(this.subfundsSelectListService.GetAllTbDomCurrencyCode()),
+                DerivMarket = new SelectList(this.subfundsSelectListService.GetAllTbDomDerivMarket()),
+                DerivPurpose = new SelectList(this.subfundsSelectListService.GetAllTbDomDerivPurpose()),
+                Frequency = new SelectList(this.subfundsSelectListService.GetAllTbDomFrequency()),
+                GeographicalFocus = new SelectList(this.subfundsSelectListService.GetAllTbDomGeographicalFocus()),
+                GlobalExposure = new SelectList(this.subfundsSelectListService.GetAllTbDomGlobalExposure()),
+                PrincipalAssetClass = new SelectList(this.subfundsSelectListService.GetAllTbDomPrincipalAssetClass()),
+                PrincipalInvestmentStrategy = new SelectList(this.subfundsSelectListService.GetAllTbDomPrincipalInvestmentStrategy()),
+                SfCatBloomberg = new SelectList(this.subfundsSelectListService.GetAllTbDomSfCatBloomberg()),
+                SfCatMorningStar = new SelectList(this.subfundsSelectListService.GetAllTbDomSfCatMorningStar()),
+                SfCatSix = new SelectList(this.subfundsSelectListService.GetAllTbDomSfCatSix()),
+                SfStatus = new SelectList(this.subfundsSelectListService.GetAllTbDomSFStatus()),
+                TypeOfMarket = new SelectList(this.subfundsSelectListService.GetAllTbDomTypeOfMarket()),
+                ValuationDate = new SelectList(this.subfundsSelectListService.GetAllTbDomValuationDate())
             };
 
             return this.View(model);

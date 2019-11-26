@@ -10,23 +10,24 @@
 
     public class RolesService : IRolesService
     {
-        private readonly RoleManager<PharusRole> _roleManager;
+        private readonly RoleManager<PharusRole> roleManager;
 
         public RolesService(
             RoleManager<PharusRole> roleManager)
         {
-            this._roleManager = roleManager;
+            this.roleManager = roleManager;
         }
+
         public List<PharusRole> GetAllRoles()
         {
-            var roles = this._roleManager.Roles.ToList();
+            var roles = this.roleManager.Roles.ToList();
 
             return roles;
         }
 
         public PharusRole GetRole(string roleName)
         {
-            var role = this._roleManager.Roles.SingleOrDefault(r => r.Name == roleName);
+            var role = this.roleManager.Roles.SingleOrDefault(r => r.Name == roleName);
 
             return role;
         }

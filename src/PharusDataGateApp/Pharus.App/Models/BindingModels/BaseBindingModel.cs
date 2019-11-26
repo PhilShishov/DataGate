@@ -1,5 +1,4 @@
-﻿
-namespace Pharus.App.Models.BindingModels
+﻿namespace Pharus.App.Models.BindingModels
 {
     using System.Collections.Generic;
 

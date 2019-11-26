@@ -9,12 +9,12 @@
 
         List<string[]> GetAllActiveSubFunds(DateTime? chosenDate);
 
-        List<string[]> GetActiveSubFundById(int Id);
+        List<string[]> GetActiveSubFundById(int id);
 
-        List<string[]> GetActiveSubFundById(DateTime? chosenDate, int Id);
+        List<string[]> GetActiveSubFundById(DateTime? chosenDate, int id);
 
-        List<string[]> GetActiveSubFundWithDateById(int Id);
+        List<string[]> GetActiveSubFundWithDateById(int id);
 
-        List<string[]> GetSubFundShareClasses(int Id);
+        List<string[]> GetSubFundShareClasses(int id);
     }
 }

@@ -8,17 +8,17 @@
 
     public class FundsSelectListService : IFundsSelectListService
     {
-        private readonly Pharus_vFinaleContext _context;
+        private readonly Pharus_vFinaleContext context;
 
         public FundsSelectListService(
             Pharus_vFinaleContext context)
         {
-            this._context = context;
+            this.context = context;
         }
 
         public List<string> GetAllTbDomCompanyAcronym()
         {
-            var companyAcronyms = this._context.TbDomCompanyType
+            var companyAcronyms = this.context.TbDomCompanyType
                 .Select(tb => tb.CtAcronym)
                 .ToList();
 
@@ -27,7 +27,7 @@
 
         public List<string> GetAllTbDomCompanyDesc()
         {
-            var companyDesc = this._context.TbDomCompanyType
+            var companyDesc = this.context.TbDomCompanyType
                 .Select(tb => tb.CtDesc)
                 .ToList();
 
@@ -36,7 +36,7 @@
 
         public List<string> GetAllTbDomFStatus()
         {
-            var fStatus = this._context.TbDomFStatus
+            var fStatus = this.context.TbDomFStatus
                 .Select(tb => tb.StFDesc)
                 .ToList();
 
@@ -45,7 +45,7 @@
 
         public List<string> GetAllTbDomLegalForm()
         {
-            var legalForms = this._context.TbDomLegalForm
+            var legalForms = this.context.TbDomLegalForm
                 .Select(tb => tb.LfAcronym)
                 .ToList();
 
@@ -54,7 +54,7 @@
 
         public List<string> GetAllTbDomLegalType()
         {
-            var legalTypes = this._context.TbDomLegalType
+            var legalTypes = this.context.TbDomLegalType
                 .Select(tb => tb.LtAcronym)
                 .ToList();
 
@@ -63,7 +63,7 @@
 
         public List<string> GetAllTbDomLegalVehicle()
         {
-            var legalVehicles = this._context.TbDomLegalVehicle
+            var legalVehicles = this.context.TbDomLegalVehicle
                 .Select(tb => tb.LvAcronym)
                 .ToList();
 

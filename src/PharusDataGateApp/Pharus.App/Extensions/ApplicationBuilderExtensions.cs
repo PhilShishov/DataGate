@@ -1,5 +1,4 @@
-﻿
-namespace Pharus.App.Extensions
+﻿namespace Pharus.App.Extensions
 {
     using System.Linq;
     using System.Reflection;

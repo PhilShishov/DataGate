@@ -11,6 +11,5 @@
         PharusUser GetUserByUserName(string username);
 
         List<PharusUser> GetAllUserRoles();
-
     }
 }

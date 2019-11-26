@@ -14,18 +14,18 @@
 
     public class ShareClassesController : Controller
     {
-        private readonly IShareClassesService _shareClassesService;
-        private readonly IShareClassesSelectListService _shareClassesSelectListService;
-        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IShareClassesService shareClassesService;
+        private readonly IShareClassesSelectListService shareClassesSelectListService;
+        private readonly IHostingEnvironment hostingEnvironment;
 
         public ShareClassesController(
             IShareClassesService shareClassesService,
             IShareClassesSelectListService shareClassesSelectListService,
             IHostingEnvironment hostingEnvironment)
         {
-            this._shareClassesService = shareClassesService;
-            this._shareClassesSelectListService = shareClassesSelectListService;
-            this._hostingEnvironment = hostingEnvironment;
+            this.shareClassesService = shareClassesService;
+            this.shareClassesSelectListService = shareClassesSelectListService;
+            this.hostingEnvironment = hostingEnvironment;
         }
 
         [HttpGet]
@@ -33,7 +33,7 @@
         {
             var model = new ActiveEntitiesViewModel
             {
-                ActiveEntities = this._shareClassesService.GetAllActiveShareClasses()
+                ActiveEntities = this.shareClassesService.GetAllActiveShareClasses()
             };
 
             return this.View(model);
@@ -43,16 +43,15 @@
         public IActionResult All(ActiveEntitiesViewModel model)
         {
             ModelState.Clear();
-            model.ActiveEntities = this._shareClassesService.GetAllActiveShareClasses();
+            model.ActiveEntities = this.shareClassesService.GetAllActiveShareClasses();
 
             if (model.Command.Equals("Update Table"))
             {
                 if (model.ChosenDate != null)
                 {
-                    model.ActiveEntities = this._shareClassesService.GetAllActiveShareClasses(model.ChosenDate);
+                    model.ActiveEntities = this.shareClassesService.GetAllActiveShareClasses(model.ChosenDate);
                 }
             }
-
             else if (model.Command.Equals("Search"))
             {
                 if (model.SearchTerm == null)
@@ -62,8 +61,8 @@
 
                 model.ActiveEntities = new List<string[]>();
 
-                var tableHeaders = this._shareClassesService.GetAllActiveShareClasses().Take(1).ToList();
-                var tableFundsWithoutHeaders = this._shareClassesService.GetAllActiveShareClasses().Skip(1).ToList();
+                var tableHeaders = this.shareClassesService.GetAllActiveShareClasses().Take(1).ToList();
+                var tableFundsWithoutHeaders = this.shareClassesService.GetAllActiveShareClasses().Skip(1).ToList();
 
                 CreateTableView.AddHeadersToView(model.ActiveEntities, tableHeaders);
 
@@ -86,7 +85,7 @@
             string typeName = model.GetType().Name;
             string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
-            if (HttpContext.Request.Form.ContainsKey("extract_Excel"))
+            if (this.HttpContext.Request.Form.ContainsKey("extract_Excel"))
             {
                 fileStreamResult = ExtractTable.ExtractTableAsExcel(model.ActiveEntities, typeName, controllerName);
             }
@@ -102,9 +101,9 @@
             string typeName = model.GetType().Name;
             string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
-            if (HttpContext.Request.Form.ContainsKey("extract_Pdf"))
+            if (this.HttpContext.Request.Form.ContainsKey("extract_Pdf"))
             {
-                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.ActiveEntities, model.ChosenDate, _hostingEnvironment, typeName, controllerName);
+                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.ActiveEntities, model.ChosenDate, this.hostingEnvironment, typeName, controllerName);
             }
 
             return fileStreamResult;
@@ -116,7 +115,7 @@
             ActiveEntitiesViewModel viewModel = new ActiveEntitiesViewModel
             {
                 EntityId = entityId,
-                ActiveEntities = this._shareClassesService.GetActiveShareClassById(entityId)
+                ActiveEntities = this.shareClassesService.GetActiveShareClassById(entityId)
             };
 
             return this.View(viewModel);
@@ -125,13 +124,13 @@
         [HttpPost("ShareClasses/ViewEntitySE/{EntityId}")]
         public IActionResult ViewEntitySE(ActiveEntitiesViewModel viewModel)
         {
-            viewModel.ActiveEntities = this._shareClassesService.GetActiveShareClassById(viewModel.EntityId);
+            viewModel.ActiveEntities = this.shareClassesService.GetActiveShareClassById(viewModel.EntityId);
 
             if (viewModel.Command.Equals("Update Table"))
             {
                 if (viewModel.ChosenDate != null)
                 {
-                    viewModel.ActiveEntities = this._shareClassesService.GetActiveShareClassById(viewModel.ChosenDate, viewModel.EntityId);
+                    viewModel.ActiveEntities = this.shareClassesService.GetActiveShareClassById(viewModel.ChosenDate, viewModel.EntityId);
                 }
             }
 
@@ -148,13 +147,13 @@
         {
             ShareClassBindingModel model = new ShareClassBindingModel
             {
-                EntityProperties = this._shareClassesService.GetActiveShareClassWithDateById(entityId),
-                InvestorType = new SelectList(this._shareClassesSelectListService.GetAllTbDomInvestorType()),
-                CurrencyCode = new SelectList(this._shareClassesSelectListService.GetAllTbDomCurrencyCode()),
-                CountryIssue = new SelectList(this._shareClassesSelectListService.GetAllTbDomCountry()),
-                CountryRisk = new SelectList(this._shareClassesSelectListService.GetAllTbDomCountry()),
-                ShareStatus = new SelectList(this._shareClassesSelectListService.GetAllTbDomShareStatus()),
-                ShareType = new SelectList(this._shareClassesSelectListService.GetAllTbDomShareType()),
+                EntityProperties = this.shareClassesService.GetActiveShareClassWithDateById(entityId),
+                InvestorType = new SelectList(this.shareClassesSelectListService.GetAllTbDomInvestorType()),
+                CurrencyCode = new SelectList(this.shareClassesSelectListService.GetAllTbDomCurrencyCode()),
+                CountryIssue = new SelectList(this.shareClassesSelectListService.GetAllTbDomCountry()),
+                CountryRisk = new SelectList(this.shareClassesSelectListService.GetAllTbDomCountry()),
+                ShareStatus = new SelectList(this.shareClassesSelectListService.GetAllTbDomShareStatus()),
+                ShareType = new SelectList(this.shareClassesSelectListService.GetAllTbDomShareType()),
             };
 
             return this.View(model);
@@ -171,9 +170,9 @@
             int entityId = int.Parse(model.EntityProperties[1][0]);
             string returnUrl = $"/ShareClasses/ViewEntitySE/{entityId}";
 
-            var shareClass = this._shareClassesService.GetActiveShareClassById(entityId);
+            var shareClass = this.shareClassesService.GetActiveShareClassById(entityId);
 
-            if (HttpContext.Request.Form.ContainsKey("modify_button"))
+            if (this.HttpContext.Request.Form.ContainsKey("modify_button"))
             {
                 for (int row = 1; row < shareClass.Count; row++)
                 {
@@ -183,7 +182,7 @@
                     }
                 }
 
-                return LocalRedirect(returnUrl);
+                return this.LocalRedirect(returnUrl);
             }
 
             return this.LocalRedirect(returnUrl);
@@ -194,13 +193,13 @@
         {
             ShareClassBindingModel model = new ShareClassBindingModel
             {
-                EntityProperties = this._shareClassesService.GetAllActiveShareClasses(),
-                InvestorType = new SelectList(this._shareClassesSelectListService.GetAllTbDomInvestorType()),
-                CurrencyCode = new SelectList(this._shareClassesSelectListService.GetAllTbDomCurrencyCode()),
-                CountryIssue = new SelectList(this._shareClassesSelectListService.GetAllTbDomCountry()),
-                CountryRisk = new SelectList(this._shareClassesSelectListService.GetAllTbDomCountry()),
-                ShareStatus = new SelectList(this._shareClassesSelectListService.GetAllTbDomShareStatus()),
-                ShareType = new SelectList(this._shareClassesSelectListService.GetAllTbDomShareType()),
+                EntityProperties = this.shareClassesService.GetAllActiveShareClasses(),
+                InvestorType = new SelectList(this.shareClassesSelectListService.GetAllTbDomInvestorType()),
+                CurrencyCode = new SelectList(this.shareClassesSelectListService.GetAllTbDomCurrencyCode()),
+                CountryIssue = new SelectList(this.shareClassesSelectListService.GetAllTbDomCountry()),
+                CountryRisk = new SelectList(this.shareClassesSelectListService.GetAllTbDomCountry()),
+                ShareStatus = new SelectList(this.shareClassesSelectListService.GetAllTbDomShareStatus()),
+                ShareType = new SelectList(this.shareClassesSelectListService.GetAllTbDomShareType()),
             };
 
             return this.View(model);

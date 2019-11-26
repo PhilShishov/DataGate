@@ -8,16 +8,17 @@
 
     public class SubFundsSelectListService : ISubFundsSelectListService
     {
-        private readonly Pharus_vFinaleContext _context;
+        private readonly Pharus_vFinaleContext context;
 
         public SubFundsSelectListService(
             Pharus_vFinaleContext context)
         {
-            this._context = context;
+            this.context = context;
         }
+
         public List<string> GetAllTbDomCalculationDate()
         {
-            var calculationDate = this._context.TbDomCalculationDate
+            var calculationDate = this.context.TbDomCalculationDate
                 .Select(tb => tb.CdDesc)
                 .ToList();
 
@@ -26,7 +27,7 @@
 
         public List<string> GetAllTbDomCesrClass()
         {
-            var cesrClass = this._context.TbDomCesrClass
+            var cesrClass = this.context.TbDomCesrClass
                 .Select(tb => tb.CDesc)
                 .ToList();
 
@@ -35,7 +36,7 @@
 
         public List<string> GetAllTbDomCurrencyCode()
         {
-            var currencyCode = this._context.TbDomIsoCurrency
+            var currencyCode = this.context.TbDomIsoCurrency
                 .Select(tb => tb.IsoCcyCode)
                 .ToList();
 
@@ -44,7 +45,7 @@
 
         public List<string> GetAllTbDomDerivMarket()
         {
-            var derivMarket = this._context.TbDomDerivMarket
+            var derivMarket = this.context.TbDomDerivMarket
                 .Select(tb => tb.DmDesc)
                 .ToList();
 
@@ -53,7 +54,7 @@
 
         public List<string> GetAllTbDomDerivPurpose()
         {
-            var derivPurpose = this._context.TbDomDerivPurpose
+            var derivPurpose = this.context.TbDomDerivPurpose
                 .Select(tb => tb.DpDesc)
                 .ToList();
 
@@ -62,7 +63,7 @@
 
         public List<string> GetAllTbDomFrequency()
         {
-            var frequency = this._context.TbDomNavFrequency
+            var frequency = this.context.TbDomNavFrequency
                 .Select(tb => tb.NfDesc)
                 .ToList();
 
@@ -71,7 +72,7 @@
 
         public List<string> GetAllTbDomGeographicalFocus()
         {
-            var geoFocus = this._context.TbDomCssfGeographicalFocus
+            var geoFocus = this.context.TbDomCssfGeographicalFocus
                 .Select(tb => tb.GfDesc)
                 .ToList();
 
@@ -80,7 +81,7 @@
 
         public List<string> GetAllTbDomGlobalExposure()
         {
-            var globalExposure = this._context.TbDomGlobalExposure
+            var globalExposure = this.context.TbDomGlobalExposure
                 .Select(tb => tb.GeDesc)
                 .ToList();
 
@@ -89,7 +90,7 @@
 
         public List<string> GetAllTbDomPrincipalAssetClass()
         {
-            var principalAssetClass = this._context.TbDomCssfPrincipalAssetClass
+            var principalAssetClass = this.context.TbDomCssfPrincipalAssetClass
                 .Select(tb => tb.PacDesc)
                 .ToList();
 
@@ -98,7 +99,7 @@
 
         public List<string> GetAllTbDomPrincipalInvestmentStrategy()
         {
-            var investmentStrategy = this._context.TbDomPrincipalInvestmentStrategy
+            var investmentStrategy = this.context.TbDomPrincipalInvestmentStrategy
                 .Select(tb => tb.PisDesc)
                 .ToList();
 
@@ -107,7 +108,7 @@
 
         public List<string> GetAllTbDomSfCatBloomberg()
         {
-            var catBloomberg = this._context.TbDomSfCatBloomberg
+            var catBloomberg = this.context.TbDomSfCatBloomberg
                 .Select(tb => tb.CatBloombergDesc)
                 .ToList();
 
@@ -116,7 +117,7 @@
 
         public List<string> GetAllTbDomSfCatMorningStar()
         {
-            var catMorningStar = this._context.TbDomSfCatMorningstar
+            var catMorningStar = this.context.TbDomSfCatMorningstar
                 .Select(tb => tb.CMorningstarDesc)
                 .ToList();
 
@@ -125,7 +126,7 @@
 
         public List<string> GetAllTbDomSfCatSix()
         {
-            var catSix = this._context.TbDomSfCatSix
+            var catSix = this.context.TbDomSfCatSix
                 .Select(tb => tb.CatSixDesc)
                 .ToList();
 
@@ -134,7 +135,7 @@
 
         public List<string> GetAllTbDomSFStatus()
         {
-            var sfStatus = this._context.TbDomSfStatus
+            var sfStatus = this.context.TbDomSfStatus
                 .Select(tb => tb.StDesc)
                 .ToList();
 
@@ -143,7 +144,7 @@
 
         public List<string> GetAllTbDomTypeOfMarket()
         {
-            var typeOfMarket = this._context.TbDomTypeOfMarket
+            var typeOfMarket = this.context.TbDomTypeOfMarket
                 .Select(tb => tb.TomDesc)
                 .ToList();
 
@@ -152,7 +153,7 @@
 
         public List<string> GetAllTbDomValuationDate()
         {
-            var valuationDate = this._context.TbDomValutationDate
+            var valuationDate = this.context.TbDomValutationDate
                 .Select(tb => tb.VdDesc)
                 .ToList();
 

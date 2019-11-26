@@ -27,10 +27,10 @@
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from fn_active_shareclasses('{defaultDate}')";
+                command.CommandText = $"select * from fn_active_shareclasses('{this.defaultDate}')";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
-            };
+            }
         }
 
         public List<string[]> GetAllActiveShareClasses(DateTime? chosenDate)
@@ -43,9 +43,8 @@
 
                 if (chosenDate == null)
                 {
-                    command.CommandText = $"select * from fn_active_shareclasses('{defaultDate}')";
+                    command.CommandText = $"select * from fn_active_shareclasses('{this.defaultDate}')";
                 }
-
                 else
                 {
                     command.CommandText = $"select * from fn_active_shareclasses('{chosenDate?.ToString("yyyyMMdd")}')";
@@ -55,7 +54,7 @@
             }
         }
 
-        public List<string[]> GetActiveShareClassById(int Id)
+        public List<string[]> GetActiveShareClassById(int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -63,13 +62,13 @@
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from fn_active_shareclasses('{defaultDate}') where [ID] = {Id}";
+                command.CommandText = $"select * from fn_active_shareclasses('{this.defaultDate}') where [ID] = {id}";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
         }
 
-        public List<string[]> GetActiveShareClassById(DateTime? chosenDate, int Id)
+        public List<string[]> GetActiveShareClassById(DateTime? chosenDate, int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -79,19 +78,18 @@
 
                 if (chosenDate == null)
                 {
-                    command.CommandText = $"select * from fn_active_shareclasses('{defaultDate}') where [ID] = {Id}";
+                    command.CommandText = $"select * from fn_active_shareclasses('{this.defaultDate}') where [ID] = {id}";
                 }
-
                 else
                 {
-                    command.CommandText = $"select * from fn_active_shareclasses('{chosenDate?.ToString("yyyyMMdd")}') where [ID] = {Id}";
+                    command.CommandText = $"select * from fn_active_shareclasses('{chosenDate?.ToString("yyyyMMdd")}') where [ID] = {id}";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
         }
 
-        public List<string[]> GetActiveShareClassWithDateById(int Id)
+        public List<string[]> GetActiveShareClassWithDateById(int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -99,7 +97,7 @@
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from fn_active_shareclasses('{defaultDate}') where [ID] = {Id}";
+                command.CommandText = $"select * from fn_active_shareclasses('{this.defaultDate}') where [ID] = {id}";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }

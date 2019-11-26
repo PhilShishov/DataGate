@@ -1,5 +1,4 @@
-﻿
-namespace Pharus.App.Models.BindingModels.Users
+﻿namespace Pharus.App.Models.BindingModels.Users
 {
     using System.ComponentModel.DataAnnotations;
 

@@ -9,44 +9,47 @@
     using Microsoft.AspNetCore.Authorization;
 
     using Pharus.Data;
-    using Pharus.App.Utilities;
     using Pharus.Services.Contracts;
-    using Pharus.App.Models.ViewModels.Entities;
+    using Pharus.App.Utilities;
     using Pharus.App.Models.BindingModels.Funds;
+    using Pharus.App.Models.ViewModels.Entities;
 
     [Authorize]
     public class FundsController : Controller
     {
-        private readonly Pharus_vFinaleContext _context;
+        private readonly Pharus_vFinaleContext context;
         private readonly IFundsService fundsService;
         private readonly IFundsSelectListService fundsSelectListService;
-        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IHostingEnvironment hostingEnvironment;
 
-        public FundsController(IFundsService fundsService,
+        public FundsController(
+            IFundsService fundsService,
             IFundsSelectListService fundsSelectListService,
             IHostingEnvironment hostingEnvironment,
             Pharus_vFinaleContext context)
         {
-            this._context = context;
+            this.context = context;
             this.fundsService = fundsService;
             this.fundsSelectListService = fundsSelectListService;
-            this._hostingEnvironment = hostingEnvironment;
-        }      
+            this.hostingEnvironment = hostingEnvironment;
+        }
 
         public JsonResult AutoCompleteFundList(string searchTerm)
         {
-            var result = _context.TbHistoryFund.ToList();
+            var result = this.context.TbHistoryFund.ToList();
             if (searchTerm != null)
             {
-                result = _context.TbHistoryFund.Where(s => s.FOfficialFundName.Contains(searchTerm)).ToList();
+                result = this.context.TbHistoryFund.Where(s => s.FOfficialFundName.Contains(searchTerm)).ToList();
             }
+
             var modifiedData = result.Select(s => new
             {
                 id = s.FOfficialFundName,
-                text = s.FOfficialFundName
+                text = s.FOfficialFundName,
             });
-            return Json(modifiedData);
-        }        
+
+            return this.Json(modifiedData);
+        }
 
         [HttpGet]
         public IActionResult All()
@@ -54,7 +57,7 @@
             var model = new ActiveEntitiesViewModel
             {
                 ActiveEntities = new List<string[]>(),
-                IsActive = true
+                IsActive = true,
             };
 
             GetAllActiveEntitiesWithHeaders.GetAllActiveFundsWithHeaders(model, this.fundsService);
@@ -65,7 +68,7 @@
         [HttpPost]
         public IActionResult All(ActiveEntitiesViewModel model)
         {
-            ModelState.Clear();
+            this.ModelState.Clear();
             GetAllActiveEntitiesWithHeaders.GetAllActiveFundsWithHeaders(model, this.fundsService);
 
             if (model.Command.Equals("Update Table"))
@@ -82,7 +85,6 @@
                     }
                 }
             }
-
             else if (model.Command.Equals("Search"))
             {
                 if (model.SearchTerm == null)
@@ -105,12 +107,11 @@
                         .Where(f => f.Contains("Active"))
                         .ToList();
                 }
-
                 else
                 {
                     tableFundsWithoutHeaders = this.fundsService
                         .GetAllActiveFunds()
-                        .Skip(1)                                                        
+                        .Skip(1)
                         .ToList();
                 }
 
@@ -135,7 +136,7 @@
             string typeName = model.GetType().Name;
             string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
-            if (HttpContext.Request.Form.ContainsKey("extract_Excel"))
+            if (this.HttpContext.Request.Form.ContainsKey("extract_Excel"))
             {
                 fileStreamResult = ExtractTable.ExtractTableAsExcel(model.ActiveEntities, typeName, controllerName);
             }
@@ -151,7 +152,7 @@
             string typeName = model.GetType().Name;
             string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
-            if (HttpContext.Request.Form.ContainsKey("extract_Excel"))
+            if (this.HttpContext.Request.Form.ContainsKey("extract_Excel"))
             {
                 fileStreamResult = ExtractTable.ExtractTableAsExcel(model.AESubEntities, typeName, controllerName);
             }
@@ -167,10 +168,10 @@
             string typeName = model.GetType().Name;
             string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
-            if (HttpContext.Request.Form.ContainsKey("extract_Pdf"))
+            if (this.HttpContext.Request.Form.ContainsKey("extract_Pdf"))
             {
                 fileStreamResult = ExtractTable
-                    .ExtractTableAsPdf(model.ActiveEntities, model.ChosenDate, _hostingEnvironment, typeName, controllerName);
+                    .ExtractTableAsPdf(model.ActiveEntities, model.ChosenDate, this.hostingEnvironment, typeName, controllerName);
             }
 
             return fileStreamResult;
@@ -184,28 +185,29 @@
             string typeName = model.GetType().Name;
             string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
-            if (HttpContext.Request.Form.ContainsKey("extract_Pdf"))
+            if (this.HttpContext.Request.Form.ContainsKey("extract_Pdf"))
             {
                 fileStreamResult = ExtractTable
-                    .ExtractTableAsPdf(model.AESubEntities, model.ChosenDate, _hostingEnvironment, typeName, controllerName);
+                    .ExtractTableAsPdf(model.AESubEntities, model.ChosenDate, this.hostingEnvironment, typeName, controllerName);
             }
 
             return fileStreamResult;
         }
 
         public JsonResult AutoCompleteSubFundList(string searchTerm, int entityId)
-        {            
+        {
             var result = this.fundsService.GetFundSubFunds(entityId).ToList();
             if (searchTerm != null)
             {
                 result = this.fundsService.GetFundSubFunds(entityId).Where(s => s[3].Contains(searchTerm)).ToList();
             }
+
             var modifiedData = result.Select(s => new
             {
                 id = s[3],
-                text = s[3]
+                text = s[3],
             });
-            return Json(modifiedData);
+            return this.Json(modifiedData);
         }
 
         [HttpGet("Funds/ViewEntitySE/{EntityId}")]
@@ -215,7 +217,7 @@
             {
                 EntityId = entityId,
                 ActiveEntity = this.fundsService.GetActiveFundById(entityId),
-                AESubEntities = this.fundsService.GetFundSubFunds(entityId)
+                AESubEntities = this.fundsService.GetFundSubFunds(entityId),
             };
 
             return this.View(viewModel);
@@ -235,7 +237,6 @@
                         .GetActiveFundById(viewModel.ChosenDate, viewModel.EntityId);
                 }
             }
-
             else if (viewModel.Command.Equals("Search"))
             {
                 if (viewModel.SearchTerm == null)
@@ -274,7 +275,7 @@
             {
                 EntityProperties = this.fundsService.GetActiveFundWithDateById(entityId),
                 ChosenDate = DateTime.Today,
-                FId = entityId
+                FId = entityId,
             };
 
             this.ViewData["FStatusList"] = this.fundsSelectListService.GetAllTbDomFStatus();
@@ -290,11 +291,10 @@
         [HttpPost]
         public IActionResult EditFund(FundBindingModel model)
         {
-            //if (!ModelState.IsValid)
-            //{
+            // if (!ModelState.IsValid)
+            // {
             //    return View(model ?? new EditFundBindingModel());
-            //}
-
+            // }
             string returnUrl = $"/Funds/All";
             List<string> entityValues = new List<string>();
             DateTime chosenDate = model.ChosenDate;
@@ -307,32 +307,33 @@
                 }
             }
 
-            if (HttpContext.Request.Form.ContainsKey("update_button"))
+            if (this.HttpContext.Request.Form.ContainsKey("update_button"))
             {
                 int fundId = model.FId;
-                int fStatusId = this._context.TbDomFStatus
+                int fStatusId = this.context.TbDomFStatus
                     .Where(s => s.StFDesc == model.FStatus)
                     .Select(s => s.StFId)
                     .FirstOrDefault();
-                int fLegalFormId = this._context.TbDomLegalForm
+                int fLegalFormId = this.context.TbDomLegalForm
                     .Where(lf => lf.LfAcronym == model.LegalForm)
                     .Select(lf => lf.LfId)
                     .FirstOrDefault();
-                int fLegalVehicleId = this._context.TbDomLegalVehicle
+                int fLegalVehicleId = this.context.TbDomLegalVehicle
                     .Where(lv => lv.LvAcronym == model.LegalVehicle)
                     .Select(lv => lv.LvId)
                     .FirstOrDefault();
-                int fLegalTypeId = this._context.TbDomLegalType
+                int fLegalTypeId = this.context.TbDomLegalType
                     .Where(lt => lt.LtAcronym == model.LegalType)
                     .Select(lt => lt.LtId)
                     .FirstOrDefault();
-                int fCompanyTypeId = this._context.TbDomCompanyType
+                int fCompanyTypeId = this.context.TbDomCompanyType
                     .Where(ct => ct.CtAcronym == model.CompanyAcronym)
                     .Select(ct => ct.CtId)
                     .FirstOrDefault();
 
-                this.fundsService.ExecuteEditFund(entityValues, fundId, chosenDate, fStatusId, fLegalFormId, fLegalTypeId, fLegalVehicleId, fCompanyTypeId);               
+                this.fundsService.ExecuteEditFund(entityValues, fundId, chosenDate, fStatusId, fLegalFormId, fLegalTypeId, fLegalVehicleId, fCompanyTypeId);
             }
+
             return this.LocalRedirect(returnUrl);
         }
 

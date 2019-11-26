@@ -6,7 +6,7 @@
     using System.Collections.Generic;
 
     public class ReadTableData
-    {        
+    {
         public static IEnumerable<string[]> ReadTableValue(DbDataReader reader)
         {
             while (reader.Read())
@@ -21,6 +21,7 @@
                 yield return values.ToArray();
             }
         }
+
         public static string[] ReadTableHeader(SqlDataReader reader)
         {
             string[] item = new string[reader.FieldCount];

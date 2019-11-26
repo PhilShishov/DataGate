@@ -1,5 +1,4 @@
-﻿
-namespace Pharus.App.Controllers
+﻿namespace Pharus.App.Controllers
 {
     using System.Diagnostics;
 
@@ -17,7 +16,7 @@ namespace Pharus.App.Controllers
 
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return this.View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
         }
     }
 }

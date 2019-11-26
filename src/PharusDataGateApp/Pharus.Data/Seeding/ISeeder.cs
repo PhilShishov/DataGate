@@ -1,5 +1,4 @@
-﻿
-namespace Pharus.Data.Seeding
+﻿namespace Pharus.Data.Seeding
 {
     public interface ISeeder
     {

@@ -28,7 +28,7 @@
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from fn_active_fund('{defaultDate}')";
+                command.CommandText = $"select * from fn_active_fund('{this.defaultDate}')";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
@@ -44,9 +44,8 @@
 
                 if (chosenDate == null)
                 {
-                    command.CommandText = $"select * from fn_active_fund('{defaultDate}')";
+                    command.CommandText = $"select * from fn_active_fund('{this.defaultDate}')";
                 }
-
                 else
                 {
                     command.CommandText = $"select * from fn_active_fund('{chosenDate?.ToString("yyyyMMdd")}')";
@@ -56,7 +55,7 @@
             }
         }
 
-        public List<string[]> GetActiveFundById(int Id)
+        public List<string[]> GetActiveFundById(int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -64,13 +63,13 @@
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from fn_active_fund('{defaultDate}') where [FUND ID PHARUS] = {Id}";
+                command.CommandText = $"select * from fn_active_fund('{this.defaultDate}') where [FUND ID PHARUS] = {id}";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
         }
 
-        public List<string[]> GetActiveFundById(DateTime? chosenDate, int Id)
+        public List<string[]> GetActiveFundById(DateTime? chosenDate, int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -80,19 +79,18 @@
 
                 if (chosenDate == null)
                 {
-                    command.CommandText = $"select * from fn_active_fund('{defaultDate}') where [FUND ID PHARUS] = {Id}";
+                    command.CommandText = $"select * from fn_active_fund('{this.defaultDate}') where [FUND ID PHARUS] = {id}";
                 }
-
                 else
                 {
-                    command.CommandText = $"select * from fn_active_fund('{chosenDate?.ToString("yyyyMMdd")}') where [FUND ID PHARUS] = {Id}";
+                    command.CommandText = $"select * from fn_active_fund('{chosenDate?.ToString("yyyyMMdd")}') where [FUND ID PHARUS] = {id}";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
         }
 
-        public List<string[]> GetActiveFundWithDateById(int Id)
+        public List<string[]> GetActiveFundWithDateById(int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -100,13 +98,13 @@
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from fn_active_fund_modifyview('{defaultDate}') where [FUND ID PHARUS] = {Id}";
+                command.CommandText = $"select * from fn_active_fund_modifyview('{this.defaultDate}') where [FUND ID PHARUS] = {id}";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
         }
 
-        public List<string[]> GetFundSubFunds(int Id)
+        public List<string[]> GetFundSubFunds(int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -114,7 +112,7 @@
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from ActivesubfundforSpecificFundAtDate('{defaultDate}', {Id})";
+                command.CommandText = $"select * from ActivesubfundforSpecificFundAtDate('{this.defaultDate}', {id})";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
@@ -136,22 +134,22 @@
                 {
                     command.Parameters.AddRange(new[]
                     {
-                        new SqlParameter("@f_id", SqlDbType.Int) { Value = fundId},
-                        new SqlParameter("@f_initialDate", SqlDbType.VarChar, 100) { Value = chosenDate.ToString("yyyyMMdd")},
-                        new SqlParameter("@f_status", SqlDbType.Int) { Value = fStatusId},
-                        new SqlParameter("@f_registrationNumber", SqlDbType.VarChar, 100) { Value = fundsValues[16]},
-                        new SqlParameter("@f_officialFundName", SqlDbType.VarChar, 100) { Value = fundsValues[3]},
-                        new SqlParameter("@f_shortFundName", SqlDbType.VarChar, 100) { Value = fundsValues[3]},
-                        new SqlParameter("@f_leiCode", SqlDbType.VarChar, 100) { Value = fundsValues[15]},
-                        new SqlParameter("@f_cssfCode", SqlDbType.VarChar, 100) { Value = fundsValues[4]},
-                        new SqlParameter("@f_faCode", SqlDbType.VarChar, 100) { Value = fundsValues[9]},
-                        new SqlParameter("@f_depCode", SqlDbType.VarChar, 100) { Value = fundsValues[10]},
-                        new SqlParameter("@f_taCode", SqlDbType.VarChar, 100) { Value = fundsValues[11]},
-                        new SqlParameter("@f_legalForm", SqlDbType.Int) { Value = fLegalFormId},
-                        new SqlParameter("@f_legalType", SqlDbType.Int) { Value = fLegalTypeId},
-                        new SqlParameter("@f_legal_vehicle", SqlDbType.Int) { Value = fLegalVehicleId},
-                        new SqlParameter("@f_companyType", SqlDbType.Int) { Value = fCompanyTypeId},
-                        new SqlParameter("@f_tinNumber", SqlDbType.VarChar, 100) { Value = fundsValues[14]}
+                        new SqlParameter("@f_id", SqlDbType.Int) { Value = fundId },
+                        new SqlParameter("@f_initialDate", SqlDbType.VarChar, 100) { Value = chosenDate.ToString("yyyyMMdd") },
+                        new SqlParameter("@f_status", SqlDbType.Int) { Value = fStatusId },
+                        new SqlParameter("@f_registrationNumber", SqlDbType.VarChar, 100) { Value = fundsValues[16] },
+                        new SqlParameter("@f_officialFundName", SqlDbType.VarChar, 100) { Value = fundsValues[3] },
+                        new SqlParameter("@f_shortFundName", SqlDbType.VarChar, 100) { Value = fundsValues[3] },
+                        new SqlParameter("@f_leiCode", SqlDbType.VarChar, 100) { Value = fundsValues[15] },
+                        new SqlParameter("@f_cssfCode", SqlDbType.VarChar, 100) { Value = fundsValues[4] },
+                        new SqlParameter("@f_faCode", SqlDbType.VarChar, 100) { Value = fundsValues[9] },
+                        new SqlParameter("@f_depCode", SqlDbType.VarChar, 100) { Value = fundsValues[10] },
+                        new SqlParameter("@f_taCode", SqlDbType.VarChar, 100) { Value = fundsValues[11] },
+                        new SqlParameter("@f_legalForm", SqlDbType.Int) { Value = fLegalFormId },
+                        new SqlParameter("@f_legalType", SqlDbType.Int) { Value = fLegalTypeId },
+                        new SqlParameter("@f_legal_vehicle", SqlDbType.Int) { Value = fLegalVehicleId },
+                        new SqlParameter("@f_companyType", SqlDbType.Int) { Value = fCompanyTypeId },
+                        new SqlParameter("@f_tinNumber", SqlDbType.VarChar, 100) { Value = fundsValues[14] },
                     });
 
                     foreach (SqlParameter parameter in command.Parameters)

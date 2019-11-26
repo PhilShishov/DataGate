@@ -7,8 +7,6 @@
 
     public partial class Pharus_vFinaleContext : DbContext
     {
-        private readonly IConfiguration configuration;
-
         public Pharus_vFinaleContext()
         {
         }
@@ -19,51 +17,80 @@
         }
 
         public virtual DbSet<TbDomActivityType> TbDomActivityType { get; set; }
-        public virtual DbSet<TbDomCalculationDate> TbDomCalculationDate { get; set; }
-        public virtual DbSet<TbDomCesrClass> TbDomCesrClass { get; set; }
-        public virtual DbSet<TbDomCompany> TbDomCompany { get; set; }
-        public virtual DbSet<TbDomCompanyType> TbDomCompanyType { get; set; }
-        public virtual DbSet<TbDomCssfGeographicalFocus> TbDomCssfGeographicalFocus { get; set; }
-        public virtual DbSet<TbDomCssfPrincipalAssetClass> TbDomCssfPrincipalAssetClass { get; set; }
-        public virtual DbSet<TbDomDerivMarket> TbDomDerivMarket { get; set; }
-        public virtual DbSet<TbDomDerivPurpose> TbDomDerivPurpose { get; set; }
-        public virtual DbSet<TbDomFStatus> TbDomFStatus { get; set; }
-        public virtual DbSet<TbDomGlobalExposure> TbDomGlobalExposure { get; set; }
-        public virtual DbSet<TbDomInvestorType> TbDomInvestorType { get; set; }
-        public virtual DbSet<TbDomIsoCountry> TbDomIsoCountry { get; set; }
-        public virtual DbSet<TbDomIsoCurrency> TbDomIsoCurrency { get; set; }
-        public virtual DbSet<TbDomLegalForm> TbDomLegalForm { get; set; }
-        public virtual DbSet<TbDomLegalType> TbDomLegalType { get; set; }
-        public virtual DbSet<TbDomLegalVehicle> TbDomLegalVehicle { get; set; }
-        public virtual DbSet<TbDomNavFrequency> TbDomNavFrequency { get; set; }
-        public virtual DbSet<TbDomPrincipalInvestmentStrategy> TbDomPrincipalInvestmentStrategy { get; set; }
-        public virtual DbSet<TbDomSfCatBloomberg> TbDomSfCatBloomberg { get; set; }
-        public virtual DbSet<TbDomSfCatMorningstar> TbDomSfCatMorningstar { get; set; }
-        public virtual DbSet<TbDomSfCatSix> TbDomSfCatSix { get; set; }
-        public virtual DbSet<TbDomSfStatus> TbDomSfStatus { get; set; }
-        public virtual DbSet<TbDomShareStatus> TbDomShareStatus { get; set; }
-        public virtual DbSet<TbDomShareType> TbDomShareType { get; set; }
-        public virtual DbSet<TbDomTypeOfMarket> TbDomTypeOfMarket { get; set; }
-        public virtual DbSet<TbDomValutationDate> TbDomValutationDate { get; set; }
-        public virtual DbSet<TbFund> TbFund { get; set; }
-        public virtual DbSet<TbFundSubFund> TbFundSubFund { get; set; }
-        public virtual DbSet<TbHistoryFund> TbHistoryFund { get; set; }
-        public virtual DbSet<TbHistoryShareClass> TbHistoryShareClass { get; set; }
-        public virtual DbSet<TbHistorySubFund> TbHistorySubFund { get; set; }
-        public virtual DbSet<TbServiceAgreementFund> TbServiceAgreementFund { get; set; }
-        public virtual DbSet<TbServiceAgreementShareclass> TbServiceAgreementShareclass { get; set; }
-        public virtual DbSet<TbServiceAgreementSubfund> TbServiceAgreementSubfund { get; set; }
-        public virtual DbSet<TbShareClass> TbShareClass { get; set; }
-        public virtual DbSet<TbSubFund> TbSubFund { get; set; }
-        public virtual DbSet<TbSubFundShareClass> TbSubFundShareClass { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        { 
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer(this.configuration.GetConnectionString("Pharus_vFinaleConnection"));
-            }
-        }
+        public virtual DbSet<TbDomCalculationDate> TbDomCalculationDate { get; set; }
+
+        public virtual DbSet<TbDomCesrClass> TbDomCesrClass { get; set; }
+
+        public virtual DbSet<TbDomCompany> TbDomCompany { get; set; }
+
+        public virtual DbSet<TbDomCompanyType> TbDomCompanyType { get; set; }
+
+        public virtual DbSet<TbDomCssfGeographicalFocus> TbDomCssfGeographicalFocus { get; set; }
+
+        public virtual DbSet<TbDomCssfPrincipalAssetClass> TbDomCssfPrincipalAssetClass { get; set; }
+
+        public virtual DbSet<TbDomDerivMarket> TbDomDerivMarket { get; set; }
+
+        public virtual DbSet<TbDomDerivPurpose> TbDomDerivPurpose { get; set; }
+
+        public virtual DbSet<TbDomFStatus> TbDomFStatus { get; set; }
+
+        public virtual DbSet<TbDomGlobalExposure> TbDomGlobalExposure { get; set; }
+
+        public virtual DbSet<TbDomInvestorType> TbDomInvestorType { get; set; }
+
+        public virtual DbSet<TbDomIsoCountry> TbDomIsoCountry { get; set; }
+
+        public virtual DbSet<TbDomIsoCurrency> TbDomIsoCurrency { get; set; }
+
+        public virtual DbSet<TbDomLegalForm> TbDomLegalForm { get; set; }
+
+        public virtual DbSet<TbDomLegalType> TbDomLegalType { get; set; }
+
+        public virtual DbSet<TbDomLegalVehicle> TbDomLegalVehicle { get; set; }
+
+        public virtual DbSet<TbDomNavFrequency> TbDomNavFrequency { get; set; }
+
+        public virtual DbSet<TbDomPrincipalInvestmentStrategy> TbDomPrincipalInvestmentStrategy { get; set; }
+
+        public virtual DbSet<TbDomSfCatBloomberg> TbDomSfCatBloomberg { get; set; }
+
+        public virtual DbSet<TbDomSfCatMorningstar> TbDomSfCatMorningstar { get; set; }
+
+        public virtual DbSet<TbDomSfCatSix> TbDomSfCatSix { get; set; }
+
+        public virtual DbSet<TbDomSfStatus> TbDomSfStatus { get; set; }
+
+        public virtual DbSet<TbDomShareStatus> TbDomShareStatus { get; set; }
+
+        public virtual DbSet<TbDomShareType> TbDomShareType { get; set; }
+
+        public virtual DbSet<TbDomTypeOfMarket> TbDomTypeOfMarket { get; set; }
+
+        public virtual DbSet<TbDomValutationDate> TbDomValutationDate { get; set; }
+
+        public virtual DbSet<TbFund> TbFund { get; set; }
+
+        public virtual DbSet<TbFundSubFund> TbFundSubFund { get; set; }
+
+        public virtual DbSet<TbHistoryFund> TbHistoryFund { get; set; }
+
+        public virtual DbSet<TbHistoryShareClass> TbHistoryShareClass { get; set; }
+
+        public virtual DbSet<TbHistorySubFund> TbHistorySubFund { get; set; }
+
+        public virtual DbSet<TbServiceAgreementFund> TbServiceAgreementFund { get; set; }
+
+        public virtual DbSet<TbServiceAgreementShareclass> TbServiceAgreementShareclass { get; set; }
+
+        public virtual DbSet<TbServiceAgreementSubfund> TbServiceAgreementSubfund { get; set; }
+
+        public virtual DbSet<TbShareClass> TbShareClass { get; set; }
+
+        public virtual DbSet<TbSubFund> TbSubFund { get; set; }
+
+        public virtual DbSet<TbSubFundShareClass> TbSubFundShareClass { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
