@@ -1,8 +1,14 @@
-﻿namespace Pharus.App.Models.BindingModels.ShareClasses
+﻿// Model class for binding shareclasses
+
+// Created: 10/2019
+// Author:  Philip Shishov
+
+// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+namespace Pharus.App.Models.BindingModels.ShareClasses
 {
     using Microsoft.AspNetCore.Mvc.Rendering;
 
-    public class ShareClassBindingModel : BaseBindingModel
+    public class ShareClassBindingModel : BaseEntityBindingModel
     {
         public SelectList InvestorType { get; set; }
 

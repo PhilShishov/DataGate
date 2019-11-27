@@ -1,4 +1,4 @@
-﻿@model Pharus.App.Models.ViewModels.Entities.ActiveEntitiesViewModel
+﻿@model Pharus.App.Models.ViewModels.Entities.EntitiesViewModel
 
 @{
     ViewData["Title"] = "All";
@@ -14,7 +14,7 @@
 
 <form asp-controller="ShareClasses" class="justify-content-between" method="post">
     <div>
-        <partial name="ContainerActiveEntityPartial" />
+        <partial name="ContainerEntityPartial" />
 
         <partial name="ExtractEntitiesViewPartial" />
 

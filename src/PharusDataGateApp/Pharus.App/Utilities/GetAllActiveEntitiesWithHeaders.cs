@@ -14,16 +14,16 @@ namespace Pharus.App.Utilities
     using Pharus.App.Models.ViewModels.Entities;
 
     // _____________________________________________________________
-    public class GetAllActiveEntitiesWithHeaders
+    public class GetAllEntitiesWithHeaders
     {
         // ________________________________________________________
         //
         // Empty and refill funds model
         // with headers and correct data
         // based on "Active" condition
-        public static void GetAllActiveFundsWithHeaders(ActiveEntitiesViewModel model, IFundsService fundsService)
+        public static void GetAllActiveFundsWithHeaders(EntitiesViewModel model, IFundsService fundsService)
         {
-            model.ActiveEntities = new List<string[]>();
+            model.Entities = new List<string[]>();
 
             var tableHeaders = fundsService
                 .GetAllActiveFunds()
@@ -36,8 +36,8 @@ namespace Pharus.App.Utilities
                 .Where(f => f.Contains("Active"))
                 .ToList();
 
-            model.ActiveEntities.AddRange(tableHeaders);
-            model.ActiveEntities.AddRange(tableFundsWithoutHeaders);
+            model.Entities.AddRange(tableHeaders);
+            model.Entities.AddRange(tableFundsWithoutHeaders);
         }
 
         // ________________________________________________________
@@ -45,9 +45,9 @@ namespace Pharus.App.Utilities
         // Empty and refill subfunds model
         // with headers and correct data
         // based on "Active" condition
-        public static void GetAllActiveSubFundsWithHeaders(ActiveEntitiesViewModel model, ISubFundsService subFundsService)
+        public static void GetAllActiveSubFundsWithHeaders(EntitiesViewModel model, ISubFundsService subFundsService)
         {
-            model.ActiveEntities = new List<string[]>();
+            model.Entities = new List<string[]>();
 
             var tableHeaders = subFundsService
                 .GetAllActiveSubFunds()
@@ -60,8 +60,8 @@ namespace Pharus.App.Utilities
                 .Where(f => f.Contains("Active"))
                 .ToList();
 
-            model.ActiveEntities.AddRange(tableHeaders);
-            model.ActiveEntities.AddRange(tableFundsWithoutHeaders);
+            model.Entities.AddRange(tableHeaders);
+            model.Entities.AddRange(tableFundsWithoutHeaders);
         }
 
         // ________________________________________________________
@@ -69,9 +69,9 @@ namespace Pharus.App.Utilities
         // Empty and refill shareclasses model
         // with headers and correct data
         // based on "Active" condition
-        public static void GetAllActiveShareClassesWithHeaders(ActiveEntitiesViewModel model, IShareClassesService shareClassesService)
+        public static void GetAllActiveShareClassesWithHeaders(EntitiesViewModel model, IShareClassesService shareClassesService)
         {
-            model.ActiveEntities = new List<string[]>();
+            model.Entities = new List<string[]>();
 
             var tableHeaders = shareClassesService
                 .GetAllActiveShareClasses()
@@ -84,8 +84,8 @@ namespace Pharus.App.Utilities
                 .Where(f => f.Contains("Active"))
                 .ToList();
 
-            model.ActiveEntities.AddRange(tableHeaders);
-            model.ActiveEntities.AddRange(tableFundsWithoutHeaders);
+            model.Entities.AddRange(tableHeaders);
+            model.Entities.AddRange(tableFundsWithoutHeaders);
         }
     }
 }

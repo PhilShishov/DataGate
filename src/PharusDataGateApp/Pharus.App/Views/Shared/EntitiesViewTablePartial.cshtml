@@ -3,16 +3,16 @@
 }
 
 <div class="table-responsive border-0 mx-auto" id="tableDoubleScroll">
-    <table class="table table-hover text-nowrap" name="ActiveEntities">
+    <table class="table table-hover text-nowrap" name="Entities">
         <thead>
             <tr>
                 @for (int row = 0; row < 1; row++)
                 {
-                    @for (int col = 0; col < Model.ActiveEntities[row].Length; col++)
+                    @for (int col = 0; col < Model.Entities[row].Length; col++)
                     {
                         <th class="text-dark pr-3 bg-info">
                             <h5>
-                                @Model.ActiveEntities[row][col]
+                                @Model.Entities[row][col]
                             </h5>
                         </th>
                     }
@@ -20,13 +20,13 @@
             </tr>
         </thead>
         <tbody>
-            @for (int row = 1; row < Model.ActiveEntities.Count; row++)
+            @for (int row = 1; row < Model.Entities.Count; row++)
             {
-                <tr class="tableRowPharus" onclick="document.location = '/@controllerName/ViewEntitySE/@Model.ActiveEntities[row][2]'">
-                    @for (int col = 0; col < Model.ActiveEntities[row].Length; col++)
+                <tr class="tableRowPharus" onclick="document.location = '/@controllerName/ViewEntitySE/@Model.Entities[row][2]'">
+                    @for (int col = 0; col < Model.Entities[row].Length; col++)
                     {
                         <td class="p-1">
-                            @Model.ActiveEntities[row][col]
+                            @Model.Entities[row][col]
                         </td>
                     }
                 </tr>

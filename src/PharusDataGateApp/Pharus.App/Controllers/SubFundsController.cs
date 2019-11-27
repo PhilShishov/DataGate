@@ -51,9 +51,9 @@
         [HttpGet]
         public IActionResult All()
         {
-            var model = new ActiveEntitiesViewModel
+            var model = new EntitiesViewModel
             {
-                ActiveEntities = this.subFundsService.GetAllActiveSubFunds(),
+                Entities = this.subFundsService.GetAllActiveSubFunds(),
                 IsActive = true,
             };
 
@@ -61,10 +61,10 @@
         }
 
         [HttpPost]
-        public IActionResult All(ActiveEntitiesViewModel model)
+        public IActionResult All(EntitiesViewModel model)
         {
             this.ModelState.Clear();
-            model.ActiveEntities = this.subFundsService.GetAllActiveSubFunds();
+            model.Entities = this.subFundsService.GetAllActiveSubFunds();
 
             if (model.Command.Equals("Update Table"))
             {
@@ -72,11 +72,11 @@
                 {
                     if (model.IsActive)
                     {
-                        GetAllActiveEntitiesWithHeaders.GetAllActiveSubFundsWithHeaders(model, this.subFundsService);
+                        GetAllEntitiesWithHeaders.GetAllActiveSubFundsWithHeaders(model, this.subFundsService);
                     }
                     else
                     {
-                        model.ActiveEntities = this.subFundsService.GetAllActiveSubFunds(model.ChosenDate);
+                        model.Entities = this.subFundsService.GetAllActiveSubFunds(model.ChosenDate);
                     }
                 }
             }
@@ -87,7 +87,7 @@
                     return this.View(model);
                 }
 
-                model.ActiveEntities = new List<string[]>();
+                model.Entities = new List<string[]>();
 
                 var tableHeaders = this.subFundsService
                     .GetAllActiveSubFunds()
@@ -95,12 +95,12 @@
                     .ToList();
                 var tableFundsWithoutHeaders = this.subFundsService.GetAllActiveSubFunds().Skip(1).ToList();
 
-                CreateTableView.AddHeadersToView(model.ActiveEntities, tableHeaders);
+                CreateTableView.AddHeadersToView(model.Entities, tableHeaders);
 
-                CreateTableView.AddTableToView(model.ActiveEntities, tableFundsWithoutHeaders, model.SearchTerm.ToLower());
+                CreateTableView.AddTableToView(model.Entities, tableFundsWithoutHeaders, model.SearchTerm.ToLower());
             }
 
-            if (model.ActiveEntities != null)
+            if (model.Entities != null)
             {
                 return this.View(model);
             }
@@ -109,7 +109,7 @@
         }
 
         [HttpPost]
-        public FileStreamResult ExtractExcelEntities(ActiveEntitiesViewModel model)
+        public FileStreamResult ExtractExcelEntities(EntitiesViewModel model)
         {
             FileStreamResult fileStreamResult = null;
 
@@ -118,7 +118,7 @@
 
             if (this.HttpContext.Request.Form.ContainsKey("extract_Excel"))
             {
-                fileStreamResult = ExtractTable.ExtractTableAsExcel(model.ActiveEntities, typeName, controllerName);
+                fileStreamResult = ExtractTable.ExtractTableAsExcel(model.Entities, typeName, controllerName);
             }
 
             return fileStreamResult;
@@ -134,14 +134,14 @@
 
             if (this.HttpContext.Request.Form.ContainsKey("extract_Excel"))
             {
-                fileStreamResult = ExtractTable.ExtractTableAsExcel(model.AESubEntities, typeName, controllerName);
+                fileStreamResult = ExtractTable.ExtractTableAsExcel(model.EntitySubEntities, typeName, controllerName);
             }
 
             return fileStreamResult;
         }
 
         [HttpPost]
-        public FileStreamResult ExtractPdfEntities(ActiveEntitiesViewModel model)
+        public FileStreamResult ExtractPdfEntities(EntitiesViewModel model)
         {
             FileStreamResult fileStreamResult = null;
 
@@ -150,7 +150,7 @@
 
             if (this.HttpContext.Request.Form.ContainsKey("extract_Pdf"))
             {
-                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.ActiveEntities, model.ChosenDate, this.hostingEnvironment, typeName, controllerName);
+                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.Entities, model.ChosenDate, this.hostingEnvironment, typeName, controllerName);
             }
 
             return fileStreamResult;
@@ -166,7 +166,7 @@
 
             if (this.HttpContext.Request.Form.ContainsKey("extract_Pdf"))
             {
-                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.AESubEntities, model.ChosenDate, this.hostingEnvironment, typeName, controllerName);
+                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.EntitySubEntities, model.ChosenDate, this.hostingEnvironment, typeName, controllerName);
             }
 
             return fileStreamResult;
@@ -178,8 +178,8 @@
             SpecificEntityViewModel viewModel = new SpecificEntityViewModel
             {
                 EntityId = entityId,
-                ActiveEntity = this.subFundsService.GetActiveSubFundById(entityId),
-                AESubEntities = this.subFundsService.GetSubFundShareClasses(entityId),
+                Entity = this.subFundsService.GetActiveSubFundById(entityId),
+                EntitySubEntities = this.subFundsService.GetSubFundShareClasses(entityId),
             };
 
             return this.View(viewModel);
@@ -188,14 +188,14 @@
         [HttpPost("SubFunds/ViewEntitySE/{EntityId}")]
         public IActionResult ViewEntitySE(SpecificEntityViewModel viewModel)
         {
-            viewModel.ActiveEntity = this.subFundsService.GetActiveSubFundById(viewModel.EntityId);
-            viewModel.AESubEntities = this.subFundsService.GetSubFundShareClasses(viewModel.EntityId);
+            viewModel.Entity = this.subFundsService.GetActiveSubFundById(viewModel.EntityId);
+            viewModel.EntitySubEntities = this.subFundsService.GetSubFundShareClasses(viewModel.EntityId);
 
             if (viewModel.Command.Equals("Update Table"))
             {
                 if (viewModel.ChosenDate != null)
                 {
-                    viewModel.ActiveEntity = this.subFundsService.GetActiveSubFundById(viewModel.ChosenDate, viewModel.EntityId);
+                    viewModel.Entity = this.subFundsService.GetActiveSubFundById(viewModel.ChosenDate, viewModel.EntityId);
                 }
             }
             else if (viewModel.Command.Equals("Filter"))
@@ -205,17 +205,17 @@
                     return this.View(viewModel);
                 }
 
-                viewModel.AESubEntities = new List<string[]>();
+                viewModel.EntitySubEntities = new List<string[]>();
 
                 var tableHeaders = this.subFundsService.GetSubFundShareClasses(viewModel.EntityId).Take(1).ToList();
                 var tableFundsWithoutHeaders = this.subFundsService.GetSubFundShareClasses(viewModel.EntityId).Skip(1).ToList();
 
-                CreateTableView.AddHeadersToView(viewModel.AESubEntities, tableHeaders);
+                CreateTableView.AddHeadersToView(viewModel.EntitySubEntities, tableHeaders);
 
-                CreateTableView.AddTableToView(viewModel.AESubEntities, tableFundsWithoutHeaders, viewModel.SearchTerm.ToLower());
+                CreateTableView.AddTableToView(viewModel.EntitySubEntities, tableFundsWithoutHeaders, viewModel.SearchTerm.ToLower());
             }
 
-            if (viewModel.ActiveEntity != null && viewModel.AESubEntities != null)
+            if (viewModel.Entity != null && viewModel.EntitySubEntities != null)
             {
                 return this.View(viewModel);
             }

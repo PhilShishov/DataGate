@@ -1,16 +1,16 @@
 ﻿@model Pharus.App.Models.ViewModels.Entities.SpecificEntityViewModel
 
     <div>
-        <table class="table" name="AESubEntities" hidden>
+        <table class="table" name="EntitySubEntities" hidden>
             <thead>
                 <tr>
                     @for (int row = 0; row < 1; row++)
                     {
-                        @for (int col = 0; col < Model.AESubEntities[row].Length; col++)
+                        @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
                         {
                             <th>
                                 <h5>
-                                    @Html.TextBoxFor(af => Model.AESubEntities[row][col],
+                                    @Html.TextBoxFor(af => Model.EntitySubEntities[row][col],
                                         new
                                              {
                                             @readonly = true
@@ -22,13 +22,13 @@
                 </tr>
             </thead>
             <tbody>
-                @for (int row = 1; row < Model.AESubEntities.Count; row++)
+                @for (int row = 1; row < Model.EntitySubEntities.Count; row++)
                 {
                     <tr>
-                        @for (int col = 0; col < Model.AESubEntities[row].Length; col++)
+                        @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
                         {
                             <td>
-                                @Html.TextBoxFor(af => Model.AESubEntities[row][col],
+                                @Html.TextBoxFor(af => Model.EntitySubEntities[row][col],
                                     new
                                          {
                                         @readonly = true

@@ -1,8 +1,14 @@
-﻿namespace Pharus.App.Models.BindingModels.Funds
+﻿// Model class for binding funds
+
+// Created: 10/2019
+// Author:  Philip Shishov
+
+// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+namespace Pharus.App.Models.BindingModels.Funds
 {
     using System;
 
-    public class FundBindingModel : BaseBindingModel
+    public class FundBindingModel : BaseEntityBindingModel
     {
         public DateTime ChosenDate { get; set; }
 

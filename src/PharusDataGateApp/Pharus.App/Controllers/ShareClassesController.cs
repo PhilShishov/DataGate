@@ -31,25 +31,25 @@
         [HttpGet]
         public IActionResult All()
         {
-            var model = new ActiveEntitiesViewModel
+            var model = new EntitiesViewModel
             {
-                ActiveEntities = this.shareClassesService.GetAllActiveShareClasses(),
+                Entities = this.shareClassesService.GetAllActiveShareClasses(),
             };
 
             return this.View(model);
         }
 
         [HttpPost]
-        public IActionResult All(ActiveEntitiesViewModel model)
+        public IActionResult All(EntitiesViewModel model)
         {
             this.ModelState.Clear();
-            model.ActiveEntities = this.shareClassesService.GetAllActiveShareClasses();
+            model.Entities = this.shareClassesService.GetAllActiveShareClasses();
 
             if (model.Command.Equals("Update Table"))
             {
                 if (model.ChosenDate != null)
                 {
-                    model.ActiveEntities = this.shareClassesService.GetAllActiveShareClasses(model.ChosenDate);
+                    model.Entities = this.shareClassesService.GetAllActiveShareClasses(model.ChosenDate);
                 }
             }
             else if (model.Command.Equals("Search"))
@@ -59,17 +59,17 @@
                     return this.View(model);
                 }
 
-                model.ActiveEntities = new List<string[]>();
+                model.Entities = new List<string[]>();
 
                 var tableHeaders = this.shareClassesService.GetAllActiveShareClasses().Take(1).ToList();
                 var tableFundsWithoutHeaders = this.shareClassesService.GetAllActiveShareClasses().Skip(1).ToList();
 
-                CreateTableView.AddHeadersToView(model.ActiveEntities, tableHeaders);
+                CreateTableView.AddHeadersToView(model.Entities, tableHeaders);
 
-                CreateTableView.AddTableToView(model.ActiveEntities, tableFundsWithoutHeaders, model.SearchTerm.ToLower());
+                CreateTableView.AddTableToView(model.Entities, tableFundsWithoutHeaders, model.SearchTerm.ToLower());
             }
 
-            if (model.ActiveEntities != null)
+            if (model.Entities != null)
             {
                 return this.View(model);
             }
@@ -78,7 +78,7 @@
         }
 
         [HttpPost]
-        public FileStreamResult ExtractExcelEntities(ActiveEntitiesViewModel model)
+        public FileStreamResult ExtractExcelEntities(EntitiesViewModel model)
         {
             FileStreamResult fileStreamResult = null;
 
@@ -87,14 +87,14 @@
 
             if (this.HttpContext.Request.Form.ContainsKey("extract_Excel"))
             {
-                fileStreamResult = ExtractTable.ExtractTableAsExcel(model.ActiveEntities, typeName, controllerName);
+                fileStreamResult = ExtractTable.ExtractTableAsExcel(model.Entities, typeName, controllerName);
             }
 
             return fileStreamResult;
         }
 
         [HttpPost]
-        public FileStreamResult ExtractPdfEntities(ActiveEntitiesViewModel model)
+        public FileStreamResult ExtractPdfEntities(EntitiesViewModel model)
         {
             FileStreamResult fileStreamResult = null;
 
@@ -103,7 +103,7 @@
 
             if (this.HttpContext.Request.Form.ContainsKey("extract_Pdf"))
             {
-                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.ActiveEntities, model.ChosenDate, this.hostingEnvironment, typeName, controllerName);
+                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.Entities, model.ChosenDate, this.hostingEnvironment, typeName, controllerName);
             }
 
             return fileStreamResult;
@@ -112,29 +112,29 @@
         [HttpGet("ShareClasses/ViewEntitySE/{EntityId}")]
         public IActionResult ViewEntitySE(int entityId)
         {
-            ActiveEntitiesViewModel viewModel = new ActiveEntitiesViewModel
+            EntitiesViewModel viewModel = new EntitiesViewModel
             {
                 EntityId = entityId,
-                ActiveEntities = this.shareClassesService.GetActiveShareClassById(entityId),
+                Entities = this.shareClassesService.GetActiveShareClassById(entityId),
             };
 
             return this.View(viewModel);
         }
 
         [HttpPost("ShareClasses/ViewEntitySE/{EntityId}")]
-        public IActionResult ViewEntitySE(ActiveEntitiesViewModel viewModel)
+        public IActionResult ViewEntitySE(EntitiesViewModel viewModel)
         {
-            viewModel.ActiveEntities = this.shareClassesService.GetActiveShareClassById(viewModel.EntityId);
+            viewModel.Entities = this.shareClassesService.GetActiveShareClassById(viewModel.EntityId);
 
             if (viewModel.Command.Equals("Update Table"))
             {
                 if (viewModel.ChosenDate != null)
                 {
-                    viewModel.ActiveEntities = this.shareClassesService.GetActiveShareClassById(viewModel.ChosenDate, viewModel.EntityId);
+                    viewModel.Entities = this.shareClassesService.GetActiveShareClassById(viewModel.ChosenDate, viewModel.EntityId);
                 }
             }
 
-            if (viewModel.ActiveEntities != null)
+            if (viewModel.Entities != null)
             {
                 return this.View(viewModel);
             }
