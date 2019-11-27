@@ -26,5 +26,7 @@
                              int fLegalTypeId,
                              int fLegalVehicleId,
                              int fCompanyTypeId);
+
+        void LoadFile();
     }
 }
