@@ -13,9 +13,9 @@ namespace Pharus.Data.Seeding
     // _____________________________________________________________
     public class PharusUserRoleSeeder : ISeeder
     {
-        private readonly PharusUsersDbContext context;
+        private readonly Pharus_UsersDbContext context;
 
-        public PharusUserRoleSeeder(PharusUsersDbContext context)
+        public PharusUserRoleSeeder(Pharus_UsersDbContext context)
         {
             this.context = context;
         }
