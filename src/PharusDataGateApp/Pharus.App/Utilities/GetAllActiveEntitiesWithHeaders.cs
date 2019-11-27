@@ -1,4 +1,10 @@
-﻿namespace Pharus.App.Utilities
+﻿// Utility class for retrieving Active table data
+
+// Created: 11/2019
+// Author:  Philip Shishov
+
+// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+namespace Pharus.App.Utilities
 {
     using System;
     using System.Linq;
@@ -7,8 +13,14 @@
     using Pharus.Services.Contracts;
     using Pharus.App.Models.ViewModels.Entities;
 
+    // _____________________________________________________________
     public class GetAllActiveEntitiesWithHeaders
     {
+        // ________________________________________________________
+        //
+        // Empty and refill funds model
+        // with headers and correct data
+        // based on "Active" condition
         public static void GetAllActiveFundsWithHeaders(ActiveEntitiesViewModel model, IFundsService fundsService)
         {
             model.ActiveEntities = new List<string[]>();
@@ -28,6 +40,11 @@
             model.ActiveEntities.AddRange(tableFundsWithoutHeaders);
         }
 
+        // ________________________________________________________
+        //
+        // Empty and refill subfunds model
+        // with headers and correct data
+        // based on "Active" condition
         public static void GetAllActiveSubFundsWithHeaders(ActiveEntitiesViewModel model, ISubFundsService subFundsService)
         {
             model.ActiveEntities = new List<string[]>();
@@ -47,6 +64,11 @@
             model.ActiveEntities.AddRange(tableFundsWithoutHeaders);
         }
 
+        // ________________________________________________________
+        //
+        // Empty and refill shareclasses model
+        // with headers and correct data
+        // based on "Active" condition
         public static void GetAllActiveShareClassesWithHeaders(ActiveEntitiesViewModel model, IShareClassesService shareClassesService)
         {
             model.ActiveEntities = new List<string[]>();

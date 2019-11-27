@@ -1,4 +1,12 @@
-﻿namespace Pharus.App.Utilities
+﻿// Utility class for extracting table data
+// as PDF and Excel
+
+// Created: 10/2019
+// Author:  Philip Shishov
+// NugetPackages : itext7 7.1.8, epplus.core 1.5.4
+
+// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+namespace Pharus.App.Utilities
 {
     using System;
     using System.IO;
@@ -16,12 +24,21 @@
     using iText.IO.Image;
     using iText.Layout.Element;
 
+    // _____________________________________________________________
     public class ExtractTable
     {
+        // ---------------------------------------------------------
+        //
+        // Names for different files when created
         private const string ActiveFunds = "ActiveFunds";
         private const string ActiveSubFunds = "ActiveSubFunds";
         private const string ActiveShareClasses = "ActiveShareClasses";
 
+        // ________________________________________________________
+        //
+        // Extract table data as Excel
+        // and preparing for download
+        // in controller as filestreamresult
         public static FileStreamResult ExtractTableAsExcel(
                                                            List<string[]> entities,
                                                            string typeName,
@@ -71,6 +88,11 @@
             }
         }
 
+        // ________________________________________________________
+        //
+        // Extract table data as PDF
+        // and preparing for download
+        // in controller as filestreamresult
         public static FileStreamResult ExtractTableAsPdf(
                                                          List<string[]> entities,
                                                          DateTime? chosenDate,
@@ -145,6 +167,12 @@
             return fileStreamResult;
         }
 
+        // ________________________________________________________
+        //
+        // Method for choosing the correct name
+        // for file to be downloaded
+        // based on controller and
+        // view model name
         private static string GetCorrectTypeName(string typeName, string controllerName)
         {
             string correctTypeName = string.Empty;
