@@ -1,8 +1,8 @@
 ﻿namespace Pharus.Data
 {
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
     using Pharus.Domain;
     using Pharus.Domain.Users;

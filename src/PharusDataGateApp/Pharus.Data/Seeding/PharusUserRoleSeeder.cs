@@ -1,9 +1,16 @@
-﻿namespace Pharus.Data.Seeding
+﻿// Utility class for seeding DB data
+
+// Created: 09/2019
+// Author:  Philip Shishov
+
+// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+namespace Pharus.Data.Seeding
 {
     using System.Linq;
 
     using Pharus.Domain.Users;
 
+    // _____________________________________________________________
     public class PharusUserRoleSeeder : ISeeder
     {
         private readonly PharusUsersDbContext context;
@@ -13,6 +20,10 @@
             this.context = context;
         }
 
+        // ________________________________________________________
+        //
+        // Seed new Pharus roles into DB
+        // to be added to users
         public void Seed()
         {
             if (!this.context.Roles.Any())
