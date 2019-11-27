@@ -5,6 +5,7 @@
     using System.Collections.Generic;
 
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Authorization;
 
@@ -196,17 +197,25 @@
 
         public JsonResult AutoCompleteSubFundList(string searchTerm, int entityId)
         {
-            var result = this.fundsService.GetFundSubFunds(entityId).ToList();
-            if (searchTerm != null)
+            var entitiesToSearch = this.fundsService.GetFundSubFunds(entityId).Skip(1).ToList();
+            List<string> officialSubFundNames = new List<string>();
+
+            for (int row = 0; row < entitiesToSearch.Count; row++)
             {
-                result = this.fundsService.GetFundSubFunds(entityId).Where(s => s[3].Contains(searchTerm)).ToList();
+                officialSubFundNames.Add(entitiesToSearch[row][3]);
             }
 
-            var modifiedData = result.Select(s => new
+            if (searchTerm != null)
             {
-                id = s[3],
-                text = s[3],
+                officialSubFundNames = officialSubFundNames.Where(s => s.Contains(searchTerm)).ToList();
+            }
+
+            var modifiedData = officialSubFundNames.Select(s => new
+            {
+                id = s,
+                text = s,
             });
+
             return this.Json(modifiedData);
         }
 
@@ -219,6 +228,8 @@
                 Entity = this.fundsService.GetActiveFundById(entityId),
                 EntitySubEntities = this.fundsService.GetFundSubFunds(entityId),
             };
+
+            HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
 
             return this.View(viewModel);
         }

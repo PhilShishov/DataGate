@@ -22,12 +22,12 @@ namespace Pharus.App.Extensions
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
                 var context = serviceScope.ServiceProvider
-                    .GetRequiredService<PharusUsersDbContext>();
+                    .GetRequiredService<Pharus_UsersDbContext>();
 
                 context.Database.EnsureCreated();
 
                 Assembly
-                    .GetAssembly(typeof(PharusUsersDbContext))
+                    .GetAssembly(typeof(Pharus_UsersDbContext))
                     .GetTypes()
                     .Where(type => typeof(ISeeder).IsAssignableFrom(type))
                     .Where(type => type.IsClass)

@@ -1,4 +1,6 @@
 ﻿@model Pharus.App.Models.ViewModels.Entities.SpecificEntityViewModel
+@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -87,9 +89,7 @@
         $(document).ready(function () {
 
             let url = "/Funds/AutoCompleteSubFundList";
-            let entityId = @Model.EntityId;
-
-            console.log(entityId);
+            var entityId = @HttpContextAccessor.HttpContext.Session.GetString("entityId");
 
             $("#SearchTerm").select2({
                 placeholder: "Select Sub Funds",
@@ -98,21 +98,19 @@
                     url: url,
                     dataType: "json",
                     delay: 250,
-                    id: entityId,
                     data: function (params) {
                         return {
-                            searchTerm: params.term
-                            };
+                            searchTerm: params.term,
+                            entityId: entityId
+
+                        };
                     },
                     processResults: function (data) {
                         return {
-                            results: $.map(data, function (val, item) {
-                                return { id: val.id, text: val.Name }
-                            })
+                            results: data
                         }
                     }
-                },
-                minimumInputLength: 1
+                }
             });
         });
     </script>
