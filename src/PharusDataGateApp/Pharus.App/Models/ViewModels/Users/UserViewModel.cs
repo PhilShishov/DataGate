@@ -1,4 +1,10 @@
-﻿namespace Pharus.App.Models.ViewModels.Users
+﻿// Model class for view user
+
+// Created: 09/2019
+// Author:  Philip Shishov
+
+// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+namespace Pharus.App.Models.ViewModels.Users
 {
     public class UserViewModel
     {

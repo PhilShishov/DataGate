@@ -1,8 +1,14 @@
-﻿namespace Pharus.App.Models.BindingModels.SubFunds
+﻿// Model class for binding subfunds
+
+// Created: 10/2019
+// Author:  Philip Shishov
+
+// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+namespace Pharus.App.Models.BindingModels.SubFunds
 {
     using Microsoft.AspNetCore.Mvc.Rendering;
 
-    public class SubFundBindingModel : BaseBindingModel
+    public class SubFundBindingModel : BaseEntityBindingModel
     {
         public SelectList CalculationDate { get; set; }
 

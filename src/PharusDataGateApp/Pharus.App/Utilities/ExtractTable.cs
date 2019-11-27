@@ -179,11 +179,11 @@ namespace Pharus.App.Utilities
 
             if (controllerName == "Funds")
             {
-                correctTypeName = typeName == "ActiveEntitiesViewModel" ? ActiveFunds : ActiveSubFunds;
+                correctTypeName = typeName == "EntitiesViewModel" ? ActiveFunds : ActiveSubFunds;
             }
             else if (controllerName == "SubFunds")
             {
-                correctTypeName = typeName == "ActiveEntitiesViewModel" ? ActiveSubFunds : ActiveShareClasses;
+                correctTypeName = typeName == "EntitiesViewModel" ? ActiveSubFunds : ActiveShareClasses;
             }
             else if (controllerName == "ShareClasses")
             {

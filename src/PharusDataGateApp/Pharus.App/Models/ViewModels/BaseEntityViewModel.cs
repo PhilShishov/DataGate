@@ -1,10 +1,17 @@
-﻿namespace Pharus.App.Models.ViewModels
+﻿// Abstract model class for view entity
+// for code reuse
+
+// Created: 11/2019
+// Author:  Philip Shishov
+
+// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+namespace Pharus.App.Models.ViewModels
 {
     using System;
 
     using Pharus.App.Models.ViewModels.Contracts;
 
-    public abstract class BaseViewModel : IBaseViewModel
+    public abstract class BaseEntityViewModel : IBaseEntityViewModel
     {
         public DateTime? ChosenDate { get; set; }
 

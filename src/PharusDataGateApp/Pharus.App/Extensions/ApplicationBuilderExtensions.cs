@@ -1,4 +1,10 @@
-﻿namespace Pharus.App.Extensions
+﻿// Extension class database seeding
+
+// Created: 09/2019
+// Author:  Philip Shishov
+
+// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+namespace Pharus.App.Extensions
 {
     using System.Linq;
     using System.Reflection;
