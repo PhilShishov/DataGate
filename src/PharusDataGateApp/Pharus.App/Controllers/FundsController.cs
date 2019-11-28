@@ -223,10 +223,8 @@
 
         [HttpGet]
         [Route("Funds/ViewEntitySE/{EntityId}/{ChosenDate}")]
-        public IActionResult ViewEntitySE(int entityId, DateTime? chosenDate)
+        public IActionResult ViewEntitySE(int entityId, string chosenDate)
         {
-            //chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-
             SpecificEntityViewModel viewModel = new SpecificEntityViewModel
             {
                 EntityId = entityId,
@@ -240,7 +238,7 @@
         }
 
         [HttpPost]
-        [Route("Funds/ViewEntitySE/{EntityId}")]
+        [Route("Funds/ViewEntitySE/{EntityId}/{ChosenDate}")]
         public IActionResult ViewEntitySE(SpecificEntityViewModel viewModel)
         {
             viewModel.Entity = this.fundsService.GetActiveFundById(viewModel.EntityId);
