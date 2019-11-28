@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using System.Globalization;
     using System.Collections.Generic;
 
     using Microsoft.AspNetCore.Mvc;
@@ -35,6 +36,21 @@
             this.hostingEnvironment = hostingEnvironment;
         }
 
+        [HttpGet]
+        public IActionResult All()
+        {
+            var model = new EntitiesViewModel
+            {
+                Entities = new List<string[]>(),
+                IsActive = true,
+                ChosenDate = DateTime.Today.ToString("yyyy-MM-dd"),
+            };
+
+            GetAllEntitiesWithHeaders.GetAllActiveFundsWithHeaders(model, this.fundsService);
+
+            return this.View(model);
+        }
+
         public JsonResult AutoCompleteFundList(string searchTerm)
         {
             var result = this.context.TbHistoryFund.ToList();
@@ -52,25 +68,13 @@
             return this.Json(modifiedData);
         }
 
-        [HttpGet]
-        public IActionResult All()
-        {
-            var model = new EntitiesViewModel
-            {
-                Entities = new List<string[]>(),
-                IsActive = true,
-            };
-
-            GetAllEntitiesWithHeaders.GetAllActiveFundsWithHeaders(model, this.fundsService);
-
-            return this.View(model);
-        }
-
         [HttpPost]
         public IActionResult All(EntitiesViewModel model)
         {
             this.ModelState.Clear();
             GetAllEntitiesWithHeaders.GetAllActiveFundsWithHeaders(model, this.fundsService);
+
+            var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
             if (model.Command.Equals("Update Table"))
             {
@@ -82,7 +86,7 @@
                     }
                     else
                     {
-                        model.Entities = this.fundsService.GetAllActiveFunds(model.ChosenDate);
+                        model.Entities = this.fundsService.GetAllActiveFunds(chosenDate);
                     }
                 }
             }
@@ -95,7 +99,7 @@
 
                 model.Entities = new List<string[]>();
                 var tableHeaders = this.fundsService
-                    .GetAllActiveFunds(model.ChosenDate)
+                    .GetAllActiveFunds(chosenDate)
                     .Take(1)
                     .ToList();
                 List<string[]> tableFundsWithoutHeaders = null;
@@ -103,7 +107,7 @@
                 if (model.IsActive)
                 {
                     tableFundsWithoutHeaders = this.fundsService
-                        .GetAllActiveFunds(model.ChosenDate)
+                        .GetAllActiveFunds(chosenDate)
                         .Skip(1)
                         .Where(f => f.Contains("Active"))
                         .ToList();
@@ -165,6 +169,8 @@
         public FileStreamResult ExtractPdfEntities(EntitiesViewModel model)
         {
             FileStreamResult fileStreamResult = null;
+            var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
 
             string typeName = model.GetType().Name;
             string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
@@ -172,7 +178,7 @@
             if (this.HttpContext.Request.Form.ContainsKey("extract_Pdf"))
             {
                 fileStreamResult = ExtractTable
-                    .ExtractTableAsPdf(model.Entities, model.ChosenDate, this.hostingEnvironment, typeName, controllerName);
+                    .ExtractTableAsPdf(model.Entities, chosenDate, this.hostingEnvironment, typeName, controllerName);
             }
 
             return fileStreamResult;
@@ -183,13 +189,15 @@
         {
             FileStreamResult fileStreamResult = null;
 
+            var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
             string typeName = model.GetType().Name;
             string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
             if (this.HttpContext.Request.Form.ContainsKey("extract_Pdf"))
             {
                 fileStreamResult = ExtractTable
-                    .ExtractTableAsPdf(model.EntitySubEntities, model.ChosenDate, this.hostingEnvironment, typeName, controllerName);
+                    .ExtractTableAsPdf(model.EntitySubEntities, chosenDate, this.hostingEnvironment, typeName, controllerName);
             }
 
             return fileStreamResult;
@@ -197,7 +205,7 @@
 
         public JsonResult AutoCompleteSubFundList(string searchTerm, int entityId)
         {
-            var entitiesToSearch = this.fundsService.GetFund_SubFunds(entityId).Skip(1).ToList();          
+            var entitiesToSearch = this.fundsService.GetFund_SubFunds(entityId).Skip(1).ToList();
 
             if (searchTerm != null)
             {
@@ -213,9 +221,12 @@
             return this.Json(modifiedData);
         }
 
-        [HttpGet("Funds/ViewEntitySE/{EntityId}")]
-        public IActionResult ViewEntitySE(int entityId)
+        [HttpGet]
+        [Route("Funds/ViewEntitySE/{EntityId}/{ChosenDate}")]
+        public IActionResult ViewEntitySE(int entityId, DateTime? chosenDate)
         {
+            //chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
             SpecificEntityViewModel viewModel = new SpecificEntityViewModel
             {
                 EntityId = entityId,
@@ -228,20 +239,23 @@
             return this.View(viewModel);
         }
 
-        [HttpPost("Funds/ViewEntitySE/{EntityId}")]
+        [HttpPost]
+        [Route("Funds/ViewEntitySE/{EntityId}")]
         public IActionResult ViewEntitySE(SpecificEntityViewModel viewModel)
         {
             viewModel.Entity = this.fundsService.GetActiveFundById(viewModel.EntityId);
             viewModel.EntitySubEntities = this.fundsService.GetFund_SubFunds(viewModel.EntityId);
+            var chosenDate = DateTime.ParseExact(viewModel.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
 
             if (viewModel.Command.Equals("Update Table"))
             {
                 if (viewModel.ChosenDate != null)
                 {
                     viewModel.Entity = this.fundsService
-                        .GetActiveFundById(viewModel.ChosenDate, viewModel.EntityId);
+                        .GetActiveFundById(chosenDate, viewModel.EntityId);
                     viewModel.EntitySubEntities = this.fundsService
-                        .GetFund_SubFunds(viewModel.ChosenDate, viewModel.EntityId);
+                        .GetFund_SubFunds(chosenDate, viewModel.EntityId);
                 }
             }
             else if (viewModel.Command.Equals("Search"))
