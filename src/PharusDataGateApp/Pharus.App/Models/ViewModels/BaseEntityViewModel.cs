@@ -7,13 +7,11 @@
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace Pharus.App.Models.ViewModels
 {
-    using System;
-
     using Pharus.App.Models.ViewModels.Contracts;
 
     public abstract class BaseEntityViewModel : IBaseEntityViewModel
     {
-        public DateTime? ChosenDate { get; set; }
+        public string ChosenDate { get; set; }
 
         public bool IsActive { get; set; }
 
