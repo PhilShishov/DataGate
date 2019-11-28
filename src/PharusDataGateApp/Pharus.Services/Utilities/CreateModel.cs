@@ -32,6 +32,6 @@ namespace Pharus.Services.Utilities
 
                 return model;
             }
-        }
+        }       
     }
 }

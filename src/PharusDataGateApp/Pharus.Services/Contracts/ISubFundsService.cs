@@ -15,6 +15,10 @@
 
         List<string[]> GetActiveSubFundWithDateById(int id);
 
-        List<string[]> GetSubFundShareClasses(int id);
+        List<string[]> GetSubFund_ShareClasses(int id);
+
+        List<string[]> GetSubFund_FundContainer(int id);
+
+        List<string[]> GetSubFund_FundContainer(DateTime? chosenDate, int id);
     }
 }

@@ -141,7 +141,7 @@ namespace Pharus.Services.Funds
             }
         }
 
-        public List<string[]> GetFundSubFunds(int id)
+        public List<string[]> GetFund_SubFunds(int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -155,7 +155,7 @@ namespace Pharus.Services.Funds
             }
         }
 
-        public List<string[]> GetFundSubFunds(DateTime? chosenDate, int id)
+        public List<string[]> GetFund_SubFunds(DateTime? chosenDate, int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -174,7 +174,7 @@ namespace Pharus.Services.Funds
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
-        }
+        }        
 
         // ________________________________________________________
         //

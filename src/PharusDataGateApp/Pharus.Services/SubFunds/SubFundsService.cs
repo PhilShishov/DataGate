@@ -118,7 +118,7 @@ namespace Pharus.Services.SubFunds
             }
         }
 
-        public List<string[]> GetSubFundShareClasses(int id)
+        public List<string[]> GetSubFund_ShareClasses(int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -127,6 +127,46 @@ namespace Pharus.Services.SubFunds
                 SqlCommand command = connection.CreateCommand();
 
                 command.CommandText = $"select * from ActivesubfundforSpecificFundAtDate('{this.defaultDate}', {id})";
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
+        public List<string[]> GetSubFund_FundContainer(int id)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                Dictionary<int, string> funds = new Dictionary<int, string>();
+
+                command.CommandText = $"select * from [ActivefundForsubfundAtDate]('{this.defaultDate}', {id})";
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
+        public List<string[]> GetSubFund_FundContainer(DateTime? chosenDate, int id)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                Dictionary<int, string> funds = new Dictionary<int, string>();
+
+                if (chosenDate == null)
+                {
+                    command.CommandText = $"select * from [ActivefundForsubfundAtDate]('{this.defaultDate}', {id})";
+                }
+
+                else
+                {
+                    command.CommandText = $"select * from [ActivefundForsubfundAtDate]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }

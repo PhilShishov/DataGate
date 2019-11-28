@@ -32,7 +32,7 @@ namespace Pharus.Services.Utilities
 
                 yield return values.ToArray();
             }
-        }
+        }       
 
         // ________________________________________________________
         //
