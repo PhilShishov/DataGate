@@ -6,7 +6,9 @@
 
 <form class="justify-content-between" method="post">
 
-    <p>FUND CONTAINER :</p><label class="text-torshia m-1 pr-3 font-weight-bold">@Model.BaseEntityName</label>
+    <div class="d-flex m-1 pr-3">
+        <p>FUND CONTAINER :</p> <p class="text-torshia font-weight-bold">@Model.BaseEntityName</p>
+    </div>
 
     <partial name="SpecificEntityUpdatePartial" />
 

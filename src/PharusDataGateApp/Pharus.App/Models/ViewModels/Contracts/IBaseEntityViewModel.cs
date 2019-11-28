@@ -10,7 +10,7 @@ namespace Pharus.App.Models.ViewModels.Contracts
 
     public interface IBaseEntityViewModel
     {
-        DateTime? ChosenDate { get; set; }
+        string ChosenDate { get; set; }
 
         string Command { get; set; }
 
