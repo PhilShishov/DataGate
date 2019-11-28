@@ -12,6 +12,7 @@
     using Pharus.Services.Contracts;
     using Pharus.App.Models.ViewModels.Entities;
     using Pharus.App.Models.BindingModels.SubFunds;
+    using System;
 
     public class SubFundsController : Controller
     {
@@ -173,13 +174,14 @@
         }
 
         [HttpGet("SubFunds/ViewEntitySE/{EntityId}")]
-        public IActionResult ViewEntitySE(int entityId)
+        public IActionResult ViewEntitySE(int entityId, [FromQuery] DateTime? fundDatetime)
         {
             SpecificEntityViewModel viewModel = new SpecificEntityViewModel
             {
                 EntityId = entityId,
                 Entity = this.subFundsService.GetActiveSubFundById(entityId),
-                EntitySubEntities = this.subFundsService.GetSubFundShareClasses(entityId),
+                EntitySubEntities = this.subFundsService.GetSubFund_ShareClasses(entityId),
+                BaseEntityName = this.subFundsService.GetSubFund_FundContainer(entityId)[1][1],
             };
 
             return this.View(viewModel);
@@ -189,7 +191,7 @@
         public IActionResult ViewEntitySE(SpecificEntityViewModel viewModel)
         {
             viewModel.Entity = this.subFundsService.GetActiveSubFundById(viewModel.EntityId);
-            viewModel.EntitySubEntities = this.subFundsService.GetSubFundShareClasses(viewModel.EntityId);
+            viewModel.EntitySubEntities = this.subFundsService.GetSubFund_ShareClasses(viewModel.EntityId);
 
             if (viewModel.Command.Equals("Update Table"))
             {
@@ -207,8 +209,8 @@
 
                 viewModel.EntitySubEntities = new List<string[]>();
 
-                var tableHeaders = this.subFundsService.GetSubFundShareClasses(viewModel.EntityId).Take(1).ToList();
-                var tableFundsWithoutHeaders = this.subFundsService.GetSubFundShareClasses(viewModel.EntityId).Skip(1).ToList();
+                var tableHeaders = this.subFundsService.GetSubFund_ShareClasses(viewModel.EntityId).Take(1).ToList();
+                var tableFundsWithoutHeaders = this.subFundsService.GetSubFund_ShareClasses(viewModel.EntityId).Skip(1).ToList();
 
                 CreateTableView.AddHeadersToView(viewModel.EntitySubEntities, tableHeaders);
 

@@ -197,7 +197,7 @@
 
         public JsonResult AutoCompleteSubFundList(string searchTerm, int entityId)
         {
-            var entitiesToSearch = this.fundsService.GetFundSubFunds(entityId).Skip(1).ToList();          
+            var entitiesToSearch = this.fundsService.GetFund_SubFunds(entityId).Skip(1).ToList();          
 
             if (searchTerm != null)
             {
@@ -220,7 +220,7 @@
             {
                 EntityId = entityId,
                 Entity = this.fundsService.GetActiveFundById(entityId),
-                EntitySubEntities = this.fundsService.GetFundSubFunds(entityId),
+                EntitySubEntities = this.fundsService.GetFund_SubFunds(entityId),
             };
 
             HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
@@ -232,7 +232,7 @@
         public IActionResult ViewEntitySE(SpecificEntityViewModel viewModel)
         {
             viewModel.Entity = this.fundsService.GetActiveFundById(viewModel.EntityId);
-            viewModel.EntitySubEntities = this.fundsService.GetFundSubFunds(viewModel.EntityId);
+            viewModel.EntitySubEntities = this.fundsService.GetFund_SubFunds(viewModel.EntityId);
 
             if (viewModel.Command.Equals("Update Table"))
             {
@@ -241,7 +241,7 @@
                     viewModel.Entity = this.fundsService
                         .GetActiveFundById(viewModel.ChosenDate, viewModel.EntityId);
                     viewModel.EntitySubEntities = this.fundsService
-                        .GetFundSubFunds(viewModel.ChosenDate, viewModel.EntityId);
+                        .GetFund_SubFunds(viewModel.ChosenDate, viewModel.EntityId);
                 }
             }
             else if (viewModel.Command.Equals("Search"))
@@ -254,11 +254,11 @@
                 viewModel.EntitySubEntities = new List<string[]>();
 
                 var tableHeaders = this.fundsService
-                    .GetFundSubFunds(viewModel.EntityId)
+                    .GetFund_SubFunds(viewModel.EntityId)
                     .Take(1)
                     .ToList();
                 var tableFundsWithoutHeaders = this.fundsService
-                    .GetFundSubFunds(viewModel.EntityId)
+                    .GetFund_SubFunds(viewModel.EntityId)
                     .Skip(1)
                     .ToList();
 
