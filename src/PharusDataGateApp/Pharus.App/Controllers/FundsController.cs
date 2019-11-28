@@ -95,7 +95,7 @@
 
                 model.Entities = new List<string[]>();
                 var tableHeaders = this.fundsService
-                    .GetAllActiveFunds()
+                    .GetAllActiveFunds(model.ChosenDate)
                     .Take(1)
                     .ToList();
                 List<string[]> tableFundsWithoutHeaders = null;
@@ -103,7 +103,7 @@
                 if (model.IsActive)
                 {
                     tableFundsWithoutHeaders = this.fundsService
-                        .GetAllActiveFunds()
+                        .GetAllActiveFunds(model.ChosenDate)
                         .Skip(1)
                         .Where(f => f.Contains("Active"))
                         .ToList();
@@ -240,6 +240,8 @@
                 {
                     viewModel.Entity = this.fundsService
                         .GetActiveFundById(viewModel.ChosenDate, viewModel.EntityId);
+                    viewModel.EntitySubEntities = this.fundsService
+                        .GetFundSubFunds(viewModel.ChosenDate, viewModel.EntityId);
                 }
             }
             else if (viewModel.Command.Equals("Search"))
