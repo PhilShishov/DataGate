@@ -197,23 +197,17 @@
 
         public JsonResult AutoCompleteSubFundList(string searchTerm, int entityId)
         {
-            var entitiesToSearch = this.fundsService.GetFundSubFunds(entityId).Skip(1).ToList();
-            List<string> officialSubFundNames = new List<string>();
-
-            for (int row = 0; row < entitiesToSearch.Count; row++)
-            {
-                officialSubFundNames.Add(entitiesToSearch[row][3]);
-            }
+            var entitiesToSearch = this.fundsService.GetFundSubFunds(entityId).Skip(1).ToList();          
 
             if (searchTerm != null)
             {
-                officialSubFundNames = officialSubFundNames.Where(s => s.Contains(searchTerm)).ToList();
+                entitiesToSearch = entitiesToSearch.Where(s => s[3].ToLower().Contains(searchTerm.ToLower())).ToList();
             }
 
-            var modifiedData = officialSubFundNames.Select(s => new
+            var modifiedData = entitiesToSearch.Select(s => new
             {
-                id = s,
-                text = s,
+                id = s[3],
+                text = s[3],
             });
 
             return this.Json(modifiedData);
