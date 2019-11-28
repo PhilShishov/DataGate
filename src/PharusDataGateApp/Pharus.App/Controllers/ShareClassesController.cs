@@ -11,6 +11,8 @@
     using Pharus.Services.Contracts;
     using Pharus.App.Models.ViewModels.Entities;
     using Pharus.App.Models.BindingModels.ShareClasses;
+    using System.Globalization;
+    using System;
 
     public class ShareClassesController : Controller
     {
@@ -45,11 +47,13 @@
             this.ModelState.Clear();
             model.Entities = this.shareClassesService.GetAllActiveShareClasses();
 
+            var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
             if (model.Command.Equals("Update Table"))
             {
                 if (model.ChosenDate != null)
                 {
-                    model.Entities = this.shareClassesService.GetAllActiveShareClasses(model.ChosenDate);
+                    model.Entities = this.shareClassesService.GetAllActiveShareClasses(chosenDate);
                 }
             }
             else if (model.Command.Equals("Search"))
@@ -98,12 +102,14 @@
         {
             FileStreamResult fileStreamResult = null;
 
+            var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
             string typeName = model.GetType().Name;
             string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
             if (this.HttpContext.Request.Form.ContainsKey("extract_Pdf"))
             {
-                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.Entities, model.ChosenDate, this.hostingEnvironment, typeName, controllerName);
+                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.Entities, chosenDate, this.hostingEnvironment, typeName, controllerName);
             }
 
             return fileStreamResult;
@@ -126,11 +132,13 @@
         {
             viewModel.Entities = this.shareClassesService.GetActiveShareClassById(viewModel.EntityId);
 
+            var chosenDate = DateTime.ParseExact(viewModel.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
             if (viewModel.Command.Equals("Update Table"))
             {
                 if (viewModel.ChosenDate != null)
                 {
-                    viewModel.Entities = this.shareClassesService.GetActiveShareClassById(viewModel.ChosenDate, viewModel.EntityId);
+                    viewModel.Entities = this.shareClassesService.GetActiveShareClassById(chosenDate, viewModel.EntityId);
                 }
             }
 
@@ -162,10 +170,10 @@
         [HttpPost]
         public IActionResult EditShareClass(ShareClassBindingModel model)
         {
-            // if (!ModelState.IsValid)
-            // {
-            //    return View(model ?? new EditFundBindingModel());
-            // }
+            if (!ModelState.IsValid)
+            {
+                return View(model ?? new ShareClassBindingModel());
+            }
             int entityId = int.Parse(model.EntityProperties[1][0]);
             string returnUrl = $"/ShareClasses/ViewEntitySE/{entityId}";
 

@@ -13,6 +13,7 @@
     using Pharus.App.Models.ViewModels.Entities;
     using Pharus.App.Models.BindingModels.SubFunds;
     using System;
+    using System.Globalization;
 
     public class SubFundsController : Controller
     {
@@ -67,6 +68,8 @@
             this.ModelState.Clear();
             model.Entities = this.subFundsService.GetAllActiveSubFunds();
 
+            var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
             if (model.Command.Equals("Update Table"))
             {
                 if (model.ChosenDate != null)
@@ -77,7 +80,7 @@
                     }
                     else
                     {
-                        model.Entities = this.subFundsService.GetAllActiveSubFunds(model.ChosenDate);
+                        model.Entities = this.subFundsService.GetAllActiveSubFunds(chosenDate);
                     }
                 }
             }
@@ -146,12 +149,14 @@
         {
             FileStreamResult fileStreamResult = null;
 
+            var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
             string typeName = model.GetType().Name;
             string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
             if (this.HttpContext.Request.Form.ContainsKey("extract_Pdf"))
             {
-                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.Entities, model.ChosenDate, this.hostingEnvironment, typeName, controllerName);
+                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.Entities, chosenDate, this.hostingEnvironment, typeName, controllerName);
             }
 
             return fileStreamResult;
@@ -162,19 +167,21 @@
         {
             FileStreamResult fileStreamResult = null;
 
+            var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
             string typeName = model.GetType().Name;
             string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
             if (this.HttpContext.Request.Form.ContainsKey("extract_Pdf"))
             {
-                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.EntitySubEntities, model.ChosenDate, this.hostingEnvironment, typeName, controllerName);
+                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.EntitySubEntities, chosenDate, this.hostingEnvironment, typeName, controllerName);
             }
 
             return fileStreamResult;
         }
 
         [HttpGet("SubFunds/ViewEntitySE/{EntityId}")]
-        public IActionResult ViewEntitySE(int entityId, [FromQuery] DateTime? fundDatetime)
+        public IActionResult ViewEntitySE(int entityId)
         {
             SpecificEntityViewModel viewModel = new SpecificEntityViewModel
             {
@@ -193,11 +200,13 @@
             viewModel.Entity = this.subFundsService.GetActiveSubFundById(viewModel.EntityId);
             viewModel.EntitySubEntities = this.subFundsService.GetSubFund_ShareClasses(viewModel.EntityId);
 
+            var chosenDate = DateTime.ParseExact(viewModel.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
             if (viewModel.Command.Equals("Update Table"))
             {
                 if (viewModel.ChosenDate != null)
                 {
-                    viewModel.Entity = this.subFundsService.GetActiveSubFundById(viewModel.ChosenDate, viewModel.EntityId);
+                    viewModel.Entity = this.subFundsService.GetActiveSubFundById(chosenDate, viewModel.EntityId);
                 }
             }
             else if (viewModel.Command.Equals("Filter"))
