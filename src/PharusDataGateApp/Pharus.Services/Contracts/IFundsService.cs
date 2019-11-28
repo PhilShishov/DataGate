@@ -15,7 +15,11 @@
 
         List<string[]> GetActiveFundWithDateById(int id);
 
+        List<string[]> GetActiveFundWithDateById(DateTime? chosenDate, int id);
+
         List<string[]> GetFundSubFunds(int id);
+
+        List<string[]> GetFundSubFunds(DateTime? chosenDate, int id);
 
         void ExecuteEditFund(
                              List<string> fundsProperties,
