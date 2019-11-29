@@ -47,6 +47,7 @@ namespace Pharus.App.Models.BindingModels.Funds
 
         [RegularExpression(@"^[A-Z0-9]+$")]
         [Display(Name = "Fund Admin Code")]
+        [Required]
         public string FACode { get; set; }
 
         [RegularExpression(@"^[A-Z0-9]+$")]
