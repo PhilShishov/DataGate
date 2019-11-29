@@ -380,7 +380,7 @@
                 return this.View(model ?? new CreateFundBindingModel());
             }
 
-            List<string> entityValues = new List<string>();
+
             DateTime chosenDate = model.InitialDate;            
 
             if (this.HttpContext.Request.Form.ContainsKey("create_button"))
