@@ -29,15 +29,19 @@ namespace Pharus.App.Models.BindingModels.Funds
         [Display(Name = "CSSF Code")]
         public string CSSFCode { get; set; }
 
+        [Required]
         [Display(Name = "Status")]
         public string FStatus { get; set; }
 
+        [Required]
         [Display(Name = "Legal Form")]
         public string LegalForm { get; set; }
 
+        [Required]
         [Display(Name = "Legal Vehicle")]
         public string LegalVehicle { get; set; }
 
+        [Required]
         [Display(Name = "Legal Type")]
         public string LegalType { get; set; }
 
@@ -53,9 +57,11 @@ namespace Pharus.App.Models.BindingModels.Funds
         [Display(Name = "Transfer Agent Code")]
         public string TACode { get; set; }
 
+        [Required]
         [Display(Name = "Company Description")]
         public string CompanyTypeDesc { get; set; }
 
+        [Required]
         [Display(Name = "Company Type")]
         public string CompanyAcronym { get; set; }
 

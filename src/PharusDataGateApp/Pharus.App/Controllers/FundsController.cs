@@ -11,11 +11,10 @@
     using Microsoft.AspNetCore.Authorization;
 
     using Pharus.Data;
-    using Pharus.Services.Contracts;
     using Pharus.App.Utilities;
+    using Pharus.Services.Contracts;
     using Pharus.App.Models.BindingModels.Funds;
     using Pharus.App.Models.ViewModels.Entities;
-    using Pharus.Domain.Pharus_vFinale;
 
     [Authorize]
     public class FundsController : Controller
@@ -298,12 +297,7 @@
                 FId = entityId,
             };
 
-            this.ViewData["FStatusList"] = this.fundsSelectListService.GetAllTbDomFStatus();
-            this.ViewData["LegalFormList"] = this.fundsSelectListService.GetAllTbDomLegalForm();
-            this.ViewData["LegalVehicleList"] = this.fundsSelectListService.GetAllTbDomLegalVehicle();
-            this.ViewData["LegalTypeList"] = this.fundsSelectListService.GetAllTbDomLegalType();
-            this.ViewData["CompanyTypeDescList"] = this.fundsSelectListService.GetAllTbDomCompanyDesc();
-            this.ViewData["CompanyAcronymList"] = this.fundsSelectListService.GetAllTbDomCompanyAcronym();
+            SetViewDataValuesForFundSelectLists();
 
             return this.View(model);
         }
@@ -362,26 +356,24 @@
         [HttpGet]
         public IActionResult CreateFund()
         {
+            this.ModelState.Clear();
+
             CreateFundBindingModel model = new CreateFundBindingModel
-            {                
+            {
                 InitialDate = DateTime.Today,
             };
-
-            this.ViewData["FStatusList"] = this.fundsSelectListService.GetAllTbDomFStatus();
-            this.ViewData["LegalFormList"] = this.fundsSelectListService.GetAllTbDomLegalForm();
-            this.ViewData["LegalVehicleList"] = this.fundsSelectListService.GetAllTbDomLegalVehicle();
-            this.ViewData["LegalTypeList"] = this.fundsSelectListService.GetAllTbDomLegalType();
-            this.ViewData["CompanyTypeDescList"] = this.fundsSelectListService.GetAllTbDomCompanyDesc();
-            this.ViewData["CompanyAcronymList"] = this.fundsSelectListService.GetAllTbDomCompanyAcronym();
+            SetViewDataValuesForFundSelectLists();
 
             return this.View(model);
-        }
+        }    
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult CreateFund(CreateFundBindingModel model)
         {
             string returnUrl = "/Funds/All";
+
+            SetViewDataValuesForFundSelectLists();
 
             if (!this.ModelState.IsValid)
             {
@@ -418,6 +410,16 @@
             }
 
             return this.LocalRedirect(returnUrl);
+        }
+
+        private void SetViewDataValuesForFundSelectLists()
+        {
+            this.ViewData["FStatusList"] = this.fundsSelectListService.GetAllTbDomFStatus();
+            this.ViewData["LegalFormList"] = this.fundsSelectListService.GetAllTbDomLegalForm();
+            this.ViewData["LegalVehicleList"] = this.fundsSelectListService.GetAllTbDomLegalVehicle();
+            this.ViewData["LegalTypeList"] = this.fundsSelectListService.GetAllTbDomLegalType();
+            this.ViewData["CompanyTypeDescList"] = this.fundsSelectListService.GetAllTbDomCompanyDesc();
+            this.ViewData["CompanyAcronymList"] = this.fundsSelectListService.GetAllTbDomCompanyAcronym();
         }
     }
 }
