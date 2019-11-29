@@ -31,8 +31,8 @@
         <div class="form-group">
             <label asp-for="FundName" class="text-torshia"></label><br>
             <input type="text"
-                   class="form-control maxw-270"
-                   asp-for="FundName">
+                   class="form-control maxw-270 upperCase"
+                   asp-for="FundName" id="fundNameInput">
             <span asp-validation-for="FundName" class="text-danger"></span>
         </div>
 

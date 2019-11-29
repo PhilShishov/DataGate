@@ -178,15 +178,6 @@ input[type=search]::-webkit-search-cancel-button {
     outline: none;
 }
 
-/*.table tr:hover {
-    background-color: #FFF842;
-    color: #403E10;
-    font-weight: bold;    
-    transform: translate3d(6px, -6px, 0);
-    transition-delay: 0s;
-    transition-property: all;
-}*/
-
 .pharusSearchDiv {
     top: 14%;
     right: 5%;
@@ -204,4 +195,8 @@ input[type=search]::-webkit-search-cancel-button {
 
 .double-scroll {
     width: 40%;
+}
+
+.upperCase {
+    text-transform: uppercase;
 }
