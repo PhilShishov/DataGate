@@ -6,8 +6,8 @@
 
 <h4>Create Pharus Fund</h4>
 
-<form asp-controller="Funds" asp-action="CreateFund" method="post" class="d-inline">
-    <div asp-validation-summary="ModelOnly" class="text-danger d-inline"></div>
+<form method="post" class="d-inline">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="d-inline">
         <div class="form-group">
             <label asp-for="InitialDate" class="text-torshia"></label><br>
@@ -46,42 +46,47 @@
 
         <div class="form-group">
             <label asp-for="FStatus" class="text-torshia"></label><br>
-            <select class="form-control maxw-270" id="fStatus" asp-for="FStatus">
+            <select class="form-control maxw-270" asp-for="FStatus">
+                <option selected disabled>-- Choose Status --</option>
                 @foreach (var status in (List<string>)ViewData["FStatusList"])
                 {
                     <option value="@status">@status</option>
                 }
             </select>
+            <span asp-validation-for="FStatus" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label asp-for="LegalForm" class="text-torshia"></label><br>
-            <select class="form-control maxw-270" id="fStatus" asp-for="LegalForm">
+            <select class="form-control maxw-270" asp-for="LegalForm">
                 @foreach (var status in (List<string>)ViewData["LegalFormList"])
                 {
                     <option value="@status">@status</option>
                 }
             </select>
+            <span asp-validation-for="LegalForm" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label asp-for="LegalVehicle" class="text-torshia"></label><br>
-            <select class="form-control maxw-270" id="fStatus" asp-for="LegalVehicle">
+            <select class="form-control maxw-270" asp-for="LegalVehicle">
                 @foreach (var status in (List<string>)ViewData["LegalVehicleList"])
                 {
                     <option value="@status">@status</option>
                 }
             </select>
+            <span asp-validation-for="LegalVehicle" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label asp-for="LegalType" class="text-torshia"></label><br>
-            <select class="form-control maxw-270" id="fStatus" asp-for="LegalType">
+            <select class="form-control maxw-270" asp-for="LegalType">
                 @foreach (var status in (List<string>)ViewData["LegalTypeList"])
                 {
                     <option value="@status">@status</option>
                 }
             </select>
+            <span asp-validation-for="LegalType" class="text-danger"></span>
         </div>
 
         <div class="form-group">
@@ -110,23 +115,25 @@
 
         <div class="form-group">
             <label asp-for="CompanyTypeDesc" class="text-torshia"></label><br>
-            <select class="form-control maxw-270" id="fStatus" asp-for="CompanyTypeDesc">
+            <select class="form-control maxw-270" asp-for="CompanyTypeDesc">
                 @foreach (var status in (List<string>)ViewData["CompanyTypeDescList"])
                 {
                     <option value="@status">@status</option>
                 }
             </select>
+            <span asp-validation-for="CompanyTypeDesc" class="text-danger"></span>
         </div>
 
         <div class="form-group">
             <label asp-for="CompanyAcronym" class="text-torshia"></label><br>
-            <select class="form-control maxw-270" id="fStatus" asp-for="CompanyAcronym">
+            <select class="form-control maxw-270" asp-for="CompanyAcronym">
                 @foreach (var status in (List<string>)ViewData["CompanyAcronymList"])
                 {
                     <option value="@status">@status</option>
                 }
             </select>
-        </div>      
+            <span asp-validation-for="CompanyAcronym" class="text-danger"></span>
+        </div>
 
         <div class="form-group">
             <label asp-for="TinNumber" class="text-torshia"></label><br>
@@ -157,8 +164,7 @@
         <button type="submit"
                 class="btn bg-pharus text-white"
                 name="create_button"
-                style="margin-right:40px"
-                onclick="return confirm('Are you sure you want to create this?')">
+                style="margin-right:40px">
             Create Fund
         </button>
     </div>
