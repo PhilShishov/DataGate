@@ -1,20 +1,20 @@
-﻿@model Pharus.App.Models.BindingModels.Funds.FundBindingModel
+﻿@model Pharus.App.Models.BindingModels.Funds.CreateFundBindingModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h4>Create New Fund</h4>
+<h4>Create Pharus Fund</h4>
 
-<form asp-action="CreateFund" method="post" class="d-inline">
+<form asp-controller="Funds" asp-action="CreateFund" method="post" class="d-inline">
     <div class="d-inline">
-        @for (int row = 0; row < 1; row++)
+        @for (int row = 0; row < Model.EntityProperties.Count; row++)
         {
             @for (int col = 0; col < Model.EntityProperties[row].Length; col++)
             {
                 <div>
                     <label class="control-label text-secondary">
-                        @Html.TextBoxFor(m => Model.EntityProperties[0][col], new { @class = "textBoxHeaderPharus", @readonly = true })
+                        @Model.EntityProperties[0][col]
                     </label>
 
                     @if (Model.EntityProperties[0][col] == "FUND ID PHARUS")
@@ -23,15 +23,12 @@
                                type="text"
                                class="form-control maxw-270" hidden />
                         <input asp-for="FId"
-                               type="text"                               
+                               type="text"
                                class="form-control maxw-270" />
                     }
 
                     else if (Model.EntityProperties[0][col] == "INITIAL DATE")
                     {
-                        <input asp-for="@Model.EntityProperties[row][col]"
-                               type="text"
-                               class="form-control maxw-270" hidden />
                         <input asp-for="ChosenDate"
                                type="date"
                                id="fundDatetime"
@@ -129,7 +126,7 @@
     <div class="button-holder mt-4">
         <button type="submit"
                 class="btn bg-pharus text-white"
-                name="update_button"
+                name="create_button"
                 style="margin-right:40px"
                 onclick="return confirm('Are you sure you want to create this?')">
             Create Fund

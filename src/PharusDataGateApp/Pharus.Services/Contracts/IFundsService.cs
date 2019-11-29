@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
 
+    using Pharus.Domain.Pharus_vFinale;
     public interface IFundsService
     {
         List<string[]> GetAllActiveFunds();
@@ -21,7 +22,7 @@
 
         List<string[]> GetFund_SubFunds(DateTime? chosenDate, int id);
 
-        void ExecuteEditFund(
+        void EditFund(
                              List<string> fundsProperties,
                              int fundId,
                              DateTime chosenDate,
@@ -30,6 +31,15 @@
                              int fLegalTypeId,
                              int fLegalVehicleId,
                              int fCompanyTypeId);
+
+        void CreateFund(
+                        List<string> fundsValues,
+                        DateTime chosenDate,
+                        int fStatusId,
+                        int fLegalFormId,
+                        int fLegalTypeId,
+                        int fLegalVehicleId,
+                        int fCompanyTypeId);
 
         void LoadFile();
     }

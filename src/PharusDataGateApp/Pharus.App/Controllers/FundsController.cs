@@ -15,6 +15,7 @@
     using Pharus.App.Utilities;
     using Pharus.App.Models.BindingModels.Funds;
     using Pharus.App.Models.ViewModels.Entities;
+    using Pharus.Domain.Pharus_vFinale;
 
     [Authorize]
     public class FundsController : Controller
@@ -46,7 +47,7 @@
                 ChosenDate = DateTime.Today.ToString("yyyy-MM-dd"),
             };
 
-            GetAllEntitiesWithHeaders.GetAllActiveFundsWithHeaders(model, this.fundsService);
+            GetAllActiveEntitiesUtility.GetAllActiveFundsWithHeaders(model, this.fundsService);
 
             return this.View(model);
         }
@@ -72,7 +73,7 @@
         public IActionResult All(EntitiesViewModel model)
         {
             this.ModelState.Clear();
-            GetAllEntitiesWithHeaders.GetAllActiveFundsWithHeaders(model, this.fundsService);
+            GetAllActiveEntitiesUtility.GetAllActiveFundsWithHeaders(model, this.fundsService);
 
             var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
@@ -82,7 +83,7 @@
                 {
                     if (model.IsActive)
                     {
-                        GetAllEntitiesWithHeaders.GetAllActiveFundsWithHeaders(model, this.fundsService);
+                        GetAllActiveEntitiesUtility.GetAllActiveFundsWithHeaders(model, this.fundsService);
                     }
                     else
                     {
@@ -290,7 +291,7 @@
         [HttpGet("Funds/EditFund/{EntityId}")]
         public IActionResult EditFund(int entityId)
         {
-            FundBindingModel model = new FundBindingModel
+            EditFundBindingModel model = new EditFundBindingModel
             {
                 EntityProperties = this.fundsService.GetActiveFundWithDateById(entityId),
                 ChosenDate = DateTime.Today,
@@ -308,13 +309,15 @@
         }
 
         [HttpPost]
-        public IActionResult EditFund(FundBindingModel model)
+        public IActionResult EditFund(EditFundBindingModel model)
         {
-            // if (!ModelState.IsValid)
-            // {
-            //    return View(model ?? new EditFundBindingModel());
-            // }
-            string returnUrl = $"/Funds/All";
+            string returnUrl = "/Funds/All";
+
+            if (!ModelState.IsValid)
+            {
+                return View(model ?? new EditFundBindingModel());
+            }
+
             List<string> entityValues = new List<string>();
             DateTime chosenDate = model.ChosenDate;
 
@@ -350,7 +353,7 @@
                     .Select(ct => ct.CtId)
                     .FirstOrDefault();
 
-                this.fundsService.ExecuteEditFund(entityValues, fundId, chosenDate, fStatusId, fLegalFormId, fLegalTypeId, fLegalVehicleId, fCompanyTypeId);
+                this.fundsService.EditFund(entityValues, fundId, chosenDate, fStatusId, fLegalFormId, fLegalTypeId, fLegalVehicleId, fCompanyTypeId);
             }
 
             return this.LocalRedirect(returnUrl);
@@ -359,9 +362,12 @@
         [HttpGet]
         public IActionResult CreateFund()
         {
-            FundBindingModel model = new FundBindingModel
+            CreateFundBindingModel model = new CreateFundBindingModel
             {
-                EntityProperties = this.fundsService.GetAllActiveFunds(),
+                EntityProperties = this.fundsService
+                    .GetAllActiveFunds()
+                    .Take(1)
+                    .ToList(),
                 ChosenDate = DateTime.Today,
             };
 
@@ -373,6 +379,57 @@
             this.ViewData["CompanyAcronymList"] = this.fundsSelectListService.GetAllTbDomCompanyAcronym();
 
             return this.View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateFund(CreateFundBindingModel model)
+        {
+            string returnUrl = "/Funds/All";
+
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model ?? new CreateFundBindingModel());
+            }
+
+            List<string> entityValues = new List<string>();
+            DateTime chosenDate = model.ChosenDate;
+
+            for (int row = 1; row < model.EntityProperties.Count; row++)
+            {
+                for (int col = 0; col < model.EntityProperties[row].Length; col++)
+                {
+                    entityValues.Add(model.EntityProperties[row][col]);
+                }
+            }
+
+            if (this.HttpContext.Request.Form.ContainsKey("create_button"))
+            {
+                int fStatusId = this.context.TbDomFStatus
+                    .Where(s => s.StFDesc == model.FStatus)
+                    .Select(s => s.StFId)
+                    .FirstOrDefault();
+                int fLegalFormId = this.context.TbDomLegalForm
+                    .Where(lf => lf.LfAcronym == model.LegalForm)
+                    .Select(lf => lf.LfId)
+                    .FirstOrDefault();
+                int fLegalVehicleId = this.context.TbDomLegalVehicle
+                    .Where(lv => lv.LvAcronym == model.LegalVehicle)
+                    .Select(lv => lv.LvId)
+                    .FirstOrDefault();
+                int fLegalTypeId = this.context.TbDomLegalType
+                    .Where(lt => lt.LtAcronym == model.LegalType)
+                    .Select(lt => lt.LtId)
+                    .FirstOrDefault();
+                int fCompanyTypeId = this.context.TbDomCompanyType
+                    .Where(ct => ct.CtAcronym == model.CompanyAcronym)
+                    .Select(ct => ct.CtId)
+                    .FirstOrDefault();
+
+                this.fundsService.CreateFund(entityValues, chosenDate, fStatusId, fLegalFormId, fLegalTypeId, fLegalVehicleId, fCompanyTypeId);
+            }
+
+            return this.LocalRedirect(returnUrl);
         }
     }
 }
