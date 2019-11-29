@@ -59,6 +59,7 @@
         <div class="form-group">
             <label asp-for="LegalForm" class="text-torshia"></label><br>
             <select class="form-control maxw-270" asp-for="LegalForm">
+                <option selected disabled>-- Choose Form --</option>
                 @foreach (var status in (List<string>)ViewData["LegalFormList"])
                 {
                     <option value="@status">@status</option>
@@ -70,6 +71,7 @@
         <div class="form-group">
             <label asp-for="LegalVehicle" class="text-torshia"></label><br>
             <select class="form-control maxw-270" asp-for="LegalVehicle">
+                <option selected disabled>-- Choose Vehicle --</option>
                 @foreach (var status in (List<string>)ViewData["LegalVehicleList"])
                 {
                     <option value="@status">@status</option>
@@ -81,6 +83,7 @@
         <div class="form-group">
             <label asp-for="LegalType" class="text-torshia"></label><br>
             <select class="form-control maxw-270" asp-for="LegalType">
+                <option selected disabled>-- Choose Type --</option>
                 @foreach (var status in (List<string>)ViewData["LegalTypeList"])
                 {
                     <option value="@status">@status</option>
@@ -116,6 +119,7 @@
         <div class="form-group">
             <label asp-for="CompanyTypeDesc" class="text-torshia"></label><br>
             <select class="form-control maxw-270" asp-for="CompanyTypeDesc">
+                <option selected disabled>-- Choose Description --</option>
                 @foreach (var status in (List<string>)ViewData["CompanyTypeDescList"])
                 {
                     <option value="@status">@status</option>
@@ -127,6 +131,7 @@
         <div class="form-group">
             <label asp-for="CompanyAcronym" class="text-torshia"></label><br>
             <select class="form-control maxw-270" asp-for="CompanyAcronym">
+                <option selected disabled>-- Choose Type --</option>
                 @foreach (var status in (List<string>)ViewData["CompanyAcronymList"])
                 {
                     <option value="@status">@status</option>

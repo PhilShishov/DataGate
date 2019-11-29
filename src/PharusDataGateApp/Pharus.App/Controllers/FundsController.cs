@@ -365,7 +365,7 @@
             SetViewDataValuesForFundSelectLists();
 
             return this.View(model);
-        }    
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -380,11 +380,13 @@
                 return this.View(model ?? new CreateFundBindingModel());
             }
 
-
-            DateTime chosenDate = model.InitialDate;            
+            string initialDate = model.InitialDate.ToString("yyyyMMdd");
+            string endDate = model.EndDate?.ToString("yyyyMMdd");
 
             if (this.HttpContext.Request.Form.ContainsKey("create_button"))
             {
+                string fundName = model.FundName;
+                string cssfCode = model.CSSFCode;
                 int fStatusId = this.context.TbDomFStatus
                     .Where(s => s.StFDesc == model.FStatus)
                     .Select(s => s.StFId)
@@ -401,12 +403,21 @@
                     .Where(lt => lt.LtAcronym == model.LegalType)
                     .Select(lt => lt.LtId)
                     .FirstOrDefault();
+                string faCode = model.FACode;
+                string depCode = model.DEPCode;
+                string taCode = model.TACode;
+
                 int fCompanyTypeId = this.context.TbDomCompanyType
                     .Where(ct => ct.CtAcronym == model.CompanyAcronym)
                     .Select(ct => ct.CtId)
                     .FirstOrDefault();
+                string tinNumber = model.TinNumber;
+                string leiCode = model.LEICode;
+                string regNumber = model.RegNumber;
 
-                this.fundsService.CreateFund(entityValues, chosenDate, fStatusId, fLegalFormId, fLegalTypeId, fLegalVehicleId, fCompanyTypeId);
+                this.fundsService.CreateFund(initialDate, endDate, fundName, cssfCode, fStatusId, fLegalFormId,
+                                             fLegalTypeId, fLegalVehicleId, faCode, depCode, taCode, fCompanyTypeId,
+                                             tinNumber, leiCode, regNumber);
             }
 
             return this.LocalRedirect(returnUrl);
