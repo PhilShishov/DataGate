@@ -7,120 +7,150 @@
 <h4>Create Pharus Fund</h4>
 
 <form asp-controller="Funds" asp-action="CreateFund" method="post" class="d-inline">
+    <div asp-validation-summary="ModelOnly" class="text-danger d-inline"></div>
     <div class="d-inline">
-        @for (int row = 0; row < Model.EntityProperties.Count; row++)
-        {
-            @for (int col = 0; col < Model.EntityProperties[row].Length; col++)
-            {
-                <div>
-                    <label class="control-label text-secondary">
-                        @Model.EntityProperties[0][col]
-                    </label>
+        <div class="form-group">
+            <label asp-for="InitialDate" class="text-torshia"></label><br>
+            <input asp-for="InitialDate"
+                   type="date"
+                   id="fundDatetime"
+                   min="2018-01-01" max=@DateTime.Today.ToString("yyyy-MM-dd")
+                   class="form-control maxw-270">
+            <span asp-validation-for="InitialDate" class="text-danger"></span>
+        </div>
 
-                    @if (Model.EntityProperties[0][col] == "FUND ID PHARUS")
-                    {
-                        <input asp-for="@Model.EntityProperties[row][col]"
-                               type="text"
-                               class="form-control maxw-270" hidden />
-                        <input asp-for="FId"
-                               type="text"
-                               class="form-control maxw-270" />
-                    }
+        <div class="form-group">
+            <label asp-for="EndDate" class="text-torshia"></label><br>
+            <input asp-for="EndDate"
+                   type="date"
+                   min="2018-01-01" max=@DateTime.Today.ToString("yyyy-MM-dd")
+                   class="form-control maxw-270">
+            <span asp-validation-for="EndDate" class="text-danger"></span>
+        </div>
 
-                    else if (Model.EntityProperties[0][col] == "INITIAL DATE")
-                    {
-                        <input asp-for="ChosenDate"
-                               type="date"
-                               id="fundDatetime"
-                               min="2018-01-01" max=@DateTime.Today.ToString("yyyy-MM-dd")
-                               class="form-control maxw-270">
-                    }
+        <div class="form-group">
+            <label asp-for="FundName" class="text-torshia"></label><br>
+            <input type="text"
+                   class="form-control maxw-270"
+                   asp-for="FundName">
+            <span asp-validation-for="FundName" class="text-danger"></span>
+        </div>
 
-                    else if (Model.EntityProperties[0][col] == "STATUS")
-                    {
-                        <input asp-for="@Model.EntityProperties[row][col]"
-                               type="text"
-                               class="form-control maxw-270" hidden />
-                        <select class="form-control maxw-270" id="fStatus" asp-for="FStatus">
-                            @foreach (var status in (List<string>)ViewData["FStatusList"])
-                            {
-                                <option value="@status">@status</option>
-                            }
-                        </select>
-                    }
+        <div class="form-group">
+            <label asp-for="CSSFCode" class="text-torshia"></label><br>
+            <input type="text"
+                   class="form-control maxw-270"
+                   asp-for="CSSFCode">
+            <span asp-validation-for="CSSFCode" class="text-danger"></span>
+        </div>
 
-                    else if (Model.EntityProperties[0][col] == "LEGAL FORM")
-                    {
-                        <input asp-for="@Model.EntityProperties[row][col]"
-                               type="text"
-                               class="form-control maxw-270" hidden />
-                        <select class="form-control maxw-270" id="fStatus" asp-for="LegalForm">
-                            @foreach (var status in (List<string>)ViewData["LegalFormList"])
-                            {
-                                <option value="@status">@status</option>
-                            }
-                        </select>
-                    }
+        <div class="form-group">
+            <label asp-for="FStatus" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" id="fStatus" asp-for="FStatus">
+                @foreach (var status in (List<string>)ViewData["FStatusList"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+        </div>
 
-                    else if (Model.EntityProperties[0][col] == "LEGAL VEHICLE")
-                    {
-                        <input asp-for="@Model.EntityProperties[row][col]"
-                               type="text"
-                               class="form-control maxw-270" hidden />
-                        <select class="form-control maxw-270" id="fStatus" asp-for="LegalVehicle">
-                            @foreach (var status in (List<string>)ViewData["LegalVehicleList"])
-                            {
-                                <option value="@status">@status</option>
-                            }
-                        </select>
-                    }
+        <div class="form-group">
+            <label asp-for="LegalForm" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" id="fStatus" asp-for="LegalForm">
+                @foreach (var status in (List<string>)ViewData["LegalFormList"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+        </div>
 
-                    else if (Model.EntityProperties[0][col] == "LEGAL TYPE")
-                    {
-                        <input asp-for="@Model.EntityProperties[row][col]"
-                               type="text"
-                               class="form-control maxw-270" hidden />
-                        <select class="form-control maxw-270" id="fStatus" asp-for="LegalType">
-                            @foreach (var status in (List<string>)ViewData["LegalTypeList"])
-                            {
-                                <option value="@status">@status</option>
-                            }
-                        </select>
-                    }
+        <div class="form-group">
+            <label asp-for="LegalVehicle" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" id="fStatus" asp-for="LegalVehicle">
+                @foreach (var status in (List<string>)ViewData["LegalVehicleList"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+        </div>
 
-                    else if (Model.EntityProperties[0][col] == "COMPANY DESCRIPTION")
-                    {
-                        <input asp-for="@Model.EntityProperties[row][col]"
-                               type="text"
-                               class="form-control maxw-270" hidden />
-                        <select class="form-control maxw-270" id="fStatus" asp-for="CompanyTypeDesc">
-                            @foreach (var status in (List<string>)ViewData["CompanyTypeDescList"])
-                            {
-                                <option value="@status">@status</option>
-                            }
-                        </select>
-                    }
-                    else if (Model.EntityProperties[0][col] == "COMPANY TYPE")
-                    {
-                        <input asp-for="@Model.EntityProperties[row][col]"
-                               type="text"
-                               class="form-control maxw-270" hidden />
-                        <select class="form-control maxw-270" id="fStatus" asp-for="CompanyAcronym">
-                            @foreach (var status in (List<string>)ViewData["CompanyAcronymList"])
-                            {
-                                <option value="@status">@status</option>
-                            }
-                        </select>
-                    }
+        <div class="form-group">
+            <label asp-for="LegalType" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" id="fStatus" asp-for="LegalType">
+                @foreach (var status in (List<string>)ViewData["LegalTypeList"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+        </div>
 
-                    else
-                    {
-                        <input type="text"
-                               class="form-control maxw-270" />
-                    }
-                </div>
-            }
-        }
+        <div class="form-group">
+            <label asp-for="FACode" class="text-torshia"></label><br>
+            <input type="text"
+                   class="form-control maxw-270"
+                   asp-for="FACode">
+            <span asp-validation-for="FACode" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="DEPCode" class="text-torshia"></label><br>
+            <input type="text"
+                   class="form-control maxw-270"
+                   asp-for="DEPCode">
+            <span asp-validation-for="DEPCode" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="TACode" class="text-torshia"></label><br>
+            <input type="text"
+                   class="form-control maxw-270"
+                   asp-for="TACode">
+            <span asp-validation-for="TACode" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CompanyTypeDesc" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" id="fStatus" asp-for="CompanyTypeDesc">
+                @foreach (var status in (List<string>)ViewData["CompanyTypeDescList"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CompanyAcronym" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" id="fStatus" asp-for="CompanyAcronym">
+                @foreach (var status in (List<string>)ViewData["CompanyAcronymList"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+        </div>      
+
+        <div class="form-group">
+            <label asp-for="TinNumber" class="text-torshia"></label><br>
+            <input type="text"
+                   class="form-control maxw-270"
+                   asp-for="TinNumber">
+            <span asp-validation-for="TinNumber" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="LEICode" class="text-torshia"></label><br>
+            <input type="text"
+                   class="form-control maxw-270"
+                   asp-for="LEICode">
+            <span asp-validation-for="LEICode" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="RegNumber" class="text-torshia"></label><br>
+            <input type="text"
+                   class="form-control maxw-270"
+                   asp-for="RegNumber">
+            <span asp-validation-for="RegNumber" class="text-danger"></span>
+        </div>
     </div>
 
     <div class="button-holder mt-4">
