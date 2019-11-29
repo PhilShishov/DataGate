@@ -33,13 +33,21 @@
                              int fCompanyTypeId);
 
         void CreateFund(
-                        List<string> fundsValues,
-                        DateTime chosenDate,
+                        string initialDate,
+                        string endDate,
+                        string fundName,
+                        string cssfCode,
                         int fStatusId,
                         int fLegalFormId,
                         int fLegalTypeId,
                         int fLegalVehicleId,
-                        int fCompanyTypeId);
+                        string faCode,
+                        string depCode,
+                        string taCode,
+                        int fCompanyTypeId,
+                        string tinNumber,
+                        string leiCode,
+                        string regNumber);
 
         void LoadFile();
     }
