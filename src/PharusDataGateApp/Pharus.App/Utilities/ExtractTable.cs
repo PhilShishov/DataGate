@@ -108,21 +108,7 @@ namespace Pharus.App.Utilities
             writer.SetCloseStream(false);
 
             PdfDocument pdfDoc = new PdfDocument(writer);
-
-            //pdfDoc.AddNewPage(PageSize.A4.Rotate());
-
             pdfDoc.SetDefaultPageSize(PageSize.A4.Rotate());
-
-            //PdfPTable
-
-            //PdfPage origPage = pdfDoc.GetPage(1);
-
-            //// Getting the page size 
-            //Rectangle orig = origPage.GetPageSizeWithRotation();
-            //PdfPage page = pdfDoc.AddNewPage(PageSize.A4.Rotate());
-            //AffineTransform transformationMatrix = AffineTransform.GetScaleInstance(
-            //   page.GetPageSize().GetWidth() / orig.GetWidth() / 2,
-            //   page.GetPageSize().GetHeight() / orig.GetHeight() / 2);
 
             Document document = new Document(pdfDoc);
 
@@ -133,6 +119,7 @@ namespace Pharus.App.Utilities
 
             Table table = new Table(entities[0].Length);
             table.SetFontSize(10);
+            table.SetWidth(PageSize.A4.GetWidth());
 
             for (int row = 0; row < 1; row++)
             {
@@ -144,11 +131,12 @@ namespace Pharus.App.Utilities
                         s = " ";
                     }
 
-                    Cell c1 = new Cell();
-                    c1.Add(new Paragraph(s));
-                    c1.SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER);
-                    c1.SetBold();
-                    table.AddHeaderCell(c1);
+                    Cell cell = new Cell();
+                    cell.Add(new Paragraph(s));
+                    cell.SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER);
+                    cell.SetBold();
+
+                    table.AddHeaderCell(cell);
                 }
             }
 
