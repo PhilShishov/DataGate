@@ -363,12 +363,8 @@
         public IActionResult CreateFund()
         {
             CreateFundBindingModel model = new CreateFundBindingModel
-            {
-                EntityProperties = this.fundsService
-                    .GetAllActiveFunds()
-                    .Take(1)
-                    .ToList(),
-                ChosenDate = DateTime.Today,
+            {                
+                InitialDate = DateTime.Today,
             };
 
             this.ViewData["FStatusList"] = this.fundsSelectListService.GetAllTbDomFStatus();
@@ -393,15 +389,7 @@
             }
 
             List<string> entityValues = new List<string>();
-            DateTime chosenDate = model.ChosenDate;
-
-            for (int row = 1; row < model.EntityProperties.Count; row++)
-            {
-                for (int col = 0; col < model.EntityProperties[row].Length; col++)
-                {
-                    entityValues.Add(model.EntityProperties[row][col]);
-                }
-            }
+            DateTime chosenDate = model.InitialDate;            
 
             if (this.HttpContext.Request.Form.ContainsKey("create_button"))
             {
