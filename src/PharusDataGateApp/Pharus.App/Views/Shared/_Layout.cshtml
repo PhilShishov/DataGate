@@ -6,7 +6,6 @@
     <title>@ViewData["Title"] Pharus DataGate</title>
 
     <environment include="Development">
-        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/reset-css.css" />
         <link rel="stylesheet" href="~/css/bootstrap.min.css" />
@@ -29,14 +28,9 @@
     </environment>
 
     <environment include="Production">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/reset-css.css" />
-        <link rel="stylesheet" href="~/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="~/css/pharus.css" />
-        <link rel="stylesheet" href="~/css/style.css" />
-        <link href="http://cdn.syncfusion.com/17.3.0.9/js/web/flat-azure/ej.web.all.min.css"
-              rel="stylesheet" />
+    </environment>
+
+    <environment include="Staging">
     </environment>
 
     @RenderSection("Styles", required: false)
@@ -201,30 +195,12 @@
         </script>
 
         <script src="~/js/site.min.js" asp-append-version="true"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script type="text/javascript">
-            $('#datepicker').datepicker({
-                weekStart: 1,
-                daysOfWeekHighlighted: "6,0",
-                autoclose: true,
-                todayHighlight: true,
-            });
-            $('#datepicker').datepicker("setDate", new Date());
-        </script>
     </environment>
 
     <environment include="Production">
-        <script>
-            //const oldWindowOnLoad = window.onload || function () { };
-            window.onload = () => {
-                manageSideNavBar();
-            }
-        </script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="http://cdn.syncfusion.com/js/assets/external/jquery-1.11.3.min.js"></script>
-        <script src="http://cdn.syncfusion.com/17.3.0.9/js/web/ej.web.all.min.js"></script>
+    </environment>
+
+    <environment include="Staging">
     </environment>
 
     @RenderSection("Scripts", required: false)

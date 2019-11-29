@@ -76,7 +76,7 @@
                 {
                     if (model.IsActive)
                     {
-                        GetAllEntitiesWithHeaders.GetAllActiveSubFundsWithHeaders(model, this.subFundsService);
+                        GetAllActiveEntitiesUtility.GetAllActiveSubFundsWithHeaders(model, this.subFundsService);
                     }
                     else
                     {

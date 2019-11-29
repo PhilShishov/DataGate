@@ -1,4 +1,4 @@
-﻿@model Pharus.App.Models.BindingModels.Funds.FundBindingModel
+﻿@model Pharus.App.Models.BindingModels.Funds.EditFundBindingModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -17,7 +17,7 @@
                 @Html.TextBoxFor(m => Model.EntityProperties[0][col], new { @class = "textBoxHeaderPharus", @readonly = true })
             </label>
 
-            <label class="control-label text-secondary" >
+            <label class="control-label text-secondary">
                 @Model.EntityProperties[0][col]
             </label>
 
@@ -124,7 +124,7 @@
             {
                 <input asp-for="@Model.EntityProperties[row][col]"
                        type="text"
-                       class="form-control maxw-270" />
+                       class="form-control maxw-270"/>
             }
         </div>
             }
