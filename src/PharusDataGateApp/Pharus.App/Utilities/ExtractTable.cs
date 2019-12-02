@@ -18,10 +18,10 @@ namespace Pharus.App.Utilities
 
     using OfficeOpenXml;
 
-    using iText.Kernel.Pdf;
-    using iText.Kernel.Geom;
     using iText.Layout;
     using iText.IO.Image;
+    using iText.Kernel.Pdf;
+    using iText.Kernel.Geom;
     using iText.Layout.Element;
     using iText.Layout.Properties;
 
@@ -111,7 +111,7 @@ namespace Pharus.App.Utilities
             writer.SetCloseStream(false);
 
             PdfDocument pdfDoc = new PdfDocument(writer);
-            pdfDoc.SetDefaultPageSize(PageSize.A3.Rotate());
+            pdfDoc.SetDefaultPageSize(PageSize.A2.Rotate());
 
             Document document = new Document(pdfDoc);
 
