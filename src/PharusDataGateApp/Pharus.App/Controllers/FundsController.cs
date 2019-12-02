@@ -169,9 +169,8 @@
         public FileStreamResult ExtractPdfEntities(EntitiesViewModel model)
         {
             FileStreamResult fileStreamResult = null;
+
             var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-
-
             string typeName = model.GetType().Name;
             string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
@@ -189,7 +188,7 @@
         {
             FileStreamResult fileStreamResult = null;
 
-            var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            var chosenDate = DateTime.Parse(model.ChosenDate);
 
             string typeName = model.GetType().Name;
             string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
@@ -230,6 +229,7 @@
                 EntityId = entityId,
                 Entity = this.fundsService.GetActiveFundById(entityId),
                 EntitySubEntities = this.fundsService.GetFund_SubFunds(entityId),
+                ChosenDate = chosenDate,
             };
 
             HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
