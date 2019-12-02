@@ -30,5 +30,9 @@ namespace Pharus.App.Models.ViewModels.Entities
         public List<string[]> EntitySubEntities { get; set; }
 
         public List<string[]> EntityTimeline { get; set; }
+
+        public List<string> FilesNames { get; set; }
+
+        public string FileToDisplay { get; set; }
     }
 }

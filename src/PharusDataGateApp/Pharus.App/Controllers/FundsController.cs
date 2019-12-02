@@ -137,6 +137,12 @@
             return this.RedirectToPage("/Funds/All");
         }
 
+        [HttpGet]
+        public ActionResult Success()
+        {
+            return RedirectToAction("All");
+        }
+
         [HttpPost]
         public FileStreamResult ExtractExcelEntities(EntitiesViewModel model)
         {
@@ -152,8 +158,6 @@
 
             return fileStreamResult;
         }
-
-
 
         [HttpPost]
         public FileStreamResult ExtractPdfEntities(EntitiesViewModel model)
@@ -172,8 +176,6 @@
 
             return fileStreamResult;
         }
-
-
 
         public JsonResult AutoCompleteSubFundList(string searchTerm, int entityId)
         {
@@ -203,6 +205,7 @@
                 Entity = this.fundsService.GetActiveFundById(entityId),
                 EntitySubEntities = this.fundsService.GetFund_SubFunds(entityId),
                 ChosenDate = chosenDate,
+                FilesNames = this.fundsFileService.LoadFilesNames(chosenDate),
             };
 
             HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
@@ -217,7 +220,6 @@
             viewModel.Entity = this.fundsService.GetActiveFundById(viewModel.EntityId);
             viewModel.EntitySubEntities = this.fundsService.GetFund_SubFunds(viewModel.EntityId);
             var chosenDate = DateTime.ParseExact(viewModel.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-
 
             if (viewModel.Command.Equals("Update Table"))
             {
@@ -299,7 +301,8 @@
         public FileStream ReadPdfFile(SpecificEntityViewModel model)
         {
             FileStream fs = null;
-            var path = this.fundsFileService.LoadFilePath();
+
+            var path = this.fundsFileService.LoadFilePath(model.FileToDisplay);
 
             if (this.HttpContext.Request.Form.ContainsKey("read_Pdf"))
             {
