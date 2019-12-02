@@ -12,8 +12,8 @@ namespace Pharus.Services.ShareClasses
 
     using Microsoft.Extensions.Configuration;
 
-    using Pharus.Services.Contracts;
     using Pharus.Services.Utilities;
+    using Pharus.Services.ShareClasses.Contracts;
 
     // _____________________________________________________________
     public class ShareClassesService : IShareClassesService

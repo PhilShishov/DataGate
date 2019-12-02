@@ -10,8 +10,10 @@ namespace Pharus.App.Utilities
     using System.Linq;
     using System.Collections.Generic;
 
-    using Pharus.Services.Contracts;
+    using Pharus.Services.Funds.Contracts;
+    using Pharus.Services.SubFunds.Contracts;
     using Pharus.App.Models.ViewModels.Entities;
+    using Pharus.Services.ShareClasses.Contracts;
 
     // _____________________________________________________________
     public class GetAllActiveEntitiesUtility

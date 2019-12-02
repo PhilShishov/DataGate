@@ -4,7 +4,7 @@
     using System.Collections.Generic;
 
     using Pharus.Data;
-    using Pharus.Services.Contracts;
+    using Pharus.Services.Funds.Contracts;
 
     public class FundsSelectListService : IFundsSelectListService
     {

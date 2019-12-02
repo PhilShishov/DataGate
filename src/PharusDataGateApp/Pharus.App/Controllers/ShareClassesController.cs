@@ -8,11 +8,11 @@
     using Microsoft.AspNetCore.Mvc.Rendering;
 
     using Pharus.App.Utilities;
-    using Pharus.Services.Contracts;
     using Pharus.App.Models.ViewModels.Entities;
     using Pharus.App.Models.BindingModels.ShareClasses;
     using System.Globalization;
     using System;
+    using Pharus.Services.ShareClasses.Contracts;
 
     public class ShareClassesController : Controller
     {

@@ -1,6 +1,8 @@
 ﻿namespace Pharus.App.Controllers
 {
+    using System;
     using System.Linq;
+    using System.Globalization;
     using System.Collections.Generic;
 
     using Microsoft.AspNetCore.Mvc;
@@ -9,11 +11,9 @@
 
     using Pharus.Data;
     using Pharus.App.Utilities;
-    using Pharus.Services.Contracts;
+    using Pharus.Services.SubFunds.Contracts;
     using Pharus.App.Models.ViewModels.Entities;
     using Pharus.App.Models.BindingModels.SubFunds;
-    using System;
-    using System.Globalization;
 
     public class SubFundsController : Controller
     {

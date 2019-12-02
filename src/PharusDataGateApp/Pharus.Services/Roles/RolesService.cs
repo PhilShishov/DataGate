@@ -12,7 +12,7 @@ namespace Pharus.Services.Roles
     using Microsoft.AspNetCore.Identity;
 
     using Pharus.Domain.Users;
-    using Pharus.Services.Contracts;
+    using Pharus.Services.Roles.Contracts;
 
     // _____________________________________________________________
     public class RolesService : IRolesService

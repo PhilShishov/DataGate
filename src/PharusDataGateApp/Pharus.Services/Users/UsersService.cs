@@ -10,7 +10,7 @@ namespace Pharus.Services.Users
     using System.Collections.Generic;
 
     using Pharus.Domain;
-    using Pharus.Services.Contracts;
+    using Pharus.Services.Users.Contracts;
 
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
