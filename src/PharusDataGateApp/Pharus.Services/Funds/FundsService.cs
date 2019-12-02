@@ -313,8 +313,9 @@ namespace Pharus.Services.Funds
             }
         }
 
-        public void LoadFile()
+        public string LoadFile()
         {
+            string filePath = string.Empty;
             SqlDataReader dataReader;
             using (SqlConnection connection = new SqlConnection())
             {
@@ -329,10 +330,11 @@ namespace Pharus.Services.Funds
                 {
                     dataReader.Read();
                     //File.Name = (string)dataReader["name"];
-                    File.FilePath = (string)dataReader["FILEPATH"];
+                    filePath = (string)dataReader["FILEPATH"];
                 }
 
                 dataReader.Close();
+                return filePath;
             }
         }
 
