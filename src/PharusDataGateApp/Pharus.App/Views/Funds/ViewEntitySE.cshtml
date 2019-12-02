@@ -12,7 +12,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 }
 
-<form class="justify-content-between" method="post">
+<form asp-controller="Funds" class="justify-content-between" method="post">
 
     <partial name="SpecificEntityUpdatePartial" />
 
@@ -32,10 +32,6 @@
     </div>
 
     <partial name="SpecificEntitySearchPartial" />
-</form>
-
-<form asp-controller="Funds" method="post">
-
     <partial name="ExtractSubEntitiesViewPartial" />
 
     <hr class="bg-pharus hr-2" />
@@ -80,7 +76,6 @@
                     </tbody>
                 </table>
             </div>
-
         </div>
     </div>
 </form>

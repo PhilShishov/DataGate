@@ -23,6 +23,7 @@ namespace Pharus.App.Utilities
     using iText.Layout;
     using iText.IO.Image;
     using iText.Layout.Element;
+    using iText.Layout.Properties;
 
     // _____________________________________________________________
     public class ExtractTable
@@ -102,13 +103,15 @@ namespace Pharus.App.Utilities
         {
             string correctTypeName = GetCorrectTypeName(typeName, controllerName);
 
+            int tableLength = entities[0].Length;
+
             FileStreamResult fileStreamResult;
             Stream stream = new MemoryStream();
             PdfWriter writer = new PdfWriter(stream);
             writer.SetCloseStream(false);
 
             PdfDocument pdfDoc = new PdfDocument(writer);
-            pdfDoc.SetDefaultPageSize(PageSize.A4.Rotate());
+            pdfDoc.SetDefaultPageSize(PageSize.A3.Rotate());
 
             Document document = new Document(pdfDoc);
 
@@ -117,9 +120,11 @@ namespace Pharus.App.Utilities
 
             Image img = new Image(data);
 
-            Table table = new Table(entities[0].Length);
+            Table table = new Table(tableLength);
+
+            table.SetWidth(UnitValue.CreatePercentValue(100));
+            //table.SetFixedLayout();
             table.SetFontSize(10);
-            table.SetWidth(PageSize.A4.GetWidth());
 
             for (int row = 0; row < 1; row++)
             {
@@ -132,6 +137,7 @@ namespace Pharus.App.Utilities
                     }
 
                     Cell cell = new Cell();
+                    cell.SetWidth(UnitValue.CreatePercentValue(50));
                     cell.Add(new Paragraph(s));
                     cell.SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER);
                     cell.SetBold();
