@@ -117,5 +117,45 @@ namespace Pharus.Services.ShareClasses
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
         }
+
+        public List<string[]> GetShareClass_SubFundContainer(int id)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                Dictionary<int, string> funds = new Dictionary<int, string>();
+
+                command.CommandText = $"select * from fn_SubfundForShareclassAtDate('{this.defaultDate}', {id})";
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
+        public List<string[]> GetShareClass_SubFundContainer(DateTime? chosenDate, int id)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                Dictionary<int, string> funds = new Dictionary<int, string>();
+
+                if (chosenDate == null)
+                {
+                    command.CommandText = $"select * from fn_SubfundForShareclassAtDate('{this.defaultDate}', {id})";
+                }
+
+                else
+                {
+                    command.CommandText = $"select * from fn_SubfundForShareclassAtDate('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                }
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
     }
 }

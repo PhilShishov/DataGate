@@ -14,5 +14,9 @@
         List<string[]> GetActiveShareClassById(DateTime? chosenDate, int id);
 
         List<string[]> GetActiveShareClassWithDateById(int id);
+
+        List<string[]> GetShareClass_SubFundContainer(int id);
+
+        List<string[]> GetShareClass_SubFundContainer(DateTime? chosenDate, int id);
     }
 }

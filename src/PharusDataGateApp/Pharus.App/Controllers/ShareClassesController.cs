@@ -122,6 +122,7 @@
             {
                 EntityId = entityId,
                 Entities = this.shareClassesService.GetActiveShareClassById(entityId),
+                BaseEntityName = this.shareClassesService.GetShareClass_SubFundContainer(entityId)[1][1],
             };
 
             return this.View(viewModel);
