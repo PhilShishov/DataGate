@@ -149,21 +149,7 @@
             return fileStreamResult;
         }
 
-        [HttpPost]
-        public FileStreamResult ExtractExcelSubEntities(SpecificEntityViewModel model)
-        {
-            FileStreamResult fileStreamResult = null;
-
-            string typeName = model.GetType().Name;
-            string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
-
-            if (this.HttpContext.Request.Form.ContainsKey("extract_Excel"))
-            {
-                fileStreamResult = ExtractTable.ExtractTableAsExcel(model.EntitySubEntities, typeName, controllerName);
-            }
-
-            return fileStreamResult;
-        }
+        
 
         [HttpPost]
         public FileStreamResult ExtractPdfEntities(EntitiesViewModel model)
@@ -183,24 +169,7 @@
             return fileStreamResult;
         }
 
-        [HttpPost]
-        public FileStreamResult ExtractPdfSubEntities(SpecificEntityViewModel model)
-        {
-            FileStreamResult fileStreamResult = null;
-
-            var chosenDate = DateTime.Parse(model.ChosenDate);
-
-            string typeName = model.GetType().Name;
-            string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
-
-            if (this.HttpContext.Request.Form.ContainsKey("extract_Pdf"))
-            {
-                fileStreamResult = ExtractTable
-                    .ExtractTableAsPdf(model.EntitySubEntities, chosenDate, this.hostingEnvironment, typeName, controllerName);
-            }
-
-            return fileStreamResult;
-        }
+       
 
         public JsonResult AutoCompleteSubFundList(string searchTerm, int entityId)
         {
@@ -285,6 +254,54 @@
             }
 
             return this.View();
+        }
+
+        [HttpPost]
+        public FileStreamResult ExtractExcelSubEntities(SpecificEntityViewModel model)
+        {
+            FileStreamResult fileStreamResult = null;
+
+            string typeName = model.GetType().Name;
+            string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+
+            if (this.HttpContext.Request.Form.ContainsKey("extract_Excel"))
+            {
+                fileStreamResult = ExtractTable.ExtractTableAsExcel(model.EntitySubEntities, typeName, controllerName);
+            }
+
+            return fileStreamResult;
+        }
+
+        [HttpPost]
+        public FileStreamResult ExtractPdfSubEntities(SpecificEntityViewModel model)
+        {
+            FileStreamResult fileStreamResult = null;
+
+            var chosenDate = DateTime.Parse(model.ChosenDate);
+
+            string typeName = model.GetType().Name;
+            string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+
+            if (this.HttpContext.Request.Form.ContainsKey("extract_Pdf"))
+            {
+                fileStreamResult = ExtractTable
+                    .ExtractTableAsPdf(model.EntitySubEntities, chosenDate, this.hostingEnvironment, typeName, controllerName);
+            }
+
+            return fileStreamResult;
+        }
+
+        //[HttpPost]
+        public FileStreamResult DownloadFile(SpecificEntityViewModel model)
+        {
+            FileStreamResult fileStreamResult = null; 
+
+            if (this.HttpContext.Request.Form.ContainsKey("download_Pdf"))
+            {
+                this.fundsService.LoadFile();                    
+            }
+
+            return fileStreamResult;
         }
 
         [HttpGet("Funds/EditFund/{EntityId}")]
