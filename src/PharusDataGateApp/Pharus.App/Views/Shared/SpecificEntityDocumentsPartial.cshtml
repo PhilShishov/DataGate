@@ -1,5 +1,13 @@
-﻿
+﻿@{
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
 <p>List of prospectus</p>
-<a href="#bottomOfPage">Document prospectus</a>
+<button class="btn-link"
+        type="submit"
+        formaction="/@controllerName/DownloadFile"
+        name="download_Pdf"> Document Prospectus
+</button>
+
 <p>List of agreements</p>
 <a href="#bottomOfPage">Document manco offer</a>

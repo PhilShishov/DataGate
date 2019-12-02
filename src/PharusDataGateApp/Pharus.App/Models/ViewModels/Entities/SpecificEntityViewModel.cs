@@ -28,5 +28,7 @@ namespace Pharus.App.Models.ViewModels.Entities
         // with table data from DB
         // for a specific entity sub entities
         public List<string[]> EntitySubEntities { get; set; }
+
+        public List<string[]> EntityTimeline { get; set; }
     }
 }

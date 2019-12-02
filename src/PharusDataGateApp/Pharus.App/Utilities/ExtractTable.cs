@@ -111,7 +111,12 @@ namespace Pharus.App.Utilities
             writer.SetCloseStream(false);
 
             PdfDocument pdfDoc = new PdfDocument(writer);
-            pdfDoc.SetDefaultPageSize(PageSize.A2.Rotate());
+
+            // Funds table format settings
+            pdfDoc.SetDefaultPageSize(PageSize.A3.Rotate());
+
+            // SubFunds table format settings
+            // ShareClasses table format settings
 
             Document document = new Document(pdfDoc);
 

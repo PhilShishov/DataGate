@@ -36,45 +36,88 @@
 
     <hr class="bg-pharus hr-2" />
 
-    <div class="dropdown pt-5">
-        <button type="button" class="dropdown-btn maxw-270">
-            SubFunds<i class="fa fa-caret-down"></i>
-        </button>
-        <div id="myDropdown" class="dropdown-container">
+    <div class="d-flex">
+        <div class="dropdown pt-5 mr-5">
+            <button type="button" class="dropdown-btn maxw-270">
+                SUBFUNDS<i class="fa fa-caret-down"></i>
+            </button>
+            <div id="myDropdown" class="dropdown-container">
 
-            <partial name="EntitySubEntitiesBindingTablePartial" />
+                <partial name="EntitySubEntitiesBindingTablePartial" />
 
-            <div class="table-responsive border-0 mx-auto" id="tableDoubleScroll">
-                <table class="table table-hover" name="EntitySubEntities">
-                    <thead>
-                        <tr>
-                            @for (int row = 0; row < 1; row++)
-                            {
-                                @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
+                <div class="table-responsive border-0 mx-auto" id="tableDoubleScroll">
+                    <table class="table table-hover" name="EntitySubEntities">
+                        <thead>
+                            <tr>
+                                @for (int row = 0; row < 1; row++)
                                 {
-                                    <th class="text-secondary p-1">
-                                        <h5>
-                                            @Model.EntitySubEntities[row][col]
-                                        </h5>
-                                    </th>
-                                }
-                            }
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @for (int row = 1; row < Model.EntitySubEntities.Count; row++)
-                        {
-                            <tr class="tableRowPharus" onclick="document.location = '/SubFunds/ViewEntitySE/@Model.EntitySubEntities[row][2]'">
-                                @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
-                                {
-                                    <td class="p-1">
-                                        @Model.EntitySubEntities[row][col]
-                                    </td>
+                                    @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
+                                    {
+                                        <th class="text-secondary p-1">
+                                            <h5>
+                                                @Model.EntitySubEntities[row][col]
+                                            </h5>
+                                        </th>
+                                    }
                                 }
                             </tr>
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @for (int row = 1; row < Model.EntitySubEntities.Count; row++)
+                            {
+                                <tr class="tableRowPharus" onclick="document.location = '/SubFunds/ViewEntitySE/@Model.EntitySubEntities[row][2]'">
+                                    @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
+                                    {
+                                        <td class="p-1">
+                                            @Model.EntitySubEntities[row][col]
+                                        </td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="dropdown pt-5 ml-5">
+            <button type="button" class="dropdown-btn maxw-270">
+                TIMELINE CHANGES<i class="fa fa-caret-down"></i>
+            </button>
+            <div id="myDropdown" class="dropdown-container">
+
+                <div class="table-responsive border-0 mx-auto" id="tableDoubleScroll">
+                    <table class="table table-hover" name="EntitySubEntities">
+                        <thead>
+                            <tr>
+                                @for (int row = 0; row < 1; row++)
+                                {
+                                    @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
+                                    {
+                                        <th class="text-secondary p-1">
+                                            <h5>
+                                                @Model.EntitySubEntities[row][col]
+                                            </h5>
+                                        </th>
+                                    }
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int row = 1; row < Model.EntitySubEntities.Count; row++)
+                            {
+                                <tr class="tableRowPharus" onclick="document.location = '/SubFunds/ViewEntitySE/@Model.EntitySubEntities[row][2]'">
+                                    @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
+                                    {
+                                        <td class="p-1">
+                                            @Model.EntitySubEntities[row][col]
+                                        </td>
+                                    }
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

@@ -322,16 +322,14 @@ namespace Pharus.Services.Funds
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = "select name, path_locator from [Pharus_File_Development].dbo.FundFile";
+                command.CommandText = "select dbo.[fn_getFilePathFund]('PHARUS SICAV - Prospectus June 2019_VISA.pdf') [FILEPATH]";
 
                 dataReader = command.ExecuteReader();
                 if (dataReader.HasRows)
                 {
                     dataReader.Read();
-                    File.Name = (string)dataReader["name"];
-
-                    // File.FileContent = (byte[])_dataReader[""];
-                    // File.FilePath = (string)_dataReader["path_locator"];
+                    //File.Name = (string)dataReader["name"];
+                    File.FilePath = (string)dataReader["FILEPATH"];
                 }
 
                 dataReader.Close();
@@ -342,9 +340,7 @@ namespace Pharus.Services.Funds
         {
             public static string Name { get; set; }
 
-            public static byte[] FileContent { get; set; }
-
-            // public static string FilePath { get; set; }
+            public static string FilePath { get; set; }
             // public static string Type { get; set; }
             // public static long Length { get; set; }
             // public static string Path { get; set; }
