@@ -142,7 +142,7 @@ namespace Pharus.Services.SubFunds
 
                 Dictionary<int, string> funds = new Dictionary<int, string>();
 
-                command.CommandText = $"select * from [ActivefundForsubfundAtDate]('{this.defaultDate}', {id})";
+                command.CommandText = $"select * from fn_FundForSubfundAtDate('{this.defaultDate}', {id})";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
@@ -160,12 +160,12 @@ namespace Pharus.Services.SubFunds
 
                 if (chosenDate == null)
                 {
-                    command.CommandText = $"select * from [ActivefundForsubfundAtDate]('{this.defaultDate}', {id})";
+                    command.CommandText = $"select * from fn_FundForSubfundAtDate('{this.defaultDate}', {id})";
                 }
 
                 else
                 {
-                    command.CommandText = $"select * from [ActivefundForsubfundAtDate]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                    command.CommandText = $"select * from fn_FundForSubfundAtDate('{chosenDate?.ToString("yyyyMMdd")}', {id})";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);

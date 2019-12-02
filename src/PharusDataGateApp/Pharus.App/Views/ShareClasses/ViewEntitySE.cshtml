@@ -6,6 +6,10 @@
 
 <form class="justify-content-between" method="post">
 
+    <div class="d-flex m-1 pr-3">
+        <p>SUBFUND CONTAINER :</p> <p class="text-torshia font-weight-bold">@Model.BaseEntityName</p>
+    </div>
+
     <div class="w-100 flex-wrap my-5">
         <label for="date"
                class="text-torshia m-1 pr-3">SELECT DATE:</label>
@@ -22,7 +26,7 @@
 
     <div class="d-flex justify-content-between">
 
-        <div class="table-responsive border-0 w-35" id="tableDoubleScroll">
+        <div class="table-responsive border-0 w-35">
             <table class="table table-hover">
                 <tbody>
                     @for (int row = 1; row < Model.Entities.Count; row++)
@@ -60,15 +64,3 @@
         </div>
     </div>
 </form>
-
-@section Scripts
-        {
-    <script type="text/javascript" src="~/js/jquery.doubleScroll.js"></script>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('.double-scroll').doubleScroll();
-            $('#tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
-        });
-    </script>
-}
