@@ -49,6 +49,6 @@
                         string leiCode,
                         string regNumber);
 
-        void LoadFile();
+        string LoadFile();
     }
 }

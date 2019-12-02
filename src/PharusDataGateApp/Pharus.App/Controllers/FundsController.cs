@@ -15,6 +15,7 @@
     using Pharus.Services.Contracts;
     using Pharus.App.Models.BindingModels.Funds;
     using Pharus.App.Models.ViewModels.Entities;
+    using System.IO;
 
     [Authorize]
     public class FundsController : Controller
@@ -149,7 +150,7 @@
             return fileStreamResult;
         }
 
-        
+
 
         [HttpPost]
         public FileStreamResult ExtractPdfEntities(EntitiesViewModel model)
@@ -169,7 +170,7 @@
             return fileStreamResult;
         }
 
-       
+
 
         public JsonResult AutoCompleteSubFundList(string searchTerm, int entityId)
         {
@@ -291,17 +292,14 @@
             return fileStreamResult;
         }
 
-        //[HttpPost]
-        public FileStreamResult DownloadFile(SpecificEntityViewModel model)
+        [HttpPost]
+        public FileStream DownloadFile(SpecificEntityViewModel model)
         {
-            FileStreamResult fileStreamResult = null; 
+            var path = this.fundsService.LoadFile();
 
-            if (this.HttpContext.Request.Form.ContainsKey("download_Pdf"))
-            {
-                this.fundsService.LoadFile();                    
-            }
+            FileStream fs = new FileStream(path, FileMode.Open);
 
-            return fileStreamResult;
+            return fs;
         }
 
         [HttpGet("Funds/EditFund/{EntityId}")]
