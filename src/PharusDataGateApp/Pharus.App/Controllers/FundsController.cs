@@ -23,17 +23,20 @@
         private readonly Pharus_vFinaleContext context;
         private readonly IFundsService fundsService;
         private readonly IFundsSelectListService fundsSelectListService;
+        private readonly IFundsFileService fundsFileService;
         private readonly IHostingEnvironment hostingEnvironment;
 
         public FundsController(
             IFundsService fundsService,
             IFundsSelectListService fundsSelectListService,
+            IFundsFileService fundsFileService,
             IHostingEnvironment hostingEnvironment,
             Pharus_vFinaleContext context)
         {
             this.context = context;
             this.fundsService = fundsService;
             this.fundsSelectListService = fundsSelectListService;
+            this.fundsFileService = fundsFileService;
             this.hostingEnvironment = hostingEnvironment;
         }
 
@@ -296,7 +299,7 @@
         public FileStream ReadPdfFile(SpecificEntityViewModel model)
         {
             FileStream fs = null;
-            var path = this.fundsService.LoadFilePath();
+            var path = this.fundsFileService.LoadFilePath();
 
             if (this.HttpContext.Request.Form.ContainsKey("read_Pdf"))
             {
