@@ -311,41 +311,6 @@ namespace Pharus.Services.Funds
                     }
                 }
             }
-        }
-
-        public string LoadFilePath()
-        {
-            string filePath = string.Empty;
-            SqlDataReader dataReader;
-            using (SqlConnection connection = new SqlConnection())
-            {
-                connection.ConnectionString = DbConfiguration.ConnectionStringPharusFiles;
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-
-                command.CommandText = "select dbo.[fn_getFilePathFund]('PHARUS SICAV - Prospectus June 2019_VISA.pdf') [FILEPATH]";
-
-                dataReader = command.ExecuteReader();
-                if (dataReader.HasRows)
-                {
-                    dataReader.Read();
-                    //File.Name = (string)dataReader["name"];
-                    filePath = (string)dataReader["FILEPATH"];
-                }
-
-                dataReader.Close();
-                return filePath;
-            }
-        }
-
-        public static class File
-        {
-            public static string Name { get; set; }
-
-            public static string FilePath { get; set; }
-            // public static string Type { get; set; }
-            // public static long Length { get; set; }
-            // public static string Path { get; set; }
-        }
+        }      
     }
 }
