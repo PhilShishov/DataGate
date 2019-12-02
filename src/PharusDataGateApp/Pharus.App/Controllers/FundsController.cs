@@ -1,6 +1,7 @@
 ﻿namespace Pharus.App.Controllers
 {
     using System;
+    using System.IO;
     using System.Linq;
     using System.Globalization;
     using System.Collections.Generic;
@@ -12,10 +13,9 @@
 
     using Pharus.Data;
     using Pharus.App.Utilities;
-    using Pharus.Services.Contracts;
+    using Pharus.Services.Funds.Contracts;
     using Pharus.App.Models.BindingModels.Funds;
     using Pharus.App.Models.ViewModels.Entities;
-    using System.IO;
 
     [Authorize]
     public class FundsController : Controller
@@ -293,11 +293,15 @@
         }
 
         [HttpPost]
-        public FileStream DownloadFile(SpecificEntityViewModel model)
+        public FileStream ReadPdfFile(SpecificEntityViewModel model)
         {
-            var path = this.fundsService.LoadFile();
+            FileStream fs = null;
+            var path = this.fundsService.LoadFilePath();
 
-            FileStream fs = new FileStream(path, FileMode.Open);
+            if (this.HttpContext.Request.Form.ContainsKey("read_Pdf"))
+            {
+                fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+            }
 
             return fs;
         }

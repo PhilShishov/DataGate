@@ -10,7 +10,7 @@ namespace Pharus.Services.ShareClasses
     using System.Collections.Generic;
 
     using Pharus.Data;
-    using Pharus.Services.Contracts;
+    using Pharus.Services.ShareClasses.Contracts;
 
     public class ShareClassesSelectListService : IShareClassesSelectListService
     {

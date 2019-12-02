@@ -12,7 +12,8 @@
 
     using Pharus.Domain;
     using Pharus.Domain.Users;
-    using Pharus.Services.Contracts;
+    using Pharus.Services.Users.Contracts;
+    using Pharus.Services.Roles.Contracts;
     using Pharus.App.Models.ViewModels.Users;
     using Pharus.App.Models.BindingModels.Users;
 

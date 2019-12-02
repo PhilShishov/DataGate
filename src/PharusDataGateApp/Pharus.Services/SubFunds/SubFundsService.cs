@@ -10,10 +10,10 @@ namespace Pharus.Services.SubFunds
     using System.Data.SqlClient;
     using System.Collections.Generic;
 
-    using Microsoft.Extensions.Configuration;
-
     using Pharus.Services.Utilities;
-    using Pharus.Services.Contracts;
+    using Pharus.Services.SubFunds.Contracts;
+
+    using Microsoft.Extensions.Configuration;
 
     // _____________________________________________________________
     public class SubFundsService : ISubFundsService

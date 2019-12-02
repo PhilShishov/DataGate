@@ -10,7 +10,7 @@ namespace Pharus.Services.SubFunds
     using System.Collections.Generic;
 
     using Pharus.Data;
-    using Pharus.Services.Contracts;
+    using Pharus.Services.SubFunds.Contracts;
 
     public class SubFundsSelectListService : ISubFundsSelectListService
     {

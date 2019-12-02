@@ -15,8 +15,8 @@ namespace Pharus.Services.Funds
     using Microsoft.Extensions.Configuration;
 
     using Pharus.Data;
-    using Pharus.Services.Contracts;
     using Pharus.Services.Utilities;
+    using Pharus.Services.Funds.Contracts;
 
     // _____________________________________________________________
     public class FundsService : IFundsService
@@ -313,7 +313,7 @@ namespace Pharus.Services.Funds
             }
         }
 
-        public string LoadFile()
+        public string LoadFilePath()
         {
             string filePath = string.Empty;
             SqlDataReader dataReader;
