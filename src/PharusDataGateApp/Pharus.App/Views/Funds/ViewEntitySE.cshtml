@@ -129,7 +129,7 @@
         $(document).ready(function () {
 
             let url = "/Funds/AutoCompleteSubFundList";
-            var entityId = @HttpContextAccessor.HttpContext.Session.GetString("entityId");
+            let entityId = @HttpContextAccessor.HttpContext.Session.GetString("entityId");
 
             $("#SearchTerm").select2({
                 placeholder: "Select Sub Funds",

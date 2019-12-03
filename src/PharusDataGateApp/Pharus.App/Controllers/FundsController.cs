@@ -49,7 +49,6 @@
                 IsActive = true,
                 ChosenDate = DateTime.Today.ToString("yyyy-MM-dd"),
             };
-
             GetAllActiveEntitiesUtility.GetAllActiveFundsWithHeaders(model, this.fundsService);
 
             return this.View(model);
@@ -137,11 +136,16 @@
             return this.RedirectToPage("/Funds/All");
         }
 
-        [HttpGet]
-        public ActionResult Success()
-        {
-            return RedirectToAction("All");
-        }
+        //[HttpGet]
+        //public ActionResult Success(EntitiesViewModel model)
+        //{
+        //    if (model == null)
+        //    {
+        //        return RedirectToAction("All");
+        //    }
+
+        //    return this.View(model);
+        //}
 
         [HttpPost]
         public FileStreamResult ExtractExcelEntities(EntitiesViewModel model)
@@ -205,8 +209,10 @@
                 Entity = this.fundsService.GetActiveFundById(entityId),
                 EntitySubEntities = this.fundsService.GetFund_SubFunds(entityId),
                 ChosenDate = chosenDate,
-                FilesNames = this.fundsFileService.LoadFilesNames(chosenDate),
+                FileToDisplay = this.fundsFileService.LoadFileToDisplay(entityId, chosenDate),
             };
+
+            viewModel.FileToDisplay.Split("/")
 
             HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
 
@@ -302,7 +308,7 @@
         {
             FileStream fs = null;
 
-            var path = this.fundsFileService.LoadFilePath(model.FileToDisplay);
+            var path = this.fundsFileService.LoadFileToDisplay(model.EntityId, model.ChosenDate);
 
             if (this.HttpContext.Request.Form.ContainsKey("read_Pdf"))
             {
