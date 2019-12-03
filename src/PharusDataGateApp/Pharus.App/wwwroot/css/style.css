@@ -15,7 +15,7 @@
     color: #FFFFFF;
 }
 
-.text-right{
+.text-right {
     margin-left: auto;
 }
 
@@ -27,10 +27,10 @@ a {
     text-rendering: unset;
 }
 
-a:hover {
-    outline: none;
-    text-decoration: none;
-}
+    a:hover {
+        outline: none;
+        text-decoration: none;
+    }
 
 tr {
     margin-right: 0 !important;
@@ -46,4 +46,11 @@ footer {
     bottom: 0;
     border: 0;
     width: 98%;
+}
+
+body {
+    background-image: url('../images/Background_Pharus.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: auto;
 }
