@@ -2,8 +2,9 @@
 {
     using System;
     using System.Data.SqlClient;
+
     using Microsoft.Extensions.Configuration;
-    using Pharus.Data;
+
     using Pharus.Services.Funds.Contracts;
 
     public class FundsFileService : IFundsFileService
