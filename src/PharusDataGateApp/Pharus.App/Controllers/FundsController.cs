@@ -203,7 +203,7 @@
         [Route("Funds/ViewEntitySE/{EntityId}/{ChosenDate}")]
         public IActionResult ViewEntitySE(int entityId, string chosenDate)
         {
-            string fileName = this.fundsFileService.LoadFileToDisplay(entityId, chosenDate).Split('\\').Last();
+            string fileName = GetFileNameFromFilePath(entityId, chosenDate);
 
             SpecificEntityViewModel viewModel = new SpecificEntityViewModel
             {
@@ -217,7 +217,7 @@
             HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
 
             return this.View(viewModel);
-        }
+        }       
 
         [HttpPost]
         [Route("Funds/ViewEntitySE/{EntityId}/{ChosenDate}")]
@@ -225,6 +225,8 @@
         {
             viewModel.Entity = this.fundsService.GetActiveFundById(viewModel.EntityId);
             viewModel.EntitySubEntities = this.fundsService.GetFund_SubFunds(viewModel.EntityId);
+            viewModel.FileNameToDisplay = GetFileNameFromFilePath(viewModel.EntityId, viewModel.ChosenDate);
+
             var chosenDate = DateTime.ParseExact(viewModel.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
             if (viewModel.Command.Equals("Update Table"))
@@ -462,6 +464,11 @@
             this.ViewData["LegalTypeList"] = this.fundsSelectListService.GetAllTbDomLegalType();
             this.ViewData["CompanyTypeDescList"] = this.fundsSelectListService.GetAllTbDomCompanyDesc();
             this.ViewData["CompanyAcronymList"] = this.fundsSelectListService.GetAllTbDomCompanyAcronym();
+        }
+
+        private string GetFileNameFromFilePath(int entityId, string chosenDate)
+        {
+            return this.fundsFileService.LoadFileToDisplay(entityId, chosenDate).Split('\\').Last();
         }
     }
 }
