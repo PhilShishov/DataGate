@@ -75,7 +75,7 @@
                                 </li>
                                 <li class="dropdown pt-5">
                                     <button class="dropdown-btn"
-                                            id="dr-btn-funds">
+                                            name="dr-btn-SideNav">
                                         Funds<i class="fa fa-caret-down"></i>
                                     </button>
                                     <div id="myDropdown" class="dropdown-container">
@@ -90,7 +90,8 @@
                                 </li>
 
                                 <li class="dropdown">
-                                    <button class="dropdown-btn">
+                                    <button class="dropdown-btn"
+                                            name="dr-btn-SideNav">
                                         SubFunds<i class="fa fa-caret-down"></i>
                                     </button>
                                     <div id="myDropdown" class="dropdown-container">
@@ -104,7 +105,8 @@
                                     </div>
                                 </li>
                                 <li class="dropdown">
-                                    <button class="dropdown-btn">
+                                    <button class="dropdown-btn"
+                                            name="dr-btn-SideNav">
                                         ShareClasses<i class="fa fa-caret-down"></i>
                                     </button>
                                     <div id="myDropdown" class="dropdown-container">
@@ -171,12 +173,14 @@
             //const oldWindowOnLoad = window.onload || function () { };
             window.onload = () => {
                 manageSideNavBar();
+                manageDropdowns();
                 //loadDate();
             }
         </script>
 
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="~/js/manageSideNavBar.js"></script>
+        <script src="~/js/manageDropdowns.js"></script>
         <script src="~/js/loadDate.js"></script>
         <script src="~/js/getDerivatives.js"></script>
         <script src="~/js/inputValueToUpperCase.js"></script>

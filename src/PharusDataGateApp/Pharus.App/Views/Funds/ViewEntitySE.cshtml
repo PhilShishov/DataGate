@@ -45,15 +45,20 @@
 
     <div class="d-flex">
         <div class="dropdown pt-5 mr-5">
-            <button type="button" class="dropdown-btn maxw-270">
+            <button type="button" 
+                    class="dropdown-btn maxw-270"
+                    name="dr-btn-SubEntities">
                 SUBFUNDS<i class="fa fa-caret-down"></i>
             </button>
-            <div id="myDropdown" class="dropdown-container">
+            <div id="myDropdown" 
+                 class="dropdown-container">
 
                 <partial name="EntitySubEntitiesBindingTablePartial" />
 
-                <div class="table-responsive border-0 mx-auto" id="tableDoubleScroll">
-                    <table class="table table-hover" name="EntitySubEntities">
+                <div class="table-responsive border-0 mx-auto" 
+                     id="tableDoubleScroll">
+                    <table class="table table-hover" 
+                           name="EntitySubEntities">
                         <thead>
                             <tr>
                                 @for (int row = 0; row < 1; row++)
@@ -88,13 +93,18 @@
         </div>
 
         <div class="dropdown pt-5 ml-5">
-            <button type="button" class="dropdown-btn maxw-270">
+            <button type="button" 
+                    class="dropdown-btn maxw-270"
+                    name="dr-btn-SubEntities">
                 TIMELINE CHANGES<i class="fa fa-caret-down"></i>
             </button>
-            <div id="myDropdown" class="dropdown-container">
+            <div id="myDropdown" 
+                 class="dropdown-container">
 
-                <div class="table-responsive border-0 mx-auto" id="tableDoubleScroll">
-                    <table class="table table-hover" name="EntitySubEntities">
+                <div class="table-responsive border-0 mx-auto" 
+                     id="tableDoubleScroll">
+                    <table class="table table-hover" 
+                           name="EntitySubEntities">
                         <thead>
                             <tr>
                                 @for (int row = 0; row < 1; row++)
