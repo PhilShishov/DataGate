@@ -33,6 +33,6 @@ namespace Pharus.App.Models.ViewModels.Entities
 
         public List<string> FilesNames { get; set; }
 
-        public string FileToDisplay { get; set; }
+        public string FileNameToDisplay { get; set; }
     }
 }

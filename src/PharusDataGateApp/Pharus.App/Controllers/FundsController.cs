@@ -203,16 +203,16 @@
         [Route("Funds/ViewEntitySE/{EntityId}/{ChosenDate}")]
         public IActionResult ViewEntitySE(int entityId, string chosenDate)
         {
+            string fileName = this.fundsFileService.LoadFileToDisplay(entityId, chosenDate).Split('\\').Last();
+
             SpecificEntityViewModel viewModel = new SpecificEntityViewModel
             {
                 EntityId = entityId,
                 Entity = this.fundsService.GetActiveFundById(entityId),
                 EntitySubEntities = this.fundsService.GetFund_SubFunds(entityId),
                 ChosenDate = chosenDate,
-                FileToDisplay = this.fundsFileService.LoadFileToDisplay(entityId, chosenDate),
+                FileNameToDisplay = fileName,
             };
-
-            viewModel.FileToDisplay.Split("/")
 
             HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
 
