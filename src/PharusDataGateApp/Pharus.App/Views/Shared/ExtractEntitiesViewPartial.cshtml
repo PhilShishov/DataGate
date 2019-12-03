@@ -1,32 +1,21 @@
-﻿@{ 
-   var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+﻿@{
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
 }
 
-    <div class="button-holder d-flex justify-content-center my-5">
-        <button class="extractbtn"
-                type="submit"
-                formaction="/@controllerName/ExtractExcelEntities"
-                name="extract_Excel">
-            <img src="~/images/Icon_Excel.ico"
-                 width="35"
-                 height="35" />
-        </button>
+<button class="extractbtn"
+        type="submit"
+        formaction="/@controllerName/ExtractExcelEntities"
+        name="extract_Excel">
+    <img src="~/images/Icon_Excel.ico"
+         width="35"
+         height="35" />
+</button>
 
-        <button class="extractbtn mr-5"
-                type="submit"
-                formaction="/@controllerName/ExtractPdfEntities"
-                name="extract_Pdf">
-            <img src="~/images/Icon_Pdf.ico"
-                 width="35"
-                 height="35" />
-        </button>
-
-        <button class="viewbtn ml-5"
-                type="submit"
-                formaction="/@controllerName/ExtractPdfEntities"
-                name="extract_Pdf">
-            <img src="~/images/ColumnSelection_Pharus.jpg"
-                 width="35"
-                 height="35" />
-        </button>
-    </div>
+<button class="extractbtn mr-5"
+        type="submit"
+        formaction="/@controllerName/ExtractPdfEntities"
+        name="extract_Pdf">
+    <img src="~/images/Icon_Pdf.ico"
+         width="35"
+         height="35" />
+</button>
