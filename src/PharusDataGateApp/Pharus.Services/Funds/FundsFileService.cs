@@ -9,8 +9,7 @@
 
     public class FundsFileService : IFundsFileService
     {
-        private readonly string defaultDate = DateTime.Today.ToString("yyyyMMdd");
-        private readonly int fileTypeProspectus = 2;
+        private const int fileTypeProspectus = 2;
 
         private readonly IConfiguration configuration;
 
@@ -37,15 +36,19 @@
                 command.CommandText = $"select [dbo].[fn_getSpecificFilepath_filefund]( {fundId},'{chosenDate}',{fileTypeProspectus}) [FILEPATH]";
 
                 dataReader = command.ExecuteReader();
+
                 if (dataReader.HasRows)
                 {
                     dataReader.Read();
-                    filePath = (string)dataReader["FILEPATH"];
+                    if (!dataReader.IsDBNull(0))
+                    {
+                        filePath = (string)dataReader["FILEPATH"];
+                    }
                 }
 
                 dataReader.Close();
                 return filePath;
             }
-        }        
+        }
     }
 }
