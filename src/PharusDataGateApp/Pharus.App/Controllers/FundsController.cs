@@ -203,18 +203,24 @@
         [Route("Funds/ViewEntitySE/{EntityId}/{ChosenDate}")]
         public IActionResult ViewEntitySE(int entityId, string chosenDate)
         {
-            string fileName = GetFileNameFromFilePath(entityId, chosenDate);
-
             SpecificEntityViewModel viewModel = new SpecificEntityViewModel
             {
                 EntityId = entityId,
                 Entity = this.fundsService.GetActiveFundById(entityId),
                 EntitySubEntities = this.fundsService.GetFund_SubFunds(entityId),
                 ChosenDate = chosenDate,
-                FileNameToDisplay = fileName,
             };
 
             HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
+
+            string fileName = GetFileNameFromFilePath(entityId, chosenDate);
+
+            if (string.IsNullOrEmpty(fileName))
+            {
+                return this.View(viewModel);
+            }
+
+            viewModel.FileNameToDisplay = fileName;
 
             return this.View(viewModel);
         }       

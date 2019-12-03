@@ -44,6 +44,9 @@
                     {
                         filePath = (string)dataReader["FILEPATH"];
                     }
+
+                    // Throw exception for null columns
+
                 }
 
                 dataReader.Close();
