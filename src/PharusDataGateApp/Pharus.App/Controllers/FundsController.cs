@@ -89,7 +89,7 @@
                     }
                     else
                     {
-                        model.Entities = this.fundsService.GetAllActiveFunds(chosenDate);
+                        model.Entities = this.fundsService.GetAllFunds(chosenDate);
                     }
                 }
             }
@@ -102,7 +102,7 @@
 
                 model.Entities = new List<string[]>();
                 var tableHeaders = this.fundsService
-                    .GetAllActiveFunds(chosenDate)
+                    .GetAllFunds(chosenDate)
                     .Take(1)
                     .ToList();
                 List<string[]> tableFundsWithoutHeaders = null;
@@ -110,7 +110,7 @@
                 if (model.IsActive)
                 {
                     tableFundsWithoutHeaders = this.fundsService
-                        .GetAllActiveFunds(chosenDate)
+                        .GetAllFunds(chosenDate)
                         .Skip(1)
                         .Where(f => f.Contains("Active"))
                         .ToList();
@@ -118,7 +118,7 @@
                 else
                 {
                     tableFundsWithoutHeaders = this.fundsService
-                        .GetAllActiveFunds()
+                        .GetAllFunds()
                         .Skip(1)
                         .ToList();
                 }
@@ -206,7 +206,7 @@
             SpecificEntityViewModel viewModel = new SpecificEntityViewModel
             {
                 EntityId = entityId,
-                Entity = this.fundsService.GetActiveFundById(entityId),
+                Entity = this.fundsService.GetFundById(entityId),
                 EntitySubEntities = this.fundsService.GetFund_SubFunds(entityId),
                 ChosenDate = chosenDate,
             };
@@ -229,7 +229,7 @@
         [Route("Funds/ViewEntitySE/{EntityId}/{ChosenDate}")]
         public IActionResult ViewEntitySE(SpecificEntityViewModel viewModel)
         {
-            viewModel.Entity = this.fundsService.GetActiveFundById(viewModel.EntityId);
+            viewModel.Entity = this.fundsService.GetFundById(viewModel.EntityId);
             viewModel.EntitySubEntities = this.fundsService.GetFund_SubFunds(viewModel.EntityId);
             viewModel.FileNameToDisplay = GetFileNameFromFilePath(viewModel.EntityId, viewModel.ChosenDate);
 
@@ -240,7 +240,7 @@
                 if (viewModel.ChosenDate != null)
                 {
                     viewModel.Entity = this.fundsService
-                        .GetActiveFundById(chosenDate, viewModel.EntityId);
+                        .GetFundById(chosenDate, viewModel.EntityId);
                     viewModel.EntitySubEntities = this.fundsService
                         .GetFund_SubFunds(chosenDate, viewModel.EntityId);
                 }
@@ -331,7 +331,7 @@
         {
             EditFundBindingModel model = new EditFundBindingModel
             {
-                EntityProperties = this.fundsService.GetActiveFundWithDateById(entityId),
+                EntityProperties = this.fundsService.GetFundWithDateById(entityId),
                 ChosenDate = DateTime.Today,
                 FId = entityId,
             };

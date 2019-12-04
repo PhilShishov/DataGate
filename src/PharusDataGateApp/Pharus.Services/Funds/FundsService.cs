@@ -14,7 +14,6 @@ namespace Pharus.Services.Funds
 
     using Microsoft.Extensions.Configuration;
 
-    using Pharus.Data;
     using Pharus.Services.Utilities;
     using Pharus.Services.Funds.Contracts;
 
@@ -37,7 +36,7 @@ namespace Pharus.Services.Funds
         //
         // Retrieve query table DB based entities
         // with table functions
-        public List<string[]> GetAllActiveFunds()
+        public List<string[]> GetAllFunds()
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -51,7 +50,7 @@ namespace Pharus.Services.Funds
             }
         }
 
-        public List<string[]> GetAllActiveFunds(DateTime? chosenDate)
+        public List<string[]> GetAllFunds(DateTime? chosenDate)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -72,7 +71,7 @@ namespace Pharus.Services.Funds
             }
         }
 
-        public List<string[]> GetActiveFundById(int id)
+        public List<string[]> GetFundById(int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -86,7 +85,7 @@ namespace Pharus.Services.Funds
             }
         }
 
-        public List<string[]> GetActiveFundById(DateTime? chosenDate, int id)
+        public List<string[]> GetFundById(DateTime? chosenDate, int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -107,7 +106,7 @@ namespace Pharus.Services.Funds
             }
         }
 
-        public List<string[]> GetActiveFundWithDateById(int id)
+        public List<string[]> GetFundWithDateById(int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -121,7 +120,7 @@ namespace Pharus.Services.Funds
             }
         }
 
-        public List<string[]> GetActiveFundWithDateById(DateTime? chosenDate, int id)
+        public List<string[]> GetFundWithDateById(DateTime? chosenDate, int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {
