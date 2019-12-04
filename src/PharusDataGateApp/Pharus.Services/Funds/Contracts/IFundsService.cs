@@ -3,21 +3,19 @@
     using System;
     using System.Collections.Generic;
 
-    using Pharus.Domain.Pharus_vFinale;
-
     public interface IFundsService
     {
-        List<string[]> GetAllActiveFunds();
+        List<string[]> GetAllFunds();
 
-        List<string[]> GetAllActiveFunds(DateTime? chosenDate);
+        List<string[]> GetAllFunds(DateTime? chosenDate);
 
-        List<string[]> GetActiveFundById(int id);
+        List<string[]> GetFundById(int id);
 
-        List<string[]> GetActiveFundById(DateTime? chosenDate, int id);
+        List<string[]> GetFundById(DateTime? chosenDate, int id);
 
-        List<string[]> GetActiveFundWithDateById(int id);
+        List<string[]> GetFundWithDateById(int id);
 
-        List<string[]> GetActiveFundWithDateById(DateTime? chosenDate, int id);
+        List<string[]> GetFundWithDateById(DateTime? chosenDate, int id);
 
         List<string[]> GetFund_SubFunds(int id);
 

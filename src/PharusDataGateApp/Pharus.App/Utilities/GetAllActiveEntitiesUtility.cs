@@ -28,11 +28,11 @@ namespace Pharus.App.Utilities
             model.Entities = new List<string[]>();
 
             var tableHeaders = fundsService
-                .GetAllActiveFunds()
+                .GetAllFunds()
                 .Take(1)
                 .ToList();
             var tableFundsWithoutHeaders = fundsService
-                .GetAllActiveFunds()
+                .GetAllFunds()
                 .Skip(1)
                 .ToList()
                 .Where(f => f.Contains("Active"))
