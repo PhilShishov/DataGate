@@ -105,11 +105,11 @@
                     .GetAllFunds(chosenDate)
                     .Take(1)
                     .ToList();
-                List<string[]> tableFundsWithoutHeaders = null;
+                List<string[]> tableWithoutHeaders = null;
 
                 if (model.IsActive)
                 {
-                    tableFundsWithoutHeaders = this.fundsService
+                    tableWithoutHeaders = this.fundsService
                         .GetAllFunds(chosenDate)
                         .Skip(1)
                         .Where(f => f.Contains("Active"))
@@ -117,7 +117,7 @@
                 }
                 else
                 {
-                    tableFundsWithoutHeaders = this.fundsService
+                    tableWithoutHeaders = this.fundsService
                         .GetAllFunds()
                         .Skip(1)
                         .ToList();
@@ -125,7 +125,7 @@
 
                 CreateTableView.AddHeadersToView(model.Entities, tableHeaders);
 
-                CreateTableView.AddTableToView(model.Entities, tableFundsWithoutHeaders, model.SearchTerm.ToLower());
+                CreateTableView.AddTableToView(model.Entities, tableWithoutHeaders, model.SearchTerm.ToLower());
             }
 
             if (model.Entities != null)
@@ -223,7 +223,7 @@
             viewModel.FileNameToDisplay = fileName;
 
             return this.View(viewModel);
-        }       
+        }
 
         [HttpPost]
         [Route("Funds/ViewEntitySE/{EntityId}/{ChosenDate}")]
@@ -326,6 +326,7 @@
             return fs;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("Funds/EditFund/{EntityId}")]
         public IActionResult EditFund(int entityId)
         {
@@ -342,6 +343,7 @@
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public IActionResult EditFund(EditFundBindingModel model)
         {
             string returnUrl = "/Funds/All";
@@ -393,6 +395,7 @@
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public IActionResult CreateFund()
         {
             this.ModelState.Clear();
@@ -407,6 +410,7 @@
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public IActionResult CreateFund(CreateFundBindingModel model)
         {

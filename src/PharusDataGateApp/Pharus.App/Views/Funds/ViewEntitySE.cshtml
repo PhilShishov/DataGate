@@ -12,6 +12,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <style>
         body {
+            background-color: antiquewhite;
             background-image: none;
             /*background-repeat: no-repeat;
             background-size: cover;
@@ -45,19 +46,19 @@
 
     <div class="d-flex">
         <div class="dropdown pt-5 mr-5">
-            <button type="button" 
+            <button type="button"
                     class="dropdown-btn maxw-270"
                     name="dr-btn-SubEntities">
                 SUBFUNDS<i class="fa fa-caret-down"></i>
             </button>
-            <div id="myDropdown" 
+            <div id="myDropdown"
                  class="dropdown-container">
 
                 <partial name="EntitySubEntitiesBindingTablePartial" />
 
-                <div class="table-responsive border-0 mx-auto" 
+                <div class="table-responsive border-0 mx-auto"
                      id="tableDoubleScroll">
-                    <table class="table table-hover" 
+                    <table class="table table-hover"
                            name="EntitySubEntities">
                         <thead>
                             <tr>
@@ -93,17 +94,17 @@
         </div>
 
         <div class="dropdown pt-5 ml-5">
-            <button type="button" 
+            <button type="button"
                     class="dropdown-btn maxw-270"
                     name="dr-btn-SubEntities">
                 TIMELINE CHANGES<i class="fa fa-caret-down"></i>
             </button>
-            <div id="myDropdown" 
+            <div id="myDropdown"
                  class="dropdown-container">
 
-                <div class="table-responsive border-0 mx-auto" 
+                <div class="table-responsive border-0 mx-auto"
                      id="tableDoubleScroll">
-                    <table class="table table-hover" 
+                    <table class="table table-hover"
                            name="EntitySubEntities">
                         <thead>
                             <tr>
@@ -171,7 +172,7 @@
         });
     </script>
 
-    <script type="text/javascript" src="~/js/jquery.doubleScroll.js"></script>
+    <script type="text/javascript" src="~/jquery/jquery.doubleScroll.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
