@@ -43,13 +43,48 @@
     <partial name="ExtractSubEntitiesViewPartial" />
     <partial name="EntitySubEntitiesBindingTablePartial" />
 
-    <div class="row w-25 ml-3">
+    <div class="row w-25 ml-3 mb-5">
         <label class="text-torshia m-1 pr-3">FUND ADDITIONAL INFORMATION</label>
         <select class="custom-select-lg pharus-select form-control input-sm" id="fundChoicesSelect" name="fundChoicesSelect">
             <option value="">Select</option>
             <option value="SubFunds">SubFunds</option>
             <option value="TimelineChanges">Timeline Changes</option>
         </select>
+    </div>
+
+    <div class="container py-5 " id="timelineChanges">      
+
+        <div class="row">
+            <div class="col-lg-7 mx-auto">
+
+                <!-- Timeline -->
+                <ul class="timeline">
+                    <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
+                        <div class="timeline-arrow"></div>
+                        <h2 class="h5 mb-0">Title of section 1</h2><span class="small text-gray"><i class="fa fa-clock-o mr-1"></i>21 March, 2019</span>
+                        <p class="text-small mt-2 font-weight-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, et elementum lorem ornare. Maecenas placerat facilisis mollis. Duis sagittis ligula in sodales vehicula....</p>
+                    </li>
+                    <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
+                        <div class="timeline-arrow"></div>
+                        <h2 class="h5 mb-0">Title of section 2</h2><span class="small text-gray"><i class="fa fa-clock-o mr-1"></i>5 April, 2019</span>
+                        <p class="text-small mt-2 font-weight-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper.</p>
+                        <p class="text-small mt-2 font-weight-light">Libero expedita explicabo eius fugiat quia aspernatur autem laudantium error architecto recusandae natus sapiente sit nam eaque, consectetur porro molestiae ipsam! Deleniti.</p>
+                    </li>
+                    <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
+                        <div class="timeline-arrow"></div>
+                        <h2 class="h5 mb-0">Title of section 3</h2><span class="small text-gray"><i class="fa fa-clock-o mr-1"></i>18 August, 2019</span>
+                        <p class="text-small mt-2 font-weight-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, et elementum lorem ornare. Maecenas placerat facilisis mollis. Duis sagittis ligula in sodales vehicula....</p>
+                    </li>
+                    <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
+                        <div class="timeline-arrow"></div>
+                        <h2 class="h5 mb-0">Title of section 4</h2><span class="small text-gray"><i class="fa fa-clock-o mr-1"></i>10 October, 2019</span>
+                        <p class="text-small mt-2 font-weight-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque scelerisque diam non nisi semper, et elementum lorem ornare. Maecenas placerat facilisis mollis. Duis sagittis ligula in sodales vehicula....</p>
+                        <p class="text-small mt-2 font-weight-light">Voluptatibus temporibus esse illum eum aspernatur, fugiat suscipit natus! Eum corporis illum nihil officiis tempore. Excepturi illo natus libero sit doloremque, laborum molestias rerum pariatur quam ipsam necessitatibus incidunt, explicabo.</p>
+                    </li>
+                </ul><!-- End -->
+
+            </div>
+        </div>
     </div>
 
     <div id="subEntities" style="visibility:hidden;">
@@ -92,8 +127,9 @@
     <script>
         $(document).ready(function () {
 
-            let url = "/Funds/AutoCompleteSubFundList";
-            let entityId = @Model.EntityId;
+            const url = "/Funds/AutoCompleteSubFundList";
+            const entityId = @Model.EntityId;
+            const placeholder = @Model.EntityId;
 
             $("#SearchTerm").select2({
                 placeholder: "Select Sub Funds",
@@ -129,11 +165,16 @@
                 var dropdownvalue = $("#fundChoicesSelect option:selected").val();
                 if (dropdownvalue == 'SubFunds') {
                     $("#subEntities").css('visibility', 'visible');
+                     $("#timelineChanges").css('visibility', 'hidden');
+                }
+                else if (dropdownvalue == 'TimelineChanges') {
+                    $("#timelineChanges").css('visibility', 'visible');
+                    $("#subEntities").css('visibility', 'hidden');
                 }
                 else {
                     $("#subEntities").css('visibility', 'hidden');
+                    $("#timelineChanges").css('visibility', 'hidden');
                 }
-
             });
         });
     </script>
