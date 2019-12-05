@@ -21,6 +21,8 @@
 
         List<string[]> GetFund_SubFunds(DateTime? chosenDate, int id);
 
+        List<string[]> GetFundTimeline(int id);
+
         void EditFund(
                              List<string> fundsProperties,
                              int fundId,
