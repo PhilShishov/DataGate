@@ -44,102 +44,99 @@
 
     <hr class="bg-pharus hr-2" />
 
-    <div class="d-flex">
-        <div class="dropdown pt-5 mr-5">
-            <button type="button"
-                    class="dropdown-btn maxw-270"
-                    name="dr-btn-SubEntities">
-                SUBFUNDS<i class="fa fa-caret-down"></i>
-            </button>
-            <div id="myDropdown"
-                 class="dropdown-container">
+    <partial name="EntitySubEntitiesBindingTablePartial" />
 
-                <partial name="EntitySubEntitiesBindingTablePartial" />
 
-                <div class="table-responsive border-0 mx-auto"
-                     id="tableDoubleScroll">
-                    <table class="table table-hover"
-                           name="EntitySubEntities">
-                        <thead>
-                            <tr>
-                                @for (int row = 0; row < 1; row++)
-                                {
-                                    @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
-                                    {
-                                        <th class="text-secondary p-1">
-                                            <h5>
-                                                @Model.EntitySubEntities[row][col]
-                                            </h5>
-                                        </th>
-                                    }
-                                }
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @for (int row = 1; row < Model.EntitySubEntities.Count; row++)
-                            {
-                                <tr class="tableRowPharus" onclick="document.location = '/SubFunds/ViewEntitySE/@Model.EntitySubEntities[row][2]'">
-                                    @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
-                                    {
-                                        <td class="p-1">
-                                            @Model.EntitySubEntities[row][col]
-                                        </td>
-                                    }
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+    @*<div class="row">
+        <div class="col-sm-4">
+            <label>Additional Fund Information</label>
+            <select class="form-control input-sm" id="fundChoicesSelect">
+                <option value="">Select</option>
+                <option value="SubFunds">SubFunds</option>
+                <option value="TimelineChanges">Timeline Changes</option>
+            </select>
         </div>
+    </div>*@
 
-        <div class="dropdown pt-5 ml-5">
-            <button type="button"
-                    class="dropdown-btn maxw-270"
-                    name="dr-btn-SubEntities">
-                TIMELINE CHANGES<i class="fa fa-caret-down"></i>
-            </button>
-            <div id="myDropdown"
-                 class="dropdown-container">
-
-                <div class="table-responsive border-0 mx-auto"
-                     id="tableDoubleScroll">
-                    <table class="table table-hover"
-                           name="EntitySubEntities">
-                        <thead>
-                            <tr>
-                                @for (int row = 0; row < 1; row++)
-                                {
-                                    @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
-                                    {
-                                        <th class="text-secondary p-1">
-                                            <h5>
-                                                @Model.EntitySubEntities[row][col]
-                                            </h5>
-                                        </th>
-                                    }
-                                }
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @for (int row = 1; row < Model.EntitySubEntities.Count; row++)
-                            {
-                                <tr class="tableRowPharus" onclick="document.location = '/SubFunds/ViewEntitySE/@Model.EntitySubEntities[row][2]'">
-                                    @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
-                                    {
-                                        <td class="p-1">
-                                            @Model.EntitySubEntities[row][col]
-                                        </td>
-                                    }
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+    <div id="subEntities" hidden>
+        <table class="table table-borderless table-hover tableDoubleScroll">
+            <thead>
+                <tr>
+                    @for (int row = 0; row < 1; row++)
+                    {
+                        @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
+                        {
+                            <th class="text-secondary p-1">
+                                <h5>
+                                    @Model.EntitySubEntities[row][col]
+                                </h5>
+                            </th>
+                        }
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @for (int row = 1; row < Model.EntitySubEntities.Count; row++)
+                {
+                    <tr class="tableRowPharus" onclick="document.location = '/SubFunds/ViewEntitySE/@Model.EntitySubEntities[row][2]'">
+                        @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
+                        {
+                            <td class="p-1">
+                                @Model.EntitySubEntities[row][col]
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </form>
+
+
+<div class="row">
+    <div class="col-sm-4">
+        <select class="form-control input-sm" id="fundChoicesSelect" name="fundChoicesSelect">
+            <option value="">Select</option>
+            <option value="Funds">Funds</option>
+            <option value="Others">Others</option>
+        </select>
+    </div>
+</div>
+
+<div id="target" style="visibility:hidden;">
+    <table class="table table-bordered table-hover table-responsive text-nowrap tableDoubleScroll">
+        <thead>
+            @for (int row = 0; row < 1; row++)
+            {
+                <tr>
+                    @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
+                    {
+                        <th class="text-secondary p-1">
+                            <h5>
+                                @Model.EntitySubEntities[row][col]
+                            </h5>
+                        </th>
+                    }
+                </tr>
+            }
+        </thead>
+
+        <tbody>
+            @for (int row = 1; row < Model.EntitySubEntities.Count; row++)
+            {
+                <tr>
+                    @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
+                    {
+                        <td class="p-1">
+                            @Model.EntitySubEntities[row][col]
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
 
 @section Scripts{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
@@ -177,7 +174,29 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('.double-scroll').doubleScroll();
-            $('#tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
+            $('.tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
+
+            $("#fundChoicesSelect").on('change', function () {
+                let dropdownvalue = $("#fundChoicesSelect option:selected").val();
+                if (dropdownvalue == 'SubFunds') {
+                    $("#subEntities").css('visibility', 'visible');
+                }
+                else {
+                    $("#subEntities").css('visibility', 'hidden');
+                }
+            });
+
+            $("#fundChoicesSelect").on('change', function () {
+                var dropdownvalue = $("#fundChoicesSelect option:selected").val();
+                if (dropdownvalue == 'Funds') {
+                    $("#target").css('visibility', 'visible');
+                }
+                else {
+                    $("#target").css('visibility', 'hidden');
+                }
+
+            });
         });
+
     </script>
 }
