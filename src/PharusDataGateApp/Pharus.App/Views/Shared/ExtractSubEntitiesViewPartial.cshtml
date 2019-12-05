@@ -2,22 +2,22 @@
     var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
 }
 
-<div class="button-holder d-flex justify-content-center my-5" 
-     id="extractDiv" 
-     hidden>
+<div class="button-holder d-flex justify-content-center my-5">
     <button class="extractbtn"
+            id="extractBtnExl"
             type="submit"
             formaction="/@controllerName/ExtractExcelSubEntities"
-            name="extract_Excel">
+            name="extract_Excel" hidden>
         <img src="~/images/Icon_Excel.ico"
              width="35"
              height="35" />
     </button>
 
     <button class="extractbtn"
+            id="extractBtnPDF"
             type="submit"
             formaction="/@controllerName/ExtractPdfSubEntities"
-            name="extract_Pdf">
+            name="extract_Pdf" hidden>
         <img src="~/images/Icon_Pdf.ico"
              width="35"
              height="35" />
