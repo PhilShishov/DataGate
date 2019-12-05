@@ -174,7 +174,21 @@ namespace Pharus.Services.Funds
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
-        }        
+        }
+
+        public List<string[]> GetFundTimeline(int id)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                command.CommandText = $"select * from dbo.fn_timeline_fund({id})";
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
 
         // ________________________________________________________
         //
@@ -310,6 +324,6 @@ namespace Pharus.Services.Funds
                     }
                 }
             }
-        }      
+        }
     }
 }

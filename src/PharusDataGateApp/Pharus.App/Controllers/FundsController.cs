@@ -137,17 +137,6 @@
             return this.RedirectToPage("/Funds/All");
         }
 
-        //[HttpGet]
-        //public ActionResult Success(EntitiesViewModel model)
-        //{
-        //    if (model == null)
-        //    {
-        //        return RedirectToAction("All");
-        //    }
-
-        //    return this.View(model);
-        //}
-
         [HttpPost]
         public FileStreamResult ExtractExcelEntities(EntitiesViewModel model)
         {
@@ -210,6 +199,7 @@
                 Entity = this.fundsService.GetFundById(entityId),
                 EntitySubEntities = this.fundsService.GetFund_SubFunds(entityId),
                 ChosenDate = chosenDate,
+                EntityTimeline = this.fundsService.GetFundTimeline(entityId),
             };
 
             HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
