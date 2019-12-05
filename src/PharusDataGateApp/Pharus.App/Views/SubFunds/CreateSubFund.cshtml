@@ -74,11 +74,10 @@
 
                     else if (Model.EntityProperties[0][col] == "DERIVATIVES")
                     {
-                        <select id="derivatives" class="form-control maxw-270" onchange="getDerivatives()">
+                        <select id="derivatives" class="form-control maxw-270">
                             <option value="No">No</option>
                             <option value="Yes">Yes</option>
                         </select>
-
                     }
                     else if (Model.EntityProperties[0][col] == "DERIV. MARKET")
                     {
@@ -115,7 +114,7 @@
                     else
                     {
                         <input type="text"
-                               class="form-control maxw-270"/>
+                               class="form-control maxw-270" />
                     }
                 </div>
             }
@@ -136,3 +135,12 @@
 <div>
     <a asp-action="All">Back to List</a>
 </div>
+
+@section Scripts{
+    <script>
+        //const oldWindowOnLoad = window.onload || function () { };
+        window.onload = () => {
+            getDerivatives();
+        }
+    </script>
+}
