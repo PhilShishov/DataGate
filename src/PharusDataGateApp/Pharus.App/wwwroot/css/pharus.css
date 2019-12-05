@@ -203,4 +203,5 @@ input[type=search]::-webkit-search-cancel-button {
     border: 0 none;
     border-radius: 20px;
     padding: 6px 20px;
+    cursor: pointer;
 }

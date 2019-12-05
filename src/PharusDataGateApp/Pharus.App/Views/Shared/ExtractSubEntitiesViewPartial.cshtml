@@ -2,7 +2,9 @@
     var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
 }
 
-<div class="button-holder d-flex justify-content-center my-5">
+<div class="button-holder d-flex justify-content-center my-5" 
+     id="extractDiv" 
+     hidden>
     <button class="extractbtn"
             type="submit"
             formaction="/@controllerName/ExtractExcelSubEntities"
