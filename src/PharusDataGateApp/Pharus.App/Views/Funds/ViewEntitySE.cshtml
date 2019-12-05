@@ -1,6 +1,4 @@
 ﻿@model Pharus.App.Models.ViewModels.Entities.SpecificEntityViewModel
-@using Microsoft.AspNetCore.Http
-@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -97,7 +95,7 @@
         $(document).ready(function () {
 
             let url = "/Funds/AutoCompleteSubFundList";
-            let entityId = @HttpContextAccessor.HttpContext.Session.GetString("entityId");
+            let entityId = @Model.EntityId;
 
             $("#SearchTerm").select2({
                 placeholder: "Select Sub Funds",
