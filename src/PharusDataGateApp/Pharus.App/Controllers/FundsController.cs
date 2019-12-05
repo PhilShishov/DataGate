@@ -48,6 +48,7 @@
                 Entities = new List<string[]>(),
                 IsActive = true,
                 ChosenDate = DateTime.Today.ToString("yyyy-MM-dd"),
+                SearchTerm = "Select Funds",
             };
             GetAllActiveEntitiesUtility.GetAllActiveFundsWithHeaders(model, this.fundsService);
 
