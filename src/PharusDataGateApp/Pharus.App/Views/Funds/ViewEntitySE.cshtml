@@ -46,24 +46,22 @@
 
     <partial name="EntitySubEntitiesBindingTablePartial" />
 
-
-    @*<div class="row">
+    <div class="row">
         <div class="col-sm-4">
-            <label>Additional Fund Information</label>
-            <select class="form-control input-sm" id="fundChoicesSelect">
+            <select class="form-control input-sm" id="fundChoicesSelect" name="fundChoicesSelect">
                 <option value="">Select</option>
                 <option value="SubFunds">SubFunds</option>
                 <option value="TimelineChanges">Timeline Changes</option>
             </select>
         </div>
-    </div>*@
+    </div>
 
-    <div id="subEntities" hidden>
-        <table class="table table-borderless table-hover tableDoubleScroll">
+    <div id="subEntities" style="visibility:hidden;">
+        <table class="table table-bordered table-hover table-responsive text-nowrap tableDoubleScroll">
             <thead>
-                <tr>
-                    @for (int row = 0; row < 1; row++)
-                    {
+                @for (int row = 0; row < 1; row++)
+                {
+                    <tr>
                         @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
                         {
                             <th class="text-secondary p-1">
@@ -72,13 +70,14 @@
                                 </h5>
                             </th>
                         }
-                    }
-                </tr>
+                    </tr>
+                }
             </thead>
+
             <tbody>
                 @for (int row = 1; row < Model.EntitySubEntities.Count; row++)
                 {
-                    <tr class="tableRowPharus" onclick="document.location = '/SubFunds/ViewEntitySE/@Model.EntitySubEntities[row][2]'">
+                    <tr>
                         @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
                         {
                             <td class="p-1">
@@ -91,52 +90,6 @@
         </table>
     </div>
 </form>
-
-
-<div class="row">
-    <div class="col-sm-4">
-        <select class="form-control input-sm" id="fundChoicesSelect" name="fundChoicesSelect">
-            <option value="">Select</option>
-            <option value="Funds">Funds</option>
-            <option value="Others">Others</option>
-        </select>
-    </div>
-</div>
-
-<div id="target" style="visibility:hidden;">
-    <table class="table table-bordered table-hover table-responsive text-nowrap tableDoubleScroll">
-        <thead>
-            @for (int row = 0; row < 1; row++)
-            {
-                <tr>
-                    @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
-                    {
-                        <th class="text-secondary p-1">
-                            <h5>
-                                @Model.EntitySubEntities[row][col]
-                            </h5>
-                        </th>
-                    }
-                </tr>
-            }
-        </thead>
-
-        <tbody>
-            @for (int row = 1; row < Model.EntitySubEntities.Count; row++)
-            {
-                <tr>
-                    @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
-                    {
-                        <td class="p-1">
-                            @Model.EntitySubEntities[row][col]
-                        </td>
-                    }
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
-
 
 @section Scripts{
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
@@ -174,29 +127,18 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('.double-scroll').doubleScroll();
-            $('.tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
+            $('.tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });           
 
             $("#fundChoicesSelect").on('change', function () {
-                let dropdownvalue = $("#fundChoicesSelect option:selected").val();
+                var dropdownvalue = $("#fundChoicesSelect option:selected").val();
                 if (dropdownvalue == 'SubFunds') {
                     $("#subEntities").css('visibility', 'visible');
                 }
                 else {
                     $("#subEntities").css('visibility', 'hidden');
                 }
-            });
-
-            $("#fundChoicesSelect").on('change', function () {
-                var dropdownvalue = $("#fundChoicesSelect option:selected").val();
-                if (dropdownvalue == 'Funds') {
-                    $("#target").css('visibility', 'visible');
-                }
-                else {
-                    $("#target").css('visibility', 'hidden');
-                }
 
             });
         });
-
     </script>
 }
