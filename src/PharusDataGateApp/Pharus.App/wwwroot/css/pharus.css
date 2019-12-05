@@ -196,3 +196,11 @@ input[type=search]::-webkit-search-cancel-button {
 .double-scroll {
     width: 40%;
 }
+
+.pharus-select {
+    background-color: lightcyan;
+    color: darkgrey;
+    border: 0 none;
+    border-radius: 20px;
+    padding: 6px 20px;
+}
