@@ -137,9 +137,13 @@
 </div>
 
 @section Scripts{
+
+    <script src="~/js/getDerivatives.js"></script>
     <script>
         //const oldWindowOnLoad = window.onload || function () { };
         window.onload = () => {
+            manageSideNavBar();
+            manageDropdowns();
             getDerivatives();
         }
     </script>
