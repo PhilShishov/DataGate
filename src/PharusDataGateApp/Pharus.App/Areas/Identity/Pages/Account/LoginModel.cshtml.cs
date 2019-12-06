@@ -11,7 +11,7 @@
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Mvc.RazorPages;
 
-    using Pharus.Domain;
+    using Pharus.Domain.Models.Users;
 
     [AllowAnonymous]
     public class LoginModel : PageModel

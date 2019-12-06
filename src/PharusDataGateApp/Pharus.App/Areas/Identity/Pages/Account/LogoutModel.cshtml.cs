@@ -8,7 +8,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc.RazorPages;
 
-    using Pharus.Domain;
+    using Pharus.Domain.Models.Users;
 
     [AllowAnonymous]
     public class LogoutModel : PageModel
