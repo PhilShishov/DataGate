@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Pharus.App.Models
+﻿namespace Pharus.Domain.Models.Pharus_vFinale
 {
+    using System.Collections.Generic;
+
     public partial class TbFund
     {
         public TbFund()
@@ -15,7 +14,9 @@ namespace Pharus.App.Models
         public int FId { get; set; }
 
         public virtual ICollection<TbFundSubFund> TbFundSubFund { get; set; }
+
         public virtual ICollection<TbHistoryFund> TbHistoryFund { get; set; }
+
         public virtual ICollection<TbServiceAgreementFund> TbServiceAgreementFund { get; set; }
     }
 }

@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Pharus.App.Models
+﻿namespace Pharus.App.Models
 {
+    using System.Collections.Generic;
+
     public partial class TbDomTimeseriesType
     {
         public TbDomTimeseriesType()
@@ -11,10 +10,13 @@ namespace Pharus.App.Models
         }
 
         public int IdTs { get; set; }
+
         public string DescTs { get; set; }
+
         public int EntityType { get; set; }
 
         public virtual TbDomEntity EntityTypeNavigation { get; set; }
+
         public virtual ICollection<TbTimeseriesShareclass> TbTimeseriesShareclass { get; set; }
     }
 }
