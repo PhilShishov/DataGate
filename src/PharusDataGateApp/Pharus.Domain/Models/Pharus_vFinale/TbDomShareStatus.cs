@@ -1,8 +1,8 @@
-﻿
-namespace Pharus.App.Models
+﻿namespace Pharus.Domain.Models.Pharus_vFinale
 {
-    using System;
     using System.Collections.Generic;
+
+    using Pharus.Domain.Models.Pharus_vFinale;
 
     public partial class TbDomShareStatus
     {
@@ -12,6 +12,7 @@ namespace Pharus.App.Models
         }
 
         public int ScSId { get; set; }
+
         public string ScSDesc { get; set; }
 
         public virtual ICollection<TbHistoryShareClass> TbHistoryShareClass { get; set; }
