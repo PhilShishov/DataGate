@@ -14,10 +14,10 @@ namespace Pharus.Services.ShareClasses
 
     public class ShareClassesSelectListService : IShareClassesSelectListService
     {
-        private readonly Pharus_vFinaleContext context;
+        private readonly Pharus_vFinale_Context context;
 
         public ShareClassesSelectListService(
-            Pharus_vFinaleContext context)
+            Pharus_vFinale_Context context)
         {
             this.context = context;
         }

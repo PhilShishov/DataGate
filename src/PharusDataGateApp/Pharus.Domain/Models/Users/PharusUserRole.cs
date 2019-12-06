@@ -1,8 +1,6 @@
-﻿namespace Pharus.Domain
+﻿namespace Pharus.Domain.Models.Users
 {
     using Microsoft.AspNetCore.Identity;
-
-    using Pharus.Domain.Users;
 
     public class PharusUserRole : IdentityUserRole<string>
     {

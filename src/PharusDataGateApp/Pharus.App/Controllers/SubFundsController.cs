@@ -17,13 +17,13 @@
 
     public class SubFundsController : Controller
     {
-        private readonly Pharus_vFinaleContext context;
+        private readonly Pharus_vFinale_Context context;
         private readonly ISubFundsService subFundsService;
         private readonly ISubFundsSelectListService subfundsSelectListService;
         private readonly IHostingEnvironment hostingEnvironment;
 
         public SubFundsController(
-            Pharus_vFinaleContext context,
+            Pharus_vFinale_Context context,
             ISubFundsService subFundsService,
             ISubFundsSelectListService subfundsSelectListService,
             IHostingEnvironment hostingEnvironment)
