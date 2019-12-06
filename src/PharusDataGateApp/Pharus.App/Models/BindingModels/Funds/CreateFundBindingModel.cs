@@ -21,11 +21,11 @@ namespace Pharus.App.Models.BindingModels.Funds
 
         [Required(ErrorMessage = "You must enter a value for the Fund Name!")]
         [StringLength(200, ErrorMessage = "The Fund Name must be no longer than 200 characters")]
-        [RegularExpression(@"^[A-Z-0-9]+(\s[A-Z-0-9]+)*$", ErrorMessage = "Fund Name not in correct format")]
+        [RegularExpression(@"^[A-Z-0-9]+(\s[A-Z-0-9]+)*$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "Fund Name")]
         public string FundName { get; set; }
 
-        [RegularExpression(@"^[A-Z0-9]+$")]
+        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "CSSF Code")]
         public string CSSFCode { get; set; }
 
@@ -45,16 +45,16 @@ namespace Pharus.App.Models.BindingModels.Funds
         [Display(Name = "Legal Type")]
         public string LegalType { get; set; }
 
-        [RegularExpression(@"^[A-Z0-9]+$")]
+        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "Fund Admin Code")]
         [Required]
         public string FACode { get; set; }
 
-        [RegularExpression(@"^[A-Z0-9]+$")]
+        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "Dep. Code")]
         public string DEPCode { get; set; }
 
-        [RegularExpression(@"^[A-Z0-9]+$")]
+        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "Transfer Agent Code")]
         public string TACode { get; set; }
 
@@ -66,15 +66,15 @@ namespace Pharus.App.Models.BindingModels.Funds
         [Display(Name = "Company Type")]
         public string CompanyAcronym { get; set; }
 
-        [RegularExpression(@"^[A-Z0-9]+$")]
+        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "TIN Number")]
         public string TinNumber { get; set; }
 
-        [RegularExpression(@"^[A-Z0-9]+$")]
+        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "LEI Code")]
         public string LEICode { get; set; }
 
-        [RegularExpression(@"^[A-Z0-9]+$")]
+        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "Reg. Number")]
         public string RegNumber { get; set; }
     }
