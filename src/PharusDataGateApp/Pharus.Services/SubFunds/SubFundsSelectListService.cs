@@ -14,10 +14,10 @@ namespace Pharus.Services.SubFunds
 
     public class SubFundsSelectListService : ISubFundsSelectListService
     {
-        private readonly Pharus_vFinaleContext context;
+        private readonly Pharus_vFinale_Context context;
 
         public SubFundsSelectListService(
-            Pharus_vFinaleContext context)
+            Pharus_vFinale_Context context)
         {
             this.context = context;
         }
