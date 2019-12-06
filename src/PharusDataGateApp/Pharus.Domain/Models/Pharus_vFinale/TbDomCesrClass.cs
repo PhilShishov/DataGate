@@ -2,8 +2,6 @@
 {
     using System.Collections.Generic;
 
-    using Pharus.Domain.Models.Pharus_vFinale;
-
     public partial class TbDomCesrClass
     {
         public TbDomCesrClass()

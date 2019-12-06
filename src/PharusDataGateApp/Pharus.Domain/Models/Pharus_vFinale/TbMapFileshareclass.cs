@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Pharus.App.Models
+﻿namespace Pharus.Domain.Models.Pharus_vFinale
 {
+    using System;
+
     public partial class TbMapFileshareclass
     {
         public Guid FileStreamId { get; set; }

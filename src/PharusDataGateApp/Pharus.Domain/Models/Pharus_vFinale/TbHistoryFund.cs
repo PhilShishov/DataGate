@@ -1,6 +1,7 @@
-﻿namespace Pharus.App.Models
+﻿namespace Pharus.Domain.Models.Pharus_vFinale
 {
     using System;
+
     using Pharus.Domain.Models.Pharus_vFinale;
 
     public partial class TbHistoryFund
