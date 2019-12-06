@@ -1,4 +1,5 @@
-﻿// Extension class database seeding
+﻿// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+// Extension class database seeding
 
 // Created: 09/2019
 // Author:  Philip Shishov

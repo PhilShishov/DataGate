@@ -1,4 +1,5 @@
-﻿// Utility class for extracting table data
+﻿// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+// Utility class for extracting table data
 // as PDF and Excel
 
 // Created: 10/2019

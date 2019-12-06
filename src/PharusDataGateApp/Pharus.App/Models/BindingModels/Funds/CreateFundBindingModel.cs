@@ -8,6 +8,7 @@
 namespace Pharus.App.Models.BindingModels.Funds
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     public class CreateFundBindingModel
@@ -77,5 +78,7 @@ namespace Pharus.App.Models.BindingModels.Funds
         [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "Reg. Number")]
         public string RegNumber { get; set; }
+
+        public List<string> ExistingFundNames { get; set; }
     }
 }
