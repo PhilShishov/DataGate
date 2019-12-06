@@ -1,10 +1,12 @@
 ﻿function inputCaps() {
 
-    const fundNameInput = document.getElementById('fundNameInput');
+    const createFundForm = document.getElementById('createFundForm').getElementsByTagName('input');
 
-    fundNameInput.addEventListener('blur', caps);
+    for (var i = 0; i < createFundForm.length; i++) {
+        createFundForm[i].addEventListener('blur', caps);
+    }    
 
     function caps() {
-        this.value = fundNameInput.value.toUpperCase();
+        this.value = this.value.toUpperCase();
     }
 }
