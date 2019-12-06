@@ -2,8 +2,6 @@
 {
     using System;
 
-    using Pharus.Domain.Models.Pharus_vFinale;
-
     public partial class TbHistoryShareClass
     {
         public int ScId { get; set; }

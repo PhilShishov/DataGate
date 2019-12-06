@@ -2,6 +2,8 @@
 {
     using System;
 
+    using Pharus.Domain.Models.Pharus_vFinale;
+
     public partial class TbFundSubFund
     {
         public int SfId { get; set; }
