@@ -1,4 +1,4 @@
-﻿namespace Pharus.App.Models
+﻿namespace Pharus.Domain.Models.Pharus_vFinale
 {
     using System.Collections.Generic;
 

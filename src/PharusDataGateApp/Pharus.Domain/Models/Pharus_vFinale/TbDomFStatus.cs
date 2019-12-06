@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Pharus.App.Models
+﻿namespace Pharus.Domain.Models.Pharus_vFinale
 {
+    using System.Collections.Generic;
+
     public partial class TbDomFStatus
     {
         public TbDomFStatus()
@@ -11,6 +10,7 @@ namespace Pharus.App.Models
         }
 
         public int StFId { get; set; }
+
         public string StFDesc { get; set; }
 
         public virtual ICollection<TbHistoryFund> TbHistoryFund { get; set; }

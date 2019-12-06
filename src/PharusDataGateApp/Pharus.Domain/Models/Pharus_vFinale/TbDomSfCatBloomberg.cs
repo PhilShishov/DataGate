@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Pharus.App.Models
+﻿namespace Pharus.Domain.Models.Pharus_vFinale
 {
+    using System.Collections.Generic;
+
     public partial class TbDomSfCatBloomberg
     {
         public TbDomSfCatBloomberg()
@@ -11,7 +10,9 @@ namespace Pharus.App.Models
         }
 
         public int CatBloombergId { get; set; }
+
         public string CatBloombergDesc { get; set; }
+
         public string CatBloombergDescExpl { get; set; }
 
         public virtual ICollection<TbHistorySubFund> TbHistorySubFund { get; set; }

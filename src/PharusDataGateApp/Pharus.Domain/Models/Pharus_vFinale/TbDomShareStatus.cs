@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 namespace Pharus.App.Models
 {
+    using System;
+    using System.Collections.Generic;
+
     public partial class TbDomShareStatus
     {
         public TbDomShareStatus()
