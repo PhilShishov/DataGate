@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Pharus.App.Models
+﻿namespace Pharus.App.Models
 {
+    using System.Collections.Generic;
+
     public partial class TbDomDerivPurpose
     {
         public TbDomDerivPurpose()
@@ -11,6 +10,7 @@ namespace Pharus.App.Models
         }
 
         public int DpId { get; set; }
+
         public string DpDesc { get; set; }
 
         public virtual ICollection<TbHistorySubFund> TbHistorySubFund { get; set; }

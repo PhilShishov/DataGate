@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Pharus.App.Models
+﻿namespace Pharus.Domain.Models.Pharus_vFinale
 {
+    using System.Collections.Generic;
+
     public partial class TbDomDerivMarket
     {
         public TbDomDerivMarket()
@@ -11,6 +10,7 @@ namespace Pharus.App.Models
         }
 
         public int DmId { get; set; }
+
         public string DmDesc { get; set; }
 
         public virtual ICollection<TbHistorySubFund> TbHistorySubFund { get; set; }

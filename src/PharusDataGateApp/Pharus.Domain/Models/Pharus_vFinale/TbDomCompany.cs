@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Pharus.App.Models
+﻿namespace Pharus.Domain.Models.Pharus_vFinale
 {
+    using System.Collections.Generic;
+
     public partial class TbDomCompany
     {
         public TbDomCompany()
@@ -13,10 +12,13 @@ namespace Pharus.App.Models
         }
 
         public int CId { get; set; }
+
         public string CName { get; set; }
 
         public virtual ICollection<TbServiceAgreementFund> TbServiceAgreementFund { get; set; }
+
         public virtual ICollection<TbServiceAgreementShareclass> TbServiceAgreementShareclass { get; set; }
+
         public virtual ICollection<TbServiceAgreementSubfund> TbServiceAgreementSubfund { get; set; }
     }
 }

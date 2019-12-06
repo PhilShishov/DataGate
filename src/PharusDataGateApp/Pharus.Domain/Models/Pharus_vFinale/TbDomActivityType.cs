@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Pharus.Domain.Models.Pharus_vFinale
+﻿namespace Pharus.Domain.Models.Pharus_vFinale
 {
+    using System.Collections.Generic;
+
     public partial class TbDomActivityType
     {
         public TbDomActivityType()
@@ -13,10 +12,13 @@ namespace Pharus.Domain.Models.Pharus_vFinale
         }
 
         public int AtId { get; set; }
+
         public string AtDesc { get; set; }
 
         public virtual ICollection<TbServiceAgreementFund> TbServiceAgreementFund { get; set; }
+
         public virtual ICollection<TbServiceAgreementShareclass> TbServiceAgreementShareclass { get; set; }
+
         public virtual ICollection<TbServiceAgreementSubfund> TbServiceAgreementSubfund { get; set; }
     }
 }
