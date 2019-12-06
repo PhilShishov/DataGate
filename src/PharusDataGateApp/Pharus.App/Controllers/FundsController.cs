@@ -223,6 +223,7 @@
             viewModel.Entity = this.fundsService.GetFundById(viewModel.EntityId);
             viewModel.EntitySubEntities = this.fundsService.GetFund_SubFunds(viewModel.EntityId);
             viewModel.FileNameToDisplay = GetFileNameFromFilePath(viewModel.EntityId, viewModel.ChosenDate);
+            viewModel.EntityTimeline = this.fundsService.GetFundTimeline(viewModel.EntityId);
 
             var chosenDate = DateTime.ParseExact(viewModel.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 

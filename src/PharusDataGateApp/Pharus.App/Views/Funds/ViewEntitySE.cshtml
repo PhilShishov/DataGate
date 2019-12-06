@@ -52,8 +52,8 @@
         </select>
     </div>
 
-    <div class="container py-5 " id="timelineChanges">
-
+    <div class="container py-5"
+         id="timelineChanges">
         <div class="row">
             <div class="col-lg-7 mx-auto">
                 <ul class="timeline">
@@ -61,11 +61,11 @@
                     {
                         <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
                             <div class="timeline-arrow"></div>
-                            <h2 class="h5 mb-0">Title</h2>
+                            <h2 class="h5 mb-0">@Model.EntityTimeline[row][3]</h2>
                             <span class="small text-gray">
                                 <i class="fa fa-clock-o mr-1"></i>@Model.EntityTimeline[row][1] - @Model.EntityTimeline[row][2]
                             </span>
-                            <p class="text-small mt-2 font-weight-light">@Model.EntityTimeline[row][3]</p>
+                            <p class="text-small mt-2 font-weight-light">@Model.EntityTimeline[row][4]</p>
                         </li>
                     }
                 </ul>
