@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Pharus.App.Models
+﻿namespace Pharus.Domain.Models.Pharus_vFinale
 {
+    using System.Collections.Generic;
+
     public partial class TbDomIsoCurrency
     {
         public TbDomIsoCurrency()
@@ -13,12 +12,17 @@ namespace Pharus.App.Models
         }
 
         public string IsoCcyCode { get; set; }
+
         public string IsoCcyDesc { get; set; }
+
         public string IsoCcyDescEntity { get; set; }
+
         public int? IsoCcyNumeric { get; set; }
 
         public virtual ICollection<TbHistoryShareClass> TbHistoryShareClass { get; set; }
+
         public virtual ICollection<TbHistorySubFund> TbHistorySubFund { get; set; }
+
         public virtual ICollection<TbTimeseriesShareclass> TbTimeseriesShareclass { get; set; }
     }
 }

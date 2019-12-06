@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Pharus.App.Models
+﻿namespace Pharus.Domain.Models.Pharus_vFinale
 {
+    using System.Collections.Generic;
+
     public partial class TbDomGlobalExposure
     {
         public TbDomGlobalExposure()
@@ -11,6 +10,7 @@ namespace Pharus.App.Models
         }
 
         public int GeId { get; set; }
+
         public string GeDesc { get; set; }
 
         public virtual ICollection<TbHistorySubFund> TbHistorySubFund { get; set; }
