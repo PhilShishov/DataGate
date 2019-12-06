@@ -4,8 +4,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-    using Pharus.Domain;
-    using Pharus.Domain.Users;
+    using Pharus.Domain.Models.Users;
 
     public class Pharus_UsersDbContext : IdentityDbContext<PharusUser, PharusRole, string, IdentityUserClaim<string>,
                             PharusUserRole, IdentityUserLogin<string>,

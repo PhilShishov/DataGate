@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    using Pharus.Domain;
+    using Pharus.Domain.Models.Users;
 
     public interface IUsersService
     {

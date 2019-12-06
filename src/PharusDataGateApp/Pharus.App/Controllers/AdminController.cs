@@ -10,8 +10,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Authorization;
 
-    using Pharus.Domain;
-    using Pharus.Domain.Users;
+    using Pharus.Domain.Models.Users;
     using Pharus.Services.Users.Contracts;
     using Pharus.Services.Roles.Contracts;
     using Pharus.App.Models.ViewModels.Users;

@@ -8,7 +8,7 @@
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.AspNetCore.Authorization;
 
-    using Pharus.Domain;
+    using Pharus.Domain.Models.Users;
 
     [AllowAnonymous]
     public class ForgotPasswordModel : PageModel

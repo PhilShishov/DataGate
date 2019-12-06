@@ -9,11 +9,11 @@ namespace Pharus.Services.Users
     using System.Linq;
     using System.Collections.Generic;
 
-    using Pharus.Domain;
-    using Pharus.Services.Users.Contracts;
-
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
+
+    using Pharus.Domain.Models.Users;
+    using Pharus.Services.Users.Contracts;
 
     // _____________________________________________________________
     public class UsersService : IUsersService

@@ -8,7 +8,7 @@ namespace Pharus.Data.Seeding
 {
     using System.Linq;
 
-    using Pharus.Domain.Users;
+    using Pharus.Domain.Models.Users;
 
     // _____________________________________________________________
     public class PharusUserRoleSeeder : ISeeder
