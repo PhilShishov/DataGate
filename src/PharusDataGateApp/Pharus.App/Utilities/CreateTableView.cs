@@ -1,4 +1,5 @@
-﻿// Utility class for creating table view
+﻿// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+// Utility class for creating table view
 // based on a search string condition
 
 // Created: 09/2019

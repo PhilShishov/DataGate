@@ -8,12 +8,14 @@
 namespace Pharus.Services.Funds
 {
     using System;
+    using System.Linq;
     using System.Data;
     using System.Data.SqlClient;
     using System.Collections.Generic;
 
     using Microsoft.Extensions.Configuration;
 
+    using Pharus.Data;
     using Pharus.Services.Utilities;
     using Pharus.Services.Funds.Contracts;
 
@@ -22,14 +24,18 @@ namespace Pharus.Services.Funds
     {
         private readonly string defaultDate = DateTime.Today.ToString("yyyyMMdd");
         private readonly IConfiguration configuration;
+        private readonly Pharus_vFinale_Context context;
 
         // ________________________________________________________
         //
         // Constructor: initialize with DI IConfiguration
         // to retrieve appsettings.json connection string
-        public FundsService(IConfiguration config)
+        public FundsService(
+            IConfiguration config,
+            Pharus_vFinale_Context context)
         {
             this.configuration = config;
+            this.context = context;
         }
 
         // ________________________________________________________
@@ -69,6 +75,13 @@ namespace Pharus.Services.Funds
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
+        }
+
+        public List<string> GetAllFundsNames()
+        {
+            return this.context.TbHistoryFund
+                .Select(f => f.FOfficialFundName)
+                .ToList();
         }
 
         public List<string[]> GetFundById(int id)

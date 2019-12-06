@@ -395,6 +395,7 @@
             CreateFundBindingModel model = new CreateFundBindingModel
             {
                 InitialDate = DateTime.Today,
+                ExistingFundNames = this.fundsService.GetAllFundsNames(),
             };
             SetViewDataValuesForFundSelectLists();
 
@@ -410,7 +411,7 @@
 
             SetViewDataValuesForFundSelectLists();
 
-            if (!this.ModelState.IsValid)
+            if (!this.ModelState.IsValid || model.ExistingFundNames.Any(f => f == model.FundName))
             {
                 return this.View(model ?? new CreateFundBindingModel());
             }
