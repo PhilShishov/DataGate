@@ -32,7 +32,7 @@
             <label asp-for="FundName" class="text-torshia"></label><br>
             <input type="text"
                    class="form-control maxw-270"
-                   asp-for="FundName" id="fundNameInput" onblur="caps(this.id)">
+                   asp-for="FundName" id="fundNameInput">
             <span asp-validation-for="FundName" class="text-danger"></span>
         </div>
 
@@ -179,8 +179,15 @@
     <a asp-action="All">Back to List</a>
 </div>
 
-<script>
-    function caps(id) {
-        document.getElementById(id).value = document.getElementById(id).value.toUpperCase();
-    }
-</script>
+@section Scripts{
+
+    <script type="text/javascript" src="~/js/inputCaps.js"></script>
+
+    <script>
+        window.onload = () => {
+            manageSideNavBar();
+            manageDropdowns();
+            inputCaps();
+        }
+    </script> 
+}
