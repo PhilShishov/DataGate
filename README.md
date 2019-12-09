@@ -7,7 +7,7 @@ Features:
  - Login, CRUD Users and Roles
  - Table Views
  - Excel and PDF Extract
- - Update Table by Date and Status 
+ - Update Table View by Date and Status 
  - Edit and Create Entities and Connections
  - Load and Upload Documents
  
