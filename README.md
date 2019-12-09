@@ -15,6 +15,7 @@ Features:
  
  JS Features: 
   - Autocomplete Search
+ ![](/Views/autocompleteSearch.gif)
   - Double Top Scroll
   - Navbar and Dropdown Management
   - Input Upper Caps
