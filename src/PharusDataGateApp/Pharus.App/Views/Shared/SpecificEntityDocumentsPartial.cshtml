@@ -2,13 +2,27 @@
     var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
 }
 
-<p>List of prospectus</p>
-<button class="btn-link"
-        formtarget="_blank"        
-        type="submit"
-        formaction="/@controllerName/ReadPdfFile"
-        name="read_Pdf"> @Model.FileNameToDisplay
-</button>
+<div>
+    <u class="text-torshia">LIST OF PROSPECTUS</u><br>
+    <button class="btn-link mt-3"
+            formtarget="_blank"
+            type="submit"
+            formaction="/@controllerName/ReadPdfFile"
+            name="read_Pdf">
+        @Model.FileNameToDisplay
+    </button>
 
-<p>List of agreements</p>
-<a href="#bottomOfPage">Document manco offer</a>
+    <div class="mt-2">
+        <a href="/Funds/ModalUploadDocumentAction" class="btn bg-pharus text-white">Upload Document</a>
+    </div>
+</div>
+
+<div class="mt-4">
+    <u class="text-torshia">LIST OF AGREEMENTS</u>
+    <br>
+    <a href="#bottomOfPage">Document manco offer</a>
+
+    <div class="mt-2">
+        <a href="/Funds/EditFund/@Model.EntityId" class="btn bg-pharus text-white">Upload Agreement</a>
+    </div>
+</div>
