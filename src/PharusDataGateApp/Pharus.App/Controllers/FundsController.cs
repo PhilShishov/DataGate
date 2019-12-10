@@ -268,6 +268,11 @@
             return this.View();
         }
 
+        //public FileStreamResult UploadDocument()
+        //{
+        //    return View();
+        //}
+
         [HttpPost]
         public FileStreamResult ExtractExcelSubEntities(SpecificEntityViewModel model)
         {
@@ -394,7 +399,7 @@
 
             CreateFundBindingModel model = new CreateFundBindingModel
             {
-                InitialDate = DateTime.Today,                
+                InitialDate = DateTime.Today,
             };
             SetViewDataValuesForFundSelectLists();
 
