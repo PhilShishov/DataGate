@@ -12,9 +12,6 @@
         body {
             background-color: antiquewhite;
             background-image: none;
-            /*background-repeat: no-repeat;
-            background-size: cover;
-            margin: auto;*/
         }
     </style>
 }
@@ -26,7 +23,7 @@
     <div class="d-flex justify-content-between">
 
         <partial name="SpecificEntityInfoPartial" />
-        <div class="w-35 float-right">
+        <div class="w-50 float-right">
             <partial name="SpecificEntityDocumentsPartial" />
             @if (this.User.IsInRole("Admin"))
             {

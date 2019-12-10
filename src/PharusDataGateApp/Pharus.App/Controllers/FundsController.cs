@@ -202,6 +202,8 @@
                 EntityTimeline = this.fundsService.GetFundTimeline(entityId),
             };
 
+            this.ViewData["FileTypes"] = this.fundsSelectListService.GetAllTbDomFStatus();
+
             HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
 
             string fileName = GetFileNameFromFilePath(entityId, chosenDate);
