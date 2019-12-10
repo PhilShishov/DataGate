@@ -64,3 +64,7 @@ body {
     background: -webkit-gradient(linear,left top,left bottom,from(rgba(34, 59, 120, 1)),to(#909090));
     box-shadow: inset 2px 2px 2px rgba(255,255,255,.25), inset -2px -2px 2px rgba(0,0,0,.25);
 }
+
+.d-grid {
+    display: grid;
+}
