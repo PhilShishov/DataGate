@@ -202,6 +202,9 @@
                 EntityTimeline = this.fundsService.GetFundTimeline(entityId),
             };
 
+            viewModel.StartConnection = viewModel.Entity[1][0];
+            viewModel.EndConnection = viewModel.Entity[1][1];
+
             this.ViewData["FileTypes"] = this.fundsSelectListService.GetAllFundFileTypes();
 
             HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
@@ -289,9 +292,9 @@
                 file.CopyTo(stream);
             }
 
-            string streamId = this.fundsFileService.GetStreamIdFromFileName(file.FileName).ToString();
-            string startConnection = model.Entity[1][0];
-            string endConnection = model.Entity[1][1];
+            string streamId = this.fundsFileService.GetStreamIdFromFileName(file.FileName);
+            string startConnection = model.StartConnection;
+            string endConnection = model.EndConnection;
             int fileTypeId = this.context.TbDomFileType
                     .Where(s => s.FiletypeDesc == fileTypeDesc)
                     .Select(s => s.FiletypeId)
