@@ -35,5 +35,9 @@ namespace Pharus.App.Models.ViewModels.Entities
         public string FileNameToDisplay { get; set; }
 
         public UploadFundFileBindingModel UploadFundFileBM { get; set; }
+
+        public string StartConnection { get; set; }
+
+        public string EndConnection { get; set; }
     }
 }

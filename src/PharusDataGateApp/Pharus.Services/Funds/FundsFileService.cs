@@ -1,6 +1,7 @@
 ﻿namespace Pharus.Services.Funds
 {
     using System;
+    using System.Data;
     using System.Data.SqlClient;
 
     using Microsoft.Extensions.Configuration;
@@ -53,9 +54,9 @@
             }
         }
 
-        public Guid GetStreamIdFromFileName(string fileName)
+        public string GetStreamIdFromFileName(string fileName)
         {
-            Guid streamId = Guid.Empty;
+            string streamId = string.Empty;
             SqlDataReader dataReader;
 
             using (SqlConnection connection = new SqlConnection())
@@ -64,7 +65,7 @@
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select stream_id from [Pharus_File_Development].[dbo].[FundFile] where [name]='{fileName}'";
+                command.CommandText = $"select cast(stream_id as nvarchar(MAX)) as [Stream Id] from [Pharus_File_Development].[dbo].[FundFile] where [name]='{fileName}'";
 
                 dataReader = command.ExecuteReader();
 
@@ -72,7 +73,7 @@
                 {
                     dataReader.Read();
 
-                    streamId = (Guid)dataReader["stream_id"];
+                    streamId = (string)dataReader["Stream Id"];
 
                     // Throw exception for null columns
 
@@ -89,18 +90,44 @@
                                     string endConnection,
                                     int fileTypeId)
         {
-            SqlDataReader dataReader;
+            string query = "insert into [dbo].[tb_map_filefund] values " +
+                "(file_stream_id, fund_id, startConnection, " +
+                "endConnection, filetype_id)";
 
             using (SqlConnection connection = new SqlConnection())
             {
                 connection.ConnectionString = configuration.GetConnectionString("Pharus_vFinaleConnection");
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
+                using (SqlCommand command = new SqlCommand(query))
+                {
+                    command.Parameters.AddRange(new[]
+                    {
+                        new SqlParameter("@file_stream_id", SqlDbType.NVarChar, 100) { Value = streamId },
+                        new SqlParameter("@fund_id", SqlDbType.Int) { Value = fundId },
+                        new SqlParameter("@startConnection", SqlDbType.NVarChar) { Value = startConnection },
+                        new SqlParameter("@endConnection", SqlDbType.NVarChar, 100) { Value = endConnection },
+                        new SqlParameter("@filetype_id", SqlDbType.Int) { Value = fileTypeId},
+                    });
 
-                command.CommandText = $"insert into [dbo].[tb_map_filefund] values ({streamId}, {fundId}, {startConnection}, {endConnection}, {fileTypeId})";
+                    foreach (SqlParameter parameter in command.Parameters)
+                    {
+                        if (parameter.Value == null)
+                        {
+                            parameter.Value = DBNull.Value;
+                        }
+                    }
 
-                dataReader = command.ExecuteReader();
-                dataReader.Close();
+                    command.Connection = connection;
+
+                    try
+                    {
+                        command.Connection.Open();
+                        command.ExecuteReader();
+                    }
+                    catch (SqlException sx)
+                    {
+                        Console.WriteLine(sx.Message);
+                    }
+                }
             }
         }
     }
