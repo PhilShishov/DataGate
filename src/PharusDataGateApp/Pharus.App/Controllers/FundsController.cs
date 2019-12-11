@@ -512,7 +512,6 @@
             this.ViewData["LegalVehicleList"] = this.fundsSelectListService.GetAllTbDomLegalVehicle();
             this.ViewData["LegalTypeList"] = this.fundsSelectListService.GetAllTbDomLegalType();
             this.ViewData["CompanyTypeDescList"] = this.fundsSelectListService.GetAllTbDomCompanyDesc();
-            this.ViewData["CompanyAcronymList"] = this.fundsSelectListService.GetAllTbDomCompanyAcronym();
         }
 
         private string GetFileNameFromFilePath(int entityId, string chosenDate)

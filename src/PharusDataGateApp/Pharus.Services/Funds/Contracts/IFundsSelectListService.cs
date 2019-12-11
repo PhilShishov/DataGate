@@ -4,8 +4,6 @@
 
     public interface IFundsSelectListService
     {
-        List<string> GetAllTbDomCompanyAcronym();
-
         List<string> GetAllTbDomCompanyDesc();
 
         List<string> GetAllTbDomFStatus();

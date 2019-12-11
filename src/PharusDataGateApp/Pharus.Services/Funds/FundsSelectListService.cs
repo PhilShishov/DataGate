@@ -17,19 +17,10 @@
             this.context = context;
         }
 
-        public List<string> GetAllTbDomCompanyAcronym()
-        {
-            var companyAcronyms = this.context.TbDomCompanyType
-                .Select(tb => tb.CtAcronym)
-                .ToList();
-
-            return companyAcronyms;
-        }
-
         public List<string> GetAllTbDomCompanyDesc()
         {
             var companyDesc = this.context.TbDomCompanyType
-                .Select(tb => tb.CtDesc)
+                .Select(tb => tb.CtDesc + " - " + tb.CtAcronym)
                 .ToList();
 
             return companyDesc;
