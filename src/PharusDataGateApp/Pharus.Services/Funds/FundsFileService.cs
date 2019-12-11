@@ -1,5 +1,6 @@
 ﻿namespace Pharus.Services.Funds
 {
+    using System;
     using System.Data.SqlClient;
 
     using Microsoft.Extensions.Configuration;
@@ -52,9 +53,9 @@
             }
         }
 
-        public int GetStreamIdFromFileName(string fileName)
+        public Guid GetStreamIdFromFileName(string fileName)
         {
-            int streamId = 0;
+            Guid streamId = Guid.Empty;
             SqlDataReader dataReader;
 
             using (SqlConnection connection = new SqlConnection())
@@ -70,10 +71,8 @@
                 if (dataReader.HasRows)
                 {
                     dataReader.Read();
-                    if (!dataReader.IsDBNull(0))
-                    {
-                        streamId = (int)dataReader["stream_id"];
-                    }
+
+                    streamId = (Guid)dataReader["stream_id"];
 
                     // Throw exception for null columns
 
@@ -84,7 +83,7 @@
         }
 
         public void InsertFundFile(
-                                    int streamId,
+                                    string streamId,
                                     int fundId,
                                     string startConnection,
                                     string endConnection,
