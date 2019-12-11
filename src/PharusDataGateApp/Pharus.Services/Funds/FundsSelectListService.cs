@@ -9,6 +9,7 @@
     public class FundsSelectListService : IFundsSelectListService
     {
         private readonly Pharus_vFinale_Context context;
+        private const int fundFileType = 1;
 
         public FundsSelectListService(
             Pharus_vFinale_Context context)
@@ -68,6 +69,16 @@
                 .ToList();
 
             return legalVehicles;
+        }
+
+        public List<string> GetAllFundFileTypes()
+        {
+            var fileTypes = this.context.TbDomFileType
+                .Where(ft => ft.FiletypeEntity == fundFileType)
+                .Select(ft => ft.FiletypeDesc)                
+                .ToList();
+
+            return fileTypes;
         }
     }
 }

@@ -22,7 +22,5 @@ namespace Pharus.App.Models.ViewModels
         public string BaseEntityName { get; set; }
 
         public string SearchTerm { get; set; }
-
-        public string HSearchString { get; set; }
     }
 }

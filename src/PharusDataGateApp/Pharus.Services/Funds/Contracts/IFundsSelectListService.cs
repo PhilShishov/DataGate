@@ -15,5 +15,7 @@
         List<string> GetAllTbDomLegalType();
 
         List<string> GetAllTbDomLegalVehicle();
+
+        List<string> GetAllFundFileTypes();
     }
 }

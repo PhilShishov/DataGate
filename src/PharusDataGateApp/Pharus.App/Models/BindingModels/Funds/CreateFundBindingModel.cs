@@ -1,5 +1,5 @@
 ﻿// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-// Model class for create fund
+// Binding model for create fund
 
 // Created: 11/2019
 // Author:  Philip Shishov
