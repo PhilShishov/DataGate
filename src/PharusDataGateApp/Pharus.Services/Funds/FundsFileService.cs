@@ -47,13 +47,48 @@
                     // Throw exception for null columns
 
                 }
-
                 dataReader.Close();
                 return filePath;
             }
         }
 
-        public void InsertFundFile(int fundId, string chosenDate)
+        public int GetStreamIdFromFileName(string fileName)
+        {
+            int streamId = 0;
+            SqlDataReader dataReader;
+
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                command.CommandText = $"select stream_id from [Pharus_File_Development].[dbo].[FundFile] where [name]='{fileName}'";
+
+                dataReader = command.ExecuteReader();
+
+                if (dataReader.HasRows)
+                {
+                    dataReader.Read();
+                    if (!dataReader.IsDBNull(0))
+                    {
+                        streamId = (int)dataReader["stream_id"];
+                    }
+
+                    // Throw exception for null columns
+
+                }
+                dataReader.Close();
+                return streamId;
+            }
+        }
+
+        public void InsertFundFile(
+                                    int streamId,
+                                    int fundId,
+                                    string startConnection,
+                                    string endConnection,
+                                    int fileTypeId)
         {
             SqlDataReader dataReader;
 
@@ -63,7 +98,7 @@
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select [dbo].[fn_getSpecificFilepath_filefund]( {fundId},'{chosenDate}',{fileTypeProspectus}) [FILEPATH]";
+                command.CommandText = $"insert into [dbo].[tb_map_filefund] values ({streamId}, {fundId}, {startConnection}, {endConnection}, {fileTypeId})";
 
                 dataReader = command.ExecuteReader();
 

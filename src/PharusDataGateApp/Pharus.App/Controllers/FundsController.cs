@@ -16,7 +16,6 @@
     using Pharus.Services.Funds.Contracts;
     using Pharus.App.Models.BindingModels.Funds;
     using Pharus.App.Models.ViewModels.Entities;
-    using System.Threading.Tasks;
 
     [Authorize]
     public class FundsController : Controller
@@ -275,38 +274,25 @@
         public IActionResult UploadFiles(SpecificEntityViewModel model)
         {
             var file = model.UploadFundFileBM.FileToUpload;
-            var fileType = model.UploadFundFileBM.FileType;
+            var fileTypeDesc = model.UploadFundFileBM.FileType;
 
             if (!ModelState.IsValid || file == null || file.Length == 0)
             {
                 return this.Content("File not loaded");
             }
 
+            int streamId = this.fundsFileService.GetStreamIdFromFileName(file.FileName);
+            string startConnection = model.Entity[1][0];
+            string endConnection = model.Entity[1][1];
+            int fileTypeId = this.context.TbDomFileType
+                    .Where(s => s.FiletypeDesc == fileTypeDesc)
+                    .Select(s => s.FiletypeId)
+                    .FirstOrDefault();
 
-            
+            this.fundsFileService.InsertFundFile(streamId, model.EntityId, startConnection, endConnection, fileTypeId);
+
             return this.RedirectToAction("All");
         }
-
-
-        //[HttpPost]
-        //public async Task<IActionResult> UploadFiles(IFormFile file)
-        //{
-        //    if (file == null || file.Length == 0)
-        //    {
-        //        return Content("File not loaded");
-        //    }
-
-        //    var path = Path.Combine(
-        //          Directory.GetCurrentDirectory(), "wwwroot",
-        //          file.FileName);
-
-        //    using (var stream = new FileStream(path, FileMode.Create))
-        //    {
-        //        await file.CopyToAsync(stream);
-        //    }
-
-        //    return RedirectToAction("All");
-        //}
 
         [HttpPost]
         public FileStreamResult ExtractExcelSubEntities(SpecificEntityViewModel model)
