@@ -200,6 +200,7 @@
                 EntitySubEntities = this.fundsService.GetFund_SubFunds(entityId),
                 ChosenDate = chosenDate,
                 EntityTimeline = this.fundsService.GetFundTimeline(entityId),
+                EntityDocuments = this.fundsService.GetAllFundDocumens(entityId),
             };
 
             viewModel.StartConnection = viewModel.Entity[1][0];
@@ -304,10 +305,10 @@
                     .FirstOrDefault();
 
             this.fundsFileService.AddFileToSpecificFund(
-                                                streamId, 
-                                                model.EntityId, 
-                                                startConnection, 
-                                                endConnection, 
+                                                streamId,
+                                                model.EntityId,
+                                                startConnection,
+                                                endConnection,
                                                 fileTypeId);
 
             return this.RedirectToAction("All");
