@@ -6,7 +6,7 @@
 
         string GetStreamIdFromFileName(string fileName);
 
-        void InsertFundFile(
+        void AddFileToSpecificFund(
                             string streamId,
                             int fundId,
                             string startConnection,

@@ -230,6 +230,8 @@
             viewModel.FileNameToDisplay = GetFileNameFromFilePath(viewModel.EntityId, viewModel.ChosenDate);
             viewModel.EntityTimeline = this.fundsService.GetFundTimeline(viewModel.EntityId);
 
+            this.ViewData["FileTypes"] = this.fundsSelectListService.GetAllFundFileTypes();
+
             var chosenDate = DateTime.ParseExact(viewModel.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
             if (viewModel.Command.Equals("Update Table"))
@@ -277,7 +279,6 @@
         public IActionResult UploadFiles(SpecificEntityViewModel model)
         {
             var file = model.UploadFundFileBM.FileToUpload;
-            var fileTypeDesc = model.UploadFundFileBM.FileType;
 
             if (!ModelState.IsValid || file == null || file.Length == 0)
             {
@@ -295,12 +296,14 @@
             string streamId = this.fundsFileService.GetStreamIdFromFileName(file.FileName);
             string startConnection = model.StartConnection;
             string endConnection = model.EndConnection;
+
+            var fileTypeDesc = model.UploadFundFileBM.FileType;
             int fileTypeId = this.context.TbDomFileType
                     .Where(s => s.FiletypeDesc == fileTypeDesc)
                     .Select(s => s.FiletypeId)
                     .FirstOrDefault();
 
-            this.fundsFileService.InsertFundFile(
+            this.fundsFileService.AddFileToSpecificFund(
                                                 streamId, 
                                                 model.EntityId, 
                                                 startConnection, 
