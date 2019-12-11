@@ -24,7 +24,7 @@
             <label asp-for="EndDate" class="text-torshia"></label><br>
             <input asp-for="EndDate"
                    type="date"
-                   min="2018-01-01" max=@DateTime.Today.ToString("yyyy-MM-dd")
+                   min="@DateTime.Today.ToString("yyyy-MM-dd")"
                    class="form-control maxw-270">
             <span asp-validation-for="EndDate" class="text-danger"></span>
         </div>
