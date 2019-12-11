@@ -101,7 +101,6 @@
                 command.CommandText = $"insert into [dbo].[tb_map_filefund] values ({streamId}, {fundId}, {startConnection}, {endConnection}, {fileTypeId})";
 
                 dataReader = command.ExecuteReader();
-
                 dataReader.Close();
             }
         }

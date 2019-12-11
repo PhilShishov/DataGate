@@ -281,6 +281,14 @@
                 return this.Content("File not loaded");
             }
 
+            string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\FundFile\";
+            string path = $"{networkFileLocation}{file.FileName}";
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+
             int streamId = this.fundsFileService.GetStreamIdFromFileName(file.FileName);
             string startConnection = model.Entity[1][0];
             string endConnection = model.Entity[1][1];
@@ -289,7 +297,12 @@
                     .Select(s => s.FiletypeId)
                     .FirstOrDefault();
 
-            this.fundsFileService.InsertFundFile(streamId, model.EntityId, startConnection, endConnection, fileTypeId);
+            this.fundsFileService.InsertFundFile(
+                                                streamId, 
+                                                model.EntityId, 
+                                                startConnection, 
+                                                endConnection, 
+                                                fileTypeId);
 
             return this.RedirectToAction("All");
         }
