@@ -46,6 +46,7 @@
             <option value="">Select</option>
             <option value="SubFunds">SubFunds</option>
             <option value="TimelineChanges">Timeline Changes</option>
+            <option value="AllDocuments">All Documents</option>
         </select>
     </div>
 
@@ -103,6 +104,54 @@
             </tbody>
         </table>
     </div>
+
+    <div id="allDocuments">
+        <table class="table table-bordered table-hover">
+            <thead>
+                @for (int row = 0; row < 1; row++)
+                {
+                    <tr>
+                        @for (int col = 0; col < Model.EntityDocuments[row].Length; col++)
+                        {
+                            <th class="text-secondary p-1">
+                                <h5>
+                                    @Model.EntityDocuments[row][col]
+                                </h5>
+                            </th>
+                        }
+                    </tr>
+                }
+            </thead>
+
+            <tbody>
+                @for (int row = 1; row < Model.EntityDocuments.Count; row++)
+                {
+                    <tr>
+                        @for (int col = 0; col < Model.EntityDocuments[row].Length; col++)
+                        {
+                            <td class="p-1">
+                                @if (Model.EntityDocuments[0][col] == "name")
+                                {
+                                    <button class="btn-link"
+                                            formtarget="_blank"
+                                            type="submit"
+                                            formaction="/@controllerName/ReadPdfFile"
+                                            name="read_Pdf">
+                                        @Model.EntityDocuments[row][col]
+                                    </button>
+                                }
+                                else
+                                {
+                                    @Model.EntityDocuments[row][col]
+
+                                }
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </form>
 
 <form asp-controller="Funds"
@@ -129,7 +178,7 @@
                         </select>
                         <span asp-validation-for="UploadFundFileBM.FileType" class="text-danger"></span>
                     </div>
-                   
+
                     <input asp-for="UploadFundFileBM.FileToUpload" type="file" required>
 
                     <button type="submit"
@@ -186,14 +235,22 @@
                 if (dropdownvalue == 'SubFunds') {
                     $("#subEntities").css('visibility', 'visible');
                     $("#timelineChanges").css('visibility', 'hidden');
+                    $("#allDocuments").css('visibility', 'hidden');
                 }
                 else if (dropdownvalue == 'TimelineChanges') {
                     $("#timelineChanges").css('visibility', 'visible');
+                    $("#subEntities").css('visibility', 'hidden');
+                    $("#allDocuments").css('visibility', 'hidden');
+                }
+                else if (dropdownvalue == 'AllDocuments') {
+                    $("#allDocuments").css('visibility', 'visible');
+                    $("#timelineChanges").css('visibility', 'hidden');
                     $("#subEntities").css('visibility', 'hidden');
                 }
                 else {
                     $("#subEntities").css('visibility', 'hidden');
                     $("#timelineChanges").css('visibility', 'hidden');
+                    $("#allDocuments").css('visibility', 'hidden');
                 }
             });
         });

@@ -25,6 +25,8 @@
 
         List<string[]> GetFundTimeline(int id);
 
+        List<string[]> GetAllFundDocumens(int id);
+
         void EditFund(
                              List<string> fundsProperties,
                              int fundId,

@@ -3,7 +3,7 @@
     using System;
     using System.Data;
     using System.Data.SqlClient;
-    using System.Data.SqlTypes;
+
     using Microsoft.Extensions.Configuration;
 
     using Pharus.Services.Funds.Contracts;
@@ -34,7 +34,8 @@
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select [dbo].[fn_getSpecificFilepath_filefund]( {fundId},'{chosenDate}',{fileTypeProspectus}) [FILEPATH]";
+                command.CommandText = $"select [dbo].[fn_getSpecificFilepath_filefund]" +
+                    $"( {fundId},'{chosenDate}',{fileTypeProspectus}) [FILEPATH]";
 
                 dataReader = command.ExecuteReader();
 
@@ -65,7 +66,8 @@
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select cast(stream_id as nvarchar(MAX)) as [Stream Id] from [Pharus_File_Development].[dbo].[FundFile] where [name]='{fileName}'";
+                command.CommandText = $"select cast(stream_id as nvarchar(MAX)) as [Stream Id] " +
+                    $"from [Pharus_File_Development].[dbo].[FundFile] where [name]='{fileName}'";
 
                 dataReader = command.ExecuteReader();
 
@@ -90,7 +92,8 @@
                                     string endConnection,
                                     int fileTypeId)
         {
-            string query = "EXEC sp_insert_map_fund @stream_id, @fund_id, @start_connection, @end_connection, @filetype_id";
+            string query = "EXEC sp_insert_map_fund " +
+                "@stream_id, @fund_id, @start_connection, @end_connection, @filetype_id";
 
             using (SqlConnection connection = new SqlConnection())
             {
