@@ -3,7 +3,7 @@
 // fund, subfund, shareclass
 // and their subentities -
 // for fund - its subfunds,
-// and for subfund -its shareclasses
+// and for subfund - its shareclasses
 
 // Created: 10/2019
 // Author:  Philip Shishov
@@ -11,6 +11,7 @@
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace Pharus.App.Models.ViewModels.Entities
 {
+    using Pharus.App.Models.BindingModels.Funds;
     using System.Collections.Generic;
 
     public class SpecificEntityViewModel : BaseEntityViewModel
@@ -31,8 +32,8 @@ namespace Pharus.App.Models.ViewModels.Entities
 
         public List<string[]> EntityTimeline { get; set; }
 
-        public List<string> FilesNames { get; set; }
-
         public string FileNameToDisplay { get; set; }
+
+        public UploadFundFileBindingModel UploadFundFileBM { get; set; }
     }
 }

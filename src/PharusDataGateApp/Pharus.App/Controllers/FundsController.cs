@@ -16,6 +16,7 @@
     using Pharus.Services.Funds.Contracts;
     using Pharus.App.Models.BindingModels.Funds;
     using Pharus.App.Models.ViewModels.Entities;
+    using System.Threading.Tasks;
 
     [Authorize]
     public class FundsController : Controller
@@ -202,7 +203,7 @@
                 EntityTimeline = this.fundsService.GetFundTimeline(entityId),
             };
 
-            this.ViewData["FileTypes"] = this.fundsSelectListService.GetAllTbDomFStatus();
+            this.ViewData["FileTypes"] = this.fundsSelectListService.GetAllFundFileTypes();
 
             HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
 
@@ -270,9 +271,41 @@
             return this.View();
         }
 
-        //public FileStreamResult UploadDocument()
+        [HttpPost]
+        public IActionResult UploadFiles(SpecificEntityViewModel model)
+        {
+            var file = model.UploadFundFileBM.FileToUpload;
+            var fileType = model.UploadFundFileBM.FileType;
+
+            if (!ModelState.IsValid || file == null || file.Length == 0)
+            {
+                return this.Content("File not loaded");
+            }
+
+
+            
+            return this.RedirectToAction("All");
+        }
+
+
+        //[HttpPost]
+        //public async Task<IActionResult> UploadFiles(IFormFile file)
         //{
-        //    return View();
+        //    if (file == null || file.Length == 0)
+        //    {
+        //        return Content("File not loaded");
+        //    }
+
+        //    var path = Path.Combine(
+        //          Directory.GetCurrentDirectory(), "wwwroot",
+        //          file.FileName);
+
+        //    using (var stream = new FileStream(path, FileMode.Create))
+        //    {
+        //        await file.CopyToAsync(stream);
+        //    }
+
+        //    return RedirectToAction("All");
         //}
 
         [HttpPost]

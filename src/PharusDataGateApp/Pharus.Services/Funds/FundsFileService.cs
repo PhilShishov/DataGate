@@ -1,6 +1,5 @@
 ﻿namespace Pharus.Services.Funds
 {
-    using System;
     using System.Data.SqlClient;
 
     using Microsoft.Extensions.Configuration;
@@ -51,6 +50,24 @@
 
                 dataReader.Close();
                 return filePath;
+            }
+        }
+
+        public void InsertFundFile(int fundId, string chosenDate)
+        {
+            SqlDataReader dataReader;
+
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                command.CommandText = $"select [dbo].[fn_getSpecificFilepath_filefund]( {fundId},'{chosenDate}',{fileTypeProspectus}) [FILEPATH]";
+
+                dataReader = command.ExecuteReader();
+
+                dataReader.Close();
             }
         }
     }

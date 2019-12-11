@@ -1,5 +1,5 @@
 ﻿// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-// Model class for edit fund
+// Binding model for edit fund
 
 // Created: 10/2019
 // Author:  Philip Shishov
