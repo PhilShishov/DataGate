@@ -289,7 +289,7 @@
                 file.CopyTo(stream);
             }
 
-            int streamId = this.fundsFileService.GetStreamIdFromFileName(file.FileName);
+            string streamId = this.fundsFileService.GetStreamIdFromFileName(file.FileName).ToString();
             string startConnection = model.Entity[1][0];
             string endConnection = model.Entity[1][1];
             int fileTypeId = this.context.TbDomFileType
