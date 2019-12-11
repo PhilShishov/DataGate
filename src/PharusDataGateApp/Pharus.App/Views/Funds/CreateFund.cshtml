@@ -132,19 +132,7 @@
                 }
             </select>
             <span asp-validation-for="CompanyTypeDesc" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="CompanyAcronym" class="text-torshia"></label><br>
-            <select class="form-control maxw-270" asp-for="CompanyAcronym">
-                <option selected disabled>-- Choose Type --</option>
-                @foreach (var status in (List<string>)ViewData["CompanyAcronymList"])
-                {
-                    <option value="@status">@status</option>
-                }
-            </select>
-            <span asp-validation-for="CompanyAcronym" class="text-danger"></span>
-        </div>
+        </div>        
 
         <div class="form-group">
             <label asp-for="TinNumber" class="text-torshia"></label><br>
