@@ -45,10 +45,8 @@
         {
             var model = new EntitiesViewModel
             {
-                Entities = new List<string[]>(),
                 IsActive = true,
                 ChosenDate = DateTime.Today.ToString("yyyy-MM-dd"),
-                SearchTerm = "Select Funds",
             };
             GetAllActiveEntitiesUtility.GetAllActiveFundsWithHeaders(model, this.fundsService);
 
@@ -227,19 +225,15 @@
         [Route("Funds/ViewEntitySE/{EntityId}/{ChosenDate}")]
         public IActionResult ViewEntitySE(SpecificEntityViewModel viewModel)
         {
-            viewModel.Entity = this.fundsService.GetFundById(viewModel.EntityId);
-            viewModel.EntitySubEntities = this.fundsService.GetFund_SubFunds(viewModel.EntityId);
-            viewModel.FileNameToDisplay = GetFileNameFromFilePath(viewModel.EntityId, viewModel.ChosenDate);
-            viewModel.EntityTimeline = this.fundsService.GetFundTimeline(viewModel.EntityId);
+            SetModelValuesForSpecificView(viewModel);
 
             this.ViewData["FileTypes"] = this.fundsSelectListService.GetAllFundFileTypes();
-
-            var chosenDate = DateTime.ParseExact(viewModel.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
             if (viewModel.Command.Equals("Update Table"))
             {
                 if (viewModel.ChosenDate != null)
                 {
+                    var chosenDate = DateTime.ParseExact(viewModel.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
                     viewModel.Entity = this.fundsService
                         .GetFundById(chosenDate, viewModel.EntityId);
                     viewModel.EntitySubEntities = this.fundsService
@@ -275,7 +269,7 @@
             }
 
             return this.View();
-        }
+        }       
 
         [HttpPost]
         public IActionResult UploadFiles(SpecificEntityViewModel model)
@@ -376,7 +370,7 @@
                 FundId = entityId,
             };
 
-            SetModelValuesForView(model);
+            SetModelValuesForEditView(model);
 
             SetViewDataValuesForFundSelectLists();
 
@@ -525,7 +519,16 @@
             return this.LocalRedirect(returnUrl);
         }
 
-        private static void SetModelValuesForView(EditFundBindingModel model)
+        private void SetModelValuesForSpecificView(SpecificEntityViewModel model)
+        {
+            model.Entity = this.fundsService.GetFundById(model.EntityId);
+            model.EntitySubEntities = this.fundsService.GetFund_SubFunds(model.EntityId);
+            model.FileNameToDisplay = GetFileNameFromFilePath(model.EntityId, model.ChosenDate);
+            model.EntityTimeline = this.fundsService.GetFundTimeline(model.EntityId);
+            model.EntityDocuments = this.fundsService.GetAllFundDocumens(model.EntityId);
+        }
+
+        private static void SetModelValuesForEditView(EditFundBindingModel model)
         {
             model.FundName = model.EntityProperties[1][3];
             model.CSSFCode = model.EntityProperties[1][4];

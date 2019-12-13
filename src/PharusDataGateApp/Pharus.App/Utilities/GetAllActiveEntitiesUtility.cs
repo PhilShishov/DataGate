@@ -37,7 +37,6 @@ namespace Pharus.App.Utilities
             var tableFundsWithoutHeaders = fundsService
                 .GetAllFunds(chosenDate)
                 .Skip(1)
-                .ToList()
                 .Where(f => f.Contains("Active"))
                 .ToList();
 
@@ -54,19 +53,20 @@ namespace Pharus.App.Utilities
         {
             model.Entities = new List<string[]>();
 
+            DateTime? chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture); ;
+
             var tableHeaders = subFundsService
-                .GetAllActiveSubFunds()
+                .GetAllSubFunds(chosenDate)
                 .Take(1)
                 .ToList();
-            var tableFundsWithoutHeaders = subFundsService
-                .GetAllActiveSubFunds()
+            var tableSubFundsWithoutHeaders = subFundsService
+                .GetAllSubFunds(chosenDate)
                 .Skip(1)
-                .ToList()
-                .Where(f => f.Contains("Active"))
+                .Where(sf => sf.Contains("Active"))
                 .ToList();
 
             model.Entities.AddRange(tableHeaders);
-            model.Entities.AddRange(tableFundsWithoutHeaders);
+            model.Entities.AddRange(tableSubFundsWithoutHeaders);
         }
 
         // ________________________________________________________
@@ -78,15 +78,16 @@ namespace Pharus.App.Utilities
         {
             model.Entities = new List<string[]>();
 
+            DateTime? chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture); ;
+
             var tableHeaders = shareClassesService
-                .GetAllActiveShareClasses()
+                .GetAllActiveShareClasses(chosenDate)
                 .Take(1)
                 .ToList();
             var tableFundsWithoutHeaders = shareClassesService
-                .GetAllActiveShareClasses()
+                .GetAllActiveShareClasses(chosenDate)
                 .Skip(1)
-                .ToList()
-                .Where(f => f.Contains("Active"))
+                .Where(sc => sc.Contains("Active"))
                 .ToList();
 
             model.Entities.AddRange(tableHeaders);

@@ -34,7 +34,22 @@
             this.hostingEnvironment = hostingEnvironment;
         }
 
-        public JsonResult AutoCompleteFundList(string searchTerm)
+        [HttpGet]
+        public IActionResult All()
+        {
+            var model = new EntitiesViewModel
+            {
+                IsActive = true,
+                ChosenDate = DateTime.Today.ToString("yyyy-MM-dd"),
+            };
+
+            GetAllActiveEntitiesUtility.GetAllActiveSubFundsWithHeaders(model, this.subFundsService);
+
+            this.ModelState.Clear();
+            return this.View(model);
+        }
+
+        public JsonResult AutoCompleteSubFundList(string searchTerm)
         {
             var result = this.context.TbHistorySubFund.ToList();
             if (searchTerm != null)
@@ -50,23 +65,11 @@
             return this.Json(modifiedData);
         }
 
-        [HttpGet]
-        public IActionResult All()
-        {
-            var model = new EntitiesViewModel
-            {
-                Entities = this.subFundsService.GetAllActiveSubFunds(),
-                IsActive = true,
-            };
-
-            return this.View(model);
-        }
-
         [HttpPost]
         public IActionResult All(EntitiesViewModel model)
         {
             this.ModelState.Clear();
-            model.Entities = this.subFundsService.GetAllActiveSubFunds();
+            model.Entities = this.subFundsService.GetAllSubFunds();
 
             var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
@@ -80,7 +83,7 @@
                     }
                     else
                     {
-                        model.Entities = this.subFundsService.GetAllActiveSubFunds(chosenDate);
+                        model.Entities = this.subFundsService.GetAllSubFunds(chosenDate);
                     }
                 }
             }
@@ -94,10 +97,10 @@
                 model.Entities = new List<string[]>();
 
                 var tableHeaders = this.subFundsService
-                    .GetAllActiveSubFunds()
+                    .GetAllSubFunds()
                     .Take(1)
                     .ToList();
-                var tableFundsWithoutHeaders = this.subFundsService.GetAllActiveSubFunds().Skip(1).ToList();
+                var tableFundsWithoutHeaders = this.subFundsService.GetAllSubFunds().Skip(1).ToList();
 
                 CreateTableView.AddHeadersToView(model.Entities, tableHeaders);
 
@@ -178,7 +181,7 @@
             }
 
             return fileStreamResult;
-        }
+        }      
 
         [HttpGet("SubFunds/ViewEntitySE/{EntityId}")]
         public IActionResult ViewEntitySE(int entityId)
@@ -186,7 +189,7 @@
             SpecificEntityViewModel viewModel = new SpecificEntityViewModel
             {
                 EntityId = entityId,
-                Entity = this.subFundsService.GetActiveSubFundById(entityId),
+                Entity = this.subFundsService.GetSubFundById(entityId),
                 EntitySubEntities = this.subFundsService.GetSubFund_ShareClasses(entityId),
                 BaseEntityName = this.subFundsService.GetSubFund_FundContainer(entityId)[1][1],
             };
@@ -197,7 +200,7 @@
         [HttpPost("SubFunds/ViewEntitySE/{EntityId}")]
         public IActionResult ViewEntitySE(SpecificEntityViewModel viewModel)
         {
-            viewModel.Entity = this.subFundsService.GetActiveSubFundById(viewModel.EntityId);
+            viewModel.Entity = this.subFundsService.GetSubFundById(viewModel.EntityId);
             viewModel.EntitySubEntities = this.subFundsService.GetSubFund_ShareClasses(viewModel.EntityId);
 
             var chosenDate = DateTime.ParseExact(viewModel.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
@@ -206,7 +209,7 @@
             {
                 if (viewModel.ChosenDate != null)
                 {
-                    viewModel.Entity = this.subFundsService.GetActiveSubFundById(chosenDate, viewModel.EntityId);
+                    viewModel.Entity = this.subFundsService.GetSubFundById(chosenDate, viewModel.EntityId);
                 }
             }
             else if (viewModel.Command.Equals("Filter"))
@@ -239,7 +242,7 @@
         {
             SubFundBindingModel model = new SubFundBindingModel
             {
-                EntityProperties = this.subFundsService.GetActiveSubFundWithDateById(entityId),
+                EntityProperties = this.subFundsService.GetSubFundWithDateById(entityId),
                 CalculationDate = new SelectList(this.subfundsSelectListService.GetAllTbDomCalculationDate()),
                 CesrClass = new SelectList(this.subfundsSelectListService.GetAllTbDomCesrClass()),
                 CurrencyCode = new SelectList(this.subfundsSelectListService.GetAllTbDomCurrencyCode()),
@@ -271,7 +274,7 @@
             int entityId = int.Parse(model.EntityProperties[1][0]);
             string returnUrl = $"/SubFunds/ViewSubFundSC/{entityId}";
 
-            var subFund = this.subFundsService.GetActiveSubFundById(entityId);
+            var subFund = this.subFundsService.GetSubFundById(entityId);
 
             if (this.HttpContext.Request.Form.ContainsKey("modify_button"))
             {
@@ -294,7 +297,7 @@
         {
             SubFundBindingModel model = new SubFundBindingModel
             {
-                EntityProperties = this.subFundsService.GetAllActiveSubFunds(),
+                EntityProperties = this.subFundsService.GetAllSubFunds(),
                 CalculationDate = new SelectList(this.subfundsSelectListService.GetAllTbDomCalculationDate()),
                 CesrClass = new SelectList(this.subfundsSelectListService.GetAllTbDomCesrClass()),
                 CurrencyCode = new SelectList(this.subfundsSelectListService.GetAllTbDomCurrencyCode()),

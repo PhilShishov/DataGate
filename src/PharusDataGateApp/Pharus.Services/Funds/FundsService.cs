@@ -226,23 +226,23 @@ namespace Pharus.Services.Funds
         // Execute query table DB based stored procedure
         // with fixed parameters
         public void EditFund(
-                                    int fundId,
-                                    string initialDate,
-                                    int fStatusId,
-                                    string regNumber,
-                                    string fundName,
-                                    string leiCode,
-                                    string cssfCode,
-                                    string faCode,
-                                    string depCode,
-                                    string taCode,
-                                    int fLegalFormId,
-                                    int fLegalTypeId,
-                                    int fLegalVehicleId,
-                                    int fCompanyTypeId,
-                                    string tinNumber,
-                                    string comment,
-                                    string commentTitle)
+                                int fundId,
+                                string initialDate,
+                                int fStatusId,
+                                string regNumber,
+                                string fundName,
+                                string leiCode,
+                                string cssfCode,
+                                string faCode,
+                                string depCode,
+                                string taCode,
+                                int fLegalFormId,
+                                int fLegalTypeId,
+                                int fLegalVehicleId,
+                                int fCompanyTypeId,
+                                string tinNumber,
+                                string comment,
+                                string commentTitle)
         {
             string query = "EXEC sp_modify_fund @f_id, @f_initialDate, @f_status, " +
                 "@f_registrationNumber, @f_officialFundName, @f_shortFundName, " +
