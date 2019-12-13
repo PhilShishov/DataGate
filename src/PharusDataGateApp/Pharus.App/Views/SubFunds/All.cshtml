@@ -10,13 +10,25 @@
 @section Styles{
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-image: none;
+        }
+    </style>
 }
 
-<form asp-controller="SubFunds" class="justify-content-between" method="post">
+<form asp-controller="SubFunds"
+      class="justify-content-between"
+      method="post">
+
     <div>
         <partial name="ContainerEntityPartial" />
 
-        <partial name="ExtractEntitiesViewPartial" />
+        <div class="button-holder d-flex justify-content-center my-5">
+
+            <partial name="ExtractEntitiesViewPartial" />
+
+        </div>
 
         <hr class="bg-pharus hr-2" />
 

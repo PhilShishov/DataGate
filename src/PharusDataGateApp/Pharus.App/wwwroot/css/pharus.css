@@ -1,10 +1,3 @@
-
-/*#bg-one {
-    background-image: url("../images/Background_Pharus.jpg");
-    background-repeat: no-repeat;
-    background-position: center; 
-}*/
-
 #btnLogin {
     -webkit-transition-duration: 0.5s;
     transition-duration: 0.5s;
@@ -217,7 +210,6 @@ input[type=search]::-webkit-search-cancel-button {
 
 #subEntities {
     visibility: hidden;
-    position: absolute;
 }
 
 #upDocModal {
