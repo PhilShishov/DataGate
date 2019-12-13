@@ -48,7 +48,7 @@ namespace Pharus.App.Models.BindingModels.Funds
 
         [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "Fund Admin Code")]
-        [Required]
+        //[Required]
         public string FACode { get; set; }
 
         [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
@@ -63,7 +63,7 @@ namespace Pharus.App.Models.BindingModels.Funds
         [Display(Name = "Company Description")]
         public string CompanyTypeDesc { get; set; }
 
-        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
+        //[RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "TIN Number")]
         public string TinNumber { get; set; }
 

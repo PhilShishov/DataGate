@@ -8,6 +8,7 @@ namespace Pharus.App.Utilities
 {
     using System;
     using System.Linq;
+    using System.Globalization;
     using System.Collections.Generic;
 
     using Pharus.Services.Funds.Contracts;
@@ -27,12 +28,14 @@ namespace Pharus.App.Utilities
         {
             model.Entities = new List<string[]>();
 
+            DateTime? chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture); ;
+
             var tableHeaders = fundsService
-                .GetAllFunds()
+                .GetAllFunds(chosenDate)
                 .Take(1)
                 .ToList();
             var tableFundsWithoutHeaders = fundsService
-                .GetAllFunds()
+                .GetAllFunds(chosenDate)
                 .Skip(1)
                 .ToList()
                 .Where(f => f.Contains("Active"))

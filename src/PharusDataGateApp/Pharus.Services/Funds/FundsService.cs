@@ -273,8 +273,8 @@ namespace Pharus.Services.Funds
                         new SqlParameter("@f_legal_vehicle", SqlDbType.Int) { Value = fLegalVehicleId },
                         new SqlParameter("@f_companyType", SqlDbType.Int) { Value = fCompanyTypeId },
                         new SqlParameter("@f_tinNumber", SqlDbType.NVarChar, 100) { Value = tinNumber },
-                        new SqlParameter("@comment", SqlDbType.NVarChar, 500) { Value = tinNumber },
-                        new SqlParameter("@commentTitle", SqlDbType.NVarChar, 100) { Value = tinNumber },
+                        new SqlParameter("@comment", SqlDbType.NVarChar, 100) { Value = comment },
+                        new SqlParameter("@commentTitle", SqlDbType.NVarChar, 100) { Value = commentTitle },
                     });
 
                     foreach (SqlParameter parameter in command.Parameters)
