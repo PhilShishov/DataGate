@@ -371,7 +371,9 @@
         {
             EditFundBindingModel model = new EditFundBindingModel
             {
+                EntityProperties = this.fundsService.GetFundWithDateById(entityId),
                 InitialDate = DateTime.Today,
+                FundId = entityId,
             };
 
             SetViewDataValuesForFundSelectLists();
