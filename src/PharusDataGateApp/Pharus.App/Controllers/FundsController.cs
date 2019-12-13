@@ -376,11 +376,13 @@
                 FundId = entityId,
             };
 
+            SetModelValuesForView(model);
+
             SetViewDataValuesForFundSelectLists();
 
             this.ModelState.Clear();
             return this.View(model);
-        }
+        }        
 
         [HttpPost]
         [Authorize(Roles = "Admin")]
@@ -388,6 +390,7 @@
         {
             string returnUrl = "/Funds/All";
 
+            model.EntityProperties = this.fundsService.GetFundWithDateById(model.FundId);
             SetViewDataValuesForFundSelectLists();
 
             if (!this.ModelState.IsValid)
@@ -520,6 +523,18 @@
 
 
             return this.LocalRedirect(returnUrl);
+        }
+
+        private static void SetModelValuesForView(EditFundBindingModel model)
+        {
+            model.FundName = model.EntityProperties[1][3];
+            model.CSSFCode = model.EntityProperties[1][4];
+            model.FACode = model.EntityProperties[1][9];
+            model.DEPCode = model.EntityProperties[1][10];
+            model.TACode = model.EntityProperties[1][11];
+            model.TinNumber = model.EntityProperties[1][14];
+            model.LEICode = model.EntityProperties[1][15];
+            model.RegNumber = model.EntityProperties[1][16];
         }
 
         private void SetViewDataValuesForFundSelectLists()
