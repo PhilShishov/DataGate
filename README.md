@@ -5,6 +5,8 @@ Web platform application for managing financial data with login, admin panel and
 
 Features: 
  - Login, CRUD Users and Roles
+ ![](/Views/pharusLogin.JPG)
+ ![](/Views/adminPanel.JPG)
  - Table Views
  - Excel and PDF Extract
  - Update Table View by Date and Status 
@@ -13,6 +15,7 @@ Features:
  
  JS Features: 
   - Autocomplete Search
+ ![](/Views/autocompleteSearch.gif)
   - Double Top Scroll
   - Navbar and Dropdown Management
   - Input Upper Caps
