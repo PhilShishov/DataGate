@@ -35,13 +35,13 @@
                 placeholder: "Select SubFunds",
                 theme: "classic",
                 ajax: {
-                    url: "/Funds/AutoCompleteSubFundList",
+                    url: "/SubFunds/AutoCompleteSubFundList",
                     dataType: "json",
                     delay: 250,
                     data: function (params) {
                         return { searchTerm: params.term };
                     },
-                    processResults: function (data, params) {
+                    processResults: function (data) {
                         return { results: data }
                     }
                 }
@@ -49,12 +49,18 @@
         });
     </script>
 
-    <script type="text/javascript" src="~/js/jquery.doubleScroll.js"></script>
+    <script type="text/javascript" src="~/jquery/jquery.doubleScroll.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
             $('.double-scroll').doubleScroll();
             $('#tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
         });
+    </script>
+
+    <script>
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
     </script>
 }
