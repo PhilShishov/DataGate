@@ -213,3 +213,22 @@
 <div>
     <a asp-action="All">Back to List</a>
 </div>
+
+@section Scripts{
+
+    <script type="text/javascript" src="~/js/inputCaps.js"></script>
+
+    <script>
+        window.onload = () => {
+            manageSideNavBar();
+            manageDropdowns();
+            inputCaps();
+        }
+    </script>
+
+    <script>
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    </script>
+}
