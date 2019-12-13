@@ -1,4 +1,5 @@
 ﻿@model Pharus.App.Models.ViewModels.Entities.SpecificEntityViewModel
+@using System.Globalization
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -41,7 +42,9 @@
 
     <div class="row w-25 ml-3 mb-5">
         <label class="text-torshia m-1 pr-3">FUND ADDITIONAL INFORMATION</label>
-        <select class="custom-select-lg pharus-select form-control input-sm" id="fundChoicesSelect" name="fundChoicesSelect">
+        <select class="custom-select-lg pharus-select form-control input-sm"
+                id="fundChoicesSelect"
+                name="fundChoicesSelect">
             <option value="">Select</option>
             <option value="SubFunds">SubFunds</option>
             <option value="TimelineChanges">Timeline Changes</option>
@@ -139,7 +142,10 @@
             <tbody>
                 @for (int row = 1; row < Model.EntitySubEntities.Count; row++)
                 {
-                    <tr class="tableRowPharus" onclick="document.location = '/SubFunds/ViewEntitySE/@Model.EntitySubEntities[row][2]'">
+                    var subfundId = Model.EntitySubEntities[row][2];
+                    DateTime date = Convert.ToDateTime(Model.EntitySubEntities[row][0]);
+
+                    <tr class="tableRowPharus" onclick="document.location = '/SubFunds/ViewEntitySE/@subfundId/@date.ToString("yyyy-MM-dd")'">
                         @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
                         {
                             <td class="p-1">
