@@ -4,7 +4,7 @@
 // Author:  Philip Shishov, Fabio Martis
 
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-namespace Pharus.Services.Utilities
+namespace Pharus.Utilities.Services
 {
     using System;
     using System.Data.Common;

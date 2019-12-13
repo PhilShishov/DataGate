@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Pharus.Data\Pharus.Data.csproj" />
     <ProjectReference Include="..\Pharus.Domain\Pharus.Domain.csproj" />
+    <ProjectReference Include="..\Pharus.Utilities\Pharus.Utilities.csproj" />
   </ItemGroup>
 
 </Project>
