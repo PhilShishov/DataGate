@@ -226,19 +226,29 @@ namespace Pharus.Services.Funds
         // Execute query table DB based stored procedure
         // with fixed parameters
         public void EditFund(
-                                    List<string> fundsValues,
                                     int fundId,
-                                    DateTime chosenDate,
+                                    string initialDate,
                                     int fStatusId,
+                                    string regNumber,
+                                    string fundName,
+                                    string leiCode,
+                                    string cssfCode,
+                                    string faCode,
+                                    string depCode,
+                                    string taCode,
                                     int fLegalFormId,
                                     int fLegalTypeId,
                                     int fLegalVehicleId,
-                                    int fCompanyTypeId)
+                                    int fCompanyTypeId,
+                                    string tinNumber,
+                                    string comment,
+                                    string commentTitle)
         {
             string query = "EXEC sp_modify_fund @f_id, @f_initialDate, @f_status, " +
                 "@f_registrationNumber, @f_officialFundName, @f_shortFundName, " +
                 "@f_leiCode, @f_cssfCode, @f_faCode, @f_depCode, @f_taCode, " +
-                "@f_legalForm, @f_legalType, @f_legal_vehicle, @f_companyType, @f_tinNumber";
+                "@f_legalForm, @f_legalType, @f_legal_vehicle, @f_companyType, @f_tinNumber, " +
+                "@comment, @commentTitle";
 
             using (SqlConnection connection = new SqlConnection())
             {
@@ -248,21 +258,23 @@ namespace Pharus.Services.Funds
                     command.Parameters.AddRange(new[]
                     {
                         new SqlParameter("@f_id", SqlDbType.Int) { Value = fundId },
-                        new SqlParameter("@f_initialDate", SqlDbType.NVarChar, 100) { Value = chosenDate.ToString("yyyyMMdd") },
+                        new SqlParameter("@f_initialDate", SqlDbType.NVarChar, 100) { Value = initialDate },
                         new SqlParameter("@f_status", SqlDbType.Int) { Value = fStatusId },
-                        new SqlParameter("@f_registrationNumber", SqlDbType.NVarChar, 100) { Value = fundsValues[16] },
-                        new SqlParameter("@f_officialFundName", SqlDbType.NVarChar, 100) { Value = fundsValues[3] },
-                        new SqlParameter("@f_shortFundName", SqlDbType.NVarChar, 100) { Value = fundsValues[3] },
-                        new SqlParameter("@f_leiCode", SqlDbType.NVarChar, 100) { Value = fundsValues[15] },
-                        new SqlParameter("@f_cssfCode", SqlDbType.NVarChar, 100) { Value = fundsValues[4] },
-                        new SqlParameter("@f_faCode", SqlDbType.NVarChar, 100) { Value = fundsValues[9] },
-                        new SqlParameter("@f_depCode", SqlDbType.NVarChar, 100) { Value = fundsValues[10] },
-                        new SqlParameter("@f_taCode", SqlDbType.NVarChar, 100) { Value = fundsValues[11] },
+                        new SqlParameter("@f_registrationNumber", SqlDbType.NVarChar, 100) { Value = regNumber },
+                        new SqlParameter("@f_officialFundName", SqlDbType.NVarChar, 100) { Value = fundName },
+                        new SqlParameter("@f_shortFundName", SqlDbType.NVarChar, 100) { Value = fundName },
+                        new SqlParameter("@f_leiCode", SqlDbType.NVarChar, 100) { Value = leiCode },
+                        new SqlParameter("@f_cssfCode", SqlDbType.NVarChar, 100) { Value = cssfCode },
+                        new SqlParameter("@f_faCode", SqlDbType.NVarChar, 100) { Value = faCode },
+                        new SqlParameter("@f_depCode", SqlDbType.NVarChar, 100) { Value = depCode },
+                        new SqlParameter("@f_taCode", SqlDbType.NVarChar, 100) { Value = taCode },
                         new SqlParameter("@f_legalForm", SqlDbType.Int) { Value = fLegalFormId },
                         new SqlParameter("@f_legalType", SqlDbType.Int) { Value = fLegalTypeId },
                         new SqlParameter("@f_legal_vehicle", SqlDbType.Int) { Value = fLegalVehicleId },
                         new SqlParameter("@f_companyType", SqlDbType.Int) { Value = fCompanyTypeId },
-                        new SqlParameter("@f_tinNumber", SqlDbType.NVarChar, 100) { Value = fundsValues[14] },
+                        new SqlParameter("@f_tinNumber", SqlDbType.NVarChar, 100) { Value = tinNumber },
+                        new SqlParameter("@comment", SqlDbType.NVarChar, 500) { Value = tinNumber },
+                        new SqlParameter("@commentTitle", SqlDbType.NVarChar, 100) { Value = tinNumber },
                     });
 
                     foreach (SqlParameter parameter in command.Parameters)
