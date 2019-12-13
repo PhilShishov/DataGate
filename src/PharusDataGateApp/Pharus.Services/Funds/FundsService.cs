@@ -16,7 +16,7 @@ namespace Pharus.Services.Funds
     using Microsoft.Extensions.Configuration;
 
     using Pharus.Data;
-    using Pharus.Services.Utilities;
+    using Pharus.Utilities.Services;
     using Pharus.Services.Funds.Contracts;
 
     // _____________________________________________________________

@@ -12,7 +12,7 @@ namespace Pharus.Services.ShareClasses
 
     using Microsoft.Extensions.Configuration;
 
-    using Pharus.Services.Utilities;
+    using Pharus.Utilities.Services;
     using Pharus.Services.ShareClasses.Contracts;
 
     // _____________________________________________________________

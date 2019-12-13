@@ -10,7 +10,7 @@ namespace Pharus.Services.SubFunds
     using System.Data.SqlClient;
     using System.Collections.Generic;
 
-    using Pharus.Services.Utilities;
+    using Pharus.Utilities.Services;
     using Pharus.Services.SubFunds.Contracts;
 
     using Microsoft.Extensions.Configuration;

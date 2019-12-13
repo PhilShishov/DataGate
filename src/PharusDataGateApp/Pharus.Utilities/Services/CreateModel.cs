@@ -4,7 +4,7 @@
 // Author:  Philip Shishov
 
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-namespace Pharus.Services.Utilities
+namespace Pharus.Utilities.Services
 {
     using System.Linq;
     using System.Data.SqlClient;
