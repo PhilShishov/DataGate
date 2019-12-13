@@ -7,7 +7,7 @@
 <form class="justify-content-between" method="post">
 
     <div class="d-flex m-1 pr-3">
-        <p>FUND CONTAINER :</p> <p class="text-torshia font-weight-bold">@Model.BaseEntityName</p>
+        <p>FUND CONTAINER :</p> <a href="/Funds/All" class="text-torshia font-weight-bold">@Model.BaseEntityName</a>
     </div>
 
     <partial name="SpecificEntityUpdatePartial" />
@@ -23,9 +23,9 @@
                 <div class="mt-5">
                     <a href="/SubFunds/EditSubFund/@Model.EntityId" class="btn bg-pharus text-white">Edit SubFund</a>
                 </div>
-                <div class="mt-5">
+                @*<div class="mt-5">
                     <a href="" class="btn bg-pharus text-white">Edit SubFund Connection</a>
-                </div>
+                </div>*@
             }
         </div>
     </div>

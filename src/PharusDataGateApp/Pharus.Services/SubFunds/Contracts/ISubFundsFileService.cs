@@ -1,12 +1,12 @@
-﻿namespace Pharus.Services.Funds.Contracts
+﻿namespace Pharus.Services.SubFunds.Contracts
 {
-    public interface IFundsFileService
+    public interface ISubFundsFileService
     {
-        string LoadFundFileToDisplay(int fundId, string chosenDate);
+        string LoadSubFundFileToDisplay(int fundId, string chosenDate);
 
         string GetStreamIdFromFileName(string fileName);
 
-        void AddFileToSpecificFund(
+        void AddFileToSpecificSubFund(
                             string streamId,
                             int fundId,
                             string startConnection,

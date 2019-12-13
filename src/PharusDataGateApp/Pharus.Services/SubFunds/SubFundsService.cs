@@ -229,12 +229,30 @@ namespace Pharus.Services.SubFunds
 
         public List<string[]> GetSubFundTimeline(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                command.CommandText = $"select * from dbo.fn_timeline_subfund({id})";
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
         }
 
         public List<string[]> GetAllSubFundDocumens(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                command.CommandText = $"select * from [dbo].[fn_viewdocuments_subfund]({id})";
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
         }
 
         public void EditSubFund(

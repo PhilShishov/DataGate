@@ -6,9 +6,9 @@
 
     using Microsoft.Extensions.Configuration;
 
-    using Pharus.Services.Funds.Contracts;
+    using Pharus.Services.SubFunds.Contracts;
 
-    public class FundsFileService : IFundsFileService
+    public class SubFundsFileService : ISubFundsFileService
     {
         private const int fileTypeProspectus = 2;
 
@@ -18,12 +18,12 @@
         //
         // Constructor: initialize with DI IConfiguration
         // to retrieve appsettings.json connection string
-        public FundsFileService(IConfiguration config)
+        public SubFundsFileService(IConfiguration config)
         {
             this.configuration = config;
         }
 
-        public string LoadFundFileToDisplay(int fundId, string chosenDate)
+        public string LoadSubFundFileToDisplay(int fundId, string chosenDate)
         {
             string filePath = string.Empty;
             SqlDataReader dataReader;
@@ -85,7 +85,7 @@
             }
         }
 
-        public void AddFileToSpecificFund(
+        public void AddFileToSpecificSubFund(
                                     string streamId,
                                     int fundId,
                                     string startConnection,
