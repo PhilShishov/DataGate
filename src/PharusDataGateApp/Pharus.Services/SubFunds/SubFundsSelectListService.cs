@@ -15,12 +15,13 @@ namespace Pharus.Services.SubFunds
     public class SubFundsSelectListService : ISubFundsSelectListService
     {
         private readonly Pharus_vFinale_Context context;
+        private const int subFundFileType = 2;
 
         public SubFundsSelectListService(
             Pharus_vFinale_Context context)
         {
             this.context = context;
-        }
+        }     
 
         public List<string> GetAllTbDomCalculationDate()
         {
@@ -164,6 +165,16 @@ namespace Pharus.Services.SubFunds
                 .ToList();
 
             return valuationDate;
+        }
+
+        public List<string> GetAllSubFundFileTypes()
+        {
+            var fileTypes = this.context.TbDomFileType
+                .Where(ft => ft.FiletypeEntity == subFundFileType)
+                .Select(ft => ft.FiletypeDesc)
+                .ToList();
+
+            return fileTypes;
         }
     }
 }

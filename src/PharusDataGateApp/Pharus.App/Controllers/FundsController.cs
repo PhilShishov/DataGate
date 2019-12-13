@@ -168,25 +168,7 @@
             }
 
             return fileStreamResult;
-        }
-
-        public JsonResult AutoCompleteSubFundList(string searchTerm, int entityId)
-        {
-            var entitiesToSearch = this.fundsService.GetFund_SubFunds(entityId).Skip(1).ToList();
-
-            if (searchTerm != null)
-            {
-                entitiesToSearch = entitiesToSearch.Where(s => s[3].ToLower().Contains(searchTerm.ToLower())).ToList();
-            }
-
-            var modifiedData = entitiesToSearch.Select(s => new
-            {
-                id = s[3],
-                text = s[3],
-            });
-
-            return this.Json(modifiedData);
-        }
+        }        
 
         [HttpGet]
         [Route("Funds/ViewEntitySE/{EntityId}/{ChosenDate}")]
@@ -194,10 +176,10 @@
         {
             SpecificEntityViewModel viewModel = new SpecificEntityViewModel
             {
+                ChosenDate = chosenDate,
                 EntityId = entityId,
                 Entity = this.fundsService.GetFundById(entityId),
                 EntitySubEntities = this.fundsService.GetFund_SubFunds(entityId),
-                ChosenDate = chosenDate,
                 EntityTimeline = this.fundsService.GetFundTimeline(entityId),
                 EntityDocuments = this.fundsService.GetAllFundDocumens(entityId),
             };
@@ -220,6 +202,24 @@
 
             this.ModelState.Clear();
             return this.View(viewModel);
+        }
+
+        public JsonResult AutoCompleteSubFundList(string searchTerm, int entityId)
+        {
+            var entitiesToSearch = this.fundsService.GetFund_SubFunds(entityId).Skip(1).ToList();
+
+            if (searchTerm != null)
+            {
+                entitiesToSearch = entitiesToSearch.Where(s => s[3].ToLower().Contains(searchTerm.ToLower())).ToList();
+            }
+
+            var modifiedData = entitiesToSearch.Select(s => new
+            {
+                id = s[3],
+                text = s[3],
+            });
+
+            return this.Json(modifiedData);
         }
 
         [HttpPost]
@@ -350,7 +350,7 @@
         {
             FileStream fs = null;
 
-            var path = this.fundsFileService.LoadFileToDisplay(model.EntityId, model.ChosenDate);
+            var path = this.fundsFileService.LoadFundFileToDisplay(model.EntityId, model.ChosenDate);
 
             if (this.HttpContext.Request.Form.ContainsKey("read_Pdf"))
             {
@@ -552,7 +552,7 @@
 
         private string GetFileNameFromFilePath(int entityId, string chosenDate)
         {
-            return this.fundsFileService.LoadFileToDisplay(entityId, chosenDate).Split('\\').Last();
+            return this.fundsFileService.LoadFundFileToDisplay(entityId, chosenDate).Split('\\').Last();
         }
     }
 }

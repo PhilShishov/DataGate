@@ -35,5 +35,7 @@
         List<string> GetAllTbDomTypeOfMarket();
 
         List<string> GetAllTbDomValuationDate();
+
+        List<string> GetAllSubFundFileTypes();
     }
 }
