@@ -7,6 +7,7 @@
 
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc.Rendering;
 
     using Pharus.Data;
@@ -15,6 +16,7 @@
     using Pharus.App.Models.ViewModels.Entities;
     using Pharus.App.Models.BindingModels.SubFunds;
 
+    [Authorize]
     public class SubFundsController : Controller
     {
         private readonly Pharus_vFinale_Context context;
@@ -68,8 +70,7 @@
         [HttpPost]
         public IActionResult All(EntitiesViewModel model)
         {
-            this.ModelState.Clear();
-            model.Entities = this.subFundsService.GetAllSubFunds();
+            GetAllActiveEntitiesUtility.GetAllActiveSubFundsWithHeaders(model, this.subFundsService);
 
             var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
@@ -100,11 +101,28 @@
                     .GetAllSubFunds()
                     .Take(1)
                     .ToList();
-                var tableFundsWithoutHeaders = this.subFundsService.GetAllSubFunds().Skip(1).ToList();
+
+                List<string[]> tableWithoutHeaders = null;
+
+                if (model.IsActive)
+                {
+                    tableWithoutHeaders = this.subFundsService
+                        .GetAllSubFunds(chosenDate)
+                        .Skip(1)
+                        .Where(f => f.Contains("Active"))
+                        .ToList();
+                }
+                else
+                {
+                    tableWithoutHeaders = this.subFundsService
+                        .GetAllSubFunds()
+                        .Skip(1)
+                        .ToList();
+                }
 
                 CreateTableView.AddHeadersToView(model.Entities, tableHeaders);
 
-                CreateTableView.AddTableToView(model.Entities, tableFundsWithoutHeaders, model.SearchTerm.ToLower());
+                CreateTableView.AddTableToView(model.Entities, tableWithoutHeaders, model.SearchTerm.ToLower());
             }
 
             if (model.Entities != null)
@@ -112,7 +130,7 @@
                 return this.View(model);
             }
 
-            return this.View();
+            return this.RedirectToPage("/SubFunds/All");
         }
 
         [HttpPost]
@@ -181,7 +199,7 @@
             }
 
             return fileStreamResult;
-        }      
+        }
 
         [HttpGet("SubFunds/ViewEntitySE/{EntityId}")]
         public IActionResult ViewEntitySE(int entityId)

@@ -13,7 +13,9 @@
     using System.Globalization;
     using System;
     using Pharus.Services.ShareClasses.Contracts;
+    using Microsoft.AspNetCore.Authorization;
 
+    [Authorize]
     public class ShareClassesController : Controller
     {
         private readonly IShareClassesService shareClassesService;

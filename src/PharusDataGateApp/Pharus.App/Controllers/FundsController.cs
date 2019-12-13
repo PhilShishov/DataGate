@@ -100,6 +100,7 @@
                 }
 
                 model.Entities = new List<string[]>();
+
                 var tableHeaders = this.fundsService
                     .GetAllFunds(chosenDate)
                     .Take(1)
