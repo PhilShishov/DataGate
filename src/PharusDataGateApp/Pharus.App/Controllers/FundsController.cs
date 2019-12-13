@@ -52,6 +52,7 @@
             };
             GetAllActiveEntitiesUtility.GetAllActiveFundsWithHeaders(model, this.fundsService);
 
+            this.ModelState.Clear();
             return this.View(model);
         }
 
@@ -75,7 +76,6 @@
         [HttpPost]
         public IActionResult All(EntitiesViewModel model)
         {
-            this.ModelState.Clear();
             GetAllActiveEntitiesUtility.GetAllActiveFundsWithHeaders(model, this.fundsService);
 
             var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
@@ -219,6 +219,7 @@
 
             viewModel.FileNameToDisplay = fileName;
 
+            this.ModelState.Clear();
             return this.View(viewModel);
         }
 
@@ -370,13 +371,12 @@
         {
             EditFundBindingModel model = new EditFundBindingModel
             {
-                EntityProperties = this.fundsService.GetFundWithDateById(entityId),
-                ChosenDate = DateTime.Today,
-                FId = entityId,
+                InitialDate = DateTime.Today,
             };
 
             SetViewDataValuesForFundSelectLists();
 
+            this.ModelState.Clear();
             return this.View(model);
         }
 
@@ -386,25 +386,20 @@
         {
             string returnUrl = "/Funds/All";
 
-            if (!ModelState.IsValid)
+            SetViewDataValuesForFundSelectLists();
+
+            if (!this.ModelState.IsValid)
             {
-                return View(model ?? new EditFundBindingModel());
+                return this.View(model ?? new EditFundBindingModel());
             }
 
-            List<string> entityValues = new List<string>();
-            DateTime chosenDate = model.ChosenDate;
-
-            for (int row = 1; row < model.EntityProperties.Count; row++)
-            {
-                for (int col = 0; col < model.EntityProperties[row].Length; col++)
-                {
-                    entityValues.Add(model.EntityProperties[row][col]);
-                }
-            }
+            string initialDate = model.InitialDate.ToString("yyyyMMdd");
 
             if (this.HttpContext.Request.Form.ContainsKey("update_button"))
             {
-                int fundId = model.FId;
+                int fundId = model.FundId;
+                string fundName = model.FundName;
+                string cssfCode = model.CSSFCode;
                 int fStatusId = this.context.TbDomFStatus
                     .Where(s => s.StFDesc == model.FStatus)
                     .Select(s => s.StFId)
@@ -421,12 +416,28 @@
                     .Where(lt => lt.LtAcronym == model.LegalType)
                     .Select(lt => lt.LtId)
                     .FirstOrDefault();
+                string faCode = model.FACode;
+                string depCode = model.DEPCode;
+                string taCode = model.TACode;
+
+                // Split to take only companyTypeDesc for comparing
+
+                string companyTypeDesc = model.CompanyTypeDesc.Split(" - ").FirstOrDefault();
                 int fCompanyTypeId = this.context.TbDomCompanyType
-                    .Where(ct => ct.CtAcronym == model.CompanyAcronym)
+                    .Where(ct => ct.CtDesc == companyTypeDesc)
                     .Select(ct => ct.CtId)
                     .FirstOrDefault();
+                string tinNumber = model.TinNumber;
+                string leiCode = model.LEICode;
+                string regNumber = model.RegNumber;
 
-                this.fundsService.EditFund(entityValues, fundId, chosenDate, fStatusId, fLegalFormId, fLegalTypeId, fLegalVehicleId, fCompanyTypeId);
+                string comment = model.CommentArea;
+                string commentTitle = model.CommentTitle;
+
+                this.fundsService.EditFund(fundId, initialDate, fStatusId, regNumber,
+                                           fundName, leiCode, cssfCode, faCode, depCode, taCode,
+                                           fLegalFormId, fLegalTypeId, fLegalVehicleId, fCompanyTypeId,
+                                           tinNumber, comment, commentTitle);
             }
 
             return this.LocalRedirect(returnUrl);
@@ -436,14 +447,13 @@
         [Authorize(Roles = "Admin")]
         public IActionResult CreateFund()
         {
-            this.ModelState.Clear();
-
             CreateFundBindingModel model = new CreateFundBindingModel
             {
                 InitialDate = DateTime.Today,
             };
             SetViewDataValuesForFundSelectLists();
 
+            this.ModelState.Clear();
             return this.View(model);
         }
 
@@ -505,6 +515,7 @@
                                              fLegalTypeId, fLegalVehicleId, faCode, depCode, taCode, fCompanyTypeId,
                                              tinNumber, leiCode, regNumber);
             }
+
 
             return this.LocalRedirect(returnUrl);
         }
