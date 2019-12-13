@@ -5,7 +5,7 @@
 // Author:  Philip Shishov
 
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-namespace Pharus.App.Extensions
+namespace Pharus.Infrastructure.Extensions
 {
     using System.Linq;
     using System.Reflection;
