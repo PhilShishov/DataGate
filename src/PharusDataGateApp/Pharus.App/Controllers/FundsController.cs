@@ -490,8 +490,11 @@
                 string depCode = model.DEPCode;
                 string taCode = model.TACode;
 
+                // Split to take only companyTypeDesc for comparing
+
+                string companyTypeDesc = model.CompanyTypeDesc.Split(" - ").FirstOrDefault();
                 int fCompanyTypeId = this.context.TbDomCompanyType
-                    .Where(ct => ct.CtAcronym == model.CompanyAcronym)
+                    .Where(ct => ct.CtDesc == companyTypeDesc)
                     .Select(ct => ct.CtId)
                     .FirstOrDefault();
                 string tinNumber = model.TinNumber;
