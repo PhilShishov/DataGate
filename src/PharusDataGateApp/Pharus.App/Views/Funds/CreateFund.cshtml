@@ -33,7 +33,7 @@
             <label asp-for="FundName" class="text-torshia"></label><br>
             <input type="text"
                    class="form-control maxw-270"
-                   asp-for="FundName" 
+                   asp-for="FundName"
                    id="fundNameInput">
             <span asp-validation-for="FundName" class="text-danger"></span>
         </div>
@@ -132,7 +132,7 @@
                 }
             </select>
             <span asp-validation-for="CompanyTypeDesc" class="text-danger"></span>
-        </div>        
+        </div>
 
         <div class="form-group">
             <label asp-for="TinNumber" class="text-torshia"></label><br>
@@ -186,5 +186,11 @@
             manageDropdowns();
             inputCaps();
         }
-    </script> 
+    </script>
+
+    <script>
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    </script>
 }
