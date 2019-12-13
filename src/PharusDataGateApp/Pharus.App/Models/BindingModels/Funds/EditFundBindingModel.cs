@@ -11,7 +11,7 @@ namespace Pharus.App.Models.BindingModels.Funds
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public class EditFundBindingModel
+    public class EditFundBindingModel : BaseEntityBindingModel
     {
         [Required(ErrorMessage = "Initial Date cannot be null")]
         [Display(Name = "Initial Date")]
@@ -79,6 +79,7 @@ namespace Pharus.App.Models.BindingModels.Funds
         [Display(Name = "Comment Title")]
         public string CommentTitle { get; set; }
 
+        [Display(Name = "Comment Description")]
         public string CommentArea { get; set; }
 
         public List<string> ExistingFundNames { get; set; }
