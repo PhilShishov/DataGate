@@ -75,7 +75,7 @@ namespace Pharus.App.Models.BindingModels.SubFunds
         public string CurrencyCode { get; set; }
 
         [Display(Name = "NAV Frequency")]
-        public string Frequency { get; set; }
+        public string NavFrequency { get; set; }
 
         [Display(Name = "Valuation Date")]
         public string ValuationDate { get; set; }

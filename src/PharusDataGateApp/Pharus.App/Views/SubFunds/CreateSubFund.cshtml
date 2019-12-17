@@ -37,6 +37,292 @@
             <span asp-validation-for="SubFundName" class="text-danger"></span>
         </div>
 
+        <div class="form-group">
+            <label asp-for="SfStatus" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="SfStatus">
+                <option selected disabled>-- Choose Status --</option>
+                @foreach (var status in (List<string>)ViewData["SfStatus"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="SfStatus" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CSSFCode" class="text-torshia"></label><br>
+            <input type="text"
+                   class="form-control maxw-270"
+                   asp-for="CSSFCode">
+            <span asp-validation-for="CSSFCode" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="FACode" class="text-torshia"></label><br>
+            <input type="text"
+                   class="form-control maxw-270"
+                   asp-for="FACode"
+                   id="faCodeInput">
+            <span asp-validation-for="FACode" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="DBCode" class="text-torshia"></label><br>
+            <input type="text"
+                   class="form-control maxw-270"
+                   asp-for="DBCode"
+                   id="depCodeInput">
+            <span asp-validation-for="DBCode" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="TACode" class="text-torshia"></label><br>
+            <input type="text"
+                   class="form-control maxw-270"
+                   asp-for="TACode"
+                   id="taCodeInput">
+            <span asp-validation-for="TACode" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="FirstNavDate" class="text-torshia"></label><br>
+            <input asp-for="FirstNavDate"
+                   type="date"
+                   class="form-control maxw-270">
+            <span asp-validation-for="FirstNavDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="LastNavDate" class="text-torshia"></label><br>
+            <input asp-for="LastNavDate"
+                   type="date"
+                   class="form-control maxw-270">
+            <span asp-validation-for="LastNavDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CSSFAuthDate" class="text-torshia"></label><br>
+            <input asp-for="CSSFAuthDate"
+                   type="date"
+                   class="form-control maxw-270">
+            <span asp-validation-for="CSSFAuthDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ExpiryDate" class="text-torshia"></label><br>
+            <input asp-for="ExpiryDate"
+                   type="date"
+                   class="form-control maxw-270">
+            <span asp-validation-for="ExpiryDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="LEICode" class="text-torshia"></label><br>
+            <input type="text"
+                   class="form-control maxw-270"
+                   asp-for="LEICode"
+                   id="leiCodeInput">
+            <span asp-validation-for="LEICode" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CesrClass" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="CesrClass">
+                <option selected disabled>-- Choose Class --</option>
+                @foreach (var status in (List<string>)ViewData["CesrClass"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="CesrClass" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="GeographicalFocus" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="GeographicalFocus">
+                <option selected disabled>-- Choose GeoFocus --</option>
+                @foreach (var status in (List<string>)ViewData["GeographicalFocus"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="GeographicalFocus" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="GlobalExposure" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="GlobalExposure">
+                <option selected disabled>-- Choose Exposure --</option>
+                @foreach (var status in (List<string>)ViewData["GlobalExposure"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="GlobalExposure" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CurrencyCode" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="CurrencyCode">
+                <option selected disabled>-- Choose Currency --</option>
+                @foreach (var status in (List<string>)ViewData["CurrencyCode"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="CurrencyCode" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="NavFrequency" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="NavFrequency">
+                <option selected disabled>-- Choose Frequency --</option>
+                @foreach (var status in (List<string>)ViewData["NavFrequency"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="NavFrequency" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ValuationDate" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="ValuationDate">
+                <option selected disabled>-- Choose Valuation --</option>
+                @foreach (var status in (List<string>)ViewData["ValuationDate"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="ValuationDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CalculationDate" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="CalculationDate">
+                <option selected disabled>-- Choose Calculation --</option>
+                @foreach (var status in (List<string>)ViewData["CalculationDate"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="CalculationDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Derivatives" class="text-torshia"></label><br>
+            <select id="derivatives" class="form-control maxw-270">
+                <option value="No">No</option>
+                <option value="Yes">Yes</option>
+            </select>
+            <span asp-validation-for="Derivatives" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="DerivMarket" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="DerivMarket">
+                <option selected disabled>-- Choose Market --</option>
+                @foreach (var status in (List<string>)ViewData["DerivMarket"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="DerivMarket" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="DerivPurpose" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="DerivPurpose">
+                <option selected disabled>-- Choose Purpose --</option>
+                @foreach (var status in (List<string>)ViewData["DerivPurpose"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="DerivPurpose" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="PrincipalAssetClass" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="PrincipalAssetClass">
+                <option selected disabled>-- Choose Class --</option>
+                @foreach (var status in (List<string>)ViewData["PrincipalAssetClass"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="PrincipalAssetClass" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="TypeOfMarket" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="TypeOfMarket">
+                <option selected disabled>-- Choose Market --</option>
+                @foreach (var status in (List<string>)ViewData["TypeOfMarket"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="TypeOfMarket" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="PrincipalInvestmentStrategy" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="PrincipalInvestmentStrategy">
+                <option selected disabled>-- Choose Strategy --</option>
+                @foreach (var status in (List<string>)ViewData["PrincipalInvestmentStrategy"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="PrincipalInvestmentStrategy" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ClearingCode" class="text-torshia"></label><br>
+            <input type="text"
+                   class="form-control maxw-270"
+                   asp-for="ClearingCode"
+                   id="leiCodeInput">
+            <span asp-validation-for="ClearingCode" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="SfCatMorningStar" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="SfCatMorningStar">
+                <option selected disabled>-- Choose Category --</option>
+                @foreach (var status in (List<string>)ViewData["SfCatMorningStar"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="SfCatMorningStar" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="SfCatSix" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="SfCatSix">
+                <option selected disabled>-- Choose Category --</option>
+                @foreach (var status in (List<string>)ViewData["SfCatSix"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="SfCatSix" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="SfCatBloomberg" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="SfCatBloomberg">
+                <option selected disabled>-- Choose Category --</option>
+                @foreach (var status in (List<string>)ViewData["SfCatBloomberg"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="SfCatBloomberg" class="text-danger"></span>
+        </div>
+
     </div>
 
     <div class="button-holder mt-4">
