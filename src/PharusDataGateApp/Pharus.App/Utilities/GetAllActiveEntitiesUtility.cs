@@ -81,11 +81,11 @@ namespace Pharus.App.Utilities
             DateTime? chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture); ;
 
             var tableHeaders = shareClassesService
-                .GetAllActiveShareClasses(chosenDate)
+                .GetAllShareClasses(chosenDate)
                 .Take(1)
                 .ToList();
             var tableFundsWithoutHeaders = shareClassesService
-                .GetAllActiveShareClasses(chosenDate)
+                .GetAllShareClasses(chosenDate)
                 .Skip(1)
                 .Where(sc => sc.Contains("Active"))
                 .ToList();

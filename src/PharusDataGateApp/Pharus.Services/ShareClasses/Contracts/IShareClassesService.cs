@@ -5,15 +5,15 @@
 
     public interface IShareClassesService
     {
-        List<string[]> GetAllActiveShareClasses();
+        List<string[]> GetAllShareClasses();
 
-        List<string[]> GetAllActiveShareClasses(DateTime? chosenDate);
+        List<string[]> GetAllShareClasses(DateTime? chosenDate);
 
-        List<string[]> GetActiveShareClassById(int id);
+        List<string[]> GetShareClassById(int id);
 
-        List<string[]> GetActiveShareClassById(DateTime? chosenDate, int id);
+        List<string[]> GetShareClassById(DateTime? chosenDate, int id);
 
-        List<string[]> GetActiveShareClassWithDateById(int id);
+        List<string[]> GetShareClassWithDateById(int id);
 
         List<string[]> GetShareClass_SubFundContainer(int id);
 
