@@ -12,7 +12,7 @@ namespace Pharus.App.Models.BindingModels.SubFunds
 
     public class CreateSubFundBindingModel : BaseEntityBindingModel
     {
-        [Required(ErrorMessage = "Initial Date cannot be null")]
+        [Required(ErrorMessage = "Initial Date cannot be empty!")]
         [Display(Name = "Initial Date")]
         public DateTime InitialDate { get; set; }
 
@@ -33,9 +33,9 @@ namespace Pharus.App.Models.BindingModels.SubFunds
         [Display(Name = "CSSF Code")]
         public string CSSFCode { get; set; }
 
+        [Required(ErrorMessage = "Fund Admin Code cannot be empty!")]
         [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "Fund Admin Code")]
-        [Required]
         public string FACode { get; set; }
 
         [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
@@ -114,6 +114,7 @@ namespace Pharus.App.Models.BindingModels.SubFunds
         [Display(Name = "Bloomberg Category")]
         public string SfCatBloomberg { get; set; }
 
+        [Required(ErrorMessage = "Please choose a fund container!")]
         [Display(Name = "Fund Container")]
         public string FundContainer { get; set; }
 

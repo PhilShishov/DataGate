@@ -13,7 +13,7 @@ namespace Pharus.App.Models.BindingModels.Funds
 
     public class CreateFundBindingModel
     {
-        [Required(ErrorMessage = "Initial Date cannot be null")]
+        [Required(ErrorMessage = "Initial Date cannot be empty!")]
         [Display(Name = "Initial Date")]
         public DateTime InitialDate { get; set; }
 
