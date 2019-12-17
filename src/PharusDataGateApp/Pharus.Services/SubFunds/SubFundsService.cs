@@ -292,23 +292,23 @@ namespace Pharus.Services.SubFunds
                         string expiryDate,
                         int sfStatusId,
                         string leiCode,
-                        int cesrClassId,
-                        int geoFocusId,
-                        int glExpId,
+                        int? cesrClassId,
+                        int? geoFocusId,
+                        int? glExpId,
                         string currency,
-                        int frequencyId,
-                        int valuationId,
-                        int calculationId,
+                        int? frequencyId,
+                        int? valuationId,
+                        int? calculationId,
                         bool isDerivative,
-                        int derivMarketId,
-                        int derivPurposeId,
-                        int principalAssetId,
-                        int typeMarketId,
-                        int principalInvStrId,
+                        int? derivMarketId,
+                        int? derivPurposeId,
+                        int? principalAssetId,
+                        int? typeMarketId,
+                        int? principalInvStrId,
                         string clearingCode,
-                        int catMorningStarId,
-                        int catSixId,
-                        int catBloombergId,
+                        int? catMorningStarId,
+                        int? catSixId,
+                        int? catBloombergId,
                         int fundContainerId
                         )
         {
@@ -348,7 +348,7 @@ namespace Pharus.Services.SubFunds
                         new SqlParameter("@sf_navFrequency", SqlDbType.Int) { Value = frequencyId },
                         new SqlParameter("@sf_valutationDate", SqlDbType.Int) { Value = valuationId },
                         new SqlParameter("@sf_calculationDate", SqlDbType.Int) { Value = calculationId },
-                        new SqlParameter("@sf_derivatives", SqlDbType.Bit) { Value = isDerivative },
+                        new SqlParameter("@sf_derivatives", SqlDbType.Int) { Value = 0 },
                         new SqlParameter("@sf_derivMarket", SqlDbType.Int) { Value = derivMarketId },
                         new SqlParameter("@sf_derivPurpose", SqlDbType.Int) { Value = derivPurposeId },
                         new SqlParameter("@sf_principal_asset_class", SqlDbType.Int) { Value = principalAssetId },
@@ -363,7 +363,7 @@ namespace Pharus.Services.SubFunds
 
                     foreach (SqlParameter parameter in command.Parameters)
                     {
-                        if (parameter.Value == null)
+                        if (parameter.Value == null || parameter == 0)
                         {
                             parameter.Value = DBNull.Value;
                         }
