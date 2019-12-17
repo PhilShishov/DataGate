@@ -328,13 +328,13 @@ namespace Pharus.Services.SubFunds
                 {
                     command.Parameters.AddRange(new[]
                     {
-                        new SqlParameter("@f_initialDate", SqlDbType.NVarChar, 100) { Value = initialDate},
-                        new SqlParameter("@f_endDate", SqlDbType.NVarChar, 100) { Value = endDate},
+                        new SqlParameter("@sf_initialDate", SqlDbType.NVarChar, 100) { Value = initialDate},
+                        new SqlParameter("@sf_endDate", SqlDbType.NVarChar, 100) { Value = endDate},
                         new SqlParameter("@sf_officialSubFundName", SqlDbType.NVarChar, 100) { Value = subFundName },
-                        new SqlParameter("@f_cssfCode", SqlDbType.NVarChar, 100) { Value = cssfCode },
-                        new SqlParameter("@f_faCode", SqlDbType.NVarChar, 100) { Value = faCode },
-                        new SqlParameter("@f_depCode", SqlDbType.NVarChar, 100) { Value = depCode },
-                        new SqlParameter("@f_taCode", SqlDbType.NVarChar, 100) { Value = taCode },
+                        new SqlParameter("@sf_cssfCode", SqlDbType.NVarChar, 100) { Value = cssfCode },
+                        new SqlParameter("@sf_faCode", SqlDbType.NVarChar, 100) { Value = faCode },
+                        new SqlParameter("@sf_depCode", SqlDbType.NVarChar, 100) { Value = depCode },
+                        new SqlParameter("@sf_taCode", SqlDbType.NVarChar, 100) { Value = taCode },
                         new SqlParameter("@sf_firstNavDate", SqlDbType.NVarChar, 100) { Value = endDate},
                         new SqlParameter("@sf_lastNavDate", SqlDbType.NVarChar, 100) { Value = endDate},
                         new SqlParameter("@sf_cssfAuthDate", SqlDbType.NVarChar, 100) { Value = endDate},
@@ -344,7 +344,6 @@ namespace Pharus.Services.SubFunds
                         new SqlParameter("@sf_cesrClass", SqlDbType.Int) { Value = cesrClassId },
                         new SqlParameter("@sf_cssf_geographical_focus", SqlDbType.Int) { Value = geoFocusId },
                         new SqlParameter("@sf_globalExposure", SqlDbType.Int) { Value = glExpId },
-                        new SqlParameter("@sf_cssf_geographical_focus", SqlDbType.Int) { Value = geoFocusId },
                         new SqlParameter("@sf_currency", SqlDbType.NChar) { Value = currency },
                         new SqlParameter("@sf_navFrequency", SqlDbType.Int) { Value = frequencyId },
                         new SqlParameter("@sf_valutationDate", SqlDbType.Int) { Value = valuationId },
