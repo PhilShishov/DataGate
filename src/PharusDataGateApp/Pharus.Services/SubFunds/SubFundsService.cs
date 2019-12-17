@@ -363,7 +363,7 @@ namespace Pharus.Services.SubFunds
 
                     foreach (SqlParameter parameter in command.Parameters)
                     {
-                        if (parameter.Value == null || parameter == 0)
+                        if (parameter.Value == null)
                         {
                             parameter.Value = DBNull.Value;
                         }
@@ -383,5 +383,6 @@ namespace Pharus.Services.SubFunds
                 }
             }
         }
+
     }
 }

@@ -395,6 +395,8 @@
             string cssfAuthDate = model.EndDate?.ToString("yyyyMMdd");
             string expiryDate = model.EndDate?.ToString("yyyyMMdd");
 
+            List<int?> nullIntegerParameters = new List<int?>();
+
             if (this.HttpContext.Request.Form.ContainsKey("create_button"))
             {
                 string subFundName = model.SubFundName;
@@ -494,17 +496,49 @@
                    .Select(fc => fc.FId)
                    .FirstOrDefault();
 
+                SetZeroValuesToNull(nullIntegerParameters, cesrClassId, geoFocusId, glExpId, 
+                                    frequencyId, valuationId, calculationId, derivMarketId, 
+                                    derivPurposeId, principalAssetId, typeMarketId, principalInvStrId, 
+                                    catMorningStarId, catSixId, catBloombergId);
+
                 this.subFundsService.CreateSubFund(initialDate, endDate, subFundName, cssfCode, faCode,
                                                 depCode, taCode, firstNavDate, lastNavDate, cssfAuthDate,
-                                                expiryDate, sfStatusId, leiCode, cesrClassId, geoFocusId,
-                                                glExpId, currency, frequencyId, valuationId, calculationId,
-                                                isDerivative, derivMarketId, derivPurposeId, principalAssetId,
-                                                typeMarketId, principalInvStrId, clearingCode, catMorningStarId,
-                                                catSixId, catBloombergId, fundContainerId);
+                                                expiryDate, sfStatusId, leiCode, nullIntegerParameters[0], nullIntegerParameters[1],
+                                                nullIntegerParameters[2], currency, nullIntegerParameters[3], nullIntegerParameters[4],
+                                                nullIntegerParameters[5], isDerivative, nullIntegerParameters[6], nullIntegerParameters[7],
+                                                nullIntegerParameters[8], nullIntegerParameters[9], nullIntegerParameters[10], 
+                                                clearingCode, nullIntegerParameters[11], nullIntegerParameters[12],
+                                                nullIntegerParameters[13], fundContainerId);
             }
             // End of if statement
 
             return this.LocalRedirect(returnUrl);
+        }
+
+        private static void SetZeroValuesToNull(List<int?> nullIntegerParameters, int? cesrClassId, int? geoFocusId, int? glExpId, int? frequencyId, int? valuationId, int? calculationId, int? derivMarketId, int? derivPurposeId, int? principalAssetId, int? typeMarketId, int? principalInvStrId, int? catMorningStarId, int? catSixId, int? catBloombergId)
+        {
+            nullIntegerParameters.Add(cesrClassId);
+            nullIntegerParameters.Add(geoFocusId);
+            nullIntegerParameters.Add(glExpId);
+            nullIntegerParameters.Add(frequencyId);
+            nullIntegerParameters.Add(valuationId);
+            nullIntegerParameters.Add(calculationId);
+            nullIntegerParameters.Add(derivMarketId);
+            nullIntegerParameters.Add(derivPurposeId);
+            nullIntegerParameters.Add(principalAssetId);
+            nullIntegerParameters.Add(typeMarketId);
+            nullIntegerParameters.Add(principalInvStrId);
+            nullIntegerParameters.Add(catMorningStarId);
+            nullIntegerParameters.Add(catSixId);
+            nullIntegerParameters.Add(catBloombergId);
+
+            for (int i = 0; i < nullIntegerParameters.Count; i++)
+            {
+                if (nullIntegerParameters[i] == 0)
+                {
+                    nullIntegerParameters[i] = null;
+                }
+            }
         }
 
         private void SetViewDataValuesForSubFundSelectLists()
