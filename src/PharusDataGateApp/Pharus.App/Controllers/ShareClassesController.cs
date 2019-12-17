@@ -70,8 +70,7 @@
         [HttpPost]
         public IActionResult All(EntitiesViewModel model)
         {
-            this.ModelState.Clear();
-            model.Entities = this.shareClassesService.GetAllShareClasses();
+            GetAllActiveEntitiesUtility.GetAllActiveShareClassesWithHeaders(model, this.shareClassesService);
 
             var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
@@ -79,7 +78,14 @@
             {
                 if (model.ChosenDate != null)
                 {
-                    model.Entities = this.shareClassesService.GetAllShareClasses(chosenDate);
+                    if (model.IsActive)
+                    {
+                        GetAllActiveEntitiesUtility.GetAllActiveShareClassesWithHeaders(model, this.shareClassesService);
+                    }
+                    else
+                    {
+                        model.Entities = this.shareClassesService.GetAllShareClasses(chosenDate);
+                    }
                 }
             }
             else if (model.Command.Equals("Search"))
@@ -91,12 +97,31 @@
 
                 model.Entities = new List<string[]>();
 
-                var tableHeaders = this.shareClassesService.GetAllShareClasses().Take(1).ToList();
-                var tableFundsWithoutHeaders = this.shareClassesService.GetAllShareClasses().Skip(1).ToList();
+                var tableHeaders = this.shareClassesService
+                    .GetAllShareClasses(chosenDate)
+                    .Take(1)
+                    .ToList();
+                List<string[]> tableWithoutHeaders = null;
+
+                if (model.IsActive)
+                {
+                    tableWithoutHeaders = this.shareClassesService
+                        .GetAllShareClasses(chosenDate)
+                        .Skip(1)
+                        .Where(f => f.Contains("Active"))
+                        .ToList();
+                }
+                else
+                {
+                    tableWithoutHeaders = this.shareClassesService
+                        .GetAllShareClasses()
+                        .Skip(1)
+                        .ToList();
+                }
 
                 CreateTableView.AddHeadersToView(model.Entities, tableHeaders);
 
-                CreateTableView.AddTableToView(model.Entities, tableFundsWithoutHeaders, model.SearchTerm.ToLower());
+                CreateTableView.AddTableToView(model.Entities, tableWithoutHeaders, model.SearchTerm.ToLower());
             }
 
             if (model.Entities != null)
@@ -104,7 +129,7 @@
                 return this.View(model);
             }
 
-            return this.View();
+            return this.RedirectToPage("/ShareClasses/All");
         }
 
         [HttpPost]
