@@ -6,7 +6,6 @@
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace Pharus.App.Models.BindingModels.SubFunds
 {
-    using Microsoft.AspNetCore.Mvc.Rendering;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -102,6 +101,7 @@ namespace Pharus.App.Models.BindingModels.SubFunds
         [Display(Name = "Principal Investment Strategy")]
         public string PrincipalInvestmentStrategy { get; set; }
 
+        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "Clearing Code")]
         public string ClearingCode { get; set; }
 

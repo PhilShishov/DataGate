@@ -366,6 +366,8 @@
                 InitialDate = DateTime.Today,               
             };
 
+            SetViewDataValuesForSubFundSelectLists();
+
             this.ModelState.Clear();
             return this.View(model);
         }
@@ -377,7 +379,7 @@
         {
             string returnUrl = "/SubFunds/All";
 
-            //SetViewDataValuesForFundSelectLists();
+            SetViewDataValuesForSubFundSelectLists();
 
             model.ExistingSubFundNames = this.subFundsService.GetAllSubFundsNames();
 
@@ -432,30 +434,24 @@
             return this.LocalRedirect(returnUrl);
         }
 
-        //private void SetViewDataValuesForFundSelectLists()
-        //{
-        //    this.ViewData["FStatusList"] = this.fundsSelectListService.GetAllTbDomFStatus();
-        //    this.ViewData["LegalFormList"] = this.fundsSelectListService.GetAllTbDomLegalForm();
-        //    this.ViewData["LegalVehicleList"] = this.fundsSelectListService.GetAllTbDomLegalVehicle();
-        //    this.ViewData["LegalTypeList"] = this.fundsSelectListService.GetAllTbDomLegalType();
-        //    this.ViewData["CompanyTypeDescList"] = this.fundsSelectListService.GetAllTbDomCompanyDesc();
-        //}
-
-        //CalculationDate = new SelectList(this.subfundsSelectListService.GetAllTbDomCalculationDate()),
-        //CesrClass = new SelectList(this.subfundsSelectListService.GetAllTbDomCesrClass()),
-        //CurrencyCode = new SelectList(this.subfundsSelectListService.GetAllTbDomCurrencyCode()),
-        //DerivMarket = new SelectList(this.subfundsSelectListService.GetAllTbDomDerivMarket()),
-        //DerivPurpose = new SelectList(this.subfundsSelectListService.GetAllTbDomDerivPurpose()),
-        //Frequency = new SelectList(this.subfundsSelectListService.GetAllTbDomFrequency()),
-        //GeographicalFocus = new SelectList(this.subfundsSelectListService.GetAllTbDomGeographicalFocus()),
-        //GlobalExposure = new SelectList(this.subfundsSelectListService.GetAllTbDomGlobalExposure()),
-        //PrincipalAssetClass = new SelectList(this.subfundsSelectListService.GetAllTbDomPrincipalAssetClass()),
-        //PrincipalInvestmentStrategy = new SelectList(this.subfundsSelectListService.GetAllTbDomPrincipalInvestmentStrategy()),
-        //SfCatBloomberg = new SelectList(this.subfundsSelectListService.GetAllTbDomSfCatBloomberg()),
-        //SfCatMorningStar = new SelectList(this.subfundsSelectListService.GetAllTbDomSfCatMorningStar()),
-        //SfCatSix = new SelectList(this.subfundsSelectListService.GetAllTbDomSfCatSix()),
-        //SfStatus = new SelectList(this.subfundsSelectListService.GetAllTbDomSFStatus()),
-        //TypeOfMarket = new SelectList(this.subfundsSelectListService.GetAllTbDomTypeOfMarket()),
-        //ValuationDate = new SelectList(this.subfundsSelectListService.GetAllTbDomValuationDate()),
+        private void SetViewDataValuesForSubFundSelectLists()
+        {
+            this.ViewData["SFStatus"] = this.subfundsSelectListService.GetAllTbDomSFStatus();
+            this.ViewData["CesrClass"] = this.subfundsSelectListService.GetAllTbDomCesrClass();
+            this.ViewData["GeographicalFocus"] = this.subfundsSelectListService.GetAllTbDomGeographicalFocus();
+            this.ViewData["GlobalExposure"] = this.subfundsSelectListService.GetAllTbDomGlobalExposure();
+            this.ViewData["CurrencyCode"] = this.subfundsSelectListService.GetAllTbDomCurrencyCode();
+            this.ViewData["NavFrequency"] = this.subfundsSelectListService.GetAllTbDomFrequency();
+            this.ViewData["ValuationDate"] = this.subfundsSelectListService.GetAllTbDomValuationDate();
+            this.ViewData["CalculationDate"] = this.subfundsSelectListService.GetAllTbDomCalculationDate();
+            this.ViewData["DerivMarket"] = this.subfundsSelectListService.GetAllTbDomDerivMarket();
+            this.ViewData["DerivPurpose"] = this.subfundsSelectListService.GetAllTbDomDerivPurpose();
+            this.ViewData["PrincipalAssetClass"] = this.subfundsSelectListService.GetAllTbDomPrincipalAssetClass();
+            this.ViewData["TypeOfMarket"] = this.subfundsSelectListService.GetAllTbDomTypeOfMarket();
+            this.ViewData["PrincipalInvestmentStrategy"] = this.subfundsSelectListService.GetAllTbDomPrincipalInvestmentStrategy();
+            this.ViewData["SfCatMorningStar"] = this.subfundsSelectListService.GetAllTbDomSfCatMorningStar();
+            this.ViewData["SfCatSix"] = this.subfundsSelectListService.GetAllTbDomSfCatSix();
+            this.ViewData["SfCatBloomberg"] = this.subfundsSelectListService.GetAllTbDomSfCatBloomberg();
+        }
     }
 }
