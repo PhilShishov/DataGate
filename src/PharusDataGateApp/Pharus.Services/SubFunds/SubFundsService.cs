@@ -278,21 +278,37 @@ namespace Pharus.Services.SubFunds
         }
 
         public void CreateSubFund(
-                                    string initialDate,
-                                    string endDate,
-                                    string fundName,
-                                    string cssfCode,
-                                    int fStatusId,
-                                    int fLegalFormId,
-                                    int fLegalTypeId,
-                                    int fLegalVehicleId,
-                                    string faCode,
-                                    string depCode,
-                                    string taCode,
-                                    int fCompanyTypeId,
-                                    string tinNumber,
-                                    string leiCode,
-                                    string regNumber)
+                        string initialDate,
+                        string endDate,
+                        string subFundName,
+                        string cssfCode,
+                        string faCode,
+                        string depCode,
+                        string taCode,
+                        string firstNavDate,
+                        string lastNavDate,
+                        string cssfAuthDate,
+                        string expiryDate,
+                        int fStatusId,
+                        string leiCode,
+                        int cesrClassId,
+                        int geoFocusId,
+                        int glExpId,
+                        int currencyId,
+                        int frequencyId,
+                        int valuationId,
+                        int calculationId,
+                        bool derivatives,
+                        int derivMarketId,
+                        int derivPurposeId,
+                        int principalAssetId,
+                        int typeMarketId,
+                        int principalInvStrId,
+                        string clearingCode,
+                        int catMorningStarId,
+                        int catSixId,
+                        int catBloombergId
+                        )
         {
             throw new NotImplementedException();
         }

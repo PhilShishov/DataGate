@@ -9,7 +9,7 @@
 <form asp-action="CreateSubFund" method="post" class="d-inline">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="d-inline"
-         id="createSubFundForm">
+         id="createForm">
 
         <div class="form-group">
             <label asp-for="InitialDate" class="text-torshia"></label><br>
@@ -218,9 +218,11 @@
             <span asp-validation-for="Derivatives" class="text-danger"></span>
         </div>
 
-        <div class="form-group">
-            <label asp-for="DerivMarket" class="text-torshia"></label><br>
-            <select class="form-control maxw-270" asp-for="DerivMarket">
+        <div class="form-group" id="derivMarket" hidden>
+            <label asp-for="DerivMarket"
+                   class="text-torshia"></label><br>
+            <select class="form-control maxw-270"
+                    asp-for="DerivMarket">
                 <option selected disabled>-- Choose Market --</option>
                 @foreach (var status in (List<string>)ViewData["DerivMarket"])
                 {
@@ -230,9 +232,11 @@
             <span asp-validation-for="DerivMarket" class="text-danger"></span>
         </div>
 
-        <div class="form-group">
-            <label asp-for="DerivPurpose" class="text-torshia"></label><br>
-            <select class="form-control maxw-270" asp-for="DerivPurpose">
+        <div class="form-group" id="derivPurpose" hidden>
+            <label asp-for="DerivPurpose"
+                   class="text-torshia"></label><br>
+            <select class="form-control maxw-270"
+                    asp-for="DerivPurpose">
                 <option selected disabled>-- Choose Purpose --</option>
                 @foreach (var status in (List<string>)ViewData["DerivPurpose"])
                 {
@@ -350,6 +354,7 @@
             manageSideNavBar();
             manageDropdowns();
             inputCaps();
+            getDerivatives();
         }
     </script>
 
