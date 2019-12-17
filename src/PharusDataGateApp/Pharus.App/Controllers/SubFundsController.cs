@@ -300,86 +300,162 @@
             return fileStreamResult;
         }
 
-        [HttpGet("SubFunds/EditSubFund/{EntityId}")]
-        public IActionResult EditSubFund(int entityId)
+        //[HttpGet("SubFunds/EditSubFund/{EntityId}")]
+        //[Authorize(Roles = "Admin")]
+        //public IActionResult EditSubFund(int entityId)
+        //{
+        //    SubFundBindingModel model = new SubFundBindingModel
+        //    {
+        //        EntityProperties = this.subFundsService.GetSubFundWithDateById(entityId),
+        //        CalculationDate = new SelectList(this.subfundsSelectListService.GetAllTbDomCalculationDate()),
+        //        CesrClass = new SelectList(this.subfundsSelectListService.GetAllTbDomCesrClass()),
+        //        CurrencyCode = new SelectList(this.subfundsSelectListService.GetAllTbDomCurrencyCode()),
+        //        DerivMarket = new SelectList(this.subfundsSelectListService.GetAllTbDomDerivMarket()),
+        //        DerivPurpose = new SelectList(this.subfundsSelectListService.GetAllTbDomDerivPurpose()),
+        //        Frequency = new SelectList(this.subfundsSelectListService.GetAllTbDomFrequency()),
+        //        GeographicalFocus = new SelectList(this.subfundsSelectListService.GetAllTbDomGeographicalFocus()),
+        //        GlobalExposure = new SelectList(this.subfundsSelectListService.GetAllTbDomGlobalExposure()),
+        //        PrincipalAssetClass = new SelectList(this.subfundsSelectListService.GetAllTbDomPrincipalAssetClass()),
+        //        PrincipalInvestmentStrategy = new SelectList(this.subfundsSelectListService.GetAllTbDomPrincipalInvestmentStrategy()),
+        //        SfCatBloomberg = new SelectList(this.subfundsSelectListService.GetAllTbDomSfCatBloomberg()),
+        //        SfCatMorningStar = new SelectList(this.subfundsSelectListService.GetAllTbDomSfCatMorningStar()),
+        //        SfCatSix = new SelectList(this.subfundsSelectListService.GetAllTbDomSfCatSix()),
+        //        SfStatus = new SelectList(this.subfundsSelectListService.GetAllTbDomSFStatus()),
+        //        TypeOfMarket = new SelectList(this.subfundsSelectListService.GetAllTbDomTypeOfMarket()),
+        //        ValuationDate = new SelectList(this.subfundsSelectListService.GetAllTbDomValuationDate()),
+        //    };
+
+        //    return this.View(model);
+        //}
+
+        //[HttpPost]
+        //[Authorize(Roles = "Admin")]
+        //public IActionResult EditSubFund(SubFundBindingModel model)
+        //{
+        //    // if (!ModelState.IsValid)
+        //    // {
+        //    //    return View(model ?? new EditFundBindingModel());
+        //    // }
+        //    int entityId = int.Parse(model.EntityProperties[1][0]);
+        //    string returnUrl = $"/SubFunds/ViewSubFundSC/{entityId}";
+
+        //    var subFund = this.subFundsService.GetSubFundById(entityId);
+
+        //    if (this.HttpContext.Request.Form.ContainsKey("modify_button"))
+        //    {
+        //        for (int row = 1; row < subFund.Count; row++)
+        //        {
+        //            for (int col = 0; col < subFund[row].Length; col++)
+        //            {
+        //                subFund[row][col] = model.EntityProperties[row][col];
+        //            }
+        //        }
+
+        //        return this.LocalRedirect(returnUrl);
+        //    }
+
+        //    return this.LocalRedirect(returnUrl);
+        //}
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IActionResult CreateSubFund()
         {
-            SubFundBindingModel model = new SubFundBindingModel
+            CreateSubFundBindingModel model = new CreateSubFundBindingModel
             {
-                EntityProperties = this.subFundsService.GetSubFundWithDateById(entityId),
-                CalculationDate = new SelectList(this.subfundsSelectListService.GetAllTbDomCalculationDate()),
-                CesrClass = new SelectList(this.subfundsSelectListService.GetAllTbDomCesrClass()),
-                CurrencyCode = new SelectList(this.subfundsSelectListService.GetAllTbDomCurrencyCode()),
-                DerivMarket = new SelectList(this.subfundsSelectListService.GetAllTbDomDerivMarket()),
-                DerivPurpose = new SelectList(this.subfundsSelectListService.GetAllTbDomDerivPurpose()),
-                Frequency = new SelectList(this.subfundsSelectListService.GetAllTbDomFrequency()),
-                GeographicalFocus = new SelectList(this.subfundsSelectListService.GetAllTbDomGeographicalFocus()),
-                GlobalExposure = new SelectList(this.subfundsSelectListService.GetAllTbDomGlobalExposure()),
-                PrincipalAssetClass = new SelectList(this.subfundsSelectListService.GetAllTbDomPrincipalAssetClass()),
-                PrincipalInvestmentStrategy = new SelectList(this.subfundsSelectListService.GetAllTbDomPrincipalInvestmentStrategy()),
-                SfCatBloomberg = new SelectList(this.subfundsSelectListService.GetAllTbDomSfCatBloomberg()),
-                SfCatMorningStar = new SelectList(this.subfundsSelectListService.GetAllTbDomSfCatMorningStar()),
-                SfCatSix = new SelectList(this.subfundsSelectListService.GetAllTbDomSfCatSix()),
-                SfStatus = new SelectList(this.subfundsSelectListService.GetAllTbDomSFStatus()),
-                TypeOfMarket = new SelectList(this.subfundsSelectListService.GetAllTbDomTypeOfMarket()),
-                ValuationDate = new SelectList(this.subfundsSelectListService.GetAllTbDomValuationDate()),
+                InitialDate = DateTime.Today,               
             };
 
+            this.ModelState.Clear();
             return this.View(model);
         }
 
         [HttpPost]
-        public IActionResult EditSubFund(SubFundBindingModel model)
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateSubFund(CreateSubFundBindingModel model)
         {
-            // if (!ModelState.IsValid)
-            // {
-            //    return View(model ?? new EditFundBindingModel());
-            // }
-            int entityId = int.Parse(model.EntityProperties[1][0]);
-            string returnUrl = $"/SubFunds/ViewSubFundSC/{entityId}";
+            string returnUrl = "/SubFunds/All";
 
-            var subFund = this.subFundsService.GetSubFundById(entityId);
+            //SetViewDataValuesForFundSelectLists();
 
-            if (this.HttpContext.Request.Form.ContainsKey("modify_button"))
+            model.ExistingSubFundNames = this.subFundsService.GetAllSubFundsNames();
+
+            if (!this.ModelState.IsValid || model.ExistingSubFundNames.Any(sf => sf == model.SubFundName))
             {
-                for (int row = 1; row < subFund.Count; row++)
-                {
-                    for (int col = 0; col < subFund[row].Length; col++)
-                    {
-                        subFund[row][col] = model.EntityProperties[row][col];
-                    }
-                }
+                return this.View(model ?? new CreateSubFundBindingModel());
+            }
 
-                return this.LocalRedirect(returnUrl);
+            string initialDate = model.InitialDate.ToString("yyyyMMdd");
+            string endDate = model.EndDate?.ToString("yyyyMMdd");
+
+            if (this.HttpContext.Request.Form.ContainsKey("create_button"))
+            {
+                //string fundName = model.FundName;
+                //string cssfCode = model.CSSFCode;
+                //int fStatusId = this.context.TbDomFStatus
+                //    .Where(s => s.StFDesc == model.FStatus)
+                //    .Select(s => s.StFId)
+                //    .FirstOrDefault();
+                //int fLegalFormId = this.context.TbDomLegalForm
+                //    .Where(lf => lf.LfAcronym == model.LegalForm)
+                //    .Select(lf => lf.LfId)
+                //    .FirstOrDefault();
+                //int fLegalVehicleId = this.context.TbDomLegalVehicle
+                //    .Where(lv => lv.LvAcronym == model.LegalVehicle)
+                //    .Select(lv => lv.LvId)
+                //    .FirstOrDefault();
+                //int fLegalTypeId = this.context.TbDomLegalType
+                //    .Where(lt => lt.LtAcronym == model.LegalType)
+                //    .Select(lt => lt.LtId)
+                //    .FirstOrDefault();
+                //string faCode = model.FACode;
+                //string depCode = model.DEPCode;
+                //string taCode = model.TACode;
+
+                //// Split to take only companyTypeDesc for comparing
+
+                //string companyTypeDesc = model.CompanyTypeDesc.Split(" - ").FirstOrDefault();
+                //int fCompanyTypeId = this.context.TbDomCompanyType
+                //    .Where(ct => ct.CtDesc == companyTypeDesc)
+                //    .Select(ct => ct.CtId)
+                //    .FirstOrDefault();
+                //string tinNumber = model.TinNumber;
+                //string leiCode = model.LEICode;
+                //string regNumber = model.RegNumber;
+
+                //this.fundsService.CreateFund(initialDate, endDate, fundName, cssfCode, fStatusId, fLegalFormId,
+                //                             fLegalTypeId, fLegalVehicleId, faCode, depCode, taCode, fCompanyTypeId,
+                //                             tinNumber, leiCode, regNumber);
             }
 
             return this.LocalRedirect(returnUrl);
         }
 
-        [HttpGet]
-        public IActionResult CreateSubFund()
-        {
-            SubFundBindingModel model = new SubFundBindingModel
-            {
-                EntityProperties = this.subFundsService.GetAllSubFunds(),
-                CalculationDate = new SelectList(this.subfundsSelectListService.GetAllTbDomCalculationDate()),
-                CesrClass = new SelectList(this.subfundsSelectListService.GetAllTbDomCesrClass()),
-                CurrencyCode = new SelectList(this.subfundsSelectListService.GetAllTbDomCurrencyCode()),
-                DerivMarket = new SelectList(this.subfundsSelectListService.GetAllTbDomDerivMarket()),
-                DerivPurpose = new SelectList(this.subfundsSelectListService.GetAllTbDomDerivPurpose()),
-                Frequency = new SelectList(this.subfundsSelectListService.GetAllTbDomFrequency()),
-                GeographicalFocus = new SelectList(this.subfundsSelectListService.GetAllTbDomGeographicalFocus()),
-                GlobalExposure = new SelectList(this.subfundsSelectListService.GetAllTbDomGlobalExposure()),
-                PrincipalAssetClass = new SelectList(this.subfundsSelectListService.GetAllTbDomPrincipalAssetClass()),
-                PrincipalInvestmentStrategy = new SelectList(this.subfundsSelectListService.GetAllTbDomPrincipalInvestmentStrategy()),
-                SfCatBloomberg = new SelectList(this.subfundsSelectListService.GetAllTbDomSfCatBloomberg()),
-                SfCatMorningStar = new SelectList(this.subfundsSelectListService.GetAllTbDomSfCatMorningStar()),
-                SfCatSix = new SelectList(this.subfundsSelectListService.GetAllTbDomSfCatSix()),
-                SfStatus = new SelectList(this.subfundsSelectListService.GetAllTbDomSFStatus()),
-                TypeOfMarket = new SelectList(this.subfundsSelectListService.GetAllTbDomTypeOfMarket()),
-                ValuationDate = new SelectList(this.subfundsSelectListService.GetAllTbDomValuationDate()),
-            };
+        //private void SetViewDataValuesForFundSelectLists()
+        //{
+        //    this.ViewData["FStatusList"] = this.fundsSelectListService.GetAllTbDomFStatus();
+        //    this.ViewData["LegalFormList"] = this.fundsSelectListService.GetAllTbDomLegalForm();
+        //    this.ViewData["LegalVehicleList"] = this.fundsSelectListService.GetAllTbDomLegalVehicle();
+        //    this.ViewData["LegalTypeList"] = this.fundsSelectListService.GetAllTbDomLegalType();
+        //    this.ViewData["CompanyTypeDescList"] = this.fundsSelectListService.GetAllTbDomCompanyDesc();
+        //}
 
-            return this.View(model);
-        }
+        //CalculationDate = new SelectList(this.subfundsSelectListService.GetAllTbDomCalculationDate()),
+        //CesrClass = new SelectList(this.subfundsSelectListService.GetAllTbDomCesrClass()),
+        //CurrencyCode = new SelectList(this.subfundsSelectListService.GetAllTbDomCurrencyCode()),
+        //DerivMarket = new SelectList(this.subfundsSelectListService.GetAllTbDomDerivMarket()),
+        //DerivPurpose = new SelectList(this.subfundsSelectListService.GetAllTbDomDerivPurpose()),
+        //Frequency = new SelectList(this.subfundsSelectListService.GetAllTbDomFrequency()),
+        //GeographicalFocus = new SelectList(this.subfundsSelectListService.GetAllTbDomGeographicalFocus()),
+        //GlobalExposure = new SelectList(this.subfundsSelectListService.GetAllTbDomGlobalExposure()),
+        //PrincipalAssetClass = new SelectList(this.subfundsSelectListService.GetAllTbDomPrincipalAssetClass()),
+        //PrincipalInvestmentStrategy = new SelectList(this.subfundsSelectListService.GetAllTbDomPrincipalInvestmentStrategy()),
+        //SfCatBloomberg = new SelectList(this.subfundsSelectListService.GetAllTbDomSfCatBloomberg()),
+        //SfCatMorningStar = new SelectList(this.subfundsSelectListService.GetAllTbDomSfCatMorningStar()),
+        //SfCatSix = new SelectList(this.subfundsSelectListService.GetAllTbDomSfCatSix()),
+        //SfStatus = new SelectList(this.subfundsSelectListService.GetAllTbDomSFStatus()),
+        //TypeOfMarket = new SelectList(this.subfundsSelectListService.GetAllTbDomTypeOfMarket()),
+        //ValuationDate = new SelectList(this.subfundsSelectListService.GetAllTbDomValuationDate()),
     }
 }
