@@ -7,11 +7,13 @@
 namespace Pharus.Services.ShareClasses
 {
     using System;
+    using System.Linq;
     using System.Data.SqlClient;
     using System.Collections.Generic;
 
     using Microsoft.Extensions.Configuration;
 
+    using Pharus.Data;
     using Pharus.Utilities.Services;
     using Pharus.Services.ShareClasses.Contracts;
 
@@ -20,14 +22,18 @@ namespace Pharus.Services.ShareClasses
     {
         private readonly string defaultDate = DateTime.Today.ToString("yyyyMMdd");
         private readonly IConfiguration configuration;
+        private readonly Pharus_vFinale_Context context;
 
         // ________________________________________________________
         //
         // Constructor: initialize with DI IConfiguration
         // to retrieve appsettings.json connection string
-        public ShareClassesService(IConfiguration config)
+        public ShareClassesService(
+            IConfiguration config,
+             Pharus_vFinale_Context context)
         {
             this.configuration = config;
+            this.context = context;
         }
 
         // ________________________________________________________
@@ -67,6 +73,13 @@ namespace Pharus.Services.ShareClasses
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
+        }
+
+        public List<string> GetAllShareClassesNames()
+        {
+            return this.context.TbHistoryShareClass
+              .Select(f => f.ScOfficialShareClassName)
+              .ToList();
         }
 
         public List<string[]> GetShareClassById(int id)
@@ -118,6 +131,28 @@ namespace Pharus.Services.ShareClasses
             }
         }
 
+        public List<string[]> GetShareClassWithDateById(DateTime? chosenDate, int id)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                if (chosenDate == null)
+                {
+                    command.CommandText = $"select * from fn_active_shareclasses('{this.defaultDate}') where [ID] = {id}";
+                }
+                else
+                {
+                    command.CommandText = $"select * from fn_active_shareclasses('{chosenDate?.ToString("yyyyMMdd")}') where [ID] = {id}";
+                }
+
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
         public List<string[]> GetShareClass_SubFundContainer(int id)
         {
             using (SqlConnection connection = new SqlConnection())
@@ -153,6 +188,34 @@ namespace Pharus.Services.ShareClasses
                 {
                     command.CommandText = $"select * from fn_SubfundForShareclassAtDate('{chosenDate?.ToString("yyyyMMdd")}', {id})";
                 }
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
+        public List<string[]> GetShareClassesTimeline(int id)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                command.CommandText = $"select * from dbo.fn_timeline_shareclass({id})";
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
+        public List<string[]> GetAllShareClassesDocumens(int id)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                command.CommandText = $"select * from [dbo].[fn_viewdocuments_shareclass]({id})";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }

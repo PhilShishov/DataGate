@@ -1,54 +1,33 @@
-﻿@model Pharus.App.Models.ViewModels.Entities.EntitiesViewModel
+﻿@model Pharus.App.Models.ViewModels.Entities.SpecificEntityViewModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
 }
 
-<form class="justify-content-between" method="post">
+@section Styles{
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-image: none;
+        }
+    </style>
+}
+
+<form asp-controller="SubFunds"
+      class="justify-content-between"
+      method="post">
 
     <div class="d-flex m-1 pr-3">
-        <p>SUBFUND CONTAINER :</p> <p class="text-torshia font-weight-bold">@Model.BaseEntityName</p>
+        <p>SUBFUND CONTAINER :</p> <a href="/SubFunds/ViewEntitySE/@Model.BaseEntityId/@Model.ChosenDate" class="text-torshia font-weight-bold">@Model.BaseEntityName</a>
     </div>
 
-    <div class="w-100 flex-wrap my-5">
-        <label for="date"
-               class="text-torshia m-1 pr-3">SELECT DATE:</label>
-        <input type="date"
-               id="fundDatetime"
-               asp-for="ChosenDate"
-               min="2018-01-01" max=@DateTime.Today.ToString("yyyy-MM-dd")>
-
-        <input type="submit"
-               class="bg-pharus text-white"
-               asp-for="Command"
-               value="Update Table"></>
-    </div>
+    <partial name="SpecificEntityUpdatePartial" />
 
     <div class="d-flex justify-content-between">
 
-        <div class="table-responsive border-0 w-35">
-            <table class="table table-hover">
-                <tbody>
-                    @for (int row = 1; row < Model.Entities.Count; row++)
-                    {
-                        @for (int col = 0; col < Model.Entities[row].Length; col++)
-                        {
-                            <tr>
-                                <th class="text-secondary p-1">
-                                    <h5>
-                                        @Model.Entities[0][col]
-                                    </h5>
-                                </th>
-                                <td class="p-1">
-                                    @Model.Entities[row][col]
-                                </td>
-                            </tr>
-                        }
-                    }
-                </tbody>
-            </table>
-        </div>
-
+        <partial name="SpecificEntityInfoPartial" />
         <div class="w-35 float-right">
             <partial name="SpecificEntityDocumentsPartial" />
 
@@ -57,10 +36,139 @@
                 <div class="mt-5">
                     <a href="/ShareClasses/EditShareClass/@Model.EntityId" class="btn bg-pharus text-white">Edit ShareClass</a>
                 </div>
-                <div class="mt-5">
-                    <a href="" class="btn bg-pharus text-white">Edit ShareClass Connection</a>
-                </div>
+                @*<div class="mt-5">
+                        <a href="" class="btn bg-pharus text-white">Edit SubFund Connection</a>
+                    </div>*@
             }
         </div>
     </div>
+
+    <partial name="SpecificEntitySearchPartial" />
+    <partial name="ExtractSubEntitiesViewPartial" />
+
+    <div class="row w-25 ml-3 mb-5">
+        <label class="text-torshia m-1 pr-3">SHARECLASS ADDITIONAL INFORMATION</label>
+        <select class="custom-select-lg pharus-select form-control input-sm"
+                id="shareClassChoicesSelect"
+                name="shareClassChoicesSelect">
+            <option value="">Select</option>
+            <option value="TimelineChanges">Timeline Changes</option>
+            <option value="AllDocuments">All Documents</option>
+        </select>
+    </div>
+
+
+
+    <div id="allDocuments">
+        <table class="table table-bordered table-hover">
+            <thead>
+                @for (int row = 0; row < 1; row++)
+                {
+                    <tr>
+                        @for (int col = 0; col < Model.EntityDocuments[row].Length; col++)
+                        {
+                            <th class="text-secondary p-1">
+                                <h5>
+                                    @Model.EntityDocuments[row][col]
+                                </h5>
+                            </th>
+                        }
+                    </tr>
+                }
+            </thead>
+
+            <tbody>
+                @for (int row = 1; row < Model.EntityDocuments.Count; row++)
+                {
+                    <tr>
+                        @for (int col = 0; col < Model.EntityDocuments[row].Length; col++)
+                        {
+                            <td class="p-1">
+                                @if (Model.EntityDocuments[0][col] == "File Name")
+                                {
+                                    <button class="btn-link"
+                                            formtarget="_blank"
+                                            type="submit"
+                                            formaction="/@controllerName/ReadPdfFile"
+                                            name="read_Pdf">
+                                        @Model.EntityDocuments[row][col]
+                                    </button>
+                                }
+                                else
+                                {
+                                    @Model.EntityDocuments[row][col]
+
+                                }
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container py-5"
+         id="timelineChanges">
+        <div class="row">
+            <div class="col-lg-7 mx-auto">
+                <ul class="timeline">
+                    @for (int row = 1; row < Model.EntityTimeline.Count; row++)
+                    {
+                        <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
+                            <div class="timeline-arrow"></div>
+                            <h2 class="h5 mb-0">@Model.EntityTimeline[row][3]</h2>
+                            <span class="small text-gray">
+                                <i class="fa fa-clock-o mr-1"></i>@Model.EntityTimeline[row][1] - @Model.EntityTimeline[row][2]
+                            </span>
+                            <p class="text-small mt-2 font-weight-light">@Model.EntityTimeline[row][4]</p>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
 </form>
+
+@section Scripts{
+    <script type="text/javascript" src="~/jquery/jquery.doubleScroll.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.double-scroll').doubleScroll();
+            $('.tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
+
+            $("#shareClassChoicesSelect").on('change', function () {
+                let dropdownvalue = $("#shareClassChoicesSelect option:selected").val();
+
+                if (dropdownvalue == 'TimelineChanges') {
+                    $("#timelineChanges").css('visibility', 'visible');
+                    $("#allDocuments").css('visibility', 'hidden');
+                }
+                else if (dropdownvalue == 'AllDocuments') {
+                    $("#allDocuments").css('visibility', 'visible');
+                    $("#timelineChanges").css('visibility', 'hidden');
+                }
+                else {
+                    $("#timelineChanges").css('visibility', 'hidden');
+                    $("#allDocuments").css('visibility', 'hidden');
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript" src="~/js/manageSubEntitiesSelectMenu.js"></script>
+
+    <script>
+        window.onload = () => {
+            manageSideNavBar();
+            manageDropdowns();
+            manageSESelectMenu();
+        }
+    </script>
+
+    <script>
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    </script>
+}

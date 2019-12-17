@@ -6,16 +6,15 @@
     using System.Collections.Generic;
 
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc.Rendering;
 
     using Pharus.Data;
     using Pharus.App.Utilities;
     using Pharus.Services.SubFunds.Contracts;
     using Pharus.App.Models.ViewModels.Entities;
     using Pharus.App.Models.BindingModels.SubFunds;
-    using Microsoft.AspNetCore.Http;
 
     [Authorize]
     public class SubFundsController : Controller
@@ -201,11 +200,6 @@
 
             this.ModelState.Clear();
             return this.View(viewModel);
-        }
-
-        private string GetFileNameFromFilePath(int entityId, string chosenDate)
-        {
-            return this.subFundsFileService.LoadSubFundFileToDisplay(entityId, chosenDate).Split('\\').Last();
         }
 
         public JsonResult AutoCompleteShareClassesList(string searchTerm, int entityId)
@@ -518,6 +512,11 @@
             // End of if statement
 
             return this.LocalRedirect(returnUrl);
+        }
+
+        private string GetFileNameFromFilePath(int entityId, string chosenDate)
+        {
+            return this.subFundsFileService.LoadSubFundFileToDisplay(entityId, chosenDate).Split('\\').Last();
         }
 
         private static void SetZeroValuesToNull(List<int?> nullIntegerParameters, int? cesrClassId, int? geoFocusId, int? glExpId, int? frequencyId, int? valuationId, int? calculationId, int? derivMarketId, int? derivPurposeId, int? principalAssetId, int? typeMarketId, int? principalInvStrId, int? catMorningStarId, int? catSixId, int? catBloombergId)
