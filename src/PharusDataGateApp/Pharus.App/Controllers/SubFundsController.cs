@@ -363,7 +363,7 @@
         {
             CreateSubFundBindingModel model = new CreateSubFundBindingModel
             {
-                InitialDate = DateTime.Today,               
+                InitialDate = DateTime.Today,
             };
 
             SetViewDataValuesForSubFundSelectLists();
@@ -390,46 +390,119 @@
 
             string initialDate = model.InitialDate.ToString("yyyyMMdd");
             string endDate = model.EndDate?.ToString("yyyyMMdd");
+            string firstNavDate = model.EndDate?.ToString("yyyyMMdd");
+            string lastNavDate = model.EndDate?.ToString("yyyyMMdd");
+            string cssfAuthDate = model.EndDate?.ToString("yyyyMMdd");
+            string expiryDate = model.EndDate?.ToString("yyyyMMdd");
 
             if (this.HttpContext.Request.Form.ContainsKey("create_button"))
             {
-                //string fundName = model.FundName;
-                //string cssfCode = model.CSSFCode;
-                //int fStatusId = this.context.TbDomFStatus
-                //    .Where(s => s.StFDesc == model.FStatus)
-                //    .Select(s => s.StFId)
-                //    .FirstOrDefault();
-                //int fLegalFormId = this.context.TbDomLegalForm
-                //    .Where(lf => lf.LfAcronym == model.LegalForm)
-                //    .Select(lf => lf.LfId)
-                //    .FirstOrDefault();
-                //int fLegalVehicleId = this.context.TbDomLegalVehicle
-                //    .Where(lv => lv.LvAcronym == model.LegalVehicle)
-                //    .Select(lv => lv.LvId)
-                //    .FirstOrDefault();
-                //int fLegalTypeId = this.context.TbDomLegalType
-                //    .Where(lt => lt.LtAcronym == model.LegalType)
-                //    .Select(lt => lt.LtId)
-                //    .FirstOrDefault();
-                //string faCode = model.FACode;
-                //string depCode = model.DEPCode;
-                //string taCode = model.TACode;
+                string subFundName = model.SubFundName;
+                string cssfCode = model.CSSFCode;
+                string faCode = model.FACode;
+                string depCode = model.DBCode;
+                string taCode = model.TACode;
 
-                //// Split to take only companyTypeDesc for comparing
+                int sfStatusId = this.context.TbDomSfStatus
+                    .Where(s => s.StDesc == model.SfStatus)
+                    .Select(s => s.StId)
+                    .FirstOrDefault();
 
-                //string companyTypeDesc = model.CompanyTypeDesc.Split(" - ").FirstOrDefault();
-                //int fCompanyTypeId = this.context.TbDomCompanyType
-                //    .Where(ct => ct.CtDesc == companyTypeDesc)
-                //    .Select(ct => ct.CtId)
-                //    .FirstOrDefault();
-                //string tinNumber = model.TinNumber;
-                //string leiCode = model.LEICode;
-                //string regNumber = model.RegNumber;
+                string leiCode = model.LEICode;
 
-                //this.subFundsService.`CreateSubFund(initialDate, endDate, fundName, cssfCode, fStatusId, fLegalFormId,
-                //                             fLegalTypeId, fLegalVehicleId, faCode, depCode, taCode, fCompanyTypeId,
-                //                             tinNumber, leiCode, regNumber);
+                int cesrClassId = this.context.TbDomCesrClass
+                    .Where(cc => cc.CDesc == model.CesrClass)
+                    .Select(cc => cc.CcId)
+                    .FirstOrDefault();
+
+                int geoFocusId = this.context.TbDomCssfGeographicalFocus
+                    .Where(gf => gf.GfDesc == model.GeographicalFocus)
+                    .Select(gf => gf.GfId)
+                    .FirstOrDefault();
+
+                int glExpId = this.context.TbDomGlobalExposure
+                    .Where(ge => ge.GeDesc == model.GlobalExposure)
+                    .Select(ge => ge.GeId)
+                    .FirstOrDefault();
+
+                string currency = this.context.TbDomIsoCurrency
+                   .Where(c => c.IsoCcyDesc == model.CurrencyCode)
+                   .Select(c => c.IsoCcyCode)
+                   .FirstOrDefault();
+
+                int frequencyId = this.context.TbDomNavFrequency
+                   .Where(f => f.NfDesc == model.NavFrequency)
+                   .Select(f => f.NfId)
+                   .FirstOrDefault();
+
+                int valuationId = this.context.TbDomValutationDate
+                   .Where(v => v.VdDesc == model.ValuationDate)
+                   .Select(v => v.VdId)
+                   .FirstOrDefault();
+
+                int calculationId = this.context.TbDomCalculationDate
+                   .Where(cal => cal.CdDesc == model.CalculationDate)
+                   .Select(cal => cal.CdId)
+                   .FirstOrDefault();
+
+                bool isDerivative = false;
+
+                int derivMarketId = this.context.TbDomDerivMarket
+                  .Where(dm => dm.DmDesc == model.DerivMarket)
+                  .Select(dm => dm.DmId)
+                  .FirstOrDefault();
+
+                int derivPurposeId = this.context.TbDomDerivPurpose
+                  .Where(dp => dp.DpDesc == model.DerivPurpose)
+                  .Select(dp => dp.DpId)
+                  .FirstOrDefault();
+
+                int principalAssetId = this.context.TbDomCssfPrincipalAssetClass
+                   .Where(pa => pa.PacDesc == model.PrincipalAssetClass)
+                   .Select(pa => pa.PacId)
+                   .FirstOrDefault();
+
+                int typeMarketId = this.context.TbDomTypeOfMarket
+                   .Where(tm => tm.TomDesc == model.TypeOfMarket)
+                   .Select(tm => tm.TomId)
+                   .FirstOrDefault();
+
+                int principalInvStrId = this.context.TbDomPrincipalInvestmentStrategy
+                   .Where(pi => pi.PisDesc == model.PrincipalInvestmentStrategy)
+                   .Select(pi => pi.PisId)
+                   .FirstOrDefault();
+
+                string clearingCode = model.ClearingCode;
+
+                int catMorningStarId = this.context.TbDomSfCatMorningstar
+                   .Where(cm => cm.CMorningstarDesc == model.SfCatMorningStar)
+                   .Select(cm => cm.CMorningstarId)
+                   .FirstOrDefault();
+
+                int catSixId = this.context.TbDomSfCatSix
+                   .Where(cs => cs.CatSixDesc == model.SfCatSix)
+                   .Select(cs => cs.CatSixId)
+                   .FirstOrDefault();
+
+                int catBloombergId = this.context.TbDomSfCatBloomberg
+                   .Where(cb => cb.CatBloombergDesc == model.SfCatBloomberg)
+                   .Select(cb => cb.CatBloombergId)
+                   .FirstOrDefault();
+
+                int fundContainerId = this.context.TbHistoryFund
+                   .Where(fc => fc.FOfficialFundName == model.FundContainer)
+                   .Select(fc => fc.FId)
+                   .FirstOrDefault();
+
+                this.subFundsService.CreateSubFund(initialDate, endDate, subFundName, cssfCode, faCode,
+                                                depCode, taCode, firstNavDate, lastNavDate, cssfAuthDate,
+                                                expiryDate, sfStatusId, leiCode, cesrClassId, geoFocusId,
+                                                glExpId, currency, frequencyId, valuationId, calculationId,
+                                                isDerivative, derivMarketId, derivPurposeId, principalAssetId,
+                                                typeMarketId, principalInvStrId, clearingCode, catMorningStarId,
+                                                catSixId, catBloombergId, fundContainerId);
             }
+            // End of if statement
 
             return this.LocalRedirect(returnUrl);
         }
