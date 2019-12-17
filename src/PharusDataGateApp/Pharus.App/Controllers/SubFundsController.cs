@@ -449,6 +449,11 @@
 
                 bool isDerivative = false;
 
+                if (model.Derivatives == "Yes")
+                {
+                    isDerivative = true;
+                }
+
                 int? derivMarketId = this.context.TbDomDerivMarket
                   .Where(dm => dm.DmDesc == model.DerivMarket)
                   .Select(dm => dm.DmId)

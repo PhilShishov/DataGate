@@ -2,7 +2,7 @@
     const sideNavDropdowns = document.getElementsByName("dr-btn-SideNav");
 
     for (let i = 0; i < sideNavDropdowns.length; i++) {
-        sideNavDropdowns[i].addEventListener("mouseover", function () {
+        sideNavDropdowns[i].addEventListener("click", function () {
             this.classList.toggle("active");
             let dropdownContent = this.nextElementSibling;
             if (dropdownContent.style.display === "block") {

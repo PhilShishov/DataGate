@@ -10,13 +10,32 @@
 @section Styles{
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-image: none;
+        }
+    </style>
 }
 
-<form asp-controller="ShareClasses" class="justify-content-between" method="post">
+<form asp-controller="ShareClasses"
+      class="justify-content-between"
+      method="post">
     <div>
         <partial name="ContainerEntityPartial" />
 
-        <partial name="ExtractEntitiesViewPartial" />
+        <div class="button-holder d-flex justify-content-center my-5">
+            <partial name="ExtractEntitiesViewPartial" />
+
+            @*<button type="button"
+                        class="btn btn-info"
+                        data-toggle="modal"
+                        data-target="#myModal"
+                        name="showColumnSelection">
+                    <img src="~/images/ColumnSelection_Pharus.jpg"
+                         width="35"
+                         height="35" />
+                </button>*@
+        </div>
 
         <hr class="bg-pharus hr-2" />
 
@@ -32,16 +51,16 @@
     <script>
         $(document).ready(function () {
             $("#SearchTerm").select2({
-                placeholder: "Select Funds",
+                placeholder: "Select Share Classes",
                 theme: "classic",
                 ajax: {
-                    url: "/Funds/AutoCompleteFundListWithFundName",
+                    url: "/ShareClasses/AutoCompleteShareClassesList",
                     dataType: "json",
                     delay: 250,
                     data: function (params) {
                         return { searchTerm: params.term };
                     },
-                    processResults: function (data, params) {
+                    processResults: function (data) {
                         return { results: data }
                     }
                 }
@@ -56,5 +75,11 @@
             $('.double-scroll').doubleScroll();
             $('#tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
         });
+    </script>
+
+    <script>
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
     </script>
 }
