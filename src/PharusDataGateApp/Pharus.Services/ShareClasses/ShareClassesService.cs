@@ -34,7 +34,7 @@ namespace Pharus.Services.ShareClasses
         //
         // Retrieve query table DB based entities
         // with table functions
-        public List<string[]> GetAllActiveShareClasses()
+        public List<string[]> GetAllShareClasses()
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -48,7 +48,7 @@ namespace Pharus.Services.ShareClasses
             }
         }
 
-        public List<string[]> GetAllActiveShareClasses(DateTime? chosenDate)
+        public List<string[]> GetAllShareClasses(DateTime? chosenDate)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -69,7 +69,7 @@ namespace Pharus.Services.ShareClasses
             }
         }
 
-        public List<string[]> GetActiveShareClassById(int id)
+        public List<string[]> GetShareClassById(int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -83,7 +83,7 @@ namespace Pharus.Services.ShareClasses
             }
         }
 
-        public List<string[]> GetActiveShareClassById(DateTime? chosenDate, int id)
+        public List<string[]> GetShareClassById(DateTime? chosenDate, int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -104,7 +104,7 @@ namespace Pharus.Services.ShareClasses
             }
         }
 
-        public List<string[]> GetActiveShareClassWithDateById(int id)
+        public List<string[]> GetShareClassWithDateById(int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {

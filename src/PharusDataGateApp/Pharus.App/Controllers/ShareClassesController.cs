@@ -1,23 +1,25 @@
 ﻿namespace Pharus.App.Controllers
 {
+    using System;
     using System.Linq;
+    using System.Globalization;
     using System.Collections.Generic;
 
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc.Rendering;
+    using Microsoft.AspNetCore.Authorization;
 
+    using Pharus.Data;
     using Pharus.App.Utilities;
     using Pharus.App.Models.ViewModels.Entities;
-    using Pharus.App.Models.BindingModels.ShareClasses;
-    using System.Globalization;
-    using System;
     using Pharus.Services.ShareClasses.Contracts;
-    using Microsoft.AspNetCore.Authorization;
+    using Pharus.App.Models.BindingModels.ShareClasses;
 
     [Authorize]
     public class ShareClassesController : Controller
     {
+        private readonly Pharus_vFinale_Context context;
         private readonly IShareClassesService shareClassesService;
         private readonly IShareClassesSelectListService shareClassesSelectListService;
         private readonly IHostingEnvironment hostingEnvironment;
@@ -25,11 +27,13 @@
         public ShareClassesController(
             IShareClassesService shareClassesService,
             IShareClassesSelectListService shareClassesSelectListService,
+            Pharus_vFinale_Context context,
             IHostingEnvironment hostingEnvironment)
         {
             this.shareClassesService = shareClassesService;
             this.shareClassesSelectListService = shareClassesSelectListService;
             this.hostingEnvironment = hostingEnvironment;
+            this.context = context;
         }
 
         [HttpGet]
@@ -37,17 +41,37 @@
         {
             var model = new EntitiesViewModel
             {
-                Entities = this.shareClassesService.GetAllActiveShareClasses(),
+                IsActive = true,
+                ChosenDate = DateTime.Today.ToString("yyyy-MM-dd"),
             };
+            GetAllActiveEntitiesUtility.GetAllActiveShareClassesWithHeaders(model, this.shareClassesService);
 
+            this.ModelState.Clear();
             return this.View(model);
+        }
+
+        public JsonResult AutoCompleteShareClassesList(string searchTerm)
+        {
+            var result = this.context.TbHistoryShareClass.ToList();
+            if (searchTerm != null)
+            {
+                result = this.context.TbHistoryShareClass.Where(s => s.ScOfficialShareClassName.Contains(searchTerm)).ToList();
+            }
+
+            var modifiedData = result.Select(s => new
+            {
+                id = s.ScOfficialShareClassName,
+                text = s.ScOfficialShareClassName,
+            });
+
+            return this.Json(modifiedData);
         }
 
         [HttpPost]
         public IActionResult All(EntitiesViewModel model)
         {
             this.ModelState.Clear();
-            model.Entities = this.shareClassesService.GetAllActiveShareClasses();
+            model.Entities = this.shareClassesService.GetAllShareClasses();
 
             var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
@@ -55,7 +79,7 @@
             {
                 if (model.ChosenDate != null)
                 {
-                    model.Entities = this.shareClassesService.GetAllActiveShareClasses(chosenDate);
+                    model.Entities = this.shareClassesService.GetAllShareClasses(chosenDate);
                 }
             }
             else if (model.Command.Equals("Search"))
@@ -67,8 +91,8 @@
 
                 model.Entities = new List<string[]>();
 
-                var tableHeaders = this.shareClassesService.GetAllActiveShareClasses().Take(1).ToList();
-                var tableFundsWithoutHeaders = this.shareClassesService.GetAllActiveShareClasses().Skip(1).ToList();
+                var tableHeaders = this.shareClassesService.GetAllShareClasses().Take(1).ToList();
+                var tableFundsWithoutHeaders = this.shareClassesService.GetAllShareClasses().Skip(1).ToList();
 
                 CreateTableView.AddHeadersToView(model.Entities, tableHeaders);
 
@@ -123,7 +147,7 @@
             EntitiesViewModel viewModel = new EntitiesViewModel
             {
                 EntityId = entityId,
-                Entities = this.shareClassesService.GetActiveShareClassById(entityId),
+                Entities = this.shareClassesService.GetShareClassById(entityId),
                 BaseEntityName = this.shareClassesService.GetShareClass_SubFundContainer(entityId)[1][1],
             };
 
@@ -133,7 +157,7 @@
         [HttpPost("ShareClasses/ViewEntitySE/{EntityId}")]
         public IActionResult ViewEntitySE(EntitiesViewModel viewModel)
         {
-            viewModel.Entities = this.shareClassesService.GetActiveShareClassById(viewModel.EntityId);
+            viewModel.Entities = this.shareClassesService.GetShareClassById(viewModel.EntityId);
 
             var chosenDate = DateTime.ParseExact(viewModel.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
@@ -141,7 +165,7 @@
             {
                 if (viewModel.ChosenDate != null)
                 {
-                    viewModel.Entities = this.shareClassesService.GetActiveShareClassById(chosenDate, viewModel.EntityId);
+                    viewModel.Entities = this.shareClassesService.GetShareClassById(chosenDate, viewModel.EntityId);
                 }
             }
 
@@ -158,7 +182,7 @@
         {
             ShareClassBindingModel model = new ShareClassBindingModel
             {
-                EntityProperties = this.shareClassesService.GetActiveShareClassWithDateById(entityId),
+                EntityProperties = this.shareClassesService.GetShareClassWithDateById(entityId),
                 InvestorType = new SelectList(this.shareClassesSelectListService.GetAllTbDomInvestorType()),
                 CurrencyCode = new SelectList(this.shareClassesSelectListService.GetAllTbDomCurrencyCode()),
                 CountryIssue = new SelectList(this.shareClassesSelectListService.GetAllTbDomCountry()),
@@ -180,7 +204,7 @@
             int entityId = int.Parse(model.EntityProperties[1][0]);
             string returnUrl = $"/ShareClasses/ViewEntitySE/{entityId}";
 
-            var shareClass = this.shareClassesService.GetActiveShareClassById(entityId);
+            var shareClass = this.shareClassesService.GetShareClassById(entityId);
 
             if (this.HttpContext.Request.Form.ContainsKey("modify_button"))
             {
@@ -203,7 +227,7 @@
         {
             ShareClassBindingModel model = new ShareClassBindingModel
             {
-                EntityProperties = this.shareClassesService.GetAllActiveShareClasses(),
+                EntityProperties = this.shareClassesService.GetAllShareClasses(),
                 InvestorType = new SelectList(this.shareClassesSelectListService.GetAllTbDomInvestorType()),
                 CurrencyCode = new SelectList(this.shareClassesSelectListService.GetAllTbDomCurrencyCode()),
                 CountryIssue = new SelectList(this.shareClassesSelectListService.GetAllTbDomCountry()),
