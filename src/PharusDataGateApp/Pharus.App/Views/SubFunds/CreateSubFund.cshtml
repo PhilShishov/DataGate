@@ -327,6 +327,18 @@
             <span asp-validation-for="SfCatBloomberg" class="text-danger"></span>
         </div>
 
+        <div class="form-group">
+            <label asp-for="FundContainer" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="FundContainer">
+                <option selected disabled>-- Choose Category --</option>
+                @foreach (var status in (List<string>)ViewData["FundContainer"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="FundContainer" class="text-danger"></span>
+        </div>
+
     </div>
 
     <div class="button-holder mt-4">

@@ -452,6 +452,8 @@
             this.ViewData["SfCatMorningStar"] = this.subfundsSelectListService.GetAllTbDomSfCatMorningStar();
             this.ViewData["SfCatSix"] = this.subfundsSelectListService.GetAllTbDomSfCatSix();
             this.ViewData["SfCatBloomberg"] = this.subfundsSelectListService.GetAllTbDomSfCatBloomberg();
+
+            this.ViewData["FundContainer"] = this.context.TbHistoryFund.Select(f => f.FOfficialFundName).ToList();
         }
     }
 }

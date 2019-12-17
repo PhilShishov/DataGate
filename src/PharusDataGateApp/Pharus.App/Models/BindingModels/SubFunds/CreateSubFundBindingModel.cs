@@ -114,6 +114,9 @@ namespace Pharus.App.Models.BindingModels.SubFunds
         [Display(Name = "Bloomberg Category")]
         public string SfCatBloomberg { get; set; }
 
+        [Display(Name = "Fund Container")]
+        public string FundContainer { get; set; }
+
         public List<string> ExistingSubFundNames { get; set; }
     }
 }
