@@ -1,9 +1,9 @@
 ﻿function inputCaps() {
 
-    const createFundForm = document.getElementById('createFundForm').getElementsByTagName('input');
+    const createForm = document.getElementById('createForm').getElementsByTagName('input');
 
-    for (var i = 0; i < createFundForm.length; i++) {
-        createFundForm[i].addEventListener('blur', caps);
+    for (var i = 0; i < createForm.length; i++) {
+        createForm[i].addEventListener('blur', caps);
     }    
 
     function caps() {
