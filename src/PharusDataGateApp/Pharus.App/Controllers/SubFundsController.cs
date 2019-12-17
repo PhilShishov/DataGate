@@ -183,6 +183,7 @@
                 EntityTimeline = this.subFundsService.GetSubFundTimeline(entityId),
                 EntityDocuments = this.subFundsService.GetAllSubFundDocumens(entityId),
                 BaseEntityName = this.subFundsService.GetSubFund_FundContainer(entityId)[1][1],
+                BaseEntityId = this.subFundsService.GetSubFund_FundContainer(entityId)[1][0],
             };
 
             this.ViewData["FileTypes"] = this.subfundsSelectListService.GetAllSubFundFileTypes();

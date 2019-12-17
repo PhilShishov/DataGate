@@ -143,7 +143,6 @@
                 @for (int row = 1; row < Model.EntitySubEntities.Count; row++)
                 {
                     var subfundId = Model.EntitySubEntities[row][2];
-                    DateTime date = Convert.ToDateTime(Model.EntitySubEntities[row][0]);
 
                     <tr class="tableRowPharus" onclick="document.location = '/SubFunds/ViewEntitySE/@subfundId/@Model.ChosenDate'">
                         @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
