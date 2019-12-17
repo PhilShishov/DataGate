@@ -543,11 +543,11 @@
 
         private void SetViewDataValuesForFundSelectLists()
         {
-            this.ViewData["FStatusList"] = this.fundsSelectListService.GetAllTbDomFStatus();
-            this.ViewData["LegalFormList"] = this.fundsSelectListService.GetAllTbDomLegalForm();
-            this.ViewData["LegalVehicleList"] = this.fundsSelectListService.GetAllTbDomLegalVehicle();
-            this.ViewData["LegalTypeList"] = this.fundsSelectListService.GetAllTbDomLegalType();
-            this.ViewData["CompanyTypeDescList"] = this.fundsSelectListService.GetAllTbDomCompanyDesc();
+            this.ViewData["FStatus"] = this.fundsSelectListService.GetAllTbDomFStatus();
+            this.ViewData["LegalForm"] = this.fundsSelectListService.GetAllTbDomLegalForm();
+            this.ViewData["LegalVehicle"] = this.fundsSelectListService.GetAllTbDomLegalVehicle();
+            this.ViewData["LegalType"] = this.fundsSelectListService.GetAllTbDomLegalType();
+            this.ViewData["CompanyTypeDesc"] = this.fundsSelectListService.GetAllTbDomCompanyDesc();
         }
 
         private string GetFileNameFromFilePath(int entityId, string chosenDate)

@@ -47,7 +47,7 @@
         <div class="form-group">
             <label asp-for="FStatus" class="text-torshia"></label><br>
             <select class="form-control maxw-270" asp-for="FStatus">
-                @foreach (var status in (List<string>)ViewData["FStatusList"])
+                @foreach (var status in (List<string>)ViewData["FStatus"])
                 {
                     if (status == Model.EntityProperties[1][5])
                     {
@@ -65,7 +65,7 @@
         <div class="form-group">
             <label asp-for="LegalForm" class="text-torshia"></label><br>
             <select class="form-control maxw-270" asp-for="LegalForm">
-                @foreach (var status in (List<string>)ViewData["LegalFormList"])
+                @foreach (var status in (List<string>)ViewData["LegalForm"])
                 {
                     if (status == Model.EntityProperties[1][6])
                     {
@@ -83,7 +83,7 @@
         <div class="form-group">
             <label asp-for="LegalVehicle" class="text-torshia"></label><br>
             <select class="form-control maxw-270" asp-for="LegalVehicle">
-                @foreach (var status in (List<string>)ViewData["LegalVehicleList"])
+                @foreach (var status in (List<string>)ViewData["LegalVehicle"])
                 {
                     if (status == Model.EntityProperties[1][7])
                     {
@@ -101,7 +101,7 @@
         <div class="form-group">
             <label asp-for="LegalType" class="text-torshia"></label><br>
             <select class="form-control maxw-270" asp-for="LegalType">
-                @foreach (var status in (List<string>)ViewData["LegalTypeList"])
+                @foreach (var status in (List<string>)ViewData["LegalType"])
                 {
                     if (status == Model.EntityProperties[1][8])
                     {
@@ -145,7 +145,7 @@
         <div class="form-group">
             <label asp-for="CompanyTypeDesc" class="text-torshia"></label><br>
             <select class="form-control maxw-270" asp-for="CompanyTypeDesc">
-                @foreach (var status in (List<string>)ViewData["CompanyTypeDescList"])
+                @foreach (var status in (List<string>)ViewData["CompanyTypeDesc"])
                 {
                     <option value="@status">@status</option>
                 }
