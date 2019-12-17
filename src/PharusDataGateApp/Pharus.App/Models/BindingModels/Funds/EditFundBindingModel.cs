@@ -63,7 +63,7 @@ namespace Pharus.App.Models.BindingModels.Funds
         [Display(Name = "Company Description")]
         public string CompanyTypeDesc { get; set; }
 
-        //[RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
+        [RegularExpression(@"^[0-9]+(\s[0-9]+)*$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "TIN Number")]
         public string TinNumber { get; set; }
 

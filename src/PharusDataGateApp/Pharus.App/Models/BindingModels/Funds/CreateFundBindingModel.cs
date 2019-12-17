@@ -23,7 +23,7 @@ namespace Pharus.App.Models.BindingModels.Funds
         [Required(ErrorMessage = "You must enter a value for the Fund Name!")]
         [StringLength(200, ErrorMessage = "The Fund Name must be no longer than 200 characters")]
         [RegularExpression(@"^[A-Z-0-9]+(\s[A-Z-0-9]+)*$", ErrorMessage = "Not in correct format!")]
-        [Display(Name = "Fund Name")]
+        [Display(Name = "Official Fund Name")]
         public string FundName { get; set; }
 
         [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
