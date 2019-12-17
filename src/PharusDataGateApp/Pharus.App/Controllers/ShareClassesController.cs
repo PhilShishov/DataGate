@@ -15,6 +15,7 @@
     using Pharus.App.Models.ViewModels.Entities;
     using Pharus.Services.ShareClasses.Contracts;
     using Pharus.App.Models.BindingModels.ShareClasses;
+    using Microsoft.AspNetCore.Http;
 
     [Authorize]
     public class ShareClassesController : Controller
@@ -166,16 +167,34 @@
             return fileStreamResult;
         }
 
-        [HttpGet("ShareClasses/ViewEntitySE/{EntityId}")]
-        public IActionResult ViewEntitySE(int entityId)
+        [HttpGet("ShareClasses/ViewEntitySE/{EntityId}/{ChosenDate}")]
+        public IActionResult ViewEntitySE(int entityId, string chosenDate)
         {
-            EntitiesViewModel viewModel = new EntitiesViewModel
+            SpecificEntityViewModel viewModel = new SpecificEntityViewModel
             {
+                ChosenDate = chosenDate,
                 EntityId = entityId,
-                Entities = this.shareClassesService.GetShareClassById(entityId),
+                Entity = this.shareClassesService.GetShareClassById(entityId),
+                EntityTimeline = this.shareClassesService.GetShareClassesTimeline(entityId),
+                EntityDocuments = this.shareClassesService.GetAllShareClassesDocumens(entityId),
                 BaseEntityName = this.shareClassesService.GetShareClass_SubFundContainer(entityId)[1][1],
+                BaseEntityId = this.shareClassesService.GetShareClass_SubFundContainer(entityId)[1][0],
             };
 
+            //this.ViewData["FileTypes"] = this.subfundsSelectListService.GetAllSubFundFileTypes();
+
+            HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
+
+            //string fileName = GetFileNameFromFilePath(entityId, chosenDate);
+
+            //if (string.IsNullOrEmpty(fileName))
+            //{
+            //    return this.View(viewModel);
+            //}
+
+            //viewModel.FileNameToDisplay = fileName;
+
+            this.ModelState.Clear();
             return this.View(viewModel);
         }
 
