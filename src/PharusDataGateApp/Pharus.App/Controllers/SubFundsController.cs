@@ -426,7 +426,7 @@
                 //string leiCode = model.LEICode;
                 //string regNumber = model.RegNumber;
 
-                //this.fundsService.CreateFund(initialDate, endDate, fundName, cssfCode, fStatusId, fLegalFormId,
+                //this.subFundsService.`CreateSubFund(initialDate, endDate, fundName, cssfCode, fStatusId, fLegalFormId,
                 //                             fLegalTypeId, fLegalVehicleId, faCode, depCode, taCode, fCompanyTypeId,
                 //                             tinNumber, leiCode, regNumber);
             }
