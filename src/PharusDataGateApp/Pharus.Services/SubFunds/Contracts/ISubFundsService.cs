@@ -80,7 +80,8 @@
                         string clearingCode,
                         int catMorningStarId,
                         int catSixId,
-                        int catBloombergId
+                        int catBloombergId,
+                        int fundContainerId
                         );
     }
 }
