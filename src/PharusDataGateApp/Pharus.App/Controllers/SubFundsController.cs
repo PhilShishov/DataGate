@@ -410,17 +410,17 @@
 
                 string leiCode = model.LEICode;
 
-                int cesrClassId = this.context.TbDomCesrClass
+                int? cesrClassId = this.context.TbDomCesrClass
                     .Where(cc => cc.CDesc == model.CesrClass)
                     .Select(cc => cc.CcId)
                     .FirstOrDefault();
 
-                int geoFocusId = this.context.TbDomCssfGeographicalFocus
+                int? geoFocusId = this.context.TbDomCssfGeographicalFocus
                     .Where(gf => gf.GfDesc == model.GeographicalFocus)
                     .Select(gf => gf.GfId)
                     .FirstOrDefault();
 
-                int glExpId = this.context.TbDomGlobalExposure
+                int? glExpId = this.context.TbDomGlobalExposure
                     .Where(ge => ge.GeDesc == model.GlobalExposure)
                     .Select(ge => ge.GeId)
                     .FirstOrDefault();
@@ -430,61 +430,61 @@
                    .Select(c => c.IsoCcyCode)
                    .FirstOrDefault();
 
-                int frequencyId = this.context.TbDomNavFrequency
+                int? frequencyId = this.context.TbDomNavFrequency
                    .Where(f => f.NfDesc == model.NavFrequency)
                    .Select(f => f.NfId)
                    .FirstOrDefault();
 
-                int valuationId = this.context.TbDomValutationDate
+                int? valuationId = this.context.TbDomValutationDate
                    .Where(v => v.VdDesc == model.ValuationDate)
                    .Select(v => v.VdId)
                    .FirstOrDefault();
 
-                int calculationId = this.context.TbDomCalculationDate
+                int? calculationId = this.context.TbDomCalculationDate
                    .Where(cal => cal.CdDesc == model.CalculationDate)
                    .Select(cal => cal.CdId)
                    .FirstOrDefault();
 
                 bool isDerivative = false;
 
-                int derivMarketId = this.context.TbDomDerivMarket
+                int? derivMarketId = this.context.TbDomDerivMarket
                   .Where(dm => dm.DmDesc == model.DerivMarket)
                   .Select(dm => dm.DmId)
                   .FirstOrDefault();
 
-                int derivPurposeId = this.context.TbDomDerivPurpose
+                int? derivPurposeId = this.context.TbDomDerivPurpose
                   .Where(dp => dp.DpDesc == model.DerivPurpose)
                   .Select(dp => dp.DpId)
                   .FirstOrDefault();
 
-                int principalAssetId = this.context.TbDomCssfPrincipalAssetClass
+                int? principalAssetId = this.context.TbDomCssfPrincipalAssetClass
                    .Where(pa => pa.PacDesc == model.PrincipalAssetClass)
                    .Select(pa => pa.PacId)
                    .FirstOrDefault();
 
-                int typeMarketId = this.context.TbDomTypeOfMarket
+                int? typeMarketId = this.context.TbDomTypeOfMarket
                    .Where(tm => tm.TomDesc == model.TypeOfMarket)
                    .Select(tm => tm.TomId)
                    .FirstOrDefault();
 
-                int principalInvStrId = this.context.TbDomPrincipalInvestmentStrategy
+                int? principalInvStrId = this.context.TbDomPrincipalInvestmentStrategy
                    .Where(pi => pi.PisDesc == model.PrincipalInvestmentStrategy)
                    .Select(pi => pi.PisId)
                    .FirstOrDefault();
 
                 string clearingCode = model.ClearingCode;
 
-                int catMorningStarId = this.context.TbDomSfCatMorningstar
+                int? catMorningStarId = this.context.TbDomSfCatMorningstar
                    .Where(cm => cm.CMorningstarDesc == model.SfCatMorningStar)
                    .Select(cm => cm.CMorningstarId)
                    .FirstOrDefault();
 
-                int catSixId = this.context.TbDomSfCatSix
+                int? catSixId = this.context.TbDomSfCatSix
                    .Where(cs => cs.CatSixDesc == model.SfCatSix)
                    .Select(cs => cs.CatSixId)
                    .FirstOrDefault();
 
-                int catBloombergId = this.context.TbDomSfCatBloomberg
+                int? catBloombergId = this.context.TbDomSfCatBloomberg
                    .Where(cb => cb.CatBloombergDesc == model.SfCatBloomberg)
                    .Select(cb => cb.CatBloombergId)
                    .FirstOrDefault();
