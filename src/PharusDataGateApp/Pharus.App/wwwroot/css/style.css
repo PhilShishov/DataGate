@@ -48,12 +48,12 @@ footer {
     width: 98%;
 }
 
-body {
+/*body {
     background-image: url('../images/Background_Pharus.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     margin: auto;
-}
+}*/
 
 ::-webkit-scrollbar {
     width: 10px;
