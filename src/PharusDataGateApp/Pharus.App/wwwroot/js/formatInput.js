@@ -1,4 +1,4 @@
-﻿function inputCaps() {
+﻿function formatInput() {
 
     const createForm = document.getElementById('createForm').getElementsByTagName('input');
 
@@ -7,7 +7,8 @@
     }    
 
     function caps() {
-        this.value = this.value.toUpperCase();
+        this.value = this.value.trimStart();
         this.value = this.value.trimEnd();
+        this.value = this.value.toUpperCase();
     }
 }
