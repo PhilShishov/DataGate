@@ -8,5 +8,6 @@
 
     function caps() {
         this.value = this.value.toUpperCase();
+        this.value = this.value.trimEnd();
     }
 }
