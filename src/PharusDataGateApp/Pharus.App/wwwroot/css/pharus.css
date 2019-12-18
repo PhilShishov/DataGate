@@ -274,24 +274,3 @@ li.timeline-item::before {
     z-index: 400;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
-.chart-container {
-    width: 60%;
-    height: 60%;
-    margin-bottom: 20px;
-    min-width: 500px;
-    min-height: 400px;
-}
-
-#chartdata {
-    width: 75%;
-    height: 75%;
-    float: left;
-    display: inline;
-    margin-bottom: 20px;
-}
-
-#tabletimeseriestype {
-    float: right;
-    width: 20%;
-    margin-top: 70px;
-}
