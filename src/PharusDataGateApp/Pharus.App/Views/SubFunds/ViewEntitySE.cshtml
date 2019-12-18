@@ -29,13 +29,13 @@
 
         <partial name="SpecificEntityInfoPartial" />
         <div class="w-35 float-right">
-            <partial name="SpecificEntityDocumentsPartial" />
+            @*<partial name="SpecificEntityDocumentsPartial" />*@
 
             @if (this.User.IsInRole("Admin"))
             {
-                <div class="mt-5">
+                @*<div class="mt-5">
                     <a href="/SubFunds/EditSubFund/@Model.EntityId" class="btn bg-pharus text-white">Edit SubFund</a>
-                </div>
+                </div>*@
                 @*<div class="mt-5">
                         <a href="" class="btn bg-pharus text-white">Edit SubFund Connection</a>
                     </div>*@
@@ -136,7 +136,7 @@
                     <tr>
                         @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
                         {
-                            <th class="text-secondary p-1">
+                            <th class="text-white p-1 tableHeaderPharus">
                                 <h5>
                                     @Model.EntitySubEntities[row][col]
                                 </h5>
