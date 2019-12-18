@@ -7,6 +7,7 @@
 namespace Pharus.Services.SubFunds
 {
     using System;
+    using System.Data;
     using System.Linq;
     using System.Data.SqlClient;
     using System.Collections.Generic;
@@ -16,7 +17,6 @@ namespace Pharus.Services.SubFunds
     using Pharus.Services.SubFunds.Contracts;
 
     using Microsoft.Extensions.Configuration;
-    using System.Data;
 
     // _____________________________________________________________
     public class SubFundsService : ISubFundsService
@@ -251,6 +251,20 @@ namespace Pharus.Services.SubFunds
                 SqlCommand command = connection.CreateCommand();
 
                 command.CommandText = $"select * from [dbo].[fn_viewdocuments_subfund]({id})";
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
+        public List<string[]> PrepareSubFundsForExtract(DateTime? chosenDate)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                command.CommandText = $"select * from fn_active_subfund_pdf('{chosenDate?.ToString("yyyyMMdd")}')";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }

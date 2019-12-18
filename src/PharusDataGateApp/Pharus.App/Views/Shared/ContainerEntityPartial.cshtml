@@ -1,29 +1,17 @@
 ﻿@model Pharus.App.Models.ViewModels.Entities.EntitiesViewModel
 
 <div class="w-100 d-flex justify-content-between my-5">
-    <div>
-        <label for="date"
-               class="text-torshia m-1 pr-3">SELECT DATE:</label>
+    <div>        
         <input type="date"
                id="fundDatetime"
                asp-for="ChosenDate"
-               min="2018-01-01" max=@DateTime.Today.ToString("yyyy-MM-dd")>
+               min="2018-01-01" 
+               max=@DateTime.Today.ToString("yyyy-MM-dd")>
 
         <input type="submit"
                class="btn btn-primary btn-sm mb-2"
                asp-for="Command"
                value="Update Table"></>      
-
-        @*<div class="pr-3 w-20 d-inline">
-            <label class="el-switch">
-                <input asp-for="IsActive"
-                       type="checkbox"
-                       name="switch"
-                       checked>
-                <span class="el-switch-style"></span>
-                ACTIVE
-            </label>
-        </div>*@
     </div>
     <div>
         <select name="SearchTerm"
