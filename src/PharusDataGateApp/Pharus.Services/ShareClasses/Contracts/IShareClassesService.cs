@@ -23,9 +23,11 @@
 
         List<string[]> GetShareClass_SubFundContainer(DateTime? chosenDate, int id);
 
-        List<string[]> GetTimeseriestypetable(int id);
+        List<string[]> GetTimeseriesTypeProviders(int id);
 
         List<string[]> GetShareClassTimeSeries(int id);
+
+        List<string[]> GetShareClassTimeSeriesDates(int id);
 
         List<string[]> GetShareClassesTimeline(int id);
 

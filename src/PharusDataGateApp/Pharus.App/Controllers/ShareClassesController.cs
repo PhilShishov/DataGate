@@ -180,41 +180,34 @@
                 BaseEntityName = this.shareClassesService.GetShareClass_SubFundContainer(entityId)[1][1],
                 BaseEntityId = this.shareClassesService.GetShareClass_SubFundContainer(entityId)[1][0],
                 TSPriceDates = this.shareClassesService
-                .GetShareClassTimeSeries(entityId)
+                .GetShareClassTimeSeriesDates(entityId)
                 .Skip(1)
-                .Select(ts => ts[0])
+                .Select(ts => ts[1])
                 .ToList(),
                 TSTableType = this.shareClassesService
-                .GetTimeseriestypetable(entityId)
+                .GetTimeseriesTypeProviders(entityId)
                 .Skip(1)
                 .Select(tt => tt[0])
                 .ToList(),
                 TSPriceBloombergEUR = this.shareClassesService
                 .GetShareClassTimeSeries(entityId)
                 .Skip(1)
-                .Where(ts => ts[2] == "Bloomberg USD")
+                .Where(ts => ts[2] == "Bloomberg EUR")
                 .Select(ts => ts[1])
                 .ToList(),
                 TSPriceBloombergUSD = this.shareClassesService
                 .GetShareClassTimeSeries(entityId)
                 .Skip(1)
+                .Where(ts => ts[2] == "Bloomberg USD")
                 .Select(ts => ts[1])
                 .ToList(),
                 TSPriceSixUSD = this.shareClassesService
                 .GetShareClassTimeSeries(entityId)
                 .Skip(1)
+                .Where(ts => ts[2] == "SiX EUR")
                 .Select(ts => ts[1])
                 .ToList(),
-            };
-
-            //viewModel.TimeSeriesTypeModel.TsPrice = this.shareClassesService
-            //    .GetActiveShareClassTimeSeries(entityId, "Six EUR")
-            //    .Skip(1)
-            //    .ToList();
-
-            //viewModel.TimeSeriesTypeModel.TableType = this.shareClassesService
-            //    .GetTimeseriestypetable(entityId)
-            //    .ToList();
+            };           
 
             //this.ViewData["FileTypes"] = this.subfundsSelectListService.GetAllSubFundFileTypes();
 

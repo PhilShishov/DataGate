@@ -4,15 +4,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
 
-    var valDatesLabel = @Html.Raw(Json.Serialize(Model.TSPriceDates.Select(s => s.First())));
-    var valDataBlUSD = @Html.Raw(Json.Serialize(Model.TSPriceBloombergUSD.Select(s => s.First())));
-    var valDataBlEUR = @Html.Raw(Json.Serialize(Model.TSPriceBloombergEUR.Select(s => s.First())));
-    var valDataSixEUR = @Html.Raw(Json.Serialize(Model.TSPriceSixUSD.Select(s => s.First())));
+    var valDatesLabel = @Html.Raw(Json.Serialize(Model.TSPriceDates));
+    var valDataBlUSD = @Html.Raw(Json.Serialize(Model.TSPriceBloombergUSD));
+    var valDataBlEUR = @Html.Raw(Json.Serialize(Model.TSPriceBloombergEUR));
+    var valDataSixEUR = @Html.Raw(Json.Serialize(Model.TSPriceSixUSD));
 }
 
 @section Styles{
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" type="text/css" src="~/css/Chart.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <style>
         body {
@@ -29,10 +28,6 @@
     </style>
 }
 
-<div style="width:50%;">
-    <canvas id="canvas"></canvas>
-</div>
-
 <form asp-controller="SubFunds"
       class="justify-content-between"
       method="post">
@@ -43,31 +38,34 @@
 
     <partial name="SpecificEntityUpdatePartial" />
 
-    <div class="chart-container">
-        <div id="chartdata"><canvas id="myChart"></canvas></div>
-        <div class="table-responsive border-0 w-35" id="tabletimeseriestype">
-            <table class="table table-hover">
-                <tbody>
-                    <tr>
-                        <th class="text-secondary p-1">
-                            <h5>
-                                @Model.TSTableType[0][0]
-                            </h5>
-                        </th>
-                    </tr>
-
-                    @for (int row = 1; row < Model.TSTableType.Count; row++)
-                                {
-                        <tr onclick="newtimeseries(this)">
-                            <td class="p-1">
-                                @Model.TSTableType[row][0]
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+    <div style="width:50%;">
+        <canvas id="canvas"></canvas>
     </div>
+    @*<div class="chart-container">
+            <div id="chartdata"><canvas id="myChart"></canvas></div>
+            <div class="table-responsive border-0 w-35" id="tabletimeseriestype">
+                <table class="table table-hover">
+                    <tbody>
+                        <tr>
+                            <th class="text-secondary p-1">
+                                <h5>
+                                    @Model.TSTableType[0][0]
+                                </h5>
+                            </th>
+                        </tr>
+
+                        @for (int row = 1; row < Model.TSTableType.Count; row++)
+                                    {
+                            <tr onclick="newtimeseries(this)">
+                                <td class="p-1">
+                                    @Model.TSTableType[row][0]
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>*@
 
     <div class="d-flex justify-content-between">
 
@@ -197,39 +195,7 @@
                 }
             });
         });
-    </script>
-
-    <script type="text/javascript" src="~/js/Chart.bundle.js"></script>
-
-    <script>
-        function newtimeseries() {
-            const ctx = $('#myChart');
-
-            let myChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: @valDatesLabel,
-                    datasets: [{
-                        data: @valDataBlUSD,
-                        label: "test",
-                        borderColor: "#3e95cd",
-                        fill: false
-                    }]
-                },
-                options: {
-                    title: {
-                        display: true,
-                        text: 'Aum for shareclass',
-
-                    },
-                    legend: {
-                        position: "top",
-                        align: "center"
-                    },
-                }
-            });
-        }
-    </script>
+    </script>  
 
     <script type="text/javascript" src="~/js/manageSubEntitiesSelectMenu.js"></script>
 
@@ -247,8 +213,8 @@
         }
     </script>
 
-    <script src="~/js/Chart.min.js"></script>
-    <script src="~/js/utils.js"></script>
+    <script src="~/lib/jquery/Chart.js/Chart.min.js"></script>
+    <script src="~/lib/jquery/Chart.js/utils.js"></script>
 
     <script>
         var config = {
