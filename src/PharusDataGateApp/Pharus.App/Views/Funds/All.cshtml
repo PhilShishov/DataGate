@@ -18,26 +18,28 @@
     <link rel="stylesheet" href="~/css/checkbox.css">
 }
 
-
-
 <form asp-controller="Funds"
       class="justify-content-between"
       method="post">
     <div>
         <partial name="ContainerEntityPartial" />
-
-        <div class="button-holder d-flex justify-content-center my-5">
+        
+        <div class="button-holder d-flex justify-content-center my-5" style="align-items: center">
             <partial name="ExtractEntitiesViewPartial" />
-
+            <label class="el-switch el-switch-sm" style="display:flex; margin-bottom:0">
+                <input type="checkbox" name="switch" checked>
+                <span class="el-switch-style"></span>
+                &nbsp; Show only all active
+            </label>
             @*<button type="button"
-                        class="btn btn-info"
-                        data-toggle="modal"
-                        data-target="#myModal"
-                        name="showColumnSelection">
-                    <img src="~/images/ColumnSelection_Pharus.jpg"
-                         width="35"
-                         height="35" />
-                </button>*@
+                class="btn btn-info"
+                data-toggle="modal"
+                data-target="#myModal"
+                name="showColumnSelection">
+            <img src="~/images/ColumnSelection_Pharus.jpg"
+                 width="35"
+                 height="35" />
+        </button>*@
         </div>
 
         <hr class="bg-pharus hr-2" />

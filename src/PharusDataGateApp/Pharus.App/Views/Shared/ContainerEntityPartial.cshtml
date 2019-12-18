@@ -10,20 +10,9 @@
                min="2018-01-01" max=@DateTime.Today.ToString("yyyy-MM-dd")>
 
         <input type="submit"
-               class="btn btn-primary btn-sm"
+               class="btn btn-primary btn-sm mb-2"
                asp-for="Command"
-               value="Update Table"></>
-
-        <div class="custom-control custom-switch">
-            <input type="checkbox" class="custom-control-input" id="customSwitch1" checked>
-            <label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>
-        </div>
-
-        <input asp-for="IsActive" type="checkbox" name="switch" class="pt-5">
-        <label class="el-switch">
-            <span class="el-switch-style"></span>
-            ACTIVE
-        </label>
+               value="Update Table"></>      
 
         @*<div class="pr-3 w-20 d-inline">
             <label class="el-switch">
