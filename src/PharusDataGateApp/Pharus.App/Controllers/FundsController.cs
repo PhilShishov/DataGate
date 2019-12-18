@@ -270,7 +270,7 @@
             }
 
             return this.View();
-        }       
+        }
 
         [HttpPost]
         public IActionResult UploadFiles(SpecificEntityViewModel model)

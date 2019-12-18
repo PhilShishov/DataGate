@@ -9,7 +9,7 @@
 
 <div class="mb-5">
     <u class="text-torshia">LIST OF PROSPECTUS</u><br>
-    <button class="btn-link mt-3"
+    <button class="btn-link mt-3 "
             formtarget="_blank"
             type="submit"
             formaction="/@controllerName/ReadPdfFile"
@@ -20,47 +20,48 @@
     @if (Model.FileNameToDisplay == null)
     {
         <button type="button"
-                class="btn bg-pharus text-white"
+                class="btn btn-primary btn-sm mb-2"
                 data-toggle="modal"
                 data-target="#upDocModal">
             Upload Document
         </button>
     }
+
 </div>
 
 @*<div class="pt-5">
-    <u class="text-torshia">LIST OF AGREEMENTS</u><br>
-    <button class="btn-link mt-3"
-            formtarget="_blank"
-            type="submit"
-            formaction="/@controllerName/ReadPdfFile"
-            name="read_Pdf">
-        @Model.FileNameToDisplay
-    </button>
-
-    @if (Model.FileNameToDisplay == null)
-    {
-        <button type="button"
-                class="btn bg-pharus text-white"
-                data-toggle="modal"
-                data-target="#upAgrModal">
-            Upload Agreement
+        <u class="text-torshia">LIST OF AGREEMENTS</u><br>
+        <button class="btn-link mt-3"
+                formtarget="_blank"
+                type="submit"
+                formaction="/@controllerName/ReadPdfFile"
+                name="read_Pdf">
+            @Model.FileNameToDisplay
         </button>
-    }
 
-    <div class="modal"
-         id="upAgrModal"
-         role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body d-grid justify-content-center">
-                    <p>Some text in the modal.</p>
-                    <button type="button" class="btn bg-pharus text-white">Upload Agreement</button>
+        @if (Model.FileNameToDisplay == null)
+        {
+            <button type="button"
+                    class="btn bg-pharus text-white"
+                    data-toggle="modal"
+                    data-target="#upAgrModal">
+                Upload Agreement
+            </button>
+        }
+
+        <div class="modal"
+             id="upAgrModal"
+             role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body d-grid justify-content-center">
+                        <p>Some text in the modal.</p>
+                        <button type="button" class="btn bg-pharus text-white">Upload Agreement</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>*@
+    </div>*@
 
 @section Scripts{
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
