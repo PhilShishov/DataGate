@@ -193,6 +193,38 @@ namespace Pharus.Services.ShareClasses
             }
         }
 
+        public List<string[]> GetShareClassTimeSeries(int id)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                command.CommandText = $"SELECT convert(varchar, date_ts, 103)date_ts , value_ts [type], " +
+                                      $"concat(tsp.desc_provider,' ',currency_ts) " +
+                                      $"providerccy FROM [tb_timeseries_shareclass] " +
+                                      $"join tb_dom_timeseries_provider tsp on tsp.id_provider = provider_ts " +
+                                      $"where id_shareclass = 70";
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
+        public List<string[]> GetTimeseriestypetable(int id)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                command.CommandText = $"SELECT distinct concat(tsp.desc_provider,' ',currency_ts) [Timeseries Provider] FROM [tb_timeseries_shareclass] join tb_dom_timeseries_provider tsp on tsp.id_provider=provider_ts where id_shareclass= 70";
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
         public List<string[]> GetShareClassesTimeline(int id)
         {
             using (SqlConnection connection = new SqlConnection())
