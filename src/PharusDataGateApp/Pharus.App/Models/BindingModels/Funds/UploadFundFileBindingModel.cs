@@ -11,7 +11,7 @@ namespace Pharus.App.Models.BindingModels.Funds
 
     using Microsoft.AspNetCore.Http;
 
-    public class UploadFundFileBindingModel
+    public class UploadFundFileModel
     {
         public IFormFile FileToUpload { get; set; }
 
