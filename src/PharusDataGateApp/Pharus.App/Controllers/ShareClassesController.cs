@@ -53,16 +53,26 @@
 
         public JsonResult AutoCompleteShareClassesList(string searchTerm)
         {
-            var result = this.context.TbHistoryShareClass.ToList();
+            var result = this.context
+                .TbHistoryShareClass
+                .GroupBy(hsc => hsc.ScOfficialShareClassName)
+                .Select(hsc => hsc.FirstOrDefault())
+                .ToList();
+
             if (searchTerm != null)
             {
-                result = this.context.TbHistoryShareClass.Where(s => s.ScOfficialShareClassName.Contains(searchTerm)).ToList();
+                result = this.context
+                    .TbHistoryShareClass
+                    .Where(hsc => hsc.ScOfficialShareClassName.Contains(searchTerm))
+                    .GroupBy(hsc => hsc.ScOfficialShareClassName)
+                    .Select(hsc => hsc.FirstOrDefault())
+                    .ToList();
             }
 
-            var modifiedData = result.Select(s => new
+            var modifiedData = result.Select(hsc => new
             {
-                id = s.ScOfficialShareClassName,
-                text = s.ScOfficialShareClassName,
+                id = hsc.ScOfficialShareClassName,
+                text = hsc.ScOfficialShareClassName,
             });
 
             return this.Json(modifiedData);

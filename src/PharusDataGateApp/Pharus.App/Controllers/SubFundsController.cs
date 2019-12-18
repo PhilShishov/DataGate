@@ -56,16 +56,26 @@
 
         public JsonResult AutoCompleteSubFundList(string searchTerm)
         {
-            var result = this.context.TbHistorySubFund.ToList();
+            var result = this.context
+                .TbHistorySubFund
+                .GroupBy(hsf => hsf.SfOfficialSubFundName)
+                .Select(hsf => hsf.FirstOrDefault())
+                .ToList();
+
             if (searchTerm != null)
             {
-                result = this.context.TbHistorySubFund.Where(s => s.SfOfficialSubFundName.Contains(searchTerm)).ToList();
+                result = this.context
+                    .TbHistorySubFund
+                    .Where(hsf => hsf.SfOfficialSubFundName.Contains(searchTerm))
+                    .GroupBy(hsf => hsf.SfOfficialSubFundName)
+                    .Select(hsf => hsf.FirstOrDefault())
+                    .ToList();
             }
 
-            var modifiedData = result.Select(s => new
+            var modifiedData = result.Select(hsf => new
             {
-                id = s.SfOfficialSubFundName,
-                text = s.SfOfficialSubFundName,
+                id = hsf.SfOfficialSubFundName,
+                text = hsf.SfOfficialSubFundName,
             });
             return this.Json(modifiedData);
         }
@@ -497,9 +507,9 @@
                    .Select(fc => fc.FId)
                    .FirstOrDefault();
 
-                SetZeroValuesToNull(nullIntegerParameters, cesrClassId, geoFocusId, glExpId, 
-                                    frequencyId, valuationId, calculationId, derivMarketId, 
-                                    derivPurposeId, principalAssetId, typeMarketId, principalInvStrId, 
+                SetZeroValuesToNull(nullIntegerParameters, cesrClassId, geoFocusId, glExpId,
+                                    frequencyId, valuationId, calculationId, derivMarketId,
+                                    derivPurposeId, principalAssetId, typeMarketId, principalInvStrId,
                                     catMorningStarId, catSixId, catBloombergId);
 
                 this.subFundsService.CreateSubFund(initialDate, endDate, subFundName, cssfCode, faCode,
@@ -507,7 +517,7 @@
                                                 expiryDate, sfStatusId, leiCode, nullIntegerParameters[0], nullIntegerParameters[1],
                                                 nullIntegerParameters[2], currency, nullIntegerParameters[3], nullIntegerParameters[4],
                                                 nullIntegerParameters[5], isDerivative, nullIntegerParameters[6], nullIntegerParameters[7],
-                                                nullIntegerParameters[8], nullIntegerParameters[9], nullIntegerParameters[10], 
+                                                nullIntegerParameters[8], nullIntegerParameters[9], nullIntegerParameters[10],
                                                 clearingCode, nullIntegerParameters[11], nullIntegerParameters[12],
                                                 nullIntegerParameters[13], fundContainerId);
             }
