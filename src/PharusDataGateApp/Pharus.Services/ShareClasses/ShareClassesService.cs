@@ -211,7 +211,24 @@ namespace Pharus.Services.ShareClasses
             }
         }
 
-        public List<string[]> GetTimeseriestypetable(int id)
+        public List<string[]> GetShareClassTimeSeriesDates(int id)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                command.CommandText = $"SELECT distinct  date_ts, convert(varchar,date_ts , 103) " +
+                                      $"datechart  FROM [tb_timeseries_shareclass] " +
+                                      $"join tb_dom_timeseries_provider tsp on tsp.id_provider = provider_ts " +
+                                      $"where id_shareclass = 70 order by date_ts asc";
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
+        public List<string[]> GetTimeseriesTypeProviders(int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {
