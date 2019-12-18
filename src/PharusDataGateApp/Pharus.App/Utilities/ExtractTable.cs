@@ -143,7 +143,6 @@ namespace Pharus.App.Utilities
                     }
 
                     Cell cell = new Cell();
-                    cell.SetWidth(UnitValue.CreatePercentValue(50));
                     cell.Add(new Paragraph(s));
                     cell.SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER);
                     cell.SetBold();
