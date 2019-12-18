@@ -98,11 +98,11 @@
 
                     if (roles.Contains("Admin"))
                     {
-                        returnUrl = "/Admin/Index";
+                        returnUrl = "/Funds/All";
                     }
                     else
                     {
-                        returnUrl = "/Home/Index";
+                        returnUrl = "/Funds/All";
                     }
 
                     return this.Redirect(returnUrl);
