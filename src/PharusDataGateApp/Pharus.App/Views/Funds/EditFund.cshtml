@@ -16,8 +16,7 @@
         <div class="form-group">
             <label asp-for="InitialDate" class="text-torshia"></label><br>
             <input asp-for="InitialDate"
-                   type="date"
-                   min=@DateTime.Today.ToString("yyyy-MM-dd")
+                   type="date"                 
                    class="form-control maxw-270">
             <span asp-validation-for="InitialDate" class="text-danger"></span>
         </div>

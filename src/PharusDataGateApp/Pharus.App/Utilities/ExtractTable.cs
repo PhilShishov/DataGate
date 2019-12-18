@@ -129,7 +129,6 @@ namespace Pharus.App.Utilities
             Table table = new Table(tableLength);
 
             table.SetWidth(UnitValue.CreatePercentValue(100));
-            //table.SetFixedLayout();
             table.SetFontSize(10);
 
             for (int row = 0; row < 1; row++)
