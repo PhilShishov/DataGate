@@ -275,7 +275,7 @@
         [HttpPost]
         public IActionResult UploadFiles(SpecificEntityViewModel model)
         {
-            var file = model.UploadFundFileBM.FileToUpload;
+            var file = model.UploadFundFileModel.FileToUpload;
 
             if (!ModelState.IsValid || file == null || file.Length == 0)
             {
@@ -294,7 +294,7 @@
             string startConnection = model.StartConnection;
             string endConnection = model.EndConnection;
 
-            var fileTypeDesc = model.UploadFundFileBM.FileType;
+            var fileTypeDesc = model.UploadFundFileModel.FileType;
             int fileTypeId = this.context.TbDomFileType
                     .Where(s => s.FiletypeDesc == fileTypeDesc)
                     .Select(s => s.FiletypeId)
