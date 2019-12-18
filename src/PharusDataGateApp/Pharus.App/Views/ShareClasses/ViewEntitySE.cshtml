@@ -18,14 +18,6 @@
             background-image: none;
         }
     </style>
-
-    <style>
-        canvas {
-            -moz-user-select: none;
-            -webkit-user-select: none;
-            -ms-user-select: none;
-        }
-    </style>
 }
 
 <form asp-controller="SubFunds"
@@ -39,33 +31,8 @@
     <partial name="SpecificEntityUpdatePartial" />
 
     <div style="width:50%;">
-        <canvas id="canvas"></canvas>
+        <canvas id="aumSC_Canvas"></canvas>
     </div>
-    @*<div class="chart-container">
-            <div id="chartdata"><canvas id="myChart"></canvas></div>
-            <div class="table-responsive border-0 w-35" id="tabletimeseriestype">
-                <table class="table table-hover">
-                    <tbody>
-                        <tr>
-                            <th class="text-secondary p-1">
-                                <h5>
-                                    @Model.TSTableType[0][0]
-                                </h5>
-                            </th>
-                        </tr>
-
-                        @for (int row = 1; row < Model.TSTableType.Count; row++)
-                                    {
-                            <tr onclick="newtimeseries(this)">
-                                <td class="p-1">
-                                    @Model.TSTableType[row][0]
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>*@
 
     <div class="d-flex justify-content-between">
 
@@ -171,7 +138,7 @@
 
 @section Scripts{
 
-    <script type="text/javascript" src="~/jquery/jquery.doubleScroll.js"></script>
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.doubleScroll.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -195,16 +162,18 @@
                 }
             });
         });
-    </script>  
+    </script>
 
     <script type="text/javascript" src="~/js/manageSubEntitiesSelectMenu.js"></script>
 
     <script>
-        window.onload = () => {
+        window.onload = function () {
+            var ctx = document.getElementById('aumSC_Canvas').getContext('2d');
+            window.myLine = new Chart(ctx, config);
             manageSideNavBar();
             manageDropdowns();
             manageSESelectMenu();
-        }
+        };
     </script>
 
     <script>
@@ -275,10 +244,6 @@
                     }
                 }
             }
-        };
-        window.onload = function () {
-            var ctx = document.getElementById('canvas').getContext('2d');
-            window.myLine = new Chart(ctx, config);
         };
     </script>
 }
