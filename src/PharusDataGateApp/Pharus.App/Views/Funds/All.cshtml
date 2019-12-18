@@ -10,12 +10,12 @@
 @section Styles{
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/checkbox.css">
     <style>
         body {
             background-image: none;
         }
     </style>
-    <link rel="stylesheet" href="~/css/checkbox.css">
 }
 
 <form asp-controller="Funds"
@@ -26,11 +26,13 @@
         
         <div class="button-holder d-flex justify-content-center my-5" style="align-items: center">
             <partial name="ExtractEntitiesViewPartial" />
+
             <label class="el-switch el-switch-sm" style="display:flex; margin-bottom:0">
-                <input type="checkbox" name="switch" checked>
-                <span class="el-switch-style"></span>
-                &nbsp; Show only all active
+                <input type="checkbox" asp-for="IsActive" checked>
+                <span class="el-switch-style mr-2"></span>
+                Show only all active
             </label>
+
             @*<button type="button"
                 class="btn btn-info"
                 data-toggle="modal"

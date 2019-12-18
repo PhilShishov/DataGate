@@ -31,6 +31,8 @@
 
         List<string[]> GetAllSubFundDocumens(int id);
 
+        List<string[]> PrepareSubFundsForExtract(DateTime? chosenDate);
+
         void EditSubFund(
                         int fundId,
                         string initialDate,
