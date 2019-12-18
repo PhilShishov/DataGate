@@ -67,6 +67,8 @@
                 result = this.context
                     .TbHistoryFund
                     .Where(s => s.FOfficialFundName.Contains(searchTerm))
+                    .GroupBy(hf => hf.FOfficialFundName)
+                    .Select(hf => hf.FirstOrDefault())
                     .ToList();
             }
 
@@ -176,7 +178,7 @@
             }
 
             return fileStreamResult;
-        }        
+        }
 
         [HttpGet]
         [Route("Funds/ViewEntitySE/{EntityId}/{ChosenDate}")]
