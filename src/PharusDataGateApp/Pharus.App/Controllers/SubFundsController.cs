@@ -155,9 +155,11 @@
         [HttpPost]
         public FileStreamResult ExtractPdfEntities(EntitiesViewModel model)
         {
-            FileStreamResult fileStreamResult = null;
-
             var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
+            model.Entities = this.subFundsService.PrepareSubFundsForExtract(chosenDate);
+
+            FileStreamResult fileStreamResult = null;
 
             string typeName = model.GetType().Name;
             string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
