@@ -151,7 +151,9 @@
             <tbody>
                 @for (int row = 1; row < Model.EntitySubEntities.Count; row++)
                 {
-                    <tr class="tableRowPharus" onclick="document.location = '/ShareClasses/ViewEntitySE/@Model.EntitySubEntities[row][2]'">
+                    var shareClassId = Model.EntitySubEntities[row][2];
+
+                    <tr class="tableRowPharus" onclick="document.location = '/ShareClasses/ViewEntitySE/@shareClassId/@Model.ChosenDate'">
                         @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
                         {
                             <td class="p-1">
