@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Chart.js" Version="2.9.3" />
     <PackageReference Include="EPPlus.Core" Version="1.5.4" />
     <PackageReference Include="itext7" Version="7.1.8" />
     <PackageReference Include="Microsoft.AspNetCore.App" />

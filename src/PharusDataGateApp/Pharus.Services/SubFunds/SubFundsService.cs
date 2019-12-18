@@ -161,7 +161,7 @@ namespace Pharus.Services.SubFunds
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from ActivesubfundforSpecificFundAtDate('{this.defaultDate}', {id})";
+                command.CommandText = $"select * from ActiveShareclassforSpecificSubFundAtDate('{this.defaultDate}', {id})";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
@@ -177,11 +177,11 @@ namespace Pharus.Services.SubFunds
 
                 if (chosenDate == null)
                 {
-                    command.CommandText = $"select * from ActivesubfundforSpecificFundAtDate('{this.defaultDate}', {id})";
+                    command.CommandText = $"select * from ActiveShareclassforSpecificSubFundAtDate('{this.defaultDate}', {id})";
                 }
                 else
                 {
-                    command.CommandText = $"select * from ActivesubfundforSpecificFundAtDate('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                    command.CommandText = $"select * from ActiveShareclassforSpecificSubFundAtDate('{chosenDate?.ToString("yyyyMMdd")}', {id})";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
