@@ -66,16 +66,16 @@
             {
                 result = this.context
                     .TbHistoryFund
-                    .Where(s => s.FOfficialFundName.Contains(searchTerm))
+                    .Where(hf => hf.FOfficialFundName.Contains(searchTerm))
                     .GroupBy(hf => hf.FOfficialFundName)
                     .Select(hf => hf.FirstOrDefault())
                     .ToList();
             }
 
-            var modifiedData = result.Select(s => new
+            var modifiedData = result.Select(hf => new
             {
-                id = s.FOfficialFundName,
-                text = s.FOfficialFundName,
+                id = hf.FOfficialFundName,
+                text = hf.FOfficialFundName,
             });
 
             return this.Json(modifiedData);
@@ -216,7 +216,24 @@
 
         public JsonResult AutoCompleteSubFundList(string searchTerm, int entityId)
         {
-            var entitiesToSearch = this.fundsService.GetFund_SubFunds(entityId).Skip(1).ToList();
+            //var result = this.context
+            //   .TbHistoryFund
+            //   .GroupBy(hf => hf.FOfficialFundName)
+            //   .Select(hf => hf.FirstOrDefault())
+            //   .ToList();
+
+            //    result = this.context
+            //        .TbHistoryFund
+            //        .Where(hf => hf.FOfficialFundName.Contains(searchTerm))
+            //        .GroupBy(hf => hf.FOfficialFundName)
+            //        .Select(hf => hf.FirstOrDefault())
+            //        .ToList();
+
+
+            var entitiesToSearch = this.fundsService
+                .GetFund_SubFunds(entityId)
+                .Skip(1)
+                .ToList();
 
             if (searchTerm != null)
             {
@@ -301,8 +318,15 @@
             }
 
             string streamId = this.fundsFileService.GetStreamIdFromFileName(file.FileName);
-            string startConnection = model.StartConnection;
-            string endConnection = model.EndConnection;
+
+            var startConnection = DateTime.ParseExact(model.StartConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+            DateTime? endConnection = null;
+
+            if (model.EndConnection != null)
+            {
+                endConnection = DateTime.ParseExact(model.EndConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            }
 
             var fileTypeDesc = model.UploadFundFileModel.FileType;
             int fileTypeId = this.context.TbDomFileType
