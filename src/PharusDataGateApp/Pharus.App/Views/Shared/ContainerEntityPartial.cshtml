@@ -10,23 +10,40 @@
                min="2018-01-01" max=@DateTime.Today.ToString("yyyy-MM-dd")>
 
         <input type="submit"
-               class="bg-pharus text-white"
+               class="btn btn-primary btn-sm"
                asp-for="Command"
                value="Update Table"></>
 
-        <div class="text-dark pr-3 bg-info w-20 d-inline">
-            <label for="Status" class="pr-3">ACTIVE</label>
-            @Html.CheckBoxFor(m => Model.IsActive)
+        <div class="custom-control custom-switch">
+            <input type="checkbox" class="custom-control-input" id="customSwitch1" checked>
+            <label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>
         </div>
+
+        <input asp-for="IsActive" type="checkbox" name="switch" class="pt-5">
+        <label class="el-switch">
+            <span class="el-switch-style"></span>
+            ACTIVE
+        </label>
+
+        @*<div class="pr-3 w-20 d-inline">
+            <label class="el-switch">
+                <input asp-for="IsActive"
+                       type="checkbox"
+                       name="switch"
+                       checked>
+                <span class="el-switch-style"></span>
+                ACTIVE
+            </label>
+        </div>*@
     </div>
     <div>
-        <select name="SearchTerm" 
-                id="SearchTerm" 
-                class="form-control input-sm" 
+        <select name="SearchTerm"
+                id="SearchTerm"
+                class="form-control input-sm"
                 style="width:300px"></select>
 
         <input type="submit"
-               class="bg-pharus text-white"
+               class="btn btn-primary btn-sm"
                asp-for="Command"
                value="Search" />
     </div>
