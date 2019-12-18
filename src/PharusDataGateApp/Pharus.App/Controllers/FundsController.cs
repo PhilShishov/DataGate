@@ -56,10 +56,18 @@
 
         public JsonResult AutoCompleteFundList(string searchTerm)
         {
-            var result = this.context.TbHistoryFund.ToList();
+            var result = this.context
+                .TbHistoryFund
+                .GroupBy(hf => hf.FOfficialFundName)
+                .Select(hf => hf.FirstOrDefault())
+                .ToList();
+
             if (searchTerm != null)
             {
-                result = this.context.TbHistoryFund.Where(s => s.FOfficialFundName.Contains(searchTerm)).ToList();
+                result = this.context
+                    .TbHistoryFund
+                    .Where(s => s.FOfficialFundName.Contains(searchTerm))
+                    .ToList();
             }
 
             var modifiedData = result.Select(s => new
