@@ -57,10 +57,23 @@
         <span asp-validation-for="RoleType" class="text-danger"></span>
     </div>
     <div class="button-holder d-flex">
-        <button type="submit" class="btn bg-pharus text-white">Create</button>
+        <button type="submit"
+                class="btn bg-pharus text-white"
+                id="confirmBtn">
+            Create
+        </button>
     </div>
 </form>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script type="text/javascript" src="~/js/confirmEvent.js"></script>
+
+    <script>
+        window.onload = () => {
+            manageSideNavBar();
+            manageDropdowns();
+            confirmEvent();
+        }
+    </script>
 }
