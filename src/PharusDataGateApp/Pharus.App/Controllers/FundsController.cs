@@ -16,6 +16,7 @@
     using Pharus.Services.Funds.Contracts;
     using Pharus.App.Models.BindingModels.Funds;
     using Pharus.App.Models.ViewModels.Entities;
+    using Microsoft.AspNetCore.Routing;
 
     [Authorize]
     public class FundsController : Controller
@@ -323,6 +324,8 @@
 
             DateTime? endConnection = null;
 
+            // here why is equal to null
+
             if (model.EndConnection != null)
             {
                 endConnection = DateTime.ParseExact(model.EndConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
@@ -340,6 +343,10 @@
                                                 startConnection,
                                                 endConnection,
                                                 fileTypeId);
+
+            //return this.RedirectToAction("ViewEntitySE", new RouteValueDictionary(
+            //     new { controller = "Funds", action = "ViewEntitySE",
+            //         EntityId = model.EntityId, ChosenDate = model.ChosenDate }));
 
             return this.RedirectToAction("All");
         }
@@ -561,6 +568,9 @@
             model.FileNameToDisplay = GetFileNameFromFilePath(model.EntityId, model.ChosenDate);
             model.EntityTimeline = this.fundsService.GetFundTimeline(model.EntityId);
             model.EntityDocuments = this.fundsService.GetAllFundDocumens(model.EntityId);
+
+            model.StartConnection = model.Entity[1][0];
+            model.EndConnection = model.Entity[1][1];
         }
 
         private static void SetModelValuesForEditView(EditFundBindingModel model)
