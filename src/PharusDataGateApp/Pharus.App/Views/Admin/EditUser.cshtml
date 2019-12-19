@@ -47,7 +47,7 @@
                 </button>
                 <button type="submit"
                         class="btn bg-pharus text-white"
-                        id="confirmBtn"
+                        id="confirmDelBtn"
                         name="delete_button"
                         value="Delete">
                     Delete User
@@ -62,13 +62,13 @@
 </div>
 
 @section Scripts {
-    <script type="text/javascript" src="~/js/confirmEvent.js"></script>
+    <script type="text/javascript" src="~/js/confirmDelete.js"></script>
 
     <script>
         window.onload = () => {
             manageSideNavBar();
             manageDropdowns();
-            confirmEvent();
+            confirmDelete();
         }
     </script>
 }
