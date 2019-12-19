@@ -559,7 +559,6 @@
                                              tinNumber, leiCode, regNumber);
             }
 
-
             return this.LocalRedirect(returnUrl);
         }
 
