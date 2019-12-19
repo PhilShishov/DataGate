@@ -362,7 +362,7 @@ namespace Pharus.Services.SubFunds
                         new SqlParameter("@sf_navFrequency", SqlDbType.Int) { Value = frequencyId },
                         new SqlParameter("@sf_valutationDate", SqlDbType.Int) { Value = valuationId },
                         new SqlParameter("@sf_calculationDate", SqlDbType.Int) { Value = calculationId },
-                        new SqlParameter("@sf_derivatives", SqlDbType.Int) { Value = 0 },
+                        new SqlParameter("@sf_derivatives", SqlDbType.Bit) { Value = isDerivative },
                         new SqlParameter("@sf_derivMarket", SqlDbType.Int) { Value = derivMarketId },
                         new SqlParameter("@sf_derivPurpose", SqlDbType.Int) { Value = derivPurposeId },
                         new SqlParameter("@sf_principal_asset_class", SqlDbType.Int) { Value = principalAssetId },
@@ -397,6 +397,5 @@ namespace Pharus.Services.SubFunds
                 }
             }
         }
-
     }
 }
