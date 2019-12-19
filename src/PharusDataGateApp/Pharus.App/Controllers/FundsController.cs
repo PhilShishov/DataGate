@@ -89,7 +89,7 @@
 
             var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
-            if (model.Command.Equals("Update Table"))
+            if (model.Command == null || model.Command.Equals("Update Table"))
             {
                 if (model.ChosenDate != null)
                 {

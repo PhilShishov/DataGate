@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "All";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+    string entityId = string.Empty;
 }
 
 <h2 class="text-center text-torshia">All Active Funds</h2>
@@ -23,25 +25,27 @@
       method="post">
     <div>
         <partial name="ContainerEntityPartial" />
-        
+
         <div class="button-holder d-flex justify-content-center my-5" style="align-items: center">
             <partial name="ExtractEntitiesViewPartial" />
 
             <label class="el-switch el-switch-sm" style="display:flex; margin-bottom:0">
-                <input type="checkbox" asp-for="IsActive">
+                <input type="checkbox" 
+                       asp-for="IsActive" 
+                       id="activeCheckBox">
                 <span class="el-switch-style mr-2"></span>
                 Show only all active
             </label>
 
             @*<button type="button"
-                class="btn btn-info"
-                data-toggle="modal"
-                data-target="#myModal"
-                name="showColumnSelection">
-            <img src="~/images/ColumnSelection_Pharus.jpg"
-                 width="35"
-                 height="35" />
-        </button>*@
+                        class="btn btn-info"
+                        data-toggle="modal"
+                        data-target="#myModal"
+                        name="showColumnSelection">
+                    <img src="~/images/ColumnSelection_Pharus.jpg"
+                         width="35"
+                         height="35" />
+                </button>*@
         </div>
 
         <hr class="bg-pharus hr-2" />
@@ -53,8 +57,21 @@
 </form>
 
 @section Scripts{
+    <script src="~/js/checkboxRedirect.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.doubleScroll.js"></script>
+
     <script>
+        window.onload = () => {
+            manageSideNavBar();
+            manageDropdowns();
+            checkboxRedirect();
+        }
+
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+
         $(document).ready(function () {
             $("#SearchTerm").select2({
                 placeholder: "Select Funds",
@@ -72,20 +89,10 @@
                 }
             });
         });
-    </script>
-
-    <script type="text/javascript" src="~/lib/jquery/dist/jquery.doubleScroll.js"></script>
-
-    <script type="text/javascript">
         $(document).ready(function () {
             $('.double-scroll').doubleScroll();
             $('#tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
         });
-    </script>
 
-    <script>
-        if (window.history.replaceState) {
-            window.history.replaceState(null, null, window.location.href);
-        }
     </script>
 }
