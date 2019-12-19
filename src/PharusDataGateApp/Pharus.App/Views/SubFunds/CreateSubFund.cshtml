@@ -6,8 +6,8 @@
 
 <h4>Create New SubFund</h4>
 
-<form asp-action="CreateSubFund" 
-      method="post" 
+<form asp-action="CreateSubFund"
+      method="post"
       class="d-inline">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="d-inline"
@@ -213,7 +213,7 @@
 
         <div class="form-group">
             <label asp-for="Derivatives" class="text-torshia"></label><br>
-            <select id="derivatives" 
+            <select id="derivatives"
                     class="form-control maxw-270"
                     asp-for="Derivatives">
                 <option value="No">No</option>
@@ -342,15 +342,14 @@
             </select>
             <span asp-validation-for="FundContainer" class="text-danger"></span>
         </div>
-
     </div>
 
     <div class="button-holder mt-4">
         <button type="submit"
                 class="btn bg-pharus text-white"
+                id="confirmCreateBtn"
                 name="create_button"
-                style="margin-right:40px"
-                onclick="return confirm('Are you sure you want to create this?')">
+                style="margin-right:40px">
             Create SubFund
         </button>
     </div>
@@ -363,7 +362,8 @@
 @section Scripts{
 
     <script src="~/js/getDerivatives.js"></script>
-    <script type="text/javascript" src="~/js/formatInput.js"></script>
+    <script src="~/js/formatInput.js"></script>
+    <script src="~/js/confirmCreate.js"></script>
 
     <script>
         window.onload = () => {
@@ -371,6 +371,7 @@
             manageDropdowns();
             formatInput();
             getDerivatives();
+            confirmCreate();
         }
     </script>
 

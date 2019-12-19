@@ -163,9 +163,9 @@
     <div class="button-holder mt-4">
         <button type="submit"
                 class="btn bg-pharus text-white"
+                id="confirmCreateBtn"
                 name="create_button"
-                style="margin-right:40px"
-                onclick="return confirm('Are you sure you want to create this?')">
+                style="margin-right:40px">
             Create Fund
         </button>
     </div>
@@ -178,12 +178,14 @@
 @section Scripts{
 
     <script type="text/javascript" src="~/js/formatInput.js"></script>
+    <script type="text/javascript" src="~/js/confirmCreate.js"></script>
 
     <script>
         window.onload = () => {
             manageSideNavBar();
             manageDropdowns();
             formatInput();
+            confirmCreate();
         }
     </script>
 
