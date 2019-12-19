@@ -59,7 +59,7 @@
     <div class="button-holder d-flex">
         <button type="submit"
                 class="btn bg-pharus text-white"
-                id="confirmBtn">
+                id="confirmCreateBtn">
             Create
         </button>
     </div>
@@ -67,13 +67,13 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    <script type="text/javascript" src="~/js/confirmEvent.js"></script>
+    <script type="text/javascript" src="~/js/confirmCreate.js"></script>
 
     <script>
         window.onload = () => {
             manageSideNavBar();
             manageDropdowns();
-            confirmEvent();
+            confirmCreate();
         }
     </script>
 }
