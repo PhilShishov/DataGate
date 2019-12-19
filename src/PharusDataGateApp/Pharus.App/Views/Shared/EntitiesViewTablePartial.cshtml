@@ -1,5 +1,6 @@
 ﻿@{
     var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+    var entityId = string.Empty;
 }
 
 <div class="table-responsive border-0 mx-auto" id="tableDoubleScroll">
@@ -22,7 +23,9 @@
         <tbody>
             @for (int row = 1; row < Model.Entities.Count; row++)
             {
-                <tr class="tableRowPharus" onclick="document.location = '/@controllerName/ViewEntitySE/@Model.Entities[row][2]/@Model.ChosenDate'">
+                entityId = Model.Entities[row][2];
+
+                <tr class="tableRowPharus" onclick="document.location ='/@controllerName/ViewEntitySE/@entityId/@Model.ChosenDate'">
                     @for (int col = 0; col < Model.Entities[row].Length; col++)
                     {
                         <td class="p-1">
