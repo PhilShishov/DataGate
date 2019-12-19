@@ -213,7 +213,9 @@
 
         <div class="form-group">
             <label asp-for="Derivatives" class="text-torshia"></label><br>
-            <select id="derivatives" class="form-control maxw-270">
+            <select id="derivatives" 
+                    class="form-control maxw-270"
+                    asp-for="Derivatives">
                 <option value="No">No</option>
                 <option value="Yes">Yes</option>
             </select>
