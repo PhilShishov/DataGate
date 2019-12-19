@@ -9,6 +9,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Routing;
     using Microsoft.AspNetCore.Authorization;
 
     using Pharus.Data;
@@ -16,7 +17,6 @@
     using Pharus.Services.Funds.Contracts;
     using Pharus.App.Models.BindingModels.Funds;
     using Pharus.App.Models.ViewModels.Entities;
-    using Microsoft.AspNetCore.Routing;
 
     [Authorize]
     public class FundsController : Controller
@@ -303,6 +303,8 @@
         [HttpPost]
         public IActionResult UploadFiles(SpecificEntityViewModel model)
         {
+            SetModelValuesForSpecificView(model);
+
             var file = model.UploadFundFileModel.FileToUpload;
 
             if (!ModelState.IsValid || file == null || file.Length == 0)
@@ -326,7 +328,7 @@
 
             // here why is equal to null
 
-            if (model.EndConnection != null)
+            if (!string.IsNullOrEmpty(model.EndConnection))
             {
                 endConnection = DateTime.ParseExact(model.EndConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             }
@@ -563,7 +565,9 @@
 
         private void SetModelValuesForSpecificView(SpecificEntityViewModel model)
         {
-            model.Entity = this.fundsService.GetFundById(model.EntityId);
+            var date = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
+            model.Entity = this.fundsService.GetFundById(date, model.EntityId);
             model.EntitySubEntities = this.fundsService.GetFund_SubFunds(model.EntityId);
             model.FileNameToDisplay = GetFileNameFromFilePath(model.EntityId, model.ChosenDate);
             model.EntityTimeline = this.fundsService.GetFundTimeline(model.EntityId);
