@@ -18,6 +18,7 @@ namespace Pharus.Services.Funds
     using Pharus.Data;
     using Pharus.Utilities.Services;
     using Pharus.Services.Funds.Contracts;
+    using System.Text;
 
     // _____________________________________________________________
     public class FundsService : IFundsService
@@ -84,6 +85,10 @@ namespace Pharus.Services.Funds
                 connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
+
+                // Prepare items for DB query with []
+
+                selectedColumns = selectedColumns.Select(c => String.Format("[{0}]", c)).ToList();
 
                 command.CommandText = $"select {string.Join(", ", selectedColumns)} from fn_active_fund('{this.defaultDate}')";
 
