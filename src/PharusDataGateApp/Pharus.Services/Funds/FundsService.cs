@@ -50,7 +50,7 @@ namespace Pharus.Services.Funds
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from fn_active_fund('{this.defaultDate}')";
+                command.CommandText = $"select * from fn_all_fund('{this.defaultDate}')";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
@@ -66,18 +66,37 @@ namespace Pharus.Services.Funds
 
                 if (chosenDate == null)
                 {
-                    command.CommandText = $"select * from fn_active_fund('{this.defaultDate}')";
+                    command.CommandText = $"select * from fn_all_fund('{this.defaultDate}')";
                 }
                 else
                 {
-                    command.CommandText = $"select * from fn_active_fund('{chosenDate?.ToString("yyyyMMdd")}')";
+                    command.CommandText = $"select * from fn_all_fund('{chosenDate?.ToString("yyyyMMdd")}')";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
         }
 
-        public List<string[]> GetAllFundsWithSelectedView(List<string> selectedColumns)
+        public List<string[]> GetAllActiveFunds()
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                command.CommandText = $"select * from fn_active_fund('{this.defaultDate}')";
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
+        public List<string[]> GetAllActiveFunds(DateTime? chosenDate)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<string[]> GetAllFundsWithSelectedViewAndDate(List<string> selectedColumns, DateTime? chosenDate)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -89,7 +108,15 @@ namespace Pharus.Services.Funds
 
                 selectedColumns = selectedColumns.Select(c => String.Format("[{0}]", c)).ToList();
 
-                command.CommandText = $"select {string.Join(", ", selectedColumns)} from fn_active_fund('{this.defaultDate}')";
+                if (chosenDate == null)
+                {
+                    command.CommandText = $"select {string.Join(", ", selectedColumns)} from fn_all_fund('{this.defaultDate}')";
+                }
+                else
+                {
+                    command.CommandText = $"select {string.Join(", ", selectedColumns)} from fn_all_fund('{chosenDate?.ToString("yyyyMMdd")}')";
+                }
+
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
@@ -110,7 +137,7 @@ namespace Pharus.Services.Funds
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from fn_active_fund('{this.defaultDate}') where [FUND ID PHARUS] = {id}";
+                command.CommandText = $"select * from fn_all_fund('{this.defaultDate}') where [FUND ID PHARUS] = {id}";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
@@ -126,11 +153,11 @@ namespace Pharus.Services.Funds
 
                 if (chosenDate == null)
                 {
-                    command.CommandText = $"select * from fn_active_fund('{this.defaultDate}') where [FUND ID PHARUS] = {id}";
+                    command.CommandText = $"select * from fn_all_fund('{this.defaultDate}') where [FUND ID PHARUS] = {id}";
                 }
                 else
                 {
-                    command.CommandText = $"select * from fn_active_fund('{chosenDate?.ToString("yyyyMMdd")}') " +
+                    command.CommandText = $"select * from fn_all_fund('{chosenDate?.ToString("yyyyMMdd")}') " +
                         $"where [FUND ID PHARUS] = {id}";
                 }
 
