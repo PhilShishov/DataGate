@@ -77,6 +77,20 @@ namespace Pharus.Services.Funds
             }
         }
 
+        public List<string[]> GetAllFundsWithSelectedView(List<string> selectedColumns)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                command.CommandText = $"select {string.Join(", ", selectedColumns)} from fn_active_fund('{this.defaultDate}')";
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
         public List<string> GetAllFundsNames()
         {
             return this.context.TbHistoryFund

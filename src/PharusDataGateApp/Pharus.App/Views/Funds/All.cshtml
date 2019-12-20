@@ -22,18 +22,6 @@
     </style>
 }
 
-@for (int row = 0; row < 1; row++)
-{
-    int count = 15;
-    <select class="multiselect" multiple="multiple" size=@count name="selectedColumns" style="width:60%">
-        @for (int col = 0; col < Model.Entities[row].Length; col++)
-        {
-            <option value="@Model.Entities[row][col]">@Model.Entities[row][col]</option>
-        }
-    </select>
-}
-
-
 <form asp-controller="Funds"
       class="justify-content-between"
       method="post">
@@ -69,11 +57,11 @@
                 <div class="modal-content">
                     <div class="modal-body">
                         <div>
-                            <h2>Select Columns</h2>
+                            <h2 class="text-center">SELECT COLUMNS </h2>
                             @for (int row = 0; row < 1; row++)
                             {
                                 int count = 15;
-                                <select class="multiselect" multiple="multiple" size=@count name="selectedColumns" style="width:60%">
+                                <select class="multiselect" multiple="multiple" size=@count asp-for="SelectedColumns" style="width:60%">
                                     @for (int col = 0; col < Model.Entities[row].Length; col++)
                                     {
                                         <option value="@Model.Entities[row][col]">@Model.Entities[row][col]</option>
@@ -84,8 +72,15 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <input type="submit" value="Apply" />
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="submit"
+                               asp-for="Command"
+                               value="Apply"
+                               class="btn btn-primary btn-sm ml-2" />
+                        <button type="button"
+                                class="btn btn-default"
+                                data-dismiss="modal">
+                            Close
+                        </button>
                     </div>
                 </div>
             </div>

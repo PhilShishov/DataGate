@@ -103,6 +103,12 @@
                     }
                 }
             }
+
+            else if (model.Command.Equals("Apply"))
+            {
+                model.Entities = this.fundsService.GetAllFundsWithSelectedView(model.SelectedColumns);
+            }
+
             else if (model.Command.Equals("Search"))
             {
                 if (model.SearchTerm == null)

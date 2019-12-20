@@ -8,6 +8,7 @@
 namespace Pharus.App.Models.ViewModels
 {
     using Pharus.App.Models.ViewModels.Contracts;
+    using System.Collections.Generic;
 
     public abstract class BaseEntityViewModel : IBaseEntityViewModel
     {
@@ -24,5 +25,7 @@ namespace Pharus.App.Models.ViewModels
         public string BaseEntityId { get; set; }
 
         public string SearchTerm { get; set; }
+
+        public List<string> SelectedColumns { get; set; }
     }
 }
