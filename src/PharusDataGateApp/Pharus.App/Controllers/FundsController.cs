@@ -48,7 +48,7 @@
             {
                 IsActive = true,
                 ChosenDate = DateTime.Today.ToString("yyyy-MM-dd"),
-                EntitiesHeaders = this.fundsService.GetAllFunds().Take(1).ToList(),
+                EntitiesHeaders = this.fundsService.GetAllActiveFunds().Take(1).ToList(),
                 Entities = this.fundsService.GetAllActiveFunds(),
             };
 
@@ -86,35 +86,47 @@
         [HttpPost]
         public IActionResult All(EntitiesViewModel model)
         {
-            GetAllActiveEntitiesUtility.GetAllActiveFundsWithHeaders(model, this.fundsService);
+            model.EntitiesHeaders = this.fundsService.GetAllActiveFunds().Take(1).ToList();
 
-            model.EntitiesHeaders = this.fundsService.GetAllFunds().Take(1).ToList();
+            bool isInSelectionMode = false;
 
-            var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-
-            if (model.Command == null || model.Command.Equals("Update Table"))
+            if (model.SelectedColumns != null && model.SelectedColumns.Count > 0)
             {
-                if (model.SelectedColumns != null)
-                {
-                    model.Entities = this.fundsService.GetAllFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
-                }
-                else if (model.ChosenDate != null && model.IsActive)
-                {
-                    GetAllActiveEntitiesUtility.GetAllActiveFundsWithHeaders(model, this.fundsService);
-                }
-                else
-                {
-                    model.Entities = this.fundsService.GetAllFunds(chosenDate);
-                }
+                isInSelectionMode = true;
             }
 
-            else if (model.Command.Equals("Apply"))
+            DateTime? chosenDate = null;
+
+            if (model.ChosenDate != null)
             {
-                if (model.SelectedColumns != null)
-                {
-                    model.Entities = this.fundsService.GetAllFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
-                }
+                chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             }
+
+            if (model.Command == null || model.Command.Equals("Update Table") || model.Command.Equals("Apply"))
+            {
+                if (isInSelectionMode)
+                {
+                    if (model.IsActive)
+                    {
+                        model.Entities = this.fundsService.GetAllActiveFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
+                    }
+                    else if (!model.IsActive)
+                    {
+                        model.Entities = this.fundsService.GetAllFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
+                    }
+                }
+                else if(!isInSelectionMode)
+                {
+                    if (model.IsActive)
+                    {
+                        model.Entities = this.fundsService.GetAllActiveFunds(chosenDate);
+                    }
+                    else if (!model.IsActive)
+                    {
+                        model.Entities = this.fundsService.GetAllFunds(chosenDate);
+                    }
+                }
+            }         
 
             else if (model.Command.Equals("Search"))
             {
@@ -141,10 +153,10 @@
                 }
                 else
                 {
-                    tableWithoutHeaders = this.fundsService
-                        .GetAllFunds()
-                        .Skip(1)
-                        .ToList();
+                    //tableWithoutHeaders = this.fundsService
+                    //    .GetAllFunds()
+                    //    .Skip(1)
+                    //    .ToList();
                 }
 
                 CreateTableView.AddHeadersToView(model.Entities, tableHeaders);
