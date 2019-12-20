@@ -3,16 +3,15 @@
 @{
     ViewData["Title"] = "All";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
-    string entityId = string.Empty;
 }
 
 <h2 class="text-center text-torshia">All Active Funds</h2>
 
 @section Styles{
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css"/>
     <link rel="stylesheet" href="~/css/checkbox.css">
+
     <style>
         body {
             background-image: none;
@@ -26,26 +25,49 @@
     <div>
         <partial name="ContainerEntityPartial" />
 
-        <div class="button-holder d-flex justify-content-center my-5" style="align-items: center">
+        <div class="button-holder d-flex justify-content-center my-5 align-items-center">
             <partial name="ExtractEntitiesViewPartial" />
 
-            <label class="el-switch el-switch-sm" style="display:flex; margin-bottom:0">
-                <input type="checkbox" 
-                       asp-for="IsActive" 
+            <label class="el-switch el-switch-sm d-flex mb-0">
+                <input type="checkbox"
+                       asp-for="IsActive"
                        id="activeCheckBox">
                 <span class="el-switch-style mr-2"></span>
-                Show only all active
+                Show only active
             </label>
 
-            @*<button type="button"
-                        class="btn btn-info"
-                        data-toggle="modal"
-                        data-target="#myModal"
-                        name="showColumnSelection">
-                    <img src="~/images/ColumnSelection_Pharus.jpg"
-                         width="35"
-                         height="35" />
-                </button>*@
+            <button type="button"
+                    class="btn btn-primary btn-sm ml-2"
+                    data-toggle="modal"
+                    data-target="#upDocModal"
+                    name="showColumnSelection">
+                <img src="~/images/ColumnSelection_Pharus.jpg"
+                     width="35"
+                     height="35" />
+            </button>
+        </div>
+
+        <div class="modal"
+             id="upDocModal"
+             role="dialog">
+            <div class="modal-dialog modal-lg d-flex">
+                <div class="modal-content">
+                    <div class="modal-body d-flex">
+                        <div style="width:100%;">
+                            <h2>Select Columns</h2>
+                            <select class="multiselect" multiple="multiple">
+                                <option value="AFG">Afghanistan</option>
+                                <option value="ALB">Albania</option>
+                                <option value="DZA">Algeria</option>
+                                <option value="AND">Andorra</option>
+                            </select>
+                            <br />
+                            <input type="submit" value="Apply" />
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <hr class="bg-pharus hr-2" />
