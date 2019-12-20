@@ -8,14 +8,13 @@
 <h2 class="text-center text-torshia">All Active Funds</h2>
 
 @section Styles{
-    <link rel="stylesheet" href="~/css/checkbox.css">
-    <link rel="stylesheet" href="~/css/common.css" type="text/css" />
-    <link rel="stylesheet" href="~/css/ui.multiselect.css" />
-
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" />
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/ui-lightness/jquery-ui.css" />
 
+    <link rel="stylesheet" href="~/css/checkbox.css">
+    <link rel="stylesheet" href="~/css/common.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/ui.multiselect.css" />
     <style>
         body {
             background-image: none;
@@ -57,14 +56,18 @@
             <div class="modal-dialog modal-lg d-flex">
                 <div class="modal-content">
                     <div class="modal-body d-flex">
-                        <div style="width:100%;">
+                        <div>
                             <h2>Select Columns</h2>
-                            <select class="multiselect" multiple="multiple">
-                                <option value="AFG">Afghanistan</option>
-                                <option value="ALB">Albania</option>
-                                <option value="DZA">Algeria</option>
-                                <option value="AND">Andorra</option>
-                            </select>
+                            @for (int row = 0; row < 1; row++)
+                            {
+                                int count = 15;
+                                <select class="multiselect" multiple="multiple" size=@count name="selectedColumns">
+                                    @for (int col = 0; col < Model.Entities[row].Length; col++)
+                                    {
+                                        <option value="@Model.Entities[row][col]">@Model.Entities[row][col]</option>
+                                    }
+                                </select>
+                            }
                             <br />
                             <input type="submit" value="Apply" />
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -83,19 +86,18 @@
 </form>
 
 @section Scripts{
-    <script src="~/js/checkboxRedirect.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-    <script src="~/lib/jquery/dist/jquery.doubleScroll.js"></script>
 
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="~/js/ui.multiselect.js"></script>
+    <script src="~/js/checkboxRedirect.js"></script>
+    <script src="~/js/ui.multiselect.js"></script>
+    <script src="~/lib/jquery/dist/jquery.doubleScroll.js"></script>
 
     <script>
         window.onload = () => {
             manageSideNavBar();
             manageDropdowns();
             checkboxRedirect();
-            ui.multiselect();
         }
 
         if (window.history.replaceState) {
