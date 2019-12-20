@@ -42,20 +42,6 @@ namespace Pharus.Services.Funds
         //
         // Retrieve query table DB based entities
         // with table functions
-        public List<string[]> GetAllFunds()
-        {
-            using (SqlConnection connection = new SqlConnection())
-            {
-                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-
-                command.CommandText = $"select * from fn_all_fund('{this.defaultDate}')";
-
-                return CreateModel.CreateModelWithHeadersAndValue(command);
-            }
-        }
-
         public List<string[]> GetAllFunds(DateTime? chosenDate)
         {
             using (SqlConnection connection = new SqlConnection())
@@ -93,7 +79,23 @@ namespace Pharus.Services.Funds
 
         public List<string[]> GetAllActiveFunds(DateTime? chosenDate)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                if (chosenDate == null)
+                {
+                    command.CommandText = $"select * from fn_active_fund('{this.defaultDate}')";
+                }
+                else
+                {
+                    command.CommandText = $"select * from fn_active_fund('{chosenDate?.ToString("yyyyMMdd")}')";
+                }
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
         }
 
         public List<string[]> GetAllFundsWithSelectedViewAndDate(List<string> selectedColumns, DateTime? chosenDate)
@@ -117,6 +119,30 @@ namespace Pharus.Services.Funds
                     command.CommandText = $"select {string.Join(", ", selectedColumns)} from fn_all_fund('{chosenDate?.ToString("yyyyMMdd")}')";
                 }
 
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
+        public List<string[]> GetAllActiveFundsWithSelectedViewAndDate(List<string> selectedColumns, DateTime? chosenDate)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                // Prepare items for DB query with []
+
+                selectedColumns = selectedColumns.Select(c => String.Format("[{0}]", c)).ToList();
+
+                if (chosenDate == null)
+                {
+                    command.CommandText = $"select {string.Join(", ", selectedColumns)} from fn_active_fund('{this.defaultDate}')";
+                }
+                else
+                {
+                    command.CommandText = $"select {string.Join(", ", selectedColumns)} from fn_active_fund('{chosenDate?.ToString("yyyyMMdd")}')";
+                }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }

@@ -9,8 +9,8 @@
 
 @section Styles{
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" />
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/pepper-grinder/jquery-ui.css" />
 
     <link rel="stylesheet" href="~/css/checkbox.css">
     <link rel="stylesheet" href="~/css/common.css" type="text/css" />
@@ -60,8 +60,7 @@
                             <h2 class="text-center">SELECT COLUMNS </h2>
                             @for (int row = 0; row < 1; row++)
                             {
-                                int count = 15;
-                                <select class="multiselect" multiple="multiple" size=@count asp-for="SelectedColumns" style="width:60%">
+                                <select class="multiselect" multiple="multiple" asp-for="SelectedColumns" style="width:60%">
                                     @for (int col = 0; col < Model.EntitiesHeaders[row].Length; col++)
                                     {
                                         <option value="@Model.EntitiesHeaders[row][col]">@Model.EntitiesHeaders[row][col]</option>
