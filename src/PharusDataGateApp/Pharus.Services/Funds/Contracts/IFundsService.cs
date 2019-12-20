@@ -9,6 +9,8 @@
 
         List<string[]> GetAllFunds(DateTime? chosenDate);
 
+        List<string[]> GetAllFundsWithSelectedView(List<string> selectedColumns);
+
         List<string> GetAllFundsNames();
 
         List<string[]> GetFundById(int id);
