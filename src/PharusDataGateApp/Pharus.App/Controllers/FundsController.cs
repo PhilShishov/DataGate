@@ -49,9 +49,8 @@
                 IsActive = true,
                 ChosenDate = DateTime.Today.ToString("yyyy-MM-dd"),
                 EntitiesHeaders = this.fundsService.GetAllFunds().Take(1).ToList(),
+                Entities = this.fundsService.GetAllActiveFunds(),
             };
-
-            GetAllActiveEntitiesUtility.GetAllActiveFundsWithHeaders(model, this.fundsService);
 
             this.ModelState.Clear();
             return this.View(model);
@@ -95,16 +94,17 @@
 
             if (model.Command == null || model.Command.Equals("Update Table"))
             {
-                if (model.ChosenDate != null)
+                if (model.SelectedColumns != null)
                 {
-                    if (model.IsActive)
-                    {
-                        GetAllActiveEntitiesUtility.GetAllActiveFundsWithHeaders(model, this.fundsService);
-                    }
-                    else
-                    {
-                        model.Entities = this.fundsService.GetAllFunds(chosenDate);
-                    }
+                    model.Entities = this.fundsService.GetAllFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
+                }
+                else if (model.ChosenDate != null && model.IsActive)
+                {
+                    GetAllActiveEntitiesUtility.GetAllActiveFundsWithHeaders(model, this.fundsService);
+                }
+                else
+                {
+                    model.Entities = this.fundsService.GetAllFunds(chosenDate);
                 }
             }
 
@@ -112,7 +112,7 @@
             {
                 if (model.SelectedColumns != null)
                 {
-                    model.Entities = this.fundsService.GetAllFundsWithSelectedView(model.SelectedColumns);
+                    model.Entities = this.fundsService.GetAllFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
                 }
             }
 

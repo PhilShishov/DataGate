@@ -9,7 +9,11 @@
 
         List<string[]> GetAllFunds(DateTime? chosenDate);
 
-        List<string[]> GetAllFundsWithSelectedView(List<string> selectedColumns);
+        List<string[]> GetAllActiveFunds();
+
+        List<string[]> GetAllActiveFunds(DateTime? chosenDate);
+
+        List<string[]> GetAllFundsWithSelectedViewAndDate(List<string> selectedColumns, DateTime? chosenDate);
 
         List<string> GetAllFundsNames();
 
