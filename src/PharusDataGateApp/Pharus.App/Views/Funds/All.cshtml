@@ -62,9 +62,9 @@
                             {
                                 int count = 15;
                                 <select class="multiselect" multiple="multiple" size=@count asp-for="SelectedColumns" style="width:60%">
-                                    @for (int col = 0; col < Model.Entities[row].Length; col++)
+                                    @for (int col = 0; col < Model.EntitiesHeaders[row].Length; col++)
                                     {
-                                        <option value="@Model.Entities[row][col]">@Model.Entities[row][col]</option>
+                                        <option value="@Model.EntitiesHeaders[row][col]">@Model.EntitiesHeaders[row][col]</option>
                                     }
                                 </select>
                             }

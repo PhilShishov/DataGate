@@ -18,5 +18,7 @@ namespace Pharus.App.Models.ViewModels.Entities
         // with table data from DB
         // for all entities of type
         public List<string[]> Entities { get; set; }
+
+        public List<string[]> EntitiesHeaders { get; set; }
     }
 }
