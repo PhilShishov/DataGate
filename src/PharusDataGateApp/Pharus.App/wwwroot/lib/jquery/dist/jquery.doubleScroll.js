@@ -1,12 +1,4 @@
-﻿/*
- * @name DoubleScroll
- * @desc displays scroll bar on top and on the bottom of the div
- * @requires jQuery
- *
- * @version 0.5 (11-11-2015)
- *
- */
-(function ($) {
+﻿(function ($) {
 
     jQuery.fn.doubleScroll = function (userOptions) {
 
