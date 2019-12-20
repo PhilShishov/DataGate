@@ -8,9 +8,13 @@
 <h2 class="text-center text-torshia">All Active Funds</h2>
 
 @section Styles{
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css"/>
     <link rel="stylesheet" href="~/css/checkbox.css">
+    <link rel="stylesheet" href="~/css/common.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/ui.multiselect.css" />
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" />
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/themes/ui-lightness/jquery-ui.css" />
 
     <style>
         body {
@@ -83,16 +87,27 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.doubleScroll.js"></script>
 
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="~/js/ui.multiselect.js"></script>
+
     <script>
         window.onload = () => {
             manageSideNavBar();
             manageDropdowns();
             checkboxRedirect();
+            ui.multiselect();
         }
 
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
         }
+
+        $(function () {
+            // choose either the full version
+            $(".multiselect").multiselect();
+            // or disable some features
+            $(".multiselect").multiselect({ sortable: false, searchable: false });
+        });
 
         $(document).ready(function () {
             $("#SearchTerm").select2({
