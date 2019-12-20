@@ -326,8 +326,6 @@
 
             DateTime? endConnection = null;
 
-            // here why is equal to null
-
             if (!string.IsNullOrEmpty(model.EndConnection))
             {
                 endConnection = DateTime.ParseExact(model.EndConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
