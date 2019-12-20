@@ -48,7 +48,9 @@
             {
                 IsActive = true,
                 ChosenDate = DateTime.Today.ToString("yyyy-MM-dd"),
+                EntitiesHeaders = this.fundsService.GetAllFunds().Take(1).ToList(),
             };
+
             GetAllActiveEntitiesUtility.GetAllActiveFundsWithHeaders(model, this.fundsService);
 
             this.ModelState.Clear();
@@ -87,6 +89,8 @@
         {
             GetAllActiveEntitiesUtility.GetAllActiveFundsWithHeaders(model, this.fundsService);
 
+            model.EntitiesHeaders = this.fundsService.GetAllFunds().Take(1).ToList();
+
             var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
             if (model.Command == null || model.Command.Equals("Update Table"))
@@ -106,7 +110,10 @@
 
             else if (model.Command.Equals("Apply"))
             {
-                model.Entities = this.fundsService.GetAllFundsWithSelectedView(model.SelectedColumns);
+                if (model.SelectedColumns != null)
+                {
+                    model.Entities = this.fundsService.GetAllFundsWithSelectedView(model.SelectedColumns);
+                }
             }
 
             else if (model.Command.Equals("Search"))

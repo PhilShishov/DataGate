@@ -18,7 +18,6 @@ namespace Pharus.Services.Funds
     using Pharus.Data;
     using Pharus.Utilities.Services;
     using Pharus.Services.Funds.Contracts;
-    using System.Text;
 
     // _____________________________________________________________
     public class FundsService : IFundsService

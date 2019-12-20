@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>@ViewData["Title"] Pharus DataGate</title>
 
     <environment include="Development">
@@ -11,7 +12,6 @@
         <link rel="stylesheet" href="~/css/bootstrap.min.css" />
         <link rel="stylesheet" href="~/css/pharus.css" />
         <link rel="stylesheet" href="~/css/style.css" />
-
     </environment>
 
     <environment exclude="Development">
@@ -38,32 +38,32 @@
             {
                 <nav class="navbar navbar-expand-lg navbar-dark bg-pharus">
                     <a href="/Home/Index">
-                    <img src="/images/Logo_Pharus.jpg" 
-                         class="img-responsive" 
-                         width="50" 
-                         height="50" 
-                         alt="Pharus Management">
+                        <img src="/images/Logo_Pharus.jpg"
+                             class="img-responsive"
+                             width="50"
+                             height="50"
+                             alt="Pharus Management">
                     </a>
-                    <button class="navbar-toggler ml-auto" 
-                            type="button" 
-                            data-toggle="collapse" 
-                            data-target="#navbarNav" 
-                            aria-controls="navbarSupportedContent" 
-                            aria-expanded="false" 
+                    <button class="navbar-toggler ml-auto"
+                            type="button"
+                            data-toggle="collapse"
+                            data-target="#navbarNav"
+                            aria-controls="navbarSupportedContent"
+                            aria-expanded="false"
                             aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    <div class="navbar-collapse collapse" 
+                    <div class="navbar-collapse collapse"
                          id="navbarNav">
-                        <div id="intro" 
+                        <div id="intro"
                              class="text-right">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link nav-link-white active" 
+                                    <a class="nav-link nav-link-white active"
                                        href="/Home/Index">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link nav-link-white active" 
+                                    <a class="nav-link nav-link-white active"
                                        href="/Identity/Account/Login">Login</a>
                                 </li>
                             </ul>
@@ -78,19 +78,20 @@
 
                     <ul class="navbar-nav">
                         <li class="nav-item dropdown">
-                            <span style="cursor:pointer" 
+                            <span style="cursor:pointer"
                                   id="sideNavIcon">
-                            <img src="/images/Logo_Pharus.jpg" 
-                                 class="img-responsive" 
-                                 width="50" 
-                                 alt="Pharus Management">
+                                <img src="/images/Logo_Pharus.jpg"
+                                     class="img-responsive"
+                                     width="50"
+                                     alt="Pharus Management">
                             </span>
 
                             <ul id="mySidenav" class="sidenav">
                                 <li>
-                                    <a style="cursor:pointer" 
-                                       id="closeBtn" 
-                                       class="closebtn">&times;
+                                    <a style="cursor:pointer"
+                                       id="closeBtn"
+                                       class="closebtn">
+                                        &times;
                                     </a>
                                 </li>
                                 <li class="dropdown pt-5">
@@ -144,12 +145,12 @@
                         </li>
                     </ul>
 
-                    <button class="navbar-toggler ml-auto" 
-                            type="button" 
+                    <button class="navbar-toggler ml-auto"
+                            type="button"
                             data-toggle="collapse"
-                            data-target="#navbarNav" 
-                            aria-controls="navbarSupportedContent" 
-                            aria-expanded="false" 
+                            data-target="#navbarNav"
+                            aria-controls="navbarSupportedContent"
+                            aria-expanded="false"
                             aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -170,8 +171,8 @@
                                     </li>
                                 }
                                 @*<li class="nav-item">
-                                    <a class="nav-link nav-link-white active" href="">View Calendar</a>
-                                </li>*@
+                                        <a class="nav-link nav-link-white active" href="">View Calendar</a>
+                                    </li>*@
                                 <li class="nav-item">
                                     <a class="nav-link nav-link-white active" href="/Identity/Account/Logout">Logout</a>
                                 </li>
@@ -204,7 +205,7 @@
         </script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="~/js/manageSideNavBar.js"></script>
-        <script src="~/js/manageDropdowns.js"></script>     
+        <script src="~/js/manageDropdowns.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/lib/jquery/dist/jquery.js"></script>
     </environment>
