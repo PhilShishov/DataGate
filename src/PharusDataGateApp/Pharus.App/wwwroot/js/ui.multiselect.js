@@ -19,10 +19,10 @@ $.widget("ui.multiselect", {
 	_create: function() {
 		this.element.hide();
 		this.id = this.element.attr("id");
-		this.container = $('<div class="ui-multiselect ui-helper-clearfix ui-widget"></div>').insertAfter(this.element);
+		this.container = $('<div class="ui-multiselect"></div>').insertAfter(this.element);
 		this.count = 0; // number of currently selected options
-		this.selectedContainer = $('<div class="selected"></div>').appendTo(this.container);
-		this.availableContainer = $('<div class="available"></div>')[this.options.availableFirst?'prependTo': 'appendTo'](this.container);
+        this.selectedContainer = $('<div class="selected" id="selectedContainerPharus"></div>').appendTo(this.container);
+        this.availableContainer = $('<div class="available" id="availableContainerPharus"></div>')[this.options.availableFirst?'prependTo': 'appendTo'](this.container);
 		this.selectedActions = $('<div class="actions ui-widget-header ui-helper-clearfix"><span class="count">0 '+$.ui.multiselect.locale.itemsCount+'</span><a href="#" class="remove-all">'+$.ui.multiselect.locale.removeAll+'</a></div>').appendTo(this.selectedContainer);
 		this.availableActions = $('<div class="actions ui-widget-header ui-helper-clearfix"><input type="text" class="search empty ui-widget-content ui-corner-all"/><a href="#" class="add-all">'+$.ui.multiselect.locale.addAll+'</a></div>').appendTo(this.availableContainer);
 		this.selectedList = $('<ul class="selected connected-list"><li class="ui-helper-hidden-accessible"></li></ul>').bind('selectstart', function(){return false;}).appendTo(this.selectedContainer);
@@ -30,14 +30,14 @@ $.widget("ui.multiselect", {
 		
 		var that = this;
 
-		// set dimensions
-		this.container.width(this.element.width()+1);
-		this.selectedContainer.width(Math.floor(this.element.width()*this.options.dividerLocation));
-		this.availableContainer.width(Math.floor(this.element.width()*(1-this.options.dividerLocation)));
+		//// set dimensions
+		//this.container.width('60%');
+		//this.selectedContainer.width('49%');
+		//this.availableContainer.width('49%');
 
 		// fix list height to match <option> depending on their individual header's heights
-		this.selectedList.height(Math.max(this.element.height()-this.selectedActions.height(),1));
-		this.availableList.height(Math.max(this.element.height()-this.availableActions.height(),1));
+		//this.selectedList.height('50%');
+  //      this.availableList.height('50%');
 		
 		if ( !this.options.animated ) {
 			this.options.show = 'show';
