@@ -1,3 +1,11 @@
+/*
+*
+* ==========================================
+* CHECKBOX
+* ==========================================
+*
+*/
+
 /*switch component*/
 .el-switch,
 .el-switch-style,
@@ -53,33 +61,7 @@
 .el-switch > input[type="checkbox"]:checked + .el-switch-style:before {
   left: 50%;
 }
-.el-switch > input[type="checkbox"]:checked[disabled] + .el-switch-style {
-  background-color: #b0d7f5;
-}
-.el-switch.el-switch-blue > input[type="checkbox"]:checked + .el-switch-style {
-  background-color: #20a0ff;
-}
-.el-switch.el-switch-blue > input[type="checkbox"]:checked[disabled] + .el-switch-style {
-  background-color: #b0d7f5;
-}
-.el-switch.el-switch-green > input[type="checkbox"]:checked + .el-switch-style {
-  background-color: #13ce66;
-}
-.el-switch.el-switch-green > input[type="checkbox"]:checked[disabled] + .el-switch-style {
-  background-color: #a1efc4;
-}
-.el-switch.el-switch-red > input[type="checkbox"]:checked + .el-switch-style {
-  background-color: #ff4949;
-}
-.el-switch.el-switch-red > input[type="checkbox"]:checked[disabled] + .el-switch-style {
-  background-color: #f9b3b3;
-}
-.el-switch.el-switch-yellow > input[type="checkbox"]:checked + .el-switch-style {
-  background-color: #f7ba2a;
-}
-.el-switch.el-switch-yellow > input[type="checkbox"]:checked[disabled] + .el-switch-style {
-  background-color: #fbeac1;
-}
+
 /*define size*/
 .el-radio.el-radio-sm,
 .el-checkbox.el-checkbox-sm,
