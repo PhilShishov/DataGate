@@ -48,7 +48,7 @@
                 ChosenDate = DateTime.Today.ToString("yyyy-MM-dd"),
             };
 
-            GetAllActiveEntitiesUtility.GetAllActiveSubFundsWithHeaders(model, this.subFundsService);
+            //GetAllActiveEntitiesUtility.GetAllActiveSubFundsWithHeaders(model, this.subFundsService);
 
             this.ModelState.Clear();
             return this.View(model);
@@ -83,7 +83,7 @@
         [HttpPost]
         public IActionResult All(EntitiesViewModel model)
         {
-            GetAllActiveEntitiesUtility.GetAllActiveSubFundsWithHeaders(model, this.subFundsService);
+            //GetAllActiveEntitiesUtility.GetAllActiveSubFundsWithHeaders(model, this.subFundsService);
 
             var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
@@ -93,7 +93,7 @@
                 {
                     if (model.IsActive)
                     {
-                        GetAllActiveEntitiesUtility.GetAllActiveSubFundsWithHeaders(model, this.subFundsService);
+                        //GetAllActiveEntitiesUtility.GetAllActiveSubFundsWithHeaders(model, this.subFundsService);
                     }
                     else
                     {

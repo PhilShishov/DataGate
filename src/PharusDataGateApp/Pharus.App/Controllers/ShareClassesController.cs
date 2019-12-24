@@ -45,7 +45,7 @@
                 IsActive = true,
                 ChosenDate = DateTime.Today.ToString("yyyy-MM-dd"),
             };
-            GetAllActiveEntitiesUtility.GetAllActiveShareClassesWithHeaders(model, this.shareClassesService);
+            //GetAllActiveEntitiesUtility.GetAllActiveShareClassesWithHeaders(model, this.shareClassesService);
 
             this.ModelState.Clear();
             return this.View(model);
@@ -81,7 +81,7 @@
         [HttpPost]
         public IActionResult All(EntitiesViewModel model)
         {
-            GetAllActiveEntitiesUtility.GetAllActiveShareClassesWithHeaders(model, this.shareClassesService);
+            //GetAllActiveEntitiesUtility.GetAllActiveShareClassesWithHeaders(model, this.shareClassesService);
 
             var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
@@ -91,7 +91,7 @@
                 {
                     if (model.IsActive)
                     {
-                        GetAllActiveEntitiesUtility.GetAllActiveShareClassesWithHeaders(model, this.shareClassesService);
+                        //GetAllActiveEntitiesUtility.GetAllActiveShareClassesWithHeaders(model, this.shareClassesService);
                     }
                     else
                     {

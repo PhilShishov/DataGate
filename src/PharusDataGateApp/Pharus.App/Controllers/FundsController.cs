@@ -13,6 +13,7 @@
     using Microsoft.AspNetCore.Authorization;
 
     using Pharus.Data;
+    using Pharus.Utilities.App;
     using Pharus.App.Utilities;
     using Pharus.Services.Funds.Contracts;
     using Pharus.App.Models.BindingModels.Funds;
