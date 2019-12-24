@@ -115,7 +115,7 @@
                         model.Entities = this.fundsService.GetAllFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
                     }
                 }
-                else if(!isInSelectionMode)
+                else if (!isInSelectionMode)
                 {
                     if (model.IsActive)
                     {
@@ -126,38 +126,84 @@
                         model.Entities = this.fundsService.GetAllFunds(chosenDate);
                     }
                 }
-            }         
+            }
 
             else if (model.Command.Equals("Search"))
             {
                 if (model.SearchTerm == null)
                 {
+                    if (isInSelectionMode)
+                    {
+                        if (model.IsActive)
+                        {
+                            model.Entities = this.fundsService.GetAllActiveFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
+                        }
+                        else if (!model.IsActive)
+                        {
+                            model.Entities = this.fundsService.GetAllFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
+                        }
+                    }
+                    else if (!isInSelectionMode)
+                    {
+                        if (model.IsActive)
+                        {
+                            model.Entities = this.fundsService.GetAllActiveFunds(chosenDate);
+                        }
+                        else if (!model.IsActive)
+                        {
+                            model.Entities = this.fundsService.GetAllFunds(chosenDate);
+                        }
+                    }
+
                     return this.View(model);
                 }
 
                 model.Entities = new List<string[]>();
 
-                var tableHeaders = this.fundsService
-                    .GetAllFunds(chosenDate)
-                    .Take(1)
-                    .ToList();
-                List<string[]> tableWithoutHeaders = null;
+                if (isInSelectionMode)
+                {
+                    if (model.IsActive)
+                    {
+                        model.Entities = this.fundsService.GetAllActiveFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
+                    }
+                    else if (!model.IsActive)
+                    {
+                        model.Entities = this.fundsService.GetAllFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
+                    }
+                }
+                else if (!isInSelectionMode)
+                {
+                    if (model.IsActive)
+                    {
+                        model.Entities = this.fundsService.GetAllActiveFunds(chosenDate);
+                    }
+                    else if (!model.IsActive)
+                    {
+                        model.Entities = this.fundsService.GetAllFunds(chosenDate);
+                    }
+                }
 
-                if (model.IsActive)
-                {
-                    tableWithoutHeaders = this.fundsService
-                        .GetAllFunds(chosenDate)
-                        .Skip(1)
-                        .Where(f => f.Contains("Active"))
-                        .ToList();
-                }
-                else
-                {
-                    //tableWithoutHeaders = this.fundsService
-                    //    .GetAllFunds()
-                    //    .Skip(1)
-                    //    .ToList();
-                }
+                //var tableHeaders = this.fundsService
+                //    .GetAllFunds(chosenDate)
+                //    .Take(1)
+                //    .ToList();
+                //List<string[]> tableWithoutHeaders = null;
+
+                //if (model.IsActive)
+                //{
+                //    tableWithoutHeaders = this.fundsService
+                //        .GetAllFunds(chosenDate)
+                //        .Skip(1)
+                //        .Where(f => f.Contains("Active"))
+                //        .ToList();
+                //}
+                //else
+                //{
+                //    //tableWithoutHeaders = this.fundsService
+                //    //    .GetAllFunds()
+                //    //    .Skip(1)
+                //    //    .ToList();
+                //}
 
                 CreateTableView.AddHeadersToView(model.Entities, tableHeaders);
 
