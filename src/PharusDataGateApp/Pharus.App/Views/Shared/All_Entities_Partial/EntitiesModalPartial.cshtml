@@ -1,0 +1,36 @@
+﻿@model Pharus.App.Models.ViewModels.Entities.EntitiesViewModel
+
+<div class="modal"
+     id="upDocModal"
+     role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div>
+                    <h2 class="text-center">SELECT COLUMNS </h2>
+                    @for (int row = 0; row < 1; row++)
+                    {
+                        <select class="multiselect" multiple="multiple" asp-for="SelectedColumns" style="width:60%">
+                            @for (int col = 0; col < Model.EntitiesHeaders[row].Length; col++)
+                            {
+                                <option value="@Model.EntitiesHeaders[row][col]">@Model.EntitiesHeaders[row][col]</option>
+                            }
+                        </select>
+                    }
+                    <br />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="submit"
+                       asp-for="Command"
+                       value="Apply"
+                       class="btn btn-primary btn-sm ml-2" />
+                <button type="button"
+                        class="btn btn-default"
+                        data-dismiss="modal">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
