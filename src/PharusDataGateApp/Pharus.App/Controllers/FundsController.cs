@@ -86,6 +86,9 @@
         [HttpPost]
         public IActionResult All(EntitiesViewModel model)
         {
+            // ---------------------------------------------------------
+            //
+            // Available header column selection
             model.EntitiesHeaders = this.fundsService.GetAllActiveFunds().Take(1).ToList();
 
             bool isInSelectionMode = false;
@@ -158,8 +161,6 @@
                     return this.View(model);
                 }
 
-                model.Entities = new List<string[]>();
-
                 if (isInSelectionMode)
                 {
                     if (model.IsActive)
@@ -183,31 +184,7 @@
                     }
                 }
 
-                //var tableHeaders = this.fundsService
-                //    .GetAllFunds(chosenDate)
-                //    .Take(1)
-                //    .ToList();
-                //List<string[]> tableWithoutHeaders = null;
-
-                //if (model.IsActive)
-                //{
-                //    tableWithoutHeaders = this.fundsService
-                //        .GetAllFunds(chosenDate)
-                //        .Skip(1)
-                //        .Where(f => f.Contains("Active"))
-                //        .ToList();
-                //}
-                //else
-                //{
-                //    //tableWithoutHeaders = this.fundsService
-                //    //    .GetAllFunds()
-                //    //    .Skip(1)
-                //    //    .ToList();
-                //}
-
-                CreateTableView.AddHeadersToView(model.Entities, tableHeaders);
-
-                CreateTableView.AddTableToView(model.Entities, tableWithoutHeaders, model.SearchTerm.ToLower());
+                model.Entities = CreateTableView.AddTableToView(model.Entities, model.SearchTerm.ToLower());
             }
 
             if (model.Entities != null)
@@ -358,9 +335,9 @@
                     .Skip(1)
                     .ToList();
 
-                CreateTableView.AddHeadersToView(viewModel.EntitySubEntities, tableHeaders);
+                //CreateTableView.AddHeadersToView(viewModel.EntitySubEntities, tableHeaders);
 
-                CreateTableView.AddTableToView(viewModel.EntitySubEntities, tableFundsWithoutHeaders, viewModel.SearchTerm.ToLower());
+                //CreateTableView.AddTableToView(viewModel.EntitySubEntities, tableFundsWithoutHeaders, viewModel.SearchTerm.ToLower());
             }
 
             if (viewModel.Entity != null && viewModel.EntitySubEntities != null)

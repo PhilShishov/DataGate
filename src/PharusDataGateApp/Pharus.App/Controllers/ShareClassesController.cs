@@ -130,9 +130,9 @@
                         .ToList();
                 }
 
-                CreateTableView.AddHeadersToView(model.Entities, tableHeaders);
+                //CreateTableView.AddHeadersToView(model.Entities, tableHeaders);
 
-                CreateTableView.AddTableToView(model.Entities, tableWithoutHeaders, model.SearchTerm.ToLower());
+                //CreateTableView.AddTableToView(model.Entities, tableWithoutHeaders, model.SearchTerm.ToLower());
             }
 
             if (model.Entities != null)
