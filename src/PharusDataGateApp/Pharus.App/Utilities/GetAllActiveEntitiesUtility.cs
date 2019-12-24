@@ -24,25 +24,25 @@ namespace Pharus.App.Utilities
         // Empty and refill funds model
         // with headers and correct data
         // based on "Active" condition
-        public static void GetAllActiveFundsWithHeaders(EntitiesViewModel model, IFundsService fundsService)
-        {
-            model.Entities = new List<string[]>();
+        //public static void GetAllActiveFundsWithHeaders(EntitiesViewModel model, IFundsService fundsService)
+        //{
+        //    model.Entities = new List<string[]>();
 
-            DateTime? chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture); ;
+        //    DateTime? chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture); ;
 
-            var tableHeaders = fundsService
-                .GetAllFunds(chosenDate)
-                .Take(1)
-                .ToList();
-            var tableFundsWithoutHeaders = fundsService
-                .GetAllFunds(chosenDate)
-                .Skip(1)
-                .Where(f => f.Contains("Active"))
-                .ToList();
+        //    var tableHeaders = fundsService
+        //        .GetAllFunds(chosenDate)
+        //        .Take(1)
+        //        .ToList();
+        //    var tableFundsWithoutHeaders = fundsService
+        //        .GetAllFunds(chosenDate)
+        //        .Skip(1)
+        //        .Where(f => f.Contains("Active"))
+        //        .ToList();
 
-            model.Entities.AddRange(tableHeaders);
-            model.Entities.AddRange(tableFundsWithoutHeaders);
-        }       
+        //    model.Entities.AddRange(tableHeaders);
+        //    model.Entities.AddRange(tableFundsWithoutHeaders);
+        //}       
 
         // ________________________________________________________
         //

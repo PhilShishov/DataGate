@@ -133,9 +133,9 @@
                         .ToList();
                 }
 
-                CreateTableView.AddHeadersToView(model.Entities, tableHeaders);
+                //CreateTableView.AddHeadersToView(model.Entities, tableHeaders);
 
-                CreateTableView.AddTableToView(model.Entities, tableWithoutHeaders, model.SearchTerm.ToLower());
+                //CreateTableView.AddTableToView(model.Entities, tableWithoutHeaders, model.SearchTerm.ToLower());
             }
 
             if (model.Entities != null)
@@ -259,9 +259,9 @@
                 var tableHeaders = this.subFundsService.GetSubFund_ShareClasses(viewModel.EntityId).Take(1).ToList();
                 var tableFundsWithoutHeaders = this.subFundsService.GetSubFund_ShareClasses(viewModel.EntityId).Skip(1).ToList();
 
-                CreateTableView.AddHeadersToView(viewModel.EntitySubEntities, tableHeaders);
+                //CreateTableView.AddHeadersToView(viewModel.EntitySubEntities, tableHeaders);
 
-                CreateTableView.AddTableToView(viewModel.EntitySubEntities, tableFundsWithoutHeaders, viewModel.SearchTerm.ToLower());
+                //CreateTableView.AddTableToView(viewModel.EntitySubEntities, tableFundsWithoutHeaders, viewModel.SearchTerm.ToLower());
             }
 
             if (viewModel.Entity != null && viewModel.EntitySubEntities != null)

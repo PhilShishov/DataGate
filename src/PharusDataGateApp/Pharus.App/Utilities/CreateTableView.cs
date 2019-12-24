@@ -8,16 +8,24 @@
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace Pharus.App.Utilities
 {
+    using System.Linq;
     using System.Collections.Generic;
 
     // _____________________________________________________________
     public class CreateTableView
     {
-        public static void AddTableToView(List<string[]> activeFunds, List<string[]> tableFundsWithoutHeaders, string searchString)
+        public static List<string[]> AddTableToView(List<string[]> entities, string searchString)
         {
-            foreach (var fund in tableFundsWithoutHeaders)
+            var tableHeaders = entities.Take(1).ToList();
+            var tableValues = entities.Skip(1).ToList();
+
+            entities = new List<string[]>();
+
+            AddHeadersToView(entities, tableHeaders);
+
+            foreach (var entity in tableValues)
             {
-                foreach (var stringValue in fund)
+                foreach (var stringValue in entity)
                 {
                     // ---------------------------------------------------------
                     //
@@ -27,18 +35,20 @@ namespace Pharus.App.Utilities
                         .ToLower()
                         .Contains(searchString.ToLower()))
                     {
-                        activeFunds.Add(fund);
+                        entities.Add(entity);
                         break;
                     }
                 }
             }
+
+            return entities;
         }
 
-        public static void AddHeadersToView(List<string[]> activeFunds, List<string[]> tableHeaders)
+        private static void AddHeadersToView(List<string[]> entities, List<string[]> tableHeaders)
         {
             foreach (var tableHeader in tableHeaders)
             {
-                activeFunds.Add(tableHeader);
+                entities.Add(tableHeader);
             }
         }
     }
