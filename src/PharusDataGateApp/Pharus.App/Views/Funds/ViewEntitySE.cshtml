@@ -27,7 +27,7 @@
             @if (this.User.IsInRole("Admin"))
             {
                 <div class="mt-5">
-                    <a href="/Funds/EditFund/@Model.EntityId" class="btn btn-primary btn-sm mb-2">Edit Fund</a>
+                    <a href="/Funds/EditFund/@Model.EntityId/@Model.ChosenDate" class="btn btn-primary btn-sm mb-2">Edit Fund</a>
                 </div>
             }
         </div>

@@ -234,12 +234,14 @@
         [Route("Funds/ViewEntitySE/{EntityId}/{ChosenDate}")]
         public IActionResult ViewEntitySE(int entityId, string chosenDate)
         {
+            var date = DateTime.Parse(chosenDate);
+
             SpecificEntityViewModel viewModel = new SpecificEntityViewModel
             {
                 ChosenDate = chosenDate,
                 EntityId = entityId,
                 Entity = this.fundsService.GetFundById(entityId),
-                EntitySubEntities = this.fundsService.GetFund_SubFunds(entityId),
+                EntitySubEntities = this.fundsService.GetFund_SubFunds(date, entityId),
                 EntityTimeline = this.fundsService.GetFundTimeline(entityId),
                 EntityDocuments = this.fundsService.GetAllFundDocumens(entityId),
             };
@@ -281,7 +283,7 @@
 
 
             var entitiesToSearch = this.fundsService
-                .GetFund_SubFunds(entityId)
+                .GetFund_SubFunds(null, entityId)
                 .Skip(1)
                 .ToList();
 
@@ -320,21 +322,21 @@
             }
             else if (viewModel.Command.Equals("Search"))
             {
-                if (viewModel.SearchTerm == null)
-                {
-                    return this.View(viewModel);
-                }
+                //if (viewModel.SearchTerm == null)
+                //{
+                //    return this.View(viewModel);
+                //}
 
-                viewModel.EntitySubEntities = new List<string[]>();
+                //viewModel.EntitySubEntities = new List<string[]>();
 
-                var tableHeaders = this.fundsService
-                    .GetFund_SubFunds(viewModel.EntityId)
-                    .Take(1)
-                    .ToList();
-                var tableFundsWithoutHeaders = this.fundsService
-                    .GetFund_SubFunds(viewModel.EntityId)
-                    .Skip(1)
-                    .ToList();
+                //var tableHeaders = this.fundsService
+                //    .GetFund_SubFunds(viewModel.EntityId)
+                //    .Take(1)
+                //    .ToList();
+                //var tableFundsWithoutHeaders = this.fundsService
+                //    .GetFund_SubFunds(viewModel.EntityId)
+                //    .Skip(1)
+                //    .ToList();
 
                 //CreateTableView.AddHeadersToView(viewModel.EntitySubEntities, tableHeaders);
 
@@ -451,12 +453,14 @@
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpGet("Funds/EditFund/{EntityId}")]
-        public IActionResult EditFund(int entityId)
+        [HttpGet("Funds/EditFund/{EntityId}/{ChosenDate}")]
+        public IActionResult EditFund(int entityId, string chosenDate)
         {
+            var date = DateTime.Parse(chosenDate);
+
             EditFundBindingModel model = new EditFundBindingModel
             {
-                EntityProperties = this.fundsService.GetFundWithDateById(entityId),
+                EntityProperties = this.fundsService.GetFundWithDateById(date, entityId),
                 InitialDate = DateTime.Today,
                 FundId = entityId,
             };
@@ -475,7 +479,6 @@
         {
             string returnUrl = "/Funds/All";
 
-            model.EntityProperties = this.fundsService.GetFundWithDateById(model.FundId);
             SetViewDataValuesForFundSelectLists();
 
             if (!this.ModelState.IsValid)
@@ -556,6 +559,7 @@
 
             SetViewDataValuesForFundSelectLists();
 
+            // Compare fund name with existing
             model.ExistingFundNames = this.fundsService.GetAllFundsNames();
 
             if (!this.ModelState.IsValid || model.ExistingFundNames.Any(f => f == model.FundName))
@@ -614,7 +618,7 @@
             var date = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
             model.Entity = this.fundsService.GetFundById(date, model.EntityId);
-            model.EntitySubEntities = this.fundsService.GetFund_SubFunds(model.EntityId);
+            model.EntitySubEntities = this.fundsService.GetFund_SubFunds(date, model.EntityId);
             model.FileNameToDisplay = GetFileNameFromFilePath(model.EntityId, model.ChosenDate);
             model.EntityTimeline = this.fundsService.GetFundTimeline(model.EntityId);
             model.EntityDocuments = this.fundsService.GetAllFundDocumens(model.EntityId);
