@@ -17,13 +17,13 @@
 
 <form asp-controller="Funds" class="justify-content-between" method="post">
 
-    <partial name="SpecificEntityUpdatePartial" />
+    <partial name="Specific_Entity_Partial/SpecificEntityUpdatePartial" />
 
     <div class="d-flex justify-content-between">
 
-        <partial name="SpecificEntityInfoPartial" />
+        <partial name="Specific_Entity_Partial/SpecificEntityInfoPartial" />
         <div class="w-50 float-right">
-            <partial name="SpecificEntityDocumentsPartial" />
+            <partial name="Specific_Entity_Partial/SpecificEntityDocumentsPartial" />
             @if (this.User.IsInRole("Admin"))
             {
                 <div class="mt-5">
@@ -35,9 +35,9 @@
 
     <hr class="bg-pharus hr-2" />
 
-    <partial name="SpecificEntitySearchPartial" />
-    <partial name="ExtractSubEntitiesViewPartial" />
-    <partial name="EntitySubEntitiesBindingTablePartial" />
+    <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesSearchPartial" />
+    <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesExtractPartial" />
+    <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesBindingTablePartial" />
 
     <div class="row w-25 ml-3 mb-5">
         <label class="text-torshia m-1 pr-3">FUND ADDITIONAL INFORMATION</label>
