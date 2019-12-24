@@ -6,7 +6,7 @@
 // Author:  Philip Shishov
 
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-namespace Pharus.App.Utilities
+namespace Pharus.Utilities.App
 {
     using System.Linq;
     using System.Collections.Generic;
