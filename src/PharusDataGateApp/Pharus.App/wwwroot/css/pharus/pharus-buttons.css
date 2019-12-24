@@ -1,0 +1,26 @@
+﻿/*
+*
+* ==========================================
+* BUTTONS
+* ==========================================
+*
+*/
+
+#btnLogin {
+    -webkit-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+}
+
+    #btnLogin:hover {
+        background-color: #555555;
+        color: white;
+    }
+
+.extractbtn {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}

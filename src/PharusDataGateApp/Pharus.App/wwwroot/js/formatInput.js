@@ -1,5 +1,4 @@
 ﻿function formatInput() {
-
     const createForm = document.getElementById('createForm').getElementsByTagName('input');
 
     for (var i = 0; i < createForm.length; i++) {

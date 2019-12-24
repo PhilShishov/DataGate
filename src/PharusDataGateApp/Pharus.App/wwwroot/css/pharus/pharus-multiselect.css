@@ -1,5 +1,18 @@
-/* Multiselect
-----------------------------------*/
+/*
+*
+* ==========================================
+* MULTISELECT
+* ==========================================
+*
+*/
+
+#selectedContainerPharus {
+    width: 50%;
+}
+
+#availableContainerPharus {
+    width: 50%;
+}
 
 .ui-multiselect {
     border: solid 1px;

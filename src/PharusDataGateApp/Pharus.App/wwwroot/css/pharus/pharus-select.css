@@ -1,0 +1,37 @@
+﻿/*
+*
+* ==========================================
+* SELECT MENU AND OPTIONS
+* ==========================================
+*
+*/
+
+.pharus-select {
+    background-color: lightcyan;
+    color: darkgrey;
+    border: 0 none;
+    border-radius: 20px;
+    padding: 6px 20px;
+    cursor: pointer;
+}
+
+#timelineChanges {
+    visibility: hidden;
+    position: absolute;
+}
+
+#allDocuments {
+    visibility: hidden;
+}
+
+#subEntities {
+    visibility: hidden;
+}
+
+#upDocModal {
+    top: 20%;
+}
+
+#upAgrModal {
+    top: 20%;
+}
