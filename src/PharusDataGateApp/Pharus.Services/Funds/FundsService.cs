@@ -191,21 +191,6 @@ namespace Pharus.Services.Funds
             }
         }
 
-        public List<string[]> GetFundWithDateById(int id)
-        {
-            using (SqlConnection connection = new SqlConnection())
-            {
-                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-
-                command.CommandText = $"select * from fn_active_fund_modifyview('{this.defaultDate}') " +
-                    $"where [FUND ID PHARUS] = {id}";
-
-                return CreateModel.CreateModelWithHeadersAndValue(command);
-            }
-        }
-
         public List<string[]> GetFundWithDateById(DateTime? chosenDate, int id)
         {
             using (SqlConnection connection = new SqlConnection())
@@ -224,20 +209,6 @@ namespace Pharus.Services.Funds
                     command.CommandText = $"select * from fn_active_fund_modifyview('{chosenDate?.ToString("yyyyMMdd")}') " +
                         $"where [FUND ID PHARUS] = {id}";
                 }
-
-                return CreateModel.CreateModelWithHeadersAndValue(command);
-            }
-        }
-
-        public List<string[]> GetFund_SubFunds(int id)
-        {
-            using (SqlConnection connection = new SqlConnection())
-            {
-                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-
-                command.CommandText = $"select * from ActivesubfundforSpecificFundAtDate('{this.defaultDate}', {id})";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }

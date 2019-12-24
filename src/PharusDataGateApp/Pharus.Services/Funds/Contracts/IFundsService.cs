@@ -21,11 +21,7 @@
 
         List<string[]> GetFundById(DateTime? chosenDate, int id);
 
-        List<string[]> GetFundWithDateById(int id);
-
         List<string[]> GetFundWithDateById(DateTime? chosenDate, int id);
-
-        List<string[]> GetFund_SubFunds(int id);
 
         List<string[]> GetFund_SubFunds(DateTime? chosenDate, int id);
 
