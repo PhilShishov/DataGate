@@ -62,7 +62,15 @@
 
         $(document).ready(function () {
 
+            // ________________________________________________________
+            //
+            // Modal multiselect for column selection
+
             $(".multiselect").multiselect();
+
+            // ________________________________________________________
+            //
+            // Autocomplete search
 
             $("#SearchTerm").select2({
                 placeholder: "Select Funds",
@@ -79,6 +87,11 @@
                     }
                 }
             });
+
+            
+            // ________________________________________________________
+            //
+            // Double top scroll for table
 
              $('.double-scroll').doubleScroll();
             $('#tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });

@@ -250,7 +250,6 @@
         [HttpGet("SubFunds/ViewEntitySE/{EntityId}/{ChosenDate}")]
         public IActionResult ViewEntitySE(int entityId, string chosenDate)
         {
-
             var date = DateTime.Parse(chosenDate);
 
             SpecificEntityViewModel viewModel = new SpecificEntityViewModel
@@ -259,6 +258,7 @@
                 EntityId = entityId,
                 Entity = this.subFundsService.GetSubFundById(entityId),
                 EntitySubEntities = this.subFundsService.GetSubFund_ShareClasses(date, entityId),
+                SubEntitiesHeadersForColumnSelection = this.subFundsService.GetAllActiveSubFunds().Take(1).ToList(),
                 EntityTimeline = this.subFundsService.GetSubFundTimeline(entityId),
                 EntityDocuments = this.subFundsService.GetAllSubFundDocumens(entityId),
                 BaseEntityName = this.subFundsService.GetSubFund_FundContainer(date, entityId)[1][1],
@@ -617,6 +617,7 @@
 
             model.Entity = this.subFundsService.GetSubFundById(date, model.EntityId);
             model.EntitySubEntities = this.subFundsService.GetSubFund_ShareClasses(date, model.EntityId);
+            model.SubEntitiesHeadersForColumnSelection = this.subFundsService.GetAllActiveSubFunds().Take(1).ToList();
             model.FileNameToDisplay = GetFileNameFromFilePath(model.EntityId, model.ChosenDate);
             model.EntityTimeline = this.subFundsService.GetSubFundTimeline(model.EntityId);
             model.EntityDocuments = this.subFundsService.GetAllSubFundDocumens(model.EntityId);
