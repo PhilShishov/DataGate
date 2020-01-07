@@ -60,14 +60,10 @@
             window.history.replaceState(null, null, window.location.href);
         }
 
-        $(function () {
-            // choose either the full version
-            $(".multiselect").multiselect();
-            // or disable some features
-            $(".multiselect").multiselect({ sortable: false, searchable: false });
-        });
-
         $(document).ready(function () {
+
+            $(".multiselect").multiselect();
+
             $("#SearchTerm").select2({
                 placeholder: "Select Funds",
                 theme: "classic",
@@ -83,12 +79,9 @@
                     }
                 }
             });
-        });
 
-        $(document).ready(function () {
-            $('.double-scroll').doubleScroll();
+             $('.double-scroll').doubleScroll();
             $('#tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
         });
-
     </script>
 }
