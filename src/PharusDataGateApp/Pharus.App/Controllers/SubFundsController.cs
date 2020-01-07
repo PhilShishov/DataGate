@@ -47,8 +47,8 @@
             {
                 IsActive = true,
                 ChosenDate = DateTime.Today.ToString("yyyy-MM-dd"),
-                EntitiesHeadersForColumnSelection = this.subFundsService.GetAllActiveFunds().Take(1).ToList(),
-                Entities = this.subFundsService.GetAllActiveFunds(),
+                EntitiesHeadersForColumnSelection = this.subFundsService.GetAllActiveSubFunds().Take(1).ToList(),
+                Entities = this.subFundsService.GetAllActiveSubFunds(),
             };
 
             this.ModelState.Clear();
@@ -87,7 +87,7 @@
             // ---------------------------------------------------------
             //
             // Available header column selection
-            model.EntitiesHeadersForColumnSelection = this.subFundsService.GetAllActiveFunds().Take(1).ToList();
+            model.EntitiesHeadersForColumnSelection = this.subFundsService.GetAllActiveSubFunds().Take(1).ToList();
 
             bool isInSelectionMode = false;
 
@@ -109,22 +109,22 @@
                 {
                     if (model.IsActive)
                     {
-                        model.Entities = this.subFundsService.GetAllActiveFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
+                        model.Entities = this.subFundsService.GetAllActiveSubFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
                     }
                     else if (!model.IsActive)
                     {
-                        model.Entities = this.subFundsService.GetAllFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
+                        model.Entities = this.subFundsService.GetAllSubFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
                     }
                 }
                 else if (!isInSelectionMode)
                 {
                     if (model.IsActive)
                     {
-                        model.Entities = this.subFundsService.GetAllActiveFunds(chosenDate);
+                        model.Entities = this.subFundsService.GetAllActiveSubFunds(chosenDate);
                     }
                     else if (!model.IsActive)
                     {
-                        model.Entities = this.subFundsService.GetAllFunds(chosenDate);
+                        model.Entities = this.subFundsService.GetAllSubFunds(chosenDate);
                     }
                 }
             }
@@ -137,22 +137,22 @@
                     {
                         if (model.IsActive)
                         {
-                            model.Entities = this.subFundsService.GetAllActiveFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
+                            model.Entities = this.subFundsService.GetAllActiveSubFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
                         }
                         else if (!model.IsActive)
                         {
-                            model.Entities = this.subFundsService.GetAllFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
+                            model.Entities = this.subFundsService.GetAllSubFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
                         }
                     }
                     else if (!isInSelectionMode)
                     {
                         if (model.IsActive)
                         {
-                            model.Entities = this.subFundsService.GetAllActiveFunds(chosenDate);
+                            model.Entities = this.subFundsService.GetAllActiveSubFunds(chosenDate);
                         }
                         else if (!model.IsActive)
                         {
-                            model.Entities = this.subFundsService.GetAllFunds(chosenDate);
+                            model.Entities = this.subFundsService.GetAllSubFunds(chosenDate);
                         }
                     }
 
@@ -163,22 +163,22 @@
                 {
                     if (model.IsActive)
                     {
-                        model.Entities = this.subFundsService.GetAllActiveFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
+                        model.Entities = this.subFundsService.GetAllActiveSubFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
                     }
                     else if (!model.IsActive)
                     {
-                        model.Entities = this.subFundsService.GetAllFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
+                        model.Entities = this.subFundsService.GetAllSubFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
                     }
                 }
                 else if (!isInSelectionMode)
                 {
                     if (model.IsActive)
                     {
-                        model.Entities = this.subFundsService.GetAllActiveFunds(chosenDate);
+                        model.Entities = this.subFundsService.GetAllActiveSubFunds(chosenDate);
                     }
                     else if (!model.IsActive)
                     {
-                        model.Entities = this.subFundsService.GetAllFunds(chosenDate);
+                        model.Entities = this.subFundsService.GetAllSubFunds(chosenDate);
                     }
                 }
 
@@ -190,7 +190,7 @@
                 return this.View(model);
             }
 
-            return this.RedirectToPage("/Funds/All");
+            return this.RedirectToPage("/SubFunds/All");
         }
 
         [HttpPost]
@@ -229,95 +229,95 @@
             return fileStreamResult;
         }
 
-        [HttpGet("SubFunds/ViewEntitySE/{EntityId}/{ChosenDate}")]
-        public IActionResult ViewEntitySE(int entityId, string chosenDate)
-        {
-            SpecificEntityViewModel viewModel = new SpecificEntityViewModel
-            {
-                ChosenDate = chosenDate,
-                EntityId = entityId,
-                Entity = this.subFundsService.GetSubFundById(entityId),
-                EntitySubEntities = this.subFundsService.GetSubFund_ShareClasses(entityId),
-                EntityTimeline = this.subFundsService.GetSubFundTimeline(entityId),
-                EntityDocuments = this.subFundsService.GetAllSubFundDocumens(entityId),
-                BaseEntityName = this.subFundsService.GetSubFund_FundContainer(entityId)[1][1],
-                BaseEntityId = this.subFundsService.GetSubFund_FundContainer(entityId)[1][0],
-            };
+        //[HttpGet("SubFunds/ViewEntitySE/{EntityId}/{ChosenDate}")]
+        //public IActionResult ViewEntitySE(int entityId, string chosenDate)
+        //{
+        //    SpecificEntityViewModel viewModel = new SpecificEntityViewModel
+        //    {
+        //        ChosenDate = chosenDate,
+        //        EntityId = entityId,
+        //        Entity = this.subFundsService.GetSubFundById(entityId),
+        //        EntitySubEntities = this.subFundsService.GetSubFund_ShareClasses(entityId),
+        //        EntityTimeline = this.subFundsService.GetSubFundTimeline(entityId),
+        //        EntityDocuments = this.subFundsService.GetAllSubFundDocumens(entityId),
+        //        BaseEntityName = this.subFundsService.GetSubFund_FundContainer(entityId)[1][1],
+        //        BaseEntityId = this.subFundsService.GetSubFund_FundContainer(entityId)[1][0],
+        //    };
 
-            this.ViewData["FileTypes"] = this.subfundsSelectListService.GetAllSubFundFileTypes();
+        //    this.ViewData["FileTypes"] = this.subfundsSelectListService.GetAllSubFundFileTypes();
 
-            HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
+        //    HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
 
-            string fileName = GetFileNameFromFilePath(entityId, chosenDate);
+        //    string fileName = GetFileNameFromFilePath(entityId, chosenDate);
 
-            if (string.IsNullOrEmpty(fileName))
-            {
-                return this.View(viewModel);
-            }
+        //    if (string.IsNullOrEmpty(fileName))
+        //    {
+        //        return this.View(viewModel);
+        //    }
 
-            viewModel.FileNameToDisplay = fileName;
+        //    viewModel.FileNameToDisplay = fileName;
 
-            this.ModelState.Clear();
-            return this.View(viewModel);
-        }
+        //    this.ModelState.Clear();
+        //    return this.View(viewModel);
+        //}
 
-        public JsonResult AutoCompleteShareClassesList(string searchTerm, int entityId)
-        {
-            var entitiesToSearch = this.subFundsService.GetSubFund_ShareClasses(entityId).Skip(1).ToList();
+        //public JsonResult AutoCompleteShareClassesList(string searchTerm, int entityId)
+        //{
+        //    var entitiesToSearch = this.subFundsService.GetSubFund_ShareClasses(entityId).Skip(1).ToList();
 
-            if (searchTerm != null)
-            {
-                entitiesToSearch = entitiesToSearch.Where(s => s[3].ToLower().Contains(searchTerm.ToLower())).ToList();
-            }
+        //    if (searchTerm != null)
+        //    {
+        //        entitiesToSearch = entitiesToSearch.Where(s => s[3].ToLower().Contains(searchTerm.ToLower())).ToList();
+        //    }
 
-            var modifiedData = entitiesToSearch.Select(s => new
-            {
-                id = s[3],
-                text = s[3],
-            });
+        //    var modifiedData = entitiesToSearch.Select(s => new
+        //    {
+        //        id = s[3],
+        //        text = s[3],
+        //    });
 
-            return this.Json(modifiedData);
-        }
+        //    return this.Json(modifiedData);
+        //}
 
-        [HttpPost("SubFunds/ViewEntitySE/{EntityId}")]
-        public IActionResult ViewEntitySE(SpecificEntityViewModel viewModel)
-        {
-            viewModel.Entity = this.subFundsService.GetSubFundById(viewModel.EntityId);
-            viewModel.EntitySubEntities = this.subFundsService.GetSubFund_ShareClasses(viewModel.EntityId);
+        //[HttpPost("SubFunds/ViewEntitySE/{EntityId}")]
+        //public IActionResult ViewEntitySE(SpecificEntityViewModel viewModel)
+        //{
+        //    viewModel.Entity = this.subFundsService.GetSubFundById(viewModel.EntityId);
+        //    viewModel.EntitySubEntities = this.subFundsService.GetSubFund_ShareClasses(viewModel.EntityId);
 
-            var chosenDate = DateTime.ParseExact(viewModel.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+        //    var chosenDate = DateTime.ParseExact(viewModel.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
-            if (viewModel.Command.Equals("Update Table"))
-            {
-                if (viewModel.ChosenDate != null)
-                {
-                    viewModel.Entity = this.subFundsService.GetSubFundById(chosenDate, viewModel.EntityId);
-                }
-            }
-            else if (viewModel.Command.Equals("Filter"))
-            {
-                if (viewModel.SearchTerm == null)
-                {
-                    return this.View(viewModel);
-                }
+        //    if (viewModel.Command.Equals("Update Table"))
+        //    {
+        //        if (viewModel.ChosenDate != null)
+        //        {
+        //            viewModel.Entity = this.subFundsService.GetSubFundById(chosenDate, viewModel.EntityId);
+        //        }
+        //    }
+        //    else if (viewModel.Command.Equals("Filter"))
+        //    {
+        //        if (viewModel.SearchTerm == null)
+        //        {
+        //            return this.View(viewModel);
+        //        }
 
-                viewModel.EntitySubEntities = new List<string[]>();
+        //        viewModel.EntitySubEntities = new List<string[]>();
 
-                var tableHeaders = this.subFundsService.GetSubFund_ShareClasses(viewModel.EntityId).Take(1).ToList();
-                var tableFundsWithoutHeaders = this.subFundsService.GetSubFund_ShareClasses(viewModel.EntityId).Skip(1).ToList();
+        //        var tableHeaders = this.subFundsService.GetSubFund_ShareClasses(viewModel.EntityId).Take(1).ToList();
+        //        var tableFundsWithoutHeaders = this.subFundsService.GetSubFund_ShareClasses(viewModel.EntityId).Skip(1).ToList();
 
-                //CreateTableView.AddHeadersToView(viewModel.EntitySubEntities, tableHeaders);
+        //        //CreateTableView.AddHeadersToView(viewModel.EntitySubEntities, tableHeaders);
 
-                //CreateTableView.AddTableToView(viewModel.EntitySubEntities, tableFundsWithoutHeaders, viewModel.SearchTerm.ToLower());
-            }
+        //        //CreateTableView.AddTableToView(viewModel.EntitySubEntities, tableFundsWithoutHeaders, viewModel.SearchTerm.ToLower());
+        //    }
 
-            if (viewModel.Entity != null && viewModel.EntitySubEntities != null)
-            {
-                return this.View(viewModel);
-            }
+        //    if (viewModel.Entity != null && viewModel.EntitySubEntities != null)
+        //    {
+        //        return this.View(viewModel);
+        //    }
 
-            return this.View();
-        }
+        //    return this.View();
+        //}
 
         [HttpPost]
         public FileStreamResult ExtractExcelSubEntities(SpecificEntityViewModel model)
