@@ -43,11 +43,34 @@
 </form>
 
 @section Scripts{
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+    <script src="~/js/checkboxRedirect.js"></script>
+    <script src="~/js/ui.multiselect.js"></script>
+    <script src="~/lib/jquery/dist/jquery.doubleScroll.js"></script>
+
     <script>
+        window.onload = () => {
+            manageSideNavBar();
+            manageDropdowns();
+            checkboxRedirect();
+        }
+
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+
+        $(function () {
+            // choose either the full version
+            $(".multiselect").multiselect();
+            // or disable some features
+            $(".multiselect").multiselect({ sortable: false, searchable: false });
+        });
+
         $(document).ready(function () {
             $("#SearchTerm").select2({
-                placeholder: "Select SubFunds",
+                placeholder: "Select Sub Funds",
                 theme: "classic",
                 ajax: {
                     url: "/SubFunds/AutoCompleteSubFundList",
@@ -62,20 +85,12 @@
                 }
             });
         });
-    </script>
 
-    <script type="text/javascript" src="~/lib/jquery/dist/jquery.doubleScroll.js"></script>
-
-    <script type="text/javascript">
         $(document).ready(function () {
             $('.double-scroll').doubleScroll();
             $('#tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
         });
+
     </script>
 
-    <script>
-        if (window.history.replaceState) {
-            window.history.replaceState(null, null, window.location.href);
-        }
-    </script>
 }
