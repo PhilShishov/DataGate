@@ -268,20 +268,6 @@
 
         public JsonResult AutoCompleteSubFundList(string searchTerm, int entityId)
         {
-            //var result = this.context
-            //   .TbHistoryFund
-            //   .GroupBy(hf => hf.FOfficialFundName)
-            //   .Select(hf => hf.FirstOrDefault())
-            //   .ToList();
-
-            //    result = this.context
-            //        .TbHistoryFund
-            //        .Where(hf => hf.FOfficialFundName.Contains(searchTerm))
-            //        .GroupBy(hf => hf.FOfficialFundName)
-            //        .Select(hf => hf.FirstOrDefault())
-            //        .ToList();
-
-
             var entitiesToSearch = this.fundsService
                 .GetFund_SubFunds(null, entityId)
                 .Skip(1)
