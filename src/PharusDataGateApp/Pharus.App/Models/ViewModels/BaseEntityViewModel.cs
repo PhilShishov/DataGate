@@ -26,6 +26,8 @@ namespace Pharus.App.Models.ViewModels
 
         public string SearchTerm { get; set; }
 
+        public List<string> PreSelectedColumns { get; set; }
+
         public List<string> SelectedColumns { get; set; }
     }
 }

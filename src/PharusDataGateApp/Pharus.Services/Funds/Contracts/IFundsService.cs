@@ -11,9 +11,9 @@
 
         List<string[]> GetAllActiveFunds(DateTime? chosenDate);
 
-        List<string[]> GetAllFundsWithSelectedViewAndDate(List<string> selectedColumns, DateTime? chosenDate);
+        List<string[]> GetAllFundsWithSelectedViewAndDate(List<string> preSelectedColumns, List<string> selectedColumns, DateTime? chosenDate);
 
-        List<string[]> GetAllActiveFundsWithSelectedViewAndDate(List<string> selectedColumns, DateTime? chosenDate);
+        List<string[]> GetAllActiveFundsWithSelectedViewAndDate(List<string> preSelectedColumns, List<string> selectedColumns, DateTime? chosenDate);
 
         List<string> GetAllFundsNames();
 
