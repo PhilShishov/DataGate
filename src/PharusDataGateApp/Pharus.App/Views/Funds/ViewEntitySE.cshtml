@@ -36,7 +36,6 @@
     <hr class="bg-pharus hr-2" />
 
     <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesSearchPartial" />
-    <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesExtractPartial" />
     <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesBindingTablePartial" />
 
     <div class="row w-25 ml-3 mb-5">
@@ -55,6 +54,10 @@
     <partial name="Specific_Entity_Partial/SpecificEntityTimeLinePartial" />
 
     <div id="subEntities">
+
+        <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesButtonsPartial" />
+        <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesModalPartial" />
+
         <table class="table table-bordered table-hover table-responsive text-nowrap tableDoubleScroll">
             <thead>
                 @for (int row = 0; row < 1; row++)
@@ -95,7 +98,7 @@
       enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <partial name="Specific_Entity_Partial/SpecificEntityUploadPartial" />   
+    <partial name="Specific_Entity_Partial/SpecificEntityUploadPartial" />
 </form>
 
 @section Scripts{

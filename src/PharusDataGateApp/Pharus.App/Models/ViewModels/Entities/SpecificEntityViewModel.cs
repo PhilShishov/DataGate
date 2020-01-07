@@ -30,7 +30,7 @@ namespace Pharus.App.Models.ViewModels.Entities
         // for a specific entity sub entities
         public List<string[]> EntitySubEntities { get; set; }
 
-        public List<string[]> EntitySubEntitiesHeadersForColumnSelection { get; set; }
+        public List<string[]> SubEntitiesHeadersForColumnSelection { get; set; }
 
         public List<string[]> EntityTimeline { get; set; }
 

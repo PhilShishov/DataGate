@@ -244,6 +244,36 @@ namespace Pharus.Services.Funds
             }
         }
 
+        public List<string[]> GetFund_SubFundsWithSelectedViewAndDate(
+                                                                    List<string> preSelectedColumns,
+                                                                    List<string> selectedColumns,
+                                                                    DateTime? chosenDate,
+                                                                    int id)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                // Prepare items for DB query with []
+
+                preSelectedColumns.AddRange(selectedColumns);
+                preSelectedColumns = preSelectedColumns.Select(c => String.Format("[{0}]", c)).ToList();
+
+                if (chosenDate == null)
+                {
+                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} from ActivesubfundforSpecificFundAtDate('{this.defaultDate}', {id}')";
+                }
+                else
+                {
+                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} from ActivesubfundforSpecificFundAtDate('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                }
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
         public List<string[]> GetFundTimeline(int id)
         {
             using (SqlConnection connection = new SqlConnection())
