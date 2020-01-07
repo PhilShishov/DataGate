@@ -12,10 +12,10 @@
 
     using Pharus.Data;
     using Pharus.App.Utilities;
+    using Pharus.Utilities.App;
     using Pharus.Services.SubFunds.Contracts;
     using Pharus.App.Models.ViewModels.Entities;
     using Pharus.App.Models.BindingModels.SubFunds;
-    using Pharus.Utilities.App;
 
     [Authorize]
     public class SubFundsController : Controller
@@ -214,7 +214,7 @@
         {
             var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
-            model.Entities = this.subFundsService.PrepareSubFundsForExtract(chosenDate);
+            model.Entities = this.subFundsService.PrepareSubFundsForPDFExtract(chosenDate);
 
             FileStreamResult fileStreamResult = null;
 

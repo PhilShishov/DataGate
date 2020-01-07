@@ -42,6 +42,7 @@ namespace Pharus.Services.Funds
         //
         // Retrieve query table DB based entities
         // with table functions
+
         public List<string[]> GetAllFunds(DateTime? chosenDate)
         {
             using (SqlConnection connection = new SqlConnection())

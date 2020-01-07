@@ -41,7 +41,29 @@ namespace Pharus.Services.SubFunds
         //
         // Retrieve query table DB based entities
         // with table functions
-        public List<string[]> GetAllSubFunds()
+
+        public List<string[]> GetAllSubFunds(DateTime? chosenDate)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                if (chosenDate == null)
+                {
+                    command.CommandText = $"select * from fn_all_subfund('{this.defaultDate}')";
+                }
+                else
+                {
+                    command.CommandText = $"select * from fn_all_subfund('{chosenDate?.ToString("yyyyMMdd")}')";
+                }
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
+        public List<string[]> GetAllActiveSubFunds()
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -55,7 +77,7 @@ namespace Pharus.Services.SubFunds
             }
         }
 
-        public List<string[]> GetAllSubFunds(DateTime? chosenDate)
+        public List<string[]> GetAllActiveSubFunds(DateTime? chosenDate)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -70,6 +92,56 @@ namespace Pharus.Services.SubFunds
                 else
                 {
                     command.CommandText = $"select * from fn_active_subfund('{chosenDate?.ToString("yyyyMMdd")}')";
+                }
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
+        public List<string[]> GetAllSubFundsWithSelectedViewAndDate(List<string> selectedColumns, DateTime? chosenDate)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                // Prepare items for DB query with []
+
+                selectedColumns = selectedColumns.Select(c => String.Format("[{0}]", c)).ToList();
+
+                if (chosenDate == null)
+                {
+                    command.CommandText = $"select {string.Join(", ", selectedColumns)} from fn_all_subfund('{this.defaultDate}')";
+                }
+                else
+                {
+                    command.CommandText = $"select {string.Join(", ", selectedColumns)} from fn_all_subfund('{chosenDate?.ToString("yyyyMMdd")}')";
+                }
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
+        public List<string[]> GetAllActiveSubFundsWithSelectedViewAndDate(List<string> selectedColumns, DateTime? chosenDate)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                // Prepare items for DB query with []
+
+                selectedColumns = selectedColumns.Select(c => String.Format("[{0}]", c)).ToList();
+
+                if (chosenDate == null)
+                {
+                    command.CommandText = $"select {string.Join(", ", selectedColumns)} from fn_active_subfund('{this.defaultDate}')";
+                }
+                else
+                {
+                    command.CommandText = $"select {string.Join(", ", selectedColumns)} from fn_active_subfund('{chosenDate?.ToString("yyyyMMdd")}')";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
@@ -91,7 +163,7 @@ namespace Pharus.Services.SubFunds
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from fn_active_subfund('{this.defaultDate}') where [ID] = {id}";
+                command.CommandText = $"select * from fn_all_subfund('{this.defaultDate}') where [ID] = {id}";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
@@ -107,30 +179,16 @@ namespace Pharus.Services.SubFunds
 
                 if (chosenDate == null)
                 {
-                    command.CommandText = $"select * from fn_active_subfund('{this.defaultDate}') where [ID] = {id}";
+                    command.CommandText = $"select * from fn_all_subfund('{this.defaultDate}') where [ID] = {id}";
                 }
                 else
                 {
-                    command.CommandText = $"select * from fn_active_subfund('{chosenDate?.ToString("yyyyMMdd")}') where [ID] = {id}";
+                    command.CommandText = $"select * from fn_all_subfund('{chosenDate?.ToString("yyyyMMdd")}') where [ID] = {id}";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
-        }
-
-        public List<string[]> GetSubFundWithDateById(int id)
-        {
-            using (SqlConnection connection = new SqlConnection())
-            {
-                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-
-                command.CommandText = $"select * from fn_active_subfund_modifyview('{this.defaultDate}') where [ID] = {id}";
-
-                return CreateModel.CreateModelWithHeadersAndValue(command);
-            }
-        }
+        }      
 
         public List<string[]> GetSubFundWithDateById(DateTime? chosenDate, int id)
         {
@@ -152,21 +210,7 @@ namespace Pharus.Services.SubFunds
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
         }
-
-        public List<string[]> GetSubFund_ShareClasses(int id)
-        {
-            using (SqlConnection connection = new SqlConnection())
-            {
-                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-
-                command.CommandText = $"select * from ActiveShareclassforSpecificSubFundAtDate('{this.defaultDate}', {id})";
-
-                return CreateModel.CreateModelWithHeadersAndValue(command);
-            }
-        }
-
+      
         public List<string[]> GetSubFund_ShareClasses(DateTime? chosenDate, int id)
         {
             using (SqlConnection connection = new SqlConnection())
@@ -186,23 +230,7 @@ namespace Pharus.Services.SubFunds
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
-        }
-
-        public List<string[]> GetSubFund_FundContainer(int id)
-        {
-            using (SqlConnection connection = new SqlConnection())
-            {
-                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-
-                Dictionary<int, string> funds = new Dictionary<int, string>();
-
-                command.CommandText = $"select * from fn_FundForSubfundAtDate('{this.defaultDate}', {id})";
-
-                return CreateModel.CreateModelWithHeadersAndValue(command);
-            }
-        }
+        }      
 
         public List<string[]> GetSubFund_FundContainer(DateTime? chosenDate, int id)
         {
@@ -223,6 +251,20 @@ namespace Pharus.Services.SubFunds
                 {
                     command.CommandText = $"select * from fn_FundForSubfundAtDate('{chosenDate?.ToString("yyyyMMdd")}', {id})";
                 }
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
+        public List<string[]> PrepareSubFundsForPDFExtract(DateTime? chosenDate)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                command.CommandText = $"select * from fn_active_subfund_pdf('{chosenDate?.ToString("yyyyMMdd")}')";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
@@ -254,21 +296,7 @@ namespace Pharus.Services.SubFunds
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
-        }
-
-        public List<string[]> PrepareSubFundsForExtract(DateTime? chosenDate)
-        {
-            using (SqlConnection connection = new SqlConnection())
-            {
-                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-
-                command.CommandText = $"select * from fn_active_subfund_pdf('{chosenDate?.ToString("yyyyMMdd")}')";
-
-                return CreateModel.CreateModelWithHeadersAndValue(command);
-            }
-        }
+        }       
 
         public void EditSubFund(
                                     int fundId,
