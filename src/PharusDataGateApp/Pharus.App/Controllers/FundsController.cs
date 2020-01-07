@@ -274,13 +274,17 @@
 
             if (searchTerm != null)
             {
-                entitiesToSearch = entitiesToSearch.Where(s => s[3].ToLower().Contains(searchTerm.ToLower())).ToList();
+                entitiesToSearch = entitiesToSearch.Where(sf => sf[3]
+                                                     .ToLower()
+                                                     .Contains(searchTerm
+                                                     .ToLower()))
+                                                   .ToList();
             }
 
-            var modifiedData = entitiesToSearch.Select(s => new
+            var modifiedData = entitiesToSearch.Select(sf => new
             {
-                id = s[3],
-                text = s[3],
+                id = sf[3],
+                text = sf[3],
             });
 
             return this.Json(modifiedData);
