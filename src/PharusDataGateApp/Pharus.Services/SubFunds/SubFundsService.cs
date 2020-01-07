@@ -98,7 +98,7 @@ namespace Pharus.Services.SubFunds
             }
         }
 
-        public List<string[]> GetAllSubFundsWithSelectedViewAndDate(List<string> selectedColumns, DateTime? chosenDate)
+        public List<string[]> GetAllSubFundsWithSelectedViewAndDate(List<string> preSelectedColumns, List<string> selectedColumns, DateTime? chosenDate)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -108,22 +108,23 @@ namespace Pharus.Services.SubFunds
 
                 // Prepare items for DB query with []
 
-                selectedColumns = selectedColumns.Select(c => String.Format("[{0}]", c)).ToList();
+                preSelectedColumns.AddRange(selectedColumns);
+                preSelectedColumns = preSelectedColumns.Select(c => String.Format("[{0}]", c)).ToList();
 
                 if (chosenDate == null)
                 {
-                    command.CommandText = $"select {string.Join(", ", selectedColumns)} from fn_all_subfund('{this.defaultDate}')";
+                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} from fn_all_subfund('{this.defaultDate}')";
                 }
                 else
                 {
-                    command.CommandText = $"select {string.Join(", ", selectedColumns)} from fn_all_subfund('{chosenDate?.ToString("yyyyMMdd")}')";
+                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} from fn_all_subfund('{chosenDate?.ToString("yyyyMMdd")}')";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
         }
 
-        public List<string[]> GetAllActiveSubFundsWithSelectedViewAndDate(List<string> selectedColumns, DateTime? chosenDate)
+        public List<string[]> GetAllActiveSubFundsWithSelectedViewAndDate(List<string> preSelectedColumns, List<string> selectedColumns, DateTime? chosenDate)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -133,15 +134,16 @@ namespace Pharus.Services.SubFunds
 
                 // Prepare items for DB query with []
 
-                selectedColumns = selectedColumns.Select(c => String.Format("[{0}]", c)).ToList();
+                preSelectedColumns.AddRange(selectedColumns);
+                preSelectedColumns = preSelectedColumns.Select(c => String.Format("[{0}]", c)).ToList();
 
                 if (chosenDate == null)
                 {
-                    command.CommandText = $"select {string.Join(", ", selectedColumns)} from fn_active_subfund('{this.defaultDate}')";
+                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} from fn_active_subfund('{this.defaultDate}')";
                 }
                 else
                 {
-                    command.CommandText = $"select {string.Join(", ", selectedColumns)} from fn_active_subfund('{chosenDate?.ToString("yyyyMMdd")}')";
+                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} from fn_active_subfund('{chosenDate?.ToString("yyyyMMdd")}')";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
