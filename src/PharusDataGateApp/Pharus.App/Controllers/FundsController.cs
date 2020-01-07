@@ -346,7 +346,7 @@
                     model.EntitySubEntities = this.fundsService.GetFund_SubFundsWithSelectedViewAndDate(
                         model.PreSelectedColumns,
                         model.SelectedColumns,
-                        chosenDate, 
+                        chosenDate,
                         model.EntityId);
                 }
 
@@ -638,6 +638,10 @@
 
             model.Entity = this.fundsService.GetFundById(date, model.EntityId);
             model.EntitySubEntities = this.fundsService.GetFund_SubFunds(date, model.EntityId);
+            model.SubEntitiesHeadersForColumnSelection = this.fundsService
+                                                                .GetFund_SubFunds(date, model.EntityId)
+                                                                .Take(1)
+                                                                .ToList();
             model.FileNameToDisplay = GetFileNameFromFilePath(model.EntityId, model.ChosenDate);
             model.EntityTimeline = this.fundsService.GetFundTimeline(model.EntityId);
             model.EntityDocuments = this.fundsService.GetAllFundDocumens(model.EntityId);

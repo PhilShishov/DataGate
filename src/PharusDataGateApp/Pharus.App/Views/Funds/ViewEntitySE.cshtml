@@ -36,9 +36,6 @@
 
     <hr class="bg-pharus hr-2" />
 
-    <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesSearchPartial" />
-    <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesBindingTablePartial" />
-
     <div class="row w-25 ml-3 mb-5">
         <label class="text-torshia m-1 pr-3">FUND ADDITIONAL INFORMATION</label>
         <select class="custom-select-lg pharus-select form-control input-sm"
@@ -56,6 +53,7 @@
 
     <div id="subEntities">
 
+        <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesBindingTablePartial" />
         <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesButtonsPartial" />
         <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesModalPartial" />
 
@@ -103,7 +101,10 @@
 </form>
 
 @section Scripts{
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+    <script src="~/js/ui.multiselect.js"></script>
     <script type="text/javascript" src="~/js/manageSubEntitiesSelectMenu.js"></script>
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.doubleScroll.js"></script>
 
@@ -118,10 +119,6 @@
             window.history.replaceState(null, null, window.location.href);
         }
 
-
-    </script>
-
-    <script>
         $(document).ready(function () {
 
             const url = "/Funds/AutoCompleteSubFundList";
@@ -147,13 +144,8 @@
                     }
                 }
             });
-        });
-    </script>
 
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('.double-scroll').doubleScroll();
+             $('.double-scroll').doubleScroll();
             $('.tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
 
             $("#fundChoicesSelect").on('change', function () {
@@ -180,5 +172,6 @@
                 }
             });
         });
+
     </script>
 }

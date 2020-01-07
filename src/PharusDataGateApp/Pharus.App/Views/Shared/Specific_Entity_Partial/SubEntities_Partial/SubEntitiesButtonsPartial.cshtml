@@ -1,35 +1,50 @@
-﻿@{
+﻿@model Pharus.App.Models.ViewModels.Entities.SpecificEntityViewModel
+@{
     var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
 }
 
-<div class="button-holder d-flex justify-content-center my-5">
-    <button class="extractbtn"
-            id="extractBtnExl"
-            type="submit"
-            formaction="/@controllerName/ExtractExcelSubEntities"
-            name="extract_Excel" hidden>
-        <img src="~/images/Icon_Excel.ico"
-             width="35"
-             height="35" />
-    </button>
+<div class="button-holder d-flex justify-content-center mb-3">
+    <div id="searchFieldDiv" class="w-50">
+        <select name="SearchTerm"
+                id="SearchTerm"
+                class="form-control input-sm"
+                style="width:300px"></select>
 
-    <button class="extractbtn"
-            id="extractBtnPDF"
-            type="submit"
-            formaction="/@controllerName/ExtractPdfSubEntities"
-            name="extract_Pdf" hidden>
-        <img src="~/images/Icon_Pdf.ico"
-             width="35"
-             height="35" />
-    </button>
+        <input type="submit"
+               class="bg-pharus text-white"
+               asp-for="Command"
+               value="Search" />
+    </div>
 
-    <button type="button"
-            class="btn btn-primary btn-sm ml-2"
-            data-toggle="modal"
-            data-target="#columnModal"
-            name="showColumnSelection">
-        <img src="~/images/ColumnSelection_Pharus.jpg"
-             width="35"
-             height="35" />
-    </button>
+    <div class="w-50">
+        <button class="extractbtn"
+                id="extractBtnExl"
+                type="submit"
+                formaction="/@controllerName/ExtractExcelSubEntities"
+                name="extract_Excel" hidden>
+            <img src="~/images/Icon_Excel.ico"
+                 width="35"
+                 height="35" />
+        </button>
+
+        <button class="extractbtn"
+                id="extractBtnPDF"
+                type="submit"
+                formaction="/@controllerName/ExtractPdfSubEntities"
+                name="extract_Pdf" hidden>
+            <img src="~/images/Icon_Pdf.ico"
+                 width="35"
+                 height="35" />
+        </button>
+
+        <button type="button"
+                class="btn btn-primary btn-sm ml-2"
+                data-toggle="modal"
+                data-target="#columnModal"
+                name="showColumnSelection">
+            <img src="~/images/ColumnSelection_Pharus.jpg"
+                 width="35"
+                 height="35" />
+        </button>
+    </div>
 </div>
