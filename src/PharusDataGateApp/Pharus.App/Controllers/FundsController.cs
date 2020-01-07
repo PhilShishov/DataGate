@@ -17,6 +17,7 @@
     using Pharus.Services.Funds.Contracts;
     using Pharus.App.Models.BindingModels.Funds;
     using Pharus.App.Models.ViewModels.Entities;
+    using System.Collections.Generic;
 
     [Authorize]
     public class FundsController : Controller
@@ -48,7 +49,10 @@
             {
                 IsActive = true,
                 ChosenDate = DateTime.Today.ToString("yyyy-MM-dd"),
-                EntitiesHeadersForColumnSelection = this.fundsService.GetAllActiveFunds().Take(1).ToList(),
+                EntitiesHeadersForColumnSelection = this.fundsService
+                                                        .GetAllActiveFunds()
+                                                        .Take(1)
+                                                        .ToList(),
                 Entities = this.fundsService.GetAllActiveFunds(),
             };
 
@@ -89,7 +93,10 @@
             // ---------------------------------------------------------
             //
             // Available header column selection
-            model.EntitiesHeadersForColumnSelection = this.fundsService.GetAllActiveFunds().Take(1).ToList();
+            model.EntitiesHeadersForColumnSelection = this.fundsService
+                                                            .GetAllActiveFunds()
+                                                            .Take(1)
+                                                            .ToList();
 
             bool isInSelectionMode = false;
 
@@ -111,11 +118,17 @@
                 {
                     if (model.IsActive)
                     {
-                        model.Entities = this.fundsService.GetAllActiveFundsWithSelectedViewAndDate(model.PreSelectedColumns, model.SelectedColumns, chosenDate);
+                        model.Entities = this.fundsService.GetAllActiveFundsWithSelectedViewAndDate(
+                            model.PreSelectedColumns, 
+                            model.SelectedColumns, 
+                            chosenDate);
                     }
                     else if (!model.IsActive)
                     {
-                        model.Entities = this.fundsService.GetAllFundsWithSelectedViewAndDate(model.PreSelectedColumns, model.SelectedColumns, chosenDate);
+                        model.Entities = this.fundsService.GetAllFundsWithSelectedViewAndDate(
+                            model.PreSelectedColumns, 
+                            model.SelectedColumns, 
+                            chosenDate);
                     }
                 }
                 else if (!isInSelectionMode)
@@ -139,11 +152,17 @@
                     {
                         if (model.IsActive)
                         {
-                            model.Entities = this.fundsService.GetAllActiveFundsWithSelectedViewAndDate(model.PreSelectedColumns, model.SelectedColumns, chosenDate);
+                            model.Entities = this.fundsService.GetAllActiveFundsWithSelectedViewAndDate(
+                                model.PreSelectedColumns, 
+                                model.SelectedColumns, 
+                                chosenDate);
                         }
                         else if (!model.IsActive)
                         {
-                            model.Entities = this.fundsService.GetAllFundsWithSelectedViewAndDate(model.PreSelectedColumns, model.SelectedColumns, chosenDate);
+                            model.Entities = this.fundsService.GetAllFundsWithSelectedViewAndDate(
+                                model.PreSelectedColumns, 
+                                model.SelectedColumns, 
+                                chosenDate);
                         }
                     }
                     else if (!isInSelectionMode)
@@ -165,11 +184,17 @@
                 {
                     if (model.IsActive)
                     {
-                        model.Entities = this.fundsService.GetAllActiveFundsWithSelectedViewAndDate(model.PreSelectedColumns, model.SelectedColumns, chosenDate);
+                        model.Entities = this.fundsService.GetAllActiveFundsWithSelectedViewAndDate(
+                            model.PreSelectedColumns, 
+                            model.SelectedColumns, 
+                            chosenDate);
                     }
                     else if (!model.IsActive)
                     {
-                        model.Entities = this.fundsService.GetAllFundsWithSelectedViewAndDate(model.PreSelectedColumns, model.SelectedColumns, chosenDate);
+                        model.Entities = this.fundsService.GetAllFundsWithSelectedViewAndDate(
+                            model.PreSelectedColumns, 
+                            model.SelectedColumns, 
+                            chosenDate);
                     }
                 }
                 else if (!isInSelectionMode)
@@ -241,7 +266,10 @@
                 EntityId = entityId,
                 Entity = this.fundsService.GetFundById(entityId),
                 EntitySubEntities = this.fundsService.GetFund_SubFunds(date, entityId),
-                EntitySubEntitiesHeadersForColumnSelection = this.fundsService.GetFund_SubFunds(date, entityId).Take(1).ToList(),
+                EntitySubEntitiesHeadersForColumnSelection = this.fundsService
+                                                                .GetFund_SubFunds(date, entityId)
+                                                                .Take(1)
+                                                                .ToList(),
                 EntityTimeline = this.fundsService.GetFundTimeline(entityId),
                 EntityDocuments = this.fundsService.GetAllFundDocumens(entityId),
             };
@@ -293,49 +321,38 @@
 
         [HttpPost]
         [Route("Funds/ViewEntitySE/{EntityId}/{ChosenDate}")]
-        public IActionResult ViewEntitySE(SpecificEntityViewModel viewModel)
+        public IActionResult ViewEntitySE(SpecificEntityViewModel model)
         {
-            SetModelValuesForSpecificView(viewModel);
+            SetModelValuesForSpecificView(model);
+
+            var date = DateTime.Parse(model.ChosenDate);
 
             this.ViewData["FileTypes"] = this.fundsSelectListService.GetAllFundFileTypes();
 
-            if (viewModel.Command.Equals("Update Table"))
+            if (model.Command.Equals("Update Table"))
             {
-                if (viewModel.ChosenDate != null)
+                if (model.ChosenDate != null)
                 {
-                    var chosenDate = DateTime.ParseExact(viewModel.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-                    viewModel.Entity = this.fundsService
-                        .GetFundById(chosenDate, viewModel.EntityId);
-                    viewModel.EntitySubEntities = this.fundsService
-                        .GetFund_SubFunds(chosenDate, viewModel.EntityId);
+                    var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                    model.Entity = this.fundsService
+                        .GetFundById(chosenDate, model.EntityId);
+                    model.EntitySubEntities = this.fundsService
+                        .GetFund_SubFunds(chosenDate, model.EntityId);
                 }
             }
-            else if (viewModel.Command.Equals("Search"))
+            else if (model.Command.Equals("Search"))
             {
-                //if (viewModel.SearchTerm == null)
-                //{
-                //    return this.View(viewModel);
-                //}
+                if (model.SearchTerm == null)
+                {
+                    return this.View(model);
+                }
 
-                //viewModel.EntitySubEntities = new List<string[]>();
-
-                //var tableHeaders = this.fundsService
-                //    .GetFund_SubFunds(viewModel.EntityId)
-                //    .Take(1)
-                //    .ToList();
-                //var tableFundsWithoutHeaders = this.fundsService
-                //    .GetFund_SubFunds(viewModel.EntityId)
-                //    .Skip(1)
-                //    .ToList();
-
-                //CreateTableView.AddHeadersToView(viewModel.EntitySubEntities, tableHeaders);
-
-                //CreateTableView.AddTableToView(viewModel.EntitySubEntities, tableFundsWithoutHeaders, viewModel.SearchTerm.ToLower());
+                model.EntitySubEntities = CreateTableView.AddTableToView(model.EntitySubEntities, model.SearchTerm.ToLower());
             }
 
-            if (viewModel.Entity != null && viewModel.EntitySubEntities != null)
+            if (model.Entity != null && model.EntitySubEntities != null)
             {
-                return this.View(viewModel);
+                return this.View(model);
             }
 
             return this.View();

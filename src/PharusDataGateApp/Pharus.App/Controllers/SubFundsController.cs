@@ -109,11 +109,17 @@
                 {
                     if (model.IsActive)
                     {
-                        model.Entities = this.subFundsService.GetAllActiveSubFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
+                        model.Entities = this.subFundsService.GetAllActiveSubFundsWithSelectedViewAndDate(
+                            model.PreSelectedColumns, 
+                            model.SelectedColumns, 
+                            chosenDate);
                     }
                     else if (!model.IsActive)
                     {
-                        model.Entities = this.subFundsService.GetAllSubFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
+                        model.Entities = this.subFundsService.GetAllSubFundsWithSelectedViewAndDate(
+                            model.PreSelectedColumns,
+                            model.SelectedColumns, 
+                            chosenDate);
                     }
                 }
                 else if (!isInSelectionMode)
@@ -137,11 +143,17 @@
                     {
                         if (model.IsActive)
                         {
-                            model.Entities = this.subFundsService.GetAllActiveSubFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
+                            model.Entities = this.subFundsService.GetAllActiveSubFundsWithSelectedViewAndDate(
+                                 model.PreSelectedColumns,
+                                 model.SelectedColumns,
+                                 chosenDate);
                         }
                         else if (!model.IsActive)
                         {
-                            model.Entities = this.subFundsService.GetAllSubFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
+                            model.Entities = this.subFundsService.GetAllSubFundsWithSelectedViewAndDate(
+                                 model.PreSelectedColumns,
+                                 model.SelectedColumns, 
+                                 chosenDate);
                         }
                     }
                     else if (!isInSelectionMode)
@@ -163,11 +175,17 @@
                 {
                     if (model.IsActive)
                     {
-                        model.Entities = this.subFundsService.GetAllActiveSubFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
+                        model.Entities = this.subFundsService.GetAllActiveSubFundsWithSelectedViewAndDate(
+                             model.PreSelectedColumns,
+                             model.SelectedColumns, 
+                             chosenDate);
                     }
                     else if (!model.IsActive)
                     {
-                        model.Entities = this.subFundsService.GetAllSubFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
+                        model.Entities = this.subFundsService.GetAllSubFundsWithSelectedViewAndDate(
+                            model.PreSelectedColumns,
+                            model.SelectedColumns,
+                            chosenDate);
                     }
                 }
                 else if (!isInSelectionMode)
