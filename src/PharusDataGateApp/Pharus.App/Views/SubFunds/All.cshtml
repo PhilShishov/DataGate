@@ -8,9 +8,10 @@
 <h2 class="text-center text-torshia">All Active SubFunds</h2>
 
 @section Styles{
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/css/checkbox.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" />
+
     <style>
         body {
             background-image: none;
@@ -23,34 +24,21 @@
       method="post">
 
     <div>
-        <partial name="ContainerEntityPartial" />
+        <partial name="All_Entities_Partial/EntitiesUpdateAndSearchPartial" />
 
-        <div class="button-holder d-flex justify-content-center my-5" style="align-items: center">
-            <partial name="ExtractEntitiesViewPartial" />
-
-            <label class="el-switch el-switch-sm" style="display:flex; margin-bottom:0">
-                <input type="checkbox" asp-for="IsActive">
-                <span class="el-switch-style mr-2"></span>
-                Show only all active
-            </label>
-
-            @*<button type="button"
-                class="btn btn-info"
-                data-toggle="modal"
-                data-target="#myModal"
-                name="showColumnSelection">
-            <img src="~/images/ColumnSelection_Pharus.jpg"
-                 width="35"
-                 height="35" />
-        </button>*@
+        <div class="button-holder d-flex justify-content-center my-5 align-items-center">
+            <partial name="All_Entities_Partial/EntitiesExtractViewPartial" />
+            <partial name="All_Entities_Partial/EntitiesActiveSwitchPartial" />
+            <partial name="All_Entities_Partial/EntitiesModalButtonPartial" />
         </div>
+
+        <partial name="All_Entities_Partial/EntitiesModalPartial" />
 
         <hr class="bg-pharus hr-2" />
 
-        <partial name="EntitiesBindingTablePartial" />
+        <partial name="All_Entities_Partial/EntitiesBindingTablePartial" />
 
-        <partial name="EntitiesViewTablePartial" />
-
+        <partial name="All_Entities_Partial/EntitiesViewTablePartial" />
     </div>
 </form>
 

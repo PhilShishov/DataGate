@@ -15,6 +15,7 @@
     using Pharus.Services.SubFunds.Contracts;
     using Pharus.App.Models.ViewModels.Entities;
     using Pharus.App.Models.BindingModels.SubFunds;
+    using Pharus.Utilities.App;
 
     [Authorize]
     public class SubFundsController : Controller
@@ -46,9 +47,9 @@
             {
                 IsActive = true,
                 ChosenDate = DateTime.Today.ToString("yyyy-MM-dd"),
+                EntitiesHeadersForColumnSelection = this.subFundsService.GetAllActiveFunds().Take(1).ToList(),
+                Entities = this.subFundsService.GetAllActiveFunds(),
             };
-
-            //GetAllActiveEntitiesUtility.GetAllActiveSubFundsWithHeaders(model, this.subFundsService);
 
             this.ModelState.Clear();
             return this.View(model);
@@ -83,59 +84,105 @@
         [HttpPost]
         public IActionResult All(EntitiesViewModel model)
         {
-            //GetAllActiveEntitiesUtility.GetAllActiveSubFundsWithHeaders(model, this.subFundsService);
+            // ---------------------------------------------------------
+            //
+            // Available header column selection
+            model.EntitiesHeadersForColumnSelection = this.subFundsService.GetAllActiveFunds().Take(1).ToList();
 
-            var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            bool isInSelectionMode = false;
 
-            if (model.Command.Equals("Update Table"))
+            if (model.SelectedColumns != null && model.SelectedColumns.Count > 0)
             {
-                if (model.ChosenDate != null)
+                isInSelectionMode = true;
+            }
+
+            DateTime? chosenDate = null;
+
+            if (model.ChosenDate != null)
+            {
+                chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            }
+
+            if (model.Command == null || model.Command.Equals("Update Table") || model.Command.Equals("Apply"))
+            {
+                if (isInSelectionMode)
                 {
                     if (model.IsActive)
                     {
-                        //GetAllActiveEntitiesUtility.GetAllActiveSubFundsWithHeaders(model, this.subFundsService);
+                        model.Entities = this.subFundsService.GetAllActiveFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
                     }
-                    else
+                    else if (!model.IsActive)
                     {
-                        model.Entities = this.subFundsService.GetAllSubFunds(chosenDate);
+                        model.Entities = this.subFundsService.GetAllFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
+                    }
+                }
+                else if (!isInSelectionMode)
+                {
+                    if (model.IsActive)
+                    {
+                        model.Entities = this.subFundsService.GetAllActiveFunds(chosenDate);
+                    }
+                    else if (!model.IsActive)
+                    {
+                        model.Entities = this.subFundsService.GetAllFunds(chosenDate);
                     }
                 }
             }
+
             else if (model.Command.Equals("Search"))
             {
                 if (model.SearchTerm == null)
                 {
+                    if (isInSelectionMode)
+                    {
+                        if (model.IsActive)
+                        {
+                            model.Entities = this.subFundsService.GetAllActiveFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
+                        }
+                        else if (!model.IsActive)
+                        {
+                            model.Entities = this.subFundsService.GetAllFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
+                        }
+                    }
+                    else if (!isInSelectionMode)
+                    {
+                        if (model.IsActive)
+                        {
+                            model.Entities = this.subFundsService.GetAllActiveFunds(chosenDate);
+                        }
+                        else if (!model.IsActive)
+                        {
+                            model.Entities = this.subFundsService.GetAllFunds(chosenDate);
+                        }
+                    }
+
                     return this.View(model);
                 }
 
-                model.Entities = new List<string[]>();
-
-                var tableHeaders = this.subFundsService
-                    .GetAllSubFunds()
-                    .Take(1)
-                    .ToList();
-
-                List<string[]> tableWithoutHeaders = null;
-
-                if (model.IsActive)
+                if (isInSelectionMode)
                 {
-                    tableWithoutHeaders = this.subFundsService
-                        .GetAllSubFunds(chosenDate)
-                        .Skip(1)
-                        .Where(f => f.Contains("Active"))
-                        .ToList();
+                    if (model.IsActive)
+                    {
+                        model.Entities = this.subFundsService.GetAllActiveFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
+                    }
+                    else if (!model.IsActive)
+                    {
+                        model.Entities = this.subFundsService.GetAllFundsWithSelectedViewAndDate(model.SelectedColumns, chosenDate);
+                    }
                 }
-                else
+                else if (!isInSelectionMode)
                 {
-                    tableWithoutHeaders = this.subFundsService
-                        .GetAllSubFunds()
-                        .Skip(1)
-                        .ToList();
+                    if (model.IsActive)
+                    {
+                        model.Entities = this.subFundsService.GetAllActiveFunds(chosenDate);
+                    }
+                    else if (!model.IsActive)
+                    {
+                        model.Entities = this.subFundsService.GetAllFunds(chosenDate);
+                    }
                 }
 
-                //CreateTableView.AddHeadersToView(model.Entities, tableHeaders);
-
-                //CreateTableView.AddTableToView(model.Entities, tableWithoutHeaders, model.SearchTerm.ToLower());
+                model.Entities = CreateTableView.AddTableToView(model.Entities, model.SearchTerm.ToLower());
             }
 
             if (model.Entities != null)
@@ -143,7 +190,7 @@
                 return this.View(model);
             }
 
-            return this.RedirectToPage("/SubFunds/All");
+            return this.RedirectToPage("/Funds/All");
         }
 
         [HttpPost]
