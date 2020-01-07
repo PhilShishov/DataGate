@@ -4,7 +4,6 @@
     using System.IO;
     using System.Linq;
     using System.Globalization;
-    using System.Collections.Generic;
 
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Http;
@@ -49,7 +48,7 @@
             {
                 IsActive = true,
                 ChosenDate = DateTime.Today.ToString("yyyy-MM-dd"),
-                EntitiesHeaders = this.fundsService.GetAllActiveFunds().Take(1).ToList(),
+                EntitiesHeadersForColumnSelection = this.fundsService.GetAllActiveFunds().Take(1).ToList(),
                 Entities = this.fundsService.GetAllActiveFunds(),
             };
 
@@ -90,7 +89,7 @@
             // ---------------------------------------------------------
             //
             // Available header column selection
-            model.EntitiesHeaders = this.fundsService.GetAllActiveFunds().Take(1).ToList();
+            model.EntitiesHeadersForColumnSelection = this.fundsService.GetAllActiveFunds().Take(1).ToList();
 
             bool isInSelectionMode = false;
 

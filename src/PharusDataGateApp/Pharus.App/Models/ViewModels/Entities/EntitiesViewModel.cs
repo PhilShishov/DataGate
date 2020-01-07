@@ -19,6 +19,6 @@ namespace Pharus.App.Models.ViewModels.Entities
         // for all entities of type
         public List<string[]> Entities { get; set; }
 
-        public List<string[]> EntitiesHeaders { get; set; }
+        public List<string[]> EntitiesHeadersForColumnSelection { get; set; }
     }
 }
