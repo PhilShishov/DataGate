@@ -7,7 +7,8 @@
 
 @section Styles{
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" />
     <style>
         body {
             background-image: none;
@@ -19,33 +20,30 @@
       class="justify-content-between"
       method="post">
 
-    <div class="d-flex m-1 pr-3">
-        <p>FUND CONTAINER :</p> <a href="/Funds/ViewEntitySE/@Model.BaseEntityId/@Model.ChosenDate" class="text-torshia font-weight-bold">@Model.BaseEntityName</a>
+    <div class="d-flex mt-2 pr-3">
+        <p>FUND CONTAINER :</p>
+        <a href="/Funds/ViewEntitySE/@Model.BaseEntityId/@Model.ChosenDate"
+           class="text-torshia font-weight-bold">
+            @Model.BaseEntityName
+        </a>
     </div>
 
-    <partial name="SpecificEntityUpdatePartial" />
+    <partial name="Specific_Entity_Partial/SpecificEntityUpdatePartial" />
 
     <div class="d-flex justify-content-between">
 
-        <partial name="SpecificEntityInfoPartial" />
-        <div class="w-35 float-right">
-            @*<partial name="SpecificEntityDocumentsPartial" />*@
+        <partial name="Specific_Entity_Partial/SpecificEntityInfoPartial" />
 
+        <div class="w-50 float-right">
+            <partial name="Specific_Entity_Partial/SpecificEntityUploadDocumentsPartial" />
             @if (this.User.IsInRole("Admin"))
             {
-                @*<div class="mt-5">
-                    <a href="/SubFunds/EditSubFund/@Model.EntityId" class="btn bg-pharus text-white">Edit SubFund</a>
-                </div>*@
-                @*<div class="mt-5">
-                        <a href="" class="btn bg-pharus text-white">Edit SubFund Connection</a>
-                    </div>*@
+                <div class="mt-5">
+                    <a href="/SubFunds/EditSubFund/@Model.EntityId/@Model.ChosenDate" class="btn btn-primary btn-sm mb-2">Edit SubFund</a>
+                </div>
             }
         </div>
     </div>
-
-    <partial name="SpecificEntitySearchPartial" />
-    <partial name="ExtractSubEntitiesViewPartial" />
-    <partial name="EntitySubEntitiesBindingTablePartial" />
 
     <div class="row w-25 ml-3 mb-5">
         <label class="text-torshia m-1 pr-3">SUBFUND ADDITIONAL INFORMATION</label>
@@ -59,76 +57,15 @@
         </select>
     </div>
 
-    <div id="allDocuments">
-        <table class="table table-bordered table-hover">
-            <thead>
-                @for (int row = 0; row < 1; row++)
-                {
-                    <tr>
-                        @for (int col = 0; col < Model.EntityDocuments[row].Length; col++)
-                        {
-                            <th class="text-secondary p-1">
-                                <h5>
-                                    @Model.EntityDocuments[row][col]
-                                </h5>
-                            </th>
-                        }
-                    </tr>
-                }
-            </thead>
-
-            <tbody>
-                @for (int row = 1; row < Model.EntityDocuments.Count; row++)
-                {
-                    <tr>
-                        @for (int col = 0; col < Model.EntityDocuments[row].Length; col++)
-                        {
-                            <td class="p-1">
-                                @if (Model.EntityDocuments[0][col] == "File Name")
-                                {
-                                    <button class="btn-link"
-                                            formtarget="_blank"
-                                            type="submit"
-                                            formaction="/@controllerName/ReadPdfFile"
-                                            name="read_Pdf">
-                                        @Model.EntityDocuments[row][col]
-                                    </button>
-                                }
-                                else
-                                {
-                                    @Model.EntityDocuments[row][col]
-
-                                }
-                            </td>
-                        }
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-
-    <div class="container py-5"
-         id="timelineChanges">
-        <div class="row">
-            <div class="col-lg-7 mx-auto">
-                <ul class="timeline">
-                    @for (int row = 1; row < Model.EntityTimeline.Count; row++)
-                    {
-                        <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
-                            <div class="timeline-arrow"></div>
-                            <h2 class="h5 mb-0">@Model.EntityTimeline[row][3]</h2>
-                            <span class="small text-gray">
-                                <i class="fa fa-clock-o mr-1"></i>@Model.EntityTimeline[row][1] - @Model.EntityTimeline[row][2]
-                            </span>
-                            <p class="text-small mt-2 font-weight-light">@Model.EntityTimeline[row][4]</p>
-                        </li>
-                    }
-                </ul>
-            </div>
-        </div>
-    </div>
+    <partial name="Specific_Entity_Partial/SpecificEntityAllDocumentsPartial" />
+    <partial name="Specific_Entity_Partial/SpecificEntityTimeLinePartial" />
 
     <div id="subEntities">
+
+        <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesBindingTablePartial" />
+        <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesButtonsPartial" />
+        <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesModalPartial" />
+
         <table class="table table-bordered table-hover table-responsive text-nowrap tableDoubleScroll">
             <thead>
                 @for (int row = 0; row < 1; row++)
@@ -163,13 +100,98 @@
             </tbody>
         </table>
     </div>
+</form>
 
+<form asp-controller="SubFunds"
+      asp-action="UploadFiles"
+      method="post"
+      enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <partial name="Specific_Entity_Partial/SpecificEntityUploadPartial" />
 </form>
 
 @section Scripts{
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+    <script src="~/js/ui.multiselect.js"></script>
+    <script src="~/lib/jquery/Chart.js/utils.js"></script>
+    <script src="~/lib/jquery/Chart.js/Chart.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.doubleScroll.js"></script>
+
     <script>
+        window.onload = () => {
+            manageSideNavBar();
+            manageDropdowns();
+        }
+
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+
+        // ________________________________________________________
+        //
+        // Chart JS Implementation
+
+        @*const ctx = document.getElementById('aumF_Canvas').getContext('2d');
+        const config = {
+            type: 'line',
+            data: {
+                labels: @valDatesLabel,
+                datasets: [
+                    {
+                    label: 'Fund Admin EUR',
+                    backgroundColor: window.chartColors.red,
+                    borderColor: window.chartColors.red,
+                    data: @dataProviderFundAdminEUR,
+                    fill: false,
+                    }]
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    text: 'AUM For Funds'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false,
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                scales: {
+                    x: {
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Month'
+                        }
+                    },
+                    y: {
+                        display: true,
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Value'
+                        }
+                    }
+                }
+            }
+        };*@
+
         $(document).ready(function () {
+
+             // ________________________________________________________
+            //
+            // Modal multiselect for column selection
+
+            $(".multiselect").multiselect();
+            
+            // ________________________________________________________
+            //
+            // Autocomplete search
 
             const url = "/SubFunds/AutoCompleteShareClassesList";
             const entityId = @Model.EntityId;
@@ -194,15 +216,18 @@
                     }
                 }
             });
-        });
-    </script>
 
-    <script type="text/javascript" src="~/lib/jquery/dist/jquery.doubleScroll.js"></script>
+            // ________________________________________________________
+            //
+            // Double top scroll for table
 
-    <script type="text/javascript">
-        $(document).ready(function () {
             $('.double-scroll').doubleScroll();
             $('.tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
+
+            // ________________________________________________________
+            //
+            // Select menu for fund additional information -
+            // subentities, timeline changes, all documents
 
             $("#subFundChoicesSelect").on('change', function () {
                 let dropdownvalue = $("#subFundChoicesSelect option:selected").val();
@@ -228,21 +253,5 @@
                 }
             });
         });
-    </script>
-
-    <script type="text/javascript" src="~/js/manageSubEntitiesSelectMenu.js"></script>
-
-    <script>
-        window.onload = () => {
-            manageSideNavBar();
-            manageDropdowns();
-            manageSESelectMenu();
-        }
-    </script>
-
-    <script>
-        if (window.history.replaceState) {
-            window.history.replaceState(null, null, window.location.href);
-        }
-    </script>
+    </script>   
 }

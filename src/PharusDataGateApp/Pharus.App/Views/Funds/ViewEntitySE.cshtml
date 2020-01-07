@@ -5,8 +5,8 @@
     var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
 
     // TODO implement Model.TSPriceDates, Model.TSPriceBloombergUSD
-    var valDatesLabel = @Html.Raw(Json.Serialize(Model.TSPriceDates));
-    var dataProviderFundAdminEUR = @Html.Raw(Json.Serialize(Model.TSPriceBloombergUSD));
+    //var valDatesLabel = @Html.Raw(Json.Serialize(Model.TSPriceDates));
+    //var dataProviderFundAdminEUR = @Html.Raw(Json.Serialize(Model.TSPriceBloombergUSD));
 }
 
 @section Styles{
@@ -20,13 +20,15 @@
     </style>
 }
 
-<form asp-controller="Funds" class="justify-content-between" method="post">
+<form asp-controller="Funds"
+      class="justify-content-between" 
+      method="post">
 
     <partial name="Specific_Entity_Partial/SpecificEntityUpdatePartial" />
 
-    <div style="width:40%;">
+    @*<div style="width:40%;">
         <canvas id="aumF_Canvas"></canvas>
-    </div>
+    </div>*@
     <div class="d-flex justify-content-between">
 
         <partial name="Specific_Entity_Partial/SpecificEntityInfoPartial" />
@@ -115,16 +117,13 @@
     <script src="~/js/ui.multiselect.js"></script>
     <script src="~/lib/jquery/Chart.js/utils.js"></script>
     <script src="~/lib/jquery/Chart.js/Chart.min.js"></script>
-    <script type="text/javascript" src="~/js/manageSubEntitiesSelectMenu.js"></script>
-    <script type="text/javascript" src="~/lib/jquery/dist/jquery.doubleScroll.js"></script>
+    <script src="~/lib/jquery/dist/jquery.doubleScroll.js"></script>
 
     <script>
-
         window.onload = () => {
-            window.myLine = new Chart(ctx, config);
             manageSideNavBar();
             manageDropdowns();
-            manageSESelectMenu();
+            //window.myLine = new Chart(ctx, config);
         }
 
         if (window.history.replaceState) {
@@ -135,7 +134,7 @@
         //
         // Chart JS Implementation
 
-        const ctx = document.getElementById('aumF_Canvas').getContext('2d');
+        @*const ctx = document.getElementById('aumF_Canvas').getContext('2d');
         const config = {
             type: 'line',
             data: {
@@ -180,7 +179,7 @@
                     }
                 }
             }
-        };
+        };*@
 
         $(document).ready(function () {
 

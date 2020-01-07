@@ -61,14 +61,17 @@
             window.history.replaceState(null, null, window.location.href);
         }
 
-        $(function () {
-            // choose either the full version
-            $(".multiselect").multiselect();
-            // or disable some features
-            $(".multiselect").multiselect({ sortable: false, searchable: false });
-        });
-
         $(document).ready(function () {
+            // ________________________________________________________
+            //
+            // Modal multiselect for column selection
+
+            $(".multiselect").multiselect();
+
+            // ________________________________________________________
+            //
+            // Autocomplete search
+
             $("#SearchTerm").select2({
                 placeholder: "Select Sub Funds",
                 theme: "classic",
@@ -84,12 +87,15 @@
                     }
                 }
             });
-        });
 
-        $(document).ready(function () {
+            // ________________________________________________________
+            //
+            // Double top scroll for table
             $('.double-scroll').doubleScroll();
             $('#tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
         });
+
+
 
     </script>
 
