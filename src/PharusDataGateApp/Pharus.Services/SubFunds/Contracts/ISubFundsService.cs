@@ -5,9 +5,15 @@
 
     public interface ISubFundsService
     {
-        List<string[]> GetAllSubFunds();
-
         List<string[]> GetAllSubFunds(DateTime? chosenDate);
+
+        List<string[]> GetAllActiveSubFunds();
+
+        List<string[]> GetAllActiveSubFunds(DateTime? chosenDate);
+
+        List<string[]> GetAllSubFundsWithSelectedViewAndDate(List<string> selectedColumns, DateTime? chosenDate);
+
+        List<string[]> GetAllActiveSubFundsWithSelectedViewAndDate(List<string> selectedColumns, DateTime? chosenDate);
 
         List<string> GetAllSubFundsNames();
 
@@ -15,15 +21,9 @@
 
         List<string[]> GetSubFundById(DateTime? chosenDate, int id);
 
-        List<string[]> GetSubFundWithDateById(int id);
-
         List<string[]> GetSubFundWithDateById(DateTime? chosenDate, int id);
 
-        List<string[]> GetSubFund_ShareClasses(int id);
-
         List<string[]> GetSubFund_ShareClasses(DateTime? chosenDate, int id);
-
-        List<string[]> GetSubFund_FundContainer(int id);
 
         List<string[]> GetSubFund_FundContainer(DateTime? chosenDate, int id);
 
@@ -31,7 +31,7 @@
 
         List<string[]> GetAllSubFundDocumens(int id);
 
-        List<string[]> PrepareSubFundsForExtract(DateTime? chosenDate);
+        List<string[]> PrepareSubFundsForPDFExtract(DateTime? chosenDate);
 
         void EditSubFund(
                         int fundId,
