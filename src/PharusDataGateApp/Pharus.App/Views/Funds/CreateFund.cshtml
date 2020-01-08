@@ -61,9 +61,9 @@
             <label asp-for="LegalForm" class="text-torshia"></label><br>
             <select class="form-control maxw-270" asp-for="LegalForm">
                 <option selected disabled>-- Choose Form --</option>
-                @foreach (var status in (List<string>)ViewData["LegalForm"])
+                @foreach (var form in (List<string>)ViewData["LegalForm"])
                 {
-                    <option value="@status">@status</option>
+                    <option value="@form">@form</option>
                 }
             </select>
             <span asp-validation-for="LegalForm" class="text-danger"></span>
@@ -73,9 +73,9 @@
             <label asp-for="LegalVehicle" class="text-torshia"></label><br>
             <select class="form-control maxw-270" asp-for="LegalVehicle">
                 <option selected disabled>-- Choose Vehicle --</option>
-                @foreach (var status in (List<string>)ViewData["LegalVehicle"])
+                @foreach (var vehicle in (List<string>)ViewData["LegalVehicle"])
                 {
-                    <option value="@status">@status</option>
+                    <option value="@vehicle">@vehicle</option>
                 }
             </select>
             <span asp-validation-for="LegalVehicle" class="text-danger"></span>
@@ -85,9 +85,9 @@
             <label asp-for="LegalType" class="text-torshia"></label><br>
             <select class="form-control maxw-270" asp-for="LegalType">
                 <option selected disabled>-- Choose Type --</option>
-                @foreach (var status in (List<string>)ViewData["LegalType"])
+                @foreach (var type in (List<string>)ViewData["LegalType"])
                 {
-                    <option value="@status">@status</option>
+                    <option value="@type">@type</option>
                 }
             </select>
             <span asp-validation-for="LegalType" class="text-danger"></span>
@@ -124,9 +124,9 @@
             <label asp-for="CompanyTypeDesc" class="text-torshia"></label><br>
             <select class="form-control maxw-270" asp-for="CompanyTypeDesc">
                 <option selected disabled>-- Choose Description --</option>
-                @foreach (var status in (List<string>)ViewData["CompanyTypeDesc"])
+                @foreach (var desc in (List<string>)ViewData["CompanyTypeDesc"])
                 {
-                    <option value="@status">@status</option>
+                    <option value="@desc">@desc</option>
                 }
             </select>
             <span asp-validation-for="CompanyTypeDesc" class="text-danger"></span>

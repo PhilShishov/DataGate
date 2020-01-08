@@ -68,15 +68,15 @@
         <div class="form-group">
             <label asp-for="LegalForm" class="text-torshia"></label><br>
             <select class="form-control maxw-270" asp-for="LegalForm">
-                @foreach (var status in (List<string>)ViewData["LegalForm"])
+                @foreach (var form in (List<string>)ViewData["LegalForm"])
                 {
-                    if (status == Model.EntityProperties[1][6])
+                    if (form == Model.EntityProperties[1][6])
                     {
-                        <option selected value="@status">@status</option>
+                        <option selected value="@form">@form</option>
                     }
                     else
                     {
-                        <option value="@status">@status</option>
+                        <option value="@form">@form</option>
                     }
                 }
             </select>
@@ -86,15 +86,15 @@
         <div class="form-group">
             <label asp-for="LegalVehicle" class="text-torshia"></label><br>
             <select class="form-control maxw-270" asp-for="LegalVehicle">
-                @foreach (var status in (List<string>)ViewData["LegalVehicle"])
+                @foreach (var vehicle in (List<string>)ViewData["LegalVehicle"])
                 {
-                    if (status == Model.EntityProperties[1][7])
+                    if (vehicle == Model.EntityProperties[1][7])
                     {
-                        <option selected value="@status">@status</option>
+                        <option selected value="@vehicle">@vehicle</option>
                     }
                     else
                     {
-                        <option value="@status">@status</option>
+                        <option value="@vehicle">@vehicle</option>
                     }
                 }
             </select>
@@ -104,15 +104,15 @@
         <div class="form-group">
             <label asp-for="LegalType" class="text-torshia"></label><br>
             <select class="form-control maxw-270" asp-for="LegalType">
-                @foreach (var status in (List<string>)ViewData["LegalType"])
+                @foreach (var type in (List<string>)ViewData["LegalType"])
                 {
-                    if (status == Model.EntityProperties[1][8])
+                    if (type == Model.EntityProperties[1][8])
                     {
-                        <option selected value="@status">@status</option>
+                        <option selected value="@type">@type</option>
                     }
                     else
                     {
-                        <option value="@status">@status</option>
+                        <option value="@type">@type</option>
                     }
                 }
             </select>
@@ -148,9 +148,16 @@
         <div class="form-group">
             <label asp-for="CompanyTypeDesc" class="text-torshia"></label><br>
             <select class="form-control maxw-270" asp-for="CompanyTypeDesc">
-                @foreach (var status in (List<string>)ViewData["CompanyTypeDesc"])
+                @foreach (var desc in (List<string>)ViewData["CompanyTypeDesc"])
                 {
-                    <option value="@status">@status</option>
+                    if (desc == Model.EntityProperties[1][8])
+                    {
+                        <option selected value="@desc">@desc</option>
+                    }
+                    else
+                    {
+                        <option value="@desc">@desc</option>
+                    }
                 }
             </select>
             <span asp-validation-for="CompanyTypeDesc" class="text-danger"></span>
@@ -232,5 +239,5 @@
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
         }
-    </script>    
+    </script>
 }

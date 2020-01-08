@@ -24,6 +24,15 @@
         </div>
 
         <div class="form-group">
+            <label asp-for="SubFundId" class="text-torshia"></label><br>
+            <input type="text"
+                   class="form-control maxw-270"
+                   asp-for="SubFundId"
+                   readonly>
+            <span asp-validation-for="SubFundId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
             <label asp-for="SubFundName" class="text-torshia"></label><br>
             <input type="text"
                    class="form-control maxw-270"
@@ -37,7 +46,14 @@
                 <option selected disabled>-- Choose Status --</option>
                 @foreach (var status in (List<string>)ViewData["SfStatus"])
                 {
-                    <option value="@status">@status</option>
+                    if (status == Model.EntityProperties[1][13])
+                    {
+                        <option selected value="@status">@status</option>
+                    }
+                    else
+                    {
+                        <option value="@status">@status</option>
+                    }
                 }
             </select>
             <span asp-validation-for="Status" class="text-danger"></span>
