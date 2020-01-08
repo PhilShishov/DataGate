@@ -234,6 +234,36 @@ namespace Pharus.Services.SubFunds
             }
         }
 
+        public List<string[]> GetSubFund_ShareClassesWithSelectedViewAndDate(
+                       List<string> preSelectedColumns,
+                       List<string> selectedColumns,
+                       DateTime? chosenDate,
+                       int id)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                // Prepare items for DB query with []
+
+                preSelectedColumns.AddRange(selectedColumns);
+                preSelectedColumns = preSelectedColumns.Select(c => String.Format("[{0}]", c)).ToList();
+
+                if (chosenDate == null)
+                {
+                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} from ActiveShareclassforSpecificSubFundAtDate('{this.defaultDate}', {id})";
+                }
+                else
+                {
+                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} from ActiveShareclassforSpecificSubFundAtDate('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                }
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
         public List<string[]> GetSubFund_FundContainer(DateTime? chosenDate, int id)
         {
             using (SqlConnection connection = new SqlConnection())
