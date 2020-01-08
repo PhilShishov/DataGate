@@ -325,7 +325,8 @@ namespace Pharus.Services.Funds
                                 string comment,
                                 string commentTitle)
         {
-            string query = "EXEC sp_modify_fund @f_id, @f_initialDate, @f_status, " +
+            string query = "EXEC sp_modify_fund " +
+                "@f_id, @f_initialDate, @f_status, " +
                 "@f_registrationNumber, @f_officialFundName, @f_shortFundName, " +
                 "@f_leiCode, @f_cssfCode, @f_faCode, @f_depCode, @f_taCode, " +
                 "@f_legalForm, @f_legalType, @f_legal_vehicle, @f_companyType, @f_tinNumber, " +
@@ -398,7 +399,8 @@ namespace Pharus.Services.Funds
                                 string leiCode,
                                 string regNumber)
         {
-            string query = "EXEC sp_new_fund @f_initialDate, @f_endDate, @f_status, " +
+            string query = "EXEC sp_new_fund " +
+                "@f_initialDate, @f_endDate, @f_status, " +
                 "@f_registrationNumber, @f_officialFundName, " +
                 "@f_leiCode, @f_cssfCode, @f_faCode, @f_depCode, @f_taCode, " +
                 "@f_legalForm, @f_legalType, @f_legal_vehicle, @f_companyType, @f_tinNumber";
