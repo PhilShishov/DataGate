@@ -7,44 +7,19 @@
 namespace Pharus.App.Models.BindingModels.SubFunds
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public class CreateSubFundBindingModel
+    public class CreateSubFundBindingModel : BaseCreateEntityBindingModel
     {
-        [Required(ErrorMessage = "Initial Date cannot be empty!")]
-        [Display(Name = "Initial Date")]
-        public DateTime InitialDate { get; set; }
-
-        [Display(Name = "End Date")]
-        public DateTime? EndDate { get; set; }
-
         [Required(ErrorMessage = "You must enter a value for the SubFund Name!")]
         [StringLength(200, ErrorMessage = "The SubFund Name must be no longer than 200 characters")]
         [RegularExpression(@"^[A-Z-0-9]+(\s[A-Z-0-9]+)*$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "Official SubFund Name")]
-        public string SubFundName { get; set; }
-
-        [Required]
-        [Display(Name = "Status")]
-        public string SfStatus { get; set; }
-
-        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
-        [Display(Name = "CSSF Code")]
-        public string CSSFCode { get; set; }
-
-        [Required(ErrorMessage = "Fund Admin Code cannot be empty!")]
-        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
-        [Display(Name = "Fund Admin Code")]
-        public string FACode { get; set; }
+        public string SubFundName { get; set; }       
 
         [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "Depository Bank Code")]
-        public string DBCode { get; set; }
-
-        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
-        [Display(Name = "Transfer Agent Code")]
-        public string TACode { get; set; }
+        public string DBCode { get; set; }      
 
         [Display(Name = "First Nav Date")]
         public DateTime? FirstNavDate { get; set; }
@@ -56,11 +31,7 @@ namespace Pharus.App.Models.BindingModels.SubFunds
         public DateTime? CSSFAuthDate { get; set; }
 
         [Display(Name = "Expiry Date")]
-        public DateTime? ExpiryDate { get; set; }
-
-        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
-        [Display(Name = "LEI Code")]
-        public string LEICode { get; set; }
+        public DateTime? ExpiryDate { get; set; }     
 
         [Display(Name = "Cesr Class")]
         public string CesrClass { get; set; }
@@ -117,7 +88,5 @@ namespace Pharus.App.Models.BindingModels.SubFunds
         [Required(ErrorMessage = "Please choose a fund container!")]
         [Display(Name = "Fund Container")]
         public string FundContainer { get; set; }
-
-        public List<string> ExistingSubFundNames { get; set; }
     }
 }

@@ -40,15 +40,15 @@
         </div>
 
         <div class="form-group">
-            <label asp-for="SfStatus" class="text-torshia"></label><br>
-            <select class="form-control maxw-270" asp-for="SfStatus">
+            <label asp-for="Status" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="Status">
                 <option selected disabled>-- Choose Status --</option>
                 @foreach (var status in (List<string>)ViewData["Status"])
                 {
                     <option value="@status">@status</option>
                 }
             </select>
-            <span asp-validation-for="SfStatus" class="text-danger"></span>
+            <span asp-validation-for="Status" class="text-danger"></span>
         </div>
 
         <div class="form-group">

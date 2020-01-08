@@ -29,8 +29,7 @@
 
         public string LoadFundFileToDisplay(
                                            int entityId,
-                                           string chosenDate,
-                                           int fileTypeId)
+                                           string chosenDate)
         {
             string filePath = string.Empty;
             SqlDataReader dataReader;
@@ -111,8 +110,7 @@
 
         public string LoadSubFundFileToDisplay(
                                         int entityId, 
-                                        string chosenDate, 
-                                        int fileTypeId)
+                                        string chosenDate)
         {
             throw new NotImplementedException();
         }
@@ -129,8 +127,7 @@
 
         public string LoadShareClassFileToDisplay(
                                         int entityId, 
-                                        string chosenDate, 
-                                        int fileTypeId)
+                                        string chosenDate)
         {
             throw new NotImplementedException();
         }

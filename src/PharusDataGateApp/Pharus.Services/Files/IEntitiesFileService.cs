@@ -6,8 +6,7 @@
     {
         string LoadFundFileToDisplay(
                             int entityId, 
-                            string chosenDate, 
-                            int fileTypeId);
+                            string chosenDate);
 
         void AddFileToSpecificFund(
                             string streamId,
@@ -18,8 +17,7 @@
 
         string LoadSubFundFileToDisplay(
                             int entityId,
-                            string chosenDate,
-                            int fileTypeId);
+                            string chosenDate);
 
         void AddFileToSpecificSubFund(
                             string streamId,
@@ -30,8 +28,7 @@
 
         string LoadShareClassFileToDisplay(
                             int entityId,
-                            string chosenDate,
-                            int fileTypeId);
+                            string chosenDate);
 
         void AddFileToSpecificShareClass(
                             string streamId,

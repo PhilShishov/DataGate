@@ -14,10 +14,10 @@
     using Pharus.Data;
     using Pharus.Utilities.App;
     using Pharus.App.Utilities;
+    using Pharus.Services.Files;
     using Pharus.Services.Funds.Contracts;
     using Pharus.App.Models.BindingModels.Funds;
     using Pharus.App.Models.ViewModels.Entities;
-    using Pharus.Services.Files;
 
     [Authorize]
     public class FundsController : Controller
@@ -279,7 +279,7 @@
 
             this.ViewData["FileTypes"] = this.fundsSelectListService.GetAllFundFileTypes();
 
-            HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
+            HttpContext.Session.SetString("entityId", Convert.ToString(entityId));         
 
             string fileName = GetFileNameFromFilePath(entityId, chosenDate);
 
@@ -420,6 +420,21 @@
         }
 
         [HttpPost]
+        public FileStream ReadPdfFile(SpecificEntityViewModel model)
+        {
+            FileStream fs = null;
+
+            var path = this.fundsFileService.LoadFundFileToDisplay(model.EntityId, model.ChosenDate);
+
+            if (this.HttpContext.Request.Form.ContainsKey("read_Pdf"))
+            {
+                fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+            }
+
+            return fs;
+        }
+
+        [HttpPost]
         public FileStreamResult ExtractExcelSubEntities(SpecificEntityViewModel model)
         {
             FileStreamResult fileStreamResult = null;
@@ -452,21 +467,6 @@
             }
 
             return fileStreamResult;
-        }
-
-        [HttpPost]
-        public FileStream ReadPdfFile(SpecificEntityViewModel model)
-        {
-            FileStream fs = null;
-
-            var path = this.fundsFileService.LoadFundFileToDisplay(model.EntityId, model.ChosenDate, );
-
-            if (this.HttpContext.Request.Form.ContainsKey("read_Pdf"))
-            {
-                fs = new FileStream(path, FileMode.Open, FileAccess.Read);
-            }
-
-            return fs;
         }
 
         [Authorize(Roles = "Admin")]
@@ -599,7 +599,7 @@
                 string fundName = model.FundName;
                 string cssfCode = model.CSSFCode;
                 int fStatusId = this.context.TbDomFStatus
-                    .Where(s => s.StFDesc == model.FStatus)
+                    .Where(s => s.StFDesc == model.Status)
                     .Select(s => s.StFId)
                     .FirstOrDefault();
                 int fLegalFormId = this.context.TbDomLegalForm
@@ -640,7 +640,7 @@
         private void SetModelValuesForSpecificView(SpecificEntityViewModel model)
         {
             var date = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-
+            
             model.Entity = this.fundsService.GetFundById(date, model.EntityId);
             model.EntitySubEntities = this.fundsService.GetFund_SubFunds(date, model.EntityId);
             model.SubEntitiesHeadersForColumnSelection = this.fundsService
@@ -676,9 +676,9 @@
             this.ViewData["CompanyTypeDesc"] = this.fundsSelectListService.GetAllTbDomCompanyDesc();
         }
 
-        private string GetFileNameFromFilePath(int entityId, string chosenDate, int fileTypeId)
+        private string GetFileNameFromFilePath(int entityId, string chosenDate)
         {
-            return this.fundsFileService.LoadFundFileToDisplay(entityId, chosenDate, fileTypeId).Split('\\').Last();
+            return this.fundsFileService.LoadFundFileToDisplay(entityId, chosenDate).Split('\\').Last();
         }
     }
 }
