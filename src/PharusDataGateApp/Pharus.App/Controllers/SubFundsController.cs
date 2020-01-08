@@ -407,16 +407,21 @@
             return this.View(model);
         }
 
-        [HttpPost]
+        [HttpPost("SubFunds/EditSubFund/{EntityId}/{ChosenDate}")]
         [Authorize(Roles = "Admin")]
-        public IActionResult EditSubFund(EditSubFundBindingModel model)
+        public IActionResult EditSubFund(EditSubFundBindingModel model, int entityId, string chosenDate)
         {
             string returnUrl = $"/SubFunds/All/";
 
-            SetViewDataValuesForSubFundSelectLists();
-
             if (!ModelState.IsValid)
             {
+                if (model.EntityProperties == null)
+                {
+                    var date = DateTime.Parse(chosenDate);
+                    model.EntityProperties = this.subFundsService.GetSubFundWithDateById(date, entityId);
+                    SetModelValuesForEditView(model);
+                    SetViewDataValuesForSubFundSelectLists();
+                }
                 return View(model ?? new EditSubFundBindingModel());
             }
 
@@ -460,10 +465,11 @@
                     .Select(ge => ge.GeId)
                     .FirstOrDefault();
 
-                string currency = this.context.TbDomIsoCurrency
-                   .Where(c => c.IsoCcyDesc == model.CurrencyCode)
-                   .Select(c => c.IsoCcyCode)
-                   .FirstOrDefault();
+                string currency = "EUR";
+                   // this.context.TbDomIsoCurrency
+                   //.Where(c => c.IsoCcyDesc == model.CurrencyCode)
+                   //.Select(c => c.IsoCcyCode)
+                   //.FirstOrDefault();
 
                 int? frequencyId = this.context.TbDomNavFrequency
                    .Where(f => f.NfDesc == model.NavFrequency)

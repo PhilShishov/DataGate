@@ -355,6 +355,7 @@ namespace Pharus.Services.SubFunds
                         new SqlParameter("@sf_id", SqlDbType.Int) { Value = sfId},
                         new SqlParameter("@sf_initialDate", SqlDbType.NVarChar, 100) { Value = initialDate},
                         new SqlParameter("@sf_officialSubFundName", SqlDbType.NVarChar, 100) { Value = subFundName },
+                        new SqlParameter("@sf_shortSubFundName", SqlDbType.NVarChar, 100) { Value = subFundName },
                         new SqlParameter("@sf_cssfCode", SqlDbType.NVarChar, 100) { Value = cssfCode },
                         new SqlParameter("@sf_faCode", SqlDbType.NVarChar, 100) { Value = faCode },
                         new SqlParameter("@sf_depCode", SqlDbType.NVarChar, 100) { Value = depCode },
@@ -391,6 +392,7 @@ namespace Pharus.Services.SubFunds
                         if (parameter.Value == null)
                         {
                             parameter.Value = DBNull.Value;
+                            
                         }
                     }
 
