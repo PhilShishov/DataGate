@@ -771,7 +771,7 @@
 
         private void SetViewDataValuesForSubFundSelectLists()
         {
-            this.ViewData["SfStatus"] = this.subfundsSelectListService.GetAllTbDomSFStatus();
+            this.ViewData["Status"] = this.subfundsSelectListService.GetAllTbDomSFStatus();
             this.ViewData["CesrClass"] = this.subfundsSelectListService.GetAllTbDomCesrClass();
             this.ViewData["GeographicalFocus"] = this.subfundsSelectListService.GetAllTbDomGeographicalFocus();
             this.ViewData["GlobalExposure"] = this.subfundsSelectListService.GetAllTbDomGlobalExposure();

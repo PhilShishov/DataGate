@@ -49,7 +49,7 @@
             <label asp-for="FStatus" class="text-torshia"></label><br>
             <select class="form-control maxw-270" asp-for="FStatus">
                 <option selected disabled>-- Choose Status --</option>
-                @foreach (var status in (List<string>)ViewData["FStatus"])
+                @foreach (var status in (List<string>)ViewData["Status"])
                 {
                     <option value="@status">@status</option>
                 }

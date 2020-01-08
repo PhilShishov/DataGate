@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h4>Edit SubFund @Model.EntityProperties[1][3]</h4>
+<h4>Edit SubFund @Model.SubFundName</h4>
 
 <form asp-action="EditSubFund"
       method="post"
@@ -44,7 +44,7 @@
             <label asp-for="Status" class="text-torshia"></label><br>
             <select class="form-control maxw-270" asp-for="Status">
                 <option selected disabled>-- Choose Status --</option>
-                @foreach (var status in (List<string>)ViewData["SfStatus"])
+                @foreach (var status in (List<string>)ViewData["Status"])
                 {
                     if (status == Model.EntityProperties[1][13])
                     {
@@ -296,186 +296,204 @@
                         <option value="@market">@market</option>
                     }
                 }
-                </select>
-                <span asp-validation-for="DerivMarket" class="text-danger"></span>
-            </div>
-
-            <div class="form-group" id="derivPurpose" hidden>
-                <label asp-for="DerivPurpose"
-                       class="text-torshia"></label><br>
-                <select class="form-control maxw-270"
-                        asp-for="DerivPurpose">
-                    <option selected disabled>-- Choose Purpose --</option>
-                    @foreach (var purpose in (List<string>)ViewData["DerivPurpose"])
-                    {
-                        if (purpose == Model.EntityProperties[1][24])
-                        {
-                            <option selected value="@purpose">@purpose</option>
-                        }
-                        else
-                        {
-                            <option value="@purpose">@purpose</option>
-                        }
-                    }
-                </select>
-                <span asp-validation-for="DerivPurpose" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="PrincipalAssetClass" class="text-torshia"></label><br>
-                <select class="form-control maxw-270" asp-for="PrincipalAssetClass">
-                    <option selected disabled>-- Choose Class --</option>
-                    @foreach (var pac in (List<string>)ViewData["PrincipalAssetClass"])
-                    {
-                        if (pac == Model.EntityProperties[1][27])
-                        {
-                            <option selected value="@pac">@pac</option>
-                        }
-                        else
-                        {
-                            <option value="@pac">@pac</option>
-                        }
-                    }
-                </select>
-                <span asp-validation-for="PrincipalAssetClass" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="TypeOfMarket" class="text-torshia"></label><br>
-                <select class="form-control maxw-270" asp-for="TypeOfMarket">
-                    <option selected disabled>-- Choose Market --</option>
-                    @foreach (var type in (List<string>)ViewData["TypeOfMarket"])
-                    {
-                        if (type == Model.EntityProperties[1][28])
-                        {
-                            <option selected value="@type">@type</option>
-                        }
-                        else
-                        {
-                            <option value="@type">@type</option>
-                        }
-                    }
-                </select>
-                <span asp-validation-for="TypeOfMarket" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="PrincipalInvestmentStrategy" class="text-torshia"></label><br>
-                <select class="form-control maxw-270" asp-for="PrincipalInvestmentStrategy">
-                    <option selected disabled>-- Choose Strategy --</option>
-                    @foreach (var strategy in (List<string>)ViewData["PrincipalInvestmentStrategy"])
-                    {
-                        if (strategy == Model.EntityProperties[1][29])
-                        {
-                            <option selected value="@strategy">@strategy</option>
-                        }
-                        else
-                        {
-                            <option value="@strategy">@strategy</option>
-                        }
-                    }
-                </select>
-                <span asp-validation-for="PrincipalInvestmentStrategy" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="ClearingCode" class="text-torshia"></label><br>
-                <input type="text"
-                       class="form-control maxw-270"
-                       asp-for="ClearingCode"
-                       id="leiCodeInput">
-                <span asp-validation-for="ClearingCode" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="SfCatMorningStar" class="text-torshia"></label><br>
-                <select class="form-control maxw-270" asp-for="SfCatMorningStar">
-                    <option selected disabled>-- Choose Category --</option>
-                    @foreach (var ms in (List<string>)ViewData["SfCatMorningStar"])
-                    {
-                        if (ms == Model.EntityProperties[1][31])
-                        {
-                            <option selected value="@ms">@ms</option>
-                        }
-                        else
-                        {
-                            <option value="@ms">@ms</option>
-                        }
-                    }
-                </select>
-                <span asp-validation-for="SfCatMorningStar" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="SfCatSix" class="text-torshia"></label><br>
-                <select class="form-control maxw-270" asp-for="SfCatSix">
-                    <option selected disabled>-- Choose Category --</option>
-                    @foreach (var six in (List<string>)ViewData["SfCatSix"])
-                    {
-                        if (six == Model.EntityProperties[1][32])
-                        {
-                            <option selected value="@six">@six</option>
-                        }
-                        else
-                        {
-                            <option value="@six">@six</option>
-                        }
-                    }
-                </select>
-                <span asp-validation-for="SfCatSix" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="SfCatBloomberg" class="text-torshia"></label><br>
-                <select class="form-control maxw-270" asp-for="SfCatBloomberg">
-                    <option selected disabled>-- Choose Category --</option>
-                    @foreach (var bg in (List<string>)ViewData["SfCatBloomberg"])
-                    {
-                        if (bg == Model.EntityProperties[1][33])
-                        {
-                            <option selected value="@bg">@bg</option>
-                        }
-                        else
-                        {
-                            <option value="@bg">@bg</option>
-                        }
-                    }
-                </select>
-                <span asp-validation-for="SfCatBloomberg" class="text-danger"></span>
-            </div>
+            </select>
+            <span asp-validation-for="DerivMarket" class="text-danger"></span>
         </div>
 
-        <div class="button-holder mt-4">
-            <button type="submit"
-                    class="btn bg-pharus text-white"
-                    id="confirmEditBtn"
-                    name="update_button"
-                    style="margin-right:40px">
-                Update SubFund
-            </button>
+        <div class="form-group" id="derivPurpose" hidden>
+            <label asp-for="DerivPurpose"
+                   class="text-torshia"></label><br>
+            <select class="form-control maxw-270"
+                    asp-for="DerivPurpose">
+                <option selected disabled>-- Choose Purpose --</option>
+                @foreach (var purpose in (List<string>)ViewData["DerivPurpose"])
+                {
+                    if (purpose == Model.EntityProperties[1][24])
+                    {
+                        <option selected value="@purpose">@purpose</option>
+                    }
+                    else
+                    {
+                        <option value="@purpose">@purpose</option>
+                    }
+                }
+            </select>
+            <span asp-validation-for="DerivPurpose" class="text-danger"></span>
         </div>
-    </form>
 
-    <div>
-        <a asp-action="All">Back to List</a>
+        <div class="form-group">
+            <label asp-for="PrincipalAssetClass" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="PrincipalAssetClass">
+                <option selected disabled>-- Choose Class --</option>
+                @foreach (var pac in (List<string>)ViewData["PrincipalAssetClass"])
+                {
+                    if (pac == Model.EntityProperties[1][27])
+                    {
+                        <option selected value="@pac">@pac</option>
+                    }
+                    else
+                    {
+                        <option value="@pac">@pac</option>
+                    }
+                }
+            </select>
+            <span asp-validation-for="PrincipalAssetClass" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="TypeOfMarket" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="TypeOfMarket">
+                <option selected disabled>-- Choose Market --</option>
+                @foreach (var type in (List<string>)ViewData["TypeOfMarket"])
+                {
+                    if (type == Model.EntityProperties[1][28])
+                    {
+                        <option selected value="@type">@type</option>
+                    }
+                    else
+                    {
+                        <option value="@type">@type</option>
+                    }
+                }
+            </select>
+            <span asp-validation-for="TypeOfMarket" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="PrincipalInvestmentStrategy" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="PrincipalInvestmentStrategy">
+                <option selected disabled>-- Choose Strategy --</option>
+                @foreach (var strategy in (List<string>)ViewData["PrincipalInvestmentStrategy"])
+                {
+                    if (strategy == Model.EntityProperties[1][29])
+                    {
+                        <option selected value="@strategy">@strategy</option>
+                    }
+                    else
+                    {
+                        <option value="@strategy">@strategy</option>
+                    }
+                }
+            </select>
+            <span asp-validation-for="PrincipalInvestmentStrategy" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ClearingCode" class="text-torshia"></label><br>
+            <input type="text"
+                   class="form-control maxw-270"
+                   asp-for="ClearingCode"
+                   id="leiCodeInput">
+            <span asp-validation-for="ClearingCode" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="SfCatMorningStar" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="SfCatMorningStar">
+                <option selected disabled>-- Choose Category --</option>
+                @foreach (var ms in (List<string>)ViewData["SfCatMorningStar"])
+                {
+                    if (ms == Model.EntityProperties[1][31])
+                    {
+                        <option selected value="@ms">@ms</option>
+                    }
+                    else
+                    {
+                        <option value="@ms">@ms</option>
+                    }
+                }
+            </select>
+            <span asp-validation-for="SfCatMorningStar" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="SfCatSix" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="SfCatSix">
+                <option selected disabled>-- Choose Category --</option>
+                @foreach (var six in (List<string>)ViewData["SfCatSix"])
+                {
+                    if (six == Model.EntityProperties[1][32])
+                    {
+                        <option selected value="@six">@six</option>
+                    }
+                    else
+                    {
+                        <option value="@six">@six</option>
+                    }
+                }
+            </select>
+            <span asp-validation-for="SfCatSix" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="SfCatBloomberg" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="SfCatBloomberg">
+                <option selected disabled>-- Choose Category --</option>
+                @foreach (var bg in (List<string>)ViewData["SfCatBloomberg"])
+                {
+                    if (bg == Model.EntityProperties[1][33])
+                    {
+                        <option selected value="@bg">@bg</option>
+                    }
+                    else
+                    {
+                        <option value="@bg">@bg</option>
+                    }
+                }
+            </select>
+            <span asp-validation-for="SfCatBloomberg" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CommentTitle" class="text-torshia"></label><br>
+            <input type="text"
+                   class="form-control maxw-270"
+                   asp-for="CommentTitle"
+                   id="regNumberInput">
+            <span asp-validation-for="CommentTitle" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CommentArea" class="text-torshia"></label><br>
+            <textarea class="form-control maxw-270"
+                      asp-for="CommentArea"
+                      id="regNumberInput">
+            </textarea>
+            <span asp-validation-for="CommentArea" class="text-danger"></span>
+        </div>
     </div>
 
-    @section Scripts{
-        <script src="~/js/formatInput.js"></script>
-        <script src="~/js/confirmCreate.js"></script>
-        <script src="~/js/getDerivatives.js"></script>
+    <div class="button-holder mt-4">
+        <button type="submit"
+                class="btn bg-pharus text-white"
+                id="confirmEditBtn"
+                name="update_button"
+                style="margin-right:40px">
+            Update SubFund
+        </button>
+    </div>
+</form>
 
-        <script>
-            window.onload = () => {
-                manageSideNavBar();
-                manageDropdowns();
-                formatInput();
-                getDerivatives();
-                confirmCreate();
-            }
+<div>
+    <a asp-action="All">Back to List</a>
+</div>
 
-            if (window.history.replaceState) {
-                window.history.replaceState(null, null, window.location.href);
-            }
-        </script>
-    }
+@section Scripts{
+    <script src="~/js/formatInput.js"></script>
+    <script src="~/js/confirmCreate.js"></script>
+    <script src="~/js/getDerivatives.js"></script>
+
+    <script>
+        window.onload = () => {
+            manageSideNavBar();
+            manageDropdowns();
+            formatInput();
+            getDerivatives();
+            confirmCreate();
+        }
+
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    </script>
+}

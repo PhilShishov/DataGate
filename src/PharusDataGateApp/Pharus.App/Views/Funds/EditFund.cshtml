@@ -50,7 +50,7 @@
         <div class="form-group">
             <label asp-for="Status" class="text-torshia"></label><br>
             <select class="form-control maxw-270" asp-for="Status">
-                @foreach (var status in (List<string>)ViewData["FStatus"])
+                @foreach (var status in (List<string>)ViewData["Status"])
                 {
                     if (status == Model.EntityProperties[1][5])
                     {

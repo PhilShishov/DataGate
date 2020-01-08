@@ -19,7 +19,7 @@ namespace Pharus.App.Models.BindingModels
         [Display(Name = "Initial Date")]
         public DateTime InitialDate { get; set; }
 
-        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
+        [RegularExpression(@"^[A-Z0-9_]+$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "CSSF Code")]
         public string CSSFCode { get; set; }
 
@@ -36,7 +36,7 @@ namespace Pharus.App.Models.BindingModels
         [Display(Name = "Transfer Agent Code")]
         public string TACode { get; set; }
 
-        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
+        [RegularExpression(@"^[A-Z0-9_]+$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "LEI Code")]
         public string LEICode { get; set; }
 
