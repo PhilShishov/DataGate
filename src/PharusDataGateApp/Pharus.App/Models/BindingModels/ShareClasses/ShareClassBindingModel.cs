@@ -8,7 +8,7 @@ namespace Pharus.App.Models.BindingModels.ShareClasses
 {
     using Microsoft.AspNetCore.Mvc.Rendering;
 
-    public class ShareClassBindingModel : BaseEntityBindingModel
+    public class ShareClassBindingModel : BaseEditEntityBindingModel
     {
         public SelectList InvestorType { get; set; }
 

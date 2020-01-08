@@ -360,10 +360,9 @@
 </div>
 
 @section Scripts{
-
-    <script src="~/js/getDerivatives.js"></script>
     <script src="~/js/formatInput.js"></script>
     <script src="~/js/confirmCreate.js"></script>
+    <script src="~/js/getDerivatives.js"></script>
 
     <script>
         window.onload = () => {
@@ -373,11 +372,9 @@
             getDerivatives();
             confirmCreate();
         }
-    </script>
 
-    <script>
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
         }
-    </script>
+    </script>    
 }

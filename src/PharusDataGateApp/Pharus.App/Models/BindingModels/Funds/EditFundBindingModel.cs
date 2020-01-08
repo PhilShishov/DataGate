@@ -7,17 +7,11 @@
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace Pharus.App.Models.BindingModels.Funds
 {
-    using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public class EditFundBindingModel : BaseEntityBindingModel
+    public class EditFundBindingModel : BaseEditEntityBindingModel
     {
-        [Required(ErrorMessage = "Initial Date cannot be null")]
-        [Display(Name = "Initial Date")]
-        public DateTime InitialDate { get; set; }   
-
-        [Display(Name = "FUND ID PHARUS")]
+        [Display(Name = "Fund Id Pharus")]
         public int FundId { get; set; }
 
         [Required(ErrorMessage = "You must enter a value for the Fund Name!")]
@@ -25,14 +19,6 @@ namespace Pharus.App.Models.BindingModels.Funds
         [RegularExpression(@"^[A-Z-0-9]+(\s[A-Z-0-9]+)*$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "Fund Name")]
         public string FundName { get; set; }
-
-        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
-        [Display(Name = "CSSF Code")]
-        public string CSSFCode { get; set; }
-
-        [Required]
-        [Display(Name = "Status")]
-        public string FStatus { get; set; }
 
         [Required]
         [Display(Name = "Legal Form")]
@@ -47,17 +33,8 @@ namespace Pharus.App.Models.BindingModels.Funds
         public string LegalType { get; set; }
 
         [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
-        [Display(Name = "Fund Admin Code")]
-        //[Required]
-        public string FACode { get; set; }
-
-        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "Dep. Code")]
         public string DEPCode { get; set; }
-
-        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
-        [Display(Name = "Transfer Agent Code")]
-        public string TACode { get; set; }
 
         [Required]
         [Display(Name = "Company Description")]
@@ -68,20 +45,7 @@ namespace Pharus.App.Models.BindingModels.Funds
         public string TinNumber { get; set; }
 
         [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
-        [Display(Name = "LEI Code")]
-        public string LEICode { get; set; }
-
-        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "Reg. Number")]
         public string RegNumber { get; set; }
-
-        [Required]
-        [Display(Name = "Comment Title")]
-        public string CommentTitle { get; set; }
-
-        [Display(Name = "Comment Description")]
-        public string CommentArea { get; set; }
-
-        public List<string> ExistingFundNames { get; set; }
     }
 }

@@ -513,7 +513,7 @@
                 string fundName = model.FundName;
                 string cssfCode = model.CSSFCode;
                 int fStatusId = this.context.TbDomFStatus
-                    .Where(s => s.StFDesc == model.FStatus)
+                    .Where(s => s.StFDesc == model.Status)
                     .Select(s => s.StFId)
                     .FirstOrDefault();
                 int fLegalFormId = this.context.TbDomLegalForm
