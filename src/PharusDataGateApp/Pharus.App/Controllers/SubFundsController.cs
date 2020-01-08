@@ -312,7 +312,7 @@
             return this.Json(modifiedData);
         }
 
-        [HttpPost("SubFunds/ViewEntitySE/{EntityId}")]
+        [HttpPost("SubFunds/ViewEntitySE/{EntityId}/{ChosenDate}")]
         public IActionResult ViewEntitySE(SpecificEntityViewModel model)
         {
             SetModelValuesForSpecificView(model);
@@ -804,13 +804,18 @@
 
             model.Entity = this.subFundsService.GetSubFundById(date, model.EntityId);
             model.EntitySubEntities = this.subFundsService.GetSubFund_ShareClasses(date, model.EntityId);
-            model.SubEntitiesHeadersForColumnSelection = this.subFundsService.GetAllActiveSubFunds().Take(1).ToList();
+            model.SubEntitiesHeadersForColumnSelection = this.subFundsService
+                                                                .GetAllActiveSubFunds()
+                                                                .Take(1)
+                                                                .ToList();
             model.FileNameToDisplay = GetFileNameFromFilePath(model.EntityId, model.ChosenDate);
             model.EntityTimeline = this.subFundsService.GetSubFundTimeline(model.EntityId);
             model.EntityDocuments = this.subFundsService.GetAllSubFundDocumens(model.EntityId);
 
             model.StartConnection = model.Entity[1][0];
             model.EndConnection = model.Entity[1][1];
+
+            this.ViewData["FileTypes"] = this.subfundsSelectListService.GetAllSubFundFileTypes();
         }
 
         private static void SetZeroValuesToNull(List<int?> nullIntegerParameters, int? cesrClassId, int? geoFocusId, int? glExpId, int? frequencyId, int? valuationId, int? calculationId, int? derivMarketId, int? derivPurposeId, int? principalAssetId, int? typeMarketId, int? principalInvStrId, int? catMorningStarId, int? catSixId, int? catBloombergId)

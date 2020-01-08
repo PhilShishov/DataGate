@@ -334,8 +334,6 @@
                 isInSelectionMode = true;
             }
 
-            this.ViewData["FileTypes"] = this.fundsSelectListService.GetAllFundFileTypes();
-
             if (model.Command.Equals("Update Table") || model.Command.Equals("Apply"))
             {
                 model.Entity = this.fundsService
@@ -653,6 +651,8 @@
 
             model.StartConnection = model.Entity[1][0];
             model.EndConnection = model.Entity[1][1];
+
+            this.ViewData["FileTypes"] = this.fundsSelectListService.GetAllFundFileTypes();
         }
 
         private static void SetModelValuesForEditView(EditFundBindingModel model)
