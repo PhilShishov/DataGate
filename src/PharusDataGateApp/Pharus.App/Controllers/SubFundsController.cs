@@ -260,7 +260,10 @@
                 EntityId = entityId,
                 Entity = this.subFundsService.GetSubFundById(entityId),
                 EntitySubEntities = this.subFundsService.GetSubFund_ShareClasses(date, entityId),
-                SubEntitiesHeadersForColumnSelection = this.subFundsService.GetAllActiveSubFunds().Take(1).ToList(),
+                SubEntitiesHeadersForColumnSelection = this.subFundsService
+                                                                    .GetSubFund_ShareClasses(date, entityId)
+                                                                    .Take(1)
+                                                                    .ToList(),
                 EntityTimeline = this.subFundsService.GetSubFundTimeline(entityId),
                 EntityDocuments = this.subFundsService.GetAllSubFundDocumens(entityId),
                 BaseEntityName = this.subFundsService.GetSubFund_FundContainer(date, entityId)[1][1],
@@ -326,7 +329,7 @@
 
             var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
-            if (model.Command.Equals("Update Table"))
+            if (model.Command.Equals("Update Table") || model.Command.Equals("Apply"))
             {
                 model.Entity = this.subFundsService
                       .GetSubFundById(chosenDate, model.EntityId);
