@@ -10,7 +10,7 @@ namespace Pharus.App.Models.BindingModels.SubFunds
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public class CreateSubFundBindingModel : BaseEntityBindingModel
+    public class CreateSubFundBindingModel
     {
         [Required(ErrorMessage = "Initial Date cannot be empty!")]
         [Display(Name = "Initial Date")]

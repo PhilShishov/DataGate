@@ -6,130 +6,331 @@
 
 <h4>Edit SubFund @Model.EntityProperties[1][3]</h4>
 
-<form asp-action="EditSubFund" method="post" class="d-inline">
-    <div class="d-inline">
-        @for (int row = 1; row < Model.EntityProperties.Count; row++)
-        {
-            @for (int col = 0; col < Model.EntityProperties[row].Length; col++)
-            {
-                <div>
-                    @if (Model.EntityProperties[0][col] == "DERIV. MARKET")
-                    {
-                        <label class="control-label text-secondary" id="derivMarketLabel" hidden>
-                            @Model.EntityProperties[0][col]
-                        </label>
-                    }
+<form asp-action="EditSubFund"
+      method="post"
+      class="d-inline">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                    else if (Model.EntityProperties[0][col] == "DERIV. PURPOSE")
-                    {
-                        <label class="control-label text-secondary" id="derivPurposeLabel" hidden>
-                            @Model.EntityProperties[0][col]
-                        </label>
-                    }
+    <div class="d-inline"
+         id="createForm">
 
-                    else
-                    {
-                        <label class="control-label text-secondary">
-                            @Model.EntityProperties[0][col]
-                        </label>
-                    }
+        <div class="form-group">
+            <label asp-for="InitialDate" class="text-torshia"></label><br>
+            <input asp-for="InitialDate"
+                   type="date"
+                   min="2018-01-01" max=@DateTime.Today.ToString("yyyy-MM-dd")
+                   class="form-control maxw-270">
+            <span asp-validation-for="InitialDate" class="text-danger"></span>
+        </div>
 
-                    @if (Model.EntityProperties[0][col] == "STATUS")
-                    {
-                        <select asp-items="@Model.SfStatus" class="form-control maxw-270"></select>
-                    }
+        <div class="form-group">
+            <label asp-for="SubFundName" class="text-torshia"></label><br>
+            <input type="text"
+                   class="form-control maxw-270"
+                   asp-for="SubFundName">
+            <span asp-validation-for="SubFundName" class="text-danger"></span>
+        </div>
 
-                    else if (Model.EntityProperties[0][col] == "CESR CLASS")
-                    {
-                        <select asp-items="@Model.CesrClass" class="form-control maxw-270"></select>
-                    }
+        <div class="form-group">
+            <label asp-for="Status" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="Status">
+                <option selected disabled>-- Choose Status --</option>
+                @foreach (var status in (List<string>)ViewData["SfStatus"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="Status" class="text-danger"></span>
+        </div>
 
-                    else if (Model.EntityProperties[0][col] == "GEO FOCUS")
-                    {
-                        <select asp-items="@Model.GeographicalFocus" class="form-control maxw-270"></select>
-                    }
+        <div class="form-group">
+            <label asp-for="CSSFCode" class="text-torshia"></label><br>
+            <input type="text"
+                   class="form-control maxw-270"
+                   asp-for="CSSFCode">
+            <span asp-validation-for="CSSFCode" class="text-danger"></span>
+        </div>
 
-                    else if (Model.EntityProperties[0][col] == "GLOBAL EXPOSURE")
-                    {
-                        <select asp-items="@Model.GlobalExposure" class="form-control maxw-270"></select>
-                    }
+        <div class="form-group">
+            <label asp-for="FACode" class="text-torshia"></label><br>
+            <input type="text"
+                   class="form-control maxw-270"
+                   asp-for="FACode"
+                   id="faCodeInput">
+            <span asp-validation-for="FACode" class="text-danger"></span>
+        </div>
 
-                    else if (Model.EntityProperties[0][col] == "CURRENCY")
-                    {
-                        <select asp-items="@Model.CurrencyCode" class="form-control maxw-270"></select>
-                    }
-                    else if (Model.EntityProperties[0][col] == "FREQUENCY")
-                    {
-                        <select asp-items="@Model.Frequency" class="form-control maxw-270"></select>
-                    }
-                    else if (Model.EntityProperties[0][col] == "VALUATION DATE")
-                    {
-                        <select asp-items="@Model.ValuationDate" class="form-control maxw-270"></select>
-                    }
+        <div class="form-group">
+            <label asp-for="DBCode" class="text-torshia"></label><br>
+            <input type="text"
+                   class="form-control maxw-270"
+                   asp-for="DBCode"
+                   id="depCodeInput">
+            <span asp-validation-for="DBCode" class="text-danger"></span>
+        </div>
 
-                    else if (Model.EntityProperties[0][col] == "CALCULATION DATE")
-                    {
-                        <select asp-items="@Model.CalculationDate" class="form-control maxw-270"></select>
-                    }
+        <div class="form-group">
+            <label asp-for="TACode" class="text-torshia"></label><br>
+            <input type="text"
+                   class="form-control maxw-270"
+                   asp-for="TACode"
+                   id="taCodeInput">
+            <span asp-validation-for="TACode" class="text-danger"></span>
+        </div>
 
-                    else if (Model.EntityProperties[0][col] == "DERIVATIVES")
-                    {
-                        <select id="derivatives" class="form-control maxw-270" onchange="getDerivatives()">
-                            <option value="No">No</option>
-                            <option value="Yes">Yes</option>
-                        </select>
-                    }
+        <div class="form-group">
+            <label asp-for="FirstNavDate" class="text-torshia"></label><br>
+            <input asp-for="FirstNavDate"
+                   type="date"
+                   class="form-control maxw-270">
+            <span asp-validation-for="FirstNavDate" class="text-danger"></span>
+        </div>
 
-                    else if (Model.EntityProperties[0][col] == "DERIV. MARKET")
-                    {
-                        <select asp-items="@Model.DerivMarket" id="derivMarket" class="form-control maxw-270" hidden></select>
-                    }
-                    else if (Model.EntityProperties[0][col] == "DERIV. PURPOSE")
-                    {
-                        <select asp-items="@Model.DerivPurpose" id="derivPurpose" class="form-control maxw-270" hidden></select>
-                    }
-                    else if (Model.EntityProperties[0][col] == "PRINCIPAL ASSET CLASS")
-                    {
-                        <select asp-items="@Model.PrincipalAssetClass" class="form-control maxw-270"></select>
-                    }
-                    else if (Model.EntityProperties[0][col] == "MARKET TYPE")
-                    {
-                        <select asp-items="@Model.TypeOfMarket" class="form-control maxw-270"></select>
-                    }
-                    else if (Model.EntityProperties[0][col] == "PRINCIPAL INVESTMENT STRATEGY")
-                    {
-                        <select asp-items="@Model.PrincipalInvestmentStrategy" class="form-control maxw-270"></select>
-                    }
-                    else if (Model.EntityProperties[0][col] == "MORNINGSTAR CATEGORY")
-                    {
-                        <select asp-items="@Model.SfCatMorningStar" class="form-control maxw-270"></select>
-                    }
-                    else if (Model.EntityProperties[0][col] == "SIX CATEGORY")
-                    {
-                        <select asp-items="@Model.SfCatSix" class="form-control maxw-270"></select>
-                    }
-                    else if (Model.EntityProperties[0][col] == "BLOOMBERG CATEGORY")
-                    {
-                        <select asp-items="@Model.SfCatBloomberg" class="form-control maxw-270"></select>
-                    }
-                    else
-                    {
-                        <input type="text"
-                               class="form-control maxw-270"
-                               asp-for="@Model.EntityProperties[row][col]" />
-                    }
-                </div>
-            }
-        }
+        <div class="form-group">
+            <label asp-for="LastNavDate" class="text-torshia"></label><br>
+            <input asp-for="LastNavDate"
+                   type="date"
+                   class="form-control maxw-270">
+            <span asp-validation-for="LastNavDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CSSFAuthDate" class="text-torshia"></label><br>
+            <input asp-for="CSSFAuthDate"
+                   type="date"
+                   class="form-control maxw-270">
+            <span asp-validation-for="CSSFAuthDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ExpiryDate" class="text-torshia"></label><br>
+            <input asp-for="ExpiryDate"
+                   type="date"
+                   class="form-control maxw-270">
+            <span asp-validation-for="ExpiryDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="LEICode" class="text-torshia"></label><br>
+            <input type="text"
+                   class="form-control maxw-270"
+                   asp-for="LEICode"
+                   id="leiCodeInput">
+            <span asp-validation-for="LEICode" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CesrClass" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="CesrClass">
+                <option selected disabled>-- Choose Class --</option>
+                @foreach (var status in (List<string>)ViewData["CesrClass"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="CesrClass" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="GeographicalFocus" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="GeographicalFocus">
+                <option selected disabled>-- Choose GeoFocus --</option>
+                @foreach (var status in (List<string>)ViewData["GeographicalFocus"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="GeographicalFocus" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="GlobalExposure" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="GlobalExposure">
+                <option selected disabled>-- Choose Exposure --</option>
+                @foreach (var status in (List<string>)ViewData["GlobalExposure"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="GlobalExposure" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CurrencyCode" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="CurrencyCode">
+                <option selected disabled>-- Choose Currency --</option>
+                @foreach (var status in (List<string>)ViewData["CurrencyCode"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="CurrencyCode" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="NavFrequency" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="NavFrequency">
+                <option selected disabled>-- Choose Frequency --</option>
+                @foreach (var status in (List<string>)ViewData["NavFrequency"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="NavFrequency" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ValuationDate" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="ValuationDate">
+                <option selected disabled>-- Choose Valuation --</option>
+                @foreach (var status in (List<string>)ViewData["ValuationDate"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="ValuationDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CalculationDate" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="CalculationDate">
+                <option selected disabled>-- Choose Calculation --</option>
+                @foreach (var status in (List<string>)ViewData["CalculationDate"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="CalculationDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Derivatives" class="text-torshia"></label><br>
+            <select id="derivatives"
+                    class="form-control maxw-270"
+                    asp-for="Derivatives">
+                <option value="No">No</option>
+                <option value="Yes">Yes</option>
+            </select>
+            <span asp-validation-for="Derivatives" class="text-danger"></span>
+        </div>
+
+        <div class="form-group" id="derivMarket" hidden>
+            <label asp-for="DerivMarket"
+                   class="text-torshia"></label><br>
+            <select class="form-control maxw-270"
+                    asp-for="DerivMarket">
+                <option selected disabled>-- Choose Market --</option>
+                @foreach (var status in (List<string>)ViewData["DerivMarket"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="DerivMarket" class="text-danger"></span>
+        </div>
+
+        <div class="form-group" id="derivPurpose" hidden>
+            <label asp-for="DerivPurpose"
+                   class="text-torshia"></label><br>
+            <select class="form-control maxw-270"
+                    asp-for="DerivPurpose">
+                <option selected disabled>-- Choose Purpose --</option>
+                @foreach (var status in (List<string>)ViewData["DerivPurpose"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="DerivPurpose" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="PrincipalAssetClass" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="PrincipalAssetClass">
+                <option selected disabled>-- Choose Class --</option>
+                @foreach (var status in (List<string>)ViewData["PrincipalAssetClass"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="PrincipalAssetClass" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="TypeOfMarket" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="TypeOfMarket">
+                <option selected disabled>-- Choose Market --</option>
+                @foreach (var status in (List<string>)ViewData["TypeOfMarket"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="TypeOfMarket" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="PrincipalInvestmentStrategy" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="PrincipalInvestmentStrategy">
+                <option selected disabled>-- Choose Strategy --</option>
+                @foreach (var status in (List<string>)ViewData["PrincipalInvestmentStrategy"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="PrincipalInvestmentStrategy" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ClearingCode" class="text-torshia"></label><br>
+            <input type="text"
+                   class="form-control maxw-270"
+                   asp-for="ClearingCode"
+                   id="leiCodeInput">
+            <span asp-validation-for="ClearingCode" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="SfCatMorningStar" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="SfCatMorningStar">
+                <option selected disabled>-- Choose Category --</option>
+                @foreach (var status in (List<string>)ViewData["SfCatMorningStar"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="SfCatMorningStar" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="SfCatSix" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="SfCatSix">
+                <option selected disabled>-- Choose Category --</option>
+                @foreach (var status in (List<string>)ViewData["SfCatSix"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="SfCatSix" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="SfCatBloomberg" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="SfCatBloomberg">
+                <option selected disabled>-- Choose Category --</option>
+                @foreach (var status in (List<string>)ViewData["SfCatBloomberg"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="SfCatBloomberg" class="text-danger"></span>
+        </div>
     </div>
 
     <div class="button-holder mt-4">
         <button type="submit"
                 class="btn bg-pharus text-white"
+                id="confirmEditBtn"
                 name="update_button"
-                style="margin-right:40px"
-                onclick="return confirm('Are you sure you want to update this?')">
-            Update Fund
+                style="margin-right:40px">
+            Update SubFund
         </button>
     </div>
 </form>
@@ -137,3 +338,23 @@
 <div>
     <a asp-action="All">Back to List</a>
 </div>
+
+@section Scripts{
+    <script src="~/js/formatInput.js"></script>
+    <script src="~/js/confirmCreate.js"></script>
+    <script src="~/js/getDerivatives.js"></script>
+
+    <script>
+        window.onload = () => {
+            manageSideNavBar();
+            manageDropdowns();
+            formatInput();
+            getDerivatives();
+            confirmCreate();
+        }
+
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    </script>
+}

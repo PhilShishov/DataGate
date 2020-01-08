@@ -16,6 +16,7 @@
     using Pharus.Services.SubFunds.Contracts;
     using Pharus.App.Models.ViewModels.Entities;
     using Pharus.App.Models.BindingModels.SubFunds;
+    using Microsoft.AspNetCore.Mvc.Rendering;
 
     [Authorize]
     public class SubFundsController : Controller
@@ -386,62 +387,52 @@
             return fileStreamResult;
         }
 
-        //[HttpGet("SubFunds/EditSubFund/{EntityId}")]
-        //[Authorize(Roles = "Admin")]
-        //public IActionResult EditSubFund(int entityId)
-        //{
-        //    SubFundBindingModel model = new SubFundBindingModel
-        //    {
-        //        EntityProperties = this.subFundsService.GetSubFundWithDateById(entityId),
-        //        CalculationDate = new SelectList(this.subfundsSelectListService.GetAllTbDomCalculationDate()),
-        //        CesrClass = new SelectList(this.subfundsSelectListService.GetAllTbDomCesrClass()),
-        //        CurrencyCode = new SelectList(this.subfundsSelectListService.GetAllTbDomCurrencyCode()),
-        //        DerivMarket = new SelectList(this.subfundsSelectListService.GetAllTbDomDerivMarket()),
-        //        DerivPurpose = new SelectList(this.subfundsSelectListService.GetAllTbDomDerivPurpose()),
-        //        Frequency = new SelectList(this.subfundsSelectListService.GetAllTbDomFrequency()),
-        //        GeographicalFocus = new SelectList(this.subfundsSelectListService.GetAllTbDomGeographicalFocus()),
-        //        GlobalExposure = new SelectList(this.subfundsSelectListService.GetAllTbDomGlobalExposure()),
-        //        PrincipalAssetClass = new SelectList(this.subfundsSelectListService.GetAllTbDomPrincipalAssetClass()),
-        //        PrincipalInvestmentStrategy = new SelectList(this.subfundsSelectListService.GetAllTbDomPrincipalInvestmentStrategy()),
-        //        SfCatBloomberg = new SelectList(this.subfundsSelectListService.GetAllTbDomSfCatBloomberg()),
-        //        SfCatMorningStar = new SelectList(this.subfundsSelectListService.GetAllTbDomSfCatMorningStar()),
-        //        SfCatSix = new SelectList(this.subfundsSelectListService.GetAllTbDomSfCatSix()),
-        //        SfStatus = new SelectList(this.subfundsSelectListService.GetAllTbDomSFStatus()),
-        //        TypeOfMarket = new SelectList(this.subfundsSelectListService.GetAllTbDomTypeOfMarket()),
-        //        ValuationDate = new SelectList(this.subfundsSelectListService.GetAllTbDomValuationDate()),
-        //    };
+        [HttpGet("SubFunds/EditSubFund/{EntityId}/{ChosenDate}")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult EditSubFund(int entityId, string chosenDate)
+        {
+            var date = DateTime.Parse(chosenDate);
 
-        //    return this.View(model);
-        //}
+            EditSubFundBindingModel model = new EditSubFundBindingModel
+            {
+                EntityProperties = this.subFundsService.GetSubFundWithDateById(date, entityId),
+                InitialDate = DateTime.Today,       
+                SubFundId = entityId,
+            };
 
-        //[HttpPost]
-        //[Authorize(Roles = "Admin")]
-        //public IActionResult EditSubFund(SubFundBindingModel model)
-        //{
-        //    // if (!ModelState.IsValid)
-        //    // {
-        //    //    return View(model ?? new EditFundBindingModel());
-        //    // }
-        //    int entityId = int.Parse(model.EntityProperties[1][0]);
-        //    string returnUrl = $"/SubFunds/ViewSubFundSC/{entityId}";
+            SetModelValuesForEditView(model);
 
-        //    var subFund = this.subFundsService.GetSubFundById(entityId);
+            SetViewDataValuesForSubFundSelectLists();
 
-        //    if (this.HttpContext.Request.Form.ContainsKey("modify_button"))
-        //    {
-        //        for (int row = 1; row < subFund.Count; row++)
-        //        {
-        //            for (int col = 0; col < subFund[row].Length; col++)
-        //            {
-        //                subFund[row][col] = model.EntityProperties[row][col];
-        //            }
-        //        }
+            this.ModelState.Clear();
+            return this.View(model);
+        }
 
-        //        return this.LocalRedirect(returnUrl);
-        //    }
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public IActionResult EditSubFund(EditSubFundBindingModel model)
+        {
+            string returnUrl = $"/SubFunds/All/";
 
-        //    return this.LocalRedirect(returnUrl);
-        //}
+            SetViewDataValuesForSubFundSelectLists();
+
+            if (!ModelState.IsValid)
+            {
+                return View(model ?? new EditSubFundBindingModel());
+            }
+
+            string initialDate = model.InitialDate.ToString("yyyyMMdd");
+
+            //if (this.HttpContext.Request.Form.ContainsKey("update_button"))
+            //{
+            //    this.subFundsService.EditSubFund(fundId, initialDate, fStatusId, regNumber,
+            //                               fundName, leiCode, cssfCode, faCode, depCode, taCode,
+            //                               fLegalFormId, fLegalTypeId, fLegalVehicleId, fCompanyTypeId,
+            //                               tinNumber, comment, commentTitle);
+            //}
+
+            return this.LocalRedirect(returnUrl);
+        }
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
@@ -650,6 +641,16 @@
                     nullIntegerParameters[i] = null;
                 }
             }
+        }
+        private static void SetModelValuesForEditView(EditSubFundBindingModel model)
+        {
+            model.SubFundName = model.EntityProperties[1][3];
+            model.CSSFCode = model.EntityProperties[1][4];
+            model.FACode = model.EntityProperties[1][9];
+            model.DBCode = model.EntityProperties[1][10];
+            model.TACode = model.EntityProperties[1][11];
+            model.LEICode = model.EntityProperties[1][15];
+            model.ClearingCode = model.EntityProperties[1][14];
         }
 
         private void SetViewDataValuesForSubFundSelectLists()

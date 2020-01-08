@@ -10,6 +10,7 @@
       asp-action="EditFund"
       method="post"
       class="d-inline">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="d-inline"
          id="createForm">
 
@@ -47,8 +48,8 @@
         </div>
 
         <div class="form-group">
-            <label asp-for="FStatus" class="text-torshia"></label><br>
-            <select class="form-control maxw-270" asp-for="FStatus">
+            <label asp-for="Status" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="Status">
                 @foreach (var status in (List<string>)ViewData["FStatus"])
                 {
                     if (status == Model.EntityProperties[1][5])
@@ -61,7 +62,7 @@
                     }
                 }
             </select>
-            <span asp-validation-for="FStatus" class="text-danger"></span>
+            <span asp-validation-for="Status" class="text-danger"></span>
         </div>
 
         <div class="form-group">
@@ -217,7 +218,6 @@
 </div>
 
 @section Scripts{
-
     <script type="text/javascript" src="~/js/formatInput.js"></script>
     <script type="text/javascript" src="~/js/confirmUpdate.js"></script>
 
@@ -228,11 +228,9 @@
             formatInput();
             confirmUpdate();
         }
-    </script>
 
-    <script>
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
         }
-    </script>
+    </script>    
 }
