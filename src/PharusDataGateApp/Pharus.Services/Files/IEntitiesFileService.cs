@@ -9,7 +9,7 @@
                             string chosenDate);
 
         void AddFileToSpecificFund(
-                            string streamId,
+                            string fileName,
                             int entityId,
                             DateTime startConnection,
                             DateTime? endConnection,
@@ -20,7 +20,7 @@
                             string chosenDate);
 
         void AddFileToSpecificSubFund(
-                            string streamId,
+                            string fileName,
                             int entityId,
                             DateTime startConnection,
                             DateTime? endConnection,
@@ -31,7 +31,7 @@
                             string chosenDate);
 
         void AddFileToSpecificShareClass(
-                            string streamId,
+                            string fileName,
                             int entityId,
                             DateTime startConnection,
                             DateTime? endConnection,
