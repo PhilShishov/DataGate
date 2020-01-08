@@ -13,7 +13,7 @@ namespace Pharus.App.Models.BindingModels
 
     using Pharus.App.Models.BindingModels.Contracts;
 
-    public abstract class BaseEditEntityBindingModel : IBaseEntityBindingModel
+    public abstract class BaseEditEntityBindingModel /*: IBaseEditEntityBindingModel*/
     {
         [Required(ErrorMessage = "Initial Date cannot be null")]
         [Display(Name = "Initial Date")]
@@ -29,7 +29,7 @@ namespace Pharus.App.Models.BindingModels
 
         [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "Fund Admin Code")]
-        //[Required]
+        [Required]
         public string FACode { get; set; }
 
         [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]

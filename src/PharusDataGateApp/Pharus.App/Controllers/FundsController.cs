@@ -491,16 +491,22 @@
             return this.View(model);
         }
 
-        [HttpPost]
+        [HttpPost("Funds/EditFund/{EntityId}/{ChosenDate}")]
         [Authorize(Roles = "Admin")]
-        public IActionResult EditFund(EditFundBindingModel model)
+        public IActionResult EditFund(EditFundBindingModel model, int entityId, string chosenDate)
         {
             string returnUrl = "/Funds/All";
 
-            SetViewDataValuesForFundSelectLists();
-
             if (!this.ModelState.IsValid)
             {
+                if (model.EntityProperties == null)
+                {
+                    var date = DateTime.Parse(chosenDate);
+                    model.EntityProperties = this.fundsService.GetFundWithDateById(date, entityId);
+                    SetModelValuesForEditView(model);
+                    SetViewDataValuesForFundSelectLists();
+                }
+
                 return this.View(model ?? new EditFundBindingModel());
             }
 
@@ -562,6 +568,7 @@
             {
                 InitialDate = DateTime.Today,
             };
+
             SetViewDataValuesForFundSelectLists();
 
             this.ModelState.Clear();
