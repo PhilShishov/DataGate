@@ -74,9 +74,7 @@
                         @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
                         {
                             <th class="text-white p-1 tableHeaderPharus">
-                                <h5>
-                                    @Model.EntitySubEntities[row][col]
-                                </h5>
+                                @Model.EntitySubEntities[row][col]
                             </th>
                         }
                     </tr>
@@ -188,7 +186,7 @@
             // Modal multiselect for column selection
 
             $(".multiselect").multiselect();
-            
+
             // ________________________________________________________
             //
             // Autocomplete search
@@ -253,5 +251,5 @@
                 }
             });
         });
-    </script>   
+    </script>
 }
