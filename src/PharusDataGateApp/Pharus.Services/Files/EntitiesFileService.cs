@@ -6,11 +6,15 @@
 
     using Microsoft.Extensions.Configuration;
 
-    using Pharus.Services.Funds.Contracts;
+    using Pharus.Services.Files;
 
-    public class FundsFileService : IFundsFileService
+    public class EntitiesFileService : IEntitiesFileService
     {
+        // Different filetypes
         private const int fileTypeProspectus = 2;
+        private const int fileTypeKiid = 3;
+        private const int fileTypePricingPolicy = 4;
+        private const int fileTypeNavReport = 5;
 
         private readonly IConfiguration configuration;
 
@@ -18,12 +22,15 @@
         //
         // Constructor: initialize with DI IConfiguration
         // to retrieve appsettings.json connection string
-        public FundsFileService(IConfiguration config)
+        public EntitiesFileService(IConfiguration config)
         {
             this.configuration = config;
         }
 
-        public string LoadFundFileToDisplay(int fundId, string chosenDate)
+        public string LoadEntityFileToDisplay(
+                                           int fundId,
+                                           string chosenDate,
+                                           int fileTypeId)
         {
             string filePath = string.Empty;
             SqlDataReader dataReader;
@@ -53,9 +60,9 @@
                 dataReader.Close();
                 return filePath;
             }
-        }       
+        }
 
-        public void AddFileToSpecificFund(
+        public void AddFileToSpecificEntity(
                                     string file_name,
                                     int fundId,
                                     DateTime startConnection,
