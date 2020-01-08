@@ -8,7 +8,7 @@ namespace Pharus.App.Models.BindingModels.Contracts
 {
     using System.Collections.Generic;
 
-    public interface IBaseEntityBindingModel
+    public interface IBaseEditEntityBindingModel
     {
         List<string[]> EntityProperties { get; set; }
     }
