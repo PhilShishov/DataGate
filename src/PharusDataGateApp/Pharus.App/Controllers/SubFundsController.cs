@@ -581,9 +581,9 @@
 
             SetViewDataValuesForSubFundSelectLists();
 
-            model.ExistingSubFundNames = this.subFundsService.GetAllSubFundsNames();
+            model.ExistingEntitiesNames = this.subFundsService.GetAllSubFundsNames();
 
-            if (!this.ModelState.IsValid || model.ExistingSubFundNames.Any(sf => sf == model.SubFundName))
+            if (!this.ModelState.IsValid || model.ExistingEntitiesNames.Any(sf => sf == model.SubFundName))
             {
                 return this.View(model ?? new CreateSubFundBindingModel());
             }
@@ -606,7 +606,7 @@
                 string taCode = model.TACode;
 
                 int sfStatusId = this.context.TbDomSfStatus
-                    .Where(s => s.StDesc == model.SfStatus)
+                    .Where(s => s.StDesc == model.Status)
                     .Select(s => s.StId)
                     .FirstOrDefault();
 
