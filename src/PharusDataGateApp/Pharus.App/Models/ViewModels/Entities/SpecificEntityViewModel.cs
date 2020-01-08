@@ -11,8 +11,9 @@
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace Pharus.App.Models.ViewModels.Entities
 {
-    using Pharus.App.Models.BindingModels.Funds;
     using System.Collections.Generic;
+
+    using Pharus.App.Models.BindingModels.Files;
 
     public class SpecificEntityViewModel : BaseEntityViewModel
     {
@@ -48,7 +49,7 @@ namespace Pharus.App.Models.ViewModels.Entities
 
         public string FileNameToDisplay { get; set; }
 
-        public UploadFundFileModel UploadFundFileModel { get; set; }
+        public UploadEntityFileModel UploadEntityFileModel { get; set; }
 
         public string StartConnection { get; set; }
 

@@ -27,8 +27,8 @@
             this.configuration = config;
         }
 
-        public string LoadEntityFileToDisplay(
-                                           int fundId,
+        public string LoadFundFileToDisplay(
+                                           int entityId,
                                            string chosenDate,
                                            int fileTypeId)
         {
@@ -42,7 +42,7 @@
                 SqlCommand command = connection.CreateCommand();
 
                 command.CommandText = $"select [dbo].[fn_getSpecificFilepath_filefund]" +
-                    $"( {fundId},'{chosenDate}',{fileTypeProspectus}) [FILEPATH]";
+                    $"( {entityId},'{chosenDate}',{fileTypeProspectus}) [FILEPATH]";
 
                 dataReader = command.ExecuteReader();
 
@@ -62,9 +62,9 @@
             }
         }
 
-        public void AddFileToSpecificEntity(
+        public void AddFileToSpecificFund(
                                     string file_name,
-                                    int fundId,
+                                    int entityId,
                                     DateTime startConnection,
                                     DateTime? endConnection,
                                     int fileTypeId)
@@ -80,7 +80,7 @@
                     command.Parameters.AddRange(new[]
                     {
                         new SqlParameter("@file_name", SqlDbType.NVarChar, 100) { Value = file_name },
-                        new SqlParameter("@fund_id", SqlDbType.Int) { Value = fundId },
+                        new SqlParameter("@fund_id", SqlDbType.Int) { Value = entityId },
                         new SqlParameter("@start_connection", SqlDbType.NVarChar, 100) { Value = startConnection.ToString("yyyyMMdd") },
                         new SqlParameter("@end_connection", SqlDbType.NVarChar, 100) { Value = endConnection?.ToString("yyyyMMdd") },
                         new SqlParameter("@filetype_id", SqlDbType.Int) { Value = fileTypeId },
@@ -107,6 +107,42 @@
                     }
                 }
             }
+        }
+
+        public string LoadSubFundFileToDisplay(
+                                        int entityId, 
+                                        string chosenDate, 
+                                        int fileTypeId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddFileToSpecificSubFund(
+                                        string streamId, 
+                                        int entityId, 
+                                        DateTime startConnection, 
+                                        DateTime? endConnection, 
+                                        int fileTypeId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string LoadShareClassFileToDisplay(
+                                        int entityId, 
+                                        string chosenDate, 
+                                        int fileTypeId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void AddFileToSpecificShareClass(
+                                        string streamId, 
+                                        int entityId, 
+                                        DateTime startConnection, 
+                                        DateTime? endConnection, 
+                                        int fileTypeId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

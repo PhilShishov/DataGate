@@ -11,9 +11,7 @@ namespace Pharus.App.Models.BindingModels
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    using Pharus.App.Models.BindingModels.Contracts;
-
-    public abstract class BaseEditEntityBindingModel /*: IBaseEditEntityBindingModel*/
+    public abstract class BaseEditEntityBindingModel
     {
         [Required(ErrorMessage = "Initial Date cannot be null")]
         [Display(Name = "Initial Date")]

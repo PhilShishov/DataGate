@@ -5,13 +5,13 @@
 // Author:  Philip Shishov
 
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-namespace Pharus.App.Models.BindingModels.Funds
+namespace Pharus.App.Models.BindingModels.Files
 {
     using System.ComponentModel.DataAnnotations;
 
     using Microsoft.AspNetCore.Http;
 
-    public class UploadFundFileModel
+    public class UploadEntityFileModel
     {
         public IFormFile FileToUpload { get; set; }
 

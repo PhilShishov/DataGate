@@ -7,10 +7,9 @@
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace Pharus.App.Models.ViewModels
 {
-    using Pharus.App.Models.ViewModels.Contracts;
     using System.Collections.Generic;
 
-    public abstract class BaseEntityViewModel : IBaseEntityViewModel
+    public abstract class BaseEntityViewModel
     {
         public string ChosenDate { get; set; }
 

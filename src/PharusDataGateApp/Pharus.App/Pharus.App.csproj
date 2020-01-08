@@ -31,10 +31,6 @@
     <ProjectReference Include="..\Pharus.Utilities\Pharus.Utilities.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\BindingModels\Files\" />
-  </ItemGroup>
-
   <ProjectExtensions>
     <VisualStudio>
       <UserProperties appsettings_1json__JsonSchema="" />
