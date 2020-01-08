@@ -16,7 +16,6 @@
     using Pharus.Services.SubFunds.Contracts;
     using Pharus.App.Models.ViewModels.Entities;
     using Pharus.App.Models.BindingModels.SubFunds;
-    using Microsoft.AspNetCore.Mvc.Rendering;
 
     [Authorize]
     public class SubFundsController : Controller
@@ -422,14 +421,131 @@
             }
 
             string initialDate = model.InitialDate.ToString("yyyyMMdd");
+            string firstNavDate = model.FirstNavDate?.ToString("yyyyMMdd");
+            string lastNavDate = model.LastNavDate?.ToString("yyyyMMdd");
+            string cssfAuthDate = model.CSSFAuthDate?.ToString("yyyyMMdd");
+            string expiryDate = model.ExpiryDate?.ToString("yyyyMMdd");
 
-            //if (this.HttpContext.Request.Form.ContainsKey("update_button"))
-            //{
-            //    this.subFundsService.EditSubFund(fundId, initialDate, fStatusId, regNumber,
-            //                               fundName, leiCode, cssfCode, faCode, depCode, taCode,
-            //                               fLegalFormId, fLegalTypeId, fLegalVehicleId, fCompanyTypeId,
-            //                               tinNumber, comment, commentTitle);
-            //}
+            List<int?> nullIntegerParameters = new List<int?>();
+
+            if (this.HttpContext.Request.Form.ContainsKey("update_button"))
+            {
+                string subFundName = model.SubFundName;
+                string cssfCode = model.CSSFCode;
+                string faCode = model.FACode;
+                string depCode = model.DBCode;
+                string taCode = model.TACode;
+
+                int sfId = model.SubFundId;
+
+                int sfStatusId = this.context.TbDomSfStatus
+                    .Where(s => s.StDesc == model.Status)
+                    .Select(s => s.StId)
+                    .FirstOrDefault();
+
+                string leiCode = model.LEICode;
+
+                int? cesrClassId = this.context.TbDomCesrClass
+                    .Where(cc => cc.CDesc == model.CesrClass)
+                    .Select(cc => cc.CcId)
+                    .FirstOrDefault();
+
+                int? geoFocusId = this.context.TbDomCssfGeographicalFocus
+                    .Where(gf => gf.GfDesc == model.GeographicalFocus)
+                    .Select(gf => gf.GfId)
+                    .FirstOrDefault();
+
+                int? glExpId = this.context.TbDomGlobalExposure
+                    .Where(ge => ge.GeDesc == model.GlobalExposure)
+                    .Select(ge => ge.GeId)
+                    .FirstOrDefault();
+
+                string currency = this.context.TbDomIsoCurrency
+                   .Where(c => c.IsoCcyDesc == model.CurrencyCode)
+                   .Select(c => c.IsoCcyCode)
+                   .FirstOrDefault();
+
+                int? frequencyId = this.context.TbDomNavFrequency
+                   .Where(f => f.NfDesc == model.NavFrequency)
+                   .Select(f => f.NfId)
+                   .FirstOrDefault();
+
+                int? valuationId = this.context.TbDomValutationDate
+                   .Where(v => v.VdDesc == model.ValuationDate)
+                   .Select(v => v.VdId)
+                   .FirstOrDefault();
+
+                int? calculationId = this.context.TbDomCalculationDate
+                   .Where(cal => cal.CdDesc == model.CalculationDate)
+                   .Select(cal => cal.CdId)
+                   .FirstOrDefault();
+
+                bool isDerivative = false;
+
+                if (model.Derivatives == "Yes")
+                {
+                    isDerivative = true;
+                }
+
+                int? derivMarketId = this.context.TbDomDerivMarket
+                  .Where(dm => dm.DmDesc == model.DerivMarket)
+                  .Select(dm => dm.DmId)
+                  .FirstOrDefault();
+
+                int? derivPurposeId = this.context.TbDomDerivPurpose
+                  .Where(dp => dp.DpDesc == model.DerivPurpose)
+                  .Select(dp => dp.DpId)
+                  .FirstOrDefault();
+
+                int? principalAssetId = this.context.TbDomCssfPrincipalAssetClass
+                   .Where(pa => pa.PacDesc == model.PrincipalAssetClass)
+                   .Select(pa => pa.PacId)
+                   .FirstOrDefault();
+
+                int? typeMarketId = this.context.TbDomTypeOfMarket
+                   .Where(tm => tm.TomDesc == model.TypeOfMarket)
+                   .Select(tm => tm.TomId)
+                   .FirstOrDefault();
+
+                int? principalInvStrId = this.context.TbDomPrincipalInvestmentStrategy
+                   .Where(pi => pi.PisDesc == model.PrincipalInvestmentStrategy)
+                   .Select(pi => pi.PisId)
+                   .FirstOrDefault();
+
+                string clearingCode = model.ClearingCode;
+
+                int? catMorningStarId = this.context.TbDomSfCatMorningstar
+                   .Where(cm => cm.CMorningstarDesc == model.SfCatMorningStar)
+                   .Select(cm => cm.CMorningstarId)
+                   .FirstOrDefault();
+
+                int? catSixId = this.context.TbDomSfCatSix
+                   .Where(cs => cs.CatSixDesc == model.SfCatSix)
+                   .Select(cs => cs.CatSixId)
+                   .FirstOrDefault();
+
+                int? catBloombergId = this.context.TbDomSfCatBloomberg
+                   .Where(cb => cb.CatBloombergDesc == model.SfCatBloomberg)
+                   .Select(cb => cb.CatBloombergId)
+                   .FirstOrDefault();
+
+                SetZeroValuesToNull(nullIntegerParameters, cesrClassId, geoFocusId, glExpId,
+                                    frequencyId, valuationId, calculationId, derivMarketId,
+                                    derivPurposeId, principalAssetId, typeMarketId, principalInvStrId,
+                                    catMorningStarId, catSixId, catBloombergId);
+
+                string comment = model.CommentArea;
+                string commentTitle = model.CommentTitle;
+
+                this.subFundsService.EditSubFund(sfId, initialDate, subFundName, cssfCode, faCode,
+                                                depCode, taCode, firstNavDate, lastNavDate, cssfAuthDate,
+                                                expiryDate, sfStatusId, leiCode, nullIntegerParameters[0], nullIntegerParameters[1],
+                                                nullIntegerParameters[2], currency, nullIntegerParameters[3], nullIntegerParameters[4],
+                                                nullIntegerParameters[5], isDerivative, nullIntegerParameters[6], nullIntegerParameters[7],
+                                                nullIntegerParameters[8], nullIntegerParameters[9], nullIntegerParameters[10],
+                                                clearingCode, nullIntegerParameters[11], nullIntegerParameters[12],
+                                                nullIntegerParameters[13], comment, commentTitle);
+            }
 
             return this.LocalRedirect(returnUrl);
         }
@@ -467,10 +583,10 @@
 
             string initialDate = model.InitialDate.ToString("yyyyMMdd");
             string endDate = model.EndDate?.ToString("yyyyMMdd");
-            string firstNavDate = model.EndDate?.ToString("yyyyMMdd");
-            string lastNavDate = model.EndDate?.ToString("yyyyMMdd");
-            string cssfAuthDate = model.EndDate?.ToString("yyyyMMdd");
-            string expiryDate = model.EndDate?.ToString("yyyyMMdd");
+            string firstNavDate = model.FirstNavDate?.ToString("yyyyMMdd");
+            string lastNavDate = model.LastNavDate?.ToString("yyyyMMdd");
+            string cssfAuthDate = model.CSSFAuthDate?.ToString("yyyyMMdd");
+            string expiryDate = model.ExpiryDate?.ToString("yyyyMMdd");
 
             List<int?> nullIntegerParameters = new List<int?>();
 

@@ -190,7 +190,7 @@ namespace Pharus.Services.SubFunds
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
-        }      
+        }
 
         public List<string[]> GetSubFundWithDateById(DateTime? chosenDate, int id)
         {
@@ -212,7 +212,7 @@ namespace Pharus.Services.SubFunds
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
         }
-      
+
         public List<string[]> GetSubFund_ShareClasses(DateTime? chosenDate, int id)
         {
             using (SqlConnection connection = new SqlConnection())
@@ -232,7 +232,7 @@ namespace Pharus.Services.SubFunds
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
-        }      
+        }
 
         public List<string[]> GetSubFund_FundContainer(DateTime? chosenDate, int id)
         {
@@ -298,28 +298,115 @@ namespace Pharus.Services.SubFunds
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
-        }       
+        }
 
         public void EditSubFund(
-                                    int fundId,
-                                    string initialDate,
-                                    int fStatusId,
-                                    string regNumber,
-                                    string fundName,
-                                    string leiCode,
-                                    string cssfCode,
-                                    string faCode,
-                                    string depCode,
-                                    string taCode,
-                                    int fLegalFormId,
-                                    int fLegalTypeId,
-                                    int fLegalVehicleId,
-                                    int fCompanyTypeId,
-                                    string tinNumber,
-                                    string comment,
-                                    string commentTitle)
+                        int sfId,
+                        string initialDate,
+                        string subFundName,
+                        string cssfCode,
+                        string faCode,
+                        string depCode,
+                        string taCode,
+                        string firstNavDate,
+                        string lastNavDate,
+                        string cssfAuthDate,
+                        string expiryDate,
+                        int sfStatusId,
+                        string leiCode,
+                        int? cesrClassId,
+                        int? geoFocusId,
+                        int? glExpId,
+                        string currency,
+                        int? frequencyId,
+                        int? valuationId,
+                        int? calculationId,
+                        bool isDerivative,
+                        int? derivMarketId,
+                        int? derivPurposeId,
+                        int? principalAssetId,
+                        int? typeMarketId,
+                        int? principalInvStrId,
+                        string clearingCode,
+                        int? catMorningStarId,
+                        int? catSixId,
+                        int? catBloombergId,
+                        string comment,
+                        string commentTitle)
         {
-            throw new NotImplementedException();
+            string query = "EXEC sp_modify_subfund " +
+               "@sf_id, @sf_initialDate, @sf_officialSubFundName, @sf_shortSubFundName," +
+               "@sf_cssfCode, @sf_faCode, @sf_depCode, @sf_taCode, @sf_firstNavDate, " +
+               "@sf_lastNavDate, @sf_cssfAuthDate, @sf_expDate, @sf_status, @sf_leiCode, " +
+               "@sf_cesrClass, @sf_cssf_geographical_focus, @sf_globalExposure, " +
+               "@sf_currency, @sf_navFrequency, @sf_valutationDate, @sf_calculationDate, " +
+               "@sf_derivatives, @sf_derivMarket, @sf_derivPurpose, @sf_principal_asset_class, " +
+               "@sf_type_of_market, @sf_principal_investment_strategy, @sf_clearing_code, " +
+               "@sf_cat_morningstar, @sf_category_six, @sf_category_bloomberg, @sf_change_comment, " +
+               "@sf_comment_title";
+
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                using (SqlCommand command = new SqlCommand(query))
+                {
+                    command.Parameters.AddRange(new[]
+                    {
+                        new SqlParameter("@sf_id", SqlDbType.Int) { Value = sfId},
+                        new SqlParameter("@sf_initialDate", SqlDbType.NVarChar, 100) { Value = initialDate},
+                        new SqlParameter("@sf_officialSubFundName", SqlDbType.NVarChar, 100) { Value = subFundName },
+                        new SqlParameter("@sf_cssfCode", SqlDbType.NVarChar, 100) { Value = cssfCode },
+                        new SqlParameter("@sf_faCode", SqlDbType.NVarChar, 100) { Value = faCode },
+                        new SqlParameter("@sf_depCode", SqlDbType.NVarChar, 100) { Value = depCode },
+                        new SqlParameter("@sf_taCode", SqlDbType.NVarChar, 100) { Value = taCode },
+                        new SqlParameter("@sf_firstNavDate", SqlDbType.NVarChar, 100) { Value = firstNavDate},
+                        new SqlParameter("@sf_lastNavDate", SqlDbType.NVarChar, 100) { Value = lastNavDate},
+                        new SqlParameter("@sf_cssfAuthDate", SqlDbType.NVarChar, 100) { Value = cssfAuthDate},
+                        new SqlParameter("@sf_expDate", SqlDbType.NVarChar, 100) { Value = expiryDate},
+                        new SqlParameter("@sf_status", SqlDbType.Int) { Value = sfStatusId },
+                        new SqlParameter("@sf_leiCode", SqlDbType.NVarChar, 100) { Value = leiCode },
+                        new SqlParameter("@sf_cesrClass", SqlDbType.Int) { Value = cesrClassId },
+                        new SqlParameter("@sf_cssf_geographical_focus", SqlDbType.Int) { Value = geoFocusId },
+                        new SqlParameter("@sf_globalExposure", SqlDbType.Int) { Value = glExpId },
+                        new SqlParameter("@sf_currency", SqlDbType.NChar) { Value = currency },
+                        new SqlParameter("@sf_navFrequency", SqlDbType.Int) { Value = frequencyId },
+                        new SqlParameter("@sf_valutationDate", SqlDbType.Int) { Value = valuationId },
+                        new SqlParameter("@sf_calculationDate", SqlDbType.Int) { Value = calculationId },
+                        new SqlParameter("@sf_derivatives", SqlDbType.Bit) { Value = isDerivative },
+                        new SqlParameter("@sf_derivMarket", SqlDbType.Int) { Value = derivMarketId },
+                        new SqlParameter("@sf_derivPurpose", SqlDbType.Int) { Value = derivPurposeId },
+                        new SqlParameter("@sf_principal_asset_class", SqlDbType.Int) { Value = principalAssetId },
+                        new SqlParameter("@sf_type_of_market", SqlDbType.Int) { Value = typeMarketId },
+                        new SqlParameter("@sf_principal_investment_strategy", SqlDbType.Int) { Value = principalInvStrId },
+                        new SqlParameter("@sf_clearing_code", SqlDbType.NVarChar, 100) { Value = clearingCode },
+                        new SqlParameter("@sf_cat_morningstar", SqlDbType.Int) { Value = catMorningStarId },
+                        new SqlParameter("@sf_category_six", SqlDbType.Int) { Value = catSixId },
+                        new SqlParameter("@sf_category_bloomberg", SqlDbType.Int) { Value = catBloombergId },
+                        new SqlParameter("@sf_change_comment", SqlDbType.NVarChar, 100) { Value = comment },
+                        new SqlParameter("@sf_comment_title", SqlDbType.NVarChar, 100) { Value = commentTitle }
+                    });
+
+                    foreach (SqlParameter parameter in command.Parameters)
+                    {
+                        if (parameter.Value == null)
+                        {
+                            parameter.Value = DBNull.Value;
+                        }
+                    }
+
+                    command.Connection = connection;
+
+                    try
+                    {
+                        command.Connection.Open();
+                        command.ExecuteScalar();
+                    }
+                    catch (SqlException sx)
+                    {
+                        Console.WriteLine(sx.Message);
+                    }
+                }
+            }
         }
 
         public void CreateSubFund(
@@ -356,7 +443,8 @@ namespace Pharus.Services.SubFunds
                         int fundContainerId
                         )
         {
-            string query = "EXEC sp_new_subfund @sf_initialDate, @sf_endDate, @sf_officialSubFundName, " +
+            string query = "EXEC sp_new_subfund " +
+                "@sf_initialDate, @sf_endDate, @sf_officialSubFundName, " +
                 "@sf_cssfCode, @sf_faCode, @sf_depCode, @sf_taCode, @sf_firstNavDate, " +
                 "@sf_lastNavDate, @sf_cssfAuthDate, @sf_expDate, @sf_status, @sf_leiCode, " +
                 "@sf_cesrClass, @sf_cssf_geographical_focus, @sf_globalExposure, " +
@@ -379,10 +467,10 @@ namespace Pharus.Services.SubFunds
                         new SqlParameter("@sf_faCode", SqlDbType.NVarChar, 100) { Value = faCode },
                         new SqlParameter("@sf_depCode", SqlDbType.NVarChar, 100) { Value = depCode },
                         new SqlParameter("@sf_taCode", SqlDbType.NVarChar, 100) { Value = taCode },
-                        new SqlParameter("@sf_firstNavDate", SqlDbType.NVarChar, 100) { Value = endDate},
-                        new SqlParameter("@sf_lastNavDate", SqlDbType.NVarChar, 100) { Value = endDate},
-                        new SqlParameter("@sf_cssfAuthDate", SqlDbType.NVarChar, 100) { Value = endDate},
-                        new SqlParameter("@sf_expDate", SqlDbType.NVarChar, 100) { Value = endDate},
+                        new SqlParameter("@sf_firstNavDate", SqlDbType.NVarChar, 100) { Value = firstNavDate},
+                        new SqlParameter("@sf_lastNavDate", SqlDbType.NVarChar, 100) { Value = lastNavDate},
+                        new SqlParameter("@sf_cssfAuthDate", SqlDbType.NVarChar, 100) { Value = cssfAuthDate},
+                        new SqlParameter("@sf_expDate", SqlDbType.NVarChar, 100) { Value = expiryDate},
                         new SqlParameter("@sf_status", SqlDbType.Int) { Value = sfStatusId },
                         new SqlParameter("@sf_leiCode", SqlDbType.NVarChar, 100) { Value = leiCode },
                         new SqlParameter("@sf_cesrClass", SqlDbType.Int) { Value = cesrClassId },
