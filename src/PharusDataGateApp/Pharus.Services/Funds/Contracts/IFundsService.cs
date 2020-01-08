@@ -12,14 +12,14 @@
         List<string[]> GetAllActiveFunds(DateTime? chosenDate);
 
         List<string[]> GetAllFundsWithSelectedViewAndDate(
-            List<string> preSelectedColumns, 
-            List<string> selectedColumns, 
-            DateTime? chosenDate);
+                        List<string> preSelectedColumns, 
+                        List<string> selectedColumns, 
+                        DateTime? chosenDate);
 
         List<string[]> GetAllActiveFundsWithSelectedViewAndDate(
-            List<string> preSelectedColumns, 
-            List<string> selectedColumns, 
-            DateTime? chosenDate);
+                        List<string> preSelectedColumns, 
+                        List<string> selectedColumns, 
+                        DateTime? chosenDate);
 
         List<string> GetAllFundsNames();
 
@@ -32,10 +32,10 @@
         List<string[]> GetFund_SubFunds(DateTime? chosenDate, int id);
 
         List<string[]> GetFund_SubFundsWithSelectedViewAndDate(
-            List<string> preSelectedColumns, 
-            List<string> selectedColumns, 
-            DateTime? chosenDate, 
-            int id);        
+                        List<string> preSelectedColumns, 
+                        List<string> selectedColumns, 
+                        DateTime? chosenDate, 
+                        int id);        
 
         List<string[]> GetFundTimeline(int id);
 
