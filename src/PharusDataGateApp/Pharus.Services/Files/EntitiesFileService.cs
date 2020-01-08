@@ -10,7 +10,6 @@
 
     public class EntitiesFileService : IEntitiesFileService
     {
-        // Different filetypes
         private const int fileTypeProspectus = 2;
         private const int fileTypeKiid = 3;
         private const int fileTypePricingPolicy = 4;
@@ -62,7 +61,7 @@
         }
 
         public void AddFileToSpecificFund(
-                                    string file_name,
+                                    string fileName,
                                     int entityId,
                                     DateTime startConnection,
                                     DateTime? endConnection,
@@ -78,7 +77,7 @@
                 {
                     command.Parameters.AddRange(new[]
                     {
-                        new SqlParameter("@file_name", SqlDbType.NVarChar, 100) { Value = file_name },
+                        new SqlParameter("@file_name", SqlDbType.NVarChar, 100) { Value = fileName },
                         new SqlParameter("@fund_id", SqlDbType.Int) { Value = entityId },
                         new SqlParameter("@start_connection", SqlDbType.NVarChar, 100) { Value = startConnection.ToString("yyyyMMdd") },
                         new SqlParameter("@end_connection", SqlDbType.NVarChar, 100) { Value = endConnection?.ToString("yyyyMMdd") },
@@ -112,17 +111,81 @@
                                         int entityId, 
                                         string chosenDate)
         {
-            throw new NotImplementedException();
+            string filePath = string.Empty;
+            SqlDataReader dataReader;
+
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                command.CommandText = $"select [dbo].[fn_getSpecificFilepath_fileSubfund]" +
+                    $"( {entityId},'{chosenDate}',{fileTypeNavReport}) [FILEPATH]";
+
+                dataReader = command.ExecuteReader();
+
+                if (dataReader.HasRows)
+                {
+                    dataReader.Read();
+                    if (!dataReader.IsDBNull(0))
+                    {
+                        filePath = (string)dataReader["FILEPATH"];
+                    }
+
+                    // Throw exception for null columns
+
+                }
+                dataReader.Close();
+                return filePath;
+            }
         }
 
         public void AddFileToSpecificSubFund(
-                                        string streamId, 
+                                        string fileName, 
                                         int entityId, 
                                         DateTime startConnection, 
                                         DateTime? endConnection, 
                                         int fileTypeId)
         {
-            throw new NotImplementedException();
+            string query = "EXEC sp_insert_map_subfund " +
+                "@file_name, @subfund_id, @start_connection, @end_connection, @filetype_id";
+
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = configuration.GetConnectionString("Pharus_vFinaleConnection");
+                using (SqlCommand command = new SqlCommand(query))
+                {
+                    command.Parameters.AddRange(new[]
+                    {
+                        new SqlParameter("@file_name", SqlDbType.NVarChar, 100) { Value = fileName },
+                        new SqlParameter("@subfund_id", SqlDbType.Int) { Value = entityId },
+                        new SqlParameter("@start_connection", SqlDbType.NVarChar, 100) { Value = startConnection.ToString("yyyyMMdd") },
+                        new SqlParameter("@end_connection", SqlDbType.NVarChar, 100) { Value = endConnection?.ToString("yyyyMMdd") },
+                        new SqlParameter("@filetype_id", SqlDbType.Int) { Value = fileTypeId },
+                    });
+
+                    foreach (SqlParameter parameter in command.Parameters)
+                    {
+                        if (parameter.Value == null)
+                        {
+                            parameter.Value = DBNull.Value;
+                        }
+                    }
+
+                    command.Connection = connection;
+
+                    try
+                    {
+                        command.Connection.Open();
+                        command.ExecuteScalar();
+                    }
+                    catch (SqlException sx)
+                    {
+                        Console.WriteLine(sx.Message);
+                    }
+                }
+            }
         }
 
         public string LoadShareClassFileToDisplay(
@@ -133,7 +196,7 @@
         }
 
         public void AddFileToSpecificShareClass(
-                                        string streamId, 
+                                        string fileName, 
                                         int entityId, 
                                         DateTime startConnection, 
                                         DateTime? endConnection, 
