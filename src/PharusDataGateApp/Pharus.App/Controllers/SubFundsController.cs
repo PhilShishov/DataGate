@@ -13,6 +13,7 @@
     using Pharus.Data;
     using Pharus.App.Utilities;
     using Pharus.Utilities.App;
+    using Pharus.Services.Files;
     using Pharus.Services.SubFunds.Contracts;
     using Pharus.App.Models.ViewModels.Entities;
     using Pharus.App.Models.BindingModels.SubFunds;
@@ -23,20 +24,20 @@
         private readonly Pharus_vFinale_Context context;
         private readonly ISubFundsService subFundsService;
         private readonly ISubFundsSelectListService subfundsSelectListService;
-        private readonly ISubFundsFileService subFundsFileService;
+        private readonly IEntitiesFileService entitiesFileService;
         private readonly IHostingEnvironment hostingEnvironment;
 
         public SubFundsController(
             Pharus_vFinale_Context context,
             ISubFundsService subFundsService,
             ISubFundsSelectListService subfundsSelectListService,
-            ISubFundsFileService subFundsFileService,
+            IEntitiesFileService entitiesFileService,
             IHostingEnvironment hostingEnvironment)
         {
             this.context = context;
             this.subFundsService = subFundsService;
             this.subfundsSelectListService = subfundsSelectListService;
-            this.subFundsFileService = subFundsFileService;
+            this.entitiesFileService = entitiesFileService;
             this.hostingEnvironment = hostingEnvironment;
         }
 
@@ -272,14 +273,14 @@
 
             HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
 
-            string fileName = GetFileNameFromFilePath(entityId, chosenDate);
+            //string fileName = GetFileNameFromFilePath(entityId, chosenDate);
 
-            if (string.IsNullOrEmpty(fileName))
-            {
-                return this.View(viewModel);
-            }
+            //if (string.IsNullOrEmpty(fileName))
+            //{
+            //    return this.View(viewModel);
+            //}
 
-            viewModel.FileNameToDisplay = fileName;
+            //viewModel.FileNameToDisplay = fileName;
 
             this.ModelState.Clear();
             return this.View(viewModel);
@@ -719,10 +720,10 @@
             return this.LocalRedirect(returnUrl);
         }
 
-        private string GetFileNameFromFilePath(int entityId, string chosenDate)
-        {
-            return this.subFundsFileService.LoadSubFundFileToDisplay(entityId, chosenDate).Split('\\').Last();
-        }
+        //private string GetFileNameFromFilePath(int entityId, string chosenDate)
+        //{
+        //    return this.entitiesFileService.LoadEntityFileToDisplay(entityId, chosenDate).Split('\\').Last();
+        //}
 
         private void SetModelValuesForSpecificView(SpecificEntityViewModel model)
         {
@@ -731,7 +732,7 @@
             model.Entity = this.subFundsService.GetSubFundById(date, model.EntityId);
             model.EntitySubEntities = this.subFundsService.GetSubFund_ShareClasses(date, model.EntityId);
             model.SubEntitiesHeadersForColumnSelection = this.subFundsService.GetAllActiveSubFunds().Take(1).ToList();
-            model.FileNameToDisplay = GetFileNameFromFilePath(model.EntityId, model.ChosenDate);
+            //model.FileNameToDisplay = GetFileNameFromFilePath(model.EntityId, model.ChosenDate);
             model.EntityTimeline = this.subFundsService.GetSubFundTimeline(model.EntityId);
             model.EntityDocuments = this.subFundsService.GetAllSubFundDocumens(model.EntityId);
 

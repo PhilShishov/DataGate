@@ -17,6 +17,7 @@
     using Pharus.Services.Funds.Contracts;
     using Pharus.App.Models.BindingModels.Funds;
     using Pharus.App.Models.ViewModels.Entities;
+    using Pharus.Services.Files;
 
     [Authorize]
     public class FundsController : Controller
@@ -24,13 +25,13 @@
         private readonly Pharus_vFinale_Context context;
         private readonly IFundsService fundsService;
         private readonly IFundsSelectListService fundsSelectListService;
-        private readonly IFundsFileService fundsFileService;
+        private readonly IEntitiesFileService fundsFileService;
         private readonly IHostingEnvironment hostingEnvironment;
 
         public FundsController(
             IFundsService fundsService,
             IFundsSelectListService fundsSelectListService,
-            IFundsFileService fundsFileService,
+            IEntitiesFileService fundsFileService,
             IHostingEnvironment hostingEnvironment,
             Pharus_vFinale_Context context)
         {
@@ -378,7 +379,7 @@
         {
             SetModelValuesForSpecificView(model);
 
-            var file = model.UploadFundFileModel.FileToUpload;
+            var file = model.UploadEntityFileModel.FileToUpload;
 
             if (!ModelState.IsValid || file == null || file.Length == 0)
             {
@@ -402,7 +403,7 @@
                 endConnection = DateTime.ParseExact(model.EndConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             }
 
-            var fileTypeDesc = model.UploadFundFileModel.FileType;
+            var fileTypeDesc = model.UploadEntityFileModel.FileType;
             int fileTypeId = this.context.TbDomFileType
                     .Where(s => s.FiletypeDesc == fileTypeDesc)
                     .Select(s => s.FiletypeId)
@@ -458,7 +459,7 @@
         {
             FileStream fs = null;
 
-            var path = this.fundsFileService.LoadFundFileToDisplay(model.EntityId, model.ChosenDate);
+            var path = this.fundsFileService.LoadFundFileToDisplay(model.EntityId, model.ChosenDate, );
 
             if (this.HttpContext.Request.Form.ContainsKey("read_Pdf"))
             {
@@ -675,9 +676,9 @@
             this.ViewData["CompanyTypeDesc"] = this.fundsSelectListService.GetAllTbDomCompanyDesc();
         }
 
-        private string GetFileNameFromFilePath(int entityId, string chosenDate)
+        private string GetFileNameFromFilePath(int entityId, string chosenDate, int fileTypeId)
         {
-            return this.fundsFileService.LoadFundFileToDisplay(entityId, chosenDate).Split('\\').Last();
+            return this.fundsFileService.LoadFundFileToDisplay(entityId, chosenDate, fileTypeId).Split('\\').Last();
         }
     }
 }
