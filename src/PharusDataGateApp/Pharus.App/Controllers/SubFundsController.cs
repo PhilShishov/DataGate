@@ -645,12 +645,12 @@
         private static void SetModelValuesForEditView(EditSubFundBindingModel model)
         {
             model.SubFundName = model.EntityProperties[1][3];
-            model.CSSFCode = model.EntityProperties[1][4];
-            model.FACode = model.EntityProperties[1][9];
-            model.DBCode = model.EntityProperties[1][10];
-            model.TACode = model.EntityProperties[1][11];
-            model.LEICode = model.EntityProperties[1][15];
-            model.ClearingCode = model.EntityProperties[1][14];
+            model.CSSFCode = model.EntityProperties[1][5];
+            model.FACode = model.EntityProperties[1][6];
+            model.DBCode = model.EntityProperties[1][7];
+            model.TACode = model.EntityProperties[1][8];
+            model.LEICode = model.EntityProperties[1][14];
+            model.ClearingCode = model.EntityProperties[1][30];
         }
 
         private void SetViewDataValuesForSubFundSelectLists()
