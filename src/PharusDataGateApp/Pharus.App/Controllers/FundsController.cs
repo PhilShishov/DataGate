@@ -393,8 +393,6 @@
                 file.CopyTo(stream);
             }
 
-            string streamId = this.fundsFileService.GetStreamIdFromFileName(file.FileName);
-
             var startConnection = DateTime.ParseExact(model.StartConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
             DateTime? endConnection = null;
@@ -411,7 +409,7 @@
                     .FirstOrDefault();
 
             this.fundsFileService.AddFileToSpecificFund(
-                                                streamId,
+                                                file.FileName,
                                                 model.EntityId,
                                                 startConnection,
                                                 endConnection,

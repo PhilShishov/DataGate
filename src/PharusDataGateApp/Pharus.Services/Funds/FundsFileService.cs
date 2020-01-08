@@ -53,47 +53,17 @@
                 dataReader.Close();
                 return filePath;
             }
-        }
-
-        public string GetStreamIdFromFileName(string fileName)
-        {
-            string streamId = string.Empty;
-            SqlDataReader dataReader;
-
-            using (SqlConnection connection = new SqlConnection())
-            {
-                connection.ConnectionString = configuration.GetConnectionString("Pharus_vFinaleConnection");
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-
-                command.CommandText = $"select cast(stream_id as nvarchar(MAX)) as [Stream Id] " +
-                    $"from [Pharus_File_Development].[dbo].[FundFile] where [name]='{fileName}'";
-
-                dataReader = command.ExecuteReader();
-
-                if (dataReader.HasRows)
-                {
-                    dataReader.Read();
-
-                    streamId = (string)dataReader["Stream Id"];
-
-                    // Throw exception for null columns
-
-                }
-                dataReader.Close();
-                return streamId;
-            }
-        }
+        }       
 
         public void AddFileToSpecificFund(
-                                    string streamId,
+                                    string file_name,
                                     int fundId,
                                     DateTime startConnection,
                                     DateTime? endConnection,
                                     int fileTypeId)
         {
             string query = "EXEC sp_insert_map_fund " +
-                "@stream_id, @fund_id, @start_connection, @end_connection, @filetype_id";
+                "@file_name, @fund_id, @start_connection, @end_connection, @filetype_id";
 
             using (SqlConnection connection = new SqlConnection())
             {
@@ -102,7 +72,7 @@
                 {
                     command.Parameters.AddRange(new[]
                     {
-                        new SqlParameter("@stream_id", SqlDbType.NVarChar) { Value = streamId },
+                        new SqlParameter("@file_name", SqlDbType.NVarChar, 100) { Value = file_name },
                         new SqlParameter("@fund_id", SqlDbType.Int) { Value = fundId },
                         new SqlParameter("@start_connection", SqlDbType.NVarChar, 100) { Value = startConnection.ToString("yyyyMMdd") },
                         new SqlParameter("@end_connection", SqlDbType.NVarChar, 100) { Value = endConnection?.ToString("yyyyMMdd") },
