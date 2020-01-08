@@ -1,6 +1,7 @@
 ﻿namespace Pharus.App.Controllers
 {
     using System;
+    using System.IO;
     using System.Linq;
     using System.Globalization;
     using System.Collections.Generic;
@@ -111,15 +112,15 @@
                     if (model.IsActive)
                     {
                         model.Entities = this.subFundsService.GetAllActiveSubFundsWithSelectedViewAndDate(
-                            model.PreSelectedColumns, 
-                            model.SelectedColumns, 
+                            model.PreSelectedColumns,
+                            model.SelectedColumns,
                             chosenDate);
                     }
                     else if (!model.IsActive)
                     {
                         model.Entities = this.subFundsService.GetAllSubFundsWithSelectedViewAndDate(
                             model.PreSelectedColumns,
-                            model.SelectedColumns, 
+                            model.SelectedColumns,
                             chosenDate);
                     }
                 }
@@ -153,7 +154,7 @@
                         {
                             model.Entities = this.subFundsService.GetAllSubFundsWithSelectedViewAndDate(
                                  model.PreSelectedColumns,
-                                 model.SelectedColumns, 
+                                 model.SelectedColumns,
                                  chosenDate);
                         }
                     }
@@ -178,7 +179,7 @@
                     {
                         model.Entities = this.subFundsService.GetAllActiveSubFundsWithSelectedViewAndDate(
                              model.PreSelectedColumns,
-                             model.SelectedColumns, 
+                             model.SelectedColumns,
                              chosenDate);
                     }
                     else if (!model.IsActive)
@@ -273,14 +274,14 @@
 
             HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
 
-            //string fileName = GetFileNameFromFilePath(entityId, chosenDate);
+            string fileName = GetFileNameFromFilePath(entityId, chosenDate);
 
-            //if (string.IsNullOrEmpty(fileName))
-            //{
-            //    return this.View(viewModel);
-            //}
+            if (string.IsNullOrEmpty(fileName))
+            {
+                return this.View(viewModel);
+            }
 
-            //viewModel.FileNameToDisplay = fileName;
+            viewModel.FileNameToDisplay = fileName;
 
             this.ModelState.Clear();
             return this.View(viewModel);
@@ -316,18 +317,36 @@
         {
             SetModelValuesForSpecificView(model);
 
-            model.Entity = this.subFundsService.GetSubFundById(model.EntityId);
-            //viewModel.EntitySubEntities = this.subFundsService.GetSubFund_ShareClasses(viewModel.EntityId);
+            bool isInSelectionMode = false;
+
+            if (model.SelectedColumns != null && model.SelectedColumns.Count > 0)
+            {
+                isInSelectionMode = true;
+            }
 
             var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
             if (model.Command.Equals("Update Table"))
             {
-                if (model.ChosenDate != null)
+                model.Entity = this.subFundsService
+                      .GetSubFundById(chosenDate, model.EntityId);
+
+                if (isInSelectionMode)
                 {
-                    model.Entity = this.subFundsService.GetSubFundById(chosenDate, model.EntityId);
+                    model.EntitySubEntities = this.subFundsService.GetSubFund_ShareClassesWithSelectedViewAndDate(
+                        model.PreSelectedColumns,
+                        model.SelectedColumns,
+                        chosenDate,
+                        model.EntityId);
+                }
+
+                else if (!isInSelectionMode)
+                {
+                    model.EntitySubEntities = this.subFundsService
+                        .GetSubFund_ShareClasses(chosenDate, model.EntityId);
                 }
             }
+
             else if (model.Command.Equals("Search"))
             {
                 if (model.SearchTerm == null)
@@ -335,14 +354,7 @@
                     return this.View(model);
                 }
 
-                model.EntitySubEntities = new List<string[]>();
-
-                //var tableHeaders = this.subFundsService.GetSubFund_ShareClasses(viewModel.EntityId).Take(1).ToList();
-                //var tableFundsWithoutHeaders = this.subFundsService.GetSubFund_ShareClasses(viewModel.EntityId).Skip(1).ToList();
-
-                //CreateTableView.AddHeadersToView(viewModel.EntitySubEntities, tableHeaders);
-
-                //CreateTableView.AddTableToView(viewModel.EntitySubEntities, tableFundsWithoutHeaders, viewModel.SearchTerm.ToLower());
+                model.EntitySubEntities = CreateTableView.AddTableToView(model.EntitySubEntities, model.SearchTerm.ToLower());
             }
 
             if (model.Entity != null && model.EntitySubEntities != null)
@@ -351,6 +363,67 @@
             }
 
             return this.View();
+        }
+
+        [HttpPost]
+        public IActionResult UploadFiles(SpecificEntityViewModel model)
+        {
+            SetModelValuesForSpecificView(model);
+
+            var file = model.UploadEntityFileModel.FileToUpload;
+
+            if (!ModelState.IsValid || file == null || file.Length == 0)
+            {
+                return this.Content("File not loaded");
+            }
+
+            string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\SubfundFile\";
+            string path = $"{networkFileLocation}{file.FileName}";
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+
+            var startConnection = DateTime.ParseExact(model.StartConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+            DateTime? endConnection = null;
+
+            if (!string.IsNullOrEmpty(model.EndConnection))
+            {
+                endConnection = DateTime.ParseExact(model.EndConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            }
+
+            var fileTypeDesc = model.UploadEntityFileModel.FileType;
+            int fileTypeId = this.context.TbDomFileType
+                    .Where(s => s.FiletypeDesc == fileTypeDesc)
+                    .Select(s => s.FiletypeId)
+                    .FirstOrDefault();
+
+            this.entitiesFileService.AddFileToSpecificSubFund(
+                                                file.FileName,
+                                                model.EntityId,
+                                                startConnection,
+                                                endConnection,
+                                                fileTypeId);
+
+            return this.RedirectToAction("All");
+        }
+
+
+        [HttpPost]
+        public FileStream ReadPdfFile(SpecificEntityViewModel model)
+        {
+            FileStream fs = null;
+
+            var path = this.entitiesFileService.LoadSubFundFileToDisplay(model.EntityId, model.ChosenDate);
+
+            if (this.HttpContext.Request.Form.ContainsKey("read_Pdf"))
+            {
+                fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+            }
+
+            return fs;
         }
 
         [HttpPost]
@@ -396,7 +469,7 @@
             EditSubFundBindingModel model = new EditSubFundBindingModel
             {
                 EntityProperties = this.subFundsService.GetSubFundWithDateById(date, entityId),
-                InitialDate = DateTime.Today,       
+                InitialDate = DateTime.Today,
                 SubFundId = entityId,
             };
 
@@ -467,10 +540,10 @@
                     .FirstOrDefault();
 
                 string currency = "EUR";
-                   // this.context.TbDomIsoCurrency
-                   //.Where(c => c.IsoCcyDesc == model.CurrencyCode)
-                   //.Select(c => c.IsoCcyCode)
-                   //.FirstOrDefault();
+                // this.context.TbDomIsoCurrency
+                //.Where(c => c.IsoCcyDesc == model.CurrencyCode)
+                //.Select(c => c.IsoCcyCode)
+                //.FirstOrDefault();
 
                 int? frequencyId = this.context.TbDomNavFrequency
                    .Where(f => f.NfDesc == model.NavFrequency)
@@ -720,10 +793,10 @@
             return this.LocalRedirect(returnUrl);
         }
 
-        //private string GetFileNameFromFilePath(int entityId, string chosenDate)
-        //{
-        //    return this.entitiesFileService.LoadEntityFileToDisplay(entityId, chosenDate).Split('\\').Last();
-        //}
+        private string GetFileNameFromFilePath(int entityId, string chosenDate)
+        {
+            return this.entitiesFileService.LoadSubFundFileToDisplay(entityId, chosenDate).Split('\\').Last();
+        }
 
         private void SetModelValuesForSpecificView(SpecificEntityViewModel model)
         {
@@ -732,7 +805,7 @@
             model.Entity = this.subFundsService.GetSubFundById(date, model.EntityId);
             model.EntitySubEntities = this.subFundsService.GetSubFund_ShareClasses(date, model.EntityId);
             model.SubEntitiesHeadersForColumnSelection = this.subFundsService.GetAllActiveSubFunds().Take(1).ToList();
-            //model.FileNameToDisplay = GetFileNameFromFilePath(model.EntityId, model.ChosenDate);
+            model.FileNameToDisplay = GetFileNameFromFilePath(model.EntityId, model.ChosenDate);
             model.EntityTimeline = this.subFundsService.GetSubFundTimeline(model.EntityId);
             model.EntityDocuments = this.subFundsService.GetAllSubFundDocumens(model.EntityId);
 
