@@ -6,8 +6,6 @@
     {
         string LoadFundFileToDisplay(int fundId, string chosenDate);
 
-        string GetStreamIdFromFileName(string fileName);
-
         void AddFileToSpecificFund(
                             string streamId,
                             int fundId,
