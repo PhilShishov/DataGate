@@ -5,15 +5,13 @@
 
 <div class="button-holder d-flex justify-content-center mb-3">
     <div id="searchFieldDiv" class="w-50">
-        <select name="SelectTerm"
+        <select asp-for="SelectTerm"
                 id="SelectTerm"
                 class="form-control input-sm"
-                style="width:300px"></select>
-
-        <input type="submit"
-               class="bg-pharus text-white"
-               asp-for="Command"
-               value="Select" />
+                style="width:300px"
+                onchange="this.form.submit()">
+            <option value=@Model.SelectTerm selected>@Model.SelectTerm</option>
+        </select>
     </div>
 
     <div class="w-50">

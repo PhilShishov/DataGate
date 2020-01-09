@@ -265,29 +265,11 @@
                 isInSelectionMode = true;
             }
 
-            if (model.Command.Equals("Update Table") )
+            if (model.Command == null || model.Command.Equals("Apply") || model.Command.Equals("Update Table"))
             {
                 model.Entity = this.fundsService
                        .GetFundById(chosenDate, model.EntityId);
 
-                if (isInSelectionMode)
-                {
-                    CallEntitySubEntitiesWithSelectedColumns(model, chosenDate);
-                }
-
-                else if (!isInSelectionMode)
-                {
-                    model.EntitySubEntities = this.fundsService
-                        .GetFund_SubFunds(chosenDate, model.EntityId);
-                }
-
-                if (model.SelectTerm != null)
-                {
-                    model.EntitySubEntities = CreateTableView.AddTableToView(model.EntitySubEntities, model.SelectTerm.ToLower());
-                }
-            }
-            else if (model.Command.Equals("Select") || model.Command.Equals("Apply"))
-            {
                 if (model.SelectTerm == null)
                 {
                     if (isInSelectionMode)
@@ -306,13 +288,18 @@
                 {
                     CallEntitySubEntitiesWithSelectedColumns(model, chosenDate);
                 }
+
                 else if (!isInSelectionMode)
                 {
-                    model.EntitySubEntities = this.fundsService.GetFund_SubFunds(chosenDate, model.EntityId);
+                    model.EntitySubEntities = this.fundsService
+                        .GetFund_SubFunds(chosenDate, model.EntityId);
                 }
 
-                model.EntitySubEntities = CreateTableView.AddTableToView(model.EntitySubEntities, model.SelectTerm.ToLower());
-            }
+                if (model.SelectTerm != null)
+                {
+                    model.EntitySubEntities = CreateTableView.AddTableToView(model.EntitySubEntities, model.SelectTerm.ToLower());
+                }
+            }          
 
             if (model.Entity != null && model.EntitySubEntities != null)
             {
