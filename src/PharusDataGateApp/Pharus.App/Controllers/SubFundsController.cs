@@ -57,7 +57,7 @@
             return this.View(model);
         }
 
-        public JsonResult AutoCompleteSubFundList(string searchTerm)
+        public JsonResult AutoCompleteSubFundList(string selectTerm)
         {
             var result = this.context
                 .TbHistorySubFund
@@ -65,11 +65,11 @@
                 .Select(hsf => hsf.FirstOrDefault())
                 .ToList();
 
-            if (searchTerm != null)
+            if (selectTerm != null)
             {
                 result = this.context
                     .TbHistorySubFund
-                    .Where(hsf => hsf.SfOfficialSubFundName.Contains(searchTerm))
+                    .Where(hsf => hsf.SfOfficialSubFundName.Contains(selectTerm))
                     .GroupBy(hsf => hsf.SfOfficialSubFundName)
                     .Select(hsf => hsf.FirstOrDefault())
                     .ToList();
@@ -133,7 +133,7 @@
 
             else if (model.Command.Equals("Search"))
             {
-                if (model.SearchTerm == null)
+                if (model.SelectTerm == null)
                 {
                     if (isInSelectionMode)
                     {
@@ -184,7 +184,7 @@
                     }
                 }
 
-                model.Entities = CreateTableView.AddTableToView(model.Entities, model.SearchTerm.ToLower());
+                model.Entities = CreateTableView.AddTableToView(model.Entities, model.SelectTerm.ToLower());
             }
 
             if (model.Entities != null)
@@ -272,18 +272,18 @@
             return this.View(viewModel);
         }
 
-        public JsonResult AutoCompleteShareClassesList(string searchTerm, int entityId)
+        public JsonResult AutoCompleteShareClassesList(string selectTerm, int entityId)
         {
             var entitiesToSearch = this.subFundsService
                 .GetSubFund_ShareClasses(null, entityId)
                 .Skip(1)
                 .ToList();
 
-            if (searchTerm != null)
+            if (selectTerm != null)
             {
                 entitiesToSearch = entitiesToSearch.Where(sc => sc[3]
                                                         .ToLower()
-                                                        .Contains(searchTerm
+                                                        .Contains(selectTerm
                                                         .ToLower()))
                                                     .ToList();
             }
@@ -330,7 +330,7 @@
 
             else if (model.Command.Equals("Search") || model.Command.Equals("Apply"))
             {
-                if (model.SearchTerm == null)
+                if (model.SelectTerm == null)
                 {
                     if (isInSelectionMode)
                     {
@@ -355,7 +355,7 @@
                         .GetSubFund_ShareClasses(chosenDate, model.EntityId);
                 }
 
-                model.EntitySubEntities = CreateTableView.AddTableToView(model.EntitySubEntities, model.SearchTerm.ToLower());
+                model.EntitySubEntities = CreateTableView.AddTableToView(model.EntitySubEntities, model.SelectTerm.ToLower());
             }
 
             if (model.Entity != null && model.EntitySubEntities != null)

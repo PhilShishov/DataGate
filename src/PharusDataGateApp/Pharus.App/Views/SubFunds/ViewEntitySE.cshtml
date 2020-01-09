@@ -196,7 +196,7 @@
             const url = "/SubFunds/AutoCompleteShareClassesList";
             const entityId = @Model.EntityId;
 
-            $("#SearchTerm").select2({
+            $("#SelectTerm").select2({
                 placeholder: "Select Share Classes",
                 theme: "classic",
                 ajax: {
@@ -205,7 +205,7 @@
                     delay: 250,
                     data: function (params) {
                         return {
-                            searchTerm: params.term,
+                            selectTerm: params.term,
                             entityId: entityId
                         };
                     },

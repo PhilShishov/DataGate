@@ -23,7 +23,7 @@ namespace Pharus.App.Models.ViewModels
 
         public string BaseEntityId { get; set; }
 
-        public string SearchTerm { get; set; }
+        public string SelectTerm { get; set; }
 
         public List<string> PreSelectedColumns { get; set; }
 

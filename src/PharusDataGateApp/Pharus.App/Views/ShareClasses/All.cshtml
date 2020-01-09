@@ -57,7 +57,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script>
         $(document).ready(function () {
-            $("#SearchTerm").select2({
+            $("#SelectTerm").select2({
                 placeholder: "Select Share Classes",
                 theme: "classic",
                 ajax: {
@@ -65,7 +65,7 @@
                     dataType: "json",
                     delay: 250,
                     data: function (params) {
-                        return { searchTerm: params.term };
+                        return { selectTerm: params.term };
                     },
                     processResults: function (data) {
                         return { results: data }

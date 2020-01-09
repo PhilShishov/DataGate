@@ -198,7 +198,7 @@
             const url = "/Funds/AutoCompleteSubFundList";
             const entityId = @Model.EntityId;
 
-            $("#SearchTerm").select2({
+            $("#SelectTerm").select2({
                 placeholder: "Select Sub Funds",
                 theme: "classic",
                 ajax: {
@@ -207,7 +207,7 @@
                     delay: 250,
                     data: function (params) {
                         return {
-                            searchTerm: params.term,
+                            selectTerm: params.term,
                             entityId: entityId
                         };
                     },

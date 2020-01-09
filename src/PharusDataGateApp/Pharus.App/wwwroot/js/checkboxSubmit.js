@@ -1,4 +1,4 @@
-﻿function checkboxRedirect() {
+﻿function checkboxSubmit() {
     const checkbox = document.getElementById('activeCheckBox');
 
     checkbox.addEventListener('change', submitForm)

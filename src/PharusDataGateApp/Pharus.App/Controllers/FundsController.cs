@@ -60,7 +60,7 @@
             return this.View(model);
         }
 
-        public JsonResult AutoCompleteFundList(string searchTerm)
+        public JsonResult AutoCompleteFundList(string selectTerm)
         {
             var result = this.context
                 .TbHistoryFund
@@ -68,11 +68,11 @@
                 .Select(hf => hf.FirstOrDefault())
                 .ToList();
 
-            if (searchTerm != null)
+            if (selectTerm != null)
             {
                 result = this.context
                     .TbHistoryFund
-                    .Where(hf => hf.FOfficialFundName.Contains(searchTerm))
+                    .Where(hf => hf.FOfficialFundName.Contains(selectTerm))
                     .GroupBy(hf => hf.FOfficialFundName)
                     .Select(hf => hf.FirstOrDefault())
                     .ToList();
@@ -136,63 +136,12 @@
                         model.Entities = this.fundsService.GetAllFunds(chosenDate);
                     }
                 }
-            }
 
-            else if (model.Command.Equals("Search"))
-            {
-                if (model.SearchTerm == null)
+                if (model.SelectTerm != null)
                 {
-                    if (isInSelectionMode)
-                    {
-                        if (model.IsActive)
-                        {
-                            CallActiveEntitiesWithSelectedColumns(model, chosenDate);
-                        }
-                        else if (!model.IsActive)
-                        {
-                            CallAllEntitiesWithSelectedColumns(model, chosenDate);
-                        }
-                    }
-                    else if (!isInSelectionMode)
-                    {
-                        if (model.IsActive)
-                        {
-                            model.Entities = this.fundsService.GetAllActiveFunds(chosenDate);
-                        }
-                        else if (!model.IsActive)
-                        {
-                            model.Entities = this.fundsService.GetAllFunds(chosenDate);
-                        }
-                    }
-
-                    return this.View(model);
+                    model.Entities = CreateTableView.AddTableToView(model.Entities, model.SelectTerm.ToLower());
                 }
-
-                if (isInSelectionMode)
-                {
-                    if (model.IsActive)
-                    {
-                        CallActiveEntitiesWithSelectedColumns(model, chosenDate);
-                    }
-                    else if (!model.IsActive)
-                    {
-                        CallAllEntitiesWithSelectedColumns(model, chosenDate);
-                    }
-                }
-                else if (!isInSelectionMode)
-                {
-                    if (model.IsActive)
-                    {
-                        model.Entities = this.fundsService.GetAllActiveFunds(chosenDate);
-                    }
-                    else if (!model.IsActive)
-                    {
-                        model.Entities = this.fundsService.GetAllFunds(chosenDate);
-                    }
-                }
-
-                model.Entities = CreateTableView.AddTableToView(model.Entities, model.SearchTerm.ToLower());
-            }
+            }           
 
             if (model.Entities != null)
             {
@@ -276,18 +225,18 @@
             return this.View(viewModel);
         }
 
-        public JsonResult AutoCompleteSubFundList(string searchTerm, int entityId)
+        public JsonResult AutoCompleteSubFundList(string selectTerm, int entityId)
         {
             var entitiesToSearch = this.fundsService
                 .GetFund_SubFunds(null, entityId)
                 .Skip(1)
                 .ToList();
 
-            if (searchTerm != null)
+            if (selectTerm != null)
             {
                 entitiesToSearch = entitiesToSearch.Where(sf => sf[3]
                                                      .ToLower()
-                                                     .Contains(searchTerm
+                                                     .Contains(selectTerm
                                                      .ToLower()))
                                                    .ToList();
             }
@@ -331,10 +280,15 @@
                     model.EntitySubEntities = this.fundsService
                         .GetFund_SubFunds(chosenDate, model.EntityId);
                 }
+
+                if (model.SelectTerm != null)
+                {
+                    model.EntitySubEntities = CreateTableView.AddTableToView(model.EntitySubEntities, model.SelectTerm.ToLower());
+                }
             }
-            else if (model.Command.Equals("Search") || model.Command.Equals("Apply"))
+            else if (model.Command.Equals("Select") || model.Command.Equals("Apply"))
             {
-                if (model.SearchTerm == null)
+                if (model.SelectTerm == null)
                 {
                     if (isInSelectionMode)
                     {
@@ -357,7 +311,7 @@
                     model.EntitySubEntities = this.fundsService.GetFund_SubFunds(chosenDate, model.EntityId);
                 }
 
-                model.EntitySubEntities = CreateTableView.AddTableToView(model.EntitySubEntities, model.SearchTerm.ToLower());
+                model.EntitySubEntities = CreateTableView.AddTableToView(model.EntitySubEntities, model.SelectTerm.ToLower());
             }
 
             if (model.Entity != null && model.EntitySubEntities != null)
