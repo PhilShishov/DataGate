@@ -136,6 +136,20 @@
                 }
             }
 
+            //var tableFundsWithoutHeaders = this.fundsService.GetAllActiveFunds().Skip(1);
+
+            //    foreach (var fund in tableFundsWithoutHeaders)
+            //    {
+            //        foreach (var stringValue in fund)
+            //        {
+            //            if (stringValue != null && stringValue.ToLower().Contains(searchString))
+            //            {
+            //                this.activeFundsView.Add(fund);
+            //                break;
+            //            }
+            //        }
+            //    }
+
             if (model.Entities != null)
             {
                 return this.View(model);

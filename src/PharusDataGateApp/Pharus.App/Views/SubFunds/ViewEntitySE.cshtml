@@ -28,14 +28,14 @@
         </a>
     </div>
 
-    <partial name="Specific_Entity_Partial/SpecificEntityUpdatePartial" />
+    <partial name="Specific_Entity_Partial/SpecificEntityUpdate_Partial" />
 
     <div class="d-flex justify-content-between">
 
-        <partial name="Specific_Entity_Partial/SpecificEntityInfoPartial" />
+        <partial name="Specific_Entity_Partial/SpecificEntityInfo_Partial" />
 
         <div class="w-50 float-right">
-            <partial name="Specific_Entity_Partial/SpecificEntityUploadDocumentsPartial" />
+            <partial name="Specific_Entity_Partial/SpecificEntityUploadDocuments_Partial" />
             @if (this.User.IsInRole("Admin"))
             {
                 <div class="mt-5">
@@ -57,14 +57,14 @@
         </select>
     </div>
 
-    <partial name="Specific_Entity_Partial/SpecificEntityAllDocumentsPartial" />
-    <partial name="Specific_Entity_Partial/SpecificEntityTimeLinePartial" />
+    <partial name="Specific_Entity_Partial/SpecificEntityAllDocuments_Partial" />
+    <partial name="Specific_Entity_Partial/SpecificEntityTimeLine_Partial" />
 
     <div id="subEntities">
 
-        <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesBindingTablePartial" />
-        <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesButtonsPartial" />
-        <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesModalPartial" />
+        <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesBindingTable_Partial" />
+        <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesButtons_Partial" />
+        <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesModal_Partial" />
 
         <div class="table-responsive border-0 mx-auto" id="tableDoubleScroll">
             <table class="table table-hover text-nowrap">
@@ -108,7 +108,7 @@
       enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <partial name="Specific_Entity_Partial/SpecificEntityUploadPartial" />
+    <partial name="Specific_Entity_Partial/SpecificEntityUpload_Partial" />
 </form>
 
 @section Scripts{
