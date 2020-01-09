@@ -1,0 +1,23 @@
+﻿@{
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<button class="extractbtn"
+        id="extractBtnExl"
+        type="submit"
+        formaction="/@controllerName/ExtractExcelSubEntities"
+        name="extract_Excel">
+    <img src="~/images/Icon_Excel.ico"
+         width="35"
+         height="35" />
+</button>
+
+<button class="extractbtn"
+        id="extractBtnPDF"
+        type="submit"
+        formaction="/@controllerName/ExtractPdfSubEntities"
+        name="extract_Pdf">
+    <img src="~/images/Icon_Pdf.ico"
+         width="35"
+         height="35" />
+</button>
