@@ -33,7 +33,7 @@
         <partial name="Specific_Entity_Partial/SpecificEntityInfo_Partial" />
 
         <div class="w-50 float-right">
-            <partial name="Specific_Entity_Partial/SpecificEntityUploadDocuments_Partial" />
+            <partial name="Specific_Entity_Partial/SpecificEntityLoad_Upload_Documents_Partial" />
             @if (this.User.IsInRole("Admin"))
             {
                 <div class="mt-5">
@@ -64,7 +64,7 @@
 
         <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesBindingTable_Partial" />
 
-        <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesSelect_Extract_ModalBtn_Partial" />     
+        <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesSelect_Extract_ModalBtn_Partial" />
         <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesModal_Partial" />
 
         <div class="table-responsive border-0 mx-auto" id="tableDoubleScroll">
@@ -104,12 +104,21 @@
 </form>
 
 <form asp-controller="Funds"
-      asp-action="UploadFiles"
+      asp-action="UploadProspectus"
       method="post"
       enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <partial name="Specific_Entity_Partial/SpecificEntityUpload_Partial" />
+    <partial name="Specific_Entity_Partial/SpecificEntityUploadPros_Partial" />
+</form>
+
+<form asp-controller="Funds"
+      asp-action="UploadAgreement"
+      method="post"
+      enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    
+    <partial name="Specific_Entity_Partial/SpecificEntityUploadAgr_Partial" />
 </form>
 
 @section Scripts{

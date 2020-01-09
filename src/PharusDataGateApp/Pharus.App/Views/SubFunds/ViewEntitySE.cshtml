@@ -35,7 +35,7 @@
         <partial name="Specific_Entity_Partial/SpecificEntityInfo_Partial" />
 
         <div class="w-50 float-right">
-            <partial name="Specific_Entity_Partial/SpecificEntityUploadDocuments_Partial" />
+            <partial name="Specific_Entity_Partial/SpecificEntityLoad_Upload_Documents_Partial" />
             @if (this.User.IsInRole("Admin"))
             {
                 <div class="mt-5">
@@ -103,12 +103,21 @@
 </form>
 
 <form asp-controller="SubFunds"
-      asp-action="UploadFiles"
+      asp-action="UploadProspectus"
       method="post"
       enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <partial name="Specific_Entity_Partial/SpecificEntityUpload_Partial" />
+    <partial name="Specific_Entity_Partial/SpecificEntityUploadPros_Partial" />
+</form>
+
+<form asp-controller="SubFunds"
+      asp-action="UploadAgreement"
+      method="post"
+      enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <partial name="Specific_Entity_Partial/SpecificEntityUploadAgr_Partial" />
 </form>
 
 @section Scripts{

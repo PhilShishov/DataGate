@@ -1,0 +1,38 @@
+﻿@model Pharus.App.Models.ViewModels.Entities.SpecificEntityViewModel
+
+@{
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<input asp-for="EntityId" type="text" hidden>
+<input asp-for="StartConnection" type="text" hidden>
+<input asp-for="EndConnection" type="text" hidden>
+<input asp-for="ChosenDate" type="date" hidden>
+
+<div class="modal"
+     id="upProspModal"
+     role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body d-grid justify-content-center">
+                <div class="form-group">
+                    <select class="form-control maxw-270" asp-for="UploadEntityFileModel.FileType" required>
+                        <option selected disabled>-- Choose File Type --</option>
+                        @foreach (var type in (List<string>)ViewData["FileTypes"])
+                        {
+                            <option value="@type">@type</option>
+                        }
+                    </select>
+                    <span asp-validation-for="UploadEntityFileModel.FileType" class="text-danger"></span>
+                </div>
+
+                <input asp-for="UploadEntityFileModel.FileToUpload" type="file" required>
+
+                <button type="submit"
+                        class="btn bg-pharus text-white">
+                    Upload Document
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
