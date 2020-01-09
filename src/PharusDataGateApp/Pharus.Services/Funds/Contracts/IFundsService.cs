@@ -39,6 +39,8 @@
 
         List<string[]> GetAllFundDocumens(int id);
 
+        List<string[]> PrepareFund_SubFundsForPDFExtract(DateTime? chosenDate);
+
         void EditFund(
                         int fundId,
                         string initialDate,
