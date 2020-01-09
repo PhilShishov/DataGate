@@ -111,17 +111,11 @@
                 {
                     if (model.IsActive)
                     {
-                        model.Entities = this.subFundsService.GetAllActiveSubFundsWithSelectedViewAndDate(
-                            model.PreSelectedColumns,
-                            model.SelectedColumns,
-                            chosenDate);
+                        CallActiveEntitiesWithSelectedColumns(model, chosenDate);
                     }
                     else if (!model.IsActive)
                     {
-                        model.Entities = this.subFundsService.GetAllSubFundsWithSelectedViewAndDate(
-                            model.PreSelectedColumns,
-                            model.SelectedColumns,
-                            chosenDate);
+                        CallAllEntitiesWithSelectedColumns(model, chosenDate);
                     }
                 }
                 else if (!isInSelectionMode)
@@ -145,17 +139,11 @@
                     {
                         if (model.IsActive)
                         {
-                            model.Entities = this.subFundsService.GetAllActiveSubFundsWithSelectedViewAndDate(
-                                 model.PreSelectedColumns,
-                                 model.SelectedColumns,
-                                 chosenDate);
+                            CallActiveEntitiesWithSelectedColumns(model, chosenDate);
                         }
                         else if (!model.IsActive)
                         {
-                            model.Entities = this.subFundsService.GetAllSubFundsWithSelectedViewAndDate(
-                                 model.PreSelectedColumns,
-                                 model.SelectedColumns,
-                                 chosenDate);
+                            CallAllEntitiesWithSelectedColumns(model, chosenDate);
                         }
                     }
                     else if (!isInSelectionMode)
@@ -177,17 +165,11 @@
                 {
                     if (model.IsActive)
                     {
-                        model.Entities = this.subFundsService.GetAllActiveSubFundsWithSelectedViewAndDate(
-                             model.PreSelectedColumns,
-                             model.SelectedColumns,
-                             chosenDate);
+                        CallActiveEntitiesWithSelectedColumns(model, chosenDate);
                     }
                     else if (!model.IsActive)
                     {
-                        model.Entities = this.subFundsService.GetAllSubFundsWithSelectedViewAndDate(
-                            model.PreSelectedColumns,
-                            model.SelectedColumns,
-                            chosenDate);
+                        CallAllEntitiesWithSelectedColumns(model, chosenDate);
                     }
                 }
                 else if (!isInSelectionMode)
@@ -211,7 +193,7 @@
             }
 
             return this.RedirectToPage("/SubFunds/All");
-        }
+        }      
 
         [HttpPost]
         public FileStreamResult ExtractExcelEntities(EntitiesViewModel model)
@@ -812,6 +794,22 @@
             return this.LocalRedirect(returnUrl);
         }
 
+        private void CallAllEntitiesWithSelectedColumns(EntitiesViewModel model, DateTime? chosenDate)
+        {
+            model.Entities = this.subFundsService.GetAllSubFundsWithSelectedViewAndDate(
+                model.PreSelectedColumns,
+                model.SelectedColumns,
+                chosenDate);
+        }
+
+        private void CallActiveEntitiesWithSelectedColumns(EntitiesViewModel model, DateTime? chosenDate)
+        {
+            model.Entities = this.subFundsService.GetAllActiveSubFundsWithSelectedViewAndDate(
+                                        model.PreSelectedColumns,
+                                        model.SelectedColumns,
+                                        chosenDate);
+        }
+
         private void CallEntitySubEntitiesWithSelectedColumns(SpecificEntityViewModel model, DateTime chosenDate)
         {
             model.EntitySubEntities = this.subFundsService.GetSubFund_ShareClassesWithSelectedViewAndDate(
@@ -833,9 +831,9 @@
             model.Entity = this.subFundsService.GetSubFundById(date, model.EntityId);
             model.EntitySubEntities = this.subFundsService.GetSubFund_ShareClasses(date, model.EntityId);
             model.SubEntitiesHeadersForColumnSelection = this.subFundsService
-                                                                .GetAllActiveSubFunds()
-                                                                .Take(1)
-                                                                .ToList();
+                                                                    .GetSubFund_ShareClasses(date, model.EntityId)
+                                                                    .Take(1)
+                                                                    .ToList();
             model.FileNameToDisplay = GetFileNameFromFilePath(model.EntityId, model.ChosenDate);
             model.EntityTimeline = this.subFundsService.GetSubFundTimeline(model.EntityId);
             model.EntityDocuments = this.subFundsService.GetAllSubFundDocumens(model.EntityId);
