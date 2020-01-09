@@ -21,14 +21,14 @@
 }
 
 <form asp-controller="Funds"
-      class="justify-content-between" 
+      class="justify-content-between"
       method="post">
 
     <partial name="Specific_Entity_Partial/SpecificEntityUpdatePartial" />
 
     @*<div style="width:40%;">
-        <canvas id="aumF_Canvas"></canvas>
-    </div>*@
+            <canvas id="aumF_Canvas"></canvas>
+        </div>*@
     <div class="d-flex justify-content-between">
 
         <partial name="Specific_Entity_Partial/SpecificEntityInfoPartial" />
@@ -67,37 +67,39 @@
         <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesButtonsPartial" />
         <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesModalPartial" />
 
-        <table class="table table-bordered table-hover table-responsive text-nowrap tableDoubleScroll">
-            <thead>
-                @for (int row = 0; row < 1; row++)
-                {
-                    <tr>
-                        @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
-                        {
-                            <th class="text-white p-1 tableHeaderPharus">
-                                @Model.EntitySubEntities[row][col]
-                            </th>
-                        }
-                    </tr>
-                }
-            </thead>
+        <div class="table-responsive border-0 mx-auto" id="tableDoubleScroll">
+            <table class="table table-hover text-nowrap">
+                <thead>
+                    @for (int row = 0; row < 1; row++)
+                    {
+                        <tr>
+                            @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
+                            {
+                                <th class="text-white p-1 tableHeaderPharus">
+                                    @Model.EntitySubEntities[row][col]
+                                </th>
+                            }
+                        </tr>
+                    }
+                </thead>
 
-            <tbody>
-                @for (int row = 1; row < Model.EntitySubEntities.Count; row++)
-                {
-                    var subfundId = Model.EntitySubEntities[row][2];
+                <tbody>
+                    @for (int row = 1; row < Model.EntitySubEntities.Count; row++)
+                    {
+                        var subfundId = Model.EntitySubEntities[row][2];
 
-                    <tr class="tableRowPharus" onclick="document.location = '/SubFunds/ViewEntitySE/@subfundId/@Model.ChosenDate'">
-                        @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
-                        {
-                            <td class="p-1">
-                                @Model.EntitySubEntities[row][col]
-                            </td>
-                        }
-                    </tr>
-                }
-            </tbody>
-        </table>
+                        <tr class="tableRowPharus" onclick="document.location = '/SubFunds/ViewEntitySE/@subfundId/@Model.ChosenDate'">
+                            @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
+                            {
+                                <td class="p-1">
+                                    @Model.EntitySubEntities[row][col]
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 </form>
 
@@ -222,7 +224,7 @@
             // Double top scroll for table
 
              $('.double-scroll').doubleScroll();
-            $('.tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
+            $('#tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
 
             // ________________________________________________________
             //
