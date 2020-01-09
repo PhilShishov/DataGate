@@ -288,6 +288,20 @@ namespace Pharus.Services.Funds
             }
         }
 
+        public List<string[]> PrepareFund_SubFundsForPDFExtract(DateTime? chosenDate)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                command.CommandText = $"select * from fn_active_subfund_pdf('{chosenDate?.ToString("yyyyMMdd")}')";
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
         // ________________________________________________________
         //
         // Execute query table DB based stored procedure
