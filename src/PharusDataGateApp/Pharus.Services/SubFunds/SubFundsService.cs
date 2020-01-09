@@ -165,21 +165,7 @@ namespace Pharus.Services.SubFunds
             return this.context.TbHistorySubFund
                .Select(f => f.SfOfficialSubFundName)
                .ToList();
-        }
-
-        public List<string[]> GetSubFundById(int id)
-        {
-            using (SqlConnection connection = new SqlConnection())
-            {
-                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-
-                command.CommandText = $"select * from fn_all_subfund('{this.defaultDate}') where [ID] = {id}";
-
-                return CreateModel.CreateModelWithHeadersAndValue(command);
-            }
-        }
+        }       
 
         public List<string[]> GetSubFundById(DateTime? chosenDate, int id)
         {

@@ -264,7 +264,7 @@
             {
                 ChosenDate = chosenDate,
                 EntityId = entityId,
-                Entity = this.fundsService.GetFundById(entityId),
+                Entity = this.fundsService.GetFundById(date, entityId),
                 EntitySubEntities = this.fundsService.GetFund_SubFunds(date, entityId),
                 SubEntitiesHeadersForColumnSelection = this.fundsService
                                                                 .GetFund_SubFunds(date, entityId)
