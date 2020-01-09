@@ -329,18 +329,14 @@
 
             var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
-            if (model.Command.Equals("Update Table") || model.Command.Equals("Apply"))
+            if (model.Command.Equals("Update Table"))
             {
                 model.Entity = this.subFundsService
                       .GetSubFundById(chosenDate, model.EntityId);
 
                 if (isInSelectionMode)
                 {
-                    model.EntitySubEntities = this.subFundsService.GetSubFund_ShareClassesWithSelectedViewAndDate(
-                        model.PreSelectedColumns,
-                        model.SelectedColumns,
-                        chosenDate,
-                        model.EntityId);
+                    CallEntitySubEntitiesWithSelectedColumns(model, chosenDate);
                 }
 
                 else if (!isInSelectionMode)
@@ -350,11 +346,31 @@
                 }
             }
 
-            else if (model.Command.Equals("Search"))
+            else if (model.Command.Equals("Search") || model.Command.Equals("Apply"))
             {
                 if (model.SearchTerm == null)
                 {
+                    if (isInSelectionMode)
+                    {
+                        CallEntitySubEntitiesWithSelectedColumns(model, chosenDate);
+                    }
+                    else if (!isInSelectionMode)
+                    {
+                        model.EntitySubEntities = this.subFundsService
+                            .GetSubFund_ShareClasses(chosenDate, model.EntityId);
+                    }
+
                     return this.View(model);
+                }
+
+                if (isInSelectionMode)
+                {
+                    CallEntitySubEntitiesWithSelectedColumns(model, chosenDate);
+                }
+                else if (!isInSelectionMode)
+                {
+                    model.EntitySubEntities = this.subFundsService
+                        .GetSubFund_ShareClasses(chosenDate, model.EntityId);
                 }
 
                 model.EntitySubEntities = CreateTableView.AddTableToView(model.EntitySubEntities, model.SearchTerm.ToLower());
@@ -794,6 +810,15 @@
             // End of if statement
 
             return this.LocalRedirect(returnUrl);
+        }
+
+        private void CallEntitySubEntitiesWithSelectedColumns(SpecificEntityViewModel model, DateTime chosenDate)
+        {
+            model.EntitySubEntities = this.subFundsService.GetSubFund_ShareClassesWithSelectedViewAndDate(
+                                    model.PreSelectedColumns,
+                                    model.SelectedColumns,
+                                    chosenDate,
+                                    model.EntityId);
         }
 
         private string GetFileNameFromFilePath(int entityId, string chosenDate)
