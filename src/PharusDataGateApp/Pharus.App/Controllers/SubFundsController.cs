@@ -129,62 +129,11 @@
                         model.Entities = this.subFundsService.GetAllSubFunds(chosenDate);
                     }
                 }
-            }
 
-            else if (model.Command.Equals("Search"))
-            {
-                if (model.SelectTerm == null)
+                if (model.SelectTerm != null)
                 {
-                    if (isInSelectionMode)
-                    {
-                        if (model.IsActive)
-                        {
-                            CallActiveEntitiesWithSelectedColumns(model, chosenDate);
-                        }
-                        else if (!model.IsActive)
-                        {
-                            CallAllEntitiesWithSelectedColumns(model, chosenDate);
-                        }
-                    }
-                    else if (!isInSelectionMode)
-                    {
-                        if (model.IsActive)
-                        {
-                            model.Entities = this.subFundsService.GetAllActiveSubFunds(chosenDate);
-                        }
-                        else if (!model.IsActive)
-                        {
-                            model.Entities = this.subFundsService.GetAllSubFunds(chosenDate);
-                        }
-                    }
-
-                    return this.View(model);
+                    model.Entities = CreateTableView.AddTableToView(model.Entities, model.SelectTerm.ToLower());
                 }
-
-                if (isInSelectionMode)
-                {
-                    if (model.IsActive)
-                    {
-                        CallActiveEntitiesWithSelectedColumns(model, chosenDate);
-                    }
-                    else if (!model.IsActive)
-                    {
-                        CallAllEntitiesWithSelectedColumns(model, chosenDate);
-                    }
-                }
-                else if (!isInSelectionMode)
-                {
-                    if (model.IsActive)
-                    {
-                        model.Entities = this.subFundsService.GetAllActiveSubFunds(chosenDate);
-                    }
-                    else if (!model.IsActive)
-                    {
-                        model.Entities = this.subFundsService.GetAllSubFunds(chosenDate);
-                    }
-                }
-
-                model.Entities = CreateTableView.AddTableToView(model.Entities, model.SelectTerm.ToLower());
             }
 
             if (model.Entities != null)
@@ -311,25 +260,11 @@
 
             var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
-            if (model.Command.Equals("Update Table"))
+            if (model.Command == null || model.Command.Equals("Apply") || model.Command.Equals("Update Table"))
             {
                 model.Entity = this.subFundsService
                       .GetSubFundById(chosenDate, model.EntityId);
 
-                if (isInSelectionMode)
-                {
-                    CallEntitySubEntitiesWithSelectedColumns(model, chosenDate);
-                }
-
-                else if (!isInSelectionMode)
-                {
-                    model.EntitySubEntities = this.subFundsService
-                        .GetSubFund_ShareClasses(chosenDate, model.EntityId);
-                }
-            }
-
-            else if (model.Command.Equals("Search") || model.Command.Equals("Apply"))
-            {
                 if (model.SelectTerm == null)
                 {
                     if (isInSelectionMode)
@@ -349,14 +284,18 @@
                 {
                     CallEntitySubEntitiesWithSelectedColumns(model, chosenDate);
                 }
+
                 else if (!isInSelectionMode)
                 {
                     model.EntitySubEntities = this.subFundsService
                         .GetSubFund_ShareClasses(chosenDate, model.EntityId);
                 }
 
-                model.EntitySubEntities = CreateTableView.AddTableToView(model.EntitySubEntities, model.SelectTerm.ToLower());
-            }
+                if (model.SelectTerm != null)
+                {
+                    model.EntitySubEntities = CreateTableView.AddTableToView(model.EntitySubEntities, model.SelectTerm.ToLower());
+                }
+            }           
 
             if (model.Entity != null && model.EntitySubEntities != null)
             {
