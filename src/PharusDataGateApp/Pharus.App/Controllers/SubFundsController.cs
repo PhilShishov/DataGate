@@ -104,51 +104,38 @@
             {
                 chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             }
-
-            if (model.Command == null || model.Command.Equals("Update Table") || model.Command.Equals("Apply"))
+            if (isInSelectionMode)
             {
-                if (isInSelectionMode)
+                if (model.IsActive)
                 {
-                    if (model.IsActive)
-                    {
-                        CallActiveEntitiesWithSelectedColumns(model, chosenDate);
-                    }
-                    else if (!model.IsActive)
-                    {
-                        CallAllEntitiesWithSelectedColumns(model, chosenDate);
-                    }
+                    CallActiveEntitiesWithSelectedColumns(model, chosenDate);
                 }
-                else if (!isInSelectionMode)
+                else if (!model.IsActive)
                 {
-                    if (model.IsActive)
-                    {
-                        model.Entities = this.subFundsService.GetAllActiveSubFunds(chosenDate);
-                    }
-                    else if (!model.IsActive)
-                    {
-                        model.Entities = this.subFundsService.GetAllSubFunds(chosenDate);
-                    }
+                    CallAllEntitiesWithSelectedColumns(model, chosenDate);
                 }
-
-                if (model.SelectTerm != null)
+            }
+            else if (!isInSelectionMode)
+            {
+                if (model.IsActive)
                 {
-                    model.Entities = CreateTableView.AddTableToView(model.Entities, model.SelectTerm.ToLower());
+                    model.Entities = this.subFundsService.GetAllActiveSubFunds(chosenDate);
+                }
+                else if (!model.IsActive)
+                {
+                    model.Entities = this.subFundsService.GetAllSubFunds(chosenDate);
                 }
             }
 
-            //var tableFundsWithoutHeaders = this.fundsService.GetAllActiveFunds().Skip(1);
+            if (model.SelectTerm != null)
+            {
+                model.Entities = CreateTableView.AddTableToView(model.Entities, model.SelectTerm.ToLower());
+            }
 
-            //    foreach (var fund in tableFundsWithoutHeaders)
-            //    {
-            //        foreach (var stringValue in fund)
-            //        {
-            //            if (stringValue != null && stringValue.ToLower().Contains(searchString))
-            //            {
-            //                this.activeFundsView.Add(fund);
-            //                break;
-            //            }
-            //        }
-            //    }
+            if (model.SearchTerm != null)
+            {
+                model.Entities = CreateTableView.AddTableToView(model.Entities, model.SearchTerm.ToLower());
+            }
 
             if (model.Entities != null)
             {
