@@ -119,16 +119,16 @@
                     if (model.IsActive)
                     {
                         model.Entities = this.fundsService.GetAllActiveFundsWithSelectedViewAndDate(
-                            model.PreSelectedColumns,
-                            model.SelectedColumns,
-                            chosenDate);
+                                                            model.PreSelectedColumns,
+                                                            model.SelectedColumns,
+                                                            chosenDate);
                     }
                     else if (!model.IsActive)
                     {
                         model.Entities = this.fundsService.GetAllFundsWithSelectedViewAndDate(
-                            model.PreSelectedColumns,
-                            model.SelectedColumns,
-                            chosenDate);
+                                                            model.PreSelectedColumns,
+                                                            model.SelectedColumns,
+                                                            chosenDate);
                     }
                 }
                 else if (!isInSelectionMode)
@@ -279,7 +279,7 @@
 
             this.ViewData["FileTypes"] = this.fundsSelectListService.GetAllFundFileTypes();
 
-            HttpContext.Session.SetString("entityId", Convert.ToString(entityId));         
+            HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
 
             string fileName = GetFileNameFromFilePath(entityId, chosenDate);
 
@@ -334,7 +334,7 @@
                 isInSelectionMode = true;
             }
 
-            if (model.Command.Equals("Update Table") || model.Command.Equals("Apply"))
+            if (model.Command.Equals("Update Table") )
             {
                 model.Entity = this.fundsService
                        .GetFundById(chosenDate, model.EntityId);
@@ -342,10 +342,10 @@
                 if (isInSelectionMode)
                 {
                     model.EntitySubEntities = this.fundsService.GetFund_SubFundsWithSelectedViewAndDate(
-                        model.PreSelectedColumns,
-                        model.SelectedColumns,
-                        chosenDate,
-                        model.EntityId);
+                                                                    model.PreSelectedColumns,
+                                                                    model.SelectedColumns,
+                                                                    chosenDate,
+                                                                    model.EntityId);
                 }
 
                 else if (!isInSelectionMode)
@@ -354,11 +354,37 @@
                         .GetFund_SubFunds(chosenDate, model.EntityId);
                 }
             }
-            else if (model.Command.Equals("Search"))
+            else if (model.Command.Equals("Search") || model.Command.Equals("Apply"))
             {
                 if (model.SearchTerm == null)
                 {
+                    if (isInSelectionMode)
+                    {
+                        model.EntitySubEntities = this.fundsService.GetFund_SubFundsWithSelectedViewAndDate(
+                                                        model.PreSelectedColumns,
+                                                        model.SelectedColumns,
+                                                        chosenDate,
+                                                        model.EntityId);
+                    }
+                    else if (!isInSelectionMode)
+                    {
+                        model.EntitySubEntities = this.fundsService.GetFund_SubFunds(chosenDate, model.EntityId);
+                    }
+
                     return this.View(model);
+                }
+
+                if (isInSelectionMode)
+                {
+                    model.EntitySubEntities = this.fundsService.GetFund_SubFundsWithSelectedViewAndDate(
+                           model.PreSelectedColumns,
+                           model.SelectedColumns,
+                           chosenDate,
+                           model.EntityId);
+                }
+                else if (!isInSelectionMode)
+                {
+                    model.EntitySubEntities = this.fundsService.GetFund_SubFunds(chosenDate, model.EntityId);
                 }
 
                 model.EntitySubEntities = CreateTableView.AddTableToView(model.EntitySubEntities, model.SearchTerm.ToLower());
@@ -638,7 +664,7 @@
         private void SetModelValuesForSpecificView(SpecificEntityViewModel model)
         {
             var date = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-            
+
             model.Entity = this.fundsService.GetFundById(date, model.EntityId);
             model.EntitySubEntities = this.fundsService.GetFund_SubFunds(date, model.EntityId);
             model.SubEntitiesHeadersForColumnSelection = this.fundsService
