@@ -142,7 +142,7 @@
             }
 
             return this.RedirectToPage("/SubFunds/All");
-        }      
+        }
 
         [HttpPost]
         public FileStreamResult ExtractExcelEntities(EntitiesViewModel model)
@@ -165,7 +165,10 @@
         {
             var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
-            model.Entities = this.subFundsService.PrepareSubFundsForPDFExtract(chosenDate);
+            if (model.Entities[0].Length > 16)
+            {
+                model.Entities = this.subFundsService.PrepareSubFundsForPDFExtract(chosenDate);
+            }
 
             FileStreamResult fileStreamResult = null;
 
@@ -295,7 +298,7 @@
                 {
                     model.EntitySubEntities = CreateTableView.AddTableToView(model.EntitySubEntities, model.SelectTerm.ToLower());
                 }
-            }           
+            }
 
             if (model.Entity != null && model.EntitySubEntities != null)
             {
@@ -391,6 +394,11 @@
 
             string typeName = model.GetType().Name;
             string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+
+            if (model.EntitySubEntities[0].Length > 16)
+            {
+                model.EntitySubEntities = this.subFundsService.PrepareSubFund_ShareClassesForPDFExtract(chosenDate);
+            }
 
             if (this.HttpContext.Request.Form.ContainsKey("extract_Pdf"))
             {
