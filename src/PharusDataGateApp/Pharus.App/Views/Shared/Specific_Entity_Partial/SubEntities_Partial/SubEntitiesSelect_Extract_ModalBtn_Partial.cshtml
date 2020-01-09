@@ -1,19 +1,9 @@
 ﻿
 <div class="button-holder d-flex justify-content-center mb-3">
 
-    @if (Model.EntitySubEntities.Count > 2)
-    {
-        <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesSelect_Partial" />
-        <div class="w-50">
-            <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesExtract_Partial" />
-            <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesModalButton_Partial" />
-        </div>
-    }
-    else
-    {
-        <div>
-            <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesExtract_Partial" />
-            <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesModalButton_Partial" />
-        </div>
-    }
+    <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesSelect_Partial" />
+    <div class="w-50">
+        <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesExtract_Partial" />
+        <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesModalButton_Partial" />
+    </div>
 </div>
