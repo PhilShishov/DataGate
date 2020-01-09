@@ -1,27 +1,24 @@
 ﻿@model Pharus.App.Models.ViewModels.Entities.EntitiesViewModel
 
 <div class="w-100 d-flex justify-content-between my-5">
-    <div>        
+    <div>
         <input type="date"
                id="fundDatetime"
                asp-for="ChosenDate"
-               min="2018-01-01" 
+               min="2018-01-01"
                max=@DateTime.Today.ToString("yyyy-MM-dd")>
 
         <input type="submit"
                class="btn btn-primary btn-sm mb-2"
                asp-for="Command"
-               value="Update Table"></>      
+               value="Update Table"></>
     </div>
     <div>
-        <select name="SearchTerm"
-                id="SearchTerm"
+        <select asp-for="SelectTerm"
+                id="SelectTerm"
                 class="form-control input-sm"
-                style="width:300px"></select>
-
-        <input type="submit"
-               class="btn btn-primary btn-sm"
-               asp-for="Command"
-               value="Search" />
+                style="width:300px">
+            <option value=@Model.SelectTerm selected>@Model.SelectTerm</option>
+        </select>
     </div>
 </div>

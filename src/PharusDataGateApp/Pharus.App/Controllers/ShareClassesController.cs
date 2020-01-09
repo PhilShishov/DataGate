@@ -51,7 +51,7 @@
             return this.View(model);
         }
 
-        public JsonResult AutoCompleteShareClassesList(string searchTerm)
+        public JsonResult AutoCompleteShareClassesList(string selectTerm)
         {
             var result = this.context
                 .TbHistoryShareClass
@@ -59,11 +59,11 @@
                 .Select(hsc => hsc.FirstOrDefault())
                 .ToList();
 
-            if (searchTerm != null)
+            if (selectTerm != null)
             {
                 result = this.context
                     .TbHistoryShareClass
-                    .Where(hsc => hsc.ScOfficialShareClassName.Contains(searchTerm))
+                    .Where(hsc => hsc.ScOfficialShareClassName.Contains(selectTerm))
                     .GroupBy(hsc => hsc.ScOfficialShareClassName)
                     .Select(hsc => hsc.FirstOrDefault())
                     .ToList();
@@ -101,7 +101,7 @@
             }
             else if (model.Command.Equals("Search"))
             {
-                if (model.SearchTerm == null)
+                if (model.SelectTerm == null)
                 {
                     return this.View(model);
                 }
