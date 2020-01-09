@@ -784,6 +784,8 @@
             model.FileNameToDisplay = GetFileNameFromFilePath(model.EntityId, model.ChosenDate);
             model.EntityTimeline = this.subFundsService.GetSubFundTimeline(model.EntityId);
             model.EntityDocuments = this.subFundsService.GetAllSubFundDocumens(model.EntityId);
+            model.BaseEntityName = this.subFundsService.GetSubFund_FundContainer(date, model.EntityId)[1][1];
+            model.BaseEntityId = this.subFundsService.GetSubFund_FundContainer(date, model.EntityId)[1][0];
 
             model.StartConnection = model.Entity[1][0];
             model.EndConnection = model.Entity[1][1];
