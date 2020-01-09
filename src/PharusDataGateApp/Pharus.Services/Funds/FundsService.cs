@@ -162,21 +162,7 @@ namespace Pharus.Services.Funds
             return this.context.TbHistoryFund
                 .Select(f => f.FOfficialFundName)
                 .ToList();
-        }
-
-        public List<string[]> GetFundById(int id)
-        {
-            using (SqlConnection connection = new SqlConnection())
-            {
-                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-
-                command.CommandText = $"select * from fn_all_fund('{this.defaultDate}') where [FUND ID PHARUS] = {id}";
-
-                return CreateModel.CreateModelWithHeadersAndValue(command);
-            }
-        }
+        }        
 
         public List<string[]> GetFundById(DateTime? chosenDate, int id)
         {
