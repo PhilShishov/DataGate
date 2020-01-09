@@ -1,0 +1,11 @@
+﻿@model Pharus.App.Models.ViewModels.Entities.SpecificEntityViewModel
+
+<div id="searchFieldDiv" class="w-50">
+    <select asp-for="SelectTerm"
+            id="SelectTerm"
+            class="form-control input-sm"
+            style="width:300px"
+            onchange="this.form.submit()">
+        <option value=@Model.SelectTerm selected>@Model.SelectTerm</option>
+    </select>
+</div>
