@@ -24,3 +24,20 @@
     overflow: hidden;
     outline: none;
 }
+
+.btn-link-pharus {
+    border: 0;
+    outline: none;
+    background: inherit;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: 400;
+    color: #007bff;
+}
+
+    .btn-link-pharus:hover {
+        /*color: #0056b3;*/
+        text-decoration: underline
+    }
