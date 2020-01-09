@@ -43,6 +43,8 @@
 
         List<string[]> PrepareSubFundsForPDFExtract(DateTime? chosenDate);
 
+        List<string[]> PrepareSubFund_ShareClassesForPDFExtract(DateTime? chosenDate);
+
         void EditSubFund(
                         int sfId,
                         string initialDate,
