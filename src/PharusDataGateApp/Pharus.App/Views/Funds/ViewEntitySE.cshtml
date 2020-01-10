@@ -232,41 +232,46 @@
             //
             // Double top scroll for table
 
-             $('.double-scroll').doubleScroll();
+            $('.double-scroll').doubleScroll();
             $('#tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
 
             // ________________________________________________________
             //
             // Select menu for fund additional information -
-            // subentities, timeline changes, all documents
+            // subentities, timeline changes, all documents 
+            // Get selected value and keep select option open
 
-            //    const dropdownvalue = $("#fundAdditionalInfSelect option:selected").val();
-            //$('#fundAdditionalInfSelect option').each(function () {
-            //    if (this.selected) {
-            //        if (dropdownvalue == 'SubFunds') {
-            //             $("#subEntities").css('visibility', 'visible');
-            //             $("#timelineChanges").css('visibility', 'hidden');
-            //             $("#allDocuments").css('visibility', 'hidden');
-            //        }
-            //        else if (dropdownvalue == 'TimelineChanges') {
-            //        $("#timelineChanges").css('visibility', 'visible');
-            //        $("#subEntities").css('visibility', 'hidden');
-            //        $("#allDocuments").css('visibility', 'hidden');
-            //        }
-            //        else if (dropdownvalue == 'AllDocuments') {
-            //            $("#allDocuments").css('visibility', 'visible');
-            //            $("#timelineChanges").css('visibility', 'hidden');
-            //            $("#subEntities").css('visibility', 'hidden');
-            //        }
-            //        else {
-            //            $("#subEntities").css('visibility', 'hidden');
-            //            $("#timelineChanges").css('visibility', 'hidden');
-            //            $("#allDocuments").css('visibility', 'hidden');
-            //        }
-            //    }
-            //         else
-            //             alert('this is not');
-            //});
+            $('#fundAdditionalInfSelect option').each(function () {
+                if (this.selected) {
+                const dropdownvalue = $("#fundAdditionalInfSelect option:selected").val();
+                    if (dropdownvalue == 'SubFunds') {
+                        $("#subEntities").css('visibility', 'visible');
+                        $("#timelineChanges").css('visibility', 'hidden');
+                        $("#allDocuments").css('visibility', 'hidden');
+                    }
+                    else if (dropdownvalue == 'TimelineChanges') {
+                        $("#timelineChanges").css('visibility', 'visible');
+                        $("#subEntities").css('visibility', 'hidden');
+                        $("#allDocuments").css('visibility', 'hidden');
+                    }
+                    else if (dropdownvalue == 'AllDocuments') {
+                        $("#allDocuments").css('visibility', 'visible');
+                        $("#timelineChanges").css('visibility', 'hidden');
+                        $("#subEntities").css('visibility', 'hidden');
+                    }
+                    else {
+                        $("#subEntities").css('visibility', 'hidden');
+                        $("#timelineChanges").css('visibility', 'hidden');
+                        $("#allDocuments").css('visibility', 'hidden');
+                    }
+                }
+            });
+
+            // ________________________________________________________
+            //
+            // Select menu for fund additional information -
+            // subentities, timeline changes, all documents - 
+            // On change event for selected value
 
             $("#fundAdditionalInfSelect").on('change', function () {
                 const dropdownvalue = $("#fundAdditionalInfSelect option:selected").val();
