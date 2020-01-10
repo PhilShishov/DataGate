@@ -18,7 +18,6 @@
     using Pharus.Services.Funds.Contracts;
     using Pharus.App.Models.BindingModels.Funds;
     using Pharus.App.Models.ViewModels.Entities;
-    using System.Collections.Generic;
 
     [Authorize]
     public class FundsController : Controller
