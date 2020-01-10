@@ -13,19 +13,11 @@ namespace Pharus.App.Models.ViewModels
     {
         public string ChosenDate { get; set; }
 
-        public bool IsActive { get; set; }
-
         public string Command { get; set; }
 
         public int EntityId { get; set; }
 
-        public string BaseEntityName { get; set; }
-
-        public string BaseEntityId { get; set; }
-
         public string SelectTerm { get; set; }
-
-        public string SearchTerm { get; set; }
 
         public List<string> PreSelectedColumns { get; set; }
 

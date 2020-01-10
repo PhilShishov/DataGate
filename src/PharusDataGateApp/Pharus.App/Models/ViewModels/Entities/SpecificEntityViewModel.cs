@@ -33,6 +33,10 @@ namespace Pharus.App.Models.ViewModels.Entities
 
         public List<string[]> SubEntitiesHeadersForColumnSelection { get; set; }
 
+        public string BaseEntityName { get; set; }
+
+        public string BaseEntityId { get; set; }
+
         public List<string[]> EntityTimeline { get; set; }
 
         public List<string[]> EntityDocuments { get; set; }
@@ -54,5 +58,7 @@ namespace Pharus.App.Models.ViewModels.Entities
         public string StartConnection { get; set; }
 
         public string EndConnection { get; set; }
+
+        public string SelectAdditionalInf { get; set; }
     }
 }
