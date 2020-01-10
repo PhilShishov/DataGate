@@ -28,14 +28,14 @@
         </a>
     </div>
 
-    <partial name="Specific_Entity_Partial/SpecificEntityUpdate_Partial" />
+    <partial name="SpecificEntity/Update_Partial" />
 
     <div class="d-flex justify-content-between">
 
-        <partial name="Specific_Entity_Partial/SpecificEntityInfo_Partial" />
+        <partial name="SpecificEntity/Info_Partial" />
 
         <div class="w-50 float-right">
-            <partial name="Specific_Entity_Partial/SpecificEntityLoad_Upload_Documents_Partial" />
+            <partial name="SpecificEntity/Load_Upload_Documents_Partial" />
             @if (this.User.IsInRole("Admin"))
             {
                 <div class="mt-5">
@@ -48,23 +48,25 @@
     <div class="row w-25 ml-3 mb-5">
         <label class="text-torshia m-1 pr-3">SUBFUND ADDITIONAL INFORMATION</label>
         <select class="custom-select-lg pharus-select form-control input-sm"
-                id="subFundChoicesSelect"
-                name="subFundChoicesSelect">
-            <option value="">Select</option>
+                id="subFundAdditionalInfSelect"
+                asp-for="SelectAdditionalInf">
+            <option value="" selected disabled>Select</option>
             <option value="ShareClasses">Share Classes</option>
             <option value="TimelineChanges">Timeline Changes</option>
             <option value="AllDocuments">All Documents</option>
         </select>
     </div>
 
-    <partial name="Specific_Entity_Partial/SpecificEntityAllDocuments_Partial" />
-    <partial name="Specific_Entity_Partial/SpecificEntityTimeLine_Partial" />
+    <partial name="SpecificEntity/AllDocuments_Partial" />
+    <partial name="SpecificEntity/TimeLine_Partial" />
+
+    <partial name="SpecificEntity/SubEntities/AdditionalInfoMenu_Partial" />
 
     <div id="subEntities">
 
-        <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesBindingTable_Partial" />
-        <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesSelect_Extract_ModalBtn_Partial" />
-        <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesModal_Partial" />
+        <partial name="SpecificEntity/SubEntities/BindingTable_Partial" />
+        <partial name="SpecificEntity/SubEntities/Select_Extract_ModalBtn_Partial" />
+        <partial name="SpecificEntity/SubEntities/Modal_Partial" />
 
         <div class="table-responsive border-0 mx-auto" id="tableDoubleScroll">
             <table class="table table-hover text-nowrap">
@@ -108,7 +110,7 @@
       enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <partial name="Specific_Entity_Partial/SpecificEntityUploadPros_Partial" />
+    <partial name="SpecificEntity/UploadPros_Partial" />
 </form>
 
 <form asp-controller="SubFunds"
@@ -117,7 +119,7 @@
       enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <partial name="Specific_Entity_Partial/SpecificEntityUploadAgr_Partial" />
+    <partial name="SpecificEntity/UploadAgr_Partial" />
 </form>
 
 @section Scripts{
@@ -236,10 +238,43 @@
             // ________________________________________________________
             //
             // Select menu for fund additional information -
-            // subentities, timeline changes, all documents
+            // subentities, timeline changes, all documents 
+            // Get selected value and keep select option open
 
-            $("#subFundChoicesSelect").on('change', function () {
-                let dropdownvalue = $("#subFundChoicesSelect option:selected").val();
+            $('#subFundAdditionalInfSelect option').each(function () {
+                if (this.selected) {
+                const dropdownvalue = $("#subFundAdditionalInfSelect option:selected").val();
+                    if (dropdownvalue == 'ShareClasses') {
+                        $("#subEntities").css('visibility', 'visible');
+                        $("#timelineChanges").css('visibility', 'hidden');
+                        $("#allDocuments").css('visibility', 'hidden');
+                    }
+                    else if (dropdownvalue == 'TimelineChanges') {
+                        $("#timelineChanges").css('visibility', 'visible');
+                        $("#subEntities").css('visibility', 'hidden');
+                        $("#allDocuments").css('visibility', 'hidden');
+                    }
+                    else if (dropdownvalue == 'AllDocuments') {
+                        $("#allDocuments").css('visibility', 'visible');
+                        $("#timelineChanges").css('visibility', 'hidden');
+                        $("#subEntities").css('visibility', 'hidden');
+                    }
+                    else {
+                        $("#subEntities").css('visibility', 'hidden');
+                        $("#timelineChanges").css('visibility', 'hidden');
+                        $("#allDocuments").css('visibility', 'hidden');
+                    }
+                }
+            });
+
+            // ________________________________________________________
+            //
+            // Select menu for fund additional information -
+            // subentities, timeline changes, all documents - 
+            // On change event for selected value
+
+            $("#subFundAdditionalInfSelect").on('change', function () {
+                const dropdownvalue = $("#subFundAdditionalInfSelect option:selected").val();
                 if (dropdownvalue == 'ShareClasses') {
                     $("#subEntities").css('visibility', 'visible');
                     $("#timelineChanges").css('visibility', 'hidden');

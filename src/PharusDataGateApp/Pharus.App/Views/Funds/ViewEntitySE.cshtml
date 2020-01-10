@@ -24,16 +24,16 @@
       class="justify-content-between"
       method="post">
 
-    <partial name="Specific_Entity_Partial/SpecificEntityUpdate_Partial" />
+    <partial name="SpecificEntity/Update_Partial" />
 
     @*<div style="width:40%;">
             <canvas id="aumF_Canvas"></canvas>
         </div>*@
     <div class="d-flex justify-content-between">
-        <partial name="Specific_Entity_Partial/SpecificEntityInfo_Partial" />
+        <partial name="SpecificEntity/Info_Partial" />
 
         <div class="w-50 float-right">
-            <partial name="Specific_Entity_Partial/SpecificEntityLoad_Upload_Documents_Partial" />
+            <partial name="SpecificEntity/Load_Upload_Documents_Partial" />
             @if (this.User.IsInRole("Admin"))
             {
                 <div class="mt-5">
@@ -57,50 +57,10 @@
         </select>
     </div>
 
-    <partial name="Specific_Entity_Partial/SpecificEntityAllDocuments_Partial" />
-    <partial name="Specific_Entity_Partial/SpecificEntityTimeLine_Partial" />
+    <partial name="SpecificEntity/AllDocuments_Partial" />
+    <partial name="SpecificEntity/TimeLine_Partial" />
 
-    <div id="subEntities">
-
-        <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesBindingTable_Partial" />
-
-        <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesSelect_Extract_ModalBtn_Partial" />
-        <partial name="Specific_Entity_Partial/SubEntities_Partial/SubEntitiesModal_Partial" />
-
-        <div class="table-responsive border-0 mx-auto" id="tableDoubleScroll">
-            <table class="table table-hover text-nowrap">
-                <thead>
-                    @for (int row = 0; row < 1; row++)
-                    {
-                        <tr>
-                            @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
-                            {
-                                <th class="text-white p-1 tableHeaderPharus">
-                                    @Model.EntitySubEntities[row][col]
-                                </th>
-                            }
-                        </tr>
-                    }
-                </thead>
-
-                <tbody>
-                    @for (int row = 1; row < Model.EntitySubEntities.Count; row++)
-                    {
-                        var subfundId = Model.EntitySubEntities[row][2];
-
-                        <tr class="tableRowPharus" onclick="document.location = '/SubFunds/ViewEntitySE/@subfundId/@Model.ChosenDate'">
-                            @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
-                            {
-                                <td class="p-1">
-                                    @Model.EntitySubEntities[row][col]
-                                </td>
-                            }
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    </div>
+    <partial name="SpecificEntity/SubEntities/AdditionalInfoMenu_Partial" />
 </form>
 
 <form asp-controller="Funds"
@@ -109,7 +69,7 @@
       enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <partial name="Specific_Entity_Partial/SpecificEntityUploadPros_Partial" />
+    <partial name="SpecificEntity/UploadPros_Partial" />
 </form>
 
 <form asp-controller="Funds"
@@ -118,14 +78,14 @@
       enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <partial name="Specific_Entity_Partial/SpecificEntityUploadAgr_Partial" />
+    <partial name="SpecificEntity/UploadAgr_Partial" />
 </form>
 
 @section Scripts{
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
-    <script src="~/js/ui.multiselect.js"></script>
+    <script src="~/js/multiselect.js"></script>
     <script src="~/lib/jquery/Chart.js/utils.js"></script>
     <script src="~/lib/jquery/Chart.js/Chart.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.doubleScroll.js"></script>
