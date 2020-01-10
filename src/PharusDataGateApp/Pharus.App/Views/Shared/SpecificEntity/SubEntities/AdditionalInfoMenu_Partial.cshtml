@@ -1,0 +1,45 @@
+﻿@{
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<div id="subEntities">
+
+    <partial name="SpecificEntity/SubEntities/BindingTable_Partial" />
+
+    <partial name="SpecificEntity/SubEntities/Select_Extract_ModalBtn_Partial" />
+    <partial name="SpecificEntity/SubEntities/Modal_Partial" />
+
+    <div class="table-responsive border-0 mx-auto" id="tableDoubleScroll">
+        <table class="table table-hover text-nowrap">
+            <thead>
+                @for (int row = 0; row < 1; row++)
+                {
+                    <tr>
+                        @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
+                        {
+                            <th class="text-white p-1 tableHeaderPharus">
+                                @Model.EntitySubEntities[row][col]
+                            </th>
+                        }
+                    </tr>
+                }
+            </thead>
+
+            <tbody>
+                @for (int row = 1; row < Model.EntitySubEntities.Count; row++)
+                {
+                    var subfundId = Model.EntitySubEntities[row][2];
+                    @*<tr class="tableRowPharus" onclick="document.location = '/ShareClasses/ViewEntitySE/@shareClassId/@Model.ChosenDate'">*@
+                    <tr class="tableRowPharus" onclick="document.location = '/SubFunds/ViewEntitySE/@subfundId/@Model.ChosenDate'">
+                        @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
+                        {
+                            <td class="p-1">
+                                @Model.EntitySubEntities[row][col]
+                            </td>
+                        }
+                    </tr>
+                    }
+                </tbody>
+        </table>
+    </div>
+</div>
