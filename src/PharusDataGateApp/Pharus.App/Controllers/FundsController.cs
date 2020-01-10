@@ -18,6 +18,7 @@
     using Pharus.Services.Funds.Contracts;
     using Pharus.App.Models.BindingModels.Funds;
     using Pharus.App.Models.ViewModels.Entities;
+    using System.Collections.Generic;
 
     [Authorize]
     public class FundsController : Controller
@@ -207,10 +208,7 @@
                 EntityDocuments = this.fundsService.GetAllFundDocumens(entityId),
             };
 
-            viewModel.StartConnection = viewModel.Entity[1][0];
-            viewModel.EndConnection = viewModel.Entity[1][1];
-
-            this.ViewData["FileTypes"] = this.fundsSelectListService.GetAllFundFileTypes();
+            SetModelValuesForSpecificViewGet(entityId, viewModel);
 
             HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
 
@@ -225,7 +223,7 @@
 
             this.ModelState.Clear();
             return this.View(viewModel);
-        }
+        }        
 
         public JsonResult AutoCompleteSubFundList(string selectTerm, int entityId)
         {
@@ -256,7 +254,7 @@
         [Route("Funds/ViewEntitySE/{EntityId}/{ChosenDate}")]
         public IActionResult ViewEntitySE(SpecificEntityViewModel model)
         {
-            SetModelValuesForSpecificView(model);
+            SetModelValuesForSpecificViewPost(model);
 
             bool isInSelectionMode = false;
 
@@ -311,7 +309,7 @@
         [HttpPost]
         public IActionResult UploadProspectus(SpecificEntityViewModel model)
         {
-            SetModelValuesForSpecificView(model);
+            SetModelValuesForSpecificViewPost(model);
 
             var file = model.UploadEntityFileModel.FileToUpload;
 
@@ -356,7 +354,7 @@
         [HttpPost]
         public IActionResult UploadAgreement(SpecificEntityViewModel model)
         {
-            SetModelValuesForSpecificView(model);
+            SetModelValuesForSpecificViewPost(model);
 
             var file = model.UploadEntityFileModel.FileToUpload;
 
@@ -646,7 +644,7 @@
                                                                                 model.EntityId);
         }
 
-        private void SetModelValuesForSpecificView(SpecificEntityViewModel model)
+        private void SetModelValuesForSpecificViewPost(SpecificEntityViewModel model)
         {
             var date = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
@@ -660,9 +658,13 @@
             model.EntityTimeline = this.fundsService.GetFundTimeline(model.EntityId);
             model.EntityDocuments = this.fundsService.GetAllFundDocumens(model.EntityId);
 
-            model.StartConnection = model.Entity[1][0];
-            model.EndConnection = model.Entity[1][1];
+            SetModelValuesForSpecificViewGet(model.EntityId, model);           
+        }
 
+        private void SetModelValuesForSpecificViewGet(int entityId, SpecificEntityViewModel model)
+        {
+            model.StartConnection = model.Entity[1][0];
+            model.EndConnection = model.Entity[1][1];          
             this.ViewData["FileTypes"] = this.fundsSelectListService.GetAllFundFileTypes();
         }
 

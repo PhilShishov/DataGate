@@ -48,12 +48,12 @@
     <div class="row w-25 ml-3 mb-5">
         <label class="text-torshia m-1 pr-3">FUND ADDITIONAL INFORMATION</label>
         <select class="custom-select-lg pharus-select form-control input-sm"
-                id="fundChoicesSelect"
-                name="fundChoicesSelect">
-            <option value="">Select</option>
+                id="fundAdditionalInfSelect"
+                asp-for="SelectAdditionalInf">
+            <option value="" selected disabled>Select</option>
             <option value="SubFunds">SubFunds</option>
-            <option value="TimelineChanges">Timeline Changes</option>
-            <option value="AllDocuments">All Documents</option>
+            <option value="TimelineChanges">TimelineChanges</option>
+            <option value="AllDocuments">AllDocuments</option>
         </select>
     </div>
 
@@ -117,7 +117,7 @@
       method="post"
       enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    
+
     <partial name="Specific_Entity_Partial/SpecificEntityUploadAgr_Partial" />
 </form>
 
@@ -240,8 +240,38 @@
             // Select menu for fund additional information -
             // subentities, timeline changes, all documents
 
-            $("#fundChoicesSelect").on('change', function () {
-                const dropdownvalue = $("#fundChoicesSelect option:selected").val();
+            //    const dropdownvalue = $("#fundAdditionalInfSelect option:selected").val();
+            //$('#fundAdditionalInfSelect option').each(function () {
+            //    if (this.selected) {
+            //        if (dropdownvalue == 'SubFunds') {
+            //             $("#subEntities").css('visibility', 'visible');
+            //             $("#timelineChanges").css('visibility', 'hidden');
+            //             $("#allDocuments").css('visibility', 'hidden');
+            //        }
+            //        else if (dropdownvalue == 'TimelineChanges') {
+            //        $("#timelineChanges").css('visibility', 'visible');
+            //        $("#subEntities").css('visibility', 'hidden');
+            //        $("#allDocuments").css('visibility', 'hidden');
+            //        }
+            //        else if (dropdownvalue == 'AllDocuments') {
+            //            $("#allDocuments").css('visibility', 'visible');
+            //            $("#timelineChanges").css('visibility', 'hidden');
+            //            $("#subEntities").css('visibility', 'hidden');
+            //        }
+            //        else {
+            //            $("#subEntities").css('visibility', 'hidden');
+            //            $("#timelineChanges").css('visibility', 'hidden');
+            //            $("#allDocuments").css('visibility', 'hidden');
+            //        }
+            //    }
+            //         else
+            //             alert('this is not');
+            //});
+
+            $("#fundAdditionalInfSelect").on('change', function () {
+                const dropdownvalue = $("#fundAdditionalInfSelect option:selected").val();
+                 $(this).find('[selected]').removeAttr('selected')
+                 $(this).find(':selected').attr('selected','selected')
                 if (dropdownvalue == 'SubFunds') {
                     $("#subEntities").css('visibility', 'visible');
                     $("#timelineChanges").css('visibility', 'hidden');

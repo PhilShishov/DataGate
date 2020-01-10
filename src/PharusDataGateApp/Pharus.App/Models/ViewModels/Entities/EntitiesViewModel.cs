@@ -20,5 +20,9 @@ namespace Pharus.App.Models.ViewModels.Entities
         public List<string[]> Entities { get; set; }
 
         public List<string[]> EntitiesHeadersForColumnSelection { get; set; }
+
+        public string SearchTerm { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }
