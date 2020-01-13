@@ -57,15 +57,6 @@
         </div>
 
         <div class="form-group">
-            <label asp-for="LEICode" class="text-torshia"></label><br>
-            <input type="text"
-                   class="form-control maxw-270"
-                   asp-for="LEICode"
-                   id="leiCodeInput">
-            <span asp-validation-for="LEICode" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
             <label asp-for="InvestorType" class="text-torshia"></label><br>
             <select class="form-control maxw-270" asp-for="InvestorType">
                 <option selected disabled>-- Choose Investor Type --</option>
@@ -304,7 +295,7 @@
 
     <div class="button-holder mt-4">
         <button type="submit"
-                class="btn bg-pharus text-white"
+                class="btn btn-primary btn-sm mb-1"
                 id="confirmCreateBtn"
                 name="create_button"
                 style="margin-right:40px">
