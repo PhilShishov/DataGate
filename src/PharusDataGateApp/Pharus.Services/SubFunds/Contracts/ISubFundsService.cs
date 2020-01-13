@@ -23,8 +23,6 @@
 
         List<string> GetAllSubFundsNames();
 
-        List<string[]> GetSubFundById(DateTime? chosenDate, int id);
-
         List<string[]> GetSubFundWithDateById(DateTime? chosenDate, int id);
 
         List<string[]> GetSubFund_ShareClasses(DateTime? chosenDate, int id);

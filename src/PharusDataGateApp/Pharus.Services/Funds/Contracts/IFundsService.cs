@@ -23,8 +23,6 @@
 
         List<string> GetAllFundsNames();
 
-        List<string[]> GetFundById(DateTime? chosenDate, int id);
-
         List<string[]> GetFundWithDateById(DateTime? chosenDate, int id);
 
         List<string[]> GetFund_SubFunds(DateTime? chosenDate, int id);
