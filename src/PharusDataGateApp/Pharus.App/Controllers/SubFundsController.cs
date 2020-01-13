@@ -194,7 +194,7 @@
             {
                 ChosenDate = chosenDate,
                 EntityId = entityId,
-                Entity = this.subFundsService.GetSubFundById(date, entityId),
+                Entity = this.subFundsService.GetSubFundWithDateById(date, entityId),
                 EntitySubEntities = this.subFundsService.GetSubFund_ShareClasses(date, entityId),
                 SubEntitiesHeadersForColumnSelection = this.subFundsService
                                                                     .GetSubFund_ShareClasses(date, entityId)
@@ -267,7 +267,7 @@
 
 
             model.Entity = this.subFundsService
-                  .GetSubFundById(chosenDate, model.EntityId);
+                  .GetSubFundWithDateById(chosenDate, model.EntityId);
 
             if (model.SelectTerm == null)
             {
@@ -819,7 +819,7 @@
         {
             var date = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
-            model.Entity = this.subFundsService.GetSubFundById(date, model.EntityId);
+            model.Entity = this.subFundsService.GetSubFundWithDateById(date, model.EntityId);
             model.EntitySubEntities = this.subFundsService.GetSubFund_ShareClasses(date, model.EntityId);
             model.SubEntitiesHeadersForColumnSelection = this.subFundsService
                                                                     .GetSubFund_ShareClasses(date, model.EntityId)

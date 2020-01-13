@@ -167,7 +167,7 @@ namespace Pharus.Services.SubFunds
                .ToList();
         }       
 
-        public List<string[]> GetSubFundById(DateTime? chosenDate, int id)
+        public List<string[]> GetSubFundWithDateById(DateTime? chosenDate, int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -186,28 +186,7 @@ namespace Pharus.Services.SubFunds
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
-        }
-
-        public List<string[]> GetSubFundWithDateById(DateTime? chosenDate, int id)
-        {
-            using (SqlConnection connection = new SqlConnection())
-            {
-                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-
-                if (chosenDate == null)
-                {
-                    command.CommandText = $"select * from fn_active_subfund_modifyview('{this.defaultDate}') where [ID] = {id}";
-                }
-                else
-                {
-                    command.CommandText = $"select * from fn_active_subfund_modifyview('{chosenDate?.ToString("yyyyMMdd")}') where [ID] = {id}";
-                }
-
-                return CreateModel.CreateModelWithHeadersAndValue(command);
-            }
-        }
+        }      
 
         public List<string[]> GetSubFund_ShareClasses(DateTime? chosenDate, int id)
         {
