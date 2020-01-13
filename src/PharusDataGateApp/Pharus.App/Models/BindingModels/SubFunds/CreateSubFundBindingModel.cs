@@ -42,6 +42,7 @@ namespace Pharus.App.Models.BindingModels.SubFunds
         [Display(Name = "Global Exposure")]
         public string GlobalExposure { get; set; }
 
+        [Required]
         [Display(Name = "Currency")]
         public string CurrencyCode { get; set; }
 

@@ -170,6 +170,11 @@
 
             var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
+            if (model.Entities[0].Length > 16)
+            {
+                model.Entities = this.shareClassesService.PrepareShareClassesForPDFExtract(chosenDate);
+            }
+
             string typeName = model.GetType().Name;
             string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
@@ -308,22 +313,31 @@
         //    return this.LocalRedirect(returnUrl);
         //}
 
-        //[HttpGet]
-        //public IActionResult CreateShareClass()
-        //{
-        //    ShareClassBindingModel model = new ShareClassBindingModel
-        //    {
-        //        EntityProperties = this.shareClassesService.GetAllShareClasses(),
-        //        InvestorType = new SelectList(this.shareClassesSelectListService.GetAllTbDomInvestorType()),
-        //        CurrencyCode = new SelectList(this.shareClassesSelectListService.GetAllTbDomCurrencyCode()),
-        //        CountryIssue = new SelectList(this.shareClassesSelectListService.GetAllTbDomCountry()),
-        //        CountryRisk = new SelectList(this.shareClassesSelectListService.GetAllTbDomCountry()),
-        //        ShareStatus = new SelectList(this.shareClassesSelectListService.GetAllTbDomShareStatus()),
-        //        ShareType = new SelectList(this.shareClassesSelectListService.GetAllTbDomShareType()),
-        //    };
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public IActionResult CreateShareClass()
+        {
+            CreateShareClassBindingModel model = new CreateShareClassBindingModel
+            {
+                InitialDate = DateTime.Today,                
+            };
 
-        //    return this.View(model);
-        //}
+            SetViewDataValuesForShareClassesSelectLists();
+
+            this.ModelState.Clear();
+            return this.View(model);
+        }
+
+        private void SetViewDataValuesForShareClassesSelectLists()
+        {
+            this.ViewData["Status"] = this.shareClassesSelectListService.GetAllTbDomShareStatus();
+            this.ViewData["InvestorType"] = this.shareClassesSelectListService.GetAllTbDomInvestorType();
+            this.ViewData["ShareType"] = this.shareClassesSelectListService.GetAllTbDomShareType();
+            this.ViewData["CurrencyCode"] = this.shareClassesSelectListService.GetAllTbDomCurrencyCode();
+            this.ViewData["Country"] = this.shareClassesSelectListService.GetAllTbDomCountry();
+
+            this.ViewData["SubFundContainer"] = this.context.TbHistorySubFund.Select(sf => sf.SfOfficialSubFundName).ToList();
+        }
 
         private void CallAllEntitiesWithSelectedColumns(EntitiesViewModel model, DateTime? chosenDate)
         {
