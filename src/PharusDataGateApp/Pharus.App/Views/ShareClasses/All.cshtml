@@ -8,9 +8,10 @@
 <h2 class="text-center text-torshia">All Active ShareClasses</h2>
 
 @section Styles{
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/css/checkbox.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" />
+
     <style>
         body {
             background-image: none;
@@ -22,43 +23,60 @@
       class="justify-content-between"
       method="post">
     <div>
-        <partial name="ContainerEntityPartial" />
+        <partial name="AllEntities/Update_Select_Partial" />
 
-        <div class="button-holder d-flex justify-content-center my-5" style="align-items: center">
-            <partial name="ExtractEntitiesViewPartial" />
-
-            <label class="el-switch el-switch-sm" style="display:flex; margin-bottom:0">
-                <input type="checkbox" asp-for="IsActive">
-                <span class="el-switch-style mr-2"></span>
-                Show only all active
-            </label>
-
-            @*<button type="button"
-                class="btn btn-info"
-                data-toggle="modal"
-                data-target="#myModal"
-                name="showColumnSelection">
-            <img src="~/images/ColumnSelection_Pharus.jpg"
-                 width="35"
-                 height="35" />
-        </button>*@
+        <div class="button-holder d-flex my-5">
+            <partial name="AllEntities/Search_Partial" />
+            <div class="w-50 d-flex">
+                <partial name="AllEntities/Extract_Partial" />
+                <partial name="AllEntities/ActiveSwitch_Partial" />
+                <partial name="AllEntities/ModalButton_Partial" />
+            </div>
         </div>
+
+        <partial name="AllEntities/Modal_Partial" />
 
         <hr class="bg-pharus hr-2" />
 
-        <partial name="EntitiesBindingTablePartial" />
+        <partial name="AllEntities/BindingTable_Partial" />
 
-        <partial name="EntitiesViewTablePartial" />
-
+        <partial name="AllEntities/ViewTable_Partial" />
     </div>
 </form>
 
 @section Scripts{
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+    <script src="~/js/checkboxSubmit.js"></script>
+    <script src="~/js/multiselect.js"></script>
+    <script src="~/lib/jquery/dist/jquery.doubleScroll.js"></script>
+
+
     <script>
+        window.onload = () => {
+            manageSideNavBar();
+            manageDropdowns();
+            checkboxSubmit();
+        }
+
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+
         $(document).ready(function () {
+            // ________________________________________________________
+            //
+            // Modal multiselect for column selection
+
+            $(".multiselect").multiselect();
+
+            // ________________________________________________________
+            //
+            // Autocomplete search
+
             $("#SelectTerm").select2({
-                placeholder: "Select Share Classes",
+                placeholder: "Select Subfund",
                 theme: "classic",
                 ajax: {
                     url: "/ShareClasses/AutoCompleteShareClassesList",
@@ -72,21 +90,12 @@
                     }
                 }
             });
-        });
-    </script>
 
-    <script type="text/javascript" src="~/lib/jquery/dist/jquery.doubleScroll.js"></script>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
+            // ________________________________________________________
+            //
+            // Double top scroll for table
             $('.double-scroll').doubleScroll();
             $('#tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
         });
-    </script>
-
-    <script>
-        if (window.history.replaceState) {
-            window.history.replaceState(null, null, window.location.href);
-        }
     </script>
 }
