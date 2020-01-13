@@ -40,19 +40,6 @@ namespace Pharus.Services.ShareClasses
         //
         // Retrieve query table DB based entities
         // with table functions
-        public List<string[]> GetAllShareClasses()
-        {
-            using (SqlConnection connection = new SqlConnection())
-            {
-                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-
-                command.CommandText = $"select * from fn_active_shareclasses('{this.defaultDate}')";
-
-                return CreateModel.CreateModelWithHeadersAndValue(command);
-            }
-        }
 
         public List<string[]> GetAllShareClasses(DateTime? chosenDate)
         {
@@ -64,25 +51,18 @@ namespace Pharus.Services.ShareClasses
 
                 if (chosenDate == null)
                 {
-                    command.CommandText = $"select * from fn_active_shareclasses('{this.defaultDate}')";
+                    command.CommandText = $"select * from fn_all_shareclass('{this.defaultDate}')";
                 }
                 else
                 {
-                    command.CommandText = $"select * from fn_active_shareclasses('{chosenDate?.ToString("yyyyMMdd")}')";
+                    command.CommandText = $"select * from fn_all_shareclass('{chosenDate?.ToString("yyyyMMdd")}')";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
         }
 
-        public List<string> GetAllShareClassesNames()
-        {
-            return this.context.TbHistoryShareClass
-              .Select(f => f.ScOfficialShareClassName)
-              .ToList();
-        }
-
-        public List<string[]> GetShareClassById(int id)
+        public List<string[]> GetAllActiveShareClasses()
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -90,13 +70,13 @@ namespace Pharus.Services.ShareClasses
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from fn_active_shareclasses('{this.defaultDate}') where [ID] = {id}";
+                command.CommandText = $"select * from fn_active_shareclass('{this.defaultDate}')";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
         }
 
-        public List<string[]> GetShareClassById(DateTime? chosenDate, int id)
+        public List<string[]> GetAllActiveShareClasses(DateTime? chosenDate)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -106,18 +86,21 @@ namespace Pharus.Services.ShareClasses
 
                 if (chosenDate == null)
                 {
-                    command.CommandText = $"select * from fn_active_shareclasses('{this.defaultDate}') where [ID] = {id}";
+                    command.CommandText = $"select * from fn_active_shareclass('{this.defaultDate}')";
                 }
                 else
                 {
-                    command.CommandText = $"select * from fn_active_shareclasses('{chosenDate?.ToString("yyyyMMdd")}') where [ID] = {id}";
+                    command.CommandText = $"select * from fn_active_shareclass('{chosenDate?.ToString("yyyyMMdd")}')";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
         }
 
-        public List<string[]> GetShareClassWithDateById(int id)
+        public List<string[]> GetAllShareClassesWithSelectedViewAndDate(
+                                                List<string> preSelectedColumns, 
+                                                List<string> selectedColumns, 
+                                                DateTime? chosenDate)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -125,10 +108,60 @@ namespace Pharus.Services.ShareClasses
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from fn_active_shareclasses('{this.defaultDate}') where [ID] = {id}";
+                // Prepare items for DB query with []
+
+                preSelectedColumns.AddRange(selectedColumns);
+                preSelectedColumns = preSelectedColumns.Select(c => String.Format("[{0}]", c)).ToList();
+
+                if (chosenDate == null)
+                {
+                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} " +
+                        $"from fn_all_shareclass('{this.defaultDate}')";
+                }
+                else
+                {
+                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} " +
+                        $"from fn_all_shareclass('{chosenDate?.ToString("yyyyMMdd")}')";
+                }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
+        }
+
+        public List<string[]> GetAllActiveShareClassesWithSelectedViewAndDate(List<string> preSelectedColumns, List<string> selectedColumns, DateTime? chosenDate)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                // Prepare items for DB query with []
+
+                preSelectedColumns.AddRange(selectedColumns);
+                preSelectedColumns = preSelectedColumns.Select(c => String.Format("[{0}]", c)).ToList();
+
+                if (chosenDate == null)
+                {
+                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} " +
+                        $"from fn_active_shareclass('{this.defaultDate}')";
+                }
+                else
+                {
+                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} " +
+                        $"from fn_active_shareclass('{chosenDate?.ToString("yyyyMMdd")}')";
+                }
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
+
+        public List<string> GetAllShareClassesNames()
+        {
+            return this.context.TbHistoryShareClass
+              .Select(f => f.ScOfficialShareClassName)
+              .ToList();
         }
 
         public List<string[]> GetShareClassWithDateById(DateTime? chosenDate, int id)
@@ -141,29 +174,13 @@ namespace Pharus.Services.ShareClasses
 
                 if (chosenDate == null)
                 {
-                    command.CommandText = $"select * from fn_active_shareclasses('{this.defaultDate}') where [ID] = {id}";
+                    command.CommandText = $"select * from fn_all_shareclass('{this.defaultDate}') where [ID] = {id}";
                 }
                 else
                 {
-                    command.CommandText = $"select * from fn_active_shareclasses('{chosenDate?.ToString("yyyyMMdd")}') where [ID] = {id}";
+                    command.CommandText = $"select * from fn_all_shareclass('{chosenDate?.ToString("yyyyMMdd")}') where [ID] = {id}";
                 }
 
-
-                return CreateModel.CreateModelWithHeadersAndValue(command);
-            }
-        }
-
-        public List<string[]> GetShareClass_SubFundContainer(int id)
-        {
-            using (SqlConnection connection = new SqlConnection())
-            {
-                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-
-                Dictionary<int, string> funds = new Dictionary<int, string>();
-
-                command.CommandText = $"select * from fn_SubfundForShareclassAtDate('{this.defaultDate}', {id})";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
@@ -188,6 +205,20 @@ namespace Pharus.Services.ShareClasses
                 {
                     command.CommandText = $"select * from fn_SubfundForShareclassAtDate('{chosenDate?.ToString("yyyyMMdd")}', {id})";
                 }
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
+        public List<string[]> PrepareShareClassesForPDFExtract(DateTime? chosenDate)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                command.CommandText = $"select * from fn_active_shareclass_pdf('{chosenDate?.ToString("yyyyMMdd")}')";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
@@ -272,6 +303,16 @@ namespace Pharus.Services.ShareClasses
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
+        }
+
+        public void EditShareClass(int scId, string initialDate, string subFundName, string cssfCode, string faCode, string depCode, string taCode, string firstNavDate, string lastNavDate, string cssfAuthDate, string expiryDate, int sfStatusId, string leiCode, int? cesrClassId, int? geoFocusId, int? glExpId, string currency, int? frequencyId, int? valuationId, int? calculationId, bool isDerivative, int? derivMarketId, int? derivPurposeId, int? principalAssetId, int? typeMarketId, int? principalInvStrId, string clearingCode, int? catMorningStarId, int? catSixId, int? catBloombergId, string comment, string commentTitle)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CreateShareClass(string initialDate, string endDate, string subFundName, string cssfCode, string faCode, string depCode, string taCode, string firstNavDate, string lastNavDate, string cssfAuthDate, string expiryDate, int sfStatusId, string leiCode, int? cesrClassId, int? geoFocusId, int? glExpId, string currency, int? frequencyId, int? valuationId, int? calculationId, bool isDerivative, int? derivMarketId, int? derivPurposeId, int? principalAssetId, int? typeMarketId, int? principalInvStrId, string clearingCode, int? catMorningStarId, int? catSixId, int? catBloombergId, int subFundContainerId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
