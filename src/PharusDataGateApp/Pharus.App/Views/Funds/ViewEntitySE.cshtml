@@ -60,7 +60,14 @@
     <partial name="SpecificEntity/AllDocuments_Partial" />
     <partial name="SpecificEntity/TimeLine_Partial" />
 
-    <partial name="SpecificEntity/SubEntities/AdditionalInfoMenu_Partial" />
+    <div id="subEntities">
+
+        <partial name="SpecificEntity/SubEntities/BindingTable_Partial" />
+        <partial name="SpecificEntity/SubEntities/Select_Extract_ModalBtn_Partial" />
+        <partial name="SpecificEntity/SubEntities/ViewTable_Partial" />
+
+        <partial name="SpecificEntity/SubEntities/Modal_Partial" />
+    </div>
 </form>
 
 <form asp-controller="Funds"
@@ -198,7 +205,7 @@
             // ________________________________________________________
             //
             // Select menu for fund additional information -
-            // subentities, timeline changes, all documents 
+            // subentities, timeline changes, all documents
             // Get selected value and keep select option open
 
             $('#fundAdditionalInfSelect option').each(function () {
@@ -230,7 +237,7 @@
             // ________________________________________________________
             //
             // Select menu for fund additional information -
-            // subentities, timeline changes, all documents - 
+            // subentities, timeline changes, all documents -
             // On change event for selected value
 
             $("#fundAdditionalInfSelect").on('change', function () {
