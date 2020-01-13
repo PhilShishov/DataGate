@@ -13,6 +13,7 @@
 
     using Pharus.Data;
     using Pharus.App.Utilities;
+    using Pharus.Services.Files;
     using Pharus.App.Models.ViewModels.Entities;
     using Pharus.Services.ShareClasses.Contracts;
     using Pharus.App.Models.BindingModels.ShareClasses;
@@ -23,18 +24,21 @@
         private readonly Pharus_vFinale_Context context;
         private readonly IShareClassesService shareClassesService;
         private readonly IShareClassesSelectListService shareClassesSelectListService;
+        private readonly IEntitiesFileService entitiesFileService;
         private readonly IHostingEnvironment hostingEnvironment;
 
         public ShareClassesController(
             IShareClassesService shareClassesService,
             IShareClassesSelectListService shareClassesSelectListService,
             Pharus_vFinale_Context context,
+            IEntitiesFileService entitiesFileService,
             IHostingEnvironment hostingEnvironment)
         {
+            this.context = context;
+            this.hostingEnvironment = hostingEnvironment;
             this.shareClassesService = shareClassesService;
             this.shareClassesSelectListService = shareClassesSelectListService;
-            this.hostingEnvironment = hostingEnvironment;
-            this.context = context;
+            this.entitiesFileService = entitiesFileService;
         }
 
         [HttpGet]
@@ -44,8 +48,9 @@
             {
                 IsActive = true,
                 ChosenDate = DateTime.Today.ToString("yyyy-MM-dd"),
+                EntitiesHeadersForColumnSelection = this.shareClassesService.GetAllActiveSubFunds().Take(1).ToList(),
+                Entities = this.shareClassesService.GetAllActiveSubFunds(),
             };
-            //GetAllActiveEntitiesUtility.GetAllActiveShareClassesWithHeaders(model, this.shareClassesService);
 
             this.ModelState.Clear();
             return this.View(model);
