@@ -268,7 +268,7 @@
                     .Select(s => s.FiletypeId)
                     .FirstOrDefault();
 
-            this.entitiesFileService.AddFileToSpecificSubFund(
+            this.entitiesFileService.AddFileToSpecificShareClass(
                                                 file.FileName,
                                                 model.EntityId,
                                                 startConnection,
@@ -313,7 +313,7 @@
                     .Select(s => s.FiletypeId)
                     .FirstOrDefault();
 
-            this.entitiesFileService.AddFileToSpecificSubFund(
+            this.entitiesFileService.AddFileToSpecificShareClass(
                                                 file.FileName,
                                                 model.EntityId,
                                                 startConnection,
@@ -328,7 +328,7 @@
         {
             FileStream fs = null;
 
-            var path = this.entitiesFileService.LoadSubFundFileToDisplay(model.EntityId, model.ChosenDate);
+            var path = this.entitiesFileService.LoadShareClassFileToDisplay(model.EntityId, model.ChosenDate);
 
             if (this.HttpContext.Request.Form.ContainsKey("read_Pdf"))
             {
@@ -611,7 +611,7 @@
 
         private string GetFileNameFromFilePath(int entityId, string chosenDate)
         {
-            return this.entitiesFileService.LoadSubFundFileToDisplay(entityId, chosenDate).Split('\\').Last();
+            return this.entitiesFileService.LoadShareClassFileToDisplay(entityId, chosenDate).Split('\\').Last();
         }
     }
 }
