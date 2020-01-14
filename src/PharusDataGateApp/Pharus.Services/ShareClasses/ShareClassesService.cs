@@ -160,7 +160,6 @@ namespace Pharus.Services.ShareClasses
             }
         }
 
-
         public List<string> GetAllShareClassesNames()
         {
             return this.context.TbHistoryShareClass
