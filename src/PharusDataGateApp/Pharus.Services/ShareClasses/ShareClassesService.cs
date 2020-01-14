@@ -8,6 +8,7 @@ namespace Pharus.Services.ShareClasses
 {
     using System;
     using System.Linq;
+    using System.Data;
     using System.Data.SqlClient;
     using System.Collections.Generic;
 
@@ -98,8 +99,8 @@ namespace Pharus.Services.ShareClasses
         }
 
         public List<string[]> GetAllShareClassesWithSelectedViewAndDate(
-                                                List<string> preSelectedColumns, 
-                                                List<string> selectedColumns, 
+                                                List<string> preSelectedColumns,
+                                                List<string> selectedColumns,
                                                 DateTime? chosenDate)
         {
             using (SqlConnection connection = new SqlConnection())
@@ -128,7 +129,10 @@ namespace Pharus.Services.ShareClasses
             }
         }
 
-        public List<string[]> GetAllActiveShareClassesWithSelectedViewAndDate(List<string> preSelectedColumns, List<string> selectedColumns, DateTime? chosenDate)
+        public List<string[]> GetAllActiveShareClassesWithSelectedViewAndDate(
+                                                        List<string> preSelectedColumns,
+                                                        List<string> selectedColumns,
+                                                        DateTime? chosenDate)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -305,14 +309,105 @@ namespace Pharus.Services.ShareClasses
             }
         }
 
-        public void EditShareClass(int scId, string initialDate, string subFundName, string cssfCode, string faCode, string depCode, string taCode, string firstNavDate, string lastNavDate, string cssfAuthDate, string expiryDate, int sfStatusId, string leiCode, int? cesrClassId, int? geoFocusId, int? glExpId, string currency, int? frequencyId, int? valuationId, int? calculationId, bool isDerivative, int? derivMarketId, int? derivPurposeId, int? principalAssetId, int? typeMarketId, int? principalInvStrId, string clearingCode, int? catMorningStarId, int? catSixId, int? catBloombergId, string comment, string commentTitle)
+        public void CreateShareClass(
+                        string initialDate,
+                        string endDate,
+                        string shareClassName,
+                        int? investorTypeId,
+                        int? shareTypeId,
+                        string currency,
+                        string countryIssue,
+                        string countryRisk,
+                        string emissionDate,
+                        string inceptionDate,
+                        string lastNavDate,
+                        string expiryDate,
+                        int scStatusId,
+                        double initialPrice,
+                        string accountingCode,
+                        bool isHedged,
+                        bool isListed,
+                        string bloombergMarket,
+                        string bloombergCode,
+                        string bloombergId,
+                        string isinCode,
+                        string valorCode,
+                        string faCode,
+                        string taCode,
+                        string wKN,
+                        string businessYearDate,
+                        string prospectusCode,
+                        int subFundContainerId)
         {
-            throw new NotImplementedException();
-        }
+            string query = "EXEC sp_new_shareclass " +
+                "@sc_initialDate, @sc_endDate, @sc_officialShareClassName, " +
+                "@sc_shortShareClassName, @sc_investorType, @sc_shareType, @sc_currency, " +
+                "@sc_countryIssue, @sc_ultimateParentCountryRisk, @sc_emissionDate, @sc_inceptionDate, " +
+                "@sc_lastNav, @sc_expiryDate, @sc_status, @sc_initialPrice, " +
+                "@sc_accountingCode, @sc_hedged, @sc_listed, @sc_bloomberMarket, " +
+                "@sc_bloomberCode, @sc_bloomberId, @sc_isinCode, @sc_valorCode, " +
+                "@sc_faCode, @sc_taCode, @sc_WKN, @sc_date_business_year" +
+                "@sc_prospectus_code, @subfundcontainer";
 
-        public void CreateShareClass(string initialDate, string endDate, string subFundName, string cssfCode, string faCode, string depCode, string taCode, string firstNavDate, string lastNavDate, string cssfAuthDate, string expiryDate, int sfStatusId, string leiCode, int? cesrClassId, int? geoFocusId, int? glExpId, string currency, int? frequencyId, int? valuationId, int? calculationId, bool isDerivative, int? derivMarketId, int? derivPurposeId, int? principalAssetId, int? typeMarketId, int? principalInvStrId, string clearingCode, int? catMorningStarId, int? catSixId, int? catBloombergId, int subFundContainerId)
-        {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                using (SqlCommand command = new SqlCommand(query))
+                {
+                    command.Parameters.AddRange(new[]
+                    {
+                        new SqlParameter("@sf_initialDate", SqlDbType.NVarChar, 100) { Value = initialDate},
+                        new SqlParameter("@sf_endDate", SqlDbType.NVarChar, 100) { Value = endDate},
+                        new SqlParameter("@sc_officialShareClassName", SqlDbType.NVarChar, 100) { Value = shareClassName },
+                        new SqlParameter("@sc_shortShareClassName", SqlDbType.NVarChar, 100) { Value = shareClassName },
+                        new SqlParameter("@sc_investorType", SqlDbType.Int) { Value = investorTypeId },
+                        new SqlParameter("@sc_shareType", SqlDbType.Int) { Value = shareTypeId },
+                        new SqlParameter("@sf_currency", SqlDbType.NChar, 3) { Value = currency },
+                        new SqlParameter("@sc_countryIssue", SqlDbType.NChar, 2) { Value = countryIssue },
+                        new SqlParameter("@sc_ultimateParentCountryRisk", SqlDbType.NChar, 3) { Value = countryRisk },
+                        new SqlParameter("@sc_emissionDate", SqlDbType.NVarChar, 100) { Value = emissionDate},
+                        new SqlParameter("@sc_inceptionDate", SqlDbType.NVarChar, 100) { Value = inceptionDate},
+                        new SqlParameter("@sc_lastNav", SqlDbType.NVarChar, 100) { Value = lastNavDate},
+                        new SqlParameter("@sc_expiryDate", SqlDbType.NVarChar, 100) { Value = expiryDate},
+                        new SqlParameter("@sc_status", SqlDbType.Int) { Value = scStatusId },
+                        new SqlParameter("@sc_initialPrice", SqlDbType.Float) { Value = initialPrice },
+                        new SqlParameter("@sc_accountingCode", SqlDbType.NVarChar, 100) { Value = accountingCode},
+                        new SqlParameter("@sc_hedged", SqlDbType.Bit) { Value = isHedged },
+                        new SqlParameter("@sc_listed", SqlDbType.Bit) { Value = isListed },
+                        new SqlParameter("@sc_bloomberMarket", SqlDbType.NVarChar, 100) { Value = bloombergMarket},
+                        new SqlParameter("@sc_bloomberCode", SqlDbType.NVarChar, 100) { Value = bloombergCode},
+                        new SqlParameter("@sc_bloomberId", SqlDbType.NVarChar, 100) { Value = bloombergId},
+                        new SqlParameter("@sc_isinCode", SqlDbType.NVarChar, 100) { Value = isinCode},
+                        new SqlParameter("@sc_valorCode", SqlDbType.NVarChar, 100) { Value = valorCode},
+                        new SqlParameter("@sf_faCode", SqlDbType.NVarChar, 100) { Value = faCode },
+                        new SqlParameter("@sf_taCode", SqlDbType.NVarChar, 100) { Value = taCode },
+                        new SqlParameter("@sc_WKN", SqlDbType.NVarChar, 100) { Value = wKN},
+                        new SqlParameter("@sc_date_business_year", SqlDbType.NVarChar, 100) { Value = businessYearDate},
+                        new SqlParameter("@sc_prospectus_code", SqlDbType.NVarChar, 100) { Value = prospectusCode},
+                        new SqlParameter("@subfundcontainer", SqlDbType.Int) { Value = subFundContainerId },
+                    });
+
+                    foreach (SqlParameter parameter in command.Parameters)
+                    {
+                        if (parameter.Value == null)
+                        {
+                            parameter.Value = DBNull.Value;
+                        }
+                    }
+
+                    command.Connection = connection;
+
+                    try
+                    {
+                        command.Connection.Open();
+                        command.ExecuteScalar();
+                    }
+                    catch (SqlException sx)
+                    {
+                        Console.WriteLine(sx.Message);
+                    }
+                }
+            }
         }
     }
 }

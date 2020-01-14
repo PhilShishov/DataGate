@@ -837,7 +837,12 @@
             this.ViewData["FileTypes"] = this.subfundsSelectListService.GetAllSubFundFileTypes();
         }
 
-        private static void SetZeroValuesToNull(List<int?> nullIntegerParameters, int? cesrClassId, int? geoFocusId, int? glExpId, int? frequencyId, int? valuationId, int? calculationId, int? derivMarketId, int? derivPurposeId, int? principalAssetId, int? typeMarketId, int? principalInvStrId, int? catMorningStarId, int? catSixId, int? catBloombergId)
+        private static void SetZeroValuesToNull(
+                                            List<int?> nullIntegerParameters, int? cesrClassId, int? geoFocusId, 
+                                            int? glExpId, int? frequencyId, int? valuationId, int? calculationId, 
+                                            int? derivMarketId, int? derivPurposeId, int? principalAssetId, 
+                                            int? typeMarketId, int? principalInvStrId, int? catMorningStarId, 
+                                            int? catSixId, int? catBloombergId)
         {
             nullIntegerParameters.Add(cesrClassId);
             nullIntegerParameters.Add(geoFocusId);
