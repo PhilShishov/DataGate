@@ -1,5 +1,5 @@
 ﻿// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-// Binding model for create share class
+// Binding model for edit share class
 
 // Created: 01/2020
 // Author:  Philip Shishov
@@ -10,12 +10,15 @@ namespace Pharus.App.Models.BindingModels.ShareClasses
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class CreateShareClassBindingModel : BaseCreateEntityBindingModel
+    public class EditShareClassBindingModel : BaseEditEntityBindingModel
     {
+        [Display(Name = "Share Class Id")]
+        public int ShareClassId { get; set; }
+
         [Required(ErrorMessage = "You must enter a value for the ShareClass Name!")]
         [StringLength(200, ErrorMessage = "The ShareClass Name must be no longer than 200 characters")]
         [RegularExpression(@"^[A-Z-0-9]+(\s[A-Z-0-9]+)*$", ErrorMessage = "Not in correct format!")]
-        [Display(Name = "Official ShareClass Name")]
+        [Display(Name = "Official Share Class Name")]
         public string ShareClassName { get; set; }
 
         [Display(Name = "Investor Type")]
@@ -81,9 +84,5 @@ namespace Pharus.App.Models.BindingModels.ShareClasses
 
         [Display(Name = "Prospectus Code")]
         public string ProspectusCode { get; set; }
-
-        [Required(ErrorMessage = "Please choose a subfund container!")]
-        [Display(Name = "Subfund Container")]
-        public string SubFundContainer { get; set; }
     }
 }
