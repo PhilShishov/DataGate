@@ -564,12 +564,6 @@
         private void SetModelValuesForEditView(EditShareClassBindingModel model)
         {
             model.ShareClassName = model.EntityProperties[1][3];
-            //model.CSSFCode = model.EntityProperties[1][5];
-            //model.FACode = model.EntityProperties[1][6];
-            //model.DBCode = model.EntityProperties[1][7];
-            //model.TACode = model.EntityProperties[1][8];
-            //model.LEICode = model.EntityProperties[1][14];
-            //model.ClearingCode = model.EntityProperties[1][30];
         }
 
         private void SetViewDataValuesForShareClassesSelectLists()

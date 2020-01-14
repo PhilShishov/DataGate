@@ -859,6 +859,10 @@
             model.FACode = model.EntityProperties[1][6];
             model.DBCode = model.EntityProperties[1][7];
             model.TACode = model.EntityProperties[1][8];
+            model.FirstNavDate = DateTime.Parse(model.EntityProperties[1][9]);
+            model.LastNavDate = DateTime.Parse(model.EntityProperties[1][10]);
+            model.CSSFAuthDate = DateTime.Parse(model.EntityProperties[1][11]);
+            model.ExpiryDate = DateTime.Parse(model.EntityProperties[1][12]);
             model.LEICode = model.EntityProperties[1][14];
             model.ClearingCode = model.EntityProperties[1][30];
         }
