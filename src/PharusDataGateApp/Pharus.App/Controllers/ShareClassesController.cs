@@ -198,7 +198,7 @@
                 EntityId = entityId,
             };
 
-            SetModelValuesForSpecificView(viewModel);           
+            SetModelValuesForSpecificView(viewModel);
 
             HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
 
@@ -338,51 +338,46 @@
             return fs;
         }
 
+        [HttpGet("ShareClasses/EditShareClass/{EntityId}/{ChosenDate}")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult EditShareClass(int entityId, string chosenDate)
+        {
+            var date = DateTime.Parse(chosenDate);
 
-        //[HttpGet("ShareClasses/EditShareClass/{EntityId}")]
-        //public IActionResult EditShareClass(int entityId)
-        //{
-        //    ShareClassBindingModel model = new ShareClassBindingModel
-        //    {
-        //        EntityProperties = this.shareClassesService.GetShareClassWithDateById(entityId),
-        //        InvestorType = new SelectList(this.shareClassesSelectListService.GetAllTbDomInvestorType()),
-        //        CurrencyCode = new SelectList(this.shareClassesSelectListService.GetAllTbDomCurrencyCode()),
-        //        CountryIssue = new SelectList(this.shareClassesSelectListService.GetAllTbDomCountry()),
-        //        CountryRisk = new SelectList(this.shareClassesSelectListService.GetAllTbDomCountry()),
-        //        ShareStatus = new SelectList(this.shareClassesSelectListService.GetAllTbDomShareStatus()),
-        //        ShareType = new SelectList(this.shareClassesSelectListService.GetAllTbDomShareType()),
-        //    };
+            EditShareClassBindingModel model = new EditShareClassBindingModel
+            {
+                EntityProperties = this.shareClassesService.GetShareClassWithDateById(date, entityId),
+                InitialDate = DateTime.Today,
+                ShareClassId = entityId,
+            };
 
-        //    return this.View(model);
-        //}
+            SetModelValuesForEditView(model);
 
-        //[HttpPost]
-        //public IActionResult EditShareClass(ShareClassBindingModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(model ?? new ShareClassBindingModel());
-        //    }
-        //    int entityId = int.Parse(model.EntityProperties[1][0]);
-        //    string returnUrl = $"/ShareClasses/ViewEntitySE/{entityId}";
+            SetViewDataValuesForShareClassesSelectLists();
 
-        //    var shareClass = this.shareClassesService.GetShareClassById(entityId);
+            return this.View(model);
+        }
 
-        //    if (this.HttpContext.Request.Form.ContainsKey("modify_button"))
-        //    {
-        //        for (int row = 1; row < shareClass.Count; row++)
-        //        {
-        //            for (int col = 0; col < shareClass[row].Length; col++)
-        //            {
-        //                shareClass[row][col] = model.EntityProperties[row][col];
-        //            }
-        //        }
+        [HttpPost("ShareClasses/EditShareClass/{EntityId}/{ChosenDate}")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult EditShareClass(EditShareClassBindingModel model, int entityId, string chosenDate)
+        {
+            string returnUrl = $"/ShareClasses/All/";
 
-        //        return this.LocalRedirect(returnUrl);
-        //    }
+            if (!ModelState.IsValid)
+            {
+                if (model.EntityProperties == null)
+                {
+                    var date = DateTime.Parse(chosenDate);
+                    model.EntityProperties = this.shareClassesService.GetShareClassWithDateById(date, entityId);
+                    SetModelValuesForEditView(model);
+                    SetViewDataValuesForShareClassesSelectLists();
+                }
+                return View(model ?? new EditShareClassBindingModel());
+            }
 
-        //    return this.LocalRedirect(returnUrl);
-        //}
+            return this.LocalRedirect(returnUrl);
+        }
 
         [HttpGet]
         [Authorize(Roles = "Admin")]
@@ -565,6 +560,16 @@
             model.EndConnection = model.Entity[1][1];
 
             this.ViewData["FileTypes"] = this.shareClassesSelectListService.GetAllShareClassFileTypes();
+        }
+        private void SetModelValuesForEditView(EditShareClassBindingModel model)
+        {
+            model.ShareClassName = model.EntityProperties[1][3];
+            //model.CSSFCode = model.EntityProperties[1][5];
+            //model.FACode = model.EntityProperties[1][6];
+            //model.DBCode = model.EntityProperties[1][7];
+            //model.TACode = model.EntityProperties[1][8];
+            //model.LEICode = model.EntityProperties[1][14];
+            //model.ClearingCode = model.EntityProperties[1][30];
         }
 
         private void SetViewDataValuesForShareClassesSelectLists()

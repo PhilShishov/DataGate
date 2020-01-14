@@ -46,7 +46,7 @@
                 <option selected disabled>-- Choose Status --</option>
                 @foreach (var status in (List<string>)ViewData["Status"])
                 {
-                    if (status == Model.EntityProperties[1][13])
+                    if (status == Model.EntityProperties[1][14])
                     {
                         <option selected value="@status">@status</option>
                     }
@@ -65,7 +65,7 @@
                 <option selected disabled>-- Choose Currency--</option>
                 @foreach (var currency in (List<string>)ViewData["CurrencyCode"])
                 {
-                    if (currency == Model.EntityProperties[1][18])
+                    if (currency == Model.EntityProperties[1][7])
                     {
                         <option selected value="@currency">@currency</option>
                     }
@@ -100,7 +100,7 @@
                 <option selected disabled>-- Choose Investor Type --</option>
                 @foreach (var type in (List<string>)ViewData["InvestorType"])
                 {
-                    if (type == Model.EntityProperties[1][18])
+                    if (type == Model.EntityProperties[1][5])
                     {
                         <option selected value="@type">@type</option>
                     }
@@ -115,11 +115,11 @@
 
         <div class="form-group">
             <label asp-for="ShareType" class="text-torshia"></label><br>
-            <select class="form-control maxw-270" asp-for="CurrencyCode">
+            <select class="form-control maxw-270" asp-for="ShareType">
                 <option selected disabled>-- Choose Share Type--</option>
                 @foreach (var type in (List<string>)ViewData["ShareType"])
                 {
-                    if (type == Model.EntityProperties[1][18])
+                    if (type == Model.EntityProperties[1][6])
                     {
                         <option selected value="@type">@type</option>
                     }
@@ -138,7 +138,7 @@
                 <option selected disabled>-- Choose Country Issue --</option>
                 @foreach (var issue in (List<string>)ViewData["Country"])
                 {
-                    if (issue == Model.EntityProperties[1][18])
+                    if (issue == Model.EntityProperties[1][8])
                     {
                         <option selected value="@issue">@issue</option>
                     }
@@ -157,7 +157,7 @@
                 <option selected disabled>-- Choose Country Risk --</option>
                 @foreach (var risk in (List<string>)ViewData["Country"])
                 {
-                    if (risk == Model.EntityProperties[1][18])
+                    if (risk == Model.EntityProperties[1][9])
                     {
                         <option selected value="@risk">@risk</option>
                     }
