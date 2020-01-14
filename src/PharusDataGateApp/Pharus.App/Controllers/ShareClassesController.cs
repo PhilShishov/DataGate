@@ -215,7 +215,7 @@
             return this.View(viewModel);
         }
 
-        [HttpPost("ShareClasses/ViewEntitySE/{EntityId}")]
+        [HttpPost("ShareClasses/ViewEntitySE/{EntityId}/{ChosenDate}")]
         public IActionResult ViewEntitySE(SpecificEntityViewModel model)
         {
             SetModelValuesForSpecificView(model);
