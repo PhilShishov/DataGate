@@ -11,7 +11,6 @@
 }
 
 @section Styles{
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <style>
         body {
             background-image: none;
@@ -25,7 +24,7 @@
 
     <div class="d-flex mt-2 pr-3">
         <p> SUB FUND CONTAINER :</p>
-        <a href="/Funds/ViewEntitySE/@Model.BaseEntityId/@Model.ChosenDate"
+        <a href="/SubFunds/ViewEntitySE/@Model.BaseEntityId/@Model.ChosenDate"
            class="text-torshia font-weight-bold">
             @Model.BaseEntityName
         </a>
@@ -35,13 +34,13 @@
 
     <div class="d-flex justify-content-between">
 
-        <div style="width:60%;">
-            <canvas id="aumSC_Canvas"></canvas>
-        </div>
-
         <partial name="SpecificEntity/Info_Partial" />
 
-        <div class="w-50 float-right">
+        <div class="w-60" style="margin-top:-70px;">
+            <div style="width:90%;">
+                <canvas id="aumSC_Canvas"></canvas>
+            </div>
+
             <partial name="SpecificEntity/Load_Upload_Documents_Partial" />
             @if (this.User.IsInRole("Admin"))
             {
@@ -146,10 +145,12 @@
                 $("#allDocuments").css('visibility', 'hidden');
             }
         });
-    </script>
+        
+        // ________________________________________________________
+        //
+        // Chart js for Asset under management 
 
-    <script>
-        let config = {
+        const config = {
             type: 'line',
             data: {
                 labels: @valDatesLabel,

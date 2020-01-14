@@ -191,44 +191,7 @@
         {
             var date = DateTime.Parse(chosenDate);
 
-            SpecificEntityViewModel viewModel = new SpecificEntityViewModel
-            {
-                ChosenDate = chosenDate,
-                EntityId = entityId,
-                Entity = this.shareClassesService.GetShareClassWithDateById(date, entityId),
-                EntityTimeline = this.shareClassesService.GetShareClassesTimeline(entityId),
-                EntityDocuments = this.shareClassesService.GetAllShareClassesDocumens(entityId),
-                BaseEntityName = this.shareClassesService.GetShareClass_SubFundContainer(date, entityId)[1][1],
-                BaseEntityId = this.shareClassesService.GetShareClass_SubFundContainer(date, entityId)[1][0],
-                TSPriceDates = this.shareClassesService
-                .GetShareClassTimeSeriesDates(entityId)
-                .Skip(1)
-                .Select(ts => ts[1])
-                .ToList(),
-                TSTableType = this.shareClassesService
-                .GetTimeseriesTypeProviders(entityId)
-                .Skip(1)
-                .Select(tt => tt[0])
-                .ToList(),
-                TSPriceBloombergEUR = this.shareClassesService
-                .GetShareClassTimeSeries(entityId)
-                .Skip(1)
-                .Where(ts => ts[2] == "Bloomberg EUR")
-                .Select(ts => ts[1])
-                .ToList(),
-                TSPriceBloombergUSD = this.shareClassesService
-                .GetShareClassTimeSeries(entityId)
-                .Skip(1)
-                .Where(ts => ts[2] == "Bloomberg USD")
-                .Select(ts => ts[1])
-                .ToList(),
-                TSPriceSixUSD = this.shareClassesService
-                .GetShareClassTimeSeries(entityId)
-                .Skip(1)
-                .Where(ts => ts[2] == "SiX EUR")
-                .Select(ts => ts[1])
-                .ToList(),
-            };
+            SpecificEntityViewModel viewModel = SetValuesForSpecificEntityGetModel(entityId, chosenDate, date);
 
             viewModel.StartConnection = viewModel.Entity[1][0];
             viewModel.EndConnection = viewModel.Entity[1][1];
@@ -251,7 +214,7 @@
         }
 
         //[HttpPost("ShareClasses/ViewEntitySE/{EntityId}")]
-        //public IActionResult ViewEntitySE(EntitiesViewModel viewModel)
+        //public IActionResult ViewEntitySE(SpecificEntityViewModel viewModel)
         //{
         //    viewModel.Entities = this.shareClassesService.GetShareClassById(viewModel.EntityId);
 
@@ -454,6 +417,48 @@
             // End of if statement
 
             return this.LocalRedirect(returnUrl);
+        }
+
+        private SpecificEntityViewModel SetValuesForSpecificEntityGetModel(int entityId, string chosenDate, DateTime date)
+        {
+            return new SpecificEntityViewModel
+            {
+                ChosenDate = chosenDate,
+                EntityId = entityId,
+                Entity = this.shareClassesService.GetShareClassWithDateById(date, entityId),
+                EntityTimeline = this.shareClassesService.GetShareClassesTimeline(entityId),
+                EntityDocuments = this.shareClassesService.GetAllShareClassesDocumens(entityId),
+                BaseEntityName = this.shareClassesService.GetShareClass_SubFundContainer(date, entityId)[1][1],
+                BaseEntityId = this.shareClassesService.GetShareClass_SubFundContainer(date, entityId)[1][0],
+                TSPriceDates = this.shareClassesService
+                            .GetShareClassTimeSeriesDates(entityId)
+                            .Skip(1)
+                            .Select(ts => ts[1])
+                            .ToList(),
+                TSTableType = this.shareClassesService
+                            .GetTimeseriesTypeProviders(entityId)
+                            .Skip(1)
+                            .Select(tt => tt[0])
+                            .ToList(),
+                TSPriceBloombergEUR = this.shareClassesService
+                            .GetShareClassTimeSeries(entityId)
+                            .Skip(1)
+                            .Where(ts => ts[2] == "Bloomberg EUR")
+                            .Select(ts => ts[1])
+                            .ToList(),
+                TSPriceBloombergUSD = this.shareClassesService
+                            .GetShareClassTimeSeries(entityId)
+                            .Skip(1)
+                            .Where(ts => ts[2] == "Bloomberg USD")
+                            .Select(ts => ts[1])
+                            .ToList(),
+                TSPriceSixUSD = this.shareClassesService
+                            .GetShareClassTimeSeries(entityId)
+                            .Skip(1)
+                            .Where(ts => ts[2] == "SiX EUR")
+                            .Select(ts => ts[1])
+                            .ToList(),
+            };
         }
 
         private void SetViewDataValuesForShareClassesSelectLists()
