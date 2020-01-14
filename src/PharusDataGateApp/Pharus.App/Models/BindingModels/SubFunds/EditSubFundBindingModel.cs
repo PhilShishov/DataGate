@@ -1,4 +1,5 @@
-﻿// Model class for binding subfunds
+﻿// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+// Binding model for edit sub fund
 
 // Created: 10/2019
 // Author:  Philip Shishov
@@ -11,13 +12,13 @@ namespace Pharus.App.Models.BindingModels.SubFunds
 
     public class EditSubFundBindingModel : BaseEditEntityBindingModel
     {
-        [Display(Name = "Subfund Id")]
+        [Display(Name = "Sub Fund Id")]
         public int SubFundId { get; set; }
 
         [Required(ErrorMessage = "You must enter a value for the SubFund Name!")]
         [StringLength(200, ErrorMessage = "The SubFund Name must be no longer than 200 characters")]
         [RegularExpression(@"^[A-Z-0-9]+(\s[A-Z-0-9]+)*$", ErrorMessage = "Not in correct format!")]
-        [Display(Name = "SubFund Name")]
+        [Display(Name = "Sub Fund Name")]
         public string SubFundName { get; set; }   
 
         [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
