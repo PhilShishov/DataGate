@@ -188,28 +188,13 @@
         [HttpGet("SubFunds/ViewEntitySE/{EntityId}/{ChosenDate}")]
         public IActionResult ViewEntitySE(int entityId, string chosenDate)
         {
-            var date = DateTime.Parse(chosenDate);
-
             SpecificEntityViewModel viewModel = new SpecificEntityViewModel
             {
                 ChosenDate = chosenDate,
                 EntityId = entityId,
-                Entity = this.subFundsService.GetSubFundWithDateById(date, entityId),
-                EntitySubEntities = this.subFundsService.GetSubFund_ShareClasses(date, entityId),
-                SubEntitiesHeadersForColumnSelection = this.subFundsService
-                                                                    .GetSubFund_ShareClasses(date, entityId)
-                                                                    .Take(1)
-                                                                    .ToList(),
-                EntityTimeline = this.subFundsService.GetSubFundTimeline(entityId),
-                EntityDocuments = this.subFundsService.GetAllSubFundDocumens(entityId),
-                BaseEntityName = this.subFundsService.GetSubFund_FundContainer(date, entityId)[1][1],
-                BaseEntityId = this.subFundsService.GetSubFund_FundContainer(date, entityId)[1][0],
             };
 
-            viewModel.StartConnection = viewModel.Entity[1][0];
-            viewModel.EndConnection = viewModel.Entity[1][1];
-
-            this.ViewData["FileTypes"] = this.subfundsSelectListService.GetAllSubFundFileTypes();
+            SetModelValuesForSpecificView(viewModel);
 
             HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
 
@@ -491,29 +476,28 @@
                 return View(model ?? new EditSubFundBindingModel());
             }
 
-            string initialDate = model.InitialDate.ToString("yyyyMMdd");
-            string firstNavDate = model.FirstNavDate?.ToString("yyyyMMdd");
-            string lastNavDate = model.LastNavDate?.ToString("yyyyMMdd");
-            string cssfAuthDate = model.CSSFAuthDate?.ToString("yyyyMMdd");
-            string expiryDate = model.ExpiryDate?.ToString("yyyyMMdd");
-
-            List<int?> nullIntegerParameters = new List<int?>();
-
             if (this.HttpContext.Request.Form.ContainsKey("update_button"))
             {
-                string subFundName = model.SubFundName;
-                string cssfCode = model.CSSFCode;
-                string faCode = model.FACode;
-                string depCode = model.DBCode;
-                string taCode = model.TACode;
+                List<int?> nullIntegerParameters = new List<int?>();
 
+                string initialDate = model.InitialDate.ToString("yyyyMMdd");
                 int sfId = model.SubFundId;
+                string subFundName = model.SubFundName;
 
                 int sfStatusId = this.context.TbDomSfStatus
                     .Where(s => s.StDesc == model.Status)
                     .Select(s => s.StId)
                     .FirstOrDefault();
 
+                string cssfCode = model.CSSFCode;
+                string faCode = model.FACode;
+                string depCode = model.DBCode;
+                string taCode = model.TACode;
+
+                string firstNavDate = model.FirstNavDate?.ToString("yyyyMMdd");
+                string lastNavDate = model.LastNavDate?.ToString("yyyyMMdd");
+                string cssfAuthDate = model.CSSFAuthDate?.ToString("yyyyMMdd");
+                string expiryDate = model.ExpiryDate?.ToString("yyyyMMdd");
                 string leiCode = model.LEICode;
 
                 int? cesrClassId = this.context.TbDomCesrClass
@@ -653,27 +637,28 @@
                 return this.View(model ?? new CreateSubFundBindingModel());
             }
 
-            string initialDate = model.InitialDate.ToString("yyyyMMdd");
-            string endDate = model.EndDate?.ToString("yyyyMMdd");
-            string firstNavDate = model.FirstNavDate?.ToString("yyyyMMdd");
-            string lastNavDate = model.LastNavDate?.ToString("yyyyMMdd");
-            string cssfAuthDate = model.CSSFAuthDate?.ToString("yyyyMMdd");
-            string expiryDate = model.ExpiryDate?.ToString("yyyyMMdd");
-
-            List<int?> nullIntegerParameters = new List<int?>();
-
             if (this.HttpContext.Request.Form.ContainsKey("create_button"))
             {
+                List<int?> nullIntegerParameters = new List<int?>();
+
+                string initialDate = model.InitialDate.ToString("yyyyMMdd");
+                string endDate = model.EndDate?.ToString("yyyyMMdd");
                 string subFundName = model.SubFundName;
-                string cssfCode = model.CSSFCode;
-                string faCode = model.FACode;
-                string depCode = model.DBCode;
-                string taCode = model.TACode;
 
                 int sfStatusId = this.context.TbDomSfStatus
                     .Where(s => s.StDesc == model.Status)
                     .Select(s => s.StId)
                     .FirstOrDefault();
+
+                string cssfCode = model.CSSFCode;
+                string faCode = model.FACode;
+                string depCode = model.DBCode;
+                string taCode = model.TACode;
+
+                string firstNavDate = model.FirstNavDate?.ToString("yyyyMMdd");
+                string lastNavDate = model.LastNavDate?.ToString("yyyyMMdd");
+                string cssfAuthDate = model.CSSFAuthDate?.ToString("yyyyMMdd");
+                string expiryDate = model.ExpiryDate?.ToString("yyyyMMdd");
 
                 string leiCode = model.LEICode;
 
@@ -838,10 +823,10 @@
         }
 
         private static void SetZeroValuesToNull(
-                                            List<int?> nullIntegerParameters, int? cesrClassId, int? geoFocusId, 
-                                            int? glExpId, int? frequencyId, int? valuationId, int? calculationId, 
-                                            int? derivMarketId, int? derivPurposeId, int? principalAssetId, 
-                                            int? typeMarketId, int? principalInvStrId, int? catMorningStarId, 
+                                            List<int?> nullIntegerParameters, int? cesrClassId, int? geoFocusId,
+                                            int? glExpId, int? frequencyId, int? valuationId, int? calculationId,
+                                            int? derivMarketId, int? derivPurposeId, int? principalAssetId,
+                                            int? typeMarketId, int? principalInvStrId, int? catMorningStarId,
                                             int? catSixId, int? catBloombergId)
         {
             nullIntegerParameters.Add(cesrClassId);
