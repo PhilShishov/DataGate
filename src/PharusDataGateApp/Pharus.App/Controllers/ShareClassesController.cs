@@ -190,8 +190,6 @@
         [HttpGet("ShareClasses/ViewEntitySE/{EntityId}/{ChosenDate}")]
         public IActionResult ViewEntitySE(int entityId, string chosenDate)
         {
-            var date = DateTime.Parse(chosenDate);
-
             SpecificEntityViewModel viewModel = new SpecificEntityViewModel
             {
                 ChosenDate = chosenDate,
@@ -525,8 +523,8 @@
             model.Entity = this.shareClassesService.GetShareClassWithDateById(date, entityId);
             model.EntityTimeline = this.shareClassesService.GetShareClassesTimeline(entityId);
             model.EntityDocuments = this.shareClassesService.GetAllShareClassesDocumens(entityId);
-            model.BaseEntityName = this.shareClassesService.GetShareClass_SubFundContainer(date, entityId)[1][1];
             model.BaseEntityId = this.shareClassesService.GetShareClass_SubFundContainer(date, entityId)[1][0];
+            model.BaseEntityName = this.shareClassesService.GetShareClass_SubFundContainer(date, entityId)[1][1];
             model.TSPriceDates = this.shareClassesService
                         .GetShareClassTimeSeriesDates(entityId)
                         .Skip(1)
@@ -564,10 +562,27 @@
         private void SetModelValuesForEditView(EditShareClassBindingModel model)
         {
             model.ShareClassName = model.EntityProperties[1][3];
-            //model.EmissionDate = DateTime.Parse(model.EntityProperties[1][10]);
-            //model.InceptionDate = DateTime.Parse(model.EntityProperties[1][11]);
-            //model.LastNavDate = DateTime.Parse(model.EntityProperties[1][12]);
-            //model.ExpiryDate = DateTime.Parse(model.EntityProperties[1][13]);
+
+            if (!string.IsNullOrEmpty(model.EntityProperties[1][10]))
+            {
+                model.EmissionDate = DateTime.ParseExact(model.EntityProperties[1][10], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            }
+
+            if (!string.IsNullOrEmpty(model.EntityProperties[1][11]))
+            {
+                model.InceptionDate = DateTime.ParseExact(model.EntityProperties[1][11], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            }
+
+            if (!string.IsNullOrEmpty(model.EntityProperties[1][12]))
+            {
+                model.LastNavDate = DateTime.ParseExact(model.EntityProperties[1][12], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            }
+
+            if (!string.IsNullOrEmpty(model.EntityProperties[1][13]))
+            {
+                model.ExpiryDate = DateTime.ParseExact(model.EntityProperties[1][13], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            }
+
             model.InitialPrice = double.Parse(model.EntityProperties[1][15]);
             model.AccountingCode = model.EntityProperties[1][16];
             model.IsHedged = model.EntityProperties[1][17];
@@ -580,7 +595,12 @@
             model.FACode = model.EntityProperties[1][24];
             model.TACode = model.EntityProperties[1][25];
             model.WKN = model.EntityProperties[1][26];
-            //model.DateBusinessYear = DateTime.Parse(model.EntityProperties[1][27]);
+
+            if (!string.IsNullOrEmpty(model.EntityProperties[1][27]))
+            {
+                model.DateBusinessYear = DateTime.ParseExact(model.EntityProperties[1][27], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            }
+
             model.ProspectusCode = model.EntityProperties[1][28];
         }
 
