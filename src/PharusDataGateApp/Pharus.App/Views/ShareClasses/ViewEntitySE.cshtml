@@ -12,7 +12,6 @@
 
 @section Styles{
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <style>
         body {
             background-image: none;
@@ -20,134 +19,97 @@
     </style>
 }
 
-<form asp-controller="SubFunds"
+<form asp-controller="ShareClasses"
       class="justify-content-between"
       method="post">
 
-    <div class="d-flex m-1 pr-3">
-        <p>SUBFUND CONTAINER :</p> <a href="/SubFunds/ViewEntitySE/@Model.BaseEntityId/@Model.ChosenDate" class="text-torshia font-weight-bold">@Model.BaseEntityName</a>
+    <div class="d-flex mt-2 pr-3">
+        <p> SUB FUND CONTAINER :</p>
+        <a href="/Funds/ViewEntitySE/@Model.BaseEntityId/@Model.ChosenDate"
+           class="text-torshia font-weight-bold">
+            @Model.BaseEntityName
+        </a>
     </div>
 
-    <partial name="SpecificEntityUpdatePartial" />
+    <partial name="SpecificEntity/Update_Partial" />
 
     <div class="d-flex justify-content-between">
-
-        <partial name="SpecificEntityInfoPartial" />
 
         <div style="width:60%;">
             <canvas id="aumSC_Canvas"></canvas>
         </div>
-        <div class="w-35 float-right">
-            @*<partial name="SpecificEntityDocumentsPartial" />*@
 
+        <partial name="SpecificEntity/Info_Partial" />
+
+        <div class="w-50 float-right">
+            <partial name="SpecificEntity/Load_Upload_Documents_Partial" />
             @if (this.User.IsInRole("Admin"))
             {
-                @*<div class="mt-5">
-                        <a href="/ShareClasses/EditShareClass/@Model.EntityId" class="btn bg-pharus text-white">Edit ShareClass</a>
-                    </div>*@
-                @*<div class="mt-5">
-                        <a href="" class="btn bg-pharus text-white">Edit SubFund Connection</a>
-                    </div>*@
+                <div class="mt-5">
+                    <a href="/SubFunds/EditSubFund/@Model.EntityId/@Model.ChosenDate" class="btn btn-primary btn-sm mb-2">Edit ShareClass</a>
+                </div>
             }
         </div>
     </div>
 
-    <partial name="SpecificEntitySearchPartial" />
-    <partial name="ExtractSubEntitiesViewPartial" />
-
     <div class="row w-25 ml-3 mb-5">
         <label class="text-torshia m-1 pr-3">SHARECLASS ADDITIONAL INFORMATION</label>
         <select class="custom-select-lg pharus-select form-control input-sm"
-                id="shareClassChoicesSelect"
-                name="shareClassChoicesSelect">
-            <option value="">Select</option>
+                id="shareClassAdditionalInfSelect"
+                asp-for="SelectAdditionalInf">
+            <option value="" selected disabled>Select</option>
             <option value="TimelineChanges">Timeline Changes</option>
             <option value="AllDocuments">All Documents</option>
         </select>
     </div>
 
-    <div id="allDocuments">
-        <table class="table table-bordered table-hover">
-            <thead>
-                @for (int row = 0; row < 1; row++)
-                {
-                    <tr>
-                        @for (int col = 0; col < Model.EntityDocuments[row].Length; col++)
-                        {
-                            <th class="text-secondary p-1">
-                                <h5>
-                                    @Model.EntityDocuments[row][col]
-                                </h5>
-                            </th>
-                        }
-                    </tr>
-                }
-            </thead>
+    <partial name="SpecificEntity/AllDocuments_Partial" />
+    <partial name="SpecificEntity/TimeLine_Partial" />
+</form>
 
-            <tbody>
-                @for (int row = 1; row < Model.EntityDocuments.Count; row++)
-                {
-                    <tr>
-                        @for (int col = 0; col < Model.EntityDocuments[row].Length; col++)
-                        {
-                            <td class="p-1">
-                                @if (Model.EntityDocuments[0][col] == "File Name")
-                                {
-                                    <button class="btn-link"
-                                            formtarget="_blank"
-                                            type="submit"
-                                            formaction="/@controllerName/ReadPdfFile"
-                                            name="read_Pdf">
-                                        @Model.EntityDocuments[row][col]
-                                    </button>
-                                }
-                                else
-                                {
-                                    @Model.EntityDocuments[row][col]
+<form asp-controller="ShareClasses"
+      asp-action="UploadProspectus"
+      method="post"
+      enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                                }
-                            </td>
-                        }
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+    <partial name="SpecificEntity/UploadPros_Partial" />
+</form>
 
-    <div class="container py-5"
-         id="timelineChanges">
-        <div class="row">
-            <div class="col-lg-7 mx-auto">
-                <ul class="timeline">
-                    @for (int row = 1; row < Model.EntityTimeline.Count; row++)
-                    {
-                        <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
-                            <div class="timeline-arrow"></div>
-                            <h2 class="h5 mb-0">@Model.EntityTimeline[row][3]</h2>
-                            <span class="small text-gray">
-                                <i class="fa fa-clock-o mr-1"></i>@Model.EntityTimeline[row][1] - @Model.EntityTimeline[row][2]
-                            </span>
-                            <p class="text-small mt-2 font-weight-light">@Model.EntityTimeline[row][4]</p>
-                        </li>
-                    }
-                </ul>
-            </div>
-        </div>
-    </div>
+<form asp-controller="ShareClasses"
+      asp-action="UploadAgreement"
+      method="post"
+      enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <partial name="SpecificEntity/UploadAgr_Partial" />
 </form>
 
 @section Scripts{
+    <script src="~/lib/jquery/Chart.js/Chart.min.js"></script>
+    <script src="~/lib/jquery/Chart.js/utils.js"></script>
 
-    <script type="text/javascript" src="~/lib/jquery/dist/jquery.doubleScroll.js"></script>
+    <script>
+        window.onload = function () {
+            var ctx = document.getElementById('aumSC_Canvas').getContext('2d');
+            window.myLine = new Chart(ctx, config);
+            manageSideNavBar();
+            manageDropdowns();
+        };
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('.double-scroll').doubleScroll();
-            $('.tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
 
-            $("#shareClassChoicesSelect").on('change', function () {
-                let dropdownvalue = $("#shareClassChoicesSelect option:selected").val();
+        // ________________________________________________________
+        //
+        // Select menu for fund additional information -
+        // subentities, timeline changes, all documents
+        // Get selected value and keep select option open
 
+        $('#shareClassAdditionalInfSelect option').each(function () {
+            if (this.selected) {
+                const dropdownvalue = $("#shareClassAdditionalInfSelect option:selected").val();
                 if (dropdownvalue == 'TimelineChanges') {
                     $("#timelineChanges").css('visibility', 'visible');
                     $("#allDocuments").css('visibility', 'hidden');
@@ -160,30 +122,31 @@
                     $("#timelineChanges").css('visibility', 'hidden');
                     $("#allDocuments").css('visibility', 'hidden');
                 }
-            });
+            }
+        });
+
+        // ________________________________________________________
+        //
+        // Select menu for fund additional information -
+        // subentities, timeline changes, all documents -
+        // On change event for selected value
+
+        $("#shareClassAdditionalInfSelect").on('change', function () {
+            const dropdownvalue = $("#shareClassAdditionalInfSelect option:selected").val();
+            if (dropdownvalue == 'TimelineChanges') {
+                $("#timelineChanges").css('visibility', 'visible');
+                $("#allDocuments").css('visibility', 'hidden');
+            }
+            else if (dropdownvalue == 'AllDocuments') {
+                $("#allDocuments").css('visibility', 'visible');
+                $("#timelineChanges").css('visibility', 'hidden');
+            }
+            else {
+                $("#timelineChanges").css('visibility', 'hidden');
+                $("#allDocuments").css('visibility', 'hidden');
+            }
         });
     </script>
-
-    <script type="text/javascript" src="~/js/manageSubEntitiesSelectMenu.js"></script>
-
-    <script>
-        window.onload = function () {
-            var ctx = document.getElementById('aumSC_Canvas').getContext('2d');
-            window.myLine = new Chart(ctx, config);
-            manageSideNavBar();
-            manageDropdowns();
-            manageSESelectMenu();
-        };
-    </script>
-
-    <script>
-        if (window.history.replaceState) {
-            window.history.replaceState(null, null, window.location.href);
-        }
-    </script>
-
-    <script src="~/lib/jquery/Chart.js/Chart.min.js"></script>
-    <script src="~/lib/jquery/Chart.js/utils.js"></script>
 
     <script>
         let config = {

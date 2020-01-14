@@ -186,64 +186,64 @@
             return fileStreamResult;
         }
 
-        //[HttpGet("ShareClasses/ViewEntitySE/{EntityId}/{ChosenDate}")]
-        //public IActionResult ViewEntitySE(int entityId, string chosenDate)
-        //{
-        //    SpecificEntityViewModel viewModel = new SpecificEntityViewModel
-        //    {
-        //        ChosenDate = chosenDate,
-        //        EntityId = entityId,
-        //        Entity = this.shareClassesService.GetShareClassById(entityId),
-        //        EntityTimeline = this.shareClassesService.GetShareClassesTimeline(entityId),
-        //        EntityDocuments = this.shareClassesService.GetAllShareClassesDocumens(entityId),
-        //        BaseEntityName = this.shareClassesService.GetShareClass_SubFundContainer(entityId)[1][1],
-        //        BaseEntityId = this.shareClassesService.GetShareClass_SubFundContainer(entityId)[1][0],
-        //        TSPriceDates = this.shareClassesService
-        //        .GetShareClassTimeSeriesDates(entityId)
-        //        .Skip(1)
-        //        .Select(ts => ts[1])
-        //        .ToList(),
-        //        TSTableType = this.shareClassesService
-        //        .GetTimeseriesTypeProviders(entityId)
-        //        .Skip(1)
-        //        .Select(tt => tt[0])
-        //        .ToList(),
-        //        TSPriceBloombergEUR = this.shareClassesService
-        //        .GetShareClassTimeSeries(entityId)
-        //        .Skip(1)
-        //        .Where(ts => ts[2] == "Bloomberg EUR")
-        //        .Select(ts => ts[1])
-        //        .ToList(),
-        //        TSPriceBloombergUSD = this.shareClassesService
-        //        .GetShareClassTimeSeries(entityId)
-        //        .Skip(1)
-        //        .Where(ts => ts[2] == "Bloomberg USD")
-        //        .Select(ts => ts[1])
-        //        .ToList(),
-        //        TSPriceSixUSD = this.shareClassesService
-        //        .GetShareClassTimeSeries(entityId)
-        //        .Skip(1)
-        //        .Where(ts => ts[2] == "SiX EUR")
-        //        .Select(ts => ts[1])
-        //        .ToList(),
-        //    };           
+        [HttpGet("ShareClasses/ViewEntitySE/{EntityId}/{ChosenDate}")]
+        public IActionResult ViewEntitySE(int entityId, string chosenDate)
+        {
+            SpecificEntityViewModel viewModel = new SpecificEntityViewModel
+            {
+                ChosenDate = chosenDate,
+                EntityId = entityId,
+                Entity = this.shareClassesService.GetShareClassById(entityId),
+                EntityTimeline = this.shareClassesService.GetShareClassesTimeline(entityId),
+                EntityDocuments = this.shareClassesService.GetAllShareClassesDocumens(entityId),
+                BaseEntityName = this.shareClassesService.GetShareClass_SubFundContainer(entityId)[1][1],
+                BaseEntityId = this.shareClassesService.GetShareClass_SubFundContainer(entityId)[1][0],
+                TSPriceDates = this.shareClassesService
+                .GetShareClassTimeSeriesDates(entityId)
+                .Skip(1)
+                .Select(ts => ts[1])
+                .ToList(),
+                TSTableType = this.shareClassesService
+                .GetTimeseriesTypeProviders(entityId)
+                .Skip(1)
+                .Select(tt => tt[0])
+                .ToList(),
+                TSPriceBloombergEUR = this.shareClassesService
+                .GetShareClassTimeSeries(entityId)
+                .Skip(1)
+                .Where(ts => ts[2] == "Bloomberg EUR")
+                .Select(ts => ts[1])
+                .ToList(),
+                TSPriceBloombergUSD = this.shareClassesService
+                .GetShareClassTimeSeries(entityId)
+                .Skip(1)
+                .Where(ts => ts[2] == "Bloomberg USD")
+                .Select(ts => ts[1])
+                .ToList(),
+                TSPriceSixUSD = this.shareClassesService
+                .GetShareClassTimeSeries(entityId)
+                .Skip(1)
+                .Where(ts => ts[2] == "SiX EUR")
+                .Select(ts => ts[1])
+                .ToList(),
+            };
 
-        //    //this.ViewData["FileTypes"] = this.subfundsSelectListService.GetAllSubFundFileTypes();
+            //this.ViewData["FileTypes"] = this.subfundsSelectListService.GetAllSubFundFileTypes();
 
-        //    HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
+            HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
 
-        //    //string fileName = GetFileNameFromFilePath(entityId, chosenDate);
+            //string fileName = GetFileNameFromFilePath(entityId, chosenDate);
 
-        //    //if (string.IsNullOrEmpty(fileName))
-        //    //{
-        //    //    return this.View(viewModel);
-        //    //}
+            //if (string.IsNullOrEmpty(fileName))
+            //{
+            //    return this.View(viewModel);
+            //}
 
-        //    //viewModel.FileNameToDisplay = fileName;
+            //viewModel.FileNameToDisplay = fileName;
 
-        //    this.ModelState.Clear();
-        //    return this.View(viewModel);
-        //}
+            this.ModelState.Clear();
+            return this.View(viewModel);
+        }
 
         //[HttpPost("ShareClasses/ViewEntitySE/{EntityId}")]
         //public IActionResult ViewEntitySE(EntitiesViewModel viewModel)
