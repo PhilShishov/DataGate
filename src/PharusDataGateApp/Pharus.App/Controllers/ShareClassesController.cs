@@ -376,7 +376,7 @@
 
                 // Split to take only companyTypeDesc for comparing
 
-                string countryIssue = string.Empty;
+                string countryIssue = null;
 
                 if (!string.IsNullOrEmpty(model.CountryIssue))
                 {
@@ -387,7 +387,7 @@
                         .FirstOrDefault();
                 }
 
-                string countryRisk = string.Empty;
+                string countryRisk = null;
 
                 if (!string.IsNullOrEmpty(model.CountryRisk))
                 {

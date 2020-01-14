@@ -346,7 +346,7 @@ namespace Pharus.Services.ShareClasses
                 "@sc_lastNav, @sc_expiryDate, @sc_status, @sc_initialPrice, " +
                 "@sc_accountingCode, @sc_hedged, @sc_listed, @sc_bloomberMarket, " +
                 "@sc_bloomberCode, @sc_bloomberId, @sc_isinCode, @sc_valorCode, " +
-                "@sc_faCode, @sc_taCode, @sc_WKN, @sc_date_business_year" +
+                "@sc_faCode, @sc_taCode, @sc_WKN, @sc_date_business_year, " +
                 "@sc_prospectus_code, @subfundcontainer";
 
             using (SqlConnection connection = new SqlConnection())
@@ -362,7 +362,7 @@ namespace Pharus.Services.ShareClasses
                         new SqlParameter("@sc_shortShareClassName", SqlDbType.NVarChar, 100) { Value = shareClassName },
                         new SqlParameter("@sc_investorType", SqlDbType.Int) { Value = investorTypeId },
                         new SqlParameter("@sc_shareType", SqlDbType.Int) { Value = shareTypeId },
-                        new SqlParameter("@sf_currency", SqlDbType.NChar, 3) { Value = currency },
+                        new SqlParameter("@sc_currency", SqlDbType.NChar, 3) { Value = currency },
                         new SqlParameter("@sc_countryIssue", SqlDbType.NChar, 2) { Value = countryIssue },
                         new SqlParameter("@sc_ultimateParentCountryRisk", SqlDbType.NChar, 3) { Value = countryRisk },
                         new SqlParameter("@sc_emissionDate", SqlDbType.NVarChar, 100) { Value = emissionDate},
@@ -377,10 +377,10 @@ namespace Pharus.Services.ShareClasses
                         new SqlParameter("@sc_bloomberMarket", SqlDbType.NVarChar, 100) { Value = bloombergMarket},
                         new SqlParameter("@sc_bloomberCode", SqlDbType.NVarChar, 100) { Value = bloombergCode},
                         new SqlParameter("@sc_bloomberId", SqlDbType.NVarChar, 100) { Value = bloombergId},
-                        new SqlParameter("@sc_isinCode", SqlDbType.NVarChar, 100) { Value = isinCode},
+                        new SqlParameter("@sc_isinCode", SqlDbType.NChar, 12) { Value = isinCode},
                         new SqlParameter("@sc_valorCode", SqlDbType.NVarChar, 100) { Value = valorCode},
-                        new SqlParameter("@sf_faCode", SqlDbType.NVarChar, 100) { Value = faCode },
-                        new SqlParameter("@sf_taCode", SqlDbType.NVarChar, 100) { Value = taCode },
+                        new SqlParameter("@sc_faCode", SqlDbType.NVarChar, 100) { Value = faCode },
+                        new SqlParameter("@sc_taCode", SqlDbType.NVarChar, 100) { Value = taCode },
                         new SqlParameter("@sc_WKN", SqlDbType.NVarChar, 100) { Value = wKN},
                         new SqlParameter("@sc_date_business_year", SqlDbType.NVarChar, 100) { Value = businessYearDate},
                         new SqlParameter("@sc_prospectus_code", SqlDbType.NVarChar, 100) { Value = prospectusCode},
