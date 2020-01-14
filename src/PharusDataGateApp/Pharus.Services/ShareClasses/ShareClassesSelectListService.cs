@@ -15,6 +15,7 @@ namespace Pharus.Services.ShareClasses
     public class ShareClassesSelectListService : IShareClassesSelectListService
     {
         private readonly Pharus_vFinale_Context context;
+        private const int shareClassFileType = 3;
 
         public ShareClassesSelectListService(
             Pharus_vFinale_Context context)
@@ -65,6 +66,16 @@ namespace Pharus.Services.ShareClasses
                 .ToList();
 
             return shareType;
+        }
+
+        public List<string> GetAllShareClassFileTypes()
+        {
+            var fileTypes = this.context.TbDomFileType
+                .Where(ft => ft.FiletypeEntity == shareClassFileType)
+                .Select(ft => ft.FiletypeDesc)
+                .ToList();
+
+            return fileTypes;
         }
     }
 }

@@ -13,5 +13,7 @@
         List<string> GetAllTbDomShareStatus();
 
         List<string> GetAllTbDomShareType();
+
+        List<string> GetAllShareClassFileTypes();
     }
 }
