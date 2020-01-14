@@ -564,6 +564,22 @@
         private void SetModelValuesForEditView(EditShareClassBindingModel model)
         {
             model.ShareClassName = model.EntityProperties[1][3];
+            model.EmissionDate = DateTime.Parse(model.EntityProperties[1][10]);
+            model.InceptionDate = DateTime.Parse(model.EntityProperties[1][11]);
+            model.LastNavDate = DateTime.Parse(model.EntityProperties[1][12]);
+            model.ExpiryDate = DateTime.Parse(model.EntityProperties[1][13]);
+            model.InitialPrice = double.Parse(model.EntityProperties[1][15]);
+            model.AccountingCode = model.EntityProperties[1][16];
+            model.BloombergMarket = model.EntityProperties[1][19];
+            model.BloombergCode = model.EntityProperties[1][20];
+            model.BloombergId = model.EntityProperties[1][21];
+            model.ISINCode = model.EntityProperties[1][22];
+            model.ValorCode = model.EntityProperties[1][23];
+            model.FACode = model.EntityProperties[1][24];
+            model.TACode = model.EntityProperties[1][25];
+            model.WKN = model.EntityProperties[1][26];
+            model.DateBusinessYear = DateTime.Parse(model.EntityProperties[1][27]);
+            model.ProspectusCode = model.EntityProperties[1][28];
         }
 
         private void SetViewDataValuesForShareClassesSelectLists()
