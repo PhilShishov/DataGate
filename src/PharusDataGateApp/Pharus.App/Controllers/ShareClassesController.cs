@@ -13,11 +13,11 @@
 
     using Pharus.Data;
     using Pharus.App.Utilities;
+    using Pharus.Utilities.App;
     using Pharus.Services.Files;
     using Pharus.App.Models.ViewModels.Entities;
     using Pharus.Services.ShareClasses.Contracts;
     using Pharus.App.Models.BindingModels.ShareClasses;
-    using Pharus.Utilities.App;
 
     [Authorize]
     public class ShareClassesController : Controller
@@ -374,8 +374,29 @@
                    .Select(c => c.IsoCcyCode)
                    .FirstOrDefault();
 
-                string countryIssue = model.CountryIssue;
-                string countryRisk = model.CountryRisk;
+                // Split to take only companyTypeDesc for comparing
+
+                string countryIssue = string.Empty;
+
+                if (!string.IsNullOrEmpty(model.CountryIssue))
+                {
+                    string countryIssueDesc = model.CountryIssue.Split(" - ").LastOrDefault();
+                    countryIssue = this.context.TbDomIsoCountry
+                        .Where(c => c.IsoCountryDesc == countryIssueDesc)
+                        .Select(c => c.IsoCountry3)
+                        .FirstOrDefault();
+                }
+
+                string countryRisk = string.Empty;
+
+                if (!string.IsNullOrEmpty(model.CountryRisk))
+                {
+                    string countryRiskDesc = model.CountryRisk.Split(" - ").LastOrDefault();
+                    countryRisk = this.context.TbDomIsoCountry
+                    .Where(c => c.IsoCountryDesc == countryRiskDesc)
+                    .Select(c => c.IsoCountry3)
+                    .FirstOrDefault();
+                }
 
                 int scStatusId = this.context.TbDomShareStatus
                     .Where(s => s.ScSDesc == model.Status)

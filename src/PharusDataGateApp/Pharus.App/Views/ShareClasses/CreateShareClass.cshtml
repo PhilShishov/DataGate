@@ -41,6 +41,30 @@
         </div>
 
         <div class="form-group">
+            <label asp-for="Status" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="Status">
+                <option selected disabled>-- Choose Status --</option>
+                @foreach (var status in (List<string>)ViewData["Status"])
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+            <span asp-validation-for="Status" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CurrencyCode" class="text-torshia"></label><br>
+            <select class="form-control maxw-270" asp-for="CurrencyCode">
+                <option selected disabled>-- Choose Currency--</option>
+                @foreach (var currency in (List<string>)ViewData["CurrencyCode"])
+                {
+                    <option value="@currency">@currency</option>
+                }
+            </select>
+            <span asp-validation-for="CurrencyCode" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
             <label asp-for="LastNavDate" class="text-torshia"></label><br>
             <input asp-for="LastNavDate"
                    type="date"
@@ -78,18 +102,6 @@
                 }
             </select>
             <span asp-validation-for="ShareType" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="CurrencyCode" class="text-torshia"></label><br>
-            <select class="form-control maxw-270" asp-for="CurrencyCode">
-                <option selected disabled>-- Choose Currency--</option>
-                @foreach (var currency in (List<string>)ViewData["CurrencyCode"])
-                {
-                    <option value="@currency">@currency</option>
-                }
-            </select>
-            <span asp-validation-for="CurrencyCode" class="text-danger"></span>
         </div>
 
         <div class="form-group">
@@ -146,18 +158,6 @@
                    type="date"
                    class="form-control maxw-270">
             <span asp-validation-for="ExpiryDate" class="text-danger"></span>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Status" class="text-torshia"></label><br>
-            <select class="form-control maxw-270" asp-for="Status">
-                <option selected disabled>-- Choose Status --</option>
-                @foreach (var status in (List<string>)ViewData["Status"])
-                {
-                    <option value="@status">@status</option>
-                }
-            </select>
-            <span asp-validation-for="Status" class="text-danger"></span>
         </div>
 
         <div class="form-group">
