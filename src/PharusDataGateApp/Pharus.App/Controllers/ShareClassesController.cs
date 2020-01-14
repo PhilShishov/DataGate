@@ -189,15 +189,17 @@
         [HttpGet("ShareClasses/ViewEntitySE/{EntityId}/{ChosenDate}")]
         public IActionResult ViewEntitySE(int entityId, string chosenDate)
         {
+            var date = DateTime.Parse(chosenDate);
+
             SpecificEntityViewModel viewModel = new SpecificEntityViewModel
             {
                 ChosenDate = chosenDate,
                 EntityId = entityId,
-                Entity = this.shareClassesService.GetShareClassById(entityId),
+                Entity = this.shareClassesService.GetShareClassWithDateById(date, entityId),
                 EntityTimeline = this.shareClassesService.GetShareClassesTimeline(entityId),
                 EntityDocuments = this.shareClassesService.GetAllShareClassesDocumens(entityId),
-                BaseEntityName = this.shareClassesService.GetShareClass_SubFundContainer(entityId)[1][1],
-                BaseEntityId = this.shareClassesService.GetShareClass_SubFundContainer(entityId)[1][0],
+                BaseEntityName = this.shareClassesService.GetShareClass_SubFundContainer(date, entityId)[1][1],
+                BaseEntityId = this.shareClassesService.GetShareClass_SubFundContainer(date, entityId)[1][0],
                 TSPriceDates = this.shareClassesService
                 .GetShareClassTimeSeriesDates(entityId)
                 .Skip(1)
@@ -228,18 +230,21 @@
                 .ToList(),
             };
 
-            //this.ViewData["FileTypes"] = this.subfundsSelectListService.GetAllSubFundFileTypes();
+            viewModel.StartConnection = viewModel.Entity[1][0];
+            viewModel.EndConnection = viewModel.Entity[1][1];
+
+            this.ViewData["FileTypes"] = this.shareClassesSelectListService.GetAllShareClassFileTypes();
 
             HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
 
-            //string fileName = GetFileNameFromFilePath(entityId, chosenDate);
+            string fileName = GetFileNameFromFilePath(entityId, chosenDate);
 
-            //if (string.IsNullOrEmpty(fileName))
-            //{
-            //    return this.View(viewModel);
-            //}
+            if (string.IsNullOrEmpty(fileName))
+            {
+                return this.View(viewModel);
+            }
 
-            //viewModel.FileNameToDisplay = fileName;
+            viewModel.FileNameToDisplay = fileName;
 
             this.ModelState.Clear();
             return this.View(viewModel);
@@ -491,6 +496,11 @@
                                         model.PreSelectedColumns,
                                         model.SelectedColumns,
                                         chosenDate);
+        }
+
+        private string GetFileNameFromFilePath(int entityId, string chosenDate)
+        {
+            return this.entitiesFileService.LoadSubFundFileToDisplay(entityId, chosenDate).Split('\\').Last();
         }
     }
 }
