@@ -319,13 +319,115 @@
         {
             CreateShareClassBindingModel model = new CreateShareClassBindingModel
             {
-                InitialDate = DateTime.Today,                
+                InitialDate = DateTime.Today,
             };
 
             SetViewDataValuesForShareClassesSelectLists();
 
             this.ModelState.Clear();
             return this.View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
+
+        public IActionResult CreateShareClass(CreateShareClassBindingModel model)
+        {
+            string returnUrl = "/ShareClasses/All";
+
+            SetViewDataValuesForShareClassesSelectLists();
+
+            model.ExistingEntitiesNames = this.shareClassesService.GetAllShareClassesNames();
+
+            if (!this.ModelState.IsValid || model.ExistingEntitiesNames.Any(sf => sf == model.ShareClassName))
+            {
+                return this.View(model ?? new CreateShareClassBindingModel());
+            }
+
+            string initialDate = model.InitialDate.ToString("yyyyMMdd");
+            string endDate = model.EndDate?.ToString("yyyyMMdd");
+            string emissionDate = model.EmissionDate?.ToString("yyyyMMdd");
+            string inceptionDate = model.InceptionDate?.ToString("yyyyMMdd");
+            string lastNavDate = model.LastNavDate?.ToString("yyyyMMdd");
+            string expiryDate = model.ExpiryDate?.ToString("yyyyMMdd");
+            string businessYearDate = model.DateBusinessYear?.ToString("yyyyMMdd");
+
+            List<int?> nullIntegerParameters = new List<int?>();
+
+            if (this.HttpContext.Request.Form.ContainsKey("create_button"))
+            {
+                string shareClassName = model.ShareClassName;
+
+                int? investorTypeId = this.context.TbDomInvestorType
+                    .Where(it => it.ItDesc == model.InvestorType)
+                    .Select(it => it.ItId)
+                    .FirstOrDefault();
+
+                int? shareTypeId = this.context.TbDomInvestorType
+                  .Where(it => it.ItDesc == model.InvestorType)
+                  .Select(it => it.ItId)
+                  .FirstOrDefault();
+
+                string currency = this.context.TbDomIsoCurrency
+                   .Where(c => c.IsoCcyDesc == model.CurrencyCode)
+                   .Select(c => c.IsoCcyCode)
+                   .FirstOrDefault();
+
+                string countryIssue = model.CountryIssue;
+                string countryRisk = model.CountryRisk;
+
+                int scStatusId = this.context.TbDomShareStatus
+                    .Where(s => s.ScSDesc == model.Status)
+                    .Select(s => s.ScSId)
+                    .FirstOrDefault();
+
+                double initialPrice = model.InitialPrice;
+                string accountingCode = model.AccountingCode;
+
+                bool isHedged = false;
+
+                if (model.IsHedged == "Yes")
+                {
+                    isHedged = true;
+                }
+
+                bool isListed = false;
+
+                if (model.IsListed == "Yes")
+                {
+                    isListed = true;
+                }
+
+                string bloombergMarket = model.BloombergMarket;
+                string bloombergCode = model.BloombergCode;
+                string bloombergId = model.BloombergId;
+                string isinCode = model.ISINCode;
+                string valorCode = model.ValorCode;
+                string faCode = model.FACode;
+                string taCode = model.TACode;
+                string WKN = model.WKN;
+                string prospectusCode = model.ProspectusCode;
+
+                int subFundContainerId = this.context.TbHistorySubFund
+                   .Where(sfc => sfc.SfOfficialSubFundName == model.SubFundContainer)
+                   .Select(sfc => sfc.SfId)
+                   .FirstOrDefault();
+
+                SetZeroValuesToNull(nullIntegerParameters, investorTypeId, shareTypeId);
+
+                this.shareClassesService.CreateShareClass(
+                                                initialDate, endDate, shareClassName, nullIntegerParameters[0],
+                                                nullIntegerParameters[1], currency, countryIssue, countryRisk,
+                                                emissionDate, inceptionDate, lastNavDate, expiryDate,
+                                                scStatusId, initialPrice, accountingCode, isHedged, isListed,
+                                                bloombergMarket, bloombergCode, bloombergId, isinCode,
+                                                valorCode, faCode, taCode, WKN, businessYearDate,
+                                                prospectusCode, subFundContainerId);
+            }
+            // End of if statement
+
+            return this.LocalRedirect(returnUrl);
         }
 
         private void SetViewDataValuesForShareClassesSelectLists()
@@ -337,6 +439,21 @@
             this.ViewData["Country"] = this.shareClassesSelectListService.GetAllTbDomCountry();
 
             this.ViewData["SubFundContainer"] = this.context.TbHistorySubFund.Select(sf => sf.SfOfficialSubFundName).ToList();
+        }
+
+        private static void SetZeroValuesToNull(
+                                            List<int?> nullIntegerParameters, int? investorTypeId, int? shareTypeId)
+        {
+            nullIntegerParameters.Add(investorTypeId);
+            nullIntegerParameters.Add(shareTypeId);
+
+            for (int i = 0; i < nullIntegerParameters.Count; i++)
+            {
+                if (nullIntegerParameters[i] == 0)
+                {
+                    nullIntegerParameters[i] = null;
+                }
+            }
         }
 
         private void CallAllEntitiesWithSelectedColumns(EntitiesViewModel model, DateTime? chosenDate)
