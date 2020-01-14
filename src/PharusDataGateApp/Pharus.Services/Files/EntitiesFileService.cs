@@ -202,7 +202,7 @@
                 SqlCommand command = connection.CreateCommand();
 
                 command.CommandText = $"select [dbo].[fn_getSpecificFilepath_fileShareclass]" +
-                    $"( {entityId},'{chosenDate}',{fileTypeNavReport}) [FILEPATH]";
+                    $"( {entityId},'{chosenDate}',{fileTypeKiid}) [FILEPATH]";
 
                 dataReader = command.ExecuteReader();
 
