@@ -515,11 +515,7 @@
                     .Select(ge => ge.GeId)
                     .FirstOrDefault();
 
-                string currency = "EUR";
-                // this.context.TbDomIsoCurrency
-                //.Where(c => c.IsoCcyDesc == model.CurrencyCode)
-                //.Select(c => c.IsoCcyCode)
-                //.FirstOrDefault();
+                string currency = model.CurrencyCode;
 
                 int? frequencyId = this.context.TbDomNavFrequency
                    .Where(f => f.NfDesc == model.NavFrequency)
@@ -677,10 +673,7 @@
                     .Select(ge => ge.GeId)
                     .FirstOrDefault();
 
-                string currency = this.context.TbDomIsoCurrency
-                   .Where(c => c.IsoCcyDesc == model.CurrencyCode)
-                   .Select(c => c.IsoCcyCode)
-                   .FirstOrDefault();
+                string currency = model.CurrencyCode;
 
                 int? frequencyId = this.context.TbDomNavFrequency
                    .Where(f => f.NfDesc == model.NavFrequency)
@@ -859,10 +852,27 @@
             model.FACode = model.EntityProperties[1][6];
             model.DBCode = model.EntityProperties[1][7];
             model.TACode = model.EntityProperties[1][8];
-            model.FirstNavDate = DateTime.Parse(model.EntityProperties[1][9]);
-            model.LastNavDate = DateTime.Parse(model.EntityProperties[1][10]);
-            model.CSSFAuthDate = DateTime.Parse(model.EntityProperties[1][11]);
-            model.ExpiryDate = DateTime.Parse(model.EntityProperties[1][12]);
+
+            if (!string.IsNullOrEmpty(model.EntityProperties[1][9]))
+            {
+                model.FirstNavDate = DateTime.Parse(model.EntityProperties[1][9], CultureInfo.InvariantCulture);
+            }
+
+            if (!string.IsNullOrEmpty(model.EntityProperties[1][10]))
+            {
+                model.LastNavDate = DateTime.Parse(model.EntityProperties[1][10], CultureInfo.InvariantCulture);
+            }
+
+            if (!string.IsNullOrEmpty(model.EntityProperties[1][11]))
+            {
+                model.CSSFAuthDate = DateTime.Parse(model.EntityProperties[1][11], CultureInfo.InvariantCulture);
+            }
+
+            if (!string.IsNullOrEmpty(model.EntityProperties[1][12]))
+            {
+                model.ExpiryDate = DateTime.Parse(model.EntityProperties[1][12], CultureInfo.InvariantCulture);
+            }
+
             model.LEICode = model.EntityProperties[1][14];
             model.Derivatives = model.EntityProperties[1][22];
             model.ClearingCode = model.EntityProperties[1][30];

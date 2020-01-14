@@ -433,10 +433,7 @@
                   .Select(it => it.ItId)
                   .FirstOrDefault();
 
-                string currency = this.context.TbDomIsoCurrency
-                   .Where(c => c.IsoCcyDesc == model.CurrencyCode)
-                   .Select(c => c.IsoCcyCode)
-                   .FirstOrDefault();
+                string currency = model.CurrencyCode;
 
                 // Split to take only companyTypeDesc for comparing
 
