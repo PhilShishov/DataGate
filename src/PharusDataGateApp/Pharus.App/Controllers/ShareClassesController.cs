@@ -18,6 +18,7 @@
     using Pharus.App.Models.ViewModels.Entities;
     using Pharus.Services.ShareClasses.Contracts;
     using Pharus.App.Models.BindingModels.ShareClasses;
+    using System.IO;
 
     [Authorize]
     public class ShareClassesController : Controller
@@ -191,12 +192,13 @@
         {
             var date = DateTime.Parse(chosenDate);
 
-            SpecificEntityViewModel viewModel = SetValuesForSpecificEntityGetModel(entityId, chosenDate, date);
+            SpecificEntityViewModel viewModel = new SpecificEntityViewModel
+            {
+                ChosenDate = chosenDate,
+                EntityId = entityId,
+            };
 
-            viewModel.StartConnection = viewModel.Entity[1][0];
-            viewModel.EndConnection = viewModel.Entity[1][1];
-
-            this.ViewData["FileTypes"] = this.shareClassesSelectListService.GetAllShareClassFileTypes();
+            SetModelValuesForSpecificView(viewModel);           
 
             HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
 
@@ -213,28 +215,129 @@
             return this.View(viewModel);
         }
 
-        //[HttpPost("ShareClasses/ViewEntitySE/{EntityId}")]
-        //public IActionResult ViewEntitySE(SpecificEntityViewModel viewModel)
-        //{
-        //    viewModel.Entities = this.shareClassesService.GetShareClassById(viewModel.EntityId);
+        [HttpPost("ShareClasses/ViewEntitySE/{EntityId}")]
+        public IActionResult ViewEntitySE(SpecificEntityViewModel model)
+        {
+            SetModelValuesForSpecificView(model);
 
-        //    var chosenDate = DateTime.ParseExact(viewModel.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
-        //    if (viewModel.Command.Equals("Update Table"))
-        //    {
-        //        if (viewModel.ChosenDate != null)
-        //        {
-        //            viewModel.Entities = this.shareClassesService.GetShareClassById(chosenDate, viewModel.EntityId);
-        //        }
-        //    }
+            model.Entity = this.shareClassesService
+                 .GetShareClassWithDateById(chosenDate, model.EntityId);
 
-        //    if (viewModel.Entities != null)
-        //    {
-        //        return this.View(viewModel);
-        //    }
+            if (model.Entity != null)
+            {
+                return this.View(model);
+            }
 
-        //    return this.View();
-        //}
+            return this.View();
+        }
+
+        [HttpPost]
+        public IActionResult UploadProspectus(SpecificEntityViewModel model)
+        {
+            SetModelValuesForSpecificView(model);
+
+            var file = model.UploadEntityFileModel.FileToUpload;
+
+            if (!ModelState.IsValid || file == null || file.Length == 0)
+            {
+                return this.Content("File not loaded");
+            }
+
+            string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\ShareclassFile\";
+            string path = $"{networkFileLocation}{file.FileName}";
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+
+            var startConnection = DateTime.ParseExact(model.StartConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+            DateTime? endConnection = null;
+
+            if (!string.IsNullOrEmpty(model.EndConnection))
+            {
+                endConnection = DateTime.ParseExact(model.EndConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            }
+
+            var fileTypeDesc = model.UploadEntityFileModel.FileType;
+            int fileTypeId = this.context.TbDomFileType
+                    .Where(s => s.FiletypeDesc == fileTypeDesc)
+                    .Select(s => s.FiletypeId)
+                    .FirstOrDefault();
+
+            this.entitiesFileService.AddFileToSpecificSubFund(
+                                                file.FileName,
+                                                model.EntityId,
+                                                startConnection,
+                                                endConnection,
+                                                fileTypeId);
+
+            return this.RedirectToAction("All");
+        }
+
+        [HttpPost]
+        public IActionResult UploadAgreement(SpecificEntityViewModel model)
+        {
+            SetModelValuesForSpecificView(model);
+
+            var file = model.UploadEntityFileModel.FileToUpload;
+
+            if (!ModelState.IsValid || file == null || file.Length == 0)
+            {
+                return this.Content("File not loaded");
+            }
+
+            string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\ShareclassFile\";
+            string path = $"{networkFileLocation}{file.FileName}";
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+
+            var startConnection = DateTime.ParseExact(model.StartConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+            DateTime? endConnection = null;
+
+            if (!string.IsNullOrEmpty(model.EndConnection))
+            {
+                endConnection = DateTime.ParseExact(model.EndConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            }
+
+            var fileTypeDesc = model.UploadEntityFileModel.FileType;
+            int fileTypeId = this.context.TbDomFileType
+                    .Where(s => s.FiletypeDesc == fileTypeDesc)
+                    .Select(s => s.FiletypeId)
+                    .FirstOrDefault();
+
+            this.entitiesFileService.AddFileToSpecificSubFund(
+                                                file.FileName,
+                                                model.EntityId,
+                                                startConnection,
+                                                endConnection,
+                                                fileTypeId);
+
+            return this.RedirectToAction("All");
+        }
+
+        [HttpPost]
+        public FileStream ReadPdfFile(SpecificEntityViewModel model)
+        {
+            FileStream fs = null;
+
+            var path = this.entitiesFileService.LoadSubFundFileToDisplay(model.EntityId, model.ChosenDate);
+
+            if (this.HttpContext.Request.Form.ContainsKey("read_Pdf"))
+            {
+                fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+            }
+
+            return fs;
+        }
+
 
         //[HttpGet("ShareClasses/EditShareClass/{EntityId}")]
         //public IActionResult EditShareClass(int entityId)
@@ -419,46 +522,49 @@
             return this.LocalRedirect(returnUrl);
         }
 
-        private SpecificEntityViewModel SetValuesForSpecificEntityGetModel(int entityId, string chosenDate, DateTime date)
+        private void SetModelValuesForSpecificView(SpecificEntityViewModel model)
         {
-            return new SpecificEntityViewModel
-            {
-                ChosenDate = chosenDate,
-                EntityId = entityId,
-                Entity = this.shareClassesService.GetShareClassWithDateById(date, entityId),
-                EntityTimeline = this.shareClassesService.GetShareClassesTimeline(entityId),
-                EntityDocuments = this.shareClassesService.GetAllShareClassesDocumens(entityId),
-                BaseEntityName = this.shareClassesService.GetShareClass_SubFundContainer(date, entityId)[1][1],
-                BaseEntityId = this.shareClassesService.GetShareClass_SubFundContainer(date, entityId)[1][0],
-                TSPriceDates = this.shareClassesService
-                            .GetShareClassTimeSeriesDates(entityId)
-                            .Skip(1)
-                            .Select(ts => ts[1])
-                            .ToList(),
-                TSTableType = this.shareClassesService
-                            .GetTimeseriesTypeProviders(entityId)
-                            .Skip(1)
-                            .Select(tt => tt[0])
-                            .ToList(),
-                TSPriceBloombergEUR = this.shareClassesService
-                            .GetShareClassTimeSeries(entityId)
-                            .Skip(1)
-                            .Where(ts => ts[2] == "Bloomberg EUR")
-                            .Select(ts => ts[1])
-                            .ToList(),
-                TSPriceBloombergUSD = this.shareClassesService
-                            .GetShareClassTimeSeries(entityId)
-                            .Skip(1)
-                            .Where(ts => ts[2] == "Bloomberg USD")
-                            .Select(ts => ts[1])
-                            .ToList(),
-                TSPriceSixUSD = this.shareClassesService
-                            .GetShareClassTimeSeries(entityId)
-                            .Skip(1)
-                            .Where(ts => ts[2] == "SiX EUR")
-                            .Select(ts => ts[1])
-                            .ToList(),
-            };
+            var date = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            int entityId = model.EntityId;
+
+            model.Entity = this.shareClassesService.GetShareClassWithDateById(date, entityId);
+            model.EntityTimeline = this.shareClassesService.GetShareClassesTimeline(entityId);
+            model.EntityDocuments = this.shareClassesService.GetAllShareClassesDocumens(entityId);
+            model.BaseEntityName = this.shareClassesService.GetShareClass_SubFundContainer(date, entityId)[1][1];
+            model.BaseEntityId = this.shareClassesService.GetShareClass_SubFundContainer(date, entityId)[1][0];
+            model.TSPriceDates = this.shareClassesService
+                        .GetShareClassTimeSeriesDates(entityId)
+                        .Skip(1)
+                        .Select(ts => ts[1])
+                        .ToList();
+            model.TSTableType = this.shareClassesService
+                        .GetTimeseriesTypeProviders(entityId)
+                        .Skip(1)
+                        .Select(tt => tt[0])
+                        .ToList();
+            model.TSPriceBloombergEUR = this.shareClassesService
+                        .GetShareClassTimeSeries(entityId)
+                        .Skip(1)
+                        .Where(ts => ts[2] == "Bloomberg EUR")
+                        .Select(ts => ts[1])
+                        .ToList();
+            model.TSPriceBloombergUSD = this.shareClassesService
+                        .GetShareClassTimeSeries(entityId)
+                        .Skip(1)
+                        .Where(ts => ts[2] == "Bloomberg USD")
+                        .Select(ts => ts[1])
+                        .ToList();
+            model.TSPriceSixUSD = this.shareClassesService
+                        .GetShareClassTimeSeries(entityId)
+                        .Skip(1)
+                        .Where(ts => ts[2] == "SiX EUR")
+                        .Select(ts => ts[1])
+                        .ToList();
+
+            model.StartConnection = model.Entity[1][0];
+            model.EndConnection = model.Entity[1][1];
+
+            this.ViewData["FileTypes"] = this.shareClassesSelectListService.GetAllShareClassFileTypes();
         }
 
         private void SetViewDataValuesForShareClassesSelectLists()
