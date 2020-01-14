@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h4>Edit SubFund @Model.SubFundName</h4>
+<h4>Edit Sub Fund @Model.SubFundName</h4>
 
 <form asp-action="EditSubFund"
       method="post"
@@ -26,8 +26,8 @@
         <div class="form-group">
             <label asp-for="SubFundId" class="text-torshia"></label><br>
             <input type="text"
-                   class="form-control maxw-270"
                    asp-for="SubFundId"
+                   class="form-control maxw-270"
                    readonly>
             <span asp-validation-for="SubFundId" class="text-danger"></span>
         </div>
@@ -469,7 +469,7 @@
                 id="confirmEditBtn"
                 name="update_button"
                 style="margin-right:40px">
-            Update SubFund
+            Update Sub Fund
         </button>
     </div>
 </form>
