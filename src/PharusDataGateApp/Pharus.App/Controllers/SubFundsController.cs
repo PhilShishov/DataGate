@@ -864,6 +864,7 @@
             model.CSSFAuthDate = DateTime.Parse(model.EntityProperties[1][11]);
             model.ExpiryDate = DateTime.Parse(model.EntityProperties[1][12]);
             model.LEICode = model.EntityProperties[1][14];
+            model.Derivatives = model.EntityProperties[1][22];
             model.ClearingCode = model.EntityProperties[1][30];
         }
 
