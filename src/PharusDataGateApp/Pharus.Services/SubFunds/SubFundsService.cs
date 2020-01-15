@@ -198,11 +198,11 @@ namespace Pharus.Services.SubFunds
 
                 if (chosenDate == null)
                 {
-                    command.CommandText = $"select * from ActiveShareclassforSpecificSubFundAtDate('{this.defaultDate}', {id})";
+                    command.CommandText = $"select * from ActiveShareClassesforSpecificSubFundAtDate('{this.defaultDate}', {id})";
                 }
                 else
                 {
-                    command.CommandText = $"select * from ActiveShareclassforSpecificSubFundAtDate('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                    command.CommandText = $"select * from ActiveShareClassesforSpecificSubFundAtDate('{chosenDate?.ToString("yyyyMMdd")}', {id})";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
@@ -229,12 +229,12 @@ namespace Pharus.Services.SubFunds
                 if (chosenDate == null)
                 {
                     command.CommandText = $"select {string.Join(", ", preSelectedColumns)} " +
-                        $"from ActiveShareclassforSpecificSubFundAtDate('{this.defaultDate}', {id})";
+                        $"from ActiveShareClassesforSpecificSubFundAtDate('{this.defaultDate}', {id})";
                 }
                 else
                 {
                     command.CommandText = $"select {string.Join(", ", preSelectedColumns)} " +
-                        $"from ActiveShareclassforSpecificSubFundAtDate('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                        $"from ActiveShareClassesforSpecificSubFundAtDate('{chosenDate?.ToString("yyyyMMdd")}', {id})";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
@@ -253,12 +253,12 @@ namespace Pharus.Services.SubFunds
 
                 if (chosenDate == null)
                 {
-                    command.CommandText = $"select * from fn_FundForSubfundAtDate('{this.defaultDate}', {id})";
+                    command.CommandText = $"select * from fn_FundContainerForSubfundAtDate('{this.defaultDate}', {id})";
                 }
 
                 else
                 {
-                    command.CommandText = $"select * from fn_FundForSubfundAtDate('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                    command.CommandText = $"select * from fn_FundContainerForSubfundAtDate('{chosenDate?.ToString("yyyyMMdd")}', {id})";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
