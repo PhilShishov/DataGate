@@ -1,7 +1,7 @@
-﻿// Abstract model class for create bind entity
+﻿// Abstract model class for edit bind entity
 // for code reuse
 
-// Created: 01/2020
+// Created: 10/2019
 // Author:  Philip Shishov
 
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
@@ -11,35 +11,44 @@ namespace Pharus.App.Models.BindingModels
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public abstract class BaseCreateEntityBindingModel
+    public abstract class BaseEntityBindingModel
     {
-        [Required(ErrorMessage = "Initial Date cannot be empty!")]
+        [Required(ErrorMessage = "Initial Date cannot be null")]
         [Display(Name = "Initial Date")]
         public DateTime InitialDate { get; set; }
 
         [Display(Name = "End Date")]
         public DateTime? EndDate { get; set; }
 
-        [Required]
-        [Display(Name = "Status")]
-        public string Status { get; set; }
-
         [RegularExpression(@"^[A-Z0-9_]+$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "CSSF Code")]
         public string CSSFCode { get; set; }
 
-        [Required(ErrorMessage = "Fund Admin Code cannot be empty!")]
+        [Required]
+        [Display(Name = "Status")]
+        public string Status { get; set; }
+
         [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "Fund Admin Code")]
+        [Required]
         public string FACode { get; set; }
 
         [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "Transfer Agent Code")]
         public string TACode { get; set; }
 
-        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
+        [RegularExpression(@"^[A-Z0-9_]+$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "LEI Code")]
         public string LEICode { get; set; }
+
+        [Required]
+        [Display(Name = "Comment Title")]
+        public string CommentTitle { get; set; }
+
+        [Display(Name = "Comment Description")]
+        public string CommentArea { get; set; }
+
+        public List<string[]> EntityProperties { get; set; }
 
         public List<string> ExistingEntitiesNames { get; set; }
     }

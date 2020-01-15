@@ -1,5 +1,5 @@
 ﻿// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-// Binding model for create share class
+// Binding model for share class
 
 // Created: 01/2020
 // Author:  Philip Shishov
@@ -10,11 +10,14 @@ namespace Pharus.App.Models.BindingModels.ShareClasses
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class CreateShareClassBindingModel : BaseCreateEntityBindingModel
+    public class ShareClassBindingModel : BaseEntityBindingModel
     {
+        [Display(Name = "Share Class Id")]
+        public int ShareClassId { get; set; }
+
         [Required(ErrorMessage = "You must enter a value for the ShareClass Name!")]
         [StringLength(200, ErrorMessage = "The ShareClass Name must be no longer than 200 characters")]
-        [RegularExpression(@"^[A-Z-0-9]+(\s[A-Z-0-9]+)*$", ErrorMessage = "Not in correct format!")]
+        [RegularExpression(@"^[A-Za-z-0-9]+(\s[A-Za-z-0-9]+)*$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "Official ShareClass Name")]
         public string ShareClassName { get; set; }
 

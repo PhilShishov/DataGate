@@ -443,7 +443,7 @@
         {
             var date = DateTime.Parse(chosenDate);
 
-            EditSubFundBindingModel model = new EditSubFundBindingModel
+            SubFundBindingModel model = new SubFundBindingModel
             {
                 EntityProperties = this.subFundsService.GetSubFundWithDateById(date, entityId),
                 InitialDate = DateTime.Today,
@@ -460,7 +460,7 @@
 
         [HttpPost("SubFunds/EditSubFund/{EntityId}/{ChosenDate}")]
         [Authorize(Roles = "Admin")]
-        public IActionResult EditSubFund(EditSubFundBindingModel model, int entityId, string chosenDate)
+        public IActionResult EditSubFund(SubFundBindingModel model, int entityId, string chosenDate)
         {
             string returnUrl = $"/SubFunds/All/";
 
@@ -473,7 +473,7 @@
                     SetModelValuesForEditView(model);
                     SetViewDataValuesForSubFundSelectLists();
                 }
-                return View(model ?? new EditSubFundBindingModel());
+                return View(model ?? new SubFundBindingModel());
             }
 
             if (this.HttpContext.Request.Form.ContainsKey("update_button"))
@@ -606,7 +606,7 @@
         [Authorize(Roles = "Admin")]
         public IActionResult CreateSubFund()
         {
-            CreateSubFundBindingModel model = new CreateSubFundBindingModel
+            SubFundBindingModel model = new SubFundBindingModel
             {
                 InitialDate = DateTime.Today,
             };
@@ -620,7 +620,7 @@
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateSubFund(CreateSubFundBindingModel model)
+        public IActionResult CreateSubFund(SubFundBindingModel model)
         {
             string returnUrl = "/SubFunds/All";
 
@@ -630,7 +630,7 @@
 
             if (!this.ModelState.IsValid || model.ExistingEntitiesNames.Any(sf => sf == model.SubFundName))
             {
-                return this.View(model ?? new CreateSubFundBindingModel());
+                return this.View(model ?? new SubFundBindingModel());
             }
 
             if (this.HttpContext.Request.Form.ContainsKey("create_button"))
@@ -845,7 +845,7 @@
                 }
             }
         }
-        private static void SetModelValuesForEditView(EditSubFundBindingModel model)
+        private static void SetModelValuesForEditView(SubFundBindingModel model)
         {
             model.SubFundName = model.EntityProperties[1][3];
             model.CSSFCode = model.EntityProperties[1][5];
