@@ -520,8 +520,13 @@
             model.Entity = this.shareClassesService.GetShareClassWithDateById(date, entityId);
             model.EntityTimeline = this.shareClassesService.GetShareClassesTimeline(entityId);
             model.EntityDocuments = this.shareClassesService.GetAllShareClassesDocumens(entityId);
-            model.BaseEntityId = this.shareClassesService.GetShareClass_SubFundContainer(date, entityId)[1][0];
-            model.BaseEntityName = this.shareClassesService.GetShareClass_SubFundContainer(date, entityId)[1][1];
+
+            if (model.BaseEntityId != null && model.BaseEntityName != null)
+            {
+                model.BaseEntityId = this.shareClassesService.GetShareClass_SubFundContainer(date, entityId)[1][0];
+                model.BaseEntityName = this.shareClassesService.GetShareClass_SubFundContainer(date, entityId)[1][1];
+            }
+
             model.TSPriceDates = this.shareClassesService
                         .GetShareClassTimeSeriesDates(entityId)
                         .Skip(1)
