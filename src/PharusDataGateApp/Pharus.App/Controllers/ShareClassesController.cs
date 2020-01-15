@@ -537,12 +537,11 @@
                         .Skip(1)
                         .Select(tt => tt[0])
                         .ToList();
-            model.TSPriceBloombergEUR = this.shareClassesService
-                .GetShareClassTimeSeries(entityId)
-                .Skip(1)
-                .Where(ts => ts[2] == "Bloomberg EUR")
-                .Select(ts => ts[1])
-                .ToList();
+
+            model.TSAllPriceValues = this.shareClassesService
+                       .GetShareClassTimeSeriesData(entityId)
+                       .Skip(1)
+                       .ToList();
 
             model.StartConnection = model.Entity[1][0];
             model.EndConnection = model.Entity[1][1];
