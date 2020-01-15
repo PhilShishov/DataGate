@@ -342,7 +342,7 @@
         {
             var date = DateTime.Parse(chosenDate);
 
-            EditShareClassBindingModel model = new EditShareClassBindingModel
+            ShareClassBindingModel model = new ShareClassBindingModel
             {
                 EntityProperties = this.shareClassesService.GetShareClassWithDateById(date, entityId),
                 InitialDate = DateTime.Today,
@@ -358,7 +358,7 @@
 
         [HttpPost("ShareClasses/EditShareClass/{EntityId}/{ChosenDate}")]
         [Authorize(Roles = "Admin")]
-        public IActionResult EditShareClass(EditShareClassBindingModel model, int entityId, string chosenDate)
+        public IActionResult EditShareClass(ShareClassBindingModel model, int entityId, string chosenDate)
         {
             string returnUrl = $"/ShareClasses/All/";
 
@@ -371,7 +371,7 @@
                     SetModelValuesForEditView(model);
                     SetViewDataValuesForShareClassesSelectLists();
                 }
-                return View(model ?? new EditShareClassBindingModel());
+                return View(model ?? new ShareClassBindingModel());
             }
 
             return this.LocalRedirect(returnUrl);
@@ -381,7 +381,7 @@
         [Authorize(Roles = "Admin")]
         public IActionResult CreateShareClass()
         {
-            CreateShareClassBindingModel model = new CreateShareClassBindingModel
+            ShareClassBindingModel model = new ShareClassBindingModel
             {
                 InitialDate = DateTime.Today,
             };
@@ -396,7 +396,7 @@
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
 
-        public IActionResult CreateShareClass(CreateShareClassBindingModel model)
+        public IActionResult CreateShareClass(ShareClassBindingModel model)
         {
             string returnUrl = "/ShareClasses/All";
 
@@ -406,7 +406,7 @@
 
             if (!this.ModelState.IsValid || model.ExistingEntitiesNames.Any(sf => sf == model.ShareClassName))
             {
-                return this.View(model ?? new CreateShareClassBindingModel());
+                return this.View(model ?? new ShareClassBindingModel());
             }
 
             string initialDate = model.InitialDate.ToString("yyyyMMdd");
@@ -556,7 +556,7 @@
 
             this.ViewData["FileTypes"] = this.shareClassesSelectListService.GetAllShareClassFileTypes();
         }
-        private void SetModelValuesForEditView(EditShareClassBindingModel model)
+        private void SetModelValuesForEditView(ShareClassBindingModel model)
         {
             model.ShareClassName = model.EntityProperties[1][3];
 

@@ -1,7 +1,7 @@
 ﻿// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-// Binding model for edit sub fund
+// Binding model for sub fund
 
-// Created: 10/2019
+// Created: 11/2019
 // Author:  Philip Shishov
 
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
@@ -10,20 +10,20 @@ namespace Pharus.App.Models.BindingModels.SubFunds
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class EditSubFundBindingModel : BaseEditEntityBindingModel
+    public class SubFundBindingModel : BaseEntityBindingModel
     {
         [Display(Name = "Sub Fund Id")]
         public int SubFundId { get; set; }
 
         [Required(ErrorMessage = "You must enter a value for the SubFund Name!")]
         [StringLength(200, ErrorMessage = "The SubFund Name must be no longer than 200 characters")]
-        [RegularExpression(@"^[A-Z-0-9]+(\s[A-Z-0-9]+)*$", ErrorMessage = "Not in correct format!")]
-        [Display(Name = "Sub Fund Name")]
-        public string SubFundName { get; set; }   
+        [RegularExpression(@"^[A-Za-z-0-9]+(\s[A-Za-z-0-9]+)*$", ErrorMessage = "Not in correct format!")]
+        [Display(Name = "Official Sub Fund Name")]
+        public string SubFundName { get; set; }       
 
         [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "Depository Bank Code")]
-        public string DBCode { get; set; }
+        public string DBCode { get; set; }      
 
         [Display(Name = "First Nav Date")]
         public DateTime? FirstNavDate { get; set; }
@@ -35,7 +35,7 @@ namespace Pharus.App.Models.BindingModels.SubFunds
         public DateTime? CSSFAuthDate { get; set; }
 
         [Display(Name = "Expiry Date")]
-        public DateTime? ExpiryDate { get; set; }
+        public DateTime? ExpiryDate { get; set; }     
 
         [Display(Name = "Cesr Class")]
         public string CesrClass { get; set; }
@@ -46,6 +46,7 @@ namespace Pharus.App.Models.BindingModels.SubFunds
         [Display(Name = "Global Exposure")]
         public string GlobalExposure { get; set; }
 
+        [Required]
         [Display(Name = "Currency")]
         public string CurrencyCode { get; set; }
 
@@ -88,5 +89,9 @@ namespace Pharus.App.Models.BindingModels.SubFunds
 
         [Display(Name = "Bloomberg Category")]
         public string SfCatBloomberg { get; set; }
+
+        [Required(ErrorMessage = "Please choose a fund container!")]
+        [Display(Name = "Fund Container")]
+        public string FundContainer { get; set; }
     }
 }

@@ -1,5 +1,5 @@
 ﻿// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-// Binding model for create fund
+// Binding model for fund
 
 // Created: 11/2019
 // Author:  Philip Shishov
@@ -7,16 +7,18 @@
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace Pharus.App.Models.BindingModels.Funds
 {
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public class CreateFundBindingModel : BaseCreateEntityBindingModel
+    public class FundBindingModel : BaseEntityBindingModel
     {
+        [Display(Name = "Fund Id Pharus")]
+        public int FundId { get; set; }
+
         [Required(ErrorMessage = "You must enter a value for the Fund Name!")]
         [StringLength(200, ErrorMessage = "The Fund Name must be no longer than 200 characters")]
         [RegularExpression(@"^[A-Z-0-9]+(\s[A-Z-0-9]+)*$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "Official Fund Name")]
-        public string FundName { get; set; }     
+        public string FundName { get; set; }
 
         [Required]
         [Display(Name = "Legal Form")]
@@ -45,7 +47,5 @@ namespace Pharus.App.Models.BindingModels.Funds
         [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "Reg. Number")]
         public string RegNumber { get; set; }
-
-        public List<string> ExistingFundNames { get; set; }
     }
 }
