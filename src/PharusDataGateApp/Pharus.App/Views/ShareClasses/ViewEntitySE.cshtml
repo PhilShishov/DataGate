@@ -24,10 +24,15 @@
 
     <div class="d-flex mt-2 pr-3">
         <p> SUB FUND CONTAINER :</p>
-        <a href="/SubFunds/ViewEntitySE/@Model.BaseEntityId/@Model.ChosenDate"
-           class="text-torshia font-weight-bold">
-            @Model.BaseEntityName
-        </a>
+
+        @if (Model.BaseEntityId != null && Model.BaseEntityName != null)
+        {
+            <a href="/SubFunds/ViewEntitySE/@Model.BaseEntityId/@Model.ChosenDate"
+               class="text-torshia font-weight-bold">
+                @Model.BaseEntityName
+            </a>
+        }
+
     </div>
 
     <partial name="SpecificEntity/Update_Partial" />
@@ -141,10 +146,10 @@
                 $("#allDocuments").css('visibility', 'hidden');
             }
         });
-        
+
         // ________________________________________________________
         //
-        // Chart js for Asset under management 
+        // Chart js for Asset under management
 
         const config = {
             type: 'line',

@@ -239,7 +239,7 @@ namespace Pharus.Services.ShareClasses
                                       $"concat(tsp.desc_provider,' ',currency_ts) " +
                                       $"providerccy FROM [tb_timeseries_shareclass] " +
                                       $"join tb_dom_timeseries_provider tsp on tsp.id_provider = provider_ts " +
-                                      $"where id_shareclass = 70";
+                                      $"where id_shareclass = {id}";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
@@ -274,7 +274,7 @@ namespace Pharus.Services.ShareClasses
                     $"concat(tsp.desc_provider,' ',currency_ts) " +
                     $"[Timeseries Provider] FROM [tb_timeseries_shareclass] " +
                     $"join tb_dom_timeseries_provider tsp on tsp.id_provider=provider_ts " +
-                    $"where id_shareclass= 70";
+                    $"where id_shareclass= {id}";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
