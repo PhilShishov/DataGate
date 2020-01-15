@@ -1,6 +1,7 @@
 ﻿namespace Pharus.App.Controllers
 {
     using System;
+    using System.IO;
     using System.Linq;
     using System.Globalization;
     using System.Collections.Generic;
@@ -8,17 +9,15 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Authorization;
 
     using Pharus.Data;
     using Pharus.App.Utilities;
     using Pharus.Utilities.App;
     using Pharus.Services.Files;
-    using Pharus.App.Models.ViewModels.Entities;
     using Pharus.Services.ShareClasses.Contracts;
+    using Pharus.App.Models.ViewModels.Entities;
     using Pharus.App.Models.BindingModels.ShareClasses;
-    using System.IO;
 
     [Authorize]
     public class ShareClassesController : Controller
@@ -358,6 +357,7 @@
 
         [HttpPost("ShareClasses/EditShareClass/{EntityId}/{ChosenDate}")]
         [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
         public IActionResult EditShareClass(ShareClassBindingModel model, int entityId, string chosenDate)
         {
             string returnUrl = $"/ShareClasses/All/";
@@ -374,7 +374,104 @@
                 return View(model ?? new ShareClassBindingModel());
             }
 
+            if (this.HttpContext.Request.Form.ContainsKey("update_button"))
+            {
+                List<int?> nullIntegerParameters = new List<int?>();
 
+                int scId = model.ShareClassId;
+                string initialDate = model.InitialDate.ToString("yyyyMMdd");
+                string endDate = model.EndDate?.ToString("yyyyMMdd");
+                string shareClassName = model.ShareClassName;
+
+                int? investorTypeId = this.context.TbDomInvestorType
+                    .Where(it => it.ItDesc == model.InvestorType)
+                    .Select(it => it.ItId)
+                    .FirstOrDefault();
+
+                int? shareTypeId = this.context.TbDomInvestorType
+                  .Where(it => it.ItDesc == model.InvestorType)
+                  .Select(it => it.ItId)
+                  .FirstOrDefault();
+
+                string currency = model.CurrencyCode;
+
+                // Split to take only companyTypeDesc for comparing
+
+                string countryIssue = null;
+
+                if (!string.IsNullOrEmpty(model.CountryIssue))
+                {
+                    string countryIssueDesc = model.CountryIssue.Split(" - ").LastOrDefault();
+                    countryIssue = this.context.TbDomIsoCountry
+                        .Where(c => c.IsoCountryDesc == countryIssueDesc)
+                        .Select(c => c.IsoCountry3)
+                        .FirstOrDefault();
+                }
+
+                string countryRisk = null;
+
+                if (!string.IsNullOrEmpty(model.CountryRisk))
+                {
+                    string countryRiskDesc = model.CountryRisk.Split(" - ").LastOrDefault();
+                    countryRisk = this.context.TbDomIsoCountry
+                    .Where(c => c.IsoCountryDesc == countryRiskDesc)
+                    .Select(c => c.IsoCountry3)
+                    .FirstOrDefault();
+                }
+
+                string emissionDate = model.EmissionDate?.ToString("yyyyMMdd");
+                string inceptionDate = model.InceptionDate?.ToString("yyyyMMdd");
+                string lastNavDate = model.LastNavDate?.ToString("yyyyMMdd");
+                string expiryDate = model.ExpiryDate?.ToString("yyyyMMdd");
+
+                int scStatusId = this.context.TbDomShareStatus
+                    .Where(s => s.ScSDesc == model.Status)
+                    .Select(s => s.ScSId)
+                    .FirstOrDefault();
+
+                double initialPrice = model.InitialPrice;
+                string accountingCode = model.AccountingCode;
+
+                bool isHedged = false;
+
+                if (model.IsHedged == "Yes")
+                {
+                    isHedged = true;
+                }
+
+                bool isListed = false;
+
+                if (model.IsListed == "Yes")
+                {
+                    isListed = true;
+                }
+
+                string bloombergMarket = model.BloombergMarket;
+                string bloombergCode = model.BloombergCode;
+                string bloombergId = model.BloombergId;
+                string isinCode = model.ISINCode;
+                string valorCode = model.ValorCode;
+                string faCode = model.FACode;
+                string taCode = model.TACode;
+                string WKN = model.WKN;
+                string businessYearDate = model.DateBusinessYear?.ToString("yyyyMMdd");
+                string prospectusCode = model.ProspectusCode;
+
+                string comment = model.CommentArea;
+                string commentTitle = model.CommentTitle;
+
+                SetZeroValuesToNull(nullIntegerParameters, investorTypeId, shareTypeId);
+
+                this.shareClassesService.EditShareClass(
+                                                scId, initialDate, shareClassName, nullIntegerParameters[0],
+                                                nullIntegerParameters[1], currency, countryIssue, countryRisk,
+                                                emissionDate, inceptionDate, lastNavDate, expiryDate,
+                                                scStatusId, initialPrice, accountingCode, isHedged, isListed,
+                                                bloombergMarket, bloombergCode, bloombergId, isinCode,
+                                                valorCode, faCode, taCode, WKN, businessYearDate,
+                                                prospectusCode, comment, commentTitle);
+            }
+            // End of if statement
 
             return this.LocalRedirect(returnUrl);
         }
