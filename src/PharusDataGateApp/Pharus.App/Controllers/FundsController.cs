@@ -196,7 +196,7 @@
             SpecificEntityViewModel viewModel = new SpecificEntityViewModel
             {
                 ChosenDate = chosenDate,
-                EntityId = entityId,               
+                EntityId = entityId,
             };
 
             SetModelValuesForSpecificView(viewModel);
@@ -214,7 +214,7 @@
 
             this.ModelState.Clear();
             return this.View(viewModel);
-        }        
+        }
 
         public JsonResult AutoCompleteSubFundList(string selectTerm, int entityId)
         {
@@ -482,17 +482,25 @@
                 return this.View(model ?? new FundBindingModel());
             }
 
-            string initialDate = model.InitialDate.ToString("yyyyMMdd");
 
             if (this.HttpContext.Request.Form.ContainsKey("update_button"))
             {
                 int fundId = model.FundId;
-                string fundName = model.FundName;
-                string cssfCode = model.CSSFCode;
+                string initialDate = model.InitialDate.ToString("yyyyMMdd");
+
                 int fStatusId = this.context.TbDomFStatus
                     .Where(s => s.StFDesc == model.Status)
                     .Select(s => s.StFId)
                     .FirstOrDefault();
+
+                string regNumber = model.RegNumber;
+                string fundName = model.FundName;
+                string leiCode = model.LEICode;
+                string cssfCode = model.CSSFCode;
+                string faCode = model.FACode;
+                string depCode = model.DEPCode;
+                string taCode = model.TACode;
+
                 int fLegalFormId = this.context.TbDomLegalForm
                     .Where(lf => lf.LfAcronym == model.LegalForm)
                     .Select(lf => lf.LfId)
@@ -505,9 +513,6 @@
                     .Where(lt => lt.LtAcronym == model.LegalType)
                     .Select(lt => lt.LtId)
                     .FirstOrDefault();
-                string faCode = model.FACode;
-                string depCode = model.DEPCode;
-                string taCode = model.TACode;
 
                 // Split to take only companyTypeDesc for comparing
 
@@ -516,9 +521,8 @@
                     .Where(ct => ct.CtDesc == companyTypeDesc)
                     .Select(ct => ct.CtId)
                     .FirstOrDefault();
+
                 string tinNumber = model.TinNumber;
-                string leiCode = model.LEICode;
-                string regNumber = model.RegNumber;
 
                 string comment = model.CommentArea;
                 string commentTitle = model.CommentTitle;
@@ -564,17 +568,24 @@
                 return this.View(model ?? new FundBindingModel());
             }
 
-            string initialDate = model.InitialDate.ToString("yyyyMMdd");
-            string endDate = model.EndDate?.ToString("yyyyMMdd");
-
             if (this.HttpContext.Request.Form.ContainsKey("create_button"))
             {
-                string fundName = model.FundName;
-                string cssfCode = model.CSSFCode;
+                string initialDate = model.InitialDate.ToString("yyyyMMdd");
+                string endDate = model.EndDate?.ToString("yyyyMMdd");
+
                 int fStatusId = this.context.TbDomFStatus
                     .Where(s => s.StFDesc == model.Status)
                     .Select(s => s.StFId)
                     .FirstOrDefault();
+
+                string regNumber = model.RegNumber;
+                string fundName = model.FundName;
+                string leiCode = model.LEICode;
+                string cssfCode = model.CSSFCode;
+                string faCode = model.FACode;
+                string depCode = model.DEPCode;
+                string taCode = model.TACode;
+
                 int fLegalFormId = this.context.TbDomLegalForm
                     .Where(lf => lf.LfAcronym == model.LegalForm)
                     .Select(lf => lf.LfId)
@@ -586,10 +597,7 @@
                 int fLegalTypeId = this.context.TbDomLegalType
                     .Where(lt => lt.LtAcronym == model.LegalType)
                     .Select(lt => lt.LtId)
-                    .FirstOrDefault();
-                string faCode = model.FACode;
-                string depCode = model.DEPCode;
-                string taCode = model.TACode;
+                    .FirstOrDefault();              
 
                 // Split to take only companyTypeDesc for comparing
 
@@ -598,9 +606,8 @@
                     .Where(ct => ct.CtDesc == companyTypeDesc)
                     .Select(ct => ct.CtId)
                     .FirstOrDefault();
-                string tinNumber = model.TinNumber;
-                string leiCode = model.LEICode;
-                string regNumber = model.RegNumber;
+
+                string tinNumber = model.TinNumber;     
 
                 this.fundsService.CreateFund(initialDate, endDate, fundName, cssfCode, fStatusId, fLegalFormId,
                                              fLegalTypeId, fLegalVehicleId, faCode, depCode, taCode, fCompanyTypeId,
@@ -650,9 +657,9 @@
             model.EntityDocuments = this.fundsService.GetAllFundDocumens(model.EntityId);
 
             model.StartConnection = model.Entity[1][0];
-            model.EndConnection = model.Entity[1][1];          
-            this.ViewData["FileTypes"] = this.fundsSelectListService.GetAllFundFileTypes();          
-        }      
+            model.EndConnection = model.Entity[1][1];
+            this.ViewData["FileTypes"] = this.fundsSelectListService.GetAllFundFileTypes();
+        }
 
         private static void SetModelValuesForEditView(FundBindingModel model)
         {
