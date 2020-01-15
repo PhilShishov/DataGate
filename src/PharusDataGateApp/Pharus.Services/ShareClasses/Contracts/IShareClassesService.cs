@@ -38,7 +38,38 @@
         List<string[]> GetAllShareClassesDocumens(int id);
 
         List<string[]> PrepareShareClassesForPDFExtract(DateTime? chosenDate);
-       
+
+        void EditShareClass(
+                        int scId,
+                        string initialDate,
+                        string shareClassName,
+                        int? investorTypeId,
+                        int? shareTypeId,
+                        string currency,
+                        string countryIssue,
+                        string countryRisk,
+                        string emissionDate,
+                        string inceptionDate,
+                        string lastNavDate,
+                        string expiryDate,
+                        int scStatusId,
+                        double initialPrice,
+                        string accountingCode,
+                        bool isHedged,
+                        bool isListed,
+                        string bloombergMarket,
+                        string bloombergCode,
+                        string bloombergId,
+                        string isinCode,
+                        string valorCode,
+                        string faCode,
+                        string taCode,
+                        string wKN,
+                        string businessYearDate,
+                        string prospectusCode,
+                        string comment,
+                        string commentTitle);
+
         void CreateShareClass(
                         string initialDate, 
                         string endDate, 

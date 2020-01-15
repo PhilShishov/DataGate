@@ -411,18 +411,12 @@
                 return this.View(model ?? new ShareClassBindingModel());
             }
 
-            string initialDate = model.InitialDate.ToString("yyyyMMdd");
-            string endDate = model.EndDate?.ToString("yyyyMMdd");
-            string emissionDate = model.EmissionDate?.ToString("yyyyMMdd");
-            string inceptionDate = model.InceptionDate?.ToString("yyyyMMdd");
-            string lastNavDate = model.LastNavDate?.ToString("yyyyMMdd");
-            string expiryDate = model.ExpiryDate?.ToString("yyyyMMdd");
-            string businessYearDate = model.DateBusinessYear?.ToString("yyyyMMdd");
-
-            List<int?> nullIntegerParameters = new List<int?>();
-
             if (this.HttpContext.Request.Form.ContainsKey("create_button"))
             {
+                List<int?> nullIntegerParameters = new List<int?>();
+
+                string initialDate = model.InitialDate.ToString("yyyyMMdd");
+                string endDate = model.EndDate?.ToString("yyyyMMdd");
                 string shareClassName = model.ShareClassName;
 
                 int? investorTypeId = this.context.TbDomInvestorType
@@ -461,6 +455,11 @@
                     .FirstOrDefault();
                 }
 
+                string emissionDate = model.EmissionDate?.ToString("yyyyMMdd");
+                string inceptionDate = model.InceptionDate?.ToString("yyyyMMdd");
+                string lastNavDate = model.LastNavDate?.ToString("yyyyMMdd");
+                string expiryDate = model.ExpiryDate?.ToString("yyyyMMdd");
+
                 int scStatusId = this.context.TbDomShareStatus
                     .Where(s => s.ScSDesc == model.Status)
                     .Select(s => s.ScSId)
@@ -491,6 +490,7 @@
                 string faCode = model.FACode;
                 string taCode = model.TACode;
                 string WKN = model.WKN;
+                string businessYearDate = model.DateBusinessYear?.ToString("yyyyMMdd");
                 string prospectusCode = model.ProspectusCode;
 
                 int subFundContainerId = this.context.TbHistorySubFund
