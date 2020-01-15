@@ -189,14 +189,17 @@
             }
         };
 
+        console.log(window.chartColors);
+
+
         $.each(@providers, function (index, value) {
                 config.data.datasets.push({
-                label: value,
-                backgroundColor: window.chartColors.red,
-                borderColor: window.chartColors.red,
-                data: @dataBlEUR,
-                fill: false,
-            });
+                    label: value,
+                    backgroundColor: window.chartColors[index],
+                    borderColor: window.chartColors[index],
+                    data: @dataBlEUR,
+                    fill: false,
+                    });
         });
     </script>
 }
