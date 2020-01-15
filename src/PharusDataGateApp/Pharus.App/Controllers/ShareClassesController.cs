@@ -527,11 +527,11 @@
                         .Skip(1)
                         .Select(ts => ts[1])
                         .ToList();
-            model.TSTableType = this.shareClassesService
-                        .GetTimeseriesTypeProviders(entityId)
-                        .Skip(1)
-                        .Select(tt => tt[0])
-                        .ToList();
+            //model.TSTableType = this.shareClassesService
+            //            .GetTimeseriesTypeProviders(entityId)
+            //            .Skip(1)
+            //            .Select(tt => tt[0])
+            //            .ToList();
             model.TSPriceBloombergEUR = this.shareClassesService
                         .GetShareClassTimeSeries(entityId)
                         .Skip(1)

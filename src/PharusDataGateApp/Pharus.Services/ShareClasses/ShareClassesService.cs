@@ -201,12 +201,12 @@ namespace Pharus.Services.ShareClasses
 
                 if (chosenDate == null)
                 {
-                    command.CommandText = $"select * from fn_SubfundForShareclassAtDate('{this.defaultDate}', {id})";
+                    command.CommandText = $"select * from fn_SubfundContainerForShareclassAtDate('{this.defaultDate}', {id})";
                 }
 
                 else
                 {
-                    command.CommandText = $"select * from fn_SubfundForShareclassAtDate('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                    command.CommandText = $"select * from fn_SubfundContainerForShareclassAtDate('{chosenDate?.ToString("yyyyMMdd")}', {id})";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
@@ -256,7 +256,7 @@ namespace Pharus.Services.ShareClasses
                 command.CommandText = $"SELECT distinct  date_ts, convert(varchar,date_ts , 103) " +
                                       $"datechart  FROM [tb_timeseries_shareclass] " +
                                       $"join tb_dom_timeseries_provider tsp on tsp.id_provider = provider_ts " +
-                                      $"where id_shareclass = 70 order by date_ts asc";
+                                      $"where id_shareclass = {id} order by date_ts asc";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }

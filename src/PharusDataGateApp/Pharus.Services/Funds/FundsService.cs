@@ -196,11 +196,11 @@ namespace Pharus.Services.Funds
 
                 if (chosenDate == null)
                 {
-                    command.CommandText = $"select * from ActivesubfundforSpecificFundAtDate('{this.defaultDate}', {id})";
+                    command.CommandText = $"select * from ActiveSubFundsForSpecificFundAtDate('{this.defaultDate}', {id})";
                 }
                 else
                 {
-                    command.CommandText = $"select * from ActivesubfundforSpecificFundAtDate('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                    command.CommandText = $"select * from ActiveSubFundsForSpecificFundAtDate('{chosenDate?.ToString("yyyyMMdd")}', {id})";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
@@ -226,11 +226,11 @@ namespace Pharus.Services.Funds
 
                 if (chosenDate == null)
                 {
-                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} from ActivesubfundforSpecificFundAtDate('{this.defaultDate}', {id}')";
+                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} from ActiveSubFundsForSpecificFundAtDate('{this.defaultDate}', {id}')";
                 }
                 else
                 {
-                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} from ActivesubfundforSpecificFundAtDate('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} from ActiveSubFundsForSpecificFundAtDate('{chosenDate?.ToString("yyyyMMdd")}', {id})";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
