@@ -5,7 +5,7 @@
 // Author:  Philip Shishov
 
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-namespace Pharus.App.Models.ViewModels.Entities
+namespace Pharus.App.Models.ViewModels.TimeSeries
 {
     using System.Collections.Generic;
 

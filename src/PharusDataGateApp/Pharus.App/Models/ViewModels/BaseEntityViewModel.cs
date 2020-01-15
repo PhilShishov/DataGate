@@ -11,6 +11,8 @@ namespace Pharus.App.Models.ViewModels
 
     public abstract class BaseEntityViewModel
     {
+        public List<string[]> EntitiesHeadersForColumnSelection { get; set; }
+
         public string ChosenDate { get; set; }
 
         public string Command { get; set; }
