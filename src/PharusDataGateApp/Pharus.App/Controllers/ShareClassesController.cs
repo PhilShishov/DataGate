@@ -374,6 +374,8 @@
                 return View(model ?? new ShareClassBindingModel());
             }
 
+
+
             return this.LocalRedirect(returnUrl);
         }
 
