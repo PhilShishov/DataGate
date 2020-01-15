@@ -799,7 +799,7 @@
 
             model.Entity = this.subFundsService.GetSubFundWithDateById(date, model.EntityId);
             model.EntitySubEntities = this.subFundsService.GetSubFund_ShareClasses(date, model.EntityId);
-            model.SubEntitiesHeadersForColumnSelection = this.subFundsService
+            model.EntitiesHeadersForColumnSelection = this.subFundsService
                                                                     .GetSubFund_ShareClasses(date, model.EntityId)
                                                                     .Take(1)
                                                                     .ToList();

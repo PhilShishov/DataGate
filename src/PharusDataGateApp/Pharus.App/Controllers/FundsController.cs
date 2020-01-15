@@ -641,7 +641,7 @@
 
             model.Entity = this.fundsService.GetFundWithDateById(date, model.EntityId);
             model.EntitySubEntities = this.fundsService.GetFund_SubFunds(date, model.EntityId);
-            model.SubEntitiesHeadersForColumnSelection = this.fundsService
+            model.EntitiesHeadersForColumnSelection = this.fundsService
                                                                 .GetFund_SubFunds(date, model.EntityId)
                                                                 .Take(1)
                                                                 .ToList();
