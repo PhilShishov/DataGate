@@ -29,7 +29,7 @@
 
         List<string[]> GetTimeseriesTypeProviders(int id);
 
-        List<string[]> GetShareClassTimeSeries(int id);
+        List<string[]> GetShareClassTimeSeriesData(int id);
 
         List<string[]> GetShareClassTimeSeriesDates(int id);
 

@@ -227,7 +227,7 @@ namespace Pharus.Services.ShareClasses
             }
         }
 
-        public List<string[]> GetShareClassTimeSeries(int id)
+        public List<string[]> GetShareClassTimeSeriesData(int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {

@@ -4,9 +4,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
 
-    var datesValue = @Html.Raw(Json.Serialize(Model.TSPriceDates));
-    var providers = @Html.Raw(Json.Serialize(Model.TSTypeProviders));
-    var dataBlEUR = @Html.Raw(Json.Serialize(Model.TSPriceBloombergEUR));
+    var timeseriesDates = @Html.Raw(Json.Serialize(Model.TSPriceDates));
+    var timeseriesProviders = @Html.Raw(Json.Serialize(Model.TSTypeProviders));  
 }
 
 @section Styles{
@@ -94,7 +93,7 @@
 
     <script>
         window.onload = function () {
-            var ctx = document.getElementById('aumSC_Canvas').getContext('2d');
+            let ctx = document.getElementById('aumSC_Canvas').getContext('2d');
             window.myLine = new Chart(ctx, config);
             manageSideNavBar();
             manageDropdowns();
@@ -150,10 +149,10 @@
         //
         // Chart js for Asset under management
 
-        let config = {
+        const config = {
             type: 'line',
             data: {
-                labels: @datesValue,
+                labels: @timeseriesDates,
                 datasets: []
             },
             options: {
@@ -189,17 +188,20 @@
             }
         };
 
-        console.log(window.chartColors);
+        $.each(@timeseriesProviders, function (index, provider) {
 
+            const allPricesValues = JSON.parse('@Html.Raw(Json.Serialize(Model.TSAllPriceValues))');
+            const currentPriceValue = allPricesValues
+                .filter(ts => ts[2] === provider)
+                .map(ts => ts[1]);
 
-        $.each(@providers, function (index, value) {
-                config.data.datasets.push({
-                    label: value,
-                    backgroundColor: window.chartColors[index],
-                    borderColor: window.chartColors[index],
-                    data: @dataBlEUR,
-                    fill: false,
-                    });
-        });
+            config.data.datasets.push({
+                label: provider,
+                backgroundColor: window.chartColors[index],
+                borderColor: window.chartColors[index],
+                data: currentPriceValue,
+                fill: false,
+            });
+        });        
     </script>
 }
