@@ -21,7 +21,7 @@ window.chartColors = [
 ];
 
 (function (global) {
-    var MONTHS = [
+    const MONTHS = [
         'January',
         'February',
         'March',
@@ -36,7 +36,7 @@ window.chartColors = [
         'December'
     ];
 
-    var COLORS = [
+    const COLORS = [
         '#4dc9f6',
         '#f67019',
         '#f53794',
@@ -48,8 +48,8 @@ window.chartColors = [
         '#8549ba'
     ];
 
-    var Samples = global.Samples || (global.Samples = {});
-    var Color = global.Color;
+    let Samples = global.Samples || (global.Samples = {});
+    let Color = global.Color;
 
     Samples.utils = {
         // Adapted from http://indiegamr.com/generate-repeatable-random-numbers-in-js/
@@ -58,7 +58,7 @@ window.chartColors = [
         },
 
         rand: function (min, max) {
-            var seed = this._seed;
+            let seed = this._seed;
             min = min === undefined ? 0 : min;
             max = max === undefined ? 1 : max;
             this._seed = (seed * 9301 + 49297) % 233280;
@@ -66,16 +66,16 @@ window.chartColors = [
         },
 
         numbers: function (config) {
-            var cfg = config || {};
-            var min = cfg.min || 0;
-            var max = cfg.max || 1;
-            var from = cfg.from || [];
-            var count = cfg.count || 8;
-            var decimals = cfg.decimals || 8;
-            var continuity = cfg.continuity || 1;
-            var dfactor = Math.pow(10, decimals) || 0;
-            var data = [];
-            var i, value;
+            let cfg = config || {};
+            let min = cfg.min || 0;
+            let max = cfg.max || 1;
+            let from = cfg.from || [];
+            let count = cfg.count || 8;
+            let decimals = cfg.decimals || 8;
+            let continuity = cfg.continuity || 1;
+            let dfactor = Math.pow(10, decimals) || 0;
+            let data = [];
+            let i, value;
 
             for (i = 0; i < count; ++i) {
                 value = (from[i] || 0) + this.rand(min, max);
@@ -90,16 +90,16 @@ window.chartColors = [
         },
 
         labels: function (config) {
-            var cfg = config || {};
-            var min = cfg.min || 0;
-            var max = cfg.max || 100;
-            var count = cfg.count || 8;
-            var step = (max - min) / count;
-            var decimals = cfg.decimals || 8;
-            var dfactor = Math.pow(10, decimals) || 0;
-            var prefix = cfg.prefix || '';
-            var values = [];
-            var i;
+            let cfg = config || {};
+            let min = cfg.min || 0;
+            let max = cfg.max || 100;
+            let count = cfg.count || 8;
+            let step = (max - min) / count;
+            let decimals = cfg.decimals || 8;
+            let dfactor = Math.pow(10, decimals) || 0;
+            let prefix = cfg.prefix || '';
+            let values = [];
+            let i;
 
             for (i = min; i < max; i += step) {
                 values.push(prefix + Math.round(dfactor * i) / dfactor);
@@ -109,11 +109,11 @@ window.chartColors = [
         },
 
         months: function (config) {
-            var cfg = config || {};
-            var count = cfg.count || 12;
-            var section = cfg.section;
-            var values = [];
-            var i, value;
+            let cfg = config || {};
+            let count = cfg.count || 12;
+            let section = cfg.section;
+            let values = [];
+            let i, value;
 
             for (i = 0; i < count; ++i) {
                 value = MONTHS[Math.ceil(i) % 12];
@@ -128,7 +128,7 @@ window.chartColors = [
         },
 
         transparentize: function (color, opacity) {
-            var alpha = opacity === undefined ? 0.5 : 1 - opacity;
+            let alpha = opacity === undefined ? 0.5 : 1 - opacity;
             return Color(color).alpha(alpha).rgbString();
         }
     };
