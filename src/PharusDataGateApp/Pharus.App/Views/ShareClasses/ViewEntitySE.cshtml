@@ -4,10 +4,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
 
-    var valDatesLabel = @Html.Raw(Json.Serialize(Model.TSPriceDates));
-    var valDataBlUSD = @Html.Raw(Json.Serialize(Model.TSPriceBloombergUSD));
-    var valDataBlEUR = @Html.Raw(Json.Serialize(Model.TSPriceBloombergEUR));
-    var valDataSixEUR = @Html.Raw(Json.Serialize(Model.TSPriceSixUSD));
+    var datesValue = @Html.Raw(Json.Serialize(Model.TSPriceDates));
+    var providers = @Html.Raw(Json.Serialize(Model.TSTypeProviders));
+    var dataBlEUR = @Html.Raw(Json.Serialize(Model.TSPriceBloombergEUR));
 }
 
 @section Styles{
@@ -151,32 +150,11 @@
         //
         // Chart js for Asset under management
 
-        const config = {
+        let config = {
             type: 'line',
             data: {
-                labels: @valDatesLabel,
-                datasets: [
-                    {
-                    label: 'Bloomberg EUR',
-                    backgroundColor: window.chartColors.red,
-                    borderColor: window.chartColors.red,
-                    data: @valDataBlEUR,
-                    fill: false,
-                    },
-                    {
-                    label: 'Bloomberg USD',
-                    backgroundColor: window.chartColors.blue,
-                    borderColor: window.chartColors.blue,
-                    data: @valDataBlUSD,
-                    fill: false,
-                    },
-                    {
-                    label: 'SiX EUR',
-                    backgroundColor: window.chartColors.green,
-                    borderColor: window.chartColors.green,
-                    data: @valDataSixEUR,
-                    fill: false,
-                    }]
+                labels: @datesValue,
+                datasets: []
             },
             options: {
                 responsive: true,
@@ -210,5 +188,15 @@
                 }
             }
         };
+
+        $.each(@providers, function (index, value) {
+                config.data.datasets.push({
+                label: value,
+                backgroundColor: window.chartColors.red,
+                borderColor: window.chartColors.red,
+                data: @dataBlEUR,
+                fill: false,
+            });
+        });
     </script>
 }

@@ -41,13 +41,9 @@ namespace Pharus.App.Models.ViewModels.Entities
 
         public List<string> TSPriceDates { get; set; }
 
-        public List<string> TSPriceBloombergUSD { get; set; }
+        public List<string> TSTypeProviders { get; set; }
 
         public List<string> TSPriceBloombergEUR { get; set; }
-
-        public List<string> TSPriceSixUSD { get; set; }
-
-        public List<string> TSTableType { get; set; }
 
         public string FileNameToDisplay { get; set; }
 

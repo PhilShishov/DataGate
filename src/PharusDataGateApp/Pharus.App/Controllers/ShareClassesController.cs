@@ -532,29 +532,17 @@
                         .Skip(1)
                         .Select(ts => ts[1])
                         .ToList();
-            //model.TSTableType = this.shareClassesService
-            //            .GetTimeseriesTypeProviders(entityId)
-            //            .Skip(1)
-            //            .Select(tt => tt[0])
-            //            .ToList();
+            model.TSTypeProviders = this.shareClassesService
+                        .GetTimeseriesTypeProviders(entityId)
+                        .Skip(1)
+                        .Select(tt => tt[0])
+                        .ToList();
             model.TSPriceBloombergEUR = this.shareClassesService
-                        .GetShareClassTimeSeries(entityId)
-                        .Skip(1)
-                        .Where(ts => ts[2] == "Bloomberg EUR")
-                        .Select(ts => ts[1])
-                        .ToList();
-            model.TSPriceBloombergUSD = this.shareClassesService
-                        .GetShareClassTimeSeries(entityId)
-                        .Skip(1)
-                        .Where(ts => ts[2] == "Bloomberg USD")
-                        .Select(ts => ts[1])
-                        .ToList();
-            model.TSPriceSixUSD = this.shareClassesService
-                        .GetShareClassTimeSeries(entityId)
-                        .Skip(1)
-                        .Where(ts => ts[2] == "SiX EUR")
-                        .Select(ts => ts[1])
-                        .ToList();
+                .GetShareClassTimeSeries(entityId)
+                .Skip(1)
+                .Where(ts => ts[2] == "Bloomberg EUR")
+                .Select(ts => ts[1])
+                .ToList();
 
             model.StartConnection = model.Entity[1][0];
             model.EndConnection = model.Entity[1][1];
