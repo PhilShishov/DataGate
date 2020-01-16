@@ -5,8 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="text-center text-torshia">All Active Funds</h2>
-
 @section Styles{
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" />
@@ -22,15 +20,23 @@
 <form asp-controller="Funds"
       class="justify-content-between mt-2"
       method="post">
-    <div class="pt-4">
-        <div class="d-flex justify-content-between">
-            <partial name="AllEntities/Select_Partial" />
-            <partial name="AllEntities/Update_Partial" />
-            <partial name="AllEntities/Extract_Partial" />
+    <div>
+        <div>
+            <div>
+                <h2 class="text-center text-torshia pb-3">All Active Funds</h2>
+            </div>
+            <div class="d-flex h-100 w-100" >
+                <partial name="AllEntities/Select_Partial" />
+                <div class="vertical mx-3"></div>
+                <partial name="AllEntities/Update_Partial" />
+                <div class="vertical mx-3"></div>
+                <partial name="AllEntities/Extract_Partial" />
+                <div class="vertical mx-3"></div>
+                <hr class="bg-pharus" />
+            </div>
         </div>
 
         <partial name="AllEntities/Modal_Partial" />
-        <hr class="bg-pharus hr-2" />
 
         <partial name="AllEntities/BindingTable_Partial" />
 
