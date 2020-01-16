@@ -1,0 +1,20 @@
+﻿/*
+*
+* ==========================================
+* TOOLBAR
+* ==========================================
+*
+*/
+
+.lbl-toolbar-pharus {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+#toolbar-pharus {
+    height: 90px;
+}
+
+#entityName {
+    line-height: 80px;
+    font-family: 'Times New Roman', Times, serif;
+}

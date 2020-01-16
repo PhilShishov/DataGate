@@ -29,9 +29,13 @@
         background-color: lightgray;
     }
 
-.btn-modal-pharus:hover {
-    background-color: lightgray;
+.btn-modal-pharus {
+    margin-top: -10px;
 }
+
+    .btn-modal-pharus:hover {
+        background-color: lightgray;
+    }
 
 .btn-link-pharus {
     border: 0;

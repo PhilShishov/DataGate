@@ -6,6 +6,10 @@
 *
 */
 
+#SelectTerm {
+    width: 300px;
+}
+
 .pharus-select {
     background-color: lightcyan;
     color: darkgrey;

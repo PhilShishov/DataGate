@@ -1,10 +1,10 @@
 ﻿@model Pharus.App.Models.ViewModels.Entities.EntitiesViewModel
 
 <div>
-    <div class="d-flex" style="height:80%">
+    <div class="d-flex h-80">
         <div>
             <input type="date"
-                   id="fundDatetime"
+                   id="date-pharus"
                    asp-for="ChosenDate"
                    min="2018-01-01"
                    max=@DateTime.Today.ToString("yyyy-MM-dd")>
@@ -17,7 +17,7 @@
     </div>
 
     <div class="text-center">
-        <label>Update</label>
+        <label class="lbl-toolbar-pharus">Update</label>
     </div>
 </div>
 
