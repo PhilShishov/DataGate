@@ -443,7 +443,7 @@
         {
             var date = DateTime.Parse(chosenDate);
 
-            SubFundBindingModel model = new SubFundBindingModel
+            EditSubFundBindingModel model = new EditSubFundBindingModel
             {
                 EntityProperties = this.subFundsService.GetSubFundWithDateById(date, entityId),
                 InitialDate = DateTime.Today,
@@ -460,7 +460,7 @@
 
         [HttpPost("SubFunds/EditSubFund/{EntityId}/{ChosenDate}")]
         [Authorize(Roles = "Admin")]
-        public IActionResult EditSubFund(SubFundBindingModel model, int entityId, string chosenDate)
+        public IActionResult EditSubFund(EditSubFundBindingModel model, int entityId, string chosenDate)
         {
             string returnUrl = $"/SubFunds/All/";
 
@@ -473,7 +473,7 @@
                     SetModelValuesForEditView(model);
                     SetViewDataValuesForSubFundSelectLists();
                 }
-                return View(model ?? new SubFundBindingModel());
+                return View(model ?? new EditSubFundBindingModel());
             }
 
             if (this.HttpContext.Request.Form.ContainsKey("update_button"))
@@ -606,7 +606,7 @@
         [Authorize(Roles = "Admin")]
         public IActionResult CreateSubFund()
         {
-            SubFundBindingModel model = new SubFundBindingModel
+            CreateSubFundBindingModel model = new CreateSubFundBindingModel
             {
                 InitialDate = DateTime.Today,
             };
@@ -620,7 +620,7 @@
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateSubFund(SubFundBindingModel model)
+        public IActionResult CreateSubFund(CreateSubFundBindingModel model)
         {
             string returnUrl = "/SubFunds/All";
 
@@ -630,7 +630,7 @@
 
             if (!this.ModelState.IsValid || model.ExistingEntitiesNames.Any(sf => sf == model.SubFundName))
             {
-                return this.View(model ?? new SubFundBindingModel());
+                return this.View(model ?? new CreateSubFundBindingModel());
             }
 
             if (this.HttpContext.Request.Form.ContainsKey("create_button"))

@@ -191,8 +191,6 @@
         [Route("Funds/ViewEntitySE/{EntityId}/{ChosenDate}")]
         public IActionResult ViewEntitySE(int entityId, string chosenDate)
         {
-            var date = DateTime.Parse(chosenDate);
-
             SpecificEntityViewModel viewModel = new SpecificEntityViewModel
             {
                 ChosenDate = chosenDate,
@@ -448,7 +446,7 @@
         {
             var date = DateTime.Parse(chosenDate);
 
-            FundBindingModel model = new FundBindingModel
+            EditFundBindingModel model = new EditFundBindingModel
             {
                 EntityProperties = this.fundsService.GetFundWithDateById(date, entityId),
                 InitialDate = DateTime.Today,
@@ -465,7 +463,7 @@
 
         [HttpPost("Funds/EditFund/{EntityId}/{ChosenDate}")]
         [Authorize(Roles = "Admin")]
-        public IActionResult EditFund(FundBindingModel model, int entityId, string chosenDate)
+        public IActionResult EditFund(EditFundBindingModel model, int entityId, string chosenDate)
         {
             string returnUrl = "/Funds/All";
 
@@ -479,7 +477,7 @@
                     SetViewDataValuesForFundSelectLists();
                 }
 
-                return this.View(model ?? new FundBindingModel());
+                return this.View(model ?? new EditFundBindingModel());
             }
 
 
@@ -540,7 +538,7 @@
         [Authorize(Roles = "Admin")]
         public IActionResult CreateFund()
         {
-            FundBindingModel model = new FundBindingModel
+            CreateFundBindingModel model = new CreateFundBindingModel
             {
                 InitialDate = DateTime.Today,
             };
@@ -554,7 +552,7 @@
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateFund(FundBindingModel model)
+        public IActionResult CreateFund(CreateFundBindingModel model)
         {
             string returnUrl = "/Funds/All";
 
@@ -565,7 +563,7 @@
 
             if (!this.ModelState.IsValid || model.ExistingEntitiesNames.Any(f => f == model.FundName))
             {
-                return this.View(model ?? new FundBindingModel());
+                return this.View(model ?? new CreateFundBindingModel());
             }
 
             if (this.HttpContext.Request.Form.ContainsKey("create_button"))
@@ -661,7 +659,7 @@
             this.ViewData["FileTypes"] = this.fundsSelectListService.GetAllFundFileTypes();
         }
 
-        private static void SetModelValuesForEditView(FundBindingModel model)
+        private static void SetModelValuesForEditView(EditFundBindingModel model)
         {
             model.FundName = model.EntityProperties[1][3];
             model.CSSFCode = model.EntityProperties[1][4];
