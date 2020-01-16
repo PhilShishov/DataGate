@@ -1,0 +1,40 @@
+﻿@model Pharus.App.Models.ViewModels.Entities.EntitiesViewModel
+
+<div class="d-flex">
+    <div>
+        <select asp-for="SelectTerm"
+                id="SelectTerm"
+                class="form-control input-sm"
+                style="width:300px"
+                onchange="this.form.submit()">
+            <option value=@Model.SelectTerm selected>@Model.SelectTerm</option>
+        </select>
+        <div class="text-center mt-3">
+            <label>Fast Selection</label>
+        </div>
+    </div>
+
+    <div style="margin-top:-12px">
+        <button type="button"
+                class="btn btn-sm ml-2"
+                data-toggle="modal"
+                data-target="#columnModal"
+                name="showColumnSelection">
+            <img src="~/images/ColumnSelection_Pharus.jpg"
+                 width="35"
+                 height="35" />
+            <span class="d-block">Choose</span>
+            <span>Columns</span>
+        </button>
+    </div>
+
+    <a asp-action="All">Show All</a>
+
+    <label class="el-switch el-switch-sm d-flex mt-3">
+        <input type="checkbox"
+               asp-for="IsActive"
+               id="activeCheckBox">
+        <span class="el-switch-style mr-2"></span>
+        Show active
+    </label>
+</div>

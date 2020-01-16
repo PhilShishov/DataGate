@@ -20,19 +20,16 @@
 }
 
 <form asp-controller="Funds"
-      class="justify-content-between"
+      class="justify-content-between mt-2"
       method="post">
-    <div>
-        <partial name="AllEntities/Update_Select_Partial" />
-
-        <div class="button-holder d-flex justify-content-center my-5 align-items-center">
+    <div class="pt-4">
+        <div class="d-flex justify-content-between">
+            <partial name="AllEntities/Select_Partial" />
+            <partial name="AllEntities/Update_Partial" />
             <partial name="AllEntities/Extract_Partial" />
-            <partial name="AllEntities/ActiveSwitch_Partial" />
-            <partial name="AllEntities/ModalButton_Partial" />
         </div>
 
         <partial name="AllEntities/Modal_Partial" />
-
         <hr class="bg-pharus hr-2" />
 
         <partial name="AllEntities/BindingTable_Partial" />
