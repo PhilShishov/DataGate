@@ -19,17 +19,16 @@
 
 <form asp-controller="Funds"
       class="justify-content-between"
-      style="margin-top:0.05rem;"
       method="post">
     <div>
         <div>
             <hr class="mt-0 mb-2" />
-            <div class="d-flex w-100" style="height:90px">
+            <div class="d-flex w-100" id="toolbar-pharus">
                 <partial name="AllEntities/Select_Partial" />
                 <partial name="AllEntities/Update_Partial" />
                 <partial name="AllEntities/Extract_Partial" />
                 <div class="justify-content-center w-35">
-                    <h2 class="text-center text-torshia" style="line-height: 80px;">All Active Funds</h2>
+                    <h2 class="text-center text-torshia" id="entityName">All Active Funds</h2>
                 </div>
             </div>
             <hr class="mt-1 mb-0" />

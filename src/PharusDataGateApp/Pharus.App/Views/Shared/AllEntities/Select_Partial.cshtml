@@ -1,18 +1,17 @@
 ﻿@model Pharus.App.Models.ViewModels.Entities.EntitiesViewModel
 
 <div class="w-30">
-    <div class="d-flex" style="height:80%">
+    <div class="d-flex h-80">
         <div>
             <select asp-for="SelectTerm"
                     id="SelectTerm"
-                    class="form-control input-sm"
-                    style="width:300px"
+                    class="form-control input-sm"                    
                     onchange="this.form.submit()">
                 <option value=@Model.SelectTerm selected>@Model.SelectTerm</option>
             </select>
         </div>
 
-        <div style="margin-top:-12px">
+        <div>
             <button type="button"
                     class="btn btn-sm ml-2 btn-modal-pharus"
                     data-toggle="modal"
@@ -49,7 +48,7 @@
     </div>
 
     <div class="text-center">
-        <label>Select</label>
+        <label class="lbl-toolbar-pharus">Select</label>
     </div>
 </div>
 

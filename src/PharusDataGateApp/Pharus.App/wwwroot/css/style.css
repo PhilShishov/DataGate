@@ -6,6 +6,10 @@
     color: #202020;
 }
 
+form {
+    margin-top: 0.05rem;
+}
+
 .border-pharus {
     border: 2px solid #d9d9d9;
     border-radius: 7px;
@@ -49,6 +53,10 @@ h3 {
 
 .w-60 {
     width: 60%;
+}
+
+.h-80 {
+    height: 80%;
 }
 
 .maxw-270 {
