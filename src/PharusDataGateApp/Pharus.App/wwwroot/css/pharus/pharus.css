@@ -36,5 +36,6 @@ input[type=search]::-webkit-search-cancel-button {
 
 .vertical {
     border-left: 1px ridge;
-    height: 120px;
+    height: 90px;
 }
+
