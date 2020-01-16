@@ -9,10 +9,12 @@ namespace Pharus.App.Models.ViewModels.TimeSeries
 {
     using System.Collections.Generic;
 
-    public class TimeSeriesTypeModel
+    public class TimeSeriesViewModel
     {
-        public List<string[]> TableType { get; set; }
+        public List<string[]> TSAllPriceValues { get; set; }
 
-        public List<string[]> TsPrice { get; set; }
+        public List<string> TSPriceDates { get; set; }
+
+        public List<string> TSTypeProviders { get; set; }
     }
 }

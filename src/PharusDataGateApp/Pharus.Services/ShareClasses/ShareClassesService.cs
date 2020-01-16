@@ -356,7 +356,7 @@ namespace Pharus.Services.ShareClasses
                 {
                     command.Parameters.AddRange(new[]
                     {
-                        new SqlParameter("@@sc_id", SqlDbType.Int) { Value = scId},
+                        new SqlParameter("@sc_id", SqlDbType.Int) { Value = scId},
                         new SqlParameter("@sc_initialDate", SqlDbType.NVarChar, 100) { Value = initialDate},
                         new SqlParameter("@sc_officialShareClassName", SqlDbType.NVarChar, 100) { Value = shareClassName },
                         new SqlParameter("@sc_shortShareClassName", SqlDbType.NVarChar, 100) { Value = shareClassName },

@@ -10,7 +10,7 @@ namespace Pharus.App.Models.BindingModels.ShareClasses
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class ShareClassBindingModel : BaseEntityBindingModel
+    public abstract class ShareClassBindingModel : BaseEntityBindingModel
     {
         [Display(Name = "Share Class Id")]
         public int ShareClassId { get; set; }
@@ -84,9 +84,5 @@ namespace Pharus.App.Models.BindingModels.ShareClasses
 
         [Display(Name = "Prospectus Code")]
         public string ProspectusCode { get; set; }
-
-        [Required(ErrorMessage = "Please choose a subfund container!")]
-        [Display(Name = "Subfund Container")]
-        public string SubFundContainer { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿// Abstract model class for edit bind entity
+﻿// Abstract model class for bind entity
 // for code reuse
 
 // Created: 10/2019
@@ -40,13 +40,6 @@ namespace Pharus.App.Models.BindingModels
         [RegularExpression(@"^[A-Z0-9_]+$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "LEI Code")]
         public string LEICode { get; set; }
-
-        [Required]
-        [Display(Name = "Comment Title")]
-        public string CommentTitle { get; set; }
-
-        [Display(Name = "Comment Description")]
-        public string CommentArea { get; set; }
 
         public List<string[]> EntityProperties { get; set; }
 

@@ -10,7 +10,7 @@ namespace Pharus.App.Models.BindingModels.SubFunds
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class SubFundBindingModel : BaseEntityBindingModel
+    public abstract class SubFundBindingModel : BaseEntityBindingModel
     {
         [Display(Name = "Sub Fund Id")]
         public int SubFundId { get; set; }
@@ -89,9 +89,5 @@ namespace Pharus.App.Models.BindingModels.SubFunds
 
         [Display(Name = "Bloomberg Category")]
         public string SfCatBloomberg { get; set; }
-
-        [Required(ErrorMessage = "Please choose a fund container!")]
-        [Display(Name = "Fund Container")]
-        public string FundContainer { get; set; }
     }
 }
