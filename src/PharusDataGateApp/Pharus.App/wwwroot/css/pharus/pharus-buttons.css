@@ -16,13 +16,17 @@
         color: white;
     }
 
-.extractbtn {
+.btn-extract-pharus {
     background-color: transparent;
     background-repeat: no-repeat;
     border: none;
     cursor: pointer;
     overflow: hidden;
     outline: none;
+}
+
+.btn-modal-pharus:hover {
+    background-color: lightgray;
 }
 
 .btn-link-pharus {
