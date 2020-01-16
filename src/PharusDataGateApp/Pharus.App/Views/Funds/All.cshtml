@@ -22,17 +22,15 @@
       method="post">
     <div>
         <div>
-            <div>
-                <h2 class="text-center text-torshia pb-3">All Active Funds</h2>
-            </div>
-            <div class="d-flex h-100 w-100" >
+            <hr class="mb-3" />
+            <div class="d-flex w-100">
                 <partial name="AllEntities/Select_Partial" />
-                <div class="vertical mx-3"></div>
                 <partial name="AllEntities/Update_Partial" />
-                <div class="vertical mx-3"></div>
                 <partial name="AllEntities/Extract_Partial" />
-                <div class="vertical mx-3"></div>
-                <hr class="bg-pharus" />
+            </div>
+            <hr class="mt-1 mb-0" />
+            <div>
+                <h2 class="text-center text-torshia">All Active Funds</h2>
             </div>
         </div>
 
@@ -76,7 +74,7 @@
             // Autocomplete search
 
             $("#SelectTerm").select2({
-                placeholder: "Select Fund",
+                placeholder: "Quick Select",
                 theme: "classic",
                 ajax: {
                     url: "/Funds/AutoCompleteFundList",
