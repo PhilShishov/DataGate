@@ -1,6 +1,6 @@
 ﻿@model Pharus.App.Models.ViewModels.Entities.EntitiesViewModel
 
-<div class="d-flex">
+<div class="d-flex vertical">
     <div>
         <select asp-for="SelectTerm"
                 id="SelectTerm"
@@ -16,7 +16,7 @@
 
     <div style="margin-top:-12px">
         <button type="button"
-                class="btn btn-sm ml-2"
+                class="btn btn-sm ml-2 btn-modal-pharus"
                 data-toggle="modal"
                 data-target="#columnModal"
                 name="showColumnSelection">
@@ -28,13 +28,24 @@
         </button>
     </div>
 
-    <a asp-action="All">Show All</a>
+    <div class="ml-2 d-flex">
+        <div class="mr-2">
+            <button type="submit"
+                    class="btn btn-primary btn-sm"
+                    formaction="All">
+                Show All
+            </button>
+        </div>
 
-    <label class="el-switch el-switch-sm d-flex mt-3">
-        <input type="checkbox"
-               asp-for="IsActive"
-               id="activeCheckBox">
-        <span class="el-switch-style mr-2"></span>
-        Show active
-    </label>
+        <div class="el-switch-div">
+            <label class="el-switch el-switch-sm mt-1">
+                <input type="checkbox"
+                       asp-for="IsActive"
+                       id="activeCheckBox">
+                <span class="el-switch-style mr-2"></span>
+                <span class="d-block">Show</span>
+                <span>Active</span>
+            </label>
+        </div>
+    </div>
 </div>
