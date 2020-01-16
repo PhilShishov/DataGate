@@ -9,7 +9,7 @@ namespace Pharus.App.Models.BindingModels.Funds
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class FundBindingModel : BaseEntityBindingModel
+    public abstract class FundBindingModel : BaseEntityBindingModel
     {
         [Display(Name = "Fund Id Pharus")]
         public int FundId { get; set; }
