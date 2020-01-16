@@ -25,6 +25,10 @@
     outline: none;
 }
 
+    .btn-extract-pharus:hover {
+        background-color: lightgray;
+    }
+
 .btn-modal-pharus:hover {
     background-color: lightgray;
 }
