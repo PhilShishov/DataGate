@@ -2,20 +2,34 @@
     var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
 }
 
-<button class="btn-extract-pharus"
-        type="submit"
-        formaction="/@controllerName/ExtractExcelEntities"
-        name="extract_Excel">
-    <img src="~/images/Icon_Excel.ico"
-         width="35"
-         height="35" />
-</button>
+<div class="w-10">
+    <div class="d-flex justify-content-between" style="height:70%">
+        <div class="ml-2">
+            <button class="btn-extract-pharus"
+                    type="submit"
+                    formaction="/@controllerName/ExtractExcelEntities"
+                    name="extract_Excel">
+                <img src="~/images/Icon_Excel.ico"
+                     width="35"
+                     height="35" />
+                <span class="d-block">Excel</span>
+            </button>
+        </div>
 
-<button class="btn-extract-pharus mr-5"
-        type="submit"
-        formaction="/@controllerName/ExtractPdfEntities"
-        name="extract_Pdf">
-    <img src="~/images/Icon_Pdf.ico"
-         width="35"
-         height="35" />
-</button>
+        <div class="ml-4">
+            <button class="btn-extract-pharus mr-4"
+                    type="submit"
+                    formaction="/@controllerName/ExtractPdfEntities"
+                    name="extract_Pdf">
+                <img src="~/images/Icon_Pdf.ico"
+                     width="35"
+                     height="35" />
+                <span class="d-block">PDF</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <label>Extract</label>
+    </div>
+</div>
