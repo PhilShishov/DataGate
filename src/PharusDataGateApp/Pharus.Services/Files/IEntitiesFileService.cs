@@ -4,37 +4,17 @@
 
     public interface IEntitiesFileService
     {
-        string LoadFundFileToDisplay(
+        string LoadEntityFileToDisplay(
                             int entityId, 
-                            string chosenDate);
+                            string chosenDate,
+                            string controllerName);
 
-        void AddFileToSpecificFund(
+        void AddFileToSpecificEntity(
                             string fileName,
                             int entityId,
                             DateTime startConnection,
                             DateTime? endConnection,
-                            int fileTypeId);
-
-        string LoadSubFundFileToDisplay(
-                            int entityId,
-                            string chosenDate);
-
-        void AddFileToSpecificSubFund(
-                            string fileName,
-                            int entityId,
-                            DateTime startConnection,
-                            DateTime? endConnection,
-                            int fileTypeId);
-
-        string LoadShareClassFileToDisplay(
-                            int entityId,
-                            string chosenDate);
-
-        void AddFileToSpecificShareClass(
-                            string fileName,
-                            int entityId,
-                            DateTime startConnection,
-                            DateTime? endConnection,
-                            int fileTypeId);
+                            int fileTypeId,
+                            string controllerName);        
     }
 }

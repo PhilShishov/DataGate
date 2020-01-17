@@ -54,5 +54,7 @@ namespace Pharus.App.Models.ViewModels.Entities
         public string EndConnection { get; set; }
 
         public string SelectAdditionalInf { get; set; }
+
+        public string ControllerName { get; set; }
     }
 }
