@@ -24,7 +24,7 @@
         <p>FUND CONTAINER: </p>
         <a href="/Funds/ViewEntitySE/@Model.BaseEntityId/@Model.ChosenDate"
            class="text-torshia font-weight-bold ml-1">
-             @Model.BaseEntityName
+            @Model.BaseEntityName
         </a>
     </div>
 
@@ -36,7 +36,8 @@
 
     <hr class="bg-pharus hr-2" />
 
-    <div class="row w-25 ml-3">
+    <div class="row w-25 ml-3"
+         id="AtBottomOfForm">
         <label class="text-torshia m-1 pr-3">SUB FUND ADDITIONAL INFORMATION</label>
         <select class="custom-select-lg pharus-select form-control input-sm"
                 id="subFundAdditionalInfSelect"
@@ -96,66 +97,24 @@
         window.onload = () => {
             manageSideNavBar();
             manageDropdowns();
-        }
+        };
 
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
-        }
-
-        // ________________________________________________________
-        //
-        // Chart JS Implementation
-
-        @*const ctx = document.getElementById('aumF_Canvas').getContext('2d');
-        const config = {
-            type: 'line',
-            data: {
-                labels: @valDatesLabel,
-                datasets: [
-                    {
-                    label: 'Fund Admin EUR',
-                    backgroundColor: window.chartColors.red,
-                    borderColor: window.chartColors.red,
-                    data: @dataProviderFundAdminEUR,
-                    fill: false,
-                    }]
-            },
-            options: {
-                responsive: true,
-                title: {
-                    display: true,
-                    text: 'AUM For Funds'
-                },
-                tooltips: {
-                    mode: 'index',
-                    intersect: false,
-                },
-                hover: {
-                    mode: 'nearest',
-                    intersect: true
-                },
-                scales: {
-                    x: {
-                        display: true,
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Month'
-                        }
-                    },
-                    y: {
-                        display: true,
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Value'
-                        }
-                    }
-                }
             }
-        };*@
 
         $(document).ready(function () {
 
-             // ________________________________________________________
+            // ________________________________________________________
+            //
+            // Automatic Scroll if selected value
+
+            const JumpTo = document.getElementById('subFundAdditionalInfSelect');
+            if (JumpTo.value == "ShareClasses") {
+                $(this).scrollTop($(JumpTo).position().top);
+            }
+           
+            // ________________________________________________________
             //
             // Modal multiselect for column selection
 
@@ -204,17 +163,15 @@
 
             $('#subFundAdditionalInfSelect option').each(function () {
                 if (this.selected) {
-                const dropdownvalue = $("#subFundAdditionalInfSelect option:selected").val();
+                    const dropdownvalue = $("#subFundAdditionalInfSelect option:selected").val();
                     if (dropdownvalue == 'ShareClasses') {
                         $("#subEntities").css('visibility', 'visible');
                         $("#timelineChanges").css('visibility', 'hidden');
                         $("#allDocuments").addClass('d-none');
-
                     } else if (dropdownvalue == 'TimelineChanges') {
                         $("#timelineChanges").css('visibility', 'visible');
                         $("#subEntities").css('visibility', 'hidden');
                         $("#allDocuments").addClass('d-none');
-
                     } else if (dropdownvalue == 'AllDocuments') {
                         $("#allDocuments").removeClass('d-none');
                         $("#timelineChanges").css('visibility', 'hidden');

@@ -206,7 +206,6 @@
             }
 
             viewModel.FileNameToDisplay = fileName;
-
             this.ModelState.Clear();
             return this.View(viewModel);
         }

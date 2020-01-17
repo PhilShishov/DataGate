@@ -147,6 +147,14 @@
         };*@
 
         $(document).ready(function () {
+            // ________________________________________________________
+            //
+            // Automatic Scroll if selected value
+
+            const JumpTo = document.getElementById('fundAdditionalInfSelect');
+            if (JumpTo.value == "SubFunds") {
+                $(this).scrollTop($(JumpTo).position().top);
+            }
 
             // ________________________________________________________
             //
