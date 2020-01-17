@@ -201,7 +201,8 @@
 
             HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
 
-            string fileName = GetFileNameFromFilePath(entityId, chosenDate);
+
+            string fileName = GetFileNameFromFilePath(entityId, chosenDate, viewModel.ControllerName);
 
             if (string.IsNullOrEmpty(fileName))
             {
@@ -330,12 +331,13 @@
                     .Select(s => s.FiletypeId)
                     .FirstOrDefault();
 
-            this.fundsFileService.AddFileToSpecificFund(
+            this.fundsFileService.AddFileToSpecificEntity(
                                                 file.FileName,
                                                 model.EntityId,
                                                 startConnection,
                                                 endConnection,
-                                                fileTypeId);
+                                                fileTypeId,
+                                                model.ControllerName);
 
             return this.RedirectToAction("All");
         }
@@ -375,12 +377,13 @@
                     .Select(s => s.FiletypeId)
                     .FirstOrDefault();
 
-            this.fundsFileService.AddFileToSpecificFund(
+            this.fundsFileService.AddFileToSpecificEntity(
                                                 file.FileName,
                                                 model.EntityId,
                                                 startConnection,
                                                 endConnection,
-                                                fileTypeId);
+                                                fileTypeId,
+                                                model.ControllerName);
 
             return this.RedirectToAction("All");
         }
@@ -390,7 +393,9 @@
         {
             FileStream fs = null;
 
-            var path = this.fundsFileService.LoadFundFileToDisplay(model.EntityId, model.ChosenDate);
+            string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+
+            var path = this.fundsFileService.LoadEntityFileToDisplay(model.EntityId, model.ChosenDate, controllerName);
 
             if (this.HttpContext.Request.Form.ContainsKey("read_Pdf"))
             {
@@ -644,13 +649,14 @@
         {
             var date = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
+            model.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
             model.Entity = this.fundsService.GetFundWithDateById(date, model.EntityId);
             model.EntitySubEntities = this.fundsService.GetFund_SubFunds(date, model.EntityId);
             model.EntitiesHeadersForColumnSelection = this.fundsService
                                                                 .GetFund_SubFunds(date, model.EntityId)
                                                                 .Take(1)
                                                                 .ToList();
-            model.FileNameToDisplay = GetFileNameFromFilePath(model.EntityId, model.ChosenDate);
+            model.FileNameToDisplay = GetFileNameFromFilePath(model.EntityId, model.ChosenDate, model.ControllerName);
             model.EntityTimeline = this.fundsService.GetFundTimeline(model.EntityId);
             model.EntityDocuments = this.fundsService.GetAllFundDocumens(model.EntityId);
 
@@ -680,9 +686,9 @@
             this.ViewData["CompanyTypeDesc"] = this.fundsSelectListService.GetAllTbDomCompanyDesc();
         }
 
-        private string GetFileNameFromFilePath(int entityId, string chosenDate)
+        private string GetFileNameFromFilePath(int entityId, string chosenDate, string controllerName)
         {
-            return this.fundsFileService.LoadFundFileToDisplay(entityId, chosenDate).Split('\\').Last();
+            return this.fundsFileService.LoadEntityFileToDisplay(entityId, chosenDate, controllerName).Split('\\').Last();
         }
     }
 }
