@@ -9,6 +9,7 @@ namespace Pharus.Utilities.Services
     using System.Linq;
     using System.Data.SqlClient;
     using System.Collections.Generic;
+    using System;
 
     // _____________________________________________________________
     public class CreateModel
