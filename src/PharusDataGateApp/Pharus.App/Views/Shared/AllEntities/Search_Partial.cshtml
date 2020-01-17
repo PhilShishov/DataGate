@@ -1,13 +1,23 @@
 ﻿@model Pharus.App.Models.ViewModels.Entities.EntitiesViewModel
 
-<div class="w-50">
-    <input type="search"
-           name="searchTerm"
-           asp-for="SearchTerm"
-           id="search-input-pharus" />
+<div>
+    <div class="d-flex h-80">
+        <div>
+            <input type="search"
+                   name="searchTerm"
+                   asp-for="SearchTerm"
+                   id="search-input-pharus" />
 
-    <input type="submit"
-           class="btn btn-primary btn-sm mb-1"
-           asp-for="Command"
-           value="Search"></>
+            <input type="submit"
+                   class="btn btn-primary btn-sm mb-1"
+                   asp-for="Command"
+                   value="Search"></>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <label class="lbl-toolbar-pharus">Search</label>
+    </div>
 </div>
+
+<div class="vertical mx-3"></div>
