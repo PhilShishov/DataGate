@@ -246,6 +246,12 @@
         {
             SetModelValuesForSpecificView(model);
 
+            if (model.Command == "Reset")
+            {
+                model.SelectTerm = "Quick Select";
+                return this.View(model);
+            }
+
             bool isInSelectionMode = false;
 
             var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
@@ -600,7 +606,7 @@
                 int fLegalTypeId = this.context.TbDomLegalType
                     .Where(lt => lt.LtAcronym == model.LegalType)
                     .Select(lt => lt.LtId)
-                    .FirstOrDefault();              
+                    .FirstOrDefault();
 
                 // Split to take only companyTypeDesc for comparing
 
@@ -610,7 +616,7 @@
                     .Select(ct => ct.CtId)
                     .FirstOrDefault();
 
-                string tinNumber = model.TinNumber;     
+                string tinNumber = model.TinNumber;
 
                 this.fundsService.CreateFund(initialDate, endDate, fundName, cssfCode, fStatusId, fLegalFormId,
                                              fLegalTypeId, fLegalVehicleId, faCode, depCode, taCode, fCompanyTypeId,
