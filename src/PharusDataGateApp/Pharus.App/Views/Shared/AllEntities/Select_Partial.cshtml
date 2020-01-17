@@ -5,8 +5,7 @@
         <div>
             <select asp-for="SelectTerm"
                     id="SelectTerm"
-                    class="form-control input-sm"                    
-                    onchange="this.form.submit()">
+                    class="form-control input-sm">
                 <option value=@Model.SelectTerm selected>@Model.SelectTerm</option>
             </select>
         </div>
@@ -29,7 +28,7 @@
             <div class="mr-2">
                 <button type="button"
                         class="btn btn-primary btn-sm"
-                        onclick="window.location.href = 'All';">
+                        id="btnRedirect">
                     Show All
                 </button>
             </div>
