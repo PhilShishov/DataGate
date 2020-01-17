@@ -19,7 +19,8 @@
 
 <form asp-controller="Funds"
       class="justify-content-between"
-      method="post">
+      method="post"
+      id="entity-form-pharus">
     <div>
         <div>
             <hr class="mt-0 mb-2" />
@@ -44,7 +45,8 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
-    <script src="~/js/checkboxSubmit.js"></script>
+    <script src="~/js/submitForm.js"></script>
+    <script src="~/js/buttonRedirect.js"></script>
     <script src="~/js/multiselect.js"></script>
     <script src="~/lib/jquery/dist/jquery.doubleScroll.js"></script>
 
@@ -52,7 +54,8 @@
         window.onload = () => {
             manageSideNavBar();
             manageDropdowns();
-            checkboxSubmit();
+            submitForm();
+            buttonRedirect();
         }
 
         if (window.history.replaceState) {
