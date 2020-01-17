@@ -14,11 +14,32 @@
            asp-for="Command"
            value="Update Table"></>
 
+    <a href='/@controllerName/All'
+       class="btn btn-primary btn-sm mb-2">
+        Back To All
+    </a>
+
     <button type="button"
             class="btn btn-primary btn-sm mb-2"
-            onclick="window.location.href = '/@controllerName/All';">
-        Show All
+            data-toggle="modal"
+            data-target="#upProspModal">
+        Upload Prospectus
     </button>
+
+    <button type="button"
+            class="btn btn-primary btn-sm mb-2"
+            data-toggle="modal"
+            data-target="#upAgrModal">
+        Upload Agreement
+    </button>
+
+    @if (this.User.IsInRole("Admin"))
+    {
+        <a href="/Funds/EditFund/@Model.EntityId/@Model.ChosenDate"
+           class="btn btn-primary btn-sm mb-2">
+            Edit Fund
+        </a>
+    }
 
     <input type="number"
            asp-for="EntityId" hidden>

@@ -24,23 +24,14 @@
       class="justify-content-between"
       method="post">
 
-    <partial name="SpecificEntity/Update_Partial" />
+    <partial name="SpecificEntity/Toolbar_Partial" />
 
     @*<div style="width:40%;">
             <canvas id="aumF_Canvas"></canvas>
         </div>*@
     <div class="d-flex justify-content-between">
         <partial name="SpecificEntity/Info_Partial" />
-
-        <div class="w-50 float-right">
-            <partial name="SpecificEntity/Load_Upload_Documents_Partial" />
-            @if (this.User.IsInRole("Admin"))
-            {
-                <div class="mt-5">
-                    <a href="/Funds/EditFund/@Model.EntityId/@Model.ChosenDate" class="btn btn-primary btn-sm mb-2">Edit Fund</a>
-                </div>
-            }
-        </div>
+        <partial name="SpecificEntity/Load_Upload_Documents_Partial" />
     </div>
 
     <hr class="bg-pharus hr-2" />

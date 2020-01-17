@@ -1,47 +1,34 @@
 ﻿@{
     var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
 }
+<div class="w-50 float-right">
+    <div class="my-5">
+        <u class="text-torshia">LIST OF PROSPECTUS</u><br>
 
-<div class="my-5">
-    <u class="text-torshia">LIST OF PROSPECTUS</u><br>
+        @if (!string.IsNullOrEmpty(Model.FileNameToDisplay))
+        {
+            <button class="btn-link-pharus mt-3"
+                    formtarget="_blank"
+                    type="submit"
+                    formaction="/@controllerName/ReadPdfFile"
+                    name="read_Pdf">
+                @Model.FileNameToDisplay
+            </button>
+        }
+    </div>
 
-    @if (!string.IsNullOrEmpty(Model.FileNameToDisplay))
-    {
-        <button class="btn-link-pharus mt-3"
-                formtarget="_blank"
-                type="submit"
-                formaction="/@controllerName/ReadPdfFile"
-                name="read_Pdf">
-            @Model.FileNameToDisplay
-        </button>
-    }
+    @*<div class="mb-5">
+            <u class="text-torshia">LIST OF AGREEMENTS</u><br>
 
-    <button type="button"
-            class="btn btn-primary btn-sm mb-2"
-            data-toggle="modal"
-            data-target="#upProspModal">
-        Upload Document
-    </button>
+            @if (!string.IsNullOrEmpty(Model.FileNameToDisplay))
+            {
+                <button class="btn-link-pharus mt-3"
+                        formtarget="_blank"
+                        type="submit"
+                        formaction="/@controllerName/ReadPdfFile"
+                        name="read_Pdf">
+                    @Model.FileNameToDisplay
+                </button>
+            }
+        </div>*@
 </div>
-
-@*<div class="mb-5">
-    <u class="text-torshia">LIST OF AGREEMENTS</u><br>
-
-    @if (!string.IsNullOrEmpty(Model.FileNameToDisplay))
-    {
-        <button class="btn-link-pharus mt-3"
-                formtarget="_blank"
-                type="submit"
-                formaction="/@controllerName/ReadPdfFile"
-                name="read_Pdf">
-            @Model.FileNameToDisplay
-        </button>
-    }
-
-    <button type="button"
-            class="btn btn-primary btn-sm mb-2"
-            data-toggle="modal"
-            data-target="#upAgrModal">
-        Upload Document
-    </button>
-</div>*@
