@@ -3,42 +3,52 @@
     var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
 }
 
-<div class="w-100 flex-wrap my-5">
-    <input type="date"
-           id="date-pharus"
-           asp-for="ChosenDate"
-           min="2018-01-01" max=@DateTime.Today.ToString("yyyy-MM-dd")>
+<div class="w-100 d-flex justify-content-center mt-1 mb-3">
+    <div>
+        <input type="date"
+               id="date-pharus"
+               asp-for="ChosenDate"
+               min="2018-01-01" max=@DateTime.Today.ToString("yyyy-MM-dd")>
 
-    <input type="submit"
-           class="btn btn-primary btn-sm mb-2"
-           asp-for="Command"
-           value="Update Table"></>
+        <input type="submit"
+               class="btn btn-primary btn-sm mb-1"
+               asp-for="Command"
+               value="Update Table"></>
+    </div>
 
-    <a href='/@controllerName/All'
-       class="btn btn-primary btn-sm mb-2">
-        Back To All
-    </a>
+    <div class="mx-2">
+        <a href='/@controllerName/All'
+           class="btn btn-primary btn-sm mb-2">
+            Back To All
+        </a>
+    </div>
 
-    <button type="button"
-            class="btn btn-primary btn-sm mb-2"
-            data-toggle="modal"
-            data-target="#upProspModal">
-        Upload Prospectus
-    </button>
+    <div>
+        <button type="button"
+                class="btn btn-primary btn-sm mb-2"
+                data-toggle="modal"
+                data-target="#upProspModal">
+            Upload Prospectus
+        </button>
+    </div>
 
-    <button type="button"
-            class="btn btn-primary btn-sm mb-2"
-            data-toggle="modal"
-            data-target="#upAgrModal">
-        Upload Agreement
-    </button>
+    <div class="mx-2">
+        <button type="button"
+                class="btn btn-primary btn-sm mb-2"
+                data-toggle="modal"
+                data-target="#upAgrModal">
+            Upload Agreement
+        </button>
+    </div>
 
     @if (this.User.IsInRole("Admin"))
     {
-        <a href="/Funds/EditFund/@Model.EntityId/@Model.ChosenDate"
-           class="btn btn-primary btn-sm mb-2">
-            Edit Fund
-        </a>
+        <div>
+            <a href="/Funds/EditFund/@Model.EntityId/@Model.ChosenDate"
+               class="btn btn-primary btn-sm mb-2">
+                Edit Fund
+            </a>
+        </div>
     }
 
     <input type="number"
