@@ -5,7 +5,7 @@
     var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
 
     var timeseriesDates = @Html.Raw(Json.Serialize(Model.TSPriceDates));
-    var timeseriesProviders = @Html.Raw(Json.Serialize(Model.TSTypeProviders));  
+    var timeseriesProviders = @Html.Raw(Json.Serialize(Model.TSTypeProviders));
 }
 
 @section Styles{
@@ -21,40 +21,28 @@
       method="post">
 
     <div class="d-flex mt-2 pr-3">
-        <p> SUB FUND CONTAINER :</p>
-
+        <p> SUB FUND CONTAINER:</p>
         @if (Model.BaseEntityId != null && Model.BaseEntityName != null)
         {
             <a href="/SubFunds/ViewEntitySE/@Model.BaseEntityId/@Model.ChosenDate"
-               class="text-torshia font-weight-bold">
+               class="text-torshia font-weight-bold ml-1">
                 @Model.BaseEntityName
             </a>
         }
-
     </div>
 
-    <partial name="SpecificEntity/Update_Partial" />
-
+    <partial name="SpecificEntity/Toolbar_Partial" />
     <div class="d-flex justify-content-between">
-
         <partial name="SpecificEntity/Info_Partial" />
-
-        <div class="w-60" style="margin-top:-70px;">
+        <div class="w-60">
             <div style="width:90%;">
                 <canvas id="aumSC_Canvas"></canvas>
             </div>
-
-            <partial name="SpecificEntity/Load_Upload_Documents_Partial" />
-            @if (this.User.IsInRole("Admin"))
-            {
-                <div class="mt-5">
-                    <a href="/ShareClasses/EditShareClass/@Model.EntityId/@Model.ChosenDate" class="btn btn-primary btn-sm mb-2">Edit ShareClass</a>
-                </div>
-            }
+            <partial name="SpecificEntity/Load_Documents_Partial" />
         </div>
     </div>
 
-    <div class="row w-25 ml-3 mb-5">
+    <div class="row w-25 ml-3">
         <label class="text-torshia m-1 pr-3">SHARECLASS ADDITIONAL INFORMATION</label>
         <select class="custom-select-lg pharus-select form-control input-sm"
                 id="shareClassAdditionalInfSelect"
@@ -114,13 +102,13 @@
                 const dropdownvalue = $("#shareClassAdditionalInfSelect option:selected").val();
                 if (dropdownvalue == 'TimelineChanges') {
                     $("#timelineChanges").css('visibility', 'visible');
-                    $("#allDocuments").css('visibility', 'hidden');
+                    $("#allDocuments").addClass('d-none');
                 } else if (dropdownvalue == 'AllDocuments') {
-                    $("#allDocuments").css('visibility', 'visible');
+                    $("#allDocuments").removeClass('d-none');
                     $("#timelineChanges").css('visibility', 'hidden');
                 } else {
                     $("#timelineChanges").css('visibility', 'hidden');
-                    $("#allDocuments").css('visibility', 'hidden');
+                    $("#allDocuments").addClass('d-none');
                 }
             }
         });
@@ -135,13 +123,13 @@
             const dropdownvalue = $("#shareClassAdditionalInfSelect option:selected").val();
             if (dropdownvalue == 'TimelineChanges') {
                 $("#timelineChanges").css('visibility', 'visible');
-                $("#allDocuments").css('visibility', 'hidden');
+                $("#allDocuments").addClass('d-none');
             } else if (dropdownvalue == 'AllDocuments') {
-                $("#allDocuments").css('visibility', 'visible');
+                $("#allDocuments").removeClass('d-none');
                 $("#timelineChanges").css('visibility', 'hidden');
             } else {
                 $("#timelineChanges").css('visibility', 'hidden');
-                $("#allDocuments").css('visibility', 'hidden');
+                $("#allDocuments").addClass('d-none');
             }
         });
 
@@ -202,6 +190,6 @@
                 data: currentPriceValue,
                 fill: false,
             });
-        });        
+        });
     </script>
 }

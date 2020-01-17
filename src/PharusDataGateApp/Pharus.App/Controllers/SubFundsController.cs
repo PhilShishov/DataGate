@@ -241,6 +241,12 @@
         {
             SetModelValuesForSpecificView(model);
 
+            if (model.Command == "Reset")
+            {
+                model.SelectTerm = "Quick Select";
+                return this.View(model);
+            }
+
             bool isInSelectionMode = false;
 
             if (model.SelectedColumns != null && model.SelectedColumns.Count > 0)
