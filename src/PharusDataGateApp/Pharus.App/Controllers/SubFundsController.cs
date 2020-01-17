@@ -198,7 +198,7 @@
 
             HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
 
-            string fileName = GetFileNameFromFilePath(entityId, chosenDate);
+            string fileName = GetFileNameFromFilePath(entityId, chosenDate, viewModel.ControllerName);
 
             if (string.IsNullOrEmpty(fileName))
             {
@@ -328,12 +328,13 @@
                     .Select(s => s.FiletypeId)
                     .FirstOrDefault();
 
-            this.entitiesFileService.AddFileToSpecificSubFund(
+            this.entitiesFileService.AddFileToSpecificEntity(
                                                 file.FileName,
                                                 model.EntityId,
                                                 startConnection,
                                                 endConnection,
-                                                fileTypeId);
+                                                fileTypeId,
+                                                model.ControllerName);
 
             return this.RedirectToAction("All");
         }
@@ -373,12 +374,13 @@
                     .Select(s => s.FiletypeId)
                     .FirstOrDefault();
 
-            this.entitiesFileService.AddFileToSpecificSubFund(
+            this.entitiesFileService.AddFileToSpecificEntity(
                                                 file.FileName,
                                                 model.EntityId,
                                                 startConnection,
                                                 endConnection,
-                                                fileTypeId);
+                                                fileTypeId,
+                                                model.ControllerName);
 
             return this.RedirectToAction("All");
         }
@@ -387,8 +389,9 @@
         public FileStream ReadPdfFile(SpecificEntityViewModel model)
         {
             FileStream fs = null;
+            string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
-            var path = this.entitiesFileService.LoadSubFundFileToDisplay(model.EntityId, model.ChosenDate);
+            var path = this.entitiesFileService.LoadEntityFileToDisplay(model.EntityId, model.ChosenDate, controllerName);
 
             if (this.HttpContext.Request.Form.ContainsKey("read_Pdf"))
             {
@@ -788,22 +791,23 @@
                                     model.EntityId);
         }
 
-        private string GetFileNameFromFilePath(int entityId, string chosenDate)
+        private string GetFileNameFromFilePath(int entityId, string chosenDate, string controllerName)
         {
-            return this.entitiesFileService.LoadSubFundFileToDisplay(entityId, chosenDate).Split('\\').Last();
+            return this.entitiesFileService.LoadEntityFileToDisplay(entityId, chosenDate, controllerName).Split('\\').Last();
         }
 
         private void SetModelValuesForSpecificView(SpecificEntityViewModel model)
         {
             var date = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
+            model.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
             model.Entity = this.subFundsService.GetSubFundWithDateById(date, model.EntityId);
             model.EntitySubEntities = this.subFundsService.GetSubFund_ShareClasses(date, model.EntityId);
             model.EntitiesHeadersForColumnSelection = this.subFundsService
                                                                     .GetSubFund_ShareClasses(date, model.EntityId)
                                                                     .Take(1)
                                                                     .ToList();
-            model.FileNameToDisplay = GetFileNameFromFilePath(model.EntityId, model.ChosenDate);
+            model.FileNameToDisplay = GetFileNameFromFilePath(model.EntityId, model.ChosenDate, model.ControllerName);
             model.EntityTimeline = this.subFundsService.GetSubFundTimeline(model.EntityId);
             model.EntityDocuments = this.subFundsService.GetAllSubFundDocumens(model.EntityId);
             model.BaseEntityName = this.subFundsService.GetSubFund_FundContainer(date, model.EntityId)[1][1];
