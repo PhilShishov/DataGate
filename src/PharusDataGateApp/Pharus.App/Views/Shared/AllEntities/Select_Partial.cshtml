@@ -5,7 +5,8 @@
         <div>
             <select asp-for="SelectTerm"
                     id="SelectTerm"
-                    class="form-control input-sm">
+                    class="form-control input-sm"                    
+                    onchange="this.form.submit()">
                 <option value=@Model.SelectTerm selected>@Model.SelectTerm</option>
             </select>
         </div>
