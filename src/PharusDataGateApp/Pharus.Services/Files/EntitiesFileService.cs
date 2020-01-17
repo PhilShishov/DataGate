@@ -85,17 +85,17 @@
             if (controllerName == "Funds")
             {
                 query = "EXEC sp_insert_map_fund " +
-                  "@file_name, @fund_id, @start_connection, @end_connection, @filetype_id";
+                  "@file_name, @entity_id, @start_connection, @end_connection, @filetype_id";
             }
             else if (controllerName == "SubFunds")
             {
                 query = "EXEC sp_insert_map_subfund " +
-               "@file_name, @subfund_id, @start_connection, @end_connection, @filetype_id";
+               "@file_name, @entity_id, @start_connection, @end_connection, @filetype_id";
             }
             else if (controllerName == "ShareClasses")
             {
                 query = "EXEC sp_insert_map_shareclass " +
-               "@file_name, @subfund_id, @start_connection, @end_connection, @filetype_id";
+               "@file_name, @entity_id, @start_connection, @end_connection, @filetype_id";
             }
 
             using (SqlConnection connection = new SqlConnection())
@@ -106,7 +106,7 @@
                     command.Parameters.AddRange(new[]
                     {
                         new SqlParameter("@file_name", SqlDbType.NVarChar, 100) { Value = fileName },
-                        new SqlParameter("@fund_id", SqlDbType.Int) { Value = entityId },
+                        new SqlParameter("@entity_id", SqlDbType.Int) { Value = entityId },
                         new SqlParameter("@start_connection", SqlDbType.NVarChar, 100) { Value = startConnection.ToString("yyyyMMdd") },
                         new SqlParameter("@end_connection", SqlDbType.NVarChar, 100) { Value = endConnection?.ToString("yyyyMMdd") },
                         new SqlParameter("@filetype_id", SqlDbType.Int) { Value = fileTypeId },
