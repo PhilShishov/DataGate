@@ -31,12 +31,12 @@
         </div>*@
     <div class="d-flex justify-content-between">
         <partial name="SpecificEntity/Info_Partial" />
-        <partial name="SpecificEntity/Load_Upload_Documents_Partial" />
+        <partial name="SpecificEntity/Load_Documents_Partial" />
     </div>
 
     <hr class="bg-pharus hr-2" />
 
-    <div class="row w-25 ml-3 mb-5">
+    <div class="row w-25 ml-3">
         <label class="text-torshia m-1 pr-3">FUND ADDITIONAL INFORMATION</label>
         <select class="custom-select-lg pharus-select form-control input-sm"
                 id="fundAdditionalInfSelect"
@@ -51,11 +51,15 @@
     <partial name="SpecificEntity/AllDocuments_Partial" />
     <partial name="SpecificEntity/TimeLine_Partial" />
 
-    <div id="subEntities">
-
-        <partial name="SpecificEntity/SubEntities/BindingTable_Partial" />
-        <partial name="SpecificEntity/SubEntities/Select_Extract_ModalBtn_Partial" />
+    <div id="subEntities" class="mt-4">
+        <div>
+            <div class="d-flex w-100 mb-2" id="toolbar-pharus">
+                <partial name="SpecificEntity/SubEntities/Select_Partial" />
+                <partial name="SpecificEntity/SubEntities/Extract_Partial" />
+            </div>
+        </div>
         <partial name="SpecificEntity/SubEntities/ViewTable_Partial" />
+        <partial name="SpecificEntity/SubEntities/BindingTable_Partial" />
 
         <partial name="SpecificEntity/SubEntities/Modal_Partial" />
     </div>
@@ -166,7 +170,7 @@
             const entityId = @Model.EntityId;
 
             $("#SelectTerm").select2({
-                placeholder: "Select Sub Fund",
+                placeholder: "Quick Select",
                 theme: "classic",
                 ajax: {
                     url: url,
@@ -205,22 +209,22 @@
                     if (dropdownvalue == 'SubFunds') {
                         $("#subEntities").css('visibility', 'visible');
                         $("#timelineChanges").css('visibility', 'hidden');
-                        $("#allDocuments").css('visibility', 'hidden');
+                        $("#allDocuments").addClass('d-none');
                     }
                     else if (dropdownvalue == 'TimelineChanges') {
                         $("#timelineChanges").css('visibility', 'visible');
                         $("#subEntities").css('visibility', 'hidden');
-                        $("#allDocuments").css('visibility', 'hidden');
+                        $("#allDocuments").addClass('d-none');
                     }
                     else if (dropdownvalue == 'AllDocuments') {
-                        $("#allDocuments").css('visibility', 'visible');
+                        $("#allDocuments").removeClass('d-none');
                         $("#timelineChanges").css('visibility', 'hidden');
                         $("#subEntities").css('visibility', 'hidden');
                     }
                     else {
                         $("#subEntities").css('visibility', 'hidden');
                         $("#timelineChanges").css('visibility', 'hidden');
-                        $("#allDocuments").css('visibility', 'hidden');
+                        $("#allDocuments").addClass('d-none');
                     }
                 }
             });
@@ -238,22 +242,22 @@
                 if (dropdownvalue == 'SubFunds') {
                     $("#subEntities").css('visibility', 'visible');
                     $("#timelineChanges").css('visibility', 'hidden');
-                    $("#allDocuments").css('visibility', 'hidden');
+                    $("#allDocuments").addClass('d-none');
                 }
                 else if (dropdownvalue == 'TimelineChanges') {
                     $("#timelineChanges").css('visibility', 'visible');
                     $("#subEntities").css('visibility', 'hidden');
-                    $("#allDocuments").css('visibility', 'hidden');
+                    $("#allDocuments").addClass('d-none');
                 }
                 else if (dropdownvalue == 'AllDocuments') {
-                    $("#allDocuments").css('visibility', 'visible');
+                    $("#allDocuments").removeClass('d-none');
                     $("#timelineChanges").css('visibility', 'hidden');
                     $("#subEntities").css('visibility', 'hidden');
                 }
                 else {
                     $("#subEntities").css('visibility', 'hidden');
                     $("#timelineChanges").css('visibility', 'hidden');
-                    $("#allDocuments").css('visibility', 'hidden');
+                    $("#allDocuments").addClass('d-none');
                 }
             });
         });
