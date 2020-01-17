@@ -44,10 +44,27 @@
     @if (this.User.IsInRole("Admin"))
     {
         <div>
-            <a href="/Funds/EditFund/@Model.EntityId/@Model.ChosenDate"
-               class="btn btn-primary btn-sm mb-2">
-                Edit Fund
-            </a>
+            @if (controllerName == "Funds")
+            {
+                <a href="/Funds/EditFund/@Model.EntityId/@Model.ChosenDate"
+                   class="btn btn-primary btn-sm mb-2">
+                    Edit Fund
+                </a>
+            }
+            else if (controllerName == "SubFunds")
+            {
+                <a href="/SubFunds/EditSubFund/@Model.EntityId/@Model.ChosenDate"
+                   class="btn btn-primary btn-sm mb-2">
+                    Edit Sub Fund
+                </a>
+            }
+            else if (controllerName == "ShareClasses")
+            {
+                <a href="/ShareClasses/EditShareClass/@Model.EntityId/@Model.ChosenDate"
+                   class="btn btn-primary btn-sm mb-2">
+                    Edit Share Class
+                </a>
+            }
         </div>
     }
 
