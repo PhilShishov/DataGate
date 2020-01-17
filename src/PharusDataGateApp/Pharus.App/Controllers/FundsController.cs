@@ -648,17 +648,18 @@
         private void SetModelValuesForSpecificView(SpecificEntityViewModel model)
         {
             var date = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            int entityId = model.EntityId;
 
             model.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
-            model.Entity = this.fundsService.GetFundWithDateById(date, model.EntityId);
-            model.EntitySubEntities = this.fundsService.GetFund_SubFunds(date, model.EntityId);
+            model.Entity = this.fundsService.GetFundWithDateById(date, entityId);
+            model.EntitySubEntities = this.fundsService.GetFund_SubFunds(date, entityId);
             model.EntitiesHeadersForColumnSelection = this.fundsService
-                                                                .GetFund_SubFunds(date, model.EntityId)
+                                                                .GetFund_SubFunds(date, entityId)
                                                                 .Take(1)
                                                                 .ToList();
-            model.FileNameToDisplay = GetFileNameFromFilePath(model.EntityId, model.ChosenDate, model.ControllerName);
-            model.EntityTimeline = this.fundsService.GetFundTimeline(model.EntityId);
-            model.EntityDocuments = this.fundsService.GetAllFundDocumens(model.EntityId);
+            model.FileNameToDisplay = GetFileNameFromFilePath(entityId, model.ChosenDate, model.ControllerName);
+            model.EntityTimeline = this.fundsService.GetFundTimeline(entityId);
+            model.EntityDocuments = this.fundsService.GetAllFundDocumens(entityId);
 
             model.StartConnection = model.Entity[1][0];
             model.EndConnection = model.Entity[1][1];

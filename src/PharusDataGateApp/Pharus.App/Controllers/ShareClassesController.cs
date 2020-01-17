@@ -199,7 +199,7 @@
 
             HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
 
-            string fileName = GetFileNameFromFilePath(entityId, chosenDate);
+            string fileName = GetFileNameFromFilePath(entityId, chosenDate, viewModel.ControllerName);
 
             if (string.IsNullOrEmpty(fileName))
             {
@@ -265,12 +265,13 @@
                     .Select(s => s.FiletypeId)
                     .FirstOrDefault();
 
-            this.entitiesFileService.AddFileToSpecificShareClass(
+            this.entitiesFileService.AddFileToSpecificEntity(
                                                 file.FileName,
                                                 model.EntityId,
                                                 startConnection,
                                                 endConnection,
-                                                fileTypeId);
+                                                fileTypeId,
+                                                model.ControllerName);
 
             return this.RedirectToAction("All");
         }
@@ -310,12 +311,13 @@
                     .Select(s => s.FiletypeId)
                     .FirstOrDefault();
 
-            this.entitiesFileService.AddFileToSpecificShareClass(
+            this.entitiesFileService.AddFileToSpecificEntity(
                                                 file.FileName,
                                                 model.EntityId,
                                                 startConnection,
                                                 endConnection,
-                                                fileTypeId);
+                                                fileTypeId,
+                                                model.ControllerName);
 
             return this.RedirectToAction("All");
         }
@@ -324,8 +326,9 @@
         public FileStream ReadPdfFile(SpecificEntityViewModel model)
         {
             FileStream fs = null;
+            string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
-            var path = this.entitiesFileService.LoadShareClassFileToDisplay(model.EntityId, model.ChosenDate);
+            var path = this.entitiesFileService.LoadEntityFileToDisplay(model.EntityId, model.ChosenDate, controllerName);
 
             if (this.HttpContext.Request.Form.ContainsKey("read_Pdf"))
             {
@@ -616,9 +619,11 @@
             var date = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             int entityId = model.EntityId;
 
+            model.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
             model.Entity = this.shareClassesService.GetShareClassWithDateById(date, entityId);
             model.EntityTimeline = this.shareClassesService.GetShareClassesTimeline(entityId);
             model.EntityDocuments = this.shareClassesService.GetAllShareClassesDocumens(entityId);
+            model.FileNameToDisplay = GetFileNameFromFilePath(entityId, model.ChosenDate, model.ControllerName);
 
             if (model.BaseEntityId != null && model.BaseEntityName != null)
             {
@@ -734,9 +739,9 @@
                                         chosenDate);
         }
 
-        private string GetFileNameFromFilePath(int entityId, string chosenDate)
+        private string GetFileNameFromFilePath(int entityId, string chosenDate, string controllerName)
         {
-            return this.entitiesFileService.LoadShareClassFileToDisplay(entityId, chosenDate).Split('\\').Last();
+            return this.entitiesFileService.LoadEntityFileToDisplay(entityId, chosenDate, controllerName).Split('\\').Last();
         }
     }
 }

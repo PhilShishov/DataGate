@@ -799,19 +799,20 @@
         private void SetModelValuesForSpecificView(SpecificEntityViewModel model)
         {
             var date = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            int entityId = model.EntityId;
 
             model.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
-            model.Entity = this.subFundsService.GetSubFundWithDateById(date, model.EntityId);
-            model.EntitySubEntities = this.subFundsService.GetSubFund_ShareClasses(date, model.EntityId);
+            model.Entity = this.subFundsService.GetSubFundWithDateById(date, entityId);
+            model.EntitySubEntities = this.subFundsService.GetSubFund_ShareClasses(date, entityId);
             model.EntitiesHeadersForColumnSelection = this.subFundsService
-                                                                    .GetSubFund_ShareClasses(date, model.EntityId)
+                                                                    .GetSubFund_ShareClasses(date, entityId)
                                                                     .Take(1)
                                                                     .ToList();
-            model.FileNameToDisplay = GetFileNameFromFilePath(model.EntityId, model.ChosenDate, model.ControllerName);
-            model.EntityTimeline = this.subFundsService.GetSubFundTimeline(model.EntityId);
-            model.EntityDocuments = this.subFundsService.GetAllSubFundDocumens(model.EntityId);
-            model.BaseEntityName = this.subFundsService.GetSubFund_FundContainer(date, model.EntityId)[1][1];
-            model.BaseEntityId = this.subFundsService.GetSubFund_FundContainer(date, model.EntityId)[1][0];
+            model.FileNameToDisplay = GetFileNameFromFilePath(entityId, model.ChosenDate, model.ControllerName);
+            model.EntityTimeline = this.subFundsService.GetSubFundTimeline(entityId);
+            model.EntityDocuments = this.subFundsService.GetAllSubFundDocumens(entityId);
+            model.BaseEntityName = this.subFundsService.GetSubFund_FundContainer(date, entityId)[1][1];
+            model.BaseEntityId = this.subFundsService.GetSubFund_FundContainer(date, entityId)[1][0];
 
             model.StartConnection = model.Entity[1][0];
             model.EndConnection = model.Entity[1][1];
