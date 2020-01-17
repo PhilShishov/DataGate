@@ -34,7 +34,7 @@
                 id="fundAdditionalInfSelect"
                 asp-for="SelectAdditionalInf">
             <option value="" selected disabled>Select</option>
-            <option value="Sub Funds">Sub Funds</option>
+            <option value="SubFunds">Sub Funds</option>
             <option value="TimelineChanges">TimelineChanges</option>
             <option value="AllDocuments">AllDocuments</option>
         </select>
@@ -198,7 +198,7 @@
             $('#fundAdditionalInfSelect option').each(function () {
                 if (this.selected) {
                 const dropdownvalue = $("#fundAdditionalInfSelect option:selected").val();
-                    if (dropdownvalue == 'Sub Funds') {
+                    if (dropdownvalue == 'SubFunds') {
                         $("#subEntities").css('visibility', 'visible');
                         $("#timelineChanges").css('visibility', 'hidden');
                         $("#allDocuments").addClass('d-none');
@@ -231,7 +231,7 @@
                 const dropdownvalue = $("#fundAdditionalInfSelect option:selected").val();
                  $(this).find('[selected]').removeAttr('selected')
                  $(this).find(':selected').attr('selected','selected')
-                if (dropdownvalue == 'Sub Funds') {
+                if (dropdownvalue == 'SubFunds') {
                     $("#subEntities").css('visibility', 'visible');
                     $("#timelineChanges").css('visibility', 'hidden');
                     $("#allDocuments").addClass('d-none');
