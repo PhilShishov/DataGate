@@ -4,9 +4,6 @@
     ViewData["Title"] = "All";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2 class="text-center text-torshia">All Active SubFunds</h2>
-
 @section Styles{
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css" />
@@ -24,23 +21,22 @@
       method="post">
 
     <div>
-        <partial name="AllEntities/Update_Select_Partial" />
-
-        <div class="button-holder d-flex my-5">
-            <partial name="AllEntities/Search_Partial" />
-            <div class="w-50 d-flex">
+        <div>
+            <hr class="mt-0 mb-2" />
+            <div class="d-flex w-100" id="toolbar-pharus">
+                <partial name="AllEntities/Select_Partial" />
+                <partial name="AllEntities/Update_Partial" />
                 <partial name="AllEntities/Extract_Partial" />
-                <partial name="AllEntities/ActiveSwitch_Partial" />
-                <partial name="AllEntities/ModalButton_Partial" />
+                <partial name="AllEntities/Search_Partial" />
+                <div class="ml-4">
+                    <h2 class="text-center text-torshia" id="entityName">All Active Sub Funds</h2>
+                </div>
             </div>
+            <hr class="mt-1 mb-0" />
         </div>
 
         <partial name="AllEntities/Modal_Partial" />
-
-        <hr class="bg-pharus hr-2" />
-
         <partial name="AllEntities/BindingTable_Partial" />
-
         <partial name="AllEntities/ViewTable_Partial" />
     </div>
 </form>
@@ -76,7 +72,7 @@
             // Autocomplete search
 
             $("#SelectTerm").select2({
-                placeholder: "Select Subfund",
+                placeholder: "Quick Select",
                 theme: "classic",
                 ajax: {
                     url: "/SubFunds/AutoCompleteSubFundList",
