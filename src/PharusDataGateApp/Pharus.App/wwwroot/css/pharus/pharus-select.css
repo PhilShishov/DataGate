@@ -24,10 +24,6 @@
     position: absolute;
 }
 
-#allDocuments {
-    visibility: hidden;
-}
-
 #subEntities {
     visibility: hidden;
 }
