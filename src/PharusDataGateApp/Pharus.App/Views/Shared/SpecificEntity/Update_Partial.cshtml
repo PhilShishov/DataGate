@@ -1,8 +1,9 @@
 ﻿@model Pharus.App.Models.ViewModels.Entities.SpecificEntityViewModel
+@{
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
 
 <div class="w-100 flex-wrap my-5">
-    <label for="date"
-           class="text-torshia m-1 pr-3">SELECT DATE:</label>
     <input type="date"
            id="date-pharus"
            asp-for="ChosenDate"
@@ -13,7 +14,11 @@
            asp-for="Command"
            value="Update Table"></>
 
-    <a asp-action="All">Show All</a>
+    <button type="button"
+            class="btn btn-primary btn-sm mb-2"
+            onclick="window.location.href = '/@controllerName/All';">
+        Show All
+    </button>
 
     <input type="number"
            asp-for="EntityId" hidden>
