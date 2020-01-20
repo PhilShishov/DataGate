@@ -10,13 +10,17 @@
     width: 300px;
 }
 
-.pharus-select {
+.select-pharus {
     background-color: lightcyan;
     color: darkgrey;
     border: 0 none;
     border-radius: 20px;
     padding: 6px 20px;
     cursor: pointer;
+}
+
+.select-div-pharus {
+    margin-top: 1px;
 }
 
 #timelineChanges {
