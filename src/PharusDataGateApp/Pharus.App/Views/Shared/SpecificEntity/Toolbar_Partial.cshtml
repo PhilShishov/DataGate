@@ -24,12 +24,24 @@
     </div>
 
     <div>
-        <button type="button"
-                class="btn btn-primary btn-sm mb-2"
-                data-toggle="modal"
-                data-target="#upProspModal">
-            Upload Prospectus
-        </button>
+        @if (controllerName == "Funds")
+        {
+            <button type="button"
+                    class="btn btn-primary btn-sm mb-2"
+                    data-toggle="modal"
+                    data-target="#upProspModal">
+                Upload Prospectus
+            </button>
+        }
+        else
+        {
+            <button type="button"
+                    class="btn btn-primary btn-sm mb-2"
+                    data-toggle="modal"
+                    data-target="#upProspModal">
+                Upload Document
+            </button>
+        }
     </div>
 
     <div class="mx-2">
