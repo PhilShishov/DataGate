@@ -201,16 +201,6 @@
 
             HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
 
-
-            //string fileName = GetFileNameFromFilePath(entityId, chosenDate, viewModel.ControllerName);
-
-            //if (string.IsNullOrEmpty(fileName))
-            //{
-            //    return this.View(viewModel);
-            //}
-
-            //viewModel.FileNameToDisplay = fileName;
-
             this.ModelState.Clear();
             return this.View(viewModel);
         }

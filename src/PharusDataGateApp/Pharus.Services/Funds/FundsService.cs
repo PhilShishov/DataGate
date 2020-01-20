@@ -162,7 +162,7 @@ namespace Pharus.Services.Funds
             return this.context.TbHistoryFund
                 .Select(f => f.FOfficialFundName)
                 .ToList();
-        }        
+        }
 
         public List<string[]> GetFundWithDateById(DateTime? chosenDate, int id)
         {
@@ -260,6 +260,20 @@ namespace Pharus.Services.Funds
                 SqlCommand command = connection.CreateCommand();
 
                 command.CommandText = $"select * from [dbo].[fn_viewdocuments_fund]({id})";
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
+        public List<string[]> GetAllAgreementDocumentsForAllFunds(DateTime? chosenDate)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                command.CommandText = $"select * from [dbo].[fn_viewdocuments_fund](1)";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
