@@ -112,23 +112,23 @@
                                         <a class="dropdown-item font-weight-light" href="/Funds/All">List</a>
                                         @if (this.User.IsInRole("Admin"))
                                         {
-                                            <a class="dropdown-item font-weight-light" href="/Funds/CreateFund">New</a>
+                                            <a class="dropdown-item font-weight-light" href="/Funds/CreateFund">Create</a>
                                         }
 
-                                        <a class="dropdown-item font-weight-light" href="/Funds/Agreements">Agreements</a>
+                                        <a class="dropdown-item font-weight-light" href="#">Report</a>
                                     </div>
                                 </li>
 
                                 <li class="dropdown">
                                     <button class="dropdown-btn"
                                             name="dr-btn-SideNav">
-                                        SubFunds<i class="fa fa-caret-down"></i>
+                                        Sub Funds<i class="fa fa-caret-down"></i>
                                     </button>
                                     <div id="myDropdown" class="dropdown-container">
                                         <a class="dropdown-item font-weight-light" href="/SubFunds/All">List</a>
                                         @if (this.User.IsInRole("Admin"))
                                         {
-                                            <a class="dropdown-item font-weight-light" href="/SubFunds/CreateSubFund">New</a>
+                                            <a class="dropdown-item font-weight-light" href="/SubFunds/CreateSubFund">Create</a>
                                         }
 
                                         <a class="dropdown-item font-weight-light" href="#">Report</a>
@@ -137,17 +137,22 @@
                                 <li class="dropdown">
                                     <button class="dropdown-btn"
                                             name="dr-btn-SideNav">
-                                        ShareClasses<i class="fa fa-caret-down"></i>
+                                        Share Classes<i class="fa fa-caret-down"></i>
                                     </button>
                                     <div id="myDropdown" class="dropdown-container">
                                         <a class="dropdown-item font-weight-light" href="/ShareClasses/All">List</a>
                                         @if (this.User.IsInRole("Admin"))
                                         {
-                                            <a class="dropdown-item font-weight-light" href="/ShareClasses/CreateShareClass">New</a>
+                                            <a class="dropdown-item font-weight-light" href="/ShareClasses/CreateShareClass">Create</a>
                                         }
 
                                         <a class="dropdown-item font-weight-light" href="#">Report</a>
                                     </div>
+                                </li>
+                                <li>
+                                    <a href="/Agreements/All">
+                                        Agreements
+                                    </a>                                   
                                 </li>
                             </ul>
 
