@@ -25,20 +25,20 @@
         private readonly Pharus_vFinale_Context context;
         private readonly IFundsService fundsService;
         private readonly IFundsSelectListService fundsSelectListService;
-        private readonly IEntitiesFileService fundsFileService;
+        private readonly IEntitiesFileService entitiesFileService;
         private readonly IHostingEnvironment hostingEnvironment;
 
         public FundsController(
             IFundsService fundsService,
             IFundsSelectListService fundsSelectListService,
-            IEntitiesFileService fundsFileService,
+            IEntitiesFileService entitiesFileService,
             IHostingEnvironment hostingEnvironment,
             Pharus_vFinale_Context context)
         {
             this.context = context;
             this.fundsService = fundsService;
             this.fundsSelectListService = fundsSelectListService;
-            this.fundsFileService = fundsFileService;
+            this.entitiesFileService = entitiesFileService;
             this.hostingEnvironment = hostingEnvironment;
         }
 
@@ -202,14 +202,14 @@
             HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
 
 
-            string fileName = GetFileNameFromFilePath(entityId, chosenDate, viewModel.ControllerName);
+            //string fileName = GetFileNameFromFilePath(entityId, chosenDate, viewModel.ControllerName);
 
-            if (string.IsNullOrEmpty(fileName))
-            {
-                return this.View(viewModel);
-            }
+            //if (string.IsNullOrEmpty(fileName))
+            //{
+            //    return this.View(viewModel);
+            //}
 
-            viewModel.FileNameToDisplay = fileName;
+            //viewModel.FileNameToDisplay = fileName;
 
             this.ModelState.Clear();
             return this.View(viewModel);
@@ -337,7 +337,7 @@
                     .Select(s => s.FiletypeId)
                     .FirstOrDefault();
 
-            this.fundsFileService.AddFileToSpecificEntity(
+            this.entitiesFileService.AddFileToSpecificEntity(
                                                 file.FileName,
                                                 model.EntityId,
                                                 startConnection,
@@ -383,7 +383,7 @@
                     .Select(s => s.FiletypeId)
                     .FirstOrDefault();
 
-            this.fundsFileService.AddFileToSpecificEntity(
+            this.entitiesFileService.AddFileToSpecificEntity(
                                                 file.FileName,
                                                 model.EntityId,
                                                 startConnection,
@@ -401,7 +401,7 @@
 
             string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
-            var path = this.fundsFileService.LoadEntityFileToDisplay(model.EntityId, model.ChosenDate, controllerName);
+            var path = this.entitiesFileService.LoadEntityFileToDisplay(model.EntityId, model.ChosenDate, controllerName);
 
             if (this.HttpContext.Request.Form.ContainsKey("read_Pdf"))
             {
@@ -625,11 +625,6 @@
 
             return this.LocalRedirect(returnUrl);
         }
-        [HttpGet]
-        public IActionResult Agreements()
-        {
-            return this.View();
-        }
 
         private void CallAllEntitiesWithSelectedColumns(EntitiesViewModel model, DateTime? chosenDate)
         {
@@ -668,7 +663,9 @@
                                                                 .GetFund_SubFunds(date, entityId)
                                                                 .Take(1)
                                                                 .ToList();
-            model.FileNameToDisplay = GetFileNameFromFilePath(entityId, model.ChosenDate, model.ControllerName);
+            model.FileNameToDisplay = GetFileNameFromFilePath
+                (entityId, model.ChosenDate, model.ControllerName)
+                .Split(".")[0];
             model.EntityTimeline = this.fundsService.GetFundTimeline(entityId);
             model.EntityDocuments = this.fundsService.GetAllFundDocumens(entityId);
 
@@ -700,7 +697,7 @@
 
         private string GetFileNameFromFilePath(int entityId, string chosenDate, string controllerName)
         {
-            return this.fundsFileService.LoadEntityFileToDisplay(entityId, chosenDate, controllerName).Split('\\').Last();
+            return this.entitiesFileService.LoadEntityFileToDisplay(entityId, chosenDate, controllerName).Split('\\').Last();
         }
     }
 }

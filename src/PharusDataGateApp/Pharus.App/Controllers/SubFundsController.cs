@@ -197,15 +197,7 @@
             SetModelValuesForSpecificView(viewModel);
 
             HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
-
-            string fileName = GetFileNameFromFilePath(entityId, chosenDate, viewModel.ControllerName);
-
-            if (string.IsNullOrEmpty(fileName))
-            {
-                return this.View(viewModel);
-            }
-
-            viewModel.FileNameToDisplay = fileName;
+            
             this.ModelState.Clear();
             return this.View(viewModel);
         }
@@ -813,7 +805,9 @@
                                                                     .GetSubFund_ShareClasses(date, entityId)
                                                                     .Take(1)
                                                                     .ToList();
-            model.FileNameToDisplay = GetFileNameFromFilePath(entityId, model.ChosenDate, model.ControllerName);
+            model.FileNameToDisplay = GetFileNameFromFilePath
+                (entityId, model.ChosenDate, model.ControllerName)
+                .Split(".")[0];
             model.EntityTimeline = this.subFundsService.GetSubFundTimeline(entityId);
             model.EntityDocuments = this.subFundsService.GetAllSubFundDocumens(entityId);
             model.BaseEntityName = this.subFundsService.GetSubFund_FundContainer(date, entityId)[1][1];

@@ -199,15 +199,6 @@
 
             HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
 
-            string fileName = GetFileNameFromFilePath(entityId, chosenDate, viewModel.ControllerName);
-
-            if (string.IsNullOrEmpty(fileName))
-            {
-                return this.View(viewModel);
-            }
-
-            viewModel.FileNameToDisplay = fileName;
-
             this.ModelState.Clear();
             return this.View(viewModel);
         }
@@ -623,7 +614,9 @@
             model.Entity = this.shareClassesService.GetShareClassWithDateById(date, entityId);
             model.EntityTimeline = this.shareClassesService.GetShareClassesTimeline(entityId);
             model.EntityDocuments = this.shareClassesService.GetAllShareClassesDocumens(entityId);
-            model.FileNameToDisplay = GetFileNameFromFilePath(entityId, model.ChosenDate, model.ControllerName);
+            model.FileNameToDisplay = GetFileNameFromFilePath
+                (entityId, model.ChosenDate, model.ControllerName)
+                .Split(".")[0];
             model.BaseEntityId = this.shareClassesService.GetShareClass_SubFundContainer(date, entityId)[1][0];
             model.BaseEntityName = this.shareClassesService.GetShareClass_SubFundContainer(date, entityId)[1][1];
 

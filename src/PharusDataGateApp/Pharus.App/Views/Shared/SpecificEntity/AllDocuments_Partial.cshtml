@@ -32,7 +32,7 @@
                                         type="submit"
                                         formaction="/@controllerName/ReadPdfFile"
                                         name="read_Pdf">
-                                    @Model.EntityDocuments[row][col]
+                                    @Model.EntityDocuments[row][col].Split(".")[0]
                                 </button>
                             }
                             else

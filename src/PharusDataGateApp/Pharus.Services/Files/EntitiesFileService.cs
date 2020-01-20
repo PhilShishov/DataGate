@@ -12,7 +12,7 @@
     {
         private const int fileTypeProspectus = 2;
         private const int fileTypeKiid = 3;
-        private const int fileTypePricingPolicy = 4;
+        //private const int fileTypePricingPolicy = 4;
         private const int fileTypeNavReport = 5;
 
         private readonly IConfiguration configuration;
