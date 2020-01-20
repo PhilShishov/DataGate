@@ -37,7 +37,7 @@ input[type=search]::-webkit-search-cancel-button {
 .vertical {
     border-left: 1px ridge;
     /*height: 90px;*/
-    margin-top: 3px;
+    margin-top: 4px;
 }
 
 #date-pharus {
