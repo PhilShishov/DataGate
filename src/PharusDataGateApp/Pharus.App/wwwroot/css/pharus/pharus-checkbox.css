@@ -24,10 +24,6 @@
     cursor: pointer;
 }
 
-.el-switch-div:hover {
-    background-color: lightgray;
-}
-
 .el-switch .el-switch-style {
     height: 1.6em;
     left: 0;
