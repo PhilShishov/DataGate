@@ -18,8 +18,8 @@
 
 <form asp-controller="SubFunds"
       class="justify-content-between"
-      method="post">
-
+      method="post"
+      id="entity-form-pharus">
     <div>
         <div>
             <hr class="mt-0 mb-auto" />
@@ -47,6 +47,7 @@
 
     <script src="~/js/submitForm.js"></script>
     <script src="~/js/multiselect.js"></script>
+    <script src="~/js/buttonRedirect.js"></script>
     <script src="~/lib/jquery/dist/jquery.doubleScroll.js"></script>
 
     <script>
@@ -54,6 +55,7 @@
             manageSideNavBar();
             manageDropdowns();
             submitForm();
+            buttonRedirect();
         }
 
         if (window.history.replaceState) {
