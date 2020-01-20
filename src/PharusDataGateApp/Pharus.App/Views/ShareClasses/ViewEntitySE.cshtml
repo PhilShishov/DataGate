@@ -20,17 +20,6 @@
       class="justify-content-between"
       method="post">
 
-    <div class="d-flex mt-2 pr-3">
-        <p> SUB FUND CONTAINER:</p>
-        @if (Model.BaseEntityId != null && Model.BaseEntityName != null)
-        {
-            <a href="/SubFunds/ViewEntitySE/@Model.BaseEntityId/@Model.ChosenDate"
-               class="text-torshia font-weight-bold ml-1">
-                @Model.BaseEntityName
-            </a>
-        }
-    </div>
-
     <partial name="SpecificEntity/Toolbar_Partial" />
     <div class="d-flex justify-content-between">
         <partial name="SpecificEntity/Info_Partial" />
