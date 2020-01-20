@@ -625,6 +625,11 @@
 
             return this.LocalRedirect(returnUrl);
         }
+        [HttpGet]
+        public IActionResult Agreements()
+        {
+            return this.View();
+        }
 
         private void CallAllEntitiesWithSelectedColumns(EntitiesViewModel model, DateTime? chosenDate)
         {
