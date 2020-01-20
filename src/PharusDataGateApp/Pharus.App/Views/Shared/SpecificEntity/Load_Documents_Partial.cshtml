@@ -3,7 +3,14 @@
 }
 <div class="w-50">
     <div class="my-5">
-        <u class="text-torshia">LIST OF PROSPECTUS</u><br>
+        @if (controllerName == "Funds")
+        {
+            <u class="text-torshia">LIST OF PROSPECTUS</u><br>
+        }
+        else
+        {
+            <u class="text-torshia">LIST OF DOCUMENTS</u><br>
+        }
 
         @if (!string.IsNullOrEmpty(Model.FileNameToDisplay))
         {
