@@ -299,9 +299,17 @@
 
             var file = model.UploadEntityFileModel.FileToUpload;
 
-            if (!ModelState.IsValid || file == null || file.Length == 0)
+            if (file == null || file.Length == 0)
             {
-                return this.Content("File not loaded");
+                return this.Content("File not loaded. Please try again");
+            }
+
+            FileInfo fileType = new FileInfo(file.FileName);
+            var fileExtension = fileType.Extension;
+
+            if (fileExtension != ".pdf")
+            {
+                return this.Content("Unsupported file format. Please try again");
             }
 
             string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\FundFile\";
@@ -338,55 +346,63 @@
             return this.RedirectToAction("All");
         }
 
-        [HttpPost]
-        public IActionResult UploadAgreement(SpecificEntityViewModel model)
-        {
-            SetModelValuesForSpecificView(model);
+        //[HttpPost]
+        //public IActionResult UploadAgreement(SpecificEntityViewModel model)
+        //{
+        //    SetModelValuesForSpecificView(model);
 
-            var file = model.UploadEntityFileModel.FileToUpload;
+        //    var file = model.UploadAgreementFileModel.FileToUpload;
 
-            if (!ModelState.IsValid || file == null || file.Length == 0)
-            {
-                return this.Content("File not loaded");
-            }
+        //    if (file == null || file.Length == 0)
+        //    {
+        //        return this.Content("File not loaded. Please try again");
+        //    }
 
-            string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\AgreementFile\";
-            string path = $"{networkFileLocation}{file.FileName}";
+        //    FileInfo fileType = new FileInfo(file.FileName);
+        //    var fileExtension = fileType.Extension;
 
-            using (var stream = new FileStream(path, FileMode.Create))
-            {
-                file.CopyTo(stream);
-            }
+        //    if (fileExtension != ".pdf")
+        //    {
+        //        return this.Content("Unsupported file format. Please try again");
+        //    }
 
-            var contractDate = DateTime.ParseExact(model.StartConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            var activationDate = DateTime.ParseExact(model.StartConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+        //    string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\AgreementFile\";
+        //    string path = $"{networkFileLocation}{file.FileName}";
 
-            DateTime? expirationDate = null;
+        //    using (var stream = new FileStream(path, FileMode.Create))
+        //    {
+        //        file.CopyTo(stream);
+        //    }
 
-            if (!string.IsNullOrEmpty(model.EndConnection))
-            {
-                expirationDate = DateTime.ParseExact(model.EndConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            }
+        //    var contractDate = DateTime.ParseExact(model.UploadEntityFileModel.StartConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+        //    var activationDate = DateTime.ParseExact(model.UploadEntityFileModel.StartConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
-            var agrFileTypeDesc = model.UploadEntityFileModel.FileType;
-            int agrFileTypeId = this.context.TbDomActivityType
-                    .Where(at => at.AtDesc == agrFileTypeDesc)
-                    .Select(at => at.AtId)
-                    .FirstOrDefault();
+        //    DateTime? expirationDate = null;
 
-            this.entitiesFileService.AddAgreementToSpecificEntity(
-                                                model.EntityId,
-                                                agrFileTypeId,
-                                                contractDate,
-                                                activationDate,
-                                                expirationDate,
-                                                file.FileName,
-                                                companyId,
-                                                statusId,
-                                                model.ControllerName);
+        //    if (!string.IsNullOrEmpty(model.UploadEntityFileModel.EndConnection))
+        //    {
+        //        expirationDate = DateTime.ParseExact(model.UploadEntityFileModel.EndConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+        //    }
 
-            return this.RedirectToAction("All");
-        }
+        //    var agrFileTypeDesc = model.UploadEntityFileModel.FileType;
+        //    int agrFileTypeId = this.context.TbDomActivityType
+        //            .Where(at => at.AtDesc == agrFileTypeDesc)
+        //            .Select(at => at.AtId)
+        //            .FirstOrDefault();
+
+        //    this.entitiesFileService.AddAgreementToSpecificEntity(
+        //                                        model.EntityId,
+        //                                        agrFileTypeId,
+        //                                        contractDate,
+        //                                        activationDate,
+        //                                        expirationDate,
+        //                                        file.FileName,
+        //                                        companyId,
+        //                                        statusId,
+        //                                        model.ControllerName);
+
+        //    return this.RedirectToAction("All");
+        //}
 
         [HttpPost]
         public FileStream ReadPdfFile(SpecificEntityViewModel model)

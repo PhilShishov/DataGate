@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Pharus.Models.Pharus_vFinale
+namespace Pharus.Domain.Models.Pharus_vFinale
 {
     public partial class TbServiceAgreementSubfund
     {
         public int SaId { get; set; }
-        public int SaSf { get; set; }
+        public int SaSubfundId { get; set; }
         public int SaActivityType { get; set; }
-        public DateTime SaConctractDate { get; set; }
+        public DateTime SaContractDate { get; set; }
         public DateTime? SaActivationDate { get; set; }
         public DateTime? SaExpirationDate { get; set; }
         public string SaRifCode { get; set; }
@@ -17,6 +17,6 @@ namespace Pharus.Models.Pharus_vFinale
 
         public virtual TbDomActivityType SaActivityTypeNavigation { get; set; }
         public virtual TbCompanies SaCompany { get; set; }
-        public virtual TbSubFund SaSfNavigation { get; set; }
+        public virtual TbSubFund SaSubfund { get; set; }
     }
 }

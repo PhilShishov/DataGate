@@ -55,6 +55,8 @@ namespace Pharus.App.Models.ViewModels.Entities
 
         public UploadEntityFileModel UploadEntityFileModel { get; set; }
 
+        public UploadAgreementFileModel UploadAgreementFileModel { get; set; }
+
         public string StartConnection { get; set; }
 
         public string EndConnection { get; set; }

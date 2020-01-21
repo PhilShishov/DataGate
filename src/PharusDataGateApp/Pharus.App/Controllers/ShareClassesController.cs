@@ -267,51 +267,53 @@
             return this.RedirectToAction("All");
         }
 
-        [HttpPost]
-        public IActionResult UploadAgreement(SpecificEntityViewModel model)
-        {
-            SetModelValuesForSpecificView(model);
+        //[HttpPost]
+        //public IActionResult UploadAgreement(SpecificEntityViewModel model)
+        //{
+        //    SetModelValuesForSpecificView(model);
 
-            var file = model.UploadEntityFileModel.FileToUpload;
+        //    var file = model.UploadEntityFileModel.FileToUpload;
+        //    var startConnectionModel = model.UploadEntityFileModel.StartConnection;
+        //    var endConnectionModel = model.UploadEntityFileModel.EndConnection;
 
-            if (!ModelState.IsValid || file == null || file.Length == 0)
-            {
-                return this.Content("File not loaded");
-            }
+        //    if (!ModelState.IsValid || file == null || file.Length == 0)
+        //    {
+        //        return this.Content("File not loaded");
+        //    }
 
-            string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\ShareclassFile\";
-            string path = $"{networkFileLocation}{file.FileName}";
+        //    string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\ShareclassFile\";
+        //    string path = $"{networkFileLocation}{file.FileName}";
 
-            using (var stream = new FileStream(path, FileMode.Create))
-            {
-                file.CopyTo(stream);
-            }
+        //    using (var stream = new FileStream(path, FileMode.Create))
+        //    {
+        //        file.CopyTo(stream);
+        //    }
 
-            var startConnection = DateTime.ParseExact(model.StartConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+        //    var startConnection = DateTime.ParseExact(model.StartConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
-            DateTime? endConnection = null;
+        //    DateTime? endConnection = null;
 
-            if (!string.IsNullOrEmpty(model.EndConnection))
-            {
-                endConnection = DateTime.ParseExact(model.EndConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            }
+        //    if (!string.IsNullOrEmpty(model.EndConnection))
+        //    {
+        //        endConnection = DateTime.ParseExact(model.EndConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+        //    }
 
-            var fileTypeDesc = model.UploadEntityFileModel.FileType;
-            int fileTypeId = this.context.TbDomFileType
-                    .Where(s => s.FiletypeDesc == fileTypeDesc)
-                    .Select(s => s.FiletypeId)
-                    .FirstOrDefault();
+        //    var fileTypeDesc = model.UploadEntityFileModel.FileType;
+        //    int fileTypeId = this.context.TbDomFileType
+        //            .Where(s => s.FiletypeDesc == fileTypeDesc)
+        //            .Select(s => s.FiletypeId)
+        //            .FirstOrDefault();
 
-            this.entitiesFileService.AddDocumentToSpecificEntity(
-                                                file.FileName,
-                                                model.EntityId,
-                                                startConnection,
-                                                endConnection,
-                                                fileTypeId,
-                                                model.ControllerName);
+        //    this.entitiesFileService.AddDocumentToSpecificEntity(
+        //                                        file.FileName,
+        //                                        model.EntityId,
+        //                                        startConnection,
+        //                                        endConnection,
+        //                                        fileTypeId,
+        //                                        model.ControllerName);
 
-            return this.RedirectToAction("All");
-        }
+        //    return this.RedirectToAction("All");
+        //}
 
         [HttpPost]
         public FileStream ReadPdfFile(SpecificEntityViewModel model)

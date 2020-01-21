@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Pharus.Models.Pharus_vFinale
+namespace Pharus.Domain.Models.Pharus_vFinale
 {
     public partial class TbCompanies
     {
