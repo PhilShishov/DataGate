@@ -1,9 +1,8 @@
-﻿namespace Pharus.Domain.Models.Pharus_vFinale
+﻿using System;
+using System.Collections.Generic;
+
+namespace Pharus.Models.Pharus_vFinale
 {
-    using System;
-
-    using Pharus.Domain.Models.Pharus_vFinale;
-
     public partial class TbFundSubFund
     {
         public int SfId { get; set; }

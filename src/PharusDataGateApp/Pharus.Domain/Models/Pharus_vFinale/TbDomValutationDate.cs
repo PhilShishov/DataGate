@@ -1,7 +1,8 @@
-﻿namespace Pharus.Domain.Models.Pharus_vFinale
-{
-    using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
+namespace Pharus.Models.Pharus_vFinale
+{
     public partial class TbDomValutationDate
     {
         public TbDomValutationDate()
@@ -10,7 +11,6 @@
         }
 
         public int VdId { get; set; }
-
         public string VdDesc { get; set; }
 
         public virtual ICollection<TbHistorySubFund> TbHistorySubFund { get; set; }

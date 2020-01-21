@@ -1,8 +1,7 @@
 ﻿namespace Pharus.Data
 {
-    using Pharus.Domain.Models.Pharus_vFinale;
-
     using Microsoft.EntityFrameworkCore;
+    using Pharus.Models.Pharus_vFinale;
 
     public partial class Pharus_vFinale_Context : DbContext
     {
@@ -15,96 +14,52 @@
         {
         }
 
+        public virtual DbSet<TbCompanies> TbCompanies { get; set; }
         public virtual DbSet<TbDomActivityType> TbDomActivityType { get; set; }
-
+        public virtual DbSet<TbDomAgreementStatus> TbDomAgreementStatus { get; set; }
         public virtual DbSet<TbDomCalculationDate> TbDomCalculationDate { get; set; }
-
         public virtual DbSet<TbDomCesrClass> TbDomCesrClass { get; set; }
-
-        public virtual DbSet<TbDomCompany> TbDomCompany { get; set; }
-
         public virtual DbSet<TbDomCompanyType> TbDomCompanyType { get; set; }
-
         public virtual DbSet<TbDomCssfGeographicalFocus> TbDomCssfGeographicalFocus { get; set; }
-
         public virtual DbSet<TbDomCssfPrincipalAssetClass> TbDomCssfPrincipalAssetClass { get; set; }
-
         public virtual DbSet<TbDomDerivMarket> TbDomDerivMarket { get; set; }
-
         public virtual DbSet<TbDomDerivPurpose> TbDomDerivPurpose { get; set; }
-
         public virtual DbSet<TbDomEntity> TbDomEntity { get; set; }
-
         public virtual DbSet<TbDomFStatus> TbDomFStatus { get; set; }
-
         public virtual DbSet<TbDomFileType> TbDomFileType { get; set; }
-
         public virtual DbSet<TbDomGlobalExposure> TbDomGlobalExposure { get; set; }
-
         public virtual DbSet<TbDomInvestorType> TbDomInvestorType { get; set; }
-
         public virtual DbSet<TbDomIsoCountry> TbDomIsoCountry { get; set; }
-
         public virtual DbSet<TbDomIsoCurrency> TbDomIsoCurrency { get; set; }
-
         public virtual DbSet<TbDomLegalForm> TbDomLegalForm { get; set; }
-
         public virtual DbSet<TbDomLegalType> TbDomLegalType { get; set; }
-
         public virtual DbSet<TbDomLegalVehicle> TbDomLegalVehicle { get; set; }
-
         public virtual DbSet<TbDomNavFrequency> TbDomNavFrequency { get; set; }
-
         public virtual DbSet<TbDomPrincipalInvestmentStrategy> TbDomPrincipalInvestmentStrategy { get; set; }
-
         public virtual DbSet<TbDomSfCatBloomberg> TbDomSfCatBloomberg { get; set; }
-
         public virtual DbSet<TbDomSfCatMorningstar> TbDomSfCatMorningstar { get; set; }
-
         public virtual DbSet<TbDomSfCatSix> TbDomSfCatSix { get; set; }
-
         public virtual DbSet<TbDomSfStatus> TbDomSfStatus { get; set; }
-
         public virtual DbSet<TbDomShareStatus> TbDomShareStatus { get; set; }
-
         public virtual DbSet<TbDomShareType> TbDomShareType { get; set; }
-
         public virtual DbSet<TbDomTimeseriesProvider> TbDomTimeseriesProvider { get; set; }
-
         public virtual DbSet<TbDomTimeseriesType> TbDomTimeseriesType { get; set; }
-
         public virtual DbSet<TbDomTypeOfMarket> TbDomTypeOfMarket { get; set; }
-
         public virtual DbSet<TbDomValutationDate> TbDomValutationDate { get; set; }
-
         public virtual DbSet<TbFund> TbFund { get; set; }
-
         public virtual DbSet<TbFundSubFund> TbFundSubFund { get; set; }
-
         public virtual DbSet<TbHistoryFund> TbHistoryFund { get; set; }
-
         public virtual DbSet<TbHistoryShareClass> TbHistoryShareClass { get; set; }
-
         public virtual DbSet<TbHistorySubFund> TbHistorySubFund { get; set; }
-
         public virtual DbSet<TbMapFilefund> TbMapFilefund { get; set; }
-
         public virtual DbSet<TbMapFileshareclass> TbMapFileshareclass { get; set; }
-
         public virtual DbSet<TbMapFilesubfund> TbMapFilesubfund { get; set; }
-
         public virtual DbSet<TbServiceAgreementFund> TbServiceAgreementFund { get; set; }
-
         public virtual DbSet<TbServiceAgreementShareclass> TbServiceAgreementShareclass { get; set; }
-
         public virtual DbSet<TbServiceAgreementSubfund> TbServiceAgreementSubfund { get; set; }
-
         public virtual DbSet<TbShareClass> TbShareClass { get; set; }
-
         public virtual DbSet<TbSubFund> TbSubFund { get; set; }
-
         public virtual DbSet<TbSubFundShareClass> TbSubFundShareClass { get; set; }
-
         public virtual DbSet<TbTimeseriesShareclass> TbTimeseriesShareclass { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -119,6 +74,22 @@
         {
             modelBuilder.HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
 
+            modelBuilder.Entity<TbCompanies>(entity =>
+            {
+                entity.HasKey(e => e.CId)
+                    .HasName("PK_tb_company");
+
+                entity.ToTable("tb_companies");
+
+                entity.Property(e => e.CId)
+                    .HasColumnName("c_id")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.CName)
+                    .IsRequired()
+                    .HasColumnName("c_name");
+            });
+
             modelBuilder.Entity<TbDomActivityType>(entity =>
             {
                 entity.HasKey(e => e.AtId);
@@ -132,6 +103,28 @@
                 entity.Property(e => e.AtDesc)
                     .HasColumnName("at_desc")
                     .HasMaxLength(100);
+
+                entity.Property(e => e.AtEntity).HasColumnName("at_entity");
+
+                entity.HasOne(d => d.AtEntityNavigation)
+                    .WithMany(p => p.TbDomActivityType)
+                    .HasForeignKey(d => d.AtEntity)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tb_dom_activityType_tb_dom_entity");
+            });
+
+            modelBuilder.Entity<TbDomAgreementStatus>(entity =>
+            {
+                entity.HasKey(e => e.ASId);
+
+                entity.ToTable("tb_dom_agreement_status");
+
+                entity.Property(e => e.ASId).HasColumnName("a_s_id");
+
+                entity.Property(e => e.ASDesc)
+                    .IsRequired()
+                    .HasColumnName("a_s_desc")
+                    .HasMaxLength(50);
             });
 
             modelBuilder.Entity<TbDomCalculationDate>(entity =>
@@ -145,7 +138,6 @@
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.CdDesc)
-                    .IsRequired()
                     .HasColumnName("cd_desc")
                     .HasMaxLength(100);
             });
@@ -161,24 +153,7 @@
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.CDesc)
-                    .IsRequired()
                     .HasColumnName("c_desc")
-                    .HasMaxLength(100);
-            });
-
-            modelBuilder.Entity<TbDomCompany>(entity =>
-            {
-                entity.HasKey(e => e.CId)
-                    .HasName("PK_tb_company");
-
-                entity.ToTable("tb_dom_company");
-
-                entity.Property(e => e.CId)
-                    .HasColumnName("c_id")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.CName)
-                    .HasColumnName("c_name")
                     .HasMaxLength(100);
             });
 
@@ -216,7 +191,6 @@
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.GfDesc)
-                    .IsRequired()
                     .HasColumnName("gf_desc")
                     .HasMaxLength(100);
             });
@@ -232,7 +206,6 @@
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.PacDesc)
-                    .IsRequired()
                     .HasColumnName("pac_desc")
                     .HasMaxLength(100);
             });
@@ -248,7 +221,6 @@
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.DmDesc)
-                    .IsRequired()
                     .HasColumnName("dm_desc")
                     .HasMaxLength(100);
             });
@@ -264,7 +236,6 @@
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.DpDesc)
-                    .IsRequired()
                     .HasColumnName("dp_desc")
                     .HasMaxLength(100);
             });
@@ -329,7 +300,6 @@
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.GeDesc)
-                    .IsRequired()
                     .HasColumnName("ge_desc")
                     .HasMaxLength(100);
             });
@@ -345,7 +315,6 @@
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.ItDesc)
-                    .IsRequired()
                     .HasColumnName("it_desc")
                     .HasMaxLength(100);
             });
@@ -462,7 +431,6 @@
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.NfDesc)
-                    .IsRequired()
                     .HasColumnName("nf_desc")
                     .HasMaxLength(100);
             });
@@ -478,7 +446,6 @@
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.PisDesc)
-                    .IsRequired()
                     .HasColumnName("pis_desc")
                     .HasMaxLength(100);
             });
@@ -494,7 +461,6 @@
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.CatBloombergDesc)
-                    .IsRequired()
                     .HasColumnName("cat_bloomberg_Desc")
                     .HasMaxLength(100);
 
@@ -558,7 +524,6 @@
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.ScSDesc)
-                    .IsRequired()
                     .HasColumnName("sc_s_desc")
                     .HasMaxLength(100);
             });
@@ -574,7 +539,6 @@
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.StDesc)
-                    .IsRequired()
                     .HasColumnName("st_desc")
                     .HasMaxLength(100);
             });
@@ -625,7 +589,6 @@
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.TomDesc)
-                    .IsRequired()
                     .HasColumnName("tom_desc")
                     .HasMaxLength(100);
             });
@@ -641,7 +604,6 @@
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.VdDesc)
-                    .IsRequired()
                     .HasColumnName("vd_desc")
                     .HasMaxLength(100);
             });
@@ -1162,6 +1124,12 @@
                     .HasForeignKey(d => d.FiletypeId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tb_map_filefund_tb_dom_file_type");
+
+                entity.HasOne(d => d.Fund)
+                    .WithMany(p => p.TbMapFilefund)
+                    .HasForeignKey(d => d.FundId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tb_map_filefund_tb_Fund");
             });
 
             modelBuilder.Entity<TbMapFileshareclass>(entity =>
@@ -1183,6 +1151,12 @@
                 entity.Property(e => e.FiletypeId).HasColumnName("filetype_id");
 
                 entity.Property(e => e.ShareclassId).HasColumnName("shareclass_id");
+
+                entity.HasOne(d => d.Filetype)
+                    .WithMany(p => p.TbMapFileshareclass)
+                    .HasForeignKey(d => d.FiletypeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tb_map_fileshareclass_tb_dom_file_type");
 
                 entity.HasOne(d => d.Shareclass)
                     .WithMany(p => p.TbMapFileshareclass)
@@ -1210,6 +1184,12 @@
                 entity.Property(e => e.FiletypeId).HasColumnName("filetype_id");
 
                 entity.Property(e => e.SubfundId).HasColumnName("subfund_id");
+
+                entity.HasOne(d => d.Filetype)
+                    .WithMany(p => p.TbMapFilesubfund)
+                    .HasForeignKey(d => d.FiletypeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tb_map_filesubfund_tb_dom_file_type");
 
                 entity.HasOne(d => d.Subfund)
                     .WithMany(p => p.TbMapFilesubfund)
@@ -1245,12 +1225,11 @@
                 entity.Property(e => e.SaF).HasColumnName("sa_f");
 
                 entity.Property(e => e.SaRifCode)
+                    .IsRequired()
                     .HasColumnName("sa_rifCode")
                     .HasMaxLength(100);
 
-                entity.Property(e => e.SaStatus)
-                    .HasColumnName("sa_status")
-                    .HasMaxLength(100);
+                entity.Property(e => e.SaStatus).HasColumnName("sa_status");
 
                 entity.HasOne(d => d.SaActivityTypeNavigation)
                     .WithMany(p => p.TbServiceAgreementFund)
@@ -1261,6 +1240,7 @@
                 entity.HasOne(d => d.SaCompany)
                     .WithMany(p => p.TbServiceAgreementFund)
                     .HasForeignKey(d => d.SaCompanyId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tb_serviceAgreement_fund_tb_dom_company");
 
                 entity.HasOne(d => d.SaFNavigation)
@@ -1268,6 +1248,12 @@
                     .HasForeignKey(d => d.SaF)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tb_serviceAgreement_fund_tb_fund");
+
+                entity.HasOne(d => d.SaStatusNavigation)
+                    .WithMany(p => p.TbServiceAgreementFund)
+                    .HasForeignKey(d => d.SaStatus)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_tb_serviceAgreement_fund_tb_dom_agreement_status");
             });
 
             modelBuilder.Entity<TbServiceAgreementShareclass>(entity =>

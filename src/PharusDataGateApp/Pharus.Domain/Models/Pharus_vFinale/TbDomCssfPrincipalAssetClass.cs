@@ -1,7 +1,8 @@
-﻿namespace Pharus.Domain.Models.Pharus_vFinale
-{
-    using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
+namespace Pharus.Models.Pharus_vFinale
+{
     public partial class TbDomCssfPrincipalAssetClass
     {
         public TbDomCssfPrincipalAssetClass()
@@ -10,7 +11,6 @@
         }
 
         public int PacId { get; set; }
-
         public string PacDesc { get; set; }
 
         public virtual ICollection<TbHistorySubFund> TbHistorySubFund { get; set; }

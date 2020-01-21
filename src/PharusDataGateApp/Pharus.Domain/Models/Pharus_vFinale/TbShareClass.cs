@@ -1,7 +1,8 @@
-﻿namespace Pharus.Domain.Models.Pharus_vFinale
-{
-    using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
+namespace Pharus.Models.Pharus_vFinale
+{
     public partial class TbShareClass
     {
         public TbShareClass()
@@ -16,13 +17,9 @@
         public int IdSc { get; set; }
 
         public virtual ICollection<TbHistoryShareClass> TbHistoryShareClass { get; set; }
-
         public virtual ICollection<TbMapFileshareclass> TbMapFileshareclass { get; set; }
-
         public virtual ICollection<TbServiceAgreementShareclass> TbServiceAgreementShareclass { get; set; }
-
         public virtual ICollection<TbSubFundShareClass> TbSubFundShareClass { get; set; }
-
         public virtual ICollection<TbTimeseriesShareclass> TbTimeseriesShareclass { get; set; }
     }
 }
