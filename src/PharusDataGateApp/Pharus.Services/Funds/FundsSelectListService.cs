@@ -62,14 +62,24 @@
             return legalVehicles;
         }
 
-        public List<string> GetAllFundFileTypes()
+        public List<string> GetAllProspectusFileTypes()
         {
-            var fileTypes = this.context.TbDomFileType
+            var prosFileTypes = this.context.TbDomFileType
                 .Where(ft => ft.FiletypeEntity == fundFileType)
-                .Select(ft => ft.FiletypeDesc)                
+                .Select(ft => ft.FiletypeDesc)
                 .ToList();
 
-            return fileTypes;
+            return prosFileTypes;
+        }
+
+        public List<string> GetAllAgreementsFileTypes()
+        {
+            var agrFileTypes = this.context.TbDomActivityType
+                .Where(at => at.AtEntity == fundFileType)
+                .Select(at => at.AtDesc)
+                .ToList();
+
+            return agrFileTypes;
         }
     }
 }

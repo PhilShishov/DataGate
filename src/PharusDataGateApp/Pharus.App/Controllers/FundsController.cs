@@ -663,7 +663,8 @@
 
             model.StartConnection = model.Entity[1][0];
             model.EndConnection = model.Entity[1][1];
-            this.ViewData["FileTypes"] = this.fundsSelectListService.GetAllFundFileTypes();
+            this.ViewData["ProspectusFileTypes"] = this.fundsSelectListService.GetAllProspectusFileTypes();
+            this.ViewData["AgreementsFileTypes"] = this.fundsSelectListService.GetAllAgreementsFileTypes();
         }
 
         private static void SetModelValuesForEditView(EditFundBindingModel model)

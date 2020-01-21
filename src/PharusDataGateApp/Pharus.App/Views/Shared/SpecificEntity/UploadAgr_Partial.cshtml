@@ -10,7 +10,7 @@
 <input asp-for="ChosenDate" type="date" hidden>
 
 <div class="modal"
-     id="upProspModal"
+     id="upAgrModal"
      role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -18,7 +18,7 @@
                 <div class="form-group">
                     <select class="form-control maxw-270" asp-for="UploadEntityFileModel.FileType" required>
                         <option selected disabled>-- Choose File Type --</option>
-                        @foreach (var type in (List<string>)ViewData["FileTypes"])
+                        @foreach (var type in (List<string>)ViewData["AgreementsFileTypes"])
                         {
                             <option value="@type">@type</option>
                         }

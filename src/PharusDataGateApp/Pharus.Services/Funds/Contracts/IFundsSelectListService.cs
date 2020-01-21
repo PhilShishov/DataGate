@@ -14,6 +14,8 @@
 
         List<string> GetAllTbDomLegalVehicle();
 
-        List<string> GetAllFundFileTypes();
+        List<string> GetAllProspectusFileTypes();
+
+        List<string> GetAllAgreementsFileTypes();
     }
 }

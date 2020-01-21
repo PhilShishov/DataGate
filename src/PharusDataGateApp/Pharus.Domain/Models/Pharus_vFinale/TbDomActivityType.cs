@@ -15,6 +15,8 @@
 
         public string AtDesc { get; set; }
 
+        public int AtEntity { get; set; }
+
         public virtual ICollection<TbServiceAgreementFund> TbServiceAgreementFund { get; set; }
 
         public virtual ICollection<TbServiceAgreementShareclass> TbServiceAgreementShareclass { get; set; }
