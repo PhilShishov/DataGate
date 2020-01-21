@@ -49,7 +49,9 @@ namespace Pharus.App.Models.ViewModels.Entities
 
         public List<string[]> DocumentsNamesToDisplay { get; set; }
 
-        public List<string[]> AgreementsNamesToDisplay { get; set; }
+        public List<string[]> DistinctAgreementsNamesToDisplay { get; set; }
+
+        public List<string[]> AllAgreementsNamesToDisplay { get; set; }
 
         public UploadEntityFileModel UploadEntityFileModel { get; set; }
 

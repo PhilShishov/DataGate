@@ -3,15 +3,15 @@
 }
 
 <div id="allAgreements" class="mt-3 d-none">
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-hover w-50">
         <thead>
             @for (int row = 0; row < 1; row++)
             {
                 <tr>
-                    @for (int col = 0; col < Model.EntityDocuments[row].Length; col++)
+                    @for (int col = 0; col < Model.AllAgreementsNamesToDisplay[row].Length; col++)
                     {
                         <th class="text-secondary p-1">
-                            @Model.EntityDocuments[row][col]
+                            @Model.AllAgreementsNamesToDisplay[row][col]
                         </th>
                     }
                 </tr>
@@ -19,25 +19,25 @@
         </thead>
 
         <tbody>
-            @for (int row = 1; row < Model.EntityDocuments.Count; row++)
+            @for (int row = 1; row < Model.AllAgreementsNamesToDisplay.Count; row++)
             {
                 <tr>
-                    @for (int col = 0; col < Model.EntityDocuments[row].Length; col++)
+                    @for (int col = 0; col < Model.AllAgreementsNamesToDisplay[row].Length; col++)
                     {
                         <td class="p-1">
-                            @if (Model.EntityDocuments[0][col] == "File Name")
+                            @if (Model.AllAgreementsNamesToDisplay[0][col] == "File Name")
                             {
                                 <button class="btn-link-pharus"
                                         formtarget="_blank"
                                         type="submit"
                                         formaction="/@controllerName/ReadPdfFile"
                                         name="read_Pdf">
-                                    @Model.EntityDocuments[row][col].Split(".")[0]
+                                    @Model.AllAgreementsNamesToDisplay[row][col].Split(".")[0]
                                 </button>
                             }
                             else
                             {
-                                @Model.EntityDocuments[row][col]
+                                @Model.AllAgreementsNamesToDisplay[row][col]
                             }
                         </td>
                     }
