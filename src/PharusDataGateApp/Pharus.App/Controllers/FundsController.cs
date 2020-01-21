@@ -327,7 +327,7 @@
                     .Select(s => s.FiletypeId)
                     .FirstOrDefault();
 
-            this.entitiesFileService.AddFileToSpecificEntity(
+            this.entitiesFileService.AddDocumentToSpecificEntity(
                                                 file.FileName,
                                                 model.EntityId,
                                                 startConnection,
@@ -373,7 +373,7 @@
                     .Select(s => s.FiletypeId)
                     .FirstOrDefault();
 
-            this.entitiesFileService.AddFileToSpecificEntity(
+            this.entitiesFileService.AddDocumentToSpecificEntity(
                                                 file.FileName,
                                                 model.EntityId,
                                                 startConnection,
@@ -656,8 +656,9 @@
             model.ProspectusNameToDisplay = GetFileNameFromFilePath
                 (entityId, model.ChosenDate, model.ControllerName)
                 .Split(".")[0];
+            model.AgreementsNamesToDisplay = this.fundsService.GetAllFundAgreements(date, entityId);
             model.EntityTimeline = this.fundsService.GetFundTimeline(entityId);
-            model.EntityDocuments = this.fundsService.GetAllFundDocumens(entityId);
+            model.EntityDocuments = this.fundsService.GetAllFundDocuments(entityId);
 
             model.StartConnection = model.Entity[1][0];
             model.EndConnection = model.Entity[1][1];

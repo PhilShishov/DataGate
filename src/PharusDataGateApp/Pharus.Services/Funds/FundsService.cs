@@ -251,7 +251,7 @@ namespace Pharus.Services.Funds
             }
         }
 
-        public List<string[]> GetAllFundDocumens(int id)
+        public List<string[]> GetAllFundDocuments(int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -265,7 +265,7 @@ namespace Pharus.Services.Funds
             }
         }
 
-        public List<string[]> GetAllAgreementDocumentsForAllFunds(DateTime? chosenDate)
+        public List<string[]> GetAllFundAgreements(DateTime? chosenDate, int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -273,7 +273,7 @@ namespace Pharus.Services.Funds
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from [dbo].[fn_viewdocuments_fund](1)";
+                command.CommandText = $"select * from [dbo].[fn_viewagreements_fund]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
