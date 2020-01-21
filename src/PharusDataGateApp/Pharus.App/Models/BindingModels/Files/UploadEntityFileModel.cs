@@ -1,5 +1,5 @@
 ﻿// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-// Binding model for fund file upload
+// Binding model for document file upload
 
 // Created: 12/2019
 // Author:  Philip Shishov

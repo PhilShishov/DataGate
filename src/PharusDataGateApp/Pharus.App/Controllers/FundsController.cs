@@ -321,10 +321,10 @@
                 endConnection = DateTime.ParseExact(model.EndConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             }
 
-            var fileTypeDesc = model.UploadEntityFileModel.FileType;
-            int fileTypeId = this.context.TbDomFileType
-                    .Where(s => s.FiletypeDesc == fileTypeDesc)
-                    .Select(s => s.FiletypeId)
+            var prosFileTypeDesc = model.UploadEntityFileModel.FileType;
+            int prosFileTypeId = this.context.TbDomFileType
+                    .Where(ft => ft.FiletypeDesc == prosFileTypeDesc)
+                    .Select(ft => ft.FiletypeId)
                     .FirstOrDefault();
 
             this.entitiesFileService.AddDocumentToSpecificEntity(
@@ -332,7 +332,7 @@
                                                 model.EntityId,
                                                 startConnection,
                                                 endConnection,
-                                                fileTypeId,
+                                                prosFileTypeId,
                                                 model.ControllerName);
 
             return this.RedirectToAction("All");
@@ -350,7 +350,7 @@
                 return this.Content("File not loaded");
             }
 
-            string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\FundFile\";
+            string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\AgreementFile\";
             string path = $"{networkFileLocation}{file.FileName}";
 
             using (var stream = new FileStream(path, FileMode.Create))
@@ -358,27 +358,31 @@
                 file.CopyTo(stream);
             }
 
-            var startConnection = DateTime.ParseExact(model.StartConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            var contractDate = DateTime.ParseExact(model.StartConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            var activationDate = DateTime.ParseExact(model.StartConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
-            DateTime? endConnection = null;
+            DateTime? expirationDate = null;
 
             if (!string.IsNullOrEmpty(model.EndConnection))
             {
-                endConnection = DateTime.ParseExact(model.EndConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                expirationDate = DateTime.ParseExact(model.EndConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             }
 
-            var fileTypeDesc = model.UploadEntityFileModel.FileType;
-            int fileTypeId = this.context.TbDomFileType
-                    .Where(s => s.FiletypeDesc == fileTypeDesc)
-                    .Select(s => s.FiletypeId)
+            var agrFileTypeDesc = model.UploadEntityFileModel.FileType;
+            int agrFileTypeId = this.context.TbDomActivityType
+                    .Where(at => at.AtDesc == agrFileTypeDesc)
+                    .Select(at => at.AtId)
                     .FirstOrDefault();
 
-            this.entitiesFileService.AddDocumentToSpecificEntity(
-                                                file.FileName,
+            this.entitiesFileService.AddAgreementToSpecificEntity(
                                                 model.EntityId,
-                                                startConnection,
-                                                endConnection,
-                                                fileTypeId,
+                                                agrFileTypeId,
+                                                contractDate,
+                                                activationDate,
+                                                expirationDate,
+                                                file.FileName,
+                                                companyId,
+                                                statusId,
                                                 model.ControllerName);
 
             return this.RedirectToAction("All");
