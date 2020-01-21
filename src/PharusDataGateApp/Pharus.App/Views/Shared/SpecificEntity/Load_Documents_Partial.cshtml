@@ -1,41 +1,42 @@
 ﻿@{
     var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
 }
+
 <div class="w-50">
     <div class="my-5">
         @if (controllerName == "Funds")
         {
-            <u class="text-torshia">LIST OF PROSPECTUS</u><br>
+            <u class="text-torshia">PROSPECTUS</u><br>
         }
         else
         {
-            <u class="text-torshia">LIST OF DOCUMENTS</u><br>
+            <u class="text-torshia">DOCUMENTS</u><br>
         }
 
-        @if (!string.IsNullOrEmpty(Model.FileNameToDisplay))
+        @if (!string.IsNullOrEmpty(Model.ProspectusNameToDisplay))
         {
             <button class="btn-link-pharus mt-3"
                     formtarget="_blank"
                     type="submit"
                     formaction="/@controllerName/ReadPdfFile"
                     name="read_Pdf">
-                @Model.FileNameToDisplay
+                @Model.ProspectusNameToDisplay
             </button>
         }
     </div>
 
-    @*<div class="mb-5">
-            <u class="text-torshia">LIST OF AGREEMENTS</u><br>
+    <div class="mb-5">
+            <u class="text-torshia">AGREEMENTS</u><br>
 
-            @if (!string.IsNullOrEmpty(Model.FileNameToDisplay))
+            @if (!string.IsNullOrEmpty(Model.ProspectusNameToDisplay))
             {
                 <button class="btn-link-pharus mt-3"
                         formtarget="_blank"
                         type="submit"
                         formaction="/@controllerName/ReadPdfFile"
                         name="read_Pdf">
-                    @Model.FileNameToDisplay
+                    @Model.ProspectusNameToDisplay
                 </button>
             }
-        </div>*@
+        </div>
 </div>

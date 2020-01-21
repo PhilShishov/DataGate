@@ -614,7 +614,7 @@
             model.Entity = this.shareClassesService.GetShareClassWithDateById(date, entityId);
             model.EntityTimeline = this.shareClassesService.GetShareClassesTimeline(entityId);
             model.EntityDocuments = this.shareClassesService.GetAllShareClassesDocumens(entityId);
-            model.FileNameToDisplay = GetFileNameFromFilePath
+            model.ProspectusNameToDisplay = GetFileNameFromFilePath
                 (entityId, model.ChosenDate, model.ControllerName)
                 .Split(".")[0];
             model.BaseEntityId = this.shareClassesService.GetShareClass_SubFundContainer(date, entityId)[1][0];
