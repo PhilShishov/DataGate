@@ -16,13 +16,5 @@
                             DateTime? endConnection,
                             int fileTypeId,
                             string controllerName);
-
-        void AddAgreementToSpecificEntity(
-                            string fileName,
-                            int entityId,
-                            DateTime startConnection,
-                            DateTime? endConnection,
-                            int fileTypeId,
-                            string controllerName);
     }
 }

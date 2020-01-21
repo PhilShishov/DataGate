@@ -1,7 +1,7 @@
 ﻿namespace Pharus.Data
 {
     using Microsoft.EntityFrameworkCore;
-    using Pharus.Models.Pharus_vFinale;
+    using Pharus.Domain.Models.Pharus_vFinale;
 
     public partial class Pharus_vFinale_Context : DbContext
     {
@@ -1214,15 +1214,15 @@
 
                 entity.Property(e => e.SaCompanyId).HasColumnName("sa_companyId");
 
-                entity.Property(e => e.SaConctractDate)
-                    .HasColumnName("sa_conctractDate")
+                entity.Property(e => e.SaContractDate)
+                    .HasColumnName("sa_contractDate")
                     .HasColumnType("datetime");
 
                 entity.Property(e => e.SaExpirationDate)
                     .HasColumnName("sa_expirationDate")
                     .HasColumnType("datetime");
 
-                entity.Property(e => e.SaF).HasColumnName("sa_f");
+                entity.Property(e => e.SaFundId).HasColumnName("sa_fundId");
 
                 entity.Property(e => e.SaRifCode)
                     .IsRequired()
@@ -1243,9 +1243,9 @@
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tb_serviceAgreement_fund_tb_dom_company");
 
-                entity.HasOne(d => d.SaFNavigation)
+                entity.HasOne(d => d.SaFund)
                     .WithMany(p => p.TbServiceAgreementFund)
-                    .HasForeignKey(d => d.SaF)
+                    .HasForeignKey(d => d.SaFundId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tb_serviceAgreement_fund_tb_fund");
 
@@ -1272,8 +1272,8 @@
 
                 entity.Property(e => e.SaCompanyId).HasColumnName("sa_companyId");
 
-                entity.Property(e => e.SaConctractDate)
-                    .HasColumnName("sa_conctractDate")
+                entity.Property(e => e.SaContractDate)
+                    .HasColumnName("sa_contractDate")
                     .HasColumnType("datetime");
 
                 entity.Property(e => e.SaExpirationDate)
@@ -1284,7 +1284,7 @@
                     .HasColumnName("sa_rifCode")
                     .HasMaxLength(100);
 
-                entity.Property(e => e.SaSc).HasColumnName("sa_sc");
+                entity.Property(e => e.SaShareclassId).HasColumnName("sa_shareclassId");
 
                 entity.Property(e => e.SaStatus)
                     .HasColumnName("sa_status")
@@ -1301,9 +1301,9 @@
                     .HasForeignKey(d => d.SaCompanyId)
                     .HasConstraintName("FK_tb_serviceAgreement_shareclass_tb_dom_company");
 
-                entity.HasOne(d => d.SaScNavigation)
+                entity.HasOne(d => d.SaShareclass)
                     .WithMany(p => p.TbServiceAgreementShareclass)
-                    .HasForeignKey(d => d.SaSc)
+                    .HasForeignKey(d => d.SaShareclassId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tb_serviceAgreement_shareclass_tb_shareClass");
             });
@@ -1324,8 +1324,8 @@
 
                 entity.Property(e => e.SaCompanyId).HasColumnName("sa_companyId");
 
-                entity.Property(e => e.SaConctractDate)
-                    .HasColumnName("sa_conctractDate")
+                entity.Property(e => e.SaContractDate)
+                    .HasColumnName("sa_contractDate")
                     .HasColumnType("datetime");
 
                 entity.Property(e => e.SaExpirationDate)
@@ -1336,11 +1336,11 @@
                     .HasColumnName("sa_rifCode")
                     .HasMaxLength(100);
 
-                entity.Property(e => e.SaSf).HasColumnName("sa_sf");
-
                 entity.Property(e => e.SaStatus)
                     .HasColumnName("sa_status")
                     .HasMaxLength(100);
+
+                entity.Property(e => e.SaSubfundId).HasColumnName("sa_subfundId");
 
                 entity.HasOne(d => d.SaActivityTypeNavigation)
                     .WithMany(p => p.TbServiceAgreementSubfund)
@@ -1353,9 +1353,9 @@
                     .HasForeignKey(d => d.SaCompanyId)
                     .HasConstraintName("FK_tb_serviceAgreement_subfund_tb_dom_company");
 
-                entity.HasOne(d => d.SaSfNavigation)
+                entity.HasOne(d => d.SaSubfund)
                     .WithMany(p => p.TbServiceAgreementSubfund)
-                    .HasForeignKey(d => d.SaSf)
+                    .HasForeignKey(d => d.SaSubfundId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tb_serviceAgreement_subfund_tb_subFund");
             });
