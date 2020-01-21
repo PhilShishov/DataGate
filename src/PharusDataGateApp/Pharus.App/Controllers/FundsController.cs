@@ -656,7 +656,7 @@
             model.ProspectusNameToDisplay = GetFileNameFromFilePath
                 (entityId, model.ChosenDate, model.ControllerName)
                 .Split(".")[0];
-            model.AgreementsNamesToDisplay = this.fundsService.GetAllFundAgreements(date, entityId);
+            model.AgreementsNamesToDisplay = this.fundsService.GetDistinctFundAgreements(date, entityId);
             model.EntityTimeline = this.fundsService.GetFundTimeline(entityId);
             model.EntityDocuments = this.fundsService.GetAllFundDocuments(entityId);
 
