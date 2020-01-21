@@ -18,7 +18,7 @@
                 <div class="form-group">
                     <select class="form-control maxw-270" asp-for="UploadEntityFileModel.FileType" required>
                         <option selected disabled>-- Choose File Type --</option>
-                        @foreach (var type in (List<string>)ViewData["FileTypes"])
+                        @foreach (var type in (List<string>)ViewData["ProspectusFileTypes"])
                         {
                             <option value="@type">@type</option>
                         }
