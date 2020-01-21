@@ -653,7 +653,7 @@
                                                                 .GetFund_SubFunds(date, entityId)
                                                                 .Take(1)
                                                                 .ToList();
-            model.FileNameToDisplay = GetFileNameFromFilePath
+            model.ProspectusNameToDisplay = GetFileNameFromFilePath
                 (entityId, model.ChosenDate, model.ControllerName)
                 .Split(".")[0];
             model.EntityTimeline = this.fundsService.GetFundTimeline(entityId);

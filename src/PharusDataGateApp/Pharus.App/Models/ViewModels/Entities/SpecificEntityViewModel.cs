@@ -45,7 +45,11 @@ namespace Pharus.App.Models.ViewModels.Entities
 
         public List<string> TSTypeProviders { get; set; }
 
-        public string FileNameToDisplay { get; set; }
+        public string ProspectusNameToDisplay { get; set; }
+
+        public List<string> DocumentsNamesToDisplay { get; set; }
+
+        public List<string> AgreementsNamesToDisplay { get; set; }
 
         public UploadEntityFileModel UploadEntityFileModel { get; set; }
 
