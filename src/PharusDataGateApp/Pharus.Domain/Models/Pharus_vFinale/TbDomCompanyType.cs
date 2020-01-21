@@ -1,7 +1,8 @@
-﻿namespace Pharus.Domain.Models.Pharus_vFinale
-{
-    using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
+namespace Pharus.Models.Pharus_vFinale
+{
     public partial class TbDomCompanyType
     {
         public TbDomCompanyType()
@@ -10,9 +11,7 @@
         }
 
         public int CtId { get; set; }
-
         public string CtDesc { get; set; }
-
         public string CtAcronym { get; set; }
 
         public virtual ICollection<TbHistoryFund> TbHistoryFund { get; set; }

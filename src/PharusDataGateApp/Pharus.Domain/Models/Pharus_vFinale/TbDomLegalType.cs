@@ -1,7 +1,8 @@
-﻿namespace Pharus.Domain.Models.Pharus_vFinale
-{
-    using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
+namespace Pharus.Models.Pharus_vFinale
+{
     public partial class TbDomLegalType
     {
         public TbDomLegalType()
@@ -10,7 +11,6 @@
         }
 
         public int LtId { get; set; }
-
         public string LtAcronym { get; set; }
 
         public virtual ICollection<TbDomLegalVehicle> TbDomLegalVehicle { get; set; }
