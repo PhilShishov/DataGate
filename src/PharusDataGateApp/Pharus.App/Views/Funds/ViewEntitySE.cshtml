@@ -37,10 +37,12 @@
             <option value="SubFunds">Sub Funds</option>
             <option value="TimelineChanges">Timeline Changes</option>
             <option value="AllDocuments">All Documents</option>
+            <option value="AllAgreements">All Agreements</option>
         </select>
     </div>
 
     <partial name="SpecificEntity/AllDocuments_Partial" />
+    <partial name="SpecificEntity/AllAgreements_Partial" />
     <partial name="SpecificEntity/TimeLine_Partial" />
 
     <div id="subEntities" class="mt-4">
@@ -210,21 +212,31 @@
                         $("#subEntities").css('visibility', 'visible');
                         $("#timelineChanges").css('visibility', 'hidden');
                         $("#allDocuments").addClass('d-none');
+                        $("#allAgreements").addClass('d-none');
                     }
                     else if (dropdownvalue == 'TimelineChanges') {
                         $("#timelineChanges").css('visibility', 'visible');
                         $("#subEntities").css('visibility', 'hidden');
                         $("#allDocuments").addClass('d-none');
+                        $("#allAgreements").addClass('d-none');
                     }
                     else if (dropdownvalue == 'AllDocuments') {
                         $("#allDocuments").removeClass('d-none');
                         $("#timelineChanges").css('visibility', 'hidden');
                         $("#subEntities").css('visibility', 'hidden');
+                        $("#allAgreements").addClass('d-none');
+                    }
+                    else if (dropdownvalue == 'AllAgreements') {
+                        $("#allAgreements").removeClass('d-none');
+                        $("#timelineChanges").css('visibility', 'hidden');
+                        $("#subEntities").css('visibility', 'hidden');
+                        $("#allDocuments").addClass('d-none');
                     }
                     else {
                         $("#subEntities").css('visibility', 'hidden');
                         $("#timelineChanges").css('visibility', 'hidden');
                         $("#allDocuments").addClass('d-none');
+                        $("#allAgreements").addClass('d-none');
                     }
                 }
             });
@@ -243,21 +255,31 @@
                     $("#subEntities").css('visibility', 'visible');
                     $("#timelineChanges").css('visibility', 'hidden');
                     $("#allDocuments").addClass('d-none');
+                    $("#allAgreements").addClass('d-none');
                 }
                 else if (dropdownvalue == 'TimelineChanges') {
                     $("#timelineChanges").css('visibility', 'visible');
                     $("#subEntities").css('visibility', 'hidden');
                     $("#allDocuments").addClass('d-none');
+                    $("#allAgreements").addClass('d-none');
                 }
                 else if (dropdownvalue == 'AllDocuments') {
                     $("#allDocuments").removeClass('d-none');
                     $("#timelineChanges").css('visibility', 'hidden');
                     $("#subEntities").css('visibility', 'hidden');
+                    $("#allAgreements").addClass('d-none');
+                }
+                else if (dropdownvalue == 'AllAgreements') {
+                    $("#allAgreements").removeClass('d-none');
+                    $("#timelineChanges").css('visibility', 'hidden');
+                    $("#subEntities").css('visibility', 'hidden');
+                    $("#allDocuments").addClass('d-none');
                 }
                 else {
                     $("#subEntities").css('visibility', 'hidden');
                     $("#timelineChanges").css('visibility', 'hidden');
                     $("#allDocuments").addClass('d-none');
+                    $("#allAgreements").addClass('d-none');
                 }
             });
         });

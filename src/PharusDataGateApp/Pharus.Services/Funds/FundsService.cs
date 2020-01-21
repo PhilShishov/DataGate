@@ -265,6 +265,20 @@ namespace Pharus.Services.Funds
             }
         }
 
+        public List<string[]> GetDistinctFundAgreements(DateTime? chosenDate, int id)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                command.CommandText = $"select * from [dbo].[fn_view_distinct_agreements_fund]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
         public List<string[]> GetAllFundAgreements(DateTime? chosenDate, int id)
         {
             using (SqlConnection connection = new SqlConnection())
