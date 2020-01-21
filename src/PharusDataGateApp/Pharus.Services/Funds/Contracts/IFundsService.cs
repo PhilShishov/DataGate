@@ -35,9 +35,9 @@
 
         List<string[]> GetFundTimeline(int id);
 
-        List<string[]> GetAllFundDocumens(int id);
+        List<string[]> GetAllFundDocuments(int id);
 
-        List<string[]> GetAllAgreementDocumentsForAllFunds(DateTime? chosenDate);
+        List<string[]> GetAllFundAgreements(DateTime? chosenDate, int id);
 
         List<string[]> PrepareFund_SubFundsForPDFExtract(DateTime? chosenDate);
 

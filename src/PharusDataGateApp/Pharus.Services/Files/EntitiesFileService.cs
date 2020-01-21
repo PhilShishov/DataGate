@@ -73,7 +73,7 @@
             }
         }
 
-        public void AddFileToSpecificEntity(
+        public void AddDocumentToSpecificEntity(
                                     string fileName,
                                     int entityId,
                                     DateTime startConnection,

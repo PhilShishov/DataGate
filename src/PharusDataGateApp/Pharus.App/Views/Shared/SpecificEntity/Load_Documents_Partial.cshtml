@@ -26,17 +26,51 @@
     </div>
 
     <div class="mb-5">
-            <u class="text-torshia">AGREEMENTS</u><br>
+        <u class="text-torshia">AGREEMENTS</u><br>
 
-            @if (!string.IsNullOrEmpty(Model.ProspectusNameToDisplay))
-            {
-                <button class="btn-link-pharus mt-3"
-                        formtarget="_blank"
-                        type="submit"
-                        formaction="/@controllerName/ReadPdfFile"
-                        name="read_Pdf">
-                    @Model.ProspectusNameToDisplay
-                </button>
-            }
+        <div id="allAgreements" class="mt-3">
+            <table class="table table-hover" style="width:80%">
+                <thead>
+                    @for (int row = 0; row < 1; row++)
+                    {
+                        <tr>
+                            @for (int col = 0; col < Model.AgreementsNamesToDisplay[row].Length; col++)
+                            {
+                                <th class="text-secondary p-1">
+                                    @Model.AgreementsNamesToDisplay[row][col]
+                                </th>
+                            }
+                        </tr>
+                    }
+                </thead>
+
+                <tbody>
+                    @for (int row = 1; row < Model.AgreementsNamesToDisplay.Count; row++)
+                    {
+                        <tr>
+                            @for (int col = 0; col < Model.AgreementsNamesToDisplay[row].Length; col++)
+                            {
+                                <td class="p-1">
+                                    @if (Model.AgreementsNamesToDisplay[0][col] == "File Name")
+                                    {
+                                        <button class="btn-link-pharus"
+                                                formtarget="_blank"
+                                                type="submit"
+                                                formaction="/@controllerName/ReadPdfFile"
+                                                name="read_Pdf">
+                                            @Model.AgreementsNamesToDisplay[row][col].Split(".")[0]
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        @Model.AgreementsNamesToDisplay[row][col]
+                                    }
+                                </td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
+    </div>
 </div>

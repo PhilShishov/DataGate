@@ -34,7 +34,7 @@
 
             var chosenDate = DateTime.Parse(model.ChosenDate);
 
-            model.EntityDocuments = this.fundsService.GetAllAgreementDocumentsForAllFunds(chosenDate);
+            //model.EntityDocuments = this.fundsService.GetAllAgreementDocumentsForAllFunds(chosenDate);
 
             return View(model);
         }

@@ -9,7 +9,7 @@
                             string chosenDate,
                             string controllerName);
 
-        void AddFileToSpecificEntity(
+        void AddDocumentToSpecificEntity(
                             string fileName,
                             int entityId,
                             DateTime startConnection,

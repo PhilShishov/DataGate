@@ -325,7 +325,7 @@
                     .Select(s => s.FiletypeId)
                     .FirstOrDefault();
 
-            this.entitiesFileService.AddFileToSpecificEntity(
+            this.entitiesFileService.AddDocumentToSpecificEntity(
                                                 file.FileName,
                                                 model.EntityId,
                                                 startConnection,
@@ -371,7 +371,7 @@
                     .Select(s => s.FiletypeId)
                     .FirstOrDefault();
 
-            this.entitiesFileService.AddFileToSpecificEntity(
+            this.entitiesFileService.AddDocumentToSpecificEntity(
                                                 file.FileName,
                                                 model.EntityId,
                                                 startConnection,
