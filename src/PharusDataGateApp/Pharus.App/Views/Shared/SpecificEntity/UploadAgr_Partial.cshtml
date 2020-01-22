@@ -7,6 +7,8 @@
 <input asp-for="EntityId" type="text" hidden>
 <input asp-for="ChosenDate" type="date" hidden>
 
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
 <div class="modal"
      id="upAgrModal"
      role="dialog">
@@ -14,17 +16,68 @@
         <div class="modal-content">
             <div class="modal-body d-grid justify-content-center">
                 <div class="form-group">
-                    <select class="form-control maxw-270" asp-for="UploadEntityFileModel.FileType" required>
-                        <option selected disabled>-- Choose File Type --</option>
+                    <select class="form-control maxw-270" asp-for="UploadAgreementFileModel.AgrType" required>
+                        <option value="">-- Choose Agreement Type --</option>
                         @foreach (var type in (List<string>)ViewData["AgreementsFileTypes"])
                         {
                             <option value="@type">@type</option>
                         }
                     </select>
-                    <span asp-validation-for="UploadEntityFileModel.FileType" class="text-danger"></span>
+                    <span asp-validation-for="UploadAgreementFileModel.AgrType" class="text-danger"></span>
                 </div>
 
-                <input asp-for="UploadEntityFileModel.FileToUpload" type="file" required>
+                <div class="form-group">
+                    <label asp-for="UploadAgreementFileModel.ContractDate" class="text-torshia"></label><br>
+                    <input asp-for="UploadAgreementFileModel.ContractDate"
+                           type="date"
+                           min="2018-01-01"
+                           class="form-control maxw-270"
+                           required>
+                    <span asp-validation-for="UploadAgreementFileModel.ContractDate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="UploadAgreementFileModel.ActivationDate" class="text-torshia"></label><br>
+                    <input asp-for="UploadAgreementFileModel.ActivationDate"
+                           type="date"
+                           min="2018-01-01"
+                           class="form-control maxw-270"
+                           required>
+                    <span asp-validation-for="UploadAgreementFileModel.ActivationDate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="UploadAgreementFileModel.ExpirationDate" class="text-torshia"></label><br>
+                    <input asp-for="UploadAgreementFileModel.ExpirationDate"
+                           type="date"
+                           min="2018-01-01"
+                           class="form-control maxw-270">
+                    <span asp-validation-for="UploadAgreementFileModel.ExpirationDate" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <select class="form-control maxw-270" asp-for="UploadAgreementFileModel.Company" required>
+                        <option selected disabled value="">-- Choose File Type --</option>
+                        @foreach (var type in (List<string>)ViewData["AgreementsFileTypes"])
+                        {
+                            <option value="@type">@type</option>
+                        }
+                    </select>
+                    <span asp-validation-for="UploadAgreementFileModel.Company" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <select class="form-control maxw-270" asp-for="UploadAgreementFileModel.Status" required>
+                        <option selected disabled value="">-- Choose File Type --</option>
+                        @foreach (var type in (List<string>)ViewData["AgreementsFileTypes"])
+                        {
+                            <option value="@type">@type</option>
+                        }
+                    </select>
+                    <span asp-validation-for="UploadAgreementFileModel.Status" class="text-danger"></span>
+                </div>
+
+                <input asp-for="UploadAgreementFileModel.FileToUpload" type="file" required>
 
                 <button type="submit"
                         class="btn bg-pharus text-white">
