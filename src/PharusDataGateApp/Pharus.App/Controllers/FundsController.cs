@@ -431,7 +431,7 @@
         }
 
         [HttpPost]
-        public void DeleteFile(int agrId)
+        public void DeleteFile(string fileName)
         {
             //FileStream fs = null;
 
