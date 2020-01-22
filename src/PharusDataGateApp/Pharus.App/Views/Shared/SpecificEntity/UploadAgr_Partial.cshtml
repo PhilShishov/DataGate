@@ -56,25 +56,25 @@
                 </div>
 
                 <div class="form-group">
-                    <select class="form-control maxw-270" asp-for="UploadAgreementFileModel.Company" required>
-                        <option selected disabled value="">-- Choose Company --</option>
-                        @foreach (var company in (List<string>)ViewData["AgreementsFileTypes"])
-                        {
-                            <option value="@company">@company</option>
-                        }
-                    </select>
-                    <span asp-validation-for="UploadAgreementFileModel.Company" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
                     <select class="form-control maxw-270" asp-for="UploadAgreementFileModel.Status" required>
                         <option selected disabled value="">-- Choose Status --</option>
-                        @foreach (var status in (List<string>)ViewData["AgreementsFileTypes"])
+                        @foreach (var status in (List<string>)ViewData["AgreementsStatus"])
                         {
                             <option value="@status">@status</option>
                         }
                     </select>
                     <span asp-validation-for="UploadAgreementFileModel.Status" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <select class="form-control maxw-270" asp-for="UploadAgreementFileModel.Company" required>
+                        <option selected disabled value="">-- Choose Company --</option>
+                        @foreach (var company in (List<string>)ViewData["Companies"])
+                        {
+                            <option value="@company">@company</option>
+                        }
+                    </select>
+                    <span asp-validation-for="UploadAgreementFileModel.Company" class="text-danger"></span>
                 </div>
 
                 <input asp-for="UploadAgreementFileModel.FileToUpload" type="file" required>
