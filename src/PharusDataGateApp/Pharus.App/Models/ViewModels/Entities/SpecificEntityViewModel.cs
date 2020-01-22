@@ -1,4 +1,5 @@
-﻿// Model class for viewing
+﻿// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+// Model class for viewing
 // a specific entity -
 // fund, subfund, shareclass
 // and their subentities -

@@ -1,4 +1,5 @@
-﻿// Abstract model class for bind entity
+﻿// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+// Abstract model class for bind entity
 // for code reuse
 
 // Created: 10/2019
@@ -13,7 +14,7 @@ namespace Pharus.App.Models.BindingModels
 
     public abstract class BaseEntityBindingModel
     {
-        [Required(ErrorMessage = "Initial Date cannot be null")]
+        [Required(ErrorMessage = "Initial Date cannot be empty")]
         [Display(Name = "Initial Date")]
         public DateTime InitialDate { get; set; }
 

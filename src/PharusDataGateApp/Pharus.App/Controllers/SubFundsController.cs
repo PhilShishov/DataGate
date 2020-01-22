@@ -319,7 +319,7 @@
                 endConnection = DateTime.ParseExact(model.EndConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
             }
 
-            var fileTypeDesc = model.UploadEntityFileModel.FileType;
+            var fileTypeDesc = model.UploadEntityFileModel.DocumentType;
             int fileTypeId = this.context.TbDomFileType
                     .Where(s => s.FiletypeDesc == fileTypeDesc)
                     .Select(s => s.FiletypeId)
