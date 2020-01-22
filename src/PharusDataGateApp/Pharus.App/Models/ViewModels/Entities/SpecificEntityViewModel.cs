@@ -54,6 +54,8 @@ namespace Pharus.App.Models.ViewModels.Entities
 
         public List<string[]> AllAgreementsNamesToDisplay { get; set; }
 
+        public int AgreementId { get; set; }
+
         public UploadEntityFileModel UploadEntityFileModel { get; set; }
 
         public UploadAgreementFileModel UploadAgreementFileModel { get; set; }

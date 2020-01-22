@@ -1,5 +1,6 @@
 ﻿@{
     var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+    Model.AgreementId = 0;
 }
 
 <div class="w-50">
@@ -29,45 +30,52 @@
         <u class="text-torshia">AGREEMENTS</u><br>
 
         <div class="mt-3">
-            <table class="table table-hover w-75">
+            <table class="table table-hover w-100">
                 <thead>
-                    @for (int row = 0; row < 1; row++)
-                    {
-                        <tr>
-                            @for (int col = 0; col < Model.DistinctAgreementsNamesToDisplay[row].Length; col++)
-                            {
-                                <th class="text-secondary p-1">
-                                    @Model.DistinctAgreementsNamesToDisplay[row][col]
-                                </th>
-                            }
-                        </tr>
-                    }
+                    <tr>
+                        <th class="text-secondary p-1">File Name</th>
+                        <th class="text-secondary p-1">File Description</th>
+                        <th class="text-secondary p-1">Actions</th>
+                    </tr>
                 </thead>
 
                 <tbody>
                     @for (int row = 1; row < Model.DistinctAgreementsNamesToDisplay.Count; row++)
                     {
+                        int i = 0;
                         <tr>
+
                             @for (int col = 0; col < Model.DistinctAgreementsNamesToDisplay[row].Length; col++)
                             {
-                                <td class="p-1">
-                                    @if (Model.DistinctAgreementsNamesToDisplay[0][col] == "File Name")
-                                    {
-                                        <button class="btn-link-pharus"
+                                @if (Model.DistinctAgreementsNamesToDisplay[0][col] == "File Name")
+                                {
+                                    <td>
+                                        <button class="btn-link-pharus text-left"
                                                 formtarget="_blank"
                                                 type="submit"
                                                 formaction="/@controllerName/ReadPdfFile"
                                                 name="read_Pdf">
                                             @Model.DistinctAgreementsNamesToDisplay[row][col].Split(".")[0]
                                         </button>
-                                    }
-                                    else
-                                    {
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
                                         @Model.DistinctAgreementsNamesToDisplay[row][col]
-                                    }
-                                </td>
+                                    </td>
+                                    <td>
+                                        <button type="submit"
+                                                class="btn btn-primary btn-sm mr-1"
+                                                id="confirmDelBtn"
+                                                formaction="@Url.Action("DeleteFile", controllerName, new { @agrId = row})">
+                                            Delete
+                                        </button>
+                                    </td>
+                                }
                             }
                         </tr>
+                        i++;
                     }
                 </tbody>
             </table>
