@@ -137,21 +137,23 @@
         }
 
         public void AddAgreementToSpecificEntity(
+                                    string fileName,
                                     int entityId,
-                                    int agrFileTypeId,
+                                    int activityTypeId,
                                     DateTime contractDate,
                                     DateTime activationDate,
                                     DateTime? expirationDate,
                                     int statusId,
                                     int companyId,
-                                    string fileName,
                                     string controllerName)
         {
             string query = string.Empty;
 
             if (controllerName == "Funds")
             {
-
+                query = "EXEC sp_insert_agreement_fund " +
+                  "@file_name, @entity_id, @activity_type_id, @contract_date, " +
+                  "@activation_date, @expiration_date, @company_id, @status";
             }
             else if (controllerName == "SubFunds")
             {
@@ -170,10 +172,13 @@
                     command.Parameters.AddRange(new[]
                     {
                         new SqlParameter("@file_name", SqlDbType.NVarChar, 100) { Value = fileName },
-                        //new SqlParameter("@entity_id", SqlDbType.Int) { Value = entityId },
-                        //new SqlParameter("@start_connection", SqlDbType.NVarChar, 100) { Value = startConnection.ToString("yyyyMMdd") },
-                        //new SqlParameter("@end_connection", SqlDbType.NVarChar, 100) { Value = endConnection?.ToString("yyyyMMdd") },
-                        //new SqlParameter("@filetype_id", SqlDbType.Int) { Value = fileTypeId },
+                        new SqlParameter("@entity_id", SqlDbType.Int) { Value = entityId },
+                        new SqlParameter("@activity_type_id", SqlDbType.Int) { Value =  activityTypeId},
+                        new SqlParameter("@contract_date", SqlDbType.NVarChar, 100) { Value = contractDate.ToString("yyyyMMdd") },
+                        new SqlParameter("@activation_date", SqlDbType.NVarChar, 100) { Value = activationDate.ToString("yyyyMMdd") },
+                        new SqlParameter("@expiration_date", SqlDbType.NVarChar, 100) { Value = expirationDate?.ToString("yyyyMMdd") },
+                        new SqlParameter("@company_id", SqlDbType.Int) { Value = companyId },
+                        new SqlParameter("@status", SqlDbType.Int) { Value = statusId },
                     });
 
                     foreach (SqlParameter parameter in command.Parameters)

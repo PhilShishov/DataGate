@@ -378,9 +378,9 @@
                 file.CopyTo(stream);
             }
 
-            var agrFileTypeDesc = model.UploadAgreementFileModel.AgrType;
-            int agrFileTypeId = this.context.TbDomActivityType
-                    .Where(at => at.AtDesc == agrFileTypeDesc)
+            var activityTypeIdDesc = model.UploadAgreementFileModel.AgrType;
+            int activityTypeId = this.context.TbDomActivityType
+                    .Where(at => at.AtDesc == activityTypeIdDesc)
                     .Select(at => at.AtId)
                     .FirstOrDefault();
 
@@ -400,14 +400,14 @@
                 .FirstOrDefault();
 
             this.entitiesFileService.AddAgreementToSpecificEntity(
+                                                file.FileName,
                                                 model.EntityId,
-                                                agrFileTypeId,
+                                                activityTypeId,
                                                 contractDate,
                                                 activationDate,
                                                 expirationDate,
                                                 statusId,
                                                 companyId,
-                                                file.FileName,
                                                 model.ControllerName);
 
             return this.RedirectToAction("All");
