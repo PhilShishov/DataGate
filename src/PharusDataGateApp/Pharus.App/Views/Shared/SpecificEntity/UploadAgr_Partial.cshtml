@@ -57,10 +57,10 @@
 
                 <div class="form-group">
                     <select class="form-control maxw-270" asp-for="UploadAgreementFileModel.Company" required>
-                        <option selected disabled value="">-- Choose File Type --</option>
-                        @foreach (var type in (List<string>)ViewData["AgreementsFileTypes"])
+                        <option selected disabled value="">-- Choose Company --</option>
+                        @foreach (var company in (List<string>)ViewData["AgreementsFileTypes"])
                         {
-                            <option value="@type">@type</option>
+                            <option value="@company">@company</option>
                         }
                     </select>
                     <span asp-validation-for="UploadAgreementFileModel.Company" class="text-danger"></span>
@@ -68,10 +68,10 @@
 
                 <div class="form-group">
                     <select class="form-control maxw-270" asp-for="UploadAgreementFileModel.Status" required>
-                        <option selected disabled value="">-- Choose File Type --</option>
-                        @foreach (var type in (List<string>)ViewData["AgreementsFileTypes"])
+                        <option selected disabled value="">-- Choose Status --</option>
+                        @foreach (var status in (List<string>)ViewData["AgreementsFileTypes"])
                         {
-                            <option value="@type">@type</option>
+                            <option value="@status">@status</option>
                         }
                     </select>
                     <span asp-validation-for="UploadAgreementFileModel.Status" class="text-danger"></span>

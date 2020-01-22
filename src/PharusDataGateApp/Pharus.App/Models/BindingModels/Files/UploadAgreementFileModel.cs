@@ -27,11 +27,9 @@ namespace Pharus.App.Models.BindingModels.Files
         public DateTime? ExpirationDate { get; set; }
 
         [Required]
-        [Display(Name = "Company")]
         public string Company { get; set; }
 
         [Required]
-        [Display(Name = "Status")]
         public string Status { get; set; }
     }
 }

@@ -18,6 +18,7 @@
     using Pharus.Services.Funds.Contracts;
     using Pharus.App.Models.BindingModels.Funds;
     using Pharus.App.Models.ViewModels.Entities;
+    using Pharus.Services.Agreements.Contracts;
 
     [Authorize]
     public class FundsController : Controller
@@ -25,12 +26,14 @@
         private readonly Pharus_vFinale_Context context;
         private readonly IFundsService fundsService;
         private readonly IFundsSelectListService fundsSelectListService;
+        private readonly IAgreementsSelectListService agreementsSelectListService;
         private readonly IEntitiesFileService entitiesFileService;
         private readonly IHostingEnvironment hostingEnvironment;
 
         public FundsController(
             IFundsService fundsService,
-            IFundsSelectListService fundsSelectListService,
+            IFundsSelectListService fundsSelectListService, 
+            IAgreementsSelectListService agreementsSelectListService,
             IEntitiesFileService entitiesFileService,
             IHostingEnvironment hostingEnvironment,
             Pharus_vFinale_Context context)
@@ -38,6 +41,7 @@
             this.context = context;
             this.fundsService = fundsService;
             this.fundsSelectListService = fundsSelectListService;
+            this.agreementsSelectListService = agreementsSelectListService;
             this.entitiesFileService = entitiesFileService;
             this.hostingEnvironment = hostingEnvironment;
         }
@@ -685,6 +689,8 @@
             model.EndConnection = model.Entity[1][1];
             this.ViewData["ProspectusFileTypes"] = this.fundsSelectListService.GetAllProspectusFileTypes();
             this.ViewData["AgreementsFileTypes"] = this.fundsSelectListService.GetAllAgreementsFileTypes();
+            this.ViewData["AgreementsStatus"] = this.agreementsSelectListService.GetAllTbDomAgreementStatus();
+            this.ViewData["Companies"] = this.agreementsSelectListService.GetAllTbCompanies();
         }
 
         private static void SetModelValuesForEditView(EditFundBindingModel model)
