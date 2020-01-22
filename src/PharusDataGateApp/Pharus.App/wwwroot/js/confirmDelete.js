@@ -1,8 +1,14 @@
 ﻿function confirmDelete() {
-    const confrDelBtn = document.getElementById('confirmDelBtn');
-    confrDelBtn.addEventListener('click', showDeleteDialog);
+    const buttons = document.getElementsByClassName('confirmDelBtn');
 
-    function showDeleteDialog() {
-        confirm('Are you sure you want to delete this?');
-    }  
+    for (var btn of buttons) {
+        btn.addEventListener('click',
+            function (event) {
+                let con = confirm('Are you sure you want to delete this?');
+
+                if (!con) {
+                    event.preventDefault();
+                }
+            });
+    }
 }
