@@ -18,14 +18,14 @@
         <div class="modal-content">
             <div class="modal-body d-grid justify-content-center">
                 <div class="form-group">
-                    <select class="form-control maxw-270" asp-for="UploadEntityFileModel.FileType" required>
+                    <select class="form-control maxw-270" asp-for="UploadEntityFileModel.DocumentType" required>
                         <option selected disabled>-- Choose File Type --</option>
                         @foreach (var type in (List<string>)ViewData["ProspectusFileTypes"])
                         {
                             <option value="@type">@type</option>
                         }
                     </select>
-                    <span asp-validation-for="UploadEntityFileModel.FileType" class="text-danger"></span>
+                    <span asp-validation-for="UploadEntityFileModel.DocumentType" class="text-danger"></span>
                 </div>
 
                 <input asp-for="UploadEntityFileModel.FileToUpload" type="file" required>
