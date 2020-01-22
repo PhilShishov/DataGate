@@ -74,7 +74,7 @@
 
         public List<string> GetAllAgreementsFileTypes()
         {
-            List<string> agrFileTypes = this.context.TbDomActivityType
+            var agrFileTypes = this.context.TbDomActivityType
                 .Where(at => at.AtEntity == fundFileType)
                 .Select(at => at.AtDesc)
                 .ToList();
