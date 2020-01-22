@@ -13,16 +13,14 @@ namespace Pharus.App.Models.BindingModels.Files
     public class UploadAgreementFileModel : BaseUploadFileBindingModel
     {
         [Required]
-        [Display(Name = "Agreement Type")]
         public string AgrType { get; set; }
 
         [Required(ErrorMessage = "Contract Date cannot be empty")]
         [Display(Name = "Contract Date")]
         public DateTime ContractDate { get; set; }
 
-
         [Required(ErrorMessage = "Activation Date cannot be empty")]
-        [Display(Name = "Contract Date")]
+        [Display(Name = "Activation Date")]
         public DateTime ActivationDate { get; set; }
 
         [Display(Name = "Expiration Date")]
