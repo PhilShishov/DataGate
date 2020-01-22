@@ -12,7 +12,6 @@ namespace Pharus.App.Models.BindingModels.Files
     public class UploadEntityFileModel : BaseUploadFileBindingModel
     {
         [Required]
-        [Display(Name = "Document Type")]
         public string DocumentType { get; set; }
     }
 }
