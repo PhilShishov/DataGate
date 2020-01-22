@@ -17,14 +17,14 @@
                             int fileTypeId,
                             string controllerName);
         void AddAgreementToSpecificEntity(
+                            string fileName,
                             int entityId,
-                            int agrFileTypeId,
+                            int activityTypeId,
                             DateTime contractDate,
                             DateTime activationDate,
                             DateTime? expirationDate,
                             int statusId,
                             int companyId,
-                            string fileName,
                             string controllerName);
     }
 }
