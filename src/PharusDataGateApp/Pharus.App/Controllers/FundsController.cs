@@ -350,63 +350,68 @@
             return this.RedirectToAction("All");
         }
 
-        //[HttpPost]
-        //public IActionResult UploadAgreement(SpecificEntityViewModel model)
-        //{
-        //    SetModelValuesForSpecificView(model);
+        [HttpPost]
+        public IActionResult UploadAgreement(SpecificEntityViewModel model)
+        {
+            SetModelValuesForSpecificView(model);
 
-        //    var file = model.UploadAgreementFileModel.FileToUpload;
+            var file = model.UploadAgreementFileModel.FileToUpload;
 
-        //    if (file == null || file.Length == 0)
-        //    {
-        //        return this.Content("File not loaded. Please try again");
-        //    }
+            if (file == null || file.Length == 0)
+            {
+                return this.Content("File not loaded. Please try again");
+            }
 
-        //    FileInfo fileType = new FileInfo(file.FileName);
-        //    var fileExtension = fileType.Extension;
+            FileInfo fileType = new FileInfo(file.FileName);
+            var fileExtension = fileType.Extension;
 
-        //    if (fileExtension != ".pdf")
-        //    {
-        //        return this.Content("Unsupported file format. Please try again");
-        //    }
+            if (fileExtension != ".pdf")
+            {
+                return this.Content("Unsupported file format. Please try again");
+            }
 
-        //    string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\AgreementFile\";
-        //    string path = $"{networkFileLocation}{file.FileName}";
+            string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\AgreementFile\";
+            string path = $"{networkFileLocation}{file.FileName}";
 
-        //    using (var stream = new FileStream(path, FileMode.Create))
-        //    {
-        //        file.CopyTo(stream);
-        //    }
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
 
-        //    var contractDate = DateTime.ParseExact(model.UploadEntityFileModel.StartConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-        //    var activationDate = DateTime.ParseExact(model.UploadEntityFileModel.StartConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            var agrFileTypeDesc = model.UploadAgreementFileModel.AgrType;
+            int agrFileTypeId = this.context.TbDomActivityType
+                    .Where(at => at.AtDesc == agrFileTypeDesc)
+                    .Select(at => at.AtId)
+                    .FirstOrDefault();
 
-        //    DateTime? expirationDate = null;
+            var contractDate = model.UploadAgreementFileModel.ContractDate;
+            var activationDate = model.UploadAgreementFileModel.ActivationDate;
+            var expirationDate = model.UploadAgreementFileModel.ExpirationDate;
 
-        //    if (!string.IsNullOrEmpty(model.UploadEntityFileModel.EndConnection))
-        //    {
-        //        expirationDate = DateTime.ParseExact(model.UploadEntityFileModel.EndConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-        //    }
 
-        //    var agrFileTypeDesc = model.UploadEntityFileModel.FileType;
-        //    int agrFileTypeId = this.context.TbDomActivityType
-        //            .Where(at => at.AtDesc == agrFileTypeDesc)
-        //            .Select(at => at.AtId)
-        //            .FirstOrDefault();
+            int statusId = this.context.TbDomAgreementStatus
+                .Where(s => s.ASDesc == model.UploadAgreementFileModel.Status)
+                .Select(s => s.ASId)
+                .FirstOrDefault();
 
-        //    this.entitiesFileService.AddAgreementToSpecificEntity(
-        //                                        model.EntityId,
-        //                                        agrFileTypeId,
-        //                                        contractDate,
-        //                                        activationDate,
-        //                                        expirationDate,
-        //                                        file.FileName,
-        //                                        companyId,
-        //                                        statusId,
-        //                                        model.ControllerName);
+            int companyId = this.context.TbCompanies
+                .Where(c => c.CName == model.UploadAgreementFileModel.Company)
+                .Select(c => c.CId)
+                .FirstOrDefault();
 
-        //    return this.RedirectToAction("All");
-        //}
+            this.entitiesFileService.AddAgreementToSpecificEntity(
+                                                model.EntityId,
+                                                agrFileTypeId,
+                                                contractDate,
+                                                activationDate,
+                                                expirationDate,
+                                                statusId,
+                                                companyId,
+                                                file.FileName,
+                                                model.ControllerName);
+
+            return this.RedirectToAction("All");
+        }
 
         [HttpPost]
         public FileStream ReadPdfFile(SpecificEntityViewModel model)

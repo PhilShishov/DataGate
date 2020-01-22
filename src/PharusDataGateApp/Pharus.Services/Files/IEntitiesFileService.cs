@@ -16,5 +16,15 @@
                             DateTime? endConnection,
                             int fileTypeId,
                             string controllerName);
+        void AddAgreementToSpecificEntity(
+                            int entityId,
+                            int agrFileTypeId,
+                            DateTime contractDate,
+                            DateTime activationDate,
+                            DateTime? expirationDate,
+                            int statusId,
+                            int companyId,
+                            string fileName,
+                            string controllerName);
     }
 }

@@ -82,6 +82,7 @@
                                     string controllerName)
         {
             string query = string.Empty;
+
             if (controllerName == "Funds")
             {
                 query = "EXEC sp_insert_map_fund " +
@@ -133,6 +134,70 @@
                     }
                 }
             }
+        }
+
+        public void AddAgreementToSpecificEntity(
+                                    int entityId,
+                                    int agrFileTypeId,
+                                    DateTime contractDate,
+                                    DateTime activationDate,
+                                    DateTime? expirationDate,
+                                    int statusId,
+                                    int companyId,
+                                    string fileName,
+                                    string controllerName)
+        {
+            string query = string.Empty;
+
+            if (controllerName == "Funds")
+            {
+
+            }
+            else if (controllerName == "SubFunds")
+            {
+               
+            }
+            else if (controllerName == "ShareClasses")
+            {
+               
+            }
+
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = configuration.GetConnectionString("Pharus_vFinaleConnection");
+                using (SqlCommand command = new SqlCommand(query))
+                {
+                    command.Parameters.AddRange(new[]
+                    {
+                        new SqlParameter("@file_name", SqlDbType.NVarChar, 100) { Value = fileName },
+                        //new SqlParameter("@entity_id", SqlDbType.Int) { Value = entityId },
+                        //new SqlParameter("@start_connection", SqlDbType.NVarChar, 100) { Value = startConnection.ToString("yyyyMMdd") },
+                        //new SqlParameter("@end_connection", SqlDbType.NVarChar, 100) { Value = endConnection?.ToString("yyyyMMdd") },
+                        //new SqlParameter("@filetype_id", SqlDbType.Int) { Value = fileTypeId },
+                    });
+
+                    foreach (SqlParameter parameter in command.Parameters)
+                    {
+                        if (parameter.Value == null)
+                        {
+                            parameter.Value = DBNull.Value;
+                        }
+                    }
+
+                    command.Connection = connection;
+
+                    try
+                    {
+                        command.Connection.Open();
+                        command.ExecuteScalar();
+                    }
+                    catch (SqlException sx)
+                    {
+                        Console.WriteLine(sx.Message);
+                    }
+                }
+            }
+
         }
     }
 }
