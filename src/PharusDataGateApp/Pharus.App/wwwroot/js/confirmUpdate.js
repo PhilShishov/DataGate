@@ -1,8 +1,11 @@
 ﻿function confirmUpdate() {
-    const confrEditBtn = document.getElementById('confirmEditBtn');
-    confrEditBtn.addEventListener('click', showUpdateDialog);
+    const btn = document.getElementById('confirmEditBtn');
+    btn.addEventListener('click',
+        function (event) {
+            let con = confirm('Are you sure you want to update this?');
 
-    function showUpdateDialog() {
-        confirm('Are you sure you want to update this?');
-    }
+            if (!con) {
+                event.preventDefault();
+            }
+        });  
 }
