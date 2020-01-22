@@ -416,7 +416,7 @@
         [HttpPost]
         public FileStream ReadPdfFile(SpecificEntityViewModel model)
         {
-            FileStream fs = null;
+            FileStream fileStreamResult = null;
 
             string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
@@ -424,10 +424,29 @@
 
             if (this.HttpContext.Request.Form.ContainsKey("read_Pdf"))
             {
-                fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+                fileStreamResult = new FileStream(path, FileMode.Open, FileAccess.Read);
             }
 
-            return fs;
+            return fileStreamResult;
+        }
+
+        [HttpPost]
+        public void DeleteFile(int agrId)
+        {
+            //FileStream fs = null;
+
+            //string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+
+            //var path = this.entitiesFileService.LoadEntityFileToDisplay(model.EntityId, model.ChosenDate, controllerName);
+
+            //if (this.HttpContext.Request.Form.ContainsKey("read_Pdf"))
+            //{
+            //    fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+            //}
+
+            //return fs;
+
+
         }
 
         [HttpPost]
