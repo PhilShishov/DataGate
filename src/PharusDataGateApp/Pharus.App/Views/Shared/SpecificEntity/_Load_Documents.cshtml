@@ -63,14 +63,14 @@
                                     <td>
                                         @Model.DistinctAgreementsNamesToDisplay[row][col]
                                     </td>
-                                    @*<td>
+                                    <td>
                                         <button type="submit"
                                                 class="btn btn-primary btn-sm mr-1 confirmDelBtn"
                                                 formaction="@Url.Action("DeleteFile", controllerName, 
                                                            new { @fileName = Model.DistinctAgreementsNamesToDisplay[row][col-1]})">
                                             Delete
                                         </button>
-                                    </td>*@
+                                    </td>
                                 }
                             }
                         </tr>

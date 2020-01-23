@@ -1,0 +1,32 @@
+﻿/*
+*
+* ==========================================
+* MEDIA QUERY
+* ==========================================
+*
+*/
+
+
+@media only screen and (min-width: 768px) {
+    /*#adminMainContainer {
+        display: flex;
+        justify-content: space-between;
+    }*/
+    #toolbar-pharus {
+        display: flex;
+    }
+
+    #adminUserPanel {
+        padding-left: 50px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    /*#adminMainContainer {
+        display: inline;
+    }*/
+
+    #toolbar-pharus {
+        overflow-x:scroll;
+    }
+}
