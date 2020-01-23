@@ -3,25 +3,6 @@
     background-color: deepskyblue;
 }
 
-/*Media queries*/
-
-@media only screen and (min-width: 768px) {
-    #adminMainContainer {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    #adminUserPanel {
-        padding-left: 50px;
-    }
-}
-
-@media only screen and (max-width: 600px) {
-    #adminMainContainer {
-        display: inline;
-    }
-}
-
 .tableRowPharus {
     cursor: pointer;
 }

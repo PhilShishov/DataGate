@@ -1,4 +1,4 @@
-﻿function rowRedirect(controllerName, entityId, chosenDate) {
+﻿function rowRedirect() {
     const tableRow = document.getElementsByClassName('tableRowPharus');
 
     console.log(controllerName);
