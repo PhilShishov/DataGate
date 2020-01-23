@@ -19,6 +19,7 @@
     using Pharus.App.Models.BindingModels.Funds;
     using Pharus.App.Models.ViewModels.Entities;
     using Pharus.Services.Agreements.Contracts;
+    using Pharus.App.Models.BindingModels.Files;
 
     [Authorize]
     public class FundsController : Controller
@@ -32,7 +33,7 @@
 
         public FundsController(
             IFundsService fundsService,
-            IFundsSelectListService fundsSelectListService, 
+            IFundsSelectListService fundsSelectListService,
             IAgreementsSelectListService agreementsSelectListService,
             IEntitiesFileService entitiesFileService,
             IHostingEnvironment hostingEnvironment,
@@ -154,6 +155,7 @@
                 return this.View(model);
             }
 
+            this.ModelState.Clear();
             return this.RedirectToPage("/Funds/All");
         }
 
@@ -293,6 +295,7 @@
                 return this.View(model);
             }
 
+            this.ModelState.Clear();
             return this.View();
         }
 
@@ -347,19 +350,25 @@
                                                 prosFileTypeId,
                                                 model.ControllerName);
 
+            this.ModelState.Clear();
             return this.RedirectToAction("All");
         }
 
         [HttpPost]
-        public IActionResult UploadAgreement(SpecificEntityViewModel model)
+        public IActionResult UploadAgreement(UploadAgreementFileModel model)
         {
-            SetModelValuesForSpecificView(model);
+            //SetModelValuesForSpecificView(model);
 
-            var file = model.UploadAgreementFileModel.FileToUpload;
+            if (!ModelState.IsValid)
+            {
+                return this.PartialView("_UploadAgr", model);
+            }
 
+            var file = model.FileToUpload;
             if (file == null || file.Length == 0)
             {
-                return this.Content("File not loaded. Please try again");
+                ViewBag.Message = "File not loaded. Please try again";
+                return PartialView("_UploadAgr", model);
             }
 
             FileInfo fileType = new FileInfo(file.FileName);
@@ -367,7 +376,8 @@
 
             if (fileExtension != ".pdf")
             {
-                return this.Content("Unsupported file format. Please try again");
+                ViewBag.Message = "Unsupported file format. Please try again";
+                return PartialView("_UploadAgr", model);
             }
 
             string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\AgreementFile\";
@@ -378,38 +388,39 @@
                 file.CopyTo(stream);
             }
 
-            var activityTypeIdDesc = model.UploadAgreementFileModel.AgrType;
+            var activityTypeIdDesc = model.AgrType;
             int activityTypeId = this.context.TbDomActivityType
                     .Where(at => at.AtDesc == activityTypeIdDesc)
                     .Select(at => at.AtId)
                     .FirstOrDefault();
 
-            var contractDate = model.UploadAgreementFileModel.ContractDate;
-            var activationDate = model.UploadAgreementFileModel.ActivationDate;
-            var expirationDate = model.UploadAgreementFileModel.ExpirationDate;
+            var contractDate = model.ContractDate;
+            var activationDate = model.ActivationDate;
+            var expirationDate = model.ExpirationDate;
 
 
             int statusId = this.context.TbDomAgreementStatus
-                .Where(s => s.ASDesc == model.UploadAgreementFileModel.Status)
+                .Where(s => s.ASDesc == model.Status)
                 .Select(s => s.ASId)
                 .FirstOrDefault();
 
             int companyId = this.context.TbCompanies
-                .Where(c => c.CName == model.UploadAgreementFileModel.Company)
+                .Where(c => c.CName == model.Company)
                 .Select(c => c.CId)
                 .FirstOrDefault();
 
-            this.entitiesFileService.AddAgreementToSpecificEntity(
-                                                file.FileName,
-                                                model.EntityId,
-                                                activityTypeId,
-                                                contractDate,
-                                                activationDate,
-                                                expirationDate,
-                                                statusId,
-                                                companyId,
-                                                model.ControllerName);
+            //this.entitiesFileService.AddAgreementToSpecificEntity(
+            //                                    file.FileName,
+            //                                    model.EntityId,
+            //                                    activityTypeId,
+            //                                    contractDate,
+            //                                    activationDate,
+            //                                    expirationDate,
+            //                                    statusId,
+            //                                    companyId,
+            //                                    model.ControllerName);
 
+            this.ModelState.Clear();
             return this.RedirectToAction("All");
         }
 
