@@ -122,21 +122,40 @@
 
     <partial name="SpecificEntity/_UploadPros" />
 </form>
-}
 
 <form asp-controller="Funds"
       asp-action="UploadAgreement"
       method="post"
+      data-ajax="true"
+      data-ajax-update="agrModalBody"
       enctype="multipart/form-data">
 
-    <a href="#" data-ajax="true">content</a>
+    <input asp-for="EntityId" type="text" hidden>
+    <input asp-for="ChosenDate" type="date" hidden>
 
-    <partial name="SpecificEntity/_UploadAgr" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="modal"
+         id="upAgrModal"
+         role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body d-grid justify-content-center" id="agrModalBody">
+                    <partial name="SpecificEntity/_UploadAgr" />
+                </div>
+            </div>
+        </div>
+    </div>
+
 </form>
 
 @section Scripts{
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+    <script src="~/lib/jquery-validate/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validate-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/lib/jquery-unobtrusive-ajax/jquery.unobtrusive-ajax.min.js"></script>
 
     <script src="~/js/multiselect.js"></script>
     <script src="~/lib/jquery/Chart.js/utils.js"></script>

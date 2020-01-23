@@ -11,7 +11,6 @@ namespace Pharus.App.Models.BindingModels.Files
     using System.ComponentModel.DataAnnotations;
     public class UploadEntityFileModel : BaseUploadFileBindingModel
     {
-        [Required]
         public string DocumentType { get; set; }
     }
 }
