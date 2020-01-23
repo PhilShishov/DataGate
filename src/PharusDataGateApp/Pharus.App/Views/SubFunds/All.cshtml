@@ -48,6 +48,7 @@
     <script src="~/js/submitForm.js"></script>
     <script src="~/js/multiselect.js"></script>
     <script src="~/js/buttonRedirect.js"></script>
+    <script src="~/js/select2/select2-entities.js"></script>
     <script src="~/lib/jquery/dist/jquery.doubleScroll.js"></script>
 
     <script>
@@ -73,21 +74,8 @@
             //
             // Autocomplete search
 
-            $("#SelectTerm").select2({
-                placeholder: "Quick Select",
-                theme: "classic",
-                ajax: {
-                    url: "/SubFunds/AutoCompleteSubFundList",
-                    dataType: "json",
-                    delay: 250,
-                    data: function (params) {
-                        return { selectTerm: params.term };
-                    },
-                    processResults: function (data) {
-                        return { results: data }
-                    }
-                }
-            });
+            const url = "/SubFunds/AutoCompleteSubFundList";
+            passUrlToSelect(url);
 
             // ________________________________________________________
             //
