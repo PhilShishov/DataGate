@@ -431,22 +431,9 @@
         }
 
         [HttpPost]
-        public void DeleteFile(string fileName)
+        public JsonResult DeleteFile(string fileName)
         {
-            //FileStream fs = null;
-
-            //string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
-
-            //var path = this.entitiesFileService.LoadEntityFileToDisplay(model.EntityId, model.ChosenDate, controllerName);
-
-            //if (this.HttpContext.Request.Form.ContainsKey("read_Pdf"))
-            //{
-            //    fs = new FileStream(path, FileMode.Open, FileAccess.Read);
-            //}
-
-            //return fs;
-
-
+            return this.Json(true);
         }
 
         [HttpPost]

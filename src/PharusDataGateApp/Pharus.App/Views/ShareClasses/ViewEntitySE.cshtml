@@ -20,14 +20,14 @@
       class="justify-content-between"
       method="post">
 
-    <partial name="SpecificEntity/Toolbar_Partial" />
+    <partial name="SpecificEntity/_Toolbar" />
     <div class="d-flex justify-content-between">
-        <partial name="SpecificEntity/Info_Partial" />
+        <partial name="SpecificEntity/_Info" />
         <div class="w-60">
             <div style="width:90%;">
                 <canvas id="aumSC_Canvas"></canvas>
             </div>
-            <partial name="SpecificEntity/Load_Documents_Partial" />
+            <partial name="SpecificEntity/_Load_Documents" />
         </div>
     </div>
 
@@ -42,8 +42,8 @@
         </select>
     </div>
 
-    <partial name="SpecificEntity/AllDocuments_Partial" />
-    <partial name="SpecificEntity/TimeLine_Partial" />
+    <partial name="SpecificEntity/_AllDocuments" />
+    <partial name="SpecificEntity/_Timeline" />
 </form>
 
 <form asp-controller="ShareClasses"
@@ -52,7 +52,7 @@
       enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <partial name="SpecificEntity/UploadPros_Partial" />
+    <partial name="SpecificEntity/_UploadPros" />
 </form>
 
 <form asp-controller="ShareClasses"
@@ -61,7 +61,7 @@
       enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <partial name="SpecificEntity/UploadAgr_Partial" />
+    <partial name="SpecificEntity/_UploadAgr" />
 </form>
 
 @section Scripts{
