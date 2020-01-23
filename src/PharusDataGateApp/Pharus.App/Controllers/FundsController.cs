@@ -350,25 +350,24 @@
                                                 prosFileTypeId,
                                                 model.ControllerName);
 
-            this.ModelState.Clear();
             return this.RedirectToAction("All");
         }
 
         [HttpPost]
-        public IActionResult UploadAgreement(UploadAgreementFileModel model)
+        public IActionResult UploadAgreement(SpecificEntityViewModel model)
         {
             //SetModelValuesForSpecificView(model);
 
             if (!ModelState.IsValid)
             {
-                return this.PartialView("_UploadAgr", model);
+                return this.PartialView("SpecificEntity/_UploadAgr", model);
             }
 
-            var file = model.FileToUpload;
+            var file = model.UploadAgreementFileModel.FileToUpload;
             if (file == null || file.Length == 0)
             {
-                ViewBag.Message = "File not loaded. Please try again";
-                return PartialView("_UploadAgr", model);
+                //ViewBag.Message = "File not loaded. Please try again";
+                return PartialView("SpecificEntity/_UploadAgr", model);
             }
 
             FileInfo fileType = new FileInfo(file.FileName);
@@ -376,7 +375,7 @@
 
             if (fileExtension != ".pdf")
             {
-                ViewBag.Message = "Unsupported file format. Please try again";
+                //ViewBag.Message = "Unsupported file format. Please try again";
                 return PartialView("_UploadAgr", model);
             }
 
@@ -388,24 +387,24 @@
                 file.CopyTo(stream);
             }
 
-            var activityTypeIdDesc = model.AgrType;
+            var activityTypeIdDesc = model.UploadAgreementFileModel.AgrType;
             int activityTypeId = this.context.TbDomActivityType
                     .Where(at => at.AtDesc == activityTypeIdDesc)
                     .Select(at => at.AtId)
                     .FirstOrDefault();
 
-            var contractDate = model.ContractDate;
-            var activationDate = model.ActivationDate;
-            var expirationDate = model.ExpirationDate;
+            var contractDate = model.UploadAgreementFileModel.ContractDate;
+            var activationDate = model.UploadAgreementFileModel.ActivationDate;
+            var expirationDate = model.UploadAgreementFileModel.ExpirationDate;
 
 
             int statusId = this.context.TbDomAgreementStatus
-                .Where(s => s.ASDesc == model.Status)
+                .Where(s => s.ASDesc == model.UploadAgreementFileModel.Status)
                 .Select(s => s.ASId)
                 .FirstOrDefault();
 
             int companyId = this.context.TbCompanies
-                .Where(c => c.CName == model.Company)
+                .Where(c => c.CName == model.UploadAgreementFileModel.Company)
                 .Select(c => c.CId)
                 .FirstOrDefault();
 
@@ -441,11 +440,11 @@
             return fileStreamResult;
         }
 
-        [HttpPost]
-        public JsonResult DeleteFile(string fileName)
-        {
-            return this.Json(true);
-        }
+        //[HttpPost]
+        //public JsonResult DeleteFile(string fileName)
+        //{
+        //    return this.Json(true);
+        //}
 
         [HttpPost]
         public FileStreamResult ExtractExcelSubEntities(SpecificEntityViewModel model)
@@ -709,6 +708,7 @@
 
             model.StartConnection = model.Entity[1][0];
             model.EndConnection = model.Entity[1][1];
+            //this.ViewData["AgreementsUploadView"] = model.UploadAgreementFileModel;
             this.ViewData["ProspectusFileTypes"] = this.fundsSelectListService.GetAllProspectusFileTypes();
             this.ViewData["AgreementsFileTypes"] = this.fundsSelectListService.GetAllAgreementsFileTypes();
             this.ViewData["AgreementsStatus"] = this.agreementsSelectListService.GetAllTbDomAgreementStatus();

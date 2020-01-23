@@ -1,9 +1,5 @@
 ﻿@model Pharus.App.Models.ViewModels.Entities.SpecificEntityViewModel
 
-@{
-    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
-}
-
 <input asp-for="EntityId" type="text" hidden>
 <input asp-for="StartConnection" type="text" hidden>
 <input asp-for="EndConnection" type="text" hidden>

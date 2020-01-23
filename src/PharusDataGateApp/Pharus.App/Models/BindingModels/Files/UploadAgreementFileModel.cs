@@ -7,15 +7,17 @@
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace Pharus.App.Models.BindingModels.Files
 {
+    using FoolProof.Core;
+    using Microsoft.AspNetCore.Http;
     using System;
     using System.ComponentModel.DataAnnotations;
 
     public class UploadAgreementFileModel : BaseUploadFileBindingModel
     {
-        [Required]
         public string AgrType { get; set; }
 
         [Required(ErrorMessage = "Contract Date cannot be empty")]
+        //[LessThanOrEqualTo("ActivationDate", ErrorMessage = "Contract date cannot be after the activation date")]
         [Display(Name = "Contract Date")]
         public DateTime ContractDate { get; set; }
 
@@ -31,5 +33,7 @@ namespace Pharus.App.Models.BindingModels.Files
 
         [Required]
         public string Status { get; set; }
+
+        //public IFormFile FileToUpload { get; set; }
     }
 }
