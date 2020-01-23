@@ -54,7 +54,7 @@
         </div>
         <partial name="SpecificEntity/SubEntities/_ViewTable" />
         <partial name="SpecificEntity/SubEntities/_BindingTable" />
-                                                  
+
         <partial name="SpecificEntity/SubEntities/_Modal" />
     </div>
 </form>
@@ -122,11 +122,14 @@
 
     <partial name="SpecificEntity/_UploadPros" />
 </form>
+}
 
 <form asp-controller="Funds"
       asp-action="UploadAgreement"
       method="post"
       enctype="multipart/form-data">
+
+    <a href="#" data-ajax="true">content</a>
 
     <partial name="SpecificEntity/_UploadAgr" />
 </form>
@@ -206,7 +209,7 @@
 
         $.ajax({
                 url: "Funds/DeleteFile",
-                datatype: 'json',                
+                datatype: 'json',
             });
 
         $(document).ready(function () {

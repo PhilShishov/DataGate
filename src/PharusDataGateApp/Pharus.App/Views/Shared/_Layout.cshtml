@@ -152,7 +152,7 @@
                                 <li>
                                     <a href="/Agreements/All">
                                         Agreements
-                                    </a>                                   
+                                    </a>
                                 </li>
                             </ul>
 
@@ -199,6 +199,7 @@
         </header>
 
         <main>
+            <form action="/" data-ajax method="post"></form>
             @RenderBody()
         </main>
 
@@ -223,6 +224,9 @@
         <script src="~/js/manageDropdowns.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/jquery-validate/jquery.validate.min.js"></script>
+        <script src="~/lib/jquery-validate-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+        <script src="~/lib/jquery-unobtrusive-ajax/jquery.unobtrusive-ajax.min.js"></script>
     </environment>
     <environment exclude="Development">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
