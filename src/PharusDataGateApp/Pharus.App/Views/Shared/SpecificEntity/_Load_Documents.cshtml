@@ -64,9 +64,10 @@
                                         @Model.DistinctAgreementsNamesToDisplay[row][col]
                                     </td>
                                     <td>
-                                        <button type="submit"
-                                                class="btn btn-primary btn-sm mr-1 confirmDelBtn"
-                                                formaction="@Url.Action("DeleteFile", controllerName, 
+                                        <button type="button"
+                                                class="btn btn-primary btn-sm mr-1"
+                                                id="btn-delete-agr"
+                                                formaction="@Url.Action("DeleteAgreement", controllerName, 
                                                            new { @fileName = Model.DistinctAgreementsNamesToDisplay[row][col-1]})">
                                             Delete
                                         </button>
