@@ -204,38 +204,37 @@
             }
         }
         public void DeleteAgreement(
-                                string fileName,
+                                string agrName,
                                 string controllerName)
         {
-            //using (SqlConnection connection = new SqlConnection())
-            //{
-            //    connection.ConnectionString = configuration.GetConnectionString("Pharus_vFinaleConnection");
-            //    connection.Open();
-            //    SqlCommand command = connection.CreateCommand();
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
 
-            //    if (controllerName == "Funds")
-            //    {
-            //        //command.CommandText = $"DELETE FROM [dbo].[tb_historyFund] WHERE f_id = {fileName}";
-            //    }
-            //    else if (controllerName == "SubFunds")
-            //    {
-                  
-            //    }
-            //    else if (controllerName == "ShareClasses")
-            //    {
-                   
-            //    }
+                if (controllerName == "Funds")
+                {
+                    command.CommandText = $"DELETE FROM [Pharus_File_Development].[dbo].[AgreementFile] WHERE [name] = '{agrName}.pdf'";
+                }
+                else if (controllerName == "SubFunds")
+                {
 
-            //    try
-            //    {
-            //        command.Connection.Open();
-            //        command.ExecuteScalar();
-            //    }
-            //    catch (SqlException sx)
-            //    {
-            //        Console.WriteLine(sx.Message);
-            //    }
-            //}
+                }
+                else if (controllerName == "ShareClasses")
+                {
+
+                }
+
+                try
+                {
+                    command.ExecuteScalar();
+                }
+                catch (SqlException sx)
+                {
+                    Console.WriteLine(sx.Message);
+                }
+            }
         }
     }
 }

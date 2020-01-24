@@ -22,7 +22,7 @@
 
     <partial name="SpecificEntity/_Toolbar" />
     <div class="justify-content-between" id="infoAndDocumentsView">
-        <partial name="SpecificEntity/_Info" />
+        <partial name="SpecificEntity/_Info" />       
         <partial name="SpecificEntity/_Load_Documents" />
     </div>
 
@@ -125,25 +125,26 @@
             //
             // Delete selected row from agreements table
 
-            $("#btn-delete-agr").on('click', function () {
-                const agrName = $(this).closest('tr').find("td:eq(0)").text().trim();
+            $(".confirmDelBtn").on('click', function () {
+                const id = $(this).closest('tr').attr("id");
+                const agrName = $(this).closest('tr').find("td:eq(1)").text().trim();
                 $.ajax({
                     type: "GET",
                     url: "/Funds/DeleteAgreement",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
-                    data: { agrName: agrName },
+                    data: { id:id, agrName: agrName },
                     success: function (data) {
                         if (data.data == "false") {
                             alert("Something wrong!");
                             return false;
                         }
-                       alert("Successfully Deleted!");
-                        $(".tblCheck tr:eq('" + data.data + "')").remove(); 
+                        $("#tbl-distinct-agreements tr:eq('" + data.data + "')").remove();
+                       //alert("Successfully Deleted!");
                     },
-                    error: function (data) {
-                        console.log("failed");
-                    },
+                    //error: function (data) {
+                    //    console.log("failed");
+                    //},
                     async: false
                 });
             });
