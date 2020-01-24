@@ -19,7 +19,6 @@
     using Pharus.App.Models.BindingModels.Funds;
     using Pharus.App.Models.ViewModels.Entities;
     using Pharus.Services.Agreements.Contracts;
-    using Pharus.App.Models.BindingModels.Files;
 
     [Authorize]
     public class FundsController : Controller
@@ -356,29 +355,30 @@
         [HttpPost]
         public IActionResult UploadAgreement(SpecificEntityViewModel model)
         {
-            //SetModelValuesForSpecificView(model);
+            SetModelValuesForSpecificView(model);
 
-            if (!ModelState.IsValid)
-            {
-                return this.PartialView("SpecificEntity/_UploadAgr", model);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return this.PartialView("SpecificEntity/_UploadAgr", model);
+            //}
+
+
+            //if (file == null || file.Length == 0)
+            //{
+            //    //ViewBag.Message = "File not loaded. Please try again";
+            //    return PartialView("SpecificEntity/_UploadAgr", model);
+            //}
+
+            //FileInfo fileType = new FileInfo(file.FileName);
+            //var fileExtension = fileType.Extension;
+
+            //if (fileExtension != ".pdf")
+            //{
+            //    //ViewBag.Message = "Unsupported file format. Please try again";
+            //    return PartialView("_UploadAgr", model);
+            //}
 
             var file = model.UploadAgreementFileModel.FileToUpload;
-            if (file == null || file.Length == 0)
-            {
-                //ViewBag.Message = "File not loaded. Please try again";
-                return PartialView("SpecificEntity/_UploadAgr", model);
-            }
-
-            FileInfo fileType = new FileInfo(file.FileName);
-            var fileExtension = fileType.Extension;
-
-            if (fileExtension != ".pdf")
-            {
-                //ViewBag.Message = "Unsupported file format. Please try again";
-                return PartialView("_UploadAgr", model);
-            }
-
             string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\AgreementFile\";
             string path = $"{networkFileLocation}{file.FileName}";
 
@@ -408,16 +408,16 @@
                 .Select(c => c.CId)
                 .FirstOrDefault();
 
-            //this.entitiesFileService.AddAgreementToSpecificEntity(
-            //                                    file.FileName,
-            //                                    model.EntityId,
-            //                                    activityTypeId,
-            //                                    contractDate,
-            //                                    activationDate,
-            //                                    expirationDate,
-            //                                    statusId,
-            //                                    companyId,
-            //                                    model.ControllerName);
+            this.entitiesFileService.AddAgreementToSpecificEntity(
+                                                file.FileName,
+                                                model.EntityId,
+                                                activityTypeId,
+                                                contractDate,
+                                                activationDate,
+                                                expirationDate,
+                                                statusId,
+                                                companyId,
+                                                model.ControllerName);
 
             this.ModelState.Clear();
             return this.RedirectToAction("All");
@@ -440,11 +440,22 @@
             return fileStreamResult;
         }
 
-        //[HttpPost]
-        //public JsonResult DeleteFile(string fileName)
-        //{
-        //    return this.Json(true);
-        //}
+        [HttpGet]
+        public JsonResult DeleteAgreement(string agrName)
+        {
+            if (!string.IsNullOrEmpty(agrName))
+            {
+                string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+
+                //this.entitiesFileService.DeleteAgreement(fileName, controllerName);
+
+                return Json(new { data = agrName });
+            }
+            else
+            {
+                return Json(new { data = "false" });
+            }
+        }
 
         [HttpPost]
         public FileStreamResult ExtractExcelSubEntities(SpecificEntityViewModel model)

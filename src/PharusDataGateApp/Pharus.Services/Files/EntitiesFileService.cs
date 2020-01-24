@@ -27,9 +27,9 @@
         }
 
         public string LoadEntityFileToDisplay(
-                                           int entityId,
-                                           string chosenDate,
-                                           string controllerName)
+                                    int entityId,
+                                    string chosenDate,
+                                    string controllerName)
         {
             string filePath = string.Empty;
             SqlDataReader dataReader;
@@ -157,11 +157,11 @@
             }
             else if (controllerName == "SubFunds")
             {
-               
+
             }
             else if (controllerName == "ShareClasses")
             {
-               
+
             }
 
             using (SqlConnection connection = new SqlConnection())
@@ -202,7 +202,40 @@
                     }
                 }
             }
+        }
+        public void DeleteAgreement(
+                                string fileName,
+                                string controllerName)
+        {
+            //using (SqlConnection connection = new SqlConnection())
+            //{
+            //    connection.ConnectionString = configuration.GetConnectionString("Pharus_vFinaleConnection");
+            //    connection.Open();
+            //    SqlCommand command = connection.CreateCommand();
 
+            //    if (controllerName == "Funds")
+            //    {
+            //        //command.CommandText = $"DELETE FROM [dbo].[tb_historyFund] WHERE f_id = {fileName}";
+            //    }
+            //    else if (controllerName == "SubFunds")
+            //    {
+                  
+            //    }
+            //    else if (controllerName == "ShareClasses")
+            //    {
+                   
+            //    }
+
+            //    try
+            //    {
+            //        command.Connection.Open();
+            //        command.ExecuteScalar();
+            //    }
+            //    catch (SqlException sx)
+            //    {
+            //        Console.WriteLine(sx.Message);
+            //    }
+            //}
         }
     }
 }
