@@ -1,7 +1,7 @@
 ﻿@model Pharus.App.Models.ViewModels.Entities.SpecificEntityViewModel
 
 <div class="form-group">
-    <select class="form-control maxw-270" asp-for="UploadAgreementFileModel.AgrType" required>
+    <select class="form-control maxw-270" asp-for="UploadAgreementFileModel.AgrType">
         <option value="">-- Choose Agreement Type --</option>
         @foreach (var type in (List<string>)ViewData["AgreementsFileTypes"])
         {
@@ -41,7 +41,7 @@
 </div>
 
 <div class="form-group">
-    <select class="form-control maxw-270" asp-for="UploadAgreementFileModel.Status" required>
+    <select class="form-control maxw-270" asp-for="UploadAgreementFileModel.Status">
         <option selected disabled value="">-- Choose Status --</option>
         @foreach (var status in (List<string>)ViewData["AgreementsStatus"])
         {
@@ -52,7 +52,7 @@
 </div>
 
 <div class="form-group">
-    <select class="form-control maxw-270" asp-for="UploadAgreementFileModel.Company" required>
+    <select class="form-control maxw-270" asp-for="UploadAgreementFileModel.Company">
         <option selected disabled value="">-- Choose Company --</option>
         @foreach (var company in (List<string>)ViewData["Companies"])
         {
@@ -62,7 +62,12 @@
     <span asp-validation-for="UploadAgreementFileModel.Company" class="text-danger"></span>
 </div>
 
-<input asp-for="UploadAgreementFileModel.FileToUpload" type="file" required>
+<div class="form-group">
+    <input asp-for="UploadAgreementFileModel.FileToUpload"
+           type="file"
+           accept="application/pdf">
+</div>
+<span asp-validation-for="UploadAgreementFileModel.FileToUpload" class="text-danger"></span>
 
 <button type="submit"
         class="btn bg-pharus text-white">

@@ -16,5 +16,14 @@
 }
 else
 {
-    <h1 class="text-center">Hello, @this.User.Identity.Name!</h1>   
+    <h1 class="text-center">Hello, @this.User.Identity.Name!</h1>
+}
+
+@section Scripts{
+    <script>
+            window.onload = () => {
+                manageSideNavBar();
+                manageDropdowns();
+            }
+    </script>
 }

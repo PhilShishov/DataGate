@@ -7,10 +7,12 @@
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace Pharus.App.Models.BindingModels.Files
 {
-
+    using Microsoft.AspNetCore.Http;
     using System.ComponentModel.DataAnnotations;
-    public class UploadEntityFileModel : BaseUploadFileBindingModel
+    public class UploadEntityFileModel
     {
         public string DocumentType { get; set; }
+
+        public IFormFile FileToUpload { get; set; }
     }
 }
