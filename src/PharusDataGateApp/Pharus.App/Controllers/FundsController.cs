@@ -350,13 +350,15 @@
                                                 prosFileTypeId,
                                                 model.ControllerName);
 
-            return this.RedirectToAction("All");
+            return this.RedirectToAction("ViewEntitySE", new { EntityId = model.EntityId, ChosenDate = model.ChosenDate});
         }
 
         [HttpPost]
         public IActionResult UploadAgreement(SpecificEntityViewModel model)
         {
             SetModelValuesForSpecificView(model);
+
+
 
             //if (!ModelState.IsValid)
             //{
