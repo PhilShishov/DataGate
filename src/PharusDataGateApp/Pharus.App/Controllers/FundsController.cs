@@ -449,7 +449,7 @@
 
                 //this.entitiesFileService.DeleteAgreement(agrName, controllerName);
 
-                return Json(new { data = id });
+                return Json(new { data = agrName });
             }
             else
             {

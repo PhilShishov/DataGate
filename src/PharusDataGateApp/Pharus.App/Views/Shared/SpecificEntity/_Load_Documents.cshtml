@@ -42,38 +42,44 @@
                 <tbody>
                     @for (int row = 1; row < Model.DistinctAgreementsNamesToDisplay.Count; row++)
                     {
-                        <tr id="@row">
+                    <tr name="trow">
 
-                            @for (int col = 0; col < Model.DistinctAgreementsNamesToDisplay[row].Length; col++)
+                        @for (int col = 0; col < Model.DistinctAgreementsNamesToDisplay[row].Length; col++)
+                        {
+                            @if (Model.DistinctAgreementsNamesToDisplay[0][col] == "File Name")
                             {
-                                @if (Model.DistinctAgreementsNamesToDisplay[0][col] == "File Name")
-                                {
-                                    <td>
-                                        <button class="btn-link-pharus text-left"
-                                                formtarget="_blank"
-                                                type="submit"
-                                                formaction="/@controllerName/ReadPdfFile"
-                                                name="read_Pdf">
-                                            @Model.DistinctAgreementsNamesToDisplay[row][col].Split(".")[0]
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button type="button"
-                                                class="btn btn-primary btn-sm mr-1 confirmDelBtn"
-                                                formaction="@Url.Action("DeleteAgreement", controllerName,
+                                <td>
+                                    <button class="btn-link-pharus text-left"
+                                            formtarget="_blank"
+                                            type="submit"
+                                            formaction="/@controllerName/ReadPdfFile"
+                                            name="read_Pdf">
+                                        @Model.DistinctAgreementsNamesToDisplay[row][col].Split(".")[0]
+                                    </button>
+                                </td>
+                                <td>
+                                    <button type="button"
+                                            class="btn btn-primary btn-sm mr-1 confirmDelBtn"
+                                            formaction="@Url.Action("DeleteAgreement", controllerName,
                                                            new { @fileName = Model.DistinctAgreementsNamesToDisplay[row][col]})">
-                                            Delete
-                                        </button>
-                                    </td>
-                                }
-                                else if (Model.DistinctAgreementsNamesToDisplay[0][col] == "File Description")
-                                {
-                                    <td>
-                                        @Model.DistinctAgreementsNamesToDisplay[row][col]
-                                    </td>
-                                }
+                                        Delete
+                                    </button>
+                                </td>
                             }
-                        </tr>
+                            else if (Model.DistinctAgreementsNamesToDisplay[0][col] == "File Description")
+                            {
+                                <td>
+                                    @Model.DistinctAgreementsNamesToDisplay[row][col]
+                                </td>
+                            }
+                            else if (Model.DistinctAgreementsNamesToDisplay[0][col] == "SA Id")
+                            {
+                                <td class="d-none">
+                                    @Model.DistinctAgreementsNamesToDisplay[row][col]
+                                </td>
+                            }
+                        }
+                    </tr>
                     }
                 </tbody>
             </table>
