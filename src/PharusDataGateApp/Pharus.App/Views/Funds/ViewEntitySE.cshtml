@@ -125,6 +125,8 @@
             //
             // Delete selected row from agreements table
 
+            const urlDel = "/Funds/DeleteAgreement";
+
             $(".confirmDelBtn").on('click', function () {
                 const id = $(this).closest('tr').find("td:eq(0)").text().trim();
                 const agrName = $(this).closest('tr').find("td:eq(2)").text().trim();
@@ -164,10 +166,10 @@
             //
             // Autocomplete search
 
-            const url = "/Funds/AutoCompleteSubFundList";
+            const urlACS = "/Funds/AutoCompleteSubFundList";
             const entityId = @Model.EntityId;
 
-            passUrlAndEntityToSelect(url, entityId);
+            passUrlAndEntityToSelect(urlACS, entityId);
 
             // ________________________________________________________
             //

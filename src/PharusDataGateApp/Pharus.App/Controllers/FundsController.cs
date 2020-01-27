@@ -324,6 +324,7 @@
             using (var stream = new FileStream(path, FileMode.Create))
             {
                 file.CopyTo(stream);
+                stream.Close();
             }
 
             var startConnection = DateTime.ParseExact(model.StartConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
@@ -385,6 +386,7 @@
             using (var stream = new FileStream(path, FileMode.Create))
             {
                 file.CopyTo(stream);
+                stream.Close();
             }
 
             var activityTypeIdDesc = model.UploadAgreementFileModel.AgrType;
