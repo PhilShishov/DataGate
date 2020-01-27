@@ -441,13 +441,11 @@
         }
 
         [HttpGet]
-        public JsonResult DeleteAgreement(int id, string agrName)
+        public JsonResult DeleteAgreement(string agrName)
         {
             if (!string.IsNullOrEmpty(agrName))
             {
-                string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
-
-                //this.entitiesFileService.DeleteAgreement(agrName, controllerName);
+                this.entitiesFileService.DeleteAgreement(agrName);
 
                 return Json(new { data = agrName });
             }
