@@ -719,7 +719,7 @@
 
             model.StartConnection = model.Entity[1][0];
             model.EndConnection = model.Entity[1][1];
-            //this.ViewData["AgreementsUploadView"] = model.UploadAgreementFileModel;
+
             this.ViewData["ProspectusFileTypes"] = this.fundsSelectListService.GetAllProspectusFileTypes();
             this.ViewData["AgreementsFileTypes"] = this.fundsSelectListService.GetAllAgreementsFileTypes();
             this.ViewData["AgreementsStatus"] = this.agreementsSelectListService.GetAllTbDomAgreementStatus();
