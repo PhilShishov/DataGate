@@ -305,52 +305,46 @@
 
             var file = model.UploadEntityFileModel.FileToUpload;
 
-            if (file == null || file.Length == 0)
+            if (file != null || file.FileName != "")
             {
-                return this.Content("File not loaded. Please try again");
+                FileInfo fileType = new FileInfo(file.FileName);
+                var fileExtension = fileType.Extension;
+
+                string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\FundFile\";
+                string path = $"{networkFileLocation}{file.FileName}";
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                    stream.Close();
+                }
+
+                var startConnection = DateTime.ParseExact(model.StartConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                DateTime? endConnection = null;
+
+                if (!string.IsNullOrEmpty(model.EndConnection))
+                {
+                    endConnection = DateTime.ParseExact(model.EndConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                }
+
+                var prosFileTypeDesc = model.UploadEntityFileModel.DocumentType;
+                int prosFileTypeId = this.context.TbDomFileType
+                        .Where(ft => ft.FiletypeDesc == prosFileTypeDesc)
+                        .Select(ft => ft.FiletypeId)
+                        .FirstOrDefault();
+
+                this.entitiesFileService.AddDocumentToSpecificEntity(
+                                                    file.FileName,
+                                                    model.EntityId,
+                                                    startConnection,
+                                                    endConnection,
+                                                    prosFileTypeId,
+                                                    model.ControllerName);
+
             }
 
-            FileInfo fileType = new FileInfo(file.FileName);
-            var fileExtension = fileType.Extension;
-
-            if (fileExtension != ".pdf")
-            {
-                return this.Content("Unsupported file format. Please try again");
-            }
-
-            string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\FundFile\";
-            string path = $"{networkFileLocation}{file.FileName}";
-
-            using (var stream = new FileStream(path, FileMode.Create))
-            {
-                file.CopyTo(stream);
-                stream.Close();
-            }
-
-            var startConnection = DateTime.ParseExact(model.StartConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-
-            DateTime? endConnection = null;
-
-            if (!string.IsNullOrEmpty(model.EndConnection))
-            {
-                endConnection = DateTime.ParseExact(model.EndConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            }
-
-            var prosFileTypeDesc = model.UploadEntityFileModel.DocumentType;
-            int prosFileTypeId = this.context.TbDomFileType
-                    .Where(ft => ft.FiletypeDesc == prosFileTypeDesc)
-                    .Select(ft => ft.FiletypeId)
-                    .FirstOrDefault();
-
-            this.entitiesFileService.AddDocumentToSpecificEntity(
-                                                file.FileName,
-                                                model.EntityId,
-                                                startConnection,
-                                                endConnection,
-                                                prosFileTypeId,
-                                                model.ControllerName);
-
-            return this.RedirectToAction("ViewEntitySE", new { EntityId = model.EntityId, ChosenDate = model.ChosenDate});
+            return this.RedirectToAction("ViewEntitySE", new { EntityId = model.EntityId, ChosenDate = model.ChosenDate });
         }
 
         [HttpPost]
@@ -374,12 +368,6 @@
 
             //FileInfo fileType = new FileInfo(file.FileName);
             //var fileExtension = fileType.Extension;
-
-            //if (fileExtension != ".pdf")
-            //{
-            //    //ViewBag.Message = "Unsupported file format. Please try again";
-            //    return PartialView("_UploadAgr", model);
-            //}
 
             var file = model.UploadAgreementFileModel.FileToUpload;
             string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\AgreementFile\";
