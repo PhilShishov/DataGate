@@ -24,10 +24,13 @@
                     <span asp-validation-for="UploadEntityFileModel.DocumentType" class="text-danger"></span>
                 </div>
 
-                <input asp-for="UploadEntityFileModel.FileToUpload" 
-                       type="file"
-                       accept="application/pdf"
-                       required>
+                <div class="form-group">
+                    <input asp-for="UploadEntityFileModel.FileToUpload"
+                           type="file"
+                           accept="application/pdf"
+                           required>
+                </div>
+                <span asp-validation-for="UploadEntityFileModel.FileToUpload" class="text-danger"></span>
 
                 <button type="submit"
                         class="btn bg-pharus text-white">

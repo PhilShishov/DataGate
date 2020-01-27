@@ -12,16 +12,18 @@ namespace Pharus.App.Models.BindingModels.Files
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class UploadAgreementFileModel : BaseUploadFileBindingModel
+    public class UploadAgreementFileModel
     {
+        [Required]
+        [Display(Name = "Agreement Type")]
         public string AgrType { get; set; }
 
-        [Required(ErrorMessage = "Contract Date cannot be empty")]
+        [Required(ErrorMessage = "Contract Date cannot be empty.")]
         //[LessThanOrEqualTo("ActivationDate", ErrorMessage = "Contract date cannot be after the activation date")]
         [Display(Name = "Contract Date")]
         public DateTime ContractDate { get; set; }
 
-        [Required(ErrorMessage = "Activation Date cannot be empty")]
+        [Required(ErrorMessage = "Activation Date cannot be empty.")]
         [Display(Name = "Activation Date")]
         public DateTime ActivationDate { get; set; }
 
@@ -34,6 +36,7 @@ namespace Pharus.App.Models.BindingModels.Files
         [Required]
         public string Status { get; set; }
 
-        //public IFormFile FileToUpload { get; set; }
+        [Required(ErrorMessage = "Please insert File.")]
+        public IFormFile FileToUpload { get; set; }
     }
 }
