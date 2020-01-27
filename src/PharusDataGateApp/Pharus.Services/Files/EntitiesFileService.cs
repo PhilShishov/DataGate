@@ -205,11 +205,12 @@
         }
         public void DeleteAgreement(string agrName)
         {
+            agrName += ".pdf";
             string query = "EXEC delete_agreement_file_byname @file_name";
 
             using (SqlConnection connection = new SqlConnection())
             {
-                connection.ConnectionString = configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.ConnectionString = configuration.GetConnectionString("PharusFileConnection");
                 using (SqlCommand command = new SqlCommand(query))
                 {
                     command.Parameters.AddRange(new[]
