@@ -22,7 +22,7 @@
 
     <partial name="SpecificEntity/_Toolbar" />
     <div class="justify-content-between" id="infoAndDocumentsView">
-        <partial name="SpecificEntity/_Info" />       
+        <partial name="SpecificEntity/_Info" />
         <partial name="SpecificEntity/_Load_Documents" />
     </div>
 
@@ -126,25 +126,21 @@
             // Delete selected row from agreements table
 
             $(".confirmDelBtn").on('click', function () {
-                const id = $(this).closest('tr').attr("id");
-                const agrName = $(this).closest('tr').find("td:eq(1)").text().trim();
+                const id = $(this).closest('tr').find("td:eq(0)").text().trim();
+                const agrName = $(this).closest('tr').find("td:eq(2)").text().trim();
                 $.ajax({
                     type: "GET",
                     url: "/Funds/DeleteAgreement",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
-                    data: { id:id, agrName: agrName },
+                    data: { id: id, agrName: agrName },
                     success: function (data) {
                         if (data.data == "false") {
                             alert("Something wrong!");
                             return false;
                         }
-                        $("#tbl-distinct-agreements tr:eq('" + data.data + "')").remove();
-                       //alert("Successfully Deleted!");
+                        $("#tbl-distinct-agreements tr:contains('" + data.data +"')").remove();
                     },
-                    //error: function (data) {
-                    //    console.log("failed");
-                    //},
                     async: false
                 });
             });
