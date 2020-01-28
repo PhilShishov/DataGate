@@ -95,6 +95,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
     <script src="~/js/multiselect.js"></script>
+    <script src="~/js/deleteAgreement.js"></script>
     <script src="~/js/confirm/confirmDelete.js"></script>
     <script src="~/js/select2/select2-entity-subentity.js"></script>
     <script src="~/js/select-additional-info/select-fund-addInfo.js"></script>
@@ -122,25 +123,7 @@
 
             const urlDel = "/Funds/DeleteAgreement";
 
-            $(".confirmDelBtn").on('click', function () {
-                const id = $(this).closest('tr').find("td:eq(0)").text().trim();
-                const agrName = $(this).closest('tr').find("td:eq(2)").text().trim();
-                $.ajax({
-                    type: "GET",
-                    url: urlDel,
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    data: { id: id, agrName: agrName },
-                    success: function (data) {
-                        if (data.data == "false") {
-                            alert("Something wrong!");
-                            return false;
-                        }
-                        $("#tbl-distinct-agreements tr:contains('" + data.data +"')").remove();
-                    },
-                    async: false
-                });
-            });
+            passUrlToDelete(urlDel);
 
             // ________________________________________________________
             //
