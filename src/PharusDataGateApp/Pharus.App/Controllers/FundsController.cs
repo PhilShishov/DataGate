@@ -412,7 +412,7 @@
                                                 model.ControllerName);
 
             this.ModelState.Clear();
-            return this.RedirectToAction("All");
+            return this.RedirectToAction("ViewEntitySE", new { EntityId = model.EntityId, ChosenDate = model.ChosenDate });
         }
 
         [HttpPost]
