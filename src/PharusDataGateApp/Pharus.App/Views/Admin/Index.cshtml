@@ -48,3 +48,12 @@ else if (this.User.IsInRole("Admin"))
         </div>
     </div>
 }
+
+@section Scripts{
+    <script>
+            window.onload = () => {
+                manageSideNavBar();
+                manageDropdowns();
+            }
+    </script>
+}
