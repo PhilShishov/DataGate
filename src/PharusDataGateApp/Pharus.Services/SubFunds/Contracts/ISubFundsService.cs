@@ -39,6 +39,10 @@
 
         List<string[]> GetAllSubFundDocumens(int id);
 
+        List<string[]> GetDistinctSubFundAgreements(DateTime? chosenDate, int id);
+
+        List<string[]> GetAllSubFundAgreements(DateTime? chosenDate, int id);
+
         List<string[]> PrepareSubFundsForPDFExtract(DateTime? chosenDate);
 
         List<string[]> PrepareSubFund_ShareClassesForPDFExtract(DateTime? chosenDate);

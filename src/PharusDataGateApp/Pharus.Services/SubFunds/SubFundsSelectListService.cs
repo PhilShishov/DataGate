@@ -176,5 +176,15 @@ namespace Pharus.Services.SubFunds
 
             return fileTypes;
         }
+
+        public List<string> GetAllAgreementsFileTypes()
+        {
+            var agrFileTypes = this.context.TbDomActivityType
+                .Where(at => at.AtEntity == subFundFileType)
+                .Select(at => at.AtDesc)
+                .ToList();
+
+            return agrFileTypes;
+        }
     }
 }

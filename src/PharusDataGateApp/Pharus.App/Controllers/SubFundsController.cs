@@ -18,6 +18,7 @@
     using Pharus.Services.SubFunds.Contracts;
     using Pharus.App.Models.ViewModels.Entities;
     using Pharus.App.Models.BindingModels.SubFunds;
+    using Pharus.Services.Agreements.Contracts;
 
     [Authorize]
     public class SubFundsController : Controller
@@ -25,6 +26,7 @@
         private readonly Pharus_vFinale_Context context;
         private readonly ISubFundsService subFundsService;
         private readonly ISubFundsSelectListService subfundsSelectListService;
+        private readonly IAgreementsSelectListService agreementsSelectListService;
         private readonly IEntitiesFileService entitiesFileService;
         private readonly IHostingEnvironment hostingEnvironment;
 
@@ -32,12 +34,14 @@
             Pharus_vFinale_Context context,
             ISubFundsService subFundsService,
             ISubFundsSelectListService subfundsSelectListService,
+            IAgreementsSelectListService agreementsSelectListService,
             IEntitiesFileService entitiesFileService,
             IHostingEnvironment hostingEnvironment)
         {
             this.context = context;
             this.subFundsService = subFundsService;
             this.subfundsSelectListService = subfundsSelectListService;
+            this.agreementsSelectListService = agreementsSelectListService;
             this.entitiesFileService = entitiesFileService;
             this.hostingEnvironment = hostingEnvironment;
         }
@@ -810,6 +814,8 @@
             model.ProspectusNameToDisplay = GetFileNameFromFilePath
                 (entityId, model.ChosenDate, model.ControllerName)
                 .Split(".")[0];
+            model.DistinctAgreementsNamesToDisplay = this.subFundsService.GetDistinctSubFundAgreements(date, entityId);
+            model.AllAgreementsNamesToDisplay = this.subFundsService.GetAllSubFundAgreements(date, entityId);
             model.EntityTimeline = this.subFundsService.GetSubFundTimeline(entityId);
             model.EntityDocuments = this.subFundsService.GetAllSubFundDocumens(entityId);
             model.BaseEntityName = this.subFundsService.GetSubFund_FundContainer(date, entityId)[1][1];
@@ -819,6 +825,9 @@
             model.EndConnection = model.Entity[1][1];
 
             this.ViewData["FileTypes"] = this.subfundsSelectListService.GetAllSubFundFileTypes();
+            this.ViewData["AgreementsFileTypes"] = this.subfundsSelectListService.GetAllAgreementsFileTypes();
+            this.ViewData["AgreementsStatus"] = this.agreementsSelectListService.GetAllTbDomAgreementStatus();
+            this.ViewData["Companies"] = this.agreementsSelectListService.GetAllTbCompanies();
         }
 
         private static void SetZeroValuesToNull(
