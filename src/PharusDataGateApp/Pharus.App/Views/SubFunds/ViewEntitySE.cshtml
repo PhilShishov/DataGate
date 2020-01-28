@@ -21,15 +21,14 @@
       method="post">
 
     <partial name="SpecificEntity/_Toolbar" />
-    <div class="d-flex justify-content-between">
+    <div class="justify-content-between" id="infoAndDocumentsView">
         <partial name="SpecificEntity/_Info" />
         <partial name="SpecificEntity/_Load_Documents" />
     </div>
 
     <hr class="bg-pharus hr-2" />
 
-    <div class="row w-25 ml-3"
-         id="AtBottomOfForm">
+    <div class="row w-25 ml-3">
         <label class="text-torshia m-1 pr-3">SUB FUND ADDITIONAL INFORMATION</label>
         <select class="custom-select-lg select-pharus form-control input-sm"
                 id="subFundAdditionalInfSelect"
@@ -38,10 +37,12 @@
             <option value="ShareClasses">Share Classes</option>
             <option value="TimelineChanges">Timeline Changes</option>
             <option value="AllDocuments">All Documents</option>
+            <option value="AllAgreements">All Agreements</option>
         </select>
     </div>
 
     <partial name="SpecificEntity/_AllDocuments" />
+    <partial name="SpecificEntity/_AllAgreements" />
     <partial name="SpecificEntity/_Timeline" />
 
     <div id="subEntities" class="mt-4">
@@ -62,7 +63,6 @@
       asp-action="UploadProspectus"
       method="post"
       enctype="multipart/form-data">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <partial name="SpecificEntity/_UploadDocument" />
 </form>
@@ -90,10 +90,14 @@
 </form>
 
 @section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
     <script src="~/js/multiselect.js"></script>
+    <script src="~/js/deleteAgreement.js"></script>
+    <script src="~/js/select2/select2-entity-subentity.js"></script>
+    <script src="~/js/select-additional-info/select-subfund-addInfo.js"></script>
     <script src="~/lib/jquery/Chart.js/utils.js"></script>
     <script src="~/lib/jquery/Chart.js/Chart.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.doubleScroll.js"></script>
@@ -109,6 +113,14 @@
             }
 
         $(document).ready(function () {
+
+            // ________________________________________________________
+            //
+            // Delete selected row from agreements table by confirming
+
+            const urlDel = "/SubFunds/DeleteAgreement";
+
+            passUrlToDelete(urlDel);
 
             // ________________________________________________________
             //
@@ -129,29 +141,10 @@
             //
             // Autocomplete search
 
-            const url = "/SubFunds/AutoCompleteShareClassesList";
+            const urlACS = "/SubFunds/AutoCompleteShareClassesList";
             const entityId = @Model.EntityId;
 
-            $("#SelectTerm").select2({
-                placeholder: "Select Share Classes",
-                theme: "classic",
-                ajax: {
-                    url: url,
-                    dataType: "json",
-                    delay: 250,
-                    data: function (params) {
-                        return {
-                            selectTerm: params.term,
-                            entityId: entityId
-                        };
-                    },
-                    processResults: function (data) {
-                        return {
-                            results: data
-                        }
-                    }
-                }
-            });
+            passUrlAndEntityToSelect(urlACS, entityId);
 
             // ________________________________________________________
             //
@@ -159,62 +152,7 @@
 
             $('.double-scroll').doubleScroll();
             $('#tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
-
-            // ________________________________________________________
-            //
-            // Select menu for fund additional information -
-            // subentities, timeline changes, all documents
-            // Get selected value and keep select option open
-
-            $('#subFundAdditionalInfSelect option').each(function () {
-                if (this.selected) {
-                    const dropdownvalue = $("#subFundAdditionalInfSelect option:selected").val();
-                    if (dropdownvalue == 'ShareClasses') {
-                        $("#subEntities").css('visibility', 'visible');
-                        $("#timelineChanges").css('visibility', 'hidden');
-                        $("#allDocuments").addClass('d-none');
-                    } else if (dropdownvalue == 'TimelineChanges') {
-                        $("#timelineChanges").css('visibility', 'visible');
-                        $("#subEntities").css('visibility', 'hidden');
-                        $("#allDocuments").addClass('d-none');
-                    } else if (dropdownvalue == 'AllDocuments') {
-                        $("#allDocuments").removeClass('d-none');
-                        $("#timelineChanges").css('visibility', 'hidden');
-                        $("#subEntities").css('visibility', 'hidden');
-                    } else {
-                        $("#subEntities").css('visibility', 'hidden');
-                        $("#timelineChanges").css('visibility', 'hidden');
-                        $("#allDocuments").addClass('d-none');
-                    }
-                }
-            });
-
-            // ________________________________________________________
-            //
-            // Select menu for fund additional information -
-            // subentities, timeline changes, all documents -
-            // On change event for selected value
-
-            $("#subFundAdditionalInfSelect").on('change', function () {
-                const dropdownvalue = $("#subFundAdditionalInfSelect option:selected").val();
-                if (dropdownvalue == 'ShareClasses') {
-                    $("#subEntities").css('visibility', 'visible');
-                    $("#timelineChanges").css('visibility', 'hidden');
-                    $("#allDocuments").addClass('d-none');
-                } else if (dropdownvalue == 'TimelineChanges') {
-                    $("#timelineChanges").css('visibility', 'visible');
-                    $("#subEntities").css('visibility', 'hidden');
-                    $("#allDocuments").addClass('d-none');
-                } else if (dropdownvalue == 'AllDocuments') {
-                    $("#allDocuments").removeClass('d-none');
-                    $("#timelineChanges").css('visibility', 'hidden');
-                    $("#subEntities").css('visibility', 'hidden');
-                } else {
-                    $("#subEntities").css('visibility', 'hidden');
-                    $("#timelineChanges").css('visibility', 'hidden');
-                    $("#allDocuments").addClass('d-none');
-                }
-            });
+            
         });
     </script>
 }
