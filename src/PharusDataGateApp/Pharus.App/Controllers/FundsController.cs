@@ -430,7 +430,7 @@
         {
             if (!string.IsNullOrEmpty(agrName))
             {
-                this.entitiesFileService.DeleteAgreement(agrName);
+                //this.entitiesFileService.DeleteAgreement(agrName);
 
                 return Json(new { data = agrName });
             }
