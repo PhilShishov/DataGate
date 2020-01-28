@@ -37,6 +37,8 @@
 
         List<string[]> GetSubFundTimeline(int id);
 
+        List<string[]> GetDistinctSubFundDocuments(int entityId);
+
         List<string[]> GetAllSubFundDocumens(int id);
 
         List<string[]> GetDistinctSubFundAgreements(DateTime? chosenDate, int id);

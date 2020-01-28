@@ -814,6 +814,7 @@
             model.ProspectusNameToDisplay = GetFileNameFromFilePath
                 (entityId, model.ChosenDate, model.ControllerName)
                 .Split(".")[0];
+            model.DistinctDocumentsNamesToDisplay = this.subFundsService.GetDistinctSubFundDocuments(entityId);
             model.DistinctAgreementsNamesToDisplay = this.subFundsService.GetDistinctSubFundAgreements(date, entityId);
             model.AllAgreementsNamesToDisplay = this.subFundsService.GetAllSubFundAgreements(date, entityId);
             model.EntityTimeline = this.subFundsService.GetSubFundTimeline(entityId);

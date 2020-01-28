@@ -48,7 +48,7 @@ namespace Pharus.App.Models.ViewModels.Entities
 
         public string ProspectusNameToDisplay { get; set; }
 
-        public List<string[]> DocumentsNamesToDisplay { get; set; }
+        public List<string[]> DistinctDocumentsNamesToDisplay { get; set; }
 
         public List<string[]> DistinctAgreementsNamesToDisplay { get; set; }
 
