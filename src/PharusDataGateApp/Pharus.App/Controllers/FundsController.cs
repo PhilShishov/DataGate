@@ -307,9 +307,6 @@
 
             if (file != null || file.FileName != "")
             {
-                FileInfo fileType = new FileInfo(file.FileName);
-                var fileExtension = fileType.Extension;
-
                 string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\FundFile\";
                 string path = $"{networkFileLocation}{file.FileName}";
 

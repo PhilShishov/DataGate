@@ -201,7 +201,7 @@
             SetModelValuesForSpecificView(viewModel);
 
             HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
-            
+
             this.ModelState.Clear();
             return this.View(viewModel);
         }
@@ -301,43 +301,43 @@
 
             var file = model.UploadEntityFileModel.FileToUpload;
 
-            if (!ModelState.IsValid || file == null || file.Length == 0)
+            if (file != null || file.FileName != "")
             {
-                return this.Content("File not loaded");
+                string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\SubfundFile\";
+                string path = $"{networkFileLocation}{file.FileName}";
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                    stream.Close();
+                }
+
+                var startConnection = DateTime.ParseExact(model.StartConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+                DateTime? endConnection = null;
+
+                if (!string.IsNullOrEmpty(model.EndConnection))
+                {
+                    endConnection = DateTime.ParseExact(model.EndConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                }
+
+                var fileTypeDesc = model.UploadEntityFileModel.DocumentType;
+                int fileTypeId = this.context.TbDomFileType
+                        .Where(s => s.FiletypeDesc == fileTypeDesc)
+                        .Select(s => s.FiletypeId)
+                        .FirstOrDefault();
+
+                this.entitiesFileService.AddDocumentToSpecificEntity(
+                                                    file.FileName,
+                                                    model.EntityId,
+                                                    startConnection,
+                                                    endConnection,
+                                                    fileTypeId,
+                                                    model.ControllerName);
+
             }
 
-            string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\SubfundFile\";
-            string path = $"{networkFileLocation}{file.FileName}";
-
-            using (var stream = new FileStream(path, FileMode.Create))
-            {
-                file.CopyTo(stream);
-            }
-
-            var startConnection = DateTime.ParseExact(model.StartConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-
-            DateTime? endConnection = null;
-
-            if (!string.IsNullOrEmpty(model.EndConnection))
-            {
-                endConnection = DateTime.ParseExact(model.EndConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            }
-
-            var fileTypeDesc = model.UploadEntityFileModel.DocumentType;
-            int fileTypeId = this.context.TbDomFileType
-                    .Where(s => s.FiletypeDesc == fileTypeDesc)
-                    .Select(s => s.FiletypeId)
-                    .FirstOrDefault();
-
-            this.entitiesFileService.AddDocumentToSpecificEntity(
-                                                file.FileName,
-                                                model.EntityId,
-                                                startConnection,
-                                                endConnection,
-                                                fileTypeId,
-                                                model.ControllerName);
-
-            return this.RedirectToAction("All");
+            return this.RedirectToAction("ViewEntitySE", new { EntityId = model.EntityId, ChosenDate = model.ChosenDate });
         }
 
         //[HttpPost]
