@@ -340,68 +340,96 @@
             return this.RedirectToAction("ViewEntitySE", new { EntityId = model.EntityId, ChosenDate = model.ChosenDate });
         }
 
-        //[HttpPost]
-        //public IActionResult UploadAgreement(SpecificEntityViewModel model)
-        //{
-        //    SetModelValuesForSpecificView(model);
+        [HttpPost]
+        public IActionResult UploadAgreement(SpecificEntityViewModel model)
+        {
+            SetModelValuesForSpecificView(model);
 
-        //    var file = model.UploadEntityFileModel.FileToUpload;
-        //    var startConnectionModel = model.UploadEntityFileModel.StartConnection;
-        //    var endConnectionModel = model.UploadEntityFileModel.EndConnection;
+            //if (!ModelState.IsValid)
+            //{
+            //    return this.PartialView("SpecificEntity/_UploadAgr", model);
+            //}
 
-        //    if (!ModelState.IsValid || file == null || file.Length == 0)
-        //    {
-        //        return this.Content("File not loaded");
-        //    }
+            var file = model.UploadAgreementFileModel.FileToUpload;
 
-        //    string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\SubfundFile\";
-        //    string path = $"{networkFileLocation}{file.FileName}";
+            if (file != null || file.FileName != "")
+            {
+                string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\AgreementFile\";
+                string path = $"{networkFileLocation}{file.FileName}";
 
-        //    using (var stream = new FileStream(path, FileMode.Create))
-        //    {
-        //        file.CopyTo(stream);
-        //    }
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                    stream.Close();
+                }
 
-        //    var startConnection = DateTime.ParseExact(startConnectionModel, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                var activityTypeIdDesc = model.UploadAgreementFileModel.AgrType;
+                int activityTypeId = this.context.TbDomActivityType
+                        .Where(at => at.AtDesc == activityTypeIdDesc)
+                        .Select(at => at.AtId)
+                        .FirstOrDefault();
 
-        //    DateTime? endConnection = null;
+                var contractDate = model.UploadAgreementFileModel.ContractDate;
+                var activationDate = model.UploadAgreementFileModel.ActivationDate;
+                var expirationDate = model.UploadAgreementFileModel.ExpirationDate;
 
-        //    if (!string.IsNullOrEmpty(endConnectionModel))
-        //    {
-        //        endConnection = DateTime.ParseExact(endConnectionModel, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-        //    }
 
-        //    var fileTypeDesc = model.UploadEntityFileModel.FileType;
-        //    int fileTypeId = this.context.TbDomFileType
-        //            .Where(s => s.FiletypeDesc == fileTypeDesc)
-        //            .Select(s => s.FiletypeId)
-        //            .FirstOrDefault();
+                int statusId = this.context.TbDomAgreementStatus
+                    .Where(s => s.ASDesc == model.UploadAgreementFileModel.Status)
+                    .Select(s => s.ASId)
+                    .FirstOrDefault();
 
-        //    this.entitiesFileService.AddDocumentToSpecificEntity(
-        //                                        file.FileName,
-        //                                        model.EntityId,
-        //                                        startConnection,
-        //                                        endConnection,
-        //                                        fileTypeId,
-        //                                        model.ControllerName);
+                int companyId = this.context.TbCompanies
+                    .Where(c => c.CName == model.UploadAgreementFileModel.Company)
+                    .Select(c => c.CId)
+                    .FirstOrDefault();
 
-        //    return this.RedirectToAction("All");
-        //}
+                this.entitiesFileService.AddAgreementToSpecificEntity(
+                                                    file.FileName,
+                                                    model.EntityId,
+                                                    activityTypeId,
+                                                    contractDate,
+                                                    activationDate,
+                                                    expirationDate,
+                                                    statusId,
+                                                    companyId,
+                                                    model.ControllerName);
+
+            }
+
+            this.ModelState.Clear();
+            return this.RedirectToAction("ViewEntitySE", new { EntityId = model.EntityId, ChosenDate = model.ChosenDate });
+        }
 
         [HttpPost]
         public FileStream ReadPdfFile(SpecificEntityViewModel model)
         {
-            FileStream fs = null;
+            FileStream fileStreamResult = null;
             string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
             var path = this.entitiesFileService.LoadEntityFileToDisplay(model.EntityId, model.ChosenDate, controllerName);
 
             if (this.HttpContext.Request.Form.ContainsKey("read_Pdf"))
             {
-                fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+                fileStreamResult = new FileStream(path, FileMode.Open, FileAccess.Read);
             }
 
-            return fs;
+            return fileStreamResult;
+        }
+
+        [HttpGet]
+        public JsonResult DeleteAgreement(string agrName)
+        {
+            if (!string.IsNullOrEmpty(agrName))
+            {
+                //this.entitiesFileService.DeleteAgreement(agrName);
+
+                return Json(new { data = agrName });
+            }
+            else
+            {
+                return Json(new { data = "false" });
+            }
         }
 
         [HttpPost]
