@@ -7,21 +7,72 @@
         @if (controllerName == "Funds")
         {
             <u class="text-torshia">PROSPECTUS</u><br>
+
+            @if (!string.IsNullOrEmpty(Model.ProspectusNameToDisplay))
+            {
+                <button class="btn-link-pharus mt-3"
+                        formtarget="_blank"
+                        type="submit"
+                        formaction="/@controllerName/ReadPdfFile"
+                        name="read_Pdf">
+                    @Model.ProspectusNameToDisplay
+                </button>
+            }
         }
         else
         {
             <u class="text-torshia">DOCUMENTS</u><br>
-        }
 
-        @if (!string.IsNullOrEmpty(Model.ProspectusNameToDisplay))
-        {
-            <button class="btn-link-pharus mt-3"
-                    formtarget="_blank"
-                    type="submit"
-                    formaction="/@controllerName/ReadPdfFile"
-                    name="read_Pdf">
-                @Model.ProspectusNameToDisplay
-            </button>
+            <div class="mt-3">
+                <table class="table table-hover w-100"
+                       id="tbl-distinct-documents">
+                    <thead>
+                        <tr>
+                            <th class="text-secondary p-1">File Description</th>
+                            <th class="text-secondary p-1">File Name</th>
+                            <th class="text-secondary p-1">Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @for (int row = 1; row < Model.DistinctDocumentsNamesToDisplay.Count; row++)
+                        {
+                            <tr name="trow">
+
+                                @for (int col = 0; col < Model.DistinctDocumentsNamesToDisplay[row].Length; col++)
+                                {
+                                    @if (Model.DistinctDocumentsNamesToDisplay[0][col] == "File Name")
+                                    {
+                                        <td>
+                                            <button class="btn-link-pharus text-left"
+                                                    formtarget="_blank"
+                                                    type="submit"
+                                                    formaction="/@controllerName/ReadPdfFile"
+                                                    name="read_Pdf">
+                                                @Model.DistinctDocumentsNamesToDisplay[row][col].Split(".")[0]
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <button type="button"
+                                                    class="btn btn-primary btn-sm mr-1 confirmDelBtn"
+                                                    formaction="@Url.Action("DeleteAgreement", controllerName,
+                                                           new { @fileName = Model.DistinctDocumentsNamesToDisplay[row][col]})">
+                                                Delete
+                                            </button>
+                                        </td>
+                                    }
+                                    else if (Model.DistinctDocumentsNamesToDisplay[0][col] == "File Description")
+                                    {
+                                        <td>
+                                            @Model.DistinctDocumentsNamesToDisplay[row][col]
+                                        </td>
+                                    }
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         }
     </div>
 
@@ -42,44 +93,38 @@
                 <tbody>
                     @for (int row = 1; row < Model.DistinctAgreementsNamesToDisplay.Count; row++)
                     {
-                    <tr name="trow">
+                        <tr name="trow">
 
-                        @for (int col = 0; col < Model.DistinctAgreementsNamesToDisplay[row].Length; col++)
-                        {
-                            @if (Model.DistinctAgreementsNamesToDisplay[0][col] == "File Name")
+                            @for (int col = 0; col < Model.DistinctAgreementsNamesToDisplay[row].Length; col++)
                             {
-                                <td>
-                                    <button class="btn-link-pharus text-left"
-                                            formtarget="_blank"
-                                            type="submit"
-                                            formaction="/@controllerName/ReadPdfFile"
-                                            name="read_Pdf">
-                                        @Model.DistinctAgreementsNamesToDisplay[row][col].Split(".")[0]
-                                    </button>
-                                </td>
-                                <td>
-                                    <button type="button"
-                                            class="btn btn-primary btn-sm mr-1 confirmDelBtn"
-                                            formaction="@Url.Action("DeleteAgreement", controllerName,
+                                @if (Model.DistinctAgreementsNamesToDisplay[0][col] == "File Name")
+                                {
+                                    <td>
+                                        <button class="btn-link-pharus text-left"
+                                                formtarget="_blank"
+                                                type="submit"
+                                                formaction="/@controllerName/ReadPdfFile"
+                                                name="read_Pdf">
+                                            @Model.DistinctAgreementsNamesToDisplay[row][col].Split(".")[0]
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button type="button"
+                                                class="btn btn-primary btn-sm mr-1 confirmDelBtn"
+                                                formaction="@Url.Action("DeleteAgreement", controllerName,
                                                            new { @fileName = Model.DistinctAgreementsNamesToDisplay[row][col]})">
-                                        Delete
-                                    </button>
-                                </td>
+                                            Delete
+                                        </button>
+                                    </td>
+                                }
+                                else if (Model.DistinctAgreementsNamesToDisplay[0][col] == "File Description")
+                                {
+                                    <td>
+                                        @Model.DistinctAgreementsNamesToDisplay[row][col]
+                                    </td>
+                                }
                             }
-                            else if (Model.DistinctAgreementsNamesToDisplay[0][col] == "File Description")
-                            {
-                                <td>
-                                    @Model.DistinctAgreementsNamesToDisplay[row][col]
-                                </td>
-                            }
-                            else if (Model.DistinctAgreementsNamesToDisplay[0][col] == "SA Id")
-                            {
-                                <td class="d-none">
-                                    @Model.DistinctAgreementsNamesToDisplay[row][col]
-                                </td>
-                            }
-                        }
-                    </tr>
+                        </tr>
                     }
                 </tbody>
             </table>
