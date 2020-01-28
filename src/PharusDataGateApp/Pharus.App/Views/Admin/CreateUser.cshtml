@@ -15,6 +15,7 @@
                class="form-control maxw-270"
                id="username"
                placeholder="Username..."
+               autocomplete="username"
                asp-for="Username">
         <span asp-validation-for="Username" class="text-danger"></span>
     </div>
@@ -24,6 +25,7 @@
                class="form-control maxw-270"
                id="password"
                placeholder="Password..."
+               autocomplete="new-password"
                asp-for="Password">
         <span asp-validation-for="Password" class="text-danger"></span>
     </div>
@@ -33,6 +35,7 @@
                class="form-control maxw-270"
                id="confirmPassword"
                placeholder="Confirm Password..."
+               autocomplete="new-password"
                asp-for="ConfirmPassword">
         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
     </div>
@@ -66,7 +69,6 @@
 </form>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
     <script type="text/javascript" src="~/js/confirmCreate.js"></script>
 
     <script>
