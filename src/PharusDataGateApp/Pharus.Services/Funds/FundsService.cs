@@ -259,7 +259,7 @@ namespace Pharus.Services.Funds
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from [dbo].[fn_viewdocuments_fund]({id})";
+                command.CommandText = $"select * from [dbo].[fn_view_documents_fund]({id})";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
@@ -287,7 +287,7 @@ namespace Pharus.Services.Funds
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from [dbo].[fn_viewagreements_fund]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                command.CommandText = $"select * from [dbo].[fn_view_agreements_fund]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
