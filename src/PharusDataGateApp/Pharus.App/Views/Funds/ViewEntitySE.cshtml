@@ -87,7 +87,6 @@
             </div>
         </div>
     </div>
-
 </form>
 
 @section Scripts{
@@ -128,7 +127,7 @@
                 const agrName = $(this).closest('tr').find("td:eq(2)").text().trim();
                 $.ajax({
                     type: "GET",
-                    url: "/Funds/DeleteAgreement",
+                    url: urlDel,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     data: { id: id, agrName: agrName },
