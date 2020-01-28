@@ -205,6 +205,45 @@
                 }
             }
         }
+
+        public void DeleteDocument(string docName, string controllerName)
+        {
+            docName += ".pdf";
+            string query = "EXEC delete_agreement_file_byname @file_name";
+
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = configuration.GetConnectionString("PharusFileConnection");
+                using (SqlCommand command = new SqlCommand(query))
+                {
+                    command.Parameters.AddRange(new[]
+                    {
+                        new SqlParameter("@file_name", SqlDbType.NVarChar, 100) { Value = docName },
+                    });
+
+                    foreach (SqlParameter parameter in command.Parameters)
+                    {
+                        if (parameter.Value == null)
+                        {
+                            parameter.Value = DBNull.Value;
+                        }
+                    }
+
+                    command.Connection = connection;
+
+                    try
+                    {
+                        command.Connection.Open();
+                        command.ExecuteScalar();
+                    }
+                    catch (SqlException sx)
+                    {
+                        Console.WriteLine(sx.Message);
+                    }
+                }
+            }
+        }
+
         public void DeleteAgreement(string agrName)
         {
             agrName += ".pdf";

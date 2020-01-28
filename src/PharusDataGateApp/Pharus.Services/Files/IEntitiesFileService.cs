@@ -27,6 +27,8 @@
                             int companyId,
                             string controllerName);
 
+        void DeleteDocument(string docName, string controllerName);
+
         void DeleteAgreement(string fileName);
     }
 }

@@ -96,7 +96,8 @@
 
     <script src="~/js/multiselect.js"></script>
     <script src="~/js/setDates.js"></script>
-    <script src="~/js/deleteAgreement.js"></script>
+    <script src="~/js/delete/deleteAgreement.js"></script>
+    <script src="~/js/delete/deleteDocument.js"></script>
     <script src="~/js/select2/select2-entity-subentity.js"></script>
     <script src="~/js/select-additional-info/select-subfund-addInfo.js"></script>
     <script src="~/lib/jquery/dist/jquery.doubleScroll.js"></script>
@@ -116,11 +117,17 @@
 
             // ________________________________________________________
             //
+            // Delete selected row from documents table by confirming
+
+            const urlDocDel = "/SubFunds/DeleteDocument";
+            passDocUrlToDelete(urlDocDel);
+
+            // ________________________________________________________
+            //
             // Delete selected row from agreements table by confirming
 
-            const urlDel = "/SubFunds/DeleteAgreement";
-
-            passUrlToDelete(urlDel);
+            const urlAgrDel = "/SubFunds/DeleteAgreement";
+            passAgrUrlToDelete(urlAgrDel);
 
             // ________________________________________________________
             //
