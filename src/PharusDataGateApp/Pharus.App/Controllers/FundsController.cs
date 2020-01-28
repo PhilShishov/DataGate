@@ -352,64 +352,57 @@
         {
             SetModelValuesForSpecificView(model);
 
-
-
             //if (!ModelState.IsValid)
             //{
             //    return this.PartialView("SpecificEntity/_UploadAgr", model);
             //}
 
-
-            //if (file == null || file.Length == 0)
-            //{
-            //    //ViewBag.Message = "File not loaded. Please try again";
-            //    return PartialView("SpecificEntity/_UploadAgr", model);
-            //}
-
-            //FileInfo fileType = new FileInfo(file.FileName);
-            //var fileExtension = fileType.Extension;
-
             var file = model.UploadAgreementFileModel.FileToUpload;
-            string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\AgreementFile\";
-            string path = $"{networkFileLocation}{file.FileName}";
 
-            using (var stream = new FileStream(path, FileMode.Create))
+            if (file != null || file.FileName != "")
             {
-                file.CopyTo(stream);
-                stream.Close();
-            }
+                string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\AgreementFile\";
+                string path = $"{networkFileLocation}{file.FileName}";
 
-            var activityTypeIdDesc = model.UploadAgreementFileModel.AgrType;
-            int activityTypeId = this.context.TbDomActivityType
-                    .Where(at => at.AtDesc == activityTypeIdDesc)
-                    .Select(at => at.AtId)
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                    stream.Close();
+                }
+
+                var activityTypeIdDesc = model.UploadAgreementFileModel.AgrType;
+                int activityTypeId = this.context.TbDomActivityType
+                        .Where(at => at.AtDesc == activityTypeIdDesc)
+                        .Select(at => at.AtId)
+                        .FirstOrDefault();
+
+                var contractDate = model.UploadAgreementFileModel.ContractDate;
+                var activationDate = model.UploadAgreementFileModel.ActivationDate;
+                var expirationDate = model.UploadAgreementFileModel.ExpirationDate;
+
+
+                int statusId = this.context.TbDomAgreementStatus
+                    .Where(s => s.ASDesc == model.UploadAgreementFileModel.Status)
+                    .Select(s => s.ASId)
                     .FirstOrDefault();
 
-            var contractDate = model.UploadAgreementFileModel.ContractDate;
-            var activationDate = model.UploadAgreementFileModel.ActivationDate;
-            var expirationDate = model.UploadAgreementFileModel.ExpirationDate;
+                int companyId = this.context.TbCompanies
+                    .Where(c => c.CName == model.UploadAgreementFileModel.Company)
+                    .Select(c => c.CId)
+                    .FirstOrDefault();
 
+                this.entitiesFileService.AddAgreementToSpecificEntity(
+                                                    file.FileName,
+                                                    model.EntityId,
+                                                    activityTypeId,
+                                                    contractDate,
+                                                    activationDate,
+                                                    expirationDate,
+                                                    statusId,
+                                                    companyId,
+                                                    model.ControllerName);
 
-            int statusId = this.context.TbDomAgreementStatus
-                .Where(s => s.ASDesc == model.UploadAgreementFileModel.Status)
-                .Select(s => s.ASId)
-                .FirstOrDefault();
-
-            int companyId = this.context.TbCompanies
-                .Where(c => c.CName == model.UploadAgreementFileModel.Company)
-                .Select(c => c.CId)
-                .FirstOrDefault();
-
-            this.entitiesFileService.AddAgreementToSpecificEntity(
-                                                file.FileName,
-                                                model.EntityId,
-                                                activityTypeId,
-                                                contractDate,
-                                                activationDate,
-                                                expirationDate,
-                                                statusId,
-                                                companyId,
-                                                model.ControllerName);
+            }
 
             this.ModelState.Clear();
             return this.RedirectToAction("ViewEntitySE", new { EntityId = model.EntityId, ChosenDate = model.ChosenDate });
