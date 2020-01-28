@@ -7,7 +7,7 @@
 
 <h1 class="text-center text-torshia">Pharus DataGate <br>User Log In</h1>
 <hr class="bg-pharus w-50 hr-2" />
-<form class="mx-auto w-50 d-inline" method="post">
+<form class="mx-auto w-50 d-inline" method="post" autocomplete="off">
     <div class="d-inline justify-content-center">
         <div class="form-group">
             <input type="text"
@@ -23,7 +23,8 @@
                    class="form-control m-auto text-center maxw-270"
                    id="password"
                    placeholder="Password..."
-                   asp-for="Input.Password">
+                   asp-for="Input.Password"
+                   autocomplete="new-password">
             <span asp-validation-for="Input.Password" class="text-danger d-flex justify-content-center"></span>
             <!-- TODO show/hide password -->
             <!-- <input type="checkbox" class="form-control-login-pharus" onclick="document.getElementById('password').type = this.checked ? 'text' : 'password'">Show password -->
@@ -46,6 +47,3 @@
     </div>
 </form>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
