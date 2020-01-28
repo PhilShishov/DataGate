@@ -95,6 +95,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
     <script src="~/js/multiselect.js"></script>
+    <script src="~/js/setDates.js"></script>
     <script src="~/js/deleteAgreement.js"></script>
     <script src="~/js/select2/select2-entity-subentity.js"></script>
     <script src="~/js/select-additional-info/select-subfund-addInfo.js"></script>
@@ -106,6 +107,7 @@
         window.onload = () => {
             manageSideNavBar();
             manageDropdowns();
+            setDates();
         };
 
         if (window.history.replaceState) {
@@ -152,7 +154,7 @@
 
             $('.double-scroll').doubleScroll();
             $('#tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
-            
+
         });
     </script>
 }
