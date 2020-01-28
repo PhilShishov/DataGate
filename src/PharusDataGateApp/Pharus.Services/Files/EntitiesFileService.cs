@@ -157,7 +157,9 @@
             }
             else if (controllerName == "SubFunds")
             {
-
+                query = "EXEC sp_insert_agreement_subfund " +
+                  "@file_name, @entity_id, @activity_type_id, @contract_date, " +
+                  "@activation_date, @expiration_date, @company_id, @status";
             }
             else if (controllerName == "ShareClasses")
             {
