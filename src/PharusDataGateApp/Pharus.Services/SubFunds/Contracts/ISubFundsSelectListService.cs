@@ -37,5 +37,7 @@
         List<string> GetAllTbDomValuationDate();
 
         List<string> GetAllSubFundFileTypes();
+
+        List<string> GetAllAgreementsFileTypes();
     }
 }

@@ -64,16 +64,29 @@
       enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <partial name="SpecificEntity/_UploadPros" />
+    <partial name="SpecificEntity/_UploadDocument" />
 </form>
 
 <form asp-controller="SubFunds"
       asp-action="UploadAgreement"
       method="post"
       enctype="multipart/form-data">
+    <input asp-for="EntityId" type="text" hidden>
+    <input asp-for="ChosenDate" type="date" hidden>
+
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <partial name="SpecificEntity/_UploadAgr" />
+    <div class="modal"
+         id="upAgrModal"
+         role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body d-grid justify-content-center" id="agrModalBody">
+                    @await Html.PartialAsync("SpecificEntity/_UploadAgr")
+                </div>
+            </div>
+        </div>
+    </div>
 </form>
 
 @section Scripts{
@@ -105,7 +118,7 @@
             if (JumpTo.value == "ShareClasses") {
                 $(this).scrollTop($(JumpTo).position().top);
             }
-           
+
             // ________________________________________________________
             //
             // Modal multiselect for column selection
