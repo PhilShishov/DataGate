@@ -95,18 +95,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
     <script src="~/js/multiselect.js"></script>
+    <script src="~/js/setDates.js"></script>
     <script src="~/js/deleteAgreement.js"></script>
     <script src="~/js/select2/select2-entity-subentity.js"></script>
     <script src="~/js/select-additional-info/select-fund-addInfo.js"></script>
-    <script src="~/lib/jquery/Chart.js/utils.js"></script>
-    <script src="~/lib/jquery/Chart.js/Chart.min.js"></script>
     <script src="~/lib/jquery/dist/jquery.doubleScroll.js"></script>
 
     <script>
         window.onload = () => {
             manageSideNavBar();
             manageDropdowns();
-            //window.myLine = new Chart(ctx, config);
+            setDates();
         }
 
         if (window.history.replaceState) {

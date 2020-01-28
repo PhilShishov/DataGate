@@ -10,7 +10,6 @@ namespace Pharus.App.Models.BindingModels.Files
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    using FoolProof.Core;
     using Microsoft.AspNetCore.Http;
 
     public class UploadAgreementFileModel
@@ -20,7 +19,6 @@ namespace Pharus.App.Models.BindingModels.Files
         public string AgrType { get; set; }
 
         [Required(ErrorMessage = "Contract Date cannot be empty.")]
-        //[LessThanOrEqualTo("ActivationDate", ErrorMessage = "Contract date cannot be after the activation date")]
         [Display(Name = "Contract Date")]
         public DateTime ContractDate { get; set; }
 
