@@ -7,10 +7,11 @@
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace Pharus.App.Models.BindingModels.Files
 {
-    using FoolProof.Core;
-    using Microsoft.AspNetCore.Http;
     using System;
     using System.ComponentModel.DataAnnotations;
+
+    using FoolProof.Core;
+    using Microsoft.AspNetCore.Http;
 
     public class UploadAgreementFileModel
     {
