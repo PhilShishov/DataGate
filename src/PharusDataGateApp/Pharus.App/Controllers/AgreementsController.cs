@@ -1,6 +1,7 @@
 ﻿namespace Pharus.App.Controllers
 {
     using System;
+    using System.Globalization;
 
     using Microsoft.AspNetCore.Mvc;
 
@@ -25,7 +26,7 @@
                 ChosenDate = DateTime.Today.ToString("yyyy-MM-dd"),
             };
 
-            var chosenDate = DateTime.Parse(model.ChosenDate);
+            var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
             model.FundAgreements = this.agreementsService.GetAgreementsForAllFunds(chosenDate);
             model.SubFundAgreements = this.agreementsService.GetAgreementsForAllSubFunds(chosenDate);
@@ -37,6 +38,15 @@
         [HttpPost]
         public IActionResult All(AgreementsViewModel model)
         {
+            if (model.ChosenDate != null)
+            {
+                var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+
+                model.FundAgreements = this.agreementsService.GetAgreementsForAllFunds(chosenDate);
+                model.SubFundAgreements = this.agreementsService.GetAgreementsForAllSubFunds(chosenDate);
+                model.ShareClassAgreements = this.agreementsService.GetAgreementsForAllShareClasses(chosenDate);
+            }
+
             if (model.FundAgreements != null)
             {
                 return this.View(model);
