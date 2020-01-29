@@ -6,7 +6,7 @@
     contractDate.addEventListener('change', setActivationDate);
 
     function setActivationDate() {
-        activationDate.setAttribute('min', contractDate.value);
+        //activationDate.setAttribute('min', contractDate.value);
         expirationDate.setAttribute('min', contractDate.value);
         activationDate.value = contractDate.value;
     }
