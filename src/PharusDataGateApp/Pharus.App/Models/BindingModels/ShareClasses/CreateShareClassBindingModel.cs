@@ -5,7 +5,7 @@
     public class CreateShareClassBindingModel : ShareClassBindingModel
     {
         [Required(ErrorMessage = "Please choose a subfund container!")]
-        [Display(Name = "Subfund Container")]
+        [Display(Name = "Sub Fund Container")]
         public string SubFundContainer { get; set; }
     }
 }
