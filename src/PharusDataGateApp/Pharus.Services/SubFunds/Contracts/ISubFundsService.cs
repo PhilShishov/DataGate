@@ -37,7 +37,7 @@
 
         List<string[]> GetSubFundTimeline(int id);
 
-        List<string[]> GetDistinctSubFundDocuments(int entityId);
+        List<string[]> GetDistinctSubFundDocuments(int id);
 
         List<string[]> GetAllSubFundDocumens(int id);
 

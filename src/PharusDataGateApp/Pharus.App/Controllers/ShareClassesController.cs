@@ -615,7 +615,7 @@
             model.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
             model.Entity = this.shareClassesService.GetShareClassWithDateById(date, entityId);
             model.EntityTimeline = this.shareClassesService.GetShareClassesTimeline(entityId);
-            model.EntityDocuments = this.shareClassesService.GetAllShareClassesDocumens(entityId);
+            model.EntityDocuments = this.shareClassesService.GetAllShareClassDocuments(entityId);
             model.ProspectusNameToDisplay = GetFileNameFromFilePath
                 (entityId, model.ChosenDate, model.ControllerName)
                 .Split(".")[0];

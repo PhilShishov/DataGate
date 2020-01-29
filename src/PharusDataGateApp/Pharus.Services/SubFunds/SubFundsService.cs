@@ -320,6 +320,19 @@ namespace Pharus.Services.SubFunds
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
         }
+        public List<string[]> GetDistinctSubFundAgreements(DateTime? chosenDate, int id)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                command.CommandText = $"select * from [dbo].[fn_view_distinct_agreements_subfund]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
 
         public List<string[]> GetAllSubFundDocumens(int id)
         {
@@ -330,20 +343,6 @@ namespace Pharus.Services.SubFunds
                 SqlCommand command = connection.CreateCommand();
 
                 command.CommandText = $"select * from [dbo].[fn_view_documents_subfund]({id})";
-
-                return CreateModel.CreateModelWithHeadersAndValue(command);
-            }
-        }
-
-        public List<string[]> GetDistinctSubFundAgreements(DateTime? chosenDate, int id)
-        {
-            using (SqlConnection connection = new SqlConnection())
-            {
-                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-
-                command.CommandText = $"select * from [dbo].[fn_view_distinct_agreements_subfund]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }

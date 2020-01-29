@@ -35,7 +35,13 @@
 
         List<string[]> GetShareClassesTimeline(int id);
 
-        List<string[]> GetAllShareClassesDocumens(int id);
+        List<string[]> GetDistinctShareClassDocuments(int id);
+
+        List<string[]> GetDistinctShareClassAgreements(DateTime? chosenDate, int id);
+
+        List<string[]> GetAllShareClassDocuments(int id);
+
+        List<string[]> GetAllShareClassAgreements(DateTime? chosenDate, int id);
 
         List<string[]> PrepareShareClassesForPDFExtract(DateTime? chosenDate);
 

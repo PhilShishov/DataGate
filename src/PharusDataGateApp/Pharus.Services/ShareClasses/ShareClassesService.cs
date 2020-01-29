@@ -294,7 +294,7 @@ namespace Pharus.Services.ShareClasses
             }
         }
 
-        public List<string[]> GetAllShareClassesDocumens(int id)
+        public List<string[]> GetDistinctShareClassDocuments(int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -302,7 +302,49 @@ namespace Pharus.Services.ShareClasses
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from [dbo].[fn_viewdocuments_shareclass]({id})";
+                command.CommandText = $"select * from [dbo].[fn_view_distinct_documents_shareclass]({id})";
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
+        public List<string[]> GetDistinctShareClassAgreements(DateTime? chosenDate, int id)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                command.CommandText = $"select * from [dbo].[fn_view_distinct_agreements_shareclass]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
+        public List<string[]> GetAllShareClassDocuments(int id)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                command.CommandText = $"select * from [dbo].[fn_view_documents_shareclass]({id})";
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
+        public List<string[]> GetAllShareClassAgreements(DateTime? chosenDate, int id)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                command.CommandText = $"select * from [dbo].[fn_view_agreements_shareclass]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
