@@ -838,11 +838,6 @@
                                     model.EntityId);
         }
 
-        //private string GetFileNameFromFilePath(int entityId, string chosenDate, string controllerName)
-        //{
-        //    return this.entitiesFileService.LoadEntityFileToDisplay(entityId, chosenDate, controllerName).Split('\\').Last();
-        //}
-
         private void SetModelValuesForSpecificView(SpecificEntityViewModel model)
         {
             var date = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
