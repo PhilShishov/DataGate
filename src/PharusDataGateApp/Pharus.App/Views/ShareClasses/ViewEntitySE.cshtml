@@ -84,6 +84,11 @@
 
     <script src="~/lib/jquery/Chart.js/Chart.min.js"></script>
     <script src="~/lib/jquery/Chart.js/utils.js"></script>
+    <script src="~/js/delete/deleteAgreement.js"></script>
+    <script src="~/js/delete/deleteDocument.js"></script>
+    <script src="~/js/select-additional-info/select-shareclass-addInfo.js"></script>
+    <script src="~/js/setDates.js"></script>
+
 
     <script>
         window.onload = function () {
@@ -91,11 +96,30 @@
             window.myLine = new Chart(ctx, config);
             manageSideNavBar();
             manageDropdowns();
+            setDates();
         };
 
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
         }
+
+        $(document).ready(function () {
+
+            // ________________________________________________________
+            //
+            // Delete selected row from documents table by confirming
+
+            const urlDocDel = "/ShareClasses/DeleteDocument";
+            passDocUrlToDelete(urlDocDel);
+
+            // ________________________________________________________
+            //
+            // Delete selected row from agreements table by confirming
+
+            const urlAgrDel = "/ShareClasses/DeleteAgreement";
+            passAgrUrlToDelete(urlAgrDel);
+
+        });
 
         // ________________________________________________________
         //

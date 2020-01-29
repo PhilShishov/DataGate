@@ -347,6 +347,38 @@
             return fileStreamResult;
         }
 
+        [HttpGet]
+        public JsonResult DeleteDocument(string docName)
+        {
+            if (!string.IsNullOrEmpty(docName))
+            {
+                string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+
+                this.entitiesFileService.DeleteDocument(docName, controllerName);
+
+                return Json(new { data = docName });
+            }
+            else
+            {
+                return Json(new { data = "false" });
+            }
+        }
+
+        [HttpGet]
+        public JsonResult DeleteAgreement(string agrName)
+        {
+            if (!string.IsNullOrEmpty(agrName))
+            {
+                this.entitiesFileService.DeleteAgreement(agrName);
+
+                return Json(new { data = agrName });
+            }
+            else
+            {
+                return Json(new { data = "false" });
+            }
+        }
+
         [HttpGet("ShareClasses/EditShareClass/{EntityId}/{ChosenDate}")]
         [Authorize(Roles = "Admin")]
         public IActionResult EditShareClass(int entityId, string chosenDate)
