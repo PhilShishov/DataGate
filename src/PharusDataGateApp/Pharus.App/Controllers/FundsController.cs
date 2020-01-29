@@ -679,19 +679,19 @@
 
         private void SetModelValuesForSpecificView(SpecificEntityViewModel model)
         {
+            model.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
             var date = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             int entityId = model.EntityId;
+            string prospectusName = GetFileNameFromFilePath
+                (entityId, model.ChosenDate, model.ControllerName);
 
-            model.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
             model.Entity = this.fundsService.GetFundWithDateById(date, entityId);
             model.EntitySubEntities = this.fundsService.GetFund_SubFunds(date, entityId);
             model.EntitiesHeadersForColumnSelection = this.fundsService
                                                                 .GetFund_SubFunds(date, entityId)
                                                                 .Take(1)
                                                                 .ToList();
-            model.ProspectusNameToDisplay = GetFileNameFromFilePath
-                (entityId, model.ChosenDate, model.ControllerName)
-                .Split(".")[0];
+            model.ProspectusNameToDisplay = Path.GetFileNameWithoutExtension(prospectusName);
             model.DistinctAgreementsNamesToDisplay = this.fundsService.GetDistinctFundAgreements(date, entityId);
             model.AllAgreementsNamesToDisplay = this.fundsService.GetAllFundAgreements(date, entityId);
             model.EntityTimeline = this.fundsService.GetFundTimeline(entityId);
