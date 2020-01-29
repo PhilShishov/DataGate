@@ -8,10 +8,10 @@
             @for (int row = 0; row < 1; row++)
             {
                 <tr>
-                    @for (int col = 0; col < Model.AllAgreementsNamesToDisplay[row].Length; col++)
+                    @for (int col = 0; col < Model.EntityAgreements[row].Length; col++)
                     {
                         <th class="text-secondary p-1">
-                            @Model.AllAgreementsNamesToDisplay[row][col]
+                            @Model.EntityAgreements[row][col]
                         </th>
                     }
                 </tr>
@@ -19,25 +19,25 @@
         </thead>
 
         <tbody>
-            @for (int row = 1; row < Model.AllAgreementsNamesToDisplay.Count; row++)
+            @for (int row = 1; row < Model.EntityAgreements.Count; row++)
             {
                 <tr>
-                    @for (int col = 0; col < Model.AllAgreementsNamesToDisplay[row].Length; col++)
+                    @for (int col = 0; col < Model.EntityAgreements[row].Length; col++)
                     {
                         <td class="p-1">
-                            @if (Model.AllAgreementsNamesToDisplay[0][col] == "File Name")
+                            @if (Model.EntityAgreements[0][col] == "File Name")
                             {
                             <button class="btn-link-pharus"
                                     formtarget="_blank"
                                     type="submit"
                                     formaction="/@controllerName/ReadPdfFile"
                                     name="read_Pdf">
-                                @System.IO.Path.GetFileNameWithoutExtension(Model.AllAgreementsNamesToDisplay[row][col])
+                                @System.IO.Path.GetFileNameWithoutExtension(Model.EntityAgreements[row][col])
                             </button>
                             }
                             else
                             {
-                                @Model.AllAgreementsNamesToDisplay[row][col]
+                                @Model.EntityAgreements[row][col]
                             }
                         </td>
                     }
