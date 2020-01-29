@@ -12,6 +12,10 @@
 
         public string Command { get; set; }
 
-        public List<string[]> EntityDocuments { get; set; }
+        public List<string[]> FundAgreements { get; set; }
+
+        public List<string[]> SubFundAgreements { get; set; }
+
+        public List<string[]> ShareClassAgreements { get; set; }
     }
 }

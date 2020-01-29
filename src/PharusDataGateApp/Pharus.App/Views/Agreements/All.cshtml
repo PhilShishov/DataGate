@@ -4,6 +4,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+@section Styles{
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" />
+
+    <style>
+        body {
+            background-image: none;
+        }
+    </style>
+}
+
 <form asp-controller="Agreements"
       class="justify-content-between"
       method="post"
@@ -24,21 +37,22 @@
                             <input type="submit"
                                    class="btn btn-primary btn-sm mb-1"
                                    asp-for="Command"
-                                   value="Update Table"></>
-                            <input type="button"
-                                   class="btn btn-primary btn-sm mb-1"
-                                   asp-for="Command"
-                                   value="Funds"></>
+                                   value="Update Table">
 
                             <input type="button"
                                    class="btn btn-primary btn-sm mb-1"
-                                   asp-for="Command"
-                                   value="Sub Funds"></>
+                                   id="showFunds"
+                                   value="Funds">
 
                             <input type="button"
                                    class="btn btn-primary btn-sm mb-1"
-                                   asp-for="Command"
-                                   value="Share Classes"></>
+                                   id="showSubFunds"
+                                   value="Sub Funds">
+
+                            <input type="button"
+                                   class="btn btn-primary btn-sm mb-1"
+                                   id="showShareClasses"
+                                   value="Share Classes">
                         </div>
                     </div>
 
@@ -56,7 +70,7 @@
                                    asp-for="Command"
                                    value="Search"></>
                         </div>
-                    </div>                 
+                    </div>
                 </div>
 
                 <div class="justify-content-center w-35">
@@ -72,10 +86,10 @@
                     @for (int row = 0; row < 1; row++)
                     {
                         <tr>
-                            @for (int col = 0; col < Model.EntityDocuments[row].Length; col++)
+                            @for (int col = 0; col < Model.FundAgreements[row].Length; col++)
                             {
                                 <th class="text-secondary p-1">
-                                    @Model.EntityDocuments[row][col]
+                                    @Model.FundAgreements[row][col]
                                 </th>
                             }
                         </tr>
@@ -83,25 +97,25 @@
                 </thead>
 
                 <tbody>
-                    @for (int row = 1; row < Model.EntityDocuments.Count; row++)
+                    @for (int row = 1; row < Model.FundAgreements.Count; row++)
                     {
                         <tr>
-                            @for (int col = 0; col < Model.EntityDocuments[row].Length; col++)
+                            @for (int col = 0; col < Model.FundAgreements[row].Length; col++)
                             {
                                 <td class="p-1">
-                                    @if (Model.EntityDocuments[0][col] == "File Name")
+                                    @if (Model.FundAgreements[0][col] == "File Name")
                                     {
                                         <button class="btn-link-pharus"
                                                 formtarget="_blank"
                                                 type="submit"
                                                 formaction="/Funds/ReadPdfFile"
                                                 name="read_Pdf">
-                                            @Model.EntityDocuments[row][col].Split(".")[0]
+                                            @Model.FundAgreements[row][col].Split(".")[0]
                                         </button>
                                     }
                                     else
                                     {
-                                        @Model.EntityDocuments[row][col]
+                                        @Model.FundAgreements[row][col]
                                     }
                                 </td>
                             }
@@ -117,10 +131,10 @@
                     @for (int row = 0; row < 1; row++)
                     {
                         <tr>
-                            @for (int col = 0; col < Model.EntityDocuments[row].Length; col++)
+                            @for (int col = 0; col < Model.SubFundAgreements[row].Length; col++)
                             {
                                 <th class="text-secondary p-1">
-                                    @Model.EntityDocuments[row][col]
+                                    @Model.SubFundAgreements[row][col]
                                 </th>
                             }
                         </tr>
@@ -128,25 +142,25 @@
                 </thead>
 
                 <tbody>
-                    @for (int row = 1; row < Model.EntityDocuments.Count; row++)
+                    @for (int row = 1; row < Model.SubFundAgreements.Count; row++)
                     {
                         <tr>
-                            @for (int col = 0; col < Model.EntityDocuments[row].Length; col++)
+                            @for (int col = 0; col < Model.SubFundAgreements[row].Length; col++)
                             {
                                 <td class="p-1">
-                                    @if (Model.EntityDocuments[0][col] == "File Name")
+                                    @if (Model.SubFundAgreements[0][col] == "File Name")
                                     {
                                         <button class="btn-link-pharus"
                                                 formtarget="_blank"
                                                 type="submit"
                                                 formaction="/Funds/ReadPdfFile"
                                                 name="read_Pdf">
-                                            @Model.EntityDocuments[row][col].Split(".")[0]
+                                            @Model.SubFundAgreements[row][col].Split(".")[0]
                                         </button>
                                     }
                                     else
                                     {
-                                        @Model.EntityDocuments[row][col]
+                                        @Model.SubFundAgreements[row][col]
                                     }
                                 </td>
                             }
@@ -162,10 +176,10 @@
                     @for (int row = 0; row < 1; row++)
                     {
                         <tr>
-                            @for (int col = 0; col < Model.EntityDocuments[row].Length; col++)
+                            @for (int col = 0; col < Model.ShareClassAgreements[row].Length; col++)
                             {
                                 <th class="text-secondary p-1">
-                                    @Model.EntityDocuments[row][col]
+                                    @Model.ShareClassAgreements[row][col]
                                 </th>
                             }
                         </tr>
@@ -173,25 +187,25 @@
                 </thead>
 
                 <tbody>
-                    @for (int row = 1; row < Model.EntityDocuments.Count; row++)
+                    @for (int row = 1; row < Model.ShareClassAgreements.Count; row++)
                     {
                         <tr>
-                            @for (int col = 0; col < Model.EntityDocuments[row].Length; col++)
+                            @for (int col = 0; col < Model.ShareClassAgreements[row].Length; col++)
                             {
                                 <td class="p-1">
-                                    @if (Model.EntityDocuments[0][col] == "File Name")
+                                    @if (Model.ShareClassAgreements[0][col] == "File Name")
                                     {
                                         <button class="btn-link-pharus"
                                                 formtarget="_blank"
                                                 type="submit"
                                                 formaction="/Funds/ReadPdfFile"
                                                 name="read_Pdf">
-                                            @Model.EntityDocuments[row][col].Split(".")[0]
+                                            @Model.ShareClassAgreements[row][col].Split(".")[0]
                                         </button>
                                     }
                                     else
                                     {
-                                        @Model.EntityDocuments[row][col]
+                                        @Model.ShareClassAgreements[row][col]
                                     }
                                 </td>
                             }
@@ -202,4 +216,13 @@
         </div>
     </div>
 </form>
+
+@section Scripts{
+    <script>
+        window.onload = () => {
+            manageSideNavBar();
+            manageDropdowns();
+        }
+    </script>
+}
 
