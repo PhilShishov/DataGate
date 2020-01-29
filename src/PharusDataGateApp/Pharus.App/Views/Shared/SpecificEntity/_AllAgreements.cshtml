@@ -27,13 +27,13 @@
                         <td class="p-1">
                             @if (Model.AllAgreementsNamesToDisplay[0][col] == "File Name")
                             {
-                                <button class="btn-link-pharus"
-                                        formtarget="_blank"
-                                        type="submit"
-                                        formaction="/@controllerName/ReadPdfFile"
-                                        name="read_Pdf">
-                                    @Model.AllAgreementsNamesToDisplay[row][col].Split(".")[0]
-                                </button>
+                            <button class="btn-link-pharus"
+                                    formtarget="_blank"
+                                    type="submit"
+                                    formaction="/@controllerName/ReadPdfFile"
+                                    name="read_Pdf">
+                                @System.IO.Path.GetFileNameWithoutExtension(Model.AllAgreementsNamesToDisplay[row][col])
+                            </button>
                             }
                             else
                             {
