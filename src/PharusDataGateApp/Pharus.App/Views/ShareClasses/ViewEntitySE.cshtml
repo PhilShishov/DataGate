@@ -39,7 +39,7 @@
             <option value="" selected disabled>Select</option>
             <option value="TimelineChanges">Timeline Changes</option>
             <option value="AllDocuments">All Documents</option>
-            <option value="AllDocuments">All Agreements</option>
+            <option value="AllAgreements">All Agreements</option>
         </select>
     </div>
 
@@ -89,7 +89,6 @@
     <script src="~/js/select-additional-info/select-shareclass-addInfo.js"></script>
     <script src="~/js/setDates.js"></script>
 
-
     <script>
         window.onload = function () {
             let ctx = document.getElementById('aumSC_Canvas').getContext('2d');
@@ -119,49 +118,7 @@
             const urlAgrDel = "/ShareClasses/DeleteAgreement";
             passAgrUrlToDelete(urlAgrDel);
 
-        });
-
-        // ________________________________________________________
-        //
-        // Select menu for fund additional information -
-        // subentities, timeline changes, all documents
-        // Get selected value and keep select option open
-
-        $('#shareClassAdditionalInfSelect option').each(function () {
-            if (this.selected) {
-                const dropdownvalue = $("#shareClassAdditionalInfSelect option:selected").val();
-                if (dropdownvalue == 'TimelineChanges') {
-                    $("#timelineChanges").css('visibility', 'visible');
-                    $("#allDocuments").addClass('d-none');
-                } else if (dropdownvalue == 'AllDocuments') {
-                    $("#allDocuments").removeClass('d-none');
-                    $("#timelineChanges").css('visibility', 'hidden');
-                } else {
-                    $("#timelineChanges").css('visibility', 'hidden');
-                    $("#allDocuments").addClass('d-none');
-                }
-            }
-        });
-
-        // ________________________________________________________
-        //
-        // Select menu for fund additional information -
-        // subentities, timeline changes, all documents -
-        // On change event for selected value
-
-        $("#shareClassAdditionalInfSelect").on('change', function () {
-            const dropdownvalue = $("#shareClassAdditionalInfSelect option:selected").val();
-            if (dropdownvalue == 'TimelineChanges') {
-                $("#timelineChanges").css('visibility', 'visible');
-                $("#allDocuments").addClass('d-none');
-            } else if (dropdownvalue == 'AllDocuments') {
-                $("#allDocuments").removeClass('d-none');
-                $("#timelineChanges").css('visibility', 'hidden');
-            } else {
-                $("#timelineChanges").css('visibility', 'hidden');
-                $("#allDocuments").addClass('d-none');
-            }
-        });
+        });       
 
         // ________________________________________________________
         //
