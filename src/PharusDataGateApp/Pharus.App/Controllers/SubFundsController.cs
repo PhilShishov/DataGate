@@ -421,9 +421,9 @@
         {
             if (!string.IsNullOrEmpty(docName))
             {
-                //string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+                string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
-                //this.entitiesFileService.DeleteDocument(docName, controllerName);
+                this.entitiesFileService.DeleteDocument(docName, controllerName);
 
                 return Json(new { data = docName });
             }
@@ -855,9 +855,7 @@
                                                                     .GetSubFund_ShareClasses(date, entityId)
                                                                     .Take(1)
                                                                     .ToList();
-            model.ProspectusNameToDisplay = GetFileNameFromFilePath
-                (entityId, model.ChosenDate, model.ControllerName)
-                .Split(".")[0];
+
             model.DistinctDocumentsNamesToDisplay = this.subFundsService.GetDistinctSubFundDocuments(entityId);
             model.DistinctAgreementsNamesToDisplay = this.subFundsService.GetDistinctSubFundAgreements(date, entityId);
             model.AllAgreementsNamesToDisplay = this.subFundsService.GetAllSubFundAgreements(date, entityId);
