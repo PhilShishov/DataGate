@@ -332,25 +332,24 @@
                 style="margin-right:40px">
             Update Share Class
         </button>
+
+        <a class="btn btn-primary btn-sm"
+           asp-action="All">Back to List</a>
     </div>
 </form>
 
-<div>
-    <a asp-action="All">Back to List</a>
-</div>
-
 @section Scripts{
-    <script src="~/js/formatInput.js"></script>
-    <script src="~/js/confirmCreate.js"></script>
-    <script src="~/js/getDerivatives.js"></script>
+    <script type="text/javascript" src="~/js/format/formatInput.js"></script>
+    <script type="text/javascript" src="~/js/format/formatName.js"></script>
+    <script type="text/javascript" src="~/js/confirm/confirmUpdate.js"></script>
 
     <script>
         window.onload = () => {
             manageSideNavBar();
             manageDropdowns();
             formatInput();
-            getDerivatives();
-            confirmCreate();
+            formatName();
+            confirmUpdate();
         }
 
         if (window.history.replaceState) {
