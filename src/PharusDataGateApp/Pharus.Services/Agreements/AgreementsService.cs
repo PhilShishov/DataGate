@@ -41,7 +41,7 @@
             }
         }
 
-        public List<string[]> GetAgreementsForAllShareClasses(DateTime chosenDate)
+        public List<string[]> GetAgreementsForAllSubFunds(DateTime chosenDate)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -62,7 +62,7 @@
             }
         }
 
-        public List<string[]> GetAgreementsForAllSubFunds(DateTime chosenDate)
+        public List<string[]> GetAgreementsForAllShareClasses(DateTime chosenDate)
         {
             using (SqlConnection connection = new SqlConnection())
             {
