@@ -466,18 +466,17 @@
 
     <div class="button-holder mt-4">
         <button type="submit"
-                class="btn bg-pharus text-white"
+                class="btn btn-primary btn-sm mb-1"
                 id="confirmEditBtn"
                 name="update_button"
                 style="margin-right:40px">
             Update Sub Fund
         </button>
+
+        <a class="btn btn-primary btn-sm"
+           asp-action="All">Back to List</a>
     </div>
 </form>
-
-<div>
-    <a asp-action="All">Back to List</a>
-</div>
 
 @section Scripts{
     <script type="text/javascript" src="~/js/format/formatInput.js"></script>
