@@ -35,8 +35,8 @@
             <label asp-for="SubFundName" class="text-torshia"></label><br>
             <input type="text"
                    asp-for="SubFundName"
-                   class="form-control maxw-270" 
-                   id="formatName"/>
+                   class="form-control maxw-270"
+                   id="formatName" />
             <span asp-validation-for="SubFundName" class="text-danger"></span>
         </div>
 
@@ -361,8 +361,9 @@
 </div>
 
 @section Scripts{
-    <script src="~/js/formatInput.js"></script>
-    <script src="~/js/confirmCreate.js"></script>
+    <script type="text/javascript" src="~/js/format/formatInput.js"></script>
+    <script type="text/javascript" src="~/js/format/formatName.js"></script>
+    <script type="text/javascript" src="~/js/confirm/confirmCreate.js"></script>
     <script src="~/js/getDerivatives.js"></script>
 
     <script>
@@ -370,6 +371,7 @@
             manageSideNavBar();
             manageDropdowns();
             formatInput();
+            formatName();
             getDerivatives();
             confirmCreate();
         }
@@ -377,5 +379,5 @@
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
         }
-    </script>    
+    </script>
 }
