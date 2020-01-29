@@ -31,7 +31,18 @@
             model.SubFundAgreements = this.agreementsService.GetAgreementsForAllSubFunds(chosenDate);
             model.ShareClassAgreements = this.agreementsService.GetAgreementsForAllShareClasses(chosenDate);
 
-            return View(model);
+            return this.View(model);
+        }
+
+        [HttpPost]
+        public IActionResult All(AgreementsViewModel model)
+        {
+            if (model.FundAgreements != null)
+            {
+                return this.View(model);
+            }
+
+            return this.RedirectToPage("/Agreements/All");
         }
     }
 }
