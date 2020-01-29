@@ -337,7 +337,7 @@
 
             }
 
-            return this.RedirectToAction("ViewEntitySE", new { EntityId = model.EntityId, ChosenDate = model.ChosenDate });
+            return this.RedirectToAction("ViewEntitySE", new { model.EntityId, model.ChosenDate });
         }
 
         [HttpPost]
@@ -397,7 +397,7 @@
             }
 
             this.ModelState.Clear();
-            return this.RedirectToAction("ViewEntitySE", new { EntityId = model.EntityId, ChosenDate = model.ChosenDate });
+            return this.RedirectToAction("ViewEntitySE", new { model.EntityId, model.ChosenDate });
         }
 
         [HttpPost]
@@ -838,10 +838,10 @@
                                     model.EntityId);
         }
 
-        private string GetFileNameFromFilePath(int entityId, string chosenDate, string controllerName)
-        {
-            return this.entitiesFileService.LoadEntityFileToDisplay(entityId, chosenDate, controllerName).Split('\\').Last();
-        }
+        //private string GetFileNameFromFilePath(int entityId, string chosenDate, string controllerName)
+        //{
+        //    return this.entitiesFileService.LoadEntityFileToDisplay(entityId, chosenDate, controllerName).Split('\\').Last();
+        //}
 
         private void SetModelValuesForSpecificView(SpecificEntityViewModel model)
         {

@@ -18,6 +18,7 @@
     using Pharus.Services.ShareClasses.Contracts;
     using Pharus.App.Models.ViewModels.Entities;
     using Pharus.App.Models.BindingModels.ShareClasses;
+    using Pharus.Services.Agreements.Contracts;
 
     [Authorize]
     public class ShareClassesController : Controller
@@ -25,12 +26,14 @@
         private readonly Pharus_vFinale_Context context;
         private readonly IShareClassesService shareClassesService;
         private readonly IShareClassesSelectListService shareClassesSelectListService;
+        private readonly IAgreementsSelectListService agreementsSelectListService;
         private readonly IEntitiesFileService entitiesFileService;
         private readonly IHostingEnvironment hostingEnvironment;
 
         public ShareClassesController(
             IShareClassesService shareClassesService,
             IShareClassesSelectListService shareClassesSelectListService,
+            IAgreementsSelectListService agreementsSelectListService,
             Pharus_vFinale_Context context,
             IEntitiesFileService entitiesFileService,
             IHostingEnvironment hostingEnvironment)
@@ -39,6 +42,7 @@
             this.hostingEnvironment = hostingEnvironment;
             this.shareClassesService = shareClassesService;
             this.shareClassesSelectListService = shareClassesSelectListService;
+            this.agreementsSelectListService = agreementsSelectListService;
             this.entitiesFileService = entitiesFileService;
         }
 
@@ -616,13 +620,6 @@
             model.Entity = this.shareClassesService.GetShareClassWithDateById(date, entityId);
             model.ContainerEntityName = this.shareClassesService.GetShareClass_SubFundContainer(date, entityId)[1][1];
             model.ContainerEntityId = this.shareClassesService.GetShareClass_SubFundContainer(date, entityId)[1][0];
-            model.EntityDistinctDocuments = this.subFundsService.GetDistinctSubFundDocuments(entityId);
-            model.EntityDistinctAgreements = this.subFundsService.GetDistinctSubFundAgreements(date, entityId);
-            model.EntityDocuments = this.shareClassesService.GetAllShareClassDocuments(entityId);
-            model.EntityAgreements = this.subFundsService.GetAllSubFundAgreements(date, entityId);
-
-
-            model.EntityTimeline = this.shareClassesService.GetShareClassesTimeline(entityId);
             model.TSPriceDates = this.shareClassesService
                         .GetShareClassTimeSeriesDates(entityId)
                         .Skip(1)
@@ -638,12 +635,18 @@
                        .GetShareClassTimeSeriesData(entityId)
                        .Skip(1)
                        .ToList();
+            model.EntityDistinctDocuments = this.shareClassesService.GetDistinctShareClassDocuments(entityId);
+            model.EntityDistinctAgreements = this.shareClassesService.GetDistinctShareClassAgreements(date, entityId);
+
+            model.EntityDocuments = this.shareClassesService.GetAllShareClassDocuments(entityId);
+            model.EntityAgreements = this.shareClassesService.GetAllShareClassAgreements(date, entityId);
+            model.EntityTimeline = this.shareClassesService.GetShareClassesTimeline(entityId);
 
             model.StartConnection = model.Entity[1][0];
             model.EndConnection = model.Entity[1][1];
 
             this.ViewData["FileTypes"] = this.shareClassesSelectListService.GetAllShareClassFileTypes();
-            this.ViewData["AgreementsFileTypes"] = this.subfundsSelectListService.GetAllAgreementsFileTypes();
+            //this.ViewData["AgreementsFileTypes"] = this.subfundsSelectListService.GetAllAgreementsFileTypes();
             this.ViewData["AgreementsStatus"] = this.agreementsSelectListService.GetAllTbDomAgreementStatus();
             this.ViewData["Companies"] = this.agreementsSelectListService.GetAllTbCompanies();
         }
@@ -734,9 +737,9 @@
                                         chosenDate);
         }
 
-        private string GetFileNameFromFilePath(int entityId, string chosenDate, string controllerName)
-        {
-            return this.entitiesFileService.LoadEntityFileToDisplay(entityId, chosenDate, controllerName).Split('\\').Last();
-        }
+        //private string GetFileNameFromFilePath(int entityId, string chosenDate, string controllerName)
+        //{
+        //    return this.entitiesFileService.LoadEntityFileToDisplay(entityId, chosenDate, controllerName).Split('\\').Last();
+        //}
     }
 }

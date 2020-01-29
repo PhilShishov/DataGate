@@ -9,9 +9,9 @@
     {
         <div class="d-flex mt-1 mr-auto">
             <p>FUND CONTAINER: </p>
-            <a href="/Funds/ViewEntitySE/@Model.BaseEntityId/@Model.ChosenDate"
+            <a href="/Funds/ViewEntitySE/@Model.ContainerEntityId/@Model.ChosenDate"
                class="text-torshia font-weight-bold ml-1">
-                @Model.BaseEntityName
+                @Model.ContainerEntityName
             </a>
         </div>
     }
@@ -19,9 +19,9 @@
     {
         <div class="d-flex mt-1 mr-auto">
             <p>SUB FUND CONTAINER: </p>
-            <a href="/SubFunds/ViewEntitySE/@Model.BaseEntityId/@Model.ChosenDate"
+            <a href="/SubFunds/ViewEntitySE/@Model.ContainerEntityId/@Model.ChosenDate"
                class="text-torshia font-weight-bold ml-1">
-                @Model.BaseEntityName
+                @Model.ContainerEntityName
             </a>
         </div>
     }
@@ -111,6 +111,6 @@
                asp-for="EntityId" hidden>
 
         <input type="text"
-               asp-for="ProspectusNameToDisplay" hidden>
+               asp-for="EntityProspectus" hidden>
     </div>
 </div>

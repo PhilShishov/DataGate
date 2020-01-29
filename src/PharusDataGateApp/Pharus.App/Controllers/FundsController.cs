@@ -341,7 +341,7 @@
 
             }
 
-            return this.RedirectToAction("ViewEntitySE", new { EntityId = model.EntityId, ChosenDate = model.ChosenDate });
+            return this.RedirectToAction("ViewEntitySE", new { model.EntityId, model.ChosenDate });
         }
 
         [HttpPost]
@@ -402,7 +402,7 @@
             }
 
             this.ModelState.Clear();
-            return this.RedirectToAction("ViewEntitySE", new { EntityId = model.EntityId, ChosenDate = model.ChosenDate });
+            return this.RedirectToAction("ViewEntitySE", new { model.EntityId, model.ChosenDate });
         }
 
         [HttpPost]
@@ -686,16 +686,17 @@
                 (entityId, model.ChosenDate, model.ControllerName);
 
             model.Entity = this.fundsService.GetFundWithDateById(date, entityId);
+            model.EntityProspectus = Path.GetFileNameWithoutExtension(prospectusName);
+            model.EntityDistinctAgreements = this.fundsService.GetDistinctFundAgreements(date, entityId);
+
             model.EntitySubEntities = this.fundsService.GetFund_SubFunds(date, entityId);
             model.EntitiesHeadersForColumnSelection = this.fundsService
                                                                 .GetFund_SubFunds(date, entityId)
                                                                 .Take(1)
                                                                 .ToList();
-            model.ProspectusNameToDisplay = Path.GetFileNameWithoutExtension(prospectusName);
-            model.ENtityDistinctAgreements = this.fundsService.GetDistinctFundAgreements(date, entityId);
-            model.EntityAgreements = this.fundsService.GetAllFundAgreements(date, entityId);
             model.EntityTimeline = this.fundsService.GetFundTimeline(entityId);
             model.EntityDocuments = this.fundsService.GetAllFundDocuments(entityId);
+            model.EntityAgreements = this.fundsService.GetAllFundAgreements(date, entityId);
 
             model.StartConnection = model.Entity[1][0];
             model.EndConnection = model.Entity[1][1];
