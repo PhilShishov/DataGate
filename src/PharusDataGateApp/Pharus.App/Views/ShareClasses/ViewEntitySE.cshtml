@@ -39,32 +39,49 @@
             <option value="" selected disabled>Select</option>
             <option value="TimelineChanges">Timeline Changes</option>
             <option value="AllDocuments">All Documents</option>
+            <option value="AllDocuments">All Agreements</option>
         </select>
     </div>
 
     <partial name="SpecificEntity/_AllDocuments" />
+    <partial name="SpecificEntity/_AllAgreements" />
     <partial name="SpecificEntity/_Timeline" />
 </form>
 
 <form asp-controller="ShareClasses"
-      asp-action="UploadProspectus"
+      asp-action="UploadDocument"
       method="post"
       enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <partial name="SpecificEntity/_UploadPros" />
+    <partial name="SpecificEntity/_UploadDocument" />
 </form>
 
 <form asp-controller="ShareClasses"
       asp-action="UploadAgreement"
       method="post"
       enctype="multipart/form-data">
+    <input asp-for="EntityId" type="text" hidden>
+    <input asp-for="ChosenDate" type="date" hidden>
+
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <partial name="SpecificEntity/_UploadAgr" />
+    <div class="modal"
+         id="upAgrModal"
+         role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body d-grid justify-content-center" id="agrModalBody">
+                    @await Html.PartialAsync("SpecificEntity/_UploadAgr")
+                </div>
+            </div>
+        </div>
+    </div>
 </form>
 
 @section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+
     <script src="~/lib/jquery/Chart.js/Chart.min.js"></script>
     <script src="~/lib/jquery/Chart.js/utils.js"></script>
 

@@ -226,7 +226,7 @@
         }
 
         [HttpPost]
-        public IActionResult UploadProspectus(SpecificEntityViewModel model)
+        public IActionResult UploadDocument(SpecificEntityViewModel model)
         {
             SetModelValuesForSpecificView(model);
 
