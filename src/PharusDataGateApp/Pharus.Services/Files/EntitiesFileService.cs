@@ -163,7 +163,9 @@
             }
             else if (controllerName == "ShareClasses")
             {
-
+                query = "EXEC sp_insert_agreement_shareclass " +
+                  "@file_name, @entity_id, @activity_type_id, @contract_date, " +
+                  "@activation_date, @expiration_date, @company_id, @status";
             }
 
             using (SqlConnection connection = new SqlConnection())
