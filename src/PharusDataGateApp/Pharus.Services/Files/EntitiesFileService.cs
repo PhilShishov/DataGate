@@ -211,11 +211,11 @@
             string query = string.Empty;
             if (controllerName == "SubFunds")
             {
-                query = "EXEC delete_agreement_file_byname @file_name";
+                query = "EXEC delete_subfund_file_byname @file_name";
             }
             else if (controllerName == "ShareClasses")
             {
-
+                query = "EXEC delete_shareclass_file_byname @file_name";
             }
 
             using (SqlConnection connection = new SqlConnection())
