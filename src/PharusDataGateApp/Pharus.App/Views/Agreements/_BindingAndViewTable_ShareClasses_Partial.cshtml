@@ -1,46 +1,85 @@
 ﻿@model Pharus.App.Models.ViewModels.Agreements.AgreementsViewModel
 
-<div id="allShareClassAgreements" class="mt-3 d-none">
-    <table class="table table-bordered table-hover">
-        <thead>
-            @for (int row = 0; row < 1; row++)
-            {
-                <tr>
-                    @for (int col = 0; col < Model.ShareClassAgreements[row].Length; col++)
-                    {
-                        <th class="text-secondary p-1">
-                            @Model.ShareClassAgreements[row][col]
-                        </th>
-                    }
-                </tr>
-            }
-        </thead>
-
-        <tbody>
-            @for (int row = 1; row < Model.ShareClassAgreements.Count; row++)
-            {
-                <tr>
-                    @for (int col = 0; col < Model.ShareClassAgreements[row].Length; col++)
-                    {
-                        <td class="p-1">
-                            @if (Model.ShareClassAgreements[0][col] == "File Name")
-                            {
-                                <button class="btn-link-pharus"
-                                        formtarget="_blank"
-                                        type="submit"
-                                        formaction="/Funds/ReadPdfFile"
-                                        name="read_Pdf">
-                                    @Model.ShareClassAgreements[row][col].Split(".")[0]
-                                </button>
-                            }
-                            else
-                            {
+    <div id="allShareClassAgreements" class="mt-3 d-none">
+        <table class="table table-bordered table-hover">
+            <thead>
+                @for (int row = 0; row < 1; row++)
+                {
+                    <tr>
+                        @for (int col = 0; col < Model.ShareClassAgreements[row].Length; col++)
+                        {
+                            <th class="text-secondary p-1">
                                 @Model.ShareClassAgreements[row][col]
-                            }
-                        </td>
+                            </th>
+                        }
+                    </tr>
+                }
+            </thead>
+
+            <tbody>
+                @for (int row = 1; row < Model.ShareClassAgreements.Count; row++)
+                {
+                    <tr>
+                        @for (int col = 0; col < Model.ShareClassAgreements[row].Length; col++)
+                        {
+                            <td class="p-1">
+                                @if (Model.ShareClassAgreements[0][col] == "File Name")
+                                {
+                                    <button class="btn-link-pharus"
+                                            formtarget="_blank"
+                                            type="submit"
+                                            formaction="/Funds/ReadPdfFile"
+                                            name="read_Pdf">
+                                        @Model.ShareClassAgreements[row][col].Split(".")[0]
+                                    </button>
+                                }
+                                else
+                                {
+                                    @Model.ShareClassAgreements[row][col]
+                                }
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <table class="table" hidden>
+            <thead>
+                <tr>
+                    @for (int row = 0; row < 1; row++)
+                    {
+                        @for (int col = 0; col < Model.ShareClassAgreements[row].Length; col++)
+                        {
+                            <th>
+                                <h5>
+                                    @Html.TextBoxFor(af => Model.ShareClassAgreements[row][col],
+                                        new
+                                             {
+                                            @readonly = true
+                                        })
+                                </h5>
+                            </th>
+                        }
                     }
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                @for (int row = 1; row < Model.ShareClassAgreements.Count; row++)
+                {
+                    <tr>
+                        @for (int col = 0; col < Model.ShareClassAgreements[row].Length; col++)
+                        {
+                            <td>
+                                @Html.TextBoxFor(af => Model.ShareClassAgreements[row][col],
+                                    new
+                                         {
+                                        @readonly = true
+                                    })
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
