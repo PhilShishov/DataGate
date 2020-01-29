@@ -373,7 +373,6 @@
                 var activationDate = model.UploadAgreementFileModel.ActivationDate;
                 var expirationDate = model.UploadAgreementFileModel.ExpirationDate;
 
-
                 int statusId = this.context.TbDomAgreementStatus
                     .Where(s => s.ASDesc == model.UploadAgreementFileModel.Status)
                     .Select(s => s.ASId)

@@ -209,7 +209,15 @@
         public void DeleteDocument(string docName, string controllerName)
         {
             docName += ".pdf";
-            string query = "EXEC delete_agreement_file_byname @file_name";
+            string query = string.Empty;
+            if (controllerName == "SubFunds")
+            {
+                query = "EXEC delete_agreement_file_byname @file_name";
+            }
+            else if (controllerName == "ShareClasses")
+            {
+
+            }
 
             using (SqlConnection connection = new SqlConnection())
             {
@@ -256,7 +264,7 @@
                 {
                     command.Parameters.AddRange(new[]
                     {
-                        new SqlParameter("@file_name", SqlDbType.NVarChar, 100) { Value = agrName },                        
+                        new SqlParameter("@file_name", SqlDbType.NVarChar, 100) { Value = agrName },
                     });
 
                     foreach (SqlParameter parameter in command.Parameters)
