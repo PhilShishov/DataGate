@@ -692,8 +692,8 @@
                                                                 .Take(1)
                                                                 .ToList();
             model.ProspectusNameToDisplay = Path.GetFileNameWithoutExtension(prospectusName);
-            model.DistinctAgreementsNamesToDisplay = this.fundsService.GetDistinctFundAgreements(date, entityId);
-            model.AllAgreementsNamesToDisplay = this.fundsService.GetAllFundAgreements(date, entityId);
+            model.ENtityDistinctAgreements = this.fundsService.GetDistinctFundAgreements(date, entityId);
+            model.EntityAgreements = this.fundsService.GetAllFundAgreements(date, entityId);
             model.EntityTimeline = this.fundsService.GetFundTimeline(entityId);
             model.EntityDocuments = this.fundsService.GetAllFundDocuments(entityId);
 

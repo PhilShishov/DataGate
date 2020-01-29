@@ -32,13 +32,11 @@ namespace Pharus.App.Models.ViewModels.Entities
         // for a specific entity sub entities
         public List<string[]> EntitySubEntities { get; set; }
 
-        public string BaseEntityName { get; set; }
+        public string ContainerEntityName { get; set; }
 
-        public string BaseEntityId { get; set; }
+        public string ContainerEntityId { get; set; }
 
         public List<string[]> EntityTimeline { get; set; }
-
-        public List<string[]> EntityDocuments { get; set; }
 
         public List<string[]> TSAllPriceValues { get; set; }
 
@@ -46,13 +44,15 @@ namespace Pharus.App.Models.ViewModels.Entities
 
         public List<string> TSTypeProviders { get; set; }
 
-        public string ProspectusNameToDisplay { get; set; }
+        public string EntityProspectus { get; set; }
 
-        public List<string[]> DistinctDocumentsNamesToDisplay { get; set; }
+        public List<string[]> EntityDistinctDocuments { get; set; }
 
-        public List<string[]> DistinctAgreementsNamesToDisplay { get; set; }
+        public List<string[]> EntityDistinctAgreements { get; set; }
 
-        public List<string[]> AllAgreementsNamesToDisplay { get; set; }
+        public List<string[]> EntityAgreements { get; set; }
+
+        public List<string[]> EntityDocuments { get; set; }
 
         public int AgreementId { get; set; }
 

@@ -611,17 +611,18 @@
         {
             var date = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             int entityId = model.EntityId;
-
             model.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
-            model.Entity = this.shareClassesService.GetShareClassWithDateById(date, entityId);
-            model.EntityTimeline = this.shareClassesService.GetShareClassesTimeline(entityId);
-            model.EntityDocuments = this.shareClassesService.GetAllShareClassDocuments(entityId);
-            model.ProspectusNameToDisplay = GetFileNameFromFilePath
-                (entityId, model.ChosenDate, model.ControllerName)
-                .Split(".")[0];
-            model.BaseEntityId = this.shareClassesService.GetShareClass_SubFundContainer(date, entityId)[1][0];
-            model.BaseEntityName = this.shareClassesService.GetShareClass_SubFundContainer(date, entityId)[1][1];
 
+            model.Entity = this.shareClassesService.GetShareClassWithDateById(date, entityId);
+            model.ContainerEntityName = this.shareClassesService.GetShareClass_SubFundContainer(date, entityId)[1][1];
+            model.ContainerEntityId = this.shareClassesService.GetShareClass_SubFundContainer(date, entityId)[1][0];
+            model.EntityDistinctDocuments = this.subFundsService.GetDistinctSubFundDocuments(entityId);
+            model.EntityDistinctAgreements = this.subFundsService.GetDistinctSubFundAgreements(date, entityId);
+            model.EntityDocuments = this.shareClassesService.GetAllShareClassDocuments(entityId);
+            model.EntityAgreements = this.subFundsService.GetAllSubFundAgreements(date, entityId);
+
+
+            model.EntityTimeline = this.shareClassesService.GetShareClassesTimeline(entityId);
             model.TSPriceDates = this.shareClassesService
                         .GetShareClassTimeSeriesDates(entityId)
                         .Skip(1)
@@ -642,6 +643,9 @@
             model.EndConnection = model.Entity[1][1];
 
             this.ViewData["FileTypes"] = this.shareClassesSelectListService.GetAllShareClassFileTypes();
+            this.ViewData["AgreementsFileTypes"] = this.subfundsSelectListService.GetAllAgreementsFileTypes();
+            this.ViewData["AgreementsStatus"] = this.agreementsSelectListService.GetAllTbDomAgreementStatus();
+            this.ViewData["Companies"] = this.agreementsSelectListService.GetAllTbCompanies();
         }
         private void SetModelValuesForEditView(EditShareClassBindingModel model)
         {
