@@ -847,22 +847,22 @@
         {
             var date = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             int entityId = model.EntityId;
-
             model.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+
             model.Entity = this.subFundsService.GetSubFundWithDateById(date, entityId);
+            model.ContainerEntityName = this.subFundsService.GetSubFund_FundContainer(date, entityId)[1][1];
+            model.ContainerEntityId = this.subFundsService.GetSubFund_FundContainer(date, entityId)[1][0];
+
+            model.EntityDistinctDocuments = this.subFundsService.GetDistinctSubFundDocuments(entityId);
+            model.EntityDistinctAgreements = this.subFundsService.GetDistinctSubFundAgreements(date, entityId);
             model.EntitySubEntities = this.subFundsService.GetSubFund_ShareClasses(date, entityId);
             model.EntitiesHeadersForColumnSelection = this.subFundsService
                                                                     .GetSubFund_ShareClasses(date, entityId)
                                                                     .Take(1)
                                                                     .ToList();
-
-            model.DistinctDocumentsNamesToDisplay = this.subFundsService.GetDistinctSubFundDocuments(entityId);
-            model.DistinctAgreementsNamesToDisplay = this.subFundsService.GetDistinctSubFundAgreements(date, entityId);
-            model.AllAgreementsNamesToDisplay = this.subFundsService.GetAllSubFundAgreements(date, entityId);
             model.EntityTimeline = this.subFundsService.GetSubFundTimeline(entityId);
+            model.EntityAgreements = this.subFundsService.GetAllSubFundAgreements(date, entityId);
             model.EntityDocuments = this.subFundsService.GetAllSubFundDocumens(entityId);
-            model.BaseEntityName = this.subFundsService.GetSubFund_FundContainer(date, entityId)[1][1];
-            model.BaseEntityId = this.subFundsService.GetSubFund_FundContainer(date, entityId)[1][0];
 
             model.StartConnection = model.Entity[1][0];
             model.EndConnection = model.Entity[1][1];
