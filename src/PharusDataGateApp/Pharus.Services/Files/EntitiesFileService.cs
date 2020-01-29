@@ -208,7 +208,6 @@
 
         public void DeleteDocument(string docName, string controllerName)
         {
-            docName += ".pdf";
             string query = string.Empty;
             if (controllerName == "SubFunds")
             {
@@ -254,7 +253,6 @@
 
         public void DeleteAgreement(string agrName)
         {
-            agrName += ".pdf";
             string query = "EXEC delete_agreement_file_byname @file_name";
 
             using (SqlConnection connection = new SqlConnection())
