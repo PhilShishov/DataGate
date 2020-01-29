@@ -646,7 +646,7 @@
             model.EndConnection = model.Entity[1][1];
 
             this.ViewData["FileTypes"] = this.shareClassesSelectListService.GetAllShareClassFileTypes();
-            //this.ViewData["AgreementsFileTypes"] = this.subfundsSelectListService.GetAllAgreementsFileTypes();
+            this.ViewData["AgreementsFileTypes"] = this.shareClassesSelectListService.GetAllAgreementsFileTypes();
             this.ViewData["AgreementsStatus"] = this.agreementsSelectListService.GetAllTbDomAgreementStatus();
             this.ViewData["Companies"] = this.agreementsSelectListService.GetAllTbCompanies();
         }
@@ -736,10 +736,5 @@
                                         model.SelectedColumns,
                                         chosenDate);
         }
-
-        //private string GetFileNameFromFilePath(int entityId, string chosenDate, string controllerName)
-        //{
-        //    return this.entitiesFileService.LoadEntityFileToDisplay(entityId, chosenDate, controllerName).Split('\\').Last();
-        //}
     }
 }

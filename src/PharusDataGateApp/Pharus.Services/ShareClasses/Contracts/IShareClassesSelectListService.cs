@@ -15,5 +15,7 @@
         List<string> GetAllTbDomShareType();
 
         List<string> GetAllShareClassFileTypes();
+
+        List<string> GetAllAgreementsFileTypes();
     }
 }

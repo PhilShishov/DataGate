@@ -77,5 +77,15 @@ namespace Pharus.Services.ShareClasses
 
             return fileTypes;
         }
+
+        public List<string> GetAllAgreementsFileTypes()
+        {
+            var agrFileTypes = this.context.TbDomActivityType
+                .Where(at => at.AtEntity == shareClassFileType)
+                .Select(at => at.AtDesc)
+                .ToList();
+
+            return agrFileTypes;
+        }
     }
 }
