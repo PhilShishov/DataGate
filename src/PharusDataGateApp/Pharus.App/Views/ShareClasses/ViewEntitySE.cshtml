@@ -92,7 +92,7 @@
     <script>
         window.onload = function () {
             let ctx = document.getElementById('aumSC_Canvas').getContext('2d');
-            window.myLine = new Chart(ctx, config);
+            window.myLine = new Chart(ctx, setConfigChart(@timeseriesDates, @timeseriesProviders));
             manageSideNavBar();
             manageDropdowns();
             setDates();
@@ -103,7 +103,6 @@
         }
 
         $(document).ready(function () {
-
             // ________________________________________________________
             //
             // Delete selected row from documents table by confirming
@@ -117,66 +116,67 @@
 
             const urlAgrDel = "/ShareClasses/DeleteAgreement";
             passAgrUrlToDelete(urlAgrDel);
-
-        });       
+        });
 
         // ________________________________________________________
         //
         // Chart js for Asset under management
 
-        const config = {
-            type: 'line',
-            data: {
-                labels: @timeseriesDates,
-                datasets: []
-            },
-            options: {
-                responsive: true,
-                title: {
-                    display: true,
-                    text: 'AUM For ShareClass'
+        function setConfigChart(timeseriesDates, timeseriesProviders) {
+            const config = {
+                type: 'line',
+                data: {
+                    labels: timeseriesDates,
+                    datasets: []
                 },
-                tooltips: {
-                    mode: 'index',
-                    intersect: false,
-                },
-                hover: {
-                    mode: 'nearest',
-                    intersect: true
-                },
-                scales: {
-                    x: {
+                options: {
+                    responsive: true,
+                    title: {
                         display: true,
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Month'
-                        }
+                        text: 'AUM For ShareClass'
                     },
-                    y: {
-                        display: true,
-                        scaleLabel: {
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    scales: {
+                        x: {
                             display: true,
-                            labelString: 'Value'
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Month'
+                            }
+                        },
+                        y: {
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Value'
+                            }
                         }
                     }
                 }
-            }
-        };
+            };
 
-        $.each(@timeseriesProviders, function (index, provider) {
+            $.each(timeseriesProviders, function (index, provider) {
+                const allPricesValues = JSON.parse('@Html.Raw(Json.Serialize(Model.TSAllPriceValues))');
+                const currentPriceValue = allPricesValues
+                    .filter(ts => ts[2] === provider)
+                    .map(ts => ts[1]);
 
-            const allPricesValues = JSON.parse('@Html.Raw(Json.Serialize(Model.TSAllPriceValues))');
-            const currentPriceValue = allPricesValues
-                .filter(ts => ts[2] === provider)
-                .map(ts => ts[1]);
-
-            config.data.datasets.push({
-                label: provider,
-                backgroundColor: window.chartColors[index],
-                borderColor: window.chartColors[index],
-                data: currentPriceValue,
-                fill: false,
+                config.data.datasets.push({
+                    label: provider,
+                    backgroundColor: window.chartColors[index],
+                    borderColor: window.chartColors[index],
+                    data: currentPriceValue,
+                    fill: false,
+                });
             });
-        });
+            return config;
+        }
     </script>
 }
