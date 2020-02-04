@@ -175,7 +175,7 @@
                 {
                     command.Parameters.AddRange(new[]
                     {
-                        new SqlParameter("@file_name", SqlDbType.NVarChar, int.MaxValue) { Value = fileName },
+                        new SqlParameter("@file_name", SqlDbType.NVarChar, 100) { Value = fileName },
                         new SqlParameter("@entity_id", SqlDbType.Int) { Value = entityId },
                         new SqlParameter("@activity_type_id", SqlDbType.Int) { Value =  activityTypeId},
                         new SqlParameter("@contract_date", SqlDbType.NVarChar, 100) { Value = contractDate },
