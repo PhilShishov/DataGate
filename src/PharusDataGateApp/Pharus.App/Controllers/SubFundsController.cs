@@ -833,9 +833,9 @@
 
         private void SetModelValuesForSpecificView(SpecificEntityViewModel model)
         {
+            model.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
             var date = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             int entityId = model.EntityId;
-            model.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
             model.Entity = this.subFundsService.GetSubFundWithDateById(date, entityId);
             model.ContainerEntityName = this.subFundsService.GetSubFund_FundContainer(date, entityId)[1][1];
@@ -852,8 +852,12 @@
             model.EntityAgreements = this.subFundsService.GetAllSubFundAgreements(date, entityId);
             model.EntityDocuments = this.subFundsService.GetAllSubFundDocumens(entityId);
 
-            model.StartConnection = Convert.ToDateTime(model.Entity[1][0]);
-            model.EndConnection = Convert.ToDateTime(model.Entity[1][1]);
+            model.StartConnection = DateTime.ParseExact(model.Entity[1][0], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+            if (model.EndConnection != null)
+            {
+                model.EndConnection = DateTime.ParseExact(model.Entity[1][1], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            }
 
             this.ViewData["FileTypes"] = this.subfundsSelectListService.GetAllSubFundFileTypes();
             this.ViewData["AgreementsFileTypes"] = this.subfundsSelectListService.GetAllAgreementsFileTypes();
