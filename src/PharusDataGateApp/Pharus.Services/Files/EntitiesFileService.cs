@@ -76,8 +76,8 @@
         public void AddDocumentToSpecificEntity(
                                     string fileName,
                                     int entityId,
-                                    DateTime startConnection,
-                                    DateTime? endConnection,
+                                    string startConnection,
+                                    string endConnection,
                                     int fileTypeId,
                                     string controllerName)
         {
@@ -108,8 +108,8 @@
                     {
                         new SqlParameter("@file_name", SqlDbType.NVarChar, 100) { Value = fileName },
                         new SqlParameter("@entity_id", SqlDbType.Int) { Value = entityId },
-                        new SqlParameter("@start_connection", SqlDbType.NVarChar, 100) { Value = startConnection.ToString("yyyyMMdd") },
-                        new SqlParameter("@end_connection", SqlDbType.NVarChar, 100) { Value = endConnection?.ToString("yyyyMMdd") },
+                        new SqlParameter("@start_connection", SqlDbType.NVarChar, 100) { Value = startConnection },
+                        new SqlParameter("@end_connection", SqlDbType.NVarChar, 100) { Value = endConnection },
                         new SqlParameter("@filetype_id", SqlDbType.Int) { Value = fileTypeId },
                     });
 
@@ -140,9 +140,9 @@
                                     string fileName,
                                     int entityId,
                                     int activityTypeId,
-                                    DateTime contractDate,
-                                    DateTime activationDate,
-                                    DateTime? expirationDate,
+                                    string contractDate,
+                                    string activationDate,
+                                    string expirationDate,
                                     int statusId,
                                     int companyId,
                                     string controllerName)
@@ -175,12 +175,12 @@
                 {
                     command.Parameters.AddRange(new[]
                     {
-                        new SqlParameter("@file_name", SqlDbType.NVarChar, 100) { Value = fileName },
+                        new SqlParameter("@file_name", SqlDbType.NVarChar, int.MaxValue) { Value = fileName },
                         new SqlParameter("@entity_id", SqlDbType.Int) { Value = entityId },
                         new SqlParameter("@activity_type_id", SqlDbType.Int) { Value =  activityTypeId},
-                        new SqlParameter("@contract_date", SqlDbType.NVarChar, 100) { Value = contractDate.ToString("yyyyMMdd") },
-                        new SqlParameter("@activation_date", SqlDbType.NVarChar, 100) { Value = activationDate.ToString("yyyyMMdd") },
-                        new SqlParameter("@expiration_date", SqlDbType.NVarChar, 100) { Value = expirationDate?.ToString("yyyyMMdd") },
+                        new SqlParameter("@contract_date", SqlDbType.NVarChar, 100) { Value = contractDate },
+                        new SqlParameter("@activation_date", SqlDbType.NVarChar, 100) { Value = activationDate },
+                        new SqlParameter("@expiration_date", SqlDbType.NVarChar, 100) { Value = expirationDate },
                         new SqlParameter("@company_id", SqlDbType.Int) { Value = companyId },
                         new SqlParameter("@status", SqlDbType.Int) { Value = statusId },
                     });
