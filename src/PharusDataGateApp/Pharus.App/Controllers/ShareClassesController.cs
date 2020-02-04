@@ -294,9 +294,9 @@
                         .Select(at => at.AtId)
                         .FirstOrDefault();
 
-                var contractDate = model.UploadAgreementFileModel.ContractDate;
-                var activationDate = model.UploadAgreementFileModel.ActivationDate;
-                var expirationDate = model.UploadAgreementFileModel.ExpirationDate;
+                string contractDate = model.UploadAgreementFileModel.ContractDate.ToString("yyyyMMdd");
+                string activationDate = model.UploadAgreementFileModel.ActivationDate.ToString("yyyyMMdd");
+                string expirationDate = model.UploadAgreementFileModel.ExpirationDate?.ToString("yyyyMMdd");
 
                 int statusId = this.context.TbDomAgreementStatus
                     .Where(s => s.ASDesc == model.UploadAgreementFileModel.Status)
@@ -308,17 +308,16 @@
                     .Select(c => c.CId)
                     .FirstOrDefault();
 
-                //this.entitiesFileService.AddAgreementToSpecificEntity(
-                //                                    file.FileName,
-                //                                    model.EntityId,
-                //                                    activityTypeId,
-                //                                    contractDate,
-                //                                    activationDate,
-                //                                    expirationDate,
-                //                                    statusId,
-                //                                    companyId,
-                //                                    model.ControllerName);
-
+                this.entitiesFileService.AddAgreementToSpecificEntity(
+                                                    file.FileName,
+                                                    model.EntityId,
+                                                    activityTypeId,
+                                                    contractDate,
+                                                    activationDate,
+                                                    expirationDate,
+                                                    statusId,
+                                                    companyId,
+                                                    model.ControllerName);
             }
 
             this.ModelState.Clear();
