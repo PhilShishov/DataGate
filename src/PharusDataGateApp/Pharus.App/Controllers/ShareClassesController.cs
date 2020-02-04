@@ -680,8 +680,12 @@
             model.EntityAgreements = this.shareClassesService.GetAllShareClassAgreements(date, entityId);
             model.EntityTimeline = this.shareClassesService.GetShareClassesTimeline(entityId);
 
-            model.StartConnection = Convert.ToDateTime(model.Entity[1][0]);
-            model.EndConnection = Convert.ToDateTime(model.Entity[1][1]);
+            model.StartConnection = DateTime.ParseExact(model.Entity[1][0], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+            if (model.EndConnection != null)
+            {
+                model.EndConnection = DateTime.ParseExact(model.Entity[1][1], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            }
 
             this.ViewData["FileTypes"] = this.shareClassesSelectListService.GetAllShareClassFileTypes();
             this.ViewData["AgreementsFileTypes"] = this.shareClassesSelectListService.GetAllAgreementsFileTypes();

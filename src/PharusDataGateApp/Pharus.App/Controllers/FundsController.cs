@@ -692,8 +692,12 @@
             model.EntityDocuments = this.fundsService.GetAllFundDocuments(entityId);
             model.EntityAgreements = this.fundsService.GetAllFundAgreements(date, entityId);
 
-            model.StartConnection = Convert.ToDateTime(model.Entity[1][0]);
-            model.EndConnection = Convert.ToDateTime(model.Entity[1][1]);
+            model.StartConnection = DateTime.ParseExact(model.Entity[1][0], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+            if (model.EndConnection != null)
+            {
+                model.EndConnection = DateTime.ParseExact(model.Entity[1][1], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            }
 
             this.ViewData["ProspectusFileTypes"] = this.fundsSelectListService.GetAllProspectusFileTypes();
             this.ViewData["AgreementsFileTypes"] = this.fundsSelectListService.GetAllAgreementsFileTypes();
