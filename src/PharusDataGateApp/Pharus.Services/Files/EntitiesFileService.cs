@@ -106,10 +106,10 @@
                 {
                     command.Parameters.AddRange(new[]
                     {
-                        new SqlParameter("@file_name", SqlDbType.NVarChar, 100) { Value = fileName },
+                        new SqlParameter("@file_name", SqlDbType.NVarChar) { Value = fileName },
                         new SqlParameter("@entity_id", SqlDbType.Int) { Value = entityId },
-                        new SqlParameter("@start_connection", SqlDbType.NVarChar, 100) { Value = startConnection },
-                        new SqlParameter("@end_connection", SqlDbType.NVarChar, 100) { Value = endConnection },
+                        new SqlParameter("@start_connection", SqlDbType.NVarChar) { Value = startConnection },
+                        new SqlParameter("@end_connection", SqlDbType.NVarChar) { Value = endConnection },
                         new SqlParameter("@filetype_id", SqlDbType.Int) { Value = fileTypeId },
                     });
 
@@ -175,12 +175,12 @@
                 {
                     command.Parameters.AddRange(new[]
                     {
-                        new SqlParameter("@file_name", SqlDbType.NVarChar, 100) { Value = fileName },
+                        new SqlParameter("@file_name", SqlDbType.NVarChar) { Value = fileName },
                         new SqlParameter("@entity_id", SqlDbType.Int) { Value = entityId },
                         new SqlParameter("@activity_type_id", SqlDbType.Int) { Value =  activityTypeId},
-                        new SqlParameter("@contract_date", SqlDbType.NVarChar, 100) { Value = contractDate },
-                        new SqlParameter("@activation_date", SqlDbType.NVarChar, 100) { Value = activationDate },
-                        new SqlParameter("@expiration_date", SqlDbType.NVarChar, 100) { Value = expirationDate },
+                        new SqlParameter("@contract_date", SqlDbType.NVarChar) { Value = contractDate },
+                        new SqlParameter("@activation_date", SqlDbType.NVarChar) { Value = activationDate },
+                        new SqlParameter("@expiration_date", SqlDbType.NVarChar) { Value = expirationDate },
                         new SqlParameter("@company_id", SqlDbType.Int) { Value = companyId },
                         new SqlParameter("@status", SqlDbType.Int) { Value = statusId },
                     });
@@ -227,7 +227,7 @@
                 {
                     command.Parameters.AddRange(new[]
                     {
-                        new SqlParameter("@file_name", SqlDbType.NVarChar, 100) { Value = docName },
+                        new SqlParameter("@file_name", SqlDbType.NVarChar) { Value = docName },
                     });
 
                     foreach (SqlParameter parameter in command.Parameters)
@@ -264,7 +264,7 @@
                 {
                     command.Parameters.AddRange(new[]
                     {
-                        new SqlParameter("@file_name", SqlDbType.NVarChar, 100) { Value = agrName },
+                        new SqlParameter("@file_name", SqlDbType.NVarChar) { Value = agrName },
                     });
 
                     foreach (SqlParameter parameter in command.Parameters)
