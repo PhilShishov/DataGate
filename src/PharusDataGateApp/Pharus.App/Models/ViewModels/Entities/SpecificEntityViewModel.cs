@@ -12,6 +12,7 @@
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace Pharus.App.Models.ViewModels.Entities
 {
+    using System;
     using System.Collections.Generic;
 
     using Pharus.App.Models.BindingModels.Files;
@@ -60,9 +61,9 @@ namespace Pharus.App.Models.ViewModels.Entities
 
         public UploadAgreementFileModel UploadAgreementFileModel { get; set; }
 
-        public string StartConnection { get; set; }
+        public DateTime StartConnection { get; set; }
 
-        public string EndConnection { get; set; }
+        public DateTime? EndConnection { get; set; }
 
         public string SelectAdditionalInf { get; set; }
 

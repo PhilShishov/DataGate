@@ -12,17 +12,17 @@
         void AddDocumentToSpecificEntity(
                             string fileName,
                             int entityId,
-                            DateTime startConnection,
-                            DateTime? endConnection,
+                            string startConnection,
+                            string endConnection,
                             int fileTypeId,
                             string controllerName);
         void AddAgreementToSpecificEntity(
                             string fileName,
                             int entityId,
                             int activityTypeId,
-                            DateTime contractDate,
-                            DateTime activationDate,
-                            DateTime? expirationDate,
+                            string contractDate,
+                            string activationDate,
+                            string expirationDate,
                             int statusId,
                             int companyId,
                             string controllerName);
