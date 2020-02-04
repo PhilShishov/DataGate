@@ -243,14 +243,8 @@
                     stream.Close();
                 }
 
-                var startConnection = DateTime.ParseExact(model.StartConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-
-                DateTime? endConnection = null;
-
-                if (!string.IsNullOrEmpty(model.EndConnection))
-                {
-                    endConnection = DateTime.ParseExact(model.EndConnection, "dd/MM/yyyy", CultureInfo.InvariantCulture);
-                }
+                string startConnection = model.StartConnection.ToString("yyyyMMdd");
+                string endConnection = model.EndConnection?.ToString("yyyyMMdd");
 
                 var fileTypeDesc = model.UploadEntityFileModel.DocumentType;
                 int fileTypeId = this.context.TbDomFileType
@@ -314,16 +308,16 @@
                     .Select(c => c.CId)
                     .FirstOrDefault();
 
-                this.entitiesFileService.AddAgreementToSpecificEntity(
-                                                    file.FileName,
-                                                    model.EntityId,
-                                                    activityTypeId,
-                                                    contractDate,
-                                                    activationDate,
-                                                    expirationDate,
-                                                    statusId,
-                                                    companyId,
-                                                    model.ControllerName);
+                //this.entitiesFileService.AddAgreementToSpecificEntity(
+                //                                    file.FileName,
+                //                                    model.EntityId,
+                //                                    activityTypeId,
+                //                                    contractDate,
+                //                                    activationDate,
+                //                                    expirationDate,
+                //                                    statusId,
+                //                                    companyId,
+                //                                    model.ControllerName);
 
             }
 
@@ -686,8 +680,8 @@
             model.EntityAgreements = this.shareClassesService.GetAllShareClassAgreements(date, entityId);
             model.EntityTimeline = this.shareClassesService.GetShareClassesTimeline(entityId);
 
-            model.StartConnection = model.Entity[1][0];
-            model.EndConnection = model.Entity[1][1];
+            model.StartConnection = Convert.ToDateTime(model.Entity[1][0]);
+            model.EndConnection = Convert.ToDateTime(model.Entity[1][1]);
 
             this.ViewData["FileTypes"] = this.shareClassesSelectListService.GetAllShareClassFileTypes();
             this.ViewData["AgreementsFileTypes"] = this.shareClassesSelectListService.GetAllAgreementsFileTypes();
