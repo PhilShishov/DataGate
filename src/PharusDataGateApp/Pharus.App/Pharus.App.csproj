@@ -5,6 +5,9 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <Features>IOperation</Features>
+    <IncludeSetACLProviderOnDestination>
+      False
+    </IncludeSetACLProviderOnDestination>
   </PropertyGroup>
 
   <ItemGroup>
