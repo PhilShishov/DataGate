@@ -26,6 +26,21 @@
     </environment> 
 
     <environment include="Production">
+        <link type="text/css" rel="stylesheet" href="~/css/reset-css.css" />
+        <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus.css" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-mediaquery.css" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-buttons.css" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-checkbox.css" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-search.css" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-multiselect.css" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-scrollbar.css" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-select.css" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-sidenav.css" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-timeline.css" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-toolbar.css" />
+        <link type="text/css" rel="stylesheet" href="~/css/style.css" />
     </environment>
 
     @RenderSection("Styles", required: false)
@@ -199,7 +214,9 @@
 
     <environment include="Development">
         <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" 
+                integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" 
+                crossorigin="anonymous"></script>
         <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 
         <script type="text/javascript" src="~/js/manageSideNavBar.js"></script>
@@ -207,6 +224,14 @@
     </environment>
 
     <environment include="Production">
+        <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+                integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+                crossorigin="anonymous"></script>
+        <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript" src="~/js/manageSideNavBar.js"></script>
+        <script type="text/javascript" src="~/js/manageDropdowns.js"></script>
     </environment>
 
     @RenderSection("Scripts", required: false)
