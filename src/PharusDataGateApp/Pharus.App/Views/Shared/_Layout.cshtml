@@ -6,38 +6,26 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>@ViewData["Title"] Pharus DataGate</title>
 
-    <link type="text/css" rel="stylesheet" href="~/css/reset-css.css" />
-    <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-    <link type="text/css" rel="stylesheet" href="~/css/bootstrap.min.css" />
-
-    <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus.css" />
-    <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-mediaquery.css" />
-    <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-buttons.css" />
-    <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-checkbox.css" />
-    <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-search.css" />
-    <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-multiselect.css" />
-    <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-scrollbar.css" />
-    <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-select.css" />
-    <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-sidenav.css" />
-    <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-timeline.css" />
-    <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-toolbar.css" />
-    <link type="text/css" rel="stylesheet" href="~/css/style.css" />
 
     <environment include="Development">
-    </environment>
+        <link type="text/css" rel="stylesheet" href="~/css/reset-css.css" />
+        <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
-    @*<environment exclude="Development">
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-                  asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-                  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
-                  crossorigin="anonymous"
-                  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
-        </environment>*@
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus.css" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-mediaquery.css" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-buttons.css" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-checkbox.css" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-search.css" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-multiselect.css" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-scrollbar.css" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-select.css" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-sidenav.css" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-timeline.css" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-toolbar.css" />
+        <link type="text/css" rel="stylesheet" href="~/css/style.css" />
+    </environment> 
 
     <environment include="Production">
-    </environment>
-
-    <environment include="Staging">
     </environment>
 
     @RenderSection("Styles", required: false)
@@ -48,151 +36,152 @@
         <header>
             @if (!this.User.Identity.IsAuthenticated)
             {
-            <nav class="navbar navbar-expand-lg navbar-dark bg-pharus">
-                <a href="/Home/Index">
-                    <img src="/images/Logo_Pharus.jpg"
-                         class="img-responsive"
-                         width="50"
-                         height="50"
-                         alt="Pharus Management">
-                </a>
-                <button class="navbar-toggler ml-auto"
-                        type="button"
-                        data-target="#navbarNav"
-                        aria-controls="navbarSupportedContent"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse"
-                     id="navbarNav">
-                    <div id="intro"
-                         class="text-right">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link nav-link-white active"
-                                   href="/Home/Index">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link nav-link-white active"
-                                   href="/Identity/Account/Login">Login</a>
-                            </li>
-                        </ul>
+                <nav class="navbar navbar-expand-lg navbar-dark bg-pharus">
+                    <a href="/Home/Index">
+                        <img src="/images/Logo_Pharus.jpg"
+                             class="img-responsive"
+                             width="50"
+                             height="50"
+                             alt="Pharus Management">
+                    </a>
+                    <button class="navbar-toggler ml-auto"
+                            type="button"
+                            data-toggle="collapse" 
+                            data-target="#navbarNav"
+                            aria-controls="navbarSupportedContent"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse"
+                         id="navbarNav">
+                        <div id="intro"
+                             class="text-right">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link nav-link-white active"
+                                       href="/Home/Index">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link nav-link-white active"
+                                       href="/Identity/Account/Login">Login</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </nav>
+                </nav>
             }
 
             else
             {
-            <nav class="navbar navbar-expand-lg navbar-dark bg-pharus">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-pharus">
 
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <span style="cursor:pointer"
-                              id="sideNavIcon">
-                            <img src="/images/Logo_Pharus.jpg"
-                                 class="img-responsive"
-                                 width="50"
-                                 alt="Pharus Management">
-                        </span>
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <span style="cursor:pointer"
+                                  id="sideNavIcon">
+                                <img src="/images/Logo_Pharus.jpg"
+                                     class="img-responsive"
+                                     width="50"
+                                     alt="Pharus Management">
+                            </span>
 
-                        <ul id="mySidenav" class="sidenav">
-                            <li>
-                                <a style="cursor:pointer"
-                                   id="closeBtn"
-                                   class="closebtn">
-                                    &times;
-                                </a>
-                            </li>
-                            <li class="dropdown pt-5">
-                                <button class="dropdown-btn"
-                                        name="dr-btn-SideNav">
-                                    Funds<i class="fa fa-caret-down"></i>
-                                </button>
-                                <div id="myDropdown" class="dropdown-container">
-                                    <a class="dropdown-item font-weight-light" href="/Funds/All">List</a>
-                                    @if (this.User.IsInRole("Admin"))
+                            <ul id="mySidenav" class="sidenav">
+                                <li>
+                                    <a style="cursor:pointer"
+                                       id="closeBtn"
+                                       class="closebtn">
+                                        &times;
+                                    </a>
+                                </li>
+                                <li class="dropdown pt-5">
+                                    <button class="dropdown-btn"
+                                            name="dr-btn-SideNav">
+                                        Funds<i class="fa fa-caret-down"></i>
+                                    </button>
+                                    <div id="myDropdown" class="dropdown-container">
+                                        <a class="dropdown-item font-weight-light" href="/Funds/All">List</a>
+                                        @if (this.User.IsInRole("Admin"))
                                         {
-                                    <a class="dropdown-item font-weight-light" href="/Funds/CreateFund">Create</a>
+                                            <a class="dropdown-item font-weight-light" href="/Funds/CreateFund">Create</a>
                                         }
 
-                                    <a class="dropdown-item font-weight-light" href="#">Report</a>
-                                </div>
-                            </li>
+                                        <a class="dropdown-item font-weight-light" href="#">Report</a>
+                                    </div>
+                                </li>
 
-                            <li class="dropdown">
-                                <button class="dropdown-btn"
-                                        name="dr-btn-SideNav">
-                                    Sub Funds<i class="fa fa-caret-down"></i>
-                                </button>
-                                <div id="myDropdown" class="dropdown-container">
-                                    <a class="dropdown-item font-weight-light" href="/SubFunds/All">List</a>
-                                    @if (this.User.IsInRole("Admin"))
+                                <li class="dropdown">
+                                    <button class="dropdown-btn"
+                                            name="dr-btn-SideNav">
+                                        Sub Funds<i class="fa fa-caret-down"></i>
+                                    </button>
+                                    <div id="myDropdown" class="dropdown-container">
+                                        <a class="dropdown-item font-weight-light" href="/SubFunds/All">List</a>
+                                        @if (this.User.IsInRole("Admin"))
                                         {
-                                    <a class="dropdown-item font-weight-light" href="/SubFunds/CreateSubFund">Create</a>
+                                            <a class="dropdown-item font-weight-light" href="/SubFunds/CreateSubFund">Create</a>
                                         }
 
-                                    <a class="dropdown-item font-weight-light" href="#">Report</a>
-                                </div>
-                            </li>
-                            <li class="dropdown">
-                                <button class="dropdown-btn"
-                                        name="dr-btn-SideNav">
-                                    Share Classes<i class="fa fa-caret-down"></i>
-                                </button>
-                                <div id="myDropdown" class="dropdown-container">
-                                    <a class="dropdown-item font-weight-light" href="/ShareClasses/All">List</a>
-                                    @if (this.User.IsInRole("Admin"))
+                                        <a class="dropdown-item font-weight-light" href="#">Report</a>
+                                    </div>
+                                </li>
+                                <li class="dropdown">
+                                    <button class="dropdown-btn"
+                                            name="dr-btn-SideNav">
+                                        Share Classes<i class="fa fa-caret-down"></i>
+                                    </button>
+                                    <div id="myDropdown" class="dropdown-container">
+                                        <a class="dropdown-item font-weight-light" href="/ShareClasses/All">List</a>
+                                        @if (this.User.IsInRole("Admin"))
                                         {
-                                    <a class="dropdown-item font-weight-light" href="/ShareClasses/CreateShareClass">Create</a>
+                                            <a class="dropdown-item font-weight-light" href="/ShareClasses/CreateShareClass">Create</a>
                                         }
 
-                                    <a class="dropdown-item font-weight-light" href="#">Report</a>
-                                </div>
-                            </li>
-                            <li>
-                                <a href="/Agreements/All">
-                                    Agreements
-                                </a>
-                            </li>
-                        </ul>
+                                        <a class="dropdown-item font-weight-light" href="#">Report</a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="/Agreements/All">
+                                        Agreements
+                                    </a>
+                                </li>
+                            </ul>
 
-                    </li>
-                </ul>
+                        </li>
+                    </ul>
 
-                <button class="navbar-toggler ml-auto"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#navbarNav"
-                        aria-controls="navbarSupportedContent"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                    <button class="navbar-toggler ml-auto"
+                            type="button"
+                            data-toggle="collapse"
+                            data-target="#navbarNav"
+                            aria-controls="navbarSupportedContent"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-                <div class="navbar-collapse collapse" id="navbarNav">
-                    <div id="intro" class="text-right">
-                        <ul class="navbar-nav">
-                            @if (this.User.IsInRole("Admin"))
+                    <div class="navbar-collapse collapse" id="navbarNav">
+                        <div id="intro" class="text-right">
+                            <ul class="navbar-nav">
+                                @if (this.User.IsInRole("Admin"))
                                 {
-                            <li class="nav-item active">
-                                <a class="nav-link nav-link-white active" href="/Admin/Index">Panel</a>
-                            </li>
+                                    <li class="nav-item active">
+                                        <a class="nav-link nav-link-white active" href="/Admin/Index">Panel</a>
+                                    </li>
                                 }
                                 else
                                 {
-                            <li class="nav-item active">
-                                <a class="nav-link nav-link-white active" href="/Home/Index">Home</a>
-                            </li>
+                                    <li class="nav-item active">
+                                        <a class="nav-link nav-link-white active" href="/Home/Index">Home</a>
+                                    </li>
                                 }
-                            <li class="nav-item">
-                                <a class="nav-link nav-link-white active" href="/Identity/Account/Logout">Logout</a>
-                            </li>
-                        </ul>
+                                <li class="nav-item">
+                                    <a class="nav-link nav-link-white active" href="/Identity/Account/Logout">Logout</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </nav>
+                </nav>
             }
 
         </header>
@@ -208,34 +197,16 @@
         </footer>
     </div>
 
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-    <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
-    <script type="text/javascript" src="~/js/manageSideNavBar.js"></script>
-    <script type="text/javascript" src="~/js/manageDropdowns.js"></script>
-
     <environment include="Development">
-    </environment>
-    <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
-        </script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd">
-        </script>
-     
+        <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript" src="~/js/manageSideNavBar.js"></script>
+        <script type="text/javascript" src="~/js/manageDropdowns.js"></script>
     </environment>
 
     <environment include="Production">
-    </environment>
-
-    <environment include="Staging">
     </environment>
 
     @RenderSection("Scripts", required: false)
