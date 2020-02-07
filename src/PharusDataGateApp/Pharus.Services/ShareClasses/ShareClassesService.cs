@@ -236,9 +236,10 @@ namespace Pharus.Services.ShareClasses
                 SqlCommand command = connection.CreateCommand();
 
                 command.CommandText = $"SELECT convert(varchar, date_ts, 103)date_ts , value_ts [type], " +
-                                      $"concat(tsp.desc_provider,' ',currency_ts) " +
-                                      $"providerccy FROM [tb_timeseries_shareclass] " +
+                                      $"concat(tst.desc_ts,' ', tsp.desc_provider,' ',currency_ts)  " +
+                                      $"providerccy FROM [tb_timeseries_shareclass] tsc " +
                                       $"join tb_dom_timeseries_provider tsp on tsp.id_provider = provider_ts " +
+                                      $"join tb_dom_timeseries_type tst on tst.id_ts=tsc.id_ts " +
                                       $"where id_shareclass = {id}";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
@@ -270,11 +271,7 @@ namespace Pharus.Services.ShareClasses
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"SELECT distinct " +
-                    $"concat(tsp.desc_provider,' ',currency_ts) " +
-                    $"[Timeseries Provider] FROM [tb_timeseries_shareclass] " +
-                    $"join tb_dom_timeseries_provider tsp on tsp.id_provider=provider_ts " +
-                    $"where id_shareclass= {id}";
+                command.CommandText = $"select * from [fn_view_timeseriesSC] ({id})";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
