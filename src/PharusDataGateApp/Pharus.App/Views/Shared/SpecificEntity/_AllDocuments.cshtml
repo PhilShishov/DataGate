@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Pharus.App.Models.ViewModels.Entities.SpecificEntityViewModel
+@{
     var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
 }
 
@@ -24,22 +25,23 @@
                 <tr>
                     @for (int col = 0; col < Model.EntityDocuments[row].Length; col++)
                     {
-                        <td class="p-1">
-                            @if (Model.EntityDocuments[0][col] == "File Name")
-                            {
-                            <button class="btn-link-pharus"
+                    <td class="p-1">
+                        @if (Model.EntityDocuments[0][col] == "File Name")
+                        {
+                            <button class="btn-link-pharus text-left"
                                     formtarget="_blank"
                                     type="submit"
                                     formaction="/@controllerName/ReadPdfFile"
-                                    name="read_Pdf">
+                                    name="pdfValue"
+                                    value="@Model.EntityDocuments[row][col]">
                                 @System.IO.Path.GetFileNameWithoutExtension(Model.EntityDocuments[row][col])
                             </button>
-                            }
-                            else
-                            {
-                                @Model.EntityDocuments[row][col]
-                            }
-                        </td>
+                        }
+                        else
+                        {
+                            @Model.EntityDocuments[row][col]
+                        }
+                    </td>
                     }
                 </tr>
             }
