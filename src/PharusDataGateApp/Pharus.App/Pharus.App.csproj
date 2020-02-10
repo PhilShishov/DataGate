@@ -34,6 +34,13 @@
     <ProjectReference Include="..\Pharus.Utilities\Pharus.Utilities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\FileFolder\Funds\" />
+    <Folder Include="wwwroot\FileFolder\Agreements\" />
+    <Folder Include="wwwroot\FileFolder\ShareClasses\" />
+    <Folder Include="wwwroot\FileFolder\SubFunds\" />
+  </ItemGroup>
+
   <ProjectExtensions>
     <VisualStudio>
       <UserProperties appsettings_1json__JsonSchema="" />

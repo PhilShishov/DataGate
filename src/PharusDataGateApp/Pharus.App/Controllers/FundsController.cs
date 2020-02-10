@@ -28,7 +28,7 @@
         private readonly IFundsSelectListService fundsSelectListService;
         private readonly IAgreementsSelectListService agreementsSelectListService;
         private readonly IEntitiesFileService entitiesFileService;
-        private readonly IHostingEnvironment hostingEnvironment;
+        private readonly IHostingEnvironment _environment;
 
         public FundsController(
             IFundsService fundsService,
@@ -43,7 +43,7 @@
             this.fundsSelectListService = fundsSelectListService;
             this.agreementsSelectListService = agreementsSelectListService;
             this.entitiesFileService = entitiesFileService;
-            this.hostingEnvironment = hostingEnvironment;
+            this._environment = hostingEnvironment;
         }
 
         [HttpGet]
@@ -186,7 +186,7 @@
             if (this.HttpContext.Request.Form.ContainsKey("extract_Pdf"))
             {
                 fileStreamResult = ExtractTable
-                    .ExtractTableAsPdf(model.Entities, chosenDate, this.hostingEnvironment, typeName, controllerName);
+                    .ExtractTableAsPdf(model.Entities, chosenDate, this._environment, typeName, controllerName);
             }
 
             return fileStreamResult;
@@ -307,8 +307,9 @@
 
             if (file != null || file.FileName != "")
             {
-                string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\FundFile\";
-                string path = $"{networkFileLocation}{file.FileName}";
+                string fileExt = Path.GetExtension(file.FileName);
+                string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\Funds\");
+                string path = $"{fileLocation}{file.FileName}";
 
                 using (var stream = new FileStream(path, FileMode.Create))
                 {
@@ -330,6 +331,7 @@
                                                     model.EntityId,
                                                     startConnection,
                                                     endConnection,
+                                                    fileExt,
                                                     prosFileTypeId,
                                                     model.ControllerName);
 
@@ -464,7 +466,7 @@
             if (this.HttpContext.Request.Form.ContainsKey("extract_Pdf"))
             {
                 fileStreamResult = ExtractTable
-                    .ExtractTableAsPdf(model.EntitySubEntities, chosenDate, this.hostingEnvironment, typeName, controllerName);
+                    .ExtractTableAsPdf(model.EntitySubEntities, chosenDate, this._environment, typeName, controllerName);
             }
 
             return fileStreamResult;
@@ -675,11 +677,10 @@
             model.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
             var date = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             int entityId = model.EntityId;
-            string prospectusName = GetFileNameFromFilePath
-                (entityId, model.ChosenDate, model.ControllerName);
 
             model.Entity = this.fundsService.GetFundWithDateById(date, entityId);
-            model.EntityProspectus = Path.GetFileNameWithoutExtension(prospectusName);
+            model.EntityDistinctDocuments = this.fundsService.
+                GetDistinctFundDocuments(date, entityId);
             model.EntityDistinctAgreements = this.fundsService.GetDistinctFundAgreements(date, entityId);
 
             model.EntitySubEntities = this.fundsService.GetFund_SubFunds(date, entityId);
@@ -688,7 +689,7 @@
                                                                 .Take(1)
                                                                 .ToList();
             model.EntityTimeline = this.fundsService.GetFundTimeline(entityId);
-            model.EntityDocuments = this.fundsService.GetAllFundDocuments(entityId);
+            model.EntityDocuments = this.fundsService.GetAllFundDocuments(date, entityId);
             model.EntityAgreements = this.fundsService.GetAllFundAgreements(date, entityId);
 
             model.StartConnection = DateTime.ParseExact(model.Entity[1][0], "dd/MM/yyyy", CultureInfo.InvariantCulture);
@@ -723,11 +724,6 @@
             this.ViewData["LegalVehicle"] = this.fundsSelectListService.GetAllTbDomLegalVehicle();
             this.ViewData["LegalType"] = this.fundsSelectListService.GetAllTbDomLegalType();
             this.ViewData["CompanyTypeDesc"] = this.fundsSelectListService.GetAllTbDomCompanyDesc();
-        }
-
-        private string GetFileNameFromFilePath(int entityId, string chosenDate, string controllerName)
-        {
-            return this.entitiesFileService.LoadEntityFileToDisplay(entityId, chosenDate, controllerName).Split('\\').Last();
         }
     }
 }
