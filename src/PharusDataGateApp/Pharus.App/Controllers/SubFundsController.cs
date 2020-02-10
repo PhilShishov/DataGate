@@ -28,7 +28,7 @@
         private readonly ISubFundsSelectListService subfundsSelectListService;
         private readonly IAgreementsSelectListService agreementsSelectListService;
         private readonly IEntitiesFileService entitiesFileService;
-        private readonly IHostingEnvironment hostingEnvironment;
+        private readonly IHostingEnvironment _environment;
 
         public SubFundsController(
             Pharus_vFinale_Context context,
@@ -43,7 +43,7 @@
             this.subfundsSelectListService = subfundsSelectListService;
             this.agreementsSelectListService = agreementsSelectListService;
             this.entitiesFileService = entitiesFileService;
-            this.hostingEnvironment = hostingEnvironment;
+            this._environment = hostingEnvironment;
         }
 
         [HttpGet]
@@ -183,7 +183,7 @@
 
             if (this.HttpContext.Request.Form.ContainsKey("extract_Pdf"))
             {
-                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.Entities, chosenDate, this.hostingEnvironment, typeName, controllerName);
+                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.Entities, chosenDate, this._environment, typeName, controllerName);
             }
 
             return fileStreamResult;
@@ -303,8 +303,9 @@
 
             if (file != null || file.FileName != "")
             {
-                string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\SubfundFile\";
-                string path = $"{networkFileLocation}{file.FileName}";
+                string fileExt = Path.GetExtension(file.FileName);
+                string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\SubFunds\");
+                string path = $"{fileLocation}{file.FileName}";
 
                 using (var stream = new FileStream(path, FileMode.Create))
                 {
@@ -321,13 +322,14 @@
                         .Select(s => s.FiletypeId)
                         .FirstOrDefault();
 
-                //this.entitiesFileService.AddDocumentToSpecificEntity(
-                //                                    file.FileName,
-                //                                    model.EntityId,
-                //                                    startConnection,
-                //                                    endConnection,
-                //                                    fileTypeId,
-                //                                    model.ControllerName);
+                this.entitiesFileService.AddDocumentToSpecificEntity(
+                                                    file.FileName,
+                                                    model.EntityId,
+                                                    startConnection,
+                                                    endConnection,
+                                                    fileExt,
+                                                    fileTypeId,
+                                                    model.ControllerName);
 
             }
 
@@ -394,19 +396,25 @@
         }
 
         [HttpPost]
-        public FileStream ReadPdfFile(SpecificEntityViewModel model)
+        public IActionResult ReadPdfFile(string pdfValue)
         {
-            FileStream fileStreamResult = null;
-            string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+            FileStreamResult fileStreamResult = null;
 
-            var path = this.entitiesFileService.LoadEntityFileToDisplay(model.EntityId, model.ChosenDate, controllerName);
+            string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\SubFunds\");
+            string path = $"{fileLocation}{pdfValue}";
 
-            if (this.HttpContext.Request.Form.ContainsKey("read_Pdf"))
+            if (this.HttpContext.Request.Form.ContainsKey("pdfValue"))
             {
-                fileStreamResult = new FileStream(path, FileMode.Open, FileAccess.Read);
+                var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
+                fileStreamResult = new FileStreamResult(fileStream, "application/pdf");
             }
 
-            return fileStreamResult;
+            if (fileStreamResult != null)
+            {
+                return fileStreamResult;
+            }
+
+            return this.RedirectToAction("All");
         }
 
         [HttpGet]
@@ -474,7 +482,7 @@
 
             if (this.HttpContext.Request.Form.ContainsKey("extract_Pdf"))
             {
-                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.EntitySubEntities, chosenDate, this.hostingEnvironment, typeName, controllerName);
+                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.EntitySubEntities, chosenDate, this._environment, typeName, controllerName);
             }
 
             return fileStreamResult;
