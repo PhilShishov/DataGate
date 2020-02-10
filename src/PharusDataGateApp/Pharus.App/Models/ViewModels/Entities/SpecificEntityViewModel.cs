@@ -45,7 +45,7 @@ namespace Pharus.App.Models.ViewModels.Entities
 
         public List<string> TSTypeProviders { get; set; }
 
-        public string EntityProspectus { get; set; }
+        public string SelectedFileName { get; set; }
 
         public List<string[]> EntityDistinctDocuments { get; set; }
 
