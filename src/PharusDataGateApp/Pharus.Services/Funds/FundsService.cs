@@ -251,7 +251,7 @@ namespace Pharus.Services.Funds
             }
         }
 
-        public List<string[]> GetAllFundDocuments(int id)
+        public List<string[]> GetDistinctFundDocuments(DateTime? chosenDate, int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -259,7 +259,36 @@ namespace Pharus.Services.Funds
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from [dbo].[fn_view_documents_fund]({id})";
+                if (chosenDate == null)
+                {
+                    command.CommandText = $"select * from [dbo].[fn_view_distinct_documents_fund]('{this.defaultDate}', {id})";
+                }
+                else
+                {
+                    command.CommandText = $"select * from [dbo].[fn_view_distinct_documents_fund]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                }
+
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
+        public List<string[]> GetAllFundDocuments(DateTime? chosenDate, int id)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                if (chosenDate == null)
+                {
+                    command.CommandText = $"select * from [dbo].[fn_view_documents_fund]('{this.defaultDate}', {id})";
+                }
+                else
+                {
+                    command.CommandText = $"select * from [dbo].[fn_view_documents_fund]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
@@ -273,7 +302,14 @@ namespace Pharus.Services.Funds
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from [dbo].[fn_view_distinct_agreements_fund]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                if (chosenDate == null)
+                {
+                    command.CommandText = $"select * from [dbo].[fn_view_distinct_agreements_fund]('{this.defaultDate}', {id})";
+                }
+                else
+                {
+                    command.CommandText = $"select * from [dbo].[fn_view_distinct_agreements_fund]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
@@ -287,7 +323,14 @@ namespace Pharus.Services.Funds
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from [dbo].[fn_view_agreements_fund]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                if (chosenDate == null)
+                {
+                    command.CommandText = $"select * from [dbo].[fn_view_agreements_fund]('{this.defaultDate}', {id})";
+                }
+                else
+                {
+                    command.CommandText = $"select * from [dbo].[fn_view_agreements_fund]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
