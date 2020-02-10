@@ -252,13 +252,13 @@
                         .Select(s => s.FiletypeId)
                         .FirstOrDefault();
 
-                this.entitiesFileService.AddDocumentToSpecificEntity(
-                                                    file.FileName,
-                                                    model.EntityId,
-                                                    startConnection,
-                                                    endConnection,
-                                                    fileTypeId,
-                                                    model.ControllerName);
+                //this.entitiesFileService.AddDocumentToSpecificEntity(
+                //                                    file.FileName,
+                //                                    model.EntityId,
+                //                                    startConnection,
+                //                                    endConnection,
+                //                                    fileTypeId,
+                //                                    model.ControllerName);
 
             }
 
