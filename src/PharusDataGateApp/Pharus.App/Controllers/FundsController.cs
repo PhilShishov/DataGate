@@ -401,20 +401,25 @@
         }
 
         [HttpPost]
-        public FileStream ReadPdfFile(SpecificEntityViewModel model)
+        public IActionResult ReadPdfFile(string pdfValue)
         {
-            FileStream fileStreamResult = null;
+            FileStreamResult fileStreamResult = null;
 
-            string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+            string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\Funds\");
+            string path = $"{fileLocation}{pdfValue}";
 
-            var path = this.entitiesFileService.LoadEntityFileToDisplay(model.EntityId, model.ChosenDate, controllerName);
-
-            if (this.HttpContext.Request.Form.ContainsKey("read_Pdf"))
+            if (this.HttpContext.Request.Form.ContainsKey("pdfValue"))
             {
-                fileStreamResult = new FileStream(path, FileMode.Open, FileAccess.Read);
+                var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
+                fileStreamResult = new FileStreamResult(fileStream, "application/pdf");
             }
 
-            return fileStreamResult;
+            if (fileStreamResult != null)
+            {
+                return fileStreamResult;
+            }
+
+            return this.RedirectToAction("All");
         }
 
         [HttpGet]
