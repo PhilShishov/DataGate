@@ -14,6 +14,7 @@
                             int entityId,
                             string startConnection,
                             string endConnection,
+                            string fileExt,
                             int fileTypeId,
                             string controllerName);
         void AddAgreementToSpecificEntity(

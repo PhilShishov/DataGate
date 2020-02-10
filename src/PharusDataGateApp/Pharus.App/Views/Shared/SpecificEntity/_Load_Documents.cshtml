@@ -8,16 +8,47 @@
         {
             <u class="text-torshia">PROSPECTUS</u><br>
 
-            @if (!string.IsNullOrEmpty(Model.EntityProspectus))
-            {
-                <button class="btn-link-pharus mt-3"
-                        formtarget="_blank"
-                        type="submit"
-                        formaction="/@controllerName/ReadPdfFile"
-                        name="read_Pdf">
-                    @Model.EntityProspectus
-                </button>
-            }
+            <table class="table table-hover w-100"
+                   id="tbl-distinct-documents">             
+
+                <tbody>
+                    @for (int row = 1; row < Model.EntityDistinctDocuments.Count; row++)
+                    {
+                        <tr>
+
+                            @for (int col = 0; col < Model.EntityDistinctDocuments[row].Length; col++)
+                            {
+                                @if (Model.EntityDistinctDocuments[0][col] == "File Name")
+                                {
+                                    <td>
+                                        <button class="btn-link-pharus text-left"
+                                                formtarget="_blank"
+                                                type="submit"
+                                                formaction="/@controllerName/ReadPdfFile"
+                                                name="read_Pdf">
+                                            @System.IO.Path.GetFileNameWithoutExtension(Model.EntityDistinctDocuments[row][col])
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button type="button"
+                                                class="btn btn-primary btn-sm mr-1 confirmDocDelBtn"
+                                                formaction="@Url.Action("DeleteDocument", controllerName,
+                                                           new { @fileName = Model.EntityDistinctDocuments[row][col]})">
+                                            Delete
+                                        </button>
+                                    </td>
+                                }
+                                else if (Model.EntityDistinctDocuments[0][col] == "File Description")
+                                {
+                                    <td>
+                                        @Model.EntityDistinctDocuments[row][col]
+                                    </td>
+                                }
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
         }
         else
         {

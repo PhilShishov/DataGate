@@ -35,7 +35,9 @@
 
         List<string[]> GetFundTimeline(int id);
 
-        List<string[]> GetAllFundDocuments(int id);
+        List<string[]> GetDistinctFundDocuments(DateTime? chosenDate, int id);
+
+        List<string[]> GetAllFundDocuments(DateTime? chosenDate, int id);
 
         List<string[]> GetDistinctFundAgreements(DateTime? chosenDate, int id);
 

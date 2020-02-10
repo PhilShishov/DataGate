@@ -26,6 +26,14 @@
             this.configuration = config;
         }
 
+        //public string LoadProspectusFileToDisplay(
+        //                            int entityId,
+        //                            string chosenDate,
+        //                            string controllerName)
+        //{
+
+        //}
+
         public string LoadEntityFileToDisplay(
                                     int entityId,
                                     string chosenDate,
@@ -78,6 +86,7 @@
                                     int entityId,
                                     string startConnection,
                                     string endConnection,
+                                    string fileExt,
                                     int fileTypeId,
                                     string controllerName)
         {
@@ -86,17 +95,17 @@
             if (controllerName == "Funds")
             {
                 query = "EXEC sp_insert_map_fund " +
-                  "@file_name, @entity_id, @start_connection, @end_connection, @filetype_id";
+                  "@file_name, @entity_id, @start_connection, @end_connection, @file_ext, @filetype_id";
             }
             else if (controllerName == "SubFunds")
             {
                 query = "EXEC sp_insert_map_subfund " +
-               "@file_name, @entity_id, @start_connection, @end_connection, @filetype_id";
+               "@file_name, @entity_id, @start_connection, @end_connection, @file_ext, @filetype_id";
             }
             else if (controllerName == "ShareClasses")
             {
                 query = "EXEC sp_insert_map_shareclass " +
-               "@file_name, @entity_id, @start_connection, @end_connection, @filetype_id";
+               "@file_name, @entity_id, @start_connection, @end_connection, @file_ext, @filetype_id";
             }
 
             using (SqlConnection connection = new SqlConnection())
@@ -110,6 +119,7 @@
                         new SqlParameter("@entity_id", SqlDbType.Int) { Value = entityId },
                         new SqlParameter("@start_connection", SqlDbType.NVarChar) { Value = startConnection },
                         new SqlParameter("@end_connection", SqlDbType.NVarChar) { Value = endConnection },
+                        new SqlParameter("@file_ext", SqlDbType.NVarChar) { Value = fileExt },
                         new SqlParameter("@filetype_id", SqlDbType.Int) { Value = fileTypeId },
                     });
 
