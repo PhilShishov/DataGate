@@ -35,7 +35,7 @@
 
         List<string[]> GetShareClassesTimeline(int id);
 
-        List<string[]> GetDistinctShareClassDocuments(int id);
+        List<string[]> GetDistinctShareClassDocuments(DateTime? chosenDate, int id);
 
         List<string[]> GetDistinctShareClassAgreements(DateTime? chosenDate, int id);
 

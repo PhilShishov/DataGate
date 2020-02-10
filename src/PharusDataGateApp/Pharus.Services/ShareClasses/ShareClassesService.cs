@@ -291,7 +291,7 @@ namespace Pharus.Services.ShareClasses
             }
         }
 
-        public List<string[]> GetDistinctShareClassDocuments(int id)
+        public List<string[]> GetDistinctShareClassDocuments(DateTime? chosenDate, int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -299,7 +299,14 @@ namespace Pharus.Services.ShareClasses
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from [dbo].[fn_view_distinct_documents_shareclass]({id})";
+                if (chosenDate == null)
+                {
+                    command.CommandText = $"select * from [dbo].[fn_view_distinct_documents_shareclass]('{this.defaultDate}', {id})";
+                }
+                else
+                {
+                    command.CommandText = $"select * from [dbo].[fn_view_distinct_documents_shareclass]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
@@ -313,7 +320,14 @@ namespace Pharus.Services.ShareClasses
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from [dbo].[fn_view_distinct_agreements_shareclass]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                if (chosenDate == null)
+                {
+                    command.CommandText = $"select * from [dbo].[fn_view_distinct_agreements_shareclass]('{this.defaultDate}', {id})";
+                }
+                else
+                {
+                    command.CommandText = $"select * from [dbo].[fn_view_distinct_agreements_shareclass]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
@@ -341,7 +355,14 @@ namespace Pharus.Services.ShareClasses
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from [dbo].[fn_view_agreements_shareclass]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                if (chosenDate == null)
+                {
+                    command.CommandText = $"select * from [dbo].[fn_view_agreements_shareclass]('{this.defaultDate}', {id})";
+                }
+                else
+                {
+                    command.CommandText = $"select * from [dbo].[fn_view_agreements_shareclass]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }

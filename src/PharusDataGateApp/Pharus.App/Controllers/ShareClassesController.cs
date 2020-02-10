@@ -672,7 +672,7 @@
                        .GetShareClassTimeSeriesData(entityId)
                        .Skip(1)
                        .ToList();
-            model.EntityDistinctDocuments = this.shareClassesService.GetDistinctShareClassDocuments(entityId);
+            model.EntityDistinctDocuments = this.shareClassesService.GetDistinctShareClassDocuments(date, entityId);
             model.EntityDistinctAgreements = this.shareClassesService.GetDistinctShareClassAgreements(date, entityId);
 
             model.EntityDocuments = this.shareClassesService.GetAllShareClassDocuments(entityId);
