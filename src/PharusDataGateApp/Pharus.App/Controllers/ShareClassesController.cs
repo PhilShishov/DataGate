@@ -308,16 +308,16 @@
                     .Select(c => c.CId)
                     .FirstOrDefault();
 
-                this.entitiesFileService.AddAgreementToSpecificEntity(
-                                                    file.FileName,
-                                                    model.EntityId,
-                                                    activityTypeId,
-                                                    contractDate,
-                                                    activationDate,
-                                                    expirationDate,
-                                                    statusId,
-                                                    companyId,
-                                                    model.ControllerName);
+                //this.entitiesFileService.AddAgreementToSpecificEntity(
+                //                                    file.FileName,
+                //                                    model.EntityId,
+                //                                    activityTypeId,
+                //                                    contractDate,
+                //                                    activationDate,
+                //                                    expirationDate,
+                //                                    statusId,
+                //                                    companyId,
+                //                                    model.ControllerName);
             }
 
             this.ModelState.Clear();

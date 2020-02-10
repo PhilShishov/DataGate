@@ -19,6 +19,7 @@
                             string controllerName);
         void AddAgreementToSpecificEntity(
                             string fileName,
+                            string fileExt,
                             int entityId,
                             int activityTypeId,
                             string contractDate,

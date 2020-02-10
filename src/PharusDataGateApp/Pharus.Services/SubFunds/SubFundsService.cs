@@ -307,7 +307,7 @@ namespace Pharus.Services.SubFunds
             }
         }
 
-        public List<string[]> GetDistinctSubFundDocuments(int id)
+        public List<string[]> GetDistinctSubFundDocuments(DateTime? chosenDate, int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -334,7 +334,7 @@ namespace Pharus.Services.SubFunds
             }
         }
 
-        public List<string[]> GetAllSubFundDocumens(int id)
+        public List<string[]> GetAllSubFundDocuments(int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {

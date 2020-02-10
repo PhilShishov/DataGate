@@ -273,7 +273,7 @@ namespace Pharus.Services.Funds
             }
         }
 
-        public List<string[]> GetAllFundDocuments(DateTime? chosenDate, int id)
+        public List<string[]> GetAllFundDocuments(int id)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -281,14 +281,7 @@ namespace Pharus.Services.Funds
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                if (chosenDate == null)
-                {
-                    command.CommandText = $"select * from [dbo].[fn_view_documents_fund]('{this.defaultDate}', {id})";
-                }
-                else
-                {
-                    command.CommandText = $"select * from [dbo].[fn_view_documents_fund]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
-                }
+                command.CommandText = $"select * from [dbo].[fn_view_documents_fund]({id})";
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }

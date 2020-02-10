@@ -354,8 +354,9 @@
 
             if (file != null || file.FileName != "")
             {
-                string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\AgreementFile\";
-                string path = $"{networkFileLocation}{file.FileName}";
+                string fileExt = Path.GetExtension(file.FileName);
+                string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\Agreements\");
+                string path = $"{fileLocation}{file.FileName}";
 
                 using (var stream = new FileStream(path, FileMode.Create))
                 {
@@ -385,6 +386,7 @@
 
                 this.entitiesFileService.AddAgreementToSpecificEntity(
                                                     file.FileName,
+                                                    fileExt,
                                                     model.EntityId,
                                                     activityTypeId,
                                                     contractDate,
@@ -694,7 +696,7 @@
                                                                 .Take(1)
                                                                 .ToList();
             model.EntityTimeline = this.fundsService.GetFundTimeline(entityId);
-            model.EntityDocuments = this.fundsService.GetAllFundDocuments(date, entityId);
+            model.EntityDocuments = this.fundsService.GetAllFundDocuments(entityId);
             model.EntityAgreements = this.fundsService.GetAllFundAgreements(date, entityId);
 
             model.StartConnection = DateTime.ParseExact(model.Entity[1][0], "dd/MM/yyyy", CultureInfo.InvariantCulture);
