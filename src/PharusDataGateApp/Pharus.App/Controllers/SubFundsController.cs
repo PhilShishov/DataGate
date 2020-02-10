@@ -377,16 +377,16 @@
                     .Select(c => c.CId)
                     .FirstOrDefault();
 
-                this.entitiesFileService.AddAgreementToSpecificEntity(
-                                                    file.FileName,
-                                                    model.EntityId,
-                                                    activityTypeId,
-                                                    contractDate,
-                                                    activationDate,
-                                                    expirationDate,
-                                                    statusId,
-                                                    companyId,
-                                                    model.ControllerName);
+                //this.entitiesFileService.AddAgreementToSpecificEntity(
+                //                                    file.FileName,
+                //                                    model.EntityId,
+                //                                    activityTypeId,
+                //                                    contractDate,
+                //                                    activationDate,
+                //                                    expirationDate,
+                //                                    statusId,
+                //                                    companyId,
+                //                                    model.ControllerName);
             }
 
             this.ModelState.Clear();
@@ -841,7 +841,7 @@
             model.ContainerEntityName = this.subFundsService.GetSubFund_FundContainer(date, entityId)[1][1];
             model.ContainerEntityId = this.subFundsService.GetSubFund_FundContainer(date, entityId)[1][0];
 
-            model.EntityDistinctDocuments = this.subFundsService.GetDistinctSubFundDocuments(entityId);
+            model.EntityDistinctDocuments = this.subFundsService.GetDistinctSubFundDocuments(date, entityId);
             model.EntityDistinctAgreements = this.subFundsService.GetDistinctSubFundAgreements(date, entityId);
             model.EntitySubEntities = this.subFundsService.GetSubFund_ShareClasses(date, entityId);
             model.EntitiesHeadersForColumnSelection = this.subFundsService
@@ -850,7 +850,7 @@
                                                                     .ToList();
             model.EntityTimeline = this.subFundsService.GetSubFundTimeline(entityId);
             model.EntityAgreements = this.subFundsService.GetAllSubFundAgreements(date, entityId);
-            model.EntityDocuments = this.subFundsService.GetAllSubFundDocumens(entityId);
+            model.EntityDocuments = this.subFundsService.GetAllSubFundDocuments(entityId);
 
             model.StartConnection = DateTime.ParseExact(model.Entity[1][0], "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
