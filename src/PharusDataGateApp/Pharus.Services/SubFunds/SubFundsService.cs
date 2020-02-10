@@ -315,7 +315,14 @@ namespace Pharus.Services.SubFunds
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from [dbo].[fn_view_distinct_documents_subfund]({id})";
+                if (chosenDate == null)
+                {
+                    command.CommandText = $"select * from [dbo].[fn_view_distinct_documents_subfund]('{this.defaultDate}', {id})";
+                }
+                else
+                {
+                    command.CommandText = $"select * from [dbo].[fn_view_distinct_documents_subfund]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
@@ -328,7 +335,14 @@ namespace Pharus.Services.SubFunds
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from [dbo].[fn_view_distinct_agreements_subfund]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                if (chosenDate == null)
+                {
+                    command.CommandText = $"select * from [dbo].[fn_view_distinct_agreements_subfund]('{this.defaultDate}', {id})";
+                }
+                else
+                {
+                    command.CommandText = $"select * from [dbo].[fn_view_distinct_agreements_subfund]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
@@ -356,7 +370,14 @@ namespace Pharus.Services.SubFunds
                 connection.Open();
                 SqlCommand command = connection.CreateCommand();
 
-                command.CommandText = $"select * from [dbo].[fn_view_agreements_subfund]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                if (chosenDate == null)
+                {
+                    command.CommandText = $"select * from [dbo].[fn_view_agreements_subfund]('{this.defaultDate}', {id})";
+                }
+                else
+                {
+                    command.CommandText = $"select * from [dbo].[fn_view_agreements_subfund]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
