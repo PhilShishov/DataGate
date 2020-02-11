@@ -301,7 +301,7 @@
             {
                 query = "EXEC delete_agreement_fundfile_byname @file_name";
             }
-            else if (controllerName == "ShareClasses")
+            else if (controllerName == "SubFunds")
             {
                 query = "EXEC delete_agreement_subfundfile_byname @file_name";
             }

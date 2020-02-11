@@ -28,7 +28,7 @@
         private readonly IShareClassesSelectListService shareClassesSelectListService;
         private readonly IAgreementsSelectListService agreementsSelectListService;
         private readonly IEntitiesFileService entitiesFileService;
-        private readonly IHostingEnvironment hostingEnvironment;
+        private readonly IHostingEnvironment _environment;
 
         public ShareClassesController(
             IShareClassesService shareClassesService,
@@ -39,7 +39,7 @@
             IHostingEnvironment hostingEnvironment)
         {
             this.context = context;
-            this.hostingEnvironment = hostingEnvironment;
+            this._environment = hostingEnvironment;
             this.shareClassesService = shareClassesService;
             this.shareClassesSelectListService = shareClassesSelectListService;
             this.agreementsSelectListService = agreementsSelectListService;
@@ -184,7 +184,7 @@
 
             if (this.HttpContext.Request.Form.ContainsKey("extract_Pdf"))
             {
-                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.Entities, chosenDate, this.hostingEnvironment, typeName, controllerName);
+                fileStreamResult = ExtractTable.ExtractTableAsPdf(model.Entities, chosenDate, this._environment, typeName, controllerName);
             }
 
             return fileStreamResult;
@@ -234,8 +234,9 @@
 
             if (file != null || file.FileName != "")
             {
-                string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\ShareclassFile\";
-                string path = $"{networkFileLocation}{file.FileName}";
+                string fileExt = Path.GetExtension(file.FileName);
+                string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\SubFunds\");
+                string path = $"{fileLocation}{file.FileName}";
 
                 using (var stream = new FileStream(path, FileMode.Create))
                 {
@@ -252,13 +253,14 @@
                         .Select(s => s.FiletypeId)
                         .FirstOrDefault();
 
-                //this.entitiesFileService.AddDocumentToSpecificEntity(
-                //                                    file.FileName,
-                //                                    model.EntityId,
-                //                                    startConnection,
-                //                                    endConnection,
-                //                                    fileTypeId,
-                //                                    model.ControllerName);
+                this.entitiesFileService.AddDocumentToSpecificEntity(
+                                                    file.FileName,
+                                                    model.EntityId,
+                                                    startConnection,
+                                                    endConnection,
+                                                    fileExt,
+                                                    fileTypeId,
+                                                    model.ControllerName);
 
             }
 
@@ -279,8 +281,9 @@
 
             if (file != null || file.FileName != "")
             {
-                string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\AgreementFile\";
-                string path = $"{networkFileLocation}{file.FileName}";
+                string fileExt = Path.GetExtension(file.FileName);
+                string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\Agreements\");
+                string path = $"{fileLocation}{file.FileName}";
 
                 using (var stream = new FileStream(path, FileMode.Create))
                 {
@@ -308,16 +311,17 @@
                     .Select(c => c.CId)
                     .FirstOrDefault();
 
-                //this.entitiesFileService.AddAgreementToSpecificEntity(
-                //                                    file.FileName,
-                //                                    model.EntityId,
-                //                                    activityTypeId,
-                //                                    contractDate,
-                //                                    activationDate,
-                //                                    expirationDate,
-                //                                    statusId,
-                //                                    companyId,
-                //                                    model.ControllerName);
+                this.entitiesFileService.AddAgreementToSpecificEntity(
+                                                    file.FileName,
+                                                    fileExt,
+                                                    model.EntityId,
+                                                    activityTypeId,
+                                                    contractDate,
+                                                    activationDate,
+                                                    expirationDate,
+                                                    statusId,
+                                                    companyId,
+                                                    model.ControllerName);
             }
 
             this.ModelState.Clear();
@@ -325,19 +329,47 @@
         }
 
         [HttpPost]
-        public FileStream ReadPdfFile(SpecificEntityViewModel model)
+        public IActionResult ReadDocument(string pdfValue)
         {
-            FileStream fileStreamResult = null;
-            string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+            FileStreamResult fileStreamResult = null;
 
-            var path = this.entitiesFileService.LoadEntityFileToDisplay(model.EntityId, model.ChosenDate, controllerName);
+            string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\ShareClasses\");
+            string path = $"{fileLocation}{pdfValue}";
 
-            if (this.HttpContext.Request.Form.ContainsKey("read_Pdf"))
+            if (this.HttpContext.Request.Form.ContainsKey("pdfValue"))
             {
-                fileStreamResult = new FileStream(path, FileMode.Open, FileAccess.Read);
+                var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
+                fileStreamResult = new FileStreamResult(fileStream, "application/pdf");
             }
 
-            return fileStreamResult;
+            if (fileStreamResult != null)
+            {
+                return fileStreamResult;
+            }
+
+            return this.RedirectToAction("All");
+        }
+
+        [HttpPost]
+        public IActionResult ReadAgreement(string pdfValue)
+        {
+            FileStreamResult fileStreamResult = null;
+
+            string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\Agreements\");
+            string path = $"{fileLocation}{pdfValue}";
+
+            if (this.HttpContext.Request.Form.ContainsKey("pdfValue"))
+            {
+                var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
+                fileStreamResult = new FileStreamResult(fileStream, "application/pdf");
+            }
+
+            if (fileStreamResult != null)
+            {
+                return fileStreamResult;
+            }
+
+            return this.RedirectToAction("All");
         }
 
         [HttpGet]
@@ -346,15 +378,19 @@
             if (!string.IsNullOrEmpty(docName))
             {
                 string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
-
                 this.entitiesFileService.DeleteDocumentMapping(docName, controllerName);
 
-                return Json(new { data = docName });
+                string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\ShareClasses\");
+                string path = $"{fileLocation}{docName}";
+
+                if (System.IO.File.Exists(path))
+                {
+                    System.IO.File.Delete(path);
+                    return Json(new { data = Path.GetFileNameWithoutExtension(docName) });
+                }
             }
-            else
-            {
-                return Json(new { data = "false" });
-            }
+
+            return Json(new { data = "false" });
         }
 
         [HttpGet]
@@ -362,14 +398,20 @@
         {
             if (!string.IsNullOrEmpty(agrName))
             {
-                //this.entitiesFileService.DeleteAgreementMapping(agrName);
+                string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+                this.entitiesFileService.DeleteAgreementMapping(agrName, controllerName);
 
-                return Json(new { data = agrName });
+                string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\Agreements\");
+                string path = $"{fileLocation}{agrName}";
+
+                if (System.IO.File.Exists(path))
+                {
+                    System.IO.File.Delete(path);
+                    return Json(new { data = Path.GetFileNameWithoutExtension(agrName) });
+                }
             }
-            else
-            {
-                return Json(new { data = "false" });
-            }
+
+            return Json(new { data = "false" });
         }
 
         [HttpGet("ShareClasses/EditShareClass/{EntityId}/{ChosenDate}")]
