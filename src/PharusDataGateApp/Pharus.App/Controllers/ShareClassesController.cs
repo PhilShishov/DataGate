@@ -235,7 +235,7 @@
             if (file != null || file.FileName != "")
             {
                 string fileExt = Path.GetExtension(file.FileName);
-                string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\SubFunds\");
+                string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\ShareClasses\");
                 string path = $"{fileLocation}{file.FileName}";
 
                 using (var stream = new FileStream(path, FileMode.Create))
