@@ -220,7 +220,7 @@
             }
         }
 
-        public void DeleteDocument(string docName, string controllerName)
+        public void DeleteDocumentMapping(string docName, string controllerName)
         {
             string query = string.Empty;
             if (controllerName == "SubFunds")
@@ -234,21 +234,13 @@
 
             using (SqlConnection connection = new SqlConnection())
             {
-                connection.ConnectionString = configuration.GetConnectionString("PharusFileConnection");
+                connection.ConnectionString = configuration.GetConnectionString("Pharus_vFinaleConnection");
                 using (SqlCommand command = new SqlCommand(query))
                 {
                     command.Parameters.AddRange(new[]
                     {
                         new SqlParameter("@file_name", SqlDbType.NVarChar) { Value = docName },
-                    });
-
-                    foreach (SqlParameter parameter in command.Parameters)
-                    {
-                        if (parameter.Value == null)
-                        {
-                            parameter.Value = DBNull.Value;
-                        }
-                    }
+                    });                  
 
                     command.Connection = connection;
 
@@ -264,6 +256,51 @@
                 }
             }
         }
+
+        //public void DeleteDocumentFileDB(string docName, string controllerName)
+        //{
+        //    string query = string.Empty;
+        //    if (controllerName == "SubFunds")
+        //    {
+        //        query = "EXEC delete_subfund_file_byname @file_name";
+        //    }
+        //    else if (controllerName == "ShareClasses")
+        //    {
+        //        query = "EXEC delete_shareclass_file_byname @file_name";
+        //    }
+
+        //    using (SqlConnection connection = new SqlConnection())
+        //    {
+        //        connection.ConnectionString = configuration.GetConnectionString("Pharus_vFinaleConnection");
+        //        using (SqlCommand command = new SqlCommand(query))
+        //        {
+        //            command.Parameters.AddRange(new[]
+        //            {
+        //                new SqlParameter("@file_name", SqlDbType.NVarChar) { Value = docName },
+        //            });
+
+        //            foreach (SqlParameter parameter in command.Parameters)
+        //            {
+        //                if (parameter.Value == null)
+        //                {
+        //                    parameter.Value = DBNull.Value;
+        //                }
+        //            }
+
+        //            command.Connection = connection;
+
+        //            try
+        //            {
+        //                command.Connection.Open();
+        //                command.ExecuteScalar();
+        //            }
+        //            catch (SqlException sx)
+        //            {
+        //                Console.WriteLine(sx.Message);
+        //            }
+        //        }
+        //    }
+        //}
 
         public void DeleteAgreement(string agrName)
         {
