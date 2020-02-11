@@ -453,12 +453,17 @@
             {
                 this.entitiesFileService.DeleteAgreementMapping(agrName);
 
-                return Json(new { data = agrName });
+                string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\Agreements\");
+                string path = $"{fileLocation}{agrName}";
+
+                if (System.IO.File.Exists(path))
+                {
+                    System.IO.File.Delete(path);
+                    return Json(new { data = Path.GetFileNameWithoutExtension(agrName) });
+                }
             }
-            else
-            {
-                return Json(new { data = "false" });
-            }
+
+            return Json(new { data = "false" });
         }
 
         [HttpPost]

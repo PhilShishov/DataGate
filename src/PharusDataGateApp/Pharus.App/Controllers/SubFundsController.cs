@@ -431,7 +431,7 @@
                 if (System.IO.File.Exists(path))
                 {
                     System.IO.File.Delete(path);
-                    return Json(new { data = docName });
+                    return Json(new { data = Path.GetFileNameWithoutExtension(docName) });
                 }
             }
 
