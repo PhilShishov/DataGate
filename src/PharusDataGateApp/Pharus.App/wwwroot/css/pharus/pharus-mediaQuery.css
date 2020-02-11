@@ -18,14 +18,49 @@
     #adminUserPanel {
         padding-left: 50px;
     }
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        border: 0;
+        margin: 0px auto;
+        width: 98%;
+    }
+
+    #footer-pharus {
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    #main-container-pharus {
+        width: 100%;
+        padding-right: 15px; 
+        padding-left: 15px; 
+        margin-right: auto;
+        margin-left: auto;
+    }
 }
 
 @media only screen and (max-width: 600px) {
     #toolbar-pharus {
-        overflow-x:scroll;
+        overflow-x: scroll;
     }
 
     #infoAndDocumentsView {
         display: inline;
+    }
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        border: 0;
+        margin: 0px auto;
+    }
+
+    #footer-pharus {
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
     }
 }
