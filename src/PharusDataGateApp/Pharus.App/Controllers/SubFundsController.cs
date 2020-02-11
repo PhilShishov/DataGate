@@ -430,7 +430,7 @@
 
                 if (System.IO.File.Exists(path))
                 {
-                    //System.IO.File.Delete(path);
+                    System.IO.File.Delete(path);
                     return Json(new { data = docName });
                 }
             }
@@ -443,7 +443,7 @@
         {
             if (!string.IsNullOrEmpty(agrName))
             {
-                this.entitiesFileService.DeleteAgreement(agrName);
+                this.entitiesFileService.DeleteAgreementMapping(agrName);
 
                 return Json(new { data = agrName });
             }

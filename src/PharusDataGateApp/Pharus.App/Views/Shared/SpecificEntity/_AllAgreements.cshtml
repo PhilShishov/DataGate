@@ -27,13 +27,14 @@
                         <td class="p-1">
                             @if (Model.EntityAgreements[0][col] == "File Name")
                             {
-                            <button class="btn-link-pharus"
-                                    formtarget="_blank"
-                                    type="submit"
-                                    formaction="/@controllerName/ReadPdfFile"
-                                    name="read_Pdf">
-                                @System.IO.Path.GetFileNameWithoutExtension(Model.EntityAgreements[row][col])
-                            </button>
+                                <button class="btn-link-pharus text-left"
+                                        formtarget="_blank"
+                                        type="submit"
+                                        formaction="/@controllerName/ReadAgreement"
+                                        name="pdfValue"
+                                        value="@Model.EntityAgreements[row][col]">
+                                    @System.IO.Path.GetFileNameWithoutExtension(Model.EntityAgreements[row][col])
+                                </button>
                             }
                             else
                             {
