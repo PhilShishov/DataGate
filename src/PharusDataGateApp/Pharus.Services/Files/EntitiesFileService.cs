@@ -26,14 +26,6 @@
             this.configuration = config;
         }
 
-        //public string LoadProspectusFileToDisplay(
-        //                            int entityId,
-        //                            string chosenDate,
-        //                            string controllerName)
-        //{
-
-        //}
-
         public string LoadEntityFileToDisplay(
                                     int entityId,
                                     string chosenDate,
@@ -163,19 +155,19 @@
             if (controllerName == "Funds")
             {
                 query = "EXEC sp_insert_agreement_fund " +
-                  "@file_name, @file_ext, @entity_id, @activity_type_id, @contract_date, " +
+                  "@file_name, @entity_id, @file_ext, @activity_type_id, @contract_date, " +
                   "@activation_date, @expiration_date, @company_id, @status";
             }
             else if (controllerName == "SubFunds")
             {
                 query = "EXEC sp_insert_agreement_subfund " +
-                  "@file_name, @file_ext, @entity_id, @activity_type_id, @contract_date, " +
+                  "@file_name, @entity_id, @file_ext, @activity_type_id, @contract_date, " +
                   "@activation_date, @expiration_date, @company_id, @status";
             }
             else if (controllerName == "ShareClasses")
             {
                 query = "EXEC sp_insert_agreement_shareclass " +
-                  "@file_name, @file_ext, @entity_id, @activity_type_id, @contract_date, " +
+                  "@file_name, @entity_id, @file_ext, @activity_type_id, @contract_date, " +
                   "@activation_date, @expiration_date, @company_id, @status";
             }
 
@@ -187,8 +179,8 @@
                     command.Parameters.AddRange(new[]
                     {
                         new SqlParameter("@file_name", SqlDbType.NVarChar) { Value = fileName },
-                        new SqlParameter("@file_ext", SqlDbType.NVarChar) { Value = fileExt },
                         new SqlParameter("@entity_id", SqlDbType.Int) { Value = entityId },
+                        new SqlParameter("@file_ext", SqlDbType.NVarChar) { Value = fileExt },
                         new SqlParameter("@activity_type_id", SqlDbType.Int) { Value =  activityTypeId},
                         new SqlParameter("@contract_date", SqlDbType.NVarChar) { Value = contractDate },
                         new SqlParameter("@activation_date", SqlDbType.NVarChar) { Value = activationDate },
@@ -302,7 +294,7 @@
         //    }
         //}
 
-        public void DeleteAgreement(string agrName)
+        public void DeleteAgreementMapping(string agrName)
         {
             string query = "EXEC delete_agreement_file_byname @file_name";
 
