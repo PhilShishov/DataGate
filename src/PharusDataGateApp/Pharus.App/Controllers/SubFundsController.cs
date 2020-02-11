@@ -401,7 +401,7 @@
         {
             FileStreamResult fileStreamResult = null;
 
-            string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\SFunds\");
+            string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\SubFunds\");
             string path = $"{fileLocation}{pdfValue}";
 
             if (this.HttpContext.Request.Form.ContainsKey("pdfValue"))
