@@ -423,15 +423,19 @@
             if (!string.IsNullOrEmpty(docName))
             {
                 string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+                this.entitiesFileService.DeleteDocumentMapping(docName, controllerName);
 
-                this.entitiesFileService.DeleteDocument(docName, controllerName);
+                string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\SubFunds\");
+                string path = $"{fileLocation}{docName}";
 
-                return Json(new { data = docName });
+                if (System.IO.File.Exists(path))
+                {
+                    //System.IO.File.Delete(path);
+                    return Json(new { data = docName });
+                }
             }
-            else
-            {
-                return Json(new { data = "false" });
-            }
+
+            return Json(new { data = "false" });
         }
 
         [HttpGet]

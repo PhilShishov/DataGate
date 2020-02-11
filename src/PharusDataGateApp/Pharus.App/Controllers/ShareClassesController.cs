@@ -347,7 +347,7 @@
             {
                 string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
-                this.entitiesFileService.DeleteDocument(docName, controllerName);
+                this.entitiesFileService.DeleteDocumentMapping(docName, controllerName);
 
                 return Json(new { data = docName });
             }
