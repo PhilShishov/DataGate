@@ -300,7 +300,7 @@
 
             using (SqlConnection connection = new SqlConnection())
             {
-                connection.ConnectionString = configuration.GetConnectionString("PharusFileConnection");
+                connection.ConnectionString = configuration.GetConnectionString("Pharus_vFinaleConnection");
                 using (SqlCommand command = new SqlCommand(query))
                 {
                     command.Parameters.AddRange(new[]

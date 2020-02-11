@@ -6,7 +6,7 @@
             event.preventDefault();
         }
         else {
-            const agrName = $(this).closest('tr').find("td:eq(1)").text().trim();
+            const agrName = $(this).closest('tr').find("button:eq(0)").val();
             $.ajax({
                 type: "GET",
                 url: url,
