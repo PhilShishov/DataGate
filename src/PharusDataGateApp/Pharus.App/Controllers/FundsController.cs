@@ -403,11 +403,33 @@
         }
 
         [HttpPost]
-        public IActionResult ReadPdfFile(string pdfValue)
+        public IActionResult ReadDocument(string pdfValue)
         {
             FileStreamResult fileStreamResult = null;
 
             string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\Funds\");
+            string path = $"{fileLocation}{pdfValue}";
+
+            if (this.HttpContext.Request.Form.ContainsKey("pdfValue"))
+            {
+                var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
+                fileStreamResult = new FileStreamResult(fileStream, "application/pdf");
+            }
+
+            if (fileStreamResult != null)
+            {
+                return fileStreamResult;
+            }
+
+            return this.RedirectToAction("All");
+        }
+
+        [HttpPost]
+        public IActionResult ReadAgreement(string pdfValue)
+        {
+            FileStreamResult fileStreamResult = null;
+
+            string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\Agreements\");
             string path = $"{fileLocation}{pdfValue}";
 
             if (this.HttpContext.Request.Form.ContainsKey("pdfValue"))
@@ -429,7 +451,7 @@
         {
             if (!string.IsNullOrEmpty(agrName))
             {
-                this.entitiesFileService.DeleteAgreement(agrName);
+                this.entitiesFileService.DeleteAgreementMapping(agrName);
 
                 return Json(new { data = agrName });
             }
