@@ -31,6 +31,6 @@
 
         void DeleteDocumentMapping(string docName, string controllerName);
 
-        void DeleteAgreementMapping(string fileName);
+        void DeleteAgreementMapping(string fileName, string controllerName);
     }
 }

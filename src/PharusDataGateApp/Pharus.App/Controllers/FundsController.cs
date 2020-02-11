@@ -395,7 +395,6 @@
                                                     statusId,
                                                     companyId,
                                                     model.ControllerName);
-
             }
 
             this.ModelState.Clear();
@@ -451,7 +450,8 @@
         {
             if (!string.IsNullOrEmpty(agrName))
             {
-                this.entitiesFileService.DeleteAgreementMapping(agrName);
+                string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+                this.entitiesFileService.DeleteAgreementMapping(agrName, controllerName);
 
                 string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\Agreements\");
                 string path = $"{fileLocation}{agrName}";

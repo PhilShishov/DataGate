@@ -350,8 +350,9 @@
 
             if (file != null || file.FileName != "")
             {
-                string networkFileLocation = @"\\Pha-sql-01\sqlexpress\FileFolder\AgreementFile\";
-                string path = $"{networkFileLocation}{file.FileName}";
+                string fileExt = Path.GetExtension(file.FileName);
+                string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\Agreements\");
+                string path = $"{fileLocation}{file.FileName}";
 
                 using (var stream = new FileStream(path, FileMode.Create))
                 {
@@ -379,28 +380,50 @@
                     .Select(c => c.CId)
                     .FirstOrDefault();
 
-                //this.entitiesFileService.AddAgreementToSpecificEntity(
-                //                                    file.FileName,
-                //                                    model.EntityId,
-                //                                    activityTypeId,
-                //                                    contractDate,
-                //                                    activationDate,
-                //                                    expirationDate,
-                //                                    statusId,
-                //                                    companyId,
-                //                                    model.ControllerName);
+                this.entitiesFileService.AddAgreementToSpecificEntity(
+                                                    file.FileName,
+                                                    fileExt,
+                                                    model.EntityId,
+                                                    activityTypeId,
+                                                    contractDate,
+                                                    activationDate,
+                                                    expirationDate,
+                                                    statusId,
+                                                    companyId,
+                                                    model.ControllerName);
             }
 
             this.ModelState.Clear();
             return this.RedirectToAction("ViewEntitySE", new { model.EntityId, model.ChosenDate });
         }
-
         [HttpPost]
-        public IActionResult ReadPdfFile(string pdfValue)
+        public IActionResult ReadDocument(string pdfValue)
         {
             FileStreamResult fileStreamResult = null;
 
-            string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\SubFunds\");
+            string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\SFunds\");
+            string path = $"{fileLocation}{pdfValue}";
+
+            if (this.HttpContext.Request.Form.ContainsKey("pdfValue"))
+            {
+                var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
+                fileStreamResult = new FileStreamResult(fileStream, "application/pdf");
+            }
+
+            if (fileStreamResult != null)
+            {
+                return fileStreamResult;
+            }
+
+            return this.RedirectToAction("All");
+        }
+
+        [HttpPost]
+        public IActionResult ReadAgreement(string pdfValue)
+        {
+            FileStreamResult fileStreamResult = null;
+
+            string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\Agreements\");
             string path = $"{fileLocation}{pdfValue}";
 
             if (this.HttpContext.Request.Form.ContainsKey("pdfValue"))
@@ -443,14 +466,20 @@
         {
             if (!string.IsNullOrEmpty(agrName))
             {
-                this.entitiesFileService.DeleteAgreementMapping(agrName);
+                string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+                this.entitiesFileService.DeleteAgreementMapping(agrName, controllerName);
 
-                return Json(new { data = agrName });
+                string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\Agreements\");
+                string path = $"{fileLocation}{agrName}";
+
+                if (System.IO.File.Exists(path))
+                {
+                    System.IO.File.Delete(path);
+                    return Json(new { data = Path.GetFileNameWithoutExtension(agrName) });
+                }
             }
-            else
-            {
-                return Json(new { data = "false" });
-            }
+
+            return Json(new { data = "false" });
         }
 
         [HttpPost]
