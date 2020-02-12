@@ -16,8 +16,16 @@
         display: flex;
     }
 
+    #table-info-pharus {
+        width: 35%;
+    }
+
     #adminUserPanel {
         padding-left: 50px;
+    }
+
+    #div-select-addInfo {
+        width: 25%;
     }
 
     footer {
@@ -52,6 +60,10 @@
         overflow-x: scroll;
     }
 
+    #div-select-addInfo {
+        width: 70%;
+    }
+
     #allselect-div-pharus {
         display: inline;
     }
@@ -78,5 +90,9 @@
         width: 100%;
         margin-right: auto;
         margin-left: auto;
+    }
+
+    .lbl-toolbar-pharus {
+        display: none;
     }
 }
