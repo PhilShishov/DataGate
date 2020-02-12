@@ -21,17 +21,15 @@
       method="post">
 
     <partial name="SpecificEntity/_Toolbar" />
-    <div class="d-flex justify-content-between">
+    <div id="canvas-aum-pharus">
+        <canvas id="aumSC_Canvas"></canvas>
+    </div>
+    <div class="justify-content-between" id="infoAndDocumentsView">
         <partial name="SpecificEntity/_Info" />
-        <div class="w-60">
-            <div style="width:90%;">
-                <canvas id="aumSC_Canvas"></canvas>
-            </div>
-            <partial name="SpecificEntity/_Load_Documents" />
-        </div>
+        <partial name="SpecificEntity/_Load_Documents" />
     </div>
 
-    <div class="row w-25 ml-3">
+    <div class="row ml-3" id="div-select-addInfo">
         <label class="text-torshia m-1 pr-3">SHARECLASS ADDITIONAL INFORMATION</label>
         <select class="custom-select-lg select-pharus form-control input-sm"
                 id="shareClassAdditionalInfSelect"
