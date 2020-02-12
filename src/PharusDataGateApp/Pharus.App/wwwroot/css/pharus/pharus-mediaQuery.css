@@ -27,16 +27,16 @@
         width: 98%;
     }
 
-    #footer-pharus {
+    .footer-pharus {
         width: 100%;
         margin-right: auto;
         margin-left: auto;
     }
 
-    #main-container-pharus {
+    .main-container-pharus {
         width: 100%;
-        padding-right: 15px; 
-        padding-left: 15px; 
+        padding-right: 15px;
+        padding-left: 15px;
         margin-right: auto;
         margin-left: auto;
     }
@@ -52,13 +52,16 @@
     }
 
     footer {
-        position: fixed;
-        bottom: 0;
-        border: 0;
-        margin: 0px auto;
+        display: none;
     }
 
-    #footer-pharus {
+    .footer-pharus {
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .main-container-pharus {
         width: 100%;
         margin-right: auto;
         margin-left: auto;
