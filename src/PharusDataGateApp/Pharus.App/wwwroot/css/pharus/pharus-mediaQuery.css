@@ -8,6 +8,7 @@
 
 @media only screen and (min-width: 768px) {
     #toolbar-pharus {
+        height: 80px;
         display: flex;
     }
 
@@ -40,11 +41,23 @@
         margin-right: auto;
         margin-left: auto;
     }
+
+    #allselect-div-pharus {
+        display: flex;
+    }
 }
 
 @media only screen and (max-width: 600px) {
     #toolbar-pharus {
         overflow-x: scroll;
+    }
+
+    #allselect-div-pharus {
+        display: inline;
+    }
+
+    #entityName {
+        display: none;
     }
 
     #infoAndDocumentsView {
