@@ -28,6 +28,10 @@
         width: 25%;
     }
 
+    #canvas-aum-pharus{
+        width:70%
+    }
+
     footer {
         position: fixed;
         bottom: 0;
@@ -58,6 +62,10 @@
 @media only screen and (max-width: 600px) {
     #toolbar-pharus {
         overflow-x: scroll;
+    }
+
+    #canvas-aum-pharus{
+        display:none;
     }
 
     #div-select-addInfo {
