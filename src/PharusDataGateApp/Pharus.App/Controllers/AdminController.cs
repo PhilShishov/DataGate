@@ -187,7 +187,7 @@
 
             if (roleExist)
             {
-                if (role == "Admin" && admins.Count <= 2)
+                if (role == "Admin" && admins.Count <= 3)
                 {
                     await this.userManager.AddToRoleAsync(user, "Admin");
                 }
