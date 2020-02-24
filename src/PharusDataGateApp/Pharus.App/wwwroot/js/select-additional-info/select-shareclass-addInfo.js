@@ -8,19 +8,19 @@ $('#shareClassAdditionalInfSelect option').each(function () {
     if (this.selected) {
         const dropdownvalue = $("#shareClassAdditionalInfSelect option:selected").val();
         if (dropdownvalue == 'TimelineChanges') {
-            $("#timelineChanges").css('visibility', 'visible');
+            $("#timelineChanges").removeClass('d-none');
             $("#allDocuments").addClass('d-none');
             $("#allAgreements").addClass('d-none');
         } else if (dropdownvalue == 'AllDocuments') {
             $("#allDocuments").removeClass('d-none');
-            $("#timelineChanges").css('visibility', 'hidden');
+            $("#timelineChanges").addClass('d-none');
             $("#allAgreements").addClass('d-none');
         } else if (dropdownvalue == 'AllAgreements') {
             $("#allAgreements").removeClass('d-none');
-            $("#timelineChanges").css('visibility', 'hidden');
+            $("#timelineChanges").addClass('d-none');
             $("#allDocuments").addClass('d-none');
         } else {
-            $("#timelineChanges").css('visibility', 'hidden');
+            $("#timelineChanges").addClass('d-none');
             $("#allDocuments").addClass('d-none');
             $("#allAgreements").addClass('d-none');
         }
@@ -36,19 +36,19 @@ $('#shareClassAdditionalInfSelect option').each(function () {
 $("#shareClassAdditionalInfSelect").on('change', function () {
     const dropdownvalue = $("#shareClassAdditionalInfSelect option:selected").val();
     if (dropdownvalue == 'TimelineChanges') {
-        $("#timelineChanges").css('visibility', 'visible');
+        $("#timelineChanges").removeClass('d-none');
         $("#allDocuments").addClass('d-none');
         $("#allAgreements").addClass('d-none');
     } else if (dropdownvalue == 'AllDocuments') {
         $("#allDocuments").removeClass('d-none');
-        $("#timelineChanges").css('visibility', 'hidden');
+        $("#timelineChanges").addClass('d-none');
         $("#allAgreements").addClass('d-none');
     } else if (dropdownvalue == 'AllAgreements') {
         $("#allAgreements").removeClass('d-none');
-        $("#timelineChanges").css('visibility', 'hidden');
+        $("#timelineChanges").addClass('d-none');
         $("#allDocuments").addClass('d-none')
     } else {
-        $("#timelineChanges").css('visibility', 'hidden');
+        $("#timelineChanges").addClass('d-none');
         $("#allDocuments").addClass('d-none');
         $("#allAgreements").addClass('d-none');
     }
