@@ -135,7 +135,7 @@ textarea {
     position: absolute;
 }
 
-#WelcometoPharusManag {
+#welcome-text-pharus {
     left: 497px;
     top: 585px;
     position: absolute;
@@ -144,7 +144,7 @@ textarea {
     z-index: 6;
 }
 
-#RoundedRectangle2 {
+#login-rectangle-pharus {
     left: 768px;
     top: 782px;
     position: absolute;
@@ -153,7 +153,7 @@ textarea {
     z-index: 4;
 }
 
-#LogintoPharusDataGat {
+#login-text-pharus {
     left: 852px;
     top: 813px;
     position: absolute;
@@ -162,7 +162,7 @@ textarea {
     z-index: 5;
 }
 
-#PharusManagement2020 {
+#footer-text-pharus {
     left: 631px;
     top: 975px;
     position: absolute;
