@@ -47,48 +47,48 @@
 </head>
 
 <body id="bg-one">
-    <div class="main-container-pharus justify-content-between mb-4">
-        <header>
-            @if (!this.User.Identity.IsAuthenticated)
-            {
-                @*<nav class="navbar navbar-expand-lg navbar-dark bg-pharus">
-                        <a href="/Home/Index">
-                            <img src="/images/Logo_Pharus.jpg"
-                                 class="img-responsive"
-                                 width="50"
-                                 height="50"
-                                 alt="Pharus Management">
-                        </a>
-                        <button class="navbar-toggler ml-auto"
-                                type="button"
-                                data-toggle="collapse"
-                                data-target="#navbarNav"
-                                aria-controls="navbarSupportedContent"
-                                aria-expanded="false"
-                                aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="navbar-collapse collapse"
-                             id="navbarNav">
-                            <div id="intro"
-                                 class="text-right">
-                                <ul class="navbar-nav">
-                                    <li class="nav-item">
-                                        <a class="nav-link nav-link-white active"
-                                           href="/Home/Index">Home</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link nav-link-white active"
-                                           href="/Identity/Account/Login">Login</a>
-                                    </li>
-                                </ul>
-                            </div>
+    <div class="main-container-pharus justify-content-between">
+        @if (!this.User.Identity.IsAuthenticated)
+        {
+            @*<nav class="navbar navbar-expand-lg navbar-dark bg-pharus">
+                    <a href="/Home/Index">
+                        <img src="/images/Logo_Pharus.jpg"
+                             class="img-responsive"
+                             width="50"
+                             height="50"
+                             alt="Pharus Management">
+                    </a>
+                    <button class="navbar-toggler ml-auto"
+                            type="button"
+                            data-toggle="collapse"
+                            data-target="#navbarNav"
+                            aria-controls="navbarSupportedContent"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse"
+                         id="navbarNav">
+                        <div id="intro"
+                             class="text-right">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link nav-link-white active"
+                                       href="/Home/Index">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link nav-link-white active"
+                                       href="/Identity/Account/Login">Login</a>
+                                </li>
+                            </ul>
                         </div>
-                    </nav>*@
-            }
+                    </div>
+                </nav>*@
+        }
 
-            else
-            {
+        else
+        {
+            <header>
                 <nav class="navbar navbar-expand-lg navbar-dark bg-pharus">
 
                     <ul class="navbar-nav">
@@ -197,19 +197,18 @@
                         </div>
                     </div>
                 </nav>
-            }
-
-        </header>
+            </header>
+        }
 
         <main>
             @RenderBody()
         </main>
 
         @*<footer>
-            <div class="bg-pharus footer-pharus">
-                <div class="text-white text-center">&copy; Pharus Management Lux SA 16, Avenue de la Gare L- 1610 Luxembourg T. +352 28 55 69 - 1</div>
-            </div>
-        </footer>*@
+                <div class="bg-pharus footer-pharus">
+                    <div class="text-white text-center">&copy; Pharus Management Lux SA 16, Avenue de la Gare L- 1610 Luxembourg T. +352 28 55 69 - 1</div>
+                </div>
+            </footer>*@
     </div>
 
     <environment include="Development">

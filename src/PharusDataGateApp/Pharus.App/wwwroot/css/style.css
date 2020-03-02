@@ -97,6 +97,13 @@ textarea {
     resize: none;
 }
 
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
 /*body {
     background-image: url('../images/Background_Pharus.jpg');
     background-repeat: no-repeat;
@@ -108,48 +115,38 @@ textarea {
     display: grid;
 }
 
-#background {
+#background-pharus-home {
     left: 0px;
     top: 0px;
     position: relative;
     margin-left: auto;
     margin-right: auto;
-    width: 1920px;
-    height: 1080px;
+    height: 1008px;
     overflow: hidden;
     z-index: 0;
 }
 
-#Layer0 {
-    left: 0px;
-    top: 0px;
+#logo-pharus {
+    left: 790px;
+    top: 236px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     position: absolute;
-    width: 1920px;
-    height: 1080px;
-    z-index: 1;
 }
 
-#Layer4 {
-    left: -187px;
-    top: -185px;
+#WelcometoPharusManag {
+    left: 497px;
+    top: 585px;
     position: absolute;
-    width: 2295px;
-    height: 1530px;
-    z-index: 2;
-}
-
-#PharusManagement2020 {
-    left: 861px;
-    top: 1022px;
-    position: absolute;
-    width: 197px;
-    height: 15px;
-    z-index: 3;
+    width: 925px;
+    height: 125px;
+    z-index: 6;
 }
 
 #RoundedRectangle2 {
-    left: 789px;
-    top: 790px;
+    left: 768px;
+    top: 782px;
     position: absolute;
     width: 341px;
     height: 62px;
@@ -165,20 +162,11 @@ textarea {
     z-index: 5;
 }
 
-#WelcometoPharusManag {
-    left: 497px;
-    top: 585px;
+#PharusManagement2020 {
+    left: 631px;
+    top: 975px;
     position: absolute;
-    width: 925px;
-    height: 125px;
-    z-index: 6;
-}
-
-#Layer3 {
-    left: 816px;
-    top: 236px;
-    position: absolute;
-    width: 289px;
-    height: 274px;
-    z-index: 7;
+    width: 197px;
+    height: 15px;
+    z-index: 3;
 }
