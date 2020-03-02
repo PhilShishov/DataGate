@@ -6,22 +6,14 @@
 
 @if (!this.User.Identity.IsAuthenticated)
 {
-    <div id="background">
-        <div id="Layer0"><img src="images/Layer0.png"></div>
-        <div id="Layer4"><img src="images/Layer4.png"></div>
-        <div id="PharusManagement2020"><img src="images/PharusManagement2020.png"></div>
-        <div id="RoundedRectangle2"><a href="/Identity/Account/Login"><img src="images/RoundedRectangle2.png"></a></div>
-        <div id="LogintoPharusDataGat"><img src="images/LogintoPharusDataGat.png"></div>
-        <div id="WelcometoPharusManag"><img src="images/WelcometoPharusManag.png"></div>
-        <div id="Layer3"><img src="images/Layer3.png"></div>
+    <div id="background-pharus-home">
+        <div id="background-layer-home"><img src="~/images/Background_Layer_Home.png"></div>
+        <div id="logo-pharus"><img src="~/images/Layer_Logo_Pharus.png"></div>
+        <div id="WelcometoPharusManag"><img src="~/images/WelcometoPharusManag.png"></div>
+        <div id="RoundedRectangle2"><a href="/Identity/Account/Login"><img src="~/images/Rounded Rectangle2.png"></a></div>
+        <div id="LogintoPharusDataGat"><a href="/Identity/Account/Login"><img src="~/images/LogintoPharusDataGat.png"></a></div>
+        <div id="PharusManagement2020"><img src="~/images/PharusManagement2020.png"></div>
     </div>
-    @*<div id="bg-one">
-            <div class="jumbotron mt-3 bg-pharus">
-                <h1 class="text-white">Welcome to Pharus Management DataGate Platform</h1>
-                <hr class="bg-white hr-2" />
-                <h3 class="text-white"><a href="/Identity/Account/Login">Login to Pharus DataGate</a> </h3>
-            </div>
-        </div>*@
 }
 else
 {
