@@ -126,7 +126,7 @@ textarea {
 #welcome-text-pharus {
     top: 55%;
     position: absolute;
-    text-align:center;
+    text-align: center;
 }
 
 @font-face {
@@ -147,12 +147,17 @@ textarea {
 
 .bold-text-pharus {
     font-family: Gilroy-Bold;
-    font-weight:bolder;
+    font-weight: bolder;
 }
 
 #login-rectangle-pharus {
     top: 78%;
     position: absolute;
+}
+
+.login-div:hover {
+    opacity: 0.6;
+    transition: .5s ease;
 }
 
 #footer-text-pharus {
