@@ -120,7 +120,7 @@ textarea {
     position: relative;
     margin-left: auto;
     margin-right: auto;
-    height: 90%;
+    height: 907px;
     overflow: hidden;
 }
 
@@ -130,7 +130,7 @@ textarea {
 }
 
 #welcome-text-pharus {
-    top: 55%;
+    top: 52%;
     position: absolute;
     text-align: center;
 }
@@ -150,7 +150,7 @@ textarea {
 
 .text-pharus {
     font-family: 'Gilroy-Regular ☞';
-    font-size: 59px;
+    font-size: 46px;
 }
 
 .text-footer-pharus {
@@ -175,7 +175,7 @@ textarea {
 }
 
 #btn-login-home {
-    top: 78%;
+    top: 72%;
     position: absolute;
 }
 
