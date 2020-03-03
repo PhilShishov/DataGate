@@ -6,7 +6,6 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>@ViewData["Title"] Pharus DataGate</title>
 
-
     <environment include="Development">
         <link type="text/css" rel="stylesheet" href="~/css/reset-css.css" />
         <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -46,7 +45,7 @@
     @RenderSection("Styles", required: false)
 </head>
 
-<body id="bg-one">
+<body>
     <div class="main-container-pharus justify-content-between">
         @if (!this.User.Identity.IsAuthenticated)
         {
