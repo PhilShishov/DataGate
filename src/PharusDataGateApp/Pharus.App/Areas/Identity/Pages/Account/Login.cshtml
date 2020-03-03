@@ -8,21 +8,21 @@
 <form class="mx-auto w-50 d-inline" method="post">
     <div>
         <div id="background-pharus">
-            <img src="~/images/Background_Login.png" width="1860" height="1010">
+            <img src="~/images/Background_Login.png" width="1867" height="1008">
         </div>
 
         <div class="d-flex">
             <text id="login-text-pharus"
                   class="bold-text-pharus">
                 Pharus DataGate User <br />
-                <span class="text-color-pharus">Login</span>
+                <span class="text-color-blue-pharus">Login</span>
             </text>
         </div>
 
-        <div class="d-inline justify-content-center">
+        <div id="login-form">
             <div class="form-group">
                 <input type="text"
-                       class="form-control m-auto text-center maxw-270"
+                       class="form-control w-470"
                        id="username"
                        placeholder="Username..."
                        asp-for="Input.Username"
@@ -30,9 +30,10 @@
                        autocomplete="username">
                 <span asp-validation-for="Input.Username" class="text-danger d-flex justify-content-center"></span>
             </div>
+
             <div class="form-group">
                 <input type="password"
-                       class="form-control m-auto text-center maxw-270"
+                       class="form-control w-470"
                        id="password"
                        placeholder="Password..."
                        asp-for="Input.Password"
@@ -41,35 +42,33 @@
                 <!-- TODO show/hide password -->
                 <!-- <input type="checkbox" class="form-control-login-pharus" onclick="document.getElementById('password').type = this.checked ? 'text' : 'password'">Show password -->
             </div>
-            <hr class="bg-pharus w-50 hr-2" />
             <div class="form-group">
-                <div class="checkbox d-flex justify-content-center">
-                    <label asp-for="Input.RememberMe">
+                <div class="checkbox d-inline">
+                    <label class="text-color-grey-pharus" asp-for="Input.RememberMe">
                         <input asp-for="Input.RememberMe" />
                         @Html.DisplayNameFor(m => m.Input.RememberMe)
                     </label>
+
+                    <a class="text-color-blue-pharus text-underline float-right" href="/Identity/Account/ForgotPassword">Forgot your password?</a>
                 </div>
             </div>
-            <div class="button-holder d-flex justify-content-center">
+
+            <div class="button-holder">
                 <button type="submit" class="btn btn-primary bg-pharus text-white" id="btnLogin">LOGIN</button>
             </div>
-        </div>
-        <div class="form-group">
-            <a href="/Identity/Account/ForgotPassword">Forgot your password?</a>
+
+            <div class="d-flex justify-content-center login-div">
+                <a id="login-rectangle-pharus" href="/Identity/Account/Login">
+                    <img src="~/images/Login_Button.png">
+                </a>
+            </div>
         </div>
 
-        <div class="d-flex justify-content-center login-div">
-            <a id="login-rectangle-pharus" href="/Identity/Account/Login">
-                <img src="~/images/Login_Button.png">
-            </a>
-        </div>
-
-        <div class="d-flex justify-content-center">
-            <text id="footer-text-pharus"
-                  class="text-white text-footer-pharus">
+        <div>
+            <text id="footer-login-pharus"
+                  class="text-footer-pharus text-color-grey-pharus">
                 © Pharus Management Lux SA 16, Avenue de la Gare L- 1610 Luxembourg T. +352 28 55 69 - 1
             </text>
         </div>
-    </div>    
+    </div>
 </form>
-
