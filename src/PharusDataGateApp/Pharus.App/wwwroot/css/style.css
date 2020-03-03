@@ -108,13 +108,13 @@ textarea {
     display: grid;
 }
 
-#background-pharus-home {
+#background-pharus {
     left: 0px;
     top: 0px;
     position: relative;
     margin-left: auto;
     margin-right: auto;
-    height: 1008px;
+    height: 90%;
     overflow: hidden;
 }
 
