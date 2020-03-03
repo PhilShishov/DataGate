@@ -8,7 +8,7 @@
 <form class="mx-auto w-50 d-inline" method="post">
     <div>
         <div id="background-pharus">
-            <img src="~/images/Background_Login.png" width="1867" height="1008">
+            <img src="~/images/Background_Login.png" width="1680" height="907">
         </div>
 
         <div class="d-flex">
@@ -43,19 +43,18 @@
                 <!-- <input type="checkbox" class="form-control-login-pharus" onclick="document.getElementById('password').type = this.checked ? 'text' : 'password'">Show password -->
             </div>
             <div class="form-group">
-                <div class="checkbox d-inline">
-                    <label class="text-color-grey-pharus" asp-for="Input.RememberMe">
-                        <input asp-for="Input.RememberMe" />
+                <div>
+                    <label class="checkbox-pharus text-color-grey-pharus" asp-for="Input.RememberMe">
                         @Html.DisplayNameFor(m => m.Input.RememberMe)
+                        <input type="checkbox" asp-for="Input.RememberMe" />
+                        <span class="checkmark mt-1"></span>
                     </label>
-
-                    <a class="text-color-blue-pharus text-underline float-right" href="/Identity/Account/ForgotPassword">Forgot Password?</a>
+                    <a class="text-color-blue-pharus text-underline float-right"
+                       href="/Identity/Account/ForgotPassword">
+                        Forgot Password?
+                    </a>
                 </div>
             </div>
-
-            @*<div class="button-holder">
-                <button type="submit" class="btn btn-primary bg-pharus text-white" id="btn-login">LOGIN</button>
-            </div>*@
 
             <div class="login-div">
                 <button type="submit" id="btn-login" href="/Identity/Account/Login">
