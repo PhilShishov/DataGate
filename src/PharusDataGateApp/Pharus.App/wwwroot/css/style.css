@@ -180,6 +180,9 @@ textarea {
 }
 
 #btn-login {
+    outline: none;
+    background: none;
+    border: 0;
     top: 130%;
     right: 62%;
     position: absolute;
