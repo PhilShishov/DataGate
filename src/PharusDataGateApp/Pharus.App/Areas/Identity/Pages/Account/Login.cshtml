@@ -49,16 +49,16 @@
                         @Html.DisplayNameFor(m => m.Input.RememberMe)
                     </label>
 
-                    <a class="text-color-blue-pharus text-underline float-right" href="/Identity/Account/ForgotPassword">Forgot your password?</a>
+                    <a class="text-color-blue-pharus text-underline float-right" href="/Identity/Account/ForgotPassword">Forgot Password?</a>
                 </div>
             </div>
 
-            <div class="button-holder">
-                <button type="submit" class="btn btn-primary bg-pharus text-white" id="btnLogin">LOGIN</button>
-            </div>
+            @*<div class="button-holder">
+                <button type="submit" class="btn btn-primary bg-pharus text-white" id="btn-login">LOGIN</button>
+            </div>*@
 
-            <div class="d-flex justify-content-center login-div">
-                <a id="login-rectangle-pharus" href="/Identity/Account/Login">
+            <div class="login-div">
+                <a id="btn-login" href="/Identity/Account/Login">
                     <img src="~/images/Login_Button.png">
                 </a>
             </div>

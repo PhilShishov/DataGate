@@ -6,15 +6,15 @@
 *
 */
 
-#btnLogin {
+/*#btn-login {
     -webkit-transition-duration: 0.5s;
     transition-duration: 0.5s;
 }
 
-    #btnLogin:hover {
+    #btn-login:hover {
         background-color: #555555;
         color: white;
-    }
+    }*/
 
 .btn-extract-pharus {
     background-color: transparent;
