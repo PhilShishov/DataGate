@@ -104,13 +104,6 @@ textarea {
     width: 50%;
 }
 
-/*body {
-    background-image: url('../images/Background_Pharus.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin: auto;
-}*/
-
 .d-grid {
     display: grid;
 }
@@ -123,50 +116,47 @@ textarea {
     margin-right: auto;
     height: 1008px;
     overflow: hidden;
-    z-index: 0;
 }
 
 #logo-pharus {
-    left: 790px;
-    top: 236px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    top: 23%;
     position: absolute;
 }
 
 #welcome-text-pharus {
-    left: 497px;
-    top: 585px;
+    top: 55%;
     position: absolute;
-    width: 925px;
-    height: 125px;
-    z-index: 6;
+    text-align:center;
+}
+
+@font-face {
+    font-family: Gilroy-Bold;
+    font-style: normal;
+    src: local("Gilroy-Bold"), url("../fonts/Gilroy-Bold.ttf") format("truetype"); /* non-IE */
+}
+
+.text-pharus {
+    font-family: 'Gilroy-Regular ☞';
+    font-size: 59px;
+}
+
+.text-footer-pharus {
+    font-family: 'Gilroy-Regular ☞';
+    font-size: 15px;
+}
+
+.bold-text-pharus {
+    font-family: Gilroy-Bold;
+    font-weight:bolder;
 }
 
 #login-rectangle-pharus {
-    left: 768px;
-    top: 782px;
+    top: 78%;
     position: absolute;
-    width: 341px;
-    height: 62px;
-    z-index: 4;
-}
-
-#login-text-pharus {
-    left: 852px;
-    top: 813px;
-    position: absolute;
-    width: 216px;
-    height: 17px;
-    z-index: 5;
 }
 
 #footer-text-pharus {
-    left: 631px;
-    top: 975px;
+    top: 97%;
     position: absolute;
-    width: 197px;
-    height: 15px;
-    z-index: 3;
+    text-align: center;
 }

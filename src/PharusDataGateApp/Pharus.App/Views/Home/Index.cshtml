@@ -6,14 +6,33 @@
 
 @if (!this.User.Identity.IsAuthenticated)
 {
-    <div id="background-pharus-home">
-        <div id="background-layer-home"><img src="~/images/Background_Layer_Home.png"></div>
-        <div id="logo-pharus"><img src="~/images/Layer_Logo.png"></div>
-        <div id="welcome-text-pharus"><img src="~/images/Welcome_Text.png"></div>
-        <div id="login-rectangle-pharus"><a href="/Identity/Account/Login"><img src="~/images/Login_Rectangle.png"></a></div>
-        <div id="login-text-pharus"><a href="/Identity/Account/Login"><img src="~/images/Login_Button.png"></a></div>
-        <div id="footer-text-pharus"><img src="~/images/Footer_Text.png"></div>
+    <div>
+        <div id="background-pharus-home">
+            <img src="~/images/Background_Layer_Home.png">
+        </div>
+        <div class="d-flex justify-content-center">
+            <img id="logo-pharus" src="~/images/Layer_Logo.png">
+        </div>
+        <div class="d-flex justify-content-center">
+            <text id="welcome-text-pharus"
+                  class="text-white text-pharus">
+                Welcome To <span class="bold-text-pharus">Pharus</span> Management<br>DataGate Platform
+            </text>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <a id="login-rectangle-pharus" href="/Identity/Account/Login">
+                <img src="~/images/Login_Button.png">
+            </a>
+        </div>
+        <div class="d-flex justify-content-center">
+            <text id="footer-text-pharus"
+                  class="text-white text-footer-pharus">
+                © Pharus Management Lux SA 16, Avenue de la Gare L- 1610 Luxembourg T. +352 28 55 69 - 1
+            </text>
+        </div>
     </div>
+
 }
 else
 {
