@@ -174,13 +174,19 @@ textarea {
     font-family: Gilroy-Bold;
 }
 
-#login-rectangle-pharus {
+#btn-login-home {
     top: 78%;
     position: absolute;
 }
 
+#btn-login {
+    top: 130%;
+    right: 62%;
+    position: absolute;
+}
+
 .login-div:hover {
-    opacity: 0.6;
+    opacity: 0.7;
     transition: .5s ease;
 }
 
