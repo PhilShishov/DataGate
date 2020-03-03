@@ -129,6 +129,13 @@ textarea {
     text-align: center;
 }
 
+#login-text-pharus {
+    top: 25%;
+    left: 12.5%;
+    position: absolute;
+    font-size: 42px;
+}
+
 @font-face {
     font-family: Gilroy-Bold;
     font-style: normal;
@@ -145,9 +152,12 @@ textarea {
     font-size: 15px;
 }
 
+.text-color-pharus {
+    color: #005596;
+}
+
 .bold-text-pharus {
     font-family: Gilroy-Bold;
-    font-weight: bolder;
 }
 
 #login-rectangle-pharus {
