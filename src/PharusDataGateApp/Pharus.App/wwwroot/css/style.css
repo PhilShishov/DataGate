@@ -63,6 +63,12 @@ h3 {
     max-width: 270px;
 }
 
+.w-470 {
+    border: 0;
+    border-bottom: 0.6px lightgrey solid;
+    width: 470px;
+}
+
 .maxw-160 {
     max-width: 160px;
 }
@@ -149,11 +155,19 @@ textarea {
 
 .text-footer-pharus {
     font-family: 'Gilroy-Regular ☞';
-    font-size: 15px;
+    font-size: 14px;
 }
 
-.text-color-pharus {
+.text-color-blue-pharus {
     color: #005596;
+}
+
+.text-color-grey-pharus {
+    color: #898989;
+}
+
+.text-underline {
+    text-decoration: underline;
 }
 
 .bold-text-pharus {
@@ -170,8 +184,20 @@ textarea {
     transition: .5s ease;
 }
 
-#footer-text-pharus {
+#footer-home-pharus {
     top: 97%;
     position: absolute;
     text-align: center;
+}
+
+#footer-login-pharus {
+    top: 87%;
+    position: absolute;
+    left: 12.5%;
+}
+
+#login-form {
+    position: absolute;
+    top: 40%;
+    left: 12.5%;
 }
