@@ -69,6 +69,7 @@
     #logo-pharus {
         top: 23%;
         position: absolute;
+        text-align:center;
     }
 
     #logo-linkedin-pharus {
@@ -81,6 +82,10 @@
         top: 13%;
         left: 12.5%;
         position: absolute;
+    }
+
+    #img-logo-pharus {
+        width: 70%;
     }
 
     #welcome-text-pharus {
@@ -178,7 +183,7 @@
         position: relative;
         margin-left: auto;
         margin-right: auto;
-        height: 640px;
+        height: 820px;
         overflow: hidden;
     }
 
@@ -189,6 +194,11 @@
     #logo-pharus {
         top: 2%;
         position: absolute;
+        text-align: center;
+    }
+
+    #img-logo-pharus{
+        width: 50%;
     }
 
     #logo-login-pharus {
@@ -204,7 +214,7 @@
     }
 
     #welcome-text-pharus {
-        top: 37%;
+        top: 30%;
         position: absolute;
         text-align: center;
         font-size: 250%;
@@ -218,7 +228,7 @@
     }
 
     #btn-login-home {
-        top: 78%;
+        top: 70%;
         position: absolute;
     }
 
