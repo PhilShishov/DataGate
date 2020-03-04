@@ -46,169 +46,128 @@
 </head>
 
 <body>
-    <div class="main-container-pharus justify-content-between">
-        @if (!this.User.Identity.IsAuthenticated)
-        {
-            @*<nav class="navbar navbar-expand-lg navbar-dark bg-pharus">
-                    <a href="/Home/Index">
-                        <img src="/images/Logo_Pharus.jpg"
-                             class="img-responsive"
-                             width="50"
-                             height="50"
-                             alt="Pharus Management">
-                    </a>
-                    <button class="navbar-toggler ml-auto"
-                            type="button"
-                            data-toggle="collapse"
-                            data-target="#navbarNav"
-                            aria-controls="navbarSupportedContent"
-                            aria-expanded="false"
-                            aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="navbar-collapse collapse"
-                         id="navbarNav">
-                        <div id="intro"
-                             class="text-right">
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link nav-link-white active"
-                                       href="/Home/Index">Home</a>
+    @if (this.User.Identity.IsAuthenticated)
+    {
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-pharus">
+
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <span style="cursor:pointer"
+                              id="sideNavIcon">
+                            <img src="/images/Logo_Pharus.jpg"
+                                 class="img-responsive"
+                                 width="50"
+                                 alt="Pharus Management">
+                        </span>
+
+                        <ul id="mySidenav" class="sidenav">
+                            <li>
+                                <a style="cursor:pointer"
+                                   id="closeBtn"
+                                   class="closebtn">
+                                    &times;
+                                </a>
+                            </li>
+                            <li class="dropdown pt-5">
+                                <button class="dropdown-btn"
+                                        name="dr-btn-SideNav">
+                                    Funds<i class="fa fa-caret-down"></i>
+                                </button>
+                                <div id="myDropdown" class="dropdown-container">
+                                    <a class="dropdown-item font-weight-light" href="/Funds/All">List</a>
+                                    @if (this.User.IsInRole("Admin"))
+                                    {
+                                        <a class="dropdown-item font-weight-light" href="/Funds/CreateFund">Create</a>
+                                    }
+
+                                    <a class="dropdown-item font-weight-light" href="#">Report</a>
+                                </div>
+                            </li>
+
+                            <li class="dropdown">
+                                <button class="dropdown-btn"
+                                        name="dr-btn-SideNav">
+                                    Sub Funds<i class="fa fa-caret-down"></i>
+                                </button>
+                                <div id="myDropdown" class="dropdown-container">
+                                    <a class="dropdown-item font-weight-light" href="/SubFunds/All">List</a>
+                                    @if (this.User.IsInRole("Admin"))
+                                    {
+                                        <a class="dropdown-item font-weight-light" href="/SubFunds/CreateSubFund">Create</a>
+                                    }
+
+                                    <a class="dropdown-item font-weight-light" href="#">Report</a>
+                                </div>
+                            </li>
+                            <li class="dropdown">
+                                <button class="dropdown-btn"
+                                        name="dr-btn-SideNav">
+                                    Share Classes<i class="fa fa-caret-down"></i>
+                                </button>
+                                <div id="myDropdown" class="dropdown-container">
+                                    <a class="dropdown-item font-weight-light" href="/ShareClasses/All">List</a>
+                                    @if (this.User.IsInRole("Admin"))
+                                    {
+                                        <a class="dropdown-item font-weight-light" href="/ShareClasses/CreateShareClass">Create</a>
+                                    }
+
+                                    <a class="dropdown-item font-weight-light" href="#">Report</a>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="/Agreements/All">
+                                    Agreements
+                                </a>
+                            </li>
+                        </ul>
+
+                    </li>
+                </ul>
+
+                <button class="navbar-toggler ml-auto"
+                        type="button"
+                        data-toggle="collapse"
+                        data-target="#navbarNav"
+                        aria-controls="navbarSupportedContent"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse collapse" id="navbarNav">
+                    <div id="intro" class="text-right">
+                        <ul class="navbar-nav">
+                            @if (this.User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item active">
+                                    <a class="nav-link nav-link-white active" href="/Admin/Index">Panel</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link nav-link-white active"
-                                       href="/Identity/Account/Login">Login</a>
+                            }
+                            else
+                            {
+                                <li class="nav-item active">
+                                    <a class="nav-link nav-link-white active" href="/Home/Index">Home</a>
                                 </li>
-                            </ul>
-                        </div>
+                            }
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-white active" href="/Identity/Account/Logout">Logout</a>
+                            </li>
+                        </ul>
                     </div>
-                </nav>*@
-        }
-
-        else
-        {
-            <header>
-                <nav class="navbar navbar-expand-lg navbar-dark bg-pharus">
-
-                    <ul class="navbar-nav">
-                        <li class="nav-item dropdown">
-                            <span style="cursor:pointer"
-                                  id="sideNavIcon">
-                                <img src="/images/Logo_Pharus.jpg"
-                                     class="img-responsive"
-                                     width="50"
-                                     alt="Pharus Management">
-                            </span>
-
-                            <ul id="mySidenav" class="sidenav">
-                                <li>
-                                    <a style="cursor:pointer"
-                                       id="closeBtn"
-                                       class="closebtn">
-                                        &times;
-                                    </a>
-                                </li>
-                                <li class="dropdown pt-5">
-                                    <button class="dropdown-btn"
-                                            name="dr-btn-SideNav">
-                                        Funds<i class="fa fa-caret-down"></i>
-                                    </button>
-                                    <div id="myDropdown" class="dropdown-container">
-                                        <a class="dropdown-item font-weight-light" href="/Funds/All">List</a>
-                                        @if (this.User.IsInRole("Admin"))
-                                        {
-                                            <a class="dropdown-item font-weight-light" href="/Funds/CreateFund">Create</a>
-                                        }
-
-                                        <a class="dropdown-item font-weight-light" href="#">Report</a>
-                                    </div>
-                                </li>
-
-                                <li class="dropdown">
-                                    <button class="dropdown-btn"
-                                            name="dr-btn-SideNav">
-                                        Sub Funds<i class="fa fa-caret-down"></i>
-                                    </button>
-                                    <div id="myDropdown" class="dropdown-container">
-                                        <a class="dropdown-item font-weight-light" href="/SubFunds/All">List</a>
-                                        @if (this.User.IsInRole("Admin"))
-                                        {
-                                            <a class="dropdown-item font-weight-light" href="/SubFunds/CreateSubFund">Create</a>
-                                        }
-
-                                        <a class="dropdown-item font-weight-light" href="#">Report</a>
-                                    </div>
-                                </li>
-                                <li class="dropdown">
-                                    <button class="dropdown-btn"
-                                            name="dr-btn-SideNav">
-                                        Share Classes<i class="fa fa-caret-down"></i>
-                                    </button>
-                                    <div id="myDropdown" class="dropdown-container">
-                                        <a class="dropdown-item font-weight-light" href="/ShareClasses/All">List</a>
-                                        @if (this.User.IsInRole("Admin"))
-                                        {
-                                            <a class="dropdown-item font-weight-light" href="/ShareClasses/CreateShareClass">Create</a>
-                                        }
-
-                                        <a class="dropdown-item font-weight-light" href="#">Report</a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="/Agreements/All">
-                                        Agreements
-                                    </a>
-                                </li>
-                            </ul>
-
-                        </li>
-                    </ul>
-
-                    <button class="navbar-toggler ml-auto"
-                            type="button"
-                            data-toggle="collapse"
-                            data-target="#navbarNav"
-                            aria-controls="navbarSupportedContent"
-                            aria-expanded="false"
-                            aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div class="navbar-collapse collapse" id="navbarNav">
-                        <div id="intro" class="text-right">
-                            <ul class="navbar-nav">
-                                @if (this.User.IsInRole("Admin"))
-                                {
-                                    <li class="nav-item active">
-                                        <a class="nav-link nav-link-white active" href="/Admin/Index">Panel</a>
-                                    </li>
-                                }
-                                else
-                                {
-                                    <li class="nav-item active">
-                                        <a class="nav-link nav-link-white active" href="/Home/Index">Home</a>
-                                    </li>
-                                }
-                                <li class="nav-item">
-                                    <a class="nav-link nav-link-white active" href="/Identity/Account/Logout">Logout</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-            </header>
-
-            <footer>
-                <div class="bg-pharus footer-pharus">
-                    <div class="text-white text-center">&copy; Pharus Management Lux SA 16, Avenue de la Gare L- 1610 Luxembourg T. +352 28 55 69 - 1</div>
                 </div>
-            </footer>
-        }
+            </nav>
+        </header>
+        <footer>
+            <div class="bg-pharus footer-pharus">
+                <div class="text-white text-center">&copy; Pharus Management Lux SA 16, Avenue de la Gare L- 1610 Luxembourg T. +352 28 55 69 - 1</div>
+            </div>
+        </footer>
+    }
 
-        <main>
-            @RenderBody()
-        </main>
-    </div>
+    <main class="mb-4">
+        @RenderBody()
+    </main>
 
     <environment include="Development">
         <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
