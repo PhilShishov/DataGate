@@ -23,7 +23,6 @@
 /* Create a custom checkbox */
 .checkmark {
     position: absolute;
-    /*top: 66%;*/
     left: 0;
     height: 25px;
     width: 25px;
