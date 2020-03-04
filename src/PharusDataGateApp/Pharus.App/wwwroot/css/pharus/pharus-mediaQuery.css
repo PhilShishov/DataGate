@@ -69,7 +69,7 @@
     #logo-pharus {
         top: 23%;
         position: absolute;
-        text-align:center;
+        text-align: center;
     }
 
     #logo-linkedin-pharus {
@@ -188,6 +188,8 @@
     }
 
     #background-login-pharus {
+        height: 820px;
+        overflow: hidden;
         display: none;
     }
 
@@ -197,7 +199,7 @@
         text-align: center;
     }
 
-    #img-logo-pharus{
+    #img-logo-pharus {
         width: 50%;
     }
 
