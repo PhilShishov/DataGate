@@ -28,8 +28,8 @@
         width: 25%;
     }
 
-    #canvas-aum-pharus{
-        width:70%
+    #canvas-aum-pharus {
+        width: 70%
     }
 
     footer {
@@ -55,6 +55,66 @@
     #allselect-div-pharus {
         display: flex;
     }
+
+    #background-pharus {
+        left: 0px;
+        top: 0px;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        height: 907px;
+        overflow: hidden;
+    }
+
+    #logo-pharus {
+        top: 23%;
+        position: absolute;
+    }
+
+    #welcome-text-pharus {
+        top: 52%;
+        position: absolute;
+        text-align: center;
+    }
+
+    #login-text-pharus {
+        top: 25%;
+        left: 12.5%;
+        position: absolute;
+        font-size: 42px;
+    }
+
+    #btn-login-home {
+        top: 72%;
+        position: absolute;
+    }
+
+    #btn-login {
+        outline: none;
+        background: none;
+        border: 0;
+        top: 130%;
+        right: 62%;
+        position: absolute;
+    }
+
+    #footer-home-pharus {
+        top: 97%;
+        position: absolute;
+        text-align: center;
+    }
+
+    #footer-login-pharus {
+        top: 87%;
+        position: absolute;
+        left: 12.5%;
+    }
+
+    #login-form {
+        position: absolute;
+        top: 40%;
+        left: 12.5%;
+    }
 }
 
 @media only screen and (max-width: 600px) {
@@ -62,8 +122,8 @@
         overflow-x: scroll;
     }
 
-    #canvas-aum-pharus{
-        display:none;
+    #canvas-aum-pharus {
+        display: none;
     }
 
     #div-select-addInfo {
@@ -94,5 +154,68 @@
 
     .lbl-toolbar-pharus {
         display: none;
+    }
+
+    #background-pharus {
+        left: 0px;
+        top: 0px;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        height: 644px;
+        overflow: hidden;
+    }
+
+    #logo-pharus {
+        top: 2%;
+        position: absolute;
+        width: 60%;
+    }
+
+    #welcome-text-pharus {
+        top: 37%;
+        position: absolute;
+        text-align: center;
+        font-size: 250%;
+    }
+
+    #login-text-pharus {
+        top: 25%;
+        left: 12.5%;
+        position: absolute;
+        font-size: 42px;
+    }
+
+    #btn-login-home {
+        top: 78%;
+        position: absolute;
+    }
+
+    #btn-login {
+        outline: none;
+        background: none;
+        border: 0;
+        top: 130%;
+        right: 62%;
+        position: absolute;
+    }
+
+    #footer-home-pharus {
+        top: 94%;
+        position: absolute;
+        text-align: center;
+        display:block;
+    }
+
+    #footer-login-pharus {
+        top: 87%;
+        position: absolute;
+        left: 12.5%;
+    }
+
+    #login-form {
+        position: absolute;
+        top: 40%;
+        left: 12.5%;
     }
 }

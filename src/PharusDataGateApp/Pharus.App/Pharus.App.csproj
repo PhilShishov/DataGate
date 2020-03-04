@@ -37,6 +37,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\css\home\" />
     <Folder Include="wwwroot\css\login\" />
+    <Folder Include="wwwroot\css\mediaQuery\" />
     <Folder Include="wwwroot\FileFolder\Funds\" />
     <Folder Include="wwwroot\FileFolder\Agreements\" />
     <Folder Include="wwwroot\FileFolder\ShareClasses\" />
