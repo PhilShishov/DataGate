@@ -75,7 +75,6 @@
         top: 13%;
         left: 12.5%;
         position: absolute;
-
     }
 
     #welcome-text-pharus {
@@ -173,6 +172,10 @@
         overflow: hidden;
     }
 
+    #background-login-pharus {
+        display: none;
+    }
+
     #logo-pharus {
         top: 2%;
         position: absolute;
@@ -221,14 +224,14 @@
     }
 
     #footer-login-pharus {
-        top: 87%;
+        top: 134%;
         position: absolute;
         left: 12.5%;
     }
 
     #login-form {
         position: absolute;
-        top: 40%;
-        left: 12.5%;
+        top: 60%;
+        left: 11%;
     }
 }
