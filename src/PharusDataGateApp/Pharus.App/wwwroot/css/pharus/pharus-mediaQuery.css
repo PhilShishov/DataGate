@@ -121,6 +121,10 @@
         top: 40%;
         left: 12.5%;
     }
+
+    #div-checkbox-password {
+        display: flex;
+    }
 }
 
 @media only screen and (max-width: 600px) {
@@ -237,4 +241,8 @@
         #login-form input {
             width: 260px;
         }
+
+    #div-checkbox-password {
+        display: inline-block;
+    }
 }
