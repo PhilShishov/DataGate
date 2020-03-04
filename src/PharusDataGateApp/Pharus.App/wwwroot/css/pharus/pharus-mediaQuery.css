@@ -71,6 +71,13 @@
         position: absolute;
     }
 
+    #logo-login-pharus {
+        top: 13%;
+        left: 12.5%;
+        position: absolute;
+
+    }
+
     #welcome-text-pharus {
         top: 52%;
         position: absolute;
@@ -172,6 +179,12 @@
         width: 60%;
     }
 
+    #logo-login-pharus {
+        top: 13%;
+        left: 12.5%;
+        position: absolute;
+    }
+
     #welcome-text-pharus {
         top: 37%;
         position: absolute;
@@ -204,7 +217,7 @@
         top: 94%;
         position: absolute;
         text-align: center;
-        display:block;
+        display: block;
     }
 
     #footer-login-pharus {
