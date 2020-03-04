@@ -224,7 +224,7 @@
     }
 
     #footer-login-pharus {
-        top: 134%;
+        top: 129%;
         position: absolute;
         left: 12.5%;
     }
@@ -232,6 +232,6 @@
     #login-form {
         position: absolute;
         top: 60%;
-        left: 11%;
+        left: 9%;
     }
 }
