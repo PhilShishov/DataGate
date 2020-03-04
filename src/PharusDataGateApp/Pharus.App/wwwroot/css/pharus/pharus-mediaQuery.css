@@ -71,6 +71,12 @@
         position: absolute;
     }
 
+    #logo-linkedin-pharus {
+        top: 86.5%;
+        left: 85%;
+        position: absolute;
+    }
+
     #logo-login-pharus {
         top: 13%;
         left: 12.5%;
@@ -188,6 +194,12 @@
     #logo-login-pharus {
         top: 4%;
         left: 12.5%;
+        position: absolute;
+    }
+
+    #logo-linkedin-pharus {
+        top: 86.5%;
+        left: 85%;
         position: absolute;
     }
 
