@@ -956,7 +956,7 @@
 
             if (!string.IsNullOrEmpty(model.EntityProperties[1][11]))
             {
-                model.CSSFAuthDate = DateTime.Parse(model.EntityProperties[1][11], CultureInfo.InvariantCulture);
+                model.CSSFAuthDate = DateTime.ParseExact(model.EntityProperties[1][11], "dd/MM/yyyy", CultureInfo.InvariantCulture);
             }
 
             if (!string.IsNullOrEmpty(model.EntityProperties[1][12]))
@@ -966,7 +966,7 @@
 
             model.LEICode = model.EntityProperties[1][14];
             model.Derivatives = model.EntityProperties[1][22];
-            model.ClearingCode = model.EntityProperties[1][30];
+            model.ClearingCode = model.EntityProperties[1][28];
         }
 
         private void SetViewDataValuesForSubFundSelectLists()

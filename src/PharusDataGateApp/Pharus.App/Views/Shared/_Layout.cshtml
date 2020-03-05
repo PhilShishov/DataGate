@@ -163,11 +163,16 @@
                 <div class="text-white text-center">&copy; Pharus Management Lux SA 16, Avenue de la Gare L- 1610 Luxembourg T. +352 28 55 69 - 1</div>
             </div>
         </footer>
+        <main class="mb-4 ml-2">
+            @RenderBody()
+        </main>
     }
-
-    <main class="mb-4 ml-2">
-        @RenderBody()
-    </main>
+    else
+    {
+        <main>
+            @RenderBody()
+        </main>
+    }
 
     <environment include="Development">
         <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
