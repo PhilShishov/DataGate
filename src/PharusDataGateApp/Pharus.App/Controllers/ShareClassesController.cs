@@ -89,7 +89,7 @@
         }
 
         [HttpPost]
-        public IActionResult All(EntitiesViewModel model)
+        public IActionResult All(EntitiesViewModel model, string command)
         {
             // ---------------------------------------------------------
             //
@@ -108,6 +108,25 @@
             if (model.ChosenDate != null)
             {
                 chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            }
+
+            if (!string.IsNullOrEmpty(command))
+            {
+                FileStreamResult fileStreamResult = null;
+                string typeName = model.GetType().Name;
+                string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+
+                if (command == "ExtractExcel")
+                {
+                    fileStreamResult = ExtractTable.ExtractTableAsExcel(model.Entities, typeName, controllerName);
+                }
+
+                else if (command == "ExtractPDF")
+                {
+                    fileStreamResult = ExtractTable
+                        .ExtractTableAsPdf(model.Entities, chosenDate, this._environment, typeName, controllerName);
+                }
+                return fileStreamResult;
             }
 
             if (isInSelectionMode)
