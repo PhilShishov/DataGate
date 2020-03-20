@@ -8,6 +8,7 @@
 
     <environment include="Development">
         <link type="text/css" rel="stylesheet" href="~/css/reset-css.css" />
+        <link type="text/css" rel="stylesheet" href="~/css/login.css" />
         <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
         <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus.css" />
@@ -26,6 +27,7 @@
 
     <environment include="Production">
         <link type="text/css" rel="stylesheet" href="~/css/reset-css.css" />
+        <link type="text/css" rel="stylesheet" href="~/css/login.css" />
         <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
         <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus.css" />
@@ -169,7 +171,9 @@
     }
     else
     {
-        @RenderBody()
+        <main>
+            @RenderBody()
+        </main>
     }
 
     <environment include="Development">
