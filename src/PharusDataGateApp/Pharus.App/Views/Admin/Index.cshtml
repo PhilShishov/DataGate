@@ -3,6 +3,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section Styles{
+    <style>
+        body {
+            background-image: none;
+        }
+    </style>
+}
+
 @if (!this.User.Identity.IsAuthenticated)
 {
     <div class="jumbotron mt-3 bg-pharus">
@@ -51,9 +59,9 @@ else if (this.User.IsInRole("Admin"))
 
 @section Scripts{
     <script>
-            window.onload = () => {
-                manageSideNavBar();
-                manageDropdowns();
-            }
+        window.onload = () => {
+            manageSideNavBar();
+            manageDropdowns();
+        }
     </script>
 }
