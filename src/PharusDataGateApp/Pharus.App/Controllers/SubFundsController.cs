@@ -28,7 +28,7 @@
         private readonly ISubFundsSelectListService subfundsSelectListService;
         private readonly IAgreementsSelectListService agreementsSelectListService;
         private readonly IEntitiesFileService entitiesFileService;
-        private readonly IHostingEnvironment _environment;
+        private readonly IWebHostEnvironment _environment;
 
         public SubFundsController(
             Pharus_vFinale_Context context,
@@ -36,7 +36,7 @@
             ISubFundsSelectListService subfundsSelectListService,
             IAgreementsSelectListService agreementsSelectListService,
             IEntitiesFileService entitiesFileService,
-            IHostingEnvironment hostingEnvironment)
+            IWebHostEnvironment hostingEnvironment)
         {
             this.context = context;
             this.subFundsService = subFundsService;

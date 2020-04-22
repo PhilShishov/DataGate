@@ -98,7 +98,7 @@ namespace Pharus.App.Utilities
         public static FileStreamResult ExtractTableAsPdf(
                                                          List<string[]> entities,
                                                          DateTime? chosenDate,
-                                                         IHostingEnvironment hostingEnvironment,
+                                                         IWebHostEnvironment hostingEnvironment,
                                                          string typeName,
                                                          string controllerName)
         {
