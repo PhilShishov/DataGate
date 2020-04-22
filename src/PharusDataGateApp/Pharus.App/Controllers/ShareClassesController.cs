@@ -28,7 +28,7 @@
         private readonly IShareClassesSelectListService shareClassesSelectListService;
         private readonly IAgreementsSelectListService agreementsSelectListService;
         private readonly IEntitiesFileService entitiesFileService;
-        private readonly IHostingEnvironment _environment;
+        private readonly IWebHostEnvironment _environment;
 
         public ShareClassesController(
             IShareClassesService shareClassesService,
@@ -36,7 +36,7 @@
             IAgreementsSelectListService agreementsSelectListService,
             Pharus_vFinale_Context context,
             IEntitiesFileService entitiesFileService,
-            IHostingEnvironment hostingEnvironment)
+            IWebHostEnvironment hostingEnvironment)
         {
             this.context = context;
             this._environment = hostingEnvironment;

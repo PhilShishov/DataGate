@@ -28,14 +28,14 @@
         private readonly IFundsSelectListService fundsSelectListService;
         private readonly IAgreementsSelectListService agreementsSelectListService;
         private readonly IEntitiesFileService entitiesFileService;
-        private readonly IHostingEnvironment _environment;
+        private readonly IWebHostEnvironment _environment;
 
         public FundsController(
             IFundsService fundsService,
             IFundsSelectListService fundsSelectListService,
             IAgreementsSelectListService agreementsSelectListService,
             IEntitiesFileService entitiesFileService,
-            IHostingEnvironment hostingEnvironment,
+            IWebHostEnvironment hostingEnvironment,
             Pharus_vFinale_Context context)
         {
             this.context = context;
