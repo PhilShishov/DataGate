@@ -6,7 +6,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     using DataGate.Services.Agreements.Contracts;
-    using DataGate.Web.Models.ViewModels.Agreements;
+    using DataGate.Web.ViewModels.Agreements;
 
     public class AgreementsController : Controller
     {
