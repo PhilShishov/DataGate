@@ -908,7 +908,8 @@ body {
 }
 
 body {
-    background: url(../images/Background_Home.png) no-repeat center center fixed;
+    /*background: url(../images/Background_Home.png) no-repeat center center fixed;*/
+    background-image: none;
     background-size: cover;
     font-family: 'Quicksand', sans-serif;
 }

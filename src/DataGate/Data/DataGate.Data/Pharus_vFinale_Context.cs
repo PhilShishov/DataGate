@@ -1,6 +1,8 @@
 ﻿namespace DataGate.Data
 {
     using Microsoft.EntityFrameworkCore;
+
+    using DataGate.Data.Configurations;
     using DataGate.Domain.Models.Pharus_vFinale;
 
     public partial class Pharus_vFinale_Context : DbContext
