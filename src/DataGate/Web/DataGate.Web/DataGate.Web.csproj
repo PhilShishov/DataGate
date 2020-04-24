@@ -12,13 +12,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Models\ViewModels\Reports\**" />
-    <Content Remove="Models\ViewModels\Reports\**" />
-    <EmbeddedResource Remove="Models\ViewModels\Reports\**" />
-    <None Remove="Models\ViewModels\Reports\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Chart.js" Version="2.9.3" />
     <PackageReference Include="EPPlus.Core" Version="1.5.4" />
     <PackageReference Include="itext7" Version="7.1.9" />
@@ -26,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\DataGate.Web.Models\DataGate.Web.Models.csproj" />
     <ProjectReference Include="..\..\DataGate.Web.Utilities\DataGate.Web.Utilities.csproj" />
     <ProjectReference Include="..\..\Data\DataGate.Data\DataGate.Data.csproj" />
     <ProjectReference Include="..\..\Data\DataGate.Domain\DataGate.Domain.csproj" />
