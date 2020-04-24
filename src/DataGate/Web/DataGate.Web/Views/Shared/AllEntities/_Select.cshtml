@@ -1,0 +1,51 @@
+﻿@model DataGate.Web.Models.ViewModels.Entities.EntitiesViewModel
+
+<div class="w-30">
+    <div class="h-70" id="allselect-div-pharus">
+        <div class=" select-div-pharus">
+            <select asp-for="SelectTerm"
+                    id="SelectTerm"
+                    class="form-control input-sm"                    
+                    onchange="this.form.submit()">
+                <option value=@Model.SelectTerm selected>@Model.SelectTerm</option>
+            </select>
+        </div>
+
+        <div>
+            <button type="button"
+                    class="btn btn-sm ml-2 btn-primary"
+                    data-toggle="modal"
+                    data-target="#columnModal"
+                    name="showColumnSelection">
+                Column Choice
+            </button>
+        </div>
+
+        <div class="ml-2 d-flex">
+            <div class="mr-2">
+                <button type="button"
+                        class="btn btn-primary btn-sm"
+                        id="btnRedirect">
+                    Show All
+                </button>
+            </div>
+
+            <div class="el-switch-div">
+                <label class="el-switch el-switch-sm mt-1">
+                    <input type="checkbox"
+                           asp-for="IsActive"
+                           id="activeCheckBox">
+                    <span class="el-switch-style"></span>
+                    <span class="d-block">Show</span>
+                    <span>Active</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <label class="lbl-toolbar-pharus mt-2">Select</label>
+    </div>
+</div>
+
+<div class="vertical mx-3"></div>

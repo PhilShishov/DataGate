@@ -1,0 +1,114 @@
+﻿@model DataGate.Web.Models.ViewModels.Entities.SpecificEntityViewModel
+@{
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<div class="w-100 mt-1 mb-3" id="toolbar-pharus">
+
+    @if (controllerName == "SubFunds")
+    {
+        <div class="d-flex mt-1 mr-auto">
+            <p>FUND CONTAINER: </p>
+            <a href="/Funds/ViewEntitySE/@Model.ContainerEntityId/@Model.ChosenDate"
+               class="text-torshia font-weight-bold ml-1">
+                @Model.ContainerEntityName
+            </a>
+        </div>
+    }
+    else if (controllerName == "ShareClasses")
+    {
+        <div class="d-flex mt-1 mr-auto">
+            <p>SUB FUND CONTAINER: </p>
+            <a href="/SubFunds/ViewEntitySE/@Model.ContainerEntityId/@Model.ChosenDate"
+               class="text-torshia font-weight-bold ml-1">
+                @Model.ContainerEntityName
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="d-flex mt-1 mr-auto"></div>
+    }
+
+    <div class="d-flex mr-auto">
+        <div>
+            <input type="date"
+                   id="date-pharus"
+                   asp-for="ChosenDate"
+                   min="2018-01-01">
+
+            <input type="submit"
+                   class="btn btn-primary btn-sm mb-1"
+                   asp-for="Command"
+                   value="Update Table"></>
+        </div>
+
+        <div class="mx-2">
+            <a href='/@controllerName/All'
+               class="btn btn-primary btn-sm mb-2">
+                Show All
+            </a>
+        </div>
+
+        <div>
+            @if (controllerName == "Funds")
+            {
+                <button type="button"
+                        class="btn btn-primary btn-sm mb-2"
+                        data-toggle="modal"
+                        data-target="#upDocModal">
+                    Upload Prospectus
+                </button>
+            }
+            else
+            {
+                <button type="button"
+                        class="btn btn-primary btn-sm mb-2"
+                        data-toggle="modal"
+                        data-target="#upDocModal">
+                    Upload Document
+                </button>
+            }
+        </div>
+
+        <div class="mx-2">
+            <button type="button"
+                    class="btn btn-primary btn-sm mb-2"
+                    data-toggle="modal"
+                    data-target="#upAgrModal">
+                Upload Agreement
+            </button>
+        </div>
+
+        @if (this.User.IsInRole("Admin"))
+        {
+            <div>
+                @if (controllerName == "Funds")
+                {
+                    <a href="/Funds/EditFund/@Model.EntityId/@Model.ChosenDate"
+                       class="btn btn-primary btn-sm mb-2">
+                        Edit Fund
+                    </a>
+                }
+                else if (controllerName == "SubFunds")
+                {
+                    <a href="/SubFunds/EditSubFund/@Model.EntityId/@Model.ChosenDate"
+                       class="btn btn-primary btn-sm mb-2">
+                        Edit Sub Fund
+                    </a>
+                }
+                else if (controllerName == "ShareClasses")
+                {
+                    <a href="/ShareClasses/EditShareClass/@Model.EntityId/@Model.ChosenDate"
+                       class="btn btn-primary btn-sm mb-2">
+                        Edit Share Class
+                    </a>
+                }
+            </div>
+        }
+
+        <input type="number"
+               asp-for="EntityId" hidden>
+
+    </div>
+</div>

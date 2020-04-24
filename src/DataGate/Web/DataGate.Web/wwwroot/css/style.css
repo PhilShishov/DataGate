@@ -1,0 +1,151 @@
+.bg-pharus {
+    background-color: #202020;
+}
+
+.text-pharus {
+    color: #202020;
+}
+
+form {
+    margin-top: 0.05rem;
+}
+
+.border-pharus {
+    border: 2px solid #d9d9d9;
+    border-radius: 7px;
+}
+
+.nav-link-white {
+    color: #FFFFFF;
+}
+
+.text-right {
+    margin-left: auto;
+}
+
+.hr-2 {
+    height: 2px;
+}
+
+h1 {
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
+}
+
+.w-10 {
+    width: 10%;
+}
+
+.w-35 {
+    width: 35%;
+}
+
+.w-40 {
+    width: 40%;
+}
+
+.w-45 {
+    width: 45%;
+}
+
+.w-60 {
+    width: 60%;
+}
+
+.h-70 {
+    height: 70%;
+}
+
+.maxw-270 {
+    max-width: 270px;
+}
+
+.w-470 {
+    border: 0;
+    border-bottom: 0.6px lightgrey solid;
+    width: 470px;
+}
+
+.maxw-160 {
+    max-width: 160px;
+}
+
+.minw-160 {
+    min-width: 160px;
+}
+
+.minh-100 {
+    min-height: 100px;
+}
+
+.mb-6 {
+    margin-bottom: 20%;
+}
+
+a {
+    text-rendering: unset;
+}
+
+    a:hover {
+        outline: none;
+        text-decoration: none;
+    }
+
+tr {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
+
+textarea {
+    resize: none;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.d-grid {
+    display: grid;
+}
+
+@font-face {
+    font-family: Gilroy-Bold;
+    font-style: normal;
+    src: local("Gilroy-Bold"), url("../fonts/Gilroy-Bold.ttf") format("truetype"); /* non-IE */
+}
+
+.text-pharus {
+    font-family: 'Gilroy-Regular ☞';
+}
+
+.text-footer-pharus {
+    font-family: 'Gilroy-Regular ☞';
+    font-size: 14px;
+}
+
+.text-color-blue-pharus {
+    color: #005596;
+}
+
+.text-color-grey-pharus {
+    color: #898989;
+}
+
+.text-underline {
+    text-decoration: underline;
+}
+
+.bold-text-pharus {
+    font-family: Gilroy-Bold;
+}
+
+.login-div:hover {
+    opacity: 0.7;
+    transition: .5s ease;
+}
