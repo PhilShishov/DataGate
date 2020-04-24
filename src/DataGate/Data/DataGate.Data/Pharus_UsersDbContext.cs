@@ -5,6 +5,7 @@
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
     using DataGate.Domain.Models.Users;
+    using DataGate.Data.Configurations;
 
     public class Pharus_UsersDbContext : IdentityDbContext<PharusUser, PharusRole, string, IdentityUserClaim<string>,
                             PharusUserRole, IdentityUserLogin<string>,
