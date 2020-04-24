@@ -13,8 +13,8 @@
     using DataGate.Domain.Models.Users;
     using DataGate.Services.Users.Contracts;
     using DataGate.Services.Roles.Contracts;
-    using DataGate.Web.Models.ViewModels.Users;
-    using DataGate.Web.Models.BindingModels.Users;
+    using DataGate.Web.InputModels.Users;
+    using DataGate.Web.ViewModels.Users;
 
     [Authorize(Policy = "RequireAdminRole")]
     public class AdminController : Controller

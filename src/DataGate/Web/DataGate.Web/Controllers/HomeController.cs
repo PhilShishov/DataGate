@@ -1,10 +1,6 @@
 ﻿namespace DataGate.Web.Controllers
 {
-    using System.Diagnostics;
-
     using Microsoft.AspNetCore.Mvc;
-
-    using DataGate.Web.Models.ViewModels;
 
     [Controller]
     public class HomeController : Controller

@@ -16,9 +16,9 @@
     using DataGate.Utilities.Web;
     using DataGate.Services.Files;
     using DataGate.Services.SubFunds.Contracts;
-    using DataGate.Web.Models.ViewModels.Entities;
-    using DataGate.Web.Models.BindingModels.SubFunds;
+    using DataGate.Web.InputModels.SubFunds;
     using DataGate.Services.Agreements.Contracts;
+    using DataGate.Web.ViewModels.Entities;
 
     [Authorize]
     public class SubFundsController : Controller

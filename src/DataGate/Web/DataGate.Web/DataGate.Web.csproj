@@ -19,8 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\DataGate.Web.Models\DataGate.Web.Models.csproj" />
-    <ProjectReference Include="..\..\DataGate.Web.Utilities\DataGate.Web.Utilities.csproj" />
+    <ProjectReference Include="..\..\DataGate.Web.InputModels\DataGate.Web.InputModels.csproj" />
+    <ProjectReference Include="..\..\DataGate.Web.ViewModels\DataGate.Web.ViewModels.csproj" />
     <ProjectReference Include="..\..\Data\DataGate.Data\DataGate.Data.csproj" />
     <ProjectReference Include="..\..\Data\DataGate.Domain\DataGate.Domain.csproj" />
     <ProjectReference Include="..\..\Services\DataGate.Services\DataGate.Services.csproj" />
