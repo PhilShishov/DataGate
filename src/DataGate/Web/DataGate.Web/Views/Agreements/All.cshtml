@@ -1,0 +1,84 @@
+﻿@model DataGate.Web.Models.ViewModels.Agreements.AgreementsViewModel
+@{
+    ViewData["Title"] = "All";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles{
+    <link type="text/css" rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link type="text/css" rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" />
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" />
+
+    <style>
+        body {
+            background-image: none;
+        }
+    </style>
+}
+
+<form asp-controller="Agreements"
+      class="justify-content-between"
+      method="post"
+      id="entity-form-pharus">
+
+    <div>
+        <div>
+            <div class="d-flex w-100" id="toolbar-pharus">
+                <div>
+                    <div class="d-flex h-70">
+                        <div>
+                            <input type="date"
+                                   asp-for="ChosenDate"
+                                   id="date-pharus"
+                                   min="2018-01-01"
+                                   max=@DateTime.Today.ToString("yyyy-MM-dd")>
+
+                            <input type="submit"
+                                   class="btn btn-primary btn-sm mb-1"
+                                   asp-for="Command"
+                                   value="Update Table">
+
+                            <input type="button"
+                                   class="btn btn-primary btn-sm mb-1"
+                                   id="btn-show-funds"
+                                   value="Funds">
+
+                            <input type="button"
+                                   class="btn btn-primary btn-sm mb-1"
+                                   id="btn-show-subfunds"
+                                   value="Sub Funds">
+
+                            <input type="button"
+                                   class="btn btn-primary btn-sm mb-1"
+                                   id="btn-show-shareclasses"
+                                   value="Share Classes">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="justify-content-center w-35">
+                    <h2 class="text-center text-torshia" id="entityName">All Agreements</h2>
+                </div>
+            </div>
+            <hr class="mt-1 mb-0" />
+        </div>
+
+        <partial name="_BindingAndViewTable_Funds_Partial" />
+        <partial name="_BindingAndViewTable_SubFunds_Partial" />
+        <partial name="_BindingAndViewTable_ShareClasses_Partial" />
+    </div>
+</form>
+
+@section Scripts{
+
+    <script type="text/javascript" src="~/js/manageAgreementViewButtons.js"></script>
+
+    <script>
+        window.onload = () => {
+            manageSideNavBar();
+            manageDropdowns();
+            manageAgreementViewButtons();
+        }
+    </script>
+}

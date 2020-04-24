@@ -1,0 +1,165 @@
+﻿@model DataGate.Web.Models.ViewModels.Entities.SpecificEntityViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+@section Styles{
+    <link type="text/css" rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link type="text/css" rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" />
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" />
+    <style>
+        body {
+            background-image: none;
+        }
+    </style>
+}
+
+<form asp-controller="SubFunds"
+      class="justify-content-between"
+      method="post">
+
+    <partial name="SpecificEntity/_Toolbar" />
+    <div class="justify-content-between" id="infoAndDocumentsView">
+        <partial name="SpecificEntity/_Info" />
+        <partial name="SpecificEntity/_Load_Documents" />
+    </div>
+
+    <hr class="bg-pharus hr-2" />
+
+    <div class="row ml-3" id="div-select-addInfo">
+        <label class="text-torshia m-1 pr-3">SUB FUND ADDITIONAL INFORMATION</label>
+        <select class="custom-select-lg select-pharus form-control input-sm"
+                id="subFundAdditionalInfSelect"
+                asp-for="SelectAdditionalInf">
+            <option value="" selected disabled>Select</option>
+            <option value="ShareClasses">Share Classes</option>
+            <option value="TimelineChanges">Timeline Changes</option>
+            <option value="AllDocuments">All Documents</option>
+            <option value="AllAgreements">All Agreements</option>
+        </select>
+    </div>
+
+    <partial name="SpecificEntity/_AllDocuments" />
+    <partial name="SpecificEntity/_AllAgreements" />
+    <partial name="SpecificEntity/_Timeline" />
+
+    <div id="subEntities" class="mt-4">
+        <div>
+            <div class="d-flex w-100 mb-2" id="toolbar-pharus">
+                <partial name="SpecificEntity/SubEntities/_Select" />
+                <partial name="SpecificEntity/SubEntities/_Extract" />
+            </div>
+        </div>
+        <partial name="SpecificEntity/SubEntities/_ViewTable" />
+        <partial name="SpecificEntity/SubEntities/_BindingTable" />
+
+        <partial name="SpecificEntity/SubEntities/_Modal" />
+    </div>
+</form>
+
+<form asp-controller="SubFunds"
+      asp-action="UploadDocument"
+      method="post"
+      enctype="multipart/form-data">
+
+    <partial name="SpecificEntity/_UploadDocument" />
+</form>
+
+<form asp-controller="SubFunds"
+      asp-action="UploadAgreement"
+      method="post"
+      enctype="multipart/form-data">
+    <input asp-for="EntityId" type="text" hidden>
+    <input asp-for="ChosenDate" type="date" hidden>
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="modal"
+         id="upAgrModal"
+         role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body d-grid justify-content-center" id="agrModalBody">
+                    @await Html.PartialAsync("SpecificEntity/_UploadAgr")
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+    <script type="text/javascript" src="~/js/multiselect.js"></script>
+    <script type="text/javascript" src="~/js/setDates.js"></script>
+    <script type="text/javascript" src="~/js/delete/deleteAgreement.js"></script>
+    <script type="text/javascript" src="~/js/delete/deleteDocument.js"></script>
+    <script type="text/javascript" src="~/js/select2/select2-entity-subentity.js"></script>
+    <script type="text/javascript" src="~/js/select-additional-info/select-subfund-addInfo.js"></script>
+    <script type="text/javascript" src="~/lib/jquery/double-scroll/jquery.doubleScroll.js"></script>
+
+    <script>
+        window.onload = () => {
+            manageSideNavBar();
+            manageDropdowns();
+            setDates();
+        };
+
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+            }
+
+        $(document).ready(function () {
+
+            // ________________________________________________________
+            //
+            // Delete selected row from documents table by confirming
+
+            const urlDocDel = "/SubFunds/DeleteDocument";
+            passDocUrlToDelete(urlDocDel);
+
+            // ________________________________________________________
+            //
+            // Delete selected row from agreements table by confirming
+
+            const urlAgrDel = "/SubFunds/DeleteAgreement";
+            passAgrUrlToDelete(urlAgrDel);
+
+            // ________________________________________________________
+            //
+            // Page Scroll position saver if selected value
+
+            const JumpTo = document.getElementById('subFundAdditionalInfSelect');
+            if (JumpTo.value == "ShareClasses") {
+                $(this).scrollTop($(JumpTo).position().top);
+            }
+
+            // ________________________________________________________
+            //
+            // Modal multiselect for column selection
+
+            $(".multiselect").multiselect();
+
+            // ________________________________________________________
+            //
+            // Autocomplete search
+
+            const urlACS = "/SubFunds/AutoCompleteShareClassesList";
+            const entityId = @Model.EntityId;
+
+            passUrlAndEntityToSelect(urlACS, entityId);
+
+            // ________________________________________________________
+            //
+            // Double top scroll for table
+
+            $('.double-scroll').doubleScroll();
+            $('#tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
+
+        });
+    </script>
+}

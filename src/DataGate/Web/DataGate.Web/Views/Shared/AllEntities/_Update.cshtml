@@ -1,0 +1,23 @@
+﻿@model DataGate.Web.Models.ViewModels.Entities.EntitiesViewModel
+
+<div>
+    <div class="d-flex h-70">
+        <div>
+            <input type="date"
+                   id="date-pharus"
+                   asp-for="ChosenDate"
+                   min="2018-01-01">
+
+            <input type="submit"
+                   class="btn btn-primary btn-sm mb-1"
+                   asp-for="Command"
+                   value="Update Table"></>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <label class="lbl-toolbar-pharus mt-2">Update</label>
+    </div>
+</div>
+
+<div class="vertical mx-3"></div>

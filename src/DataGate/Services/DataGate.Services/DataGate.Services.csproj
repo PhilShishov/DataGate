@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Features>IOperation</Features>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\DataGate.Data\DataGate.Data.csproj" />
+    <ProjectReference Include="..\..\Data\DataGate.Domain\DataGate.Domain.csproj" />
+    <ProjectReference Include="..\DataGate.Services.Utilities\DataGate.Services.Utilities.csproj" />
+  </ItemGroup>
+
+</Project>
