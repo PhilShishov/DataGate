@@ -24,6 +24,13 @@ namespace DataGate.Services.Data.Funds
         private readonly string defaultDateTimeWithSqlConversion = DateTime.Today.ToString("yyyyMMdd");
         private readonly string sqlFunctionAllFund = "fn_all_fund";
         private readonly string sqlFunctionAllActiveFund = "fn_active_fund";
+        private readonly string sqlFunctionSubFundPdfView = "fn_active_subfund_pdf";
+        private readonly string sqlFunctionTimelineFund = "dbo.fn_timeline_fund";
+        private readonly string sqlFunctionDistinctDocuments = "[dbo].[fn_view_distinct_documents_fund]";
+        private readonly string sqlFunctionAllDocuments = "[dbo].[fn_view_documents_fund]";
+        private readonly string sqlFunctionDistinctAgreements = "[dbo].[fn_view_distinct_agreements_fund]";
+        private readonly string sqlFunctionAllAgreements = "[dbo].[fn_view_agreements_fund]";
+        private readonly string sqlFunctionSubFundsForFund = "ActiveSubFundsForSpecificFundAtDate";
 
         private readonly IConfiguration configuration;
 
@@ -68,28 +75,7 @@ namespace DataGate.Services.Data.Funds
                                                                             List<string> selectedColumns,
                                                                             DateTime? chosenDate)
         {
-            using (SqlConnection connection = new SqlConnection())
-            {
-                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-
-                // Prepare items for DB query with []
-
-                preSelectedColumns.AddRange(selectedColumns);
-                preSelectedColumns = preSelectedColumns.Select(c => String.Format("[{0}]", c)).ToList();
-
-                if (chosenDate == null)
-                {
-                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} from fn_active_fund('{this.sqlDateTimeFormatRequired}')";
-                }
-                else
-                {
-                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} from fn_active_fund('{chosenDate?.ToString("yyyyMMdd")}')";
-                }
-
-                return CreateModel.CreateModelWithHeadersAndValue(command);
-            }
+            return this.ExecuteSqlQueryWithSelection(ref preSelectedColumns, selectedColumns, chosenDate, this.sqlFunctionAllActiveFund);
         }
 
         //public List<string> GetAllFundsNames()
@@ -103,17 +89,15 @@ namespace DataGate.Services.Data.Funds
         {
             using (SqlConnection connection = new SqlConnection())
             {
-                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
+                SqlCommand command = this.SetUpSqlConnectionCommand(connection);
 
                 if (chosenDate == null)
                 {
-                    command.CommandText = $"select * from fn_all_fund('{this.sqlDateTimeFormatRequired}') where [FUND ID PHARUS] = {id}";
+                    command.CommandText = $"select * from {this.sqlFunctionAllFund}('{this.defaultDateTimeWithSqlConversion}') where [FUND ID PHARUS] = {id}";
                 }
                 else
                 {
-                    command.CommandText = $"select * from fn_all_fund('{chosenDate?.ToString("yyyyMMdd")}') " +
+                    command.CommandText = $"select * from {this.sqlFunctionAllFund}('{chosenDate?.ToString(GlobalConstants.SqlDateTimeFormatRequired)}') " +
                         $"where [FUND ID PHARUS] = {id}";
                 }
 
@@ -123,23 +107,7 @@ namespace DataGate.Services.Data.Funds
 
         public IEnumerable<string[]> GetFund_SubFunds(DateTime? chosenDate, int id)
         {
-            using (SqlConnection connection = new SqlConnection())
-            {
-                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-
-                if (chosenDate == null)
-                {
-                    command.CommandText = $"select * from ActiveSubFundsForSpecificFundAtDate('{this.sqlDateTimeFormatRequired}', {id})";
-                }
-                else
-                {
-                    command.CommandText = $"select * from ActiveSubFundsForSpecificFundAtDate('{chosenDate?.ToString("yyyyMMdd")}', {id})";
-                }
-
-                return CreateModel.CreateModelWithHeadersAndValue(command);
-            }
+            return this.ExecuteSqlQueryByDateAndId(chosenDate, id, this.sqlFunctionSubFundsForFund);
         }
 
         public IEnumerable<string[]> GetFund_SubFundsWithSelectedViewAndDate(
@@ -150,22 +118,19 @@ namespace DataGate.Services.Data.Funds
         {
             using (SqlConnection connection = new SqlConnection())
             {
-                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
+                SqlCommand command = this.SetUpSqlConnectionCommand(connection);
 
                 // Prepare items for DB query with []
-
                 preSelectedColumns.AddRange(selectedColumns);
-                preSelectedColumns = preSelectedColumns.Select(c => String.Format("[{0}]", c)).ToList();
+                preSelectedColumns = preSelectedColumns.Select(c => string.Format(GlobalConstants.SqlItemFormatRequired, c)).ToList();
 
                 if (chosenDate == null)
                 {
-                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} from ActiveSubFundsForSpecificFundAtDate('{this.sqlDateTimeFormatRequired}', {id}')";
+                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} from {this.sqlFunctionSubFundsForFund}('{this.defaultDateTimeWithSqlConversion}', {id}')";
                 }
                 else
                 {
-                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} from ActiveSubFundsForSpecificFundAtDate('{chosenDate?.ToString("yyyyMMdd")}', {id})";
+                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} from {this.sqlFunctionSubFundsForFund}('{chosenDate?.ToString(GlobalConstants.SqlDateTimeFormatRequired)}', {id})";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
@@ -174,108 +139,32 @@ namespace DataGate.Services.Data.Funds
 
         public IEnumerable<string[]> GetFundTimeline(int id)
         {
-            using (SqlConnection connection = new SqlConnection())
-            {
-                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-
-                command.CommandText = $"select * from dbo.fn_timeline_fund({id})";
-
-                return CreateModel.CreateModelWithHeadersAndValue(command);
-            }
+            return this.ExecuteSqlQueryById(id, this.sqlFunctionTimelineFund);
         }
 
         public IEnumerable<string[]> GetDistinctFundDocuments(DateTime? chosenDate, int id)
         {
-            using (SqlConnection connection = new SqlConnection())
-            {
-                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-
-                if (chosenDate == null)
-                {
-                    command.CommandText = $"select * from [dbo].[fn_view_distinct_documents_fund]('{this.sqlDateTimeFormatRequired}', {id})";
-                }
-                else
-                {
-                    command.CommandText = $"select * from [dbo].[fn_view_distinct_documents_fund]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
-                }
-
-
-                return CreateModel.CreateModelWithHeadersAndValue(command);
-            }
+            return this.ExecuteSqlQueryByDateAndId(chosenDate, id, this.sqlFunctionDistinctDocuments);
         }
 
         public IEnumerable<string[]> GetAllFundDocuments(int id)
         {
-            using (SqlConnection connection = new SqlConnection())
-            {
-                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-
-                command.CommandText = $"select * from [dbo].[fn_view_documents_fund]({id})";
-
-                return CreateModel.CreateModelWithHeadersAndValue(command);
-            }
+            return this.ExecuteSqlQueryById(id, this.sqlFunctionAllDocuments);
         }
 
         public IEnumerable<string[]> GetDistinctFundAgreements(DateTime? chosenDate, int id)
         {
-            using (SqlConnection connection = new SqlConnection())
-            {
-                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-
-                if (chosenDate == null)
-                {
-                    command.CommandText = $"select * from [dbo].[fn_view_distinct_agreements_fund]('{this.sqlDateTimeFormatRequired}', {id})";
-                }
-                else
-                {
-                    command.CommandText = $"select * from [dbo].[fn_view_distinct_agreements_fund]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
-                }
-
-                return CreateModel.CreateModelWithHeadersAndValue(command);
-            }
+            return this.ExecuteSqlQueryByDateAndId(chosenDate, id, this.sqlFunctionDistinctAgreements);
         }
 
         public IEnumerable<string[]> GetAllFundAgreements(DateTime? chosenDate, int id)
         {
-            using (SqlConnection connection = new SqlConnection())
-            {
-                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-
-                if (chosenDate == null)
-                {
-                    command.CommandText = $"select * from [dbo].[fn_view_agreements_fund]('{this.sqlDateTimeFormatRequired}', {id})";
-                }
-                else
-                {
-                    command.CommandText = $"select * from [dbo].[fn_view_agreements_fund]('{chosenDate?.ToString("yyyyMMdd")}', {id})";
-                }
-
-                return CreateModel.CreateModelWithHeadersAndValue(command);
-            }
+            return this.ExecuteSqlQueryByDateAndId(chosenDate, id, this.sqlFunctionAllAgreements);
         }
 
         public IEnumerable<string[]> PrepareFund_SubFundsForPDFExtract(DateTime? chosenDate)
         {
-            using (SqlConnection connection = new SqlConnection())
-            {
-                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-
-                command.CommandText = $"select * from fn_active_subfund_pdf('{chosenDate?.ToString("yyyyMMdd")}')";
-
-                return CreateModel.CreateModelWithHeadersAndValue(command);
-            }
+            return this.ExecuteSqlQuery(chosenDate, this.sqlFunctionSubFundPdfView);
         }
 
         // ________________________________________________________
@@ -308,6 +197,11 @@ namespace DataGate.Services.Data.Funds
                 "@f_legalForm, @f_legalType, @f_legal_vehicle, @f_companyType, @f_tinNumber, " +
                 "@comment, @commentTitle";
 
+            NewMethod(fundId, initialDate, fStatusId, regNumber, fundName, leiCode, cssfCode, faCode, depCode, taCode, fLegalFormId, fLegalTypeId, fLegalVehicleId, fCompanyTypeId, tinNumber, comment, commentTitle, query);
+        }
+
+        private void NewMethod(int fundId, string initialDate, int fStatusId, string regNumber, string fundName, string leiCode, string cssfCode, string faCode, string depCode, string taCode, int fLegalFormId, int fLegalTypeId, int fLegalVehicleId, int fCompanyTypeId, string tinNumber, string comment, string commentTitle, string query)
+        {
             using (SqlConnection connection = new SqlConnection())
             {
                 connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
@@ -432,9 +326,7 @@ namespace DataGate.Services.Data.Funds
         {
             using (SqlConnection connection = new SqlConnection())
             {
-                connection.ConnectionString = this.configuration.GetConnectionString(GlobalConstants.DataGatevFinaleConnection);
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
+                SqlCommand command = this.SetUpSqlConnectionCommand(connection);
 
                 if (chosenDate == null)
                 {
@@ -457,9 +349,7 @@ namespace DataGate.Services.Data.Funds
         {
             using (SqlConnection connection = new SqlConnection())
             {
-                connection.ConnectionString = this.configuration.GetConnectionString(GlobalConstants.DataGatevFinaleConnection);
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
+                SqlCommand command = this.SetUpSqlConnectionCommand(connection);
 
                 // Prepare items for DB query with []
                 preSelectedColumns.AddRange(selectedColumns);
@@ -476,6 +366,45 @@ namespace DataGate.Services.Data.Funds
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
             }
+        }
+
+        private IEnumerable<string[]> ExecuteSqlQueryByDateAndId(DateTime? chosenDate, int id, string function)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                SqlCommand command = this.SetUpSqlConnectionCommand(connection);
+
+                if (chosenDate == null)
+                {
+                    command.CommandText = $"select * from {function}('{this.defaultDateTimeWithSqlConversion}', {id})";
+                }
+                else
+                {
+                    command.CommandText = $"select * from {function}('{chosenDate?.ToString(GlobalConstants.SqlDateTimeFormatRequired)}', {id})";
+                }
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
+        private IEnumerable<string[]> ExecuteSqlQueryById(int id, string function)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                SqlCommand command = this.SetUpSqlConnectionCommand(connection);
+
+                command.CommandText = $"select * from {function}({id})";
+
+                return CreateModel.CreateModelWithHeadersAndValue(command);
+            }
+        }
+
+        private SqlCommand SetUpSqlConnectionCommand(SqlConnection connection)
+        {
+            connection.ConnectionString = this.configuration.GetConnectionString(GlobalConstants.DataGatevFinaleConnection);
+            connection.Open();
+            SqlCommand command = connection.CreateCommand();
+            return command;
         }
     }
 }
