@@ -118,7 +118,6 @@ namespace DataGate.Web.Utilities
 
             // SubFunds table format settings
             // ShareClasses table format settings
-
             Document document = new Document(pdfDoc);
 
             string sfile = hostingEnvironment.WebRootPath + "/images/Logo_Pharus_small.jpg";

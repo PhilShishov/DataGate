@@ -1,7 +1,7 @@
 ﻿namespace DataGate.Web.Areas.Identity.Pages.Account
 {
     using System.Threading.Tasks;
-    using DataGate.Common;
+
     using DataGate.Data.Models.Users;
 
     using Microsoft.AspNetCore.Authorization;
@@ -13,6 +13,7 @@
     [AllowAnonymous]
     public class LogoutModel : PageModel
     {
+        private const string LoginPageRoute = "/Identity/Account/Login";
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly ILogger<LogoutModel> logger;
 
@@ -31,7 +32,7 @@
                 return this.RedirectToPage();
             }
 
-            return this.Redirect(UrlConstants.UserLoginUrl);
+            return this.Redirect(LoginPageRoute);
         }
     }
 }

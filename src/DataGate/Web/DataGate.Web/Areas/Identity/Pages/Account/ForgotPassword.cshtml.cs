@@ -1,22 +1,24 @@
 ﻿namespace DataGate.Web.Areas.Identity.Pages.Account
 {
     using System.ComponentModel.DataAnnotations;
-    using System.Text;
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
+
     using DataGate.Common;
     using DataGate.Data.Models.Users;
+    using DataGate.Services.Messaging;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
-    using Microsoft.AspNetCore.WebUtilities;
 
     [AllowAnonymous]
     public class ForgotPasswordModel : PageModel
     {
+        private const string ForgotPasswordConfirmationUrl = "/Account/ForgotPasswordConfirmation";
+        private const string ResetPasswordUrl = "/Account/ResetPassword";
+        private const string UserIndexUrl = "/User/Index";
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IEmailSender emailSender;
@@ -41,7 +43,7 @@
                 return this.Page();
             }
 
-            return this.Redirect(UrlConstants.UserIndexUrl);
+            return this.Redirect(UserIndexUrl);
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -52,25 +54,20 @@
                 if (user == null || !(await this.userManager.IsEmailConfirmedAsync(user)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
-                    return this.RedirectToPage("./ForgotPasswordConfirmation");
+                    return this.RedirectToPage(ForgotPasswordConfirmationUrl);
                 }
 
-                // For more information on how to enable account confirmation and password reset please 
-                // visit https://go.microsoft.com/fwlink/?LinkID=532713
-                var code = await this.userManager.GeneratePasswordResetTokenAsync(user);
-                code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                var callbackUrl = this.Url.Page(
-                    "/Account/ResetPassword",
+                string code = await this.userManager.GeneratePasswordResetTokenAsync(user);
+                string callbackUrl = this.Url.Page(
+                    ResetPasswordUrl,
                     pageHandler: null,
-                    values: new { area = "Identity", code },
+                    values: new { code },
                     protocol: this.Request.Scheme);
 
-                await this.emailSender.SendEmailAsync(
-                    this.Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                string message = string.Format(GlobalConstants.PasswordResetMessage, HtmlEncoder.Default.Encode(callbackUrl));
+                await this.emailSender.SendEmailAsync("philip.shishov@pharusmanco.lu", "Philip Shishov", this.Input.Email, GlobalConstants.ConfirmEmailSubject, message);
 
-                return this.RedirectToPage("./ForgotPasswordConfirmation");
+                return this.RedirectToPage(ForgotPasswordConfirmationUrl);
             }
 
             return this.Page();

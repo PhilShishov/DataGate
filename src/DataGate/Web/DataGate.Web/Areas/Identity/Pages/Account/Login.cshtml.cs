@@ -18,6 +18,7 @@
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
+        private const string UserIndexUrl = "/User/Index";
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly ILogger<LoginModel> logger;
@@ -59,7 +60,7 @@
                 return this.Page();
             }
 
-            return this.Redirect(UrlConstants.UserIndexUrl);
+            return this.Redirect(UserIndexUrl);
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -102,7 +103,6 @@
                     // }
 
                     // return Page();
-
                     this.ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                     return this.Page();
                 }
