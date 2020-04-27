@@ -3,7 +3,6 @@
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
-    using System.Text;
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
 
@@ -17,7 +16,6 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.WebUtilities;
     using Microsoft.Extensions.Logging;
 
     [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
@@ -58,7 +56,7 @@
         [HttpPost]
         public async Task<IActionResult> CreateUser(CreateUserInputModel inputModel)
         {
-            string returnUrl = "/Administration/Admin/ViewUsers";
+            string returnUrl = UrlConstants.ViewUsersUrl;
             if (!this.ModelState.IsValid)
             {
                 return this.View(inputModel ?? new CreateUserInputModel());
@@ -78,23 +76,22 @@
                 await this.AssignRoleToUser(inputModel, user);
 
                 // Upon creation send email confirmation to new user
-                //var code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
-                //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                //var callbackUrl = this.Url.Page(
-                //    "/Account/ConfirmEmail",
-                //    pageHandler: null,
-                //    values: new { area = "Identity", userId = user.Id, code = code },
-                //    protocol: this.Request.Scheme);
+                string code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
+                string callbackUrl = this.Url.Page(
+                    UrlConstants.EmailConfirmationUrl,
+                    pageHandler: null,
+                    values: new { userId = user.Id, code },
+                    protocol: this.Request.Scheme);
 
-                //await this.emailSender.SendEmailAsync
-                //    (inputModel.Email, "Confirm your email", $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                string message = string.Format(GlobalConstants.EmailConfirmationMessage, HtmlEncoder.Default.Encode(callbackUrl));
+                await this.emailSender.SendEmailAsync("philip.shishov@pharusmanco.lu", "Philip Shishov", inputModel.Email, GlobalConstants.ConfirmEmailSubject, message);
 
                 return this.LocalRedirect(returnUrl);
             }
 
             this.AddErrors(result);
 
-            return this.RedirectToPage("/Administration/Admin/CreateUser");
+            return this.View();
         }
 
         public async Task<IActionResult> ViewUsers()
@@ -143,7 +140,7 @@
         [HttpPost]
         public async Task<IActionResult> EditUser(EditUserInputModel inputModel, string returnUrl = null)
         {
-            returnUrl = "/Administration/Admin/ViewUsers";
+            returnUrl = UrlConstants.ViewUsersUrl;
 
             if (!this.ModelState.IsValid)
             {
@@ -200,7 +197,7 @@
                 }
             }
 
-            return this.RedirectToPage(returnUrl);
+            return this.View();
         }
 
         private async Task AssignRoleToUser(CreateUserInputModel inputModel, ApplicationUser user)

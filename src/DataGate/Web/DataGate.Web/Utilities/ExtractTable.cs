@@ -10,21 +10,21 @@
 namespace DataGate.Web.Utilities
 {
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using System.Collections.Generic;
 
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Hosting;
-
-    using OfficeOpenXml;
-
-    using iText.Layout;
     using iText.IO.Image;
-    using iText.Kernel.Pdf;
     using iText.Kernel.Geom;
+    using iText.Kernel.Pdf;
+    using iText.Layout;
     using iText.Layout.Element;
     using iText.Layout.Properties;
+
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Mvc;
+
+    using OfficeOpenXml;
 
     // _____________________________________________________________
     public class ExtractTable
