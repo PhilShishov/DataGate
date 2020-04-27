@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Threading.Tasks;
+
     using DataGate.Common;
     using DataGate.Data.Models.Users;
 
@@ -91,7 +92,6 @@
                 else
                 {
                     // TODO check login for confirmed email
-                    //opt.SignIn.RequireConfirmedEmail = true;
                     // if (userService.IsExistingUserWithNotConfirmedEmail(Input.Username))
                     // {
                     //    ModelState.AddModelError(string.Empty, ErrorMessages.NotConfirmedEmail);
