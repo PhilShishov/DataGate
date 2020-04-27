@@ -1,7 +1,7 @@
 ﻿namespace DataGate.Web.Areas.Identity.Pages.Account
 {
     using System.Threading.Tasks;
-
+    using DataGate.Common;
     using DataGate.Data.Models.Users;
 
     using Microsoft.AspNetCore.Authorization;
@@ -31,7 +31,7 @@
                 return this.RedirectToPage();
             }
 
-            return this.Page();
+            return this.Redirect(UrlConstants.UserLoginUrl);
         }
     }
 }
