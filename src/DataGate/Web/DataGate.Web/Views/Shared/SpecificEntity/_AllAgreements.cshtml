@@ -1,0 +1,49 @@
+﻿@{
+    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<div id="allAgreements" class="mt-3 d-none">
+    <table class="table table-bordered table-hover">
+        <thead>
+            @for (int row = 0; row < 1; row++)
+            {
+                <tr>
+                    @for (int col = 0; col < Model.EntityAgreements[row].Length; col++)
+                    {
+                        <th class="text-secondary p-1">
+                            @Model.EntityAgreements[row][col]
+                        </th>
+                    }
+                </tr>
+            }
+        </thead>
+
+        <tbody>
+            @for (int row = 1; row < Model.EntityAgreements.Count; row++)
+            {
+                <tr>
+                    @for (int col = 0; col < Model.EntityAgreements[row].Length; col++)
+                    {
+                        <td class="p-1">
+                            @if (Model.EntityAgreements[0][col] == "File Name")
+                            {
+                                <button class="btn-link-pharus text-left"
+                                        formtarget="_blank"
+                                        type="submit"
+                                        formaction="/@controllerName/ReadAgreement"
+                                        name="pdfValue"
+                                        value="@Model.EntityAgreements[row][col]">
+                                    @System.IO.Path.GetFileNameWithoutExtension(Model.EntityAgreements[row][col])
+                                </button>
+                            }
+                            else
+                            {
+                                @Model.EntityAgreements[row][col]
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
