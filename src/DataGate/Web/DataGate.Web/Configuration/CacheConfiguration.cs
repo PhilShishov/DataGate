@@ -1,5 +1,4 @@
-﻿
-namespace DataGate.Web.Configuration
+﻿namespace DataGate.Web.Configuration
 {
     using DataGate.Common;
     using Microsoft.Extensions.Configuration;
@@ -10,16 +9,15 @@ namespace DataGate.Web.Configuration
         public const string SchemaName = "dbo";
         public const string TableName = "Cache";
 
-        //public static IServiceCollection ConfigureDistributedSqlServerCache(this IServiceCollection services, IConfiguration configuration)
-        //{
+        // public static IServiceCollection ConfigureDistributedSqlServerCache(this IServiceCollection services, IConfiguration configuration)
+        // {
         //    services.AddDistributedSqlServerCache(options =>
         //    {
         //        options.ConnectionString = configuration.GetConnectionString(GlobalConstants.DefaultConnectionStringName);
         //        options.SchemaName = SchemaName;
         //        options.TableName = TableName;
         //    });
-
         //    return services;
-        //}
+        // }
     }
 }

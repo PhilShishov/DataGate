@@ -11,6 +11,7 @@
     [AllowAnonymous]
     public class ForgotPasswordConfirmation : PageModel
     {
+        private const string UserIndexUrl = "/User/Index";
         private readonly SignInManager<ApplicationUser> signInManager;
 
         public ForgotPasswordConfirmation(
@@ -26,7 +27,7 @@
                 return this.Page();
             }
 
-            return this.Redirect(UrlConstants.UserIndexUrl);
+            return this.Redirect(UserIndexUrl);
         }
     }
 }

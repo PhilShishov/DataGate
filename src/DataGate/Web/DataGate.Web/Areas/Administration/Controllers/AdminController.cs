@@ -22,6 +22,8 @@
     [Area("Administration")]
     public class AdminController : BaseController
     {
+        private const string EmailConfirmationUrl = "/Account/ConfirmEmail";
+        private const string ViewUsersUrl = "/Administration/Admin/ViewUsers";
         private readonly RoleManager<ApplicationRole> roleManager;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ILogger<CreateUserInputModel> logger;
@@ -56,7 +58,7 @@
         [HttpPost]
         public async Task<IActionResult> CreateUser(CreateUserInputModel inputModel)
         {
-            string returnUrl = UrlConstants.ViewUsersUrl;
+            string returnUrl = ViewUsersUrl;
             if (!this.ModelState.IsValid)
             {
                 return this.View(inputModel ?? new CreateUserInputModel());
@@ -77,7 +79,7 @@
                 // Upon creation send email confirmation to new user
                 string code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
                 string callbackUrl = this.Url.Page(
-                    UrlConstants.EmailConfirmationUrl,
+                    EmailConfirmationUrl,
                     pageHandler: null,
                     values: new { userId = user.Id, code },
                     protocol: this.Request.Scheme);
@@ -140,7 +142,7 @@
         [HttpPost]
         public async Task<IActionResult> EditUser(EditUserInputModel inputModel, string returnUrl = null)
         {
-            returnUrl = UrlConstants.ViewUsersUrl;
+            returnUrl = ViewUsersUrl;
 
             if (!this.ModelState.IsValid)
             {
