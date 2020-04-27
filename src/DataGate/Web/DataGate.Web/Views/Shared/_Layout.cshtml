@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using DataGate.Common
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <title>@ViewData["Title"] Pharus DataGate</title>
+    <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
 
     <environment include="Development">
         <link type="text/css" rel="stylesheet" href="~/css/reset-css.css" />
@@ -31,36 +31,8 @@
             }
         </style>
     </environment>
-
-    <environment include="Production">
-        <link type="text/css" rel="stylesheet" href="~/css/reset-css.css" />
-        <link type="text/css" rel="stylesheet" href="~/css/login.css" />
-        <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus.css" />
-        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-mediaquery.css" />
-        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-buttons.css" />
-        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-checkbox.css" />
-        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-search.css" />
-        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-multiselect.css" />
-        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-scrollbar.css" />
-        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-select.css" />
-        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-sidenav.css" />
-        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-timeline.css" />
-        <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus-toolbar.css" />
-        <link type="text/css" rel="stylesheet" href="~/css/style.css" />
-
-        <style>
-            body {
-                background-image: none;
-            }
-        </style>
-    </environment>
-
     @RenderSection("Styles", required: false)
 </head>
-
 <body>
     @if (this.User.Identity.IsAuthenticated)
     {
@@ -154,20 +126,23 @@
                 <div class="navbar-collapse collapse" id="navbarNav">
                     <div id="intro" class="text-right">
                         <ul class="navbar-nav">
-                            @if (this.User.IsInRole("Admin"))
+                            @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                             {
                                 <li class="nav-item active">
-                                    <a class="nav-link nav-link-white active" href="/Admin/Index">Panel</a>
+                                    <a class="nav-link nav-link-white active"
+                                       asp-area="Administration"
+                                       asp-controller="Admin"
+                                       asp-action="Index">Panel</a>
                                 </li>
                             }
                             else
                             {
                                 <li class="nav-item active">
-                                    <a class="nav-link nav-link-white active" href="/Home/Index">Home</a>
+                                    <a class="nav-link nav-link-white active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                                 </li>
                             }
                             <li class="nav-item">
-                                <a class="nav-link nav-link-white active" href="/Identity/Account/Logout">Logout</a>
+                                <a class="nav-link nav-link-white active" asp-area="Identity" asp-page="/Account/Logout">Logout</a>
                             </li>
                         </ul>
                     </div>
@@ -179,7 +154,10 @@
         </main>
         <footer>
             <div class="bg-pharus footer-pharus">
-                <div class="text-white text-center">&copy; Pharus Management Lux SA 16, Avenue de la Gare L- 1610 Luxembourg T. +352 28 55 69 - 1</div>
+                <div class="text-white text-center">
+                    &copy;  @DateTime.Now.Year @GlobalConstants.DataGateFooterDisplay
+                    <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </div>
             </div>
         </footer>
     }
@@ -191,27 +169,19 @@
     }
 
     <environment include="Development">
-        <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
                 integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
                 crossorigin="anonymous"></script>
-        <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 
-        <script type="text/javascript" src="~/js/manageSideNavBar.js"></script>
-        <script type="text/javascript" src="~/js/manageDropdowns.js"></script>
+        <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
+        <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+
+        <script type="text/javascript" src="~/js/manageSideNavBar.js" asp-append-version="true"></script>
+        <script type="text/javascript" src="~/js/manageDropdowns.js" asp-append-version="true"></script>
     </environment>
 
-    <environment include="Production">
-        <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-                integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-                crossorigin="anonymous"></script>
-        <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-
-        <script type="text/javascript" src="~/js/manageSideNavBar.js"></script>
-        <script type="text/javascript" src="~/js/manageDropdowns.js"></script>
-    </environment>
-
-    @RenderSection("Scripts", required: false)
+    @this.RenderSection("Scripts", required: false)
 </body>
 </html>

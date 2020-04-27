@@ -2,46 +2,40 @@
 @model LoginModel
 
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = "Log in";
 }
-
 <section class="fxt-template-layout2">
     <div class="container-fluid custom-container">
         <div class="row">
             <div class="col-xl-4 col-lg-6 col-12 fxt-bg-color">
                 <div class="fxt-content">
-                    <a href="/Home/Index">
-                        <img class="login-brand-img" src="~/images/Logo_Pharus_small.jpg" />
-                    </a>
+                    <partial name="Identity/_LoginRedirectPartial" />
                     <h2 class="login-brand">Pharus DataGate </h2>
                     <h2 class="login-title">User Login</h2>
-                    @*<div class="fxt-header">
-                            <a href="index.html" class="fxt-logo"><img src="~/images/login/logo-2.png" alt="Logo"></a>
-                            <ul class="fxt-socials">
-                                <li class="fxt-google"><a href="#" title="google"><i class="fab fa-google-plus-g"></i><span>Google +</span></a></li>
-                                <li class="fxt-twitter"><a href="#" title="twitter"><i class="fab fa-twitter"></i><span>Twitter</span></a></li>
-                                <li class="fxt-facebook"><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i><span>Facebook</span></a></li>
-                            </ul>
-                            <div class="fxt-style-line">
-                                <h2>Or Login With Email</h2>
-                            </div>
-                        </div>*@
                     <div class="fxt-form">
                         <form method="POST">
                             <div class="form-group col-md-12">
                                 <label>Username</label>
                                 <div class="fxt-transformY-50 fxt-transition-delay-1">
-                                    <input type="text" asp-for="Input.Username"
+                                    <input type="text" 
+                                           asp-for="Input.Username"
                                            autofocus
-                                           autocomplete="username" class="form-control" id="username" placeholder="Username" required="required">
+                                           autocomplete="username" 
+                                           class="form-control" 
+                                           id="username" 
+                                           placeholder="Username">
                                     <span asp-validation-for="Input.Username" class="text-danger d-flex justify-content-center"></span>
                                 </div>
                             </div>
                             <div class="form-group col-md-12">
                                 <label>Password</label>
                                 <div class="fxt-transformY-50 fxt-transition-delay-2">
-                                    <input type="password" asp-for="Input.Password"
-                                           autocomplete="new-password" class="form-control" id="password" placeholder="Password" required="required">
+                                    <input type="password" 
+                                           asp-for="Input.Password"
+                                           autocomplete="new-password"
+                                           class="form-control" 
+                                           id="password" 
+                                           placeholder="Password">
                                     <span asp-validation-for="Input.Password" class="text-danger d-flex justify-content-center"></span>
                                 </div>
                             </div>
@@ -52,28 +46,37 @@
                                             <input id="checkbox1" type="checkbox" asp-for="Input.RememberMe">
                                             <label for="checkbox1" asp-for="Input.RememberMe">Remember me?</label>
                                         </div>
-                                        <a href="/Identity/Account/ForgotPassword" class="switcher-text">Forgot Password</a>
+                                        <a asp-area="Identity"
+                                           asp-page="/Account/ForgotPassword"
+                                           class="switcher-text">Forgot Password</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group col-md-6 col-lg-6 col-sm-12 col-xs-12">
                                 <div class="fxt-transformY-50 fxt-transition-delay-4">
-                                    <button type="submit" class="fxt-btn-fill" href="/Identity/Account/Login">Log in</button>
+                                    <button type="submit"
+                                            class="fxt-btn-fill"
+                                            asp-area="Identity"
+                                            asp-page="/Account/Login">
+                                        Log in
+                                    </button>
                                 </div>
                             </div>
                         </form>
                     </div>
-                    @*<div class="fxt-footer">
-                            <div class="fxt-transformY-50 fxt-transition-delay-5">
-                                <p>Don't have an account?<a href="#" class="switcher-text">Sign up</a></p>
-                            </div>
-                        </div>*@
                     <div class="social-icons d-inline d-sm-block d-xl-none d-lg-none d-md-none">
-                        @*<div><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></div>
-                            <div><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>     </div>*@
-                        <div><a href="https://www.linkedin.com/company/pharus-management-lux-sa/about/" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>        </div>
-                        <div><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>         </div>
-                        <div><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>    </div>
+                        <div>
+                            <a href="https://www.linkedin.com/company/pharus-management-lux-sa/about/"
+                               target="_blank">
+                                <i class="fa fa-linkedin" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                        </div>
+                        <div>
+                            <a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+                        </div>
 
                     </div>
                 </div>
@@ -83,78 +86,10 @@
                 <img class="img-fluid left-img float-right" alt="Responsive image" src="~/images/login-image.png" />
             </div>
         </div>
-        <div class="row login-footer">
-            <div class="col-12 col-lg-6 col-md-6 col-sm-12 footer-text">© Pharus Management Lux SA 16, Avenue de la Gare L- 1610 Luxembourg T. +352 28 55 69 - 1</div>
-            <div class="col-12 col-md-6 col-sm-12 social-icons d-none d-md-block d-lg-block">
-                @*<div><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></div>
-                    <div><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>     </div>*@
-                <div><a href="https://www.linkedin.com/company/pharus-management-lux-sa/about/" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>        </div>
-                <div><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>         </div>
-                <div><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>    </div>
-
-            </div>
-        </div>
+        <partial name="Identity/_FooterPartial" />
     </div>
-
 </section>
 
-@*<form class="mx-auto w-50 d-inline" method="post">
-        <div>
-
-            <partial name="_SharedData" />
-
-            <div class="d-flex">
-                <text id="login-text-pharus"
-                      class="bold-text-pharus">
-                    Pharus DataGate User <br />
-                    <span class="text-color-blue-pharus">Login</span>
-                </text>
-            </div>
-
-            <div id="login-form" class="mt-1">
-                <div class="form-group">
-                    <input type="text"
-                           class="form-control w-470"
-                           id="username"
-                           placeholder="Username..."
-                           asp-for="Input.Username"
-                           autofocus
-                           autocomplete="username">
-                    <span asp-validation-for="Input.Username" class="text-danger d-flex justify-content-center"></span>
-                </div>
-
-                <div class="form-group">
-                    <input type="password"
-                           class="form-control w-470"
-                           id="password"
-                           placeholder="Password..."
-                           asp-for="Input.Password"
-                           autocomplete="new-password">
-                    <span asp-validation-for="Input.Password" class="text-danger d-flex justify-content-center"></span>
-                     TODO show/hide password
-                     <input type="checkbox" class="form-control-login-pharus" onclick="document.getElementById('password').type = this.checked ? 'text' : 'password'">Show password
-                </div>
-                <div class="form-group justify-content-between" id="div-checkbox-password">
-                    <div>
-                        <label class="checkbox-pharus text-color-grey-pharus" asp-for="Input.RememberMe">
-                            @Html.DisplayNameFor(m => m.Input.RememberMe)
-                            <input type="checkbox" asp-for="Input.RememberMe" />
-                            <span class="checkmark"></span>
-                        </label>
-                    </div>
-                    <div>
-                        <a class="text-color-blue-pharus text-underline"
-                           href="/Identity/Account/ForgotPassword">
-                            Forgot Password?
-                        </a>
-                    </div>
-                </div>
-
-                <div class="login-div">
-                    <button type="submit" id="btn-login" href="/Identity/Account/Login">
-                        <img src="~/images/Login_Button.png">
-                    </button>
-                </div>
-            </div>
-        </div>
-    </form>*@
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

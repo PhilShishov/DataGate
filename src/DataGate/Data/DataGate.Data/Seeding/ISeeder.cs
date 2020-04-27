@@ -1,13 +1,10 @@
-﻿// Interface for seeding DB data
-
-// Created: 09/2019
-// Author:  Philip Shishov
-
-// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-namespace DataGate.Data.Seeding
+﻿namespace DataGate.Data.Seeding
 {
+    using System;
+    using System.Threading.Tasks;
+
     public interface ISeeder
     {
-        void Seed();
+        Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider);
     }
 }

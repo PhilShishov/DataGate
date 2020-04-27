@@ -1,18 +1,33 @@
 ﻿namespace DataGate.Web.Controllers
 {
+    using System.Diagnostics;
+
+    using DataGate.Web.ViewModels;
+
     using Microsoft.AspNetCore.Mvc;
 
-    [Controller]
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public IActionResult Index()
         {
-            return this.View("Index");
+            //if (this.User.Identity.IsAuthenticated)
+            //{
+            //    return this.Redirect("/Funds/All");
+            //}
+
+            return this.View();
         }
 
-        //public IActionResult Error()
-        //{
-        //    return this.View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
-        //}
+        public IActionResult Privacy()
+        {
+            return this.View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return this.View(
+                new ErrorViewModel { RequestId = Activity.Current?.Id ?? this.HttpContext.TraceIdentifier });
+        }
     }
 }
