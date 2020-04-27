@@ -38,11 +38,24 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="mastfoot">
+                <div class="mastfoot mb-5">
+                    <div class="inner text-white">
+                        <p>
+                            <a class="text-white a-underline mr-1" asp-area="" asp-controller="Legal" asp-action="Privacy">Privacy Policy</a>
+                            <a class="text-white a-underline mr-1" asp-area="" asp-controller="Legal" asp-action="Cookie">Cookie Policy</a>
+                            <a class="text-white a-underline mr-1" asp-area="" asp-controller="Legal" asp-action="Copyright">Copyright Policy</a>
+                            <a class="text-white a-underline mr-1" asp-area="" asp-controller="Legal" asp-action="UserAgreement">User Agreement</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="mastfoot mt-5">
                     <div class="inner text-white">
                         <p>
                             &copy; @DateTime.Now.Year @GlobalConstants.DataGateFooterDisplay
-                            <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </p>
                     </div>
                 </div>
