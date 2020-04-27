@@ -11,6 +11,5 @@ namespace DataGate.Common
 
         // User
         public const string UserIndexUrl = "/User/Index";
-
     }
 }

@@ -126,6 +126,13 @@
                 <div class="navbar-collapse collapse" id="navbarNav">
                     <div id="intro" class="text-right">
                         <ul class="navbar-nav">
+                            <li class="nav-item active">
+                                <a class="nav-link nav-link-white active"
+                                   asp-area=""
+                                   asp-controller="User"
+                                   asp-action="Index">Panel</a>
+                            </li>
+
                             @if (this.User.IsInRole("Admin"))
                             {
                                 <li class="nav-item active">
@@ -135,12 +142,6 @@
                                        asp-action="Index">Settings</a>
                                 </li>
                             }
-                            <li class="nav-item active">
-                                <a class="nav-link nav-link-white active"
-                                   asp-area=""
-                                   asp-controller="User"
-                                   asp-action="Index">Panel</a>
-                            </li>
 
                             <li class="nav-item">
                                 <a class="nav-link nav-link-white active" asp-area="Identity" asp-page="/Account/Manage/Index">Manage</a>
@@ -161,7 +162,7 @@
             <div class="bg-pharus footer-pharus">
                 <div class="text-white text-center">
                     &copy;  @DateTime.Now.Year @GlobalConstants.DataGateFooterDisplay
-                    <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    @*<a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>*@
                 </div>
             </div>
         </footer>
