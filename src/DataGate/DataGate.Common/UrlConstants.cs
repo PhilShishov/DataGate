@@ -8,5 +8,8 @@ namespace DataGate.Common
         // Administration
         public const string ViewUsersUrl = "/Administration/Admin/ViewUsers";
 
+        // User
+        public const string UserIndexUrl = "/User/Index";
+
     }
 }

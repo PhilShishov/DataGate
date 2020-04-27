@@ -73,7 +73,6 @@
             if (result.Succeeded)
             {
                 this.logger.LogInformation("User created a new account with password.");
-                await this.AssignRoleToUser(inputModel, user);
 
                 // Upon creation send email confirmation to new user
                 string code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -86,6 +85,7 @@
                 string message = string.Format(GlobalConstants.EmailConfirmationMessage, HtmlEncoder.Default.Encode(callbackUrl));
                 await this.emailSender.SendEmailAsync("philip.shishov@pharusmanco.lu", "Philip Shishov", inputModel.Email, GlobalConstants.ConfirmEmailSubject, message);
 
+                await this.AssignRoleToUser(inputModel, user);
                 return this.LocalRedirect(returnUrl);
             }
 

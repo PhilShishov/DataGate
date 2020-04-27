@@ -41,21 +41,24 @@
         [TempData]
         public string ErrorMessage { get; set; }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public async Task<IActionResult> OnGetAsync()
         {
             if (!string.IsNullOrEmpty(this.ErrorMessage))
             {
                 this.ModelState.AddModelError(string.Empty, this.ErrorMessage);
             }
 
-            returnUrl = returnUrl ?? this.Url.Content("~/");
+            if (!this.signInManager.IsSignedIn(this.User))
+            {
+                // Clear the existing external cookie to ensure a clean login process
+                await this.HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
-            // Clear the existing external cookie to ensure a clean login process
-            await this.HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+                this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
-            this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+                return this.Page();
+            }
 
-            this.ReturnUrl = returnUrl;
+            return this.Redirect(UrlConstants.UserIndexUrl);
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -68,6 +71,7 @@
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 Microsoft.AspNetCore.Identity.SignInResult result = await this.signInManager
                     .PasswordSignInAsync(this.Input.Username, this.Input.Password, this.Input.RememberMe, lockoutOnFailure: false);
+
                 if (result.Succeeded)
                 {
                     this.logger.LogInformation("User logged in.");
@@ -86,6 +90,19 @@
                 }
                 else
                 {
+                    // TODO check login for confirmed email
+                    //opt.SignIn.RequireConfirmedEmail = true;
+                    // if (userService.IsExistingUserWithNotConfirmedEmail(Input.Username))
+                    // {
+                    //    ModelState.AddModelError(string.Empty, ErrorMessages.NotConfirmedEmail);
+                    // }
+                    // else
+                    // {
+                    //    ModelState.AddModelError(string.Empty, ErrorMessages.InvalidLoginAttempt);
+                    // }
+
+                    // return Page();
+
                     this.ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                     return this.Page();
                 }
