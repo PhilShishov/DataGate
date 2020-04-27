@@ -4,7 +4,7 @@
     using System.Text;
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
-
+    using DataGate.Common;
     using DataGate.Data.Models.Users;
 
     using Microsoft.AspNetCore.Authorization;
@@ -18,16 +18,31 @@
     public class ForgotPasswordModel : PageModel
     {
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IEmailSender emailSender;
 
-        public ForgotPasswordModel(UserManager<ApplicationUser> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(
+            UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager,
+            IEmailSender emailSender)
         {
             this.userManager = userManager;
+            this.signInManager = signInManager;
             this.emailSender = emailSender;
         }
 
         [BindProperty]
         public InputModel Input { get; set; }
+
+        public IActionResult OnGet()
+        {
+            if (!this.signInManager.IsSignedIn(this.User))
+            {
+                return this.Page();
+            }
+
+            return this.Redirect(UrlConstants.UserIndexUrl);
+        }
 
         public async Task<IActionResult> OnPostAsync()
         {

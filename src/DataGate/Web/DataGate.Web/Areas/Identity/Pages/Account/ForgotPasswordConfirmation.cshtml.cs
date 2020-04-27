@@ -1,13 +1,32 @@
 ﻿namespace DataGate.Web.Areas.Identity.Pages.Account
 {
+    using DataGate.Common;
+    using DataGate.Data.Models.Users;
+
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
 
     [AllowAnonymous]
     public class ForgotPasswordConfirmation : PageModel
     {
-        public void OnGet()
+        private readonly SignInManager<ApplicationUser> signInManager;
+
+        public ForgotPasswordConfirmation(
+            SignInManager<ApplicationUser> signInManager)
         {
+            this.signInManager = signInManager;
+        }
+
+        public IActionResult OnGet()
+        {
+            if (!this.signInManager.IsSignedIn(this.User))
+            {
+                return this.Page();
+            }
+
+            return this.Redirect(UrlConstants.UserIndexUrl);
         }
     }
 }
