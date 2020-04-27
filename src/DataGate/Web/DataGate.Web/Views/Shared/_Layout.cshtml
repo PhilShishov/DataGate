@@ -126,6 +126,15 @@
                 <div class="navbar-collapse collapse" id="navbarNav">
                     <div id="intro" class="text-right">
                         <ul class="navbar-nav">
+                            @if (this.User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item active">
+                                    <a class="nav-link nav-link-white active"
+                                       asp-area=""
+                                       asp-controller="Settings"
+                                       asp-action="Index">Settings</a>
+                                </li>
+                            }
                             <li class="nav-item active">
                                 <a class="nav-link nav-link-white active"
                                    asp-area=""

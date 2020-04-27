@@ -2,12 +2,11 @@
 @model DataGate.Web.InputModels.Users.CreateUserInputModel
 @{
     ViewData["Title"] = "Create User";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2 class="text-torshia">Create User</h2>
 <div>
-    <a class="btn bg-pharus text-white mt-2" asp-action="Index">Back to Panel</a>
+    <a class="btn bg-pharus text-white mt-2" asp-area="" asp-controller="User" asp-action="Index">Back to Panel</a>
 </div>
 <hr />
 <form class="d-inline" method="post">

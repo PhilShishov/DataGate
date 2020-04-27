@@ -10,10 +10,10 @@
     {
         public IActionResult Index()
         {
-            //if (this.User.Identity.IsAuthenticated)
-            //{
-            //    return this.Redirect("/Funds/All");
-            //}
+            if (this.User.Identity.IsAuthenticated)
+            {
+                return this.Redirect("/User/Index");
+            }
 
             return this.View();
         }
