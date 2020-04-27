@@ -25,7 +25,7 @@
         {
             if (userId == null || code == null)
             {
-                return this.RedirectToPage("/Index");
+                return this.Redirect("/User/Index");
             }
 
             ApplicationUser user = await this.userManager.FindByIdAsync(userId);
