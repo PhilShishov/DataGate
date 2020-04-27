@@ -126,21 +126,17 @@
                 <div class="navbar-collapse collapse" id="navbarNav">
                     <div id="intro" class="text-right">
                         <ul class="navbar-nav">
-                            @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-                            {
-                                <li class="nav-item active">
-                                    <a class="nav-link nav-link-white active"
-                                       asp-area="Administration"
-                                       asp-controller="Admin"
-                                       asp-action="Index">Panel</a>
-                                </li>
-                            }
-                            else
-                            {
-                                <li class="nav-item active">
-                                    <a class="nav-link nav-link-white active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                                </li>
-                            }
+                            <li class="nav-item active">
+                                <a class="nav-link nav-link-white active"
+                                   asp-area=""
+                                   asp-controller="User"
+                                   asp-action="Index">Panel</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-white active" asp-area="Identity" asp-page="/Account/Manage/Index">Manage</a>
+                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link nav-link-white active" asp-area="Identity" asp-page="/Account/Logout">Logout</a>
                             </li>
