@@ -16,12 +16,15 @@
     <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.164" PrivateAssets="all">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\DataGate.Common\DataGate.Common.csproj" />
     <ProjectReference Include="..\..\Data\DataGate.Data.Common\DataGate.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\DataGate.Data.Models\DataGate.Data.Models.csproj" />
     <ProjectReference Include="..\DataGate.Services.Mapping\DataGate.Services.Mapping.csproj" />
+    <ProjectReference Include="..\DataGate.Services\DataGate.Services.csproj" />
   </ItemGroup>
 
 </Project>
