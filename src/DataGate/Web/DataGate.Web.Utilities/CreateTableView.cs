@@ -6,7 +6,7 @@
 // Author:  Philip Shishov
 
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-namespace DataGate.Utilities.Web
+namespace DataGate.Web.Utilities
 {
     using System.Linq;
     using System.Collections.Generic;
