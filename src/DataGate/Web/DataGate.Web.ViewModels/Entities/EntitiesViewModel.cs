@@ -17,7 +17,7 @@ namespace DataGate.Web.ViewModels.Entities
         // Property will be filled
         // with table data from DB
         // for all entities of type
-        public List<string[]> Entities { get; set; }
+        public IEnumerable<string[]> Entities { get; set; }
 
         public string SearchTerm { get; set; }
 

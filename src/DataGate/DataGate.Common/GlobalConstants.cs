@@ -1,4 +1,6 @@
-﻿namespace DataGate.Common
+﻿using System;
+
+namespace DataGate.Common
 {
     public static class GlobalConstants
     {
@@ -23,11 +25,16 @@
 
         public const int MaxAdminCount = 3;
         public const string LastLoginTimeDisplay = "dd.MM.yyyy HH:mm";
+        public const string DateTimeFormatDisplay = "yyyy-MM-dd";
 
         // Email
         public const string ConfirmEmailSubject = "Confirm your email";
         public const string EmailConfirmationMessage = "Please confirm your account by <a href='{0}'>clicking here</a>.";
         public const string ResetPasswordEmailSubject = "Reset Password";
         public const string PasswordResetMessage = "Please reset your password by <a href='{0}'>clicking here</a>.";
+
+        // SQL Queries
+        public const string SqlDateTimeFormatRequired = "yyyyMMdd";
+        public const string SqlItemFormatRequired = "[{0}]";
     }
 }

@@ -32,7 +32,7 @@ namespace DataGate.Services
 
                 yield return values.ToArray();
             }
-        }       
+        }
 
         // ________________________________________________________
         //

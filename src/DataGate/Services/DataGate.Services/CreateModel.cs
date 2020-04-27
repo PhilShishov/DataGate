@@ -6,9 +6,9 @@
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace DataGate.Services
 {
-    using System.Linq;
-    using System.Data.SqlClient;
     using System.Collections.Generic;
+    using System.Data.SqlClient;
+    using System.Linq;
 
     // _____________________________________________________________
     public class CreateModel
@@ -17,7 +17,7 @@ namespace DataGate.Services
         //
         // Create a model by reading table data
         // from SQL Server with headers and values
-        public static List<string[]> CreateModelWithHeadersAndValue(SqlCommand command)
+        public static IEnumerable<string[]> CreateModelWithHeadersAndValue(SqlCommand command)
         {
             using (var reader = command.ExecuteReader())
             {
@@ -32,6 +32,6 @@ namespace DataGate.Services
 
                 return model;
             }
-        }       
+        }
     }
 }

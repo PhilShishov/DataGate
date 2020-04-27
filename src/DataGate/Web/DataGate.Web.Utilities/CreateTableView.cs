@@ -14,7 +14,7 @@ namespace DataGate.Web.Utilities
     // _____________________________________________________________
     public class CreateTableView
     {
-        public static List<string[]> AddTableToView(List<string[]> entities, string searchString)
+        public static IEnumerable<string[]> AddTableToView(List<string[]> entities, string searchString)
         {
             var tableHeaders = entities.Take(1).ToList();
             var tableValues = entities.Skip(1).ToList();
