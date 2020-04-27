@@ -5,7 +5,7 @@
 // Author:  Philip Shishov
 
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-namespace DataGate.Web.ViewModels
+namespace DataGate.Web.ViewModels.Entities
 {
     using System.Collections.Generic;
 

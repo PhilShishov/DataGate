@@ -1,5 +1,5 @@
 ﻿// Model class for viewing
-// different entities -
+// different independent entities -
 // funds, subfunds, shareclasses
 
 // Created: 10/2019
