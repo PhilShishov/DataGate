@@ -8,4 +8,14 @@
     <AdditionalFiles Include="..\..\stylecop.json" Link="stylecop.json" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="5.1.0" />
+    <PackageReference Include="itext7" Version="7.1.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\DataGate.Common\DataGate.Common.csproj" />
+  </ItemGroup>
+
 </Project>

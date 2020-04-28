@@ -7,9 +7,9 @@
 namespace DataGate.Services
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.Common;
     using System.Data.SqlClient;
-    using System.Collections.Generic;
 
     // _____________________________________________________________
     public class ReadTableData

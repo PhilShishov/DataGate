@@ -13,6 +13,8 @@ namespace DataGate.Services
     // _____________________________________________________________
     public class CreateModel
     {
+        private const int StartingIndex = 0;
+
         // ________________________________________________________
         //
         // Create a model by reading table data
@@ -28,7 +30,7 @@ namespace DataGate.Services
                 var item = ReadTableData
                     .ReadTableHeader(reader);
 
-                model.Insert(0, item);
+                model.Insert(StartingIndex, item);
 
                 return model;
             }

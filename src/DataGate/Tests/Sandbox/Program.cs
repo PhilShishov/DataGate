@@ -26,6 +26,8 @@
         public static int Main(string[] args)
         {
             Console.WriteLine($"{typeof(Program).Namespace} ({string.Join(" ", args)}) starts working...");
+            string imageFilePath = Path.GetFullPath("./images/Logo_Pharus_small.jpg");
+            Console.WriteLine(imageFilePath);
             var serviceCollection = new ServiceCollection();
             ConfigureServices(serviceCollection);
             IServiceProvider serviceProvider = serviceCollection.BuildServiceProvider(true);
