@@ -13,7 +13,7 @@ namespace DataGate.Web.Utilities
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-
+    using DataGate.Common;
     using iText.IO.Image;
     using iText.Kernel.Geom;
     using iText.Kernel.Pdf;
@@ -31,10 +31,12 @@ namespace DataGate.Web.Utilities
     {
         // ---------------------------------------------------------
         //
-        // Names for different files when created
+        // Names for files when created
         private const string ActiveFunds = "ActiveFunds";
         private const string ActiveSubFunds = "ActiveSubFunds";
         private const string ActiveShareClasses = "ActiveShareClasses";
+
+        private const string ModelTypeNameToBeChecked = "EntitiesViewModel";
 
         // ________________________________________________________
         //
@@ -78,12 +80,13 @@ namespace DataGate.Web.Utilities
                 package.Save();
 
                 MemoryStream stream = new MemoryStream();
+
                 package.SaveAs(stream);
                 stream.Position = 0;
 
-                fileStreamResult = new FileStreamResult(stream, "application/excel")
+                fileStreamResult = new FileStreamResult(stream, GlobalConstants.ExcelStreamMimeType)
                 {
-                    FileDownloadName = $"{correctTypeName}.xlsx",
+                    FileDownloadName = $"{correctTypeName}{GlobalConstants.ExcelFileExtension}",
                 };
 
                 return fileStreamResult;
@@ -98,7 +101,6 @@ namespace DataGate.Web.Utilities
         public static FileStreamResult ExtractTableAsPdf(
                                                          List<string[]> entities,
                                                          DateTime? chosenDate,
-                                                         IWebHostEnvironment hostingEnvironment,
                                                          string typeName,
                                                          string controllerName)
         {
@@ -120,7 +122,7 @@ namespace DataGate.Web.Utilities
             // ShareClasses table format settings
             Document document = new Document(pdfDoc);
 
-            string sfile = hostingEnvironment.WebRootPath + "/images/Logo_Pharus_small.jpg";
+            string sfile = "~/images/Logo_Pharus_small.jpg";
             ImageData data = ImageDataFactory.Create(sfile);
 
             Image img = new Image(data);
@@ -134,15 +136,15 @@ namespace DataGate.Web.Utilities
             {
                 for (int col = 0; col < entities[0].Length; col++)
                 {
-                    string s = entities[row][col];
-                    if (s == null)
+                    string input = entities[row][col];
+                    if (input == null)
                     {
-                        s = " ";
+                        input = " ";
                     }
 
                     Cell cell = new Cell();
-                    cell.Add(new Paragraph(s));
-                    cell.SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER);
+                    cell.Add(new Paragraph(input));
+                    cell.SetTextAlignment(TextAlignment.CENTER);
                     cell.SetBold();
 
                     table.AddHeaderCell(cell);
@@ -153,28 +155,30 @@ namespace DataGate.Web.Utilities
             {
                 for (int col = 0; col < entities[0].Length; col++)
                 {
-                    string s = entities[row][col];
-                    if (s == null)
+                    string input = entities[row][col];
+                    if (input == null)
                     {
-                        s = " ";
+                        input = " ";
                     }
 
-                    table.AddCell(new Paragraph(s));
+                    table.AddCell(new Paragraph(input));
                 }
             }
 
             document.Add(img);
             document.Add(new Paragraph(" "));
-            document.Add(new Paragraph($"List of {correctTypeName} as of " + chosenDate?.ToString("dd MMMM yyyy")));
+            document.Add(new Paragraph($"List of {correctTypeName} as of " + chosenDate?.ToString(GlobalConstants.PDfDateTimeFormatDisplay)));
             document.Add(new Paragraph(" "));
             document.Add(table);
             document.Close();
 
             stream.Position = 0;
-            fileStreamResult = new FileStreamResult(stream, "application/pdf")
+            fileStreamResult = new FileStreamResult(stream, GlobalConstants.PdfStreamMimeType)
             {
-                FileDownloadName = $"{correctTypeName}.pdf",
+                FileDownloadName = $"{correctTypeName}{GlobalConstants.PdfFileExtension}",
             };
+            stream.Dispose();
+
             return fileStreamResult;
         }
 
@@ -188,15 +192,15 @@ namespace DataGate.Web.Utilities
         {
             string correctTypeName = string.Empty;
 
-            if (controllerName == "Funds")
+            if (controllerName == GlobalConstants.FundsControllerName)
             {
-                correctTypeName = typeName == "EntitiesViewModel" ? ActiveFunds : ActiveSubFunds;
+                correctTypeName = typeName == ModelTypeNameToBeChecked ? ActiveFunds : ActiveSubFunds;
             }
-            else if (controllerName == "SubFunds")
+            else if (controllerName == GlobalConstants.SubFundsControllerName)
             {
-                correctTypeName = typeName == "EntitiesViewModel" ? ActiveSubFunds : ActiveShareClasses;
+                correctTypeName = typeName == ModelTypeNameToBeChecked ? ActiveSubFunds : ActiveShareClasses;
             }
-            else if (controllerName == "ShareClasses")
+            else if (controllerName == GlobalConstants.ShareClassesControllerName)
             {
                 correctTypeName = ActiveShareClasses;
             }

@@ -2,10 +2,10 @@
 {
     using System;
 
-    public interface IEntitiesFileService
+    public interface IFileSystemService
     {
         string LoadEntityFileToDisplay(
-                            int entityId, 
+                            int entityId,
                             string chosenDate,
                             string controllerName);
 
