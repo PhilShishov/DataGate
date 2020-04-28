@@ -1,6 +1,7 @@
 ﻿namespace DataGate.Web.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
     using System.Linq;
@@ -18,6 +19,7 @@
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Routing;
+    using Microsoft.Extensions.Caching.Memory;
 
     [Authorize]
     public class FundsController : Controller
@@ -25,6 +27,7 @@
         // Fund constants
         private const int IndexEntityNameInSQLTable = 3;
 
+        private IMemoryCache cache;
         private readonly Pharus_vFinaleDbContext context;
         private readonly IFundsService fundsService;
         //private readonly IFundsSelectListService fundsSelectListService;
@@ -38,6 +41,7 @@
             //IAgreementsSelectListService agreementsSelectListService,
             IFileSystemService entitiesFileService,
             IWebHostEnvironment hostingEnvironment,
+            IMemoryCache memoryCache,
             Pharus_vFinaleDbContext context)
         {
             this.context = context;
@@ -45,6 +49,7 @@
             //this.fundsSelectListService = fundsSelectListService;
             //this.agreementsSelectListService = agreementsSelectListService;
             this.entitiesFileService = entitiesFileService;
+            this.cache = memoryCache;
             this._environment = hostingEnvironment;
         }
 
@@ -62,7 +67,6 @@
                 Entities = this.fundsService.GetAllActiveFunds().ToList(),
             };
 
-            this.ModelState.Clear();
             return this.View(model);
         }
 
@@ -92,7 +96,7 @@
         }
 
         [HttpPost]
-        public IActionResult All(EntitiesViewModel model)
+        public IActionResult All(EntitiesViewModel model, List<string[]> entities)
         {
             // ---------------------------------------------------------
             //
@@ -144,18 +148,13 @@
                 model.Entities = CreateTableView.AddTableToView(model.Entities.ToList(), model.SelectTerm.ToLower());
             }
 
-            if (model.SearchTerm != null)
-            {
-                model.Entities = CreateTableView.AddTableToView(model.Entities.ToList(), model.SearchTerm.ToLower());
-            }
-
             if (model.Entities != null)
             {
                 return this.View(model);
             }
 
             this.ModelState.Clear();
-            return this.RedirectToPage(GlobalConstants.FundAllUrl);
+            return this.View();
         }
 
         [HttpPost]

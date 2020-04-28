@@ -13,7 +13,9 @@ namespace DataGate.Web.Utilities
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+
     using DataGate.Common;
+
     using iText.IO.Image;
     using iText.Kernel.Geom;
     using iText.Kernel.Pdf;
@@ -21,7 +23,6 @@ namespace DataGate.Web.Utilities
     using iText.Layout.Element;
     using iText.Layout.Properties;
 
-    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
 
     using OfficeOpenXml;
@@ -122,8 +123,8 @@ namespace DataGate.Web.Utilities
             // ShareClasses table format settings
             Document document = new Document(pdfDoc);
 
-            string sfile = "~/images/Logo_Pharus_small.jpg";
-            ImageData data = ImageDataFactory.Create(sfile);
+            string imageFilePath = @".\wwwroot\images\Logo_Pharus_small.jpg";
+            ImageData data = ImageDataFactory.Create(imageFilePath);
 
             Image img = new Image(data);
 
@@ -177,7 +178,6 @@ namespace DataGate.Web.Utilities
             {
                 FileDownloadName = $"{correctTypeName}{GlobalConstants.PdfFileExtension}",
             };
-            stream.Dispose();
 
             return fileStreamResult;
         }
