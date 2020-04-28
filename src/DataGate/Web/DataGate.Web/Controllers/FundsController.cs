@@ -54,8 +54,9 @@
                 ChosenDate = DateTime.Today.ToString(GlobalConstants.DateTimeFormatDisplay),
                 EntitiesHeadersForColumnSelection = this.fundsService
                                                         .GetAllActiveFunds()
-                                                        .Take(1),
-                Entities = this.fundsService.GetAllActiveFunds(),
+                                                        .Take(1)
+                                                        .ToList(),
+                Entities = this.fundsService.GetAllActiveFunds().ToList(),
             };
 
             this.ModelState.Clear();
@@ -102,7 +103,7 @@
 
             bool isInSelectionMode = false;
 
-            if (model.SelectedColumns != null && model.SelectedColumns.Count > 0)
+            if (model.SelectedColumns != null && model.SelectedColumns.ToList().Count > 0)
             {
                 isInSelectionMode = true;
             }
@@ -111,29 +112,29 @@
 
             if (model.ChosenDate != null)
             {
-                chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+                chosenDate = DateTime.ParseExact(model.ChosenDate, GlobalConstants.DateTimeFormatDisplay, CultureInfo.InvariantCulture);
             }
 
             if (isInSelectionMode)
             {
                 if (model.IsActive)
                 {
-                    CallActiveEntitiesWithSelectedColumns(model, chosenDate);
+                    this.CallActiveEntitiesWithSelectedColumns(model, chosenDate);
                 }
                 else if (!model.IsActive)
                 {
-                    CallAllEntitiesWithSelectedColumns(model, chosenDate);
+                    this.CallAllEntitiesWithSelectedColumns(model, chosenDate);
                 }
             }
             else if (!isInSelectionMode)
             {
                 if (model.IsActive)
                 {
-                    model.Entities = this.fundsService.GetAllActiveFunds(chosenDate);
+                    model.Entities = this.fundsService.GetAllActiveFunds(chosenDate).ToList();
                 }
                 else if (!model.IsActive)
                 {
-                    model.Entities = this.fundsService.GetAllFunds(chosenDate);
+                    model.Entities = this.fundsService.GetAllFunds(chosenDate).ToList();
                 }
             }
 
@@ -153,7 +154,7 @@
             }
 
             this.ModelState.Clear();
-            return this.RedirectToPage("/Funds/All");
+            return this.RedirectToPage(GlobalConstants.FundAllUrl);
         }
 
         [HttpPost]
@@ -200,9 +201,9 @@
                 EntityId = entityId,
             };
 
-            SetModelValuesForSpecificView(viewModel);
+            this.SetModelValuesForSpecificView(viewModel);
 
-            HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
+            this.HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
 
             this.ModelState.Clear();
             return this.View(viewModel);
@@ -684,7 +685,8 @@
             model.Entities = this.fundsService.GetAllFundsWithSelectedViewAndDate(
                                                                         model.PreSelectedColumns,
                                                                         model.SelectedColumns,
-                                                                        chosenDate);
+                                                                        chosenDate)
+                .ToList();
         }
 
         private void CallActiveEntitiesWithSelectedColumns(EntitiesViewModel model, DateTime? chosenDate)
@@ -692,7 +694,8 @@
             model.Entities = this.fundsService.GetAllActiveFundsWithSelectedViewAndDate(
                                                                         model.PreSelectedColumns,
                                                                         model.SelectedColumns,
-                                                                        chosenDate);
+                                                                        chosenDate)
+                .ToList();
         }
 
         private void CallEntitySubEntitiesWithSelectedColumns(SpecificEntityViewModel model, DateTime chosenDate)
@@ -701,7 +704,8 @@
                                                                                 model.PreSelectedColumns,
                                                                                 model.SelectedColumns,
                                                                                 chosenDate,
-                                                                                model.EntityId);
+                                                                                model.EntityId)
+                .ToList();
         }
 
         private void SetModelValuesForSpecificView(SpecificEntityViewModel model)
@@ -712,23 +716,23 @@
 
             model.Entity = this.fundsService.GetFundWithDateById(date, entityId).ToList();
             model.EntityDistinctDocuments = this.fundsService.
-                GetDistinctFundDocuments(date, entityId);
-            model.EntityDistinctAgreements = this.fundsService.GetDistinctFundAgreements(date, entityId);
+                GetDistinctFundDocuments(date, entityId).ToList();
+            model.EntityDistinctAgreements = this.fundsService.GetDistinctFundAgreements(date, entityId).ToList();
 
-            model.EntitySubEntities = this.fundsService.GetFund_SubFunds(date, entityId);
+            model.EntitySubEntities = this.fundsService.GetFund_SubFunds(date, entityId).ToList();
             model.EntitiesHeadersForColumnSelection = this.fundsService
                                                                 .GetFund_SubFunds(date, entityId)
                                                                 .Take(1)
                                                                 .ToList();
-            model.EntityTimeline = this.fundsService.GetFundTimeline(entityId);
-            model.EntityDocuments = this.fundsService.GetAllFundDocuments(entityId);
-            model.EntityAgreements = this.fundsService.GetAllFundAgreements(date, entityId);
+            model.EntityTimeline = this.fundsService.GetFundTimeline(entityId).ToList();
+            model.EntityDocuments = this.fundsService.GetAllFundDocuments(entityId).ToList();
+            model.EntityAgreements = this.fundsService.GetAllFundAgreements(date, entityId).ToList();
 
-            model.StartConnection = DateTime.ParseExact(model.Entity[1][0], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            model.StartConnection = DateTime.ParseExact(model.Entity.ToList()[1][0], "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
             if (model.EndConnection != null)
             {
-                model.EndConnection = DateTime.ParseExact(model.Entity[1][1], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                model.EndConnection = DateTime.ParseExact(model.Entity.ToList()[1][1], "dd/MM/yyyy", CultureInfo.InvariantCulture);
             }
 
             //this.ViewData["ProspectusFileTypes"] = this.fundsSelectListService.GetAllProspectusFileTypes();

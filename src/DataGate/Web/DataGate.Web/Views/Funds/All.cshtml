@@ -5,12 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@section Styles{
-    <link type="text/css" rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link type="text/css" rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" />
-    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" />
-}
-
 <form asp-controller="Funds"
       class="justify-content-between"
       method="post"
@@ -36,14 +30,11 @@
 </form>
 
 @section Scripts{
-    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-            
-    <script type="text/javascript" src="~/js/submitForm.js"></script>
-    <script type="text/javascript" src="~/js/buttonRedirect.js"></script>
-    <script type="text/javascript" src="~/js/multiselect.js"></script>
-    <script type="text/javascript" src="~/js/select2/select2-entities.js"></script>
-    <script type="text/javascript" src="~/lib/jquery/double-scroll/jquery.doubleScroll.js"></script>
+    <script type="text/javascript" src="~/js/submitForm.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/buttonRedirect.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/multiselect.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/select2/select2-entities.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/double-scroll/jquery.doubleScroll.js" asp-append-version="true"></script>
 
     <script>
         window.onload = () => {
@@ -70,7 +61,7 @@
 
             // ________________________________________________________
             //
-            // Double top scroll for table
+            // Double top scroll for wide table
 
             $('.double-scroll').doubleScroll();
             $('#tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });

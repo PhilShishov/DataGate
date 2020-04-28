@@ -36,5 +36,9 @@ namespace DataGate.Common
         // SQL Queries
         public const string SqlDateTimeFormatRequired = "yyyyMMdd";
         public const string SqlItemFormatRequired = "[{0}]";
+
+        // Urls
+        public const string FundAllUrl = "/Funds/All";
+
     }
 }

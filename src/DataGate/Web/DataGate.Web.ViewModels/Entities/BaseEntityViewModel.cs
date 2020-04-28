@@ -11,7 +11,7 @@ namespace DataGate.Web.ViewModels.Entities
 
     public abstract class BaseEntityViewModel
     {
-        public IEnumerable<string[]> EntitiesHeadersForColumnSelection { get; set; }
+        public List<string[]> EntitiesHeadersForColumnSelection { get; set; }
 
         public string ChosenDate { get; set; }
 
