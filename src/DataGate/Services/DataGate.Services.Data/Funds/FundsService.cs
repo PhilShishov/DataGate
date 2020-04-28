@@ -71,7 +71,7 @@ namespace DataGate.Services.Data.Funds
         }
 
         public IEnumerable<string[]> GetAllFundsWithSelectedViewAndDate(
-                                                                    IEnumerable<string> preSelectedColumns,
+                                                                    List<string> preSelectedColumns,
                                                                     IEnumerable<string> selectedColumns,
                                                                     DateTime? chosenDate)
         {
@@ -79,7 +79,7 @@ namespace DataGate.Services.Data.Funds
         }
 
         public IEnumerable<string[]> GetAllActiveFundsWithSelectedViewAndDate(
-                                                                            IEnumerable<string> preSelectedColumns,
+                                                                            List<string> preSelectedColumns,
                                                                             IEnumerable<string> selectedColumns,
                                                                             DateTime? chosenDate)
         {
@@ -125,7 +125,7 @@ namespace DataGate.Services.Data.Funds
         }
 
         public IEnumerable<string[]> GetFund_SubFundsWithSelectedViewAndDate(
-                                                                    IEnumerable<string> preSelectedColumns,
+                                                                    List<string> preSelectedColumns,
                                                                     IEnumerable<string> selectedColumns,
                                                                     DateTime? chosenDate,
                                                                     int id)
@@ -348,7 +348,7 @@ namespace DataGate.Services.Data.Funds
         }
 
         private IEnumerable<string[]> ExecuteSqlQueryWithSelection(
-                                                                    ref IEnumerable<string> preSelectedColumns,
+                                                                    ref List<string> preSelectedColumns,
                                                                     IEnumerable<string> selectedColumns,
                                                                     DateTime? chosenDate,
                                                                     string function)
@@ -358,7 +358,7 @@ namespace DataGate.Services.Data.Funds
                 SqlCommand command = this.SetUpSqlConnectionCommand(connection);
 
                 // Prepare items for DB query with []
-                preSelectedColumns.ToList().AddRange(selectedColumns);
+                preSelectedColumns.AddRange(selectedColumns);
                 preSelectedColumns = preSelectedColumns.Select(col => string.Format(GlobalConstants.SqlItemFormatRequired, col)).ToList();
 
                 if (chosenDate == null)
