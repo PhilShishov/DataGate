@@ -18,6 +18,7 @@
                 .Configure<CookiePolicyOptions>(options =>
                 {
                     options.CheckConsentNeeded = context => true;
+                    options.Secure = CookieSecurePolicy.Always;
                     options.MinimumSameSitePolicy = SameSiteMode.Lax;
                     options.ConsentCookie.Name = ".AspNetCore.ConsentCookie";
                 });

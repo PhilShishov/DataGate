@@ -2,6 +2,7 @@
 {
     using System.Diagnostics;
 
+    using DataGate.Common;
     using DataGate.Web.ViewModels;
 
     using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,7 @@
         {
             if (this.User.Identity.IsAuthenticated)
             {
-                return this.Redirect("/User/Index");
+                return this.Redirect(GlobalConstants.FundAllUrl);
             }
 
             return this.View();

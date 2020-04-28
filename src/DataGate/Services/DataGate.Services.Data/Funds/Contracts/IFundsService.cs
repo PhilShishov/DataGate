@@ -12,25 +12,25 @@
         IEnumerable<string[]> GetAllActiveFunds(DateTime? chosenDate);
 
         IEnumerable<string[]> GetAllFundsWithSelectedViewAndDate(
-                        List<string> preSelectedColumns, 
-                        List<string> selectedColumns, 
+                        IEnumerable<string> preSelectedColumns,
+                        IEnumerable<string> selectedColumns,
                         DateTime? chosenDate);
 
         IEnumerable<string[]> GetAllActiveFundsWithSelectedViewAndDate(
-                        List<string> preSelectedColumns, 
-                        List<string> selectedColumns, 
+                        IEnumerable<string> preSelectedColumns,
+                        IEnumerable<string> selectedColumns,
                         DateTime? chosenDate);
 
-        //IEnumerable<string> GetAllFundsNames();
+        IEnumerable<T> GetAllFundsNames<T>();
 
         IEnumerable<string[]> GetFundWithDateById(DateTime? chosenDate, int id);
 
         IEnumerable<string[]> GetFund_SubFunds(DateTime? chosenDate, int id);
 
         IEnumerable<string[]> GetFund_SubFundsWithSelectedViewAndDate(
-                        List<string> preSelectedColumns, 
-                        List<string> selectedColumns, 
-                        DateTime? chosenDate, 
+                        IEnumerable<string> preSelectedColumns,
+                        IEnumerable<string> selectedColumns,
+                        DateTime? chosenDate,
                         int id);
 
         IEnumerable<string[]> GetFundTimeline(int id);

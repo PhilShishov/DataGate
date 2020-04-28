@@ -14,13 +14,19 @@ namespace DataGate.Services.Data.Funds
     using System.Linq;
 
     using DataGate.Common;
+    using DataGate.Data.Common.Repositories;
+    using DataGate.Data.Models.Entities;
     using DataGate.Services.Data.Funds.Contracts;
+    using DataGate.Services.Mapping;
 
     using Microsoft.Extensions.Configuration;
 
     // _____________________________________________________________
     public class FundsService : IFundsService
     {
+        // ________________________________________________________
+        //
+        // Table functions names as in DB
         private readonly string defaultDateTimeWithSqlConversion = DateTime.Today.ToString("yyyyMMdd");
         private readonly string sqlFunctionAllFund = "fn_all_fund";
         private readonly string sqlFunctionAllActiveFund = "fn_active_fund";
@@ -33,14 +39,16 @@ namespace DataGate.Services.Data.Funds
         private readonly string sqlFunctionSubFundsForFund = "ActiveSubFundsForSpecificFundAtDate";
 
         private readonly IConfiguration configuration;
+        private readonly IRepository<TbHistoryFund> fundsRepository;
 
         // ________________________________________________________
         //
         // Constructor: initialize with DI IConfiguration
         // to retrieve appsettings.json connection string
-        public FundsService(IConfiguration config)
+        public FundsService(IConfiguration config, IRepository<TbHistoryFund> fundsRepository)
         {
             this.configuration = config;
+            this.fundsRepository = fundsRepository;
         }
 
         // ________________________________________________________
@@ -63,27 +71,33 @@ namespace DataGate.Services.Data.Funds
         }
 
         public IEnumerable<string[]> GetAllFundsWithSelectedViewAndDate(
-                                                                    List<string> preSelectedColumns,
-                                                                    List<string> selectedColumns,
+                                                                    IEnumerable<string> preSelectedColumns,
+                                                                    IEnumerable<string> selectedColumns,
                                                                     DateTime? chosenDate)
         {
             return this.ExecuteSqlQueryWithSelection(ref preSelectedColumns, selectedColumns, chosenDate, this.sqlFunctionAllFund);
         }
 
         public IEnumerable<string[]> GetAllActiveFundsWithSelectedViewAndDate(
-                                                                            List<string> preSelectedColumns,
-                                                                            List<string> selectedColumns,
+                                                                            IEnumerable<string> preSelectedColumns,
+                                                                            IEnumerable<string> selectedColumns,
                                                                             DateTime? chosenDate)
         {
             return this.ExecuteSqlQueryWithSelection(ref preSelectedColumns, selectedColumns, chosenDate, this.sqlFunctionAllActiveFund);
         }
 
-        //public List<string> GetAllFundsNames()
-        //{
-        //    return this.context.TbHistoryFund
-        //        .Select(f => f.FOfficialFundName)
-        //        .ToList();
-        //}
+        public IEnumerable<T> GetAllFundsNames<T>()
+        {
+            return this.fundsRepository
+                .All()
+                .Select(f => f.FOfficialFundName)
+                .To<T>()
+                .ToList();
+
+            //return this.context.TbHistoryFund
+            //   .Select(f => f.FOfficialFundName)
+            //   .ToList();
+        }
 
         public IEnumerable<string[]> GetFundWithDateById(DateTime? chosenDate, int id)
         {
@@ -111,8 +125,8 @@ namespace DataGate.Services.Data.Funds
         }
 
         public IEnumerable<string[]> GetFund_SubFundsWithSelectedViewAndDate(
-                                                                    List<string> preSelectedColumns,
-                                                                    List<string> selectedColumns,
+                                                                    IEnumerable<string> preSelectedColumns,
+                                                                    IEnumerable<string> selectedColumns,
                                                                     DateTime? chosenDate,
                                                                     int id)
         {
@@ -121,7 +135,7 @@ namespace DataGate.Services.Data.Funds
                 SqlCommand command = this.SetUpSqlConnectionCommand(connection);
 
                 // Prepare items for DB query with []
-                preSelectedColumns.AddRange(selectedColumns);
+                preSelectedColumns.ToList().AddRange(selectedColumns);
                 preSelectedColumns = preSelectedColumns.Select(c => string.Format(GlobalConstants.SqlItemFormatRequired, c)).ToList();
 
                 if (chosenDate == null)
@@ -197,19 +211,20 @@ namespace DataGate.Services.Data.Funds
                 "@f_legalForm, @f_legalType, @f_legal_vehicle, @f_companyType, @f_tinNumber, " +
                 "@comment, @commentTitle";
 
-            NewMethod(fundId, initialDate, fStatusId, regNumber, fundName, leiCode, cssfCode, faCode, depCode, taCode, fLegalFormId, fLegalTypeId, fLegalVehicleId, fCompanyTypeId, tinNumber, comment, commentTitle, query);
-        }
-
-        private void NewMethod(int fundId, string initialDate, int fStatusId, string regNumber, string fundName, string leiCode, string cssfCode, string faCode, string depCode, string taCode, int fLegalFormId, int fLegalTypeId, int fLegalVehicleId, int fCompanyTypeId, string tinNumber, string comment, string commentTitle, string query)
-        {
             using (SqlConnection connection = new SqlConnection())
             {
-                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.ConnectionString = this.configuration.GetConnectionString(GlobalConstants.DataGatevFinaleConnection);
                 using (SqlCommand command = new SqlCommand(query))
                 {
                     command.Parameters.AddRange(new[]
                     {
                         new SqlParameter("@f_id", SqlDbType.Int) { Value = fundId },
+                        new SqlParameter("@comment", SqlDbType.NVarChar) { Value = comment },
+                        new SqlParameter("@commentTitle", SqlDbType.NVarChar) { Value = commentTitle },
+                    });
+
+                    command.Parameters.AddRange(new[]
+                    {
                         new SqlParameter("@f_initialDate", SqlDbType.NVarChar) { Value = initialDate },
                         new SqlParameter("@f_status", SqlDbType.Int) { Value = fStatusId },
                         new SqlParameter("@f_registrationNumber", SqlDbType.NVarChar) { Value = regNumber },
@@ -225,29 +240,9 @@ namespace DataGate.Services.Data.Funds
                         new SqlParameter("@f_legal_vehicle", SqlDbType.Int) { Value = fLegalVehicleId },
                         new SqlParameter("@f_companyType", SqlDbType.Int) { Value = fCompanyTypeId },
                         new SqlParameter("@f_tinNumber", SqlDbType.NVarChar) { Value = tinNumber },
-                        new SqlParameter("@comment", SqlDbType.NVarChar) { Value = comment },
-                        new SqlParameter("@commentTitle", SqlDbType.NVarChar) { Value = commentTitle },
                     });
 
-                    foreach (SqlParameter parameter in command.Parameters)
-                    {
-                        if (parameter.Value == null)
-                        {
-                            parameter.Value = DBNull.Value;
-                        }
-                    }
-
-                    command.Connection = connection;
-
-                    try
-                    {
-                        command.Connection.Open();
-                        command.ExecuteScalar();
-                    }
-                    catch (SqlException sx)
-                    {
-                        Console.WriteLine(sx.Message);
-                    }
+                    ExecuteScalarSqlConnectionCommand(connection, command);
                 }
             }
         }
@@ -277,13 +272,14 @@ namespace DataGate.Services.Data.Funds
 
             using (SqlConnection connection = new SqlConnection())
             {
-                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.ConnectionString = this.configuration.GetConnectionString(GlobalConstants.DataGatevFinaleConnection);
                 using (SqlCommand command = new SqlCommand(query))
                 {
+                    command.Parameters.Add(new SqlParameter("@f_endDate", SqlDbType.NVarChar) { Value = endDate });
+
                     command.Parameters.AddRange(new[]
                     {
                         new SqlParameter("@f_initialDate", SqlDbType.NVarChar) { Value = initialDate},
-                        new SqlParameter("@f_endDate", SqlDbType.NVarChar) { Value = endDate},
                         new SqlParameter("@f_status", SqlDbType.Int) { Value = fStatusId },
                         new SqlParameter("@f_registrationNumber", SqlDbType.NVarChar) { Value = regNumber },
                         new SqlParameter("@f_officialFundName", SqlDbType.NVarChar) { Value = fundName },
@@ -299,25 +295,35 @@ namespace DataGate.Services.Data.Funds
                         new SqlParameter("@f_tinNumber", SqlDbType.NVarChar) { Value = tinNumber },
                     });
 
-                    foreach (SqlParameter parameter in command.Parameters)
-                    {
-                        if (parameter.Value == null)
-                        {
-                            parameter.Value = DBNull.Value;
-                        }
-                    }
+                    ExecuteScalarSqlConnectionCommand(connection, command);
+                }
+            }
+        }
 
-                    command.Connection = connection;
+        private static void ExecuteScalarSqlConnectionCommand(SqlConnection connection, SqlCommand command)
+        {
+            SetUpSqlParametersForDB(command);
 
-                    try
-                    {
-                        command.Connection.Open();
-                        command.ExecuteScalar();
-                    }
-                    catch (SqlException sx)
-                    {
-                        Console.WriteLine(sx.Message);
-                    }
+            command.Connection = connection;
+
+            try
+            {
+                command.Connection.Open();
+                command.ExecuteScalar();
+            }
+            catch (SqlException sx)
+            {
+                Console.WriteLine(sx.Message);
+            }
+        }
+
+        private static void SetUpSqlParametersForDB(SqlCommand command)
+        {
+            foreach (SqlParameter parameter in command.Parameters)
+            {
+                if (parameter.Value == null)
+                {
+                    parameter.Value = DBNull.Value;
                 }
             }
         }
@@ -342,8 +348,8 @@ namespace DataGate.Services.Data.Funds
         }
 
         private IEnumerable<string[]> ExecuteSqlQueryWithSelection(
-                                                                    ref List<string> preSelectedColumns,
-                                                                    List<string> selectedColumns,
+                                                                    ref IEnumerable<string> preSelectedColumns,
+                                                                    IEnumerable<string> selectedColumns,
                                                                     DateTime? chosenDate,
                                                                     string function)
         {
@@ -352,7 +358,7 @@ namespace DataGate.Services.Data.Funds
                 SqlCommand command = this.SetUpSqlConnectionCommand(connection);
 
                 // Prepare items for DB query with []
-                preSelectedColumns.AddRange(selectedColumns);
+                preSelectedColumns.ToList().AddRange(selectedColumns);
                 preSelectedColumns = preSelectedColumns.Select(col => string.Format(GlobalConstants.SqlItemFormatRequired, col)).ToList();
 
                 if (chosenDate == null)

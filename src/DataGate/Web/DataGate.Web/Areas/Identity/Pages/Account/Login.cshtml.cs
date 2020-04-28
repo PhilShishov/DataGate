@@ -19,6 +19,7 @@
     public class LoginModel : PageModel
     {
         private const string UserIndexUrl = "/User/Index";
+
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly ILogger<LoginModel> logger;
@@ -77,7 +78,7 @@
                 if (result.Succeeded)
                 {
                     this.logger.LogInformation("User logged in.");
-                    return this.LocalRedirect(returnUrl);
+                    return this.Redirect(GlobalConstants.FundAllUrl);
                 }
 
                 if (result.RequiresTwoFactor)
