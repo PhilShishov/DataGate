@@ -22,6 +22,9 @@
     [Authorize]
     public class FundsController : Controller
     {
+        // Fund constants
+        private const int IndexEntityNameInSQLTable = 3;
+
         private readonly Pharus_vFinaleDbContext context;
         private readonly IFundsService fundsService;
         //private readonly IFundsSelectListService fundsSelectListService;
@@ -65,26 +68,24 @@
 
         public JsonResult AutoCompleteFundList(string selectTerm)
         {
-            var result = this.context
-                .TbHistoryFund
-                .GroupBy(hf => hf.FOfficialFundName)
-                .Select(hf => hf.FirstOrDefault())
+            var result = this.fundsService
+                .GetAllFunds(null)
+                .Skip(1)
                 .ToList();
 
             if (selectTerm != null)
             {
-                result = this.context
-                    .TbHistoryFund
-                    .Where(hf => hf.FOfficialFundName.Contains(selectTerm))
-                    .GroupBy(hf => hf.FOfficialFundName)
-                    .Select(hf => hf.FirstOrDefault())
+                result = result
+                    .Where(f => f[IndexEntityNameInSQLTable]
+                        .ToLower()
+                        .Contains(selectTerm.ToLower()))
                     .ToList();
             }
 
-            var modifiedData = result.Select(hf => new
+            var modifiedData = result.Select(f => new
             {
-                id = hf.FOfficialFundName,
-                text = hf.FOfficialFundName,
+                id = f[IndexEntityNameInSQLTable],
+                text = f[IndexEntityNameInSQLTable],
             });
 
             return this.Json(modifiedData);

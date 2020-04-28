@@ -40,5 +40,6 @@ namespace DataGate.Common
         // Urls
         public const string FundAllUrl = "/Funds/All";
 
+        // Entities
     }
 }
