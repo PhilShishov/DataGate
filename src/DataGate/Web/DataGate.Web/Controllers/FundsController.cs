@@ -29,14 +29,14 @@
         private readonly IFundsService fundsService;
         //private readonly IFundsSelectListService fundsSelectListService;
         //private readonly IAgreementsSelectListService agreementsSelectListService;
-        private readonly IEntitiesFileService entitiesFileService;
+        private readonly IFileSystemService entitiesFileService;
         private readonly IWebHostEnvironment _environment;
 
         public FundsController(
             IFundsService fundsService,
             //IFundsSelectListService fundsSelectListService,
             //IAgreementsSelectListService agreementsSelectListService,
-            IEntitiesFileService entitiesFileService,
+            IFileSystemService entitiesFileService,
             IWebHostEnvironment hostingEnvironment,
             Pharus_vFinaleDbContext context)
         {
@@ -159,12 +159,12 @@
         }
 
         [HttpPost]
-        public FileStreamResult ExtractExcelEntities(EntitiesViewModel model)
+        public FileStreamResult GenerateExcelReport(EntitiesViewModel model)
         {
             FileStreamResult fileStreamResult = null;
 
             string typeName = model.GetType().Name;
-            string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+            string controllerName = this.ControllerContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
 
             if (this.HttpContext.Request.Form.ContainsKey("extract_Excel"))
             {
@@ -175,18 +175,18 @@
         }
 
         [HttpPost]
-        public FileStreamResult ExtractPdfEntities(EntitiesViewModel model)
+        public FileStreamResult GeneratePdfReport(EntitiesViewModel model)
         {
             FileStreamResult fileStreamResult = null;
 
-            var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            var chosenDate = DateTime.ParseExact(model.ChosenDate, GlobalConstants.DateTimeFormatDisplay, CultureInfo.InvariantCulture);
             string typeName = model.GetType().Name;
-            string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+            string controllerName = this.ControllerContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
 
             if (this.HttpContext.Request.Form.ContainsKey("extract_Pdf"))
             {
                 fileStreamResult = ExtractTable
-                    .ExtractTableAsPdf(model.Entities.ToList(), chosenDate, this._environment, typeName, controllerName);
+                    .ExtractTableAsPdf(model.Entities.ToList(), chosenDate, typeName, controllerName);
             }
 
             return fileStreamResult;

@@ -7,6 +7,11 @@ namespace DataGate.Common
         // Application Constants
         public const string SystemName = "DataGate";
         public const string DataGateFooterDisplay = "- Pharus Management Lux SA 16, Avenue de la Gare L- 1610 Luxembourg T. +352 28 55 69 - 1";
+        public const string ControllerRouteDataValue = "controller";
+        public const string FundsControllerName = "Funds";
+        public const string SubFundsControllerName = "SubFunds";
+        public const string ShareClassesControllerName = "ShareClasses";
+        public const int MaxAdminCount = 3;
 
         // Keys
         public const string InfoKey = "info";
@@ -23,10 +28,6 @@ namespace DataGate.Common
         public const string InvestmentRoleName = "Investement";
         public const string ComplianceRoleName = "Compliance";
 
-        public const int MaxAdminCount = 3;
-        public const string LastLoginTimeDisplay = "dd.MM.yyyy HH:mm";
-        public const string DateTimeFormatDisplay = "yyyy-MM-dd";
-
         // Email
         public const string ConfirmEmailSubject = "Confirm your email";
         public const string EmailConfirmationMessage = "Please confirm your account by <a href='{0}'>clicking here</a>.";
@@ -34,12 +35,21 @@ namespace DataGate.Common
         public const string PasswordResetMessage = "Please reset your password by <a href='{0}'>clicking here</a>.";
 
         // SQL Queries
-        public const string SqlDateTimeFormatRequired = "yyyyMMdd";
         public const string SqlItemFormatRequired = "[{0}]";
 
         // Urls
         public const string FundAllUrl = "/Funds/All";
 
-        // Entities
+        // Dates
+        public const string LastLoginTimeDisplay = "dd.MM.yyyy HH:mm";
+        public const string DateTimeFormatDisplay = "yyyy-MM-dd";
+        public const string SqlDateTimeFormatRequired = "yyyyMMdd";
+        public const string PDfDateTimeFormatDisplay = "dd MMMM yyyy";
+
+        // Folder names, mime types, formats, file names
+        public const string ExcelFileExtension = ".xlsx";
+        public const string PdfFileExtension = ".pdf";
+        public const string ExcelStreamMimeType = "application/excel";
+        public const string PdfStreamMimeType = "application/pdf";
     }
 }

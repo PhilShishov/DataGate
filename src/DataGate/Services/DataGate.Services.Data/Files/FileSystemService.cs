@@ -8,7 +8,7 @@
 
     using Microsoft.Extensions.Configuration;
 
-    public class EntitiesFileService : IEntitiesFileService
+    public class FileSystemService : IFileSystemService
     {
         private const int fileTypeProspectus = 2;
         private const int fileTypeKiid = 3;
@@ -21,7 +21,7 @@
         //
         // Constructor: initialize with DI IConfiguration
         // to retrieve appsettings.json connection string
-        public EntitiesFileService(IConfiguration config)
+        public FileSystemService(IConfiguration config)
         {
             this.configuration = config;
         }
