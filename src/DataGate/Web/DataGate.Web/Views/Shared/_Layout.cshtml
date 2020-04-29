@@ -68,7 +68,11 @@
                                     Funds<i class="fa fa-caret-down"></i>
                                 </button>
                                 <div id="myDropdown" class="dropdown-container">
-                                    <a class="dropdown-item font-weight-light" href="/Funds/All">List</a>
+                                    <a class="dropdown-item font-weight-light"
+                                       asp-area=""
+                                       asp-route="allFunds">
+                                        List
+                                    </a>
                                     @if (this.User.IsInRole("Admin"))
                                     {
                                         <a class="dropdown-item font-weight-light" href="/Funds/CreateFund">Create</a>
@@ -120,8 +124,7 @@
                     <li class="nav-item mt-3 ml-2">
                         <a class="nav-link nav-link-white active"
                            asp-area=""
-                           asp-controller="Funds"
-                           asp-action="All">Fund Library</a>
+                           asp-route="allFunds">Fund Library</a>
                     </li>
                     <li class="nav-item mt-3 ml-2">
                         <a class="nav-link nav-link-white active"
