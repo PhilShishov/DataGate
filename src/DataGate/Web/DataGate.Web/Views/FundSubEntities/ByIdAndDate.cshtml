@@ -1,19 +1,9 @@
-﻿@model DataGate.Web.ViewModels.Entities.SpecificEntityViewModel
+﻿@using DataGate.Common
+@model DataGate.Web.ViewModels.Entities.SpecificEntityViewModel
 
 @{
+    ViewData["Title"] = GlobalConstants.FundsControllerName;
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
-}
-
-@section Styles{
-    <link type="text/css" rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link type="text/css" rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css" />
-    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" />
-    <style>
-        body {
-            background-image: none;
-        }
-    </style>
 }
 
 <form asp-controller="FundSubEntities"
@@ -23,7 +13,7 @@
     <partial name="SpecificEntity/_Toolbar" />
     <div class="justify-content-between" id="infoAndDocumentsView">
         <partial name="SpecificEntity/_Info" />
-        @*<partial name="SpecificEntity/_Load_Documents" />*@
+        <partial name="SpecificEntity/_Load_Documents" />
     </div>
 
     <hr class="bg-pharus hr-2" />
@@ -60,46 +50,43 @@
 </form>
 
 @*<form asp-controller="FundSubEntities"
-      asp-action="UploadProspectus"
-      method="post"
-      enctype="multipart/form-data">
+          asp-action="UploadProspectus"
+          method="post"
+          enctype="multipart/form-data">
 
-    <partial name="SpecificEntity/_UploadPros" />
-</form>
+        <partial name="SpecificEntity/_UploadPros" />
+    </form>
 
-<form asp-controller="FundSubEntities"
-      asp-action="UploadAgreement"
-      enctype="multipart/form-data">
+    <form asp-controller="FundSubEntities"
+          asp-action="UploadAgreement"
+          enctype="multipart/form-data">
 
-    <input asp-for="EntityId" type="text" hidden>
-    <input asp-for="ChosenDate" type="date" hidden>
+        <input asp-for="EntityId" type="text" hidden>
+        <input asp-for="ChosenDate" type="date" hidden>
 
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <div class="modal"
-         id="upAgrModal"
-         role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body d-grid justify-content-center" id="agrModalBody">
-                    @await Html.PartialAsync("SpecificEntity/_UploadAgr")
+        <div class="modal"
+             id="upAgrModal"
+             role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body d-grid justify-content-center" id="agrModalBody">
+                        @await Html.PartialAsync("SpecificEntity/_UploadAgr")
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</form>*@
+    </form>*@
 
 @section Scripts{
     @await Html.PartialAsync("_ValidationScriptsPartial")
-    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-
-    <script type="text/javascript" src="~/js/multiselect.js"></script>
-    <script type="text/javascript" src="~/js/setDates.js"></script>
-    <script type="text/javascript" src="~/js/delete/deleteAgreement.js"></script>
-    <script type="text/javascript" src="~/js/select2/select2-entity-subentity.js"></script>
-    <script type="text/javascript" src="~/js/select-additional-info/select-fund-addInfo.js"></script>
-    <script type="text/javascript" src="~/lib/jquery/double-scroll/jquery.doubleScroll.js"></script>
+    <script type="text/javascript" src="~/js/multiselect.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/double-scroll/jquery.doubleScroll.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/setDates.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/delete/deleteAgreement.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/select2/select2-entity-subentity.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/select-additional-info/select-fund-addInfo.js" asp-append-version="true"></script>
 
     <script>
         window.onload = () => {
