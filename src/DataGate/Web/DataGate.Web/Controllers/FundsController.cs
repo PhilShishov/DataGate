@@ -335,6 +335,8 @@
         //    return this.RedirectToAction("All");
         //}
 
+        //[ValidateAntiForgeryToken]
+
         //[HttpGet]
         //public JsonResult DeleteAgreement(string agrName)
         //{
@@ -416,6 +418,8 @@
         //    this.ModelState.Clear();
         //    return this.View(model);
         //}
+
+        //[ValidateAntiForgeryToken]
 
         //[HttpPost("Funds/EditFund/{EntityId}/{ChosenDate}")]
         //[Authorize(Roles = "Admin")]
@@ -504,6 +508,8 @@
         //    this.ModelState.Clear();
         //    return this.View(model);
         //}
+
+        //[ValidateAntiForgeryToken]
 
         //[HttpPost]
         //[Authorize(Roles = "Admin")]

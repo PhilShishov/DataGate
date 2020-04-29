@@ -101,7 +101,7 @@
                     model.EntitySubEntities = this.fundsService.GetFund_SubFunds(chosenDate, model.EntityId).ToList();
                 }
 
-                return this.View(model);
+                return this.RedirectToAction("ByIdAndDate", new { model.EntityId, model.ChosenDate });
             }
 
             if (isInSelectionMode)
@@ -122,11 +122,11 @@
 
             if (model.Entity != null && model.EntitySubEntities != null)
             {
-                return this.View(model);
+                return this.RedirectToAction("ByIdAndDate", new { model.EntityId, model.ChosenDate });
             }
 
             this.ModelState.Clear();
-            return this.View();
+            return this.RedirectToAction("ByIdAndDate", new { model.EntityId, model.ChosenDate });
         }
 
         private void CallEntitySubEntitiesWithSelectedColumns(SpecificEntityViewModel model, DateTime chosenDate)
