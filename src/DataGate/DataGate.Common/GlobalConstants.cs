@@ -7,11 +7,16 @@ namespace DataGate.Common
         // Application Constants
         public const string SystemName = "DataGate";
         public const string DataGateFooterDisplay = "- Pharus Management Lux SA 16, Avenue de la Gare L- 1610 Luxembourg T. +352 28 55 69 - 1";
+        public const int MaxAdminCount = 3;
+
+        // Controllers
         public const string ControllerRouteDataValue = "controller";
         public const string FundsControllerName = "Funds";
+        public const string FundSubEntitiesControllerName = "FundSubEntities";
         public const string SubFundsControllerName = "SubFunds";
+        public const string SubFundSubEntitiesControllerName = "SubFundSubEntities";
         public const string ShareClassesControllerName = "ShareClasses";
-        public const int MaxAdminCount = 3;
+        public const string ShareClassesSubEntitiesControllerName = "ShareClassesSubEntities";
 
         // Keys
         public const string InfoKey = "info";

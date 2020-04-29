@@ -19,6 +19,7 @@ namespace DataGate.Services.Data.Funds
     using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Services.Mapping;
     using DataGate.Services.SqlClient;
+
     using Microsoft.Extensions.Configuration;
 
     // _____________________________________________________________
@@ -93,7 +94,7 @@ namespace DataGate.Services.Data.Funds
                 .To<T>()
                 .ToList();
 
-            //return this.context.TbHistoryFund
+            // return this.context.TbHistoryFund
             //   .Select(f => f.FOfficialFundName)
             //   .ToList();
         }
@@ -196,7 +197,7 @@ namespace DataGate.Services.Data.Funds
 
                     command.Parameters.AddRange(new[]
                     {
-                        new SqlParameter("@f_initialDate", SqlDbType.NVarChar) { Value = initialDate},
+                        new SqlParameter("@f_initialDate", SqlDbType.NVarChar) { Value = initialDate },
                         new SqlParameter("@f_status", SqlDbType.Int) { Value = fStatusId },
                         new SqlParameter("@f_registrationNumber", SqlDbType.NVarChar) { Value = regNumber },
                         new SqlParameter("@f_officialFundName", SqlDbType.NVarChar) { Value = fundName },
