@@ -42,12 +42,13 @@
         public const string SqlItemFormatRequired = "[{0}]";
 
         // Urls
-        public const string FundAllUrl = "/Funds/All";
+        public const string FundAllUrl = "/f/all";
 
         // Dates
         public const string LastLoginTimeDisplay = "dd.MM.yyyy HH:mm";
-        public const string DateTimeFormatDisplay = "yyyy-MM-dd";
+        public const string WebDateTimeFormatRequired = "yyyy-MM-dd";
         public const string SqlDateTimeFormatRequired = "yyyyMMdd";
+        public const string SqlDateTimeFormatParsing = "dd/MM/yyyy";
         public const string PDfDateTimeFormatDisplay = "dd MMMM yyyy";
 
         // Folder names, mime types, formats, file names
