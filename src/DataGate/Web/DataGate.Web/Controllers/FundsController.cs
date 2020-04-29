@@ -193,19 +193,21 @@
 
         private void CallAllEntitiesWithSelectedColumns(EntitiesViewModel model, DateTime? chosenDate)
         {
-            model.Entities = this.fundsService.GetAllFundsWithSelectedViewAndDate(
-                                                                        model.PreSelectedColumns,
-                                                                        model.SelectedColumns,
-                                                                        chosenDate)
+            model.Entities = this.fundsService
+                .GetAllFundsWithSelectedViewAndDate(
+                            model.PreSelectedColumns,
+                            model.SelectedColumns,
+                            chosenDate)
                 .ToList();
         }
 
         private void CallActiveEntitiesWithSelectedColumns(EntitiesViewModel model, DateTime? chosenDate)
         {
-            model.Entities = this.fundsService.GetAllActiveFundsWithSelectedViewAndDate(
-                                                                        model.PreSelectedColumns,
-                                                                        model.SelectedColumns,
-                                                                        chosenDate)
+            model.Entities = this.fundsService
+                .GetAllActiveFundsWithSelectedViewAndDate(
+                            model.PreSelectedColumns,
+                            model.SelectedColumns,
+                            chosenDate)
                 .ToList();
         }
 

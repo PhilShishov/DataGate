@@ -1,13 +1,10 @@
 namespace DataGate.Services.Data.FundSubFunds
 {
-    using DataGate.Common;
-    using DataGate.Services.Data.FundSubFunds.Contracts;
-    using DataGate.Services.SqlClient;
-    using Microsoft.Extensions.Configuration;
     using System;
     using System.Collections.Generic;
-    using System.Data.SqlClient;
-    using System.Linq;
+
+    using DataGate.Services.Data.FundSubFunds.Contracts;
+    using DataGate.Services.SqlClient;
 
     public class FundSubFundsService : IFundSubFundsService
     {
@@ -25,16 +22,14 @@ namespace DataGate.Services.Data.FundSubFunds
         private readonly string sqlFunctionSubFundsForFund = "ActiveSubFundsForSpecificFundAtDate";
 
         private readonly string columnToPassToQuery = "FUND ID PHARUS";
-        private readonly IConfiguration configuration;
         private readonly ISqlQueryManager sqlManager;
 
         // ________________________________________________________
         //
         // Constructor: initialize with DI IConfiguration
         // to retrieve appsettings.json connection string
-        public FundSubFundsService(IConfiguration config, ISqlQueryManager sqlQueryManager)
+        public FundSubFundsService(ISqlQueryManager sqlQueryManager)
         {
-            this.configuration = config;
             this.sqlManager = sqlQueryManager;
         }
 
@@ -42,10 +37,9 @@ namespace DataGate.Services.Data.FundSubFunds
         //
         // Retrieve query table DB based entities
         // with table functions
-
         public IEnumerable<string[]> GetFundWithDateById(DateTime? chosenDate, int id)
         {
-            return ExecuteSqlQueryByWhereId(chosenDate, id, this.sqlFunctionAllFund, this.columnToPassToQuery);
+            return this.sqlManager.ExecuteSqlQueryByWhereId(chosenDate, id, this.sqlFunctionAllFund, this.columnToPassToQuery);
         }
 
         public IEnumerable<string[]> GetFund_SubFunds(DateTime? chosenDate, int id)

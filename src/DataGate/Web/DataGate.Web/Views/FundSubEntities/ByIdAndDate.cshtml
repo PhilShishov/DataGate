@@ -16,14 +16,14 @@
     </style>
 }
 
-<form asp-controller="Funds"
+<form asp-controller="FundSubEntities"
       class="justify-content-between"
       method="post">
 
     <partial name="SpecificEntity/_Toolbar" />
     <div class="justify-content-between" id="infoAndDocumentsView">
         <partial name="SpecificEntity/_Info" />
-        <partial name="SpecificEntity/_Load_Documents" />
+        @*<partial name="SpecificEntity/_Load_Documents" />*@
     </div>
 
     <hr class="bg-pharus hr-2" />
@@ -59,7 +59,7 @@
     </div>
 </form>
 
-<form asp-controller="Funds"
+@*<form asp-controller="FundSubEntities"
       asp-action="UploadProspectus"
       method="post"
       enctype="multipart/form-data">
@@ -67,7 +67,7 @@
     <partial name="SpecificEntity/_UploadPros" />
 </form>
 
-<form asp-controller="Funds"
+<form asp-controller="FundSubEntities"
       asp-action="UploadAgreement"
       enctype="multipart/form-data">
 
@@ -87,7 +87,7 @@
             </div>
         </div>
     </div>
-</form>
+</form>*@
 
 @section Scripts{
     @await Html.PartialAsync("_ValidationScriptsPartial")
@@ -118,7 +118,7 @@
             //
             // Delete selected row from agreements table by confirming
 
-            const urlDel = "/Funds/DeleteAgreement";
+            const urlDel = "/FundSubEntities/DeleteAgreement";
 
             passAgrUrlToDelete(urlDel);
 
@@ -141,7 +141,7 @@
             //
             // Autocomplete search
 
-            const urlACS = "/Funds/AutoCompleteSubFundList";
+            const urlACS = "/FundSubEntities/AutoCompleteSubFundList";
             const entityId = @Model.EntityId;
 
             passUrlAndEntityToSelect(urlACS, entityId);
