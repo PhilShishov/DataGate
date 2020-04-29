@@ -93,7 +93,7 @@
         }
 
         [HttpPost]
-        public IActionResult All(EntitiesViewModel model, List<string[]> entities)
+        public IActionResult All(EntitiesViewModel model)
         {
             // ---------------------------------------------------------
             //

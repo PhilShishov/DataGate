@@ -143,7 +143,7 @@
         private void SetModelValuesForSpecificView(SpecificEntityViewModel model)
         {
             model.ControllerName = this.ControllerContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
-            var date = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            var date = DateTime.ParseExact(model.ChosenDate, GlobalConstants.DateTimeFormatDisplay, CultureInfo.InvariantCulture);
             int entityId = model.EntityId;
 
             model.Entity = this.fundsService.GetFundWithDateById(date, entityId).ToList();
