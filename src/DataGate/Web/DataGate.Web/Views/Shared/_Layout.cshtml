@@ -42,7 +42,7 @@
     @if (this.User.Identity.IsAuthenticated)
     {
         <header>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-pharus">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-pharus position-fixed w-100 t" style="top:0">
 
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
@@ -121,24 +121,24 @@
 
                     </li>
 
-                    <li class="nav-item mt-3 ml-2">
+                    <li class="nav-item mt-2 ml-2">
                         <a class="nav-link nav-link-white active"
                            asp-area=""
                            asp-route="allFunds">Fund Library</a>
                     </li>
-                    <li class="nav-item mt-3 ml-2">
+                    <li class="nav-item mt-2 ml-2">
                         <a class="nav-link nav-link-white active"
                            asp-area=""
                            asp-controller=""
                            asp-action=""> Sub Fund Library</a>
                     </li>
-                    <li class="nav-item mt-3 ml-2">
+                    <li class="nav-item mt-2 ml-2">
                         <a class="nav-link nav-link-white active"
                            asp-area=""
                            asp-controller=""
                            asp-action="">Share Class Library</a>
                     </li>
-                    <li class="nav-item mt-3 ml-2">
+                    <li class="nav-item mt-2 ml-2">
                         <a class="nav-link nav-link-white active"
                            asp-area=""
                            asp-controller=""
@@ -200,7 +200,7 @@
                 </div>
             </nav>
         </header>
-        <main class="mb-4 ml-2">
+        <main class="mb-3 ml-2" style="margin-top:115px">
             @RenderBody()
         </main>
         <footer>

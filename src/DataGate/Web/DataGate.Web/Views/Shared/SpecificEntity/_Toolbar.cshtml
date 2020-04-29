@@ -50,7 +50,7 @@
     {
         <div class="d-flex mt-1 mr-auto">
             <p>@containerName CONTAINER: </p>
-            <a href="/@targetRouteContainer/@Model.ContainerEntityId/@Model.ChosenDate"
+            <a href="/@targetRouteContainer/edit/@Model.ContainerEntityId/@Model.ChosenDate"
                class="text-torshia font-weight-bold ml-1">
                 @Model.ContainerEntityName
             </a>
@@ -65,9 +65,10 @@
                    min="2018-01-01">
 
             <input type="submit"
-                   class="btn btn-primary btn-sm mb-1"
+                   class="btn btn-primary btn-sm"
                    asp-for="Command"
-                   value="Update Table"></>
+                   value="Update Table"
+                   style="margin-bottom: 2%"></>
         </div>
         <div class="mx-2">
             <a asp-route="@routeName"
