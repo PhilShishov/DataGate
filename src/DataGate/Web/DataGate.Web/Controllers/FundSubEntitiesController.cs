@@ -23,6 +23,7 @@
         }
 
         [HttpGet]
+        [Route("f/{EntityId}/{ChosenDate}")]
         public IActionResult ByIdAndDate(int entityId, string chosenDate)
         {
             SpecificEntityViewModel viewModel = new SpecificEntityViewModel
@@ -32,8 +33,6 @@
             };
 
             this.SetModelValuesForSpecificView(viewModel);
-
-            //this.HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
 
             this.ModelState.Clear();
             return this.View(viewModel);
@@ -66,20 +65,19 @@
         }
 
         [HttpPost]
-        [Route("f/{EntityId}/{ChosenDate}")]
         public IActionResult ByIdAndDate(SpecificEntityViewModel model)
         {
-            this.SetModelValuesForSpecificView(model);
-
             if (model.Command == "Reset")
             {
-                model.SelectTerm = "Quick Select";
+                model.SelectTerm = GlobalConstants.DefaultAutocompleteSelectTerm;
                 return this.View(model);
             }
 
+            this.SetModelValuesForSpecificView(model);
+
             bool isInSelectionMode = false;
 
-            var chosenDate = DateTime.ParseExact(model.ChosenDate, GlobalConstants.WebDateTimeFormatRequired, CultureInfo.InvariantCulture);
+            var chosenDate = DateTime.ParseExact(model.ChosenDate, GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
 
             if (model.SelectedColumns != null && model.SelectedColumns.Count > 0)
             {
@@ -126,8 +124,218 @@
             }
 
             this.ModelState.Clear();
-            return this.RedirectToAction("ByIdAndDate", new { model.EntityId, model.ChosenDate });
+            return this.View();
         }
+
+        //[HttpPost]
+        //public IActionResult UploadProspectus(SpecificEntityViewModel model)
+        //{
+        //    SetModelValuesForSpecificView(model);
+
+        //    var file = model.UploadEntityFileModel.FileToUpload;
+
+        //    if (file != null || file.FileName != "")
+        //    {
+        //        string fileExt = Path.GetExtension(file.FileName);
+        //        string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\Funds\");
+        //        string path = $"{fileLocation}{file.FileName}";
+
+        //        using (var stream = new FileStream(path, FileMode.Create))
+        //        {
+        //            file.CopyTo(stream);
+        //            stream.Close();
+        //        }
+
+        //        string startConnection = model.StartConnection.ToString("yyyyMMdd");
+        //        string endConnection = model.EndConnection?.ToString("yyyyMMdd");
+
+        //        var prosFileTypeDesc = model.UploadEntityFileModel.DocumentType;
+        //        int prosFileTypeId = this.context.TbDomFileType
+        //                .Where(ft => ft.FiletypeDesc == prosFileTypeDesc)
+        //                .Select(ft => ft.FiletypeId)
+        //                .FirstOrDefault();
+
+        //        this.entitiesFileService.AddDocumentToSpecificEntity(
+        //                                            file.FileName,
+        //                                            model.EntityId,
+        //                                            startConnection,
+        //                                            endConnection,
+        //                                            fileExt,
+        //                                            prosFileTypeId,
+        //                                            model.ControllerName);
+
+        //    }
+
+        //    return this.RedirectToAction("ViewEntitySE", new { model.EntityId, model.ChosenDate });
+        //}
+
+        //[HttpPost]
+        //public IActionResult UploadAgreement(SpecificEntityViewModel model)
+        //{
+        //    SetModelValuesForSpecificView(model);
+
+        //    //if (!ModelState.IsValid)
+        //    //{
+        //    //    return this.PartialView("SpecificEntity/_UploadAgr", model);
+        //    //}
+
+        //    var file = model.UploadAgreementFileModel.FileToUpload;
+
+        //    if (file != null || file.FileName != "")
+        //    {
+        //        string fileExt = Path.GetExtension(file.FileName);
+        //        string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\Agreements\");
+        //        string path = $"{fileLocation}{file.FileName}";
+
+        //        using (var stream = new FileStream(path, FileMode.Create))
+        //        {
+        //            file.CopyTo(stream);
+        //            stream.Close();
+        //        }
+
+        //        var activityTypeIdDesc = model.UploadAgreementFileModel.AgrType;
+        //        int activityTypeId = this.context.TbDomActivityType
+        //                .Where(at => at.AtDesc == activityTypeIdDesc)
+        //                .Select(at => at.AtId)
+        //                .FirstOrDefault();
+
+        //        string contractDate = model.UploadAgreementFileModel.ContractDate.ToString("yyyyMMdd");
+        //        string activationDate = model.UploadAgreementFileModel.ActivationDate.ToString("yyyyMMdd");
+        //        string expirationDate = model.UploadAgreementFileModel.ExpirationDate?.ToString("yyyyMMdd");
+
+        //        int statusId = this.context.TbDomAgreementStatus
+        //            .Where(s => s.ASDesc == model.UploadAgreementFileModel.Status)
+        //            .Select(s => s.ASId)
+        //            .FirstOrDefault();
+
+        //        int companyId = this.context.TbCompanies
+        //            .Where(c => c.CName == model.UploadAgreementFileModel.Company)
+        //            .Select(c => c.CId)
+        //            .FirstOrDefault();
+
+        //        this.entitiesFileService.AddAgreementToSpecificEntity(
+        //                                            file.FileName,
+        //                                            fileExt,
+        //                                            model.EntityId,
+        //                                            activityTypeId,
+        //                                            contractDate,
+        //                                            activationDate,
+        //                                            expirationDate,
+        //                                            statusId,
+        //                                            companyId,
+        //                                            model.ControllerName);
+        //    }
+
+        //    this.ModelState.Clear();
+        //    return this.RedirectToAction("ViewEntitySE", new { model.EntityId, model.ChosenDate });
+        //}
+
+        //[HttpPost]
+        //public IActionResult ReadDocument(string pdfValue)
+        //{
+        //    FileStreamResult fileStreamResult = null;
+
+        //    string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\Funds\");
+        //    string path = $"{fileLocation}{pdfValue}";
+
+        //    if (this.HttpContext.Request.Form.ContainsKey("pdfValue"))
+        //    {
+        //        var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
+        //        fileStreamResult = new FileStreamResult(fileStream, "application/pdf");
+        //    }
+
+        //    if (fileStreamResult != null)
+        //    {
+        //        return fileStreamResult;
+        //    }
+
+        //    return this.RedirectToAction("All");
+        //}
+
+        //[HttpPost]
+        //public IActionResult ReadAgreement(string pdfValue)
+        //{
+        //    FileStreamResult fileStreamResult = null;
+
+        //    string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\Agreements\");
+        //    string path = $"{fileLocation}{pdfValue}";
+
+        //    if (this.HttpContext.Request.Form.ContainsKey("pdfValue"))
+        //    {
+        //        var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
+        //        fileStreamResult = new FileStreamResult(fileStream, "application/pdf");
+        //    }
+
+        //    if (fileStreamResult != null)
+        //    {
+        //        return fileStreamResult;
+        //    }
+
+        //    return this.RedirectToAction("All");
+        //}
+
+        //[ValidateAntiForgeryToken]
+
+        //[HttpGet]
+        //public JsonResult DeleteAgreement(string agrName)
+        //{
+        //    if (!string.IsNullOrEmpty(agrName))
+        //    {
+        //        string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+        //        this.entitiesFileService.DeleteAgreementMapping(agrName, controllerName);
+
+        //        string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\Agreements\");
+        //        string path = $"{fileLocation}{agrName}";
+
+        //        if (System.IO.File.Exists(path))
+        //        {
+        //            System.IO.File.Delete(path);
+        //            return Json(new { data = Path.GetFileNameWithoutExtension(agrName) });
+        //        }
+        //    }
+
+        //    return Json(new { data = "false" });
+        //}
+
+        //[HttpPost]
+        //public FileStreamResult ExtractExcelSubEntities(SpecificEntityViewModel model)
+        //{
+        //    FileStreamResult fileStreamResult = null;
+
+        //    string typeName = model.GetType().Name;
+        //    string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+
+        //    if (this.HttpContext.Request.Form.ContainsKey("extract_Excel"))
+        //    {
+        //        fileStreamResult = ExtractTable.ExtractTableAsExcel(model.EntitySubEntities, typeName, controllerName);
+        //    }
+
+        //    return fileStreamResult;
+        //}
+
+        //[HttpPost]
+        //public FileStreamResult ExtractPdfSubEntities(SpecificEntityViewModel model)
+        //{
+        //    FileStreamResult fileStreamResult = null;
+
+        //    var chosenDate = DateTime.Parse(model.ChosenDate);
+
+        //    string typeName = model.GetType().Name;
+        //    string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+
+        //    if (model.EntitySubEntities[0].Length > 16)
+        //    {
+        //        model.EntitySubEntities = this.fundsService.PrepareFund_SubFundsForPDFExtract(chosenDate);
+        //    }
+
+        //    if (this.HttpContext.Request.Form.ContainsKey("extract_Pdf"))
+        //    {
+        //        fileStreamResult = ExtractTable
+        //            .ExtractTableAsPdf(model.EntitySubEntities, chosenDate, this._environment, typeName, controllerName);
+        //    }
+
+        //    return fileStreamResult;
+        //}
 
         private void CallEntitySubEntitiesWithSelectedColumns(SpecificEntityViewModel model, DateTime chosenDate)
         {
@@ -143,7 +351,7 @@
         private void SetModelValuesForSpecificView(SpecificEntityViewModel model)
         {
             model.ControllerName = this.ControllerContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
-            var date = DateTime.ParseExact(model.ChosenDate, GlobalConstants.WebDateTimeFormatRequired, CultureInfo.InvariantCulture);
+            var date = DateTime.ParseExact(model.ChosenDate, GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
             int entityId = model.EntityId;
 
             model.Entity = this.fundsService.GetFundWithDateById(date, entityId).ToList();

@@ -1,33 +1,60 @@
-﻿@model DataGate.Web.ViewModels.Entities.SpecificEntityViewModel
+﻿@using DataGate.Common
+@model DataGate.Web.ViewModels.Entities.SpecificEntityViewModel
 @{
-    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+    var controllerName = this.ViewContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
+    var targetRoute = string.Empty;
+    var targetRouteContainer = string.Empty;
+    var containerName = string.Empty;
+    var documentTypeName = string.Empty;
+    var entityName = string.Empty;
+    var routeName = string.Empty;
+    var routeSEName = string.Empty;
+
+    if (controllerName == GlobalConstants.FundSubEntitiesControllerName)
+    {
+        documentTypeName = GlobalConstants.UploadTypeProspectusDisplay;
+        entityName = GlobalConstants.FundNameDisplay;
+        targetRoute = "f";
+        routeName = GlobalConstants.AllFundsRouteName;
+        routeSEName = GlobalConstants.FundSubEntititesRouteName;
+    }
+    else if (controllerName == GlobalConstants.SubFundSubEntitiesControllerName)
+    {
+        containerName = GlobalConstants.ContainerFundName;
+        targetRouteContainer = "f";
+        documentTypeName = GlobalConstants.UploadTypeDocumentDisplay;
+        entityName = GlobalConstants.SubFundNameDisplay;
+        targetRoute = "sf";
+        routeName = GlobalConstants.AllSubFundsRouteName;
+        routeSEName = GlobalConstants.SubFundSubEntititesRouteName;
+    }
+    else if (controllerName == GlobalConstants.ShareClassesSubEntitiesControllerName)
+    {
+        containerName = GlobalConstants.ContainerSubFundName;
+        targetRouteContainer = "sf";
+        documentTypeName = GlobalConstants.UploadTypeDocumentDisplay;
+        entityName = GlobalConstants.ShareClassNameDisplay;
+        targetRoute = "sc";
+        routeName = GlobalConstants.AllShareClassesRouteName;
+        routeSEName = GlobalConstants.ShareClassSubEntititesRouteName;
+    }
 }
 
 <div class="w-100 mt-1 mb-3" id="toolbar-pharus">
 
-    @if (controllerName == "SubFunds")
+    @if (controllerName == GlobalConstants.FundSubEntitiesControllerName)
     {
-        <div class="d-flex mt-1 mr-auto">
-            <p>FUND CONTAINER: </p>
-            <a href="/Funds/ViewEntitySE/@Model.ContainerEntityId/@Model.ChosenDate"
-               class="text-torshia font-weight-bold ml-1">
-                @Model.ContainerEntityName
-            </a>
-        </div>
-    }
-    else if (controllerName == "ShareClasses")
-    {
-        <div class="d-flex mt-1 mr-auto">
-            <p>SUB FUND CONTAINER: </p>
-            <a href="/SubFunds/ViewEntitySE/@Model.ContainerEntityId/@Model.ChosenDate"
-               class="text-torshia font-weight-bold ml-1">
-                @Model.ContainerEntityName
-            </a>
-        </div>
+        <div class="d-flex mt-1 mr-auto"></div>
     }
     else
     {
-        <div class="d-flex mt-1 mr-auto"></div>
+        <div class="d-flex mt-1 mr-auto">
+            <p>@containerName CONTAINER: </p>
+            <a href="/@targetRouteContainer/@Model.ContainerEntityId/@Model.ChosenDate"
+               class="text-torshia font-weight-bold ml-1">
+                @Model.ContainerEntityName
+            </a>
+        </div>
     }
 
     <div class="d-flex mr-auto">
@@ -42,35 +69,20 @@
                    asp-for="Command"
                    value="Update Table"></>
         </div>
-
         <div class="mx-2">
-            <a href='/@controllerName/All'
+            <a asp-route="@routeName"
                class="btn btn-primary btn-sm mb-2">
-                Show All
+                Back to All
             </a>
         </div>
-
         <div>
-            @if (controllerName == "Funds")
-            {
-                <button type="button"
-                        class="btn btn-primary btn-sm mb-2"
-                        data-toggle="modal"
-                        data-target="#upDocModal">
-                    Upload Prospectus
-                </button>
-            }
-            else
-            {
-                <button type="button"
-                        class="btn btn-primary btn-sm mb-2"
-                        data-toggle="modal"
-                        data-target="#upDocModal">
-                    Upload Document
-                </button>
-            }
+            <button type="button"
+                    class="btn btn-primary btn-sm mb-2"
+                    data-toggle="modal"
+                    data-target="#upDocModal">
+                Upload @documentTypeName
+            </button>
         </div>
-
         <div class="mx-2">
             <button type="button"
                     class="btn btn-primary btn-sm mb-2"
@@ -80,35 +92,17 @@
             </button>
         </div>
 
-        @if (this.User.IsInRole("Admin"))
+        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
         {
             <div>
-                @if (controllerName == "Funds")
-                {
-                    <a href="/Funds/EditFund/@Model.EntityId/@Model.ChosenDate"
-                       class="btn btn-primary btn-sm mb-2">
-                        Edit Fund
-                    </a>
-                }
-                else if (controllerName == "SubFunds")
-                {
-                    <a href="/SubFunds/EditSubFund/@Model.EntityId/@Model.ChosenDate"
-                       class="btn btn-primary btn-sm mb-2">
-                        Edit Sub Fund
-                    </a>
-                }
-                else if (controllerName == "ShareClasses")
-                {
-                    <a href="/ShareClasses/EditShareClass/@Model.EntityId/@Model.ChosenDate"
-                       class="btn btn-primary btn-sm mb-2">
-                        Edit Share Class
-                    </a>
-                }
+                <a href="/@targetRoute/@Model.EntityId/@Model.ChosenDate"
+                   class="btn btn-primary btn-sm mb-2">
+                    Edit @entityName
+                </a>
             </div>
         }
-
         <input type="number"
-               asp-for="EntityId" hidden>
-
+               asp-for="EntityId"
+               hidden>
     </div>
 </div>

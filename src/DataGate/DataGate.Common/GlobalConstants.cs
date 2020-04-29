@@ -16,6 +16,14 @@
         public const string ShareClassesControllerName = "ShareClasses";
         public const string ShareClassesSubEntitiesControllerName = "ShareClassesSubEntities";
 
+        // Routes names
+        public const string AllFundsRouteName = "allFunds";
+        public const string FundSubEntititesRouteName = "fundSubEntities";
+        public const string AllSubFundsRouteName = "allSubFunds";
+        public const string SubFundSubEntititesRouteName = "subFundSubEntities";
+        public const string AllShareClassesRouteName = "allShareClasses";
+        public const string ShareClassSubEntititesRouteName = "shareClassSubEntities";
+
         // Keys
         public const string InfoKey = "info";
         public const string ErrorKey = "error";
@@ -46,8 +54,8 @@
 
         // Dates
         public const string LastLoginTimeDisplay = "dd.MM.yyyy HH:mm";
-        public const string WebDateTimeFormatRequired = "yyyy-MM-dd";
-        public const string SqlDateTimeFormatRequired = "yyyyMMdd";
+        public const string RequiredWebDateTimeFormat = "yyyy-MM-dd";
+        public const string RequiredSqlDateTimeFormat = "yyyyMMdd";
         public const string SqlDateTimeFormatParsing = "dd/MM/yyyy";
         public const string PDfDateTimeFormatDisplay = "dd MMMM yyyy";
 
@@ -59,5 +67,13 @@
 
         // Entities
         public const int IndexEntityNameInSQLTable = 3;
+        public const string DefaultAutocompleteSelectTerm = "Quick Select";
+        public const string ContainerFundName = "FUND";
+        public const string ContainerSubFundName = "SUB FUND";
+        public const string UploadTypeProspectusDisplay = "Prospectus";
+        public const string UploadTypeDocumentDisplay = "Document";
+        public const string FundNameDisplay = "Fund";
+        public const string SubFundNameDisplay = "Sub Fund";
+        public const string ShareClassNameDisplay = "Share Class";
     }
 }

@@ -22,7 +22,7 @@ namespace DataGate.Web.Utilities
 
         public static FileStreamResult GeneratePdfTemplate(EntitiesViewModel model, string controllerName)
         {
-            var chosenDate = DateTime.ParseExact(model.ChosenDate, GlobalConstants.WebDateTimeFormatRequired, CultureInfo.InvariantCulture);
+            var chosenDate = DateTime.ParseExact(model.ChosenDate, GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
             string typeName = model.GetType().Name;
 
             FileStreamResult fileStreamResult = ExtractTable
