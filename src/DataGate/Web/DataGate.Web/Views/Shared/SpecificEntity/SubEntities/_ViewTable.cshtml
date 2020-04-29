@@ -1,8 +1,19 @@
-﻿@{
-    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+﻿@using DataGate.Common
+@model DataGate.Web.ViewModels.Entities.SpecificEntityViewModel
+
+@{
+    var controller = this.ViewContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
+    var targetRoute = string.Empty;
+
+    if (controller == GlobalConstants.FundSubEntitiesControllerName)
+    {
+        targetRoute = "sf";
+    }
+
+    var entityId = string.Empty;
 }
 
-<div class="table-responsive border-0 mx-auto" id="tableDoubleScroll">
+<div class="table-responsive border-0 mx-auto" id="tableDoubleScroll" name="EntitySubEntities">
     <table class="table table-hover text-nowrap">
         <thead>
             @for (int row = 0; row < 1; row++)
@@ -21,30 +32,16 @@
         <tbody>
             @for (int row = 1; row < Model.EntitySubEntities.Count; row++)
             {
-                var entityId = Model.EntitySubEntities[row][2];
+                entityId = Model.EntitySubEntities[row][2];
 
-                @if (controllerName == "Funds")
-                {
-                    <tr class="tableCellPharus" onclick="document.location = '/SubFunds/ViewEntitySE/@entityId/@Model.ChosenDate'">
-                        @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
-                        {
-                            <td class="p-1">
-                                @Model.EntitySubEntities[row][col]
-                            </td>
-                        }
-                    </tr>
-                }
-                else if (controllerName == "SubFunds")
-                {
-                    <tr class="tableCellPharus" onclick="document.location = '/ShareClasses/ViewEntitySE/@entityId/@Model.ChosenDate'">
-                        @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
-                        {
-                            <td class="p-1">
-                                @Model.EntitySubEntities[row][col]
-                            </td>
-                        }
-                    </tr>
-                }
+                <tr class="tableCellPharus" onclick="document.location = '/@targetRoute/@entityId/@Model.ChosenDate'">
+                    @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
+                    {
+                        <td class="p-1">
+                            @Model.EntitySubEntities[row][col]
+                        </td>
+                    }
+                </tr>
             }
         </tbody>
     </table>

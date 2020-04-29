@@ -35,7 +35,7 @@
 
             //this.HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
 
-            //this.ModelState.Clear();
+            this.ModelState.Clear();
             return this.View(viewModel);
         }
 
@@ -79,7 +79,7 @@
 
             bool isInSelectionMode = false;
 
-            var chosenDate = DateTime.ParseExact(model.ChosenDate, GlobalConstants.DateTimeFormatDisplay, CultureInfo.InvariantCulture);
+            var chosenDate = DateTime.ParseExact(model.ChosenDate, GlobalConstants.WebDateTimeFormatRequired, CultureInfo.InvariantCulture);
 
             if (model.SelectedColumns != null && model.SelectedColumns.Count > 0)
             {
@@ -143,7 +143,7 @@
         private void SetModelValuesForSpecificView(SpecificEntityViewModel model)
         {
             model.ControllerName = this.ControllerContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
-            var date = DateTime.ParseExact(model.ChosenDate, GlobalConstants.DateTimeFormatDisplay, CultureInfo.InvariantCulture);
+            var date = DateTime.ParseExact(model.ChosenDate, GlobalConstants.WebDateTimeFormatRequired, CultureInfo.InvariantCulture);
             int entityId = model.EntityId;
 
             model.Entity = this.fundsService.GetFundWithDateById(date, entityId).ToList();
@@ -160,11 +160,11 @@
             model.EntityDocuments = this.fundsService.GetAllFundDocuments(entityId).ToList();
             model.EntityAgreements = this.fundsService.GetAllFundAgreements(date, entityId).ToList();
 
-            model.StartConnection = DateTime.ParseExact(model.Entity.ToList()[1][0], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+            model.StartConnection = DateTime.ParseExact(model.Entity.ToList()[1][0], GlobalConstants.SqlDateTimeFormatParsing, CultureInfo.InvariantCulture);
 
             if (model.EndConnection != null)
             {
-                model.EndConnection = DateTime.ParseExact(model.Entity.ToList()[1][1], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                model.EndConnection = DateTime.ParseExact(model.Entity.ToList()[1][1], GlobalConstants.SqlDateTimeFormatParsing, CultureInfo.InvariantCulture);
             }
 
             //this.ViewData["ProspectusFileTypes"] = this.fundsSelectListService.GetAllProspectusFileTypes();
