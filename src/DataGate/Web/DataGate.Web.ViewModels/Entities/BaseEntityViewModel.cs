@@ -8,11 +8,13 @@
 namespace DataGate.Web.ViewModels.Entities
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     public abstract class BaseEntityViewModel
     {
         public List<string[]> EntitiesHeadersForColumnSelection { get; set; }
 
+        [Required]
         public string ChosenDate { get; set; }
 
         public string Command { get; set; }
