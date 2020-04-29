@@ -1,7 +1,7 @@
 // Utility class for managing sql
 // queries, connections, commands
 
-// Created: 09/2019
+// Created: 04/2020
 // Author:  Philip Shishov
 
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-

@@ -56,5 +56,8 @@ namespace DataGate.Common
         public const string PdfFileExtension = ".pdf";
         public const string ExcelStreamMimeType = "application/excel";
         public const string PdfStreamMimeType = "application/pdf";
+
+        // Entities
+        public const int IndexEntityNameInSQLTable = 3;
     }
 }
