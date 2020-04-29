@@ -1,44 +1,42 @@
 ﻿@model DataGate.Web.ViewModels.Entities.EntitiesViewModel
 
-<cache enabled="false">
-    <div>
-        <table class="table" name="entities" hidden>
-            <thead>
-                <tr>
-                    @for (int row = 0; row < 1; row++)
-                    {
-                        @for (int col = 0; col < Model.Entities[row].Length; col++)
-                        {
-                            <th>
-                                <h5>
-                                    @Html.TextBoxFor(af => Model.Entities[row][col],
-                                        new
-                                             {
-                                            @readonly = true
-                                        })
-                                </h5>
-                            </th>
-                        }
-                    }
-                </tr>
-            </thead>
-            <tbody>
-                @for (int row = 1; row < Model.Entities.Count; row++)
+<div>
+    <table class="table" name="Entities" hidden>
+        <thead>
+            <tr>
+                @for (int row = 0; row < 1; row++)
                 {
-                    <tr>
-                        @for (int col = 0; col < Model.Entities[row].Length; col++)
-                        {
-                            <td>
+                    @for (int col = 0; col < Model.Entities[row].Length; col++)
+                    {
+                        <th>
+                            <h5>
                                 @Html.TextBoxFor(af => Model.Entities[row][col],
                                     new
                                          {
                                         @readonly = true
                                     })
-                            </td>
-                        }
-                    </tr>
+                            </h5>
+                        </th>
+                    }
                 }
-            </tbody>
-        </table>
-    </div>
-</cache>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int row = 1; row < Model.Entities.Count; row++)
+            {
+                <tr>
+                    @for (int col = 0; col < Model.Entities[row].Length; col++)
+                    {
+                        <td>
+                            @Html.TextBoxFor(af => Model.Entities[row][col],
+                                new
+                                     {
+                                    @readonly = true
+                                })
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
