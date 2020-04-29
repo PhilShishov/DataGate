@@ -1,5 +1,7 @@
 ﻿@model DataGate.Web.ViewModels.Entities.EntitiesViewModel
-
+@{ 
+    var numberPreSelectedColumns = 4;
+}
 
 <div class="modal"
      id="columnModal"
@@ -13,7 +15,7 @@
                     @for (int row = 0; row < 1; row++)
                     {
                         <select asp-for="PreSelectedColumns" style="width:60%" hidden>
-                            @for (int col = 0; col < 4; col++)
+                            @for (int col = 0; col < numberPreSelectedColumns; col++)
                             {
                                 <option selected value="@Model.EntitiesHeadersForColumnSelection[row][col]">
                                     @Model.EntitiesHeadersForColumnSelection[row][col]
@@ -25,7 +27,7 @@
                     @for (int row = 0; row < 1; row++)
                     {
                         <select class="multiselect" multiple="multiple" asp-for="SelectedColumns" style="width:60%">
-                            @for (int col = 4; col < Model.EntitiesHeadersForColumnSelection[row].Length; col++)
+                            @for (int col = numberPreSelectedColumns; col < Model.EntitiesHeadersForColumnSelection[row].Length; col++)
                             {
                                 <option value="@Model.EntitiesHeadersForColumnSelection[row][col]">
                                     @Model.EntitiesHeadersForColumnSelection[row][col]

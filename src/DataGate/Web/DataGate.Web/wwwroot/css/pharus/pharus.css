@@ -3,8 +3,13 @@
     background-color: deepskyblue;
 }
 
-.tableRowPharus {
+.tableCellPharus {
     cursor: pointer;
+}
+
+td.tableCellPharus:hover {
+    background-color: deepskyblue;
+    text-decoration: underline;
 }
 
 .tableHeaderPharus {
