@@ -211,49 +211,6 @@
                 .ToList();
         }
 
-        //[HttpGet]
-        //[Route("Funds/ViewEntitySE/{EntityId}/{ChosenDate}")]
-        //public IActionResult ViewEntitySE(int entityId, string chosenDate)
-        //{
-        //    SpecificEntityViewModel viewModel = new SpecificEntityViewModel
-        //    {
-        //        ChosenDate = chosenDate,
-        //        EntityId = entityId,
-        //    };
-
-        //    this.SetModelValuesForSpecificView(viewModel);
-
-        //    this.HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
-
-        //    this.ModelState.Clear();
-        //    return this.View(viewModel);
-        //}
-
-        //public JsonResult AutoCompleteSubFundList(string selectTerm, int entityId)
-        //{
-        //    var entitiesToSearch = this.fundsService
-        //        .GetFund_SubFunds(null, entityId)
-        //        .Skip(1)
-        //        .ToList();
-
-        //    if (selectTerm != null)
-        //    {
-        //        entitiesToSearch = entitiesToSearch.Where(sf => sf[3]
-        //                                             .ToLower()
-        //                                             .Contains(selectTerm
-        //                                             .ToLower()))
-        //                                           .ToList();
-        //    }
-
-        //    var modifiedData = entitiesToSearch.Select(sf => new
-        //    {
-        //        id = sf[3],
-        //        text = sf[3],
-        //    });
-
-        //    return this.Json(modifiedData);
-        //}
-
         //[HttpPost]
         //[Route("Funds/ViewEntitySE/{EntityId}/{ChosenDate}")]
         //public IActionResult ViewEntitySE(SpecificEntityViewModel model)

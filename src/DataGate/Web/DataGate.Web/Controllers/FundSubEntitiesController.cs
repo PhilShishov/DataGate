@@ -3,6 +3,7 @@
     using System;
     using System.Globalization;
     using System.Linq;
+
     using DataGate.Services.Data.FundSubFunds.Contracts;
     using DataGate.Web.ViewModels.Entities;
 
@@ -32,7 +33,7 @@
 
             //this.HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
 
-            this.ModelState.Clear();
+            //this.ModelState.Clear();
             return this.View(viewModel);
         }
 
