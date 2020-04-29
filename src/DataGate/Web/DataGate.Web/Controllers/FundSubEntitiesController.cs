@@ -67,26 +67,30 @@
         [HttpPost]
         public IActionResult ByIdAndDate(SpecificEntityViewModel model)
         {
+            this.SetModelValuesForSpecificView(model);
+
+            if (model.Command == "Update Table")
+            {
+                return this.RedirectToAction("ByIdAndDate", new { model.EntityId, model.ChosenDate });
+            }
+
             if (model.Command == "Reset")
             {
                 model.SelectTerm = GlobalConstants.DefaultAutocompleteSelectTerm;
                 return this.View(model);
             }
 
-            this.SetModelValuesForSpecificView(model);
-
             bool isInSelectionMode = false;
-
-            var chosenDate = DateTime.ParseExact(model.ChosenDate, GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
 
             if (model.SelectedColumns != null && model.SelectedColumns.Count > 0)
             {
                 isInSelectionMode = true;
             }
 
-            model.Entity = this.fundsService
-                   .GetFundWithDateById(chosenDate, model.EntityId)
-                   .ToList();
+            var chosenDate = DateTime.ParseExact(model.ChosenDate, GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
+            //model.Entity = this.fundsService
+            //       .GetFundWithDateById(chosenDate, model.EntityId)
+            //       .ToList();
 
             if (model.SelectTerm == null)
             {
@@ -99,7 +103,7 @@
                     model.EntitySubEntities = this.fundsService.GetFund_SubFunds(chosenDate, model.EntityId).ToList();
                 }
 
-                return this.RedirectToAction("ByIdAndDate", new { model.EntityId, model.ChosenDate });
+                return this.View(model);
             }
 
             if (isInSelectionMode)
@@ -120,7 +124,7 @@
 
             if (model.Entity != null && model.EntitySubEntities != null)
             {
-                return this.RedirectToAction("ByIdAndDate", new { model.EntityId, model.ChosenDate });
+                return this.View(model);
             }
 
             this.ModelState.Clear();
@@ -297,45 +301,25 @@
         //    return Json(new { data = "false" });
         //}
 
-        //[HttpPost]
-        //public FileStreamResult ExtractExcelSubEntities(SpecificEntityViewModel model)
-        //{
-        //    FileStreamResult fileStreamResult = null;
+        public FileStreamResult GenerateExcelReport(SpecificEntityViewModel model)
+        {
+            string typeName = model.GetType().Name;
 
-        //    string typeName = model.GetType().Name;
-        //    string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+            return GenerateFileTemplate.ExtractTableAsExcel(model.EntitySubEntities, typeName, GlobalConstants.FundsControllerName);
+        }
 
-        //    if (this.HttpContext.Request.Form.ContainsKey("extract_Excel"))
-        //    {
-        //        fileStreamResult = ExtractTable.ExtractTableAsExcel(model.EntitySubEntities, typeName, controllerName);
-        //    }
+        public FileStreamResult GeneratePdfReport(SpecificEntityViewModel model)
+        {
+            var date = DateTime.ParseExact(model.ChosenDate, GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
+            string typeName = model.GetType().Name;
 
-        //    return fileStreamResult;
-        //}
+            if (model.EntitySubEntities[0].Length > 16)
+            {
+                model.EntitySubEntities = this.fundsService.PrepareFund_SubFundsForPDFExtract(date).ToList();
+            }
 
-        //[HttpPost]
-        //public FileStreamResult ExtractPdfSubEntities(SpecificEntityViewModel model)
-        //{
-        //    FileStreamResult fileStreamResult = null;
-
-        //    var chosenDate = DateTime.Parse(model.ChosenDate);
-
-        //    string typeName = model.GetType().Name;
-        //    string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
-
-        //    if (model.EntitySubEntities[0].Length > 16)
-        //    {
-        //        model.EntitySubEntities = this.fundsService.PrepareFund_SubFundsForPDFExtract(chosenDate);
-        //    }
-
-        //    if (this.HttpContext.Request.Form.ContainsKey("extract_Pdf"))
-        //    {
-        //        fileStreamResult = ExtractTable
-        //            .ExtractTableAsPdf(model.EntitySubEntities, chosenDate, this._environment, typeName, controllerName);
-        //    }
-
-        //    return fileStreamResult;
-        //}
+            return GenerateFileTemplate.ExtractTableAsPdf(model.EntitySubEntities, date, typeName, GlobalConstants.FundsControllerName);
+        }
 
         private void CallEntitySubEntitiesWithSelectedColumns(SpecificEntityViewModel model, DateTime chosenDate)
         {

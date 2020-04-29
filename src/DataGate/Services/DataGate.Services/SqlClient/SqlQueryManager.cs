@@ -69,7 +69,7 @@ namespace DataGate.Services.SqlClient
 
         public IEnumerable<string[]> ExecuteSqlQueryWithSelection(
                                                                     ref List<string> preSelectedColumns,
-                                                                    IEnumerable<string> selectedColumns,
+                                                                    List<string> selectedColumns,
                                                                     DateTime? chosenDate,
                                                                     string function)
         {
@@ -147,7 +147,7 @@ namespace DataGate.Services.SqlClient
 
         public IEnumerable<string[]> ExecuteSqlQueryByIdWithSelection(
                                                                 ref List<string> preSelectedColumns,
-                                                                IEnumerable<string> selectedColumns,
+                                                                List<string> selectedColumns,
                                                                 DateTime? chosenDate,
                                                                 int id,
                                                                 string function)
@@ -157,7 +157,7 @@ namespace DataGate.Services.SqlClient
                 SqlCommand command = this.SetUpSqlConnectionCommand(connection);
 
                 // Prepare items for DB query with []
-                preSelectedColumns.ToList().AddRange(selectedColumns);
+                preSelectedColumns.AddRange(selectedColumns);
                 preSelectedColumns = preSelectedColumns.Select(c => string.Format(GlobalConstants.SqlItemFormatRequired, c)).ToList();
 
                 if (chosenDate == null)

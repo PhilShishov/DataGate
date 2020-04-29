@@ -157,16 +157,17 @@
 
         public FileStreamResult GenerateExcelReport(EntitiesViewModel model)
         {
-            string controllerName = this.ControllerContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
+            string typeName = model.GetType().Name;
 
-            return GenerateFileTemplate.GenerateExcelTemplate(model, controllerName);
+            return GenerateFileTemplate.ExtractTableAsExcel(model.Entities, typeName, GlobalConstants.FundsControllerName);
         }
 
         public FileStreamResult GeneratePdfReport(EntitiesViewModel model)
         {
-            string controllerName = this.ControllerContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
+            var chosenDate = DateTime.ParseExact(model.ChosenDate, GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
+            string typeName = model.GetType().Name;
 
-            return GenerateFileTemplate.GeneratePdfTemplate(model, controllerName);
+            return GenerateFileTemplate.ExtractTableAsPdf(model.Entities, chosenDate, typeName, GlobalConstants.FundsControllerName);
         }
 
         private void CallAllEntitiesWithSelectedColumns(EntitiesViewModel model, DateTime? chosenDate)

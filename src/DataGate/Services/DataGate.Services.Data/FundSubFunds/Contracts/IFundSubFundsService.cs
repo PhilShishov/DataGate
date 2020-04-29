@@ -11,7 +11,7 @@ namespace DataGate.Services.Data.FundSubFunds.Contracts
 
         IEnumerable<string[]> GetFund_SubFundsWithSelectedViewAndDate(
                         List<string> preSelectedColumns,
-                        IEnumerable<string> selectedColumns,
+                        List<string> selectedColumns,
                         DateTime? chosenDate,
                         int id);
 

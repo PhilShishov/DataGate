@@ -13,12 +13,12 @@
 
         IEnumerable<string[]> GetAllFundsWithSelectedViewAndDate(
                         List<string> preSelectedColumns,
-                        IEnumerable<string> selectedColumns,
+                        List<string> selectedColumns,
                         DateTime? chosenDate);
 
         IEnumerable<string[]> GetAllActiveFundsWithSelectedViewAndDate(
                         List<string> preSelectedColumns,
-                        IEnumerable<string> selectedColumns,
+                        List<string> selectedColumns,
                         DateTime? chosenDate);
 
         IEnumerable<T> GetAllFundsNames<T>();

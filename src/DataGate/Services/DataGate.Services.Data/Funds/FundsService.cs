@@ -72,7 +72,7 @@ namespace DataGate.Services.Data.Funds
 
         public IEnumerable<string[]> GetAllFundsWithSelectedViewAndDate(
                                                                     List<string> preSelectedColumns,
-                                                                    IEnumerable<string> selectedColumns,
+                                                                    List<string> selectedColumns,
                                                                     DateTime? chosenDate)
         {
             return this.sqlManager.ExecuteSqlQueryWithSelection(ref preSelectedColumns, selectedColumns, chosenDate, this.sqlFunctionAllFund);
@@ -80,7 +80,7 @@ namespace DataGate.Services.Data.Funds
 
         public IEnumerable<string[]> GetAllActiveFundsWithSelectedViewAndDate(
                                                                             List<string> preSelectedColumns,
-                                                                            IEnumerable<string> selectedColumns,
+                                                                            List<string> selectedColumns,
                                                                             DateTime? chosenDate)
         {
             return this.sqlManager.ExecuteSqlQueryWithSelection(ref preSelectedColumns, selectedColumns, chosenDate, this.sqlFunctionAllActiveFund);

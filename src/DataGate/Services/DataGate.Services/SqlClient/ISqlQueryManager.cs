@@ -12,7 +12,7 @@ namespace DataGate.Services.SqlClient
 
         IEnumerable<string[]> ExecuteSqlQueryWithSelection(
                                                                     ref List<string> preSelectedColumns,
-                                                                    IEnumerable<string> selectedColumns,
+                                                                    List<string> selectedColumns,
                                                                     DateTime? chosenDate,
                                                                     string function);
 
@@ -24,7 +24,7 @@ namespace DataGate.Services.SqlClient
 
         IEnumerable<string[]> ExecuteSqlQueryByIdWithSelection(
                                                                 ref List<string> preSelectedColumns,
-                                                                IEnumerable<string> selectedColumns,
+                                                                List<string> selectedColumns,
                                                                 DateTime? chosenDate,
                                                                 int id,
                                                                 string function);

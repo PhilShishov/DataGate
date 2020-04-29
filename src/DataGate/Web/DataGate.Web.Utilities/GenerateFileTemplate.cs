@@ -28,7 +28,7 @@ namespace DataGate.Web.Utilities
     using OfficeOpenXml;
 
     // _____________________________________________________________
-    public class ExtractTable
+    public class GenerateFileTemplate
     {
         // ---------------------------------------------------------
         //
