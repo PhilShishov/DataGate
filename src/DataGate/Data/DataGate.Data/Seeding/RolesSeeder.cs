@@ -21,6 +21,7 @@
             await SeedRoleAsync(roleManager, GlobalConstants.RiskRoleName);
             await SeedRoleAsync(roleManager, GlobalConstants.LegalRoleName);
             await SeedRoleAsync(roleManager, GlobalConstants.ComplianceRoleName);
+            await SeedRoleAsync(roleManager, GlobalConstants.GuestRoleName);
         }
 
         private static async Task SeedRoleAsync(RoleManager<ApplicationRole> roleManager, string roleName)

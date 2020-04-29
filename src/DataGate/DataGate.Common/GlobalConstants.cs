@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DataGate.Common
+﻿namespace DataGate.Common
 {
     public static class GlobalConstants
     {
@@ -32,6 +30,7 @@ namespace DataGate.Common
         public const string LegalRoleName = "Legal";
         public const string InvestmentRoleName = "Investement";
         public const string ComplianceRoleName = "Compliance";
+        public const string GuestRoleName = "Guest";
 
         // Email
         public const string ConfirmEmailSubject = "Confirm your email";
