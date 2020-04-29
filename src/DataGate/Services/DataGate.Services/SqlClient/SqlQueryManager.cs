@@ -60,7 +60,7 @@ namespace DataGate.Services.SqlClient
                 }
                 else
                 {
-                    command.CommandText = $"select * from {function}('{chosenDate?.ToString(GlobalConstants.SqlDateTimeFormatRequired)}')";
+                    command.CommandText = $"select * from {function}('{chosenDate?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}')";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
@@ -87,7 +87,7 @@ namespace DataGate.Services.SqlClient
                 }
                 else
                 {
-                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} from {function}('{chosenDate?.ToString(GlobalConstants.SqlDateTimeFormatRequired)}')";
+                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} from {function}('{chosenDate?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}')";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
@@ -106,7 +106,7 @@ namespace DataGate.Services.SqlClient
                 }
                 else
                 {
-                    command.CommandText = $"select * from {function}('{chosenDate?.ToString(GlobalConstants.SqlDateTimeFormatRequired)}', {id})";
+                    command.CommandText = $"select * from {function}('{chosenDate?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}', {id})";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
@@ -137,7 +137,7 @@ namespace DataGate.Services.SqlClient
                 }
                 else
                 {
-                    command.CommandText = $"select * from {function}('{chosenDate?.ToString(GlobalConstants.SqlDateTimeFormatRequired)}') " +
+                    command.CommandText = $"select * from {function}('{chosenDate?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}') " +
                         $"where [{column}] = {id}";
                 }
 
@@ -166,7 +166,7 @@ namespace DataGate.Services.SqlClient
                 }
                 else
                 {
-                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} from {function}('{chosenDate?.ToString(GlobalConstants.SqlDateTimeFormatRequired)}', {id})";
+                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} from {function}('{chosenDate?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}', {id})";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
