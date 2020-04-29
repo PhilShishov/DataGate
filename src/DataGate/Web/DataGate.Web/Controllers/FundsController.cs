@@ -51,12 +51,13 @@
         }
 
         [HttpGet]
+        [Route("f/all")]
         public IActionResult All()
         {
             var model = new EntitiesViewModel
             {
                 IsActive = true,
-                ChosenDate = DateTime.Today.ToString(GlobalConstants.DateTimeFormatDisplay),
+                ChosenDate = DateTime.Today.ToString(GlobalConstants.WebDateTimeFormatRequired),
                 EntitiesHeadersForColumnSelection = this.fundsService
                                                         .GetAllActiveFunds()
                                                         .Take(1)
@@ -114,7 +115,7 @@
 
             if (model.ChosenDate != null)
             {
-                chosenDate = DateTime.ParseExact(model.ChosenDate, GlobalConstants.DateTimeFormatDisplay, CultureInfo.InvariantCulture);
+                chosenDate = DateTime.ParseExact(model.ChosenDate, GlobalConstants.WebDateTimeFormatRequired, CultureInfo.InvariantCulture);
             }
 
             if (isInSelectionMode)

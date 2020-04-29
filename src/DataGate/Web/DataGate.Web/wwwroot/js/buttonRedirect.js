@@ -4,6 +4,6 @@
     btn.addEventListener('click', redirect);
 
     function redirect() {
-        window.location.href = 'All';
+        window.location.href = 'all';
     }
 }
