@@ -12,7 +12,6 @@ namespace DataGate.Services.Data.FundSubFunds
         //
         // Table functions names as in DB
         private readonly string sqlFunctionAllFund = "fn_all_fund";
-        private readonly string sqlFunctionAllActiveFund = "fn_active_fund";
         private readonly string sqlFunctionSubFundPdfView = "fn_active_subfund_pdf";
         private readonly string sqlFunctionTimelineFund = "dbo.fn_timeline_fund";
         private readonly string sqlFunctionDistinctDocuments = "[dbo].[fn_view_distinct_documents_fund]";
@@ -49,7 +48,7 @@ namespace DataGate.Services.Data.FundSubFunds
 
         public IEnumerable<string[]> GetFund_SubFundsWithSelectedViewAndDate(
                                                                     List<string> preSelectedColumns,
-                                                                    IEnumerable<string> selectedColumns,
+                                                                    List<string> selectedColumns,
                                                                     DateTime? chosenDate,
                                                                     int id)
         {
