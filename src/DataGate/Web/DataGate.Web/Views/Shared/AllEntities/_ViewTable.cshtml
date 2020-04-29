@@ -1,7 +1,15 @@
-﻿@model DataGate.Web.ViewModels.Entities.EntitiesViewModel
+﻿@using DataGate.Common
+@model DataGate.Web.ViewModels.Entities.EntitiesViewModel
 
 @{
-    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+    var controller = this.ViewContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
+    var targetRoute = string.Empty;
+
+    if (controller == GlobalConstants.FundsControllerName)
+    {
+        targetRoute = "f";
+    }
+
     var entityId = string.Empty;
 }
 <div class="table-responsive border-0 mx-auto" id="tableDoubleScroll">
@@ -24,12 +32,21 @@
             {
                 entityId = Model.Entities[row][2];
 
-                <tr class="tableRowPharus" onclick="document.location ='/@controllerName/ViewEntitySE/@entityId/@Model.ChosenDate'">
+                <tr class="">
                     @for (int col = 0; col < Model.Entities[row].Length; col++)
                     {
-                        <td class="p-1">
-                            @Model.Entities[row][col]
-                        </td>
+                        if (Model.Entities[0][col].Contains("NAME"))
+                        {
+                            <td class="p-1 tableCellPharus" onclick="document.location ='/@targetRoute/@entityId/@Model.ChosenDate'">
+                                @Model.Entities[row][col]
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="p-1">
+                                @Model.Entities[row][col]
+                            </td>
+                        }
                     }
                 </tr>
             }
