@@ -22,7 +22,7 @@
     using Microsoft.Extensions.Caching.Memory;
 
     [Authorize]
-    public class FundsController : Controller
+    public class FundsController : BaseController
     {
         // Fund constants
         private const int IndexEntityNameInSQLTable = 3;
@@ -191,48 +191,66 @@
             return fileStreamResult;
         }
 
-        [HttpGet]
-        [Route("Funds/ViewEntitySE/{EntityId}/{ChosenDate}")]
-        public IActionResult ViewEntitySE(int entityId, string chosenDate)
+        private void CallAllEntitiesWithSelectedColumns(EntitiesViewModel model, DateTime? chosenDate)
         {
-            SpecificEntityViewModel viewModel = new SpecificEntityViewModel
-            {
-                ChosenDate = chosenDate,
-                EntityId = entityId,
-            };
-
-            this.SetModelValuesForSpecificView(viewModel);
-
-            this.HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
-
-            this.ModelState.Clear();
-            return this.View(viewModel);
-        }
-
-        public JsonResult AutoCompleteSubFundList(string selectTerm, int entityId)
-        {
-            var entitiesToSearch = this.fundsService
-                .GetFund_SubFunds(null, entityId)
-                .Skip(1)
+            model.Entities = this.fundsService.GetAllFundsWithSelectedViewAndDate(
+                                                                        model.PreSelectedColumns,
+                                                                        model.SelectedColumns,
+                                                                        chosenDate)
                 .ToList();
-
-            if (selectTerm != null)
-            {
-                entitiesToSearch = entitiesToSearch.Where(sf => sf[3]
-                                                     .ToLower()
-                                                     .Contains(selectTerm
-                                                     .ToLower()))
-                                                   .ToList();
-            }
-
-            var modifiedData = entitiesToSearch.Select(sf => new
-            {
-                id = sf[3],
-                text = sf[3],
-            });
-
-            return this.Json(modifiedData);
         }
+
+        private void CallActiveEntitiesWithSelectedColumns(EntitiesViewModel model, DateTime? chosenDate)
+        {
+            model.Entities = this.fundsService.GetAllActiveFundsWithSelectedViewAndDate(
+                                                                        model.PreSelectedColumns,
+                                                                        model.SelectedColumns,
+                                                                        chosenDate)
+                .ToList();
+        }
+
+        //[HttpGet]
+        //[Route("Funds/ViewEntitySE/{EntityId}/{ChosenDate}")]
+        //public IActionResult ViewEntitySE(int entityId, string chosenDate)
+        //{
+        //    SpecificEntityViewModel viewModel = new SpecificEntityViewModel
+        //    {
+        //        ChosenDate = chosenDate,
+        //        EntityId = entityId,
+        //    };
+
+        //    this.SetModelValuesForSpecificView(viewModel);
+
+        //    this.HttpContext.Session.SetString("entityId", Convert.ToString(entityId));
+
+        //    this.ModelState.Clear();
+        //    return this.View(viewModel);
+        //}
+
+        //public JsonResult AutoCompleteSubFundList(string selectTerm, int entityId)
+        //{
+        //    var entitiesToSearch = this.fundsService
+        //        .GetFund_SubFunds(null, entityId)
+        //        .Skip(1)
+        //        .ToList();
+
+        //    if (selectTerm != null)
+        //    {
+        //        entitiesToSearch = entitiesToSearch.Where(sf => sf[3]
+        //                                             .ToLower()
+        //                                             .Contains(selectTerm
+        //                                             .ToLower()))
+        //                                           .ToList();
+        //    }
+
+        //    var modifiedData = entitiesToSearch.Select(sf => new
+        //    {
+        //        id = sf[3],
+        //        text = sf[3],
+        //    });
+
+        //    return this.Json(modifiedData);
+        //}
 
         //[HttpPost]
         //[Route("Funds/ViewEntitySE/{EntityId}/{ChosenDate}")]
@@ -680,86 +698,70 @@
         //    return this.LocalRedirect(returnUrl);
         //}
 
-        private void CallAllEntitiesWithSelectedColumns(EntitiesViewModel model, DateTime? chosenDate)
-        {
-            model.Entities = this.fundsService.GetAllFundsWithSelectedViewAndDate(
-                                                                        model.PreSelectedColumns,
-                                                                        model.SelectedColumns,
-                                                                        chosenDate)
-                .ToList();
-        }
 
-        private void CallActiveEntitiesWithSelectedColumns(EntitiesViewModel model, DateTime? chosenDate)
-        {
-            model.Entities = this.fundsService.GetAllActiveFundsWithSelectedViewAndDate(
-                                                                        model.PreSelectedColumns,
-                                                                        model.SelectedColumns,
-                                                                        chosenDate)
-                .ToList();
-        }
 
-        private void CallEntitySubEntitiesWithSelectedColumns(SpecificEntityViewModel model, DateTime chosenDate)
-        {
-            model.EntitySubEntities = this.fundsService.GetFund_SubFundsWithSelectedViewAndDate(
-                                                                                model.PreSelectedColumns,
-                                                                                model.SelectedColumns,
-                                                                                chosenDate,
-                                                                                model.EntityId)
-                .ToList();
-        }
+        //private void CallEntitySubEntitiesWithSelectedColumns(SpecificEntityViewModel model, DateTime chosenDate)
+        //{
+        //    model.EntitySubEntities = this.fundsService.GetFund_SubFundsWithSelectedViewAndDate(
+        //                                                                        model.PreSelectedColumns,
+        //                                                                        model.SelectedColumns,
+        //                                                                        chosenDate,
+        //                                                                        model.EntityId)
+        //        .ToList();
+        //}
 
-        private void SetModelValuesForSpecificView(SpecificEntityViewModel model)
-        {
-            model.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
-            var date = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-            int entityId = model.EntityId;
+        //private void SetModelValuesForSpecificView(SpecificEntityViewModel model)
+        //{
+        //    model.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+        //    var date = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+        //    int entityId = model.EntityId;
 
-            model.Entity = this.fundsService.GetFundWithDateById(date, entityId).ToList();
-            model.EntityDistinctDocuments = this.fundsService.
-                GetDistinctFundDocuments(date, entityId).ToList();
-            model.EntityDistinctAgreements = this.fundsService.GetDistinctFundAgreements(date, entityId).ToList();
+        //    model.Entity = this.fundsService.GetFundWithDateById(date, entityId).ToList();
+        //    model.EntityDistinctDocuments = this.fundsService.
+        //        GetDistinctFundDocuments(date, entityId).ToList();
+        //    model.EntityDistinctAgreements = this.fundsService.GetDistinctFundAgreements(date, entityId).ToList();
 
-            model.EntitySubEntities = this.fundsService.GetFund_SubFunds(date, entityId).ToList();
-            model.EntitiesHeadersForColumnSelection = this.fundsService
-                                                                .GetFund_SubFunds(date, entityId)
-                                                                .Take(1)
-                                                                .ToList();
-            model.EntityTimeline = this.fundsService.GetFundTimeline(entityId).ToList();
-            model.EntityDocuments = this.fundsService.GetAllFundDocuments(entityId).ToList();
-            model.EntityAgreements = this.fundsService.GetAllFundAgreements(date, entityId).ToList();
+        //    model.EntitySubEntities = this.fundsService.GetFund_SubFunds(date, entityId).ToList();
+        //    model.EntitiesHeadersForColumnSelection = this.fundsService
+        //                                                        .GetFund_SubFunds(date, entityId)
+        //                                                        .Take(1)
+        //                                                        .ToList();
+        //    model.EntityTimeline = this.fundsService.GetFundTimeline(entityId).ToList();
+        //    model.EntityDocuments = this.fundsService.GetAllFundDocuments(entityId).ToList();
+        //    model.EntityAgreements = this.fundsService.GetAllFundAgreements(date, entityId).ToList();
 
-            model.StartConnection = DateTime.ParseExact(model.Entity.ToList()[1][0], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+        //    model.StartConnection = DateTime.ParseExact(model.Entity.ToList()[1][0], "dd/MM/yyyy", CultureInfo.InvariantCulture);
 
-            if (model.EndConnection != null)
-            {
-                model.EndConnection = DateTime.ParseExact(model.Entity.ToList()[1][1], "dd/MM/yyyy", CultureInfo.InvariantCulture);
-            }
+        //    if (model.EndConnection != null)
+        //    {
+        //        model.EndConnection = DateTime.ParseExact(model.Entity.ToList()[1][1], "dd/MM/yyyy", CultureInfo.InvariantCulture);
+        //    }
 
-            //this.ViewData["ProspectusFileTypes"] = this.fundsSelectListService.GetAllProspectusFileTypes();
-            //this.ViewData["AgreementsFileTypes"] = this.fundsSelectListService.GetAllAgreementsFileTypes();
-            //this.ViewData["AgreementsStatus"] = this.agreementsSelectListService.GetAllTbDomAgreementStatus();
-            //this.ViewData["Companies"] = this.agreementsSelectListService.GetAllTbCompanies();
-        }
+        //    //this.ViewData["ProspectusFileTypes"] = this.fundsSelectListService.GetAllProspectusFileTypes();
+        //    //this.ViewData["AgreementsFileTypes"] = this.fundsSelectListService.GetAllAgreementsFileTypes();
+        //    //this.ViewData["AgreementsStatus"] = this.agreementsSelectListService.GetAllTbDomAgreementStatus();
+        //    //this.ViewData["Companies"] = this.agreementsSelectListService.GetAllTbCompanies();
+        //}
 
-        private static void SetModelValuesForEditView(EditFundInputModel model)
-        {
-            model.FundName = model.EntityProperties[1][3];
-            model.CSSFCode = model.EntityProperties[1][4];
-            model.FACode = model.EntityProperties[1][9];
-            model.DEPCode = model.EntityProperties[1][10];
-            model.TACode = model.EntityProperties[1][11];
-            model.TinNumber = model.EntityProperties[1][14];
-            model.LEICode = model.EntityProperties[1][15];
-            model.RegNumber = model.EntityProperties[1][16];
-        }
+        //private static void SetModelValuesForEditView(EditFundInputModel model)
+        //{
+        //    model.FundName = model.EntityProperties[1][3];
+        //    model.CSSFCode = model.EntityProperties[1][4];
+        //    model.FACode = model.EntityProperties[1][9];
+        //    model.DEPCode = model.EntityProperties[1][10];
+        //    model.TACode = model.EntityProperties[1][11];
+        //    model.TinNumber = model.EntityProperties[1][14];
+        //    model.LEICode = model.EntityProperties[1][15];
+        //    model.RegNumber = model.EntityProperties[1][16];
+        //}
 
-        private void SetViewDataValuesForFundSelectLists()
-        {
-            //this.ViewData["Status"] = this.fundsSelectListService.GetAllTbDomFStatus();
-            //this.ViewData["LegalForm"] = this.fundsSelectListService.GetAllTbDomLegalForm();
-            //this.ViewData["LegalVehicle"] = this.fundsSelectListService.GetAllTbDomLegalVehicle();
-            //this.ViewData["LegalType"] = this.fundsSelectListService.GetAllTbDomLegalType();
-            //this.ViewData["CompanyTypeDesc"] = this.fundsSelectListService.GetAllTbDomCompanyDesc();
-        }
+        //private void SetViewDataValuesForFundSelectLists()
+        //{
+        //    //this.ViewData["Status"] = this.fundsSelectListService.GetAllTbDomFStatus();
+        //    //this.ViewData["LegalForm"] = this.fundsSelectListService.GetAllTbDomLegalForm();
+        //    //this.ViewData["LegalVehicle"] = this.fundsSelectListService.GetAllTbDomLegalVehicle();
+        //    //this.ViewData["LegalType"] = this.fundsSelectListService.GetAllTbDomLegalType();
+        //    //this.ViewData["CompanyTypeDesc"] = this.fundsSelectListService.GetAllTbDomCompanyDesc();
+        //}
     }
 }

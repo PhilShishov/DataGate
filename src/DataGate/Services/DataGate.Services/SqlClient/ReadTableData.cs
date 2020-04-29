@@ -4,7 +4,7 @@
 // Author:  Philip Shishov
 
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-namespace DataGate.Services
+namespace DataGate.Services.SqlClient
 {
     using System;
     using System.Collections.Generic;
