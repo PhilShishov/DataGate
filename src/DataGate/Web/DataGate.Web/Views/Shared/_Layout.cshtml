@@ -114,6 +114,31 @@
                         </ul>
 
                     </li>
+
+                    <li class="nav-item mt-3 ml-2">
+                        <a class="nav-link nav-link-white active"
+                           asp-area=""
+                           asp-controller="Funds"
+                           asp-action="All">Fund Library</a>
+                    </li>
+                    <li class="nav-item mt-3 ml-2">
+                        <a class="nav-link nav-link-white active"
+                           asp-area=""
+                           asp-controller=""
+                           asp-action=""> Sub Fund Library</a>
+                    </li>
+                    <li class="nav-item mt-3 ml-2">
+                        <a class="nav-link nav-link-white active"
+                           asp-area=""
+                           asp-controller=""
+                           asp-action="">Share Class Library</a>
+                    </li>
+                    <li class="nav-item mt-3 ml-2">
+                        <a class="nav-link nav-link-white active"
+                           asp-area=""
+                           asp-controller=""
+                           asp-action="">Agreements Library</a>
+                    </li>
                 </ul>
 
                 <button class="navbar-toggler ml-auto"
@@ -132,6 +157,18 @@
                             <li class="nav-item active">
                                 <a class="nav-link nav-link-white active"
                                    asp-area=""
+                                   asp-controller=""
+                                   asp-action="">Reports</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link nav-link-white active"
+                                   asp-area=""
+                                   asp-controller=""
+                                   asp-action="">Projects</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link nav-link-white active"
+                                   asp-area=""
                                    asp-controller="User"
                                    asp-action="Index">Panel</a>
                             </li>
@@ -147,7 +184,7 @@
                             }
 
                             <li class="nav-item">
-                                <a class="nav-link nav-link-white active" asp-area="Identity" asp-page="/Account/Manage/Index">Manage</a>
+                                <a class="nav-link nav-link-white active" asp-area="Identity" asp-page="/Account/Manage/Index">@this.User.Identity.Name</a>
                             </li>
 
                             <li class="nav-item">
