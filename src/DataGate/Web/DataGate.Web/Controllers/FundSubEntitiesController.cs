@@ -4,7 +4,9 @@
     using System.Globalization;
     using System.Linq;
 
+    using DataGate.Common;
     using DataGate.Services.Data.FundSubFunds.Contracts;
+    using DataGate.Web.Utilities;
     using DataGate.Web.ViewModels.Entities;
 
     using Microsoft.AspNetCore.Authorization;
@@ -37,34 +39,110 @@
             return this.View(viewModel);
         }
 
-        //public JsonResult AutoCompleteSubFundList(string selectTerm, int entityId)
-        //{
-        //    var entitiesToSearch = this.fundsService
-        //        .GetFund_SubFunds(null, entityId)
-        //        .Skip(1)
-        //        .ToList();
+        public JsonResult AutoCompleteSubFundList(string selectTerm, int entityId)
+        {
+            var entitiesToSearch = this.fundsService
+                .GetFund_SubFunds(null, entityId)
+                .Skip(1)
+                .ToList();
 
-        //    if (selectTerm != null)
-        //    {
-        //        entitiesToSearch = entitiesToSearch.Where(sf => sf[3]
-        //                                             .ToLower()
-        //                                             .Contains(selectTerm
-        //                                             .ToLower()))
-        //                                           .ToList();
-        //    }
+            if (selectTerm != null)
+            {
+                entitiesToSearch = entitiesToSearch
+                    .Where(sf => sf[GlobalConstants.IndexEntityNameInSQLTable]
+                        .ToLower()
+                        .Contains(selectTerm
+                        .ToLower()))
+                    .ToList();
+            }
 
-        //    var modifiedData = entitiesToSearch.Select(sf => new
-        //    {
-        //        id = sf[3],
-        //        text = sf[3],
-        //    });
+            var modifiedData = entitiesToSearch.Select(sf => new
+            {
+                id = sf[GlobalConstants.IndexEntityNameInSQLTable],
+                text = sf[GlobalConstants.IndexEntityNameInSQLTable],
+            });
 
-        //    return this.Json(modifiedData);
-        //}
+            return this.Json(modifiedData);
+        }
+
+        [HttpPost]
+        [Route("f/{EntityId}/{ChosenDate}")]
+        public IActionResult ByIdAndDate(SpecificEntityViewModel model)
+        {
+            this.SetModelValuesForSpecificView(model);
+
+            if (model.Command == "Reset")
+            {
+                model.SelectTerm = "Quick Select";
+                return this.View(model);
+            }
+
+            bool isInSelectionMode = false;
+
+            var chosenDate = DateTime.ParseExact(model.ChosenDate, GlobalConstants.DateTimeFormatDisplay, CultureInfo.InvariantCulture);
+
+            if (model.SelectedColumns != null && model.SelectedColumns.Count > 0)
+            {
+                isInSelectionMode = true;
+            }
+
+            model.Entity = this.fundsService
+                   .GetFundWithDateById(chosenDate, model.EntityId)
+                   .ToList();
+
+            if (model.SelectTerm == null)
+            {
+                if (isInSelectionMode)
+                {
+                    this.CallEntitySubEntitiesWithSelectedColumns(model, chosenDate);
+                }
+                else if (!isInSelectionMode)
+                {
+                    model.EntitySubEntities = this.fundsService.GetFund_SubFunds(chosenDate, model.EntityId).ToList();
+                }
+
+                return this.View(model);
+            }
+
+            if (isInSelectionMode)
+            {
+                this.CallEntitySubEntitiesWithSelectedColumns(model, chosenDate);
+            }
+            else if (!isInSelectionMode)
+            {
+                model.EntitySubEntities = this.fundsService
+                    .GetFund_SubFunds(chosenDate, model.EntityId)
+                    .ToList();
+            }
+
+            if (model.SelectTerm != null)
+            {
+                model.EntitySubEntities = CreateTableView.AddTableToView(model.EntitySubEntities, model.SelectTerm.ToLower());
+            }
+
+            if (model.Entity != null && model.EntitySubEntities != null)
+            {
+                return this.View(model);
+            }
+
+            this.ModelState.Clear();
+            return this.View();
+        }
+
+        private void CallEntitySubEntitiesWithSelectedColumns(SpecificEntityViewModel model, DateTime chosenDate)
+        {
+            model.EntitySubEntities = this.fundsService
+                .GetFund_SubFundsWithSelectedViewAndDate(
+                                                model.PreSelectedColumns,
+                                                model.SelectedColumns,
+                                                chosenDate,
+                                                model.EntityId)
+                .ToList();
+        }
 
         private void SetModelValuesForSpecificView(SpecificEntityViewModel model)
         {
-            model.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+            model.ControllerName = this.ControllerContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
             var date = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
             int entityId = model.EntityId;
 

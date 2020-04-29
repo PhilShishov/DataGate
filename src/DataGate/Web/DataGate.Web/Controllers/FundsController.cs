@@ -24,9 +24,6 @@
     [Authorize]
     public class FundsController : BaseController
     {
-        // Fund constants
-        private const int IndexEntityNameInSQLTable = 3;
-
         private IMemoryCache cache;
         private readonly Pharus_vFinaleDbContext context;
         private readonly IFundsService fundsService;
@@ -80,7 +77,7 @@
             if (selectTerm != null)
             {
                 result = result
-                    .Where(f => f[IndexEntityNameInSQLTable]
+                    .Where(f => f[GlobalConstants.IndexEntityNameInSQLTable]
                         .ToLower()
                         .Contains(selectTerm.ToLower()))
                     .ToList();
@@ -88,8 +85,8 @@
 
             var modifiedData = result.Select(f => new
             {
-                id = f[IndexEntityNameInSQLTable],
-                text = f[IndexEntityNameInSQLTable],
+                id = f[GlobalConstants.IndexEntityNameInSQLTable],
+                text = f[GlobalConstants.IndexEntityNameInSQLTable],
             });
 
             return this.Json(modifiedData);
@@ -157,38 +154,18 @@
             return this.View();
         }
 
-        [HttpPost]
         public FileStreamResult GenerateExcelReport(EntitiesViewModel model)
         {
-            FileStreamResult fileStreamResult = null;
-
-            string typeName = model.GetType().Name;
             string controllerName = this.ControllerContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
 
-            if (this.HttpContext.Request.Form.ContainsKey("extract_Excel"))
-            {
-                fileStreamResult = ExtractTable.ExtractTableAsExcel(model.Entities.ToList(), typeName, controllerName);
-            }
-
-            return fileStreamResult;
+            return GenerateFileTemplate.GenerateExcelTemplate(model, controllerName);
         }
 
-        [HttpPost]
         public FileStreamResult GeneratePdfReport(EntitiesViewModel model)
         {
-            FileStreamResult fileStreamResult = null;
-
-            var chosenDate = DateTime.ParseExact(model.ChosenDate, GlobalConstants.DateTimeFormatDisplay, CultureInfo.InvariantCulture);
-            string typeName = model.GetType().Name;
             string controllerName = this.ControllerContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
 
-            if (this.HttpContext.Request.Form.ContainsKey("extract_Pdf"))
-            {
-                fileStreamResult = ExtractTable
-                    .ExtractTableAsPdf(model.Entities.ToList(), chosenDate, typeName, controllerName);
-            }
-
-            return fileStreamResult;
+            return GenerateFileTemplate.GeneratePdfTemplate(model, controllerName);
         }
 
         private void CallAllEntitiesWithSelectedColumns(EntitiesViewModel model, DateTime? chosenDate)
@@ -210,69 +187,6 @@
                             chosenDate)
                 .ToList();
         }
-
-        //[HttpPost]
-        //[Route("Funds/ViewEntitySE/{EntityId}/{ChosenDate}")]
-        //public IActionResult ViewEntitySE(SpecificEntityViewModel model)
-        //{
-        //    SetModelValuesForSpecificView(model);
-
-        //    if (model.Command == "Reset")
-        //    {
-        //        model.SelectTerm = "Quick Select";
-        //        return this.View(model);
-        //    }
-
-        //    bool isInSelectionMode = false;
-
-        //    var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-
-        //    if (model.SelectedColumns != null && model.SelectedColumns.Count > 0)
-        //    {
-        //        isInSelectionMode = true;
-        //    }
-
-        //    model.Entity = this.fundsService
-        //           .GetFundWithDateById(chosenDate, model.EntityId);
-
-        //    if (model.SelectTerm == null)
-        //    {
-        //        if (isInSelectionMode)
-        //        {
-        //            CallEntitySubEntitiesWithSelectedColumns(model, chosenDate);
-        //        }
-        //        else if (!isInSelectionMode)
-        //        {
-        //            model.EntitySubEntities = this.fundsService.GetFund_SubFunds(chosenDate, model.EntityId);
-        //        }
-
-        //        return this.View(model);
-        //    }
-
-        //    if (isInSelectionMode)
-        //    {
-        //        CallEntitySubEntitiesWithSelectedColumns(model, chosenDate);
-        //    }
-
-        //    else if (!isInSelectionMode)
-        //    {
-        //        model.EntitySubEntities = this.fundsService
-        //            .GetFund_SubFunds(chosenDate, model.EntityId);
-        //    }
-
-        //    if (model.SelectTerm != null)
-        //    {
-        //        model.EntitySubEntities = CreateTableView.AddTableToView(model.EntitySubEntities, model.SelectTerm.ToLower());
-        //    }
-
-        //    if (model.Entity != null && model.EntitySubEntities != null)
-        //    {
-        //        return this.View(model);
-        //    }
-
-        //    this.ModelState.Clear();
-        //    return this.View();
-        //}
 
         //[HttpPost]
         //public IActionResult UploadProspectus(SpecificEntityViewModel model)
@@ -655,51 +569,6 @@
         //    }
 
         //    return this.LocalRedirect(returnUrl);
-        //}
-
-
-
-        //private void CallEntitySubEntitiesWithSelectedColumns(SpecificEntityViewModel model, DateTime chosenDate)
-        //{
-        //    model.EntitySubEntities = this.fundsService.GetFund_SubFundsWithSelectedViewAndDate(
-        //                                                                        model.PreSelectedColumns,
-        //                                                                        model.SelectedColumns,
-        //                                                                        chosenDate,
-        //                                                                        model.EntityId)
-        //        .ToList();
-        //}
-
-        //private void SetModelValuesForSpecificView(SpecificEntityViewModel model)
-        //{
-        //    model.ControllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
-        //    var date = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
-        //    int entityId = model.EntityId;
-
-        //    model.Entity = this.fundsService.GetFundWithDateById(date, entityId).ToList();
-        //    model.EntityDistinctDocuments = this.fundsService.
-        //        GetDistinctFundDocuments(date, entityId).ToList();
-        //    model.EntityDistinctAgreements = this.fundsService.GetDistinctFundAgreements(date, entityId).ToList();
-
-        //    model.EntitySubEntities = this.fundsService.GetFund_SubFunds(date, entityId).ToList();
-        //    model.EntitiesHeadersForColumnSelection = this.fundsService
-        //                                                        .GetFund_SubFunds(date, entityId)
-        //                                                        .Take(1)
-        //                                                        .ToList();
-        //    model.EntityTimeline = this.fundsService.GetFundTimeline(entityId).ToList();
-        //    model.EntityDocuments = this.fundsService.GetAllFundDocuments(entityId).ToList();
-        //    model.EntityAgreements = this.fundsService.GetAllFundAgreements(date, entityId).ToList();
-
-        //    model.StartConnection = DateTime.ParseExact(model.Entity.ToList()[1][0], "dd/MM/yyyy", CultureInfo.InvariantCulture);
-
-        //    if (model.EndConnection != null)
-        //    {
-        //        model.EndConnection = DateTime.ParseExact(model.Entity.ToList()[1][1], "dd/MM/yyyy", CultureInfo.InvariantCulture);
-        //    }
-
-        //    //this.ViewData["ProspectusFileTypes"] = this.fundsSelectListService.GetAllProspectusFileTypes();
-        //    //this.ViewData["AgreementsFileTypes"] = this.fundsSelectListService.GetAllAgreementsFileTypes();
-        //    //this.ViewData["AgreementsStatus"] = this.agreementsSelectListService.GetAllTbDomAgreementStatus();
-        //    //this.ViewData["Companies"] = this.agreementsSelectListService.GetAllTbCompanies();
         //}
 
         //private static void SetModelValuesForEditView(EditFundInputModel model)
