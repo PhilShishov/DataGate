@@ -24,30 +24,21 @@
     [Authorize]
     public class FundsController : BaseController
     {
-        private IMemoryCache cache;
         private readonly Pharus_vFinaleDbContext context;
         private readonly IFundsService fundsService;
         //private readonly IFundsSelectListService fundsSelectListService;
         //private readonly IAgreementsSelectListService agreementsSelectListService;
-        private readonly IFileSystemService entitiesFileService;
-        private readonly IWebHostEnvironment _environment;
 
         public FundsController(
             IFundsService fundsService,
             //IFundsSelectListService fundsSelectListService,
             //IAgreementsSelectListService agreementsSelectListService,
-            IFileSystemService entitiesFileService,
-            IWebHostEnvironment hostingEnvironment,
-            IMemoryCache memoryCache,
             Pharus_vFinaleDbContext context)
         {
             this.context = context;
             this.fundsService = fundsService;
             //this.fundsSelectListService = fundsSelectListService;
             //this.agreementsSelectListService = agreementsSelectListService;
-            this.entitiesFileService = entitiesFileService;
-            this.cache = memoryCache;
-            this._environment = hostingEnvironment;
         }
 
         [HttpGet]
@@ -155,19 +146,33 @@
             return this.View();
         }
 
-        public FileStreamResult GenerateExcelReport(EntitiesViewModel model)
+        [HttpPost]
+        public IActionResult GenerateExcelReport(EntitiesViewModel model)
         {
-            string typeName = model.GetType().Name;
+            int count = model.Entities.Count;
+            if (count > GlobalConstants.RowNumberOfHeadersInTable)
+            {
+                string typeName = model.GetType().Name;
 
-            return GenerateFileTemplate.ExtractTableAsExcel(model.Entities, typeName, GlobalConstants.FundsControllerName);
+                return GenerateFileTemplate.ExtractTableAsExcel(model.Entities, typeName, GlobalConstants.FundsControllerName);
+            }
+
+            return this.Redirect(GlobalConstants.FundAllUrl);
         }
 
-        public FileStreamResult GeneratePdfReport(EntitiesViewModel model)
+        [HttpPost]
+        public IActionResult GeneratePdfReport(EntitiesViewModel model)
         {
-            var chosenDate = DateTime.ParseExact(model.ChosenDate, GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
-            string typeName = model.GetType().Name;
+            int count = model.Entities.Count;
+            if (count > GlobalConstants.RowNumberOfHeadersInTable)
+            {
+                var chosenDate = DateTime.ParseExact(model.ChosenDate, GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
+                string typeName = model.GetType().Name;
 
-            return GenerateFileTemplate.ExtractTableAsPdf(model.Entities, chosenDate, typeName, GlobalConstants.FundsControllerName);
+                return GenerateFileTemplate.ExtractTableAsPdf(model.Entities, chosenDate, typeName, GlobalConstants.FundsControllerName);
+            }
+
+            return this.Redirect(GlobalConstants.FundAllUrl);
         }
 
         private void CallAllEntitiesWithSelectedColumns(EntitiesViewModel model, DateTime? chosenDate)

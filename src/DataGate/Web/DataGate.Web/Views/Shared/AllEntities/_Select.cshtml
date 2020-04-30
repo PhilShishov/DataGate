@@ -5,7 +5,7 @@
         <div class=" select-div-pharus">
             <select asp-for="SelectTerm"
                     id="SelectTerm"
-                    class="form-control input-sm"                    
+                    class="form-control input-sm"
                     onchange="this.form.submit()">
                 <option value=@Model.SelectTerm selected>@Model.SelectTerm</option>
             </select>
@@ -21,15 +21,8 @@
             </button>
         </div>
 
-        <div class="ml-2 d-flex">
-            <div class="mr-2">
-                <button type="button"
-                        class="btn btn-primary btn-sm"
-                        id="btnRedirect">
-                    Show All
-                </button>
-            </div>
 
+        <div class="ml-2 d-flex">
             <div class="el-switch-div">
                 <label class="el-switch el-switch-sm mt-1">
                     <input type="checkbox"
@@ -40,11 +33,14 @@
                     <span>Active</span>
                 </label>
             </div>
+            <div class="mx-2">
+                <button type="button"
+                        class="btn btn-primary btn-sm"
+                        id="btnRedirect">
+                    Reset
+                </button>
+            </div>
         </div>
-    </div>
-
-    <div class="text-center">
-        <label class="lbl-toolbar-pharus mt-2">Select</label>
     </div>
 </div>
 
