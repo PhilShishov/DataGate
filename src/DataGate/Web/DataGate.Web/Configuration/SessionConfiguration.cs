@@ -13,8 +13,9 @@
             services.AddDistributedMemoryCache();
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromHours(SessionIdleTimeout);
+                options.IdleTimeout = TimeSpan.FromDays(SessionIdleTimeout);
                 options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
             });
 
             return services;

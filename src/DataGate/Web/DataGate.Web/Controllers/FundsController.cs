@@ -87,6 +87,8 @@
         [HttpPost]
         public IActionResult All(EntitiesViewModel model)
         {
+            this.TempData["InfoMessage"] = "Table report not generated!";
+
             // ---------------------------------------------------------
             //
             // Available header column selection
@@ -149,6 +151,7 @@
         [HttpPost]
         public IActionResult GenerateExcelReport(EntitiesViewModel model)
         {
+            this.TempData["InfoMessage"] = "Table report not generated!";
             int count = model.Entities.Count;
             if (count > GlobalConstants.RowNumberOfHeadersInTable)
             {
