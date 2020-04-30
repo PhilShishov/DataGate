@@ -383,7 +383,7 @@
         public IActionResult GenerateExcelReport(SpecificEntityViewModel model)
         {
             int count = model.EntitySubEntities.Count;
-            if (count > GlobalConstants.RowNumberOfHeadersInTable)
+            if (count > GlobalConstants.NumberOfHeadersInTable)
             {
                 string typeName = model.GetType().Name;
 
@@ -397,7 +397,7 @@
         public IActionResult GeneratePdfReport(SpecificEntityViewModel model)
         {
             int count = model.EntitySubEntities.Count;
-            if (count > GlobalConstants.RowNumberOfHeadersInTable)
+            if (count > GlobalConstants.NumberOfHeadersInTable)
             {
                 // TODO prepare query for less than 16 columns
                 //if (model.EntitySubEntities[GlobalConstants.IndexEntityHeadersInSqlTable].Length > GlobalConstants.NumberOfAllowedColumnsInPdfView)

@@ -2,6 +2,10 @@
 {
     public static class InfoMessages
     {
+        public const string TemDataInfoMessageDisplay = "InfoMessage";
+
+        public const string SuccessfullyUpdatedTable = "The table was successfully updated.";
+
         public const string SuccessfullyDeletedMessage = "The \"{0}\" was successfully deleted.";
 
         public const string ChangeUserPasswordSuccessfully = "Your password has been changed.";
