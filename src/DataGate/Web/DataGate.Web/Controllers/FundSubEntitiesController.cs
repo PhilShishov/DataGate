@@ -2,24 +2,34 @@
 {
     using System;
     using System.Globalization;
+    using System.IO;
     using System.Linq;
 
     using DataGate.Common;
+    using DataGate.Services.Data.Files;
     using DataGate.Services.Data.FundSubFunds.Contracts;
     using DataGate.Web.Utilities;
     using DataGate.Web.ViewModels.Entities;
 
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
 
     [Authorize]
     public class FundSubEntitiesController : BaseController
     {
         private readonly IFundSubFundsService fundsService;
+        private readonly IFileSystemService entitiesFileService;
+        private readonly IWebHostEnvironment environment;
 
-        public FundSubEntitiesController(IFundSubFundsService fundSubFundsService)
+        public FundSubEntitiesController(
+                    IFundSubFundsService fundSubFundsService,
+                    IFileSystemService entitiesFileService,
+                    IWebHostEnvironment environment)
         {
             this.fundsService = fundSubFundsService;
+            this.entitiesFileService = entitiesFileService;
+            this.environment = environment;
         }
 
         [HttpGet]
@@ -88,9 +98,6 @@
             }
 
             var chosenDate = DateTime.ParseExact(model.ChosenDate, GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
-            //model.Entity = this.fundsService
-            //       .GetFundWithDateById(chosenDate, model.EntityId)
-            //       .ToList();
 
             if (model.SelectTerm == null)
             {
@@ -131,47 +138,118 @@
             return this.View();
         }
 
-        //[HttpPost]
-        //public IActionResult UploadProspectus(SpecificEntityViewModel model)
-        //{
-        //    SetModelValuesForSpecificView(model);
+        [HttpPost]
+        public IActionResult UploadProspectus(SpecificEntityViewModel model)
+        {
+            this.SetModelValuesForSpecificView(model);
 
-        //    var file = model.UploadEntityFileModel.FileToUpload;
+            var file = model.UploadEntityFileModel.FileToUpload;
 
-        //    if (file != null || file.FileName != "")
-        //    {
-        //        string fileExt = Path.GetExtension(file.FileName);
-        //        string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\Funds\");
-        //        string path = $"{fileLocation}{file.FileName}";
+            if (file != null || file.FileName != string.Empty)
+            {
+                //                private string[] permittedExtensions = { ".txt", ".pdf" };
 
-        //        using (var stream = new FileStream(path, FileMode.Create))
-        //        {
-        //            file.CopyTo(stream);
-        //            stream.Close();
-        //        }
+                //        var ext = Path.GetExtension(uploadedFileName).ToLowerInvariant();
 
-        //        string startConnection = model.StartConnection.ToString("yyyyMMdd");
-        //        string endConnection = model.EndConnection?.ToString("yyyyMMdd");
+                //if (string.IsNullOrEmpty(ext) || !permittedExtensions.Contains(ext))
+                //{
+                //    // The extension is invalid ... discontinue processing the file
+                //}
 
-        //        var prosFileTypeDesc = model.UploadEntityFileModel.DocumentType;
-        //        int prosFileTypeId = this.context.TbDomFileType
-        //                .Where(ft => ft.FiletypeDesc == prosFileTypeDesc)
-        //                .Select(ft => ft.FiletypeId)
-        //                .FirstOrDefault();
+                //                private static readonly Dictionary<string, List<byte[]>> _fileSignature =
+                //    new Dictionary<string, List<byte[]>>
+                //{
+                //    { ".jpeg", new List<byte[]>
+                //        {
+                //            new byte[] { 0xFF, 0xD8, 0xFF, 0xE0 },
+                //            new byte[] { 0xFF, 0xD8, 0xFF, 0xE2 },
+                //            new byte[] { 0xFF, 0xD8, 0xFF, 0xE3 },
+                //        }
+                //    },
+                //};
 
-        //        this.entitiesFileService.AddDocumentToSpecificEntity(
-        //                                            file.FileName,
-        //                                            model.EntityId,
-        //                                            startConnection,
-        //                                            endConnection,
-        //                                            fileExt,
-        //                                            prosFileTypeId,
-        //                                            model.ControllerName);
+                //using (var reader = new BinaryReader(uploadedFileData))
+                //{
+                //    var signatures = _fileSignature[ext];
+                //    var headerBytes = reader.ReadBytes(signatures.Max(m => m.Length));
 
-        //    }
+                //    return signatures.Any(signature => 
+                //        headerBytes.Take(signature.Length).SequenceEqual(signature));
+                //}
 
-        //    return this.RedirectToAction("ViewEntitySE", new { model.EntityId, model.ChosenDate });
-        //}
+                //                Size validation
+                //Limit the size of uploaded files.
+
+                //In the sample app, the size of the file is limited to 2 MB(indicated in bytes).The limit is supplied via Configuration from the appsettings.json file:
+
+                //JSON
+
+                //Copy
+                //{
+                //                    "FileSizeLimit": 2097152
+                //}
+                //                The FileSizeLimit is injected into PageModel classes:
+
+                //C#
+
+                //Copy
+                //public class BufferedSingleFileUploadPhysicalModel : PageModel
+                //        {
+                //            private readonly long _fileSizeLimit;
+
+                //            public BufferedSingleFileUploadPhysicalModel(IConfiguration config)
+                //            {
+                //                _fileSizeLimit = config.GetValue<long>("FileSizeLimit");
+                //            }
+
+                //    ...
+                //}
+                //        When a file size exceeds the limit, the file is rejected:
+
+                //C#
+
+                //Copy
+                //if (formFile.Length > _fileSizeLimit)
+                //{
+                //    // The file is too large ... discontinue processing the file
+                //}
+
+                // DTO
+                string fileExt = Path.GetExtension(file.FileName);
+                string fileLocation = Path.Combine(this.environment.WebRootPath, @"FileFolder\Funds\");
+                string path = $"{fileLocation}{file.FileName}";
+
+                // file exists
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    file.CopyTo(stream);
+                    stream.Close();
+                }
+
+                string startConnection = model.StartConnection.ToString("yyyyMMdd");
+                string endConnection = model.EndConnection?.ToString("yyyyMMdd");
+
+                var prosFileTypeDesc = model.UploadEntityFileModel.DocumentType;
+                int prosFileTypeId = 0;
+                //this.context.TbDomFileType
+                //    .Where(ft => ft.FiletypeDesc == prosFileTypeDesc)
+                //    .Select(ft => ft.FiletypeId)
+                //    .FirstOrDefault();
+
+                this.entitiesFileService.AddDocumentToSpecificEntity(
+                                                    file.FileName,
+                                                    model.EntityId,
+                                                    startConnection,
+                                                    endConnection,
+                                                    fileExt,
+                                                    prosFileTypeId,
+                                                    model.ControllerName);
+
+            }
+
+            return this.RedirectToAction("ViewEntitySE", new { model.EntityId, model.ChosenDate });
+        }
 
         //[HttpPost]
         //public IActionResult UploadAgreement(SpecificEntityViewModel model)
@@ -301,11 +379,18 @@
         //    return Json(new { data = "false" });
         //}
 
-        public FileStreamResult GenerateExcelReport(SpecificEntityViewModel model)
+        [HttpPost]
+        public IActionResult GenerateExcelReport(SpecificEntityViewModel model)
         {
-            string typeName = model.GetType().Name;
+            int count = model.EntitySubEntities.Count;
+            if (count > GlobalConstants.RowNumberOfHeadersInTable)
+            {
+                string typeName = model.GetType().Name;
 
-            return GenerateFileTemplate.ExtractTableAsExcel(model.EntitySubEntities, typeName, GlobalConstants.FundsControllerName);
+                return GenerateFileTemplate.ExtractTableAsExcel(model.EntitySubEntities, typeName, GlobalConstants.FundsControllerName);
+            }
+
+            return this.Redirect(GlobalConstants.FundAllUrl);
         }
 
         public FileStreamResult GeneratePdfReport(SpecificEntityViewModel model)
@@ -313,10 +398,11 @@
             var date = DateTime.ParseExact(model.ChosenDate, GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
             string typeName = model.GetType().Name;
 
-            if (model.EntitySubEntities[0].Length > 16)
-            {
-                model.EntitySubEntities = this.fundsService.PrepareFund_SubFundsForPDFExtract(date).ToList();
-            }
+            // TODO prepare query for less than 16 columns
+            //if (model.EntitySubEntities[GlobalConstants.IndexEntityHeadersInSqlTable].Length > GlobalConstants.NumberOfAllowedColumnsInPdfView)
+            //{
+            //    model.EntitySubEntities = this.fundsService.PrepareFund_SubFundsForPDFExtract(date).ToList();
+            //}
 
             return GenerateFileTemplate.ExtractTableAsPdf(model.EntitySubEntities, date, typeName, GlobalConstants.FundsControllerName);
         }
