@@ -49,8 +49,9 @@
         // SQL Queries
         public const string SqlItemFormatRequired = "[{0}]";
 
-        // Urls
+        // Urls, actions
         public const string FundAllUrl = "/f/all";
+        public const string ByIdAndDateActionName = "ByIdAndDate";
 
         // Dates
         public const string LastLoginTimeDisplay = "dd.MM.yyyy HH:mm";

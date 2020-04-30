@@ -50,6 +50,9 @@ namespace DataGate.Web.Utilities
                                                            string controllerName)
         {
             FileStreamResult fileStreamResult;
+
+            ExcelPackage.LicenseContext = LicenseContext.Commercial;
+
             using (ExcelPackage package = new ExcelPackage())
             {
                 ExcelWorksheet worksheet = null;

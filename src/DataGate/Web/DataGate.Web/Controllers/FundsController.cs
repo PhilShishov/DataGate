@@ -157,7 +157,8 @@
                 return GenerateFileTemplate.ExtractTableAsExcel(model.Entities, typeName, GlobalConstants.FundsControllerName);
             }
 
-            return this.Redirect(GlobalConstants.FundAllUrl);
+            this.TempData["InfoMessage"] = "Table report not generated!";
+            return this.RedirectToAction("All");
         }
 
         [HttpPost]
