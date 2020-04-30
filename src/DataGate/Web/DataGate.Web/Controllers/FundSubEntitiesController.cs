@@ -81,6 +81,7 @@
 
             if (model.Command == "Update Table")
             {
+                this.TempData[GlobalConstants.ParentInfoMessageDisplay] = InfoMessages.SuccessfullyUpdatedTable;
                 return this.RedirectToAction(GlobalConstants.ByIdAndDateActionName, new { model.EntityId, model.ChosenDate });
             }
 
@@ -129,11 +130,13 @@
                 model.EntitySubEntities = CreateTableView.AddTableToView(model.EntitySubEntities, model.SelectTerm.ToLower());
             }
 
-            if (model.Entity != null && model.EntitySubEntities != null)
+            if (model.Entity != null && model.EntitySubEntities.Count > GlobalConstants.NumberOfHeadersInTable)
             {
+                this.TempData[GlobalConstants.InfoMessageDisplay] = InfoMessages.SuccessfullyUpdatedTable;
                 return this.View(model);
             }
 
+            this.TempData[GlobalConstants.ErrorMessageDisplay] = ErrorMessages.TableModelIsEmpty;
             this.ModelState.Clear();
             return this.View();
         }
@@ -245,7 +248,6 @@
                                                     fileExt,
                                                     prosFileTypeId,
                                                     model.ControllerName);
-
             }
 
             return this.RedirectToAction("ByIdAndDate", new { model.EntityId, model.ChosenDate });
@@ -383,11 +385,17 @@
         public IActionResult GenerateExcelReport(SpecificEntityViewModel model)
         {
             int count = model.EntitySubEntities.Count;
-            if (count > GlobalConstants.NumberOfHeadersInTable)
+            if (count > GlobalConstants.NumberOfHeadersInTable && model.EntityId != 0)
             {
                 string typeName = model.GetType().Name;
 
                 return GenerateFileTemplate.ExtractTableAsExcel(model.EntitySubEntities, typeName, GlobalConstants.FundsControllerName);
+            }
+
+            if (model.EntityId != 0 && model.ChosenDate != null)
+            {
+                this.TempData[GlobalConstants.ErrorMessageDisplay] = ErrorMessages.TableReportNotGenerated;
+                return this.RedirectToAction(GlobalConstants.ByIdAndDateActionName, new { model.EntityId, model.ChosenDate });
             }
 
             return this.Redirect(GlobalConstants.FundAllUrl);
@@ -397,7 +405,7 @@
         public IActionResult GeneratePdfReport(SpecificEntityViewModel model)
         {
             int count = model.EntitySubEntities.Count;
-            if (count > GlobalConstants.NumberOfHeadersInTable)
+            if (count > GlobalConstants.NumberOfHeadersInTable && model.EntityId != 0)
             {
                 // TODO prepare query for less than 16 columns
                 //if (model.EntitySubEntities[GlobalConstants.IndexEntityHeadersInSqlTable].Length > GlobalConstants.NumberOfAllowedColumnsInPdfView)
@@ -407,6 +415,12 @@
                 var date = DateTime.ParseExact(model.ChosenDate, GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
                 string typeName = model.GetType().Name;
                 return GenerateFileTemplate.ExtractTableAsPdf(model.EntitySubEntities, date, typeName, GlobalConstants.FundsControllerName);
+            }
+
+            if (model.EntityId != 0 && model.ChosenDate != null)
+            {
+                this.TempData[GlobalConstants.ErrorMessageDisplay] = ErrorMessages.TableReportNotGenerated;
+                return this.RedirectToAction(GlobalConstants.ByIdAndDateActionName, new { model.EntityId, model.ChosenDate });
             }
 
             return this.Redirect(GlobalConstants.FundAllUrl);

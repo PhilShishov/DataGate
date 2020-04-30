@@ -11,7 +11,6 @@
       method="post"
       id="entity-form-pharus" style="margin-top: -2.9%;">
     <div>
-        <partial name="AllEntities/_BindingTable" />
         <div>
             <hr class="mt-0 mb-auto" />
             <div class="w-100" id="toolbar-pharus">
@@ -25,14 +24,22 @@
             <hr class="mt-1 mb-0" />
         </div>
 
-        @if (this.TempData[InfoMessages.TemDataInfoMessageDisplay] != null)
+        @if (this.TempData[GlobalConstants.InfoMessageDisplay] != null)
         {
             <div class="alert alert-success" id="infoMessage">
-                @this.TempData[InfoMessages.TemDataInfoMessageDisplay]
+                @this.TempData[GlobalConstants.InfoMessageDisplay]
+            </div>
+        }
+
+        @if (this.TempData[GlobalConstants.ErrorMessageDisplay] != null)
+        {
+            <div class="alert alert-danger" id="errorMessage">
+                @this.TempData[GlobalConstants.ErrorMessageDisplay]
             </div>
         }
 
         <partial name="AllEntities/_Modal" />
+        <partial name="AllEntities/_BindingTable" />
         <partial name="AllEntities/_ViewTable" />
     </div>
 </form>
@@ -59,7 +66,8 @@
         // Fade timeout for tempdata messages
         setTimeout(function () {
             $('#infoMessage').fadeOut();
-        }, 4000);
+            $('#errorMessage').fadeOut();
+        }, 3000);
 
         $(document).ready(function () {
 

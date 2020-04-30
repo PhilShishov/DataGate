@@ -6,6 +6,10 @@
         public const string SystemName = "DataGate";
         public const string DataGateFooterDisplay = "- Pharus Management Lux SA 16, Avenue de la Gare L- 1610 Luxembourg T. +352 28 55 69 - 1";
         public const int MaxAdminCount = 3;
+        public const string InfoMessageDisplay = "InfoMessage";
+        public const string ParentInfoMessageDisplay = "ParentInfoMessage";
+        public const string WelcomeMessageDisplay = "WelcomeMessage";
+        public const string ErrorMessageDisplay = "ErrorMessage";
 
         // Controllers
         public const string ControllerRouteDataValue = "controller";
