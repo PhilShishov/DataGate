@@ -25,6 +25,13 @@
             <hr class="mt-1 mb-0" />
         </div>
 
+        @if (this.TempData["InfoMessage"] != null)
+        {
+            <div class="alert alert-success">
+                @this.TempData["InfoMessage"]
+            </div>
+        }
+
         <partial name="AllEntities/_Modal" />
         <partial name="AllEntities/_ViewTable" />
     </div>

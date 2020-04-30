@@ -81,7 +81,7 @@
 
             if (model.Command == "Update Table")
             {
-                return this.RedirectToAction("ByIdAndDate", new { model.EntityId, model.ChosenDate });
+                return this.RedirectToAction(GlobalConstants.ByIdAndDateActionName, new { model.EntityId, model.ChosenDate });
             }
 
             if (model.Command == "Reset")
@@ -248,7 +248,7 @@
 
             }
 
-            return this.RedirectToAction("ViewEntitySE", new { model.EntityId, model.ChosenDate });
+            return this.RedirectToAction("ByIdAndDate", new { model.EntityId, model.ChosenDate });
         }
 
         //[HttpPost]
@@ -393,18 +393,23 @@
             return this.Redirect(GlobalConstants.FundAllUrl);
         }
 
-        public FileStreamResult GeneratePdfReport(SpecificEntityViewModel model)
+        [HttpPost]
+        public IActionResult GeneratePdfReport(SpecificEntityViewModel model)
         {
-            var date = DateTime.ParseExact(model.ChosenDate, GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
-            string typeName = model.GetType().Name;
+            int count = model.EntitySubEntities.Count;
+            if (count > GlobalConstants.RowNumberOfHeadersInTable)
+            {
+                // TODO prepare query for less than 16 columns
+                //if (model.EntitySubEntities[GlobalConstants.IndexEntityHeadersInSqlTable].Length > GlobalConstants.NumberOfAllowedColumnsInPdfView)
+                //{
+                //    model.EntitySubEntities = this.fundsService.PrepareFund_SubFundsForPDFExtract(date).ToList();
+                //}
+                var date = DateTime.ParseExact(model.ChosenDate, GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
+                string typeName = model.GetType().Name;
+                return GenerateFileTemplate.ExtractTableAsPdf(model.EntitySubEntities, date, typeName, GlobalConstants.FundsControllerName);
+            }
 
-            // TODO prepare query for less than 16 columns
-            //if (model.EntitySubEntities[GlobalConstants.IndexEntityHeadersInSqlTable].Length > GlobalConstants.NumberOfAllowedColumnsInPdfView)
-            //{
-            //    model.EntitySubEntities = this.fundsService.PrepareFund_SubFundsForPDFExtract(date).ToList();
-            //}
-
-            return GenerateFileTemplate.ExtractTableAsPdf(model.EntitySubEntities, date, typeName, GlobalConstants.FundsControllerName);
+            return this.Redirect(GlobalConstants.FundAllUrl);
         }
 
         private void CallEntitySubEntitiesWithSelectedColumns(SpecificEntityViewModel model, DateTime chosenDate)
