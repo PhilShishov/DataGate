@@ -25,10 +25,10 @@
             <hr class="mt-1 mb-0" />
         </div>
 
-        @if (this.TempData["InfoMessage"] != null)
+        @if (this.TempData[InfoMessages.TemDataInfoMessageDisplay] != null)
         {
             <div class="alert alert-success" id="infoMessage">
-                @this.TempData["InfoMessage"]
+                @this.TempData[InfoMessages.TemDataInfoMessageDisplay]
             </div>
         }
 
@@ -56,9 +56,10 @@
             window.history.replaceState(null, null, window.location.href);
         }
 
+        // Fade timeout for tempdata messages
         setTimeout(function () {
             $('#infoMessage').fadeOut();
-        }, 3000);
+        }, 4000);
 
         $(document).ready(function () {
 

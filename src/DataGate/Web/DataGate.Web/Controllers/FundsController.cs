@@ -87,8 +87,6 @@
         [HttpPost]
         public IActionResult All(EntitiesViewModel model)
         {
-            this.TempData["InfoMessage"] = "Table report not generated!";
-
             // ---------------------------------------------------------
             //
             // Available header column selection
@@ -139,36 +137,37 @@
                 model.Entities = CreateTableView.AddTableToView(model.Entities.ToList(), model.SelectTerm.ToLower());
             }
 
-            if (model.Entities != null)
+            if (model.Entities.Count > GlobalConstants.NumberOfHeadersInTable)
             {
+                this.TempData[InfoMessages.TemDataInfoMessageDisplay] = InfoMessages.SuccessfullyUpdatedTable;
                 return this.View(model);
             }
 
+            this.TempData[InfoMessages.TemDataInfoMessageDisplay] = ErrorMessages.TableModelIsEmpty;
             this.ModelState.Clear();
-            return this.View();
+            return this.Redirect(GlobalConstants.FundAllUrl);
         }
 
         [HttpPost]
         public IActionResult GenerateExcelReport(EntitiesViewModel model)
         {
-            this.TempData["InfoMessage"] = "Table report not generated!";
             int count = model.Entities.Count;
-            if (count > GlobalConstants.RowNumberOfHeadersInTable)
+            if (count > GlobalConstants.NumberOfHeadersInTable)
             {
                 string typeName = model.GetType().Name;
 
                 return GenerateFileTemplate.ExtractTableAsExcel(model.Entities, typeName, GlobalConstants.FundsControllerName);
             }
 
-            this.TempData["InfoMessage"] = "Table report not generated!";
-            return this.RedirectToAction("All");
+            this.TempData[InfoMessages.TemDataInfoMessageDisplay] = ErrorMessages.TableReportNotGenerated;
+            return this.Redirect(GlobalConstants.FundAllUrl);
         }
 
         [HttpPost]
         public IActionResult GeneratePdfReport(EntitiesViewModel model)
         {
             int count = model.Entities.Count;
-            if (count > GlobalConstants.RowNumberOfHeadersInTable)
+            if (count > GlobalConstants.NumberOfHeadersInTable)
             {
                 var chosenDate = DateTime.ParseExact(model.ChosenDate, GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
                 string typeName = model.GetType().Name;
@@ -176,6 +175,7 @@
                 return GenerateFileTemplate.ExtractTableAsPdf(model.Entities, chosenDate, typeName, GlobalConstants.FundsControllerName);
             }
 
+            this.TempData[InfoMessages.TemDataInfoMessageDisplay] = ErrorMessages.TableReportNotGenerated;
             return this.Redirect(GlobalConstants.FundAllUrl);
         }
 
