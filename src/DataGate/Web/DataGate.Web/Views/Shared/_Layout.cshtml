@@ -44,107 +44,112 @@
         <header>
             <nav class="navbar navbar-expand-lg navbar-dark bg-pharus position-fixed w-100 t" style="top:0;z-index:1">
 
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <span style="cursor:pointer"
-                              id="sideNavIcon">
-                            <img src="/images/Logo_Pharus.jpg"
-                                 class="img-responsive"
-                                 width="50"
-                                 alt="Pharus Management">
-                        </span>
+                <div>
+                    <div>
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <span style="cursor:pointer"
+                                      id="sideNavIcon">
+                                    <img src="/images/Logo_Pharus.jpg"
+                                         class="img-responsive"
+                                         width="50"
+                                         alt="Pharus Management">
+                                </span>
 
-                        <ul id="mySidenav" class="sidenav">
-                            <li>
-                                <a style="cursor:pointer"
-                                   id="closeBtn"
-                                   class="closebtn">
-                                    &times;
-                                </a>
+                                <ul id="mySidenav" class="sidenav">
+                                    <li>
+                                        <a style="cursor:pointer"
+                                           id="closeBtn"
+                                           class="closebtn">
+                                            &times;
+                                        </a>
+                                    </li>
+                                    <li class="dropdown pt-5">
+                                        <button class="dropdown-btn"
+                                                name="dr-btn-SideNav">
+                                            Funds<i class="fa fa-caret-down"></i>
+                                        </button>
+                                        <div id="myDropdown" class="dropdown-container">
+                                            <a class="dropdown-item font-weight-light"
+                                               asp-area=""
+                                               asp-route="allFunds">
+                                                List
+                                            </a>
+                                            @if (this.User.IsInRole("Admin"))
+                                            {
+                                                <a class="dropdown-item font-weight-light" href="/Funds/CreateFund">Create</a>
+                                            }
+
+                                            <a class="dropdown-item font-weight-light" href="#">Report</a>
+                                        </div>
+                                    </li>
+
+                                    <li class="dropdown">
+                                        <button class="dropdown-btn"
+                                                name="dr-btn-SideNav">
+                                            Sub Funds<i class="fa fa-caret-down"></i>
+                                        </button>
+                                        <div id="myDropdown" class="dropdown-container">
+                                            <a class="dropdown-item font-weight-light" href="/SubFunds/All">List</a>
+                                            @if (this.User.IsInRole("Admin"))
+                                            {
+                                                <a class="dropdown-item font-weight-light" href="/SubFunds/CreateSubFund">Create</a>
+                                            }
+
+                                            <a class="dropdown-item font-weight-light" href="#">Report</a>
+                                        </div>
+                                    </li>
+                                    <li class="dropdown">
+                                        <button class="dropdown-btn"
+                                                name="dr-btn-SideNav">
+                                            Share Classes<i class="fa fa-caret-down"></i>
+                                        </button>
+                                        <div id="myDropdown" class="dropdown-container">
+                                            <a class="dropdown-item font-weight-light" href="/ShareClasses/All">List</a>
+                                            @if (this.User.IsInRole("Admin"))
+                                            {
+                                                <a class="dropdown-item font-weight-light" href="/ShareClasses/CreateShareClass">Create</a>
+                                            }
+
+                                            <a class="dropdown-item font-weight-light" href="#">Report</a>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <a href="/Agreements/All">
+                                            Agreements
+                                        </a>
+                                    </li>
+                                </ul>
+
                             </li>
-                            <li class="dropdown pt-5">
-                                <button class="dropdown-btn"
-                                        name="dr-btn-SideNav">
-                                    Funds<i class="fa fa-caret-down"></i>
-                                </button>
-                                <div id="myDropdown" class="dropdown-container">
-                                    <a class="dropdown-item font-weight-light"
-                                       asp-area=""
-                                       asp-route="allFunds">
-                                        List
-                                    </a>
-                                    @if (this.User.IsInRole("Admin"))
-                                    {
-                                        <a class="dropdown-item font-weight-light" href="/Funds/CreateFund">Create</a>
-                                    }
 
-                                    <a class="dropdown-item font-weight-light" href="#">Report</a>
-                                </div>
+                            <li class="nav-item ml-2" style="margin-top:2%">
+                                <a class="nav-link nav-link-white active"
+                                   asp-area=""
+                                   asp-route="allFunds">Fund Library</a>
                             </li>
-
-                            <li class="dropdown">
-                                <button class="dropdown-btn"
-                                        name="dr-btn-SideNav">
-                                    Sub Funds<i class="fa fa-caret-down"></i>
-                                </button>
-                                <div id="myDropdown" class="dropdown-container">
-                                    <a class="dropdown-item font-weight-light" href="/SubFunds/All">List</a>
-                                    @if (this.User.IsInRole("Admin"))
-                                    {
-                                        <a class="dropdown-item font-weight-light" href="/SubFunds/CreateSubFund">Create</a>
-                                    }
-
-                                    <a class="dropdown-item font-weight-light" href="#">Report</a>
-                                </div>
+                            <li class="nav-item ml-2" style="margin-top:2%">
+                                <a class="nav-link nav-link-white active"
+                                   asp-area=""
+                                   asp-controller=""
+                                   asp-action=""> Sub Fund Library</a>
                             </li>
-                            <li class="dropdown">
-                                <button class="dropdown-btn"
-                                        name="dr-btn-SideNav">
-                                    Share Classes<i class="fa fa-caret-down"></i>
-                                </button>
-                                <div id="myDropdown" class="dropdown-container">
-                                    <a class="dropdown-item font-weight-light" href="/ShareClasses/All">List</a>
-                                    @if (this.User.IsInRole("Admin"))
-                                    {
-                                        <a class="dropdown-item font-weight-light" href="/ShareClasses/CreateShareClass">Create</a>
-                                    }
-
-                                    <a class="dropdown-item font-weight-light" href="#">Report</a>
-                                </div>
+                            <li class="nav-item ml-2" style="margin-top:2%">
+                                <a class="nav-link nav-link-white active"
+                                   asp-area=""
+                                   asp-controller=""
+                                   asp-action="">Share Class Library</a>
                             </li>
-                            <li>
-                                <a href="/Agreements/All">
-                                    Agreements
-                                </a>
+                            <li class="nav-item ml-2" style="margin-top:2%">
+                                <a class="nav-link nav-link-white active"
+                                   asp-area=""
+                                   asp-controller=""
+                                   asp-action="">Agreements Library</a>
                             </li>
                         </ul>
+                    </div>
+                </div>
 
-                    </li>
-
-                    <li class="nav-item mt-2 ml-2">
-                        <a class="nav-link nav-link-white active"
-                           asp-area=""
-                           asp-route="allFunds">Fund Library</a>
-                    </li>
-                    <li class="nav-item mt-2 ml-2">
-                        <a class="nav-link nav-link-white active"
-                           asp-area=""
-                           asp-controller=""
-                           asp-action=""> Sub Fund Library</a>
-                    </li>
-                    <li class="nav-item mt-2 ml-2">
-                        <a class="nav-link nav-link-white active"
-                           asp-area=""
-                           asp-controller=""
-                           asp-action="">Share Class Library</a>
-                    </li>
-                    <li class="nav-item mt-2 ml-2">
-                        <a class="nav-link nav-link-white active"
-                           asp-area=""
-                           asp-controller=""
-                           asp-action="">Agreements Library</a>
-                    </li>
-                </ul>
 
                 <button class="navbar-toggler ml-auto"
                         type="button"
