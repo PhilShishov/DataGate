@@ -19,7 +19,7 @@
                 {
                     options.CheckConsentNeeded = context => true;
                     options.Secure = CookieSecurePolicy.Always;
-                    options.MinimumSameSitePolicy = SameSiteMode.Lax;
+                    options.MinimumSameSitePolicy = SameSiteMode.None;
                     options.ConsentCookie.Name = ".AspNetCore.ConsentCookie";
                 });
 

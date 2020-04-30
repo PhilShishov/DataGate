@@ -27,7 +27,7 @@
 
         @if (this.TempData["InfoMessage"] != null)
         {
-            <div class="alert alert-success">
+            <div class="alert alert-success" id="infoMessage">
                 @this.TempData["InfoMessage"]
             </div>
         }
@@ -55,6 +55,10 @@
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
         }
+
+        setTimeout(function () {
+            $('#infoMessage').fadeOut();
+        }, 3000);
 
         $(document).ready(function () {
 
