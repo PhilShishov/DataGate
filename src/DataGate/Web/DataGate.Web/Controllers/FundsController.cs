@@ -1,25 +1,18 @@
 ﻿namespace DataGate.Web.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Globalization;
-    using System.IO;
     using System.Linq;
 
     using DataGate.Common;
     using DataGate.Data;
-    using DataGate.Services.Data.Files;
     using DataGate.Services.Data.Funds.Contracts;
-    using DataGate.Web.InputModels.Funds;
     using DataGate.Web.Utilities;
     using DataGate.Web.ViewModels.Entities;
 
     using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Routing;
-    using Microsoft.Extensions.Caching.Memory;
 
     [Authorize]
     public class FundsController : BaseController
@@ -139,11 +132,11 @@
 
             if (model.Entities.Count > GlobalConstants.NumberOfHeadersInTable)
             {
-                this.TempData[InfoMessages.TemDataInfoMessageDisplay] = InfoMessages.SuccessfullyUpdatedTable;
+                this.TempData[GlobalConstants.InfoMessageDisplay] = InfoMessages.SuccessfullyUpdatedTable;
                 return this.View(model);
             }
 
-            this.TempData[InfoMessages.TemDataInfoMessageDisplay] = ErrorMessages.TableModelIsEmpty;
+            this.TempData[GlobalConstants.ErrorMessageDisplay] = ErrorMessages.TableModelIsEmpty;
             this.ModelState.Clear();
             return this.Redirect(GlobalConstants.FundAllUrl);
         }
@@ -159,7 +152,7 @@
                 return GenerateFileTemplate.ExtractTableAsExcel(model.Entities, typeName, GlobalConstants.FundsControllerName);
             }
 
-            this.TempData[InfoMessages.TemDataInfoMessageDisplay] = ErrorMessages.TableReportNotGenerated;
+            this.TempData[GlobalConstants.ErrorMessageDisplay] = ErrorMessages.TableReportNotGenerated;
             return this.Redirect(GlobalConstants.FundAllUrl);
         }
 
@@ -175,7 +168,7 @@
                 return GenerateFileTemplate.ExtractTableAsPdf(model.Entities, chosenDate, typeName, GlobalConstants.FundsControllerName);
             }
 
-            this.TempData[InfoMessages.TemDataInfoMessageDisplay] = ErrorMessages.TableReportNotGenerated;
+            this.TempData[GlobalConstants.ErrorMessageDisplay] = ErrorMessages.TableReportNotGenerated;
             return this.Redirect(GlobalConstants.FundAllUrl);
         }
 

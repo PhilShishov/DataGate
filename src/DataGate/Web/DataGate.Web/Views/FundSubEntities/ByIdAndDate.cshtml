@@ -12,6 +12,14 @@
       style="margin-top: -3.95rem">
 
     <partial name="SpecificEntity/_Toolbar" />
+
+    @if (this.TempData[GlobalConstants.ParentInfoMessageDisplay] != null)
+    {
+        <div class="alert alert-success" id="parentInfoMessage">
+            @this.TempData[GlobalConstants.ParentInfoMessageDisplay]
+        </div>
+    }
+
     <div class="justify-content-between" id="infoAndDocumentsView">
         <partial name="SpecificEntity/_Info" />
         <partial name="SpecificEntity/_Load_Documents" />
@@ -43,6 +51,20 @@
                 <partial name="SpecificEntity/SubEntities/_Extract" />
             </div>
         </div>
+        @if (this.TempData[GlobalConstants.InfoMessageDisplay] != null)
+        {
+            <div class="alert alert-success" id="infoMessage">
+                @this.TempData[GlobalConstants.InfoMessageDisplay]
+            </div>
+        }
+
+        @if (this.TempData[GlobalConstants.ErrorMessageDisplay] != null)
+        {
+            <div class="alert alert-danger" id="errorMessage">
+                @this.TempData[GlobalConstants.ErrorMessageDisplay]
+            </div>
+        }
+
         <partial name="SpecificEntity/SubEntities/_BindingTable" />
         <partial name="SpecificEntity/SubEntities/_ViewTable" />
 
@@ -99,6 +121,13 @@
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
         }
+
+        // Fade timeout for tempdata messages
+        setTimeout(function () {
+            $('#parentInfoMessage').fadeOut();
+            $('#infoMessage').fadeOut();
+            $('#errorMessage').fadeOut();
+        }, 3000);
 
         $(document).ready(function () {
 
