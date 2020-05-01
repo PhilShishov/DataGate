@@ -38,6 +38,8 @@ namespace DataGate.Services.Data.Funds
         // with table functions
         public IEnumerable<string[]> GetFundWithDateById(DateTime? chosenDate, int id)
         {
+            ThrowEntityNotFoundExceptionIfLessonDoesNotExist(id);
+
             return this.sqlManager.ExecuteSqlQueryByWhereId(chosenDate, id, this.sqlFunctionAllFund, this.columnToPassToQuery);
         }
 
@@ -83,6 +85,16 @@ namespace DataGate.Services.Data.Funds
         public IEnumerable<string[]> PrepareFund_SubFundsForPDFExtract(DateTime? chosenDate)
         {
             return this.sqlManager.ExecuteSqlQuery(chosenDate, this.sqlFunctionSubFundPdfView);
+        }
+
+        private bool Exists(int id) => repository.All().Any(x => x.Id == id);
+
+        private void ThrowEntityNotFoundExceptionIfLessonDoesNotExist(int lessonId)
+        {
+            if (!Exists(lessonId))
+            {
+                throw new EntityNotFoundException(nameof(Lesson));
+            }
         }
     }
 }

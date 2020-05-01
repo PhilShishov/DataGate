@@ -28,7 +28,5 @@ namespace DataGate.Services.Data
                         List<string> preSelectedColumns,
                         List<string> selectedColumns,
                         DateTime? chosenDate);
-
-        IEnumerable<T> GetAllNames<T>();
     }
 }

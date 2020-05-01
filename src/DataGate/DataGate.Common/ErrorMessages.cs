@@ -7,5 +7,7 @@
 
         public const string TableReportNotGenerated = "Table report not generated! Please make a new selection.";
         public const string TableModelIsEmpty = "Table cannot be empty! Please make a new selection.";
+
+        public const string NotFoundEntityMessage = "The required {0} was not found!";
     }
 }

@@ -1,7 +1,10 @@
+using System.Collections.Generic;
+
 namespace DataGate.Services.Data.Funds.Contracts
 {
     public interface IFundsStorageService
     {
+        IEnumerable<T> GetAllNames<T>();
         void EditFund(
                       int fundId,
                       string initialDate,
