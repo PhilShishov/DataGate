@@ -10,12 +10,8 @@ namespace DataGate.Services.Data.Funds
     using System;
     using System.Collections.Generic;
 
-    using DataGate.Data.Common.Repositories;
-    using DataGate.Data.Models.Entities;
     using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Services.SqlClient;
-
-    using Microsoft.Extensions.Configuration;
 
     // _____________________________________________________________
     public class FundsService : IFundsService
@@ -26,8 +22,6 @@ namespace DataGate.Services.Data.Funds
         private readonly string sqlFunctionAllFund = "fn_all_fund";
         private readonly string sqlFunctionAllActiveFund = "fn_active_fund";
 
-        private readonly IConfiguration configuration;
-        private readonly IRepository<TbHistoryFund> fundsRepository;
         private readonly ISqlQueryManager sqlManager;
 
         // ________________________________________________________
@@ -36,13 +30,8 @@ namespace DataGate.Services.Data.Funds
         // to retrieve appsettings.json connection string,
         // IRepository to connect with dbcontext and
         // sql manager for executing queries
-        public FundsService(
-                        IConfiguration config,
-                        IRepository<TbHistoryFund> fundsRepository,
-                        ISqlQueryManager sqlQueryManager)
+        public FundsService(ISqlQueryManager sqlQueryManager)
         {
-            this.configuration = config;
-            this.fundsRepository = fundsRepository;
             this.sqlManager = sqlQueryManager;
         }
 

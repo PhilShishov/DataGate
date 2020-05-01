@@ -8,6 +8,7 @@
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace DataGate.Web.ViewModels.Entities
 {
+    using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
 
     public class EntitiesViewModel : BaseEntityViewModel
@@ -18,6 +19,7 @@ namespace DataGate.Web.ViewModels.Entities
         // with table data from DB
         // for all entities of type
 
+        [BindProperty]
         public List<string[]> Entities { get; set; }
 
         public string SearchTerm { get; set; }
