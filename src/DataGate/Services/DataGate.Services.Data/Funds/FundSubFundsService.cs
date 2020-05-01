@@ -1,9 +1,9 @@
-namespace DataGate.Services.Data.FundSubFunds
+namespace DataGate.Services.Data.Funds
 {
     using System;
     using System.Collections.Generic;
 
-    using DataGate.Services.Data.FundSubFunds.Contracts;
+    using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Services.SqlClient;
 
     public class FundSubFundsService : IFundSubFundsService
