@@ -6,6 +6,7 @@
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace DataGate.Services.SqlClient
 {
+    using DataGate.Common;
     using System.Collections.Generic;
     using System.Data.SqlClient;
     using System.Linq;
@@ -31,6 +32,8 @@ namespace DataGate.Services.SqlClient
                     .ReadTableHeader(reader);
 
                 model.Insert(StartingIndex, item);
+
+                Validator.ThrowEntityNotFoundExceptionIfEntityIsNull(model, nameof(model));
 
                 return model;
             }

@@ -1,11 +1,11 @@
 ﻿namespace DataGate.Web.Controllers.Funds
 {
     using System;
+    using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
 
     using DataGate.Common;
-    using DataGate.Services.Data;
     using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Web.Utilities;
     using DataGate.Web.ViewModels.Entities;
@@ -45,10 +45,23 @@
 
         public JsonResult AutoCompleteFundList(string selectTerm)
         {
+            List<string[]> result = NewMethod1(selectTerm);
+
+            var modifiedData = result.Select(f => new
+            {
+                id = f[GlobalConstants.IndexEntityNameInSQLTable],
+                text = f[GlobalConstants.IndexEntityNameInSQLTable],
+            });
+
+            return this.Json(modifiedData);
+        }
+
+        private List<string[]> NewMethod1(string selectTerm)
+        {
             var result = this.fundsService
-                .GetAll(null)
-                .Skip(1)
-                .ToList();
+                            .GetAll(null)
+                            .Skip(1)
+                            .ToList();
 
             if (selectTerm != null)
             {
@@ -59,13 +72,7 @@
                     .ToList();
             }
 
-            var modifiedData = result.Select(f => new
-            {
-                id = f[GlobalConstants.IndexEntityNameInSQLTable],
-                text = f[GlobalConstants.IndexEntityNameInSQLTable],
-            });
-
-            return this.Json(modifiedData);
+            return result;
         }
 
         [HttpPost]
