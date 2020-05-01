@@ -6,6 +6,7 @@
     using System.Linq;
 
     using DataGate.Common;
+    using DataGate.Services;
     using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Web.Utilities;
     using DataGate.Web.ViewModels.Entities;
@@ -45,7 +46,7 @@
 
         public JsonResult AutoCompleteFundList(string selectTerm)
         {
-            List<string[]> result = NewMethod1(selectTerm);
+            List<string[]> result = GetAutocompleteResult.GetEntityResult(selectTerm, this.fundsService);
 
             var modifiedData = result.Select(f => new
             {
@@ -56,24 +57,25 @@
             return this.Json(modifiedData);
         }
 
-        private List<string[]> NewMethod1(string selectTerm)
-        {
-            var result = this.fundsService
-                            .GetAll(null)
-                            .Skip(1)
-                            .ToList();
+        //private List<string[]> NewMethod1(string selectTerm, IEntityService service)
+        //{
+        //    var result = this.fundsService
+        //                                .GetAll(null)
+        //                                .Skip(1)
+        //                                .ToList();
 
-            if (selectTerm != null)
-            {
-                result = result
-                    .Where(f => f[GlobalConstants.IndexEntityNameInSQLTable]
-                        .ToLower()
-                        .Contains(selectTerm.ToLower()))
-                    .ToList();
-            }
+        //    if (selectTerm != null)
+        //    {
+        //        //result = GetSelectedResult.GetResult(selectTerm, result);
+        //        result = result
+        //                .Where(f => f[GlobalConstants.IndexEntityNameInSQLTable]
+        //                    .ToLower()
+        //                    .Contains(selectTerm.ToLower()))
+        //                .ToList();
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
 
         [HttpPost]
         public IActionResult All(EntitiesViewModel model)

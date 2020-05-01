@@ -2,7 +2,10 @@ namespace DataGate.Services.Data.Funds
 {
     using System;
     using System.Collections.Generic;
-
+    using System.Linq;
+    using DataGate.Common.Exceptions;
+    using DataGate.Data.Common.Repositories;
+    using DataGate.Data.Models.Entities;
     using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Services.SqlClient;
 
@@ -22,13 +25,17 @@ namespace DataGate.Services.Data.Funds
 
         private readonly string columnToPassToQuery = "FUND ID PHARUS";
         private readonly ISqlQueryManager sqlManager;
+        private readonly IRepository<TbHistoryFund> repository;
 
         // ________________________________________________________
         //
         // Constructor: initialize with DI IConfiguration
         // to retrieve appsettings.json connection string
-        public FundSubFundsService(ISqlQueryManager sqlQueryManager)
+        public FundSubFundsService(
+                    ISqlQueryManager sqlQueryManager,
+                    IRepository<TbHistoryFund> fundsRepository)
         {
+            this.repository = fundsRepository;
             this.sqlManager = sqlQueryManager;
         }
 
@@ -38,8 +45,6 @@ namespace DataGate.Services.Data.Funds
         // with table functions
         public IEnumerable<string[]> GetFundWithDateById(DateTime? chosenDate, int id)
         {
-            ThrowEntityNotFoundExceptionIfLessonDoesNotExist(id);
-
             return this.sqlManager.ExecuteSqlQueryByWhereId(chosenDate, id, this.sqlFunctionAllFund, this.columnToPassToQuery);
         }
 
@@ -85,16 +90,6 @@ namespace DataGate.Services.Data.Funds
         public IEnumerable<string[]> PrepareFund_SubFundsForPDFExtract(DateTime? chosenDate)
         {
             return this.sqlManager.ExecuteSqlQuery(chosenDate, this.sqlFunctionSubFundPdfView);
-        }
-
-        private bool Exists(int id) => repository.All().Any(x => x.Id == id);
-
-        private void ThrowEntityNotFoundExceptionIfLessonDoesNotExist(int lessonId)
-        {
-            if (!Exists(lessonId))
-            {
-                throw new EntityNotFoundException(nameof(Lesson));
-            }
         }
     }
 }

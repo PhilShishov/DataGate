@@ -4,6 +4,29 @@
 
 //    public class MediaController : BaseController
 //    {
+
+//<form method = "post" enctype="multipart/form-data" 
+//                    asp-controller="Files" asp-action="Upload">
+//    <input type = "file" name="file">    <button type = "submit" value="Upload" />
+//</form> 
+
+//[HttpPost("Upload")]
+//public async Task<IActionResult> Upload(List<IFormFile> files)
+//{
+//    var filePath = Path.GetTempFileName(); // Full path to file in temp location
+
+//    foreach (var formFile in files.Where(f => f.Length > 0))
+//    {
+//        using (var stream = new FileStream(filePath, FileMode.Create))
+//        {
+//            await formFile.CopyToAsync(stream);
+//        }
+//    } // Copy files to FileSystem using Streams
+
+//    var bytes = files.Sum(f => f.Length);
+//    return Ok(new { count = files.Count, bytes, filePath });
+//}
+
 //        [HttpPost]
 //        public IActionResult UploadProspectus(SpecificEntityViewModel model)
 //        {

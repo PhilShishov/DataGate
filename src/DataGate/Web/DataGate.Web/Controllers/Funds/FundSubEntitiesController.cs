@@ -2,34 +2,24 @@
 {
     using System;
     using System.Globalization;
-    using System.IO;
     using System.Linq;
 
     using DataGate.Common;
-    using DataGate.Services.Data.Files;
     using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Web.Utilities;
     using DataGate.Web.ViewModels.Entities;
 
     using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
 
     [Authorize]
     public class FundSubEntitiesController : BaseController
     {
         private readonly IFundSubFundsService fundsService;
-        private readonly IFileSystemService entitiesFileService;
-        private readonly IWebHostEnvironment environment;
 
-        public FundSubEntitiesController(
-                    IFundSubFundsService fundSubFundsService,
-                    IFileSystemService entitiesFileService,
-                    IWebHostEnvironment environment)
+        public FundSubEntitiesController(IFundSubFundsService fundSubFundsService)
         {
             this.fundsService = fundSubFundsService;
-            this.entitiesFileService = entitiesFileService;
-            this.environment = environment;
         }
 
         [HttpGet]
@@ -199,6 +189,18 @@
 
         private void SetModelValuesForSpecificView(SpecificEntityViewModel model)
         {
+
+            //private void ThrowEntityNotFoundExceptionIfFundDoesNotExist(int fundId)
+            //{
+            //    if (!this.Exists(fundId))
+            //    {
+            //        throw new EntityNotFoundException(nameof(TbHistoryFund));
+            //    }
+            //}
+
+            //private bool Exists(int id) => this.repository.All().Any(x => x.FId == id);
+
+
             var date = DateTime.ParseExact(model.ChosenDate, GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
             int entityId = model.EntityId;
 
