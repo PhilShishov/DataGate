@@ -44,7 +44,7 @@ namespace DataGate.Web.Utilities
         // Extract table data as Excel
         // and preparing for download
         // in controller as filestreamresult
-        public static FileStreamResult ExtractTableAsExcel(
+        public static FileStreamResult Excel(
                                                            List<string[]> entities,
                                                            string typeName,
                                                            string controllerName)
@@ -102,7 +102,7 @@ namespace DataGate.Web.Utilities
         // Extract table data as PDF
         // and preparing for download
         // in controller as filestreamresult
-        public static FileStreamResult ExtractTableAsPdf(
+        public static FileStreamResult Pdf(
                                                          List<string[]> entities,
                                                          DateTime? chosenDate,
                                                          string typeName,

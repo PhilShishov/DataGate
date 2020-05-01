@@ -140,7 +140,7 @@
             {
                 string typeName = model.GetType().Name;
 
-                return GenerateFileTemplate.ExtractTableAsExcel(model.EntitySubEntities, typeName, GlobalConstants.FundsControllerName);
+                return GenerateFileTemplate.Excel(model.EntitySubEntities, typeName, GlobalConstants.FundsControllerName);
             }
 
             if (model.EntityId != 0 && model.ChosenDate != null)
@@ -165,7 +165,7 @@
                 //}
                 var date = DateTime.ParseExact(model.ChosenDate, GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
                 string typeName = model.GetType().Name;
-                return GenerateFileTemplate.ExtractTableAsPdf(model.EntitySubEntities, date, typeName, GlobalConstants.FundsControllerName);
+                return GenerateFileTemplate.Pdf(model.EntitySubEntities, date, typeName, GlobalConstants.FundsControllerName);
             }
 
             if (model.EntityId != 0 && model.ChosenDate != null)

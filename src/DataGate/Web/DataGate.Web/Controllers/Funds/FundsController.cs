@@ -2,13 +2,13 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Globalization;
     using System.Linq;
 
     using DataGate.Common;
     using DataGate.Services.AutoComplete;
     using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Services.Data.ViewModel;
+    using DataGate.Services.DateTime;
     using DataGate.Web.Utilities;
     using DataGate.Web.ViewModels.Entities;
 
@@ -81,8 +81,9 @@
             {
                 string typeName = model.GetType().Name;
 
-                return GenerateFileTemplate.ExtractTableAsExcel(model.Entities, typeName, GlobalConstants.FundsControllerName);
+                return GenerateFileTemplate.Excel(model.Entities, typeName, GlobalConstants.FundsControllerName);
             }
+
             this.TempData[GlobalConstants.ErrorMessageDisplay] = ErrorMessages.TableReportNotGenerated;
             return this.Redirect(GlobalConstants.FundAllUrl);
         }
@@ -92,10 +93,10 @@
         {
             if (model.Count > GlobalConstants.RowNumberOfHeadersInTable)
             {
-                var chosenDate = DateTime.ParseExact(model.ChosenDate, GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
+                var chosenDate = DateTimeParser.WebFormat(model.ChosenDate);
                 string typeName = model.GetType().Name;
 
-                return GenerateFileTemplate.ExtractTableAsPdf(model.Entities, chosenDate, typeName, GlobalConstants.FundsControllerName);
+                return GenerateFileTemplate.Pdf(model.Entities, chosenDate, typeName, GlobalConstants.FundsControllerName);
             }
 
             this.TempData[GlobalConstants.ErrorMessageDisplay] = ErrorMessages.TableReportNotGenerated;
