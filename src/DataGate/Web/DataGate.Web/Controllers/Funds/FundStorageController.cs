@@ -2,7 +2,7 @@
 {
     using Microsoft.AspNetCore.Mvc;
 
-    public class FundStorageController : Controller
+    public class FundStorageController : BaseController
     {
         public IActionResult Index()
         {

@@ -5,6 +5,7 @@
     using System.Linq;
 
     using DataGate.Common;
+    using DataGate.Services;
     using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Web.Utilities;
     using DataGate.Web.ViewModels.Entities;
@@ -120,7 +121,7 @@
                 model.EntitySubEntities = CreateTableView.AddTableToView(model.EntitySubEntities, model.SelectTerm.ToLower());
             }
 
-            if (model.Entity != null && model.EntitySubEntities.Count > GlobalConstants.NumberOfHeadersInTable)
+            if (model.Entity != null && model.EntitySubEntities.Count > GlobalConstants.RowNumberOfHeadersInTable)
             {
                 this.TempData[GlobalConstants.InfoMessageDisplay] = InfoMessages.SuccessfullyUpdatedTable;
                 return this.View(model);
@@ -135,7 +136,7 @@
         public IActionResult GenerateExcelReport(SpecificEntityViewModel model)
         {
             int count = model.EntitySubEntities.Count;
-            if (count > GlobalConstants.NumberOfHeadersInTable && model.EntityId != 0)
+            if (count > GlobalConstants.RowNumberOfHeadersInTable && model.EntityId != 0)
             {
                 string typeName = model.GetType().Name;
 
@@ -155,7 +156,7 @@
         public IActionResult GeneratePdfReport(SpecificEntityViewModel model)
         {
             int count = model.EntitySubEntities.Count;
-            if (count > GlobalConstants.NumberOfHeadersInTable && model.EntityId != 0)
+            if (count > GlobalConstants.RowNumberOfHeadersInTable && model.EntityId != 0)
             {
                 // TODO prepare query for less than 16 columns
                 //if (model.EntitySubEntities[GlobalConstants.IndexEntityHeadersInSqlTable].Length > GlobalConstants.NumberOfAllowedColumnsInPdfView)

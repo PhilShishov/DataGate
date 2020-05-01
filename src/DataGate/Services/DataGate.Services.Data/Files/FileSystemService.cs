@@ -66,8 +66,8 @@
                     }
 
                     // Throw exception for null columns
-
                 }
+
                 dataReader.Close();
                 return filePath;
             }

@@ -2,12 +2,11 @@ namespace DataGate.Services.Data.Funds
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using DataGate.Common.Exceptions;
+
     using DataGate.Data.Common.Repositories;
     using DataGate.Data.Models.Entities;
     using DataGate.Services.Data.Funds.Contracts;
-    using DataGate.Services.SqlClient;
+    using DataGate.Services.SqlClient.Contracts;
 
     public class FundSubFundsService : IFundSubFundsService
     {

@@ -7,9 +7,10 @@
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace DataGate.Web.ViewModels.Entities
 {
-    using DataGate.Common;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+
+    using DataGate.Common;
 
     public abstract class BaseEntityViewModel
     {

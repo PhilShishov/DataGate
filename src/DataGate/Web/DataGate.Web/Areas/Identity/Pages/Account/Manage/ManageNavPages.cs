@@ -1,8 +1,7 @@
 ﻿namespace DataGate.Web.Areas.Identity.Pages.Account.Manage
 {
-    using System;
-
     using Microsoft.AspNetCore.Mvc.Rendering;
+    using System;
 
     public static class ManageNavPages
     {

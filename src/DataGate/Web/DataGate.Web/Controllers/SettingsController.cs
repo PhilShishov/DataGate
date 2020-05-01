@@ -1,14 +1,12 @@
 ﻿namespace DataGate.Web.Controllers
 {
-    using System;
-    using System.Threading.Tasks;
-
     using DataGate.Data.Common.Repositories;
     using DataGate.Data.Models;
     using DataGate.Services.Data;
     using DataGate.Web.ViewModels.Settings;
-
     using Microsoft.AspNetCore.Mvc;
+    using System;
+    using System.Threading.Tasks;
 
     public class SettingsController : BaseController
     {

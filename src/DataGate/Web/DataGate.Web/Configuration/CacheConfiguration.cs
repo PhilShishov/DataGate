@@ -1,6 +1,5 @@
 ﻿namespace DataGate.Web.Configuration
 {
-    using DataGate.Common;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     //using Microsoft.Extensions.Caching.SqlServer;

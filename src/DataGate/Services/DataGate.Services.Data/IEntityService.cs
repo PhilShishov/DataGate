@@ -1,4 +1,4 @@
-// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+﻿// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 // Base service interface for managing services of
 // different entities - funds, subfunds, shareclasse
 
