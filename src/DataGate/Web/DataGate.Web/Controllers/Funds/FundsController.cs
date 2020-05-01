@@ -57,26 +57,6 @@
             return this.Json(modifiedData);
         }
 
-        //private List<string[]> NewMethod1(string selectTerm, IEntityService service)
-        //{
-        //    var result = this.fundsService
-        //                                .GetAll(null)
-        //                                .Skip(1)
-        //                                .ToList();
-
-        //    if (selectTerm != null)
-        //    {
-        //        //result = GetSelectedResult.GetResult(selectTerm, result);
-        //        result = result
-        //                .Where(f => f[GlobalConstants.IndexEntityNameInSQLTable]
-        //                    .ToLower()
-        //                    .Contains(selectTerm.ToLower()))
-        //                .ToList();
-        //    }
-
-        //    return result;
-        //}
-
         [HttpPost]
         public IActionResult All(EntitiesViewModel model)
         {
@@ -88,7 +68,7 @@
                 return this.View(model);
             }
 
-            this.TempData[GlobalConstants.ErrorMessageDisplay] = ErrorMessages.TableModelIsEmpty;
+            this.TempData[GlobalConstants.ErrorMessageDisplay] = ErrorMessages.TableModeIsEmpty;
             this.ModelState.Clear();
             return this.Redirect(GlobalConstants.FundAllUrl);
         }

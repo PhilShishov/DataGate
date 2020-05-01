@@ -16,6 +16,7 @@ namespace DataGate.Web.ViewModels.Entities
     using System.Collections.Generic;
 
     using DataGate.Web.InputModels.Files;
+    using Microsoft.AspNetCore.Mvc;
 
     public class SpecificEntityViewModel : BaseEntityViewModel
     {
@@ -24,6 +25,7 @@ namespace DataGate.Web.ViewModels.Entities
         // Property will be filled
         // with table data from DB
         // for a specific entity
+        [BindProperty]
         public List<string[]> Entity { get; set; }
 
         // ________________________________________________________
@@ -31,6 +33,7 @@ namespace DataGate.Web.ViewModels.Entities
         // Property will be filled
         // with table data from DB
         // for a specific entity sub entities
+        [BindProperty]
         public List<string[]> EntitySubEntities { get; set; }
 
         public string ContainerEntityName { get; set; }

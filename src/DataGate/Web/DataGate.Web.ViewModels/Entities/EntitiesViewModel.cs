@@ -8,8 +8,9 @@
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace DataGate.Web.ViewModels.Entities
 {
-    using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
+
+    using Microsoft.AspNetCore.Mvc;
 
     public class EntitiesViewModel : BaseEntityViewModel
     {
@@ -18,7 +19,6 @@ namespace DataGate.Web.ViewModels.Entities
         // Property will be filled
         // with table data from DB
         // for all entities of type
-
         [BindProperty]
         public List<string[]> Entities { get; set; }
 

@@ -126,7 +126,7 @@
                 return this.View(model);
             }
 
-            this.TempData[GlobalConstants.ErrorMessageDisplay] = ErrorMessages.TableModelIsEmpty;
+            this.TempData[GlobalConstants.ErrorMessageDisplay] = ErrorMessages.TableModeIsEmpty;
             this.ModelState.Clear();
             return this.View();
         }
