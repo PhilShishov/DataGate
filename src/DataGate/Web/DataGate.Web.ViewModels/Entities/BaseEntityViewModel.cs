@@ -7,6 +7,7 @@
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace DataGate.Web.ViewModels.Entities
 {
+    using DataGate.Common;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
@@ -14,7 +15,7 @@ namespace DataGate.Web.ViewModels.Entities
     {
         public List<string[]> EntitiesHeadersForColumnSelection { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = ErrorMessages.ChosenDateIsEmpty)]
         public string ChosenDate { get; set; }
 
         public string Command { get; set; }
