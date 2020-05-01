@@ -55,22 +55,22 @@ namespace DataGate.Services.Data.Funds
         //
         // Retrieve query table DB based entities
         // with table functions
-        public IEnumerable<string[]> GetAllFunds(DateTime? chosenDate)
+        public IEnumerable<string[]> GetAll(DateTime? chosenDate)
         {
             return this.sqlManager.ExecuteSqlQuery(chosenDate, this.sqlFunctionAllFund);
         }
 
-        public IEnumerable<string[]> GetAllActiveFunds()
+        public IEnumerable<string[]> GetAllActive()
         {
             return this.sqlManager.ExecuteSqlQuery(null, this.sqlFunctionAllActiveFund);
         }
 
-        public IEnumerable<string[]> GetAllActiveFunds(DateTime? chosenDate)
+        public IEnumerable<string[]> GetAllActive(DateTime? chosenDate)
         {
             return this.sqlManager.ExecuteSqlQuery(chosenDate, this.sqlFunctionAllActiveFund);
         }
 
-        public IEnumerable<string[]> GetAllFundsWithSelectedViewAndDate(
+        public IEnumerable<string[]> GetAllWithSelectedViewAndDate(
                                                                     List<string> preSelectedColumns,
                                                                     List<string> selectedColumns,
                                                                     DateTime? chosenDate)
@@ -78,7 +78,7 @@ namespace DataGate.Services.Data.Funds
             return this.sqlManager.ExecuteSqlQueryWithSelection(ref preSelectedColumns, selectedColumns, chosenDate, this.sqlFunctionAllFund);
         }
 
-        public IEnumerable<string[]> GetAllActiveFundsWithSelectedViewAndDate(
+        public IEnumerable<string[]> GetAllActiveWithSelectedViewAndDate(
                                                                             List<string> preSelectedColumns,
                                                                             List<string> selectedColumns,
                                                                             DateTime? chosenDate)
@@ -86,7 +86,7 @@ namespace DataGate.Services.Data.Funds
             return this.sqlManager.ExecuteSqlQueryWithSelection(ref preSelectedColumns, selectedColumns, chosenDate, this.sqlFunctionAllActiveFund);
         }
 
-        public IEnumerable<T> GetAllFundsNames<T>()
+        public IEnumerable<T> GetAllNames<T>()
         {
             return this.fundsRepository
                 .All()
