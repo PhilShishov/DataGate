@@ -6,13 +6,14 @@
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace DataGate.Services.SqlClient
 {
-    using DataGate.Common;
     using System.Collections.Generic;
     using System.Data.SqlClient;
     using System.Linq;
 
+    using DataGate.Common;
+
     // _____________________________________________________________
-    public class CreateModel
+    public static class CreateModel
     {
         private const int StartingIndex = 0;
 

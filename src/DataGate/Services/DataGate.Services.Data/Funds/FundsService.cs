@@ -11,7 +11,7 @@ namespace DataGate.Services.Data.Funds
     using System.Collections.Generic;
 
     using DataGate.Services.Data.Funds.Contracts;
-    using DataGate.Services.SqlClient;
+    using DataGate.Services.SqlClient.Contracts;
 
     // _____________________________________________________________
     public class FundsService : IFundsService

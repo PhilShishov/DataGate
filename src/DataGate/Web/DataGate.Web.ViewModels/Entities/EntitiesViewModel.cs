@@ -25,5 +25,7 @@ namespace DataGate.Web.ViewModels.Entities
         public string SearchTerm { get; set; }
 
         public bool IsActive { get; set; }
+
+        public int Count => this.Entities.Count;
     }
 }

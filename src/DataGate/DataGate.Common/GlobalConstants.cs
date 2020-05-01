@@ -74,7 +74,7 @@
         // Entities
         public const int IndexEntityNameInSQLTable = 3;
         public const int IndexEntityHeadersInSqlTable = 0;
-        public const int NumberOfHeadersInTable = 1;
+        public const int RowNumberOfHeadersInTable = 1;
         public const int NumberOfAllowedColumnsInPdfView = 16;
         public const string DefaultAutocompleteSelectTerm = "Quick Select";
         public const string ContainerFundName = "FUND";

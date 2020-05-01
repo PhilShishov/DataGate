@@ -1,22 +1,20 @@
 ﻿namespace DataGate.Web.Areas.Administration.Controllers
 {
-    using System.Collections.Generic;
-    using System.Globalization;
-    using System.Linq;
-    using System.Text.Encodings.Web;
-    using System.Threading.Tasks;
-
     using DataGate.Common;
     using DataGate.Data.Models.Users;
     using DataGate.Services.Messaging;
     using DataGate.Web.Controllers;
     using DataGate.Web.InputModels.Users;
     using DataGate.Web.ViewModels.Users;
-
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
+    using System.Collections.Generic;
+    using System.Globalization;
+    using System.Linq;
+    using System.Text.Encodings.Web;
+    using System.Threading.Tasks;
 
     [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     [Area("Administration")]

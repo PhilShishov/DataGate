@@ -1,6 +1,5 @@
 ﻿namespace DataGate.Web.Areas.Identity.Pages.Account
 {
-    using DataGate.Common;
     using DataGate.Data.Models.Users;
 
     using Microsoft.AspNetCore.Authorization;

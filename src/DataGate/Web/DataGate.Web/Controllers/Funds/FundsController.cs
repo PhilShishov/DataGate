@@ -6,8 +6,9 @@
     using System.Linq;
 
     using DataGate.Common;
-    using DataGate.Services;
+    using DataGate.Services.AutoComplete;
     using DataGate.Services.Data.Funds.Contracts;
+    using DataGate.Services.Data.ViewModel;
     using DataGate.Web.Utilities;
     using DataGate.Web.ViewModels.Entities;
 
@@ -46,7 +47,7 @@
 
         public JsonResult AutoCompleteFundList(string selectTerm)
         {
-            List<string[]> result = GetAutocompleteResult.GetEntityResult(selectTerm, this.fundsService);
+            List<string[]> result = AutoCompleteService.GetEntityResult(selectTerm, this.fundsService);
 
             var modifiedData = result.Select(f => new
             {
@@ -60,9 +61,9 @@
         [HttpPost]
         public IActionResult All(EntitiesViewModel model)
         {
-            this.NewMethod(model);
+            ViewModelService.SetEntityViewModelProperties(model, this.fundsService);
 
-            if (model.Entities.Count > GlobalConstants.NumberOfHeadersInTable)
+            if (model.Entities.Count > GlobalConstants.RowNumberOfHeadersInTable)
             {
                 this.TempData[GlobalConstants.InfoMessageDisplay] = InfoMessages.SuccessfullyUpdatedTable;
                 return this.View(model);
@@ -73,70 +74,15 @@
             return this.Redirect(GlobalConstants.FundAllUrl);
         }
 
-        private void NewMethod(EntitiesViewModel model)
-        {
-            // ---------------------------------------------------------
-            //
-            // Available header column selection
-            model.EntitiesHeadersForColumnSelection = this.fundsService
-                                                            .GetAllActive()
-                                                            .Take(1)
-                                                            .ToList();
-
-            bool isInSelectionMode = false;
-
-            if (model.SelectedColumns != null && model.SelectedColumns.ToList().Count > 0)
-            {
-                isInSelectionMode = true;
-            }
-
-            DateTime? chosenDate = null;
-
-            if (model.ChosenDate != null)
-            {
-                chosenDate = DateTime.ParseExact(model.ChosenDate, GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
-            }
-
-            if (isInSelectionMode)
-            {
-                if (model.IsActive)
-                {
-                    this.CallActiveEntitiesWithSelectedColumns(model, chosenDate);
-                }
-                else if (!model.IsActive)
-                {
-                    this.CallAllEntitiesWithSelectedColumns(model, chosenDate);
-                }
-            }
-            else if (!isInSelectionMode)
-            {
-                if (model.IsActive)
-                {
-                    model.Entities = this.fundsService.GetAllActive(chosenDate).ToList();
-                }
-                else if (!model.IsActive)
-                {
-                    model.Entities = this.fundsService.GetAll(chosenDate).ToList();
-                }
-            }
-
-            if (model.SelectTerm != null)
-            {
-                model.Entities = CreateTableView.AddTableToView(model.Entities.ToList(), model.SelectTerm.ToLower());
-            }
-        }
-
         [HttpPost]
         public IActionResult GenerateExcelReport(EntitiesViewModel model)
         {
-            int count = model.Entities.Count;
-            if (count > GlobalConstants.NumberOfHeadersInTable)
+            if (model.Count > GlobalConstants.RowNumberOfHeadersInTable)
             {
                 string typeName = model.GetType().Name;
 
                 return GenerateFileTemplate.ExtractTableAsExcel(model.Entities, typeName, GlobalConstants.FundsControllerName);
             }
-
             this.TempData[GlobalConstants.ErrorMessageDisplay] = ErrorMessages.TableReportNotGenerated;
             return this.Redirect(GlobalConstants.FundAllUrl);
         }
@@ -144,8 +90,7 @@
         [HttpPost]
         public IActionResult GeneratePdfReport(EntitiesViewModel model)
         {
-            int count = model.Entities.Count;
-            if (count > GlobalConstants.NumberOfHeadersInTable)
+            if (model.Count > GlobalConstants.RowNumberOfHeadersInTable)
             {
                 var chosenDate = DateTime.ParseExact(model.ChosenDate, GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
                 string typeName = model.GetType().Name;
@@ -155,26 +100,6 @@
 
             this.TempData[GlobalConstants.ErrorMessageDisplay] = ErrorMessages.TableReportNotGenerated;
             return this.Redirect(GlobalConstants.FundAllUrl);
-        }
-
-        private void CallAllEntitiesWithSelectedColumns(EntitiesViewModel model, DateTime? chosenDate)
-        {
-            model.Entities = this.fundsService
-                .GetAllWithSelectedViewAndDate(
-                            model.PreSelectedColumns,
-                            model.SelectedColumns,
-                            chosenDate)
-                .ToList();
-        }
-
-        private void CallActiveEntitiesWithSelectedColumns(EntitiesViewModel model, DateTime? chosenDate)
-        {
-            model.Entities = this.fundsService
-                .GetAllActiveWithSelectedViewAndDate(
-                            model.PreSelectedColumns,
-                            model.SelectedColumns,
-                            chosenDate)
-                .ToList();
         }
     }
 }

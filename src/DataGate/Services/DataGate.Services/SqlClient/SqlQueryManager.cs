@@ -1,4 +1,4 @@
-// Utility class for managing sql
+﻿// Utility class for managing sql
 // queries, connections, commands
 
 // Created: 04/2020
@@ -13,6 +13,7 @@ namespace DataGate.Services.SqlClient
     using System.Linq;
 
     using DataGate.Common;
+    using DataGate.Services.SqlClient.Contracts;
 
     using Microsoft.Extensions.Configuration;
 

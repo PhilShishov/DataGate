@@ -1,14 +1,12 @@
 ﻿namespace DataGate.Web.Areas.Identity.Pages.Account
 {
-    using System.Threading.Tasks;
-
     using DataGate.Data.Models.Users;
-
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.Extensions.Logging;
+    using System.Threading.Tasks;
 
     [AllowAnonymous]
     public class LogoutModel : PageModel
