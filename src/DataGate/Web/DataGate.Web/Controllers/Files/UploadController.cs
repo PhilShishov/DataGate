@@ -1,7 +1,9 @@
 ﻿namespace DataGate.Web.Controllers.Files
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    [Authorize]
     public class UploadController : Controller
     {
         //<form method = "post" enctype="multipart/form-data" 
