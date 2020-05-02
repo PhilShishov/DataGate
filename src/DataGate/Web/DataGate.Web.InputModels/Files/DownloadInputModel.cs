@@ -5,7 +5,7 @@ namespace DataGate.Web.InputModels.Files
 
     using DataGate.Common;
 
-    public class ExtractInputModel
+    public class DownloadInputModel
     {
         public List<string[]> Entities { get; set; }
 

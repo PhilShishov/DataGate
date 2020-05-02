@@ -12,7 +12,7 @@
     public class MediaController : BaseController
     {
         [HttpPost]
-        public IActionResult Download(ExtractInputModel model)
+        public IActionResult Download(DownloadInputModel model)
         {
             if (model.Count > GlobalConstants.RowNumberOfHeadersInTable)
             {
