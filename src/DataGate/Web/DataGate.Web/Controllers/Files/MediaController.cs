@@ -2,6 +2,7 @@
 //{
 //    using Microsoft.AspNetCore.Mvc;
 
+//[Authorize]
 //    public class MediaController : BaseController
 //    {
 //        //[HttpPost]

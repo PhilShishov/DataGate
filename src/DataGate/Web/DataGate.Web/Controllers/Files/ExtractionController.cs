@@ -2,14 +2,17 @@
 {
     using DataGate.Common;
     using DataGate.Services.DateTime;
+    using DataGate.Web.InputModels.Files;
     using DataGate.Web.Utilities;
-    using DataGate.Web.ViewModels.Entities;
+
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    [Authorize]
     public class ExtractionController : Controller
     {
         [HttpPost]
-        public IActionResult GenerateExcel(EntitiesViewModel model)
+        public IActionResult GenerateExcel(GenerateFileInputModel model)
         {
             if (model.Count > GlobalConstants.RowNumberOfHeadersInTable)
             {
@@ -23,7 +26,7 @@
         }
 
         [HttpPost]
-        public IActionResult GeneratePdf(EntitiesViewModel model)
+        public IActionResult GeneratePdf(GenerateFileInputModel model)
         {
             if (model.Count > GlobalConstants.RowNumberOfHeadersInTable)
             {

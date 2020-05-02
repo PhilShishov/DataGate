@@ -2,12 +2,12 @@
     const checkbox = document.getElementById('activeCheckBox');
     //const select = document.getElementById('SelectTerm');
 
-    const formPharus = document.getElementById('entity-form-pharus');
+    const updateForm = document.getElementById('update-form');
 
     checkbox.addEventListener('change', submitForm);
     //select.addEventListener('change', submitForm);
 
     function submitForm() {
-        formPharus.submit();
+        updateForm.submit();
     }
 }
