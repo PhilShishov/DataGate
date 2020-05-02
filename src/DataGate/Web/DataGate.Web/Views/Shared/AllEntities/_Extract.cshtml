@@ -8,7 +8,9 @@
             <button class="btn btn-sm btn-primary"
                     type="submit"
                     asp-controller="Extraction"
-                    asp-action="GenerateExcel">
+                    asp-action="GenerateFile"
+                    name="Command"
+                    value="Excel">
                 Excel
             </button>
         </div>
@@ -17,11 +19,15 @@
             <button class="btn btn-sm btn-primary"
                     type="submit"
                     asp-controller="Extraction"
-                    asp-action="GeneratePdf">
+                    asp-action="GenerateFile"
+                    name="Command"
+                    value="PDF">
                 PDF
             </button>
         </div>
     </div>
 </div>
+
+<input type="hidden" name="ControllerName" value="@controllerName" />
 
 <div class="vertical mx-3"></div>

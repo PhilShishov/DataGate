@@ -5,12 +5,16 @@ namespace DataGate.Web.InputModels.Files
 
     using DataGate.Common;
 
-    public class GenerateFileInputModel
+    public class ExtractInputModel
     {
         public List<string[]> Entities { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.ChosenDateIsEmpty)]
         public string ChosenDate { get; set; }
+
+        public string ControllerName { get; set; }
+
+        public string Command { get; set; }
 
         public int Count => this.Entities.Count;
     }
