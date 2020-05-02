@@ -2,13 +2,14 @@ namespace DataGate.Services.Data.Funds
 {
     using System;
     using System.Collections.Generic;
-
+    using System.Linq;
+    using DataGate.Common.Exceptions;
     using DataGate.Data.Common.Repositories;
     using DataGate.Data.Models.Entities;
     using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Services.SqlClient.Contracts;
 
-    public class FundSubFundsService : IFundSubFundsService
+    public class FundSubEntitiesService : IFundSubEntitiesService
     {
         // ________________________________________________________
         //
@@ -30,7 +31,7 @@ namespace DataGate.Services.Data.Funds
         //
         // Constructor: initialize with DI IConfiguration
         // to retrieve appsettings.json connection string
-        public FundSubFundsService(
+        public FundSubEntitiesService(
                     ISqlQueryManager sqlQueryManager,
                     IRepository<TbHistoryFund> fundsRepository)
         {
@@ -42,17 +43,17 @@ namespace DataGate.Services.Data.Funds
         //
         // Retrieve query table DB based entities
         // with table functions
-        public IEnumerable<string[]> GetFundWithDateById(DateTime? chosenDate, int id)
+        public IEnumerable<string[]> GetEntityWithDateById(DateTime? chosenDate, int id)
         {
             return this.sqlManager.ExecuteSqlQueryByWhereId(chosenDate, id, this.sqlFunctionAllFund, this.columnToPassToQuery);
         }
 
-        public IEnumerable<string[]> GetFund_SubFunds(DateTime? chosenDate, int id)
+        public IEnumerable<string[]> GetEntity_SubEntities(DateTime? chosenDate, int id)
         {
             return this.sqlManager.ExecuteSqlQueryByDateAndId(chosenDate, id, this.sqlFunctionSubFundsForFund);
         }
 
-        public IEnumerable<string[]> GetFund_SubFundsWithSelectedViewAndDate(
+        public IEnumerable<string[]> GetEntity_SubEntitiesWithSelectedViewAndDate(
                                                                     List<string> preSelectedColumns,
                                                                     List<string> selectedColumns,
                                                                     DateTime? chosenDate,
@@ -61,34 +62,44 @@ namespace DataGate.Services.Data.Funds
             return this.sqlManager.ExecuteSqlQueryByIdWithSelection(ref preSelectedColumns, selectedColumns, chosenDate, id, this.sqlFunctionSubFundsForFund);
         }
 
-        public IEnumerable<string[]> GetFundTimeline(int id)
+        public IEnumerable<string[]> GetTimeline(int id)
         {
             return this.sqlManager.ExecuteSqlQueryById(id, this.sqlFunctionTimelineFund);
         }
 
-        public IEnumerable<string[]> GetDistinctFundDocuments(DateTime? chosenDate, int id)
+        public IEnumerable<string[]> GetDistinctDocuments(DateTime? chosenDate, int id)
         {
             return this.sqlManager.ExecuteSqlQueryByDateAndId(chosenDate, id, this.sqlFunctionDistinctDocuments);
         }
 
-        public IEnumerable<string[]> GetAllFundDocuments(int id)
+        public IEnumerable<string[]> GetAllDocuments(int id)
         {
             return this.sqlManager.ExecuteSqlQueryById(id, this.sqlFunctionAllDocuments);
         }
 
-        public IEnumerable<string[]> GetDistinctFundAgreements(DateTime? chosenDate, int id)
+        public IEnumerable<string[]> GetDistinctAgreements(DateTime? chosenDate, int id)
         {
             return this.sqlManager.ExecuteSqlQueryByDateAndId(chosenDate, id, this.sqlFunctionDistinctAgreements);
         }
 
-        public IEnumerable<string[]> GetAllFundAgreements(DateTime? chosenDate, int id)
+        public IEnumerable<string[]> GetAllAgreements(DateTime? chosenDate, int id)
         {
             return this.sqlManager.ExecuteSqlQueryByDateAndId(chosenDate, id, this.sqlFunctionAllAgreements);
         }
 
-        public IEnumerable<string[]> PrepareFund_SubFundsForPDFExtract(DateTime? chosenDate)
+        public IEnumerable<string[]> PrepareEntity_SubEntitiesForPdfExtract(DateTime? chosenDate)
         {
             return this.sqlManager.ExecuteSqlQuery(chosenDate, this.sqlFunctionSubFundPdfView);
         }
+
+        public void ThrowEntityNotFoundExceptionIfIdDoesNotExist(int id)
+        {
+            if (!this.Exists(id))
+            {
+                throw new EntityNotFoundException(nameof(TbHistoryFund));
+            }
+        }
+
+        private bool Exists(int id) => this.repository.All().Any(x => x.FId == id);
     }
 }

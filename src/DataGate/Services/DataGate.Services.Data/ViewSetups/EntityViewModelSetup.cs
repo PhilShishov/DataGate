@@ -5,7 +5,7 @@
 // Author:  Philip Shishov
 
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-namespace DataGate.Services.Data.ViewModel
+namespace DataGate.Services.Data.ViewSetups
 {
     using System;
     using System.Linq;
@@ -13,9 +13,9 @@ namespace DataGate.Services.Data.ViewModel
     using DataGate.Services.DateTime;
     using DataGate.Web.ViewModels.Entities;
 
-    public static class EntityViewModelService
+    public static class EntityViewModelSetup
     {
-        public static void SetProperties(EntitiesViewModel model, IEntityService<string[]> service)
+        public static void SetModel(EntitiesViewModel model, IEntityService<string[]> service)
         {
             // ---------------------------------------------------------
             //

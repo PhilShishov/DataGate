@@ -11,5 +11,10 @@
         {
             return DateTime.ParseExact(chosenDate, GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
         }
+
+        public static DateTime SqlFormat(string chosenDate)
+        {
+            return DateTime.ParseExact(chosenDate, GlobalConstants.SqlDateTimeFormatParsing, CultureInfo.InvariantCulture);
+        }
     }
 }

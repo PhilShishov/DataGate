@@ -33,6 +33,9 @@
 //        [HttpPost]
 //        public IActionResult Update()
 //        {
+
+// 
+
 //            //if (model.Entity != null && model.EntitySubEntities.Count > GlobalConstants.RowNumberOfHeadersInTable)
 //            //{
 //            //    this.TempData[GlobalConstants.InfoMessageDisplay] = InfoMessages.SuccessfullyUpdatedTable;
@@ -142,17 +145,6 @@
 //            }
 
 //            return this.Redirect(GlobalConstants.FundAllUrl);
-//        }
-
-//        private void CallEntitySubEntitiesWithSelectedColumns(SpecificEntityViewModel model, DateTime chosenDate)
-//        {
-//            model.EntitySubEntities = this.service
-//                .GetFund_SubFundsWithSelectedViewAndDate(
-//                                                model.PreSelectedColumns,
-//                                                model.SelectedColumns,
-//                                                chosenDate,
-//                                                model.EntityId)
-//                .ToList();
 //        }
 //    }
 //}

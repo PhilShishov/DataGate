@@ -7,7 +7,7 @@
     using DataGate.Common;
     using DataGate.Services.AutoComplete;
     using DataGate.Services.Data.Funds.Contracts;
-    using DataGate.Services.Data.ViewModel;
+    using DataGate.Services.Data.ViewSetups;
     using DataGate.Web.ViewModels.Entities;
 
     using Microsoft.AspNetCore.Authorization;
@@ -59,7 +59,7 @@
         [HttpPost]
         public IActionResult All(EntitiesViewModel model)
         {
-            EntityViewModelService.SetProperties(model, this.service);
+            EntityViewModelSetup.SetModel(model, this.service);
 
             if (model.Entities.Count > GlobalConstants.RowNumberOfHeadersInTable)
             {

@@ -1,4 +1,4 @@
-namespace DataGate.Services.Data.Funds
+﻿namespace DataGate.Services.Data.Funds
 {
     using System;
     using System.Collections.Generic;
