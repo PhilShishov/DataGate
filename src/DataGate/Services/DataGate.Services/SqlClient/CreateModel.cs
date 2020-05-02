@@ -34,7 +34,7 @@ namespace DataGate.Services.SqlClient
 
                 model.Insert(StartingIndex, item);
 
-                Validator.ThrowEntityNotFoundExceptionIfEntityIsNull(model, nameof(model));
+                Validator.NotFoundExceptionIfEntityIsNull(model, nameof(model));
 
                 return model;
             }

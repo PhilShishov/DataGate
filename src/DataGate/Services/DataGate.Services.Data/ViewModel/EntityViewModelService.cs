@@ -13,9 +13,9 @@ namespace DataGate.Services.Data.ViewModel
     using DataGate.Services.DateTime;
     using DataGate.Web.ViewModels.Entities;
 
-    public static class ViewModelService
+    public static class EntityViewModelService
     {
-        public static void SetEntityViewModelProperties(EntitiesViewModel model, IEntityService<string[]> service)
+        public static void SetProperties(EntitiesViewModel model, IEntityService<string[]> service)
         {
             // ---------------------------------------------------------
             //
