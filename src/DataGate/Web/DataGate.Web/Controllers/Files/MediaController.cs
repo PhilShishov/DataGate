@@ -4,6 +4,7 @@
     using DataGate.Services.DateTime;
     using DataGate.Web.InputModels.Files;
     using DataGate.Web.Utilities;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -15,16 +16,14 @@
         {
             if (model.Count > GlobalConstants.RowNumberOfHeadersInTable)
             {
-                string typeName = model.GetType().Name;
-
                 if (model.Command == GlobalConstants.CommandExtractExcel)
                 {
-                    return GenerateFileTemplate.Excel(model.Entities, typeName, model.ControllerName);
+                    return GenerateFileTemplate.Excel(model.Entities, model.ControllerName);
                 }
                 else if (model.Command == GlobalConstants.CommandExtractPdf)
                 {
                     var chosenDate = DateTimeParser.WebFormat(model.ChosenDate);
-                    return GenerateFileTemplate.Pdf(model.Entities, chosenDate, typeName, model.ControllerName);
+                    return GenerateFileTemplate.Pdf(model.Entities, chosenDate, model.ControllerName);
                 }
             }
 

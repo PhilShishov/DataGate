@@ -37,8 +37,6 @@ namespace DataGate.Web.Utilities
         private const string SubFundsNameDisplay = "Sub Funds";
         private const string ShareClassesNameDisplay = "Share Classes";
 
-        private const string ModelTypeNameToBeChecked = "EntitiesViewModel";
-
         // ________________________________________________________
         //
         // Extract table data as Excel
@@ -46,7 +44,6 @@ namespace DataGate.Web.Utilities
         // in controller as filestreamresult
         public static FileStreamResult Excel(
                                                            List<string[]> entities,
-                                                           string typeName,
                                                            string controllerName)
         {
             FileStreamResult fileStreamResult;
@@ -56,7 +53,7 @@ namespace DataGate.Web.Utilities
             using (ExcelPackage package = new ExcelPackage())
             {
                 ExcelWorksheet worksheet = null;
-                string correctTypeName = GetCorrectTypeName(typeName, controllerName);
+                string correctTypeName = GetCorrectTypeName(controllerName);
 
                 worksheet = package.Workbook.Worksheets.Add($"{correctTypeName}");
 
@@ -105,10 +102,9 @@ namespace DataGate.Web.Utilities
         public static FileStreamResult Pdf(
                                                          List<string[]> entities,
                                                          DateTime? chosenDate,
-                                                         string typeName,
                                                          string controllerName)
         {
-            string correctTypeName = GetCorrectTypeName(typeName, controllerName);
+            string correctTypeName = GetCorrectTypeName(controllerName);
 
             int tableLength = entities[0].Length;
 
@@ -189,26 +185,25 @@ namespace DataGate.Web.Utilities
         //
         // Method for choosing the correct name
         // for file to be downloaded
-        // based on controller and
-        // view model name
-        private static string GetCorrectTypeName(string typeName, string controllerName)
+        // based on controller name
+        private static string GetCorrectTypeName(string controllerName)
         {
-            string correctTypeName = string.Empty;
+            string typeName = string.Empty;
 
-            if (controllerName == GlobalConstants.FundsControllerName)
+            switch (controllerName)
             {
-                correctTypeName = typeName == ModelTypeNameToBeChecked ? FundsNameDisplay : SubFundsNameDisplay;
-            }
-            else if (controllerName == GlobalConstants.SubFundsControllerName)
-            {
-                correctTypeName = typeName == ModelTypeNameToBeChecked ? SubFundsNameDisplay : ShareClassesNameDisplay;
-            }
-            else if (controllerName == GlobalConstants.ShareClassesControllerName)
-            {
-                correctTypeName = ShareClassesNameDisplay;
+                case GlobalConstants.FundsControllerName:
+                    typeName = FundsNameDisplay;
+                    break;
+                case GlobalConstants.SubFundsControllerName:
+                    typeName = SubFundsNameDisplay;
+                    break;
+                case GlobalConstants.ShareClassesControllerName:
+                    typeName = ShareClassesNameDisplay;
+                    break;
             }
 
-            return correctTypeName;
+            return typeName;
         }
     }
 }
