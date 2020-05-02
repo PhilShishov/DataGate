@@ -61,7 +61,7 @@
         [HttpPost]
         public IActionResult All(EntitiesViewModel model)
         {
-            ViewModelService.SetEntityViewModelProperties(model, this.fundsService);
+            EntityViewModelService.SetProperties(model, this.fundsService);
 
             if (model.Entities.Count > GlobalConstants.RowNumberOfHeadersInTable)
             {

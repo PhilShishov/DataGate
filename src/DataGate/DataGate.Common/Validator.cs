@@ -4,7 +4,7 @@
 
     public static class Validator
     {
-        public static void ThrowEntityNotFoundExceptionIfEntityIsNull(object entity, string name)
+        public static void NotFoundExceptionIfEntityIsNull(object entity, string name)
         {
             if (entity == null)
             {

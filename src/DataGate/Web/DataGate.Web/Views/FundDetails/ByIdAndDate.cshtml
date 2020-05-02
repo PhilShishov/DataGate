@@ -7,6 +7,7 @@
 }
 
 <form asp-controller="FundSubEntities"
+      asp-action="ByIdAndDate"
       class="justify-content-between"
       method="post"
       style="margin-top: -3.95rem">
@@ -26,7 +27,9 @@
     </div>
 
     <hr class="bg-pharus hr-2" />
+</form>
 
+<form action="/" method="post">
     <div class="row ml-3" id="div-select-addInfo">
         <label class="text-torshia m-1 pr-3">FUND ADDITIONAL INFORMATION</label>
         <select class="custom-select-lg select-pharus form-control input-sm"
@@ -43,7 +46,6 @@
     <partial name="SpecificEntity/_AllDocuments" />
     <partial name="SpecificEntity/_AllAgreements" />
     <partial name="SpecificEntity/_Timeline" />
-
     <div id="subEntities" class="mt-4">
         <div>
             <div class="d-flex w-100 mb-2" id="toolbar-pharus">
@@ -72,15 +74,15 @@
     </div>
 </form>
 
-<form asp-controller="FundSubEntities"
+@*<form asp-controller="FundSubEntities"
           asp-action="UploadProspectus"
           method="post"
           enctype="multipart/form-data">
 
         <partial name="SpecificEntity/_UploadPros" />
-    </form>
+    </form>*@
 
-    @*<form asp-controller="FundSubEntities"
+@*<form asp-controller="FundSubEntities"
           asp-action="UploadAgreement"
           enctype="multipart/form-data">
 
