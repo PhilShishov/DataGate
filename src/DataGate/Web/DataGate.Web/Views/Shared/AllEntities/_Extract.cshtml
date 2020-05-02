@@ -7,8 +7,8 @@
         <div>
             <button class="btn btn-sm btn-primary"
                     type="submit"
-                    formaction="/@controllerName/GenerateExcelReport"
-                    name="extract_Excel">
+                    asp-controller="Transfer"
+                    asp-action="GenerateExcel">
                 Excel
             </button>
         </div>
@@ -16,8 +16,8 @@
         <div class="ml-4">
             <button class="btn btn-sm btn-primary"
                     type="submit"
-                    formaction="/@controllerName/GeneratePdfReport"
-                    name="extract_Pdf">
+                    asp-controller="Transfer"
+                    asp-action="GeneratePdf">
                 PDF
             </button>
         </div>
