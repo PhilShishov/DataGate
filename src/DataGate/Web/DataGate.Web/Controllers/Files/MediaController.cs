@@ -1,75 +1,102 @@
-﻿//namespace DataGate.Web.Controllers
-//{
-//    using Microsoft.AspNetCore.Mvc;
+﻿namespace DataGate.Web.Controllers
+{
+    using DataGate.Common;
+    using DataGate.Services.DateTime;
+    using DataGate.Web.InputModels.Files;
+    using DataGate.Web.Utilities;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
 
-//[Authorize]
-//    public class MediaController : BaseController
-//    {
-//        //[HttpPost]
-//        //public IActionResult ReadDocument(string pdfValue)
-//        //{
-//        //    FileStreamResult fileStreamResult = null;
+    [Authorize]
+    public class MediaController : BaseController
+    {
+        [HttpPost]
+        public IActionResult Download(ExtractInputModel model)
+        {
+            if (model.Count > GlobalConstants.RowNumberOfHeadersInTable)
+            {
+                string typeName = model.GetType().Name;
 
-//        //    string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\Funds\");
-//        //    string path = $"{fileLocation}{pdfValue}";
+                if (model.Command == GlobalConstants.CommandExtractExcel)
+                {
+                    return GenerateFileTemplate.Excel(model.Entities, typeName, model.ControllerName);
+                }
+                else if (model.Command == GlobalConstants.CommandExtractPdf)
+                {
+                    var chosenDate = DateTimeParser.WebFormat(model.ChosenDate);
+                    return GenerateFileTemplate.Pdf(model.Entities, chosenDate, typeName, model.ControllerName);
+                }
+            }
 
-//        //    if (this.HttpContext.Request.Form.ContainsKey("pdfValue"))
-//        //    {
-//        //        var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
-//        //        fileStreamResult = new FileStreamResult(fileStream, "application/pdf");
-//        //    }
+            this.TempData[GlobalConstants.ErrorMessageDisplay] = ErrorMessages.TableReportNotGenerated;
+            return this.Redirect(GlobalConstants.FundAllUrl);
+        }
 
-//        //    if (fileStreamResult != null)
-//        //    {
-//        //        return fileStreamResult;
-//        //    }
+        //[HttpPost]
+        //public IActionResult ReadDocument(string pdfValue)
+        //{
+        //    FileStreamResult fileStreamResult = null;
 
-//        //    return this.RedirectToAction("All");
-//        //}
+        //    string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\Funds\");
+        //    string path = $"{fileLocation}{pdfValue}";
 
-//        //[HttpPost]
-//        //public IActionResult ReadAgreement(string pdfValue)
-//        //{
-//        //    FileStreamResult fileStreamResult = null;
+        //    if (this.HttpContext.Request.Form.ContainsKey("pdfValue"))
+        //    {
+        //        var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
+        //        fileStreamResult = new FileStreamResult(fileStream, "application/pdf");
+        //    }
 
-//        //    string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\Agreements\");
-//        //    string path = $"{fileLocation}{pdfValue}";
+        //    if (fileStreamResult != null)
+        //    {
+        //        return fileStreamResult;
+        //    }
 
-//        //    if (this.HttpContext.Request.Form.ContainsKey("pdfValue"))
-//        //    {
-//        //        var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
-//        //        fileStreamResult = new FileStreamResult(fileStream, "application/pdf");
-//        //    }
+        //    return this.RedirectToAction("All");
+        //}
 
-//        //    if (fileStreamResult != null)
-//        //    {
-//        //        return fileStreamResult;
-//        //    }
+        //[HttpPost]
+        //public IActionResult ReadAgreement(string pdfValue)
+        //{
+        //    FileStreamResult fileStreamResult = null;
 
-//        //    return this.RedirectToAction("All");
-//        //}
+        //    string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\Agreements\");
+        //    string path = $"{fileLocation}{pdfValue}";
 
-//        //[ValidateAntiForgeryToken]
+        //    if (this.HttpContext.Request.Form.ContainsKey("pdfValue"))
+        //    {
+        //        var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
+        //        fileStreamResult = new FileStreamResult(fileStream, "application/pdf");
+        //    }
 
-//        //[HttpGet]
-//        //public JsonResult DeleteAgreement(string agrName)
-//        //{
-//        //    if (!string.IsNullOrEmpty(agrName))
-//        //    {
-//        //        string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
-//        //        this.entitiesFileService.DeleteAgreementMapping(agrName, controllerName);
+        //    if (fileStreamResult != null)
+        //    {
+        //        return fileStreamResult;
+        //    }
 
-//        //        string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\Agreements\");
-//        //        string path = $"{fileLocation}{agrName}";
+        //    return this.RedirectToAction("All");
+        //}
 
-//        //        if (System.IO.File.Exists(path))
-//        //        {
-//        //            System.IO.File.Delete(path);
-//        //            return Json(new { data = Path.GetFileNameWithoutExtension(agrName) });
-//        //        }
-//        //    }
+        //[ValidateAntiForgeryToken]
 
-//        //    return Json(new { data = "false" });
-//        //}
-//    }
-//}
+        //[HttpGet]
+        //public JsonResult DeleteAgreement(string agrName)
+        //{
+        //    if (!string.IsNullOrEmpty(agrName))
+        //    {
+        //        string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
+        //        this.entitiesFileService.DeleteAgreementMapping(agrName, controllerName);
+
+        //        string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\Agreements\");
+        //        string path = $"{fileLocation}{agrName}";
+
+        //        if (System.IO.File.Exists(path))
+        //        {
+        //            System.IO.File.Delete(path);
+        //            return Json(new { data = Path.GetFileNameWithoutExtension(agrName) });
+        //        }
+        //    }
+
+        //    return Json(new { data = "false" });
+        //}
+    }
+}

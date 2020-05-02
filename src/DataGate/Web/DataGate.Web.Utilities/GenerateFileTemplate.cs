@@ -33,9 +33,9 @@ namespace DataGate.Web.Utilities
         // ---------------------------------------------------------
         //
         // Names for files when created
-        private const string ActiveFunds = "ActiveFunds";
-        private const string ActiveSubFunds = "ActiveSubFunds";
-        private const string ActiveShareClasses = "ActiveShareClasses";
+        private const string FundsNameDisplay = "Funds";
+        private const string SubFundsNameDisplay = "Sub Funds";
+        private const string ShareClassesNameDisplay = "Share Classes";
 
         private const string ModelTypeNameToBeChecked = "EntitiesViewModel";
 
@@ -197,15 +197,15 @@ namespace DataGate.Web.Utilities
 
             if (controllerName == GlobalConstants.FundsControllerName)
             {
-                correctTypeName = typeName == ModelTypeNameToBeChecked ? ActiveFunds : ActiveSubFunds;
+                correctTypeName = typeName == ModelTypeNameToBeChecked ? FundsNameDisplay : SubFundsNameDisplay;
             }
             else if (controllerName == GlobalConstants.SubFundsControllerName)
             {
-                correctTypeName = typeName == ModelTypeNameToBeChecked ? ActiveSubFunds : ActiveShareClasses;
+                correctTypeName = typeName == ModelTypeNameToBeChecked ? SubFundsNameDisplay : ShareClassesNameDisplay;
             }
             else if (controllerName == GlobalConstants.ShareClassesControllerName)
             {
-                correctTypeName = ActiveShareClasses;
+                correctTypeName = ShareClassesNameDisplay;
             }
 
             return correctTypeName;
