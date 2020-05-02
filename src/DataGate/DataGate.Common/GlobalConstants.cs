@@ -86,8 +86,9 @@
         public const string SubFundNameDisplay = "Sub Fund";
         public const string ShareClassNameDisplay = "Share Class";
 
-        // Table Commands
+        // Toolbar Commands
         public const string CommandUpdateTable = "Update Table";
-
+        public const string CommandExtractExcel = "Excel";
+        public const string CommandExtractPdf = "PDF";
     }
 }
