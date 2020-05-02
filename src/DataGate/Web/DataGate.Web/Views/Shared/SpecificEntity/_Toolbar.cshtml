@@ -10,7 +10,7 @@
     var routeName = string.Empty;
     var routeSEName = string.Empty;
 
-    if (controllerName == GlobalConstants.FundSubEntitiesControllerName)
+    if (controllerName == GlobalConstants.FundDetailsControllerName)
     {
         documentTypeName = GlobalConstants.UploadTypeProspectusDisplay;
         entityName = GlobalConstants.FundNameDisplay;
@@ -18,31 +18,31 @@
         routeName = GlobalConstants.AllFundsRouteName;
         routeSEName = GlobalConstants.FundSubEntititesRouteName;
     }
-    else if (controllerName == GlobalConstants.SubFundSubEntitiesControllerName)
-    {
-        containerName = GlobalConstants.ContainerFundName;
-        targetRouteContainer = "f";
-        documentTypeName = GlobalConstants.UploadTypeDocumentDisplay;
-        entityName = GlobalConstants.SubFundNameDisplay;
-        targetRoute = "sf";
-        routeName = GlobalConstants.AllSubFundsRouteName;
-        routeSEName = GlobalConstants.SubFundSubEntititesRouteName;
-    }
-    else if (controllerName == GlobalConstants.ShareClassesSubEntitiesControllerName)
-    {
-        containerName = GlobalConstants.ContainerSubFundName;
-        targetRouteContainer = "sf";
-        documentTypeName = GlobalConstants.UploadTypeDocumentDisplay;
-        entityName = GlobalConstants.ShareClassNameDisplay;
-        targetRoute = "sc";
-        routeName = GlobalConstants.AllShareClassesRouteName;
-        routeSEName = GlobalConstants.ShareClassSubEntititesRouteName;
-    }
+    //else if (controllerName == GlobalConstants.SubFundSubEntitiesControllerName)
+    //{
+    //    containerName = GlobalConstants.ContainerFundName;
+    //    targetRouteContainer = "f";
+    //    documentTypeName = GlobalConstants.UploadTypeDocumentDisplay;
+    //    entityName = GlobalConstants.SubFundNameDisplay;
+    //    targetRoute = "sf";
+    //    routeName = GlobalConstants.AllSubFundsRouteName;
+    //    routeSEName = GlobalConstants.SubFundSubEntititesRouteName;
+    //}
+    //else if (controllerName == GlobalConstants.ShareClassesSubEntitiesControllerName)
+    //{
+    //    containerName = GlobalConstants.ContainerSubFundName;
+    //    targetRouteContainer = "sf";
+    //    documentTypeName = GlobalConstants.UploadTypeDocumentDisplay;
+    //    entityName = GlobalConstants.ShareClassNameDisplay;
+    //    targetRoute = "sc";
+    //    routeName = GlobalConstants.AllShareClassesRouteName;
+    //    routeSEName = GlobalConstants.ShareClassSubEntititesRouteName;
+    //}
 }
 
 <div class="w-100 mt-1 mb-3" id="toolbar-pharus">
 
-    @if (controllerName == GlobalConstants.FundSubEntitiesControllerName)
+    @if (controllerName == GlobalConstants.FundDetailsControllerName)
     {
         <div class="d-flex mt-1 mr-auto"></div>
     }

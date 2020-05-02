@@ -14,6 +14,7 @@
         // Controllers
         public const string ControllerRouteDataValue = "controller";
         public const string FundsControllerName = "Funds";
+        public const string FundDetailsControllerName = "FundDetails";
         public const string FundSubEntitiesControllerName = "FundSubEntities";
         public const string SubFundsControllerName = "SubFunds";
         public const string SubFundSubEntitiesControllerName = "SubFundSubEntities";
@@ -84,5 +85,9 @@
         public const string FundNameDisplay = "Fund";
         public const string SubFundNameDisplay = "Sub Fund";
         public const string ShareClassNameDisplay = "Share Class";
+
+        // Table Commands
+        public const string CommandUpdateTable = "Update Table";
+
     }
 }
