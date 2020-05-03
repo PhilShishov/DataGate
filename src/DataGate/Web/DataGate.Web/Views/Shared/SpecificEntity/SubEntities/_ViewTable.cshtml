@@ -1,4 +1,4 @@
-﻿@using DataGate.Common
+﻿@*@using DataGate.Common
 @model DataGate.Web.ViewModels.Entities.SpecificEntityViewModel
 
 @{
@@ -34,7 +34,7 @@
             {
                 entityId = Model.EntitySubEntities[row][2];
 
-                <tr class="tableCellPharus" onclick="document.location = '/@targetRoute/@entityId/@Model.ChosenDate'">
+                <tr class="tableCellPharus" onclick="document.location = '/@targetRoute/@entityId/@Model.Date'">
                     @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
                     {
                         <td class="p-1">
@@ -45,4 +45,4 @@
             }
         </tbody>
     </table>
-</div>
+</div>*@

@@ -9,7 +9,7 @@ namespace DataGate.Services.Data.Funds
 {
     using System;
     using System.Collections.Generic;
-
+    using System.Linq;
     using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Services.SqlClient.Contracts;
 
@@ -39,19 +39,39 @@ namespace DataGate.Services.Data.Funds
         //
         // Retrieve query table DB based entities
         // with table functions
-        public IEnumerable<string[]> GetAll(DateTime? chosenDate)
+        public IEnumerable<string[]> GetAll(DateTime? chosenDate, int? take, int skip)
         {
-            return this.sqlManager.ExecuteSqlQuery(chosenDate, this.sqlFunctionAllFund);
+            var query = this.sqlManager
+                .ExecuteQuery(chosenDate, this.sqlFunctionAllFund)
+                .Skip(skip);
+
+            if (take.HasValue)
+            {
+                query.Take(take.Value);
+            }
+
+            return query.ToList();
         }
 
-        public IEnumerable<string[]> GetAllActive()
+        public IEnumerable<string[]> GetAllActive(int? take, int skip)
         {
-            return this.sqlManager.ExecuteSqlQuery(null, this.sqlFunctionAllActiveFund);
+            var query = this.sqlManager
+                .ExecuteQuery(null, this.sqlFunctionAllActiveFund)
+                .Skip(skip);
+
+            //var result = query;
+
+            if (take.HasValue)
+            {
+                query = query.Take(take.Value);
+            }
+
+            return query;
         }
 
-        public IEnumerable<string[]> GetAllActive(DateTime? chosenDate)
+        public IEnumerable<string[]> GetAllActive(DateTime? chosenDate, int? take, int skip)
         {
-            return this.sqlManager.ExecuteSqlQuery(chosenDate, this.sqlFunctionAllActiveFund);
+            return this.sqlManager.ExecuteQuery(chosenDate, this.sqlFunctionAllActiveFund);
         }
 
         public IEnumerable<string[]> GetAllWithSelectedViewAndDate(
@@ -59,7 +79,7 @@ namespace DataGate.Services.Data.Funds
                                                                     List<string> selectedColumns,
                                                                     DateTime? chosenDate)
         {
-            return this.sqlManager.ExecuteSqlQueryWithSelection(ref preSelectedColumns, selectedColumns, chosenDate, this.sqlFunctionAllFund);
+            return this.sqlManager.ExecuteQueryWithSelection(ref preSelectedColumns, selectedColumns, chosenDate, this.sqlFunctionAllFund);
         }
 
         public IEnumerable<string[]> GetAllActiveWithSelectedViewAndDate(
@@ -67,7 +87,7 @@ namespace DataGate.Services.Data.Funds
                                                                             List<string> selectedColumns,
                                                                             DateTime? chosenDate)
         {
-            return this.sqlManager.ExecuteSqlQueryWithSelection(ref preSelectedColumns, selectedColumns, chosenDate, this.sqlFunctionAllActiveFund);
+            return this.sqlManager.ExecuteQueryWithSelection(ref preSelectedColumns, selectedColumns, chosenDate, this.sqlFunctionAllActiveFund);
         }
     }
 }

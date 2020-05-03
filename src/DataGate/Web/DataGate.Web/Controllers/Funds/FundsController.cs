@@ -19,8 +19,7 @@
     {
         private readonly IFundsService service;
 
-        public FundsController(
-            IFundsService fundsService)
+        public FundsController(IFundsService fundsService)
         {
             this.service = fundsService;
         }
@@ -32,12 +31,9 @@
             var model = new EntitiesViewModel
             {
                 IsActive = true,
-                ChosenDate = DateTime.Today.ToString(GlobalConstants.RequiredWebDateTimeFormat),
-                EntitiesHeadersForColumnSelection = this.service
-                                                        .GetAllActive()
-                                                        .Take(1)
-                                                        .ToList(),
-                Entities = this.service.GetAllActive().ToList(),
+                Date = DateTime.Today.ToString(GlobalConstants.RequiredWebDateTimeFormat),
+                Headers = this.service.GetAllActive(1),
+                Entities = this.service.GetAllActive(null, 1),
             };
 
             return this.View(model);
@@ -61,7 +57,7 @@
         {
             EntityViewModelSetup.SetModel(model, this.service);
 
-            if (model.Entities.Count > GlobalConstants.RowNumberOfHeadersInTable)
+            if (model.Entities.ToList().Count > GlobalConstants.RowNumberOfHeadersInTable)
             {
                 this.TempData[GlobalConstants.InfoMessageDisplay] = InfoMessages.SuccessfullyUpdatedTable;
                 return this.View(model);

@@ -16,7 +16,17 @@
     <table class="table table-hover text-nowrap" name="Entities">
         <thead>
             <tr>
-                @for (int row = 0; row < 1; row++)
+                @foreach (var row in Model.Headers)
+                {
+                    foreach (var col in row)
+                    {
+                        <th class="text-white pr-3 tableHeaderPharus">
+                            @col
+                        </th>
+                    }
+                }
+
+                @*@for (int row = 0; row < 1; row++)
                 {
                     @for (int col = 0; col < Model.Entities[row].Length; col++)
                     {
@@ -24,11 +34,11 @@
                             @Model.Entities[row][col]
                         </th>
                     }
-                }
+                }*@
             </tr>
         </thead>
         <tbody>
-            @for (int row = 1; row < Model.Entities.Count; row++)
+            @*@for (int row = 1; row < Model.Entities.Count; row++)
             {
                 entityId = Model.Entities[row][2];
 
@@ -37,7 +47,7 @@
                     {
                         if (Model.Entities[0][col].Contains("NAME"))
                         {
-                            <td class="p-1 tableCellPharus" onclick="document.location ='/@targetRoute/@entityId/@Model.ChosenDate'">
+                            <td class="p-1 tableCellPharus" onclick="document.location ='/@targetRoute/@entityId/@Model.Date'">
                                 @Model.Entities[row][col]
                             </td>
                         }
@@ -49,7 +59,7 @@
                         }
                     }
                 </tr>
-            }
+            }*@
         </tbody>
     </table>
 </div>

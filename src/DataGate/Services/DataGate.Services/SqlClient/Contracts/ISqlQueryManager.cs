@@ -8,21 +8,21 @@ namespace DataGate.Services.SqlClient.Contracts
     {
         void ExecuteScalarSqlConnectionCommand(SqlConnection connection, SqlCommand command);
 
-        IEnumerable<string[]> ExecuteSqlQuery(DateTime? chosenDate, string function);
+        IEnumerable<string[]> ExecuteQuery(DateTime? chosenDate, string function);
 
-        IEnumerable<string[]> ExecuteSqlQueryWithSelection(
+        IEnumerable<string[]> ExecuteQueryWithSelection(
                                                                     ref List<string> preSelectedColumns,
                                                                     List<string> selectedColumns,
                                                                     DateTime? chosenDate,
                                                                     string function);
 
-        IEnumerable<string[]> ExecuteSqlQueryById(int id, string function);
+        IEnumerable<string[]> ExecuteQueryById(int id, string function);
 
-        IEnumerable<string[]> ExecuteSqlQueryByWhereId(DateTime? chosenDate, int id, string function, string column);
+        IEnumerable<string[]> ExecuteQueryByWhereId(DateTime? chosenDate, int id, string function, string column);
 
-        IEnumerable<string[]> ExecuteSqlQueryByDateAndId(DateTime? chosenDate, int id, string function);
+        IEnumerable<string[]> ExecuteQueryByDateAndId(DateTime? chosenDate, int id, string function);
 
-        IEnumerable<string[]> ExecuteSqlQueryByIdWithSelection(
+        IEnumerable<string[]> ExecuteQueryByIdWithSelection(
                                                                 ref List<string> preSelectedColumns,
                                                                 List<string> selectedColumns,
                                                                 DateTime? chosenDate,

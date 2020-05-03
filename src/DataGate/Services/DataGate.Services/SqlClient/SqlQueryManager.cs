@@ -49,7 +49,7 @@ namespace DataGate.Services.SqlClient
             }
         }
 
-        public IEnumerable<string[]> ExecuteSqlQuery(DateTime? chosenDate, string function)
+        public IEnumerable<string[]> ExecuteQuery(DateTime? chosenDate, string function)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -68,7 +68,7 @@ namespace DataGate.Services.SqlClient
             }
         }
 
-        public IEnumerable<string[]> ExecuteSqlQueryWithSelection(
+        public IEnumerable<string[]> ExecuteQueryWithSelection(
                                                                     ref List<string> preSelectedColumns,
                                                                     List<string> selectedColumns,
                                                                     DateTime? chosenDate,
@@ -95,7 +95,7 @@ namespace DataGate.Services.SqlClient
             }
         }
 
-        public IEnumerable<string[]> ExecuteSqlQueryByDateAndId(DateTime? chosenDate, int id, string function)
+        public IEnumerable<string[]> ExecuteQueryByDateAndId(DateTime? chosenDate, int id, string function)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -114,7 +114,7 @@ namespace DataGate.Services.SqlClient
             }
         }
 
-        public IEnumerable<string[]> ExecuteSqlQueryById(int id, string function)
+        public IEnumerable<string[]> ExecuteQueryById(int id, string function)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -126,7 +126,7 @@ namespace DataGate.Services.SqlClient
             }
         }
 
-        public IEnumerable<string[]> ExecuteSqlQueryByWhereId(DateTime? chosenDate, int id, string function, string column)
+        public IEnumerable<string[]> ExecuteQueryByWhereId(DateTime? chosenDate, int id, string function, string column)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -146,7 +146,7 @@ namespace DataGate.Services.SqlClient
             }
         }
 
-        public IEnumerable<string[]> ExecuteSqlQueryByIdWithSelection(
+        public IEnumerable<string[]> ExecuteQueryByIdWithSelection(
                                                                 ref List<string> preSelectedColumns,
                                                                 List<string> selectedColumns,
                                                                 DateTime? chosenDate,

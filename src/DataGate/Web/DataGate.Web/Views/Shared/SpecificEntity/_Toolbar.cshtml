@@ -50,7 +50,7 @@
     {
         <div class="d-flex mt-1 mr-auto">
             <p>@containerName CONTAINER: </p>
-            <a href="/@targetRouteContainer/edit/@Model.ContainerEntityId/@Model.ChosenDate"
+            <a href="/@targetRouteContainer/edit/@Model.ContainerEntityId/@Model.Date"
                class="text-torshia font-weight-bold ml-1">
                 @Model.ContainerEntityName
             </a>
@@ -61,7 +61,7 @@
         <div>
             <input type="date"
                    id="date-pharus"
-                   asp-for="ChosenDate"
+                   asp-for="Date"
                    min="2018-01-01">
 
             <input type="submit"
@@ -96,14 +96,14 @@
         @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
         {
             <div>
-                <a href="/@targetRoute/@Model.EntityId/@Model.ChosenDate"
+                <a href="/@targetRoute/@Model.Id/@Model.Date"
                    class="btn btn-primary btn-sm mb-2">
                     Edit @entityName
                 </a>
             </div>
         }
         <input type="number"
-               asp-for="EntityId"
+               asp-for="Id"
                hidden>
     </div>
 </div>
