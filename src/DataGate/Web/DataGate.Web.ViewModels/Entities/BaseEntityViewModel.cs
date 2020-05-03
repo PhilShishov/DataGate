@@ -27,7 +27,7 @@ namespace DataGate.Web.ViewModels.Entities
 
         public string SelectTerm { get; set; }
 
-        public IEnumerable<string> PreSelectedColumns { get; set; }
+        public IReadOnlyCollection<string> PreSelectedColumns { get; set; }
 
         public IEnumerable<string> SelectedColumns { get; set; }
     }

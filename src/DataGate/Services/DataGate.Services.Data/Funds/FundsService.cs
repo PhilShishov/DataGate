@@ -11,6 +11,7 @@ namespace DataGate.Services.Data.Funds
     using System.Collections.Generic;
     using System.Linq;
 
+    using DataGate.Common;
     using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Services.SqlClient.Contracts;
 
@@ -69,19 +70,28 @@ namespace DataGate.Services.Data.Funds
         }
 
         public IEnumerable<string[]> GetAllWithSelectedViewAndDate(
-                                                                    List<string> preSelectedColumns,
-                                                                    List<string> selectedColumns,
-                                                                    DateTime? chosenDate)
+                                                                IReadOnlyCollection<string> preSelectedColumns,
+                                                                IEnumerable<string> selectedColumns,
+                                                                DateTime? chosenDate)
         {
-            return this.sqlManager.ExecuteQueryWithSelection(ref preSelectedColumns, selectedColumns, chosenDate, this.sqlFunctionAllFund);
+            // Prepare items for DB query with []
+            //preSelectedColumns.AddRange(selectedColumns);
+            //selectedColumns = selectedColumns.Select(col => string.Format(GlobalConstants.SqlItemFormatRequired, col));
+
+            return this.sqlManager.ExecuteQueryWithSelection(selectedColumns, chosenDate, this.sqlFunctionAllFund);
         }
 
         public IEnumerable<string[]> GetAllActiveWithSelectedViewAndDate(
-                                                                            List<string> preSelectedColumns,
-                                                                            List<string> selectedColumns,
-                                                                            DateTime? chosenDate)
+                                                                    IReadOnlyCollection<string> preSelectedColumns,
+                                                                    IEnumerable<string> selectedColumns,
+                                                                    DateTime? chosenDate)
         {
-            return this.sqlManager.ExecuteQueryWithSelection(ref preSelectedColumns, selectedColumns, chosenDate, this.sqlFunctionAllActiveFund);
+            // Prepare items for DB query with []
+            ((List<string>)selectedColumns).InsertRange(0, preSelectedColumns);
+
+            selectedColumns = selectedColumns.Select(col => string.Format(GlobalConstants.SqlItemFormatRequired, col)).ToList();
+
+            return this.sqlManager.ExecuteQueryWithSelection(selectedColumns, chosenDate, this.sqlFunctionAllActiveFund);
         }
     }
 }
