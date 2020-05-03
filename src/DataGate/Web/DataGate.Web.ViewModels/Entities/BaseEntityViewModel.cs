@@ -18,6 +18,8 @@ namespace DataGate.Web.ViewModels.Entities
 
         public IEnumerable<string[]> Headers { get; set; }
 
+        public IEnumerable<string[]> HeadersSelection { get; set; }
+
         [Required(ErrorMessage = ErrorMessages.ChosenDateIsEmpty)]
         public string Date { get; set; }
 

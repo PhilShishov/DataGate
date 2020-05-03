@@ -72,26 +72,57 @@ namespace DataGate.Services.Data.Funds
         public IEnumerable<string[]> GetAllWithSelectedViewAndDate(
                                                                 IReadOnlyCollection<string> preSelectedColumns,
                                                                 IEnumerable<string> selectedColumns,
-                                                                DateTime? chosenDate)
+                                                                DateTime? chosenDate,
+                                                                int? take,
+                                                                int skip)
         {
-            // Prepare items for DB query with []
-            //preSelectedColumns.AddRange(selectedColumns);
-            //selectedColumns = selectedColumns.Select(col => string.Format(GlobalConstants.SqlItemFormatRequired, col));
+            // Create new collection to store
+            // selected without change
+            List<string> resultColumns = new List<string>(preSelectedColumns);
 
-            return this.sqlManager.ExecuteQueryWithSelection(selectedColumns, chosenDate, this.sqlFunctionAllFund);
+            resultColumns.AddRange(selectedColumns);
+
+            // Prepare items for DB query with []
+            resultColumns = resultColumns.Select(col => string.Format(GlobalConstants.SqlItemFormatRequired, col)).ToList();
+
+            var query = this.sqlManager
+                .ExecuteQueryWithSelection(resultColumns, chosenDate, this.sqlFunctionAllFund)
+                .Skip(skip);
+
+            if (take.HasValue)
+            {
+                query = query.Take(take.Value);
+            }
+
+            return query;
         }
 
         public IEnumerable<string[]> GetAllActiveWithSelectedViewAndDate(
                                                                     IReadOnlyCollection<string> preSelectedColumns,
                                                                     IEnumerable<string> selectedColumns,
-                                                                    DateTime? chosenDate)
+                                                                    DateTime? chosenDate,
+                                                                    int? take,
+                                                                    int skip)
         {
+            // Create new collection to store
+            // selected without change
+            List<string> resultColumns = new List<string>(preSelectedColumns);
+
+            resultColumns.AddRange(selectedColumns);
+
             // Prepare items for DB query with []
-            ((List<string>)selectedColumns).InsertRange(0, preSelectedColumns);
+            resultColumns = resultColumns.Select(col => string.Format(GlobalConstants.SqlItemFormatRequired, col)).ToList();
 
-            selectedColumns = selectedColumns.Select(col => string.Format(GlobalConstants.SqlItemFormatRequired, col)).ToList();
+            var query = this.sqlManager
+                .ExecuteQueryWithSelection(resultColumns, chosenDate, this.sqlFunctionAllActiveFund)
+                .Skip(skip);
 
-            return this.sqlManager.ExecuteQueryWithSelection(selectedColumns, chosenDate, this.sqlFunctionAllActiveFund);
+            if (take.HasValue)
+            {
+                query = query.Take(take.Value);
+            }
+
+            return query;
         }
     }
 }

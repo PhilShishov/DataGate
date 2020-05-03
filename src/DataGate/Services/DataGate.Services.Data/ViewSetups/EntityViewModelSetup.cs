@@ -20,6 +20,7 @@ namespace DataGate.Services.Data.ViewSetups
             //
             // Available header column selection
             model.Headers = service.GetAllActive(null, 1);
+            model.HeadersSelection = service.GetAllActive(null, 1);
 
             bool isInSelectionMode = false;
 
@@ -70,7 +71,16 @@ namespace DataGate.Services.Data.ViewSetups
                 .GetAllWithSelectedViewAndDate(
                             model.PreSelectedColumns,
                             model.SelectedColumns,
-                            chosenDate);
+                            chosenDate,
+                            null,
+                            1);
+
+            model.Headers = service
+                .GetAllWithSelectedViewAndDate(
+                            model.PreSelectedColumns,
+                            model.SelectedColumns,
+                            chosenDate,
+                            1);
         }
 
         private static void CallAllActiveWithSelectedColumns(EntitiesViewModel model, DateTime? chosenDate, IEntityService<string[], string> service)
@@ -79,7 +89,16 @@ namespace DataGate.Services.Data.ViewSetups
                 .GetAllActiveWithSelectedViewAndDate(
                             model.PreSelectedColumns,
                             model.SelectedColumns,
-                            chosenDate);
+                            chosenDate,
+                            null,
+                            1);
+
+            model.Headers = service
+               .GetAllActiveWithSelectedViewAndDate(
+                           model.PreSelectedColumns,
+                           model.SelectedColumns,
+                           chosenDate,
+                           1);
         }
     }
 }

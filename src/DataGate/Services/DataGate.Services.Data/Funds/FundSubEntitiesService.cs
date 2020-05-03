@@ -56,16 +56,11 @@ namespace DataGate.Services.Data.Funds
         }
 
         public IEnumerable<string[]> GetEntity_SubEntitiesWithSelectedViewAndDate(
-                                                                    List<string> preSelectedColumns,
-                                                                    List<string> selectedColumns,
+                                                                    IReadOnlyCollection<string> preSelectedColumns,
+                                                                    IEnumerable<string> selectedColumns,
                                                                     DateTime? chosenDate,
                                                                     int id)
         {
-            // Prepare items for DB query with []
-            selectedColumns.ToList().InsertRange(0, preSelectedColumns);
-            //preSelectedColumns.AddRange(selectedColumns);
-            selectedColumns = preSelectedColumns.Select(col => string.Format(GlobalConstants.SqlItemFormatRequired, col)).ToList();
-
             return this.sqlManager.ExecuteQueryByIdWithSelection(selectedColumns, chosenDate, id, this.sqlFunctionSubFundsForFund);
         }
 

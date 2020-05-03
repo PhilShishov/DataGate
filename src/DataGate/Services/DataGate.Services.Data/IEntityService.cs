@@ -20,11 +20,15 @@ namespace DataGate.Services.Data
         IEnumerable<T> GetAllWithSelectedViewAndDate(
                         IReadOnlyCollection<TS> preSelectedColumns,
                         IEnumerable<TS> selectedColumns,
-                        DateTime? chosenDate);
+                        DateTime? chosenDate,
+                        int? take = null,
+                        int skip = 0);
 
         IEnumerable<T> GetAllActiveWithSelectedViewAndDate(
                         IReadOnlyCollection<TS> preSelectedColumns,
                         IEnumerable<TS> selectedColumns,
-                        DateTime? chosenDate);
+                        DateTime? chosenDate,
+                        int? take = null,
+                        int skip = 0);
     }
 }
