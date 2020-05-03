@@ -14,9 +14,9 @@ namespace DataGate.Web.ViewModels.Entities
 
     public abstract class BaseEntityViewModel
     {
-        public IEnumerable<string[]> Entities { get; set; }
+        public IEnumerable<string[]> TValues { get; set; }
 
-        public IEnumerable<string[]> Headers { get; set; }
+        public IEnumerable<string[]> THeaders { get; set; }
 
         public IEnumerable<string[]> HeadersSelection { get; set; }
 

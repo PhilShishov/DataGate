@@ -14,12 +14,12 @@ namespace DataGate.Services.Data.ViewSetups
 
     public static class EntityViewModelSetup
     {
-        public static void SetModel(EntitiesViewModel model, IEntityService<string[], string> service)
+        public static void SetModel(EntitiesOverviewViewModel model, IEntityService<string[], string> service)
         {
             // ---------------------------------------------------------
             //
             // Available header column selection
-            model.Headers = service.GetAllActive(null, 1);
+            model.THeaders = service.GetAllActive(null, 1);
             model.HeadersSelection = service.GetAllActive(null, 1);
 
             bool isInSelectionMode = false;
@@ -51,23 +51,23 @@ namespace DataGate.Services.Data.ViewSetups
             {
                 if (model.IsActive)
                 {
-                    model.Entities = service.GetAllActive(chosenDate, null, 1);
+                    model.TValues = service.GetAllActive(chosenDate, null, 1);
                 }
                 else if (!model.IsActive)
                 {
-                    model.Entities = service.GetAll(chosenDate, null, 1);
+                    model.TValues = service.GetAll(chosenDate, null, 1);
                 }
             }
 
             if (model.SelectTerm != null)
             {
-                model.Entities = CreateTableView.AddTableToView(model.Entities, model.SelectTerm.ToLower());
+                model.TValues = CreateTableView.AddTableToView(model.TValues, model.SelectTerm.ToLower());
             }
         }
 
-        private static void CallAllWithSelectedColumns(EntitiesViewModel model, DateTime? chosenDate, IEntityService<string[], string> service)
+        private static void CallAllWithSelectedColumns(EntitiesOverviewViewModel model, DateTime? chosenDate, IEntityService<string[], string> service)
         {
-            model.Entities = service
+            model.TValues = service
                 .GetAllWithSelectedViewAndDate(
                             model.PreSelectedColumns,
                             model.SelectedColumns,
@@ -75,7 +75,7 @@ namespace DataGate.Services.Data.ViewSetups
                             null,
                             1);
 
-            model.Headers = service
+            model.THeaders = service
                 .GetAllWithSelectedViewAndDate(
                             model.PreSelectedColumns,
                             model.SelectedColumns,
@@ -83,9 +83,9 @@ namespace DataGate.Services.Data.ViewSetups
                             1);
         }
 
-        private static void CallAllActiveWithSelectedColumns(EntitiesViewModel model, DateTime? chosenDate, IEntityService<string[], string> service)
+        private static void CallAllActiveWithSelectedColumns(EntitiesOverviewViewModel model, DateTime? chosenDate, IEntityService<string[], string> service)
         {
-            model.Entities = service
+            model.TValues = service
                 .GetAllActiveWithSelectedViewAndDate(
                             model.PreSelectedColumns,
                             model.SelectedColumns,
@@ -93,7 +93,7 @@ namespace DataGate.Services.Data.ViewSetups
                             null,
                             1);
 
-            model.Headers = service
+            model.THeaders = service
                .GetAllActiveWithSelectedViewAndDate(
                            model.PreSelectedColumns,
                            model.SelectedColumns,

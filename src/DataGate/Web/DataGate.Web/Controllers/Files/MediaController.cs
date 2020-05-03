@@ -11,10 +11,10 @@
     [Authorize]
     public class MediaController : BaseController
     {
-        [HttpPost]
+        [HttpGet]
         public IActionResult Download(DownloadInputModel model)
         {
-            if (model.Count > GlobalConstants.RowNumberOfHeadersInTable)
+            if (model.Entities != null)
             {
                 if (model.Command == GlobalConstants.CommandExtractExcel)
                 {

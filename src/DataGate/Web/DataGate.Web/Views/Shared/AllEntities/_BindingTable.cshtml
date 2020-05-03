@@ -1,10 +1,10 @@
-﻿@model DataGate.Web.ViewModels.Entities.EntitiesViewModel
+﻿@model DataGate.Web.ViewModels.Entities.EntitiesOverviewViewModel
 
 <div>
-    <table class="table" name="Entities" hidden>
+    <table class="table" name="THeaders" hidden>
         <thead>
             <tr>
-                @foreach (var row in Model.Headers)
+                @foreach (var row in Model.THeaders)
                 {
                     foreach (var col in row)
                     {
@@ -21,8 +21,10 @@
                 }
             </tr>
         </thead>
+    </table>
+    <table class="table" name="TValues" hidden>
         <tbody>
-            @foreach (var row in Model.Entities)
+            @foreach (var row in Model.TValues)
             {
                 <tr>
                     @foreach (var col in row)

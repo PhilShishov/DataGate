@@ -201,6 +201,7 @@ namespace DataGate.Web.Utilities
                 case GlobalConstants.ShareClassesControllerName:
                     typeName = ShareClassesNameDisplay;
                     break;
+
             }
 
             return typeName;
