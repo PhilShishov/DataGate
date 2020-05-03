@@ -10,7 +10,6 @@ namespace DataGate.Services.SqlClient
     using System;
     using System.Collections.Generic;
     using System.Data.SqlClient;
-    using System.Linq;
 
     using DataGate.Common;
     using DataGate.Services.SqlClient.Contracts;
@@ -69,26 +68,21 @@ namespace DataGate.Services.SqlClient
         }
 
         public IEnumerable<string[]> ExecuteQueryWithSelection(
-                                                                    ref List<string> preSelectedColumns,
-                                                                    List<string> selectedColumns,
-                                                                    DateTime? chosenDate,
-                                                                    string function)
-        {
+                                                                IEnumerable<string> columns,
+                                                                DateTime? chosenDate,
+                                                                string function)
+    {
             using (SqlConnection connection = new SqlConnection())
             {
                 SqlCommand command = this.SetUpSqlConnectionCommand(connection);
 
-                // Prepare items for DB query with []
-                preSelectedColumns.AddRange(selectedColumns);
-                preSelectedColumns = preSelectedColumns.Select(col => string.Format(GlobalConstants.SqlItemFormatRequired, col)).ToList();
-
                 if (chosenDate == null)
                 {
-                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} from {function}('{this.defaultDateTimeWithSqlConversion}')";
+                    command.CommandText = $"select {string.Join(", ", columns)} from {function}('{this.defaultDateTimeWithSqlConversion}')";
                 }
                 else
                 {
-                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} from {function}('{chosenDate?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}')";
+                    command.CommandText = $"select {string.Join(", ", columns)} from {function}('{chosenDate?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}')";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
@@ -147,8 +141,7 @@ namespace DataGate.Services.SqlClient
         }
 
         public IEnumerable<string[]> ExecuteQueryByIdWithSelection(
-                                                                ref List<string> preSelectedColumns,
-                                                                List<string> selectedColumns,
+                                                                IEnumerable<string> selectedColumns,
                                                                 DateTime? chosenDate,
                                                                 int id,
                                                                 string function)
@@ -157,17 +150,13 @@ namespace DataGate.Services.SqlClient
             {
                 SqlCommand command = this.SetUpSqlConnectionCommand(connection);
 
-                // Prepare items for DB query with []
-                preSelectedColumns.AddRange(selectedColumns);
-                preSelectedColumns = preSelectedColumns.Select(c => string.Format(GlobalConstants.SqlItemFormatRequired, c)).ToList();
-
                 if (chosenDate == null)
                 {
-                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} from {function}('{this.defaultDateTimeWithSqlConversion}', {id}')";
+                    command.CommandText = $"select {string.Join(", ", selectedColumns)} from {function}('{this.defaultDateTimeWithSqlConversion}', {id}')";
                 }
                 else
                 {
-                    command.CommandText = $"select {string.Join(", ", preSelectedColumns)} from {function}('{chosenDate?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}', {id})";
+                    command.CommandText = $"select {string.Join(", ", selectedColumns)} from {function}('{chosenDate?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}', {id})";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);

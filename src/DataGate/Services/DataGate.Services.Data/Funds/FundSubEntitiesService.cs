@@ -4,6 +4,7 @@ namespace DataGate.Services.Data.Funds
     using System.Collections.Generic;
     using System.Linq;
 
+    using DataGate.Common;
     using DataGate.Common.Exceptions;
     using DataGate.Data.Common.Repositories;
     using DataGate.Data.Models.Entities;
@@ -60,7 +61,12 @@ namespace DataGate.Services.Data.Funds
                                                                     DateTime? chosenDate,
                                                                     int id)
         {
-            return this.sqlManager.ExecuteQueryByIdWithSelection(ref preSelectedColumns, selectedColumns, chosenDate, id, this.sqlFunctionSubFundsForFund);
+            // Prepare items for DB query with []
+            selectedColumns.ToList().InsertRange(0, preSelectedColumns);
+            //preSelectedColumns.AddRange(selectedColumns);
+            selectedColumns = preSelectedColumns.Select(col => string.Format(GlobalConstants.SqlItemFormatRequired, col)).ToList();
+
+            return this.sqlManager.ExecuteQueryByIdWithSelection(selectedColumns, chosenDate, id, this.sqlFunctionSubFundsForFund);
         }
 
         public IEnumerable<string[]> GetTimeline(int id)

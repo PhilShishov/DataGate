@@ -8,14 +8,13 @@
 namespace DataGate.Services.Data.ViewSetups
 {
     using System;
-    using System.Linq;
 
     using DataGate.Services.DateTime;
     using DataGate.Web.ViewModels.Entities;
 
     public static class EntityViewModelSetup
     {
-        public static void SetModel(EntitiesViewModel model, IEntityService<string[]> service)
+        public static void SetModel(EntitiesViewModel model, IEntityService<string[], string> service)
         {
             // ---------------------------------------------------------
             //
@@ -40,11 +39,11 @@ namespace DataGate.Services.Data.ViewSetups
             {
                 if (model.IsActive)
                 {
-                    //CallActiveEntitiesWithSelectedColumns(model, chosenDate, service);
+                    CallAllActiveWithSelectedColumns(model, chosenDate, service);
                 }
                 else if (!model.IsActive)
                 {
-                    //CallAllEntitiesWithSelectedColumns(model, chosenDate, service);
+                    CallAllWithSelectedColumns(model, chosenDate, service);
                 }
             }
             else if (!isInSelectionMode)
@@ -65,24 +64,22 @@ namespace DataGate.Services.Data.ViewSetups
             }
         }
 
-        //private static void CallAllEntitiesWithSelectedColumns(EntitiesViewModel model, DateTime? chosenDate, IEntityService<string[]> service)
-        //{
-        //    model.Entities.ToList() = service
-        //        .GetAllWithSelectedViewAndDate(
-        //                    model.PreSelectedColumns,
-        //                    model.SelectedColumns,
-        //                    chosenDate)
-        //        .ToList();
-        //}
+        private static void CallAllWithSelectedColumns(EntitiesViewModel model, DateTime? chosenDate, IEntityService<string[], string> service)
+        {
+            model.Entities = service
+                .GetAllWithSelectedViewAndDate(
+                            model.PreSelectedColumns,
+                            model.SelectedColumns,
+                            chosenDate);
+        }
 
-        //private static void CallActiveEntitiesWithSelectedColumns(EntitiesViewModel model, DateTime? chosenDate, IEntityService<string[]> service)
-        //{
-        //    model.Entities = service
-        //        .GetAllActiveWithSelectedViewAndDate(
-        //                    model.PreSelectedColumns,
-        //                    model.SelectedColumns,
-        //                    chosenDate)
-        //        .ToList();
-        //}
+        private static void CallAllActiveWithSelectedColumns(EntitiesViewModel model, DateTime? chosenDate, IEntityService<string[], string> service)
+        {
+            model.Entities = service
+                .GetAllActiveWithSelectedViewAndDate(
+                            model.PreSelectedColumns,
+                            model.SelectedColumns,
+                            chosenDate);
+        }
     }
 }
