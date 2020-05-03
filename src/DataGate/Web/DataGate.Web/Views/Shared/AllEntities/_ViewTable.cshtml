@@ -25,41 +25,32 @@
                         </th>
                     }
                 }
-
-                @*@for (int row = 0; row < 1; row++)
-                {
-                    @for (int col = 0; col < Model.Entities[row].Length; col++)
-                    {
-                        <th class="text-white pr-3 tableHeaderPharus">
-                            @Model.Entities[row][col]
-                        </th>
-                    }
-                }*@
             </tr>
         </thead>
         <tbody>
-            @*@for (int row = 1; row < Model.Entities.Count; row++)
+
+            @foreach (var row in Model.Entities)
             {
-                entityId = Model.Entities[row][2];
+                entityId = row[2];
 
                 <tr class="">
-                    @for (int col = 0; col < Model.Entities[row].Length; col++)
+                    @for (int col = 0; col < row.Length; col++)
                     {
-                        if (Model.Entities[0][col].Contains("NAME"))
+                        if (Model.Headers.ToList()[0][col].Contains("NAME"))
                         {
                             <td class="p-1 tableCellPharus" onclick="document.location ='/@targetRoute/@entityId/@Model.Date'">
-                                @Model.Entities[row][col]
+                                @row[col]
                             </td>
                         }
                         else
                         {
                             <td class="p-1">
-                                @Model.Entities[row][col]
+                                @row[col]
                             </td>
                         }
                     }
                 </tr>
-            }*@
+            }
         </tbody>
     </table>
 </div>

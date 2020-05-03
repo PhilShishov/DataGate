@@ -1,21 +1,16 @@
-﻿@*@model DataGate.Web.ViewModels.Entities.EntitiesViewModel
+﻿@model DataGate.Web.ViewModels.Entities.EntitiesViewModel
 
 <div>
     <table class="table" name="Entities" hidden>
         <thead>
             <tr>
-
-                @foreach (var header in Model.EntitiesHeaders)
+                @foreach (var row in Model.Headers)
                 {
-
-                }
-                @for (int row = 0; row < 1; row++)
-                {
-                    @for (int col = 0; col < Model.Entities[row].Length; col++)
+                    foreach (var col in row)
                     {
                         <th>
                             <h5>
-                                @Html.TextBoxFor(af => Model.Entities[row][col],
+                                @Html.TextBoxFor(h => col,
                                     new
                                          {
                                         @readonly = true
@@ -27,13 +22,13 @@
             </tr>
         </thead>
         <tbody>
-            @for (int row = 1; row < Model.Entities.Count; row++)
+            @foreach (var row in Model.Entities)
             {
                 <tr>
-                    @for (int col = 0; col < Model.Entities[row].Length; col++)
+                    @foreach (var col in row)
                     {
                         <td>
-                            @Html.TextBoxFor(af => Model.Entities[row][col],
+                            @Html.TextBoxFor(c => col,
                                 new
                                      {
                                     @readonly = true
@@ -44,4 +39,4 @@
             }
         </tbody>
     </table>
-</div>*@
+</div>
