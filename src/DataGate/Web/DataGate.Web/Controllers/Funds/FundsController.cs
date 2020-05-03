@@ -32,8 +32,8 @@
             {
                 IsActive = true,
                 Date = DateTime.Today.ToString(GlobalConstants.RequiredWebDateTimeFormat),
-                Headers = this.service.GetAllActive(1),
-                Entities = this.service.GetAllActive(null, 1),
+                Headers = this.service.GetAllActive(null, 1),
+                Entities = this.service.GetAllActive(null, null, 1),
             };
 
             return this.View(model);
@@ -41,7 +41,7 @@
 
         public JsonResult AutoCompleteFundList(string selectTerm)
         {
-            List<string[]> result = AutoCompleteService.GetEntityResult(selectTerm, this.service);
+            IEnumerable<string[]> result = AutoCompleteService.GetResult(selectTerm, this.service);
 
             var modifiedData = result.Select(f => new
             {
@@ -55,7 +55,7 @@
         [HttpPost]
         public IActionResult All(EntitiesViewModel model)
         {
-            EntityViewModelSetup.SetModel(model, this.service);
+            //EntityViewModelSetup.SetModel(model, this.service);
 
             if (model.Entities.ToList().Count > GlobalConstants.RowNumberOfHeadersInTable)
             {
