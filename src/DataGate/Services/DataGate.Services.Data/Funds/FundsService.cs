@@ -10,6 +10,7 @@ namespace DataGate.Services.Data.Funds
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
     using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Services.SqlClient.Contracts;
 
