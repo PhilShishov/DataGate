@@ -1,5 +1,5 @@
 ﻿@using DataGate.Common
-@model DataGate.Web.ViewModels.Entities.EntitiesViewModel
+@model DataGate.Web.ViewModels.Entities.EntitiesOverviewViewModel
 
 @{
     var controller = this.ViewContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
@@ -13,10 +13,10 @@
     var entityId = string.Empty;
 }
 <div class="table-responsive border-0 mx-auto" id="tableDoubleScroll">
-    <table class="table table-hover text-nowrap" name="Entities">
+    <table class="table table-hover text-nowrap">
         <thead>
             <tr>
-                @foreach (var row in Model.Headers)
+                @foreach (var row in Model.THeaders)
                 {
                     foreach (var col in row)
                     {
@@ -29,14 +29,14 @@
         </thead>
         <tbody>
 
-            @foreach (var row in Model.Entities)
+            @foreach (var row in Model.TValues)
             {
                 entityId = row[2];
 
                 <tr class="">
                     @for (int col = 0; col < row.Length; col++)
                     {
-                        if (Model.Headers.ToList()[0][col].Contains("NAME"))
+                        if (Model.THeaders.ToList()[0][col].Contains("NAME"))
                         {
                             <td class="p-1 tableCellPharus" onclick="document.location ='/@targetRoute/@entityId/@Model.Date'">
                                 @row[col]

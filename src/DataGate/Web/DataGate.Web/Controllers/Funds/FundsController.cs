@@ -28,13 +28,13 @@
         [Route("f/all")]
         public IActionResult All()
         {
-            var model = new EntitiesViewModel
+            var model = new EntitiesOverviewViewModel
             {
                 IsActive = true,
                 Date = DateTime.Today.ToString(GlobalConstants.RequiredWebDateTimeFormat),
-                Headers = this.service.GetAllActive(null, 1),
                 HeadersSelection = this.service.GetAllActive(null, 1),
-                Entities = this.service.GetAllActive(null, null, 1),
+                THeaders = this.service.GetAllActive(null, 1),
+                TValues = this.service.GetAllActive(null, null, 1),
             };
 
             return this.View(model);
@@ -54,11 +54,11 @@
         }
 
         [HttpPost]
-        public IActionResult All(EntitiesViewModel model)
+        public IActionResult All(EntitiesOverviewViewModel model)
         {
             EntityViewModelSetup.SetModel(model, this.service);
 
-            if (model.Entities != null)
+            if (model.TValues != null)
             {
                 this.TempData[GlobalConstants.InfoMessageDisplay] = InfoMessages.SuccessfullyUpdatedTable;
                 return this.View(model);
