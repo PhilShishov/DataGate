@@ -10,8 +10,8 @@
         IEnumerable<T> GetEntity_SubEntities(DateTime? chosenDate, int id);
 
         IEnumerable<T> GetEntity_SubEntitiesWithSelectedViewAndDate(
-                        List<string> preSelectedColumns,
-                        List<string> selectedColumns,
+                        IReadOnlyCollection<string> preSelectedColumns,
+                        IEnumerable<string> selectedColumns,
                         DateTime? chosenDate,
                         int id);
 

@@ -10,6 +10,7 @@ namespace DataGate.Services.SqlClient
     using System;
     using System.Collections.Generic;
     using System.Data.SqlClient;
+    using System.Linq;
 
     using DataGate.Common;
     using DataGate.Services.SqlClient.Contracts;
@@ -68,21 +69,21 @@ namespace DataGate.Services.SqlClient
         }
 
         public IEnumerable<string[]> ExecuteQueryWithSelection(
-                                                                IEnumerable<string> columns,
-                                                                DateTime? chosenDate,
-                                                                string function)
-    {
+                                                            IEnumerable<string> selectedColumns,
+                                                            DateTime? chosenDate,
+                                                            string function)
+        {
             using (SqlConnection connection = new SqlConnection())
             {
                 SqlCommand command = this.SetUpSqlConnectionCommand(connection);
 
                 if (chosenDate == null)
                 {
-                    command.CommandText = $"select {string.Join(", ", columns)} from {function}('{this.defaultDateTimeWithSqlConversion}')";
+                    command.CommandText = $"select {string.Join(", ", selectedColumns)} from {function}('{this.defaultDateTimeWithSqlConversion}')";
                 }
                 else
                 {
-                    command.CommandText = $"select {string.Join(", ", columns)} from {function}('{chosenDate?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}')";
+                    command.CommandText = $"select {string.Join(", ", selectedColumns)} from {function}('{chosenDate?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}')";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);
@@ -141,7 +142,7 @@ namespace DataGate.Services.SqlClient
         }
 
         public IEnumerable<string[]> ExecuteQueryByIdWithSelection(
-                                                                IEnumerable<string> selectedColumns,
+                                                                IEnumerable<string> columns,
                                                                 DateTime? chosenDate,
                                                                 int id,
                                                                 string function)
@@ -152,11 +153,11 @@ namespace DataGate.Services.SqlClient
 
                 if (chosenDate == null)
                 {
-                    command.CommandText = $"select {string.Join(", ", selectedColumns)} from {function}('{this.defaultDateTimeWithSqlConversion}', {id}')";
+                    command.CommandText = $"select {string.Join(", ", columns)} from {function}('{this.defaultDateTimeWithSqlConversion}', {id}')";
                 }
                 else
                 {
-                    command.CommandText = $"select {string.Join(", ", selectedColumns)} from {function}('{chosenDate?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}', {id})";
+                    command.CommandText = $"select {string.Join(", ", columns)} from {function}('{chosenDate?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}', {id})";
                 }
 
                 return CreateModel.CreateModelWithHeadersAndValue(command);

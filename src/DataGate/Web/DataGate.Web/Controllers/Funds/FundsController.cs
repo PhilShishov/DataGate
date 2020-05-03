@@ -33,6 +33,7 @@
                 IsActive = true,
                 Date = DateTime.Today.ToString(GlobalConstants.RequiredWebDateTimeFormat),
                 Headers = this.service.GetAllActive(null, 1),
+                HeadersSelection = this.service.GetAllActive(null, 1),
                 Entities = this.service.GetAllActive(null, null, 1),
             };
 
