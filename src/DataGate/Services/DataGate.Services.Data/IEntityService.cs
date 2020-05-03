@@ -13,11 +13,11 @@ namespace DataGate.Services.Data
 
     public interface IEntityService<T>
     {
-        IEnumerable<T> GetAll(DateTime? chosenDate);
+        IEnumerable<T> GetAll(DateTime? chosenDate, int? take = null, int skip = 0);
 
-        IEnumerable<T> GetAllActive();
+        IEnumerable<T> GetAllActive(int? take = null, int skip = 0);
 
-        IEnumerable<T> GetAllActive(DateTime? chosenDate);
+        IEnumerable<T> GetAllActive(DateTime? chosenDate, int? take = null, int skip = 0);
 
         IEnumerable<T> GetAllWithSelectedViewAndDate(
                         List<string> preSelectedColumns,

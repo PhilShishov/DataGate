@@ -20,7 +20,7 @@ namespace DataGate.Services.Data.ViewSetups
             // ---------------------------------------------------------
             //
             // Available header column selection
-            model.EntitiesHeadersForColumnSelection = service
+            model.Headers = service
                                                             .GetAllActive()
                                                             .Take(1)
                                                             .ToList();
@@ -34,31 +34,31 @@ namespace DataGate.Services.Data.ViewSetups
 
             DateTime? chosenDate = null;
 
-            if (model.ChosenDate != null)
+            if (model.Date != null)
             {
-                chosenDate = DateTimeParser.WebFormat(model.ChosenDate);
+                chosenDate = DateTimeParser.WebFormat(model.Date);
             }
 
             if (isInSelectionMode)
             {
                 if (model.IsActive)
                 {
-                    CallActiveEntitiesWithSelectedColumns(model, chosenDate, service);
+                    //CallActiveEntitiesWithSelectedColumns(model, chosenDate, service);
                 }
                 else if (!model.IsActive)
                 {
-                    CallAllEntitiesWithSelectedColumns(model, chosenDate, service);
+                    //CallAllEntitiesWithSelectedColumns(model, chosenDate, service);
                 }
             }
             else if (!isInSelectionMode)
             {
                 if (model.IsActive)
                 {
-                    model.Entities = service.GetAllActive(chosenDate).ToList();
+                    model.Entities = service.GetAllActive(chosenDate);
                 }
                 else if (!model.IsActive)
                 {
-                    model.Entities = service.GetAll(chosenDate).ToList();
+                    model.Entities = service.GetAll(chosenDate);
                 }
             }
 
@@ -68,24 +68,24 @@ namespace DataGate.Services.Data.ViewSetups
             }
         }
 
-        private static void CallAllEntitiesWithSelectedColumns(EntitiesViewModel model, DateTime? chosenDate, IEntityService<string[]> service)
-        {
-            model.Entities = service
-                .GetAllWithSelectedViewAndDate(
-                            model.PreSelectedColumns,
-                            model.SelectedColumns,
-                            chosenDate)
-                .ToList();
-        }
+        //private static void CallAllEntitiesWithSelectedColumns(EntitiesViewModel model, DateTime? chosenDate, IEntityService<string[]> service)
+        //{
+        //    model.Entities.ToList() = service
+        //        .GetAllWithSelectedViewAndDate(
+        //                    model.PreSelectedColumns,
+        //                    model.SelectedColumns,
+        //                    chosenDate)
+        //        .ToList();
+        //}
 
-        private static void CallActiveEntitiesWithSelectedColumns(EntitiesViewModel model, DateTime? chosenDate, IEntityService<string[]> service)
-        {
-            model.Entities = service
-                .GetAllActiveWithSelectedViewAndDate(
-                            model.PreSelectedColumns,
-                            model.SelectedColumns,
-                            chosenDate)
-                .ToList();
-        }
+        //private static void CallActiveEntitiesWithSelectedColumns(EntitiesViewModel model, DateTime? chosenDate, IEntityService<string[]> service)
+        //{
+        //    model.Entities = service
+        //        .GetAllActiveWithSelectedViewAndDate(
+        //                    model.PreSelectedColumns,
+        //                    model.SelectedColumns,
+        //                    chosenDate)
+        //        .ToList();
+        //}
     }
 }

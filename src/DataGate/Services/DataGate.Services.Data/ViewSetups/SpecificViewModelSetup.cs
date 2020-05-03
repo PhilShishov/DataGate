@@ -2,8 +2,6 @@ namespace DataGate.Services.Data.ViewSetups
 {
     using System.Linq;
 
-    using DataGate.Common.Exceptions;
-    using DataGate.Data.Models.Entities;
     using DataGate.Services.DateTime;
     using DataGate.Web.ViewModels.Entities;
 
@@ -14,17 +12,17 @@ namespace DataGate.Services.Data.ViewSetups
 
         public static void PrepareModel(SpecificEntityViewModel model, IEntitySubEntitiesService<string[]> service)
         {
-            service.ThrowEntityNotFoundExceptionIfIdDoesNotExist(model.EntityId);
+            service.ThrowEntityNotFoundExceptionIfIdDoesNotExist(model.Id);
 
-            var date = DateTimeParser.WebFormat(model.ChosenDate);
-            int entityId = model.EntityId;
+            var date = DateTimeParser.WebFormat(model.Date);
+            int entityId = model.Id;
 
             model.Entity = service.GetEntityWithDateById(date, entityId).ToList();
             model.EntityDistinctDocuments = service.GetDistinctDocuments(date, entityId).ToList();
             model.EntityDistinctAgreements = service.GetDistinctAgreements(date, entityId).ToList();
 
             model.EntitySubEntities = service.GetEntity_SubEntities(date, entityId).ToList();
-            model.EntitiesHeadersForColumnSelection = service
+            model.Headers = service
                                                             .GetEntity_SubEntities(date, entityId)
                                                             .Take(1)
                                                             .ToList();
@@ -57,17 +55,5 @@ namespace DataGate.Services.Data.ViewSetups
         //                                        model.EntityId)
         //        .ToList();
         //}
-
-        //private void ThrowEntityNotFoundExceptionIfIdDoesNotExist(int id)
-        //{
-        //    if (!this.Exists(id))
-        //    {
-        //        throw new EntityNotFoundException(nameof(TbHistoryFund));
-        //    }
-        //}
-
-        //private bool Exists(int id) => this.repository.All().Any(x => x.FId == id);
-        ////private bool Exists(int id) => this.repository.All().Any(x => x.SFId == id);
-        ////private bool Exists(int id) => this.repository.All().Any(x => x.SCId == id);
     }
 }

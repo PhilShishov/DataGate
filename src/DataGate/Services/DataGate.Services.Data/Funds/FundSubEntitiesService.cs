@@ -3,6 +3,7 @@ namespace DataGate.Services.Data.Funds
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
     using DataGate.Common.Exceptions;
     using DataGate.Data.Common.Repositories;
     using DataGate.Data.Models.Entities;
@@ -45,12 +46,12 @@ namespace DataGate.Services.Data.Funds
         // with table functions
         public IEnumerable<string[]> GetEntityWithDateById(DateTime? chosenDate, int id)
         {
-            return this.sqlManager.ExecuteSqlQueryByWhereId(chosenDate, id, this.sqlFunctionAllFund, this.columnToPassToQuery);
+            return this.sqlManager.ExecuteQueryByWhereId(chosenDate, id, this.sqlFunctionAllFund, this.columnToPassToQuery);
         }
 
         public IEnumerable<string[]> GetEntity_SubEntities(DateTime? chosenDate, int id)
         {
-            return this.sqlManager.ExecuteSqlQueryByDateAndId(chosenDate, id, this.sqlFunctionSubFundsForFund);
+            return this.sqlManager.ExecuteQueryByDateAndId(chosenDate, id, this.sqlFunctionSubFundsForFund);
         }
 
         public IEnumerable<string[]> GetEntity_SubEntitiesWithSelectedViewAndDate(
@@ -59,37 +60,37 @@ namespace DataGate.Services.Data.Funds
                                                                     DateTime? chosenDate,
                                                                     int id)
         {
-            return this.sqlManager.ExecuteSqlQueryByIdWithSelection(ref preSelectedColumns, selectedColumns, chosenDate, id, this.sqlFunctionSubFundsForFund);
+            return this.sqlManager.ExecuteQueryByIdWithSelection(ref preSelectedColumns, selectedColumns, chosenDate, id, this.sqlFunctionSubFundsForFund);
         }
 
         public IEnumerable<string[]> GetTimeline(int id)
         {
-            return this.sqlManager.ExecuteSqlQueryById(id, this.sqlFunctionTimelineFund);
+            return this.sqlManager.ExecuteQueryById(id, this.sqlFunctionTimelineFund);
         }
 
         public IEnumerable<string[]> GetDistinctDocuments(DateTime? chosenDate, int id)
         {
-            return this.sqlManager.ExecuteSqlQueryByDateAndId(chosenDate, id, this.sqlFunctionDistinctDocuments);
+            return this.sqlManager.ExecuteQueryByDateAndId(chosenDate, id, this.sqlFunctionDistinctDocuments);
         }
 
         public IEnumerable<string[]> GetAllDocuments(int id)
         {
-            return this.sqlManager.ExecuteSqlQueryById(id, this.sqlFunctionAllDocuments);
+            return this.sqlManager.ExecuteQueryById(id, this.sqlFunctionAllDocuments);
         }
 
         public IEnumerable<string[]> GetDistinctAgreements(DateTime? chosenDate, int id)
         {
-            return this.sqlManager.ExecuteSqlQueryByDateAndId(chosenDate, id, this.sqlFunctionDistinctAgreements);
+            return this.sqlManager.ExecuteQueryByDateAndId(chosenDate, id, this.sqlFunctionDistinctAgreements);
         }
 
         public IEnumerable<string[]> GetAllAgreements(DateTime? chosenDate, int id)
         {
-            return this.sqlManager.ExecuteSqlQueryByDateAndId(chosenDate, id, this.sqlFunctionAllAgreements);
+            return this.sqlManager.ExecuteQueryByDateAndId(chosenDate, id, this.sqlFunctionAllAgreements);
         }
 
         public IEnumerable<string[]> PrepareEntity_SubEntitiesForPdfExtract(DateTime? chosenDate)
         {
-            return this.sqlManager.ExecuteSqlQuery(chosenDate, this.sqlFunctionSubFundPdfView);
+            return this.sqlManager.ExecuteQuery(chosenDate, this.sqlFunctionSubFundPdfView);
         }
 
         public void ThrowEntityNotFoundExceptionIfIdDoesNotExist(int id)

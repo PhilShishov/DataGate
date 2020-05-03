@@ -40,23 +40,23 @@ namespace DataGate.Web.ViewModels.Entities
 
         public string ContainerEntityId { get; set; }
 
-        public List<string[]> EntityTimeline { get; set; }
+        public IEnumerable<string[]> EntityTimeline { get; set; }
 
-        public List<string[]> TSAllPriceValues { get; set; }
+        public IEnumerable<string[]> TSAllPriceValues { get; set; }
 
-        public List<string> TSPriceDates { get; set; }
+        public IEnumerable<string> TSPriceDates { get; set; }
 
-        public List<string> TSTypeProviders { get; set; }
+        public IEnumerable<string> TSTypeProviders { get; set; }
 
         public string SelectedFileName { get; set; }
 
-        public List<string[]> EntityDistinctDocuments { get; set; }
+        public IEnumerable<string[]> EntityDistinctDocuments { get; set; }
 
-        public List<string[]> EntityDistinctAgreements { get; set; }
+        public IEnumerable<string[]> EntityDistinctAgreements { get; set; }
 
-        public List<string[]> EntityAgreements { get; set; }
+        public IEnumerable<string[]> EntityAgreements { get; set; }
 
-        public List<string[]> EntityDocuments { get; set; }
+        public IEnumerable<string[]> EntityDocuments { get; set; }
 
         public int AgreementId { get; set; }
 
