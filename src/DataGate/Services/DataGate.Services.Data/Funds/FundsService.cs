@@ -46,11 +46,7 @@ namespace DataGate.Services.Data.Funds
             var query = this.sqlManager
                 .ExecuteQuery(chosenDate, this.sqlFunctionAllFund)
                 .Skip(skip);
-
-            if (take.HasValue)
-            {
-                query = query.Take(take.Value);
-            }
+            query = CheckForTakeValue(take, query);
 
             return query;
         }
@@ -60,11 +56,7 @@ namespace DataGate.Services.Data.Funds
             var query = this.sqlManager
                .ExecuteQuery(chosenDate, this.sqlFunctionAllActiveFund)
                .Skip(skip);
-
-            if (take.HasValue)
-            {
-                query = query.Take(take.Value);
-            }
+            query = CheckForTakeValue(take, query);
 
             return query;
         }
@@ -78,21 +70,12 @@ namespace DataGate.Services.Data.Funds
         {
             // Create new collection to store
             // selected without change
-            List<string> resultColumns = new List<string>(preSelectedColumns);
-
-            resultColumns.AddRange(selectedColumns);
-
-            // Prepare items for DB query with []
-            resultColumns = resultColumns.Select(col => string.Format(GlobalConstants.SqlItemFormatRequired, col)).ToList();
+            List<string> resultColumns = PrepareResultForSelection(preSelectedColumns, selectedColumns);
 
             var query = this.sqlManager
                 .ExecuteQueryWithSelection(resultColumns, chosenDate, this.sqlFunctionAllFund)
                 .Skip(skip);
-
-            if (take.HasValue)
-            {
-                query = query.Take(take.Value);
-            }
+            query = CheckForTakeValue(take, query);
 
             return query;
         }
@@ -106,17 +89,29 @@ namespace DataGate.Services.Data.Funds
         {
             // Create new collection to store
             // selected without change
+            List<string> resultColumns = PrepareResultForSelection(preSelectedColumns, selectedColumns);
+
+            var query = this.sqlManager
+                .ExecuteQueryWithSelection(resultColumns, chosenDate, this.sqlFunctionAllActiveFund)
+                .Skip(skip);
+            query = CheckForTakeValue(take, query);
+
+            return query;
+        }
+
+        private static List<string> PrepareResultForSelection(IReadOnlyCollection<string> preSelectedColumns, IEnumerable<string> selectedColumns)
+        {
             List<string> resultColumns = new List<string>(preSelectedColumns);
 
             resultColumns.AddRange(selectedColumns);
 
             // Prepare items for DB query with []
             resultColumns = resultColumns.Select(col => string.Format(GlobalConstants.SqlItemFormatRequired, col)).ToList();
+            return resultColumns;
+        }
 
-            var query = this.sqlManager
-                .ExecuteQueryWithSelection(resultColumns, chosenDate, this.sqlFunctionAllActiveFund)
-                .Skip(skip);
-
+        private static IEnumerable<string[]> CheckForTakeValue(int? take, IEnumerable<string[]> query)
+        {
             if (take.HasValue)
             {
                 query = query.Take(take.Value);
