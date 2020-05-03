@@ -47,22 +47,6 @@ namespace DataGate.Services.Data.Funds
 
             if (take.HasValue)
             {
-                query.Take(take.Value);
-            }
-
-            return query.ToList();
-        }
-
-        public IEnumerable<string[]> GetAllActive(int? take, int skip)
-        {
-            var query = this.sqlManager
-                .ExecuteQuery(null, this.sqlFunctionAllActiveFund)
-                .Skip(skip);
-
-            //var result = query;
-
-            if (take.HasValue)
-            {
                 query = query.Take(take.Value);
             }
 
@@ -71,7 +55,16 @@ namespace DataGate.Services.Data.Funds
 
         public IEnumerable<string[]> GetAllActive(DateTime? chosenDate, int? take, int skip)
         {
-            return this.sqlManager.ExecuteQuery(chosenDate, this.sqlFunctionAllActiveFund);
+            var query = this.sqlManager
+               .ExecuteQuery(chosenDate, this.sqlFunctionAllActiveFund)
+               .Skip(skip);
+
+            if (take.HasValue)
+            {
+                query = query.Take(take.Value);
+            }
+
+            return query;
         }
 
         public IEnumerable<string[]> GetAllWithSelectedViewAndDate(
