@@ -55,9 +55,9 @@
         [HttpPost]
         public IActionResult All(EntitiesViewModel model)
         {
-            //EntityViewModelSetup.SetModel(model, this.service);
+            EntityViewModelSetup.SetModel(model, this.service);
 
-            if (model.Entities.ToList().Count > GlobalConstants.RowNumberOfHeadersInTable)
+            if (model.Entities != null)
             {
                 this.TempData[GlobalConstants.InfoMessageDisplay] = InfoMessages.SuccessfullyUpdatedTable;
                 return this.View(model);

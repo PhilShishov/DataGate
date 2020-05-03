@@ -9,47 +9,32 @@
 namespace DataGate.Services
 {
     using System.Collections.Generic;
-    using System.Linq;
 
     // _____________________________________________________________
     public class CreateTableView
     {
-        public static List<string[]> AddTableToView(List<string[]> entities, string searchString)
+        private const int IndexEntityNameInTable = 3;
+
+        public static List<string[]> AddTableToView(IEnumerable<string[]> entities, string searchString)
         {
-            var tableHeaders = entities.Take(1).ToList();
-            var tableValues = entities.Skip(1).ToList();
+            var tableValues = new List<string[]>();
 
-            entities = new List<string[]>();
-
-            AddHeadersToView(entities, tableHeaders);
-
-            foreach (var entity in tableValues)
+            foreach (var entity in entities)
             {
-                foreach (var stringValue in entity)
+                // ---------------------------------------------------------
+                //
+                // ToLower method for making
+                // values equivalent to compare
+                if (entity[IndexEntityNameInTable] != null && entity[IndexEntityNameInTable]
+                    .ToLower()
+                    .Contains(searchString.ToLower()))
                 {
-                    // ---------------------------------------------------------
-                    //
-                    // ToLower method for making
-                    // values equivalent to compare
-                    if (stringValue != null && stringValue
-                        .ToLower()
-                        .Contains(searchString.ToLower()))
-                    {
-                        entities.Add(entity);
-                        break;
-                    }
+                    tableValues.Add(entity);
+                    break;
                 }
             }
 
-            return entities;
-        }
-
-        private static void AddHeadersToView(List<string[]> entities, IEnumerable<string[]> tableHeaders)
-        {
-            foreach (var tableHeader in tableHeaders)
-            {
-                entities.Add(tableHeader);
-            }
+            return tableValues;
         }
     }
 }
