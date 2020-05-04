@@ -16,7 +16,7 @@ namespace DataGate.Services.AutoComplete
 
     public static class AutoCompleteService
     {
-        public static IEnumerable<string[]> GetResult(string selectTerm, IEntityService<string[]> service)
+        public static IEnumerable<string[]> GetResult(string selectTerm, IEntityService service)
         {
             var result = service.GetAll(null, null, 1);
 

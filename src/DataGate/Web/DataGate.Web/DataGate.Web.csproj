@@ -43,4 +43,8 @@
     <ProjectReference Include="..\DataGate.Web.Utilities\DataGate.Web.Utilities.csproj" />
     <ProjectReference Include="..\DataGate.Web.ViewModels\DataGate.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Shared\EditorTemplates\" />
+  </ItemGroup>
 </Project>

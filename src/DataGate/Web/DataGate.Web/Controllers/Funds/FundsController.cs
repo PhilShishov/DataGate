@@ -1,6 +1,5 @@
 ﻿namespace DataGate.Web.Controllers.Funds
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -14,7 +13,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Routing;
 
-    [Authorize]
+    //[Authorize]
     public class FundsController : BaseController
     {
         private readonly IFundsService service;
@@ -28,20 +27,7 @@
         [Route("f/all")]
         public IActionResult All()
         {
-            var headers = this.service.GetAllActive(null, 1).ToList();
-            var values = this.service.GetAllActive(null, null, 1).ToList();
-
-            var entities = this.service.GetActiveEntities<EntitiesViewModel>();
-
-            var model = new EntitiesOverviewViewModel
-            {
-                IsActive = true,
-                Date = DateTime.Today.ToString(GlobalConstants.RequiredWebDateTimeFormat),
-                HeadersSelection = this.service.GetAllActive(null, 1),
-                Headers = headers,
-                Values = values,
-                Entities = entities,
-            };
+            var model = this.service.GetEntitiesOverview<EntitiesOverviewViewModel>();
 
             return this.View(model);
         }
@@ -64,7 +50,7 @@
         {
             EntityViewModelSetup.SetModel(model, this.service);
 
-            if (model.Values != null)
+            if (model != null)
             {
                 this.TempData[GlobalConstants.InfoMessageDisplay] = InfoMessages.SuccessfullyUpdatedTable;
                 return this.View(model);

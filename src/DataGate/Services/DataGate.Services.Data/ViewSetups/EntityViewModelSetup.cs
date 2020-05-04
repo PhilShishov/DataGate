@@ -15,7 +15,7 @@ namespace DataGate.Services.Data.ViewSetups
 
     public static class EntityViewModelSetup
     {
-        public static void SetModel(EntitiesOverviewViewModel model, IEntityService<string[]> service)
+        public static void SetModel(EntitiesOverviewViewModel model, IEntityService service)
         {
             // ---------------------------------------------------------
             //
@@ -66,7 +66,7 @@ namespace DataGate.Services.Data.ViewSetups
             }
         }
 
-        private static void CallAllWithSelectedColumns(EntitiesOverviewViewModel model, DateTime? chosenDate, IEntityService<string[]> service)
+        private static void CallAllWithSelectedColumns(EntitiesOverviewViewModel model, DateTime? chosenDate, IEntityService service)
         {
             model.Values = service
                 .GetAllWithSelectedViewAndDate(
@@ -86,7 +86,7 @@ namespace DataGate.Services.Data.ViewSetups
                 .ToList();
         }
 
-        private static void CallAllActiveWithSelectedColumns(EntitiesOverviewViewModel model, DateTime? chosenDate, IEntityService<string[]> service)
+        private static void CallAllActiveWithSelectedColumns(EntitiesOverviewViewModel model, DateTime? chosenDate, IEntityService service)
         {
             model.Values = service
                 .GetAllActiveWithSelectedViewAndDate(
