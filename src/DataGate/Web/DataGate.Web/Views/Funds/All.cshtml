@@ -6,44 +6,46 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<form asp-controller="Funds"
-      asp-action="All"
-      class="justify-content-between"
-      method="post"
-      id="update-form">
-    <div>
+    <form asp-controller="Funds"
+          asp-action="All"
+          class="justify-content-between"
+          method="post"
+          id="update-form">
+
+        @Html.AntiForgeryToken()
         <div>
-            <hr class="mt-0 mb-auto" />
-            <div class="w-100" id="toolbar-pharus">
-                <partial name="AllEntities/_Select" />
-                <partial name="AllEntities/_Update" />
-                <partial name="AllEntities/_Extract" />
-                <div class="justify-content-center w-35">
-                    <h2 class="text-center text-torshia" id="entityName">All Funds</h2>
+            <div>
+                <hr class="mt-0 mb-auto" />
+                <div class="w-100" id="toolbar-pharus">
+                    <partial name="AllEntities/_Select" />
+                    <partial name="AllEntities/_Update" />
+                    <partial name="AllEntities/_Extract" />
+                    <div class="justify-content-center w-35">
+                        <h2 class="text-center text-torshia" id="entityName">All Funds</h2>
+                    </div>
                 </div>
+                <hr class="mt-1 mb-0" />
             </div>
-            <hr class="mt-1 mb-0" />
+
+            @if (this.TempData[GlobalConstants.InfoMessageDisplay] != null)
+            {
+                <div class="alert alert-success" id="infoMessage">
+                    @this.TempData[GlobalConstants.InfoMessageDisplay]
+                </div>
+            }
+
+            @if (this.TempData[GlobalConstants.ErrorMessageDisplay] != null)
+            {
+                <div class="alert alert-danger" id="errorMessage">
+                    @this.TempData[GlobalConstants.ErrorMessageDisplay]
+                </div>
+            }
+
+            <partial name="AllEntities/_Modal" />
+            <partial name="AllEntities/_BindingTable" />
+            <partial name="AllEntities/_ViewTable" />
         </div>
-
-        @if (this.TempData[GlobalConstants.InfoMessageDisplay] != null)
-        {
-            <div class="alert alert-success" id="infoMessage">
-                @this.TempData[GlobalConstants.InfoMessageDisplay]
-            </div>
-        }
-
-        @if (this.TempData[GlobalConstants.ErrorMessageDisplay] != null)
-        {
-            <div class="alert alert-danger" id="errorMessage">
-                @this.TempData[GlobalConstants.ErrorMessageDisplay]
-            </div>
-        }
-
-        <partial name="AllEntities/_Modal" />
-        <partial name="AllEntities/_BindingTable" />
-        <partial name="AllEntities/_ViewTable" />
-    </div>
-</form>
+    </form>
 
 @section Scripts{
     <script type="text/javascript" src="~/js/submitForm.js" asp-append-version="true"></script>
@@ -72,7 +74,7 @@
 
         $(document).ready(function () {
 
-            const url = "/Funds/AutoCompleteFundList";
+            const url = "/api/autofunds";
             passUrlToSelect(url);
 
             // ________________________________________________________

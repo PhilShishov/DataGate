@@ -13,7 +13,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Routing;
 
-    //[Authorize]
+    [Authorize]
     public class FundsController : BaseController
     {
         private readonly IFundsService service;
@@ -32,6 +32,7 @@
             return this.View(model);
         }
 
+        [Route("api/autofunds")]
         public JsonResult AutoCompleteFundList(string selectTerm)
         {
             ISet<string> result = AutoCompleteService.GetResult(selectTerm, this.service);
@@ -50,14 +51,14 @@
         {
             EntityViewModelSetup.SetModel(model, this.service);
 
-            if (model != null)
+            if (model.Values.Count > 0)
             {
                 this.TempData[GlobalConstants.InfoMessageDisplay] = InfoMessages.SuccessfullyUpdatedTable;
                 return this.View(model);
             }
 
-            this.TempData[GlobalConstants.ErrorMessageDisplay] = ErrorMessages.TableModeIsEmpty;
             this.ModelState.Clear();
+            this.TempData[GlobalConstants.ErrorMessageDisplay] = ErrorMessages.TableModeIsEmpty;
             return this.Redirect(GlobalConstants.FundAllUrl);
         }
     }

@@ -14,8 +14,8 @@
                 return this.Redirect(GlobalConstants.FundAllUrl);
             }
 
-            return this.Redirect(GlobalConstants.FundAllUrl);
-            //return this.View();
+            //return this.Redirect(GlobalConstants.FundAllUrl);
+            return this.View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
