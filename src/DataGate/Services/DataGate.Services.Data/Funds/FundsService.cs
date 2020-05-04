@@ -13,7 +13,9 @@ namespace DataGate.Services.Data.Funds
 
     using DataGate.Common;
     using DataGate.Services.Data.Funds.Contracts;
+    using DataGate.Services.Mapping;
     using DataGate.Services.SqlClient.Contracts;
+    using DataGate.Web.Dtos.Queries;
     using DataGate.Web.ViewModels.Entities;
 
     // _____________________________________________________________
@@ -50,6 +52,25 @@ namespace DataGate.Services.Data.Funds
             query = CheckForTakeValue(take, query);
 
             return query;
+        }
+
+        public IEnumerable<T> GetActiveEntities<T>(DateTime? chosenDate, int? take, int skip)
+        {
+            var query = this.sqlManager
+               .ExecuteQuery(chosenDate, this.sqlFunctionAllActiveFund)
+               .Skip(skip);
+            query = CheckForTakeValue(take, query);
+
+            var entities = new List<GetAllDto>();
+
+            foreach (var item in query)
+            {
+                GetAllDto model = new GetAllDto();
+                model.Values = item;
+                entities.Add(model);
+            }
+
+            return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(entities);
         }
 
         public IEnumerable<string[]> GetAllActive(DateTime? chosenDate, int? take, int skip)

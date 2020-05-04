@@ -2,10 +2,11 @@ namespace DataGate.Web.ViewModels.Entities
 {
     using System.Collections.Generic;
 
-    public class EntitiesViewModel
-    {
-        public IEnumerable<string[]> Headers { get; set; }
+    using DataGate.Services.Mapping;
+    using DataGate.Web.Dtos.Queries;
 
-        public IEnumerable<string[]> Values { get; set; }
+    public class EntitiesViewModel : IMapFrom<GetAllDto>
+    {
+        public IEnumerable<string> Values { get; set; }
     }
 }
