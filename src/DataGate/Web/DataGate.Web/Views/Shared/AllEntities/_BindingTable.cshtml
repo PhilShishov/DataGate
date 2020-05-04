@@ -1,40 +1,29 @@
 ﻿@model DataGate.Web.ViewModels.Entities.EntitiesOverviewViewModel
 
 <div>
-    <table class="table" name="THeaders" hidden>
-        <thead>
-            <tr>
-                @foreach (var row in Model.THeaders)
+    <table class="table" name="Headers">
+        <tr>
+            @for (int row = 0; row < Model.Headers.Count; row++)
+            {
+                @for (int col = 0; col < Model.Headers[row].Length; col++)
                 {
-                    foreach (var col in row)
-                    {
-                        <th>
-                            <h5>
-                                @Html.TextBoxFor(h => col,
-                                    new
-                                         {
-                                        @readonly = true
-                                    })
-                            </h5>
-                        </th>
-                    }
+                    <th>
+                        <input type="text" asp-for="@Model.Headers[row][col]" readonly />
+                    </th>
                 }
-            </tr>
-        </thead>
+            }
+        </tr>
     </table>
-    <table class="table" name="TValues" hidden>
+    <table class="table" name="Values">
         <tbody>
-            @foreach (var row in Model.TValues)
+
+            @for (int row = 0; row < Model.Values.Count; row++)
             {
                 <tr>
-                    @foreach (var col in row)
+                    @for (int col = 0; col < Model.Values[row].Length; col++)
                     {
                         <td>
-                            @Html.TextBoxFor(c => col,
-                                new
-                                     {
-                                    @readonly = true
-                                })
+                            <input type="text" asp-for="@Model.Values[row][col]" readonly />
                         </td>
                     }
                 </tr>

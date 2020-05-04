@@ -11,12 +11,17 @@ namespace DataGate.Web.ViewModels.Entities
     using System.ComponentModel.DataAnnotations;
 
     using DataGate.Common;
+    using Microsoft.AspNetCore.Mvc;
 
     public abstract class BaseEntityViewModel
     {
-        public IEnumerable<string[]> TValues { get; set; }
+        [BindProperty]
+        public List<string[]> Values { get; set; }
 
-        public IEnumerable<string[]> THeaders { get; set; }
+        [BindProperty]
+        public List<string[]> Headers { get; set; }
+
+        //public IEnumerable<EntitiesViewModel> Entities { get; set; }
 
         public IEnumerable<string[]> HeadersSelection { get; set; }
 

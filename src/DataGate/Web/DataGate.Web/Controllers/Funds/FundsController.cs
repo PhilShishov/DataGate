@@ -33,8 +33,8 @@
                 IsActive = true,
                 Date = DateTime.Today.ToString(GlobalConstants.RequiredWebDateTimeFormat),
                 HeadersSelection = this.service.GetAllActive(null, 1),
-                THeaders = this.service.GetAllActive(null, 1),
-                TValues = this.service.GetAllActive(null, null, 1),
+                Headers = this.service.GetAllActive(null, 1).ToList(),
+                Values = this.service.GetAllActive(null, null, 1).ToList(),
             };
 
             return this.View(model);
@@ -58,7 +58,7 @@
         {
             EntityViewModelSetup.SetModel(model, this.service);
 
-            if (model.TValues != null)
+            if (model.Values != null)
             {
                 this.TempData[GlobalConstants.InfoMessageDisplay] = InfoMessages.SuccessfullyUpdatedTable;
                 return this.View(model);

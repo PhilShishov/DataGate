@@ -8,18 +8,19 @@
 namespace DataGate.Services.Data.ViewSetups
 {
     using System;
+    using System.Linq;
 
     using DataGate.Services.DateTime;
     using DataGate.Web.ViewModels.Entities;
 
     public static class EntityViewModelSetup
     {
-        public static void SetModel(EntitiesOverviewViewModel model, IEntityService<string[], string> service)
+        public static void SetModel(EntitiesOverviewViewModel model, IEntityService<string[]> service)
         {
             // ---------------------------------------------------------
             //
             // Available header column selection
-            model.THeaders = service.GetAllActive(null, 1);
+            model.Headers = service.GetAllActive(null, 1).ToList();
             model.HeadersSelection = service.GetAllActive(null, 1);
 
             bool isInSelectionMode = false;
@@ -51,54 +52,54 @@ namespace DataGate.Services.Data.ViewSetups
             {
                 if (model.IsActive)
                 {
-                    model.TValues = service.GetAllActive(chosenDate, null, 1);
+                    model.Values = service.GetAllActive(chosenDate, null, 1).ToList();
                 }
                 else if (!model.IsActive)
                 {
-                    model.TValues = service.GetAll(chosenDate, null, 1);
+                    model.Values = service.GetAll(chosenDate, null, 1).ToList();
                 }
             }
 
             if (model.SelectTerm != null)
             {
-                model.TValues = CreateTableView.AddTableToView(model.TValues, model.SelectTerm.ToLower());
+                model.Values = CreateTableView.AddTableToView(model.Values, model.SelectTerm.ToLower());
             }
         }
 
-        private static void CallAllWithSelectedColumns(EntitiesOverviewViewModel model, DateTime? chosenDate, IEntityService<string[], string> service)
+        private static void CallAllWithSelectedColumns(EntitiesOverviewViewModel model, DateTime? chosenDate, IEntityService<string[]> service)
         {
-            model.TValues = service
+            model.Values = service
                 .GetAllWithSelectedViewAndDate(
                             model.PreSelectedColumns,
                             model.SelectedColumns,
                             chosenDate,
                             null,
-                            1);
+                            1).ToList();
 
-            model.THeaders = service
+            model.Headers = service
                 .GetAllWithSelectedViewAndDate(
                             model.PreSelectedColumns,
                             model.SelectedColumns,
                             chosenDate,
-                            1);
+                            1).ToList();
         }
 
-        private static void CallAllActiveWithSelectedColumns(EntitiesOverviewViewModel model, DateTime? chosenDate, IEntityService<string[], string> service)
+        private static void CallAllActiveWithSelectedColumns(EntitiesOverviewViewModel model, DateTime? chosenDate, IEntityService<string[]> service)
         {
-            model.TValues = service
+            model.Values = service
                 .GetAllActiveWithSelectedViewAndDate(
                             model.PreSelectedColumns,
                             model.SelectedColumns,
                             chosenDate,
                             null,
-                            1);
+                            1).ToList();
 
-            model.THeaders = service
+            model.Headers = service
                .GetAllActiveWithSelectedViewAndDate(
                            model.PreSelectedColumns,
                            model.SelectedColumns,
                            chosenDate,
-                           1);
+                           1).ToList();
         }
     }
 }

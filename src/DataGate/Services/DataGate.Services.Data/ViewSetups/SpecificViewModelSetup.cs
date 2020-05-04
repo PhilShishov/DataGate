@@ -22,7 +22,7 @@ namespace DataGate.Services.Data.ViewSetups
             model.EntityDistinctAgreements = service.GetDistinctAgreements(date, entityId).ToList();
 
             model.EntitySubEntities = service.GetEntity_SubEntities(date, entityId).ToList();
-            model.THeaders = service
+            model.Headers = service
                                                             .GetEntity_SubEntities(date, entityId)
                                                             .Take(1)
                                                             .ToList();
