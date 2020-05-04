@@ -14,6 +14,7 @@ namespace DataGate.Services.Data.Funds
     using DataGate.Common;
     using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Services.SqlClient.Contracts;
+    using DataGate.Web.ViewModels.Entities;
 
     // _____________________________________________________________
     public class FundsService : IFundsService
