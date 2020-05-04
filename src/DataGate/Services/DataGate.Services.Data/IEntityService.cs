@@ -15,6 +15,8 @@ namespace DataGate.Services.Data
     {
         IEnumerable<string[]> GetAll(DateTime? chosenDate = null, int? take = null, int skip = 0);
 
+        ISet<string> GetNames();
+
         IEnumerable<string[]> GetAllActive(DateTime? chosenDate = null, int? take = null, int skip = 0);
 
         T GetEntitiesOverview<T>();

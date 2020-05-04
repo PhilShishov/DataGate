@@ -34,12 +34,12 @@
 
         public JsonResult AutoCompleteFundList(string selectTerm)
         {
-            IEnumerable<string[]> result = AutoCompleteService.GetResult(selectTerm, this.service);
+            ISet<string> result = AutoCompleteService.GetResult(selectTerm, this.service);
 
             var modifiedData = result.Select(f => new
             {
-                id = f[GlobalConstants.IndexEntityNameInSQLTable],
-                text = f[GlobalConstants.IndexEntityNameInSQLTable],
+                id = f,
+                text = f,
             });
 
             return this.Json(modifiedData);
