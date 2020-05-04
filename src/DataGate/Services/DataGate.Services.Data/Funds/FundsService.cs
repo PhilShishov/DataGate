@@ -12,6 +12,8 @@ namespace DataGate.Services.Data.Funds
     using System.Linq;
 
     using DataGate.Common;
+    using DataGate.Data.Common.Repositories;
+    using DataGate.Data.Models.Entities;
     using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Services.Mapping;
     using DataGate.Services.SqlClient.Contracts;
@@ -27,6 +29,7 @@ namespace DataGate.Services.Data.Funds
         private readonly string sqlFunctionAllActiveFund = "fn_active_fund";
 
         private readonly ISqlQueryManager sqlManager;
+        private readonly IRepository<TbHistoryFund> repository;
 
         // ________________________________________________________
         //
@@ -34,9 +37,12 @@ namespace DataGate.Services.Data.Funds
         // to retrieve appsettings.json connection string,
         // IRepository to connect with dbcontext and
         // sql manager for executing queries
-        public FundsService(ISqlQueryManager sqlQueryManager)
+        public FundsService(
+                        ISqlQueryManager sqlQueryManager,
+                        IRepository<TbHistoryFund> fundRepository)
         {
             this.sqlManager = sqlQueryManager;
+            this.repository = fundRepository;
         }
 
         // ________________________________________________________
@@ -97,6 +103,17 @@ namespace DataGate.Services.Data.Funds
                 .ExecuteQueryWithSelection(resultColumns, chosenDate, this.sqlFunctionAllActiveFund)
                 .Skip(skip);
             query = CheckForTakeValue(take, query);
+
+            return query;
+        }
+
+        public ISet<string> GetNames()
+        {
+            HashSet<string> query = this.repository
+                .All()
+                .OrderBy(x => x.FOfficialFundName)
+                .Select(f => f.FOfficialFundName)
+                .ToHashSet();
 
             return query;
         }
