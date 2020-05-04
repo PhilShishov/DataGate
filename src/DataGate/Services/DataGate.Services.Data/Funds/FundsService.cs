@@ -16,7 +16,6 @@ namespace DataGate.Services.Data.Funds
     using DataGate.Services.Mapping;
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.Dtos.Queries;
-    using DataGate.Web.ViewModels.Entities;
 
     // _____________________________________________________________
     public class FundsService : IFundsService
@@ -52,25 +51,6 @@ namespace DataGate.Services.Data.Funds
             query = CheckForTakeValue(take, query);
 
             return query;
-        }
-
-        public IEnumerable<T> GetActiveEntities<T>(DateTime? chosenDate, int? take, int skip)
-        {
-            var query = this.sqlManager
-               .ExecuteQuery(chosenDate, this.sqlFunctionAllActiveFund)
-               .Skip(skip);
-            query = CheckForTakeValue(take, query);
-
-            var entities = new List<GetAllDto>();
-
-            foreach (var item in query)
-            {
-                GetAllDto model = new GetAllDto();
-                model.Values = item;
-                entities.Add(model);
-            }
-
-            return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(entities);
         }
 
         public IEnumerable<string[]> GetAllActive(DateTime? chosenDate, int? take, int skip)
@@ -119,6 +99,23 @@ namespace DataGate.Services.Data.Funds
             query = CheckForTakeValue(take, query);
 
             return query;
+        }
+
+        public T GetEntitiesOverview<T>()
+        {
+            var headers = this.GetAllActive(null, 1, 0);
+            var values = this.GetAllActive(null, null, 1);
+
+            var entity = new EntitiesOverviewGetDto()
+            {
+                IsActive = true,
+                Date = DateTime.Today.ToString(GlobalConstants.RequiredWebDateTimeFormat),
+                HeadersSelection = headers,
+                Headers = headers,
+                Values = values,
+            };
+
+            return AutoMapperConfig.MapperInstance.Map<T>(entity);
         }
 
         private static List<string> PrepareResultForSelection(IReadOnlyCollection<string> preSelectedColumns, IEnumerable<string> selectedColumns)

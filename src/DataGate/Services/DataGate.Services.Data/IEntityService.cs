@@ -11,24 +11,22 @@ namespace DataGate.Services.Data
     using System;
     using System.Collections.Generic;
 
-    using DataGate.Web.ViewModels.Entities;
-
-    public interface IEntityService<T>
+    public interface IEntityService
     {
-        IEnumerable<T> GetAll(DateTime? chosenDate = null, int? take = null, int skip = 0);
+        IEnumerable<string[]> GetAll(DateTime? chosenDate = null, int? take = null, int skip = 0);
 
-        IEnumerable<T> GetAllActive(DateTime? chosenDate = null, int? take = null, int skip = 0);
+        IEnumerable<string[]> GetAllActive(DateTime? chosenDate = null, int? take = null, int skip = 0);
 
-        IEnumerable<EntitiesViewModel> GetActiveEntities<EntitiesViewModel>(DateTime? chosenDate = null, int? take = null, int skip = 0);
+        T GetEntitiesOverview<T>();
 
-        IEnumerable<T> GetAllWithSelectedViewAndDate(
+        IEnumerable<string[]> GetAllWithSelectedViewAndDate(
                                         IReadOnlyCollection<string> preSelectedColumns,
                                         IEnumerable<string> selectedColumns,
                                         DateTime? chosenDate,
                                         int? take = null,
                                         int skip = 0);
 
-        IEnumerable<T> GetAllActiveWithSelectedViewAndDate(
+        IEnumerable<string[]> GetAllActiveWithSelectedViewAndDate(
                                         IReadOnlyCollection<string> preSelectedColumns,
                                         IEnumerable<string> selectedColumns,
                                         DateTime? chosenDate,

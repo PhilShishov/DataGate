@@ -8,7 +8,10 @@
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace DataGate.Web.ViewModels.Entities
 {
-    public class EntitiesOverviewViewModel : BaseEntityViewModel
+    using DataGate.Services.Mapping;
+    using DataGate.Web.Dtos.Queries;
+
+    public class EntitiesOverviewViewModel : BaseEntityViewModel, IMapFrom<EntitiesOverviewGetDto>
     {
         // ________________________________________________________
         //

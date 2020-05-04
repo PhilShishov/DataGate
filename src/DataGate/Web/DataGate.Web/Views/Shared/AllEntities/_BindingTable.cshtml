@@ -1,7 +1,7 @@
 ﻿@model DataGate.Web.ViewModels.Entities.EntitiesOverviewViewModel
 
 <div>
-    <table class="table" name="Headers">
+    <table class="table" hidden>
         <tr>
             @for (int row = 0; row < Model.Headers.Count; row++)
             {
@@ -14,16 +14,15 @@
             }
         </tr>
     </table>
-    <table class="table" name="Values">
+    <table class="table" hidden>
         <tbody>
-
             @for (int row = 0; row < Model.Values.Count; row++)
             {
                 <tr>
                     @for (int col = 0; col < Model.Values[row].Length; col++)
                     {
                         <td>
-                            <input type="text" asp-for="@Model.Values[row][col]" readonly />
+                            <input type="text" asp-for="@Model.Values[row][col]" />
                         </td>
                     }
                 </tr>
