@@ -1,7 +1,8 @@
 ﻿namespace DataGate.Web.Configuration
 {
-    using Microsoft.Extensions.DependencyInjection;
     using System;
+
+    using Microsoft.Extensions.DependencyInjection;
 
     public static class SessionConfiguration
     {
