@@ -74,14 +74,16 @@ namespace DataGate.Services.Data.ViewSetups
                             model.SelectedColumns,
                             chosenDate,
                             null,
-                            1).ToList();
+                            1)
+                .ToList();
 
             model.Headers = service
                 .GetAllWithSelectedViewAndDate(
                             model.PreSelectedColumns,
                             model.SelectedColumns,
                             chosenDate,
-                            1).ToList();
+                            1)
+                .ToList();
         }
 
         private static void CallAllActiveWithSelectedColumns(EntitiesOverviewViewModel model, DateTime? chosenDate, IEntityService<string[]> service)
@@ -92,14 +94,16 @@ namespace DataGate.Services.Data.ViewSetups
                             model.SelectedColumns,
                             chosenDate,
                             null,
-                            1).ToList();
+                            1)
+                .ToList();
 
             model.Headers = service
                .GetAllActiveWithSelectedViewAndDate(
                            model.PreSelectedColumns,
                            model.SelectedColumns,
                            chosenDate,
-                           1).ToList();
+                           1)
+               .ToList();
         }
     }
 }

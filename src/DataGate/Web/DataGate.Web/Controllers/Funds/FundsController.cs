@@ -28,13 +28,19 @@
         [Route("f/all")]
         public IActionResult All()
         {
+            var headers = this.service.GetAllActive(null, 1).ToList();
+            var values = this.service.GetAllActive(null, null, 1).ToList();
+
+            var entities = this.service.GetActiveEntities<EntitiesViewModel>();
+
             var model = new EntitiesOverviewViewModel
             {
                 IsActive = true,
                 Date = DateTime.Today.ToString(GlobalConstants.RequiredWebDateTimeFormat),
                 HeadersSelection = this.service.GetAllActive(null, 1),
-                Headers = this.service.GetAllActive(null, 1).ToList(),
-                Values = this.service.GetAllActive(null, null, 1).ToList(),
+                Headers = headers,
+                Values = values,
+                Entities = entities,
             };
 
             return this.View(model);

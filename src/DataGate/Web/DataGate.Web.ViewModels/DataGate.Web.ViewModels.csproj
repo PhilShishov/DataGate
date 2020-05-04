@@ -22,6 +22,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\DataGate.Data.Models\DataGate.Data.Models.csproj" />
     <ProjectReference Include="..\..\Services\DataGate.Services.Mapping\DataGate.Services.Mapping.csproj" />
+    <ProjectReference Include="..\DataGate.Web.Dtos\DataGate.Web.Dtos.csproj" />
     <ProjectReference Include="..\DataGate.Web.InputModels\DataGate.Web.InputModels.csproj" />
   </ItemGroup>
 
