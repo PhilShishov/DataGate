@@ -1,4 +1,4 @@
-﻿@{
+﻿@*@{
     var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
 }
 
@@ -8,10 +8,10 @@
             @for (int row = 0; row < 1; row++)
             {
                 <tr>
-                    @for (int col = 0; col < Model.EntityAgreements[row].Length; col++)
+                    @for (int col = 0; col < Model.Agreements[row].Length; col++)
                     {
                         <th class="text-secondary p-1">
-                            @Model.EntityAgreements[row][col]
+                            @Model.Agreements[row][col]
                         </th>
                     }
                 </tr>
@@ -19,26 +19,26 @@
         </thead>
 
         <tbody>
-            @for (int row = 1; row < Model.EntityAgreements.Count; row++)
+            @for (int row = 1; row < Model.Agreements.Count; row++)
             {
                 <tr>
-                    @for (int col = 0; col < Model.EntityAgreements[row].Length; col++)
+                    @for (int col = 0; col < Model.Agreements[row].Length; col++)
                     {
                         <td class="p-1">
-                            @if (Model.EntityAgreements[0][col] == "File Name")
+                            @if (Model.Agreements[0][col] == "File Name")
                             {
                                 <button class="btn-link-pharus text-left"
                                         formtarget="_blank"
                                         type="submit"
                                         formaction="/@controllerName/ReadAgreement"
                                         name="pdfValue"
-                                        value="@Model.EntityAgreements[row][col]">
-                                    @System.IO.Path.GetFileNameWithoutExtension(Model.EntityAgreements[row][col])
+                                        value="@Model.Agreements[row][col]">
+                                    @System.IO.Path.GetFileNameWithoutExtension(Model.Agreements[row][col])
                                 </button>
                             }
                             else
                             {
-                                @Model.EntityAgreements[row][col]
+                                @Model.Agreements[row][col]
                             }
                         </td>
                     }
@@ -46,4 +46,4 @@
             }
         </tbody>
     </table>
-</div>
+</div>*@

@@ -11,8 +11,9 @@
         public const string WelcomeMessageDisplay = "WelcomeMessage";
         public const string ErrorMessageDisplay = "ErrorMessage";
 
-        // Controllers
+        // Controllers, areas
         public const string ControllerRouteDataValue = "controller";
+        public const string FundsAreaName = "Funds";
         public const string FundsControllerName = "Funds";
         public const string FundDetailsControllerName = "FundDetails";
         public const string FundSubEntitiesControllerName = "FundSubEntities";

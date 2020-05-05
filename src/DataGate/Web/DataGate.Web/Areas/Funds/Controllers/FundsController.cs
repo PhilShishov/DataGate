@@ -1,4 +1,4 @@
-﻿namespace DataGate.Web.Controllers.Funds
+﻿namespace DataGate.Web.Areas.Funds.Controllers
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -13,8 +13,9 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Routing;
 
+    [Area(GlobalConstants.FundsAreaName)]
     [Authorize]
-    public class FundsController : BaseController
+    public class FundsController : Controller
     {
         private readonly IFundsService service;
 

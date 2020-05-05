@@ -45,23 +45,23 @@ namespace DataGate.Services.Data.Funds
         //
         // Retrieve query table DB based entities
         // with table functions
-        public IEnumerable<string[]> GetEntityWithDateById(DateTime? chosenDate, int id)
+        public IEnumerable<string[]> GetEntityWithDateById(DateTime? date, int id)
         {
-            return this.sqlManager.ExecuteQueryByWhereId(chosenDate, id, this.sqlFunctionAllFund, this.columnToPassToQuery);
+            return this.sqlManager.ExecuteQueryByWhereId(date, id, this.sqlFunctionAllFund, this.columnToPassToQuery);
         }
 
-        public IEnumerable<string[]> GetEntity_SubEntities(DateTime? chosenDate, int id)
+        public IEnumerable<string[]> GetEntity_SubEntities(DateTime? date, int id)
         {
-            return this.sqlManager.ExecuteQueryByDateAndId(chosenDate, id, this.sqlFunctionSubFundsForFund);
+            return this.sqlManager.ExecuteQueryByDateAndId(date, id, this.sqlFunctionSubFundsForFund);
         }
 
         public IEnumerable<string[]> GetEntity_SubEntitiesWithSelectedViewAndDate(
                                                                     IReadOnlyCollection<string> preSelectedColumns,
                                                                     IEnumerable<string> selectedColumns,
-                                                                    DateTime? chosenDate,
+                                                                    DateTime? date,
                                                                     int id)
         {
-            return this.sqlManager.ExecuteQueryByIdWithSelection(selectedColumns, chosenDate, id, this.sqlFunctionSubFundsForFund);
+            return this.sqlManager.ExecuteQueryByIdWithSelection(selectedColumns, date, id, this.sqlFunctionSubFundsForFund);
         }
 
         public IEnumerable<string[]> GetTimeline(int id)
@@ -69,9 +69,9 @@ namespace DataGate.Services.Data.Funds
             return this.sqlManager.ExecuteQueryById(id, this.sqlFunctionTimelineFund);
         }
 
-        public IEnumerable<string[]> GetDistinctDocuments(DateTime? chosenDate, int id)
+        public IEnumerable<string[]> GetDistinctDocuments(DateTime? date, int id)
         {
-            return this.sqlManager.ExecuteQueryByDateAndId(chosenDate, id, this.sqlFunctionDistinctDocuments);
+            return this.sqlManager.ExecuteQueryByDateAndId(date, id, this.sqlFunctionDistinctDocuments);
         }
 
         public IEnumerable<string[]> GetAllDocuments(int id)
@@ -79,19 +79,19 @@ namespace DataGate.Services.Data.Funds
             return this.sqlManager.ExecuteQueryById(id, this.sqlFunctionAllDocuments);
         }
 
-        public IEnumerable<string[]> GetDistinctAgreements(DateTime? chosenDate, int id)
+        public IEnumerable<string[]> GetDistinctAgreements(DateTime? date, int id)
         {
-            return this.sqlManager.ExecuteQueryByDateAndId(chosenDate, id, this.sqlFunctionDistinctAgreements);
+            return this.sqlManager.ExecuteQueryByDateAndId(date, id, this.sqlFunctionDistinctAgreements);
         }
 
-        public IEnumerable<string[]> GetAllAgreements(DateTime? chosenDate, int id)
+        public IEnumerable<string[]> GetAllAgreements(DateTime? date, int id)
         {
-            return this.sqlManager.ExecuteQueryByDateAndId(chosenDate, id, this.sqlFunctionAllAgreements);
+            return this.sqlManager.ExecuteQueryByDateAndId(date, id, this.sqlFunctionAllAgreements);
         }
 
-        public IEnumerable<string[]> PrepareEntity_SubEntitiesForPdfExtract(DateTime? chosenDate)
+        public IEnumerable<string[]> PrepareEntity_SubEntitiesForPdfExtract(DateTime? date)
         {
-            return this.sqlManager.ExecuteQuery(chosenDate, this.sqlFunctionSubFundPdfView);
+            return this.sqlManager.ExecuteQuery(date, this.sqlFunctionSubFundPdfView);
         }
 
         public void ThrowEntityNotFoundExceptionIfIdDoesNotExist(int id)
@@ -103,5 +103,10 @@ namespace DataGate.Services.Data.Funds
         }
 
         private bool Exists(int id) => this.repository.All().Any(x => x.FId == id);
+
+        public T GetSpecificEntityOverview<T>(int id, DateTime? date)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

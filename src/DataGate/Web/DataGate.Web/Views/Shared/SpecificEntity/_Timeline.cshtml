@@ -3,15 +3,15 @@
     <div class="row">
         <div class="col-lg-7 mx-auto">
             <ul class="timeline">
-                @for (int row = 1; row < Model.EntityTimeline.Count; row++)
+                @for (int row = 1; row < Model.Timeline.Count; row++)
                 {
                     <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
                         <div class="timeline-arrow"></div>
-                        <h2 class="h5 mb-0">@Model.EntityTimeline[row][3]</h2>
+                        <h2 class="h5 mb-0">@Model.Timeline[row][3]</h2>
                         <span class="small text-gray">
-                            <i class="fa fa-clock-o mr-1"></i>@Model.EntityTimeline[row][1] - @Model.EntityTimeline[row][2]
+                            <i class="fa fa-clock-o mr-1"></i>@Model.Timeline[row][1] - @Model.Timeline[row][2]
                         </span>
-                        <p class="text-small mt-2 font-weight-light">@Model.EntityTimeline[row][4]</p>
+                        <p class="text-small mt-2 font-weight-light">@Model.Timeline[row][4]</p>
                     </li>
                 }
             </ul>

@@ -10,7 +10,7 @@ namespace DataGate.Services.Data.ViewSetups
         private const int IndexStartConnectionInSQLTable = 0;
         private const int IndexEndConnectionInSQLTable = 1;
 
-        public static void PrepareModel(SpecificEntityViewModel model, IEntitySubEntitiesService<string[]> service)
+        public static void PrepareModel(SpecificEntityViewModel model, IEntitySubEntitiesService service)
         {
             service.ThrowEntityNotFoundExceptionIfIdDoesNotExist(model.Id);
 
@@ -18,18 +18,18 @@ namespace DataGate.Services.Data.ViewSetups
             int entityId = model.Id;
 
             model.Entity = service.GetEntityWithDateById(date, entityId).ToList();
-            model.EntityDistinctDocuments = service.GetDistinctDocuments(date, entityId).ToList();
-            model.EntityDistinctAgreements = service.GetDistinctAgreements(date, entityId).ToList();
+            model.DistinctDocuments = service.GetDistinctDocuments(date, entityId).ToList();
+            model.DistinctAgreements = service.GetDistinctAgreements(date, entityId).ToList();
 
-            model.EntitySubEntities = service.GetEntity_SubEntities(date, entityId).ToList();
+            model.Values = service.GetEntity_SubEntities(date, entityId).ToList();
             model.Headers = service
                                                             .GetEntity_SubEntities(date, entityId)
                                                             .Take(1)
                                                             .FirstOrDefault()
                                                             .ToList();
-            model.EntityTimeline = service.GetTimeline(entityId).ToList();
-            model.EntityDocuments = service.GetAllDocuments(entityId).ToList();
-            model.EntityAgreements = service.GetAllAgreements(date, entityId).ToList();
+            model.Timeline = service.GetTimeline(entityId).ToList();
+            model.Documents = service.GetAllDocuments(entityId).ToList();
+            model.Agreements = service.GetAllAgreements(date, entityId).ToList();
 
             string startConnection = model.Entity.ToList()[1][IndexStartConnectionInSQLTable];
             model.StartConnection = DateTimeParser.SqlFormat(startConnection);
