@@ -8,6 +8,7 @@ namespace DataGate.Web.InputModels.Files
     public class DownloadInputModel
     {
         public List<string[]> Entities { get; set; }
+
         public List<string[]> Headers { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.ChosenDateIsEmpty)]

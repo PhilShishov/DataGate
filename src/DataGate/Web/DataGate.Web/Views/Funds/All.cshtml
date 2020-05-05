@@ -6,53 +6,53 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <form asp-controller="Funds"
-          asp-action="All"
-          class="justify-content-between"
-          method="post"
-          id="update-form">
+<form asp-controller="Funds"
+      asp-action="All"
+      class="justify-content-between"
+      method="post"
+      id="update-form">
 
-        @Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()
+    <div>
         <div>
-            <div>
-                <hr class="mt-0 mb-auto" />
-                <div class="w-100" id="toolbar-pharus">
-                    <partial name="AllEntities/_Select" />
-                    <partial name="AllEntities/_Update" />
-                    <partial name="AllEntities/_Extract" />
-                    <div class="justify-content-center w-35">
-                        <h2 class="text-center text-torshia" id="entityName">All Funds</h2>
-                    </div>
+            <hr class="mt-0 mb-auto" />
+            <div class="w-100" id="toolbar-pharus">
+                <partial name="AllEntities/_Select" />
+                <partial name="AllEntities/_Update" />
+                <partial name="AllEntities/_Extract" />
+                <div class="justify-content-center w-35">
+                    <h2 class="text-center text-torshia" id="entityName">All Funds</h2>
                 </div>
-                <hr class="mt-1 mb-0" />
             </div>
-
-            @if (this.TempData[GlobalConstants.InfoMessageDisplay] != null)
-            {
-                <div class="alert alert-success" id="infoMessage">
-                    @this.TempData[GlobalConstants.InfoMessageDisplay]
-                </div>
-            }
-
-            @if (this.TempData[GlobalConstants.ErrorMessageDisplay] != null)
-            {
-                <div class="alert alert-danger" id="errorMessage">
-                    @this.TempData[GlobalConstants.ErrorMessageDisplay]
-                </div>
-            }
-
-            <partial name="AllEntities/_Modal" />
-            <partial name="AllEntities/_BindingTable" />
-            <partial name="AllEntities/_ViewTable" />
+            <hr class="mt-1 mb-0" />
         </div>
-    </form>
+
+        @if (this.TempData[GlobalConstants.InfoMessageDisplay] != null)
+        {
+            <div class="alert alert-success" id="infoMessage">
+                @this.TempData[GlobalConstants.InfoMessageDisplay]
+            </div>
+        }
+
+        @if (this.TempData[GlobalConstants.ErrorMessageDisplay] != null)
+        {
+            <div class="alert alert-danger" id="errorMessage">
+                @this.TempData[GlobalConstants.ErrorMessageDisplay]
+            </div>
+        }
+
+        <partial name="AllEntities/_Modal" />
+        <partial name="AllEntities/_BindingTable" />
+        <partial name="AllEntities/_ViewTable" />
+    </div>
+</form>
 
 @section Scripts{
-    <script type="text/javascript" src="~/js/submitForm.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="~/js/buttonRedirect.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/multiselect.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/select2/select2-entities.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/double-scroll/jquery.doubleScroll.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/submitForm.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/buttonRedirect.js" asp-append-version="true"></script>
 
     <script>
         window.onload = () => {
@@ -60,7 +60,16 @@
             manageDropdowns();
             submitForm();
             buttonRedirect();
+            setTableValues();
         }
+
+        function setTableValues() {
+            const tblValues = document.getElementsByClassName('tblValues');
+
+            for (let cell of tblValues) {
+                cell.value = cell.defaultValue;
+            }
+        };
 
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
@@ -73,7 +82,9 @@
         }, 3000);
 
         $(document).ready(function () {
-
+            // ________________________________________________________
+            //
+            // Autocomplete search
             const url = "/api/autofunds";
             passUrlToSelect(url);
 

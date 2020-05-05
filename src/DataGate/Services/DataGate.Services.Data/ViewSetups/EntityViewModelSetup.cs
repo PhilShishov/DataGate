@@ -72,34 +72,16 @@ namespace DataGate.Services.Data.ViewSetups
 
         private static void CallAllWithSelectedColumns(EntitiesOverviewViewModel model, GetWithSelectionDto dto, IEntityService service)
         {
-            model.Values = service
-                .GetAllWithSelectedViewAndDate(
-                            dto,
-                            null,
-                            1)
-                .ToList();
+            model.Values = service.GetAllSelected(dto, null, 1).ToList();
 
-            model.Headers = service
-                .GetAllWithSelectedViewAndDate(
-                            dto,
-                            1)
-                .ToList();
+            model.Headers = service.GetAllSelected(dto, 1).ToList();
         }
 
         private static void CallAllActiveWithSelectedColumns(EntitiesOverviewViewModel model, GetWithSelectionDto dto, IEntityService service)
         {
-            model.Values = service
-                .GetAllActiveWithSelectedViewAndDate(
-                            dto,
-                            null,
-                            1)
-                .ToList();
+            model.Values = service.GetAllActiveSelected(dto, null, 1).ToList();
 
-            model.Headers = service
-               .GetAllActiveWithSelectedViewAndDate(
-                          dto,
-                           1)
-               .ToList();
+            model.Headers = service.GetAllActiveSelected(dto, 1).ToList();
         }
     }
 }
