@@ -28,7 +28,7 @@
         [Route("f/all")]
         public IActionResult All()
         {
-            var model = this.service.GetEntitiesOverview<EntitiesOverviewViewModel>();
+            var model = GetOverview.Entities<EntitiesOverviewViewModel>(this.service);
 
             return this.View(model);
         }

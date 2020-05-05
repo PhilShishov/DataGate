@@ -15,9 +15,7 @@ namespace DataGate.Services.Data.Funds
     using DataGate.Data.Common.Repositories;
     using DataGate.Data.Models.Entities;
     using DataGate.Services.Data.Funds.Contracts;
-    using DataGate.Services.Mapping;
     using DataGate.Services.SqlClient.Contracts;
-    using DataGate.Web.Dtos.Queries;
     using DataGate.Web.ViewModels.Entities;
 
     // _____________________________________________________________
@@ -109,11 +107,6 @@ namespace DataGate.Services.Data.Funds
            return this.GetAllActive(null, 1, 0).FirstOrDefault();
         }
 
-        public IEnumerable<string> GetSelectedHeaders()
-        {
-            return this.GetAllActive(null, 1, 0).FirstOrDefault();
-        }
-
         public ISet<string> GetNames()
         {
             HashSet<string> query = this.repository
@@ -123,23 +116,6 @@ namespace DataGate.Services.Data.Funds
                 .ToHashSet();
 
             return query;
-        }
-
-        public T GetEntitiesOverview<T>()
-        {
-            var headers = this.GetHeaders();
-            var values = this.GetAllActive(null, null, 1);
-
-            var entity = new EntitiesOverviewGetDto()
-            {
-                IsActive = true,
-                Date = DateTime.Today.ToString(GlobalConstants.RequiredWebDateTimeFormat),
-                HeadersSelection = headers,
-                Headers = headers,
-                Values = values,
-            };
-
-            return AutoMapperConfig.MapperInstance.Map<T>(entity);
         }
 
         private static List<string> PrepareResultForSelection(IReadOnlyCollection<string> preSelectedColumns, IEnumerable<string> selectedColumns)

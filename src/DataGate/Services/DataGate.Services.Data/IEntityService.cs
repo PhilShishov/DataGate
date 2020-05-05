@@ -23,8 +23,6 @@ namespace DataGate.Services.Data
 
         IEnumerable<string[]> GetAllActive(DateTime? chosenDate = null, int? take = null, int skip = 0);
 
-        T GetEntitiesOverview<T>();
-
         IEnumerable<string[]> GetAllSelected(
                                         GetWithSelectionDto dto,
                                         int? take = null,

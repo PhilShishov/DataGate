@@ -9,7 +9,10 @@ namespace DataGate.Services.Data.Funds
     using DataGate.Data.Common.Repositories;
     using DataGate.Data.Models.Entities;
     using DataGate.Services.Data.Funds.Contracts;
+    using DataGate.Services.DateTime;
+    using DataGate.Services.Mapping;
     using DataGate.Services.SqlClient.Contracts;
+    using DataGate.Web.Dtos.Queries;
 
     public class FundSubEntitiesService : IFundSubEntitiesService
     {
@@ -103,10 +106,5 @@ namespace DataGate.Services.Data.Funds
         }
 
         private bool Exists(int id) => this.repository.All().Any(x => x.FId == id);
-
-        public T GetSpecificEntityOverview<T>(int id, DateTime? date)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

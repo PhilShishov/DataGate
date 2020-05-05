@@ -15,8 +15,6 @@
                         DateTime? date,
                         int id);
 
-        T GetSpecificEntityOverview<T>(int id, DateTime? date = null);
-
         IEnumerable<string[]> GetTimeline(int id);
 
         IEnumerable<string[]> GetDistinctDocuments(DateTime? date, int id);
