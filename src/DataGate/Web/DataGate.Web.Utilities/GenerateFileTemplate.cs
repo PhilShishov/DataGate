@@ -43,9 +43,9 @@ namespace DataGate.Web.Utilities
         // and preparing for download
         // in controller as filestreamresult
         public static FileStreamResult Excel(
-                                                           IEnumerable<string> headers,
-                                                           List<string[]> values,
-                                                           string controllerName)
+                                            IEnumerable<string> headers,
+                                            List<string[]> values,
+                                            string controllerName)
         {
             FileStreamResult fileStreamResult;
 
@@ -96,16 +96,17 @@ namespace DataGate.Web.Utilities
         // and preparing for download
         // in controller as filestreamresult
         public static FileStreamResult Pdf(
-                                                         List<string[]> entities,
-                                                         DateTime? chosenDate,
-                                                         string controllerName)
+                                            IEnumerable<string> headers,
+                                            List<string[]> entities,
+                                            DateTime? chosenDate,
+                                            string controllerName)
         {
             string correctTypeName = GetCorrectTypeName(controllerName);
 
             int tableLength = entities[0].Length;
 
             FileStreamResult fileStreamResult;
-            Stream stream = new MemoryStream();
+            var stream = new MemoryStream();
             PdfWriter writer = new PdfWriter(stream);
             writer.SetCloseStream(false);
 
@@ -128,26 +129,24 @@ namespace DataGate.Web.Utilities
             table.SetWidth(UnitValue.CreatePercentValue(100));
             table.SetFontSize(10);
 
-            for (int row = 0; row < 1; row++)
+            foreach (var header in headers)
             {
-                for (int col = 0; col < entities[0].Length; col++)
+                string input = header;
+                if (input == null)
                 {
-                    string input = entities[row][col];
-                    if (input == null)
-                    {
-                        input = " ";
-                    }
-
-                    Cell cell = new Cell();
-                    cell.Add(new Paragraph(input));
-                    cell.SetTextAlignment(TextAlignment.CENTER);
-                    cell.SetBold();
-
-                    table.AddHeaderCell(cell);
+                    input = " ";
                 }
+
+                Cell cell = new Cell();
+                cell.Add(new Paragraph(input));
+                cell.SetTextAlignment(TextAlignment.CENTER);
+                cell.SetBold();
+
+                table.AddHeaderCell(cell);
+
             }
 
-            for (int row = 1; row < entities.Count; row++)
+            for (int row = 0; row < entities.Count; row++)
             {
                 for (int col = 0; col < entities[0].Length; col++)
                 {
