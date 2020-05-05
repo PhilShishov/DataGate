@@ -3,14 +3,12 @@
 <div hidden>
     <table class="table">
         <tr>
-            @for (int row = 0; row < Model.Headers.Count; row++)
+
+            @for (int header = 0; header < Model.Headers.Count; header++)
             {
-                @for (int col = 0; col < Model.Headers[row].Length; col++)
-                {
-                    <th>
-                        <input class="tblValues" type="text" asp-for="@Model.Headers[row][col]" value="@Model.Headers[row][col]" readonly />
-                    </th>
-                }
+                <th>
+                    <input class="tblValues" type="text" asp-for="@Model.Headers[header]" readonly />
+                </th>
             }
         </tr>
     </table>
@@ -21,7 +19,7 @@
                 @for (int col = 0; col < Model.Values[row].Length; col++)
                 {
                     <td>
-                        <input class="tblValues" type="text" asp-for="@Model.Values[row][col]" value="@Model.Values[row][col]" readonly />
+                        <input class="tblValues" type="text" asp-for="@Model.Values[row][col]" readonly />
                     </td>
                 }
             </tr>

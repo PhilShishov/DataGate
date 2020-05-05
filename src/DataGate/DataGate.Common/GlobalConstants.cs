@@ -73,8 +73,9 @@
         //public static string[] AllowedFileExtensoins = new string[] { ".ppt", ".pptx", ".doc", ".docx", ".xls", ".cs", ".zip", ".json", ".xml", ".mp4", ".avi", ".txt", ".html", ".pdf" };
 
         // Entities
-        public const int IndexEntityNameInSQLTable = 3;
-        public const int IndexEntityHeadersInSqlTable = 0;
+        public const int IndexEntityIdInTable = 2;
+        public const int IndexEntityNameInTable = 3;
+        public const int IndexEntityHeadersInTable = 0;
         public const int RowNumberOfHeadersInTable = 1;
         public const int NumberOfAllowedColumnsInPdfView = 16;
         public const string DefaultAutocompleteSelectTerm = "Quick Select";

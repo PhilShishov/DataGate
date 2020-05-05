@@ -16,7 +16,7 @@ namespace DataGate.Web.ViewModels.Entities
     {
         public List<string> Headers { get; set; }
 
-        public IEnumerable<string> HeadersSelection { get; set; }
+        public List<string> HeadersSelection { get; set; }
 
         public List<string[]> Values { get; set; }
 

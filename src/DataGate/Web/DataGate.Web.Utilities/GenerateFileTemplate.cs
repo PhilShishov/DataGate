@@ -43,7 +43,7 @@ namespace DataGate.Web.Utilities
         // and preparing for download
         // in controller as filestreamresult
         public static FileStreamResult Excel(
-                                                           IEnumerable<string[]> headers,
+                                                           IEnumerable<string> headers,
                                                            List<string[]> values,
                                                            string controllerName)
         {
@@ -62,11 +62,8 @@ namespace DataGate.Web.Utilities
 
                 foreach (var header in headers)
                 {
-                    foreach (var cell in header)
-                    {
-                        counter++;
-                        worksheet.Cells[1, counter].Value = cell;
-                    }
+                    counter++;
+                    worksheet.Cells[1, counter].Value = header;
                 }
 
                 for (int row = 0; row < values.Count; row++)
