@@ -45,6 +45,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Shared\EditorTemplates\" />
+    <Folder Include="Areas\ShareClasses\" />
+    <Folder Include="Areas\SubFunds\" />
   </ItemGroup>
 </Project>

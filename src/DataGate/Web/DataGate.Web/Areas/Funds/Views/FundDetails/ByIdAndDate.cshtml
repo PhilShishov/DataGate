@@ -6,73 +6,74 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<form asp-controller="FundDetails"
-      asp-action="ByIdAndDate"
-      class="justify-content-between"
-      method="post"
-      style="margin-top: -3.95rem">
+<div class="push justify-content-between">
+    <form asp-controller="FundDetails"
+          asp-action="Update"
+          method="post">
 
-    <partial name="SpecificEntity/_Toolbar" />
+        @Html.AntiForgeryToken()
+        <partial name="SpecificEntity/_Toolbar" />
 
-    @if (this.TempData[GlobalConstants.ParentInfoMessageDisplay] != null)
-    {
-        <div class="alert alert-success" id="parentInfoMessage">
-            @this.TempData[GlobalConstants.ParentInfoMessageDisplay]
-        </div>
-    }
-
-    <div class="justify-content-between" id="infoAndDocumentsView">
-        <partial name="SpecificEntity/_Info" />
-        <partial name="SpecificEntity/_Load_Documents" />
-    </div>
-
-    <hr class="bg-pharus hr-2" />
-</form>
-
-<form action="/" method="post">
-    <div class="row ml-3" id="div-select-addInfo">
-        <label class="text-torshia m-1 pr-3">FUND ADDITIONAL INFORMATION</label>
-        <select class="custom-select-lg select-pharus form-control input-sm"
-                id="fundAdditionalInfSelect"
-                asp-for="SelectAdditionalInf">
-            <option value="" selected disabled>Select</option>
-            <option value="SubFunds">Sub Funds</option>
-            <option value="TimelineChanges">Timeline Changes</option>
-            <option value="AllDocuments">All Documents</option>
-            <option value="AllAgreements">All Agreements</option>
-        </select>
-    </div>
-
-    <partial name="SpecificEntity/_AllDocuments" />
-    <partial name="SpecificEntity/_AllAgreements" />
-    <partial name="SpecificEntity/_Timeline" />
-    <div id="subEntities" class="mt-4">
-        <div>
-            <div class="d-flex w-100 mb-2" id="toolbar-pharus">
-                <partial name="SpecificEntity/SubEntities/_Select" />
-                <partial name="SpecificEntity/SubEntities/_Extract" />
-            </div>
-        </div>
-        @if (this.TempData[GlobalConstants.InfoMessageDisplay] != null)
+        @if (this.TempData[GlobalConstants.ParentInfoMessageDisplay] != null)
         {
-            <div class="alert alert-success" id="infoMessage">
-                @this.TempData[GlobalConstants.InfoMessageDisplay]
+            <div class="alert alert-success" id="parentInfoMessage">
+                @this.TempData[GlobalConstants.ParentInfoMessageDisplay]
             </div>
         }
 
-        @if (this.TempData[GlobalConstants.ErrorMessageDisplay] != null)
-        {
-            <div class="alert alert-danger" id="errorMessage">
-                @this.TempData[GlobalConstants.ErrorMessageDisplay]
+        <div class="justify-content-between" id="infoAndDocumentsView">
+            <partial name="SpecificEntity/_Info" />
+            <partial name="SpecificEntity/_Load_Documents" />
+        </div>
+
+        <hr class="bg-pharus hr-2" />
+    </form>
+
+    <form action="/" method="post">
+        <div class="row ml-3" id="div-select-addInfo">
+            <label class="text-torshia m-1 pr-3">FUND ADDITIONAL INFORMATION</label>
+            <select class="custom-select-lg select-pharus form-control input-sm"
+                    id="fundAdditionalInfSelect"
+                    asp-for="SelectAdditionalInf">
+                <option value="" selected disabled>Select</option>
+                <option value="SubFunds">Sub Funds</option>
+                <option value="TimelineChanges">Timeline Changes</option>
+                <option value="AllDocuments">All Documents</option>
+                <option value="AllAgreements">All Agreements</option>
+            </select>
+        </div>
+
+        <partial name="SpecificEntity/_AllDocuments" />
+        <partial name="SpecificEntity/_AllAgreements" />
+        <partial name="SpecificEntity/_Timeline" />
+        <div id="subEntities" class="mt-4">
+            <div>
+                <div class="d-flex w-100 mb-2" id="toolbar-pharus">
+                    <partial name="SpecificEntity/SubEntities/_Select" />
+                    <partial name="SpecificEntity/SubEntities/_Extract" />
+                </div>
             </div>
-        }
+            @if (this.TempData[GlobalConstants.InfoMessageDisplay] != null)
+            {
+                <div class="alert alert-success" id="infoMessage">
+                    @this.TempData[GlobalConstants.InfoMessageDisplay]
+                </div>
+            }
 
-        <partial name="SpecificEntity/SubEntities/_BindingTable" />
-        <partial name="SpecificEntity/SubEntities/_ViewTable" />
+            @if (this.TempData[GlobalConstants.ErrorMessageDisplay] != null)
+            {
+                <div class="alert alert-danger" id="errorMessage">
+                    @this.TempData[GlobalConstants.ErrorMessageDisplay]
+                </div>
+            }
 
-        <partial name="SpecificEntity/SubEntities/_Modal" />
-    </div>
-</form>
+            <partial name="SpecificEntity/SubEntities/_BindingTable" />
+            <partial name="SpecificEntity/SubEntities/_ViewTable" />
+
+            <partial name="SpecificEntity/SubEntities/_Modal" />
+        </div>
+    </form>
+</div>
 
 @*<form asp-controller="FundSubEntities"
           asp-action="UploadProspectus"

@@ -16,49 +16,37 @@ namespace DataGate.Web.ViewModels.Entities
     using System.Collections.Generic;
 
     using DataGate.Web.InputModels.Files;
-    using Microsoft.AspNetCore.Mvc;
 
     public class SpecificEntityViewModel : BaseEntityViewModel
     {
         // ________________________________________________________
         //
         // Property will be filled
-        // with table data from DB
-        // for a specific entity
-        [BindProperty]
+        // with table headers and values
+        // data from DB for a specific entity
         public List<string[]> Entity { get; set; }
 
-        // ________________________________________________________
-        //
-        // Property will be filled
-        // with table data from DB
-        // for a specific entity sub entities
-        [BindProperty]
-        public List<string[]> EntitySubEntities { get; set; }
+        public string Container { get; set; }
 
-        public string ContainerEntityName { get; set; }
+        public string ContainerId { get; set; }
 
-        public string ContainerEntityId { get; set; }
+        public IEnumerable<string[]> Timeline { get; set; }
 
-        public IEnumerable<string[]> EntityTimeline { get; set; }
+        //public IEnumerable<string[]> TSAllPriceValues { get; set; }
 
-        public IEnumerable<string[]> TSAllPriceValues { get; set; }
+        //public IEnumerable<string> TSPriceDates { get; set; }
 
-        public IEnumerable<string> TSPriceDates { get; set; }
-
-        public IEnumerable<string> TSTypeProviders { get; set; }
+        //public IEnumerable<string> TSTypeProviders { get; set; }
 
         public string SelectedFileName { get; set; }
 
-        public IEnumerable<string[]> EntityDistinctDocuments { get; set; }
+        public IEnumerable<string[]> DistinctDocuments { get; set; }
 
-        public IEnumerable<string[]> EntityDistinctAgreements { get; set; }
+        public IEnumerable<string[]> DistinctAgreements { get; set; }
 
-        public IEnumerable<string[]> EntityAgreements { get; set; }
+        public IEnumerable<string[]> Agreements { get; set; }
 
-        public IEnumerable<string[]> EntityDocuments { get; set; }
-
-        public int AgreementId { get; set; }
+        public IEnumerable<string[]> Documents { get; set; }
 
         public UploadEntityFileModel UploadEntityFileModel { get; set; }
 

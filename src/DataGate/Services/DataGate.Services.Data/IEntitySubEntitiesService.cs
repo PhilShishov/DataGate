@@ -3,29 +3,31 @@
     using System;
     using System.Collections.Generic;
 
-    public interface IEntitySubEntitiesService<T>
+    public interface IEntitySubEntitiesService
     {
-        IEnumerable<T> GetEntityWithDateById(DateTime? chosenDate, int id);
+        IEnumerable<string[]> GetEntityWithDateById(DateTime? date, int id);
 
-        IEnumerable<T> GetEntity_SubEntities(DateTime? chosenDate, int id);
+        IEnumerable<string[]> GetEntity_SubEntities(DateTime? date, int id);
 
-        IEnumerable<T> GetEntity_SubEntitiesWithSelectedViewAndDate(
+        IEnumerable<string[]> GetEntity_SubEntitiesWithSelectedViewAndDate(
                         IReadOnlyCollection<string> preSelectedColumns,
                         IEnumerable<string> selectedColumns,
-                        DateTime? chosenDate,
+                        DateTime? date,
                         int id);
 
-        IEnumerable<T> GetTimeline(int id);
+        T GetSpecificEntityOverview<T>(int id, DateTime? date = null);
 
-        IEnumerable<T> GetDistinctDocuments(DateTime? chosenDate, int id);
+        IEnumerable<string[]> GetTimeline(int id);
 
-        IEnumerable<T> GetAllDocuments(int id);
+        IEnumerable<string[]> GetDistinctDocuments(DateTime? date, int id);
 
-        IEnumerable<T> GetDistinctAgreements(DateTime? chosenDate, int id);
+        IEnumerable<string[]> GetAllDocuments(int id);
 
-        IEnumerable<T> GetAllAgreements(DateTime? chosenDate, int id);
+        IEnumerable<string[]> GetDistinctAgreements(DateTime? date, int id);
 
-        IEnumerable<T> PrepareEntity_SubEntitiesForPdfExtract(DateTime? chosenDate);
+        IEnumerable<string[]> GetAllAgreements(DateTime? date, int id);
+
+        IEnumerable<string[]> PrepareEntity_SubEntitiesForPdfExtract(DateTime? date);
 
         void ThrowEntityNotFoundExceptionIfIdDoesNotExist(int id);
     }
