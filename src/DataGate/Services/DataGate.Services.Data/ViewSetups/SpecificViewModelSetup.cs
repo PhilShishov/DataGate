@@ -25,6 +25,7 @@ namespace DataGate.Services.Data.ViewSetups
             model.Headers = service
                                                             .GetEntity_SubEntities(date, entityId)
                                                             .Take(1)
+                                                            .FirstOrDefault()
                                                             .ToList();
             model.EntityTimeline = service.GetTimeline(entityId).ToList();
             model.EntityDocuments = service.GetAllDocuments(entityId).ToList();

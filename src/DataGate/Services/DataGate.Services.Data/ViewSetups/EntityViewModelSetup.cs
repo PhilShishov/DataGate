@@ -21,8 +21,8 @@ namespace DataGate.Services.Data.ViewSetups
             // ---------------------------------------------------------
             //
             // Available header column selection
-            var headers = service.GetHeaders();
-            model.Headers = headers.ToList();
+            var headers = service.GetHeaders().ToList();
+            model.Headers = headers;
             model.HeadersSelection = headers;
 
             bool isInSelectionMode = false;

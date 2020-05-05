@@ -12,26 +12,23 @@
                 <div>
                     <h2 class="text-center">SELECT COLUMNS </h2>
 
-                    @foreach (var header in Model.HeadersSelection)
-                    {
-                        <select asp-for="PreSelectedColumns" style="width:60%" hidden>
-                            @for (int col = 0; col < numberPreSelectedColumns; col++)
-                            {
-                                <option selected value="@header[col]">
-                                    @header[col]
-                                </option>
-                            }
-                        </select>
+                    <select asp-for="PreSelectedColumns" style="width:60%" hidden>
+                        @for (int col = 0; col < numberPreSelectedColumns; col++)
+                        {
+                            <option selected value="@Model.HeadersSelection[col]">
+                                @Model.HeadersSelection[col]
+                            </option>
+                        }
+                    </select>
 
-                        <select class="multiselect" multiple="multiple" asp-for="SelectedColumns" style="width:60%">
-                            @for (int col = numberPreSelectedColumns; col < header.Length; col++)
-                            {
-                                <option value="@header[col]">
-                                    @header[col]
-                                </option>
-                            }
-                        </select>
-                    }
+                    <select class="multiselect" multiple="multiple" asp-for="SelectedColumns" style="width:60%">
+                        @for (int col = numberPreSelectedColumns; col < Model.HeadersSelection.Count; col++)
+                        {
+                            <option value="@Model.HeadersSelection[col]">
+                                @Model.HeadersSelection[col]
+                            </option>
+                        }
+                    </select>
                     <br />
                 </div>
             </div>
