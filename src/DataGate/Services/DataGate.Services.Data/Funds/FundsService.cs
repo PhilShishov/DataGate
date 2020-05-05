@@ -18,6 +18,7 @@ namespace DataGate.Services.Data.Funds
     using DataGate.Services.Mapping;
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.Dtos.Queries;
+    using DataGate.Web.ViewModels.Entities;
 
     // _____________________________________________________________
     public class FundsService : IFundsService
@@ -70,18 +71,16 @@ namespace DataGate.Services.Data.Funds
         }
 
         public IEnumerable<string[]> GetAllWithSelectedViewAndDate(
-                                                                IReadOnlyCollection<string> preSelectedColumns,
-                                                                IEnumerable<string> selectedColumns,
-                                                                DateTime? chosenDate,
+                                                                GetWithSelectionDto dto,
                                                                 int? take,
                                                                 int skip)
         {
             // Create new collection to store
             // selected without change
-            List<string> resultColumns = PrepareResultForSelection(preSelectedColumns, selectedColumns);
+            List<string> resultColumns = PrepareResultForSelection(dto.PreSelectedColumns,dto.SelectedColumns);
 
             var query = this.sqlManager
-                .ExecuteQueryWithSelection(resultColumns, chosenDate, this.sqlFunctionAllFund)
+                .ExecuteQueryWithSelection(resultColumns, dto.Date, this.sqlFunctionAllFund)
                 .Skip(skip);
             query = CheckForTakeValue(take, query);
 
@@ -89,18 +88,16 @@ namespace DataGate.Services.Data.Funds
         }
 
         public IEnumerable<string[]> GetAllActiveWithSelectedViewAndDate(
-                                                                    IReadOnlyCollection<string> preSelectedColumns,
-                                                                    IEnumerable<string> selectedColumns,
-                                                                    DateTime? chosenDate,
+                                                                    GetWithSelectionDto dto,
                                                                     int? take,
                                                                     int skip)
         {
             // Create new collection to store
             // selected without change
-            List<string> resultColumns = PrepareResultForSelection(preSelectedColumns, selectedColumns);
+            List<string> resultColumns = PrepareResultForSelection(dto.PreSelectedColumns, dto.SelectedColumns);
 
             var query = this.sqlManager
-                .ExecuteQueryWithSelection(resultColumns, chosenDate, this.sqlFunctionAllActiveFund)
+                .ExecuteQueryWithSelection(resultColumns, dto.Date, this.sqlFunctionAllActiveFund)
                 .Skip(skip);
             query = CheckForTakeValue(take, query);
 
