@@ -23,12 +23,12 @@ namespace DataGate.Services.Data
 
         T GetEntitiesOverview<T>();
 
-        IEnumerable<string[]> GetAllWithSelectedViewAndDate(
+        IEnumerable<string[]> GetAllSelected(
                                         GetWithSelectionDto dto,
                                         int? take = null,
                                         int skip = 0);
 
-        IEnumerable<string[]> GetAllActiveWithSelectedViewAndDate(
+        IEnumerable<string[]> GetAllActiveSelected(
                                         GetWithSelectionDto dto,
                                         int? take = null,
                                         int skip = 0);

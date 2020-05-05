@@ -70,7 +70,7 @@ namespace DataGate.Services.Data.Funds
             return query;
         }
 
-        public IEnumerable<string[]> GetAllWithSelectedViewAndDate(
+        public IEnumerable<string[]> GetAllSelected(
                                                                 GetWithSelectionDto dto,
                                                                 int? take,
                                                                 int skip)
@@ -87,7 +87,7 @@ namespace DataGate.Services.Data.Funds
             return query;
         }
 
-        public IEnumerable<string[]> GetAllActiveWithSelectedViewAndDate(
+        public IEnumerable<string[]> GetAllActiveSelected(
                                                                     GetWithSelectionDto dto,
                                                                     int? take,
                                                                     int skip)

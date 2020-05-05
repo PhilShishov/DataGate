@@ -1,32 +1,30 @@
 ﻿@model DataGate.Web.ViewModels.Entities.EntitiesOverviewViewModel
 
 <div>
-    <table class="table" hidden>
+    <table class="table">
         <tr>
             @for (int row = 0; row < Model.Headers.Count; row++)
             {
                 @for (int col = 0; col < Model.Headers[row].Length; col++)
                 {
                     <th>
-                        <input type="text" asp-for="@Model.Headers[row][col]" readonly />
+                        <input class="tblValues" type="text" asp-for="@Model.Headers[row][col]" value="@Model.Headers[row][col]" readonly />
                     </th>
                 }
             }
         </tr>
     </table>
-    <table class="table" hidden>
-        <tbody>
-            @for (int row = 0; row < Model.Values.Count; row++)
-            {
-                <tr>
-                    @for (int col = 0; col < Model.Values[row].Length; col++)
-                    {
-                        <td>
-                            <input type="text" asp-for="@Model.Values[row][col]" />
-                        </td>
-                    }
-                </tr>
-            }
-        </tbody>
+    <table class="table">
+        @for (int row = 0; row < Model.Values.Count; row++)
+        {
+            <tr>
+                @for (int col = 0; col < Model.Values[row].Length; col++)
+                {
+                    <td>
+                        <input class="tblValues" type="text" asp-for="@Model.Values[row][col]" value="@Model.Values[row][col]" readonly />
+                    </td>
+                }
+            </tr>
+        }
     </table>
 </div>
