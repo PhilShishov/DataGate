@@ -12,7 +12,7 @@ namespace DataGate.Web.InputModels.Files
         public List<string[]> Values { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.ChosenDateIsEmpty)]
-        public string ChosenDate { get; set; }
+        public string Date { get; set; }
 
         public string ControllerName { get; set; }
 

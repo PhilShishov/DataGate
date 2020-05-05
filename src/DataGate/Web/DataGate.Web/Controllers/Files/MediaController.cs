@@ -22,8 +22,8 @@
                 }
                 else if (model.Command == GlobalConstants.CommandExtractPdf)
                 {
-                    var chosenDate = DateTimeParser.WebFormat(model.ChosenDate);
-                    //return GenerateFileTemplate.Pdf(model.Headers, model.Values, chosenDate, model.ControllerName);
+                    var chosenDate = DateTimeParser.WebFormat(model.Date);
+                    return GenerateFileTemplate.Pdf(model.Headers, model.Values, chosenDate, model.ControllerName);
                 }
             }
 

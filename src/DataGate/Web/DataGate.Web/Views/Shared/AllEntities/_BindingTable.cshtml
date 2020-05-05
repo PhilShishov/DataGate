@@ -1,13 +1,13 @@
 ﻿@model DataGate.Web.ViewModels.Entities.EntitiesOverviewViewModel
 
-<div hidden>
+<div>
     <table class="table">
         <tr>
 
             @for (int header = 0; header < Model.Headers.Count; header++)
             {
                 <th>
-                    <input class="tblValues" type="text" asp-for="@Model.Headers[header]" readonly />
+                    <input class="tblValues" type="text" asp-for="@Model.Headers[header]" value="@Model.Headers[header]" readonly />
                 </th>
             }
         </tr>
@@ -19,7 +19,7 @@
                 @for (int col = 0; col < Model.Values[row].Length; col++)
                 {
                     <td>
-                        <input class="tblValues" type="text" asp-for="@Model.Values[row][col]" readonly />
+                        <input class="tblValues" type="text" asp-for="@Model.Values[row][col]" value="@Model.Values[row][col]" readonly />
                     </td>
                 }
             </tr>
