@@ -11,19 +11,19 @@
     [Authorize]
     public class MediaController : BaseController
     {
-        [HttpGet]
+        [HttpPost]
         public IActionResult Download(DownloadInputModel model)
         {
-            if (model.Entities != null)
+            if (model.Values.Count > 0)
             {
                 if (model.Command == GlobalConstants.CommandExtractExcel)
                 {
-                    return GenerateFileTemplate.Excel(model.Entities, model.ControllerName);
+                    return GenerateFileTemplate.Excel(model.Headers, model.Values, model.ControllerName);
                 }
                 else if (model.Command == GlobalConstants.CommandExtractPdf)
                 {
                     var chosenDate = DateTimeParser.WebFormat(model.ChosenDate);
-                    return GenerateFileTemplate.Pdf(model.Entities, chosenDate, model.ControllerName);
+                    //return GenerateFileTemplate.Pdf(model.Headers, model.Values, chosenDate, model.ControllerName);
                 }
             }
 

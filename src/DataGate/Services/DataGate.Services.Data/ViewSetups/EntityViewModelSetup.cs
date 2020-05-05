@@ -21,7 +21,7 @@ namespace DataGate.Services.Data.ViewSetups
             // ---------------------------------------------------------
             //
             // Available header column selection
-            var headers = service.GetAllActive(null, 1);
+            var headers = service.GetHeaders();
             model.Headers = headers.ToList();
             model.HeadersSelection = headers;
 
@@ -74,14 +74,14 @@ namespace DataGate.Services.Data.ViewSetups
         {
             model.Values = service.GetAllSelected(dto, null, 1).ToList();
 
-            model.Headers = service.GetAllSelected(dto, 1).ToList();
+            model.Headers = service.GetAllSelected(dto, 1).FirstOrDefault().ToList();
         }
 
         private static void CallAllActiveWithSelectedColumns(EntitiesOverviewViewModel model, GetWithSelectionDto dto, IEntityService service)
         {
             model.Values = service.GetAllActiveSelected(dto, null, 1).ToList();
 
-            model.Headers = service.GetAllActiveSelected(dto, 1).ToList();
+            model.Headers = service.GetAllActiveSelected(dto, 1).FirstOrDefault().ToList();
         }
     }
 }
