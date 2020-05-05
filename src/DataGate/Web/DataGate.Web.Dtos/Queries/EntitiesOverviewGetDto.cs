@@ -10,9 +10,9 @@ namespace DataGate.Web.Dtos.Queries
 
         public IEnumerable<string[]> Values { get; set; }
 
-        public IEnumerable<string[]> Headers { get; set; }
+        public IEnumerable<string> Headers { get; set; }
 
-        public IEnumerable<string[]> HeadersSelection { get; set; }
+        public IEnumerable<string> HeadersSelection { get; set; }
 
     }
 }

@@ -43,7 +43,8 @@ namespace DataGate.Web.Utilities
         // and preparing for download
         // in controller as filestreamresult
         public static FileStreamResult Excel(
-                                                           List<string[]> entities,
+                                                           IEnumerable<string[]> headers,
+                                                           List<string[]> values,
                                                            string controllerName)
         {
             FileStreamResult fileStreamResult;
@@ -57,24 +58,22 @@ namespace DataGate.Web.Utilities
 
                 worksheet = package.Workbook.Worksheets.Add($"{correctTypeName}");
 
-                var tableHeaders = entities.Take(1);
-
                 int counter = 0;
 
-                foreach (var tableHeader in tableHeaders)
+                foreach (var header in headers)
                 {
-                    foreach (var headerValue in tableHeader)
+                    foreach (var cell in header)
                     {
                         counter++;
-                        worksheet.Cells[1, counter].Value = headerValue;
+                        worksheet.Cells[1, counter].Value = cell;
                     }
                 }
 
-                for (int row = 1; row < entities.Count; row++)
+                for (int row = 0; row < values.Count; row++)
                 {
-                    for (int col = 0; col < entities[row].Length; col++)
+                    for (int col = 0; col < values[row].Length; col++)
                     {
-                        worksheet.Cells[row + 1, col + 1].Value = Convert.ToString(entities[row][col]);
+                        worksheet.Cells[row + 2, col + 1].Value = Convert.ToString(values[row][col]);
                     }
                 }
 

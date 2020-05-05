@@ -104,6 +104,16 @@ namespace DataGate.Services.Data.Funds
             return query;
         }
 
+        public IEnumerable<string> GetHeaders()
+        {
+           return this.GetAllActive(null, 1, 0).FirstOrDefault();
+        }
+
+        public IEnumerable<string> GetSelectedHeaders()
+        {
+            return this.GetAllActive(null, 1, 0).FirstOrDefault();
+        }
+
         public ISet<string> GetNames()
         {
             HashSet<string> query = this.repository
@@ -117,7 +127,7 @@ namespace DataGate.Services.Data.Funds
 
         public T GetEntitiesOverview<T>()
         {
-            var headers = this.GetAllActive(null, 1, 0);
+            var headers = this.GetHeaders();
             var values = this.GetAllActive(null, null, 1);
 
             var entity = new EntitiesOverviewGetDto()
