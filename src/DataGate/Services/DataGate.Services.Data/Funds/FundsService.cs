@@ -23,8 +23,8 @@ namespace DataGate.Services.Data.Funds
         // ________________________________________________________
         //
         // Table functions names as in DB
-        private readonly string sqlFunctionAllFund = "fn_all_fund";
-        private readonly string sqlFunctionAllActiveFund = "fn_active_fund";
+        private readonly string sqlFunctionAllFund = "[fn_all_fund]";
+        private readonly string sqlFunctionAllActiveFund = "[fn_active_fund]";
 
         private readonly ISqlQueryManager sqlManager;
         private readonly IRepository<TbHistoryFund> repository;
@@ -47,10 +47,10 @@ namespace DataGate.Services.Data.Funds
         //
         // Retrieve query table DB based entities
         // with table functions
-        public IEnumerable<string[]> GetAll(DateTime? chosenDate, int? take, int skip)
+        public IEnumerable<string[]> GetAll(DateTime? date, int? take, int skip)
         {
             var query = this.sqlManager
-                .ExecuteQuery(chosenDate, this.sqlFunctionAllFund)
+                .ExecuteQuery(this.sqlFunctionAllFund, date)
                 .Skip(skip);
             query = CheckForTakeValue(take, query);
 
@@ -60,7 +60,7 @@ namespace DataGate.Services.Data.Funds
         public IEnumerable<string[]> GetAllActive(DateTime? chosenDate, int? take, int skip)
         {
             var query = this.sqlManager
-               .ExecuteQuery(chosenDate, this.sqlFunctionAllActiveFund)
+               .ExecuteQuery(this.sqlFunctionAllActiveFund, chosenDate)
                .Skip(skip);
             query = CheckForTakeValue(take, query);
 
@@ -74,10 +74,10 @@ namespace DataGate.Services.Data.Funds
         {
             // Create new collection to store
             // selected without change
-            List<string> resultColumns = FormatSql.FormatColumns(dto.PreSelectedColumns,dto.SelectedColumns);
+            List<string> resultColumns = FormatSql.FormatColumns(dto.PreSelectedColumns, dto.SelectedColumns);
 
             var query = this.sqlManager
-                .ExecuteQueryWithSelection(resultColumns, dto.Date, this.sqlFunctionAllFund)
+                .ExecuteQuery(this.sqlFunctionAllFund, dto.Date, null, resultColumns)
                 .Skip(skip);
             query = CheckForTakeValue(take, query);
 
@@ -94,7 +94,7 @@ namespace DataGate.Services.Data.Funds
             List<string> resultColumns = FormatSql.FormatColumns(dto.PreSelectedColumns, dto.SelectedColumns);
 
             var query = this.sqlManager
-                .ExecuteQueryWithSelection(resultColumns, dto.Date, this.sqlFunctionAllActiveFund)
+                .ExecuteQuery(this.sqlFunctionAllActiveFund, dto.Date, null, resultColumns)
                 .Skip(skip);
             query = CheckForTakeValue(take, query);
 
@@ -103,7 +103,7 @@ namespace DataGate.Services.Data.Funds
 
         public IEnumerable<string> GetHeaders()
         {
-           return this.GetAllActive(null, 1, 0).FirstOrDefault();
+            return this.GetAllActive(null, 1, 0).FirstOrDefault();
         }
 
         public ISet<string> GetNames()

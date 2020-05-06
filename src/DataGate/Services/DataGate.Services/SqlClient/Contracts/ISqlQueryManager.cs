@@ -6,28 +6,13 @@ namespace DataGate.Services.SqlClient.Contracts
 
     public interface ISqlQueryManager
     {
-        void ExecuteScalarSqlConnectionCommand(SqlConnection connection, SqlCommand command);
+        void ExecuteProcedure(SqlConnection connection, SqlCommand command);
 
-        IEnumerable<string[]> ExecuteQuery(DateTime? chosenDate, string function);
-
-        IEnumerable<string[]> ExecuteQueryWithSelection(
-                                                    IEnumerable<string> columns,
-                                                    DateTime? chosenDate,
-                                                    string function);
+        IEnumerable<string[]> ExecuteQuery(string function, DateTime? date = null, int? id = null, IEnumerable<string> columns = null);
 
         IEnumerable<string[]> ExecuteQueryById(int id, string function);
 
-        IEnumerable<string[]> ExecuteQueryByWhereId(int id, DateTime? chosenDate, string function, string column);
-
-        IEnumerable<string[]> ExecuteQueryByDateAndId(int id, DateTime? chosenDate, string function);
-
-        IEnumerable<string[]> ExecuteQueryByIdWithSelection(
-                                                    int id,
-                                                    IEnumerable<string> columns,
-                                                    DateTime? chosenDate,
-                                                    string function);
-
-        IEnumerable<T> ExecuteQueryMapping<T>(int id, DateTime? date, string function)
+        IEnumerable<T> ExecuteQueryMapping<T>(string function, int id, DateTime? date = null)
             where T : IDataReaderParser, new();
     }
 }

@@ -17,14 +17,15 @@
         // ________________________________________________________
         //
         // Table functions names as in DB
-        private readonly string sqlFunctionAllFund = "fn_all_fund";
-        private readonly string sqlFunctionSubFundPdfView = "fn_active_subfund_pdf";
-        private readonly string sqlFunctionTimelineFund = "dbo.fn_timeline_fund";
-        private readonly string sqlFunctionDistinctDocuments = "[dbo].[fn_view_distinct_documents_fund]";
-        private readonly string sqlFunctionAllDocuments = "[dbo].[fn_view_documents_fund]";
-        private readonly string sqlFunctionDistinctAgreements = "[dbo].[fn_view_distinct_agreements_fund]";
-        private readonly string sqlFunctionAllAgreements = "[dbo].[fn_view_agreements_fund]";
-        private readonly string sqlFunctionSubFundsForFund = "ActiveSubFundsForSpecificFundAtDate";
+        private readonly string sqlFunctionAllFund = "[fn_all_fund]";
+        private readonly string sqlFunctionFundId = "[fn_fund_id]";
+        private readonly string sqlFunctionSubFundPdfView = "[fn_active_subfund_pdf]";
+        private readonly string sqlFunctionTimelineFund = "[fn_timeline_fund]";
+        private readonly string sqlFunctionDistinctDocuments = "[fn_view_distinct_documents_fund]";
+        private readonly string sqlFunctionAllDocuments = "[fn_view_documents_fund]";
+        private readonly string sqlFunctionDistinctAgreements = "[fn_view_distinct_agreements_fund]";
+        private readonly string sqlFunctionAllAgreements = "[fn_view_agreements_fund]";
+        private readonly string sqlFunctionSubFundsForFund = "[fn_active_fund_subfunds]";
 
         private readonly string columnToPassToQuery = "FUND ID PHARUS";
         private readonly ISqlQueryManager sqlManager;
@@ -48,12 +49,16 @@
         // with table functions
         public IEnumerable<string[]> GetByIdAndDate(int id, DateTime? date)
         {
-            return this.sqlManager.ExecuteQueryByWhereId(id, date, this.sqlFunctionAllFund, this.columnToPassToQuery);
+            return this.sqlManager.ExecuteQuery(this.sqlFunctionFundId, date, id);
         }
 
         public IEnumerable<string[]> GetSubEntities(int id, DateTime? date, int? take, int skip)
         {
-            return this.sqlManager.ExecuteQueryByDateAndId(id, date, this.sqlFunctionSubFundsForFund);
+            var query = this.sqlManager
+                .ExecuteQuery(this.sqlFunctionSubFundsForFund, date, id)
+                .Skip(skip);
+
+            return query;
         }
 
         public IEnumerable<string> GetHeaders(int id, DateTime? date)
@@ -69,7 +74,7 @@
                                                                     int? take,
                                                                     int skip)
         {
-            return this.sqlManager.ExecuteQueryByIdWithSelection(id, selectedColumns, date, this.sqlFunctionSubFundsForFund);
+            return this.sqlManager.ExecuteQuery(this.sqlFunctionSubFundsForFund, date, id, selectedColumns);
         }
 
         public IEnumerable<string[]> GetTimeline(int id)
@@ -80,7 +85,7 @@
         public IEnumerable<T> GetDistinctDocuments<T>(int id, DateTime? date)
         {
             var query = this.sqlManager
-                .ExecuteQueryByDateAndId(id, date, this.sqlFunctionDistinctDocuments)
+                .ExecuteQuery(this.sqlFunctionDistinctDocuments, date, id)
                 .ToList();
 
             var dto = new List<DistinctDocDto>();
@@ -100,37 +105,30 @@
             return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
         }
 
-        public IEnumerable<string[]> GetAllDocuments(int id)
+        public IEnumerable<T> GetAllDocuments<T>(int id)
         {
-            return this.sqlManager.ExecuteQueryById(id, this.sqlFunctionAllDocuments);
-        }
+            this.sqlManager.ExecuteQueryById(id, this.sqlFunctionAllDocuments);
 
-        public IEnumerable<T> GetDistinctAgreements<T>(int id, DateTime? date)
-        {
-            var query = this.sqlManager
-                .ExecuteQueryByDateAndId(id, date, this.sqlFunctionDistinctAgreements)
-               .ToList();
-
-            var dto = new List<DistinctDocDto>();
+            IEnumerable<AllDocDto> dto = this.sqlManager.ExecuteQueryMapping<AllDocDto>(this.sqlFunctionDistinctAgreements, id);
 
             return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
         }
 
-        public IEnumerable<T> GetDistincTest<T>(int id, DateTime? date)
+        public IEnumerable<T> GetDistinctAgreements<T>(int id, DateTime? date)
         {
-            IEnumerable<DistinctDocDto> dto = this.sqlManager.ExecuteQueryMapping<DistinctDocDto>(id, date, this.sqlFunctionDistinctAgreements);
+            IEnumerable<DistinctDocDto> dto = this.sqlManager.ExecuteQueryMapping<DistinctDocDto>( this.sqlFunctionDistinctAgreements, id, date);
 
             return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
         }
 
         public IEnumerable<string[]> GetAllAgreements(int id, DateTime? date)
         {
-            return this.sqlManager.ExecuteQueryByDateAndId(id, date, this.sqlFunctionAllAgreements);
+            return this.sqlManager.ExecuteQuery(this.sqlFunctionAllAgreements, date, id);
         }
 
         public IEnumerable<string[]> PrepareEntity_SubEntitiesForPdfExtract(DateTime? date)
         {
-            return this.sqlManager.ExecuteQuery(date, this.sqlFunctionSubFundPdfView);
+            return this.sqlManager.ExecuteQuery(this.sqlFunctionSubFundPdfView, date);
         }
 
         public void ThrowEntityNotFoundExceptionIfIdDoesNotExist(int id)
