@@ -1,6 +1,5 @@
 ﻿namespace DataGate.Services.Data
 {
-    using DataGate.Web.Dtos.Queries;
     using System;
     using System.Collections.Generic;
 
@@ -24,9 +23,7 @@
 
         IEnumerable<T> GetDistinctDocuments<T>(int id, DateTime? date);
 
-        IEnumerable<T> GetDistincTest<T>(int id, DateTime? date);
-
-        IEnumerable<string[]> GetAllDocuments(int id);
+        IEnumerable<T> GetAllDocuments<T>(int id);
 
         IEnumerable<T> GetDistinctAgreements<T>(int id, DateTime? date);
 

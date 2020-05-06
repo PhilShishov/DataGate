@@ -1,8 +1,9 @@
-namespace DataGate.Services.Data.ViewSetups
+﻿namespace DataGate.Services.Data.ViewSetups
 {
     using System.Linq;
 
     using DataGate.Services.DateTime;
+    using DataGate.Web.ViewModels.Documents;
     using DataGate.Web.ViewModels.Entities;
 
     public class SpecificViewModelSetup
@@ -15,21 +16,24 @@ namespace DataGate.Services.Data.ViewSetups
             service.ThrowEntityNotFoundExceptionIfIdDoesNotExist(model.Id);
 
             var date = DateTimeParser.WebFormat(model.Date);
-            int entityId = model.Id;
+            int id = model.Id;
 
-            model.Entity = service.GetByIdAndDate(entityId, date).ToList();
-            model.DistinctDocuments = service.GetDistinctDocuments<DistinctDocViewModel>(entityId, date);
-            model.DistinctAgreements = service.GetDistincTest<DistinctDocViewModel>(entityId, date);
+            model.Entity = service.GetByIdAndDate(id, date).ToList();
+            model.DistinctDocuments = service.GetDistinctDocuments<DistinctDocViewModel>(id, date);
+            model.DistinctAgreements = service.GetDistinctAgreements<DistinctDocViewModel>(id, date);
 
-            model.Values = service.GetSubEntities(entityId, date).ToList();
+            var headers = service.GetHeaders(id, date);
+            var values = service.GetSubEntities(id, date, null, 1);
+
+            model.Values = service.GetSubEntities(id, date).ToList();
             model.Headers = service
-                                                            .GetSubEntities(entityId, date)
+                                                            .GetSubEntities(id, date)
                                                             .Take(1)
                                                             .FirstOrDefault()
                                                             .ToList();
-            model.Timeline = service.GetTimeline(entityId).ToList();
-            model.Documents = service.GetAllDocuments(entityId).ToList();
-            model.Agreements = service.GetAllAgreements(entityId, date).ToList();
+            model.Timeline = service.GetTimeline(id).ToList();
+            //model.Documents = service.GetAllDocuments<AllDocViewModel>(entityId);
+            model.Agreements = service.GetAllAgreements(id, date).ToList();
 
             string startConnection = model.Entity.ToList()[1][IndexStartConnectionInSQLTable];
             model.StartConnection = DateTimeParser.SqlFormat(startConnection);

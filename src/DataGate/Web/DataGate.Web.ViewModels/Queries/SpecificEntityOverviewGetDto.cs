@@ -1,8 +1,9 @@
-namespace DataGate.Web.ViewModels.Queries
+﻿namespace DataGate.Web.ViewModels.Queries
 {
     using System;
     using System.Collections.Generic;
 
+    using DataGate.Web.ViewModels.Documents;
     using DataGate.Web.ViewModels.Entities;
 
     public class SpecificEntityOverviewGetDto
@@ -26,5 +27,9 @@ namespace DataGate.Web.ViewModels.Queries
         public IEnumerable<DistinctDocViewModel> DistinctDocuments { get; set; }
 
         public IEnumerable<DistinctDocViewModel> DistinctAgreements { get; set; }
+
+        public IEnumerable<AllDocViewModel> Documents { get; set; }
+
+        public IEnumerable<AllAgrViewModel> Agreements { get; set; }
     }
 }

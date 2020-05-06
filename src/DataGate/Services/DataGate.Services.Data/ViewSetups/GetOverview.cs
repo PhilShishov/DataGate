@@ -7,6 +7,7 @@
     using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
     using DataGate.Web.Dtos.Queries;
+    using DataGate.Web.ViewModels.Documents;
     using DataGate.Web.ViewModels.Entities;
     using DataGate.Web.ViewModels.Queries;
 
@@ -18,17 +19,17 @@
         public static T Entities<T>(IEntityService service)
         {
             var headers = service.GetHeaders();
-            var values = service.GetAllActive(null, null, 1);
+            var today = DateTime.Today;
+            var values = service.GetAllActive(today, null, 1);
 
             var entity = new EntitiesOverviewGetDto()
             {
                 IsActive = true,
-                Date = DateTime.Today.ToString(GlobalConstants.RequiredWebDateTimeFormat),
+                Date = today.ToString(GlobalConstants.RequiredWebDateTimeFormat),
                 HeadersSelection = headers,
                 Headers = headers,
                 Values = values,
             };
-
             return AutoMapperConfig.MapperInstance.Map<T>(entity);
         }
 
@@ -47,7 +48,8 @@
 
             var distinctDocs = service.GetDistinctDocuments<DistinctDocViewModel>(id, date);
             var distinctAgrs = service.GetDistinctAgreements<DistinctDocViewModel>(id, date);
-            //var documents = service.GetAllDocuments<AllDocViewModel>(id);
+            var documents = service.GetAllDocuments<AllDocViewModel>(id);
+            //var agreements = service.GetAllAgreements<AllAgrViewModel>(id, date);
 
             var dto = new SpecificEntityOverviewGetDto()
             {
@@ -61,15 +63,13 @@
                 EndConnection = DateTimeParser.SqlFormat(endConnection),
                 DistinctDocuments = distinctDocs,
                 DistinctAgreements = distinctAgrs,
-                //Documents = 
-
+                Documents = documents,
+                //Agreements = agreements,
             };
 
             return AutoMapperConfig.MapperInstance.Map<T>(dto);
-            //    model.DistinctAgreements = service.GetDistinctAgreements(date, entityId).ToList();
 
             //    model.Timeline = service.GetTimeline(entityId).ToList();
-            //    model.Documents = service.GetAllDocuments(entityId).ToList();
             //    model.Agreements = service.GetAllAgreements(date, entityId).ToList();
         }
     }
