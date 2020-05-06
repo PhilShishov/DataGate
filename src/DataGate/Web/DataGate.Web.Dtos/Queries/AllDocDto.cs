@@ -1,10 +1,8 @@
 namespace DataGate.Web.Dtos.Queries
 {
-    using DataGate.Services.SqlClient.Contracts;
-    using System;
-    using System.Collections.Generic;
     using System.Data;
-    using System.Text;
+
+    using DataGate.Services.SqlClient.Contracts;
 
     public class AllDocDto : IDataReaderParser
     {
@@ -20,11 +18,11 @@ namespace DataGate.Web.Dtos.Queries
 
         public void Parse(IDataReader reader)
         {
-            Description = reader["File Description"].ToString();
-            ValidFrom = reader["Valid from:"].ToString();
-            ValidUntil = reader["Valid until:"].ToString();
-            Name = reader["File Name"].ToString();
-            Type = reader["File Type"].ToString();
+            Description = reader["File Description"] as string;
+            ValidFrom = reader["Valid from:"] as string;
+            ValidUntil = reader["Valid until:"] as string;
+            Name = reader["File Name"] as string;
+            Type = reader["File Type"] as string;
         }
     }
 }

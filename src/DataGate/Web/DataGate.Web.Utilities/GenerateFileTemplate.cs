@@ -162,7 +162,7 @@ namespace DataGate.Web.Utilities
 
             document.Add(img);
             document.Add(new Paragraph(" "));
-            document.Add(new Paragraph($"List of {correctTypeName} as of " + chosenDate?.ToString(GlobalConstants.PDfDateTimeFormatDisplay)));
+            document.Add(new Paragraph($"List of {correctTypeName} as of " + chosenDate?.ToString(GlobalConstants.PdfDateTimeFormatDisplay)));
             document.Add(new Paragraph(" "));
             document.Add(table);
             document.Close();

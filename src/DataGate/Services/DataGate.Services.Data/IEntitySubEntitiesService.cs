@@ -19,7 +19,7 @@
                         int? take = null,
                         int skip = 0);
 
-        IEnumerable<string[]> GetTimeline(int id);
+        IEnumerable<T> GetTimeline<T>(int id);
 
         IEnumerable<T> GetDistinctDocuments<T>(int id, DateTime? date);
 
@@ -27,7 +27,7 @@
 
         IEnumerable<T> GetDistinctAgreements<T>(int id, DateTime? date);
 
-        IEnumerable<string[]> GetAllAgreements(int id, DateTime? date);
+        IEnumerable<T> GetAllAgreements<T>(int id, DateTime? date);
 
         IEnumerable<string[]> PrepareEntity_SubEntitiesForPdfExtract(DateTime? date);
 

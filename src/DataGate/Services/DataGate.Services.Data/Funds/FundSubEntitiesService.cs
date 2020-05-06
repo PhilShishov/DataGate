@@ -17,7 +17,6 @@
         // ________________________________________________________
         //
         // Table functions names as in DB
-        private readonly string sqlFunctionAllFund = "[fn_all_fund]";
         private readonly string sqlFunctionFundId = "[fn_fund_id]";
         private readonly string sqlFunctionSubFundPdfView = "[fn_active_subfund_pdf]";
         private readonly string sqlFunctionTimelineFund = "[fn_timeline_fund]";
@@ -27,9 +26,8 @@
         private readonly string sqlFunctionAllAgreements = "[fn_view_agreements_fund]";
         private readonly string sqlFunctionSubFundsForFund = "[fn_active_fund_subfunds]";
 
-        private readonly string columnToPassToQuery = "FUND ID PHARUS";
         private readonly ISqlQueryManager sqlManager;
-        private readonly IRepository<TbHistoryFund> repository;
+        private readonly IRepository<TbHistorySubFund> repository;
 
         // ________________________________________________________
         //
@@ -37,9 +35,9 @@
         // to retrieve appsettings.json connection string
         public FundSubEntitiesService(
                     ISqlQueryManager sqlQueryManager,
-                    IRepository<TbHistoryFund> fundsRepository)
+                    IRepository<TbHistorySubFund> subFundsRepository)
         {
-            this.repository = fundsRepository;
+            this.repository = subFundsRepository;
             this.sqlManager = sqlQueryManager;
         }
 
@@ -77,11 +75,6 @@
             return this.sqlManager.ExecuteQuery(this.sqlFunctionSubFundsForFund, date, id, selectedColumns);
         }
 
-        public IEnumerable<string[]> GetTimeline(int id)
-        {
-            return this.sqlManager.ExecuteQueryById(id, this.sqlFunctionTimelineFund);
-        }
-
         public IEnumerable<T> GetDistinctDocuments<T>(int id, DateTime? date)
         {
             var query = this.sqlManager
@@ -107,28 +100,35 @@
 
         public IEnumerable<T> GetAllDocuments<T>(int id)
         {
-            this.sqlManager.ExecuteQueryById(id, this.sqlFunctionAllDocuments);
-
-            IEnumerable<AllDocDto> dto = this.sqlManager.ExecuteQueryMapping<AllDocDto>(this.sqlFunctionDistinctAgreements, id);
+            IEnumerable<AllDocDto> dto = this.sqlManager.ExecuteQueryMapping<AllDocDto>(this.sqlFunctionAllDocuments, id);
 
             return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
         }
 
         public IEnumerable<T> GetDistinctAgreements<T>(int id, DateTime? date)
         {
-            IEnumerable<DistinctDocDto> dto = this.sqlManager.ExecuteQueryMapping<DistinctDocDto>( this.sqlFunctionDistinctAgreements, id, date);
+            IEnumerable<DistinctDocDto> dto = this.sqlManager.ExecuteQueryMapping<DistinctDocDto>(this.sqlFunctionDistinctAgreements, id, date);
 
             return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
         }
 
-        public IEnumerable<string[]> GetAllAgreements(int id, DateTime? date)
+        public IEnumerable<T> GetAllAgreements<T>(int id, DateTime? date)
         {
-            return this.sqlManager.ExecuteQuery(this.sqlFunctionAllAgreements, date, id);
+            IEnumerable<AllAgrDto> dto = this.sqlManager.ExecuteQueryMapping<AllAgrDto>(this.sqlFunctionAllAgreements, id, date);
+
+            return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
         }
 
         public IEnumerable<string[]> PrepareEntity_SubEntitiesForPdfExtract(DateTime? date)
         {
             return this.sqlManager.ExecuteQuery(this.sqlFunctionSubFundPdfView, date);
+        }
+
+        public IEnumerable<T> GetTimeline<T>(int id)
+        {
+            IEnumerable<TimelineDto> dto = this.sqlManager.ExecuteQueryMapping<TimelineDto>(this.sqlFunctionTimelineFund, id);
+
+            return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
         }
 
         public void ThrowEntityNotFoundExceptionIfIdDoesNotExist(int id)
@@ -139,6 +139,6 @@
             }
         }
 
-        private bool Exists(int id) => this.repository.All().Any(x => x.FId == id);
+        private bool Exists(int id) => this.repository.All().Any(x => x.SfId == id);
     }
 }

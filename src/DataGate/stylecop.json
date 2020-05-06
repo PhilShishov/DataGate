@@ -12,7 +12,8 @@
       "companyName": "DataGate",
       "copyrightText": "Copyright (c) {companyName}. All Rights Reserved.",
       "documentInterfaces": false,
-      "documentInternalElements": false
+      "documentInternalElements": false,
+      "fileNamingConvention": "stylecop"
     },
     "orderingRules": {
       "usingDirectivesPlacement": "insideNamespace",
