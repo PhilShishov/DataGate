@@ -26,5 +26,8 @@ namespace DataGate.Services.SqlClient.Contracts
                                                     IEnumerable<string> columns,
                                                     DateTime? chosenDate,
                                                     string function);
+
+        IEnumerable<T> ExecuteQueryMapping<T>(int id, DateTime? date, string function)
+            where T : IDataReaderParser, new();
     }
 }

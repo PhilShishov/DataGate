@@ -2,28 +2,21 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Data;
-    using System.Data.SqlClient;
     using System.Linq;
-    using AutoMapper;
-    using DataGate.Common;
+
     using DataGate.Common.Exceptions;
     using DataGate.Data.Common.Repositories;
     using DataGate.Data.Models.Entities;
     using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Services.Mapping;
-    using DataGate.Services.SqlClient;
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.Dtos.Queries;
-    using DataGate.Web.ViewModels.Entities;
-    using Microsoft.Extensions.Configuration;
 
     public class FundSubEntitiesService : IFundSubEntitiesService
     {
         // ________________________________________________________
         //
         // Table functions names as in DB
-        private readonly string defaultDateTimeWithSqlConversion = DateTime.Today.ToString("yyyyMMdd");
         private readonly string sqlFunctionAllFund = "fn_all_fund";
         private readonly string sqlFunctionSubFundPdfView = "fn_active_subfund_pdf";
         private readonly string sqlFunctionTimelineFund = "dbo.fn_timeline_fund";
@@ -36,7 +29,6 @@
         private readonly string columnToPassToQuery = "FUND ID PHARUS";
         private readonly ISqlQueryManager sqlManager;
         private readonly IRepository<TbHistoryFund> repository;
-        private readonly IConfiguration configuration;
 
         // ________________________________________________________
         //
@@ -44,12 +36,10 @@
         // to retrieve appsettings.json connection string
         public FundSubEntitiesService(
                     ISqlQueryManager sqlQueryManager,
-                    IRepository<TbHistoryFund> fundsRepository,
-                    IConfiguration configuration)
+                    IRepository<TbHistoryFund> fundsRepository)
         {
             this.repository = fundsRepository;
             this.sqlManager = sqlQueryManager;
-            this.configuration = configuration;
         }
 
         // ________________________________________________________
@@ -123,47 +113,14 @@
 
             var dto = new List<DistinctDocDto>();
 
-            for (int row = 1; row < query.Count; row++)
-            {
-                for (int col = 0; col < row; col++)
-                {
-                    var document = new DistinctDocDto
-                    {
-                        Description = query[row][col],
-                        Name = query[row][col + 1],
-                    };
-                    dto.Add(document);
-                }
-            }
-
             return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
         }
 
         public IEnumerable<T> GetDistincTest<T>(int id, DateTime? date)
         {
-            using (SqlConnection connection = new SqlConnection())
-            {
-                connection.ConnectionString = this.configuration.GetConnectionString(GlobalConstants.DataGatevFinaleConnection);
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
+            IEnumerable<DistinctDocDto> dto = this.sqlManager.ExecuteQueryMapping<DistinctDocDto>(id, date, this.sqlFunctionDistinctAgreements);
 
-                if (date == null)
-                {
-                    command.CommandText = $"select * from {this.sqlFunctionDistinctAgreements}('{this.defaultDateTimeWithSqlConversion}', {id})";
-                }
-                else
-                {
-                    command.CommandText = $"select * from {this.sqlFunctionDistinctAgreements}('{date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}', {id})";
-                }
-
-                var reader = command.ExecuteReader();
-
-                IEnumerable<DistinctDocDto> result = DataSQLHelper.GetData(reader, DistinctDocDto.Create);
-
-                var second = AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(result);
-
-                return second;
-            }
+            return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
         }
 
         public IEnumerable<string[]> GetAllAgreements(int id, DateTime? date)
