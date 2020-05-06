@@ -1,18 +1,18 @@
-namespace DataGate.Services.Data.Funds
+﻿namespace DataGate.Services.Data.Funds
 {
     using System;
     using System.Collections.Generic;
+    using System.Data;
     using System.Linq;
-
-    using DataGate.Common;
+    using AutoMapper;
     using DataGate.Common.Exceptions;
     using DataGate.Data.Common.Repositories;
     using DataGate.Data.Models.Entities;
     using DataGate.Services.Data.Funds.Contracts;
-    using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.Dtos.Queries;
+    using DataGate.Web.ViewModels.Entities;
 
     public class FundSubEntitiesService : IFundSubEntitiesService
     {
@@ -48,23 +48,30 @@ namespace DataGate.Services.Data.Funds
         //
         // Retrieve query table DB based entities
         // with table functions
-        public IEnumerable<string[]> GetEntityWithDateById(DateTime? date, int id)
+        public IEnumerable<string[]> GetByIdAndDate(int id, DateTime? date)
         {
-            return this.sqlManager.ExecuteQueryByWhereId(date, id, this.sqlFunctionAllFund, this.columnToPassToQuery);
+            return this.sqlManager.ExecuteQueryByWhereId(id, date, this.sqlFunctionAllFund, this.columnToPassToQuery);
         }
 
-        public IEnumerable<string[]> GetEntity_SubEntities(DateTime? date, int id)
+        public IEnumerable<string[]> GetSubEntities(int id, DateTime? date, int? take, int skip)
         {
-            return this.sqlManager.ExecuteQueryByDateAndId(date, id, this.sqlFunctionSubFundsForFund);
+            return this.sqlManager.ExecuteQueryByDateAndId(id, date, this.sqlFunctionSubFundsForFund);
         }
 
-        public IEnumerable<string[]> GetEntity_SubEntitiesWithSelectedViewAndDate(
+        public IEnumerable<string> GetHeaders(int id, DateTime? date)
+        {
+            return this.GetSubEntities(id, date, 1, 0).FirstOrDefault();
+        }
+
+        public IEnumerable<string[]> GetSubEntitiesSelected(
+                                                                    int id,
                                                                     IReadOnlyCollection<string> preSelectedColumns,
                                                                     IEnumerable<string> selectedColumns,
                                                                     DateTime? date,
-                                                                    int id)
+                                                                    int? take,
+                                                                    int skip)
         {
-            return this.sqlManager.ExecuteQueryByIdWithSelection(selectedColumns, date, id, this.sqlFunctionSubFundsForFund);
+            return this.sqlManager.ExecuteQueryByIdWithSelection(id, selectedColumns, date, this.sqlFunctionSubFundsForFund);
         }
 
         public IEnumerable<string[]> GetTimeline(int id)
@@ -72,9 +79,27 @@ namespace DataGate.Services.Data.Funds
             return this.sqlManager.ExecuteQueryById(id, this.sqlFunctionTimelineFund);
         }
 
-        public IEnumerable<string[]> GetDistinctDocuments(DateTime? date, int id)
+        public IEnumerable<T> GetDistinctDocuments<T>(int id, DateTime? date)
         {
-            return this.sqlManager.ExecuteQueryByDateAndId(date, id, this.sqlFunctionDistinctDocuments);
+            var query = this.sqlManager
+                .ExecuteQueryByDateAndId(id, date, this.sqlFunctionDistinctDocuments)
+                .ToList();
+
+            var dto = new List<DistinctDocDto>();
+
+            for (int row = 1; row < query.Count; row++)
+            {
+                for (int col = 0; col < row; col++)
+                {
+                    var document = new DistinctDocDto
+                    {
+                        Name = query[row][col],
+                    };
+                    dto.Add(document);
+                }
+            }
+
+            return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
         }
 
         public IEnumerable<string[]> GetAllDocuments(int id)
@@ -82,14 +107,33 @@ namespace DataGate.Services.Data.Funds
             return this.sqlManager.ExecuteQueryById(id, this.sqlFunctionAllDocuments);
         }
 
-        public IEnumerable<string[]> GetDistinctAgreements(DateTime? date, int id)
+        public IEnumerable<T> GetDistinctAgreements<T>(int id, DateTime? date)
         {
-            return this.sqlManager.ExecuteQueryByDateAndId(date, id, this.sqlFunctionDistinctAgreements);
+            var query = this.sqlManager
+                .ExecuteQueryByDateAndId(id, date, this.sqlFunctionDistinctAgreements)
+               .ToList();
+
+            var dto = new List<DistinctDocDto>();
+
+            for (int row = 1; row < query.Count; row++)
+            {
+                for (int col = 0; col < row; col++)
+                {
+                    var document = new DistinctDocDto
+                    {
+                        Description = query[row][col],
+                        Name = query[row][col + 1],
+                    };
+                    dto.Add(document);
+                }
+            }
+
+            return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
         }
 
-        public IEnumerable<string[]> GetAllAgreements(DateTime? date, int id)
+        public IEnumerable<string[]> GetAllAgreements(int id, DateTime? date)
         {
-            return this.sqlManager.ExecuteQueryByDateAndId(date, id, this.sqlFunctionAllAgreements);
+            return this.sqlManager.ExecuteQueryByDateAndId(id, date, this.sqlFunctionAllAgreements);
         }
 
         public IEnumerable<string[]> PrepareEntity_SubEntitiesForPdfExtract(DateTime? date)

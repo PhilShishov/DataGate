@@ -10,7 +10,6 @@ namespace DataGate.Services.SqlClient
     using System;
     using System.Collections.Generic;
     using System.Data.SqlClient;
-    using System.Linq;
 
     using DataGate.Common;
     using DataGate.Services.SqlClient.Contracts;
@@ -64,7 +63,7 @@ namespace DataGate.Services.SqlClient
                     command.CommandText = $"select * from {function}('{chosenDate?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}')";
                 }
 
-                return CreateModel.CreateModelWithHeadersAndValue(command);
+                return DataSQLHelper.GetStringData(command);
             }
         }
 
@@ -86,11 +85,11 @@ namespace DataGate.Services.SqlClient
                     command.CommandText = $"select {string.Join(", ", selectedColumns)} from {function}('{chosenDate?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}')";
                 }
 
-                return CreateModel.CreateModelWithHeadersAndValue(command);
+                return DataSQLHelper.GetStringData(command);
             }
         }
 
-        public IEnumerable<string[]> ExecuteQueryByDateAndId(DateTime? chosenDate, int id, string function)
+        public IEnumerable<string[]> ExecuteQueryByDateAndId(int id, DateTime? chosenDate, string function)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -105,7 +104,7 @@ namespace DataGate.Services.SqlClient
                     command.CommandText = $"select * from {function}('{chosenDate?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}', {id})";
                 }
 
-                return CreateModel.CreateModelWithHeadersAndValue(command);
+                return DataSQLHelper.GetStringData(command);
             }
         }
 
@@ -117,11 +116,11 @@ namespace DataGate.Services.SqlClient
 
                 command.CommandText = $"select * from {function}({id})";
 
-                return CreateModel.CreateModelWithHeadersAndValue(command);
+                return DataSQLHelper.GetStringData(command);
             }
         }
 
-        public IEnumerable<string[]> ExecuteQueryByWhereId(DateTime? chosenDate, int id, string function, string column)
+        public IEnumerable<string[]> ExecuteQueryByWhereId(int id, DateTime? chosenDate, string function, string column)
         {
             using (SqlConnection connection = new SqlConnection())
             {
@@ -137,14 +136,14 @@ namespace DataGate.Services.SqlClient
                         $"where [{column}] = {id}";
                 }
 
-                return CreateModel.CreateModelWithHeadersAndValue(command);
+                return DataSQLHelper.GetStringData(command);
             }
         }
 
         public IEnumerable<string[]> ExecuteQueryByIdWithSelection(
+                                                                int id,
                                                                 IEnumerable<string> columns,
                                                                 DateTime? chosenDate,
-                                                                int id,
                                                                 string function)
         {
             using (SqlConnection connection = new SqlConnection())
@@ -160,7 +159,7 @@ namespace DataGate.Services.SqlClient
                     command.CommandText = $"select {string.Join(", ", columns)} from {function}('{chosenDate?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}', {id})";
                 }
 
-                return CreateModel.CreateModelWithHeadersAndValue(command);
+                return DataSQLHelper.GetStringData(command);
             }
         }
 

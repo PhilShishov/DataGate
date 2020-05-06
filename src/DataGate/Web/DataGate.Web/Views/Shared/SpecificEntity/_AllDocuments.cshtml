@@ -1,4 +1,4 @@
-﻿@*@model DataGate.Web.ViewModels.Entities.SpecificEntityViewModel
+﻿@model DataGate.Web.ViewModels.Entities.SpecificEntityViewModel
 @{
     var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
 }
@@ -9,10 +9,10 @@
             @for (int row = 0; row < 1; row++)
             {
                 <tr>
-                    @for (int col = 0; col < Model.EntityDocuments[row].Length; col++)
+                    @for (int col = 0; col < Model.Documents[row].Length; col++)
                     {
                         <th class="text-secondary p-1">
-                            @Model.EntityDocuments[row][col]
+                            @Model.Documents[row][col]
                         </th>
                     }
                 </tr>
@@ -20,26 +20,26 @@
         </thead>
 
         <tbody>
-            @for (int row = 1; row < Model.EntityDocuments.Count; row++)
+            @for (int row = 1; row < Model.Documents.Count; row++)
             {
                 <tr>
-                    @for (int col = 0; col < Model.EntityDocuments[row].Length; col++)
+                    @for (int col = 0; col < Model.Documents[row].Length; col++)
                     {
                     <td class="p-1">
-                        @if (Model.EntityDocuments[0][col] == "File Name")
+                        @if (Model.Documents[0][col] == "File Name")
                         {
                             <button class="btn-link-pharus text-left"
                                     formtarget="_blank"
                                     type="submit"
                                     formaction="/@controllerName/ReadDocument"
                                     name="pdfValue"
-                                    value="@Model.EntityDocuments[row][col]">
-                                @System.IO.Path.GetFileNameWithoutExtension(Model.EntityDocuments[row][col])
+                                    value="@Model.Documents[row][col]">
+                                @System.IO.Path.GetFileNameWithoutExtension(Model.Documents[row][col])
                             </button>
                         }
                         else
                         {
-                            @Model.EntityDocuments[row][col]
+                            @Model.Documents[row][col]
                         }
                     </td>
                     }
@@ -47,4 +47,4 @@
             }
         </tbody>
     </table>
-</div>*@
+</div>

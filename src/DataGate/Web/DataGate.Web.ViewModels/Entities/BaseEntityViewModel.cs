@@ -14,6 +14,8 @@ namespace DataGate.Web.ViewModels.Entities
 
     public abstract class BaseEntityViewModel
     {
+        public int Id { get; set; }
+
         public List<string> Headers { get; set; }
 
         public List<string> HeadersSelection { get; set; }
@@ -24,8 +26,6 @@ namespace DataGate.Web.ViewModels.Entities
         public string Date { get; set; }
 
         public string Command { get; set; }
-
-        public int Id { get; set; }
 
         public string SelectTerm { get; set; }
 

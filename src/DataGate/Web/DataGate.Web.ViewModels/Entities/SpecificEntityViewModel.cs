@@ -14,7 +14,7 @@ namespace DataGate.Web.ViewModels.Entities
 {
     using System;
     using System.Collections.Generic;
-
+    using AutoMapper;
     using DataGate.Web.InputModels.Files;
 
     public class SpecificEntityViewModel : BaseEntityViewModel
@@ -24,13 +24,13 @@ namespace DataGate.Web.ViewModels.Entities
         // Property will be filled
         // with table headers and values
         // data from DB for a specific entity
-        public List<string[]> Entity { get; set; }
+        public IEnumerable<string[]> Entity { get; set; }
 
         public string Container { get; set; }
 
         public string ContainerId { get; set; }
 
-        public IEnumerable<string[]> Timeline { get; set; }
+        public List<string[]> Timeline { get; set; }
 
         //public IEnumerable<string[]> TSAllPriceValues { get; set; }
 
@@ -40,13 +40,13 @@ namespace DataGate.Web.ViewModels.Entities
 
         public string SelectedFileName { get; set; }
 
-        public IEnumerable<string[]> DistinctDocuments { get; set; }
+        public IEnumerable<DistinctDocViewModel> DistinctDocuments { get; set; }
 
-        public IEnumerable<string[]> DistinctAgreements { get; set; }
+        public IEnumerable<DistinctDocViewModel> DistinctAgreements { get; set; }
 
-        public IEnumerable<string[]> Agreements { get; set; }
+        public List<string[]> Agreements { get; set; }
 
-        public IEnumerable<string[]> Documents { get; set; }
+        public List<string[]> Documents { get; set; }
 
         public UploadEntityFileModel UploadEntityFileModel { get; set; }
 

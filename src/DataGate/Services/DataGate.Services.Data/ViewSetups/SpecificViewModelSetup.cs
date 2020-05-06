@@ -17,19 +17,19 @@ namespace DataGate.Services.Data.ViewSetups
             var date = DateTimeParser.WebFormat(model.Date);
             int entityId = model.Id;
 
-            model.Entity = service.GetEntityWithDateById(date, entityId).ToList();
-            model.DistinctDocuments = service.GetDistinctDocuments(date, entityId).ToList();
-            model.DistinctAgreements = service.GetDistinctAgreements(date, entityId).ToList();
+            model.Entity = service.GetByIdAndDate(entityId, date).ToList();
+            model.DistinctDocuments = service.GetDistinctDocuments<DistinctDocViewModel>(entityId, date);
+            model.DistinctAgreements = service.GetDistinctAgreements<DistinctDocViewModel>(entityId, date);
 
-            model.Values = service.GetEntity_SubEntities(date, entityId).ToList();
+            model.Values = service.GetSubEntities(entityId, date).ToList();
             model.Headers = service
-                                                            .GetEntity_SubEntities(date, entityId)
+                                                            .GetSubEntities(entityId, date)
                                                             .Take(1)
                                                             .FirstOrDefault()
                                                             .ToList();
             model.Timeline = service.GetTimeline(entityId).ToList();
             model.Documents = service.GetAllDocuments(entityId).ToList();
-            model.Agreements = service.GetAllAgreements(date, entityId).ToList();
+            model.Agreements = service.GetAllAgreements(entityId, date).ToList();
 
             string startConnection = model.Entity.ToList()[1][IndexStartConnectionInSQLTable];
             model.StartConnection = DateTimeParser.SqlFormat(startConnection);
