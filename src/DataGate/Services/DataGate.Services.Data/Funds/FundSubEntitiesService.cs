@@ -3,22 +3,27 @@
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Data.SqlClient;
     using System.Linq;
     using AutoMapper;
+    using DataGate.Common;
     using DataGate.Common.Exceptions;
     using DataGate.Data.Common.Repositories;
     using DataGate.Data.Models.Entities;
     using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Services.Mapping;
+    using DataGate.Services.SqlClient;
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.Dtos.Queries;
     using DataGate.Web.ViewModels.Entities;
+    using Microsoft.Extensions.Configuration;
 
     public class FundSubEntitiesService : IFundSubEntitiesService
     {
         // ________________________________________________________
         //
         // Table functions names as in DB
+        private readonly string defaultDateTimeWithSqlConversion = DateTime.Today.ToString("yyyyMMdd");
         private readonly string sqlFunctionAllFund = "fn_all_fund";
         private readonly string sqlFunctionSubFundPdfView = "fn_active_subfund_pdf";
         private readonly string sqlFunctionTimelineFund = "dbo.fn_timeline_fund";
@@ -31,6 +36,7 @@
         private readonly string columnToPassToQuery = "FUND ID PHARUS";
         private readonly ISqlQueryManager sqlManager;
         private readonly IRepository<TbHistoryFund> repository;
+        private readonly IConfiguration configuration;
 
         // ________________________________________________________
         //
@@ -38,10 +44,12 @@
         // to retrieve appsettings.json connection string
         public FundSubEntitiesService(
                     ISqlQueryManager sqlQueryManager,
-                    IRepository<TbHistoryFund> fundsRepository)
+                    IRepository<TbHistoryFund> fundsRepository,
+                    IConfiguration configuration)
         {
             this.repository = fundsRepository;
             this.sqlManager = sqlQueryManager;
+            this.configuration = configuration;
         }
 
         // ________________________________________________________
@@ -129,6 +137,33 @@
             }
 
             return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
+        }
+
+        public IEnumerable<T> GetDistincTest<T>(int id, DateTime? date)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString(GlobalConstants.DataGatevFinaleConnection);
+                connection.Open();
+                SqlCommand command = connection.CreateCommand();
+
+                if (date == null)
+                {
+                    command.CommandText = $"select * from {this.sqlFunctionDistinctAgreements}('{this.defaultDateTimeWithSqlConversion}', {id})";
+                }
+                else
+                {
+                    command.CommandText = $"select * from {this.sqlFunctionDistinctAgreements}('{date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}', {id})";
+                }
+
+                var reader = command.ExecuteReader();
+
+                IEnumerable<DistinctDocDto> result = DataSQLHelper.GetData(reader, DistinctDocDto.Create);
+
+                var second = AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(result);
+
+                return second;
+            }
         }
 
         public IEnumerable<string[]> GetAllAgreements(int id, DateTime? date)

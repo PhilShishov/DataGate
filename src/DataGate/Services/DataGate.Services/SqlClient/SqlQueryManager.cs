@@ -1,4 +1,5 @@
-﻿// Utility class for managing sql
+﻿// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+// Utility class for managing sql
 // queries, connections, commands
 
 // Created: 04/2020

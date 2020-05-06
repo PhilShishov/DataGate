@@ -19,7 +19,7 @@ namespace DataGate.Services.Data.ViewSetups
 
             model.Entity = service.GetByIdAndDate(entityId, date).ToList();
             model.DistinctDocuments = service.GetDistinctDocuments<DistinctDocViewModel>(entityId, date);
-            model.DistinctAgreements = service.GetDistinctAgreements<DistinctDocViewModel>(entityId, date);
+            model.DistinctAgreements = service.GetDistincTest<DistinctDocViewModel>(entityId, date);
 
             model.Values = service.GetSubEntities(entityId, date).ToList();
             model.Headers = service
