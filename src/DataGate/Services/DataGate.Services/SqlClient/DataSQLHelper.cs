@@ -1,4 +1,5 @@
-﻿// Utility class for creating table model
+﻿// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+// Utility class for creating table model
 
 // Created: 09/2019
 // Author:  Philip Shishov
@@ -8,9 +9,8 @@ namespace DataGate.Services.SqlClient
 {
     using System;
     using System.Collections.Generic;
+    using System.Data;
     using System.Data.SqlClient;
-    using System.Diagnostics;
-    using System.Linq;
 
     using DataGate.Common;
 
@@ -30,7 +30,7 @@ namespace DataGate.Services.SqlClient
                 var model = new List<string[]>();
 
                 // Performance overhead :
-                // array of strings is with fastest access time
+                // array of strings and for loop is with fastest access time
 
                 // ________________________________________________________
                 //
@@ -53,15 +53,16 @@ namespace DataGate.Services.SqlClient
             }
         }
 
-        // public static IEnumerable<T> GetData<T>(SqlCommand command)
-        // {
-        //    using (var reader = command.ExecuteReader())
-        //    {
-        //        Validator.NotFoundExceptionIfEntityIsNull(model, nameof(model));
-
-        //        return model;
-        //    }
-        // }
+        // ________________________________________________________
+        //
+        // Convert rows values from a data reader into typed results
+        public static IEnumerable<T> GetData<T>(IDataReader reader, Func<IDataRecord, T> BuildObject)
+        {
+            while (reader.Read())
+            {
+                yield return BuildObject(reader);
+            }
+        }
 
         // ________________________________________________________
         //
