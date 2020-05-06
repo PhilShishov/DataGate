@@ -13,6 +13,7 @@ namespace DataGate.Services.Data.ViewSetups
     using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
     using DataGate.Web.ViewModels.Entities;
+    using DataGate.Web.ViewModels.Queries;
 
     public static class EntityViewModelSetup
     {

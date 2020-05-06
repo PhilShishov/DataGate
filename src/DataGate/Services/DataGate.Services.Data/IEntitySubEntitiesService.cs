@@ -5,25 +5,29 @@
 
     public interface IEntitySubEntitiesService
     {
-        IEnumerable<string[]> GetEntityWithDateById(DateTime? date, int id);
+        IEnumerable<string[]> GetByIdAndDate(int id, DateTime? date);
 
-        IEnumerable<string[]> GetEntity_SubEntities(DateTime? date, int id);
+        IEnumerable<string[]> GetSubEntities(int id, DateTime? date, int? take = null, int skip = 0);
 
-        IEnumerable<string[]> GetEntity_SubEntitiesWithSelectedViewAndDate(
+        IEnumerable<string> GetHeaders(int id, DateTime? date);
+
+        IEnumerable<string[]> GetSubEntitiesSelected(
+                        int id,
                         IReadOnlyCollection<string> preSelectedColumns,
                         IEnumerable<string> selectedColumns,
                         DateTime? date,
-                        int id);
+                        int? take = null,
+                        int skip = 0);
 
         IEnumerable<string[]> GetTimeline(int id);
 
-        IEnumerable<string[]> GetDistinctDocuments(DateTime? date, int id);
+        IEnumerable<T> GetDistinctDocuments<T>(int id, DateTime? date);
 
         IEnumerable<string[]> GetAllDocuments(int id);
 
-        IEnumerable<string[]> GetDistinctAgreements(DateTime? date, int id);
+        IEnumerable<T> GetDistinctAgreements<T>(int id, DateTime? date);
 
-        IEnumerable<string[]> GetAllAgreements(DateTime? date, int id);
+        IEnumerable<string[]> GetAllAgreements(int id, DateTime? date);
 
         IEnumerable<string[]> PrepareEntity_SubEntitiesForPdfExtract(DateTime? date);
 

@@ -17,14 +17,14 @@ namespace DataGate.Services.SqlClient.Contracts
 
         IEnumerable<string[]> ExecuteQueryById(int id, string function);
 
-        IEnumerable<string[]> ExecuteQueryByWhereId(DateTime? chosenDate, int id, string function, string column);
+        IEnumerable<string[]> ExecuteQueryByWhereId(int id, DateTime? chosenDate, string function, string column);
 
-        IEnumerable<string[]> ExecuteQueryByDateAndId(DateTime? chosenDate, int id, string function);
+        IEnumerable<string[]> ExecuteQueryByDateAndId(int id, DateTime? chosenDate, string function);
 
         IEnumerable<string[]> ExecuteQueryByIdWithSelection(
+                                                    int id,
                                                     IEnumerable<string> columns,
                                                     DateTime? chosenDate,
-                                                    int id,
                                                     string function);
     }
 }

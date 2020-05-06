@@ -11,7 +11,7 @@ namespace DataGate.Services.Data
     using System;
     using System.Collections.Generic;
 
-    using DataGate.Web.ViewModels.Entities;
+    using DataGate.Web.ViewModels.Queries;
 
     public interface IEntityService
     {

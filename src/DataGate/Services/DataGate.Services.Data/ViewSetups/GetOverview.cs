@@ -1,13 +1,20 @@
 ﻿namespace DataGate.Services.Data.ViewSetups
 {
     using System;
+    using System.Linq;
 
     using DataGate.Common;
+    using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
     using DataGate.Web.Dtos.Queries;
+    using DataGate.Web.ViewModels.Entities;
+    using DataGate.Web.ViewModels.Queries;
 
     public static class GetOverview
     {
+        private const int IndexStartConnectionInSQLTable = 0;
+        private const int IndexEndConnectionInSQLTable = 1;
+
         public static T Entities<T>(IEntityService service)
         {
             var headers = service.GetHeaders();
@@ -25,64 +32,45 @@
             return AutoMapperConfig.MapperInstance.Map<T>(entity);
         }
 
-        //public static T GetSpecificEntityOverview<T>(int id, DateTime? date = null)
-        //{
+        public static T SpecificEntity<T>(int id, string chosenDate, IEntitySubEntitiesService service)
+        {
+            service.ThrowEntityNotFoundExceptionIfIdDoesNotExist(id);
 
-        //}
+            var date = DateTimeParser.WebFormat(chosenDate);
 
-        //public T GetSpecificEntityOverview<T>(int id, string chosenDate)
-        //{
-        //    //this.ThrowEntityNotFoundExceptionIfIdDoesNotExist(id);
+            var headers = service.GetHeaders(id, date);
+            var values = service.GetSubEntities(id, date, null, 1);
+            var entity = service.GetByIdAndDate(id, date);
 
-        //    //var date = DateTimeParser.WebFormat(chosenDate);
+            string startConnection = entity.ToList()[1][IndexStartConnectionInSQLTable];
+            string endConnection = entity.ToList()[1][IndexEndConnectionInSQLTable];
 
-        //    //var headers = this.GetHeaders();
-        //    //var values = this.GetAllActive(null, null, 1);
-        //    //var entity = this.GetEntityWithDateById(date, id);
+            var distinctDocs = service.GetDistinctDocuments<DistinctDocViewModel>(id, date);
+            var distinctAgrs = service.GetDistinctAgreements<DistinctDocViewModel>(id, date);
+            //var documents = service.GetAllDocuments<AllDocViewModel>(id);
 
-        //    //var entity = new SpecificEntityOverviewGetDto()
-        //    //{
-        //    //    Id = id,
-        //    //    Date = date,
-        //    //    Entity = entity,
-        //    //    HeadersSelection = headers,
-        //    //    Headers = headers,
-        //    //    Values = values,
-        //    //};
+            var dto = new SpecificEntityOverviewGetDto()
+            {
+                Id = id,
+                Date = date,
+                Entity = entity,
+                Headers = headers,
+                HeadersSelection = headers,
+                Values = values,
+                StartConnection = DateTimeParser.SqlFormat(startConnection),
+                EndConnection = DateTimeParser.SqlFormat(endConnection),
+                DistinctDocuments = distinctDocs,
+                DistinctAgreements = distinctAgrs,
+                //Documents = 
 
-        //    //return AutoMapperConfig.MapperInstance.Map<T>(entity);
+            };
 
-        //    //    private const int IndexStartConnectionInSQLTable = 0;
-        //    //private const int IndexEndConnectionInSQLTable = 1;
+            return AutoMapperConfig.MapperInstance.Map<T>(dto);
+            //    model.DistinctAgreements = service.GetDistinctAgreements(date, entityId).ToList();
 
-
-        //    //    model.Entity = service.GetEntityWithDateById(date, entityId).ToList();
-        //    //    model.DistinctDocuments = service.GetDistinctDocuments(date, entityId).ToList();
-        //    //    model.DistinctAgreements = service.GetDistinctAgreements(date, entityId).ToList();
-
-        //    //    model.Values = service.GetEntity_SubEntities(date, entityId).ToList();
-        //    //    model.Headers = service
-        //    //                                                    .GetEntity_SubEntities(date, entityId)
-        //    //                                                    .Take(1)
-        //    //                                                    .FirstOrDefault()
-        //    //                                                    .ToList();
-        //    //    model.Timeline = service.GetTimeline(entityId).ToList();
-        //    //    model.Documents = service.GetAllDocuments(entityId).ToList();
-        //    //    model.Agreements = service.GetAllAgreements(date, entityId).ToList();
-
-        //    //    string startConnection = model.Entity.ToList()[1][IndexStartConnectionInSQLTable];
-        //    //    model.StartConnection = DateTimeParser.SqlFormat(startConnection);
-
-        //    //    if (model.EndConnection != null)
-        //    //    {
-        //    //        string endConnection = model.Entity.ToList()[1][IndexEndConnectionInSQLTable];
-        //    //        model.EndConnection = DateTimeParser.SqlFormat(endConnection);
-        //    //    }
-
-        //    //    //this.ViewData["DocumentFileTypes"] = this.fundsSelectListService.GetAllProspectusFileTypes();
-        //    //    //this.ViewData["AgreementsFileTypes"] = this.fundsSelectListService.GetAllAgreementsFileTypes();
-        //    //    //this.ViewData["AgreementsStatus"] = this.agreementsSelectListService.GetAllTbDomAgreementStatus();
-        //    //    //this.ViewData["Companies"] = this.agreementsSelectListService.GetAllTbCompanies();
-        //}
+            //    model.Timeline = service.GetTimeline(entityId).ToList();
+            //    model.Documents = service.GetAllDocuments(entityId).ToList();
+            //    model.Agreements = service.GetAllAgreements(date, entityId).ToList();
+        }
     }
 }

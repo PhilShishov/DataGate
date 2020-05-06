@@ -25,8 +25,8 @@
         {
             SpecificEntityViewModel viewModel = new SpecificEntityViewModel
             {
-                Date = date,
                 Id = id,
+                Date = date,
             };
 
             //var model = this.service.GetSpecificEntityOverview<SpecificEntityViewModel>(id, date);
@@ -35,7 +35,6 @@
 
             SpecificViewModelSetup.PrepareModel(viewModel, this.service);
 
-            this.ModelState.Clear();
             return this.View(viewModel);
         }
 

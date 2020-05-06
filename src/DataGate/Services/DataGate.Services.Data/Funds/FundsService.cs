@@ -11,12 +11,11 @@ namespace DataGate.Services.Data.Funds
     using System.Collections.Generic;
     using System.Linq;
 
-    using DataGate.Common;
     using DataGate.Data.Common.Repositories;
     using DataGate.Data.Models.Entities;
     using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Services.SqlClient.Contracts;
-    using DataGate.Web.ViewModels.Entities;
+    using DataGate.Web.ViewModels.Queries;
 
     // _____________________________________________________________
     public class FundsService : IFundsService
@@ -75,7 +74,7 @@ namespace DataGate.Services.Data.Funds
         {
             // Create new collection to store
             // selected without change
-            List<string> resultColumns = PrepareResultForSelection(dto.PreSelectedColumns,dto.SelectedColumns);
+            List<string> resultColumns = FormatSql.FormatColumns(dto.PreSelectedColumns,dto.SelectedColumns);
 
             var query = this.sqlManager
                 .ExecuteQueryWithSelection(resultColumns, dto.Date, this.sqlFunctionAllFund)
@@ -92,7 +91,7 @@ namespace DataGate.Services.Data.Funds
         {
             // Create new collection to store
             // selected without change
-            List<string> resultColumns = PrepareResultForSelection(dto.PreSelectedColumns, dto.SelectedColumns);
+            List<string> resultColumns = FormatSql.FormatColumns(dto.PreSelectedColumns, dto.SelectedColumns);
 
             var query = this.sqlManager
                 .ExecuteQueryWithSelection(resultColumns, dto.Date, this.sqlFunctionAllActiveFund)
@@ -116,17 +115,6 @@ namespace DataGate.Services.Data.Funds
                 .ToHashSet();
 
             return query;
-        }
-
-        private static List<string> PrepareResultForSelection(IReadOnlyCollection<string> preSelectedColumns, IEnumerable<string> selectedColumns)
-        {
-            List<string> resultColumns = new List<string>(preSelectedColumns);
-
-            resultColumns.AddRange(selectedColumns);
-
-            // Prepare items for DB query with []
-            resultColumns = resultColumns.Select(col => string.Format(GlobalConstants.SqlItemFormatRequired, col)).ToList();
-            return resultColumns;
         }
 
         private static IEnumerable<string[]> CheckForTakeValue(int? take, IEnumerable<string[]> query)
