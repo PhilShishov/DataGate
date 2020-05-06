@@ -5,6 +5,7 @@
 
     using DataGate.Web.ViewModels.Documents;
     using DataGate.Web.ViewModels.Entities;
+    using DataGate.Web.ViewModels.Timelines;
 
     public class SpecificEntityOverviewGetDto
     {
@@ -22,7 +23,7 @@
 
         public DateTime StartConnection { get; set; }
 
-        public DateTime EndConnection { get; set; }
+        public DateTime? EndConnection { get; set; }
 
         public IEnumerable<DistinctDocViewModel> DistinctDocuments { get; set; }
 
@@ -31,5 +32,7 @@
         public IEnumerable<AllDocViewModel> Documents { get; set; }
 
         public IEnumerable<AllAgrViewModel> Agreements { get; set; }
+
+        public IEnumerable<TimelineViewModel> Timelines { get; set; }
     }
 }

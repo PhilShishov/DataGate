@@ -5,6 +5,7 @@
     using DataGate.Services.DateTime;
     using DataGate.Web.ViewModels.Documents;
     using DataGate.Web.ViewModels.Entities;
+    using DataGate.Web.ViewModels.Timelines;
 
     public class SpecificViewModelSetup
     {
@@ -31,9 +32,9 @@
                                                             .Take(1)
                                                             .FirstOrDefault()
                                                             .ToList();
-            model.Timeline = service.GetTimeline(id).ToList();
-            //model.Documents = service.GetAllDocuments<AllDocViewModel>(entityId);
-            model.Agreements = service.GetAllAgreements(id, date).ToList();
+            model.Timelines = service.GetTimeline<TimelineViewModel>(id);
+            model.Documents = service.GetAllDocuments<AllDocViewModel>(id);
+            model.Agreements = service.GetAllAgreements<AllAgrViewModel>(id, date);
 
             string startConnection = model.Entity.ToList()[1][IndexStartConnectionInSQLTable];
             model.StartConnection = DateTimeParser.SqlFormat(startConnection);

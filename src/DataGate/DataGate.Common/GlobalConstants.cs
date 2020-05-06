@@ -64,7 +64,8 @@
         public const string RequiredWebDateTimeFormat = "yyyy-MM-dd";
         public const string RequiredSqlDateTimeFormat = "yyyyMMdd";
         public const string SqlDateTimeFormatParsing = "dd/MM/yyyy";
-        public const string PDfDateTimeFormatDisplay = "dd MMMM yyyy";
+        public const string PdfDateTimeFormatDisplay = "dd MMMM yyyy";
+        public const string EmptyEndConnectionDisplay = "STILL VALID";
 
         // Folder names, mime types, formats, file names
         public const string ExcelFileExtension = ".xlsx";

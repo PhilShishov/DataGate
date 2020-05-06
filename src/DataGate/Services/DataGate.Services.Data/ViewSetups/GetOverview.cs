@@ -10,6 +10,7 @@
     using DataGate.Web.ViewModels.Documents;
     using DataGate.Web.ViewModels.Entities;
     using DataGate.Web.ViewModels.Queries;
+    using DataGate.Web.ViewModels.Timelines;
 
     public static class GetOverview
     {
@@ -43,13 +44,20 @@
             var values = service.GetSubEntities(id, date, null, 1);
             var entity = service.GetByIdAndDate(id, date);
 
-            string startConnection = entity.ToList()[1][IndexStartConnectionInSQLTable];
-            string endConnection = entity.ToList()[1][IndexEndConnectionInSQLTable];
+            string startConnectionString = entity.ToList()[1][IndexStartConnectionInSQLTable];
+            string endConnectionString = entity.ToList()[1][IndexEndConnectionInSQLTable];
+            DateTime? endConnection = null;
+
+            if (!string.IsNullOrWhiteSpace(endConnectionString) && endConnectionString != GlobalConstants.EmptyEndConnectionDisplay)
+            {
+               endConnection = DateTimeParser.SqlFormat(endConnectionString);
+            }
 
             var distinctDocs = service.GetDistinctDocuments<DistinctDocViewModel>(id, date);
             var distinctAgrs = service.GetDistinctAgreements<DistinctDocViewModel>(id, date);
             var documents = service.GetAllDocuments<AllDocViewModel>(id);
-            //var agreements = service.GetAllAgreements<AllAgrViewModel>(id, date);
+            var agreements = service.GetAllAgreements<AllAgrViewModel>(id, date);
+            var timelines = service.GetTimeline<TimelineViewModel>(id);
 
             var dto = new SpecificEntityOverviewGetDto()
             {
@@ -59,18 +67,16 @@
                 Headers = headers,
                 HeadersSelection = headers,
                 Values = values,
-                StartConnection = DateTimeParser.SqlFormat(startConnection),
-                EndConnection = DateTimeParser.SqlFormat(endConnection),
+                StartConnection = DateTimeParser.SqlFormat(startConnectionString),
+                EndConnection = endConnection,
                 DistinctDocuments = distinctDocs,
                 DistinctAgreements = distinctAgrs,
                 Documents = documents,
-                //Agreements = agreements,
+                Agreements = agreements,
+                Timelines = timelines,
             };
 
             return AutoMapperConfig.MapperInstance.Map<T>(dto);
-
-            //    model.Timeline = service.GetTimeline(entityId).ToList();
-            //    model.Agreements = service.GetAllAgreements(date, entityId).ToList();
         }
     }
 }

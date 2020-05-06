@@ -14,10 +14,14 @@ namespace DataGate.Web.ViewModels.Entities
 {
     using System;
     using System.Collections.Generic;
-    using AutoMapper;
-    using DataGate.Web.InputModels.Files;
 
-    public class SpecificEntityViewModel : BaseEntityViewModel
+    using DataGate.Services.Mapping;
+    using DataGate.Web.InputModels.Files;
+    using DataGate.Web.ViewModels.Documents;
+    using DataGate.Web.ViewModels.Queries;
+    using DataGate.Web.ViewModels.Timelines;
+
+    public class SpecificEntityViewModel : BaseEntityViewModel, IMapFrom<SpecificEntityOverviewGetDto>
     {
         // ________________________________________________________
         //
@@ -30,7 +34,7 @@ namespace DataGate.Web.ViewModels.Entities
 
         public string ContainerId { get; set; }
 
-        public List<string[]> Timeline { get; set; }
+        public IEnumerable<TimelineViewModel> Timelines { get; set; }
 
         //public IEnumerable<string[]> TSAllPriceValues { get; set; }
 
@@ -44,9 +48,9 @@ namespace DataGate.Web.ViewModels.Entities
 
         public IEnumerable<DistinctDocViewModel> DistinctAgreements { get; set; }
 
-        public List<string[]> Agreements { get; set; }
+        public IEnumerable<AllAgrViewModel> Agreements { get; set; }
 
-        public List<string[]> Documents { get; set; }
+        public IEnumerable<AllDocViewModel> Documents { get; set; }
 
         public UploadEntityFileModel UploadEntityFileModel { get; set; }
 

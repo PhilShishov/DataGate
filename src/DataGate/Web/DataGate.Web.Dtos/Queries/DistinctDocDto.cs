@@ -11,8 +11,8 @@ namespace DataGate.Web.Dtos.Queries
 
         public void Parse(IDataReader reader)
         {
-            Description = reader["File Description"].ToString();
-            Name = reader["File Name"].ToString();
+            Description = reader["File Description"] as string;
+            Name = reader["File Name"] as string;
         }
     }
 }

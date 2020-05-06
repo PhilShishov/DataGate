@@ -23,19 +23,9 @@
         [Route("f/{id}/{date}")]
         public IActionResult ByIdAndDate(int id, string date)
         {
-            SpecificEntityViewModel viewModel = new SpecificEntityViewModel
-            {
-                Id = id,
-                Date = date,
-            };
+            var model = GetOverview.SpecificEntity<SpecificEntityViewModel>(id, date, this.service);
 
-            //var model = this.service.GetSpecificEntityOverview<SpecificEntityViewModel>(id, date);
-
-            //return this.View(model);
-
-            SpecificViewModelSetup.PrepareModel(viewModel, this.service);
-
-            return this.View(viewModel);
+            return this.View(model);
         }
 
         [HttpPost]

@@ -54,6 +54,11 @@ namespace DataGate.Services.SqlClient
             {
                 SqlCommand command = this.SetUpSqlConnectionCommand(connection);
 
+                if (!date.HasValue)
+                {
+                    command.CommandText = $"select * from {function}({id})";
+                }
+
                 if (id.HasValue)
                 {
                     if (columns != null)
@@ -76,18 +81,6 @@ namespace DataGate.Services.SqlClient
                         command.CommandText = $"select * from {function}('{date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}')";
                     }
                 }
-
-                return DataSQLHelper.GetStringData(command);
-            }
-        }
-
-        public IEnumerable<string[]> ExecuteQueryById(int id, string function)
-        {
-            using (SqlConnection connection = new SqlConnection())
-            {
-                SqlCommand command = this.SetUpSqlConnectionCommand(connection);
-
-                command.CommandText = $"select * from {function}({id})";
 
                 return DataSQLHelper.GetStringData(command);
             }
