@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Services\DataGate.Services.Mapping\DataGate.Services.Mapping.csproj" />
+    <ProjectReference Include="..\..\Services\DataGate.Services\DataGate.Services.csproj" />
   </ItemGroup>
 
 </Project>

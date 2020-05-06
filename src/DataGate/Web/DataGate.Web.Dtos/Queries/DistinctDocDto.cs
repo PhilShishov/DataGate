@@ -1,20 +1,18 @@
+using DataGate.Services.SqlClient.Contracts;
 using System.Data;
 
 namespace DataGate.Web.Dtos.Queries
 {
-    public class DistinctDocDto
+    public class DistinctDocDto : IDataReaderParser
     {
         public string Description { get; set; }
 
         public string Name { get; set; }
 
-        public static DistinctDocDto Create(IDataRecord record)
+        public void Parse(IDataReader reader)
         {
-            return new DistinctDocDto
-            {
-                Description = record["File Description"].ToString(),
-                Name = record["File Name"].ToString(),
-            };
+            Description = reader["File Description"].ToString();
+            Name = reader["File Name"].ToString();
         }
     }
 }

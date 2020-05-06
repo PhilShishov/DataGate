@@ -9,13 +9,12 @@ namespace DataGate.Services.SqlClient
 {
     using System;
     using System.Collections.Generic;
-    using System.Data;
     using System.Data.SqlClient;
 
     using DataGate.Common;
 
     // _____________________________________________________________
-    public static class DataSQLHelper
+    public class DataSQLHelper
     {
         private const int StartingIndex = 0;
 
@@ -50,17 +49,6 @@ namespace DataGate.Services.SqlClient
                 Validator.NotFoundExceptionIfEntityIsNull(model, nameof(model));
 
                 return model;
-            }
-        }
-
-        // ________________________________________________________
-        //
-        // Convert rows values from a data reader into typed results
-        public static IEnumerable<T> GetData<T>(IDataReader reader, Func<IDataRecord, T> BuildObject)
-        {
-            while (reader.Read())
-            {
-                yield return BuildObject(reader);
             }
         }
 

@@ -49,19 +49,19 @@ namespace DataGate.Services.SqlClient
             }
         }
 
-        public IEnumerable<string[]> ExecuteQuery(DateTime? chosenDate, string function)
+        public IEnumerable<string[]> ExecuteQuery(DateTime? date, string function)
         {
             using (SqlConnection connection = new SqlConnection())
             {
                 SqlCommand command = this.SetUpSqlConnectionCommand(connection);
 
-                if (chosenDate == null)
+                if (date == null)
                 {
                     command.CommandText = $"select * from {function}('{this.defaultDateTimeWithSqlConversion}')";
                 }
                 else
                 {
-                    command.CommandText = $"select * from {function}('{chosenDate?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}')";
+                    command.CommandText = $"select * from {function}('{date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}')";
                 }
 
                 return DataSQLHelper.GetStringData(command);
@@ -70,40 +70,32 @@ namespace DataGate.Services.SqlClient
 
         public IEnumerable<string[]> ExecuteQueryWithSelection(
                                                             IEnumerable<string> selectedColumns,
-                                                            DateTime? chosenDate,
+                                                            DateTime? date,
                                                             string function)
         {
             using (SqlConnection connection = new SqlConnection())
             {
                 SqlCommand command = this.SetUpSqlConnectionCommand(connection);
 
-                if (chosenDate == null)
+                if (date == null)
                 {
                     command.CommandText = $"select {string.Join(", ", selectedColumns)} from {function}('{this.defaultDateTimeWithSqlConversion}')";
                 }
                 else
                 {
-                    command.CommandText = $"select {string.Join(", ", selectedColumns)} from {function}('{chosenDate?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}')";
+                    command.CommandText = $"select {string.Join(", ", selectedColumns)} from {function}('{date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}')";
                 }
 
                 return DataSQLHelper.GetStringData(command);
             }
         }
 
-        public IEnumerable<string[]> ExecuteQueryByDateAndId(int id, DateTime? chosenDate, string function)
+        public IEnumerable<string[]> ExecuteQueryByDateAndId(int id, DateTime? date, string function)
         {
             using (SqlConnection connection = new SqlConnection())
             {
                 SqlCommand command = this.SetUpSqlConnectionCommand(connection);
-
-                if (chosenDate == null)
-                {
-                    command.CommandText = $"select * from {function}('{this.defaultDateTimeWithSqlConversion}', {id})";
-                }
-                else
-                {
-                    command.CommandText = $"select * from {function}('{chosenDate?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}', {id})";
-                }
+                this.ExecuteQueryByDateAndIdTemplate(id, date, function, command);
 
                 return DataSQLHelper.GetStringData(command);
             }
@@ -121,19 +113,19 @@ namespace DataGate.Services.SqlClient
             }
         }
 
-        public IEnumerable<string[]> ExecuteQueryByWhereId(int id, DateTime? chosenDate, string function, string column)
+        public IEnumerable<string[]> ExecuteQueryByWhereId(int id, DateTime? date, string function, string column)
         {
             using (SqlConnection connection = new SqlConnection())
             {
                 SqlCommand command = this.SetUpSqlConnectionCommand(connection);
 
-                if (chosenDate == null)
+                if (date == null)
                 {
                     command.CommandText = $"select * from {function}('{this.defaultDateTimeWithSqlConversion}') where [{column}] = {id}";
                 }
                 else
                 {
-                    command.CommandText = $"select * from {function}('{chosenDate?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}') " +
+                    command.CommandText = $"select * from {function}('{date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}') " +
                         $"where [{column}] = {id}";
                 }
 
@@ -144,23 +136,60 @@ namespace DataGate.Services.SqlClient
         public IEnumerable<string[]> ExecuteQueryByIdWithSelection(
                                                                 int id,
                                                                 IEnumerable<string> columns,
-                                                                DateTime? chosenDate,
+                                                                DateTime? date,
                                                                 string function)
         {
             using (SqlConnection connection = new SqlConnection())
             {
                 SqlCommand command = this.SetUpSqlConnectionCommand(connection);
 
-                if (chosenDate == null)
+                if (date == null)
                 {
                     command.CommandText = $"select {string.Join(", ", columns)} from {function}('{this.defaultDateTimeWithSqlConversion}', {id}')";
                 }
                 else
                 {
-                    command.CommandText = $"select {string.Join(", ", columns)} from {function}('{chosenDate?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}', {id})";
+                    command.CommandText = $"select {string.Join(", ", columns)} from {function}('{date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}', {id})";
                 }
 
                 return DataSQLHelper.GetStringData(command);
+            }
+        }
+
+        // ________________________________________________________
+        //
+        // Convert rows values from a data reader into typed results
+        // using IDataReaderParser interface
+        public IEnumerable<T> ExecuteQueryMapping<T>(int id, DateTime? date, string function)
+            where T : IDataReaderParser, new()
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                SqlCommand command = this.SetUpSqlConnectionCommand(connection);
+
+                this.ExecuteQueryByDateAndIdTemplate(id, date, function, command);
+
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var entity = new T();
+                        entity.Parse(reader);
+                        yield return entity;
+                    }
+                }
+            }
+        }
+
+        private void ExecuteQueryByDateAndIdTemplate(int id, DateTime? date, string function, SqlCommand command)
+        {
+            if (date == null)
+            {
+                command.CommandText = $"select * from {function}('{this.defaultDateTimeWithSqlConversion}', {id})";
+            }
+            else
+            {
+                command.CommandText = $"select * from {function}('{date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}', {id})";
             }
         }
 
