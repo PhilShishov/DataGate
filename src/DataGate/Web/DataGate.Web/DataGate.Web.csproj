@@ -47,5 +47,9 @@
   <ItemGroup>
     <Folder Include="Areas\ShareClasses\" />
     <Folder Include="Areas\SubFunds\" />
+    <Folder Include="wwwroot\FileFolder\Fund\" />
+    <Folder Include="wwwroot\FileFolder\Agreement\" />
+    <Folder Include="wwwroot\FileFolder\ShareClass\" />
+    <Folder Include="wwwroot\FileFolder\SubFund\" />
   </ItemGroup>
 </Project>

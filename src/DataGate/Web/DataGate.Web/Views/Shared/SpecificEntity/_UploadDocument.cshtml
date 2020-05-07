@@ -1,4 +1,4 @@
-﻿@*@model DataGate.Web.ViewModels.Entities.SpecificEntityViewModel
+﻿@model DataGate.Web.ViewModels.Entities.SpecificEntityViewModel
 
 <input asp-for="Id" type="text" hidden>
 <input asp-for="StartConnection" type="text" hidden>
@@ -16,7 +16,7 @@
                 <div class="form-group">
                     <select class="form-control maxw-270" asp-for="UploadEntityFileModel.DocumentType" required>
                         <option selected disabled value="">-- Choose File Type --</option>
-                        @foreach (var type in (List<string>)ViewData["FileTypes"])
+                        @foreach (var type in (List<string>)ViewData["DocumentFileTypes"])
                         {
                             <option value="@type">@type</option>
                         }
@@ -39,4 +39,4 @@
             </div>
         </div>
     </div>
-</div>*@
+</div>

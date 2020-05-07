@@ -20,7 +20,8 @@
                                 <button class="btn-link-pharus text-left"
                                         formtarget="_blank"
                                         type="submit"
-                                        formaction="/@controllerName/ReadDocument"
+                                        asp-route="files"
+                                        asp-route-name="@document.Name"
                                         name="pdfValue"
                                         value="@document.Name">
                                     @System.IO.Path.GetFileNameWithoutExtension(document.Name)
@@ -56,7 +57,8 @@
                                     <button class="btn-link-pharus text-left"
                                             formtarget="_blank"
                                             type="submit"
-                                            formaction="/@controllerName/ReadDocument"
+                                            asp-route="files"
+                                            asp-route-name="@document.Name"
                                             name="pdfValue"
                                             value="@document.Name">
                                         @System.IO.Path.GetFileNameWithoutExtension(document.Name)
@@ -103,8 +105,9 @@
                                 <button class="btn-link-pharus text-left"
                                         formtarget="_blank"
                                         type="submit"
-                                        formaction="/@controllerName/ReadDocument"
-                                        name="pdfValue"
+                                        asp-route="files"
+                                        asp-route-name="@document.Name"
+                                        name="agrValue"
                                         value="@document.Name">
                                     @System.IO.Path.GetFileNameWithoutExtension(document.Name)
                                 </button>
@@ -124,4 +127,6 @@
             </table>
         </div>
     </div>
+
+    <input type="hidden" name="ControllerName" value="@controllerName" />
 </div>

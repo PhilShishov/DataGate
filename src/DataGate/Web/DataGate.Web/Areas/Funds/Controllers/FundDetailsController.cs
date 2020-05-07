@@ -1,6 +1,7 @@
 ﻿namespace DataGate.Web.Areas.Funds.Controllers
 {
     using DataGate.Common;
+    using DataGate.Services.Data.Documents.Contracts;
     using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Services.Data.ViewSetups;
     using DataGate.Web.Controllers;
@@ -14,10 +15,14 @@
     public class FundDetailsController : BaseController
     {
         private readonly IFundSubEntitiesService service;
+        private readonly IDocumentsSelectService selectService;
 
-        public FundDetailsController(IFundSubEntitiesService fundSubFundsService)
+        public FundDetailsController(
+            IFundSubEntitiesService fundSubFundsService,
+            IDocumentsSelectService documentsSelectService)
         {
             this.service = fundSubFundsService;
+            this.selectService = documentsSelectService;
         }
 
         [HttpGet]
@@ -26,7 +31,7 @@
         {
             var model = GetOverview.SpecificEntity<SpecificEntityViewModel>(id, date, this.service);
 
-            this.PrepareModel();
+            this.SetUploadFileLists();
 
             return this.View(model);
         }
@@ -44,12 +49,12 @@
             return this.RedirectToAction(GlobalConstants.ByIdAndDateActionName, new { model.Id, model.Date });
         }
 
-        private void PrepareModel()
+        private void SetUploadFileLists()
         {
-            //this.ViewData["DocumentFileTypes"] = this.fundsSelectListService.GetAllProspectusFileTypes();
-            //this.ViewData["AgreementsFileTypes"] = this.fundsSelectListService.GetAllAgreementsFileTypes();
-            //this.ViewData["AgreementsStatus"] = this.agreementsSelectListService.GetAllTbDomAgreementStatus();
-            //this.ViewData["Companies"] = this.agreementsSelectListService.GetAllTbCompanies();
+            this.ViewData["DocumentFileTypes"] = this.selectService.GetDocumentsFileTypes();
+            this.ViewData["AgreementsFileTypes"] = this.selectService.GetAgreementsFileTypes();
+            this.ViewData["AgreementsStatus"] = this.selectService.GetAgreementStatus();
+            this.ViewData["Companies"] = this.selectService.GetCompanies();
         }
     }
 }
