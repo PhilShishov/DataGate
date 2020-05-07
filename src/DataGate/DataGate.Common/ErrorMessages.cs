@@ -7,7 +7,7 @@
         public const string ChosenDateIsEmpty = "Date cannot be empty!";
 
         public const string TableReportNotGenerated = "Table report not generated! Please make a new selection.";
-        public const string TableModeIsEmpty = "Table cannot be empty! Please make a new selection.";
+        public const string TableIsEmpty = "Table is empty! Please make a new selection.";
 
         public const string NotFoundEntityMessage = "The required {0} was not found!";
     }

@@ -9,6 +9,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     [Authorize]
+    [ValidateAntiForgeryToken]
     public class MediaController : BaseController
     {
         [HttpPost]
@@ -22,43 +23,30 @@
                 }
                 else if (model.Command == GlobalConstants.CommandExtractPdf)
                 {
-                    var chosenDate = DateTimeParser.WebFormat(model.Date);
-                    return GenerateFileTemplate.Pdf(model.Headers, model.Values, chosenDate, model.ControllerName);
+                    var date = DateTimeParser.WebFormat(model.Date);
+
+                    // TODO prepare query for less than 16 columns
+                    //if (model.Values.Count > GlobalConstants.NumberOfAllowedColumnsInPdfView)
+                    //{
+                    //    model.EntitySubEntities = this.fundsService.PrepareFund_SubFundsForPDFExtract(date).ToList();
+                    //}
+
+                    return GenerateFileTemplate.Pdf(model.Headers, model.Values, date, model.ControllerName);
                 }
             }
 
-            this.TempData[GlobalConstants.ErrorMessageDisplay] = ErrorMessages.TableReportNotGenerated;
+            this.TempData[GlobalConstants.ErrorKey] = ErrorMessages.TableReportNotGenerated;
             return this.Redirect(GlobalConstants.FundAllUrl);
         }
 
         //[HttpPost]
-        //public IActionResult ReadDocument(string pdfValue)
+        //public IActionResult Read(string pdfValue)
         //{
         //    FileStreamResult fileStreamResult = null;
 
         //    string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\Funds\");
-        //    string path = $"{fileLocation}{pdfValue}";
-
-        //    if (this.HttpContext.Request.Form.ContainsKey("pdfValue"))
-        //    {
-        //        var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
-        //        fileStreamResult = new FileStreamResult(fileStream, "application/pdf");
-        //    }
-
-        //    if (fileStreamResult != null)
-        //    {
-        //        return fileStreamResult;
-        //    }
-
-        //    return this.RedirectToAction("All");
-        //}
-
-        //[HttpPost]
-        //public IActionResult ReadAgreement(string pdfValue)
-        //{
-        //    FileStreamResult fileStreamResult = null;
-
         //    string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\Agreements\");
+
         //    string path = $"{fileLocation}{pdfValue}";
 
         //    if (this.HttpContext.Request.Form.ContainsKey("pdfValue"))
@@ -74,8 +62,6 @@
 
         //    return this.RedirectToAction("All");
         //}
-
-        //[ValidateAntiForgeryToken]
 
         //[HttpGet]
         //public JsonResult DeleteAgreement(string agrName)

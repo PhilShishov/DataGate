@@ -62,7 +62,7 @@
             var dto = new SpecificEntityOverviewGetDto()
             {
                 Id = id,
-                Date = date,
+                Date = chosenDate,
                 Entity = entity,
                 Headers = headers,
                 HeadersSelection = headers,

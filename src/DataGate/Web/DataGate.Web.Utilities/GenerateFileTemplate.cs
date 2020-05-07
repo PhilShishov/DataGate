@@ -190,10 +190,10 @@ namespace DataGate.Web.Utilities
                 case GlobalConstants.FundsControllerName:
                     typeName = FundsNameDisplay;
                     break;
-                case GlobalConstants.SubFundsControllerName:
+                case GlobalConstants.SubFundsControllerName: case GlobalConstants.FundDetailsControllerName:
                     typeName = SubFundsNameDisplay;
                     break;
-                case GlobalConstants.ShareClassesControllerName:
+                case GlobalConstants.ShareClassesControllerName: case GlobalConstants.SubFundDetailsControllerName:
                     typeName = ShareClassesNameDisplay;
                     break;
 

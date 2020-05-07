@@ -3,6 +3,7 @@
     using DataGate.Common;
     using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Services.Data.ViewSetups;
+    using DataGate.Web.Controllers;
     using DataGate.Web.ViewModels.Entities;
 
     using Microsoft.AspNetCore.Authorization;
@@ -10,7 +11,7 @@
 
     [Area(GlobalConstants.FundsAreaName)]
     [Authorize]
-    public class FundDetailsController : Controller
+    public class FundDetailsController : BaseController
     {
         private readonly IFundSubEntitiesService service;
 
@@ -33,12 +34,11 @@
         {
             if (model.Command == GlobalConstants.CommandUpdateTable)
             {
-                this.TempData[GlobalConstants.ParentInfoMessageDisplay] = InfoMessages.SuccessfullyUpdatedTable;
+                this.TempData[GlobalConstants.ParentKey] = InfoMessages.SuccessfullyUpdatedTable;
                 return this.RedirectToAction(GlobalConstants.ByIdAndDateActionName, new { model.Id, model.Date });
             }
 
-            this.TempData[GlobalConstants.ErrorMessageDisplay] = ErrorMessages.TableModeIsEmpty;
-            this.ModelState.Clear();
+            this.TempData[GlobalConstants.ErrorKey] = ErrorMessages.TableIsEmpty;
             return this.View();
         }
     }

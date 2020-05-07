@@ -1,24 +1,24 @@
-﻿@*<div class="container py-5"
-         id="timelineChanges">
-        <div class="row">
-            <div class="col-lg-7 mx-auto">
-                <ul class="timeline">
-                    @for (int row = 1; row < Model.Timeline.Count; row++)
-                    {
-                        <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
-                            <div class="timeline-arrow"></div>
-                            <h2 class="h5 mb-0">@Model.Timeline[row][3]</h2>
-                            <span class="small text-gray">
-                                <i class="fa fa-clock-o mr-1"></i>@Model.Timeline[row][1] - @Model.Timeline[row][2]
-                            </span>
-                            <p class="text-small mt-2 font-weight-light">@Model.Timeline[row][4]</p>
-                        </li>
-                    }
-                </ul>
-            </div>
-        </div>
-    </div>*@
+﻿@model DataGate.Web.ViewModels.Entities.SpecificEntityViewModel
 
-@*<article>
-    @Html.Raw(Model.SanitizedContent)
-</article>*@
+<div class="container py-5"
+     id="timelineChanges">
+    <div class="row">
+        <div class="col-lg-7 mx-auto">
+            <ul class="timeline">
+                @foreach (var timeline in Model.Timelines)
+                {
+                    <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
+                        <div class="timeline-arrow"></div>
+                        <h2 class="h5 mb-0">@timeline.Title</h2>
+                        <span class="small text-gray">
+                            <i class="fa fa-clock-o mr-1"></i>@timeline.InitialDate - @timeline.EndDate
+                        </span>
+                        <p class="text-small mt-2 font-weight-light">
+                            @Html.Raw(timeline.SanitizedComment)
+                        </p>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

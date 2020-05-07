@@ -15,13 +15,13 @@ namespace DataGate.Services.Data
 
     public interface IEntityService
     {
-        IEnumerable<string[]> GetAll(DateTime? chosenDate = null, int? take = null, int skip = 0);
+        IEnumerable<string[]> GetAll(DateTime? date = null, int? take = null, int skip = 0);
 
         ISet<string> GetNames();
 
         IEnumerable<string> GetHeaders();
 
-        IEnumerable<string[]> GetAllActive(DateTime? chosenDate = null, int? take = null, int skip = 0);
+        IEnumerable<string[]> GetAllActive(DateTime? date = null, int? take = null, int skip = 0);
 
         IEnumerable<string[]> GetAllSelected(
                                         GetWithSelectionDto dto,

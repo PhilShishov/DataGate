@@ -10,14 +10,12 @@
     <form asp-controller="FundDetails"
           asp-action="Update"
           method="post">
-
-        @Html.AntiForgeryToken()
         <partial name="SpecificEntity/_Toolbar" />
 
-        @if (this.TempData[GlobalConstants.ParentInfoMessageDisplay] != null)
+        @if (this.TempData[GlobalConstants.ParentKey] != null)
         {
             <div class="alert alert-success" id="parentInfoMessage">
-                @this.TempData[GlobalConstants.ParentInfoMessageDisplay]
+                @this.TempData[GlobalConstants.ParentKey]
             </div>
         }
 
@@ -29,7 +27,12 @@
         <hr class="bg-pharus hr-2" />
     </form>
 
-    <form action="/" method="post">
+    <form asp-controller="FundSubEntities"
+          asp-action="Update"
+          method="post">
+
+        <input type="hidden" asp-for="Date">
+
         <div class="row ml-3" id="div-select-addInfo">
             <label class="text-torshia m-1 pr-3">FUND ADDITIONAL INFORMATION</label>
             <select class="custom-select-lg select-pharus form-control input-sm"
@@ -53,23 +56,22 @@
                     <partial name="SpecificEntity/SubEntities/_Extract" />
                 </div>
             </div>
-            @if (this.TempData[GlobalConstants.InfoMessageDisplay] != null)
+            @if (this.TempData[GlobalConstants.InfoKey] != null)
             {
                 <div class="alert alert-success" id="infoMessage">
-                    @this.TempData[GlobalConstants.InfoMessageDisplay]
+                    @this.TempData[GlobalConstants.InfoKey]
                 </div>
             }
 
-            @if (this.TempData[GlobalConstants.ErrorMessageDisplay] != null)
+            @if (this.TempData[GlobalConstants.ErrorKey] != null)
             {
                 <div class="alert alert-danger" id="errorMessage">
-                    @this.TempData[GlobalConstants.ErrorMessageDisplay]
+                    @this.TempData[GlobalConstants.ErrorKey]
                 </div>
             }
 
             <partial name="SpecificEntity/SubEntities/_BindingTable" />
             <partial name="SpecificEntity/SubEntities/_ViewTable" />
-
             <partial name="SpecificEntity/SubEntities/_Modal" />
         </div>
     </form>
