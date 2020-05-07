@@ -2,7 +2,7 @@
 {
     public static class InfoMessages
     {
-        public const string SuccessfullyUpdatedTable = "Table successfully updated.";
+        public const string SuccessfulUpdate = "Table successfully updated.";
 
         public const string SuccessfullyDeletedMessage = "The \"{0}\" was successfully deleted.";
 

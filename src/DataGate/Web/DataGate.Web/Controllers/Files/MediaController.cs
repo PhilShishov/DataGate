@@ -1,10 +1,11 @@
 ﻿namespace DataGate.Web.Controllers
 {
+    using System.Linq;
+
     using DataGate.Common;
     using DataGate.Services.DateTime;
     using DataGate.Web.InputModels.Files;
     using DataGate.Web.Utilities;
-
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -12,6 +13,10 @@
     [ValidateAntiForgeryToken]
     public class MediaController : BaseController
     {
+        public MediaController()
+        {
+        }
+
         [HttpPost]
         public IActionResult Download(DownloadInputModel model)
         {
@@ -25,18 +30,16 @@
                 {
                     var date = DateTimeParser.WebFormat(model.Date);
 
-                    // TODO prepare query for less than 16 columns
-                    //if (model.Values.Count > GlobalConstants.NumberOfAllowedColumnsInPdfView)
-                    //{
-                    //    model.EntitySubEntities = this.fundsService.PrepareFund_SubFundsForPDFExtract(date).ToList();
-                    //}
+                    if (model.Headers.ToList().Count > GlobalConstants.NumberOfAllowedColumnsInPdfView)
+                    {
+                        return this.ShowError(ErrorMessages.TooManyColumns, model.RouteName);
+                    }
 
                     return GenerateFileTemplate.Pdf(model.Headers, model.Values, date, model.ControllerName);
                 }
             }
 
-            this.TempData[GlobalConstants.ErrorKey] = ErrorMessages.TableReportNotGenerated;
-            return this.Redirect(GlobalConstants.FundAllUrl);
+            return this.ShowError(ErrorMessages.TableReportNotGenerated, model.RouteName);
         }
 
         //[HttpPost]

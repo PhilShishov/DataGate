@@ -30,6 +30,7 @@
         // Tempdata Keys
         public const string InfoKey = "info";
         public const string ParentKey = "parent";
+        public const string ParentErrorKey = "parentError";
         public const string ErrorKey = "error";
 
         // Connection Strings
@@ -77,7 +78,7 @@
         public const int IndexEntityNameInTable = 3;
         public const int IndexEntityHeadersInTable = 0;
         public const int RowNumberOfHeadersInTable = 1;
-        public const int NumberOfAllowedColumnsInPdfView = 16;
+        public const int NumberOfAllowedColumnsInPdfView = 17;
         public const string DefaultAutocompleteSelectTerm = "Quick Select";
         public const string ContainerFundName = "FUND";
         public const string ContainerSubFundName = "SUB FUND";

@@ -29,8 +29,6 @@
 
         IEnumerable<T> GetAllAgreements<T>(int id, DateTime? date);
 
-        IEnumerable<string[]> PrepareEntity_SubEntitiesForPdfExtract(DateTime? date);
-
         void ThrowEntityNotFoundExceptionIfIdDoesNotExist(int id);
     }
 }
