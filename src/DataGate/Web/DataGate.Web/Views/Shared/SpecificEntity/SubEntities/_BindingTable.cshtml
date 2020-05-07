@@ -1,42 +1,28 @@
-﻿@*@model DataGate.Web.ViewModels.Entities.SpecificEntityViewModel
+﻿@model DataGate.Web.ViewModels.Entities.SpecificEntityViewModel
 
-<div>
-    <table class="table" name="EntitySubEntities" hidden>
-        <thead>
+<div hidden>
+    <table class="table">
+        <tr>
+
+            @for (int header = 0; header < Model.Headers.Count; header++)
+            {
+                <th>
+                    <input class="tblValues" type="text" asp-for="@Model.Headers[header]" value="@Model.Headers[header]" readonly />
+                </th>
+            }
+        </tr>
+    </table>
+    <table class="table">
+        @for (int row = 0; row < Model.Values.Count; row++)
+        {
             <tr>
-                @for (int row = 0; row < 1; row++)
+                @for (int col = 0; col < Model.Values[row].Length; col++)
                 {
-                    @for (int col = 0; col < Model.Headers[row].Length; col++)
-                    {
-                        <th>
-                            <h5>
-                                @Html.TextBoxFor(af => Model.Headers[row][col],
-                                    new
-                                         {
-                                        @readonly = true
-                                    })
-                            </h5>
-                        </th>
-                    }
+                    <td>
+                        <input class="tblValues" type="text" asp-for="@Model.Values[row][col]" value="@Model.Values[row][col]" readonly />
+                    </td>
                 }
             </tr>
-        </thead>
-        <tbody>
-            @for (int row = 1; row < Model.Values.Count; row++)
-            {
-                <tr>
-                    @for (int col = 0; col < Model.Values[row].Length; col++)
-                    {
-                        <td>
-                            @Html.TextBoxFor(af => Model.Values[row][col],
-                                new
-                                     {
-                                    @readonly = true
-                                })
-                        </td>
-                    }
-                </tr>
-            }
-        </tbody>
+        }
     </table>
-</div>*@
+</div>

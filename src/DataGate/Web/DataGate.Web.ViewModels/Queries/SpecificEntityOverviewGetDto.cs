@@ -11,7 +11,7 @@
     {
         public int Id { get; set; }
 
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
 
         public IEnumerable<string[]> Entity { get; set; }
 

@@ -7,6 +7,7 @@
     using DataGate.Services.AutoComplete;
     using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Services.Data.ViewSetups;
+    using DataGate.Web.Controllers;
     using DataGate.Web.ViewModels.Entities;
 
     using Microsoft.AspNetCore.Authorization;
@@ -15,7 +16,7 @@
 
     [Area(GlobalConstants.FundsAreaName)]
     [Authorize]
-    public class FundsController : Controller
+    public class FundsController : BaseController
     {
         private readonly IFundsService service;
 
@@ -54,13 +55,11 @@
 
             if (model.Values.Count > 0)
             {
-                this.TempData[GlobalConstants.InfoMessageDisplay] = InfoMessages.SuccessfullyUpdatedTable;
+                this.TempData[GlobalConstants.InfoKey] = InfoMessages.SuccessfullyUpdatedTable;
                 return this.View(model);
             }
 
-            this.ModelState.Clear();
-            this.TempData[GlobalConstants.ErrorMessageDisplay] = ErrorMessages.TableModeIsEmpty;
-            return this.Redirect(GlobalConstants.FundAllUrl);
+            return this.ShowError(ErrorMessages.TableIsEmpty, "All", "Funds");
         }
     }
 }

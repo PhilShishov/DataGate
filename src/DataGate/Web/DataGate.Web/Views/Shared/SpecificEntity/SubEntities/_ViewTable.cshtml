@@ -1,11 +1,11 @@
-﻿@*@using DataGate.Common
+﻿@using DataGate.Common
 @model DataGate.Web.ViewModels.Entities.SpecificEntityViewModel
 
 @{
     var controller = this.ViewContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
     var targetRoute = string.Empty;
 
-    if (controller == GlobalConstants.FundSubEntitiesControllerName)
+    if (controller == GlobalConstants.FundDetailsControllerName)
     {
         targetRoute = "sf";
     }
@@ -13,36 +13,43 @@
     var entityId = string.Empty;
 }
 
-<div class="table-responsive border-0 mx-auto" id="tableDoubleScroll" name="EntitySubEntities">
+<div class="table-responsive border-0 mx-auto" id="tableDoubleScroll">
     <table class="table table-hover text-nowrap">
         <thead>
-            @for (int row = 0; row < 1; row++)
-            {
-                <tr>
-                    @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
-                    {
-                        <th class="text-white p-1 tableHeaderPharus">
-                            @Model.EntitySubEntities[row][col]
-                        </th>
-                    }
-                </tr>
-            }
+            <tr>
+                @foreach (var header in Model.Headers)
+                {
+                    <th class="text-white pr-3 tableHeaderPharus">
+                        @header
+                    </th>
+                }
+            </tr>
         </thead>
-
         <tbody>
-            @for (int row = 1; row < Model.EntitySubEntities.Count; row++)
+            @foreach (var row in Model.Values)
             {
-                entityId = Model.EntitySubEntities[row][2];
+                entityId = row[GlobalConstants.IndexEntityIdInTable];
 
-                <tr class="tableCellPharus" onclick="document.location = '/@targetRoute/@entityId/@Model.Date'">
-                    @for (int col = 0; col < Model.EntitySubEntities[row].Length; col++)
+                <tr>
+                    @for (int col = 0; col < row.Length; col++)
                     {
-                        <td class="p-1">
-                            @Model.EntitySubEntities[row][col]
-                        </td>
+                        if (Model.Headers.ToList()[col].Contains("NAME"))
+                        {
+                            <td class="p-1 tableCellPharus">
+                                <a class="text-dark" asp-route="@targetRoute" asp-route-id="@entityId" asp-route-date="@Model.Date">
+                                    @row[col]
+                                </a>
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="p-1">
+                                @row[col]
+                            </td>
+                        }
                     }
                 </tr>
             }
         </tbody>
     </table>
-</div>*@
+</div>

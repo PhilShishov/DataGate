@@ -33,11 +33,11 @@ namespace DataGate.Services.Data.ViewSetups
                 isInSelectionMode = true;
             }
 
-            DateTime? chosenDate = null;
+            DateTime? date = null;
 
             if (model.Date != null)
             {
-                chosenDate = DateTimeParser.WebFormat(model.Date);
+                date = DateTimeParser.WebFormat(model.Date);
             }
 
             if (isInSelectionMode)
@@ -57,11 +57,11 @@ namespace DataGate.Services.Data.ViewSetups
             {
                 if (model.IsActive)
                 {
-                    model.Values = service.GetAllActive(chosenDate, null, 1).ToList();
+                    model.Values = service.GetAllActive(date, null, 1).ToList();
                 }
                 else if (!model.IsActive)
                 {
-                    model.Values = service.GetAll(chosenDate, null, 1).ToList();
+                    model.Values = service.GetAll(date, null, 1).ToList();
                 }
             }
 

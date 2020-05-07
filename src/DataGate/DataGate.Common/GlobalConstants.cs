@@ -6,10 +6,6 @@
         public const string SystemName = "DataGate";
         public const string DataGateFooterDisplay = "- Pharus Management Lux SA 16, Avenue de la Gare L- 1610 Luxembourg T. +352 28 55 69 - 1";
         public const int MaxAdminCount = 3;
-        public const string InfoMessageDisplay = "InfoMessage";
-        public const string ParentInfoMessageDisplay = "ParentInfoMessage";
-        public const string WelcomeMessageDisplay = "WelcomeMessage";
-        public const string ErrorMessageDisplay = "ErrorMessage";
 
         // Controllers, areas
         public const string ControllerRouteDataValue = "controller";
@@ -18,6 +14,7 @@
         public const string FundDetailsControllerName = "FundDetails";
         public const string FundSubEntitiesControllerName = "FundSubEntities";
         public const string SubFundsControllerName = "SubFunds";
+        public const string SubFundDetailsControllerName = "SubFundDetails";
         public const string SubFundSubEntitiesControllerName = "SubFundSubEntities";
         public const string ShareClassesControllerName = "ShareClasses";
         public const string ShareClassesSubEntitiesControllerName = "ShareClassesSubEntities";
@@ -30,8 +27,9 @@
         public const string AllShareClassesRouteName = "allShareClasses";
         public const string ShareClassSubEntititesRouteName = "shareClassSubEntities";
 
-        // Keys
+        // Tempdata Keys
         public const string InfoKey = "info";
+        public const string ParentKey = "parent";
         public const string ErrorKey = "error";
 
         // Connection Strings

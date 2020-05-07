@@ -10,8 +10,6 @@
           asp-action="All"
           method="post"
           id="update-form">
-
-        @Html.AntiForgeryToken()
         <div>
             <div>
                 <hr class="mt-0 mb-auto" />
@@ -26,17 +24,17 @@
                 <hr class="mt-1 mb-0" />
             </div>
 
-            @if (this.TempData[GlobalConstants.InfoMessageDisplay] != null)
+            @if (this.TempData[GlobalConstants.InfoKey] != null)
             {
                 <div class="alert alert-success" id="infoMessage">
-                    @this.TempData[GlobalConstants.InfoMessageDisplay]
+                    @this.TempData[GlobalConstants.InfoKey]
                 </div>
             }
 
-            @if (this.TempData[GlobalConstants.ErrorMessageDisplay] != null)
+            @if (this.TempData[GlobalConstants.ErrorKey] != null)
             {
                 <div class="alert alert-danger" id="errorMessage">
-                    @this.TempData[GlobalConstants.ErrorMessageDisplay]
+                    @this.TempData[GlobalConstants.ErrorKey]
                 </div>
             }
 

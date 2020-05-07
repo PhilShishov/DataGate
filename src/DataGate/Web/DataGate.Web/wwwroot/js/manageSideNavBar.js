@@ -1,9 +1,6 @@
 ﻿function manageSideNavBar() {
     const sideNavIcon = document.getElementById("sideNavIcon");
-    sideNavIcon.addEventListener('mouseover', openNav);
-
-    const sideNav = document.getElementById("mySidenav");
-    sideNav.addEventListener('mouseleave', closeNav);
+    sideNavIcon.addEventListener('click', openNav);
 
     const closebtn = document.getElementById("closeBtn");
     closebtn.addEventListener('click', closeNav);
@@ -13,6 +10,6 @@
     }
 
     function closeNav() {
-        sideNav.style.width = "0";
-    }  
+        document.getElementById("mySidenav").style.width = '0px';
+    }
 }

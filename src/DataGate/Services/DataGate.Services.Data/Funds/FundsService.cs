@@ -57,10 +57,10 @@ namespace DataGate.Services.Data.Funds
             return query;
         }
 
-        public IEnumerable<string[]> GetAllActive(DateTime? chosenDate, int? take, int skip)
+        public IEnumerable<string[]> GetAllActive(DateTime? date, int? take, int skip)
         {
             var query = this.sqlManager
-               .ExecuteQuery(this.sqlFunctionAllActiveFund, chosenDate)
+               .ExecuteQuery(this.sqlFunctionAllActiveFund, date)
                .Skip(skip);
             query = CheckForTakeValue(take, query);
 
