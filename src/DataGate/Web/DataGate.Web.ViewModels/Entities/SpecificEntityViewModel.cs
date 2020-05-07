@@ -34,8 +34,6 @@ namespace DataGate.Web.ViewModels.Entities
 
         public string ContainerId { get; set; }
 
-        public IEnumerable<TimelineViewModel> Timelines { get; set; }
-
         //public IEnumerable<string[]> TSAllPriceValues { get; set; }
 
         //public IEnumerable<string> TSPriceDates { get; set; }
@@ -43,6 +41,8 @@ namespace DataGate.Web.ViewModels.Entities
         //public IEnumerable<string> TSTypeProviders { get; set; }
 
         public string SelectedFileName { get; set; }
+
+        public IEnumerable<TimelineViewModel> Timelines { get; set; }
 
         public IEnumerable<DistinctDocViewModel> DistinctDocuments { get; set; }
 

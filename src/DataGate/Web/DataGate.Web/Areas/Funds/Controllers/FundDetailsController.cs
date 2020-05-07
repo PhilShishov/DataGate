@@ -26,6 +26,8 @@
         {
             var model = GetOverview.SpecificEntity<SpecificEntityViewModel>(id, date, this.service);
 
+            this.PrepareModel();
+
             return this.View(model);
         }
 
@@ -34,12 +36,20 @@
         {
             if (model.Command == GlobalConstants.CommandUpdateTable)
             {
-                this.TempData[GlobalConstants.ParentKey] = InfoMessages.SuccessfullyUpdatedTable;
+                this.TempData[GlobalConstants.InfoKey] = InfoMessages.SuccessfulUpdate;
                 return this.RedirectToAction(GlobalConstants.ByIdAndDateActionName, new { model.Id, model.Date });
             }
 
-            this.TempData[GlobalConstants.ErrorKey] = ErrorMessages.TableIsEmpty;
-            return this.View();
+            this.TempData[GlobalConstants.ErrorKey] = ErrorMessages.UnsuccessfulUpdate;
+            return this.RedirectToAction(GlobalConstants.ByIdAndDateActionName, new { model.Id, model.Date });
+        }
+
+        private void PrepareModel()
+        {
+            //this.ViewData["DocumentFileTypes"] = this.fundsSelectListService.GetAllProspectusFileTypes();
+            //this.ViewData["AgreementsFileTypes"] = this.fundsSelectListService.GetAllAgreementsFileTypes();
+            //this.ViewData["AgreementsStatus"] = this.agreementsSelectListService.GetAllTbDomAgreementStatus();
+            //this.ViewData["Companies"] = this.agreementsSelectListService.GetAllTbCompanies();
         }
     }
 }

@@ -5,6 +5,12 @@
 
     public class BaseController : Controller
     {
+        public IActionResult ShowError(string errorMessage, string route)
+        {
+            this.TempData[GlobalConstants.ErrorKey] = errorMessage;
+            return this.Redirect(route);
+        }
+
         public IActionResult ShowError(string errorMessage, string action, string controller)
         {
             this.TempData[GlobalConstants.ErrorKey] = errorMessage;

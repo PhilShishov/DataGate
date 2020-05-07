@@ -18,7 +18,6 @@
         //
         // Table functions names as in DB
         private readonly string sqlFunctionFundId = "[fn_fund_id]";
-        private readonly string sqlFunctionSubFundPdfView = "[fn_active_subfund_pdf]";
         private readonly string sqlFunctionTimelineFund = "[fn_timeline_fund]";
         private readonly string sqlFunctionDistinctDocuments = "[fn_view_distinct_documents_fund]";
         private readonly string sqlFunctionAllDocuments = "[fn_view_documents_fund]";
@@ -117,11 +116,6 @@
             IEnumerable<AllAgrDto> dto = this.sqlManager.ExecuteQueryMapping<AllAgrDto>(this.sqlFunctionAllAgreements, id, date);
 
             return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
-        }
-
-        public IEnumerable<string[]> PrepareEntity_SubEntitiesForPdfExtract(DateTime? date)
-        {
-            return this.sqlManager.ExecuteQuery(this.sqlFunctionSubFundPdfView, date);
         }
 
         public IEnumerable<T> GetTimeline<T>(int id)

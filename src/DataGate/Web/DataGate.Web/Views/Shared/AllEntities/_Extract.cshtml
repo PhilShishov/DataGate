@@ -1,5 +1,14 @@
-﻿@{
-    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+﻿@using DataGate.Common
+@model DataGate.Web.ViewModels.Entities.EntitiesOverviewViewModel
+
+@{
+    var controller = this.ViewContext.RouteData.Values["controller"].ToString();
+    var route = string.Empty;
+
+    if (controller == GlobalConstants.FundsControllerName)
+    {
+        route = GlobalConstants.FundAllUrl;
+    }
 }
 
 <div>
@@ -30,6 +39,7 @@
     </div>
 </div>
 
-<input type="hidden" name="ControllerName" value="@controllerName" />
+<input type="hidden" name="ControllerName" value="@controller" />
+<input type="hidden" id="routeName" name="RouteName" value="@route" />
 
 <div class="vertical mx-3"></div>

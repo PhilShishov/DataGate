@@ -51,11 +51,11 @@
         [HttpPost]
         public IActionResult All(EntitiesOverviewViewModel model)
         {
-            EntityViewModelSetup.SetModel(model, this.service);
+            EntityViewModelSetup.SetPostProperties(model, this.service);
 
             if (model.Values.Count > 0)
             {
-                this.TempData[GlobalConstants.InfoKey] = InfoMessages.SuccessfullyUpdatedTable;
+                this.TempData[GlobalConstants.InfoKey] = InfoMessages.SuccessfulUpdate;
                 return this.View(model);
             }
 

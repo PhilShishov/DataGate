@@ -17,7 +17,7 @@ namespace DataGate.Services.Data.ViewSetups
 
     public static class EntityViewModelSetup
     {
-        public static void SetModel(EntitiesOverviewViewModel model, IEntityService service)
+        public static void SetPostProperties(EntitiesOverviewViewModel model, IEntityService service)
         {
             // ---------------------------------------------------------
             //

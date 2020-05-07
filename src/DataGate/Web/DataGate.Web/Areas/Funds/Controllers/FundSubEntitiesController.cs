@@ -44,7 +44,7 @@
 //        }
 
 //        //[HttpPost]
-//        //public IActionResult Update()
+//        //public IActionResult ByIdAndDate()
 //        //{
 //        //    if (model.Entity != null && model.EntitySubEntities.Count > GlobalConstants.RowNumberOfHeadersInTable)
 //        //    {

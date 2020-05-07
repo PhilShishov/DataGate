@@ -12,10 +12,17 @@
           method="post">
         <partial name="SpecificEntity/_Toolbar" />
 
-        @if (this.TempData[GlobalConstants.ParentKey] != null)
+        @if (this.TempData[GlobalConstants.InfoKey] != null)
         {
-            <div class="alert alert-success" id="parentInfoMessage">
-                @this.TempData[GlobalConstants.ParentKey]
+            <div class="alert alert-success" id="infoMessage">
+                @this.TempData[GlobalConstants.InfoKey]
+            </div>
+        }
+
+        @if (this.TempData[GlobalConstants.ErrorKey] != null)
+        {
+            <div class="alert alert-danger" id="errorMessage">
+                @this.TempData[GlobalConstants.ErrorKey]
             </div>
         }
 
@@ -56,19 +63,6 @@
                     <partial name="SpecificEntity/SubEntities/_Extract" />
                 </div>
             </div>
-            @if (this.TempData[GlobalConstants.InfoKey] != null)
-            {
-                <div class="alert alert-success" id="infoMessage">
-                    @this.TempData[GlobalConstants.InfoKey]
-                </div>
-            }
-
-            @if (this.TempData[GlobalConstants.ErrorKey] != null)
-            {
-                <div class="alert alert-danger" id="errorMessage">
-                    @this.TempData[GlobalConstants.ErrorKey]
-                </div>
-            }
 
             <partial name="SpecificEntity/SubEntities/_BindingTable" />
             <partial name="SpecificEntity/SubEntities/_ViewTable" />
@@ -132,7 +126,7 @@
             $('#parentInfoMessage').fadeOut();
             $('#infoMessage').fadeOut();
             $('#errorMessage').fadeOut();
-        }, 3000);
+        }, 5000);
 
         $(document).ready(function () {
 

@@ -1,5 +1,14 @@
-﻿@{
-    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+﻿@using DataGate.Common
+@model DataGate.Web.ViewModels.Entities.SpecificEntityViewModel
+
+@{
+    var controller = this.ViewContext.RouteData.Values["controller"].ToString();
+    var route = string.Empty;
+
+    if (controller == GlobalConstants.FundDetailsControllerName)
+    {
+        route = $"/f/{Model.Id}/{Model.Date}";
+    }
 }
 
 <div>
@@ -29,7 +38,8 @@
         </div>
     </div>
 
-    <input type="hidden" name="ControllerName" value="@controllerName" />
+    <input type="hidden" name="ControllerName" value="@controller" />
+    <input type="hidden" name="RouteName" value="@route" />
 
     <div class="text-center">
         <label class="lbl-toolbar-pharus">Extract</label>
