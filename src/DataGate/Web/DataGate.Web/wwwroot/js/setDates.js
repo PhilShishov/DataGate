@@ -3,7 +3,7 @@
     const activationDate = document.getElementById('activationDate');
     const expirationDate = document.getElementById('expirationDate');
 
-    //contractDate.addEventListener('change', setActivationDate);
+    contractDate.addEventListener('change', setActivationDate);
 
     function setActivationDate() {
         //activationDate.setAttribute('min', contractDate.value);

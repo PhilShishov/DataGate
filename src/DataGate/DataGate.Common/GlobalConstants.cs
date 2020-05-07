@@ -21,16 +21,16 @@
 
         // Routes names
         public const string AllFundsRouteName = "allFunds";
-        public const string FundSubEntititesRouteName = "fundSubEntities";
+        public const string FundDetailsRouteName = "fundDetails";
+
         public const string AllSubFundsRouteName = "allSubFunds";
-        public const string SubFundSubEntititesRouteName = "subFundSubEntities";
+        public const string SubFundDetailsRouteName = "subFundDetails";
+
         public const string AllShareClassesRouteName = "allShareClasses";
-        public const string ShareClassSubEntititesRouteName = "shareClassSubEntities";
+        public const string ShareClassDetailsRouteName = "shareClassDetails";
 
         // Tempdata Keys
         public const string InfoKey = "info";
-        public const string ParentKey = "parent";
-        public const string ParentErrorKey = "parentError";
         public const string ErrorKey = "error";
 
         // Connection Strings

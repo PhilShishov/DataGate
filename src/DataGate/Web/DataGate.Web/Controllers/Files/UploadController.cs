@@ -6,11 +6,6 @@
     [Authorize]
     public class UploadController : Controller
     {
-        //<form method = "post" enctype="multipart/form-data" 
-        //                    asp-controller="Files" asp-action="Upload">
-        //    <input type = "file" name="file">    <button type = "submit" value="Upload" />
-        //</form> 
-
         //[HttpPost("Upload")]
         //public async Task<IActionResult> Upload(List<IFormFile> files)
         //{
