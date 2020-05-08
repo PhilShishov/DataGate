@@ -26,5 +26,17 @@ namespace DataGate.Services.AutoComplete
 
             return result;
         }
+
+        public static ISet<string> GetResult(string selectTerm, IEntitySubEntitiesService service, int? id)
+        {
+            var result = service.GetNames(id);
+
+            if (selectTerm != null)
+            {
+                result = result.Where(f => f.ToLower().Contains(selectTerm.ToLower())).ToHashSet();
+            }
+
+            return result;
+        }
     }
 }

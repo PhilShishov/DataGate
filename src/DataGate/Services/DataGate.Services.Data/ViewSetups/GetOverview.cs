@@ -34,14 +34,14 @@
             return AutoMapperConfig.MapperInstance.Map<T>(entity);
         }
 
-        public static T SpecificEntity<T>(int id, string chosenDate, IEntitySubEntitiesService service)
+        public static T SpecificEntity<T>(int id, string chosenDate, ISubEntitiesService service)
         {
             service.ThrowEntityNotFoundExceptionIfIdDoesNotExist(id);
 
             var date = DateTimeParser.WebFormat(chosenDate);
 
-            //var headers = service.GetHeaders(id, date);
-            //var values = service.GetSubEntities(id, date, null, 1);
+            var headers = service.GetHeaders(id, date);
+            var values = service.GetSubEntities(id, date, null, 1);
             var entity = service.GetByIdAndDate(id, date);
 
             string startConnectionString = entity.ToList()[1][IndexStartConnectionInSQLTable];
@@ -80,6 +80,9 @@
                 EndConnection = endConnection,
                 DistinctDocuments = distinctDocs,
                 DistinctAgreements = distinctAgrs,
+                Headers = headers,
+                HeadersSelection = headers,
+                Values = values,
             };
 
             return AutoMapperConfig.MapperInstance.Map<T>(dto);

@@ -73,11 +73,13 @@
         }, 3000);
 
         $(document).ready(function () {
+
+            var token = $("#update-form input[name=__RequestVerificationToken]").val();
             // ________________________________________________________
             //
             // Autocomplete search
-            const controller = `Funds`;
-            passControllerToSelect(controller);
+            const controller = 'Funds';
+            passControllerToSelect(token, controller, entityId = null);
 
             // ________________________________________________________
             //

@@ -13,20 +13,14 @@
     public class AutoCompleteController : Controller
     {
         private readonly IFundsService fundsService;
-        //private readonly IFundsService fundsService;
-        //private readonly IFundsService fundsService;
-        //private readonly IFundsService fundsService;
-        //private readonly IFundsService fundsService;
+        private readonly IFundSubEntitiesService fundSubFundservice;
 
         public AutoCompleteController(
-            IFundsService fundsService
-            //IFundsService fundsService,
-            //IFundsService fundsService,
-            //IFundsService fundsService,
-            //IFundsService fundsService,
-            )
+                            IFundsService fundsService,
+                            IFundSubEntitiesService fundSubFundservice)
         {
             this.fundsService = fundsService;
+            this.fundSubFundservice = fundSubFundservice;
         }
 
         [Route("api/autocomplete")]
@@ -34,54 +28,46 @@
         {
             ISet<string> result = null;
 
-            if (input.ControllerToPass == GlobalConstants.FundsControllerName)
+            if (!input.Id.HasValue)
             {
-                result = AutoCompleteService.GetResult(input.SelectTerm, this.fundsService);
+                if (input.ControllerToPass == GlobalConstants.ShareClassesControllerName)
+                {
+                    //result = AutoCompleteService.GetResult(input.SelectTerm, this.fundsService);
+                }
+                else if (input.ControllerToPass == GlobalConstants.SubFundsControllerName)
+                {
+                    //result = AutoCompleteService.GetResult(input.SelectTerm, this.service);
+                }
+                else if (input.ControllerToPass == GlobalConstants.FundsControllerName)
+                {
+                    result = AutoCompleteService.GetResult(input.SelectTerm, this.fundsService);
+                }
+
+                var modifiedData = result.Select(f => new
+                {
+                    id = f,
+                    text = f,
+                });
+
+                return this.Json(modifiedData);
             }
 
-            //else if (input.Controller == GlobalConstants.FundsControllerName)
-            //{
-            //    result = AutoCompleteService.GetResult(input.SelectTerm, this.service);
+            if (input.ControllerToPass == GlobalConstants.SubFundSubEntitiesControllerName)
+            {
+                //result = AutoCompleteService.GetResult(input.SelectTerm, this.fundsService, input.Id);
+            }
+            else if (input.ControllerToPass == GlobalConstants.FundSubEntitiesControllerName)
+            {
+                result = AutoCompleteService.GetResult(input.SelectTerm, this.fundSubFundservice, input.Id);
+            }
 
-            //}
-            //else if (input.Controller == GlobalConstants.FundsControllerName)
-            //{
-            //    result = AutoCompleteService.GetResult(input.SelectTerm, this.service);
-            //}
-
-            var modifiedData = result.Select(f => new
+            var modifiedDataId = result.Select(f => new
             {
                 id = f,
                 text = f,
             });
 
-            return this.Json(modifiedData);
+            return this.Json(modifiedDataId);
         }
-
-        //public JsonResult AutoCompleteSubFundList(string selectTerm, int entityId)
-        //{
-        //    var entitiesToSearch = this.service
-        //        .GetEntity_SubEntities(null, entityId)
-        //        .Skip(1)
-        //        .ToList();
-
-        //    if (selectTerm != null)
-        //    {
-        //        entitiesToSearch = entitiesToSearch
-        //            .Where(sf => sf[GlobalConstants.IndexEntityNameInTable]
-        //                .ToLower()
-        //                .Contains(selectTerm
-        //                .ToLower()))
-        //            .ToList();
-        //    }
-
-        //    var modifiedData = entitiesToSearch.Select(sf => new
-        //    {
-        //        id = sf[GlobalConstants.IndexEntityNameInTable],
-        //        text = sf[GlobalConstants.IndexEntityNameInTable],
-        //    });
-
-        //    return this.Json(modifiedData);
-        //}
     }
 }

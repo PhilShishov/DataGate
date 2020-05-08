@@ -2,8 +2,7 @@
 //
 // Autocomplete search entities
 
-function passControllerToSelect(controllerToPass) {
-    var token = $("#update-form input[name=__RequestVerificationToken]").val();
+function passControllerToSelect(token, controllerToPass, entityId) {
     $("#SelectTerm").select2({
         placeholder: "Quick Select",
         theme: "classic",
@@ -18,6 +17,7 @@ function passControllerToSelect(controllerToPass) {
                 return {
                     selectTerm: params.term,
                     controllerToPass: controllerToPass,
+                    id: entityId
                 };
             },
             processResults: function (data) {
