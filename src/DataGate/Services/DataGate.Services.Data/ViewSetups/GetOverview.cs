@@ -40,8 +40,8 @@
 
             var date = DateTimeParser.WebFormat(chosenDate);
 
-            var headers = service.GetHeaders(id, date);
-            var values = service.GetSubEntities(id, date, null, 1);
+            //var headers = service.GetHeaders(id, date);
+            //var values = service.GetSubEntities(id, date, null, 1);
             var entity = service.GetByIdAndDate(id, date);
 
             string startConnectionString = entity.ToList()[1][IndexStartConnectionInSQLTable];
@@ -50,30 +50,36 @@
 
             if (!string.IsNullOrWhiteSpace(endConnectionString) && endConnectionString != GlobalConstants.EmptyEndConnectionDisplay)
             {
-               endConnection = DateTimeParser.SqlFormat(endConnectionString);
+                endConnection = DateTimeParser.SqlFormat(endConnectionString);
             }
 
             var distinctDocs = service.GetDistinctDocuments<DistinctDocViewModel>(id, date);
             var distinctAgrs = service.GetDistinctAgreements<DistinctDocViewModel>(id, date);
-            var documents = service.GetAllDocuments<AllDocViewModel>(id);
-            var agreements = service.GetAllAgreements<AllAgrViewModel>(id, date);
-            var timelines = service.GetTimeline<TimelineViewModel>(id);
+            //var documents = service.GetAllDocuments<AllDocViewModel>(id);
+            //var agreements = service.GetAllAgreements<AllAgrViewModel>(id, date);
+            //var timelines = service.GetTimeline<TimelineViewModel>(id);
+
+            //public IEnumerable<string> Headers { get; set; }
+
+            //public IEnumerable<string> HeadersSelection { get; set; }
+
+            //public IEnumerable<string[]> Values { get; set; }
+
+            //public IEnumerable<AllDocViewModel> Documents { get; set; }
+
+            //public IEnumerable<AllAgrViewModel> Agreements { get; set; }
+
+            //public IEnumerable<TimelineViewModel> Timelines { get; set; }
 
             var dto = new SpecificEntityOverviewGetDto()
             {
                 Id = id,
                 Date = chosenDate,
                 Entity = entity,
-                Headers = headers,
-                HeadersSelection = headers,
-                Values = values,
                 StartConnection = DateTimeParser.SqlFormat(startConnectionString),
                 EndConnection = endConnection,
                 DistinctDocuments = distinctDocs,
                 DistinctAgreements = distinctAgrs,
-                Documents = documents,
-                Agreements = agreements,
-                Timelines = timelines,
             };
 
             return AutoMapperConfig.MapperInstance.Map<T>(dto);
