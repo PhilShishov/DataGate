@@ -69,7 +69,7 @@
                 }
             }
 
-            return this.RedirectToAction("All");
+            return this.RedirectToRoute(GlobalConstants.AllFundsRouteName);
         }
 
         //[EndpointExceptionFilter]

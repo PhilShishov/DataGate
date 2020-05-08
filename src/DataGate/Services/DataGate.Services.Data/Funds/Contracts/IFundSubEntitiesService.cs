@@ -1,6 +1,8 @@
 ﻿namespace DataGate.Services.Data.Funds.Contracts
 {
-    public interface IFundSubEntitiesService : IEntitySubEntitiesService, ISubEntitiesService
+    using DataGate.Services.Data.Contracts;
+
+    public interface IFundSubEntitiesService : IEntitySubEntitiesService, ISubEntitiesService, IEntityAutocompleteService
     {
     }
 }

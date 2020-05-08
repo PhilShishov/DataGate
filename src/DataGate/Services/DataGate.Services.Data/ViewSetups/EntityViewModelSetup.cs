@@ -1,49 +1,63 @@
-﻿// Service class for setting up
-// view model properties
-
-// Created: 04/2020
-// Author:  Philip Shishov
-
-// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-namespace DataGate.Services.Data.ViewSetups
+﻿namespace DataGate.Services.Data.ViewSetups
 {
+    using System;
     using System.Linq;
 
+    using DataGate.Common;
+    using DataGate.Services.Data.Contracts;
     using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
+    using DataGate.Web.Dtos.Queries;
     using DataGate.Web.ViewModels.Entities;
     using DataGate.Web.ViewModels.Queries;
 
     public static class EntityViewModelSetup
     {
-        public static void SetPostProperties(EntitiesOverviewViewModel model, IEntityService service)
+        public static T SetGet<T>(IEntityService service)
         {
-            // ---------------------------------------------------------
-            //
-            // Available header column selection
-            var headers = service.GetHeaders().ToList();
-            model.HeadersSelection = headers;
+            var today = DateTime.Today;
+            var headers = service.GetHeaders();
+            var values = service.GetAllActive(today, null, 1);
+
+            var entity = new EntitiesOverviewGetDto()
+            {
+                IsActive = true,
+                Date = today.ToString(GlobalConstants.RequiredWebDateTimeFormat),
+                HeadersSelection = headers,
+                Headers = headers,
+                Values = values,
+            };
+            return AutoMapperConfig.MapperInstance.Map<T>(entity);
+        }
+
+        public static void SetPost(EntitiesOverviewViewModel model, IEntityService service)
+        {
+            model.HeadersSelection = service.GetHeaders().ToList();
 
             bool isInSelectionMode = model.SelectedColumns != null ? true : false;
 
             var date = DateTimeParser.WebFormat(model.Date);
 
-            // Algorithm for getting values based on:
-            // 0. Date update of table
-            // 1. Selection mode as columns or not
-            // 2. Active entities or not
-            // 3. Selected entity
+            // ---------------------------------------------------------
+            //
+            // Algorithm for getting values and headers based on:
+            // 1. Date update of table
+            // 2. Selection mode as columns or not
+            // 3. Active entities or not
+            // 4. Selected entity or not
             if (isInSelectionMode)
             {
                 var dto = AutoMapperConfig.MapperInstance.Map<GetWithSelectionDto>(model);
 
                 if (model.IsActive)
                 {
-                    CallAllActiveWithSelectedColumns(model, dto, service);
+                    model.Headers = service.GetAllActiveSelected(dto, 1).FirstOrDefault().ToList();
+                    model.Values = service.GetAllActiveSelected(dto, null, 1).ToList();
                 }
                 else if (!model.IsActive)
                 {
-                    CallAllWithSelectedColumns(model, dto, service);
+                    model.Headers = service.GetAllSelected(dto, 1).FirstOrDefault().ToList();
+                    model.Values = service.GetAllSelected(dto, null, 1).ToList();
                 }
             }
             else if (!isInSelectionMode)
@@ -62,20 +76,6 @@ namespace DataGate.Services.Data.ViewSetups
             {
                 model.Values = CreateTableView.AddTableToView(model.Values, model.SelectTerm.ToLower());
             }
-        }
-
-        private static void CallAllWithSelectedColumns(EntitiesOverviewViewModel model, GetWithSelectionDto dto, IEntityService service)
-        {
-            model.Values = service.GetAllSelected(dto, null, 1).ToList();
-
-            model.Headers = service.GetAllSelected(dto, 1).FirstOrDefault().ToList();
-        }
-
-        private static void CallAllActiveWithSelectedColumns(EntitiesOverviewViewModel model, GetWithSelectionDto dto, IEntityService service)
-        {
-            model.Values = service.GetAllActiveSelected(dto, null, 1).ToList();
-
-            model.Headers = service.GetAllActiveSelected(dto, 1).FirstOrDefault().ToList();
         }
     }
 }

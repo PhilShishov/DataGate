@@ -106,7 +106,7 @@ namespace DataGate.Services.Data.Funds
             return this.GetAllActive(null, 1, 0).FirstOrDefault();
         }
 
-        public ISet<string> GetNames()
+        public ISet<string> GetNames(int? id)
         {
             HashSet<string> query = this.repository
                 .All()

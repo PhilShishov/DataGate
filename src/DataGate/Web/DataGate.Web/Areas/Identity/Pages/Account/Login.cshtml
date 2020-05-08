@@ -6,6 +6,7 @@
 }
 <section class="fxt-template-layout2">
     <div class="container-fluid custom-container">
+        <partial name="_CookieConsentPartial" />
         <div class="row">
             <div class="col-xl-4 col-lg-6 col-12 fxt-bg-color">
                 <div class="fxt-content">
@@ -17,12 +18,12 @@
                             <div class="form-group col-md-12">
                                 <label>Username</label>
                                 <div class="fxt-transformY-50 fxt-transition-delay-1">
-                                    <input type="text" 
+                                    <input type="text"
                                            asp-for="Input.Username"
                                            autofocus
-                                           autocomplete="username" 
-                                           class="form-control" 
-                                           id="username" 
+                                           autocomplete="username"
+                                           class="form-control"
+                                           id="username"
                                            placeholder="Username">
                                     <span asp-validation-for="Input.Username" class="text-danger d-flex justify-content-center"></span>
                                 </div>
@@ -30,11 +31,11 @@
                             <div class="form-group col-md-12">
                                 <label>Password</label>
                                 <div class="fxt-transformY-50 fxt-transition-delay-2">
-                                    <input type="password" 
+                                    <input type="password"
                                            asp-for="Input.Password"
                                            autocomplete="new-password"
-                                           class="form-control" 
-                                           id="password" 
+                                           class="form-control"
+                                           id="password"
                                            placeholder="Password">
                                     <span asp-validation-for="Input.Password" class="text-danger d-flex justify-content-center"></span>
                                 </div>

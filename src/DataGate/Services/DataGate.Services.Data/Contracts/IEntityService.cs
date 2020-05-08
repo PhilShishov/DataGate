@@ -6,7 +6,7 @@
 // Author:  Philip Shishov
 
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-namespace DataGate.Services.Data
+namespace DataGate.Services.Data.Contracts
 {
     using System;
     using System.Collections.Generic;
@@ -16,8 +16,6 @@ namespace DataGate.Services.Data
     public interface IEntityService
     {
         IEnumerable<string[]> GetAll(DateTime? date = null, int? take = null, int skip = 0);
-
-        ISet<string> GetNames();
 
         IEnumerable<string> GetHeaders();
 

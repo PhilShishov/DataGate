@@ -11,6 +11,7 @@
     using DataGate.Services.Mapping;
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.Dtos.Queries;
+    using DataGate.Web.ViewModels.Queries;
 
     public class FundSubEntitiesService : IFundSubEntitiesService
     {
@@ -81,15 +82,9 @@
             return query;
         }
 
-        public IEnumerable<string[]> GetSubEntitiesSelected(
-                                                                    int id,
-                                                                    IReadOnlyCollection<string> preSelectedColumns,
-                                                                    IEnumerable<string> selectedColumns,
-                                                                    DateTime? date,
-                                                                    int? take,
-                                                                    int skip)
+        public IEnumerable<string[]> GetSubEntitiesSelected(GetWithSelectionDto dto, int? take, int skip)
         {
-            return this.sqlManager.ExecuteQuery(this.sqlFunctionSubFundsForFund, date, id, selectedColumns);
+            return this.sqlManager.ExecuteQuery(this.sqlFunctionSubFundsForFund, dto.Date, dto.Id, dto.SelectedColumns);
         }
 
         public IEnumerable<T> GetDistinctDocuments<T>(int id, DateTime? date)

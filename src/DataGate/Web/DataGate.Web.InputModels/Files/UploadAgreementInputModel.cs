@@ -12,7 +12,7 @@ namespace DataGate.Web.InputModels.Files
 
     using Microsoft.AspNetCore.Http;
 
-    public class UploadAgreementFileModel
+    public class UploadAgreementInputModel
     {
         [Required]
         [Display(Name = "Agreement Type")]

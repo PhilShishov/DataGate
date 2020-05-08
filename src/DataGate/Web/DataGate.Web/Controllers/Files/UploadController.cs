@@ -1,5 +1,7 @@
 ﻿namespace DataGate.Web.Controllers.Files
 {
+    using DataGate.Services.Data.Documents.Contracts;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 

@@ -9,7 +9,7 @@ namespace DataGate.Web.InputModels.Files
 {
     using Microsoft.AspNetCore.Http;
 
-    public class UploadEntityFileModel
+    public class UploadDocumentInputModel
     {
         public string DocumentType { get; set; }
 

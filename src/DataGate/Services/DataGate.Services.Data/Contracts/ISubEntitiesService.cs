@@ -1,4 +1,4 @@
-namespace DataGate.Services.Data
+namespace DataGate.Services.Data.Contracts
 {
     using System;
     using System.Collections.Generic;
@@ -18,9 +18,5 @@ namespace DataGate.Services.Data
         IEnumerable<T> GetAllAgreements<T>(int id, DateTime? date);
 
         void ThrowEntityNotFoundExceptionIfIdDoesNotExist(int id);
-
-        IEnumerable<string[]> GetSubEntities(int id, DateTime? date, int? take = null, int skip = 0);
-
-        IEnumerable<string> GetHeaders(int id, DateTime? date);
     }
 }

@@ -8,6 +8,8 @@ namespace DataGate.Web.ViewModels.Queries
 
     public class GetWithSelectionDto : IMapFrom<EntitiesOverviewViewModel>
     {
+        public int Id { get; set; }
+
         public DateTime? Date { get; set; }
 
         public IReadOnlyCollection<string> PreSelectedColumns { get; set; }
