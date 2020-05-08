@@ -19,6 +19,11 @@
         public const string ShareClassesControllerName = "ShareClasses";
         public const string ShareClassesSubEntitiesControllerName = "ShareClassesSubEntities";
 
+        // Urls, actions
+        public const string FundAllUrl = "/f/all";
+        public const string DetailsActionName = "Details";
+        public const string AllActionName = "All";
+
         // Routes names
         public const string AllFundsRouteName = "allFunds";
         public const string FundDetailsRouteName = "fundDetails";
@@ -53,10 +58,6 @@
 
         // SQL Queries
         public const string SqlItemFormatRequired = "[{0}]";
-
-        // Urls, actions
-        public const string FundAllUrl = "/f/all";
-        public const string ByIdAndDateActionName = "ByIdAndDate";
 
         // Dates
         public const string LastLoginTimeDisplay = "dd.MM.yyyy HH:mm";

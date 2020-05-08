@@ -5,6 +5,7 @@
 
     using DataGate.Common;
     using DataGate.Services.DateTime;
+    using DataGate.Web.Filters;
     using DataGate.Web.InputModels.Files;
     using DataGate.Web.Utilities;
 
@@ -49,25 +50,13 @@
         }
 
         [HttpPost]
-        public IActionResult Read(string pdfValue, string agrValue, string controllerName)
+        public IActionResult Read(string docValue, string agrValue, string controllerName)
         {
             FileStreamResult fileStreamResult = null;
 
             if (!string.IsNullOrEmpty(controllerName))
             {
-                string correctLocation;
-                if (string.IsNullOrEmpty(pdfValue))
-                {
-                    correctLocation = "Agreement";
-                    pdfValue = agrValue;
-                }
-                else
-                {
-                    correctLocation = controllerName.Replace("Details", string.Empty);
-                }
-
-                string fileLocation = Path.Combine(this.environment.WebRootPath, @$"FileFolder\{correctLocation}\");
-                string path = $"{fileLocation}{pdfValue}";
+                string path = this.GetTargetPath(ref docValue, agrValue, controllerName);
 
                 using (var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read))
                 {
@@ -83,25 +72,43 @@
             return this.RedirectToAction("All");
         }
 
-        //[HttpGet]
-        //public JsonResult Delete(string agrName)
-        //{
-        //    if (!string.IsNullOrEmpty(agrName))
-        //    {
-        //        string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
-        //        this.entitiesFileService.DeleteAgreementMapping(agrName, controllerName);
+        //[EndpointExceptionFilter]
+        [HttpGet]
+        public JsonResult Delete(string docValue, string agrValue, string controllerName)
+        {
+            if (!string.IsNullOrEmpty(controllerName))
+            {
+                //string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
 
-        //        string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\Agreement\");
-        //        string path = $"{fileLocation}{agrName}";
+                string path = this.GetTargetPath(ref docValue, agrValue, controllerName);
 
-        //        if (System.IO.File.Exists(path))
-        //        {
-        //            System.IO.File.Delete(path);
-        //            return Json(new { data = Path.GetFileNameWithoutExtension(agrName) });
-        //        }
-        //    }
+                if (System.IO.File.Exists(path))
+                {
+                    //this.fileService.DeleteMapping(docValue, agrValue, controllerName);
+                    //System.IO.File.Delete(path);
+                    return this.Json(new { data = Path.GetFileNameWithoutExtension(agrValue) });
+                }
+            }
 
-        //    return Json(new { data = "false" });
-        //}
+            return this.Json(new { data = "false" });
+        }
+
+        private string GetTargetPath(ref string pdfValue, string agrValue, string controllerName)
+        {
+            string targetLocation;
+            if (string.IsNullOrEmpty(pdfValue))
+            {
+                targetLocation = "Agreement";
+                pdfValue = agrValue;
+            }
+            else
+            {
+                targetLocation = controllerName.Replace("Details", string.Empty);
+            }
+
+            string fileLocation = Path.Combine(this.environment.WebRootPath, @$"FileFolder\{targetLocation}\");
+            string path = $"{fileLocation}{pdfValue}";
+            return path;
+        }
     }
 }

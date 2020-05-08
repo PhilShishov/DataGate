@@ -1,115 +1,87 @@
-﻿//namespace DataGate.Web.Controllers.Funds
-//{
-//    using System.Linq;
+﻿namespace DataGate.Web.Controllers.Funds
+{
+    using System;
+    using System.Linq;
 
-//    using DataGate.Common;
-//    using DataGate.Services.Data.Funds.Contracts;
-//    using Microsoft.AspNetCore.Authorization;
-//    using Microsoft.AspNetCore.Mvc;
+    using DataGate.Common;
+    using DataGate.Services;
+    using DataGate.Services.Data.Funds.Contracts;
+    using DataGate.Services.Data.ViewSetups;
+    using DataGate.Services.DateTime;
+    using DataGate.Web.ViewModels.Entities;
 
-//    [Authorize]
-//    public class FundSubEntitiesController : BaseController
-//    {
-//        private readonly IFundSubEntitiesService service;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
 
-//        public FundSubEntitiesController(IFundSubEntitiesService fundSubFundsService)
-//        {
-//            this.service = fundSubFundsService;
-//        }
+    [Area(GlobalConstants.FundsAreaName)]
+    //[Authorize]
+    public class FundSubEntitiesController : BaseController
+    {
+        private readonly IFundSubEntitiesService service;
 
-//        public JsonResult AutoCompleteSubFundList(string selectTerm, int entityId)
-//        {
-//            var entitiesToSearch = this.service
-//                .GetEntity_SubEntities(null, entityId)
-//                .Skip(1)
-//                .ToList();
+        public FundSubEntitiesController(IFundSubEntitiesService fundSubFundsService)
+        {
+            this.service = fundSubFundsService;
+        }
 
-//            if (selectTerm != null)
-//            {
-//                entitiesToSearch = entitiesToSearch
-//                    .Where(sf => sf[GlobalConstants.IndexEntityNameInSQLTable]
-//                        .ToLower()
-//                        .Contains(selectTerm
-//                        .ToLower()))
-//                    .ToList();
-//            }
+        [HttpPost]
+        [ActionName("Update")]
+        public IActionResult UpdateSubEntities(SpecificEntityViewModel model)
+        {
+            //model = GetOverview.SpecificEntity<SpecificEntityViewModel>(model.Id, model.Date, this.service);
 
-//            var modifiedData = entitiesToSearch.Select(sf => new
-//            {
-//                id = sf[GlobalConstants.IndexEntityNameInSQLTable],
-//                text = sf[GlobalConstants.IndexEntityNameInSQLTable],
-//            });
+            if (model.Command == "Reset")
+            {
+                model.SelectTerm = GlobalConstants.DefaultAutocompleteSelectTerm;
+                return this.View(GlobalConstants.DetailsActionName, model);
+            }
 
-//            return this.Json(modifiedData);
-//        }
+            var date = DateTimeParser.WebFormat(model.Date);
+            bool isInSelectionMode = model.SelectedColumns != null ? true : false;
 
-//        //[HttpPost]
-//        //public IActionResult ByIdAndDate()
-//        //{
-//        //    if (model.Entity != null && model.EntitySubEntities.Count > GlobalConstants.RowNumberOfHeadersInTable)
-//        //    {
-//        //        this.TempData[GlobalConstants.InfoMessageDisplay] = InfoMessages.SuccessfullyUpdatedTable;
-//        //        return this.View(model);
-//        //    }
+            if (isInSelectionMode)
+            {
+                this.CallEntitySubEntitiesWithSelectedColumns(model, date);
+            }
+            else if (!isInSelectionMode)
+            {
+                model.Values = this.service.GetSubEntities(model.Id, date).ToList();
+            }
 
+            if (model.SelectTerm != null)
+            {
+                model.Values = CreateTableView.AddTableToView(model.Values, model.SelectTerm.ToLower());
+            }
 
-//        //    this.SetModelValuesForSpecificView(model);
+            if (model.Entity != null && model.Values.Count > 0)
+            {
+                this.TempData[GlobalConstants.InfoKey] = InfoMessages.SuccessfulUpdate;
+                return this.View(model);
+            }
 
-//        //    if (model.Command == "Reset")
-//        //    {
-//        //        model.SelectTerm = GlobalConstants.DefaultAutocompleteSelectTerm;
-//        //        return this.View(model);
-//        //    }
+            this.TempData[GlobalConstants.ErrorKey] = ErrorMessages.TableIsEmpty;
+            return this.RedirectToAction("");
+        }
 
-//        //    bool isInSelectionMode = false;
+        private void CallEntitySubEntitiesWithSelectedColumns(SpecificEntityViewModel model, DateTime date)
+        {
+            model.Values = this.service
+                .GetSubEntitiesSelected(
+                                    model.Id,
+                                    model.PreSelectedColumns,
+                                    model.SelectedColumns,
+                                    date)
+                .ToList();
 
-//        //    if (model.SelectedColumns != null && model.SelectedColumns.Count > 0)
-//        //    {
-//        //        isInSelectionMode = true;
-//        //    }
+            model.Headers = this.service.GetHeaders(model.Id, date).ToList();
+        }
 
-//        //    var chosenDate = DateTime.ParseExact(model.ChosenDate, GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
-
-//        //    if (model.SelectTerm == null)
-//        //    {
-//        //        if (isInSelectionMode)
-//        //        {
-//        //            this.CallEntitySubEntitiesWithSelectedColumns(model, chosenDate);
-//        //        }
-//        //        else if (!isInSelectionMode)
-//        //        {
-//        //            model.EntitySubEntities = this.fundsService.GetFund_SubFunds(chosenDate, model.EntityId).ToList();
-//        //        }
-
-//        //        return this.View(model);
-//        //    }
-
-//        //    if (isInSelectionMode)
-//        //    {
-//        //        this.CallEntitySubEntitiesWithSelectedColumns(model, chosenDate);
-//        //    }
-//        //    else if (!isInSelectionMode)
-//        //    {
-//        //        model.EntitySubEntities = this.fundsService
-//        //            .GetFund_SubFunds(chosenDate, model.EntityId)
-//        //            .ToList();
-//        //    }
-
-//        //    if (model.SelectTerm != null)
-//        //    {
-//        //        model.EntitySubEntities = CreateTableView.AddTableToView(model.EntitySubEntities, model.SelectTerm.ToLower());
-//        //    }
-
-//        //    if (model.Entity != null && model.EntitySubEntities.Count > GlobalConstants.RowNumberOfHeadersInTable)
-//        //    {
-//        //        this.TempData[GlobalConstants.InfoMessageDisplay] = InfoMessages.SuccessfullyUpdatedTable;
-//        //        return this.View(model);
-//        //    }
-
-//        //    this.TempData[GlobalConstants.ErrorMessageDisplay] = ErrorMessages.TableModeIsEmpty;
-//        //    this.ModelState.Clear();
-//        //    return this.View();
-//        //    return this.RedirectToAction();
-//        //}
-//    }
-//}
+        private void SetUploadFileLists()
+        {
+            //this.ViewData["DocumentFileTypes"] = this.selectService.GetDocumentsFileTypes();
+            //this.ViewData["AgreementsFileTypes"] = this.selectService.GetAgreementsFileTypes();
+            //this.ViewData["AgreementsStatus"] = this.selectService.GetAgreementStatus();
+            //this.ViewData["Companies"] = this.selectService.GetCompanies();
+        }
+    }
+}

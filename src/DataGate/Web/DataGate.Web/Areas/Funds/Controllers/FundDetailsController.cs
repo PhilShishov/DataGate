@@ -11,7 +11,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     [Area(GlobalConstants.FundsAreaName)]
-    [Authorize]
+    //[Authorize]
     public class FundDetailsController : BaseController
     {
         private readonly IFundSubEntitiesService service;
@@ -26,6 +26,7 @@
         }
 
         [HttpGet]
+        [ActionName("Details")]
         [Route("f/{id}/{date}")]
         public IActionResult ByIdAndDate(int id, string date)
         {
@@ -37,16 +38,17 @@
         }
 
         [HttpPost]
-        public IActionResult Update(SpecificEntityViewModel model)
+        [ActionName("Update")]
+        public IActionResult UpdateEntity(SpecificEntityViewModel model)
         {
             if (model.Command == GlobalConstants.CommandUpdateTable)
             {
                 this.TempData[GlobalConstants.InfoKey] = InfoMessages.SuccessfulUpdate;
-                return this.RedirectToAction(GlobalConstants.ByIdAndDateActionName, new { model.Id, model.Date });
+                return this.RedirectToAction(GlobalConstants.DetailsActionName, new { model.Id, model.Date });
             }
 
             this.TempData[GlobalConstants.ErrorKey] = ErrorMessages.UnsuccessfulUpdate;
-            return this.RedirectToAction(GlobalConstants.ByIdAndDateActionName, new { model.Id, model.Date });
+            return this.RedirectToAction(GlobalConstants.DetailsActionName, new { model.Id, model.Date });
         }
 
         private void SetUploadFileLists()

@@ -1,10 +1,6 @@
 ﻿namespace DataGate.Web.Areas.Funds.Controllers
 {
-    using System.Collections.Generic;
-    using System.Linq;
-
     using DataGate.Common;
-    using DataGate.Services.AutoComplete;
     using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Services.Data.ViewSetups;
     using DataGate.Web.Controllers;
@@ -34,20 +30,6 @@
             return this.View(model);
         }
 
-        [Route("api/autofunds")]
-        public JsonResult AutoCompleteFundList(string selectTerm)
-        {
-            ISet<string> result = AutoCompleteService.GetResult(selectTerm, this.service);
-
-            var modifiedData = result.Select(f => new
-            {
-                id = f,
-                text = f,
-            });
-
-            return this.Json(modifiedData);
-        }
-
         [HttpPost]
         public IActionResult All(EntitiesOverviewViewModel model)
         {
@@ -59,7 +41,7 @@
                 return this.View(model);
             }
 
-            return this.ShowError(ErrorMessages.TableIsEmpty, "All", "Funds");
+            return this.ShowError(ErrorMessages.TableIsEmpty, GlobalConstants.AllActionName, GlobalConstants.FundsControllerName);
         }
     }
 }

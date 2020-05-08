@@ -22,7 +22,7 @@
                                         type="submit"
                                         asp-route="files"
                                         asp-route-name="@document.Name"
-                                        name="pdfValue"
+                                        name="docValue"
                                         value="@document.Name">
                                     @System.IO.Path.GetFileNameWithoutExtension(document.Name)
                                 </button>
@@ -59,7 +59,7 @@
                                             type="submit"
                                             asp-route="files"
                                             asp-route-name="@document.Name"
-                                            name="pdfValue"
+                                            name="docValue"
                                             value="@document.Name">
                                         @System.IO.Path.GetFileNameWithoutExtension(document.Name)
                                     </button>
