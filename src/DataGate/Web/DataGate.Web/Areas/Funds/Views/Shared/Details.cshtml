@@ -70,8 +70,9 @@
 
 
 
-<form asp-controller="FundSubEntities"
-      asp-action="UploadDocument"
+<form asp-area=""
+      asp-controller="Upload"
+      asp-action="Document"
       method="post"
       enctype="multipart/form-data">
 
@@ -83,15 +84,17 @@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div id="partial">
-        @*<partial name="SpecificEntity/_UploadDocument" />*@
     </div>
 </form>
 
-<form asp-controller="FundSubEntities"
-      asp-action="UploadAgreement"
+<form  asp-area=""
+      asp-controller="Upload"
+      asp-action="Agreement"
       enctype="multipart/form-data">
 
     <input asp-for="Id" type="text" hidden>
+    <input asp-for="StartConnection" type="text" hidden>
+    <input asp-for="EndConnection" type="text" hidden>
     <input asp-for="Date" type="date" hidden>
 
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -102,7 +105,6 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body d-grid justify-content-center" id="agrModalBody">
-                    @*@Html.PartialAsync("SpecificEntity/_UploadAgreement")*@
                 </div>
             </div>
         </div>

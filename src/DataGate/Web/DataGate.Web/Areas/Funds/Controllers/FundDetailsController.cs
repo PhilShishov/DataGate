@@ -1,14 +1,11 @@
 ﻿namespace DataGate.Web.Areas.Funds.Controllers
 {
     using DataGate.Common;
-    using DataGate.Services.Data.Documents.Contracts;
     using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Services.Data.ViewSetups;
     using DataGate.Services.DateTime;
     using DataGate.Web.Controllers;
-    using DataGate.Web.InputModels.Files;
     using DataGate.Web.ViewModels.Entities;
-
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -17,14 +14,10 @@
     public class FundDetailsController : BaseController
     {
         private readonly IFundSubEntitiesService service;
-        private readonly IDocumentsSelectService selectService;
 
-        public FundDetailsController(
-            IFundSubEntitiesService fundSubFundsService,
-            IDocumentsSelectService documentsSelectService)
+        public FundDetailsController(IFundSubEntitiesService fundSubFundsService)
         {
             this.service = fundSubFundsService;
-            this.selectService = documentsSelectService;
         }
 
         [HttpGet]
@@ -72,22 +65,6 @@
             }
 
             return this.ShowError(ErrorMessages.UnsuccessfulUpdate, GlobalConstants.FundDetailsRouteName, new { model.Id, model.Date });
-        }
-
-        [Route("f/loadDoc")]
-        public IActionResult LoadDocumentModel(UploadDocumentInputModel model)
-        {
-            this.ViewData["DocumentFileTypes"] = this.selectService.GetDocumentsFileTypes();
-            return this.PartialView("SpecificEntity/_UploadDocument", model);
-        }
-
-        [Route("f/loadAgr")]
-        public IActionResult LoadAgreementModel(UploadAgreementInputModel model)
-        {
-            this.ViewData["AgreementsFileTypes"] = this.selectService.GetAgreementsFileTypes();
-            this.ViewData["AgreementsStatus"] = this.selectService.GetAgreementStatus();
-            this.ViewData["Companies"] = this.selectService.GetCompanies();
-            return this.PartialView("SpecificEntity/_UploadAgreement", model);
         }
     }
 }

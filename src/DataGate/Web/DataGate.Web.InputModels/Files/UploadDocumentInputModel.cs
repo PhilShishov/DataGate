@@ -7,12 +7,22 @@
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace DataGate.Web.InputModels.Files
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+
     using Microsoft.AspNetCore.Http;
 
     public class UploadDocumentInputModel
     {
+
+        [Required]
         public string DocumentType { get; set; }
 
+        [Required(ErrorMessage = "Please insert File.")]
         public IFormFile FileToUpload { get; set; }
+
+        public DateTime StartConnection { get; set; }
+
+        public DateTime? EndConnection { get; set; }
     }
 }
