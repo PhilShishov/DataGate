@@ -3,26 +3,60 @@
     using System.Collections.Generic;
     using System.Linq;
 
+    using DataGate.Common;
     using DataGate.Services.AutoComplete;
+    using DataGate.Services.Data.Funds.Contracts;
+    using DataGate.Web.InputModels.Autocomplete;
 
     using Microsoft.AspNetCore.Mvc;
 
-    [ApiController]
-    [Route("api/[controller]")]
     public class AutoCompleteController : Controller
     {
-        //public JsonResult AutoCompleteList(string selectTerm)
-        //{
-        //    ISet<string> result = AutoCompleteService.GetResult(selectTerm, this.service);
+        private readonly IFundsService fundsService;
+        //private readonly IFundsService fundsService;
+        //private readonly IFundsService fundsService;
+        //private readonly IFundsService fundsService;
+        //private readonly IFundsService fundsService;
 
-        //    var modifiedData = result.Select(f => new
-        //    {
-        //        id = f,
-        //        text = f,
-        //    });
+        public AutoCompleteController(
+            IFundsService fundsService
+            //IFundsService fundsService,
+            //IFundsService fundsService,
+            //IFundsService fundsService,
+            //IFundsService fundsService,
+            )
+        {
+            this.fundsService = fundsService;
+        }
 
-        //    return this.Json(modifiedData);
-        //}
+        [Route("api/autocomplete")]
+        public JsonResult Get(AutoCompleteInputModel input)
+        {
+            ISet<string> result = null;
+
+            if (input.ControllerToPass == GlobalConstants.FundsControllerName)
+            {
+                result = AutoCompleteService.GetResult(input.SelectTerm, this.fundsService);
+            }
+
+            //else if (input.Controller == GlobalConstants.FundsControllerName)
+            //{
+            //    result = AutoCompleteService.GetResult(input.SelectTerm, this.service);
+
+            //}
+            //else if (input.Controller == GlobalConstants.FundsControllerName)
+            //{
+            //    result = AutoCompleteService.GetResult(input.SelectTerm, this.service);
+            //}
+
+            var modifiedData = result.Select(f => new
+            {
+                id = f,
+                text = f,
+            });
+
+            return this.Json(modifiedData);
+        }
 
         //public JsonResult AutoCompleteSubFundList(string selectTerm, int entityId)
         //{
