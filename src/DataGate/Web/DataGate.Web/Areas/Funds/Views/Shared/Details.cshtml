@@ -8,8 +8,10 @@
 
 <div class="push justify-content-between">
     <form asp-controller="FundDetails"
-          asp-action="Update"
-          method="post">
+          asp-action="Details"
+          method="post"
+          id="update-form">
+
         <partial name="SpecificEntity/_Toolbar" />
 
         @if (this.TempData[GlobalConstants.InfoKey] != null)
@@ -32,14 +34,8 @@
         </div>
 
         <hr class="bg-pharus hr-2" />
-    </form>
 
-    <form asp-controller="FundSubEntities"
-          asp-action="Update"
-          method="post"
-          id="update-form">
-
-        <input type="hidden" asp-for="Date">
+        <partial name="SpecificEntity/_BindingEntities" />
 
         <div class="row ml-3" id="div-select-addInfo">
             <label class="text-torshia m-1 pr-3">FUND ADDITIONAL INFORMATION</label>
@@ -72,12 +68,23 @@
     </form>
 </div>
 
+
+
 <form asp-controller="FundSubEntities"
       asp-action="UploadDocument"
       method="post"
       enctype="multipart/form-data">
 
-    <partial name="SpecificEntity/_UploadDocument" />
+    <input asp-for="Id" type="text" hidden>
+    <input asp-for="StartConnection" type="text" hidden>
+    <input asp-for="EndConnection" type="text" hidden>
+    <input asp-for="Date" type="date" hidden>
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div id="partial">
+        @*<partial name="SpecificEntity/_UploadDocument" />*@
+    </div>
 </form>
 
 <form asp-controller="FundSubEntities"
@@ -95,7 +102,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body d-grid justify-content-center" id="agrModalBody">
-                    @await Html.PartialAsync("SpecificEntity/_UploadAgreement")
+                    @*@Html.PartialAsync("SpecificEntity/_UploadAgreement")*@
                 </div>
             </div>
         </div>
@@ -115,7 +122,7 @@
         window.onload = () => {
             manageSideNavBar();
             manageDropdowns();
-            setDates();
+            //setDates();
         }
 
         if (window.history.replaceState) {
@@ -129,13 +136,39 @@
         }, 5000);
 
         $(document).ready(function () {
+
             var token = $("#update-form input[name=__RequestVerificationToken]").val();
+
+            $("#btn-upload-document").click(function () {
+                console.log('here 1');
+
+                $.ajax({
+                    type: "GET",
+                    url: "/f/loadDoc",
+                    success: function (response) {
+                        $('#partial').html(response);
+                       }
+                    })
+            });
+
+
+            $("#btn-upload-agreement").click(function () {
+                console.log('here 1');
+
+                $.ajax({
+                    type: "GET",
+                    url: "/f/loadAgr",
+                    success: function (response) {
+                        $('#agrModalBody').html(response);
+                    }
+                })
+            });
+
             // ________________________________________________________
             //
             // Delete selected row from agreements table by confirming
 
             const urlDel = "/FundSubEntities/DeleteAgreement";
-
             passAgrUrlToDelete(urlDel);
 
             // ________________________________________________________

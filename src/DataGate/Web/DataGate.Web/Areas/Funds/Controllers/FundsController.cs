@@ -25,7 +25,7 @@
         [Route("f/all")]
         public IActionResult All()
         {
-            var model = GetOverview.Entities<EntitiesOverviewViewModel>(this.service);
+            var model = EntityViewModelSetup.SetGet<EntitiesOverviewViewModel>(this.service);
 
             return this.View(model);
         }
@@ -33,7 +33,7 @@
         [HttpPost]
         public IActionResult All(EntitiesOverviewViewModel model)
         {
-            EntityViewModelSetup.SetPostProperties(model, this.service);
+            EntityViewModelSetup.SetPost(model, this.service);
 
             if (model.Values.Count > 0)
             {

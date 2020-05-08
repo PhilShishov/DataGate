@@ -8,7 +8,13 @@
         public IActionResult ShowError(string errorMessage, string route)
         {
             this.TempData[GlobalConstants.ErrorKey] = errorMessage;
-            return this.Redirect(route);
+            return this.RedirectToRoute(route);
+        }
+
+        public IActionResult ShowError(string errorMessage, string route, object routeValues)
+        {
+            this.TempData[GlobalConstants.ErrorKey] = errorMessage;
+            return this.RedirectToRoute(route, routeValues);
         }
 
         public IActionResult ShowError(string errorMessage, string action, string controller)
@@ -17,34 +23,10 @@
             return this.RedirectToAction(action, controller);
         }
 
-        public IActionResult ShowError(string errorMessage, string action, string controller, string area)
-        {
-            this.TempData[GlobalConstants.ErrorKey] = errorMessage;
-            return this.RedirectToAction(action, controller, new { area });
-        }
-
-        public IActionResult ShowError(string errorMessage, string action, string controller, object routeValues)
-        {
-            this.TempData[GlobalConstants.ErrorKey] = errorMessage;
-            return this.RedirectToAction(action, controller, routeValues);
-        }
-
-        public IActionResult ShowInfo(string infoMessage, string action, string controller)
+        public IActionResult ShowInfo(string infoMessage, string route, object routeValues)
         {
             this.TempData[GlobalConstants.InfoKey] = infoMessage;
-            return this.RedirectToAction(action, controller);
-        }
-
-        public IActionResult ShowInfo(string infoMessage, string action, object routeValues)
-        {
-            this.TempData[GlobalConstants.InfoKey] = infoMessage;
-            return this.RedirectToAction(action, routeValues);
-        }
-
-        public IActionResult ShowInfo(string infoMessage, string action, string controller, object routeValues)
-        {
-            this.TempData[GlobalConstants.InfoKey] = infoMessage;
-            return this.RedirectToAction(action, controller, routeValues);
+            return this.RedirectToRoute(route, routeValues);
         }
     }
 }

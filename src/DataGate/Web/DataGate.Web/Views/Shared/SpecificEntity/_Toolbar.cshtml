@@ -67,6 +67,7 @@
             <input type="submit"
                    class="btn btn-primary btn-sm"
                    asp-for="Command"
+                   asp-action="UpdateEntity"
                    value="Update Table"
                    style="margin-bottom: 2%"></>
         </div>
@@ -79,6 +80,7 @@
         <div>
             <button type="button"
                     class="btn btn-primary btn-sm mb-2"
+                    id="btn-upload-document"
                     data-toggle="modal"
                     data-target="#upDocModal">
                 Upload @documentTypeName
@@ -86,6 +88,7 @@
         </div>
         <div class="mx-2">
             <button type="button"
+                    id="btn-upload-agreement"
                     class="btn btn-primary btn-sm mb-2"
                     data-toggle="modal"
                     data-target="#upAgrModal">

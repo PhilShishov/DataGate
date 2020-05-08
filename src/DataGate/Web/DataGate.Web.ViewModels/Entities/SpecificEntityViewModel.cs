@@ -16,7 +16,6 @@ namespace DataGate.Web.ViewModels.Entities
     using System.Collections.Generic;
 
     using DataGate.Services.Mapping;
-    using DataGate.Web.InputModels.Files;
     using DataGate.Web.ViewModels.Documents;
     using DataGate.Web.ViewModels.Queries;
     using DataGate.Web.ViewModels.Timelines;
@@ -51,10 +50,6 @@ namespace DataGate.Web.ViewModels.Entities
         public IEnumerable<AllAgrViewModel> Agreements { get; set; }
 
         public IEnumerable<AllDocViewModel> Documents { get; set; }
-
-        public UploadEntityFileModel UploadEntityFileModel { get; set; }
-
-        public UploadAgreementFileModel UploadAgreementFileModel { get; set; }
 
         public DateTime StartConnection { get; set; }
 
