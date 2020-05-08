@@ -7,7 +7,6 @@
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace DataGate.Services.Data.ViewSetups
 {
-    using System;
     using System.Linq;
 
     using DataGate.Services.DateTime;
@@ -23,23 +22,17 @@ namespace DataGate.Services.Data.ViewSetups
             //
             // Available header column selection
             var headers = service.GetHeaders().ToList();
-            model.Headers = headers;
             model.HeadersSelection = headers;
 
-            bool isInSelectionMode = false;
+            bool isInSelectionMode = model.SelectedColumns != null ? true : false;
 
-            if (model.SelectedColumns != null)
-            {
-                isInSelectionMode = true;
-            }
+            var date = DateTimeParser.WebFormat(model.Date);
 
-            DateTime? date = null;
-
-            if (model.Date != null)
-            {
-                date = DateTimeParser.WebFormat(model.Date);
-            }
-
+            // Algorithm for getting values based on:
+            // 0. Date update of table
+            // 1. Selection mode as columns or not
+            // 2. Active entities or not
+            // 3. Selected entity
             if (isInSelectionMode)
             {
                 var dto = AutoMapperConfig.MapperInstance.Map<GetWithSelectionDto>(model);

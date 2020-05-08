@@ -12,5 +12,6 @@
         public const string UnsuccessfulUpdate = "Update was unsuccessful! Please try again.";
 
         public const string NotFoundEntityMessage = "The required {0} was not found!";
+        public const string EndpointErrorMessage = "Some error occurs.";
     }
 }

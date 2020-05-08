@@ -4,11 +4,6 @@
 
     public interface IFileSystemService
     {
-        string LoadEntityFileToDisplay(
-                            int entityId,
-                            string chosenDate,
-                            string controllerName);
-
         void AddDocumentToSpecificEntity(
                             string fileName,
                             int entityId,
@@ -17,6 +12,7 @@
                             string fileExt,
                             int fileTypeId,
                             string controllerName);
+
         void AddAgreementToSpecificEntity(
                             string fileName,
                             string fileExt,
@@ -29,8 +25,6 @@
                             int companyId,
                             string controllerName);
 
-        void DeleteDocumentMapping(string docName, string controllerName);
-
-        void DeleteAgreementMapping(string fileName, string controllerName);
+        void DeleteMapping(string docValue, string agrValue, string controllerName);
     }
 }

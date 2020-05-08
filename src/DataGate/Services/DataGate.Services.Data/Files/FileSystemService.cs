@@ -10,67 +10,15 @@
 
     public class FileSystemService : IFileSystemService
     {
-        private const int fileTypeProspectus = 2;
-        private const int fileTypeKiid = 3;
-        //private const int fileTypePricingPolicy = 4;
-        private const int fileTypeNavReport = 5;
-
         private readonly IConfiguration configuration;
 
         // ________________________________________________________
         //
         // Constructor: initialize with DI IConfiguration
         // to retrieve appsettings.json connection string
-        public FileSystemService(IConfiguration config)
+        public FileSystemService(IConfiguration configuration)
         {
-            this.configuration = config;
-        }
-
-        public string LoadEntityFileToDisplay(
-                                    int entityId,
-                                    string chosenDate,
-                                    string controllerName)
-        {
-            string filePath = string.Empty;
-            SqlDataReader dataReader;
-
-            using (SqlConnection connection = new SqlConnection())
-            {
-                connection.ConnectionString = configuration.GetConnectionString("Pharus_vFinaleConnection");
-                connection.Open();
-                SqlCommand command = connection.CreateCommand();
-                if (controllerName == "Funds")
-                {
-                    command.CommandText = $"select [dbo].[fn_getSpecificFilepath_filefund]" +
-                   $"( {entityId},'{chosenDate}',{fileTypeProspectus}) [FILEPATH]";
-                }
-                else if (controllerName == "SubFunds")
-                {
-                    command.CommandText = $"select [dbo].[fn_getSpecificFilepath_fileSubfund]" +
-                   $"( {entityId},'{chosenDate}',{fileTypeNavReport}) [FILEPATH]";
-                }
-                else if (controllerName == "ShareClasses")
-                {
-                    command.CommandText = $"select [dbo].[fn_getSpecificFilepath_fileShareclass]" +
-                   $"( {entityId},'{chosenDate}',{fileTypeKiid}) [FILEPATH]";
-                }
-
-                dataReader = command.ExecuteReader();
-
-                if (dataReader.HasRows)
-                {
-                    dataReader.Read();
-                    if (!dataReader.IsDBNull(0))
-                    {
-                        filePath = (string)dataReader["FILEPATH"];
-                    }
-
-                    // Throw exception for null columns
-                }
-
-                dataReader.Close();
-                return filePath;
-            }
+            this.configuration = configuration;
         }
 
         public void AddDocumentToSpecificEntity(
@@ -102,7 +50,7 @@
 
             using (SqlConnection connection = new SqlConnection())
             {
-                connection.ConnectionString = configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
                 using (SqlCommand command = new SqlCommand(query))
                 {
                     command.Parameters.AddRange(new[]
@@ -173,7 +121,7 @@
 
             using (SqlConnection connection = new SqlConnection())
             {
-                connection.ConnectionString = configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
                 using (SqlCommand command = new SqlCommand(query))
                 {
                     command.Parameters.AddRange(new[]
@@ -212,9 +160,11 @@
             }
         }
 
-        public void DeleteDocumentMapping(string docName, string controllerName)
+        public void DeleteMapping(string docValue,string agrValue, string controllerName)
         {
             string query = string.Empty;
+
+            // Documents
             if (controllerName == "SubFunds")
             {
                 query = "EXEC delete_subfund_file_byname @file_name";
@@ -224,79 +174,7 @@
                 query = "EXEC delete_shareclass_file_byname @file_name";
             }
 
-            using (SqlConnection connection = new SqlConnection())
-            {
-                connection.ConnectionString = configuration.GetConnectionString("Pharus_vFinaleConnection");
-                using (SqlCommand command = new SqlCommand(query))
-                {
-                    command.Parameters.AddRange(new[]
-                    {
-                        new SqlParameter("@file_name", SqlDbType.NVarChar) { Value = docName },
-                    });                  
-
-                    command.Connection = connection;
-
-                    try
-                    {
-                        command.Connection.Open();
-                        command.ExecuteScalar();
-                    }
-                    catch (SqlException sx)
-                    {
-                        Console.WriteLine(sx.Message);
-                    }
-                }
-            }
-        }
-
-        //public void DeleteDocumentFileDB(string docName, string controllerName)
-        //{
-        //    string query = string.Empty;
-        //    if (controllerName == "SubFunds")
-        //    {
-        //        query = "EXEC delete_subfund_file_byname @file_name";
-        //    }
-        //    else if (controllerName == "ShareClasses")
-        //    {
-        //        query = "EXEC delete_shareclass_file_byname @file_name";
-        //    }
-
-        //    using (SqlConnection connection = new SqlConnection())
-        //    {
-        //        connection.ConnectionString = configuration.GetConnectionString("Pharus_vFinaleConnection");
-        //        using (SqlCommand command = new SqlCommand(query))
-        //        {
-        //            command.Parameters.AddRange(new[]
-        //            {
-        //                new SqlParameter("@file_name", SqlDbType.NVarChar) { Value = docName },
-        //            });
-
-        //            foreach (SqlParameter parameter in command.Parameters)
-        //            {
-        //                if (parameter.Value == null)
-        //                {
-        //                    parameter.Value = DBNull.Value;
-        //                }
-        //            }
-
-        //            command.Connection = connection;
-
-        //            try
-        //            {
-        //                command.Connection.Open();
-        //                command.ExecuteScalar();
-        //            }
-        //            catch (SqlException sx)
-        //            {
-        //                Console.WriteLine(sx.Message);
-        //            }
-        //        }
-        //    }
-        //}
-
-        public void DeleteAgreementMapping(string agrName, string controllerName)
-        {
-            string query = string.Empty;
+            // Agreements
             if (controllerName == "Funds")
             {
                 query = "EXEC delete_agreement_fundfile_byname @file_name";
@@ -312,13 +190,13 @@
 
             using (SqlConnection connection = new SqlConnection())
             {
-                connection.ConnectionString = configuration.GetConnectionString("Pharus_vFinaleConnection");
+                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
                 using (SqlCommand command = new SqlCommand(query))
                 {
                     command.Parameters.AddRange(new[]
                     {
-                        new SqlParameter("@file_name", SqlDbType.NVarChar) { Value = agrName },
-                    });               
+                        new SqlParameter("@file_name", SqlDbType.NVarChar) { Value = docValue },
+                    });
 
                     command.Connection = connection;
 
