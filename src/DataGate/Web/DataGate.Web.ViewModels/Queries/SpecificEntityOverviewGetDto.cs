@@ -20,5 +20,11 @@
         public IEnumerable<DistinctDocViewModel> DistinctDocuments { get; set; }
 
         public IEnumerable<DistinctDocViewModel> DistinctAgreements { get; set; }
+
+        public IEnumerable<string> Headers { get; set; }
+
+        public IEnumerable<string[]> Values { get; set; }
+
+        public IEnumerable<string> HeadersSelection { get; set; }
     }
 }

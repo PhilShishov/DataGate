@@ -1,3 +1,5 @@
+using System.Security.Principal;
+
 namespace DataGate.Web.InputModels.Autocomplete
 {
     public class AutoCompleteInputModel
@@ -5,5 +7,7 @@ namespace DataGate.Web.InputModels.Autocomplete
         public string SelectTerm { get; set; }
 
         public string ControllerToPass { get; set; }
+
+        public int? Id { get; set; }
     }
 }

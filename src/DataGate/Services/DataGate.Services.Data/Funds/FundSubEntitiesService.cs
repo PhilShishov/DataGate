@@ -27,6 +27,7 @@
 
         private readonly ISqlQueryManager sqlManager;
         private readonly IRepository<TbHistorySubFund> repository;
+        private readonly IRepository<TbFundSubFund> fundSubFundrepository;
 
         // ________________________________________________________
         //
@@ -34,10 +35,12 @@
         // to retrieve appsettings.json connection string
         public FundSubEntitiesService(
                     ISqlQueryManager sqlQueryManager,
-                    IRepository<TbHistorySubFund> subFundsRepository)
+                    IRepository<TbHistorySubFund> subFundsRepository,
+                    IRepository<TbFundSubFund> fundSubFundrepository)
         {
             this.repository = subFundsRepository;
             this.sqlManager = sqlQueryManager;
+            this.fundSubFundrepository = fundSubFundrepository;
         }
 
         // ________________________________________________________
@@ -61,6 +64,21 @@
         public IEnumerable<string> GetHeaders(int id, DateTime? date)
         {
             return this.GetSubEntities(id, date, 1, 0).FirstOrDefault();
+        }
+
+        public ISet<string> GetNames(int? id)
+        {
+            var fundSubfunds = this.fundSubFundrepository.All()
+                .Where(fsf => fsf.FId == id);
+
+            var subfunds = this.repository.All();
+
+            var query = subfunds
+                .Join(fundSubfunds, sf => sf.SfId, fsf => fsf.SfId, (sf, fsf) => sf)
+                .Select(sf => sf.SfOfficialSubFundName)
+                .ToHashSet();
+
+            return query;
         }
 
         public IEnumerable<string[]> GetSubEntitiesSelected(

@@ -14,7 +14,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     [Area(GlobalConstants.FundsAreaName)]
-    //[Authorize]
+    [Authorize]
     public class FundSubEntitiesController : BaseController
     {
         private readonly IFundSubEntitiesService service;

@@ -36,7 +36,8 @@
 
     <form asp-controller="FundSubEntities"
           asp-action="Update"
-          method="post">
+          method="post"
+          id="update-form">
 
         <input type="hidden" asp-for="Date">
 
@@ -107,7 +108,7 @@
     <script type="text/javascript" src="~/js/double-scroll/jquery.doubleScroll.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/setDates.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/delete/deleteAgreement.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="~/js/select2/select2-entity-subentity.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/select2/select2-entities.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/select-additional-info/select-fund-addInfo.js" asp-append-version="true"></script>
 
     <script>
@@ -128,6 +129,7 @@
         }, 5000);
 
         $(document).ready(function () {
+            var token = $("#update-form input[name=__RequestVerificationToken]").val();
             // ________________________________________________________
             //
             // Delete selected row from agreements table by confirming
@@ -155,10 +157,10 @@
             //
             // Autocomplete search
 
-            const urlACS = "/FundSubEntities/AutoCompleteSubFundList";
+            const controller = 'FundSubEntities';
             const entityId = @Model.Id;
 
-            passUrlAndEntityToSelect(urlACS, entityId);
+            passControllerToSelect(token, controller, entityId);
 
             // ________________________________________________________
             //
