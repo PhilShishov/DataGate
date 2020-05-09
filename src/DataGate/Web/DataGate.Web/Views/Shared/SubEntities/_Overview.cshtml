@@ -1,0 +1,49 @@
+﻿@using DataGate.Common
+@model DataGate.Web.ViewModels.Entities.EntitiesViewModel
+
+<div class="d-flex w-100 mb-2" id="toolbar-pharus">
+    <partial name="SubEntities/_Select" />
+    <partial name="SubEntities/_Extract" />
+</div>
+<partial name="SubEntities/_BindingTable" />
+<partial name="SubEntities/_ViewTable" />
+<partial name="SubEntities/_Modal" />
+
+<script type="text/javascript" src="~/js/multiselect.js" asp-append-version="true"></script>
+<script type="text/javascript" src="~/js/double-scroll/jquery.doubleScroll.js" asp-append-version="true"></script>
+<script type="text/javascript" src="~/js/autocomplete/loadAutocomplete.js" asp-append-version="true"></script>
+
+<script>
+        // Fade timeout for tempdata messages
+        setTimeout(function () {
+            $('#infoMessage').fadeOut();
+            $('#errorMessage').fadeOut();
+        }, 5000);
+
+        $(document).ready(function () {
+
+            const token = $("#update-form input[name=__RequestVerificationToken]").val();
+            const controller = '@GlobalConstants.FundDetailsControllerName';
+            const entityId = @Model.Id;
+
+            // ________________________________________________________
+            //
+            // Modal multiselect for column selection
+
+            $(".multiselect").multiselect();
+
+            // ________________________________________________________
+            //
+            // Autocomplete search
+
+            loadAutocomplete(token, controller, entityId);
+
+            // ________________________________________________________
+            //
+            // Double top scroll for table
+
+            $('.double-scroll').doubleScroll();
+            $('#tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
+        });
+</script>
+

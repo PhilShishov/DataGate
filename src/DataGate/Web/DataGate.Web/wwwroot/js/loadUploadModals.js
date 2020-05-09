@@ -3,7 +3,7 @@
     var json = { controllerName: controllerName };
     $("#btn-upload-document").click(function () {
         $.ajax({
-            url: '/loadSelectDoc',
+            url: '/loadDocUpload',
             type: "GET",
             data: json,
             contentType: "application/json; charset=utf-8",
@@ -16,7 +16,7 @@
 
     $("#btn-upload-agreement").click(function () {
         $.ajax({
-            url: '/loadSelectAgr',
+            url: '/loadAgrUpload',
             type: "GET",
             data: json,
             contentType: "application/json; charset=utf-8",

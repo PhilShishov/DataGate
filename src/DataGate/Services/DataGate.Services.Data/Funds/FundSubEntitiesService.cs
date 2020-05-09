@@ -19,7 +19,6 @@
         //
         // Table functions names as in DB
         private readonly string sqlFunctionFundId = "[fn_fund_id]";
-        private readonly string sqlFunctionTimelineFund = "[fn_timeline_fund]";
         private readonly string sqlFunctionDistinctDocuments = "[fn_view_distinct_documents_fund]";
         private readonly string sqlFunctionDistinctAgreements = "[fn_view_distinct_agreements_fund]";
         private readonly string sqlFunctionSubFundsForFund = "[fn_active_fund_subfunds]";
@@ -111,13 +110,6 @@
         public IEnumerable<T> GetDistinctAgreements<T>(int id, DateTime? date)
         {
             IEnumerable<DistinctDocDto> dto = this.sqlManager.ExecuteQueryMapping<DistinctDocDto>(this.sqlFunctionDistinctAgreements, id, date);
-
-            return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
-        }
-
-        public IEnumerable<T> GetTimeline<T>(int id)
-        {
-            IEnumerable<TimelineDto> dto = this.sqlManager.ExecuteQueryMapping<TimelineDto>(this.sqlFunctionTimelineFund, id);
 
             return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
         }

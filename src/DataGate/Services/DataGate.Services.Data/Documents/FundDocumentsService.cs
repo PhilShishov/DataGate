@@ -12,7 +12,7 @@
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.Dtos.Queries;
 
-    public class FundDocumentsSelectService : IDocumentsSelectService
+    public class FundDocumentsService : IDocumentsService
     {
         private const int FundFileType = 1;
         private readonly string sqlFunctionAllDocuments = "[fn_view_documents_fund]";
@@ -24,7 +24,7 @@
         private readonly IRepository<TbCompanies> repositoryCompanies;
         private readonly ISqlQueryManager sqlManager;
 
-        public FundDocumentsSelectService(
+        public FundDocumentsService(
                             ISqlQueryManager sqlQueryManager,
                             IRepository<TbDomFileType> repositoryFileType,
                             IRepository<TbDomActivityType> repositoryActivityType,

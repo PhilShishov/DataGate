@@ -25,15 +25,15 @@
         [Route("f/all")]
         public IActionResult All()
         {
-            var model = EntityViewModelSetup.SetGet<EntitiesOverviewViewModel>(this.service);
+            var model = EntitiesVMSetup.SetGet<EntitiesViewModel>(this.service);
 
             return this.View(model);
         }
 
         [HttpPost]
-        public IActionResult All(EntitiesOverviewViewModel model)
+        public IActionResult All([Bind("Date,Values,Headers,HeadersSelection,IsActive,PreSelectedColumns,SelectedColumns,SelectTerm")] EntitiesViewModel model)
         {
-            EntityViewModelSetup.SetPost(model, this.service);
+            EntitiesVMSetup.SetPost(model, this.service);
 
             if (model.Values.Count > 0)
             {
