@@ -2,7 +2,7 @@
 //
 // Autocomplete search entities
 
-function passControllerToSelect(token, controllerToPass, entityId) {
+function loadAutocomplete(token, controllerToPass, entityId) {
     $("#SelectTerm").select2({
         placeholder: "Quick Select",
         theme: "classic",
