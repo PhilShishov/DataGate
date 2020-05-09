@@ -1,5 +1,6 @@
 ﻿namespace DataGate.Services.Data.Documents.Contracts
 {
+    using System;
     using System.Collections.Generic;
 
     public interface IDocumentsSelectService
@@ -11,5 +12,9 @@
         IReadOnlyCollection<string> GetAgreementStatus();
 
         IReadOnlyCollection<string> GetCompanies();
+
+        IEnumerable<T> GetAllDocuments<T>(int id);
+
+        IEnumerable<T> GetAllAgreements<T>(int id, DateTime? date);
     }
 }

@@ -15,7 +15,6 @@
                 return this.Redirect(GlobalConstants.FundAllUrl);
             }
 
-            //return this.Redirect(GlobalConstants.FundAllUrl);
             return this.View();
         }
 

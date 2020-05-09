@@ -1,7 +1,5 @@
 ﻿namespace DataGate.Web.ViewModels.Documents
 {
-    using System.ComponentModel.DataAnnotations;
-
     using DataGate.Services.Mapping;
     using DataGate.Web.Dtos.Queries;
 

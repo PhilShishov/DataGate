@@ -11,7 +11,7 @@
           asp-action="Details"
           method="post"
           id="update-form">
-
+        <input type="text" asp-for="Id" hidden>
         <partial name="SpecificEntity/_Toolbar" />
 
         @if (this.TempData[GlobalConstants.InfoKey] != null)
@@ -49,8 +49,32 @@
                 <option value="AllAgreements">All Agreements</option>
             </select>
         </div>
-
-        <partial name="SpecificEntity/_AllDocuments" />
+        <div id="allDocuments" class="mt-3 d-none">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-secondary p-1">
+                            File Description
+                        </th>
+                        <th class="text-secondary p-1">
+                            Valid From:
+                        </th>
+                        <th class="text-secondary p-1">
+                            Valid Until:
+                        </th>
+                        <th class="text-secondary p-1">
+                            File Name
+                        </th>
+                        <th class="text-secondary p-1">
+                            File Type
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="loadAllDocuments">
+                </tbody>
+            </table>
+            @*<partial name="SpecificEntity/_AllDocuments" />*@
+        </div>
         <partial name="SpecificEntity/_AllAgreements" />
         <partial name="SpecificEntity/_Timeline" />
         <div id="subEntities" class="mt-4">
@@ -68,8 +92,6 @@
     </form>
 </div>
 
-
-
 <form asp-area=""
       asp-controller="Upload"
       asp-action="Document"
@@ -83,11 +105,19 @@
 
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <div id="partial">
+    <div class="modal"
+         id="upDocModal"
+         role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body d-grid justify-content-center" id="docModalBody">
+                </div>
+            </div>
+        </div>
     </div>
 </form>
 
-<form  asp-area=""
+<form asp-area=""
       asp-controller="Upload"
       asp-action="Agreement"
       enctype="multipart/form-data">
@@ -115,16 +145,15 @@
     @await Html.PartialAsync("_ValidationScriptsPartial")
     <script type="text/javascript" src="~/js/multiselect.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/double-scroll/jquery.doubleScroll.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="~/js/setDates.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/delete/deleteAgreement.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/select2/select2-entities.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/loadUploadForms.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/select-additional-info/select-fund-addInfo.js" asp-append-version="true"></script>
 
     <script>
         window.onload = () => {
             manageSideNavBar();
             manageDropdowns();
-            //setDates();
         }
 
         if (window.history.replaceState) {
@@ -140,31 +169,14 @@
         $(document).ready(function () {
 
             var token = $("#update-form input[name=__RequestVerificationToken]").val();
+            const controller = 'FundSubEntities';
+            const entityId = @Model.Id;
 
-            $("#btn-upload-document").click(function () {
-                console.log('here 1');
+            // ________________________________________________________
+            //
+            // Load documents and agreements lists
 
-                $.ajax({
-                    type: "GET",
-                    url: "/f/loadDoc",
-                    success: function (response) {
-                        $('#partial').html(response);
-                       }
-                    })
-            });
-
-
-            $("#btn-upload-agreement").click(function () {
-                console.log('here 1');
-
-                $.ajax({
-                    type: "GET",
-                    url: "/f/loadAgr",
-                    success: function (response) {
-                        $('#agrModalBody').html(response);
-                    }
-                })
-            });
+            passUrlsToLoadModals(token, controller);
 
             // ________________________________________________________
             //
@@ -191,9 +203,6 @@
             // ________________________________________________________
             //
             // Autocomplete search
-
-            const controller = 'FundSubEntities';
-            const entityId = @Model.Id;
 
             passControllerToSelect(token, controller, entityId);
 

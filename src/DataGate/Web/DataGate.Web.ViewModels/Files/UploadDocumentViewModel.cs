@@ -6,6 +6,8 @@
     {
         public string DocumentType { get; set; }
 
+        public string ControllerName { get; set; }
+
         public IFormFile FileToUpload { get; set; }
     }
 }
