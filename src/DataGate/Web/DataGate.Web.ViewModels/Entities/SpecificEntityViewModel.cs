@@ -16,9 +16,7 @@ namespace DataGate.Web.ViewModels.Entities
     using System.Collections.Generic;
 
     using DataGate.Services.Mapping;
-    using DataGate.Web.ViewModels.Documents;
     using DataGate.Web.ViewModels.Queries;
-    using DataGate.Web.ViewModels.Timelines;
 
     public class SpecificEntityViewModel : BaseEntityViewModel, IMapFrom<SpecificEntityOverviewGetDto>
     {
@@ -41,15 +39,9 @@ namespace DataGate.Web.ViewModels.Entities
 
         public string SelectedFileName { get; set; }
 
-        public IEnumerable<TimelineViewModel> Timelines { get; set; }
-
         public IEnumerable<DistinctDocViewModel> DistinctDocuments { get; set; }
 
         public IEnumerable<DistinctDocViewModel> DistinctAgreements { get; set; }
-
-        public IEnumerable<AllAgrViewModel> Agreements { get; set; }
-
-        public IEnumerable<AllDocViewModel> Documents { get; set; }
 
         public DateTime StartConnection { get; set; }
 
