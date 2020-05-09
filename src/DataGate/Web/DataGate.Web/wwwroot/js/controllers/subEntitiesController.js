@@ -13,21 +13,6 @@
                 $("#timelineChanges").addClass('d-none');
                 $("#allDocuments").addClass('d-none');
                 $("#allAgreements").addClass('d-none');
-            } else if (dropdownvalue == 'TimelineChanges') {
-                $("#timelineChanges").removeClass('d-none');
-                $("#subEntities").css('visibility', 'hidden');
-                $("#allDocuments").addClass('d-none');
-                $("#allAgreements").addClass('d-none');
-            } else if (dropdownvalue == 'AllDocuments') {
-                $("#allDocuments").removeClass('d-none');
-                $("#timelineChanges").addClass('d-none');
-                $("#subEntities").css('visibility', 'hidden');
-                $("#allAgreements").addClass('d-none');
-            } else if (dropdownvalue == 'AllAgreements') {
-                $("#allAgreements").removeClass('d-none');
-                $("#timelineChanges").addClass('d-none');
-                $("#subEntities").css('visibility', 'hidden');
-                $("#allDocuments").addClass('d-none');
             } else {
                 $("#subEntities").css('visibility', 'hidden');
                 $("#timelineChanges").addClass('d-none');
@@ -45,6 +30,9 @@
 
     $("#fundAdditionalInfSelect").on('change', function () {
         const dropdownvalue = $("#fundAdditionalInfSelect option:selected").val();
+        const docJson = { id: id, controllerName: controllerName };
+        const agrJson = { id: id, chosenDate: date, controllerName: controllerName };
+
         $(this).find('[selected]').removeAttr('selected')
         $(this).find(':selected').attr('selected', 'selected')
         if (dropdownvalue == 'SubFunds') {
@@ -64,10 +52,11 @@
             $("#allAgreements").addClass('d-none');
 
             $.ajax({
-                type: "GET",
                 url: '/loadAllDoc',
+                type: "GET",
+                data: docJson,
                 contentType: "application/json; charset=utf-8",
-                //headers: { 'X-CSRF-TOKEN': token },
+                headers: { 'X-CSRF-TOKEN': token },
                 success: function (response) {
                     $('#loadAllDocuments').html(response);
                 }
@@ -77,6 +66,16 @@
             $("#timelineChanges").addClass('d-none');
             $("#subEntities").css('visibility', 'hidden');
             $("#allDocuments").addClass('d-none');
+            $.ajax({
+                url: '/loadAllAgr',
+                type: "GET",
+                data: agrJson,
+                contentType: "application/json; charset=utf-8",
+                headers: { 'X-CSRF-TOKEN': token },
+                success: function (response) {
+                    $('#loadAllAgreements').html(response);
+                }
+            });
         } else {
             $("#subEntities").css('visibility', 'hidden');
             $("#timelineChanges").addClass('d-none');

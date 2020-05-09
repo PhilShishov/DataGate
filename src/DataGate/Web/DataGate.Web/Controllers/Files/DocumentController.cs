@@ -1,9 +1,11 @@
 ﻿namespace DataGate.Web.Controllers.Files
 {
+    using System.Collections.Generic;
+
     using DataGate.Common;
     using DataGate.Services.Data.Documents.Contracts;
+    using DataGate.Services.DateTime;
     using DataGate.Web.ViewModels.Documents;
-    using DataGate.Web.ViewModels.Files;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -20,43 +22,54 @@
         }
 
         [Route("loadSelectDoc")]
-        public IActionResult LoadDocument(UploadDocumentViewModel model)
+        public IActionResult LoadDocument(string controllerName)
         {
-            if (model.ControllerName == GlobalConstants.FundSubEntitiesControllerName)
+            if (controllerName == GlobalConstants.FundSubEntitiesControllerName)
             {
                 this.ViewData["DocumentFileTypes"] = this.fundSelectService.GetDocumentsFileTypes();
             }
 
-            return this.PartialView("SpecificEntity/_UploadDocument", model);
+            return this.PartialView("SpecificEntity/_UploadDocument");
         }
 
         [Route("loadSelectAgr")]
-        public IActionResult LoadAgreement(UploadAgreementViewModel model)
+        public IActionResult LoadAgreement(string controllerName)
         {
-            if (model.ControllerName == GlobalConstants.FundSubEntitiesControllerName)
+            if (controllerName == GlobalConstants.FundSubEntitiesControllerName)
             {
                 this.ViewData["AgreementsFileTypes"] = this.fundSelectService.GetAgreementsFileTypes();
                 this.ViewData["AgreementsStatus"] = this.fundSelectService.GetAgreementStatus();
                 this.ViewData["Companies"] = this.fundSelectService.GetCompanies();
             }
 
-            return this.PartialView("SpecificEntity/_UploadAgreement", model);
+            return this.PartialView("SpecificEntity/_UploadAgreement");
         }
 
-        //[Route("loadAllDoc")]
-        //public IActionResult GetAllDocuments(AllDocViewModel model)
-        //{
-        //    model = this.fundSelectService.GetAllDocuments<AllDocViewModel>(model.Id);
+        [Route("loadAllDoc")]
+        public IActionResult GetAllDocuments(int id, string controllerName)
+        {
+            IEnumerable<AllDocViewModel> model = null;
 
-        //    return this.PartialView("SpecificEntity/_AllDocuments", model);
-        //}
+            if (controllerName == GlobalConstants.FundSubEntitiesControllerName)
+            {
+                model = this.fundSelectService.GetAllDocuments<AllDocViewModel>(id);
+            }
 
-        //[Route("loadAllAgr")]
-        //public IActionResult GetAllAgreements(SpecificEntityViewModel model)
-        //{
-        //    model.Agreements = this.fundSelectService.GetAllAgreements<AllAgrViewModel>(model.Id, model.Date);
+            return this.PartialView("SpecificEntity/_AllDocuments", model);
+        }
 
-        //    return this.PartialView("SpecificEntity/_AllDocuments", model);
-        //}
+        [Route("loadAllAgr")]
+        public IActionResult GetAllAgreements(int id, string chosenDate, string controllerName)
+        {
+            IEnumerable<AllAgrViewModel> model = null;
+            var date = DateTimeParser.WebFormat(chosenDate);
+
+            if (controllerName == GlobalConstants.FundSubEntitiesControllerName)
+            {
+                model = this.fundSelectService.GetAllAgreements<AllAgrViewModel>(id, date);
+            }
+
+            return this.PartialView("SpecificEntity/_AllAgreements", model);
+        }
     }
 }
