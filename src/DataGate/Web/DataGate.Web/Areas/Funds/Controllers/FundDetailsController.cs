@@ -3,7 +3,6 @@
     using DataGate.Common;
     using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Services.Data.ViewSetups;
-    using DataGate.Services.DateTime;
     using DataGate.Web.Controllers;
     using DataGate.Web.ViewModels.Entities;
 
@@ -25,13 +24,13 @@
         [Route("f/{id}/{date}")]
         public IActionResult ByIdAndDate(int id, string date)
         {
-            var model = SpecificViewModelSetup.SetGet<SpecificEntityViewModel>(id, date, this.service);
+            var model = SpecificVMSetup.SetGet<SpecificEntityViewModel>(id, date, this.service);
 
             return this.View(model);
         }
 
         [HttpPost]
-        public IActionResult UpdateEntity(SpecificEntityViewModel model)
+        public IActionResult Update([Bind("Command,Date,Id")] SpecificEntityViewModel model)
         {
             if (model.Command == GlobalConstants.CommandUpdateTable)
             {
@@ -41,30 +40,30 @@
             return this.ShowError(ErrorMessages.UnsuccessfulUpdate, GlobalConstants.FundDetailsRouteName, new { model.Id, model.Date });
         }
 
-        [HttpPost]
-        [ActionName("Details")]
-        public IActionResult UpdateSubEntities(SpecificEntityViewModel model)
-        {
-            var date = DateTimeParser.WebFormat(model.Date);
-            model.Entity = this.service.GetByIdAndDate(model.Id, date);
-            model.DistinctDocuments = this.service.GetDistinctDocuments<DistinctDocViewModel>(model.Id, date);
-            model.DistinctAgreements = this.service.GetDistinctAgreements<DistinctDocViewModel>(model.Id, date);
+        //[HttpPost]
+        //[ActionName("Details")]
+        //public IActionResult UpdateSubEntities(SpecificEntityViewModel model)
+        //{
+        //    var date = DateTimeParser.WebFormat(model.Date);
+        //    model.Entity = this.service.GetByIdAndDate(model.Id, date);
+        //    model.DistinctDocuments = this.service.GetDistinctDocuments<DistinctDocViewModel>(model.Id, date);
+        //    model.DistinctAgreements = this.service.GetDistinctAgreements<DistinctDocViewModel>(model.Id, date);
 
-            if (model.Command == GlobalConstants.CommandResetTable)
-            {
-                model.SelectTerm = GlobalConstants.DefaultAutocompleteSelectTerm;
-                return this.View(model);
-            }
+        //    if (model.Command == GlobalConstants.CommandResetTable)
+        //    {
+        //        model.SelectTerm = GlobalConstants.DefaultAutocompleteSelectTerm;
+        //        return this.View(model);
+        //    }
 
-            SpecificViewModelSetup.SetPost(model, this.service);
+        //    SpecificViewModelSetup.SetPost(model, this.service);
 
-            if (model.Entity != null && model.Values.Count > 0)
-            {
-                this.TempData[GlobalConstants.InfoKey] = InfoMessages.SuccessfulUpdate;
-                return this.View(model);
-            }
+        //    if (model.Entity != null && model.Values.Count > 0)
+        //    {
+        //        this.TempData[GlobalConstants.InfoKey] = InfoMessages.SuccessfulUpdate;
+        //        return this.View(model);
+        //    }
 
-            return this.ShowError(ErrorMessages.UnsuccessfulUpdate, GlobalConstants.FundDetailsRouteName, new { model.Id, model.Date });
-        }
+        //    return this.ShowError(ErrorMessages.UnsuccessfulUpdate, GlobalConstants.FundDetailsRouteName, new { model.Id, model.Date });
+        //}
     }
 }

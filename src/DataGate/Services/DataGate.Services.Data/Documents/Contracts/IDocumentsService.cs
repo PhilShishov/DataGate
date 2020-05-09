@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    public interface IDocumentsSelectService
+    public interface IDocumentsService
     {
         IReadOnlyCollection<string> GetDocumentsFileTypes();
 

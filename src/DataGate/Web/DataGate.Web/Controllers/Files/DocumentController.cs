@@ -13,33 +13,33 @@
     [Authorize]
     public class DocumentController : Controller
     {
-        private readonly IDocumentsSelectService fundSelectService;
+        private readonly IDocumentsService fundService;
 
         public DocumentController(
-                        IDocumentsSelectService fundSelectService)
+                        IDocumentsService fundService)
         {
-            this.fundSelectService = fundSelectService;
+            this.fundService = fundService;
         }
 
-        [Route("loadSelectDoc")]
-        public IActionResult LoadDocument(string controllerName)
+        [Route("loadDocUpload")]
+        public IActionResult LoadDocumentUpload(string controllerName)
         {
-            if (controllerName == GlobalConstants.FundSubEntitiesControllerName)
+            if (controllerName == GlobalConstants.FundDetailsControllerName)
             {
-                this.ViewData["DocumentFileTypes"] = this.fundSelectService.GetDocumentsFileTypes();
+                this.ViewData["DocumentFileTypes"] = this.fundService.GetDocumentsFileTypes();
             }
 
             return this.PartialView("SpecificEntity/_UploadDocument");
         }
 
-        [Route("loadSelectAgr")]
-        public IActionResult LoadAgreement(string controllerName)
+        [Route("loadAgrUpload")]
+        public IActionResult LoadAgreementUpload(string controllerName)
         {
-            if (controllerName == GlobalConstants.FundSubEntitiesControllerName)
+            if (controllerName == GlobalConstants.FundDetailsControllerName)
             {
-                this.ViewData["AgreementsFileTypes"] = this.fundSelectService.GetAgreementsFileTypes();
-                this.ViewData["AgreementsStatus"] = this.fundSelectService.GetAgreementStatus();
-                this.ViewData["Companies"] = this.fundSelectService.GetCompanies();
+                this.ViewData["AgreementsFileTypes"] = this.fundService.GetAgreementsFileTypes();
+                this.ViewData["AgreementsStatus"] = this.fundService.GetAgreementStatus();
+                this.ViewData["Companies"] = this.fundService.GetCompanies();
             }
 
             return this.PartialView("SpecificEntity/_UploadAgreement");
@@ -50,9 +50,9 @@
         {
             IEnumerable<AllDocViewModel> model = null;
 
-            if (controllerName == GlobalConstants.FundSubEntitiesControllerName)
+            if (controllerName == GlobalConstants.FundDetailsControllerName)
             {
-                model = this.fundSelectService.GetAllDocuments<AllDocViewModel>(id);
+                model = this.fundService.GetAllDocuments<AllDocViewModel>(id);
             }
 
             return this.PartialView("SpecificEntity/_AllDocuments", model);
@@ -64,9 +64,9 @@
             IEnumerable<AllAgrViewModel> model = null;
             var date = DateTimeParser.WebFormat(chosenDate);
 
-            if (controllerName == GlobalConstants.FundSubEntitiesControllerName)
+            if (controllerName == GlobalConstants.FundDetailsControllerName)
             {
-                model = this.fundSelectService.GetAllAgreements<AllAgrViewModel>(id, date);
+                model = this.fundService.GetAllAgreements<AllAgrViewModel>(id, date);
             }
 
             return this.PartialView("SpecificEntity/_AllAgreements", model);

@@ -27,6 +27,7 @@ namespace DataGate.Web.ViewModels.Entities
         // data from DB for a specific entity
         public IEnumerable<string[]> Entity { get; set; }
 
+        // TODO create ContainerViewModel
         public string Container { get; set; }
 
         public string ContainerId { get; set; }
@@ -37,8 +38,6 @@ namespace DataGate.Web.ViewModels.Entities
 
         //public IEnumerable<string> TSTypeProviders { get; set; }
 
-        public string SelectedFileName { get; set; }
-
         public IEnumerable<DistinctDocViewModel> DistinctDocuments { get; set; }
 
         public IEnumerable<DistinctDocViewModel> DistinctAgreements { get; set; }
@@ -47,8 +46,7 @@ namespace DataGate.Web.ViewModels.Entities
 
         public DateTime? EndConnection { get; set; }
 
+        // TODO remove scrollto because of partial
         public string SelectAdditionalInf { get; set; }
-
-        public string ControllerName { get; set; }
     }
 }

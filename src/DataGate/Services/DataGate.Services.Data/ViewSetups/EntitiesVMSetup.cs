@@ -11,7 +11,7 @@
     using DataGate.Web.ViewModels.Entities;
     using DataGate.Web.ViewModels.Queries;
 
-    public static class EntityViewModelSetup
+    public static class EntitiesVMSetup
     {
         public static T SetGet<T>(IEntityService service)
         {
@@ -30,9 +30,11 @@
             return AutoMapperConfig.MapperInstance.Map<T>(entity);
         }
 
-        public static void SetPost(EntitiesOverviewViewModel model, IEntityService service)
+        public static void SetPost(EntitiesViewModel model, IEntityService service)
         {
-            model.HeadersSelection = service.GetHeaders().ToList();
+            var headers = service.GetHeaders().ToList();
+            model.Headers = headers;
+            model.HeadersSelection = headers;
 
             bool isInSelectionMode = model.SelectedColumns != null ? true : false;
 

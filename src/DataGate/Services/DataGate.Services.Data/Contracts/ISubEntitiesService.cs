@@ -7,8 +7,6 @@ namespace DataGate.Services.Data.Contracts
     {
         IEnumerable<string[]> GetByIdAndDate(int id, DateTime? date);
 
-        IEnumerable<T> GetTimeline<T>(int id);
-
         IEnumerable<T> GetDistinctDocuments<T>(int id, DateTime? date);
 
         IEnumerable<T> GetDistinctAgreements<T>(int id, DateTime? date);

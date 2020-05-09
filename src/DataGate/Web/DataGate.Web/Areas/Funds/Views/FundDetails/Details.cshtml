@@ -9,8 +9,8 @@
 <div class="push justify-content-between">
     <form asp-controller="FundDetails"
           asp-action="Details"
-          method="post"
-          id="update-form">
+          method="post">
+
         <input type="text" asp-for="Id" hidden>
         <input asp-for="Date" type="date" hidden>
 
@@ -36,46 +36,47 @@
         </div>
 
         <hr class="bg-pharus hr-2" />
-
-        <partial name="SpecificEntity/_BindingEntities" />
-
-        <div class="row ml-3" id="div-select-addInfo">
-            <label class="text-torshia m-1 pr-3">FUND ADDITIONAL INFORMATION</label>
-            <select class="custom-select-lg select-pharus form-control input-sm"
-                    id="fundAdditionalInfSelect"
-                    asp-for="SelectAdditionalInf">
-                <option value="" selected disabled>Select</option>
-                <option value="SubFunds">Sub Funds</option>
-                <option value="TimelineChanges">Timeline Changes</option>
-                <option value="AllDocuments">All Documents</option>
-                <option value="AllAgreements">All Agreements</option>
-            </select>
-        </div>
-        <div id="allDocuments" class="mt-3 d-none">
-            <table id="loadAllDocuments" class="table table-bordered table-hover">
-            </table>
-        </div>
-
-        <div id="allAgreements" class="mt-3 d-none">
-            <table id="loadAllAgreements" class="table table-bordered table-hover">
-            </table>
-        </div>
-
-        @*<partial name="SpecificEntity/_AllAgreements" />
-        <partial name="SpecificEntity/_Timeline" />*@
-        <div id="subEntities" class="mt-4">
-            <div>
-                <div class="d-flex w-100 mb-2" id="toolbar-pharus">
-                    <partial name="SpecificEntity/SubEntities/_Select" />
-                    <partial name="SpecificEntity/SubEntities/_Extract" />
-                </div>
-            </div>
-
-            <partial name="SpecificEntity/SubEntities/_BindingTable" />
-            <partial name="SpecificEntity/SubEntities/_ViewTable" />
-            <partial name="SpecificEntity/SubEntities/_Modal" />
-        </div>
     </form>
+
+    @*<partial name="SpecificEntity/_BindingEntities" />*@
+
+    <div class="row ml-3" id="div-select-addInfo">
+        <label class="text-torshia m-1 pr-3">FUND ADDITIONAL INFORMATION</label>
+        <select class="custom-select-lg select-pharus form-control input-sm"
+                id="fundAdditionalInfSelect"
+                asp-for="SelectAdditionalInf">
+            <option value="" selected disabled>Select</option>
+            <option value="SubFunds">Sub Funds</option>
+            <option value="TimelineChanges">Timeline Changes</option>
+            <option value="AllDocuments">All Documents</option>
+            <option value="AllAgreements">All Agreements</option>
+        </select>
+    </div>
+    <form id="load-form" method="get"></form>
+
+    <div id="allDocuments" class="mt-3 d-none">
+        <table id="loadAllDocuments" class="table table-bordered table-hover">
+        </table>
+    </div>
+
+    <div id="allAgreements" class="mt-3 d-none">
+        <table id="loadAllAgreements" class="table table-bordered table-hover">
+        </table>
+    </div>
+
+    <div class="container py-5" id="timelineChanges">
+        <div class="row" id="loadTimelines">
+        </div>
+    </div>
+
+    <div id="subEntities" class="mt-4">
+        <form asp-controller="FundSubFunds"
+              asp-action="Update"
+              method="post"
+              id="update-form"></form>
+        <div id="loadSubEntities">
+        </div>
+    </div>
 </div>
 
 <form asp-area=""
@@ -129,10 +130,7 @@
 
 @section Scripts{
     @await Html.PartialAsync("_ValidationScriptsPartial")
-    <script type="text/javascript" src="~/js/multiselect.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="~/js/double-scroll/jquery.doubleScroll.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/delete/deleteAgreement.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="~/js/autocomplete/loadAutocomplete.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/loadUploadModals.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/controllers/subEntitiesController.js" asp-append-version="true"></script>
 
@@ -154,8 +152,8 @@
 
         $(document).ready(function () {
 
-            const token = $("#update-form input[name=__RequestVerificationToken]").val();
-            const controller = 'FundSubEntities';
+            const token = $("#load-form input[name=__RequestVerificationToken]").val();
+            const controller = '@GlobalConstants.FundDetailsControllerName';
             const entityId = @Model.Id;
             const date = '@Model.Date';
 
@@ -167,9 +165,9 @@
 
             // ________________________________________________________
             //
-            // Load documents and agreements upload lists
+            // Load all documents, agreements and timelines
 
-            loadAddInfo(token, entityId, date, controller );
+            loadAddInfo(token, entityId, date, controller);
 
             // ________________________________________________________
             //
@@ -182,29 +180,10 @@
             //
             // Automatic Scroll if selected value
 
-            const JumpTo = document.getElementById('fundAdditionalInfSelect');
-            if (JumpTo.value == "SubFunds") {
-                $(this).scrollTop($(JumpTo).position().top);
-            }
-
-            // ________________________________________________________
-            //
-            // Modal multiselect for column selection
-
-            $(".multiselect").multiselect();
-
-            // ________________________________________________________
-            //
-            // Autocomplete search
-
-            loadAutocomplete(token, controller, entityId);
-
-            // ________________________________________________________
-            //
-            // Double top scroll for table
-
-            $('.double-scroll').doubleScroll();
-            $('#tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
+            //const JumpTo = document.getElementById('fundAdditionalInfSelect');
+            //if (JumpTo.value == "SubFunds") {
+            //    $(this).scrollTop($(JumpTo).position().top);
+            //}
         });
     </script>
 }

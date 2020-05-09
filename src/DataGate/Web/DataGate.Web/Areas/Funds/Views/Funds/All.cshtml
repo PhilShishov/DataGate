@@ -1,5 +1,5 @@
 ﻿@using DataGate.Common
-@model DataGate.Web.ViewModels.Entities.EntitiesOverviewViewModel
+@model DataGate.Web.ViewModels.Entities.EntitiesViewModel
 
 @{
     ViewData["Title"] = GlobalConstants.FundsControllerName;
@@ -78,7 +78,7 @@
             // ________________________________________________________
             //
             // Autocomplete search
-            const controller = 'Funds';
+            const controller = '@GlobalConstants.FundsControllerName';
             loadAutocomplete(token, controller, entityId = null);
 
             // ________________________________________________________

@@ -1,21 +1,34 @@
 ﻿namespace DataGate.Web.Controllers
 {
-    using DataGate.Services.Data.Funds.Contracts;
+    using System.Collections.Generic;
+
+    using DataGate.Common;
+    using DataGate.Services.Data.Timelines.Contracts;
+    using DataGate.Web.ViewModels.Timelines;
 
     using Microsoft.AspNetCore.Mvc;
 
     public class TimelineController : Controller
     {
-        private readonly IFundSubEntitiesService fundService;
+        private readonly ITimelinesService fundService;
 
-        public TimelineController(IFundSubEntitiesService fundService)
+        public TimelineController(
+                        ITimelinesService fundService)
         {
             this.fundService = fundService;
         }
 
-        public IActionResult Index()
+        [Route("loadTimelines")]
+        public IActionResult GetAllTimelines(int id, string controllerName)
         {
-            return View();
+            IEnumerable<TimelineViewModel> model = null;
+
+            if (controllerName == GlobalConstants.FundDetailsControllerName)
+            {
+                model = this.fundService.GetTimeline<TimelineViewModel>(id);
+            }
+
+            return this.PartialView("SpecificEntity/_Timeline", model);
         }
     }
 }
