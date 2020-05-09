@@ -1,4 +1,4 @@
-﻿function passUrlsToLoadModals(token, controllerName) {
+﻿function loadUploadModals(token, controllerName) {
     //import { setDates } from './setDates.js';
     var json = { controllerName: controllerName };
     $("#btn-upload-document").click(function () {

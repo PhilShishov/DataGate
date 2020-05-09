@@ -1,4 +1,4 @@
-﻿function subEntitiesController(token, id, date) {
+﻿function loadAddInfo(token, id, date, controllerName) {
     // ________________________________________________________
     //
     // Select menu for fund additional information -

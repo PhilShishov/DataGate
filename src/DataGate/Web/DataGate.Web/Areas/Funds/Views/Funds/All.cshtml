@@ -47,7 +47,7 @@
 
 @section Scripts{
     <script type="text/javascript" src="~/js/multiselect.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="~/js/select2/select2-entities.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/autocomplete/loadAutocomplete.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/double-scroll/jquery.doubleScroll.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/submitForm.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/buttonRedirect.js" asp-append-version="true"></script>
@@ -79,7 +79,7 @@
             //
             // Autocomplete search
             const controller = 'Funds';
-            passControllerToSelect(token, controller, entityId = null);
+            loadAutocomplete(token, controller, entityId = null);
 
             // ________________________________________________________
             //
