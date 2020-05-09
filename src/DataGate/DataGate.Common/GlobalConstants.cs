@@ -91,6 +91,7 @@
 
         // Toolbar Commands
         public const string CommandUpdateTable = "Update Table";
+        public const string CommandResetTable = "Reset";
         public const string CommandExtractExcel = "Excel";
         public const string CommandExtractPdf = "PDF";
     }

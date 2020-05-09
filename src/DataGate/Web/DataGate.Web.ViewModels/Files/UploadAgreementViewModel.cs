@@ -6,6 +6,8 @@
 
     public class UploadAgreementViewModel
     {
+        public string ControllerName { get; set; }
+
         public string AgrType { get; set; }
 
         public DateTime ContractDate { get; set; }

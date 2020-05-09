@@ -21,9 +21,7 @@
         private readonly string sqlFunctionFundId = "[fn_fund_id]";
         private readonly string sqlFunctionTimelineFund = "[fn_timeline_fund]";
         private readonly string sqlFunctionDistinctDocuments = "[fn_view_distinct_documents_fund]";
-        private readonly string sqlFunctionAllDocuments = "[fn_view_documents_fund]";
         private readonly string sqlFunctionDistinctAgreements = "[fn_view_distinct_agreements_fund]";
-        private readonly string sqlFunctionAllAgreements = "[fn_view_agreements_fund]";
         private readonly string sqlFunctionSubFundsForFund = "[fn_active_fund_subfunds]";
 
         private readonly ISqlQueryManager sqlManager;
@@ -110,23 +108,9 @@
             return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
         }
 
-        public IEnumerable<T> GetAllDocuments<T>(int id)
-        {
-            IEnumerable<AllDocDto> dto = this.sqlManager.ExecuteQueryMapping<AllDocDto>(this.sqlFunctionAllDocuments, id);
-
-            return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
-        }
-
         public IEnumerable<T> GetDistinctAgreements<T>(int id, DateTime? date)
         {
             IEnumerable<DistinctDocDto> dto = this.sqlManager.ExecuteQueryMapping<DistinctDocDto>(this.sqlFunctionDistinctAgreements, id, date);
-
-            return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
-        }
-
-        public IEnumerable<T> GetAllAgreements<T>(int id, DateTime? date)
-        {
-            IEnumerable<AllAgrDto> dto = this.sqlManager.ExecuteQueryMapping<AllAgrDto>(this.sqlFunctionAllAgreements, id, date);
 
             return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
         }

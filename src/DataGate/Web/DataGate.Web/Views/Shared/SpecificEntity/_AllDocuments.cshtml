@@ -1,58 +1,33 @@
-﻿@*@model DataGate.Web.ViewModels.Entities.SpecificEntityViewModel
+﻿@model DataGate.Web.ViewModels.Entities.SpecificEntityViewModel
 @{
     var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
 }
 
-<div id="allDocuments" class="mt-3 d-none">
-    <table class="table table-bordered table-hover">
-        <thead>
-            <tr>
-                <th class="text-secondary p-1">
-                    File Description
-                </th>
-                <th class="text-secondary p-1">
-                    Valid From:
-                </th>
-                <th class="text-secondary p-1">
-                    Valid Until:
-                </th>
-                <th class="text-secondary p-1">
-                    File Name
-                </th>
-                <th class="text-secondary p-1">
-                    File Type
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var document in Model.Documents)
-            {
-            <tr>
-                <td class="p-1">
-                    @document.Description
-                </td>
-                <td class="p-1">
-                    @document.ValidFrom
-                </td>
-                <td class="p-1">
-                    @document.ValidUntil
-                </td>
-                <td class="p-1">
-                    <button class="btn-link-pharus text-left"
-                            formtarget="_blank"
-                            type="submit"
-                            formaction="/@controllerName/ReadDocument"
-                            name="pdfValue"
-                            value="@document.Name">
-                        @System.IO.Path.GetFileNameWithoutExtension(document.Name)
-                    </button>
-                </td>
-                <td class="p-1">
-                    @document.Type
-                </td>
+@foreach (var document in Model.Documents)
+{
+    <tr>
+        <td class="p-1">
+            @document.Description
+        </td>
+        <td class="p-1">
+            @document.ValidFrom
+        </td>
+        <td class="p-1">
+            @document.ValidUntil
+        </td>
+        <td class="p-1">
+            <button class="btn-link-pharus text-left"
+                    formtarget="_blank"
+                    type="submit"
+                    formaction="/@controllerName/ReadDocument"
+                    name="pdfValue"
+                    value="@document.Name">
+                @System.IO.Path.GetFileNameWithoutExtension(document.Name)
+            </button>
+        </td>
+        <td class="p-1">
+            @document.Type
+        </td>
 
-            </tr>
-            }
-        </tbody>
-    </table>
-</div>*@
+    </tr>
+}

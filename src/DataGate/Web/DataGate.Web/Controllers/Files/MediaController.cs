@@ -5,7 +5,6 @@
 
     using DataGate.Common;
     using DataGate.Services.DateTime;
-    using DataGate.Web.Filters;
     using DataGate.Web.InputModels.Files;
     using DataGate.Web.Utilities;
 
@@ -78,8 +77,6 @@
         {
             if (!string.IsNullOrEmpty(controllerName))
             {
-                //string controllerName = this.ControllerContext.RouteData.Values["controller"].ToString();
-
                 string path = this.GetTargetPath(ref docValue, agrValue, controllerName);
 
                 if (System.IO.File.Exists(path))

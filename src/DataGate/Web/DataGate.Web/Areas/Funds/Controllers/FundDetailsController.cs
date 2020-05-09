@@ -6,6 +6,7 @@
     using DataGate.Services.DateTime;
     using DataGate.Web.Controllers;
     using DataGate.Web.ViewModels.Entities;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -20,7 +21,6 @@
             this.service = fundSubFundsService;
         }
 
-        [HttpGet]
         [ActionName("Details")]
         [Route("f/{id}/{date}")]
         public IActionResult ByIdAndDate(int id, string date)
@@ -50,7 +50,7 @@
             model.DistinctDocuments = this.service.GetDistinctDocuments<DistinctDocViewModel>(model.Id, date);
             model.DistinctAgreements = this.service.GetDistinctAgreements<DistinctDocViewModel>(model.Id, date);
 
-            if (model.Command == "Reset")
+            if (model.Command == GlobalConstants.CommandResetTable)
             {
                 model.SelectTerm = GlobalConstants.DefaultAutocompleteSelectTerm;
                 return this.View(model);

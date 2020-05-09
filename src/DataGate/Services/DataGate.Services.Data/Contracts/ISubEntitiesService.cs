@@ -11,11 +11,7 @@ namespace DataGate.Services.Data.Contracts
 
         IEnumerable<T> GetDistinctDocuments<T>(int id, DateTime? date);
 
-        IEnumerable<T> GetAllDocuments<T>(int id);
-
         IEnumerable<T> GetDistinctAgreements<T>(int id, DateTime? date);
-
-        IEnumerable<T> GetAllAgreements<T>(int id, DateTime? date);
 
         void ThrowEntityNotFoundExceptionIfIdDoesNotExist(int id);
     }
