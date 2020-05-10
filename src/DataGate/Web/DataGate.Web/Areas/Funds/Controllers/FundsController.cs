@@ -14,9 +14,9 @@
     [Authorize]
     public class FundsController : BaseController
     {
-        private readonly IFundsService service;
+        private readonly IFundService service;
 
-        public FundsController(IFundsService fundsService)
+        public FundsController(IFundService fundsService)
         {
             this.service = fundsService;
         }

@@ -1,10 +1,10 @@
-namespace DataGate.Services.Data.Contracts
+namespace DataGate.Services.Data.Common
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public interface IEntityAutocompleteService
     {
-        Task<ISet<string>> GetNames(int? id = null);
+        Task<ISet<string>> GetNamesAsync(int? id = null);
     }
 }

@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using DataGate.Common;
     using DataGate.Services.AutoComplete;
     using DataGate.Services.Data.Funds.Contracts;
@@ -12,12 +13,12 @@
 
     public class AutoCompleteController : Controller
     {
-        private readonly IFundsService fundsService;
-        private readonly IFundSubEntitiesService fundSubFundservice;
+        private readonly IFundService fundsService;
+        private readonly IFundSubFundsService fundSubFundservice;
 
         public AutoCompleteController(
-                            IFundsService fundsService,
-                            IFundSubEntitiesService fundSubFundservice)
+                            IFundService fundsService,
+                            IFundSubFundsService fundSubFundservice)
         {
             this.fundsService = fundsService;
             this.fundSubFundservice = fundSubFundservice;
@@ -32,11 +33,11 @@
             {
                 if (input.ControllerToPass == GlobalConstants.ShareClassesControllerName)
                 {
-                    //result = AutoCompleteService.GetResult(input.SelectTerm, this.fundsService);
+                    //result = await AutoCompleteService.GetResult(input.SelectTerm, this.fundsService);
                 }
                 else if (input.ControllerToPass == GlobalConstants.SubFundsControllerName)
                 {
-                    //result = AutoCompleteService.GetResult(input.SelectTerm, this.service);
+                    //result = await AutoCompleteService.GetResult(input.SelectTerm, this.service);
                 }
                 else if (input.ControllerToPass == GlobalConstants.FundsControllerName)
                 {
@@ -54,11 +55,11 @@
 
             if (input.ControllerToPass == GlobalConstants.SubFundShareClassesControllerName)
             {
-                //result = AutoCompleteService.GetResult(input.SelectTerm, this.fundsService, input.Id);
+                //result = await AutoCompleteService.GetResult(input.SelectTerm, this.fundsService, input.Id);
             }
             else if (input.ControllerToPass == GlobalConstants.FundSubFundsControllerName)
             {
-                //result = await AutoCompleteService.GetResult(input.SelectTerm, this.fundSubFundservice, input.Id);
+                result = await AutoCompleteService.GetResult(input.SelectTerm, this.fundSubFundservice, input.Id);
             }
 
             var modifiedDataId = result.Select(f => new

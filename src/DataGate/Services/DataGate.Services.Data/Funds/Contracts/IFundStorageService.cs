@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-
-namespace DataGate.Services.Data.Funds.Contracts
+﻿namespace DataGate.Services.Data.Funds.Contracts
 {
-    public interface IFundsStorageService
+    using System.Collections.Generic;
+
+    public interface IFundStorageService
     {
         IEnumerable<T> GetAllNames<T>();
 

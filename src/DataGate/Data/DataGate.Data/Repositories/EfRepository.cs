@@ -3,7 +3,7 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using DataGate.Common.Exceptions;
     using DataGate.Data.Common.Repositories;
 
     using Microsoft.EntityFrameworkCore;
@@ -26,6 +26,18 @@
         public virtual IQueryable<TEntity> AllAsNoTracking() => this.DbSet.AsNoTracking();
 
         public virtual Task AddAsync(TEntity entity) => this.DbSet.AddAsync(entity).AsTask();
+
+        public virtual async Task<TEntity> FindAsync(object id)
+        {
+            TEntity model = await this.DbSet.FindAsync(id);
+
+            if (model == null)
+            {
+                throw new EntityNotFoundException(typeof(TEntity).Name);
+            }
+
+            return model;
+        }
 
         public virtual void Update(TEntity entity)
         {

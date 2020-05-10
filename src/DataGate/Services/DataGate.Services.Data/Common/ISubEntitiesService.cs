@@ -1,11 +1,11 @@
-﻿namespace DataGate.Services.Data.Contracts
+﻿namespace DataGate.Services.Data.Common
 {
     using System;
     using System.Collections.Generic;
 
     using DataGate.Web.ViewModels.Queries;
 
-    public interface IEntitySubEntitiesService
+    public interface ISubEntitiesService
     {
         IEnumerable<string[]> GetSubEntities(int id, DateTime? date, int? take = null, int skip = 0);
 

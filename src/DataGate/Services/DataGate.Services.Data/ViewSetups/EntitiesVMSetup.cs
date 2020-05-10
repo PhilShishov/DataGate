@@ -4,7 +4,7 @@
     using System.Linq;
 
     using DataGate.Common;
-    using DataGate.Services.Data.Contracts;
+    using DataGate.Services.Data.Common;
     using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
     using DataGate.Web.Dtos.Queries;

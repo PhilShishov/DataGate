@@ -4,7 +4,7 @@
     using System.Linq;
 
     using DataGate.Common;
-    using DataGate.Services.Data.Contracts;
+    using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
     using DataGate.Web.ViewModels.Entities;
@@ -15,7 +15,7 @@
         private const int IndexStartConnectionInSQLTable = 0;
         private const int IndexEndConnectionInSQLTable = 1;
 
-        public static T SetGet<T>(int id, string chosenDate, ISubEntitiesService service)
+        public static T SetGet<T>(int id, string chosenDate, IFundDetailsService service)
         {
             service.ThrowEntityNotFoundExceptionIfIdDoesNotExist(id);
 
