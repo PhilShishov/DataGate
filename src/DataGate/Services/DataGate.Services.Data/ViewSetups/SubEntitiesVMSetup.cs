@@ -2,7 +2,7 @@
 {
     using System.Linq;
 
-    using DataGate.Services.Data.Contracts;
+    using DataGate.Services.Data.Common;
     using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
     using DataGate.Web.ViewModels.Entities;
@@ -10,7 +10,7 @@
 
     public class SubEntitiesVMSetup
     {
-        public static void SetPost(EntitiesViewModel model, IEntitySubEntitiesService service)
+        public static void SetPost(EntitiesViewModel model, ISubEntitiesService service)
         {
             var date = DateTimeParser.WebFormat(model.Date);
             bool isInSelectionMode = model.SelectedColumns != null ? true : false;

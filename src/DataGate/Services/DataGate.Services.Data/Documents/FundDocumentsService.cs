@@ -12,7 +12,7 @@
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.Dtos.Queries;
 
-    public class FundDocumentsService : IDocumentsService
+    public class FundDocumentsService : IDocumentService
     {
         private const int FundFileType = 1;
         private readonly string sqlFunctionAllDocuments = "[fn_view_documents_fund]";

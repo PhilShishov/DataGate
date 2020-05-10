@@ -16,9 +16,9 @@
     [Authorize]
     public class FundSubFundsController : BaseController
     {
-        private readonly IFundSubEntitiesService subFundsService;
+        private readonly IFundSubFundsService subFundsService;
 
-        public FundSubFundsController(IFundSubEntitiesService subFundsService)
+        public FundSubFundsController(IFundSubFundsService subFundsService)
         {
             this.subFundsService = subFundsService;
         }

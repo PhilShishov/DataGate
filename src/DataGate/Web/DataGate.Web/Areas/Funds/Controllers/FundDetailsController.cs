@@ -13,9 +13,9 @@
     [Authorize]
     public class FundDetailsController : BaseController
     {
-        private readonly IFundSubEntitiesService service;
+        private readonly IFundDetailsService service;
 
-        public FundDetailsController(IFundSubEntitiesService fundSubFundsService)
+        public FundDetailsController(IFundDetailsService fundSubFundsService)
         {
             this.service = fundSubFundsService;
         }
@@ -39,31 +39,5 @@
 
             return this.ShowError(ErrorMessages.UnsuccessfulUpdate, GlobalConstants.FundDetailsRouteName, new { model.Id, model.Date });
         }
-
-        //[HttpPost]
-        //[ActionName("Details")]
-        //public IActionResult UpdateSubEntities(SpecificEntityViewModel model)
-        //{
-        //    var date = DateTimeParser.WebFormat(model.Date);
-        //    model.Entity = this.service.GetByIdAndDate(model.Id, date);
-        //    model.DistinctDocuments = this.service.GetDistinctDocuments<DistinctDocViewModel>(model.Id, date);
-        //    model.DistinctAgreements = this.service.GetDistinctAgreements<DistinctDocViewModel>(model.Id, date);
-
-        //    if (model.Command == GlobalConstants.CommandResetTable)
-        //    {
-        //        model.SelectTerm = GlobalConstants.DefaultAutocompleteSelectTerm;
-        //        return this.View(model);
-        //    }
-
-        //    SpecificViewModelSetup.SetPost(model, this.service);
-
-        //    if (model.Entity != null && model.Values.Count > 0)
-        //    {
-        //        this.TempData[GlobalConstants.InfoKey] = InfoMessages.SuccessfulUpdate;
-        //        return this.View(model);
-        //    }
-
-        //    return this.ShowError(ErrorMessages.UnsuccessfulUpdate, GlobalConstants.FundDetailsRouteName, new { model.Id, model.Date });
-        //}
     }
 }

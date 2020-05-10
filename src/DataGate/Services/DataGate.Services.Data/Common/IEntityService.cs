@@ -6,7 +6,7 @@
 // Author:  Philip Shishov
 
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-namespace DataGate.Services.Data.Contracts
+namespace DataGate.Services.Data.Common
 {
     using System;
     using System.Collections.Generic;

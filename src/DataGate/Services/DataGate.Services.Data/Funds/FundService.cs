@@ -11,15 +11,17 @@ namespace DataGate.Services.Data.Funds
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using DataGate.Data.Common.Repositories;
     using DataGate.Data.Models.Entities;
     using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.ViewModels.Queries;
+
     using Microsoft.EntityFrameworkCore;
 
     // _____________________________________________________________
-    public class FundsService : IFundsService
+    public class FundService : IFundService
     {
         // ________________________________________________________
         //
@@ -36,7 +38,7 @@ namespace DataGate.Services.Data.Funds
         // to retrieve appsettings.json connection string,
         // IRepository to connect with dbcontext and
         // sql manager for executing queries
-        public FundsService(
+        public FundService(
                         ISqlQueryManager sqlQueryManager,
                         IRepository<TbHistoryFund> fundRepository)
         {
@@ -107,7 +109,7 @@ namespace DataGate.Services.Data.Funds
             return this.GetAllActive(null, 1, 0).FirstOrDefault();
         }
 
-        public async Task<ISet<string>> GetNames(int? id)
+        public async Task<ISet<string>> GetNamesAsync(int? id)
         {
             var query = await this.repository
                 .All()

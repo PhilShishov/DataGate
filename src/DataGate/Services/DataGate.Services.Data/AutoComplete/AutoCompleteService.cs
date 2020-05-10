@@ -11,13 +11,14 @@ namespace DataGate.Services.AutoComplete
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using DataGate.Services.Data.Contracts;
+
+    using DataGate.Services.Data.Common;
 
     public static class AutoCompleteService
     {
         public static async Task<ISet<string>> GetResult(string selectTerm, IEntityAutocompleteService service, int? id = null)
         {
-            var result = await service.GetNames(id);
+            var result = await service.GetNamesAsync(id);
 
             if (selectTerm != null)
             {

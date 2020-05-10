@@ -13,10 +13,10 @@
     [Authorize]
     public class DocumentController : Controller
     {
-        private readonly IDocumentsService fundService;
+        private readonly IDocumentService fundService;
 
         public DocumentController(
-                        IDocumentsService fundService)
+                        IDocumentService fundService)
         {
             this.fundService = fundService;
         }
