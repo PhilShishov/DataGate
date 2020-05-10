@@ -1,13 +1,15 @@
 ﻿namespace DataGate.Web.Areas.Identity.Pages.Account
 {
+    using System;
+    using System.Threading.Tasks;
+
     using DataGate.Common;
     using DataGate.Data.Models.Users;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
-    using System;
-    using System.Threading.Tasks;
 
     [AllowAnonymous]
     public class ConfirmEmailModel : PageModel

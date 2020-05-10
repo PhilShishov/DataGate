@@ -38,8 +38,6 @@
         <hr class="bg-pharus hr-2" />
     </form>
 
-    @*<partial name="SpecificEntity/_BindingEntities" />*@
-
     <div class="row ml-3" id="div-select-addInfo">
         <label class="text-torshia m-1 pr-3">FUND ADDITIONAL INFORMATION</label>
         <select class="custom-select-lg select-pharus form-control input-sm"
@@ -70,10 +68,6 @@
     </div>
 
     <div id="subEntities" class="mt-4">
-        <form asp-controller="FundSubFunds"
-              asp-action="Update"
-              method="post"
-              id="update-form"></form>
         <div id="loadSubEntities">
         </div>
     </div>
@@ -156,6 +150,7 @@
             const controller = '@GlobalConstants.FundDetailsControllerName';
             const entityId = @Model.Id;
             const date = '@Model.Date';
+            const url = '/loadSubFunds';
 
             // ________________________________________________________
             //
@@ -167,7 +162,7 @@
             //
             // Load all documents, agreements and timelines
 
-            loadAddInfo(token, entityId, date, controller);
+            loadAddInfo(token, entityId, date, controller, url);
 
             // ________________________________________________________
             //

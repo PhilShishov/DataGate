@@ -1,4 +1,4 @@
-﻿function loadAddInfo(token, id, date, controllerName) {
+﻿function loadAddInfo(token, id, date, controllerName, url) {
     // ________________________________________________________
     //
     // Select menu for fund additional information -
@@ -42,7 +42,7 @@
             $("#allAgreements").addClass('d-none');
 
             $.ajax({
-                url: '/loadSubEntities',
+                url: url,
                 type: "GET",
                 data: fullJson,
                 contentType: "application/json; charset=utf-8",

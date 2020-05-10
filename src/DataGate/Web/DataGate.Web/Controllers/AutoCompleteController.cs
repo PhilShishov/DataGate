@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-
+    using System.Threading.Tasks;
     using DataGate.Common;
     using DataGate.Services.AutoComplete;
     using DataGate.Services.Data.Funds.Contracts;
@@ -24,7 +24,7 @@
         }
 
         [Route("api/autocomplete")]
-        public JsonResult Get(AutoCompleteInputModel input)
+        public async Task<JsonResult> GetResultAsync(AutoCompleteInputModel input)
         {
             ISet<string> result = null;
 
@@ -40,7 +40,7 @@
                 }
                 else if (input.ControllerToPass == GlobalConstants.FundsControllerName)
                 {
-                    result = AutoCompleteService.GetResult(input.SelectTerm, this.fundsService);
+                    result = await AutoCompleteService.GetResult(input.SelectTerm, this.fundsService);
                 }
 
                 var modifiedData = result.Select(f => new
@@ -52,13 +52,13 @@
                 return this.Json(modifiedData);
             }
 
-            if (input.ControllerToPass == GlobalConstants.SubFundSubEntitiesControllerName)
+            if (input.ControllerToPass == GlobalConstants.SubFundShareClassesControllerName)
             {
                 //result = AutoCompleteService.GetResult(input.SelectTerm, this.fundsService, input.Id);
             }
-            else if (input.ControllerToPass == GlobalConstants.FundSubEntitiesControllerName)
+            else if (input.ControllerToPass == GlobalConstants.FundSubFundsControllerName)
             {
-                result = AutoCompleteService.GetResult(input.SelectTerm, this.fundSubFundservice, input.Id);
+                //result = await AutoCompleteService.GetResult(input.SelectTerm, this.fundSubFundservice, input.Id);
             }
 
             var modifiedDataId = result.Select(f => new
