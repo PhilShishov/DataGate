@@ -12,10 +12,12 @@
         public const string FundsAreaName = "Funds";
         public const string FundsControllerName = "Funds";
         public const string FundDetailsControllerName = "FundDetails";
-        public const string FundSubEntitiesControllerName = "FundSubEntities";
+        public const string FundSubFundsControllerName = "FundSubFunds";
+
         public const string SubFundsControllerName = "SubFunds";
         public const string SubFundDetailsControllerName = "SubFundDetails";
-        public const string SubFundSubEntitiesControllerName = "SubFundSubEntities";
+        public const string SubFundShareClassesControllerName = "SubFundShareClasses";
+
         public const string ShareClassesControllerName = "ShareClasses";
         public const string ShareClassesSubEntitiesControllerName = "ShareClassesSubEntities";
 

@@ -2,7 +2,7 @@
 {
     using DataGate.Services.Data.Contracts;
 
-    public interface IFundSubEntitiesService : IEntitySubEntitiesService, ISubEntitiesService, IEntityAutocompleteService
+    public interface IFundSubEntitiesService : IEntitySubEntitiesService, ISubEntitiesService
     {
     }
 }

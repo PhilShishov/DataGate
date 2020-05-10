@@ -4,7 +4,7 @@
     var controller = this.ViewContext.RouteData.Values["controller"].ToString();
     var route = string.Empty;
 
-    if (controller == GlobalConstants.FundDetailsControllerName)
+    if (controller == GlobalConstants.FundSubFundsControllerName)
     {
         route = $"/f/{Model.Id}/{Model.Date}";
     }
