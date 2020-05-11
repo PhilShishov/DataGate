@@ -1,4 +1,4 @@
-namespace DataGate.Services.Data.Timelines
+﻿namespace DataGate.Services.Data.Timelines
 {
     using System.Collections.Generic;
 

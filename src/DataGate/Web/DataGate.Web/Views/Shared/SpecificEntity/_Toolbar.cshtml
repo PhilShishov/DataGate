@@ -67,7 +67,8 @@
             <input type="submit"
                    class="btn btn-primary btn-sm"
                    asp-for="Command"
-                   asp-action="UpdateEntity"
+                   asp-action="Update"
+                   asp-route-id="@Model.Id"
                    value="Update Table"
                    style="margin-bottom: 2%"></>
         </div>

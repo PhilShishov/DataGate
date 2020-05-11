@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -43,23 +44,29 @@
         //
         // Retrieve query table DB based entities
         // with table functions
-        public IEnumerable<string[]> GetSubEntities(int id, DateTime? date, int? take, int skip)
+        public async IAsyncEnumerable<string[]> GetSubEntities(int id, DateTime? date)
         {
+            var sw = Stopwatch.StartNew();
             var query = this.sqlManager
-                .ExecuteQuery(this.sqlFunctionSubFundsForFund, date, id)
-                .Skip(skip);
+                .ExecuteQueryAsync(this.sqlFunctionSubFundsForFund, date, id);
 
-            return query;
+            long ticks3 = sw.ElapsedTicks;
+            Console.WriteLine("------------1-------------------");
+            Console.WriteLine(ticks3);
+            Console.WriteLine("------------------------------------------");
+
+            await foreach (var item in query)
+            {
+                yield return item;
+            }
         }
 
         public IEnumerable<string[]> GetSubEntitiesSelected(GetWithSelectionDto dto, int? take, int skip)
         {
-            return this.sqlManager.ExecuteQuery(this.sqlFunctionSubFundsForFund, dto.Date, dto.Id, dto.SelectedColumns);
-        }
+            var query = this.sqlManager
+                .ExecuteQuery(this.sqlFunctionSubFundsForFund, dto.Date, dto.Id, dto.SelectedColumns);
 
-        public IEnumerable<string> GetHeaders(int id, DateTime? date)
-        {
-            return this.GetSubEntities(id, date, 1, 0).FirstOrDefault();
+            return query;
         }
 
         public async Task<ISet<string>> GetNamesAsync(int? id)

@@ -2,17 +2,16 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Threading.Tasks;
 
     public interface IDocumentService
     {
         IReadOnlyCollection<string> GetDocumentsFileTypes();
 
-        Task<IReadOnlyCollection<string>> GetAgreementsFileTypes();
+        IAsyncEnumerable<string> GetAgreementsFileTypes();
 
-        Task<IReadOnlyCollection<string>> GetAgreementStatus();
+        IAsyncEnumerable<string> GetAgreementStatus();
 
-        Task<IReadOnlyCollection<string>> GetCompanies();
+        IAsyncEnumerable<string> GetCompanies();
 
         IEnumerable<T> GetAllDocuments<T>(int id);
 

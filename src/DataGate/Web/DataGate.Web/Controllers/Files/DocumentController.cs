@@ -1,6 +1,7 @@
 ﻿namespace DataGate.Web.Controllers.Files
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using DataGate.Common;
@@ -38,9 +39,9 @@
         {
             if (controllerName == GlobalConstants.FundDetailsControllerName)
             {
-                this.ViewData["AgreementsFileTypes"] = await this.fundService.GetAgreementsFileTypes();
-                this.ViewData["AgreementsStatus"] = await this.fundService.GetAgreementStatus();
-                this.ViewData["Companies"] = await this.fundService.GetCompanies();
+                this.ViewData["AgreementsFileTypes"] = await this.fundService.GetAgreementsFileTypes().ToListAsync();
+                this.ViewData["AgreementsStatus"] = await this.fundService.GetAgreementStatus().ToListAsync();
+                this.ViewData["Companies"] = await this.fundService.GetCompanies().ToListAsync();
             }
 
             return this.PartialView("SpecificEntity/_UploadAgreement");
