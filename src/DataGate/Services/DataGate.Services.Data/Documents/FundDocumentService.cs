@@ -51,32 +51,43 @@
             return prosFileTypes;
         }
 
-        public async Task<IReadOnlyCollection<string>> GetAgreementsFileTypes()
+        public async IAsyncEnumerable<string> GetAgreementsFileTypes()
         {
             var agrFileTypes = await this.repositoryActivityType.All()
                 .Where(at => at.AtEntity == FundFileType)
                 .Select(at => at.AtDesc)
                 .ToListAsync();
 
-            return agrFileTypes;
+            foreach (var item in agrFileTypes)
+            {
+                yield return item;
+            }
+
+            //return agrFileTypes;
         }
 
-        public async Task<IReadOnlyCollection<string>> GetAgreementStatus()
+        public async IAsyncEnumerable<string> GetAgreementStatus()
         {
             var agrStatus = await this.repositoryAgrStatus.All()
                 .Select(ast => ast.ASDesc)
                 .ToListAsync();
 
-            return agrStatus;
+            foreach (var item in agrStatus)
+            {
+                yield return item;
+            }
         }
 
-        public async Task<IReadOnlyCollection<string>> GetCompanies()
+        public async IAsyncEnumerable<string> GetCompanies()
         {
             var companies = await this.repositoryCompanies.All()
                .Select(c => c.CName)
                .ToListAsync();
 
-            return companies;
+            foreach (var item in companies)
+            {
+                yield return item;
+            }
         }
 
         public IEnumerable<T> GetAllAgreements<T>(int id, DateTime? date)
