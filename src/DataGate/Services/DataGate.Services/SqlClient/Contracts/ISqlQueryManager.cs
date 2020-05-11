@@ -10,6 +10,8 @@ namespace DataGate.Services.SqlClient.Contracts
 
         IEnumerable<string[]> ExecuteQuery(string function, DateTime? date = null, int? id = null, IEnumerable<string> columns = null);
 
+        IAsyncEnumerable<string[]> ExecuteQueryAsync(string function, DateTime? date = null, int? id = null, IEnumerable<string> columns = null);
+
         IEnumerable<T> ExecuteQueryMapping<T>(string function, int id, DateTime? date = null)
             where T : IDataReaderParser, new();
     }

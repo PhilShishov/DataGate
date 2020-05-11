@@ -15,17 +15,17 @@
             var date = DateTimeParser.WebFormat(model.Date);
             bool isInSelectionMode = model.SelectedColumns != null ? true : false;
 
-            if (isInSelectionMode)
-            {
-                var dto = AutoMapperConfig.MapperInstance.Map<GetWithSelectionDto>(model);
+            //if (isInSelectionMode)
+            //{
+            //    var dto = AutoMapperConfig.MapperInstance.Map<GetWithSelectionDto>(model);
 
-                model.Values = service.GetSubEntitiesSelected(dto).ToList();
-                model.Headers = service.GetHeaders(model.Id, date).ToList();
-            }
-            else if (!isInSelectionMode)
-            {
-                model.Values = service.GetSubEntities(model.Id, date).ToList();
-            }
+            //    model.Values = service.GetSubEntitiesSelected(dto).ToList();
+            //    model.Headers = service.GetHeaders(model.Id, date).ToList();
+            //}
+            //else if (!isInSelectionMode)
+            //{
+            //    model.Values = service.GetSubEntities(model.Id, date).ToList();
+            //}
 
             if (model.SelectTerm != null)
             {

@@ -11,9 +11,6 @@
           asp-action="Details"
           method="post">
 
-        <input type="text" asp-for="Id" hidden>
-        <input asp-for="Date" type="date" hidden>
-
         <partial name="SpecificEntity/_Toolbar" />
 
         @if (this.TempData[GlobalConstants.InfoKey] != null)
