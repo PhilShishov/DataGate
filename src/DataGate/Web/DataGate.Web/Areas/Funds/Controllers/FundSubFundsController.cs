@@ -1,6 +1,7 @@
 ﻿namespace DataGate.Web.Areas.Funds.Controllers
 {
     using System.Linq;
+    using System.Threading.Tasks;
 
     using DataGate.Common;
     using DataGate.Services.Data.Funds.Contracts;
@@ -24,17 +25,17 @@
         }
 
         [Route("loadSubFunds")]
-        public IActionResult GetAll(int id, string chosenDate, string controllerName)
+        public async Task<IActionResult> GetAllAsync(int id, string chosenDate)
         {
             var date = DateTimeParser.WebFormat(chosenDate);
-            var headers = this.subFundsService.GetHeaders(id, date).ToList();
-            var values = this.subFundsService.GetSubEntities(id, date, null, 1).ToList();
+            var headers = await this.subFundsService.GetSubEntities(id, date).FirstOrDefaultAsync();
+            var values = await this.subFundsService.GetSubEntities(id, date).ToListAsync();
 
             EntitiesViewModel model = new EntitiesViewModel()
             {
                 Id = id,
-                Headers = headers,
-                HeadersSelection = headers,
+                Headers = headers.ToList(),
+                HeadersSelection = headers.ToList(),
                 Values = values,
             };
 
