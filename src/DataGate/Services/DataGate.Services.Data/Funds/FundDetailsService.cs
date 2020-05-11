@@ -7,11 +7,12 @@
     using DataGate.Common.Exceptions;
     using DataGate.Data.Common.Repositories;
     using DataGate.Data.Models.Entities;
+    using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Services.Mapping;
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.Dtos.Queries;
 
-    public class FundDetailsService
+    public class FundDetailsService : IFundDetailsService
     {
         // ________________________________________________________
         //

@@ -19,34 +19,43 @@
         <th class="text-secondary p-1">
             File Name
         </th>
+        <th class="text-secondary p-1"></th>
     </tr>
 </thead>
 <tbody>
     @foreach (var agreement in Model)
     {
-        <tr>
-            <td class="p-1">
-                @agreement.Description
-            </td>
-            <td class="p-1">
-                @agreement.ContractDate
-            </td>
-            <td class="p-1">
-                @agreement.ActivationDate
-            </td>
-            <td class="p-1">
-                @agreement.ExpirationDate
-            </td>
-            <td class="p-1">
-                <button class="btn-link-pharus text-left"
-                        formtarget="_blank"
-                        type="submit"
-                        formaction="/@controllerName/ReadAgreement"
-                        name="pdfValue"
-                        value="@agreement.Name">
-                    @System.IO.Path.GetFileNameWithoutExtension(agreement.Name)
-                </button>
-            </td>
-        </tr>
+    <tr>
+        <td class="p-1">
+            @agreement.Description
+        </td>
+        <td class="p-1">
+            @agreement.ContractDate
+        </td>
+        <td class="p-1">
+            @agreement.ActivationDate
+        </td>
+        <td class="p-1">
+            @agreement.ExpirationDate
+        </td>
+        <td class="p-1">
+            <button class="btn-link-pharus text-left"
+                    formtarget="_blank"
+                    type="submit"
+                    formaction="/@controllerName/ReadAgreement"
+                    name="pdfValue"
+                    value="@agreement.Name">
+                @System.IO.Path.GetFileNameWithoutExtension(agreement.Name)
+            </button>
+        </td>
+        <td class="p-1">
+            <button type="button"
+                    class="btn btn-primary btn-sm mr-1 confirmDocDelBtn"
+                    formaction="@Url.Action("DeleteDocument", controllerName,
+                                                               new { @fileName = agreement.Name })">
+                Delete
+            </button>
+        </td>
+    </tr>
     }
 </tbody>

@@ -1,8 +1,8 @@
-﻿namespace DataGate.Services.Data.Timelines.Contracts
+﻿namespace DataGate.Services.Data.Timelines.Common
 {
     using System.Collections.Generic;
 
-    public interface ITimelinesService
+    public interface ITimelineService
     {
         IEnumerable<T> GetTimeline<T>(int id);
     }

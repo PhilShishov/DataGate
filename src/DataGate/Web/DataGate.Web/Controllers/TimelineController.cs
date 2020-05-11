@@ -10,10 +10,10 @@
 
     public class TimelineController : Controller
     {
-        private readonly ITimelinesService fundService;
+        private readonly IFundTimelineService fundService;
 
         public TimelineController(
-                        ITimelinesService fundService)
+                        IFundTimelineService fundService)
         {
             this.fundService = fundService;
         }

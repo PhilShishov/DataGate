@@ -20,6 +20,7 @@
         <th class="text-secondary p-1">
             File Type
         </th>
+        <th class="text-secondary p-1"></th>
     </tr>
 </thead>
 <tbody>
@@ -47,6 +48,14 @@
             </td>
             <td class="p-1">
                 @document.Type
+            </td>
+            <td class="p-1">
+                <button type="button"
+                        class="btn btn-primary btn-sm mr-1 confirmDocDelBtn"
+                        formaction="@Url.Action("DeleteDocument", controllerName,
+                                                               new { @fileName = document.Name })">
+                    Delete
+                </button>
             </td>
         </tr>
     }

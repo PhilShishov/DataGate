@@ -52,6 +52,11 @@
             return query;
         }
 
+        public IEnumerable<string[]> GetSubEntitiesSelected(GetWithSelectionDto dto, int? take, int skip)
+        {
+            return this.sqlManager.ExecuteQuery(this.sqlFunctionSubFundsForFund, dto.Date, dto.Id, dto.SelectedColumns);
+        }
+
         public IEnumerable<string> GetHeaders(int id, DateTime? date)
         {
             return this.GetSubEntities(id, date, 1, 0).FirstOrDefault();
@@ -59,8 +64,8 @@
 
         public async Task<ISet<string>> GetNamesAsync(int? id)
         {
-            var fundSubfunds = this.fundSubFundrepository.All()
-                .Where(fsf => fsf.FId == id);
+            var fundSubfunds = await this.fundSubFundrepository.All()
+                .Where(fsf => fsf.FId == id).ToListAsync();
 
             var subfunds = this.repository.All();
 
@@ -71,11 +76,6 @@
                 .ToListAsync();
 
             return query.ToHashSet();
-        }
-
-        public IEnumerable<string[]> GetSubEntitiesSelected(GetWithSelectionDto dto, int? take, int skip)
-        {
-            return this.sqlManager.ExecuteQuery(this.sqlFunctionSubFundsForFund, dto.Date, dto.Id, dto.SelectedColumns);
         }
 
         public void ThrowEntityNotFoundExceptionIfIdDoesNotExist(int id)
