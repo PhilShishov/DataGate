@@ -43,7 +43,6 @@
                         <tr>
                             <th class="text-secondary p-1">File Description</th>
                             <th class="text-secondary p-1">File Name</th>
-                            <th class="text-secondary p-1">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,15 +63,6 @@
                                         @System.IO.Path.GetFileNameWithoutExtension(document.Name)
                                     </button>
                                 </td>
-
-                                <td>
-                                    <button type="button"
-                                            class="btn btn-primary btn-sm mr-1 confirmDocDelBtn"
-                                            formaction="@Url.Action("DeleteDocument", controllerName,
-                                                               new { @fileName = document.Name })">
-                                        Delete
-                                    </button>
-                                </td>
                             </tr>
                         }
                     </tbody>
@@ -91,7 +81,6 @@
                     <tr>
                         <th class="text-secondary p-1">File Description</th>
                         <th class="text-secondary p-1">File Name</th>
-                        <th class="text-secondary p-1">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -110,15 +99,6 @@
                                         name="agrValue"
                                         value="@document.Name">
                                     @System.IO.Path.GetFileNameWithoutExtension(document.Name)
-                                </button>
-                            </td>
-
-                            <td>
-                                <button type="button"
-                                        class="btn btn-primary btn-sm mr-1 confirmDocDelBtn"
-                                        formaction="@Url.Action("DeleteDocument", controllerName,
-                                                               new { @fileName = document.Name })">
-                                    Delete
                                 </button>
                             </td>
                         </tr>

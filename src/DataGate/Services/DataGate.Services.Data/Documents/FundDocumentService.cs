@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     using DataGate.Data.Common.Repositories;
     using DataGate.Data.Models.Domain;
@@ -12,7 +13,9 @@
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.Dtos.Queries;
 
-    public class FundDocumentsService : IDocumentService
+    using Microsoft.EntityFrameworkCore;
+
+    public class FundDocumentService : IFundDocumentService
     {
         private const int FundFileType = 1;
         private readonly string sqlFunctionAllDocuments = "[fn_view_documents_fund]";
@@ -24,7 +27,7 @@
         private readonly IRepository<TbCompanies> repositoryCompanies;
         private readonly ISqlQueryManager sqlManager;
 
-        public FundDocumentsService(
+        public FundDocumentService(
                             ISqlQueryManager sqlQueryManager,
                             IRepository<TbDomFileType> repositoryFileType,
                             IRepository<TbDomActivityType> repositoryActivityType,
@@ -48,30 +51,30 @@
             return prosFileTypes;
         }
 
-        public IReadOnlyCollection<string> GetAgreementsFileTypes()
+        public async Task<IReadOnlyCollection<string>> GetAgreementsFileTypes()
         {
-            var agrFileTypes = this.repositoryActivityType.All()
+            var agrFileTypes = await this.repositoryActivityType.All()
                 .Where(at => at.AtEntity == FundFileType)
                 .Select(at => at.AtDesc)
-                .ToList();
+                .ToListAsync();
 
             return agrFileTypes;
         }
 
-        public IReadOnlyCollection<string> GetAgreementStatus()
+        public async Task<IReadOnlyCollection<string>> GetAgreementStatus()
         {
-            var agrStatus = this.repositoryAgrStatus.All()
+            var agrStatus = await this.repositoryAgrStatus.All()
                 .Select(ast => ast.ASDesc)
-                .ToList();
+                .ToListAsync();
 
             return agrStatus;
         }
 
-        public IReadOnlyCollection<string> GetCompanies()
+        public async Task<IReadOnlyCollection<string>> GetCompanies()
         {
-            var companies = this.repositoryCompanies.All()
+            var companies = await this.repositoryCompanies.All()
                .Select(c => c.CName)
-               .ToList();
+               .ToListAsync();
 
             return companies;
         }

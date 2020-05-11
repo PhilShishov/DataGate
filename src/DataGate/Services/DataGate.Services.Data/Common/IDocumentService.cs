@@ -1,17 +1,18 @@
-﻿namespace DataGate.Services.Data.Documents.Contracts
+﻿namespace DataGate.Services.Data.Documents.Common
 {
     using System;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     public interface IDocumentService
     {
         IReadOnlyCollection<string> GetDocumentsFileTypes();
 
-        IReadOnlyCollection<string> GetAgreementsFileTypes();
+        Task<IReadOnlyCollection<string>> GetAgreementsFileTypes();
 
-        IReadOnlyCollection<string> GetAgreementStatus();
+        Task<IReadOnlyCollection<string>> GetAgreementStatus();
 
-        IReadOnlyCollection<string> GetCompanies();
+        Task<IReadOnlyCollection<string>> GetCompanies();
 
         IEnumerable<T> GetAllDocuments<T>(int id);
 

@@ -7,7 +7,7 @@ namespace DataGate.Services.Data.Timelines
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.Dtos.Queries;
 
-    public class FundTimelineService : ITimelinesService
+    public class FundTimelineService : IFundTimelineService
     {
         private readonly string sqlFunctionTimelineFund = "[fn_timeline_fund]";
 

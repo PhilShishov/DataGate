@@ -1,6 +1,7 @@
 ﻿namespace DataGate.Web.Controllers.Files
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     using DataGate.Common;
     using DataGate.Services.Data.Documents.Contracts;
@@ -13,10 +14,10 @@
     [Authorize]
     public class DocumentController : Controller
     {
-        private readonly IDocumentService fundService;
+        private readonly IFundDocumentService fundService;
 
         public DocumentController(
-                        IDocumentService fundService)
+                        IFundDocumentService fundService)
         {
             this.fundService = fundService;
         }
@@ -33,13 +34,13 @@
         }
 
         [Route("loadAgrUpload")]
-        public IActionResult LoadAgreementUpload(string controllerName)
+        public async Task<IActionResult> LoadAgreementUpload(string controllerName)
         {
             if (controllerName == GlobalConstants.FundDetailsControllerName)
             {
-                this.ViewData["AgreementsFileTypes"] = this.fundService.GetAgreementsFileTypes();
-                this.ViewData["AgreementsStatus"] = this.fundService.GetAgreementStatus();
-                this.ViewData["Companies"] = this.fundService.GetCompanies();
+                this.ViewData["AgreementsFileTypes"] = await this.fundService.GetAgreementsFileTypes();
+                this.ViewData["AgreementsStatus"] = await this.fundService.GetAgreementStatus();
+                this.ViewData["Companies"] = await this.fundService.GetCompanies();
             }
 
             return this.PartialView("SpecificEntity/_UploadAgreement");
