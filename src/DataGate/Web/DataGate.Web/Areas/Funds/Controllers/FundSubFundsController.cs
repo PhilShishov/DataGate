@@ -44,14 +44,16 @@
         }
 
         [HttpPost]
+        [ActionName("Reset")]
+        public IActionResult ResetSubFunds([Bind("Id", "Date")] EntitiesViewModel model)
+        {
+            return this.RedirectToRoute(GlobalConstants.FundDetailsRouteName, new { model.Id, model.Date });
+        }
+
+        [HttpPost]
         [ActionName("Update")]
         public async Task<IActionResult> UpdateSubFunds(EntitiesViewModel model)
         {
-            if (model.Command == GlobalConstants.CommandResetTable)
-            {
-                return this.RedirectToRoute(GlobalConstants.FundDetailsRouteName, new { model.Id, model.Date });
-            }
-
             await SubEntitiesVMSetup.SetPost(model, this.subFundsService);
 
             if (model.Values.Count > 0)
