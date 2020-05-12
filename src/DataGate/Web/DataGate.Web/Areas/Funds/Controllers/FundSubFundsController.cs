@@ -34,6 +34,7 @@
             EntitiesViewModel model = new EntitiesViewModel()
             {
                 Id = id,
+                Date = chosenDate,
                 Headers = headers.ToList(),
                 HeadersSelection = headers.ToList(),
                 Values = values,
@@ -44,20 +45,19 @@
 
         [HttpPost]
         [ActionName("Update")]
-        public IActionResult UpdateSubFunds(EntitiesViewModel model)
+        public async Task<IActionResult> UpdateSubFunds(EntitiesViewModel model)
         {
             if (model.Command == GlobalConstants.CommandResetTable)
             {
-                model.SelectTerm = GlobalConstants.DefaultAutocompleteSelectTerm;
-                return this.PartialView("SubEntities/_Overview");
+                return this.RedirectToRoute(GlobalConstants.FundDetailsRouteName, new { model.Id, model.Date });
             }
 
-            SubEntitiesVMSetup.SetPost(model, this.subFundsService);
+            await SubEntitiesVMSetup.SetPost(model, this.subFundsService);
 
             if (model.Values.Count > 0)
             {
                 this.TempData[GlobalConstants.InfoKey] = InfoMessages.SuccessfulUpdate;
-                return this.View(model);
+                return this.PartialView("SubEntities/_Overview", model);
             }
 
             return this.ShowError(ErrorMessages.UnsuccessfulUpdate, GlobalConstants.FundDetailsRouteName, new { model.Id, model.Date });

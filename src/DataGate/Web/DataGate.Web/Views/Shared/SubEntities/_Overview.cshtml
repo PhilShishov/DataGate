@@ -3,14 +3,20 @@
 @{
     var controller = this.ViewContext.RouteData.Values["controller"].ToString();
 }
+<form asp-action="Update" method="post" id="update-form">
 
-<div class="d-flex w-100 mb-2" id="toolbar-pharus">
-    <partial name="SubEntities/_Select" />
-    <partial name="SubEntities/_Extract" />
-</div>
-@*<partial name="SubEntities/_BindingTable" />*@
-<partial name="SubEntities/_ViewTable" />
-<partial name="SubEntities/_Modal" />
+
+    <input asp-for="Date" type="date" hidden>
+    <input asp-for="Id" type="text" hidden>
+
+    <div class="d-flex w-100 mb-2" id="toolbar-pharus">
+        <partial name="SubEntities/_Select" />
+        <partial name="SubEntities/_Extract" />
+    </div>
+    @*<partial name="SubEntities/_BindingTable" />*@
+    <partial name="SubEntities/_ViewTable" />
+    <partial name="SubEntities/_Modal" />
+</form>
 
 <script>
         $(document).ready(function () {
