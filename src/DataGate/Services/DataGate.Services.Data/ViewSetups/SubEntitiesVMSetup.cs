@@ -11,7 +11,25 @@
 
     public class SubEntitiesVMSetup
     {
-        public static async Task SetPost(EntitiesViewModel model, ISubEntitiesService service)
+        public static async Task<T> SetGet<T>(int id, string chosenDate, ISubEntitiesService service)
+        {
+            var date = DateTimeParser.WebFormat(chosenDate);
+            var headers = await service.GetSubEntities(id, date).FirstOrDefaultAsync();
+            var values = await service.GetSubEntities(id, date).ToListAsync();
+
+            SubEntitiesViewModel dto = new SubEntitiesViewModel()
+            {
+                Id = id,
+                Date = chosenDate,
+                Headers = headers.ToList(),
+                HeadersSelection = headers.ToList(),
+                Values = values,
+            };
+
+            return AutoMapperConfig.MapperInstance.Map<T>(dto);
+        }
+
+        public static async Task SetPost(SubEntitiesViewModel model, ISubEntitiesService service)
         {
             var date = DateTimeParser.WebFormat(model.Date);
             var headers = await service.GetSubEntities(model.Id, date).FirstOrDefaultAsync();
