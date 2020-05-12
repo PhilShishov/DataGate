@@ -8,7 +8,10 @@
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace DataGate.Services
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
 
     // _____________________________________________________________
     public class CreateTableView
@@ -35,6 +38,32 @@ namespace DataGate.Services
             }
 
             return tableValues;
+        }
+
+        public static async IAsyncEnumerable<string[]> AddTableToViewAsync(IEnumerable<string[]> entities, string searchString)
+        {
+            var tableValues = new List<string[]>();
+
+            foreach (var entity in entities)
+            {
+                // ---------------------------------------------------------
+                //
+                // ToLower method for making
+                // values equivalent to compare
+                if (entity[IndexEntityNameInTable] != null && entity[IndexEntityNameInTable]
+                    .ToLower()
+                    .Contains(searchString.ToLower()))
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(1));
+                    tableValues.Add(entity);
+                    break;
+                }
+            }
+
+            foreach (var item in tableValues)
+            {
+                yield return item;
+            }
         }
     }
 }

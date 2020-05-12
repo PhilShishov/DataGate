@@ -1,6 +1,7 @@
 ﻿namespace DataGate.Services.Data.ViewSetups
 {
     using System.Linq;
+    using System.Threading.Tasks;
 
     using DataGate.Services.Data.Common;
     using DataGate.Services.DateTime;
@@ -10,26 +11,30 @@
 
     public class SubEntitiesVMSetup
     {
-        public static void SetPost(EntitiesViewModel model, ISubEntitiesService service)
+        public static async Task SetPost(EntitiesViewModel model, ISubEntitiesService service)
         {
             var date = DateTimeParser.WebFormat(model.Date);
+            var headers = await service.GetSubEntities(model.Id, date).FirstOrDefaultAsync();
+            model.Headers = headers.ToList();
+            model.HeadersSelection = headers.ToList();
+
             bool isInSelectionMode = model.SelectedColumns != null ? true : false;
 
-            //if (isInSelectionMode)
-            //{
-            //    var dto = AutoMapperConfig.MapperInstance.Map<GetWithSelectionDto>(model);
+            if (isInSelectionMode)
+            {
+                var dto = AutoMapperConfig.MapperInstance.Map<GetWithSelectionDto>(model);
 
-            //    model.Values = service.GetSubEntitiesSelected(dto).ToList();
-            //    model.Headers = service.GetHeaders(model.Id, date).ToList();
-            //}
-            //else if (!isInSelectionMode)
-            //{
-            //    model.Values = service.GetSubEntities(model.Id, date).ToList();
-            //}
+                model.Values = service.GetSubEntitiesSelected(dto).ToList();
+                model.Headers = service.GetSubEntitiesSelected(dto).FirstOrDefault().ToList();
+            }
+            else if (!isInSelectionMode)
+            {
+                model.Values = await service.GetSubEntities(model.Id, date).ToListAsync();
+            }
 
             if (model.SelectTerm != null)
             {
-                model.Values = CreateTableView.AddTableToView(model.Values, model.SelectTerm.ToLower());
+                model.Values = await CreateTableView.AddTableToViewAsync(model.Values, model.SelectTerm.ToLower()).ToListAsync();
             }
         }
     }
