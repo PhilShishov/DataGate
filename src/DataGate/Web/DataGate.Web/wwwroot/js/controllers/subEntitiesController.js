@@ -44,9 +44,8 @@
             $.ajax({
                 url: url,
                 type: 'GET',
-                contentType: 'application/json; charset=utf-8',
-                dataType: 'html',
                 data: fullJson,
+                contentType: 'application/json; charset=utf-8',
                 headers: { 'X-CSRF-TOKEN': token },
                 success: function (response) {
                     $('#loadSubEntities').html(response);

@@ -3,27 +3,16 @@
 @{
     var controller = this.ViewContext.RouteData.Values["controller"].ToString();
 }
-<form method="post" id="update-form">
-    <div class="d-flex w-100 mb-2" id="toolbar-pharus">
-        <partial name="SubEntities/_Select" />
-        <partial name="SubEntities/_Extract" />
-    </div>
-    @*<partial name="SubEntities/_BindingTable" />
-    <partial name="SubEntities/_ViewTable" />*@
-    @*<partial name="SubEntities/_Modal" />*@
-</form>
 
-<script type="text/javascript" src="~/js/multiselect.js" asp-append-version="true"></script>
-<script type="text/javascript" src="~/js/double-scroll/jquery.doubleScroll.js" asp-append-version="true"></script>
-<script type="text/javascript" src="~/js/autocomplete/loadAutocomplete.js" asp-append-version="true"></script>
+<div class="d-flex w-100 mb-2" id="toolbar-pharus">
+    <partial name="SubEntities/_Select" />
+    <partial name="SubEntities/_Extract" />
+</div>
+@*<partial name="SubEntities/_BindingTable" />*@
+<partial name="SubEntities/_ViewTable" />
+<partial name="SubEntities/_Modal" />
 
 <script>
-        // Fade timeout for tempdata messages
-        setTimeout(function () {
-            $('#infoMessage').fadeOut();
-            $('#errorMessage').fadeOut();
-        }, 5000);
-
         $(document).ready(function () {
 
             const token = $("#update-form input[name=__RequestVerificationToken]").val();

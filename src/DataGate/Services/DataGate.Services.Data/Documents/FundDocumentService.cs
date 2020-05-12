@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
 
     using DataGate.Data.Common.Repositories;
     using DataGate.Data.Models.Domain;
@@ -62,8 +61,6 @@
             {
                 yield return item;
             }
-
-            //return agrFileTypes;
         }
 
         public async IAsyncEnumerable<string> GetAgreementStatus()
