@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -46,14 +45,8 @@
         // with table functions
         public async IAsyncEnumerable<string[]> GetSubEntities(int id, DateTime? date)
         {
-            var sw = Stopwatch.StartNew();
             var query = this.sqlManager
                 .ExecuteQueryAsync(this.sqlFunctionSubFundsForFund, date, id);
-
-            long ticks3 = sw.ElapsedTicks;
-            Console.WriteLine("------------1-------------------");
-            Console.WriteLine(ticks3);
-            Console.WriteLine("------------------------------------------");
 
             await foreach (var item in query)
             {
@@ -71,16 +64,14 @@
 
         public async Task<ISet<string>> GetNamesAsync(int? id)
         {
-            var fundSubfunds = await this.fundSubFundrepository.All()
-                .Where(fsf => fsf.FId == id).ToListAsync();
-
+            var fundSubfunds = this.fundSubFundrepository.All();
             var subfunds = this.repository.All();
 
-            var query = await subfunds
-                .Join(fundSubfunds, sf => sf.SfId, fsf => fsf.SfId, (sf, fsf) => sf)
-                .OrderBy(x => x.SfOfficialSubFundName)
-                .Select(sf => sf.SfOfficialSubFundName)
-                .ToListAsync();
+            var query = await (from sf in subfunds
+                        join fsf in fundSubfunds on sf.SfId equals fsf.SfId
+                        where fsf.FId == id
+                        select sf.SfOfficialSubFundName)
+                        .ToListAsync();
 
             return query.ToHashSet();
         }
