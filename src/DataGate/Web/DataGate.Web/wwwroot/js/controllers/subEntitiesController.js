@@ -43,9 +43,10 @@
 
             $.ajax({
                 url: url,
-                type: "GET",
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'html',
                 data: fullJson,
-                contentType: "application/json; charset=utf-8",
                 headers: { 'X-CSRF-TOKEN': token },
                 success: function (response) {
                     $('#loadSubEntities').html(response);
@@ -59,9 +60,9 @@
 
             $.ajax({
                 url: '/loadTimelines',
-                type: "GET",
+                type: 'GET',
                 data: json,
-                contentType: "application/json; charset=utf-8",
+                contentType: 'application/json; charset=utf-8',
                 headers: { 'X-CSRF-TOKEN': token },
                 success: function (response) {
                     $('#loadTimelines').html(response);
@@ -75,9 +76,9 @@
 
             $.ajax({
                 url: '/loadAllDoc',
-                type: "GET",
+                type: 'GET',
                 data: json,
-                contentType: "application/json; charset=utf-8",
+                contentType: 'application/json; charset=utf-8',
                 headers: { 'X-CSRF-TOKEN': token },
                 success: function (response) {
                     $('#loadAllDocuments').html(response);
@@ -91,9 +92,9 @@
 
             $.ajax({
                 url: '/loadAllAgr',
-                type: "GET",
+                type: 'GET',
                 data: fullJson,
-                contentType: "application/json; charset=utf-8",
+                contentType: 'application/json; charset=utf-8',
                 headers: { 'X-CSRF-TOKEN': token },
                 success: function (response) {
                     $('#loadAllAgreements').html(response);

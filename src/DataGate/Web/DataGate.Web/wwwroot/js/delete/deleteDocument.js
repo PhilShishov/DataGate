@@ -19,8 +19,7 @@
                         return false;
                     }
                     $("#tbl-distinct-documents tr:contains('" + data.data + "')").remove();
-                },
-                async: false
+                }
             });
         }
     });

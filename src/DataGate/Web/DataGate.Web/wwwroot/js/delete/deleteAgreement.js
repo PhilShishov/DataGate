@@ -19,8 +19,7 @@
                         return false;
                     }
                     $("#tbl-distinct-agreements tr:contains('" + data.data + "')").remove();
-                },
-                async: false
+                }
             });
         }
     });
