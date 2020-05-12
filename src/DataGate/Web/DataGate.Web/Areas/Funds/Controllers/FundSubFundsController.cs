@@ -29,14 +29,14 @@
         {
             var date = DateTimeParser.WebFormat(chosenDate);
             var headers = await this.subFundsService.GetSubEntities(id, date).FirstOrDefaultAsync();
-            //var values = await this.subFundsService.GetSubEntities(id, date).ToListAsync();
+            var values = await this.subFundsService.GetSubEntities(id, date).ToListAsync();
 
             EntitiesViewModel model = new EntitiesViewModel()
             {
                 Id = id,
-                //Headers = headers.ToList(),
+                Headers = headers.ToList(),
                 HeadersSelection = headers.ToList(),
-                //Values = values,
+                Values = values,
             };
 
             return this.PartialView("SubEntities/_Overview", model);
