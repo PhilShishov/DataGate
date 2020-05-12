@@ -27,32 +27,21 @@
         [Route("loadSubFunds")]
         public async Task<IActionResult> GetAllAsync(int id, string chosenDate)
         {
-            var date = DateTimeParser.WebFormat(chosenDate);
-            var headers = await this.subFundsService.GetSubEntities(id, date).FirstOrDefaultAsync();
-            var values = await this.subFundsService.GetSubEntities(id, date).ToListAsync();
-
-            EntitiesViewModel model = new EntitiesViewModel()
-            {
-                Id = id,
-                Date = chosenDate,
-                Headers = headers.ToList(),
-                HeadersSelection = headers.ToList(),
-                Values = values,
-            };
+            var model = await SubEntitiesVMSetup.SetGet<SubEntitiesViewModel>(id, chosenDate, this.subFundsService);
 
             return this.PartialView("SubEntities/_Overview", model);
         }
 
         [HttpPost]
         [ActionName("Reset")]
-        public IActionResult ResetSubFunds([Bind("Id", "Date")] EntitiesViewModel model)
+        public IActionResult ResetSubFunds([Bind("Id", "Date")] SubEntitiesViewModel model)
         {
             return this.RedirectToRoute(GlobalConstants.FundDetailsRouteName, new { model.Id, model.Date });
         }
 
-        [HttpPost]
+        [HttpGet]
         [ActionName("Update")]
-        public async Task<IActionResult> UpdateSubFunds(EntitiesViewModel model)
+        public async Task<IActionResult> UpdateSubFunds(SubEntitiesViewModel model)
         {
             await SubEntitiesVMSetup.SetPost(model, this.subFundsService);
 
