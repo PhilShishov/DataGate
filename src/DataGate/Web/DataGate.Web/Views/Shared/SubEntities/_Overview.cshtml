@@ -3,7 +3,7 @@
 @{
     var controller = this.ViewContext.RouteData.Values["controller"].ToString();
 }
-<form asp-action="Update" method="post" id="update-form">
+<form method="post" id="update-form">
 
 
     <input asp-for="Date" type="date" hidden>
@@ -24,6 +24,18 @@
             const token = $("#update-form input[name=__RequestVerificationToken]").val();
             const controller = '@controller';
             const entityId = @Model.Id;
+
+            //var myData = $('#myFormId').serialize();
+            //$("#button").click(function () {
+            //    $.ajax({
+            //        url: "YourController/GetData",
+            //        type: "get",
+            //        data: $("form").serialize(), //if you need to post Model data, use this
+            //        success: function (result) {
+            //            $("#partial").html(result);
+            //        }
+            //    });
+            //})
 
             // ________________________________________________________
             //
