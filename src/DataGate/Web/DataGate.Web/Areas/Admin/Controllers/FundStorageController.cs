@@ -1,8 +1,9 @@
 ﻿namespace DataGate.Web.Controllers.Funds
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using AngleSharp.Html.Dom;
     using DataGate.Common;
     using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Services.Data.Storage.Contracts;
@@ -29,11 +30,38 @@
         [Route("f/edit/{id}/{date}")]
         public async Task<IActionResult> Edit(int id, string date)
         {
-            var model = await this.service.GetByIdAndDateWithoutHeaders<EditFundInputModel>(id, date);
+            var model = await this.service.GetByIdAndDate<EditFundInputModel>(id, date);
 
             await this.SetViewDataValuesForFundSelectLists();
 
             return this.View(model);
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        [Route("f/edit/{id}/{date}")]
+        public async Task<IActionResult> Edit([Bind("FundId", "InitialDate", "FundName", "CSSFCode", "Status",
+                                                    "LegalForm", "LegalVehicle", "LegalType", "FACode",
+                                                    "DEPCode", "TACode", "CompanyTypeDesc", "TinNumber",
+                                                    "LEICode", "RegNumber", "CommentTitle", "CommentArea")] EditFundInputModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                await this.SetViewDataValuesForFundSelectLists();
+                return this.View(model);
+            }
+
+            //var fund = await this.service.Edit(model);
+
+            var date = model.InitialDate.ToString("yyyy-MM-dd");
+            var id = model.FundId;
+
+            return this.ShowInfo(InfoMessages.SuccessfulUpdate, GlobalConstants.FundDetailsRouteName, new
+            {
+                area = "Funds",
+                id,
+                date,
+            });
         }
 
         private async Task SetViewDataValuesForFundSelectLists()
@@ -44,79 +72,6 @@
             this.ViewData["LegalType"] = await this.serviceSelect.GetAllTbDomLegalType().ToListAsync();
             this.ViewData["CompanyTypeDesc"] = await this.serviceSelect.GetAllTbDomCompanyDesc().ToListAsync();
         }
-
-        //[ValidateAntiForgeryToken]
-        //[HttpPost("Funds/EditFund/{EntityId}/{ChosenDate}")]
-        //public IActionResult Edit(EditFundInputModel model, int entityId, string chosenDate)
-        //{
-        //    string returnUrl = "/Funds/All";
-
-        //    if (!this.ModelState.IsValid)
-        //    {
-        //        if (model.EntityProperties == null)
-        //        {
-        //            var date = DateTime.Parse(chosenDate);
-        //            model.EntityProperties = this.fundsService.GetFundWithDateById(date, entityId);
-        //            SetModelValuesForEditView(model);
-        //            SetViewDataValuesForFundSelectLists();
-        //        }
-
-        //        return this.View(model ?? new EditFundInputModel());
-        //    }
-
-
-        //    if (this.HttpContext.Request.Form.ContainsKey("update_button"))
-        //    {
-        //        int fundId = model.FundId;
-        //        string initialDate = model.InitialDate.ToString("yyyyMMdd");
-
-        //        int fStatusId = this.context.TbDomFStatus
-        //            .Where(s => s.StFDesc == model.Status)
-        //            .Select(s => s.StFId)
-        //            .FirstOrDefault();
-
-        //        string regNumber = model.RegNumber;
-        //        string fundName = model.FundName;
-        //        string leiCode = model.LEICode;
-        //        string cssfCode = model.CSSFCode;
-        //        string faCode = model.FACode;
-        //        string depCode = model.DEPCode;
-        //        string taCode = model.TACode;
-
-        //        int fLegalFormId = this.context.TbDomLegalForm
-        //            .Where(lf => lf.LfAcronym == model.LegalForm)
-        //            .Select(lf => lf.LfId)
-        //            .FirstOrDefault();
-        //        int fLegalVehicleId = this.context.TbDomLegalVehicle
-        //            .Where(lv => lv.LvAcronym == model.LegalVehicle)
-        //            .Select(lv => lv.LvId)
-        //            .FirstOrDefault();
-        //        int fLegalTypeId = this.context.TbDomLegalType
-        //            .Where(lt => lt.LtAcronym == model.LegalType)
-        //            .Select(lt => lt.LtId)
-        //            .FirstOrDefault();
-
-        //        // Split to take only companyTypeDesc for comparing
-
-        //        string companyTypeDesc = model.CompanyTypeDesc.Split(" - ").FirstOrDefault();
-        //        int fCompanyTypeId = this.context.TbDomCompanyType
-        //            .Where(ct => ct.CtDesc == companyTypeDesc)
-        //            .Select(ct => ct.CtId)
-        //            .FirstOrDefault();
-
-        //        string tinNumber = model.TinNumber;
-
-        //        string comment = model.CommentArea;
-        //        string commentTitle = model.CommentTitle;
-
-        //        this.fundsService.EditFund(fundId, initialDate, fStatusId, regNumber,
-        //                                   fundName, leiCode, cssfCode, faCode, depCode, taCode,
-        //                                   fLegalFormId, fLegalTypeId, fLegalVehicleId, fCompanyTypeId,
-        //                                   tinNumber, comment, commentTitle);
-        //    }
-
-        //    return this.LocalRedirect(returnUrl);
-        //}
 
         //[HttpGet]
         //[Authorize(Roles = "Admin")]

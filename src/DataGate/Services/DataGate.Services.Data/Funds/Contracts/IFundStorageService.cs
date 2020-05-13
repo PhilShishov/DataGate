@@ -1,11 +1,15 @@
 ﻿namespace DataGate.Services.Data.Funds.Contracts
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
+
+    using DataGate.Web.Dtos.Funds;
+    using DataGate.Web.InputModels.Funds;
 
     public interface IFundStorageService
     {
-        Task<T> GetByIdAndDateWithoutHeaders<T>(int id, string date);
+        Task<TDestination> GetByIdAndDate<TDestination>(int id, string date);
+
+        Task<EditFundPostDto> Edit(EditFundInputModel model);
 
         //IEnumerable<T> GetAllNames<T>();
 
