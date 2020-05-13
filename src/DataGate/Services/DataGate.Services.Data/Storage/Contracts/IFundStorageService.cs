@@ -1,17 +1,12 @@
-﻿namespace DataGate.Services.Data.Funds.Contracts
+﻿namespace DataGate.Services.Data.Storage.Contracts
 {
     using System.Threading.Tasks;
-
-    using DataGate.Web.Dtos.Funds;
+    using DataGate.Services.Data.Common;
     using DataGate.Web.InputModels.Funds;
 
-    public interface IFundStorageService
+    public interface IFundStorageService : IStorageService
     {
-        Task<TDestination> GetByIdAndDate<TDestination>(int id, string date);
-
-        Task<EditFundPostDto> Edit(EditFundInputModel model);
-
-        //IEnumerable<T> GetAllNames<T>();
+        Task<FundPostDto> Edit(EditFundInputModel model);
 
         //void EditFund(
         //              int fundId,

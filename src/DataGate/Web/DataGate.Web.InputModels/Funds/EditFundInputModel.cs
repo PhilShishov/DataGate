@@ -8,7 +8,7 @@
     public class EditFundInputModel : BaseEntityInputModel, IMapFrom<EditFundGetDto>
     {
         [Display(Name = "Fund Id Pharus")]
-        public int FundId { get; set; }
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "You must enter a value for the Fund Name!")]
         [StringLength(200, ErrorMessage = "The Fund Name must be no longer than 200 characters")]

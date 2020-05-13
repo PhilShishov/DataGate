@@ -6,7 +6,7 @@ namespace DataGate.Services.SqlClient.Contracts
 
     public interface ISqlQueryManager
     {
-        void ExecuteProcedure(SqlConnection connection, SqlCommand command);
+        void ExecuteProcedure(SqlCommand command);
 
         IEnumerable<string[]> ExecuteQuery(string function, DateTime? date = null, int? id = null, IEnumerable<string> columns = null);
 

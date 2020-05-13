@@ -6,7 +6,7 @@ namespace DataGate.Web.Dtos.Funds
     {
         public DateTime InitialDate { get; set; }
 
-        public int FundId { get; set; }
+        public int Id { get; set; }
 
         public string FundName { get; set; }
 

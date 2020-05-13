@@ -1,11 +1,10 @@
 ﻿namespace DataGate.Web.Controllers.Funds
 {
-    using System;
+    using System.Globalization;
     using System.Linq;
     using System.Threading.Tasks;
-    using AngleSharp.Html.Dom;
+
     using DataGate.Common;
-    using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Services.Data.Storage.Contracts;
     using DataGate.Web.InputModels.Funds;
 
@@ -40,7 +39,7 @@
         [ValidateAntiForgeryToken]
         [HttpPost]
         [Route("f/edit/{id}/{date}")]
-        public async Task<IActionResult> Edit([Bind("FundId", "InitialDate", "FundName", "CSSFCode", "Status",
+        public async Task<IActionResult> Edit([Bind("Id", "InitialDate", "FundName", "CSSFCode", "Status",
                                                     "LegalForm", "LegalVehicle", "LegalType", "FACode",
                                                     "DEPCode", "TACode", "CompanyTypeDesc", "TinNumber",
                                                     "LEICode", "RegNumber", "CommentTitle", "CommentArea")] EditFundInputModel model)
@@ -51,15 +50,13 @@
                 return this.View(model);
             }
 
-            //var fund = await this.service.Edit(model);
-
-            var date = model.InitialDate.ToString("yyyy-MM-dd");
-            var id = model.FundId;
+            var date = model.InitialDate.ToString(GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
+            await this.service.Edit(model);
 
             return this.ShowInfo(InfoMessages.SuccessfulUpdate, GlobalConstants.FundDetailsRouteName, new
             {
-                area = "Funds",
-                id,
+                area = GlobalConstants.FundsAreaName,
+                model.Id,
                 date,
             });
         }
