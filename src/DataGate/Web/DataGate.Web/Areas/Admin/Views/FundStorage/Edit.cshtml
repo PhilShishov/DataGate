@@ -52,7 +52,7 @@
             <select class="form-control maxw-270" asp-for="Status">
                 @foreach (var status in (List<string>)ViewData["Status"])
                 {
-                    if (status == Model.EntityProperties[1][5])
+                    if (status == Model.EntityProperties[5])
                     {
                         <option selected value="@status">@status</option>
                     }
@@ -70,7 +70,7 @@
             <select class="form-control maxw-270" asp-for="LegalForm">
                 @foreach (var form in (List<string>)ViewData["LegalForm"])
                 {
-                    if (form == Model.EntityProperties[1][6])
+                    if (form == Model.EntityProperties[6])
                     {
                         <option selected value="@form">@form</option>
                     }
@@ -88,7 +88,7 @@
             <select class="form-control maxw-270" asp-for="LegalVehicle">
                 @foreach (var vehicle in (List<string>)ViewData["LegalVehicle"])
                 {
-                    if (vehicle == Model.EntityProperties[1][7])
+                    if (vehicle == Model.EntityProperties[7])
                     {
                         <option selected value="@vehicle">@vehicle</option>
                     }
@@ -106,7 +106,7 @@
             <select class="form-control maxw-270" asp-for="LegalType">
                 @foreach (var type in (List<string>)ViewData["LegalType"])
                 {
-                    if (type == Model.EntityProperties[1][8])
+                    if (type == Model.EntityProperties[8])
                     {
                         <option selected value="@type">@type</option>
                     }
@@ -150,7 +150,7 @@
             <select class="form-control maxw-270" asp-for="CompanyTypeDesc">
                 @foreach (var desc in (List<string>)ViewData["CompanyTypeDesc"])
                 {
-                    if (desc == Model.EntityProperties[1][8])
+                    if (desc == Model.EntityProperties[8])
                     {
                         <option selected value="@desc">@desc</option>
                     }

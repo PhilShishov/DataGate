@@ -35,7 +35,7 @@
         {
             EntitiesVMSetup.SetPost(model, this.service);
 
-            if (model.Values.Count > 0)
+            if (model.Values != null)
             {
                 this.TempData[GlobalConstants.InfoKey] = InfoMessages.SuccessfulUpdate;
                 return this.View(model);

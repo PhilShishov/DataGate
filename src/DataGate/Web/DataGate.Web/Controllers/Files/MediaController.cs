@@ -26,7 +26,7 @@
         [HttpPost]
         public IActionResult Download(DownloadInputModel model)
         {
-            if (model.Values.Count > 0)
+            if (model.Values != null)
             {
                 if (model.Command == GlobalConstants.CommandExtractExcel)
                 {

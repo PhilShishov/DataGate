@@ -2,7 +2,7 @@
 @model DataGate.Web.ViewModels.Entities.SpecificEntityViewModel
 @{
     var controllerName = this.ViewContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
-    var targetRoute = string.Empty;
+    var targetEditRoute = string.Empty;
     var targetRouteContainer = string.Empty;
     var containerName = string.Empty;
     var documentTypeName = string.Empty;
@@ -14,7 +14,7 @@
     {
         documentTypeName = GlobalConstants.UploadTypeProspectusDisplay;
         entityName = GlobalConstants.FundNameDisplay;
-        targetRoute = "f";
+        targetEditRoute = "editFund";
         routeName = GlobalConstants.AllFundsRouteName;
         //routeSEName;
     }
@@ -100,7 +100,10 @@
         @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
         {
             <div>
-                <a href="/@targetRoute/@Model.Id/@Model.Date"
+                <a asp-area="Admin"
+                   asp-route="@targetEditRoute"
+                   asp-route-id="@Model.Id"
+                   asp-route-date="@Model.Date"
                    class="btn btn-primary btn-sm mb-2">
                     Edit @entityName
                 </a>

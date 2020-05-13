@@ -43,8 +43,8 @@ namespace DataGate.Web.InputModels
         [Display(Name = "LEI Code")]
         public string LEICode { get; set; }
 
-        public List<string[]> EntityProperties { get; set; }
+        public List<string> EntityProperties { get; set; }
 
-        public List<string> ExistingEntitiesNames { get; set; }
+        public IEnumerable<string> ExistingEntitiesNames { get; set; }
     }
 }
