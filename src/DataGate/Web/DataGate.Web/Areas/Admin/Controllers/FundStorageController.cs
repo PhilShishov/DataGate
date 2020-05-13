@@ -53,7 +53,7 @@
             var date = model.InitialDate.ToString(GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
             await this.service.Edit(model);
 
-            return this.ShowInfo(InfoMessages.SuccessfulUpdate, GlobalConstants.FundDetailsRouteName, new
+            return this.ShowInfo(InfoMessages.SuccessfulEdit, GlobalConstants.FundDetailsRouteName, new
             {
                 area = GlobalConstants.FundsAreaName,
                 model.Id,

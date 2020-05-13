@@ -103,7 +103,7 @@
                             new SqlParameter("@commentTitle", SqlDbType.NVarChar) { Value = dto.CommentTitle },
                    });
 
-            this.sqlManager.ExecuteProcedure(command);
+            await this.sqlManager.ExecuteProcedure(command);
 
             return dto;
         }

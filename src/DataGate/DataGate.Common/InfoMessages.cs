@@ -4,6 +4,8 @@
     {
         public const string SuccessfulUpdate = "Table successfully updated.";
 
+        public const string SuccessfulEdit = "Entity edited.";
+
         public const string SuccessfullyDeletedMessage = "The \"{0}\" was successfully deleted.";
 
         public const string ChangeUserPasswordSuccessfully = "Your password has been changed.";

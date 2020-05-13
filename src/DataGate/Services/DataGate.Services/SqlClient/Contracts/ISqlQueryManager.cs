@@ -3,10 +3,11 @@ namespace DataGate.Services.SqlClient.Contracts
     using System;
     using System.Collections.Generic;
     using System.Data.SqlClient;
+    using System.Threading.Tasks;
 
     public interface ISqlQueryManager
     {
-        void ExecuteProcedure(SqlCommand command);
+        Task ExecuteProcedure(SqlCommand command);
 
         IEnumerable<string[]> ExecuteQuery(string function, DateTime? date = null, int? id = null, IEnumerable<string> columns = null);
 

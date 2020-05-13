@@ -10,11 +10,13 @@ namespace DataGate.Services.SqlClient
 {
     using System;
     using System.Collections.Generic;
+    using System.Data;
     using System.Data.SqlClient;
+    using System.Threading.Tasks;
 
     using DataGate.Common;
+    using DataGate.Common.Exceptions;
     using DataGate.Services.SqlClient.Contracts;
-
     using Microsoft.Extensions.Configuration;
 
     // _____________________________________________________________
@@ -34,27 +36,34 @@ namespace DataGate.Services.SqlClient
         //// ________________________________________________________
         ////
         //// Execute parameterized stored procedure
-        public void ExecuteProcedure(SqlCommand command)
+        public async Task ExecuteProcedure(SqlCommand command)
         {
-            try
+            using (SqlConnection connection = new SqlConnection())
             {
-                using (SqlConnection connection = new SqlConnection())
+                connection.ConnectionString = this.configuration.GetConnectionString(GlobalConstants.DataGatevFinaleConnection);
+                try
                 {
-                    connection.ConnectionString = this.configuration.GetConnectionString(GlobalConstants.DataGatevFinaleConnection);
+                    if (connection.State == ConnectionState.Closed)
+                    {
+                        await connection.OpenAsync();
+                    }
+
+                    command.Connection = connection;
                     using (command)
                     {
                         this.SetParametersForDB(command);
-
-                        command.Connection = connection;
-
-                        command.Connection.Open();
-                        command.ExecuteScalar();
+                        await command.ExecuteScalarAsync();
                     }
                 }
-            }
-            catch (SqlException sx)
-            {
-                Console.WriteLine(sx.Message);
+                catch (SqlException exception)
+                {
+                    if (connection.State == ConnectionState.Open)
+                    {
+                        await connection.CloseAsync();
+                    }
+
+                    throw new CustomSqlException(exception.Message, exception);
+                }
             }
         }
 
@@ -93,6 +102,48 @@ namespace DataGate.Services.SqlClient
                 }
 
                 return DataSQLHelper.GetStringData(command);
+            }
+        }
+
+        public async IAsyncEnumerable<string[]> ExecuteQueryAsync(string function, DateTime? date, int? id, IEnumerable<string> columns)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString(GlobalConstants.DataGatevFinaleConnection);
+                await connection.OpenAsync();
+                SqlCommand command = connection.CreateCommand();
+
+                if (!date.HasValue)
+                {
+                    command.CommandText = $"select * from {function}({id})";
+                }
+                else if (id.HasValue)
+                {
+                    if (columns != null)
+                    {
+                        command.CommandText = $"select {string.Join(", ", columns)} from {function}('{date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}', {id})";
+                    }
+                    else
+                    {
+                        command.CommandText = $"select * from {function}('{date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}', {id})";
+                    }
+                }
+                else
+                {
+                    if (columns != null)
+                    {
+                        command.CommandText = $"select {string.Join(", ", columns)} from {function}('{date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}')";
+                    }
+                    else
+                    {
+                        command.CommandText = $"select * from {function}('{date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}')";
+                    }
+                }
+
+                await foreach (var item in DataSQLHelper.GetStringDataAsync(command))
+                {
+                    yield return item;
+                }
             }
         }
 
@@ -143,48 +194,6 @@ namespace DataGate.Services.SqlClient
                 if (parameter.Value == null)
                 {
                     parameter.Value = DBNull.Value;
-                }
-            }
-        }
-
-        public async IAsyncEnumerable<string[]> ExecuteQueryAsync(string function, DateTime? date, int? id, IEnumerable<string> columns)
-        {
-            using (SqlConnection connection = new SqlConnection())
-            {
-                connection.ConnectionString = this.configuration.GetConnectionString(GlobalConstants.DataGatevFinaleConnection);
-                await connection.OpenAsync();
-                SqlCommand command = connection.CreateCommand();
-
-                if (!date.HasValue)
-                {
-                    command.CommandText = $"select * from {function}({id})";
-                }
-                else if (id.HasValue)
-                {
-                    if (columns != null)
-                    {
-                        command.CommandText = $"select {string.Join(", ", columns)} from {function}('{date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}', {id})";
-                    }
-                    else
-                    {
-                        command.CommandText = $"select * from {function}('{date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}', {id})";
-                    }
-                }
-                else
-                {
-                    if (columns != null)
-                    {
-                        command.CommandText = $"select {string.Join(", ", columns)} from {function}('{date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}')";
-                    }
-                    else
-                    {
-                        command.CommandText = $"select * from {function}('{date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}')";
-                    }
-                }
-
-                await foreach (var item in DataSQLHelper.GetStringDataAsync(command))
-                {
-                    yield return item;
                 }
             }
         }
