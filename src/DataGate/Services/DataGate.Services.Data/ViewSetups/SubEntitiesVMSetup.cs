@@ -6,6 +6,7 @@
     using DataGate.Services.Data.Common;
     using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
+    using DataGate.Web.Dtos.Queries;
     using DataGate.Web.ViewModels.Entities;
     using DataGate.Web.ViewModels.Queries;
 
@@ -17,7 +18,7 @@
             var headers = await service.GetSubEntities(id, date).FirstOrDefaultAsync();
             var values = await service.GetSubEntities(id, date).ToListAsync();
 
-            SubEntitiesViewModel dto = new SubEntitiesViewModel()
+            var dto = new SubEntitiesGetDto()
             {
                 Id = id,
                 Date = chosenDate,
