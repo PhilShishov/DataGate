@@ -1,11 +1,11 @@
 ﻿namespace DataGate.Web.Controllers.Funds
 {
-    using System;
     using System.Linq;
+    using System.Threading.Tasks;
 
     using DataGate.Common;
     using DataGate.Services.Data.Funds.Contracts;
-    using DataGate.Services.DateTime;
+    using DataGate.Services.Data.Storage.Contracts;
     using DataGate.Web.InputModels.Funds;
 
     using Microsoft.AspNetCore.Authorization;
@@ -15,52 +15,35 @@
     [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     public class FundStorageController : BaseController
     {
-        private readonly IFundDetailsService service;
+        private readonly IFundStorageService service;
+        private readonly IFundsSelectListService serviceSelect;
 
-        public FundStorageController(IFundDetailsService fundSubFundsService)
+        public FundStorageController(
+                        IFundStorageService fundService,
+                        IFundsSelectListService fundServiceSelect)
         {
-            this.service = fundSubFundsService;
+            this.service = fundService;
+            this.serviceSelect = fundServiceSelect;
         }
 
         [Route("f/edit/{id}/{date}")]
-        public IActionResult Edit(int id, string date)
+        public async Task<IActionResult> Edit(int id, string date)
         {
-            var dateParsed = DateTimeParser.WebFormat(date);
+            var model = await this.service.GetByIdAndDateWithoutHeaders<EditFundInputModel>(id, date);
 
-            EditFundInputModel model = new EditFundInputModel
-            {
-                EntityProperties = this.service.GetByIdAndDate(id, dateParsed).Skip(1).FirstOrDefault().ToList(),
-                InitialDate = dateParsed,
-                FundId = id,
-            };
-
-            SetModelValues(model);
-
-            //SetViewDataValuesForFundSelectLists();
+            await this.SetViewDataValuesForFundSelectLists();
 
             return this.View(model);
         }
 
-        private static void SetModelValues(EditFundInputModel model)
+        private async Task SetViewDataValuesForFundSelectLists()
         {
-            model.FundName = model.EntityProperties[3];
-            model.CSSFCode = model.EntityProperties[4];
-            model.FACode = model.EntityProperties[9];
-            model.DEPCode = model.EntityProperties[10];
-            model.TACode = model.EntityProperties[11];
-            model.TinNumber = model.EntityProperties[14];
-            model.LEICode = model.EntityProperties[15];
-            model.RegNumber = model.EntityProperties[16];
+            this.ViewData["Status"] = await this.serviceSelect.GetAllTbDomFStatus().ToListAsync();
+            this.ViewData["LegalForm"] = await this.serviceSelect.GetAllTbDomLegalForm().ToListAsync();
+            this.ViewData["LegalVehicle"] = await this.serviceSelect.GetAllTbDomLegalVehicle().ToListAsync();
+            this.ViewData["LegalType"] = await this.serviceSelect.GetAllTbDomLegalType().ToListAsync();
+            this.ViewData["CompanyTypeDesc"] = await this.serviceSelect.GetAllTbDomCompanyDesc().ToListAsync();
         }
-
-        //private void SetViewDataValuesForFundSelectLists()
-        //{
-        //    //this.ViewData["Status"] = this.fundsSelectListService.GetAllTbDomFStatus();
-        //    //this.ViewData["LegalForm"] = this.fundsSelectListService.GetAllTbDomLegalForm();
-        //    //this.ViewData["LegalVehicle"] = this.fundsSelectListService.GetAllTbDomLegalVehicle();
-        //    //this.ViewData["LegalType"] = this.fundsSelectListService.GetAllTbDomLegalType();
-        //    //this.ViewData["CompanyTypeDesc"] = this.fundsSelectListService.GetAllTbDomCompanyDesc();
-        //}
 
         //[ValidateAntiForgeryToken]
         //[HttpPost("Funds/EditFund/{EntityId}/{ChosenDate}")]

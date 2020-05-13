@@ -19,9 +19,6 @@ namespace DataGate.Web.InputModels
         [Display(Name = "Initial Date")]
         public DateTime InitialDate { get; set; }
 
-        [Display(Name = "End Date")]
-        public DateTime? EndDate { get; set; }
-
         [RegularExpression(@"^[A-Z0-9_]+$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "CSSF Code")]
         public string CSSFCode { get; set; }
@@ -43,8 +40,8 @@ namespace DataGate.Web.InputModels
         [Display(Name = "LEI Code")]
         public string LEICode { get; set; }
 
-        public List<string> EntityProperties { get; set; }
+        //public List<string> EntityProperties { get; set; }
 
-        public IEnumerable<string> ExistingEntitiesNames { get; set; }
+        //public IEnumerable<string> ExistingEntitiesNames { get; set; }
     }
 }

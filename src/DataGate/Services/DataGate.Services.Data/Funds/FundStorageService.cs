@@ -1,11 +1,95 @@
 ﻿namespace DataGate.Services.Data.Funds
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
+    using System.Linq;
+    using System.Threading.Tasks;
 
-    public class FundStorageService
+    using DataGate.Common.Exceptions;
+    using DataGate.Data.Common.Repositories;
+    using DataGate.Data.Models.Entities;
+    using DataGate.Services.Data.Funds.Contracts;
+    using DataGate.Services.DateTime;
+    using DataGate.Services.Mapping;
+    using DataGate.Services.SqlClient.Contracts;
+    using DataGate.Web.Dtos.Funds;
+    using DataGate.Web.InputModels.Funds;
+
+    public class FundStorageService : IFundStorageService
     {
+        private const int SkipHeaders = 1;
+        private const int IndexFundName = 3;
+        private const int IndexCSSFCode = 4;
+        private const int IndexStatus = 5;
+        private const int IndexLegalForm = 6;
+        private const int IndexLegalVehicle = 7;
+        private const int IndexLegalType = 8;
+        private const int IndexFACode = 9;
+        private const int IndexDEPCode = 10;
+        private const int IndexTACode = 11;
+        private const int IndexCompanyTypeDesc = 12;
+        private const int IndexTinNumber = 14;
+        private const int IndexLEICode = 15;
+        private const int IndexRegNumber = 16;
+
+        // ________________________________________________________
+        //
+        // Table functions names as in DB
+        private readonly string sqlFunctionFundId = "[fn_fund_id]";
+
+        private readonly ISqlQueryManager sqlManager;
+        private readonly IRepository<TbHistorySubFund> repository;
+
+        public FundStorageService(
+                        ISqlQueryManager sqlQueryManager,
+                        IRepository<TbHistorySubFund> repository)
+        {
+            this.sqlManager = sqlQueryManager;
+            this.repository = repository;
+        }
+
+        public async Task<T> GetByIdAndDateWithoutHeaders<T>(int id, string date)
+        {
+            this.ThrowEntityNotFoundExceptionIfIdDoesNotExist(id);
+
+            var dateParsed = DateTimeParser.WebFormat(date);
+            var query = await this.sqlManager
+                .ExecuteQueryAsync(this.sqlFunctionFundId, dateParsed, id)
+                .Skip(SkipHeaders)
+                .FirstOrDefaultAsync();
+
+            var dto = new EditFundGetDto
+            {
+                InitialDate = dateParsed,
+                FundId = id,
+                FundName = query[IndexFundName],
+                CSSFCode = query[IndexCSSFCode],
+                Status = query[IndexStatus],
+                LegalForm = query[IndexLegalForm],
+                LegalVehicle = query[IndexLegalVehicle],
+                LegalType = query[IndexLegalType],
+                FACode = query[IndexFACode],
+                DEPCode = query[IndexDEPCode],
+                TACode = query[IndexTACode],
+                CompanyTypeDesc = query[IndexCompanyTypeDesc],
+                TinNumber = query[IndexTinNumber],
+                LEICode = query[IndexLEICode],
+                RegNumber = query[IndexRegNumber],
+            };
+
+            //AutoMapperConfig.MapperInstance.CreateMap<Client, ClientViewModel>();
+
+            return AutoMapperConfig.MapperInstance.Map<T>(dto);
+        }
+
+        private void ThrowEntityNotFoundExceptionIfIdDoesNotExist(int id)
+        {
+            if (!this.Exists(id))
+            {
+                throw new EntityNotFoundException(nameof(TbHistoryFund));
+            }
+        }
+
+        private bool Exists(int id) => this.repository.All().Any(x => x.SfId == id);
+
         ////public IEnumerable<T> GetAllNames<T>()
         ////{
         ////    return this.fundsRepository
