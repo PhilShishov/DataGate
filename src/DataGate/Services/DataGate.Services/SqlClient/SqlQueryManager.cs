@@ -11,7 +11,6 @@ namespace DataGate.Services.SqlClient
     using System;
     using System.Collections.Generic;
     using System.Data.SqlClient;
-    using System.Linq;
 
     using DataGate.Common;
     using DataGate.Services.SqlClient.Contracts;
@@ -32,16 +31,26 @@ namespace DataGate.Services.SqlClient
             this.configuration = config;
         }
 
-        public void ExecuteProcedure(SqlConnection connection, SqlCommand command)
+        //// ________________________________________________________
+        ////
+        //// Execute parameterized stored procedure
+        public void ExecuteProcedure(SqlCommand command)
         {
-            this.SetParameters(command);
-
-            command.Connection = connection;
-
             try
             {
-                command.Connection.Open();
-                command.ExecuteScalar();
+                using (SqlConnection connection = new SqlConnection())
+                {
+                    connection.ConnectionString = this.configuration.GetConnectionString(GlobalConstants.DataGatevFinaleConnection);
+                    using (command)
+                    {
+                        this.SetParametersForDB(command);
+
+                        command.Connection = connection;
+
+                        command.Connection.Open();
+                        command.ExecuteScalar();
+                    }
+                }
             }
             catch (SqlException sx)
             {
@@ -127,7 +136,7 @@ namespace DataGate.Services.SqlClient
             return command;
         }
 
-        private void SetParameters(SqlCommand command)
+        private void SetParametersForDB(SqlCommand command)
         {
             foreach (SqlParameter parameter in command.Parameters)
             {

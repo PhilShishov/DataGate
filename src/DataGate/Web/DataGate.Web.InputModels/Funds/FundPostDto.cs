@@ -1,0 +1,59 @@
+namespace DataGate.Web.InputModels.Funds
+{
+    using System.Globalization;
+
+    using AutoMapper;
+    using DataGate.Common;
+    using DataGate.Services.Mapping;
+
+    public class FundPostDto : IMapFrom<EditFundInputModel>, IMapFrom<CreateFundInputModel>, IHaveCustomMappings
+    {
+        public string InitialDate { get; set; }
+
+        public int Id { get; set; }
+
+        public string FundName { get; set; }
+
+        public string CSSFCode { get; set; }
+
+        [IgnoreMap]
+        public int Status { get; set; }
+
+        [IgnoreMap]
+
+        public int LegalForm { get; set; }
+
+        [IgnoreMap]
+
+        public int LegalVehicle { get; set; }
+
+        [IgnoreMap]
+
+        public int LegalType { get; set; }
+
+        public string FACode { get; set; }
+
+        public string DEPCode { get; set; }
+
+        public string TACode { get; set; }
+
+        [IgnoreMap]
+        public int CompanyTypeDesc { get; set; }
+
+        public string TinNumber { get; set; }
+
+        public string LEICode { get; set; }
+
+        public string RegNumber { get; set; }
+
+        public string CommentTitle { get; set; }
+
+        public string CommentArea { get; set; }
+
+        public void CreateMappings(IProfileExpression configuration)
+        {
+            configuration.CreateMap<EditFundInputModel, FundPostDto>()
+                .ForMember(dto => dto.InitialDate, action => action.MapFrom(model => model.InitialDate.ToString(GlobalConstants.RequiredSqlDateTimeFormat, CultureInfo.InvariantCulture)));
+        }
+    }
+}

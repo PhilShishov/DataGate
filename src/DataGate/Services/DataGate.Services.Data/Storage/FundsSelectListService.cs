@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     using DataGate.Data.Common.Repositories;
     using DataGate.Data.Models.Domain;
@@ -88,6 +89,49 @@
             {
                 yield return item;
             }
+        }
+
+        public async Task<int> GetByIdCompanyType(string companyTypeDesc)
+        {
+            // Split to take only companyTypeDesc for comparing
+            string companyTypeDescSplitted = companyTypeDesc.Split(" - ").FirstOrDefault();
+
+            return await this.repositoryCompanyType.All()
+                        .Where(ct => ct.CtDesc == companyTypeDescSplitted)
+                        .Select(ct => ct.CtId)
+                        .FirstOrDefaultAsync();
+        }
+
+        public async Task<int> GetByIdLegalForm(string legalForm)
+        {
+           return await this.repositoryLegalForm.All()
+                        .Where(lf => lf.LfAcronym == legalForm)
+                        .Select(lf => lf.LfId)
+                        .FirstOrDefaultAsync();
+        }
+
+        public async Task<int> GetByIdLegalType(string legalType)
+        {
+           return await this.repositoryLegalType.All()
+                        .Where(lt => lt.LtAcronym == legalType)
+                        .Select(lt => lt.LtId)
+                        .FirstOrDefaultAsync();
+        }
+
+        public async Task<int> GetByIdLegalVehicle(string legalVehicle)
+        {
+            return await this.repositoryLegalVehicle.All()
+                        .Where(lv => lv.LvAcronym == legalVehicle)
+                        .Select(lv => lv.LvId)
+                        .FirstOrDefaultAsync();
+        }
+
+        public async Task<int> GetByIdStatus(string status)
+        {
+            return await this.repositoryFStatus.All()
+                        .Where(s => s.StFDesc == status)
+                        .Select(s => s.StFId)
+                        .FirstOrDefaultAsync();
         }
     }
 }
