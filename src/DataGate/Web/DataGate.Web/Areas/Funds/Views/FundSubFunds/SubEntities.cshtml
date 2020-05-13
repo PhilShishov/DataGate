@@ -3,8 +3,10 @@
 @{
     var controller = this.ViewContext.RouteData.Values["controller"].ToString();
 }
-<form method="post" id="update-form">
-
+<form asp-controller="FundSubFunds" 
+      asp-action="SubEntities" 
+      method="post" 
+      id="update-form">
 
     <input asp-for="Date" type="date" hidden>
     <input asp-for="Id" type="text" hidden>
@@ -14,7 +16,9 @@
         <partial name="SubEntities/_Extract" />
     </div>
     @*<partial name="SubEntities/_BindingTable" />*@
-    <partial name="SubEntities/_ViewTable" />
+    <div id="updateTable">
+        <partial name="SubEntities/_ViewTable" />
+    </div>
     <partial name="SubEntities/_Modal" />
 </form>
 
@@ -37,6 +41,23 @@
             //    });
             //})
 
+            //$("#update-form").submit(function (ev) {
+
+            //    ev.preventDefault(); // avoid to execute the actual submit of the form.
+
+            //    const form = $(this);
+            //    const url = form.attr('action');
+
+            //    $.ajax({
+            //        type: "GET",
+            //        url: url,
+            //        data: form.serialize(), // serializes the form's elements.
+            //        success: function (result) {
+            //            $("#updateTable").html(result);
+            //        }
+            //    });
+            //});
+
             // ________________________________________________________
             //
             // Modal multiselect for column selection
@@ -55,6 +76,6 @@
 
             $('.double-scroll').doubleScroll();
             $('#tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
+
         });
 </script>
-

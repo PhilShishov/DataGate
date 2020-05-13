@@ -19,7 +19,7 @@
     using Microsoft.Extensions.Logging;
 
     [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-    [Area("Administration")]
+    [Area("Admin")]
     public class AdminController : BaseController
     {
         private const string EmailConfirmationUrl = "/Account/ConfirmEmail";

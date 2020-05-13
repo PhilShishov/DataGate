@@ -1,40 +1,70 @@
 ﻿namespace DataGate.Web.Controllers.Funds
 {
+    using System;
+    using System.Linq;
+
+    using DataGate.Common;
+    using DataGate.Services.Data.Funds.Contracts;
+    using DataGate.Services.DateTime;
+    using DataGate.Web.InputModels.Funds;
+
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    [Area("Admin")]
+    [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     public class FundStorageController : BaseController
     {
-        public IActionResult Index()
+        private readonly IFundDetailsService service;
+
+        public FundStorageController(IFundDetailsService fundSubFundsService)
         {
-            return View();
+            this.service = fundSubFundsService;
         }
 
-        //[Authorize(Roles = "Admin")]
-        //[HttpGet("Funds/EditFund/{EntityId}/{ChosenDate}")]
-        //public IActionResult EditFund(int entityId, string chosenDate)
+        [Route("f/edit/{id}/{date}")]
+        public IActionResult Edit(int id, string date)
+        {
+            var dateParsed = DateTimeParser.WebFormat(date);
+
+            EditFundInputModel model = new EditFundInputModel
+            {
+                EntityProperties = this.service.GetByIdAndDate(id, dateParsed).Skip(1).FirstOrDefault().ToList(),
+                InitialDate = dateParsed,
+                FundId = id,
+            };
+
+            SetModelValues(model);
+
+            //SetViewDataValuesForFundSelectLists();
+
+            return this.View(model);
+        }
+
+        private static void SetModelValues(EditFundInputModel model)
+        {
+            model.FundName = model.EntityProperties[3];
+            model.CSSFCode = model.EntityProperties[4];
+            model.FACode = model.EntityProperties[9];
+            model.DEPCode = model.EntityProperties[10];
+            model.TACode = model.EntityProperties[11];
+            model.TinNumber = model.EntityProperties[14];
+            model.LEICode = model.EntityProperties[15];
+            model.RegNumber = model.EntityProperties[16];
+        }
+
+        //private void SetViewDataValuesForFundSelectLists()
         //{
-        //    var date = DateTime.Parse(chosenDate);
-
-        //    EditFundInputModel model = new EditFundInputModel
-        //    {
-        //        EntityProperties = this.fundsService.GetFundWithDateById(date, entityId),
-        //        InitialDate = DateTime.Today,
-        //        FundId = entityId,
-        //    };
-
-        //    SetModelValuesForEditView(model);
-
-        //    SetViewDataValuesForFundSelectLists();
-
-        //    this.ModelState.Clear();
-        //    return this.View(model);
+        //    //this.ViewData["Status"] = this.fundsSelectListService.GetAllTbDomFStatus();
+        //    //this.ViewData["LegalForm"] = this.fundsSelectListService.GetAllTbDomLegalForm();
+        //    //this.ViewData["LegalVehicle"] = this.fundsSelectListService.GetAllTbDomLegalVehicle();
+        //    //this.ViewData["LegalType"] = this.fundsSelectListService.GetAllTbDomLegalType();
+        //    //this.ViewData["CompanyTypeDesc"] = this.fundsSelectListService.GetAllTbDomCompanyDesc();
         //}
 
         //[ValidateAntiForgeryToken]
-
         //[HttpPost("Funds/EditFund/{EntityId}/{ChosenDate}")]
-        //[Authorize(Roles = "Admin")]
-        //public IActionResult EditFund(EditFundInputModel model, int entityId, string chosenDate)
+        //public IActionResult Edit(EditFundInputModel model, int entityId, string chosenDate)
         //{
         //    string returnUrl = "/Funds/All";
 
@@ -186,27 +216,6 @@
         //    }
 
         //    return this.LocalRedirect(returnUrl);
-        //}
-
-        //private static void SetModelValuesForEditView(EditFundInputModel model)
-        //{
-        //    model.FundName = model.EntityProperties[1][3];
-        //    model.CSSFCode = model.EntityProperties[1][4];
-        //    model.FACode = model.EntityProperties[1][9];
-        //    model.DEPCode = model.EntityProperties[1][10];
-        //    model.TACode = model.EntityProperties[1][11];
-        //    model.TinNumber = model.EntityProperties[1][14];
-        //    model.LEICode = model.EntityProperties[1][15];
-        //    model.RegNumber = model.EntityProperties[1][16];
-        //}
-
-        //private void SetViewDataValuesForFundSelectLists()
-        //{
-        //    //this.ViewData["Status"] = this.fundsSelectListService.GetAllTbDomFStatus();
-        //    //this.ViewData["LegalForm"] = this.fundsSelectListService.GetAllTbDomLegalForm();
-        //    //this.ViewData["LegalVehicle"] = this.fundsSelectListService.GetAllTbDomLegalVehicle();
-        //    //this.ViewData["LegalType"] = this.fundsSelectListService.GetAllTbDomLegalType();
-        //    //this.ViewData["CompanyTypeDesc"] = this.fundsSelectListService.GetAllTbDomCompanyDesc();
         //}
     }
 }

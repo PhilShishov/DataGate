@@ -31,7 +31,7 @@
     $("#fundAdditionalInfSelect").on('change', function () {
         const dropdownvalue = $("#fundAdditionalInfSelect option:selected").val();
         const json = { id: id, controllerName: controllerName };
-        const fullJson = { id: id, chosenDate: date, controllerName: controllerName };
+        const fullJson = { id: id, date: date, controllerName: controllerName };
 
         $(this).find('[selected]').removeAttr('selected')
         $(this).find(':selected').attr('selected', 'selected')

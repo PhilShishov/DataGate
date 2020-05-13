@@ -7,14 +7,14 @@
 
     public static class DateTimeParser
     {
-        public static DateTime WebFormat(string chosenDate)
+        public static DateTime WebFormat(string date)
         {
-            return DateTime.ParseExact(chosenDate, GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
+            return DateTime.ParseExact(date, GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
         }
 
-        public static DateTime SqlFormat(string chosenDate)
+        public static DateTime SqlFormat(string date)
         {
-            return DateTime.ParseExact(chosenDate, GlobalConstants.SqlDateTimeFormatParsing, CultureInfo.InvariantCulture);
+            return DateTime.ParseExact(date, GlobalConstants.SqlDateTimeFormatParsing, CultureInfo.InvariantCulture);
         }
     }
 }
