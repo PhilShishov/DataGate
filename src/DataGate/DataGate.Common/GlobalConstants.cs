@@ -25,6 +25,8 @@
         public const string FundAllUrl = "/f/all";
         public const string DetailsActionName = "Details";
         public const string AllActionName = "All";
+        public const string EditActionName = "Edit";
+        public const string CreateActionName = "Create";
 
         // Routes names
         public const string AllFundsRouteName = "allFunds";

@@ -205,18 +205,18 @@
             </nav>
         </header>
         <main>
-            <div class="container-fluid">
+            <div class="container-fluid push">
                 @RenderBody()
             </div>
         </main>
-        <footer>
+        @*<footer>
             <div class="bg-pharus footer-pharus">
                 <div class="text-white text-center">
                     &copy;  @DateTime.Now.Year @GlobalConstants.DataGateFooterDisplay
-                    @*<a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>*@
+                    <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                 </div>
             </div>
-        </footer>
+        </footer>*@
     }
     else
     {

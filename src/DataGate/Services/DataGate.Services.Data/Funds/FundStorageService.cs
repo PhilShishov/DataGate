@@ -36,17 +36,17 @@
         private readonly string sqlFunctionFundId = "[fn_fund_id]";
 
         private readonly ISqlQueryManager sqlManager;
-        private readonly IRepository<TbHistorySubFund> repository;
+        private readonly IRepository<TbHistoryFund> repository;
 
         public FundStorageService(
                         ISqlQueryManager sqlQueryManager,
-                        IRepository<TbHistorySubFund> repository)
+                        IRepository<TbHistoryFund> repository)
         {
             this.sqlManager = sqlQueryManager;
             this.repository = repository;
         }
 
-        public async Task<T> GetByIdAndDateWithoutHeaders<T>(int id, string date)
+        public async Task<TDestination> GetByIdAndDate<TDestination>(int id, string date)
         {
             this.ThrowEntityNotFoundExceptionIfIdDoesNotExist(id);
 
@@ -75,20 +75,61 @@
                 RegNumber = query[IndexRegNumber],
             };
 
-            //AutoMapperConfig.MapperInstance.CreateMap<Client, ClientViewModel>();
-
-            return AutoMapperConfig.MapperInstance.Map<T>(dto);
+            return AutoMapperConfig.MapperInstance.Map<TDestination>(dto);
         }
 
-        private void ThrowEntityNotFoundExceptionIfIdDoesNotExist(int id)
+        public async Task<EditFundPostDto> Edit(EditFundInputModel model)
         {
-            if (!this.Exists(id))
-            {
-                throw new EntityNotFoundException(nameof(TbHistoryFund));
-            }
-        }
 
-        private bool Exists(int id) => this.repository.All().Any(x => x.SfId == id);
+            return null;
+
+            //    int fundId = model.FundId;
+            //    string initialDate = model.InitialDate.ToString("yyyyMMdd");
+
+            //    int fStatusId = this.context.TbDomFStatus
+            //        .Where(s => s.StFDesc == model.Status)
+            //        .Select(s => s.StFId)
+            //        .FirstOrDefault();
+
+            //    string regNumber = model.RegNumber;
+            //    string fundName = model.FundName;
+            //    string leiCode = model.LEICode;
+            //    string cssfCode = model.CSSFCode;
+            //    string faCode = model.FACode;
+            //    string depCode = model.DEPCode;
+            //    string taCode = model.TACode;
+
+            //    int fLegalFormId = this.context.TbDomLegalForm
+            //        .Where(lf => lf.LfAcronym == model.LegalForm)
+            //        .Select(lf => lf.LfId)
+            //        .FirstOrDefault();
+            //    int fLegalVehicleId = this.context.TbDomLegalVehicle
+            //        .Where(lv => lv.LvAcronym == model.LegalVehicle)
+            //        .Select(lv => lv.LvId)
+            //        .FirstOrDefault();
+            //    int fLegalTypeId = this.context.TbDomLegalType
+            //        .Where(lt => lt.LtAcronym == model.LegalType)
+            //        .Select(lt => lt.LtId)
+            //        .FirstOrDefault();
+
+            //    // Split to take only companyTypeDesc for comparing
+
+            //    string companyTypeDesc = model.CompanyTypeDesc.Split(" - ").FirstOrDefault();
+            //    int fCompanyTypeId = this.context.TbDomCompanyType
+            //        .Where(ct => ct.CtDesc == companyTypeDesc)
+            //        .Select(ct => ct.CtId)
+            //        .FirstOrDefault();
+
+            //    string tinNumber = model.TinNumber;
+
+            //    string comment = model.CommentArea;
+            //    string commentTitle = model.CommentTitle;
+
+            //    this.fundsService.EditFund(fundId, initialDate, fStatusId, regNumber,
+            //                               fundName, leiCode, cssfCode, faCode, depCode, taCode,
+            //                               fLegalFormId, fLegalTypeId, fLegalVehicleId, fCompanyTypeId,
+            //                               tinNumber, comment, commentTitle);
+        }
 
         ////public IEnumerable<T> GetAllNames<T>()
         ////{
@@ -168,6 +209,16 @@
         //        }
         //    }
         //}
+
+        private void ThrowEntityNotFoundExceptionIfIdDoesNotExist(int id)
+        {
+            if (!this.Exists(id))
+            {
+                throw new EntityNotFoundException(nameof(TbHistoryFund));
+            }
+        }
+
+        private bool Exists(int id) => this.repository.All().Any(x => x.FId == id);
 
         //public void CreateFund(
         //                        string initialDate,
