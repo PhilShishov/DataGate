@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using DataGate.Common;
+    using DataGate.Services.Data.Files.Contracts;
     using DataGate.Web.Helpers;
     using DataGate.Web.InputModels.Files;
 
@@ -18,20 +19,27 @@
         private readonly long fileSizeLimit;
         private readonly string[] permittedExtensions = { ".pdf" };
         private readonly IWebHostEnvironment environment;
+        private readonly IFileSystemService service;
 
-        public UploadController(IWebHostEnvironment environment, IConfiguration config)
+        public UploadController(
+                       IFileSystemService service,
+                       IWebHostEnvironment environment,
+                       IConfiguration config)
         {
+            this.service = service;
             this.fileSizeLimit = config.GetValue<long>("FileSizeLimit");
             this.environment = environment;
         }
 
         [HttpPost]
         [ActionName("Document")]
-        public async Task<IActionResult> OnPostUploadDocumentAsync(UploadDocumentInputModel model)
+        public async Task<IActionResult> OnPostUploadDocumentAsync(
+            [Bind("DocumentType", "FileToUpload", "StartConnection", "EndConnection",
+                  "Date", "Id", "RouteName", "AreaName")] UploadDocumentInputModel model)
         {
             if (!this.ModelState.IsValid)
             {
-                return this.PartialView("SpecificEntity/_UploadDocument", model);
+                return this.ShowError(ErrorMessages.ModelUploadErrorMessage, model.RouteName, new { area = model.AreaName, id = model.Id, date = model.Date });
             }
 
             string path = await FileHelpers.ProcessFormFile(model.FileToUpload, this.ModelState, this.permittedExtensions,
@@ -39,33 +47,16 @@
 
             if (!this.ModelState.IsValid)
             {
-                return this.PartialView("SpecificEntity/_UploadDocument", model);
+                return this.ShowError(ErrorMessages.ModelUploadFileErrorMessage, model.RouteName, new { area = model.AreaName, id = model.Id, date = model.Date });
             }
+
+            await this.service.UploadDocument(model);
 
             using (var stream = new FileStream(path, FileMode.Create))
             {
                 await model.FileToUpload.CopyToAsync(stream);
                 stream.Close();
             }
-
-            string startConnection = model.StartConnection.ToString("yyyyMMdd");
-            string endConnection = model.EndConnection?.ToString("yyyyMMdd");
-
-            var prosFileTypeDesc = model.DocumentType;
-            int prosFileTypeId = 0;
-            //this.context.TbDomFileType
-            //    .Where(ft => ft.FiletypeDesc == prosFileTypeDesc)
-            //    .Select(ft => ft.FiletypeId)
-            //    .FirstOrDefault();
-
-            //this.entitiesFileService.AddDocumentToSpecificEntity(
-            //                                    file.FileName,
-            //                                    model.EntityId,
-            //                                    startConnection,
-            //                                    endConnection,
-            //                                    ext,
-            //                                    prosFileTypeId,
-            //                                    model.ControllerName);
 
             return this.ShowInfo(InfoMessages.SuccessfulUpdate, GlobalConstants.FundDetailsRouteName, new { model.Id, model.Date });
         }

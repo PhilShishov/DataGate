@@ -4,6 +4,8 @@
     {
         public const string SuccessfulUpdate = "Table successfully updated.";
 
+        public const string FileUploaded = "File uploaded.";
+
         public const string SuccessfulEdit = "Entity edited.";
 
         public const string SuccessfulCreate = "Entity successfully created.";

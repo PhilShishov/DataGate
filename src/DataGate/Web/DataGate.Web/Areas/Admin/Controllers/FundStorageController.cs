@@ -40,10 +40,11 @@
         [ValidateAntiForgeryToken]
         [HttpPost]
         [Route("f/edit/{id}/{date}")]
-        public async Task<IActionResult> Edit([Bind("Id", "InitialDate", "FundName", "CSSFCode", "Status",
-                                                    "LegalForm", "LegalVehicle", "LegalType", "FACode",
-                                                    "DEPCode", "TACode", "CompanyTypeDesc", "TinNumber",
-                                                    "LEICode", "RegNumber", "CommentTitle", "CommentArea")] EditFundInputModel model)
+        public async Task<IActionResult> Edit(
+                    [Bind("Id", "InitialDate", "FundName", "CSSFCode", "Status",
+                          "LegalForm", "LegalVehicle", "LegalType", "FACode",
+                          "DEPCode", "TACode", "CompanyTypeDesc", "TinNumber",
+                          "LEICode", "RegNumber", "CommentTitle", "CommentArea")] EditFundInputModel model)
         {
             if (!this.ModelState.IsValid)
             {
@@ -67,9 +68,10 @@
         [ValidateAntiForgeryToken]
         [HttpPost]
         [Route("f/new")]
-        public async Task<IActionResult> Create([Bind("InitialDate", "EndDate", "FundName", "CSSFCode", "Status",
-                                                      "LegalForm", "LegalVehicle", "LegalType", "FACode", "DEPCode",
-                                                      "TACode", "CompanyTypeDesc", "TinNumber", "LEICode", "RegNumber")] CreateFundInputModel model)
+        public async Task<IActionResult> Create(
+                    [Bind("InitialDate", "EndDate", "FundName", "CSSFCode", "Status",
+                          "LegalForm", "LegalVehicle", "LegalType", "FACode", "DEPCode",
+                          "TACode", "CompanyTypeDesc", "TinNumber", "LEICode", "RegNumber")] CreateFundInputModel model)
         {
             bool doesExist = await this.service.DoesExist(model.FundName);
 

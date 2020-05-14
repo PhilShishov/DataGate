@@ -2,10 +2,13 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     public interface IDocumentService
     {
         IReadOnlyCollection<string> GetDocumentsFileTypes();
+
+        Task<int> GetByIdFileType(string documentType);
 
         IAsyncEnumerable<string> GetAgreementsFileTypes();
 

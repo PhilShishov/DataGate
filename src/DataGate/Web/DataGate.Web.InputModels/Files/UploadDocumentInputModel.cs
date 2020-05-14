@@ -13,8 +13,7 @@ namespace DataGate.Web.InputModels.Files
     using Microsoft.AspNetCore.Http;
 
     public class UploadDocumentInputModel
-    {
-
+    {         
         [Required]
         public string DocumentType { get; set; }
 
@@ -29,6 +28,8 @@ namespace DataGate.Web.InputModels.Files
 
         public int Id { get; set; }
 
-        public string ControllerName { get; set; }
+        public string RouteName { get; set; }
+
+        public string AreaName { get; set; }
     }
 }
