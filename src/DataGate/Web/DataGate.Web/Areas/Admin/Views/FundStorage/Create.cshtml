@@ -1,6 +1,8 @@
-﻿@model DataGate.Web.InputModels.Funds.CreateFundInputModel
+﻿@using DataGate.Common
+@model DataGate.Web.InputModels.Funds.CreateFundInputModel
 
 @{
+    ViewData["Title"] = GlobalConstants.CreateActionName;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -36,6 +38,13 @@
                    asp-for="FundName">
             <span asp-validation-for="FundName" class="text-danger"></span>
         </div>
+
+        @if (this.TempData[GlobalConstants.ErrorKey] != null)
+        {
+            <div class="alert alert-danger" id="errorMessage">
+                @this.TempData[GlobalConstants.ErrorKey]
+            </div>
+        }
 
         <div class="form-group">
             <label asp-for="CSSFCode" class="text-torshia"></label><br>
@@ -168,8 +177,9 @@
                 style="margin-right:40px">
             Create Fund
         </button>
-        <a class="btn btn-primary btn-sm"
-           asp-action="All">Back to List</a>
+        <a class="btn btn-primary btn-sm" asp-area="Funds" asp-route="allFunds">
+            Back to List
+        </a>
     </div>
 </form>
 @section Scripts{

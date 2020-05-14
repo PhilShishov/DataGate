@@ -7,6 +7,6 @@
     {
         Task<TDestination> GetByIdAndDate<TDestination>(int id, string date);
 
-        //IEnumerable<string> GetAllNames();
+        Task<bool> DoesExist(string name);
     }
 }

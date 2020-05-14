@@ -76,7 +76,11 @@
                                             </a>
                                             @if (this.User.IsInRole("Admin"))
                                             {
-                                                <a class="dropdown-item font-weight-light" href="/Funds/CreateFund">Create</a>
+                                                <a asp-area="Admin"
+                                                   asp-route="newFund"
+                                                   class="dropdown-item font-weight-light">
+                                                    Create
+                                                </a>
                                             }
 
                                             <a class="dropdown-item font-weight-light" href="#">Report</a>
@@ -210,13 +214,13 @@
             </div>
         </main>
         @*<footer>
-            <div class="bg-pharus footer-pharus">
-                <div class="text-white text-center">
-                    &copy;  @DateTime.Now.Year @GlobalConstants.DataGateFooterDisplay
-                    <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                <div class="bg-pharus footer-pharus">
+                    <div class="text-white text-center">
+                        &copy;  @DateTime.Now.Year @GlobalConstants.DataGateFooterDisplay
+                        <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    </div>
                 </div>
-            </div>
-        </footer>*@
+            </footer>*@
     }
     else
     {

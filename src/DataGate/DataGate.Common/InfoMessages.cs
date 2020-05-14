@@ -6,6 +6,8 @@
 
         public const string SuccessfulEdit = "Entity edited.";
 
+        public const string SuccessfulCreate = "Entity successfully created.";
+
         public const string SuccessfullyDeletedMessage = "The \"{0}\" was successfully deleted.";
 
         public const string ChangeUserPasswordSuccessfully = "Your password has been changed.";
@@ -16,8 +18,8 @@
 
         public const string SuccessfullyConfirmedEmail = "Your email was successfully confirmed.";
 
-        public const string AddAdministrator = "{0} was successfully added as adminstrator";
+        public const string AddAdministrator = "{0} was successfully added as administrator";
 
-        public const string RemoveAdministrator = "{0} was successfully removed as adminstrator";
+        public const string RemoveAdministrator = "{0} was successfully removed as administrator";
     }
 }

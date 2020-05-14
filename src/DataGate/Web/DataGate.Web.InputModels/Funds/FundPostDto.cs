@@ -10,6 +10,8 @@ namespace DataGate.Web.InputModels.Funds
     {
         public string InitialDate { get; set; }
 
+        public string EndDate { get; set; }
+
         public int Id { get; set; }
 
         public string FundName { get; set; }
