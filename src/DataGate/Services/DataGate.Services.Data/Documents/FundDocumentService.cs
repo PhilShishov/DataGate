@@ -89,14 +89,14 @@
 
         public IEnumerable<T> GetAllAgreements<T>(int id, DateTime? date)
         {
-            IEnumerable<AllAgrDto> dto = this.sqlManager.ExecuteQueryMapping<AllAgrDto>(this.sqlFunctionAllAgreements, id, date);
+            IEnumerable<AgreementDto> dto = this.sqlManager.ExecuteQueryMapping<AgreementDto>(this.sqlFunctionAllAgreements, id, date);
 
             return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
         }
 
         public IEnumerable<T> GetAllDocuments<T>(int id)
         {
-            IEnumerable<AllDocDto> dto = this.sqlManager.ExecuteQueryMapping<AllDocDto>(this.sqlFunctionAllDocuments, id);
+            IEnumerable<DocumentDto> dto = this.sqlManager.ExecuteQueryMapping<DocumentDto>(this.sqlFunctionAllDocuments, id);
 
             return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
         }

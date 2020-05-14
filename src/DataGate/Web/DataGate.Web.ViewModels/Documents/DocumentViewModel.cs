@@ -3,10 +3,8 @@
     using DataGate.Services.Mapping;
     using DataGate.Web.Dtos.Queries;
 
-    public class AllDocViewModel : IMapFrom<AllDocDto>
+    public class DocumentViewModel : IMapFrom<DocumentDto>
     {
-        public int Id { get; set; }
-
         public string Description { get; set; }
 
         public string ValidFrom { get; set; }

@@ -3,7 +3,7 @@
     using DataGate.Services.Mapping;
     using DataGate.Web.Dtos.Queries;
 
-    public class AllAgrViewModel : IMapFrom<AllAgrDto>
+    public class AgreementViewModel : IMapFrom<AgreementDto>
     {
         public string Description { get; set; }
 

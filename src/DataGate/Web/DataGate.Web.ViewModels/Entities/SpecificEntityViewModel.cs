@@ -16,6 +16,7 @@ namespace DataGate.Web.ViewModels.Entities
     using System.Collections.Generic;
 
     using DataGate.Services.Mapping;
+    using DataGate.Web.ViewModels.Documents;
     using DataGate.Web.ViewModels.Queries;
 
     public class SpecificEntityViewModel : BaseEntityViewModel, IMapFrom<SpecificEntityOverviewGetDto>
@@ -40,7 +41,7 @@ namespace DataGate.Web.ViewModels.Entities
 
         public IEnumerable<DistinctDocViewModel> DistinctDocuments { get; set; }
 
-        public IEnumerable<DistinctDocViewModel> DistinctAgreements { get; set; }
+        public IEnumerable<DistinctAgrViewModel> DistinctAgreements { get; set; }
 
         public DateTime StartConnection { get; set; }
 

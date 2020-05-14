@@ -21,9 +21,10 @@
                                         formtarget="_blank"
                                         type="submit"
                                         asp-route="files"
-                                        asp-route-name="@document.Name"
-                                        name="docValue">
-                                    @Html.Encode(@System.IO.Path.GetFileNameWithoutExtension(document.Name))
+                                        asp-route-name="@document.DocumentName"
+                                        name="docValue"
+                                        value="@document.DocumentName">
+                                    @Html.Encode(System.IO.Path.GetFileNameWithoutExtension(document.DocumentName))
                                 </button>
                             </td>
                         </tr>
@@ -56,9 +57,10 @@
                                             formtarget="_blank"
                                             type="submit"
                                             asp-route="files"
-                                            asp-route-name="@document.Name"
-                                            name="docValue">
-                                        @Html.Encode(@System.IO.Path.GetFileNameWithoutExtension(document.Name))
+                                            asp-route-name="@document.DocumentName"
+                                            name="docValue"
+                                            value="@document.DocumentName">
+                                        @Html.Encode(System.IO.Path.GetFileNameWithoutExtension(document.DocumentName))
                                     </button>
                                 </td>
                             </tr>
@@ -82,20 +84,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var document in Model.DistinctAgreements)
+                    @foreach (var agreement in Model.DistinctAgreements)
                     {
                         <tr>
                             <td>
-                                @document.Description
+                                @agreement.Description
                             </td>
                             <td>
                                 <button class="btn-link-pharus text-left"
                                         formtarget="_blank"
                                         type="submit"
                                         asp-route="files"
-                                        asp-route-name="@document.Name"
-                                        name="agrValue">
-                                    @Html.Encode(@System.IO.Path.GetFileNameWithoutExtension(document.Name))
+                                        asp-route-name="@agreement.AgreementName"
+                                        name="agrValue"
+                                        value="@agreement.AgreementName">
+                                    @Html.Encode(System.IO.Path.GetFileNameWithoutExtension(agreement.AgreementName))
                                 </button>
                             </td>
                         </tr>

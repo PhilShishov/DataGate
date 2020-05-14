@@ -59,7 +59,7 @@
                 {
                     var document = new DistinctDocDto
                     {
-                        Name = query[row][col],
+                        DocumentName = query[row][col],
                     };
                     dto.Add(document);
                 }
@@ -70,7 +70,7 @@
 
         public IEnumerable<T> GetDistinctAgreements<T>(int id, DateTime? date)
         {
-            IEnumerable<DistinctDocDto> dto = this.sqlManager.ExecuteQueryMapping<DistinctDocDto>(this.sqlFunctionDistinctAgreements, id, date);
+            IEnumerable<DistinctAgrDto> dto = this.sqlManager.ExecuteQueryMapping<DistinctAgrDto>(this.sqlFunctionDistinctAgreements, id, date);
 
             return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
         }

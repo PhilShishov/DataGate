@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class AgreementsViewModel
+    public class AgreementsMainViewModel
     {
         public string ChosenDate { get; set; }
 

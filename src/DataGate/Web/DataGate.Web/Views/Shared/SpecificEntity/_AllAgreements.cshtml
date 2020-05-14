@@ -1,61 +1,67 @@
-﻿@model IEnumerable<DataGate.Web.ViewModels.Documents.AllAgrViewModel>
-@{
-    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
-}
-<thead>
-    <tr>
-        <th class="text-secondary p-1">
-            File Description
-        </th>
-        <th class="text-secondary p-1">
-            Contract Date
-        </th>
-        <th class="text-secondary p-1">
-            Activation Date
-        </th>
-        <th class="text-secondary p-1">
-            Expiration Date
-        </th>
-        <th class="text-secondary p-1">
-            File Name
-        </th>
-        <th class="text-secondary p-1"></th>
-    </tr>
-</thead>
-<tbody>
-    @foreach (var agreement in Model)
-    {
-        <tr>
-            <td class="p-1">
-                @agreement.Description
-            </td>
-            <td class="p-1">
-                @agreement.ContractDate
-            </td>
-            <td class="p-1">
-                @agreement.ActivationDate
-            </td>
-            <td class="p-1">
-                @agreement.ExpirationDate
-            </td>
-            <td class="p-1">
-                <button class="btn-link-pharus text-left"
-                        formtarget="_blank"
-                        type="submit"
-                        asp-route="files"
-                        asp-route-name="@agreement.Name"
-                        name="agrValue">
-                    @Html.Encode(@System.IO.Path.GetFileNameWithoutExtension(agreement.Name))
-                </button>
-            </td>
-            <td class="p-1">
-                <button type="button"
-                        class="btn btn-primary btn-sm mr-1 confirmDocDelBtn"
-                        formaction="@Url.Action("DeleteDocument", controllerName,
+﻿@model DataGate.Web.ViewModels.Documents.AgreementOverviewViewModel
+
+<form method="post">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th class="text-secondary p-1">
+                    File Description
+                </th>
+                <th class="text-secondary p-1">
+                    Contract Date
+                </th>
+                <th class="text-secondary p-1">
+                    Activation Date
+                </th>
+                <th class="text-secondary p-1">
+                    Expiration Date
+                </th>
+                <th class="text-secondary p-1">
+                    File Name
+                </th>
+                <th class="text-secondary p-1"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var agreement in Model.Agreements)
+            {
+                <tr>
+                    <td class="p-1">
+                        @agreement.Description
+                    </td>
+                    <td class="p-1">
+                        @agreement.ContractDate
+                    </td>
+                    <td class="p-1">
+                        @agreement.ActivationDate
+                    </td>
+                    <td class="p-1">
+                        @agreement.ExpirationDate
+                    </td>
+                    <td class="p-1">
+                        <button class="btn-link-pharus text-left"
+                                formtarget="_blank"
+                                type="submit"
+                                asp-route="files"
+                                asp-route-name="@agreement.Name"
+                                name="agrValue"
+                                value="@agreement.Name">
+                            @Html.Encode(@System.IO.Path.GetFileNameWithoutExtension(agreement.Name))
+                        </button>
+
+                    </td>
+                    <td class="p-1">
+                        <button type="button"
+                                class="btn btn-primary btn-sm mr-1 confirmDocDelBtn"
+                                formaction="@Url.Action("DeleteDocument", Model.ControllerName,
                                                                new { @fileName = agreement.Name })">
-                    Delete
-                </button>
-            </td>
-        </tr>
-    }
-</tbody>
+                            Delete
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <input type="hidden" name="ControllerName" value="@Model.ControllerName" />
+</form>
+
