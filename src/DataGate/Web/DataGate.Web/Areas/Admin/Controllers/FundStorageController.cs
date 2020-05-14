@@ -1,5 +1,6 @@
 ﻿namespace DataGate.Web.Controllers.Funds
 {
+    using System;
     using System.Globalization;
     using System.Linq;
     using System.Threading.Tasks;
@@ -51,13 +52,45 @@
             }
 
             var date = model.InitialDate.ToString(GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
-            await this.service.Edit(model);
+            var fundId = await this.service.Edit(model);
 
             return this.ShowInfo(InfoMessages.SuccessfulEdit, GlobalConstants.FundDetailsRouteName, new
             {
                 area = GlobalConstants.FundsAreaName,
-                model.Id,
+                fundId,
                 date,
+            });
+        }
+
+        [Route("f/new")]
+        public async Task<IActionResult> Create()
+        {
+            await this.SetViewDataValuesForFundSelectLists();
+            return this.View(new CreateFundInputModel { InitialDate = DateTime.Today, });
+        }
+
+        [HttpPost]
+        [Route("f/new")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(CreateFundInputModel model)
+        {
+            bool doesExist = await this.service.DoesExist(model.FundName);
+
+            if (!this.ModelState.IsValid || doesExist)
+            {
+                this.TempData[GlobalConstants.ErrorKey] = ErrorMessages.ExistingEntityName;
+                await this.SetViewDataValuesForFundSelectLists();
+                return this.View(model);
+            }
+
+            var date = model.InitialDate.ToString(GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
+            //var fundId = await this.service.Create(model);
+
+            return this.ShowInfo(InfoMessages.SuccessfulCreate, GlobalConstants.FundDetailsRouteName, new
+            {
+                area = GlobalConstants.FundsAreaName,
+                //fundId,
+                //date,
             });
         }
 
@@ -69,88 +102,5 @@
             this.ViewData["LegalType"] = await this.serviceSelect.GetAllTbDomLegalType().ToListAsync();
             this.ViewData["CompanyTypeDesc"] = await this.serviceSelect.GetAllTbDomCompanyDesc().ToListAsync();
         }
-
-        //[HttpGet]
-        //[Authorize(Roles = "Admin")]
-        //public IActionResult CreateFund()
-        //{
-        //    CreateFundInputModel model = new CreateFundInputModel
-        //    {
-        //        InitialDate = DateTime.Today,
-        //    };
-
-        //    SetViewDataValuesForFundSelectLists();
-
-        //    this.ModelState.Clear();
-        //    return this.View(model);
-        //}
-
-        //[ValidateAntiForgeryToken]
-
-        //[HttpPost]
-        //[Authorize(Roles = "Admin")]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult CreateFund(CreateFundInputModel model)
-        //{
-        //    string returnUrl = "/Funds/All";
-
-        //    SetViewDataValuesForFundSelectLists();
-
-        //    // Compare fund name with existing
-        //    //model.ExistingEntitiesNames = this.fundsService.GetAllFundsNames();
-
-        //    if (!this.ModelState.IsValid || model.ExistingEntitiesNames.Any(f => f == model.FundName))
-        //    {
-        //        return this.View(model ?? new CreateFundInputModel());
-        //    }
-
-        //    if (this.HttpContext.Request.Form.ContainsKey("create_button"))
-        //    {
-        //        string initialDate = model.InitialDate.ToString("yyyyMMdd");
-        //        string endDate = model.EndDate?.ToString("yyyyMMdd");
-
-        //        int fStatusId = this.context.TbDomFStatus
-        //            .Where(s => s.StFDesc == model.Status)
-        //            .Select(s => s.StFId)
-        //            .FirstOrDefault();
-
-        //        string regNumber = model.RegNumber;
-        //        string fundName = model.FundName;
-        //        string leiCode = model.LEICode;
-        //        string cssfCode = model.CSSFCode;
-        //        string faCode = model.FACode;
-        //        string depCode = model.DEPCode;
-        //        string taCode = model.TACode;
-
-        //        int fLegalFormId = this.context.TbDomLegalForm
-        //            .Where(lf => lf.LfAcronym == model.LegalForm)
-        //            .Select(lf => lf.LfId)
-        //            .FirstOrDefault();
-        //        int fLegalVehicleId = this.context.TbDomLegalVehicle
-        //            .Where(lv => lv.LvAcronym == model.LegalVehicle)
-        //            .Select(lv => lv.LvId)
-        //            .FirstOrDefault();
-        //        int fLegalTypeId = this.context.TbDomLegalType
-        //            .Where(lt => lt.LtAcronym == model.LegalType)
-        //            .Select(lt => lt.LtId)
-        //            .FirstOrDefault();
-
-        //        // Split to take only companyTypeDesc for comparing
-
-        //        string companyTypeDesc = model.CompanyTypeDesc.Split(" - ").FirstOrDefault();
-        //        int fCompanyTypeId = this.context.TbDomCompanyType
-        //            .Where(ct => ct.CtDesc == companyTypeDesc)
-        //            .Select(ct => ct.CtId)
-        //            .FirstOrDefault();
-
-        //        string tinNumber = model.TinNumber;
-
-        //        this.fundsService.CreateFund(initialDate, endDate, fundName, cssfCode, fStatusId, fLegalFormId,
-        //                                     fLegalTypeId, fLegalVehicleId, faCode, depCode, taCode, fCompanyTypeId,
-        //                                     tinNumber, leiCode, regNumber);
-        //    }
-
-        //    return this.LocalRedirect(returnUrl);
-        //}
     }
 }

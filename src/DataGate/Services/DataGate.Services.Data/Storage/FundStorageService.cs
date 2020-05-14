@@ -14,6 +14,7 @@
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.Dtos.Funds;
     using DataGate.Web.InputModels.Funds;
+    using Microsoft.EntityFrameworkCore;
 
     public class FundStorageService : IFundStorageService
     {
@@ -61,7 +62,7 @@
         {
             this.ThrowEntityNotFoundExceptionIfIdDoesNotExist(id);
 
-            var dateParsed = DateTimeParser.WebFormat(date);
+            var dateParsed = DateTimeParser.WebFormat(date).AddDays(-1);
             var query = await this.sqlManager
                 .ExecuteQueryAsync(this.sqlFunctionFundId, dateParsed, id)
                 .Skip(SkipHeaders)
@@ -89,11 +90,17 @@
             return AutoMapperConfig.MapperInstance.Map<TDestination>(dto);
         }
 
-        public async Task<FundPostDto> Edit(EditFundInputModel model)
+        public async Task<int> Edit(EditFundInputModel model)
         {
             FundPostDto dto = AutoMapperConfig.MapperInstance.Map<FundPostDto>(model);
 
-            SqlCommand command = await this.AssignBaseParameters(model, dto, this.sqlProcedureEditFund);
+            dto.Status = await this.service.GetByIdStatus(model.Status);
+            dto.LegalForm = await this.service.GetByIdLegalForm(model.LegalForm);
+            dto.LegalVehicle = await this.service.GetByIdLegalVehicle(model.LegalVehicle);
+            dto.LegalType = await this.service.GetByIdLegalType(model.LegalType);
+            dto.CompanyTypeDesc = await this.service.GetByIdCompanyType(model.CompanyTypeDesc);
+
+            SqlCommand command = this.AssignBaseParameters(dto, this.sqlProcedureEditFund);
 
             // Assign particular parameters
             command.Parameters.AddRange(new[]
@@ -105,17 +112,67 @@
 
             await this.sqlManager.ExecuteProcedure(command);
 
-            return dto;
+            return dto.Id;
         }
 
-        private async Task<SqlCommand> AssignBaseParameters(EditFundInputModel model, FundPostDto dto, string procedure)
-        {
-            dto.Status = await this.service.GetByIdStatus(model.Status);
-            dto.LegalForm = await this.service.GetByIdLegalForm(model.LegalForm);
-            dto.LegalVehicle = await this.service.GetByIdLegalVehicle(model.LegalVehicle);
-            dto.LegalType = await this.service.GetByIdLegalType(model.LegalType);
-            dto.CompanyTypeDesc = await this.service.GetByIdCompanyType(model.CompanyTypeDesc);
+        //    string initialDate = model.InitialDate.ToString("yyyyMMdd");
+        //    string endDate = model.EndDate?.ToString("yyyyMMdd");
 
+        //    int fStatusId = this.context.TbDomFStatus
+        //        .Where(s => s.StFDesc == model.Status)
+        //        .Select(s => s.StFId)
+        //        .FirstOrDefault();
+
+        //    string regNumber = model.RegNumber;
+        //    string fundName = model.FundName;
+        //    string leiCode = model.LEICode;
+        //    string cssfCode = model.CSSFCode;
+        //    string faCode = model.FACode;
+        //    string depCode = model.DEPCode;
+        //    string taCode = model.TACode;
+
+        //    int fLegalFormId = this.context.TbDomLegalForm
+        //        .Where(lf => lf.LfAcronym == model.LegalForm)
+        //        .Select(lf => lf.LfId)
+        //        .FirstOrDefault();
+        //    int fLegalVehicleId = this.context.TbDomLegalVehicle
+        //        .Where(lv => lv.LvAcronym == model.LegalVehicle)
+        //        .Select(lv => lv.LvId)
+        //        .FirstOrDefault();
+        //    int fLegalTypeId = this.context.TbDomLegalType
+        //        .Where(lt => lt.LtAcronym == model.LegalType)
+        //        .Select(lt => lt.LtId)
+        //        .FirstOrDefault();
+
+        //    // Split to take only companyTypeDesc for comparing
+
+        //    string companyTypeDesc = model.CompanyTypeDesc.Split(" - ").FirstOrDefault();
+        //    int fCompanyTypeId = this.context.TbDomCompanyType
+        //        .Where(ct => ct.CtDesc == companyTypeDesc)
+        //        .Select(ct => ct.CtId)
+        //        .FirstOrDefault();
+
+        //    string tinNumber = model.TinNumber;
+
+        //    this.fundsService.CreateFund(initialDate, endDate, fundName, cssfCode, fStatusId, fLegalFormId,
+        //                                 fLegalTypeId, fLegalVehicleId, faCode, depCode, taCode, fCompanyTypeId,
+        //                                 tinNumber, leiCode, regNumber);
+
+        //    string query = "EXEC sp_new_fund " +
+        //        "@f_initialDate, @f_endDate, @f_status, " +
+        //        "@f_registrationNumber, @f_officialFundName, " +
+        //        "@f_leiCode, @f_cssfCode, @f_faCode, @f_depCode, @f_taCode, " +
+        //        "@f_legalForm, @f_legalType, @f_legal_vehicle, @f_companyType, @f_tinNumber";
+
+        //            command.Parameters.Add(new SqlParameter("@f_endDate", SqlDbType.NVarChar) { Value = endDate });
+
+        public async Task<bool> DoesExist(string name)
+        {
+            return await this.repository.All().AnyAsync(f => f.FOfficialFundName == name);
+        }
+
+        private SqlCommand AssignBaseParameters(FundPostDto dto, string procedure)
+        {
             SqlCommand command = new SqlCommand(procedure);
 
             command.Parameters.AddRange(new[]
@@ -148,26 +205,5 @@
         }
 
         private bool Exists(int id) => this.repository.All().Any(x => x.FId == id);
-
-        ////public IEnumerable<T> GetAllNames<T>()
-        ////{
-        ////    return this.fundsRepository
-        ////        .All()
-        ////        .Select(f => f.FOfficialFundName)
-        ////        .To<T>()
-        ////        .ToList();
-
-        ////    // return this.context.TbHistoryFund
-        ////    //   .Select(f => f.FOfficialFundName)
-        ////    //   .ToList();
-        ////}
-        //{
-        //    string query = "EXEC sp_new_fund " +
-        //        "@f_initialDate, @f_endDate, @f_status, " +
-        //        "@f_registrationNumber, @f_officialFundName, " +
-        //        "@f_leiCode, @f_cssfCode, @f_faCode, @f_depCode, @f_taCode, " +
-        //        "@f_legalForm, @f_legalType, @f_legal_vehicle, @f_companyType, @f_tinNumber";
-
-        //            command.Parameters.Add(new SqlParameter("@f_endDate", SqlDbType.NVarChar) { Value = endDate });
     }
 }
