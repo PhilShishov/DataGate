@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    using DataGate.Web.ViewModels.Entities;
+    using DataGate.Web.ViewModels.Documents;
 
     public class SpecificEntityOverviewGetDto
     {
@@ -19,7 +19,7 @@
 
         public IEnumerable<DistinctDocViewModel> DistinctDocuments { get; set; }
 
-        public IEnumerable<DistinctDocViewModel> DistinctAgreements { get; set; }
+        public IEnumerable<DistinctAgrViewModel> DistinctAgreements { get; set; }
 
         public IEnumerable<string> Headers { get; set; }
 

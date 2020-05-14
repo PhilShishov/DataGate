@@ -7,6 +7,7 @@
     using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
+    using DataGate.Web.ViewModels.Documents;
     using DataGate.Web.ViewModels.Entities;
     using DataGate.Web.ViewModels.Queries;
 
@@ -31,7 +32,7 @@
             }
 
             var distinctDocs = service.GetDistinctDocuments<DistinctDocViewModel>(id, dateParsed);
-            var distinctAgrs = service.GetDistinctAgreements<DistinctDocViewModel>(id, dateParsed);
+            var distinctAgrs = service.GetDistinctAgreements<DistinctAgrViewModel>(id, dateParsed);
 
             var dto = new SpecificEntityOverviewGetDto()
             {

@@ -50,25 +50,25 @@
         [Route("loadAllDoc")]
         public IActionResult GetAllDocuments(int id, string controllerName)
         {
-            IEnumerable<AllDocViewModel> model = null;
+            var model = new DocumentOverviewViewModel { ControllerName = controllerName };
 
             if (controllerName == GlobalConstants.FundDetailsControllerName)
             {
-                model = this.fundService.GetAllDocuments<AllDocViewModel>(id);
+                model.Documents = this.fundService.GetAllDocuments<DocumentViewModel>(id);
             }
 
             return this.PartialView("SpecificEntity/_AllDocuments", model);
         }
 
         [Route("loadAllAgr")]
-        public IActionResult GetAllAgreements(int id, string chosenDate, string controllerName)
+        public IActionResult GetAllAgreements(int id, string date, string controllerName)
         {
-            IEnumerable<AllAgrViewModel> model = null;
-            var date = DateTimeParser.WebFormat(chosenDate);
+            var model = new AgreementOverviewViewModel { ControllerName = controllerName };
+            var dateParsed = DateTimeParser.WebFormat(date);
 
             if (controllerName == GlobalConstants.FundDetailsControllerName)
             {
-                model = this.fundService.GetAllAgreements<AllAgrViewModel>(id, date);
+                model.Agreements = this.fundService.GetAllAgreements<AgreementViewModel>(id, dateParsed);
             }
 
             return this.PartialView("SpecificEntity/_AllAgreements", model);

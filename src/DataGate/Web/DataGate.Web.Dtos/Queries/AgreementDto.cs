@@ -4,7 +4,7 @@ namespace DataGate.Web.Dtos.Queries
 
     using DataGate.Services.SqlClient.Contracts;
 
-    public class AllAgrDto : IDataReaderParser
+    public class AgreementDto : IDataReaderParser
     {
         public string Description { get; set; }
 
