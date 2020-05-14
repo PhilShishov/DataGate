@@ -1,6 +1,7 @@
 ﻿namespace DataGate.Web.Controllers.Funds
 {
     using System;
+    using System.Globalization;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -50,9 +51,10 @@
                 return this.View(model);
             }
 
-            await this.service.Edit(model);
+            var fundId = await this.service.Edit(model);
+            var date = model.InitialDate.ToString(GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
 
-            return this.ShowInfo(InfoMessages.SuccessfulEdit, GlobalConstants.AllFundsRouteName, new { GlobalConstants.FundsAreaName });
+            return this.ShowInfo(InfoMessages.SuccessfulEdit, GlobalConstants.FundDetailsRouteName, new { area = GlobalConstants.FundsAreaName, id = fundId, date = date });
         }
 
         [Route("f/new")]
@@ -65,7 +67,9 @@
         [ValidateAntiForgeryToken]
         [HttpPost]
         [Route("f/new")]
-        public async Task<IActionResult> Create(CreateFundInputModel model)
+        public async Task<IActionResult> Create([Bind("InitialDate", "EndDate", "FundName", "CSSFCode", "Status",
+                                                      "LegalForm", "LegalVehicle", "LegalType", "FACode", "DEPCode",
+                                                      "TACode", "CompanyTypeDesc", "TinNumber", "LEICode", "RegNumber")] CreateFundInputModel model)
         {
             bool doesExist = await this.service.DoesExist(model.FundName);
 
@@ -76,9 +80,10 @@
                 return this.View(model);
             }
 
-            await this.service.Create(model);
+            var fundId = await this.service.Create(model);
+            var date = model.InitialDate.ToString(GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
 
-            return this.ShowInfo(InfoMessages.SuccessfulEdit, GlobalConstants.AllFundsRouteName, new { GlobalConstants.FundsAreaName });
+            return this.ShowInfo(InfoMessages.SuccessfulCreate, GlobalConstants.FundDetailsRouteName, new { area = GlobalConstants.FundsAreaName, id = fundId, date = date });
         }
 
         private async Task SetViewDataValuesForFundSelectLists()

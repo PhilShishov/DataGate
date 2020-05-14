@@ -70,7 +70,7 @@
         {
             this.ThrowEntityNotFoundExceptionIfIdDoesNotExist(id);
 
-            var dateParsed = DateTimeParser.WebFormat(date).AddDays(-2);
+            var dateParsed = DateTimeParser.WebFormat(date);
             var query = await this.sqlManager
                 .ExecuteQueryAsync(this.sqlFunctionFundId, dateParsed, id)
                 .Skip(SkipHeaders)
