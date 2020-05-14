@@ -1,7 +1,6 @@
 ﻿namespace DataGate.Web.Controllers.Funds
 {
     using System;
-    using System.Globalization;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -51,15 +50,9 @@
                 return this.View(model);
             }
 
-            var date = model.InitialDate.ToString(GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
-            var fundId = await this.service.Edit(model);
+            await this.service.Edit(model);
 
-            return this.ShowInfo(InfoMessages.SuccessfulEdit, GlobalConstants.FundDetailsRouteName, new
-            {
-                area = GlobalConstants.FundsAreaName,
-                fundId,
-                date,
-            });
+            return this.ShowInfo(InfoMessages.SuccessfulEdit, GlobalConstants.AllFundsRouteName, new { GlobalConstants.FundsAreaName });
         }
 
         [Route("f/new")]
@@ -69,9 +62,9 @@
             return this.View(new CreateFundInputModel { InitialDate = DateTime.Today, });
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost]
         [Route("f/new")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateFundInputModel model)
         {
             bool doesExist = await this.service.DoesExist(model.FundName);
@@ -83,15 +76,9 @@
                 return this.View(model);
             }
 
-            var date = model.InitialDate.ToString(GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
-            //var fundId = await this.service.Create(model);
+            await this.service.Create(model);
 
-            return this.ShowInfo(InfoMessages.SuccessfulCreate, GlobalConstants.FundDetailsRouteName, new
-            {
-                area = GlobalConstants.FundsAreaName,
-                //fundId,
-                //date,
-            });
+            return this.ShowInfo(InfoMessages.SuccessfulEdit, GlobalConstants.AllFundsRouteName, new { GlobalConstants.FundsAreaName });
         }
 
         private async Task SetViewDataValuesForFundSelectLists()

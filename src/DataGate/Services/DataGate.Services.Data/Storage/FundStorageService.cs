@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using DataGate.Common;
     using DataGate.Common.Exceptions;
     using DataGate.Data.Common.Repositories;
     using DataGate.Data.Models.Entities;
@@ -37,12 +38,19 @@
         //
         // Table functions and procedures as in DB
         private readonly string sqlFunctionFundId = "[fn_fund_id]";
+
         private readonly string sqlProcedureEditFund = "EXEC sp_modify_fund " +
                 "@f_id, @f_initialDate, @f_status, " +
                 "@f_registrationNumber, @f_officialFundName, @f_shortFundName, " +
                 "@f_leiCode, @f_cssfCode, @f_faCode, @f_depCode, @f_taCode, " +
                 "@f_legalForm, @f_legalType, @f_legal_vehicle, @f_companyType, @f_tinNumber, " +
                 "@comment, @commentTitle";
+
+        private readonly string sqlProcedureCreateFund = "EXEC sp_new_fund " +
+                "@f_initialDate, @f_endDate, @f_status, " +
+                "@f_registrationNumber, @f_officialFundName, " +
+                "@f_leiCode, @f_cssfCode, @f_faCode, @f_depCode, @f_taCode, " +
+                "@f_legalForm, @f_legalType, @f_legal_vehicle, @f_companyType, @f_tinNumber";
 
         private readonly ISqlQueryManager sqlManager;
         private readonly IRepository<TbHistoryFund> repository;
@@ -62,7 +70,7 @@
         {
             this.ThrowEntityNotFoundExceptionIfIdDoesNotExist(id);
 
-            var dateParsed = DateTimeParser.WebFormat(date).AddDays(-1);
+            var dateParsed = DateTimeParser.WebFormat(date).AddDays(-2);
             var query = await this.sqlManager
                 .ExecuteQueryAsync(this.sqlFunctionFundId, dateParsed, id)
                 .Skip(SkipHeaders)
@@ -115,56 +123,28 @@
             return dto.Id;
         }
 
-        //    string initialDate = model.InitialDate.ToString("yyyyMMdd");
-        //    string endDate = model.EndDate?.ToString("yyyyMMdd");
+        public async Task<int> Create(CreateFundInputModel model)
+        {
+            FundPostDto dto = AutoMapperConfig.MapperInstance.Map<FundPostDto>(model);
 
-        //    int fStatusId = this.context.TbDomFStatus
-        //        .Where(s => s.StFDesc == model.Status)
-        //        .Select(s => s.StFId)
-        //        .FirstOrDefault();
+            dto.EndDate = model.EndDate?.ToString(GlobalConstants.RequiredSqlDateTimeFormat);
+            dto.Status = await this.service.GetByIdStatus(model.Status);
+            dto.LegalForm = await this.service.GetByIdLegalForm(model.LegalForm);
+            dto.LegalVehicle = await this.service.GetByIdLegalVehicle(model.LegalVehicle);
+            dto.LegalType = await this.service.GetByIdLegalType(model.LegalType);
+            dto.CompanyTypeDesc = await this.service.GetByIdCompanyType(model.CompanyTypeDesc);
 
-        //    string regNumber = model.RegNumber;
-        //    string fundName = model.FundName;
-        //    string leiCode = model.LEICode;
-        //    string cssfCode = model.CSSFCode;
-        //    string faCode = model.FACode;
-        //    string depCode = model.DEPCode;
-        //    string taCode = model.TACode;
+            SqlCommand command = this.AssignBaseParameters(dto, this.sqlProcedureCreateFund);
 
-        //    int fLegalFormId = this.context.TbDomLegalForm
-        //        .Where(lf => lf.LfAcronym == model.LegalForm)
-        //        .Select(lf => lf.LfId)
-        //        .FirstOrDefault();
-        //    int fLegalVehicleId = this.context.TbDomLegalVehicle
-        //        .Where(lv => lv.LvAcronym == model.LegalVehicle)
-        //        .Select(lv => lv.LvId)
-        //        .FirstOrDefault();
-        //    int fLegalTypeId = this.context.TbDomLegalType
-        //        .Where(lt => lt.LtAcronym == model.LegalType)
-        //        .Select(lt => lt.LtId)
-        //        .FirstOrDefault();
+            // Assign particular parameters
+            command.Parameters.Add(new SqlParameter("@f_endDate", SqlDbType.NVarChar) { Value = dto.EndDate });
 
-        //    // Split to take only companyTypeDesc for comparing
+            await this.sqlManager.ExecuteProcedure(command);
 
-        //    string companyTypeDesc = model.CompanyTypeDesc.Split(" - ").FirstOrDefault();
-        //    int fCompanyTypeId = this.context.TbDomCompanyType
-        //        .Where(ct => ct.CtDesc == companyTypeDesc)
-        //        .Select(ct => ct.CtId)
-        //        .FirstOrDefault();
+            var fundId = this.repository.All().Where(f => f.FOfficialFundName == dto.FundName).Select(f => f.FId).FirstOrDefault();
 
-        //    string tinNumber = model.TinNumber;
-
-        //    this.fundsService.CreateFund(initialDate, endDate, fundName, cssfCode, fStatusId, fLegalFormId,
-        //                                 fLegalTypeId, fLegalVehicleId, faCode, depCode, taCode, fCompanyTypeId,
-        //                                 tinNumber, leiCode, regNumber);
-
-        //    string query = "EXEC sp_new_fund " +
-        //        "@f_initialDate, @f_endDate, @f_status, " +
-        //        "@f_registrationNumber, @f_officialFundName, " +
-        //        "@f_leiCode, @f_cssfCode, @f_faCode, @f_depCode, @f_taCode, " +
-        //        "@f_legalForm, @f_legalType, @f_legal_vehicle, @f_companyType, @f_tinNumber";
-
-        //            command.Parameters.Add(new SqlParameter("@f_endDate", SqlDbType.NVarChar) { Value = endDate });
+            return fundId;
+        }
 
         public async Task<bool> DoesExist(string name)
         {

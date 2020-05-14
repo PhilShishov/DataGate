@@ -9,6 +9,6 @@
     {
         Task<int> Edit(EditFundInputModel model);
 
-        //Task<int> Create(CreateFundInputModel model);
+        Task<int> Create(CreateFundInputModel model);
     }
 }
