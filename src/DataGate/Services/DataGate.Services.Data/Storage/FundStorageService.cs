@@ -15,6 +15,7 @@
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.Dtos.Funds;
     using DataGate.Web.InputModels.Funds;
+    using Ganss.XSS;
     using Microsoft.EntityFrameworkCore;
 
     public class FundStorageService : IFundStorageService
@@ -102,6 +103,7 @@
         {
             FundPostDto dto = AutoMapperConfig.MapperInstance.Map<FundPostDto>(model);
 
+            dto.CommentArea = new HtmlSanitizer().Sanitize(dto.CommentArea);
             dto.Status = await this.service.GetByIdStatus(model.Status);
             dto.LegalForm = await this.service.GetByIdLegalForm(model.LegalForm);
             dto.LegalVehicle = await this.service.GetByIdLegalVehicle(model.LegalVehicle);

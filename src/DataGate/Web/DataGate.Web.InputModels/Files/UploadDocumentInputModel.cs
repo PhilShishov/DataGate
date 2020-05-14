@@ -24,5 +24,11 @@ namespace DataGate.Web.InputModels.Files
         public DateTime StartConnection { get; set; }
 
         public DateTime? EndConnection { get; set; }
+
+        public string Date { get; set; }
+
+        public int Id { get; set; }
+
+        public string ControllerName { get; set; }
     }
 }

@@ -22,9 +22,8 @@
                                         type="submit"
                                         asp-route="files"
                                         asp-route-name="@document.Name"
-                                        name="docValue"
-                                        value="@document.Name">
-                                    @System.IO.Path.GetFileNameWithoutExtension(document.Name)
+                                        name="docValue">
+                                    @Html.Encode(@System.IO.Path.GetFileNameWithoutExtension(document.Name))
                                 </button>
                             </td>
                         </tr>
@@ -58,9 +57,8 @@
                                             type="submit"
                                             asp-route="files"
                                             asp-route-name="@document.Name"
-                                            name="docValue"
-                                            value="@document.Name">
-                                        @System.IO.Path.GetFileNameWithoutExtension(document.Name)
+                                            name="docValue">
+                                        @Html.Encode(@System.IO.Path.GetFileNameWithoutExtension(document.Name))
                                     </button>
                                 </td>
                             </tr>
@@ -96,9 +94,8 @@
                                         type="submit"
                                         asp-route="files"
                                         asp-route-name="@document.Name"
-                                        name="agrValue"
-                                        value="@document.Name">
-                                    @System.IO.Path.GetFileNameWithoutExtension(document.Name)
+                                        name="agrValue">
+                                    @Html.Encode(@System.IO.Path.GetFileNameWithoutExtension(document.Name))
                                 </button>
                             </td>
                         </tr>

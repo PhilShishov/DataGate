@@ -1,13 +1,28 @@
 ﻿namespace DataGate.Web.Controllers.Files
 {
+    using System.IO;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using DataGate.Common;
     using DataGate.Services.Data.Documents.Contracts;
+    using DataGate.Web.InputModels.Files;
 
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
 
     [Authorize]
-    public class UploadController : Controller
+    public class UploadController : BaseController
     {
+        private readonly IWebHostEnvironment environment;
+        private string[] permittedExtensions = { ".pdf" };
+
+        public UploadController(IWebHostEnvironment environment)
+        {
+            this.environment = environment;
+        }
+
         //[HttpPost("Upload")]
         //public async Task<IActionResult> Upload(List<IFormFile> files)
         //{
@@ -25,117 +40,118 @@
         //    return Ok(new { count = files.Count, bytes, filePath });
         //}
 
-        //        [HttpPost]
-        //        public IActionResult UploadProspectus(SpecificEntityViewModel model)
-        //        {
-        //            this.SetModelValuesForSpecificView(model);
+        [HttpPost]
+        [ActionName("Document")]
+        public async Task<IActionResult> OnPostUploadDocumentAsync(UploadDocumentInputModel model)
+        {
+            var file = model.FileToUpload;
+            var filePath = Path.GetTempFileName();
 
-        //            var file = model.UploadEntityFileModel.FileToUpload;
+            if (file != null || file.FileName != string.Empty || file.Length > 0)
+            {
+                string ext = Path.GetExtension(file.FileName).ToLowerInvariant();
 
-        //            if (file != null || file.FileName != string.Empty)
-        //            {
-        //                //                private string[] permittedExtensions = { ".txt", ".pdf" };
+                if (string.IsNullOrEmpty(ext) || !this.permittedExtensions.Contains(ext))
+                {
+                    // The extension is invalid ... discontinue processing the file
+                }
 
-        //                //        var ext = Path.GetExtension(uploadedFileName).ToLowerInvariant();
+                string fileLocation = Path.Combine(this.environment.WebRootPath, @"FileFolder\Funds\");
+                string path = $"{fileLocation}{file.FileName}";
 
-        //                //if (string.IsNullOrEmpty(ext) || !permittedExtensions.Contains(ext))
-        //                //{
-        //                //    // The extension is invalid ... discontinue processing the file
-        //                //}
+                //                private static readonly Dictionary<string, List<byte[]>> _fileSignature =
+                //    new Dictionary<string, List<byte[]>>
+                //{
+                //    { ".jpeg", new List<byte[]>
+                //        {
+                //            new byte[] { 0xFF, 0xD8, 0xFF, 0xE0 },
+                //            new byte[] { 0xFF, 0xD8, 0xFF, 0xE2 },
+                //            new byte[] { 0xFF, 0xD8, 0xFF, 0xE3 },
+                //        }
+                //    },
+                //};
 
-        //                //                private static readonly Dictionary<string, List<byte[]>> _fileSignature =
-        //                //    new Dictionary<string, List<byte[]>>
-        //                //{
-        //                //    { ".jpeg", new List<byte[]>
-        //                //        {
-        //                //            new byte[] { 0xFF, 0xD8, 0xFF, 0xE0 },
-        //                //            new byte[] { 0xFF, 0xD8, 0xFF, 0xE2 },
-        //                //            new byte[] { 0xFF, 0xD8, 0xFF, 0xE3 },
-        //                //        }
-        //                //    },
-        //                //};
+                //using (var reader = new BinaryReader(uploadedFileData))
+                //{
+                //    var signatures = _fileSignature[ext];
+                //    var headerBytes = reader.ReadBytes(signatures.Max(m => m.Length));
 
-        //                //using (var reader = new BinaryReader(uploadedFileData))
-        //                //{
-        //                //    var signatures = _fileSignature[ext];
-        //                //    var headerBytes = reader.ReadBytes(signatures.Max(m => m.Length));
+                //    return signatures.Any(signature => 
+                //        headerBytes.Take(signature.Length).SequenceEqual(signature));
+                //}
 
-        //                //    return signatures.Any(signature => 
-        //                //        headerBytes.Take(signature.Length).SequenceEqual(signature));
-        //                //}
+                //                Size validation
+                //Limit the size of uploaded files.
 
-        //                //                Size validation
-        //                //Limit the size of uploaded files.
+                //In the sample app, the size of the file is limited to 2 MB(indicated in bytes).The limit is supplied via Configuration from the appsettings.json file:
 
-        //                //In the sample app, the size of the file is limited to 2 MB(indicated in bytes).The limit is supplied via Configuration from the appsettings.json file:
+                //JSON
 
-        //                //JSON
+                //Copy
+                //{
+                //                    "FileSizeLimit": 2097152
+                //}
+                //                The FileSizeLimit is injected into PageModel classes:
 
-        //                //Copy
-        //                //{
-        //                //                    "FileSizeLimit": 2097152
-        //                //}
-        //                //                The FileSizeLimit is injected into PageModel classes:
+                //C#
 
-        //                //C#
+                //Copy
+                //public class BufferedSingleFileUploadPhysicalModel : PageModel
+                //        {
+                //            private readonly long _fileSizeLimit;
 
-        //                //Copy
-        //                //public class BufferedSingleFileUploadPhysicalModel : PageModel
-        //                //        {
-        //                //            private readonly long _fileSizeLimit;
+                //            public BufferedSingleFileUploadPhysicalModel(IConfiguration config)
+                //            {
+                //                _fileSizeLimit = config.GetValue<long>("FileSizeLimit");
+                //            }
 
-        //                //            public BufferedSingleFileUploadPhysicalModel(IConfiguration config)
-        //                //            {
-        //                //                _fileSizeLimit = config.GetValue<long>("FileSizeLimit");
-        //                //            }
+                //    ...
+                //}
+                //        When a file size exceeds the limit, the file is rejected:
 
-        //                //    ...
-        //                //}
-        //                //        When a file size exceeds the limit, the file is rejected:
+                //C#
 
-        //                //C#
+                //Copy
+                //if (formFile.Length > _fileSizeLimit)
+                //{
+                //    // The file is too large ... discontinue processing the file
+                //}
 
-        //                //Copy
-        //                //if (formFile.Length > _fileSizeLimit)
-        //                //{
-        //                //    // The file is too large ... discontinue processing the file
-        //                //}
+                // DTO
 
-        //                // DTO
-        //                string fileExt = Path.GetExtension(file.FileName);
-        //                string fileLocation = Path.Combine(this.environment.WebRootPath, @"FileFolder\Funds\");
-        //                string path = $"{fileLocation}{file.FileName}";
 
-        //                // file exists
+                // file exists
+                //if (File.Exists(HttpContext.Current.Server.MapPath(deletePath)))
+                    //if (File.Exists(file))
 
-        //                using (var stream = new FileStream(path, FileMode.Create))
-        //                {
-        //                    file.CopyTo(stream);
-        //                    stream.Close();
-        //                }
+                    using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                    stream.Close();
+                }
 
-        //                string startConnection = model.StartConnection.ToString("yyyyMMdd");
-        //                string endConnection = model.EndConnection?.ToString("yyyyMMdd");
+                string startConnection = model.StartConnection.ToString("yyyyMMdd");
+                string endConnection = model.EndConnection?.ToString("yyyyMMdd");
 
-        //                var prosFileTypeDesc = model.UploadEntityFileModel.DocumentType;
-        //                int prosFileTypeId = 0;
-        //                //this.context.TbDomFileType
-        //                //    .Where(ft => ft.FiletypeDesc == prosFileTypeDesc)
-        //                //    .Select(ft => ft.FiletypeId)
-        //                //    .FirstOrDefault();
+                var prosFileTypeDesc = model.DocumentType;
+                int prosFileTypeId = 0;
+                //this.context.TbDomFileType
+                //    .Where(ft => ft.FiletypeDesc == prosFileTypeDesc)
+                //    .Select(ft => ft.FiletypeId)
+                //    .FirstOrDefault();
 
-        //                this.entitiesFileService.AddDocumentToSpecificEntity(
-        //                                                    file.FileName,
-        //                                                    model.EntityId,
-        //                                                    startConnection,
-        //                                                    endConnection,
-        //                                                    fileExt,
-        //                                                    prosFileTypeId,
-        //                                                    model.ControllerName);
-        //            }
+                //this.entitiesFileService.AddDocumentToSpecificEntity(
+                //                                    file.FileName,
+                //                                    model.EntityId,
+                //                                    startConnection,
+                //                                    endConnection,
+                //                                    ext,
+                //                                    prosFileTypeId,
+                //                                    model.ControllerName);
+            }
 
-        //            return this.RedirectToAction("ByIdAndDate", new { model.EntityId, model.ChosenDate });
-        //        }
+            return this.ShowInfo(InfoMessages.SuccessfulUpdate, GlobalConstants.FundDetailsRouteName, new { model.Id, model.Date });
+        }
 
         //        //[HttpPost]
         //        //public IActionResult UploadAgreement(SpecificEntityViewModel model)

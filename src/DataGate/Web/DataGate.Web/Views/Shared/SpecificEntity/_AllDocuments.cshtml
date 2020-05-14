@@ -40,10 +40,10 @@
                 <button class="btn-link-pharus text-left"
                         formtarget="_blank"
                         type="submit"
-                        formaction="/@controllerName/ReadDocument"
-                        name="pdfValue"
-                        value="@document.Name">
-                    @System.IO.Path.GetFileNameWithoutExtension(document.Name)
+                        asp-route="files"
+                        asp-route-name="@document.Name"
+                        name="docValue">
+                    @Html.Encode(@System.IO.Path.GetFileNameWithoutExtension(document.Name))
                 </button>
             </td>
             <td class="p-1">
