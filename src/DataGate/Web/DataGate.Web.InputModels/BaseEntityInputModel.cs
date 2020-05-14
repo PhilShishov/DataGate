@@ -39,9 +39,5 @@ namespace DataGate.Web.InputModels
         [RegularExpression(@"^[A-Z0-9_]+$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "LEI Code")]
         public string LEICode { get; set; }
-
-        //public List<string> EntityProperties { get; set; }
-
-        //public IEnumerable<string> ExistingEntitiesNames { get; set; }
     }
 }
