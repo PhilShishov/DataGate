@@ -4,6 +4,7 @@
 
     using DataGate.Common;
     using DataGate.Web.ViewModels;
+
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
