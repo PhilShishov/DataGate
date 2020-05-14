@@ -56,6 +56,9 @@ namespace DataGate.Web.InputModels.Funds
         {
             configuration.CreateMap<EditFundInputModel, FundPostDto>()
                 .ForMember(dto => dto.InitialDate, action => action.MapFrom(model => model.InitialDate.ToString(GlobalConstants.RequiredSqlDateTimeFormat, CultureInfo.InvariantCulture)));
+
+            configuration.CreateMap<CreateFundInputModel, FundPostDto>()
+                .ForMember(dto => dto.InitialDate, action => action.MapFrom(model => model.InitialDate.ToString(GlobalConstants.RequiredSqlDateTimeFormat, CultureInfo.InvariantCulture)));
         }
     }
 }

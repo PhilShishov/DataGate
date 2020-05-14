@@ -1,0 +1,33 @@
+namespace DataGate.Web.InputModels.Files
+{
+    using System.Globalization;
+    using System.IO;
+
+    using AutoMapper;
+    using DataGate.Common;
+    using DataGate.Services.Mapping;
+
+    public class UploadDocumentDto : IMapFrom<UploadDocumentInputModel>, IHaveCustomMappings
+    {
+        public string FileName { get; set; }
+
+        public int Id { get; set; }
+
+        public string StartConnection { get; set; }
+
+        public string EndConnection { get; set; }
+
+        public string FileExt { get; set; }
+
+        [IgnoreMap]
+        public int DocumentType { get; set; }
+
+        public void CreateMappings(IProfileExpression configuration)
+        {
+            configuration.CreateMap<UploadDocumentInputModel, UploadDocumentDto>()
+               .ForMember(dto => dto.StartConnection, action => action.MapFrom(model => model.StartConnection.ToString(GlobalConstants.RequiredSqlDateTimeFormat, CultureInfo.InvariantCulture)))
+               .ForMember(dto => dto.FileName, action => action.MapFrom(model => model.FileToUpload.FileName))
+               .ForMember(dto => dto.FileExt, action => action.MapFrom(model => Path.GetExtension(model.FileToUpload.FileName).ToLowerInvariant()));
+        }
+    }
+}

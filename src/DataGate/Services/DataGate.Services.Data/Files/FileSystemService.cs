@@ -3,90 +3,76 @@
     using System;
     using System.Data;
     using System.Data.SqlClient;
+    using System.Globalization;
+    using System.Threading.Tasks;
 
-    using DataGate.Services.Data.Files;
-
-    using Microsoft.Extensions.Configuration;
+    using DataGate.Common;
+    using DataGate.Services.Data.Documents.Contracts;
+    using DataGate.Services.Data.Files.Contracts;
+    using DataGate.Services.Mapping;
+    using DataGate.Services.SqlClient.Contracts;
+    using DataGate.Web.InputModels.Files;
 
     public class FileSystemService : IFileSystemService
     {
-        private readonly IConfiguration configuration;
-
         // ________________________________________________________
         //
-        // Constructor: initialize with DI IConfiguration
-        // to retrieve appsettings.json connection string
-        public FileSystemService(IConfiguration configuration)
+        // Table procedures as in DB
+        private readonly string sqlProcedureDocumentFund = "EXEC sp_insert_map_fund";
+        private readonly string sqlProcedureDocumentSubFund = "EXEC sp_insert_map_subfund";
+        private readonly string sqlProcedureDocumentShareClass = "EXEC sp_insert_map_shareclass";
+        private readonly string sqlProcedureDocument = "@file_name, @entity_id, @start_connection, @end_connection, @file_ext, @filetype_id";
+
+        private readonly ISqlQueryManager sqlManager;
+        private readonly IFundDocumentService fundService;
+
+        public FileSystemService(
+                        ISqlQueryManager sqlManager,
+                        IFundDocumentService fundService)
         {
-            this.configuration = configuration;
+            this.sqlManager = sqlManager;
+            this.fundService = fundService;
         }
 
-        public void AddDocumentToSpecificEntity(
-                                    string fileName,
-                                    int entityId,
-                                    string startConnection,
-                                    string endConnection,
-                                    string fileExt,
-                                    int fileTypeId,
-                                    string controllerName)
+        public async Task UploadDocument(UploadDocumentInputModel model)
         {
             string query = string.Empty;
 
-            if (controllerName == "Funds")
+            UploadDocumentDto dto = AutoMapperConfig.MapperInstance.Map<UploadDocumentDto>(model);
+            dto.EndConnection = model.EndConnection?.ToString(GlobalConstants.RequiredSqlDateTimeFormat, CultureInfo.InvariantCulture);
+
+            if (model.AreaName == GlobalConstants.FundsAreaName)
             {
-                query = "EXEC sp_insert_map_fund " +
-                  "@file_name, @entity_id, @start_connection, @end_connection, @file_ext, @filetype_id";
+                query = $"{this.sqlProcedureDocumentFund} {this.sqlProcedureDocument}";
+                dto.DocumentType = await this.fundService.GetByIdFileType(model.DocumentType);
             }
-            else if (controllerName == "SubFunds")
+            else if (model.AreaName == GlobalConstants.SubFundsAreaName)
             {
-                query = "EXEC sp_insert_map_subfund " +
-               "@file_name, @entity_id, @start_connection, @end_connection, @file_ext, @filetype_id";
+                query = $"{this.sqlProcedureDocumentSubFund} {this.sqlProcedureDocument}";
+                //dto.DocumentType = await this.service.GetByIdFileType(model.DocumentType);
             }
-            else if (controllerName == "ShareClasses")
+            else if (model.AreaName == GlobalConstants.ShareClassesAreaName)
             {
-                query = "EXEC sp_insert_map_shareclass " +
-               "@file_name, @entity_id, @start_connection, @end_connection, @file_ext, @filetype_id";
+                query = $"{this.sqlProcedureDocumentShareClass} {this.sqlProcedureDocument}";
+                //dto.DocumentType = await this.service.GetByIdFileType(model.DocumentType);
             }
 
-            using (SqlConnection connection = new SqlConnection())
-            {
-                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
-                using (SqlCommand command = new SqlCommand(query))
-                {
-                    command.Parameters.AddRange(new[]
+            SqlCommand command = new SqlCommand(query);
+
+            command.Parameters.AddRange(new[]
                     {
-                        new SqlParameter("@file_name", SqlDbType.NVarChar) { Value = fileName },
-                        new SqlParameter("@entity_id", SqlDbType.Int) { Value = entityId },
-                        new SqlParameter("@start_connection", SqlDbType.NVarChar) { Value = startConnection },
-                        new SqlParameter("@end_connection", SqlDbType.NVarChar) { Value = endConnection },
-                        new SqlParameter("@file_ext", SqlDbType.NVarChar) { Value = fileExt },
-                        new SqlParameter("@filetype_id", SqlDbType.Int) { Value = fileTypeId },
+                        new SqlParameter("@file_name", SqlDbType.NVarChar) { Value = dto.FileName },
+                        new SqlParameter("@entity_id", SqlDbType.Int) { Value = dto.Id },
+                        new SqlParameter("@file_ext", SqlDbType.NVarChar) { Value = dto.FileExt },
+                        new SqlParameter("@start_connection", SqlDbType.NVarChar) { Value = dto.StartConnection },
+                        new SqlParameter("@end_connection", SqlDbType.NVarChar) { Value = dto.EndConnection },
+                        new SqlParameter("@filetype_id", SqlDbType.Int) { Value = dto.DocumentType },
                     });
 
-                    foreach (SqlParameter parameter in command.Parameters)
-                    {
-                        if (parameter.Value == null)
-                        {
-                            parameter.Value = DBNull.Value;
-                        }
-                    }
-
-                    command.Connection = connection;
-
-                    try
-                    {
-                        command.Connection.Open();
-                        command.ExecuteScalar();
-                    }
-                    catch (SqlException sx)
-                    {
-                        Console.WriteLine(sx.Message);
-                    }
-                }
-            }
+            await this.sqlManager.ExecuteProcedure(command);
         }
 
-        public void AddAgreementToSpecificEntity(
+        public void MapAgreementDB(
                                     string fileName,
                                     string fileExt,
                                     int entityId,
@@ -121,7 +107,7 @@
 
             using (SqlConnection connection = new SqlConnection())
             {
-                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                //connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
                 using (SqlCommand command = new SqlCommand(query))
                 {
                     command.Parameters.AddRange(new[]
@@ -129,7 +115,8 @@
                         new SqlParameter("@file_name", SqlDbType.NVarChar) { Value = fileName },
                         new SqlParameter("@entity_id", SqlDbType.Int) { Value = entityId },
                         new SqlParameter("@file_ext", SqlDbType.NVarChar) { Value = fileExt },
-                        new SqlParameter("@activity_type_id", SqlDbType.Int) { Value =  activityTypeId},
+
+                        new SqlParameter("@activity_type_id", SqlDbType.Int) { Value = activityTypeId},
                         new SqlParameter("@contract_date", SqlDbType.NVarChar) { Value = contractDate },
                         new SqlParameter("@activation_date", SqlDbType.NVarChar) { Value = activationDate },
                         new SqlParameter("@expiration_date", SqlDbType.NVarChar) { Value = expirationDate },
@@ -160,7 +147,7 @@
             }
         }
 
-        public void DeleteMapping(string docValue,string agrValue, string controllerName)
+        public void DeleteMapping(string docValue, string agrValue, string controllerName)
         {
             string query = string.Empty;
 
@@ -190,7 +177,7 @@
 
             using (SqlConnection connection = new SqlConnection())
             {
-                connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
+                //connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
                 using (SqlCommand command = new SqlCommand(query))
                 {
                     command.Parameters.AddRange(new[]

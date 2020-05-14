@@ -21,8 +21,7 @@
         public static async Task<string> ProcessFormFile(IFormFile formFile, ModelStateDictionary modelState,
                                                          string[] permittedExtensions, long sizeLimit, string webRootPath)
         {
-            var trustedFileNameForDisplay = WebUtility.HtmlEncode(
-                formFile.FileName);
+            var trustedFileNameForDisplay = WebUtility.HtmlEncode(formFile.FileName);
 
             if (formFile.Length == 0)
             {
@@ -52,6 +51,12 @@
 
             string fileLocation = Path.Combine(webRootPath, @"FileFolder\Funds\");
             string path = $"{fileLocation}{formFile.FileName}";
+            if (File.Exists(path))
+            {
+                modelState.AddModelError(formFile.Name, $"{trustedFileNameForDisplay} already exists!");
+                return string.Empty;
+            }
+
             return path;
         }
 

@@ -4,6 +4,15 @@
 @{
     ViewData["Title"] = GlobalConstants.FundsControllerName;
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var controller = this.ViewContext.RouteData.Values["controller"].ToString();
+    var area = string.Empty;
+    var route = string.Empty;
+
+    if (controller == GlobalConstants.FundDetailsControllerName)
+    {
+        route = GlobalConstants.FundDetailsRouteName;
+        area = GlobalConstants.FundsAreaName;
+    }
 }
 
 <div class="justify-content-between">
@@ -74,10 +83,12 @@
       method="post"
       enctype="multipart/form-data">
 
-    <input asp-for="Id" type="text" hidden>
-    <input asp-for="StartConnection" type="text" hidden>
-    <input asp-for="EndConnection" type="text" hidden>
-    <input asp-for="Date" type="date" hidden>
+    <input asp-for="Id" type="hidden">
+    <input asp-for="StartConnection" type="hidden">
+    <input asp-for="EndConnection" type="hidden">
+    <input asp-for="Date" type="hidden">
+    <input name="AreaName" value="@area" type="hidden">
+    <input name="RouteName" value="@route" type="hidden">
 
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 

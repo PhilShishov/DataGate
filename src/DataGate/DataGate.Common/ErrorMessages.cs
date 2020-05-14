@@ -14,5 +14,8 @@
 
         public const string NotFoundEntityMessage = "The required {0} was not found!";
         public const string EndpointErrorMessage = "Some error occurs.";
+
+        public const string ModelUploadErrorMessage = "Inputs are not valid!";
+        public const string ModelUploadFileErrorMessage = "The file must be a PDF and less than 2mb!";
     }
 }
