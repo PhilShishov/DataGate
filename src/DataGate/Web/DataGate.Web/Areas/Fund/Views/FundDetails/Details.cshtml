@@ -11,7 +11,7 @@
     if (controller == GlobalConstants.FundDetailsControllerName)
     {
         route = GlobalConstants.FundDetailsRouteName;
-        area = GlobalConstants.FundsAreaName;
+        area = GlobalConstants.FundAreaName;
     }
 }
 
@@ -159,7 +159,7 @@
         $(document).ready(function () {
 
             const token = $('#load-form input[name=__RequestVerificationToken]').val();
-            const controller = '@GlobalConstants.FundDetailsControllerName';
+            const area = '@GlobalConstants.FundAreaName';
             const entityId = @Model.Id;
             const date = '@Model.Date';
             const url = '/loadSubFunds';
@@ -168,13 +168,13 @@
             //
             // Load documents and agreements upload lists
 
-            loadUploadModals(token, controller);
+            loadUploadModals(token, area);
 
             // ________________________________________________________
             //
             // Load all documents, agreements and timelines
 
-            loadAddInfo(token, entityId, date, controller, url);
+            loadAddInfo(token, entityId, date, area, url);
 
             // ________________________________________________________
             //

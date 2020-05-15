@@ -2,8 +2,9 @@
 {
     using System.IO;
     using System.Linq;
-
+    using System.Threading.Tasks;
     using DataGate.Common;
+    using DataGate.Services.Data.Files.Contracts;
     using DataGate.Services.DateTime;
     using DataGate.Web.Filters;
     using DataGate.Web.InputModels.Files;
@@ -18,10 +19,14 @@
     public class MediaController : BaseController
     {
         private readonly IWebHostEnvironment environment;
+        private readonly IFileSystemService service;
 
-        public MediaController(IWebHostEnvironment environment)
+        public MediaController(
+                    IWebHostEnvironment environment,
+                    IFileSystemService fileService)
         {
             this.environment = environment;
+            this.service = fileService;
         }
 
         [HttpPost]
@@ -50,11 +55,11 @@
         }
 
         [HttpPost]
-        public IActionResult Read(string docValue, string agrValue, string controllerName)
+        public IActionResult Read(string docValue, string agrValue, string areaName)
         {
-            if (!string.IsNullOrEmpty(controllerName))
+            if (!string.IsNullOrEmpty(areaName))
             {
-                string path = this.GetTargetPath(ref docValue, agrValue, controllerName);
+                string path = this.GetTargetPath(ref docValue, agrValue, areaName);
 
                 var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
 
@@ -71,23 +76,23 @@
 
         [EndpointExceptionFilter]
         [Route("media/delete")]
-        public JsonResult Delete(string docValue, string agrValue, string controllerName)
+        public async Task<JsonResult> Delete(string docValue, string agrValue, string areaName)
         {
-            if (!string.IsNullOrEmpty(controllerName))
+            if (!string.IsNullOrEmpty(areaName))
             {
-                string path = this.GetTargetPath(ref docValue, agrValue, controllerName);
+                string path = this.GetTargetPath(ref docValue, agrValue, areaName);
 
                 if (System.IO.File.Exists(path))
                 {
                     if (string.IsNullOrEmpty(docValue))
                     {
-                        //this.fileService.DeleteAgreement(agrValue, controllerName);
+                        await this.service.DeleteAgreement(agrValue, areaName);
                     }
                     else
                     {
-                        //this.fileService.DeleteDocument(docValue, controllerName);
+                        await this.service.DeleteDocument(docValue, areaName);
                     }
-                    //System.IO.File.Delete(path);
+                    System.IO.File.Delete(path);
                     return this.Json(new { data = Path.GetFileNameWithoutExtension(docValue) });
                 }
             }
@@ -95,7 +100,7 @@
             return this.Json(new { data = "false" });
         }
 
-        private string GetTargetPath(ref string docValue, string agrValue, string controllerName)
+        private string GetTargetPath(ref string docValue, string agrValue, string areaName)
         {
             string targetLocation;
             if (string.IsNullOrEmpty(docValue))
@@ -105,7 +110,7 @@
             }
             else
             {
-                targetLocation = controllerName.Replace("Details", string.Empty);
+                targetLocation = areaName;
             }
 
             string fileLocation = Path.Combine(this.environment.WebRootPath, @$"FileFolder\{targetLocation}\");

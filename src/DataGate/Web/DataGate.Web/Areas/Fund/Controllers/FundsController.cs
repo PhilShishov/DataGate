@@ -10,7 +10,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Routing;
 
-    [Area(GlobalConstants.FundsAreaName)]
+    [Area(GlobalConstants.FundAreaName)]
     [Authorize]
     public class FundsController : BaseController
     {

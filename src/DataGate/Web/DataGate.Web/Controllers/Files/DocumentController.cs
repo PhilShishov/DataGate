@@ -1,6 +1,5 @@
 ﻿namespace DataGate.Web.Controllers.Files
 {
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -24,9 +23,9 @@
         }
 
         [Route("loadDocUpload")]
-        public IActionResult LoadDocumentUpload(string controllerName)
+        public IActionResult LoadDocumentUpload(string areaName)
         {
-            if (controllerName == GlobalConstants.FundDetailsControllerName)
+            if (areaName == GlobalConstants.FundAreaName)
             {
                 this.ViewData["DocumentFileTypes"] = this.fundService.GetDocumentsFileTypes();
             }
@@ -35,9 +34,9 @@
         }
 
         [Route("loadAgrUpload")]
-        public async Task<IActionResult> LoadAgreementUpload(string controllerName)
+        public async Task<IActionResult> LoadAgreementUpload(string areaName)
         {
-            if (controllerName == GlobalConstants.FundDetailsControllerName)
+            if (areaName == GlobalConstants.FundAreaName)
             {
                 this.ViewData["AgreementsFileTypes"] = await this.fundService.GetAgreementsFileTypes().ToListAsync();
                 this.ViewData["AgreementsStatus"] = await this.fundService.GetAgreementStatus().ToListAsync();
@@ -48,11 +47,11 @@
         }
 
         [Route("loadAllDoc")]
-        public IActionResult GetAllDocuments(int id, string controllerName)
+        public IActionResult GetAllDocuments(int id, string areaName)
         {
-            var model = new DocumentOverviewViewModel { ControllerName = controllerName };
+            var model = new DocumentOverviewViewModel { AreaName = areaName };
 
-            if (controllerName == GlobalConstants.FundDetailsControllerName)
+            if (areaName == GlobalConstants.FundAreaName)
             {
                 model.Documents = this.fundService.GetAllDocuments<DocumentViewModel>(id);
             }
@@ -61,12 +60,12 @@
         }
 
         [Route("loadAllAgr")]
-        public IActionResult GetAllAgreements(int id, string date, string controllerName)
+        public IActionResult GetAllAgreements(int id, string date, string areaName)
         {
-            var model = new AgreementOverviewViewModel { ControllerName = controllerName };
+            var model = new AgreementOverviewViewModel { AreaName = areaName };
             var dateParsed = DateTimeParser.WebFormat(date);
 
-            if (controllerName == GlobalConstants.FundDetailsControllerName)
+            if (areaName == GlobalConstants.FundAreaName)
             {
                 model.Agreements = this.fundService.GetAllAgreements<AgreementViewModel>(id, dateParsed);
             }

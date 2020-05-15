@@ -1,6 +1,5 @@
 ﻿namespace DataGate.Services.Data.Funds
 {
-    using System;
     using System.Data;
     using System.Data.SqlClient;
     using System.Globalization;
@@ -18,6 +17,7 @@
         // ________________________________________________________
         //
         // Stored procedures as in DB
+        // Upload
         private readonly string sqlProcedureDocumentFund = "EXEC sp_insert_map_fund";
         private readonly string sqlProcedureDocumentSubFund = "EXEC sp_insert_map_subfund";
         private readonly string sqlProcedureDocumentShareClass = "EXEC sp_insert_map_shareclass";
@@ -28,6 +28,15 @@
         private readonly string sqlProcedureAgreementShareClass = "EXEC sp_insert_agreement_shareclass";
         private readonly string sqlProcedureAgreement = "@file_name, @entity_id, @file_ext, @activity_type_id, @contract_date, " +
                                                         "@activation_date, @expiration_date, @company_id, @status";
+
+        // Delete
+        private readonly string sqlProcedureDeleteDocumentFund = "EXEC delete_fund_file_byname @file_name";
+        private readonly string sqlProcedureDeleteDocumentSubFund = "EXEC delete_subfund_file_byname @file_name";
+        private readonly string sqlProcedureDeleteDocumentShareClass = "EXEC delete_shareclass_file_byname @file_name";
+
+        private readonly string sqlProcedureDeleteAgreementFund = "EXEC delete_agreement_fundfile_byname @file_name";
+        private readonly string sqlProcedureDeleteAgreementSubFund = "EXEC delete_agreement_subfundfile_byname @file_name";
+        private readonly string sqlProcedureDeleteAgreementShareClass = "EXEC delete_agreement_shareclassfile_byname @file_name";
 
         private readonly ISqlQueryManager sqlManager;
         private readonly IFundDocumentService fundService;
@@ -40,6 +49,9 @@
             this.fundService = fundService;
         }
 
+        // ________________________________________________________
+        //
+        // Documents
         public async Task UploadDocument(UploadDocumentInputModel model)
         {
             string query = string.Empty;
@@ -47,17 +59,17 @@
             UploadDocumentDto dto = AutoMapperConfig.MapperInstance.Map<UploadDocumentDto>(model);
             dto.EndConnection = model.EndConnection?.ToString(GlobalConstants.RequiredSqlDateTimeFormat, CultureInfo.InvariantCulture);
 
-            if (model.AreaName == GlobalConstants.FundsAreaName)
+            if (model.AreaName == GlobalConstants.FundAreaName)
             {
                 query = $"{this.sqlProcedureDocumentFund} {this.sqlProcedureDocument}";
                 dto.DocumentType = await this.fundService.GetByIdDocumentType(model.DocumentType);
             }
-            else if (model.AreaName == GlobalConstants.SubFundsAreaName)
+            else if (model.AreaName == GlobalConstants.SubFundAreaName)
             {
                 query = $"{this.sqlProcedureDocumentSubFund} {this.sqlProcedureDocument}";
                 //dto.DocumentType = await this.service.GetByIdFileType(model.DocumentType);
             }
-            else if (model.AreaName == GlobalConstants.ShareClassesAreaName)
+            else if (model.AreaName == GlobalConstants.ShareClassAreaName)
             {
                 query = $"{this.sqlProcedureDocumentShareClass} {this.sqlProcedureDocument}";
                 //dto.DocumentType = await this.service.GetByIdFileType(model.DocumentType);
@@ -78,6 +90,32 @@
             await this.sqlManager.ExecuteProcedure(command);
         }
 
+        public async Task DeleteDocument(string docValue, string areaName)
+        {
+            string query = string.Empty;
+
+            if (areaName == GlobalConstants.FundAreaName)
+            {
+                query = $"{this.sqlProcedureDeleteDocumentFund}";
+            }
+            else if (areaName == GlobalConstants.SubFundAreaName)
+            {
+                query = $"{this.sqlProcedureDeleteDocumentSubFund}";
+            }
+            else if (areaName == GlobalConstants.ShareClassAreaName)
+            {
+                query = $"{this.sqlProcedureDeleteDocumentShareClass}";
+            }
+
+            SqlCommand command = new SqlCommand(query);
+            command.Parameters.Add(new SqlParameter("@file_name", SqlDbType.NVarChar) { Value = docValue });
+
+            await this.sqlManager.ExecuteProcedure(command);
+        }
+
+        // ________________________________________________________
+        //
+        // Agreements
         public async Task UploadAgreement(UploadAgreementInputModel model)
         {
             string query = string.Empty;
@@ -85,21 +123,21 @@
             UploadAgreementDto dto = AutoMapperConfig.MapperInstance.Map<UploadAgreementDto>(model);
             dto.ExpirationDate = model.ExpirationDate?.ToString(GlobalConstants.RequiredSqlDateTimeFormat, CultureInfo.InvariantCulture);
 
-            if (model.AreaName == GlobalConstants.FundsAreaName)
+            if (model.AreaName == GlobalConstants.FundAreaName)
             {
                 query = $"{this.sqlProcedureAgreementFund} {this.sqlProcedureAgreement}";
                 dto.AgreementType = await this.fundService.GetByIdAgreementType(model.AgrType);
                 dto.Status = await this.fundService.GetByIdStatus(model.Status);
                 dto.Company = await this.fundService.GetByIdCompany(model.Company);
             }
-            else if (model.AreaName == GlobalConstants.SubFundsAreaName)
+            else if (model.AreaName == GlobalConstants.SubFundAreaName)
             {
                 query = $"{this.sqlProcedureAgreementSubFund} {this.sqlProcedureAgreement}";
                 //dto.AgreementType = await this.fundService.GetByIdAgreementType(model.AgrType);
                 //dto.Status = await this.fundService.GetByIdStatus(model.Status);
                 //dto.Company = await this.fundService.GetByIdCompany(model.Company);
             }
-            else if (model.AreaName == GlobalConstants.ShareClassesAreaName)
+            else if (model.AreaName == GlobalConstants.ShareClassAreaName)
             {
                 query = $"{this.sqlProcedureAgreementShareClass} {this.sqlProcedureAgreement}";
                 //dto.AgreementType = await this.fundService.GetByIdAgreementType(model.AgrType);
@@ -124,57 +162,27 @@
             await this.sqlManager.ExecuteProcedure(command);
         }
 
-        public void DeleteMapping(string docValue, string agrValue, string controllerName)
+        public async Task DeleteAgreement(string agrValue, string areaName)
         {
             string query = string.Empty;
 
-            // Documents
-            if (controllerName == "SubFunds")
+            if (areaName == GlobalConstants.FundAreaName)
             {
-                query = "EXEC delete_subfund_file_byname @file_name";
+                query = $"{this.sqlProcedureDeleteAgreementFund}";
             }
-            else if (controllerName == "ShareClasses")
+            else if (areaName == GlobalConstants.SubFundAreaName)
             {
-                query = "EXEC delete_shareclass_file_byname @file_name";
+                query = $"{this.sqlProcedureDeleteAgreementSubFund}";
             }
-
-            // Agreements
-            if (controllerName == "Funds")
+            else if (areaName == GlobalConstants.ShareClassAreaName)
             {
-                query = "EXEC delete_agreement_fundfile_byname @file_name";
-            }
-            else if (controllerName == "SubFunds")
-            {
-                query = "EXEC delete_agreement_subfundfile_byname @file_name";
-            }
-            else if (controllerName == "ShareClasses")
-            {
-                query = "EXEC delete_agreement_shareclassfile_byname @file_name";
+                query = $"{this.sqlProcedureDeleteAgreementShareClass}";
             }
 
-            using (SqlConnection connection = new SqlConnection())
-            {
-                //connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
-                using (SqlCommand command = new SqlCommand(query))
-                {
-                    command.Parameters.AddRange(new[]
-                    {
-                        new SqlParameter("@file_name", SqlDbType.NVarChar) { Value = docValue },
-                    });
+            SqlCommand command = new SqlCommand(query);
+            command.Parameters.Add(new SqlParameter("@file_name", SqlDbType.NVarChar) { Value = agrValue });
 
-                    command.Connection = connection;
-
-                    try
-                    {
-                        command.Connection.Open();
-                        command.ExecuteScalar();
-                    }
-                    catch (SqlException sx)
-                    {
-                        Console.WriteLine(sx.Message);
-                    }
-                }
-            }
+            await this.sqlManager.ExecuteProcedure(command);
         }
     }
 }

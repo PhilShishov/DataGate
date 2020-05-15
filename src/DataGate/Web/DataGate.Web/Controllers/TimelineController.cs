@@ -19,11 +19,11 @@
         }
 
         [Route("loadTimelines")]
-        public IActionResult GetAllTimelines(int id, string controllerName)
+        public IActionResult GetAllTimelines(int id, string areaName)
         {
             IEnumerable<TimelineViewModel> model = null;
 
-            if (controllerName == GlobalConstants.FundDetailsControllerName)
+            if (areaName == GlobalConstants.FundAreaName)
             {
                 model = this.fundService.GetTimeline<TimelineViewModel>(id);
             }

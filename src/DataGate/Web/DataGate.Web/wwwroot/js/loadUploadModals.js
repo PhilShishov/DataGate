@@ -1,6 +1,6 @@
-﻿function loadUploadModals(token, controllerName) {
+﻿function loadUploadModals(token, areaName) {
     //import { setDates } from './setDates.js';
-    var json = { controllerName: controllerName };
+    var json = { areaName: areaName };
     $('#btn-upload-document').click(function () {
         $.ajax({
             url: '/loadDocUpload',
