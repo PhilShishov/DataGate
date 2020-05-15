@@ -2,7 +2,7 @@
 @model DataGate.Web.ViewModels.Documents.DocumentOverviewViewModel
 
 <form id="form-document" method="post">
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-hover"  id="tbl-documents">
         <thead>
             <tr>
                 <th class="text-secondary p-1">
@@ -71,7 +71,7 @@
 
             // ________________________________________________________
             //
-            // Delete selected row from agreements table by confirming
+            // Delete selected row from documents table by confirming
 
               $('.btn-delete').on('click', function () {
                   let con = confirm('Are you sure you want to delete this?');
@@ -93,7 +93,7 @@
                                   alert('Something wrong!');
                                   return false;
                               }
-                              $("#tbl-distinct-documents tr:contains('" + data.data + "')").remove();
+                              $("#tbl-documents tr:contains('" + data.data + "')").remove();
                           }
                       });
                   }
