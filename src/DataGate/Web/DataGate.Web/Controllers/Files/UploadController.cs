@@ -17,7 +17,7 @@
     public class UploadController : BaseController
     {
         private readonly long fileSizeLimit;
-        private readonly string[] permittedExtensions = { ".pdf" };
+        private readonly string[] permittedExtensions = { GlobalConstants.PdfFileExtension };
         private readonly IWebHostEnvironment environment;
         private readonly IFileSystemService service;
 
@@ -27,7 +27,7 @@
                        IConfiguration config)
         {
             this.service = service;
-            this.fileSizeLimit = config.GetValue<long>("FileSizeLimit");
+            this.fileSizeLimit = config.GetValue<long>(GlobalConstants.FileSizeLimitConfiguration);
             this.environment = environment;
         }
 
@@ -39,15 +39,21 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.ShowError(ErrorMessages.ModelUploadErrorMessage, model.RouteName, new { area = model.AreaName, id = model.Id, date = model.Date });
+                return this.ShowError(
+                    ErrorMessages.ModelUploadErrorMessage,
+                    model.RouteName,
+                    new { area = model.AreaName, id = model.Id, date = model.Date });
             }
 
             string path = await FileHelpers.ProcessFormFile(model.FileToUpload, this.ModelState, this.permittedExtensions,
-                                                            this.fileSizeLimit, this.environment.WebRootPath);
+                                                            this.fileSizeLimit, this.environment.WebRootPath, model.AreaName, false);
 
             if (!this.ModelState.IsValid)
             {
-                return this.ShowError(ErrorMessages.ModelUploadFileErrorMessage, model.RouteName, new { area = model.AreaName, id = model.Id, date = model.Date });
+                return this.ShowError(
+                    ErrorMessages.ModelUploadFileErrorMessage,
+                    model.RouteName,
+                    new { area = model.AreaName, id = model.Id, date = model.Date });
             }
 
             await this.service.UploadDocument(model);
@@ -58,68 +64,48 @@
                 stream.Close();
             }
 
-            return this.ShowInfo(InfoMessages.SuccessfulUpdate, GlobalConstants.FundDetailsRouteName, new { model.Id, model.Date });
+            return this.ShowInfo(
+                InfoMessages.FileUploaded,
+                model.RouteName,
+                new { area = model.AreaName, id = model.Id, date = model.Date });
         }
 
-        //        //[HttpPost]
-        //        //public IActionResult UploadAgreement(SpecificEntityViewModel model)
-        //        //{
-        //        //    SetModelValuesForSpecificView(model);
+        [HttpPost]
+        public async Task<IActionResult> OnPostUploadAgreementAsync(
+            [Bind("AgrType", "ContractDate", "ActivationDate", "ExpirationDate", "Company", "Status", "FileToUpload",
+                  "Date", "Id", "RouteName", "AreaName")]UploadAgreementInputModel model)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.ShowError(
+                    ErrorMessages.ModelUploadErrorMessage,
+                    model.RouteName,
+                    new { area = model.AreaName, id = model.Id, date = model.Date });
+            }
 
-        //        //    //if (!ModelState.IsValid)
-        //        //    //{
-        //        //    //    return this.PartialView("SpecificEntity/_UploadAgr", model);
-        //        //    //}
+            string path = await FileHelpers.ProcessFormFile(model.FileToUpload, this.ModelState, this.permittedExtensions,
+                                                            this.fileSizeLimit, this.environment.WebRootPath, model.AreaName, true);
 
-        //        //    var file = model.UploadAgreementFileModel.FileToUpload;
+            if (!this.ModelState.IsValid)
+            {
+                return this.ShowError(
+                    ErrorMessages.ModelUploadFileErrorMessage,
+                    model.RouteName,
+                    new { area = model.AreaName, id = model.Id, date = model.Date });
+            }
 
-        //        //    if (file != null || file.FileName != "")
-        //        //    {
-        //        //        string fileExt = Path.GetExtension(file.FileName);
-        //        //        string fileLocation = Path.Combine(_environment.WebRootPath, @"FileFolder\Agreements\");
-        //        //        string path = $"{fileLocation}{file.FileName}";
+            await this.service.UploadAgreement(model);
 
-        //        //        using (var stream = new FileStream(path, FileMode.Create))
-        //        //        {
-        //        //            file.CopyTo(stream);
-        //        //            stream.Close();
-        //        //        }
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                await model.FileToUpload.CopyToAsync(stream);
+                stream.Close();
+            }
 
-        //        //        var activityTypeIdDesc = model.UploadAgreementFileModel.AgrType;
-        //        //        int activityTypeId = this.context.TbDomActivityType
-        //        //                .Where(at => at.AtDesc == activityTypeIdDesc)
-        //        //                .Select(at => at.AtId)
-        //        //                .FirstOrDefault();
-
-        //        //        string contractDate = model.UploadAgreementFileModel.ContractDate.ToString("yyyyMMdd");
-        //        //        string activationDate = model.UploadAgreementFileModel.ActivationDate.ToString("yyyyMMdd");
-        //        //        string expirationDate = model.UploadAgreementFileModel.ExpirationDate?.ToString("yyyyMMdd");
-
-        //        //        int statusId = this.context.TbDomAgreementStatus
-        //        //            .Where(s => s.ASDesc == model.UploadAgreementFileModel.Status)
-        //        //            .Select(s => s.ASId)
-        //        //            .FirstOrDefault();
-
-        //        //        int companyId = this.context.TbCompanies
-        //        //            .Where(c => c.CName == model.UploadAgreementFileModel.Company)
-        //        //            .Select(c => c.CId)
-        //        //            .FirstOrDefault();
-
-        //        //        this.entitiesFileService.AddAgreementToSpecificEntity(
-        //        //                                            file.FileName,
-        //        //                                            fileExt,
-        //        //                                            model.EntityId,
-        //        //                                            activityTypeId,
-        //        //                                            contractDate,
-        //        //                                            activationDate,
-        //        //                                            expirationDate,
-        //        //                                            statusId,
-        //        //                                            companyId,
-        //        //                                            model.ControllerName);
-        //        //    }
-
-        //        //    this.ModelState.Clear();
-        //        //    return this.RedirectToAction("ViewEntitySE", new { model.EntityId, model.ChosenDate });
-        //        //}
+            return this.ShowInfo(
+                InfoMessages.FileUploaded,
+                model.RouteName,
+                new { area = model.AreaName, id = model.Id, date = model.Date });
+        }
     }
 }

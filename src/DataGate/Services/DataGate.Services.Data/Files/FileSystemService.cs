@@ -17,11 +17,17 @@
     {
         // ________________________________________________________
         //
-        // Table procedures as in DB
+        // Stored procedures as in DB
         private readonly string sqlProcedureDocumentFund = "EXEC sp_insert_map_fund";
         private readonly string sqlProcedureDocumentSubFund = "EXEC sp_insert_map_subfund";
         private readonly string sqlProcedureDocumentShareClass = "EXEC sp_insert_map_shareclass";
         private readonly string sqlProcedureDocument = "@file_name, @entity_id, @start_connection, @end_connection, @file_ext, @filetype_id";
+
+        private readonly string sqlProcedureAgreementFund = "EXEC sp_insert_agreement_fund";
+        private readonly string sqlProcedureAgreementSubFund = "EXEC sp_insert_agreement_subfund";
+        private readonly string sqlProcedureAgreementShareClass = "EXEC sp_insert_agreement_shareclass";
+        private readonly string sqlProcedureAgreement = "@file_name, @entity_id, @file_ext, @activity_type_id, @contract_date, " +
+                                                        "@activation_date, @expiration_date, @company_id, @status";
 
         private readonly ISqlQueryManager sqlManager;
         private readonly IFundDocumentService fundService;
@@ -44,7 +50,7 @@
             if (model.AreaName == GlobalConstants.FundsAreaName)
             {
                 query = $"{this.sqlProcedureDocumentFund} {this.sqlProcedureDocument}";
-                dto.DocumentType = await this.fundService.GetByIdFileType(model.DocumentType);
+                dto.DocumentType = await this.fundService.GetByIdDocumentType(model.DocumentType);
             }
             else if (model.AreaName == GlobalConstants.SubFundsAreaName)
             {
@@ -72,79 +78,50 @@
             await this.sqlManager.ExecuteProcedure(command);
         }
 
-        public void MapAgreementDB(
-                                    string fileName,
-                                    string fileExt,
-                                    int entityId,
-                                    int activityTypeId,
-                                    string contractDate,
-                                    string activationDate,
-                                    string expirationDate,
-                                    int statusId,
-                                    int companyId,
-                                    string controllerName)
+        public async Task UploadAgreement(UploadAgreementInputModel model)
         {
             string query = string.Empty;
 
-            if (controllerName == "Funds")
+            UploadAgreementDto dto = AutoMapperConfig.MapperInstance.Map<UploadAgreementDto>(model);
+            dto.ExpirationDate = model.ExpirationDate?.ToString(GlobalConstants.RequiredSqlDateTimeFormat, CultureInfo.InvariantCulture);
+
+            if (model.AreaName == GlobalConstants.FundsAreaName)
             {
-                query = "EXEC sp_insert_agreement_fund " +
-                  "@file_name, @entity_id, @file_ext, @activity_type_id, @contract_date, " +
-                  "@activation_date, @expiration_date, @company_id, @status";
+                query = $"{this.sqlProcedureAgreementFund} {this.sqlProcedureAgreement}";
+                dto.AgreementType = await this.fundService.GetByIdAgreementType(model.AgrType);
+                dto.Status = await this.fundService.GetByIdStatus(model.Status);
+                dto.Company = await this.fundService.GetByIdCompany(model.Company);
             }
-            else if (controllerName == "SubFunds")
+            else if (model.AreaName == GlobalConstants.SubFundsAreaName)
             {
-                query = "EXEC sp_insert_agreement_subfund " +
-                  "@file_name, @entity_id, @file_ext, @activity_type_id, @contract_date, " +
-                  "@activation_date, @expiration_date, @company_id, @status";
+                query = $"{this.sqlProcedureAgreementSubFund} {this.sqlProcedureAgreement}";
+                //dto.AgreementType = await this.fundService.GetByIdAgreementType(model.AgrType);
+                //dto.Status = await this.fundService.GetByIdStatus(model.Status);
+                //dto.Company = await this.fundService.GetByIdCompany(model.Company);
             }
-            else if (controllerName == "ShareClasses")
+            else if (model.AreaName == GlobalConstants.ShareClassesAreaName)
             {
-                query = "EXEC sp_insert_agreement_shareclass " +
-                  "@file_name, @entity_id, @file_ext, @activity_type_id, @contract_date, " +
-                  "@activation_date, @expiration_date, @company_id, @status";
+                query = $"{this.sqlProcedureAgreementShareClass} {this.sqlProcedureAgreement}";
+                //dto.AgreementType = await this.fundService.GetByIdAgreementType(model.AgrType);
+                //dto.Status = await this.fundService.GetByIdStatus(model.Status);
+                //dto.Company = await this.fundService.GetByIdCompany(model.Company);
             }
 
-            using (SqlConnection connection = new SqlConnection())
+            SqlCommand command = new SqlCommand(query);
+            command.Parameters.AddRange(new[]
             {
-                //connection.ConnectionString = this.configuration.GetConnectionString("Pharus_vFinaleConnection");
-                using (SqlCommand command = new SqlCommand(query))
-                {
-                    command.Parameters.AddRange(new[]
-                    {
-                        new SqlParameter("@file_name", SqlDbType.NVarChar) { Value = fileName },
-                        new SqlParameter("@entity_id", SqlDbType.Int) { Value = entityId },
-                        new SqlParameter("@file_ext", SqlDbType.NVarChar) { Value = fileExt },
+                        new SqlParameter("@file_name", SqlDbType.NVarChar) { Value = dto.FileName},
+                        new SqlParameter("@entity_id", SqlDbType.Int) { Value = dto.Id },
+                        new SqlParameter("@file_ext", SqlDbType.NVarChar) { Value = dto.FileExt },
+                        new SqlParameter("@activity_type_id", SqlDbType.Int) { Value = dto.AgreementType},
+                        new SqlParameter("@contract_date", SqlDbType.NVarChar) { Value = dto.ContractDate },
+                        new SqlParameter("@activation_date", SqlDbType.NVarChar) { Value = dto.ActivationDate },
+                        new SqlParameter("@expiration_date", SqlDbType.NVarChar) { Value = dto.ExpirationDate },
+                        new SqlParameter("@company_id", SqlDbType.Int) { Value = dto.Company },
+                        new SqlParameter("@status", SqlDbType.Int) { Value = dto.Status },
+            });
 
-                        new SqlParameter("@activity_type_id", SqlDbType.Int) { Value = activityTypeId},
-                        new SqlParameter("@contract_date", SqlDbType.NVarChar) { Value = contractDate },
-                        new SqlParameter("@activation_date", SqlDbType.NVarChar) { Value = activationDate },
-                        new SqlParameter("@expiration_date", SqlDbType.NVarChar) { Value = expirationDate },
-                        new SqlParameter("@company_id", SqlDbType.Int) { Value = companyId },
-                        new SqlParameter("@status", SqlDbType.Int) { Value = statusId },
-                    });
-
-                    foreach (SqlParameter parameter in command.Parameters)
-                    {
-                        if (parameter.Value == null)
-                        {
-                            parameter.Value = DBNull.Value;
-                        }
-                    }
-
-                    command.Connection = connection;
-
-                    try
-                    {
-                        command.Connection.Open();
-                        command.ExecuteScalar();
-                    }
-                    catch (SqlException sx)
-                    {
-                        Console.WriteLine(sx.Message);
-                    }
-                }
-            }
+            await this.sqlManager.ExecuteProcedure(command);
         }
 
         public void DeleteMapping(string docValue, string agrValue, string controllerName)

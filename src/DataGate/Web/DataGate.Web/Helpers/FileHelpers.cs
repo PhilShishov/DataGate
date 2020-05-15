@@ -19,7 +19,8 @@
         };
 
         public static async Task<string> ProcessFormFile(IFormFile formFile, ModelStateDictionary modelState,
-                                                         string[] permittedExtensions, long sizeLimit, string webRootPath)
+                                                         string[] permittedExtensions, long sizeLimit, string webRootPath,
+                                                         string area, bool isAgreement)
         {
             var trustedFileNameForDisplay = WebUtility.HtmlEncode(formFile.FileName);
 
@@ -49,7 +50,9 @@
                 }
             }
 
-            string fileLocation = Path.Combine(webRootPath, @"FileFolder\Funds\");
+            string targetLocation = GetTargetPath(isAgreement, area);
+
+            string fileLocation = Path.Combine(webRootPath, @$"FileFolder\{targetLocation}\");
             string path = $"{fileLocation}{formFile.FileName}";
             if (File.Exists(path))
             {
@@ -58,6 +61,21 @@
             }
 
             return path;
+        }
+
+        private static string GetTargetPath(bool isAgreement, string area)
+        {
+            string targetLocation;
+            if (isAgreement)
+            {
+                targetLocation = "Agreement";
+            }
+            else
+            {
+                targetLocation = area;
+            }
+
+            return targetLocation;
         }
 
         private static bool IsValidFileExtensionAndSignature(string fileName, Stream data, string[] permittedExtensions)

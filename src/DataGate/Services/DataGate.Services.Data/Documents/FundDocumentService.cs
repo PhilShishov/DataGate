@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using DataGate.Data.Common.Repositories;
     using DataGate.Data.Models.Domain;
     using DataGate.Data.Models.Entities;
@@ -50,7 +51,7 @@
             return prosFileTypes;
         }
 
-        public async Task<int> GetByIdFileType(string documentType)
+        public async Task<int> GetByIdDocumentType(string documentType)
         {
             return await this.repositoryFileType.All()
                         .Where(ft => ft.FiletypeDesc == documentType)
@@ -71,6 +72,14 @@
             }
         }
 
+        public async Task<int> GetByIdAgreementType(string agrType)
+        {
+            return await this.repositoryActivityType.All()
+                        .Where(at => at.AtDesc == agrType)
+                        .Select(at => at.AtId)
+                        .FirstOrDefaultAsync();
+        }
+
         public async IAsyncEnumerable<string> GetAgreementStatus()
         {
             var agrStatus = await this.repositoryAgrStatus.All()
@@ -83,6 +92,14 @@
             }
         }
 
+        public async Task<int> GetByIdStatus(string status)
+        {
+            return await this.repositoryAgrStatus.All()
+                        .Where(s => s.ASDesc == status)
+                        .Select(s => s.ASId)
+                        .FirstOrDefaultAsync();
+        }
+
         public async IAsyncEnumerable<string> GetCompanies()
         {
             var companies = await this.repositoryCompanies.All()
@@ -93,6 +110,14 @@
             {
                 yield return item;
             }
+        }
+
+        public async Task<int> GetByIdCompany(string company)
+        {
+            return await this.repositoryCompanies.All()
+                        .Where(c => c.CName == company)
+                        .Select(c => c.CId)
+                        .FirstOrDefaultAsync();
         }
 
         public IEnumerable<T> GetAllAgreements<T>(int id, DateTime? date)
