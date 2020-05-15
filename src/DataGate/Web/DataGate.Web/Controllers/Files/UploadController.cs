@@ -71,6 +71,7 @@
         }
 
         [HttpPost]
+        [ActionName("Agreement")]
         public async Task<IActionResult> OnPostUploadAgreementAsync(
             [Bind("AgrType", "ContractDate", "ActivationDate", "ExpirationDate", "Company", "Status", "FileToUpload",
                   "Date", "Id", "RouteName", "AreaName")]UploadAgreementInputModel model)

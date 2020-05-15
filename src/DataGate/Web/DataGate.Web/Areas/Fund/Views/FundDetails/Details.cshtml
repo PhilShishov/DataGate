@@ -113,6 +113,8 @@
     <input asp-for="StartConnection" type="text" hidden>
     <input asp-for="EndConnection" type="text" hidden>
     <input asp-for="Date" type="date" hidden>
+    <input name="AreaName" value="@area" type="hidden">
+    <input name="RouteName" value="@route" type="hidden">
 
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -130,7 +132,7 @@
 
 @section Scripts{
     @await Html.PartialAsync("_ValidationScriptsPartial")
-    <script type="text/javascript" src="~/js/delete/deleteAgreement.js" asp-append-version="true"></script>
+    @*<script type="text/javascript" src="~/js/delete/deleteAgreement.js" asp-append-version="true"></script>*@
     <script type="text/javascript" src="~/js/loadUploadModals.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/controllers/subEntitiesController.js" asp-append-version="true"></script>
 
@@ -156,7 +158,7 @@
 
         $(document).ready(function () {
 
-            const token = $("#load-form input[name=__RequestVerificationToken]").val();
+            const token = $('#load-form input[name=__RequestVerificationToken]').val();
             const controller = '@GlobalConstants.FundDetailsControllerName';
             const entityId = @Model.Id;
             const date = '@Model.Date';
@@ -173,13 +175,6 @@
             // Load all documents, agreements and timelines
 
             loadAddInfo(token, entityId, date, controller, url);
-
-            // ________________________________________________________
-            //
-            // Delete selected row from agreements table by confirming
-
-            //const urlDel = "/FundSubEntities/DeleteAgreement";
-            //passAgrUrlToDelete(urlDel);
 
             // ________________________________________________________
             //

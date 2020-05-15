@@ -53,15 +53,18 @@
                     <td class="p-1">
                         <button type="button"
                                 class="btn btn-primary btn-sm mr-1 confirmDocDelBtn"
-                                formaction="@Url.Action("DeleteDocument", Model.ControllerName,
-                                                               new { @fileName = agreement.Name })">
-                            Delete
+                                asp-area=""
+                                asp-controller="Media"
+                                asp-action="Delete" >
+                        Delete
                         </button>
                     </td>
                 </tr>
-            }
-        </tbody>
-    </table>
-    <input type="hidden" name="ControllerName" value="@Model.ControllerName" />
-</form>
+                }
+            </tbody>
+        </table>
+        <input type="hidden" name="ControllerName" value="@Model.ControllerName" />
+    </form>
+
+
 
