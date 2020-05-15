@@ -57,14 +57,13 @@
             {
                 string path = this.GetTargetPath(ref docValue, agrValue, controllerName);
 
-                using (var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read))
-                {
-                    fileStreamResult = new FileStreamResult(fileStream, $"{GlobalConstants.PdfStreamMimeType}");
+                var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
 
-                    if (fileStreamResult != null)
-                    {
-                        return fileStreamResult;
-                    }
+                fileStreamResult = new FileStreamResult(fileStream, $"{GlobalConstants.PdfStreamMimeType}");
+
+                if (fileStreamResult != null)
+                {
+                    return fileStreamResult;
                 }
             }
 
