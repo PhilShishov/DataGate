@@ -46,11 +46,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\ShareClasses\" />
-    <Folder Include="Areas\SubFunds\" />
+    <Folder Include="Areas\ShareClass\" />
+    <Folder Include="Areas\SubFund\" />
     <Folder Include="wwwroot\FileFolder\Fund\" />
-    <Folder Include="wwwroot\FileFolder\Agreement\" />
-    <Folder Include="wwwroot\FileFolder\ShareClass\" />
-    <Folder Include="wwwroot\FileFolder\SubFund\" />
+    <Folder Include="wwwroot\FileFolder\Agreements\" />
+    <Folder Include="wwwroot\FileFolder\ShareClasses\" />
+    <Folder Include="wwwroot\FileFolder\SubFunds\" />
   </ItemGroup>
 </Project>

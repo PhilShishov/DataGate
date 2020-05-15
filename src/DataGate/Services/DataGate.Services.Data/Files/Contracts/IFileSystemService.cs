@@ -8,7 +8,7 @@
     {
         Task UploadDocument(UploadDocumentInputModel model);
 
-        //Task UploadAgreement(UploadAgreementInputModel model);
+        Task UploadAgreement(UploadAgreementInputModel model);
 
         void DeleteMapping(string docValue, string agrValue, string controllerName);
     }

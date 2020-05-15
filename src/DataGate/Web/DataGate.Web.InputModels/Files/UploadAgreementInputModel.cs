@@ -38,8 +38,12 @@ namespace DataGate.Web.InputModels.Files
         [Required(ErrorMessage = "Please insert File.")]
         public IFormFile FileToUpload { get; set; }
 
-        public DateTime StartConnection { get; set; }
+        public string Date { get; set; }
 
-        public DateTime? EndConnection { get; set; }
+        public int Id { get; set; }
+
+        public string RouteName { get; set; }
+
+        public string AreaName { get; set; }
     }
 }

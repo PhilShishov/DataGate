@@ -8,13 +8,19 @@
     {
         IReadOnlyCollection<string> GetDocumentsFileTypes();
 
-        Task<int> GetByIdFileType(string documentType);
+        Task<int> GetByIdDocumentType(string documentType);
 
         IAsyncEnumerable<string> GetAgreementsFileTypes();
 
+        Task<int> GetByIdAgreementType(string agrType);
+
         IAsyncEnumerable<string> GetAgreementStatus();
 
+        Task<int> GetByIdStatus(string status);
+
         IAsyncEnumerable<string> GetCompanies();
+
+        Task<int> GetByIdCompany(string company);
 
         IEnumerable<T> GetAllDocuments<T>(int id);
 

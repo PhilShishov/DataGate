@@ -5,22 +5,23 @@
         // Application Constants
         public const string SystemName = "DataGate";
         public const string DataGateFooterDisplay = "- Pharus Management Lux SA 16, Avenue de la Gare L- 1610 Luxembourg T. +352 28 55 69 - 1";
+        public const string FileSizeLimitConfiguration = "FileSizeLimit";
         public const int MaxAdminCount = 3;
 
         // Controllers, areas
         public const string ControllerRouteDataValue = "controller";
-        public const string FundsAreaName = "Funds";
+        public const string FundsAreaName = "Fund";
         public const string FundsControllerName = "Funds";
         public const string FundDetailsControllerName = "FundDetails";
         public const string FundSubFundsControllerName = "FundSubFunds";
 
         public const string SubFundsControllerName = "SubFunds";
-        public const string SubFundsAreaName = "SubFunds";
+        public const string SubFundsAreaName = "SubFund";
         public const string SubFundDetailsControllerName = "SubFundDetails";
         public const string SubFundShareClassesControllerName = "SubFundShareClasses";
 
         public const string ShareClassesControllerName = "ShareClasses";
-        public const string ShareClassesAreaName = "ShareClasses";
+        public const string ShareClassesAreaName = "ShareClass";
         public const string ShareClassesSubEntitiesControllerName = "ShareClassesSubEntities";
 
         // Urls, actions
@@ -78,7 +79,6 @@
         public const string PdfFileExtension = ".pdf";
         public const string ExcelStreamMimeType = "application/excel";
         public const string PdfStreamMimeType = "application/pdf";
-        //public static string[] AllowedFileExtensoins = new string[] { ".ppt", ".pptx", ".doc", ".docx", ".xls", ".cs", ".zip", ".json", ".xml", ".mp4", ".avi", ".txt", ".html", ".pdf" };
 
         // Entities
         public const int IndexEntityIdInTable = 2;
