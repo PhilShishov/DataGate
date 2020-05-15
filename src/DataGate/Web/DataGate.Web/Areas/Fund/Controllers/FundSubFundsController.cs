@@ -13,7 +13,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    [Area(GlobalConstants.FundsAreaName)]
+    [Area(GlobalConstants.FundAreaName)]
     [Authorize]
     public class FundSubFundsController : BaseController
     {

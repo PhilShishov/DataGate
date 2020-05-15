@@ -61,13 +61,13 @@
             }
         </tbody>
     </table>
-    <input type="hidden" name="ControllerName" value="@Model.ControllerName" />
+    <input type="hidden" name="AreaName" value="@Model.AreaName" />
 </form>
 
 <script>
       $(document).ready(function () {
             const token = $('#form-document input[name=__RequestVerificationToken]').val();
-            const controllerName = '@Model.ControllerName';
+            const areaName = '@Model.AreaName';
 
             // ________________________________________________________
             //
@@ -87,7 +87,7 @@
                           dataType: 'json',
                           contentType: 'application/json; charset=utf-8',
                           headers: { 'X-CSRF-TOKEN': token },
-                          data: { docValue: docValue, controllerName: controllerName },
+                          data: { docValue: docValue, areaName: areaName },
                           success: function (data) {
                               if (data.data == 'false') {
                                   alert('Something wrong!');

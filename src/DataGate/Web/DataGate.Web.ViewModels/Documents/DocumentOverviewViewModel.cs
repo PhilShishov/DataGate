@@ -6,6 +6,6 @@
     {
         public IEnumerable<DocumentViewModel> Documents { get; set; }
 
-        public string ControllerName { get; set; }
+        public string AreaName { get; set; }
     }
 }

@@ -8,8 +8,10 @@
     {
         Task UploadDocument(UploadDocumentInputModel model);
 
+        Task DeleteDocument(string docValue, string areaName);
+
         Task UploadAgreement(UploadAgreementInputModel model);
 
-        void DeleteMapping(string docValue, string agrValue, string controllerName);
+        Task DeleteAgreement(string agrValue, string areaName);
     }
 }

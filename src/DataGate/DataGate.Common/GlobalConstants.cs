@@ -10,18 +10,18 @@
 
         // Controllers, areas
         public const string ControllerRouteDataValue = "controller";
-        public const string FundsAreaName = "Fund";
+        public const string FundAreaName = "Fund";
         public const string FundsControllerName = "Funds";
         public const string FundDetailsControllerName = "FundDetails";
         public const string FundSubFundsControllerName = "FundSubFunds";
 
         public const string SubFundsControllerName = "SubFunds";
-        public const string SubFundsAreaName = "SubFund";
+        public const string SubFundAreaName = "SubFund";
         public const string SubFundDetailsControllerName = "SubFundDetails";
         public const string SubFundShareClassesControllerName = "SubFundShareClasses";
 
         public const string ShareClassesControllerName = "ShareClasses";
-        public const string ShareClassesAreaName = "ShareClass";
+        public const string ShareClassAreaName = "ShareClass";
         public const string ShareClassesSubEntitiesControllerName = "ShareClassesSubEntities";
 
         // Urls, actions
