@@ -69,7 +69,7 @@
             return this.RedirectToRoute(GlobalConstants.AllFundsRouteName);
         }
 
-        //[EndpointExceptionFilter]
+        [EndpointExceptionFilter]
         [Route("media/delete")]
         public JsonResult Delete(string docValue, string agrValue, string controllerName)
         {
