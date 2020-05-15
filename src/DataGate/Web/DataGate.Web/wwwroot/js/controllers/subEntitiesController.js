@@ -7,17 +7,17 @@
 
     $('#fundAdditionalInfSelect option').each(function () {
         if (this.selected) {
-            const dropdownvalue = $("#fundAdditionalInfSelect option:selected").val();
+            const dropdownvalue = $('#fundAdditionalInfSelect option:selected').val();
             if (dropdownvalue == 'SubFunds') {
-                $("#subEntities").css('visibility', 'visible');
-                $("#timelineChanges").addClass('d-none');
-                $("#allDocuments").addClass('d-none');
-                $("#allAgreements").addClass('d-none');
+                $('#subEntities').css('visibility', 'visible');
+                $('#timelineChanges').addClass('d-none');
+                $('#allDocuments').addClass('d-none');
+                $('#allAgreements').addClass('d-none');
             } else {
-                $("#subEntities").css('visibility', 'hidden');
-                $("#timelineChanges").addClass('d-none');
-                $("#allDocuments").addClass('d-none');
-                $("#allAgreements").addClass('d-none');
+                $('#subEntities').css('visibility', 'hidden');
+                $('#timelineChanges').addClass('d-none');
+                $('#allDocuments').addClass('d-none');
+                $('#allAgreements').addClass('d-none');
             }
         }
     });
@@ -28,18 +28,18 @@
     // subentities, timeline changes, all documents -
     // On change event for selected value
 
-    $("#fundAdditionalInfSelect").on('change', function () {
-        const dropdownvalue = $("#fundAdditionalInfSelect option:selected").val();
+    $('#fundAdditionalInfSelect').on('change', function () {
+        const dropdownvalue = $('#fundAdditionalInfSelect option:selected').val();
         const json = { id: id, controllerName: controllerName };
         const fullJson = { id: id, date: date, controllerName: controllerName };
 
         $(this).find('[selected]').removeAttr('selected')
         $(this).find(':selected').attr('selected', 'selected')
         if (dropdownvalue == 'SubFunds') {
-            $("#subEntities").css('visibility', 'visible');
-            $("#timelineChanges").addClass('d-none');
-            $("#allDocuments").addClass('d-none');
-            $("#allAgreements").addClass('d-none');
+            $('#subEntities').css('visibility', 'visible');
+            $('#timelineChanges').addClass('d-none');
+            $('#allDocuments').addClass('d-none');
+            $('#allAgreements').addClass('d-none');
 
             $.ajax({
                 url: url,
@@ -52,10 +52,10 @@
                 }
             });
         } else if (dropdownvalue == 'TimelineChanges') {
-            $("#timelineChanges").removeClass('d-none');
-            $("#subEntities").css('visibility', 'hidden');
-            $("#allDocuments").addClass('d-none');
-            $("#allAgreements").addClass('d-none');
+            $('#timelineChanges').removeClass('d-none');
+            $('#subEntities').css('visibility', 'hidden');
+            $('#allDocuments').addClass('d-none');
+            $('#allAgreements').addClass('d-none');
 
             $.ajax({
                 url: '/loadTimelines',
@@ -68,10 +68,10 @@
                 }
             });
         } else if (dropdownvalue == 'AllDocuments') {
-            $("#allDocuments").removeClass('d-none');
-            $("#timelineChanges").addClass('d-none');
-            $("#subEntities").css('visibility', 'hidden');
-            $("#allAgreements").addClass('d-none');
+            $('#allDocuments').removeClass('d-none');
+            $('#timelineChanges').addClass('d-none');
+            $('#subEntities').css('visibility', 'hidden');
+            $('#allAgreements').addClass('d-none');
 
             $.ajax({
                 url: '/loadAllDoc',
@@ -84,10 +84,10 @@
                 }
             });
         } else if (dropdownvalue == 'AllAgreements') {
-            $("#allAgreements").removeClass('d-none');
-            $("#timelineChanges").addClass('d-none');
-            $("#subEntities").css('visibility', 'hidden');
-            $("#allDocuments").addClass('d-none');
+            $('#allAgreements').removeClass('d-none');
+            $('#timelineChanges').addClass('d-none');
+            $('#subEntities').css('visibility', 'hidden');
+            $('#allDocuments').addClass('d-none');
 
             $.ajax({
                 url: '/loadAllAgr',
@@ -100,10 +100,10 @@
                 }
             });
         } else {
-            $("#subEntities").css('visibility', 'hidden');
-            $("#timelineChanges").addClass('d-none');
-            $("#allDocuments").addClass('d-none');
-            $("#allAgreements").addClass('d-none');
+            $('#subEntities').css('visibility', 'hidden');
+            $('#timelineChanges').addClass('d-none');
+            $('#allDocuments').addClass('d-none');
+            $('#allAgreements').addClass('d-none');
         }
     });
 }

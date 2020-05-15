@@ -5,6 +5,7 @@
 
     using DataGate.Common;
     using DataGate.Services.DateTime;
+    using DataGate.Web.Filters;
     using DataGate.Web.InputModels.Files;
     using DataGate.Web.Utilities;
 
@@ -51,15 +52,13 @@
         [HttpPost]
         public IActionResult Read(string docValue, string agrValue, string controllerName)
         {
-            FileStreamResult fileStreamResult = null;
-
             if (!string.IsNullOrEmpty(controllerName))
             {
                 string path = this.GetTargetPath(ref docValue, agrValue, controllerName);
 
                 var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
 
-                fileStreamResult = new FileStreamResult(fileStream, $"{GlobalConstants.PdfStreamMimeType}");
+                FileStreamResult fileStreamResult = new FileStreamResult(fileStream, $"{GlobalConstants.PdfStreamMimeType}");
 
                 if (fileStreamResult != null)
                 {
@@ -71,7 +70,7 @@
         }
 
         //[EndpointExceptionFilter]
-        [HttpGet]
+        [Route("media/delete")]
         public JsonResult Delete(string docValue, string agrValue, string controllerName)
         {
             if (!string.IsNullOrEmpty(controllerName))
@@ -80,22 +79,29 @@
 
                 if (System.IO.File.Exists(path))
                 {
-                    //this.fileService.DeleteMapping(docValue, agrValue, controllerName);
+                    if (string.IsNullOrEmpty(docValue))
+                    {
+                        //this.fileService.DeleteAgreement(agrValue, controllerName);
+                    }
+                    else
+                    {
+                        //this.fileService.DeleteDocument(docValue, controllerName);
+                    }
                     //System.IO.File.Delete(path);
-                    return this.Json(new { data = Path.GetFileNameWithoutExtension(agrValue) });
+                    return this.Json(new { data = Path.GetFileNameWithoutExtension(docValue) });
                 }
             }
 
             return this.Json(new { data = "false" });
         }
 
-        private string GetTargetPath(ref string pdfValue, string agrValue, string controllerName)
+        private string GetTargetPath(ref string docValue, string agrValue, string controllerName)
         {
             string targetLocation;
-            if (string.IsNullOrEmpty(pdfValue))
+            if (string.IsNullOrEmpty(docValue))
             {
                 targetLocation = "Agreement";
-                pdfValue = agrValue;
+                docValue = agrValue;
             }
             else
             {
@@ -103,7 +109,7 @@
             }
 
             string fileLocation = Path.Combine(this.environment.WebRootPath, @$"FileFolder\{targetLocation}\");
-            string path = $"{fileLocation}{pdfValue}";
+            string path = $"{fileLocation}{docValue}";
             return path;
         }
     }

@@ -186,7 +186,7 @@
                                    asp-action="Index">Panel</a>
                             </li>
 
-                            @if (this.User.IsInRole("Admin"))
+                            @*@if (this.User.IsInRole("Admin"))
                             {
                                 <li class="nav-item active">
                                     <a class="nav-link nav-link-white active"
@@ -194,7 +194,7 @@
                                        asp-controller="Settings"
                                        asp-action="Index">Settings</a>
                                 </li>
-                            }
+                            }*@
 
                             <li class="nav-item">
                                 <a class="nav-link nav-link-white active" asp-area="Identity" asp-page="/Account/Manage/Index">@this.User.Identity.Name</a>
