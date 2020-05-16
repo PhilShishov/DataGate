@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    public interface IEntityDetailsService
+    public interface IEntityDetailsService : IContainerService, ICustomException
     {
         IEnumerable<string[]> GetByIdAndDate(int id, DateTime? date);
 

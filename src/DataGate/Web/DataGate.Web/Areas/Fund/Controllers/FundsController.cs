@@ -31,11 +31,11 @@
         }
 
         [HttpPost]
-        public IActionResult All([Bind("Date,Values,Headers,HeadersSelection,IsActive,PreSelectedColumns,SelectedColumns,SelectTerm")] EntitiesViewModel model)
+        public IActionResult All([Bind("Date,Values,Headers,IsActive,PreSelectedColumns,SelectedColumns,SelectTerm")] EntitiesViewModel model)
         {
             EntitiesVMSetup.SetPost(model, this.service);
 
-            if (model.Values != null)
+            if (model.Values != null && model.Values.Count > 0)
             {
                 this.TempData[GlobalConstants.InfoKey] = InfoMessages.SuccessfulUpdate;
                 return this.View(model);

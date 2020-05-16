@@ -12,19 +12,36 @@
 
     public class SubEntitiesVMSetup
     {
-        public static async Task<T> SetGet<T>(int id, string chosenDate, ISubEntitiesService service)
+        public static async Task<T> SetLoadedGet<T>(int id, string chosenDate, string container, ISubEntitiesService service)
         {
             var date = DateTimeParser.WebFormat(chosenDate);
+            var entities = await service.GetSubEntities(id, date).ToListAsync();
+
+            var dto = new EntitySubEntitiesGetDto()
+            {
+                Id = id,
+                Date = chosenDate,
+                Container = container,
+                Entities = entities,
+            };
+
+            return AutoMapperConfig.MapperInstance.Map<T>(dto);
+        }
+
+        public static async Task<T> SetGet<T>(int id, string chosenDate, string container, ISubEntitiesService service)
+        {
+            var date = DateTimeParser.WebFormat(chosenDate);
+            var values = await service.GetSubEntities(id, date, null, 1).ToListAsync();
             var headers = await service.GetSubEntities(id, date).FirstOrDefaultAsync();
-            var values = await service.GetSubEntities(id, date).ToListAsync();
 
             var dto = new SubEntitiesGetDto()
             {
                 Id = id,
                 Date = chosenDate,
-                Headers = headers.ToList(),
-                HeadersSelection = headers.ToList(),
+                Container = container,
                 Values = values,
+                Headers = headers,
+                HeadersSelection = headers,
             };
 
             return AutoMapperConfig.MapperInstance.Map<T>(dto);
@@ -43,8 +60,9 @@
             {
                 var dto = AutoMapperConfig.MapperInstance.Map<GetWithSelectionDto>(model);
 
-                model.Values = service.GetSubEntitiesSelected(dto).ToList();
-                model.Headers = service.GetSubEntitiesSelected(dto).FirstOrDefault().ToList();
+                model.Values = await service.GetSubEntitiesSelected(dto, null, 1).ToListAsync();
+                headers = await service.GetSubEntitiesSelected(dto).FirstOrDefaultAsync();
+                model.Headers = headers.ToList();
             }
             else if (!isInSelectionMode)
             {

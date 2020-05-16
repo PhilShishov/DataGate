@@ -28,7 +28,6 @@ namespace DataGate.Web.ViewModels.Entities
         // data from DB for a specific entity
         public IEnumerable<string[]> Entity { get; set; }
 
-        // TODO create ContainerViewModel
         public string Container { get; set; }
 
         public string ContainerId { get; set; }

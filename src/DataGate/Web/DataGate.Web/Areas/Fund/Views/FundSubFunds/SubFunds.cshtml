@@ -1,24 +1,28 @@
 ﻿@using DataGate.Common
-@model DataGate.Web.ViewModels.Entities.EntitiesViewModel
+@model DataGate.Web.ViewModels.Entities.SubEntitiesViewModel
 
 @{
-    ViewData["Title"] = GlobalConstants.FundsControllerName;
+    ViewData["Title"] = "Sub Funds";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="justify-content-between">
-    <form asp-controller="Funds"
-          asp-action="All"
+    <form asp-controller="FundSubFunds"
+          asp-action="SubFunds"
           method="post"
           id="update-form">
+
+        <input asp-for="Date" type="hidden">
+        <input asp-for="Id" type="hidden">
+        <input asp-for="Container" type="hidden">
+
         <div>
             <div>
                 <hr class="mt-0 mb-auto" />
                 <div class="w-100" id="toolbar-pharus">
-                    <partial name="AllEntities/_Select" />
-                    <partial name="AllEntities/_Update" />
-                    <partial name="AllEntities/_Extract" />
+                    <partial name="SubEntities/_Select" />
+                    <partial name="SubEntities/_Extract" />
                     <div class="justify-content-center w-35">
-                        <h2 class="text-center text-torshia" id="entityName">All Funds</h2>
+                        <h2 class="text-center text-torshia" id="entityName">@Model.Container Sub Funds</h2>
                     </div>
                 </div>
                 <hr class="mt-1 mb-0" />
@@ -38,15 +42,14 @@
                 </div>
             }
 
-            <partial name="AllEntities/_Modal" />
-            <partial name="AllEntities/_BindingTable" />
-            <partial name="AllEntities/_ViewTable" />
+            <partial name="SubEntities/_Modal" />
+            <partial name="SubEntities/_BindingTable" />
+            <partial name="SubEntities/_ViewTable" />
         </div>
     </form>
 </div>
 
 @section Scripts{
-    <script type="text/javascript" src="~/js/submitForm.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/buttonRedirect.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/setTable.js" asp-append-version="true"></script>
 
@@ -54,8 +57,6 @@
         window.onload = () => {
             manageSideNavBar();
             manageDropdowns();
-            submitForm();
-            buttonRedirect();
             setTableValues();
         }
 
@@ -75,8 +76,9 @@
             // ________________________________________________________
             //
             // Autocomplete search
-            const controller = '@GlobalConstants.FundsControllerName';
-            loadAutocomplete(token, controller, entityId = null);
+            const controller = '@GlobalConstants.FundSubFundsControllerName';
+            const entityId = @Model.Id;
+            loadAutocomplete(token, controller, entityId);
 
             // ________________________________________________________
             //

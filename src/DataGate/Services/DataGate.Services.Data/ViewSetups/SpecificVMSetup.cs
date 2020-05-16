@@ -4,11 +4,10 @@
     using System.Linq;
 
     using DataGate.Common;
-    using DataGate.Services.Data.Funds.Contracts;
+    using DataGate.Services.Data.Common;
     using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
     using DataGate.Web.ViewModels.Documents;
-    using DataGate.Web.ViewModels.Entities;
     using DataGate.Web.ViewModels.Queries;
 
     public class SpecificVMSetup
@@ -16,7 +15,7 @@
         private const int IndexStartConnectionInSQLTable = 0;
         private const int IndexEndConnectionInSQLTable = 1;
 
-        public static T SetGet<T>(int id, string date, IFundDetailsService service)
+        public static T SetGet<T>(int id, string date, IEntityDetailsService service)
         {
             service.ThrowEntityNotFoundExceptionIfIdDoesNotExist(id);
 
@@ -44,6 +43,12 @@
                 DistinctDocuments = distinctDocs,
                 DistinctAgreements = distinctAgrs,
             };
+
+            if (service.GetType().Name != "FundDetailsService")
+            {
+                //dto.Container = service.GetContainer(id, dateParsed);
+                //dto.ContainerId = service.GetContainer(id, dateParsed);
+            }
 
             return AutoMapperConfig.MapperInstance.Map<T>(dto);
         }

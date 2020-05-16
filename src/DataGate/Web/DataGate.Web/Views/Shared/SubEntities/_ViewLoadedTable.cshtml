@@ -1,0 +1,68 @@
+﻿@using DataGate.Common
+@model DataGate.Web.ViewModels.Entities.EntitySubEntitiesViewModel
+
+@{
+    var controller = this.ViewContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
+    var targetRoute = string.Empty;
+    var subEntitiesRoute = string.Empty;
+
+    if (controller == GlobalConstants.FundSubFundsControllerName)
+    {
+        //targetRoute = "subFunds";
+        subEntitiesRoute = "fundSubFunds";
+    }
+}
+
+<div class="table-responsive border-0 mx-auto" id="tableDoubleScroll">
+
+    <div>
+        <a class="btn btn-primary btn-sm" 
+           asp-route="@subEntitiesRoute" 
+           asp-route-id="@Model.Id" 
+           asp-route-date="@Model.Date"
+           asp-route-container="@Model.Container">
+            Advanced Selection
+        </a>
+    </div>
+
+    <table class="table table-hover text-nowrap">
+        <thead>
+            <tr>
+                @for (int row = 0; row < GlobalConstants.RowNumberOfHeadersInTable; row++)
+                {
+                    for (int col = 0; col < Model.Entities[row].Length; col++)
+                    {
+                        <th class="text-white pr-3 tableHeaderPharus">
+                            @Model.Entities[row][col]
+                        </th>
+                    }
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @for (int row = GlobalConstants.RowNumberOfHeadersInTable; row < Model.Entities.Count; row++)
+            {
+                var entityId = @Model.Entities[row][GlobalConstants.IndexEntityIdInTable];
+                <tr>
+                    @for (int col = 0; col < Model.Entities[row].Length; col++)
+                    {
+                        if (Model.Entities[0][col].Contains("NAME"))
+                        {
+                            <td class="p-1 tableCellPharus">
+                                <a class="text-dark" asp-route="@targetRoute" asp-route-id="@entityId" asp-route-date="@Model.Date">
+                                    @Model.Entities[row][col]
+                                </a>
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="p-1">
+                                @Model.Entities[row][col]
+                            </td>
+                        }
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

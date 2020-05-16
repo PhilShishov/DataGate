@@ -18,12 +18,12 @@
 
         public List<string> HeadersSelection { get; set; }
 
-        public string SearchTerm { get; set; }
-
         public IReadOnlyCollection<string> PreSelectedColumns { get; set; }
 
         public IEnumerable<string> SelectedColumns { get; set; }
 
         public string SelectTerm { get; set; }
+
+        public string Container { get; set; }
     }
 }
