@@ -1,7 +1,23 @@
-﻿@model DataGate.Web.ViewModels.Entities.SubEntitiesViewModel
+﻿@using DataGate.Common
+@model DataGate.Web.ViewModels.Entities.SubEntitiesViewModel
+
+@{
+    var controller = this.ViewContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
+    var targetRoute = string.Empty;
+
+    if (controller == GlobalConstants.FundSubFundsControllerName)
+    {
+        targetRoute = "fundDetails";
+    }
+}
 
 <div class="w-30">
     <div class="d-flex h-70">
+        <div>
+            <a class="btn btn-primary btn-sm mr-2" asp-route="@targetRoute" asp-route-id="@Model.Id" asp-route-date="@Model.Date">
+                Back to Container
+            </a>
+        </div>
         <div class="select-div-pharus">
             <select asp-for="SelectTerm"
                     id="SelectTerm"
@@ -20,7 +36,6 @@
                 Column Choice
             </button>
         </div>
-
         <div>
             <input type="submit"
                    asp-for="Command"

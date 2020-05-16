@@ -11,6 +11,10 @@
 
         public string Date { get; set; }
 
+        public int ContainerId { get; set; }
+
+        public string Container { get; set; }
+
         public IEnumerable<string[]> Entity { get; set; }
 
         public DateTime StartConnection { get; set; }

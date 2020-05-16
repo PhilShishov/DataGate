@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     using DataGate.Common.Exceptions;
     using DataGate.Data.Common.Repositories;
@@ -43,6 +44,11 @@
         public IEnumerable<string[]> GetByIdAndDate(int id, DateTime? date)
         {
             return this.sqlManager.ExecuteQuery(this.sqlFunctionFundId, date, id);
+        }
+
+        public Task<string> GetContainer(int id, DateTime? date)
+        {
+            throw new NotImplementedException();
         }
 
         public IEnumerable<T> GetDistinctDocuments<T>(int id, DateTime? date)

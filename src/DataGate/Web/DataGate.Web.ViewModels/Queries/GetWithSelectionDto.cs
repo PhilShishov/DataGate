@@ -6,7 +6,7 @@ namespace DataGate.Web.ViewModels.Queries
     using DataGate.Services.Mapping;
     using DataGate.Web.ViewModels.Entities;
 
-    public class GetWithSelectionDto : IMapFrom<EntitiesViewModel>
+    public class GetWithSelectionDto : IMapFrom<EntitiesViewModel>, IMapFrom<SubEntitiesViewModel>
     {
         public int Id { get; set; }
 

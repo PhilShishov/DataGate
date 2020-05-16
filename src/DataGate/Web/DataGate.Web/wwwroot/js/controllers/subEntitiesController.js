@@ -1,4 +1,4 @@
-﻿function loadAddInfo(token, id, date, areaName, url) {
+﻿function loadAddInfo(token, id, date, areaName, container, url) {
     // ________________________________________________________
     //
     // Select menu for fund additional information -
@@ -32,6 +32,7 @@
         const dropdownvalue = $('#fundAdditionalInfSelect option:selected').val();
         const json = { id: id, areaName: areaName };
         const fullJson = { id: id, date: date, areaName: areaName };
+        const subEntitiesJson = { id: id, date: date, container: container };
 
         $(this).find('[selected]').removeAttr('selected')
         $(this).find(':selected').attr('selected', 'selected')
@@ -44,7 +45,7 @@
             $.ajax({
                 url: url,
                 type: 'GET',
-                data: fullJson,
+                data: subEntitiesJson,
                 contentType: 'application/json; charset=utf-8',
                 headers: { 'X-CSRF-TOKEN': token },
                 success: function (response) {

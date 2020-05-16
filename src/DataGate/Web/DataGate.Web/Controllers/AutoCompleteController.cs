@@ -44,10 +44,10 @@
                     result = await AutoCompleteService.GetResult(input.SelectTerm, this.fundsService);
                 }
 
-                var modifiedData = result.Select(f => new
+                var modifiedData = result.Select(fund => new
                 {
-                    id = f,
-                    text = f,
+                    id = fund,
+                    text = fund,
                 });
 
                 return this.Json(modifiedData);
@@ -62,10 +62,10 @@
                 result = await AutoCompleteService.GetResult(input.SelectTerm, this.fundSubFundservice, input.Id);
             }
 
-            var modifiedDataId = result.Select(f => new
+            var modifiedDataId = result.Select(fund => new
             {
-                id = f,
-                text = f,
+                id = fund,
+                text = fund,
             });
 
             return this.Json(modifiedDataId);

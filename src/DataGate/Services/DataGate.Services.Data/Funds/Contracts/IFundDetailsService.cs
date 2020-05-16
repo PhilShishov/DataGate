@@ -2,7 +2,7 @@
 {
     using DataGate.Services.Data.Common;
 
-    public interface IFundDetailsService : IEntityDetailsService, ICustomException
+    public interface IFundDetailsService : IEntityDetailsService
     {
     }
 }

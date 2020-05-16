@@ -4,6 +4,7 @@
 @{
     ViewData["Title"] = GlobalConstants.FundsControllerName;
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var entityName = @Model.Entity.ToList()[1][GlobalConstants.IndexEntityNameInTable];
     var controller = this.ViewContext.RouteData.Values["controller"].ToString();
     var area = string.Empty;
     var route = string.Empty;
@@ -132,13 +133,8 @@
 
 @section Scripts{
     @await Html.PartialAsync("_ValidationScriptsPartial")
-    @*<script type="text/javascript" src="~/js/delete/deleteAgreement.js" asp-append-version="true"></script>*@
     <script type="text/javascript" src="~/js/loadUploadModals.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/controllers/subEntitiesController.js" asp-append-version="true"></script>
-
-    <script type="text/javascript" src="~/js/multiselect.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="~/js/double-scroll/jquery.doubleScroll.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="~/js/autocomplete/loadAutocomplete.js" asp-append-version="true"></script>
 
     <script>
         window.onload = () => {
@@ -163,6 +159,7 @@
             const entityId = @Model.Id;
             const date = '@Model.Date';
             const url = '/loadSubFunds';
+            const container = '@entityName';
 
             // ________________________________________________________
             //
@@ -172,9 +169,9 @@
 
             // ________________________________________________________
             //
-            // Load all documents, agreements and timelines
+            // Load sub funds, documents, agreements and timelines
 
-            loadAddInfo(token, entityId, date, area, url);
+            loadAddInfo(token, entityId, date, area, container, url);
 
             // ________________________________________________________
             //

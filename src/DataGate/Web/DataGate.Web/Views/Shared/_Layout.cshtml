@@ -153,7 +153,6 @@
                     </div>
                 </div>
 
-
                 <button class="navbar-toggler ml-auto"
                         type="button"
                         data-toggle="collapse"
@@ -187,14 +186,14 @@
                             </li>
 
                             @*@if (this.User.IsInRole("Admin"))
-                            {
-                                <li class="nav-item active">
-                                    <a class="nav-link nav-link-white active"
-                                       asp-area=""
-                                       asp-controller="Settings"
-                                       asp-action="Index">Settings</a>
-                                </li>
-                            }*@
+                                {
+                                    <li class="nav-item active">
+                                        <a class="nav-link nav-link-white active"
+                                           asp-area=""
+                                           asp-controller="Settings"
+                                           asp-action="Index">Settings</a>
+                                    </li>
+                                }*@
 
                             <li class="nav-item">
                                 <a class="nav-link nav-link-white active" asp-area="Identity" asp-page="/Account/Manage/Index">@this.User.Identity.Name</a>
@@ -229,21 +228,24 @@
         </main>
     }
 
-    <environment include="Development">
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-                integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-                crossorigin="anonymous"></script>
+<environment include="Development">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
 
-        <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
-        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
-        <script src="~/lib/select2/dist/js/select2.min.js" asp-append-version="true"></script>
-        <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" asp-append-version="true"></script>
-        <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
+    <script src="~/lib/select2/dist/js/select2.min.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
 
-        <script type="text/javascript" src="~/js/manageSideNavBar.js" asp-append-version="true"></script>
-        <script type="text/javascript" src="~/js/manageDropdowns.js" asp-append-version="true"></script>
-    </environment>
+    <script type="text/javascript" src="~/js/manageSideNavBar.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/manageDropdowns.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/multiselect.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/autocomplete/loadAutocomplete.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/double-scroll/jquery.doubleScroll.js" asp-append-version="true"></script>
+</environment>
 
     @this.RenderSection("Scripts", required: false)
 </body>

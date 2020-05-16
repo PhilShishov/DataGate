@@ -3,6 +3,7 @@
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
+
     using DataGate.Common;
     using DataGate.Services.Data.Files.Contracts;
     using DataGate.Services.DateTime;
@@ -32,7 +33,7 @@
         [HttpPost]
         public IActionResult Download(DownloadInputModel model)
         {
-            if (model.Values != null)
+            if (model.Values != null && model.Values.Count > 0)
             {
                 if (model.Command == GlobalConstants.CommandExtractExcel)
                 {
@@ -84,14 +85,15 @@
 
                 if (System.IO.File.Exists(path))
                 {
-                    if (string.IsNullOrEmpty(docValue))
-                    {
-                        await this.service.DeleteAgreement(agrValue, areaName);
-                    }
-                    else
+                    if (string.IsNullOrEmpty(agrValue))
                     {
                         await this.service.DeleteDocument(docValue, areaName);
                     }
+                    else
+                    {
+                        await this.service.DeleteAgreement(agrValue, areaName);
+                    }
+
                     System.IO.File.Delete(path);
                     return this.Json(new { data = Path.GetFileNameWithoutExtension(docValue) });
                 }

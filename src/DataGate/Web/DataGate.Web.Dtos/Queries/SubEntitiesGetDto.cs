@@ -13,5 +13,7 @@ namespace DataGate.Web.Dtos.Queries
         public IEnumerable<string> Headers { get; set; }
 
         public IEnumerable<string> HeadersSelection { get; set; }
+
+        public string Container { get; set; }
     }
 }
