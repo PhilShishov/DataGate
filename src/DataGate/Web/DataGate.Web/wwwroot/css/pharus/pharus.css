@@ -7,6 +7,10 @@
     cursor: pointer;
 }
 
+/*.push {
+    margin-top: 3.6%;
+}*/
+
 td.tableCellPharus:hover {
     background-color: deepskyblue;
     text-decoration: underline;

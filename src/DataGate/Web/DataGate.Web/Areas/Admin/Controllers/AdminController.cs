@@ -18,8 +18,8 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
 
-    [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     [Area("Admin")]
+    [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     public class AdminController : BaseController
     {
         private const string EmailConfirmationUrl = "/Account/ConfirmEmail";

@@ -13,6 +13,10 @@
         margin-top: 3.3%;
     }
 
+    .push {
+        margin-top: 3.6%;
+    }
+
     #infoAndDocumentsView {
         display: flex;
     }
@@ -146,6 +150,14 @@
 
     #canvas-aum-pharus {
         display: none;
+    }
+
+    .mobile-none {
+        display: none;
+    }
+
+    .push-mobile {
+        margin-top: 16.6%;
     }
 
     #div-select-addInfo {
