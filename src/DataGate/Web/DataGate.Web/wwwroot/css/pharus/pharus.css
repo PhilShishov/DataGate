@@ -7,9 +7,13 @@
     cursor: pointer;
 }
 
-/*.push {
-    margin-top: 3.6%;
-}*/
+.inactive-entity {
+    opacity: 0.5;
+}
+
+    .inactive-entity:hover {
+        opacity: 1;
+    }
 
 td.tableCellPharus:hover {
     background-color: deepskyblue;
