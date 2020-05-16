@@ -3,7 +3,6 @@
 <div hidden>
     <table class="table">
         <tr>
-
             @for (int header = 0; header < Model.Headers.Count; header++)
             {
                 <th>
@@ -11,8 +10,6 @@
                 </th>
             }
         </tr>
-    </table>
-    <table class="table">
         @for (int row = 0; row < Model.Values.Count; row++)
         {
             <tr>
@@ -26,4 +23,5 @@
         }
     </table>
 </div>
+
 
