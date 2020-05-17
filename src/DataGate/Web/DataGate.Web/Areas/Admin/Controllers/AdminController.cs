@@ -23,7 +23,7 @@
     public class AdminController : BaseController
     {
         private const string EmailConfirmationUrl = "/Account/ConfirmEmail";
-        private const string ViewUsersUrl = "/Administration/Admin/ViewUsers";
+        private const string ViewUsersUrl = "/Admin/Admin/ViewUsers";
         private readonly RoleManager<ApplicationRole> roleManager;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ILogger<CreateUserInputModel> logger;
@@ -122,7 +122,7 @@
             return this.View(usersViewList);
         }
 
-        [HttpGet("/Administration/Admin/EditUser/{id}")]
+        [HttpGet("/Admin/Admin/EditUser/{id}")]
         public async Task<IActionResult> EditUser(string id)
         {
             var user = await this.userManager.FindByIdAsync(id);

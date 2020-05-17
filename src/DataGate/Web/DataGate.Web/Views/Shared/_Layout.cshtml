@@ -14,9 +14,7 @@
         <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
         <link type="text/css" rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" asp-append-version="true" />
         <link type="text/css" rel="stylesheet" href="~/lib/select2/dist/css/select2.min.css" asp-append-version="true">
-
         <link type="text/css" rel="stylesheet" href="~/lib/jqueryui/themes/base/jquery-ui.min.css" asp-append-version="true">
-
         <link type="text/css" rel="stylesheet" href="~/lib/jqueryui/themes/smoothness/jquery-ui.min.css" asp-append-version="true" />
 
         <link type="text/css" rel="stylesheet" href="~/css/pharus/pharus.css" asp-append-version="true" />
@@ -206,7 +204,7 @@
                                 }*@
 
                             <li class="nav-item">
-                                <a class="nav-link nav-link-white active" asp-area="Identity" asp-page="/Account/Manage/Index">@this.User.Identity.Name</a>
+                                <a class="nav-link nav-link-white active" asp-area="Identity" asp-page="/Account/Manage/Email">@this.User.Identity.Name</a>
                             </li>
 
                             <li class="nav-item">
@@ -231,22 +229,19 @@
     }
 
 <environment include="Development">
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-            crossorigin="anonymous"></script>
-
+    <script src="~/lib/popperjs/umd/popper.min.js" asp-append-version="true"></script>
     <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
     <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
     <script src="~/lib/select2/dist/js/select2.min.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="~/lib/jqueryui/jquery-ui.min.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+    <script src="~/lib/jqueryui/jquery-ui.min.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
 
-    <script type="text/javascript" src="~/js/manageSideNavBar.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="~/js/manageDropdowns.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="~/js/multiselect.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="~/js/autocomplete/loadAutocomplete.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="~/js/double-scroll/jquery.doubleScroll.js" asp-append-version="true"></script>
+    <script src="~/js/manageSideNavBar.js" asp-append-version="true"></script>
+    <script src="~/js/manageDropdowns.js" asp-append-version="true"></script>
+    <script src="~/js/multiselect.js" asp-append-version="true"></script>
+    <script src="~/js/autocomplete/loadAutocomplete.js" asp-append-version="true"></script>
+    <script src="~/js/double-scroll/jquery.doubleScroll.js" asp-append-version="true"></script>
 </environment>
 
     @this.RenderSection("Scripts", required: false)

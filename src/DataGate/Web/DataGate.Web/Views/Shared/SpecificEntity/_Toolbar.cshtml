@@ -65,7 +65,7 @@
                    min="2018-01-01">
 
             <input type="submit"
-                   class="btn btn-primary btn-sm"
+                   class="btn btn-pharus btn-sm"
                    asp-for="Command"
                    asp-action="Update"
                    asp-route-id="@Model.Id"
@@ -74,13 +74,13 @@
         </div>
         <div class="mx-2">
             <a asp-route="@routeName"
-               class="btn btn-primary btn-sm mb-2">
+               class="btn btn-pharus btn-sm mb-2">
                 Back to All
             </a>
         </div>
         <div>
             <button type="button"
-                    class="btn btn-primary btn-sm mb-2"
+                    class="btn btn-pharus btn-sm mb-2"
                     id="btn-upload-document"
                     data-toggle="modal"
                     data-target="#upDocModal">
@@ -90,7 +90,7 @@
         <div class="mx-2">
             <button type="button"
                     id="btn-upload-agreement"
-                    class="btn btn-primary btn-sm mb-2"
+                    class="btn btn-pharus btn-sm mb-2"
                     data-toggle="modal"
                     data-target="#upAgrModal">
                 Upload Agreement
@@ -104,7 +104,7 @@
                    asp-route="@targetEditRoute"
                    asp-route-id="@Model.Id"
                    asp-route-date="@Model.Date"
-                   class="btn btn-primary btn-sm mb-2">
+                   class="btn btn-pharus btn-sm mb-2">
                     Edit @entityName
                 </a>
             </div>

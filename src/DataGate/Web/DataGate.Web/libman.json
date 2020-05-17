@@ -56,7 +56,21 @@
         "themes/base/jquery-ui.css",
         "themes/base/jquery-ui.min.css",
         "themes/smoothness/jquery-ui.min.css",
-        "themes/smoothness/jquery-ui.css"
+        "themes/smoothness/jquery-ui.css",
+        "themes/smoothness/images/ui-bg_glass_75_e6e6e6_1x400.png",
+        "themes/smoothness/images/ui-bg_glass_75_dadada_1x400.png",
+        "themes/smoothness/images/ui-icons_222222_256x240.png",
+        "themes/smoothness/images/ui-icons_454545_256x240.png",
+        "themes/smoothness/images/ui-bg_highlight-soft_75_cccccc_1x100.png",
+        "themes/smoothness/images/ui-bg_glass_55_fbf9ee_1x400.png"
+      ]
+    },
+    {
+      "provider": "cdnjs",
+      "library": "popper.js@1.16.1",
+      "destination": "wwwroot/lib/popperjs/",
+      "files": [
+        "umd/popper.min.js"
       ]
     },
     {
