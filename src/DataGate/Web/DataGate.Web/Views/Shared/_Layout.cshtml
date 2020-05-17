@@ -125,9 +125,10 @@
                                         </a>
                                     </li>
 
-                                    <li class="li-bordered">
-                                        &copy;  @DateTime.Now.Year @GlobalConstants.DataGateFooterDisplay
-                                        <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                                    <li class="mt-3 text-color-grey-pharus text-center">
+                                        <div>
+                                            &copy;  @DateTime.Now.Year @GlobalConstants.DataGateFooterDisplay
+                                        </div>
                                     </li>
                                 </ul>
 
@@ -219,14 +220,6 @@
                 @RenderBody()
             </div>
         </main>
-        @*<footer>
-                <div class="bg-pharus footer-pharus">
-                    <div class="text-white text-center">
-                        &copy;  @DateTime.Now.Year @GlobalConstants.DataGateFooterDisplay
-                        <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                    </div>
-                </div>
-            </footer>*@
     }
     else
     {
