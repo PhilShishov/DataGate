@@ -18,7 +18,10 @@
             <tr>
                 @foreach (var header in Model.Headers)
                 {
-                    <th class="text-white pr-3 tableHeaderPharus">
+                    <th class="text-white pr-3 tableHeaderPharus help"
+                        data-toggle="tooltip"
+                        data-placement="bottom"
+                        title="@header">
                         @header
                     </th>
                 }
@@ -64,4 +67,15 @@
             }
         }
     }
+
+    // ________________________________________________________
+    //
+    // Additional information about headers
+    $(document).ready(function () {
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip({
+                html: true
+            })
+        })
+    });
 </script>
