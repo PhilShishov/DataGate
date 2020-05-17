@@ -6,6 +6,13 @@
 *
 */
 
+#sidenav-footer {
+    position: fixed;
+    margin-left: 0.5%;
+    top: 96%;
+    display: none;
+}
+
 .li-bordered {
     border-bottom: 1px solid;
     border-color: #dee2e6;

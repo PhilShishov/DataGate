@@ -1,15 +1,24 @@
 ﻿function manageSideNavBar() {
-    const sideNavIcon = document.getElementById("sideNavIcon");
-    sideNavIcon.addEventListener('click', openNav);
+    const sideNavIcon = document.getElementById('sideNavIcon');
+    const sideNavFooter = document.getElementById('sidenav-footer');
+    sideNavIcon.addEventListener('click', toggleSideNavMenu);
 
-    const closebtn = document.getElementById("closeBtn");
+    const closebtn = document.getElementById('closeBtn');
     closebtn.addEventListener('click', closeNav);
 
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
+    function toggleSideNavMenu() {
+        navMenuStatus = document.getElementById('mySidenav').style.width;
+        if (navMenuStatus == '0px') {
+            document.getElementById('mySidenav').style.width = '250px';
+            sideNavFooter.style.display = 'block';
+        } else {
+            document.getElementById('mySidenav').style.width = '0px';
+            sideNavFooter.style.display = 'none';
+        }
     }
 
     function closeNav() {
-        document.getElementById("mySidenav").style.width = '0px';
+        document.getElementById('mySidenav').style.width = '0px';
+        sideNavFooter.style.display = 'none';
     }
 }

@@ -32,7 +32,10 @@
                 {
                     for (int col = 0; col < Model.Entities[row].Length; col++)
                     {
-                        <th class="text-white pr-3 tableHeaderPharus">
+                        <th class="text-white pr-3 tableHeaderPharus help"
+                            data-toggle="tooltip"
+                            data-placement="bottom"
+                            title="@Model.Entities[row][col]">
                             @Model.Entities[row][col]
                         </th>
                     }
