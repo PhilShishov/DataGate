@@ -13,6 +13,10 @@
         margin-top: 3.3%;
     }
 
+    .sidenav {
+        top: 6.3%;
+    }
+
     .push {
         margin-top: 3.6%;
     }
@@ -150,6 +154,10 @@
 
     #canvas-aum-pharus {
         display: none;
+    }
+
+    .sidenav {
+        top: 9.2%;
     }
 
     .mobile-none {
