@@ -4,7 +4,8 @@
     {
         // Application Constants
         public const string SystemName = "DataGate";
-        public const string DataGateFooterDisplay = "- Pharus Management Lux SA 16, Avenue de la Gare L- 1610 Luxembourg T. +352 28 55 69 - 1";
+        public const string DataGateFullFooterDisplay = "- Pharus Management Lux SA 16, Avenue de la Gare L- 1610 Luxembourg T. +352 28 55 69 - 1";
+        public const string DataGateFooterDisplay = "- Pharus Management Lux SA";
         public const string FileSizeLimitConfiguration = "FileSizeLimit";
         public const int MaxAdminCount = 3;
 
