@@ -72,6 +72,7 @@
                                         </button>
                                         <div id="myDropdown" class="dropdown-container">
                                             <a class="dropdown-item font-weight-light"
+                                               asp-area="Fund"
                                                asp-route="allFunds">
                                                 List
                                             </a>
@@ -125,7 +126,7 @@
                                         </a>
                                     </li>
 
-                                    <li class="mt-3 text-color-grey-pharus text-center">
+                                    <li class="mt-3 text-color-grey-pharus text-center" id="sidenav-footer">
                                         <div>
                                             &copy;  @DateTime.Now.Year @GlobalConstants.DataGateFooterDisplay
                                         </div>
@@ -228,21 +229,21 @@
         </main>
     }
 
-<environment include="Development">
-    <script src="~/lib/popperjs/umd/popper.min.js" asp-append-version="true"></script>
-    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
-    <script src="~/lib/select2/dist/js/select2.min.js" asp-append-version="true"></script>
-    <script src="~/lib/jqueryui/jquery-ui.min.js" asp-append-version="true"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+    <environment include="Development">
+        <script src="~/lib/popperjs/umd/popper.min.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
+        <script src="~/lib/select2/dist/js/select2.min.js" asp-append-version="true"></script>
+        <script src="~/lib/jqueryui/jquery-ui.min.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
 
-    <script src="~/js/manageSideNavBar.js" asp-append-version="true"></script>
-    <script src="~/js/manageDropdowns.js" asp-append-version="true"></script>
-    <script src="~/js/multiselect.js" asp-append-version="true"></script>
-    <script src="~/js/autocomplete/loadAutocomplete.js" asp-append-version="true"></script>
-    <script src="~/js/double-scroll/jquery.doubleScroll.js" asp-append-version="true"></script>
-</environment>
+        <script src="~/js/manageSideNavBar.js" asp-append-version="true"></script>
+        <script src="~/js/manageDropdowns.js" asp-append-version="true"></script>
+        <script src="~/js/multiselect.js" asp-append-version="true"></script>
+        <script src="~/js/autocomplete/loadAutocomplete.js" asp-append-version="true"></script>
+        <script src="~/js/double-scroll/jquery.doubleScroll.js" asp-append-version="true"></script>
+    </environment>
 
     @this.RenderSection("Scripts", required: false)
 </body>
