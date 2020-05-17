@@ -39,7 +39,7 @@
                 }
             </tr>
         </thead>
-        <tbody>
+        <tbody id="tbody-entities">
             @for (int row = GlobalConstants.RowNumberOfHeadersInTable; row < Model.Entities.Count; row++)
             {
                 var entityId = @Model.Entities[row][GlobalConstants.IndexEntityIdInTable];
@@ -66,3 +66,16 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    const rows = document.getElementById('tbody-entities').getElementsByTagName('tr');
+
+    for (var row of rows) {
+        const cells = row.getElementsByTagName('td');
+        for (var cell of cells) {
+            if (cell.textContent.includes('Inactive')) {
+                row.classList.add('inactive-entity');
+            }
+        }
+    }
+</script>
