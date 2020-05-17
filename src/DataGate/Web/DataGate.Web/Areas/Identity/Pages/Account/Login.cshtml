@@ -2,11 +2,11 @@
 @model LoginModel
 
 @{
-    ViewData["Title"] = "Log in";
+    ViewData["Title"] = "Login";
 }
 <section class="fxt-template-layout2">
+    <partial name="_CookieConsentPartial" />
     <div class="container-fluid custom-container">
-        <partial name="_CookieConsentPartial" />
         <div class="row">
             <div class="col-xl-4 col-lg-6 col-12 fxt-bg-color">
                 <div class="fxt-content">
@@ -59,7 +59,7 @@
                                             class="fxt-btn-fill"
                                             asp-area="Identity"
                                             asp-page="/Account/Login">
-                                        Log in
+                                        Login
                                     </button>
                                 </div>
                             </div>
@@ -78,7 +78,6 @@
                         <div>
                             <a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
                         </div>
-
                     </div>
                 </div>
             </div>
