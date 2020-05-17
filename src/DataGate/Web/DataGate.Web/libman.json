@@ -48,6 +48,19 @@
     },
     {
       "provider": "cdnjs",
+      "library": "jqueryui@1.12.1",
+      "destination": "wwwroot/lib/jqueryui/",
+      "files": [
+        "jquery-ui.min.js",
+        "jquery-ui.js",
+        "themes/base/jquery-ui.css",
+        "themes/base/jquery-ui.min.css",
+        "themes/smoothness/jquery-ui.min.css",
+        "themes/smoothness/jquery-ui.css"
+      ]
+    },
+    {
+      "provider": "cdnjs",
       "library": "font-awesome@5.13.0",
       "destination": "wwwroot/lib/font-awesome/",
       "files": [
@@ -60,7 +73,12 @@
         "webfonts/fa-brands-400.svg",
         "webfonts/fa-brands-400.ttf",
         "webfonts/fa-brands-400.woff",
-        "webfonts/fa-brands-400.woff2"
+        "webfonts/fa-brands-400.woff2",
+        "webfonts/fa-solid-900.eot",
+        "webfonts/fa-solid-900.svg",
+        "webfonts/fa-solid-900.ttf",
+        "webfonts/fa-solid-900.woff",
+        "webfonts/fa-solid-900.woff2"
       ]
     }
   ]
