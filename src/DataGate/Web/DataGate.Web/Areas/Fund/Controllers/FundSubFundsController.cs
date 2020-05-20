@@ -15,7 +15,6 @@
     [Authorize]
     public class FundSubFundsController : BaseController
     {
-        private readonly IFundDetailsService fundService;
         private readonly IFundSubFundsService subFundsService;
 
         public FundSubFundsController(IFundSubFundsService subFundsService)
@@ -27,40 +26,40 @@
         [Route("loadSubFunds")]
         public async Task<IActionResult> LoadedSubFunds(int id, string date, string container)
         {
-            var model = await SubEntitiesVMSetup.SetLoadedGet<EntitySubEntitiesViewModel>(id, date, container, this.subFundsService);
+            var viewModel = await SubEntitiesVMSetup.SetLoadedGet<EntitySubEntitiesViewModel>(id, date, container, this.subFundsService);
 
-            return this.PartialView("SubEntities/_ViewLoadedTable", model);
+            return this.PartialView("SubEntities/_ViewLoadedTable", viewModel);
         }
 
         [HttpGet]
         [Route("f/{id}/sf")]
         public async Task<IActionResult> SubFunds(int id, string date, string container)
         {
-            var model = await SubEntitiesVMSetup.SetGet<SubEntitiesViewModel>(id, date, container, this.subFundsService);
+            var viewModel = await SubEntitiesVMSetup.SetGet<SubEntitiesViewModel>(id, date, container, this.subFundsService);
 
-            return this.View(model);
+            return this.View(viewModel);
         }
 
         [HttpPost]
         [Route("f/{id}/sf")]
         public async Task<IActionResult> SubFunds([Bind("Id, Command, Container, Date,Values,Headers,PreSelectedColumns,SelectedColumns,SelectTerm")]
-                                                   SubEntitiesViewModel model)
+                                                   SubEntitiesViewModel viewModel)
         {
-            if (model.Command == GlobalConstants.CommandResetTable)
+            if (viewModel.Command == GlobalConstants.CommandResetTable)
             {
-                return this.RedirectToAction("SubFunds", new { model.Id, model.Date, model.Container });
+                return this.RedirectToAction("SubFunds", new { viewModel.Id, viewModel.Date, viewModel.Container });
             }
 
-            await SubEntitiesVMSetup.SetPost(model, this.subFundsService);
+            await SubEntitiesVMSetup.SetPost(viewModel, this.subFundsService);
 
-            if (model.Values != null && model.Values.Count > 0)
+            if (viewModel.Values != null && viewModel.Values.Count > 0)
             {
                 this.TempData[GlobalConstants.InfoKey] = InfoMessages.SuccessfulUpdate;
-                return this.View(model);
+                return this.View(viewModel);
             }
 
             this.TempData[GlobalConstants.ErrorKey] = ErrorMessages.UnsuccessfulUpdate;
-            return this.View(model);
+            return this.View(viewModel);
         }
     }
 }

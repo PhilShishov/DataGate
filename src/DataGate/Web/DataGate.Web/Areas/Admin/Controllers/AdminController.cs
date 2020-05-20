@@ -26,25 +26,19 @@
         private const string ViewUsersUrl = "/Admin/Admin/ViewUsers";
         private readonly RoleManager<ApplicationRole> roleManager;
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly ILogger<CreateUserInputModel> logger;
+        private readonly ILogger<AdminController> logger;
         private readonly IEmailSender emailSender;
 
         public AdminController(
             UserManager<ApplicationUser> userManager,
             RoleManager<ApplicationRole> roleManager,
             IEmailSender emailSender,
-            ILogger<CreateUserInputModel> logger)
+            ILogger<AdminController> logger)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
             this.emailSender = emailSender;
             this.logger = logger;
-        }
-
-        [HttpGet]
-        public IActionResult Index()
-        {
-            return this.View();
         }
 
         [HttpGet]

@@ -10,7 +10,6 @@
 
         public static IServiceCollection ConfigureSession(this IServiceCollection services)
         {
-            services.AddDistributedMemoryCache();
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromDays(SessionIdleTimeout);
