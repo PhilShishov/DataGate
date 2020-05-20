@@ -24,20 +24,20 @@
         [Route("f/{id}/{date}")]
         public IActionResult ByIdAndDate(int id, string date)
         {
-            var model = SpecificVMSetup.SetGet<SpecificEntityViewModel>(id, date, this.service);
+            var viewModel = SpecificVMSetup.SetGet<SpecificEntityViewModel>(id, date, this.service);
 
-            return this.View(model);
+            return this.View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult Update([Bind("Command,Date,Id")] SpecificEntityViewModel model)
+        public IActionResult Update([Bind("Command,Date,Id")] SpecificEntityViewModel viewModel)
         {
-            if (model.Command == GlobalConstants.CommandUpdateTable)
+            if (viewModel.Command == GlobalConstants.CommandUpdateTable)
             {
-                return this.ShowInfo(InfoMessages.SuccessfulUpdate, GlobalConstants.FundDetailsRouteName, new { model.Id, model.Date });
+                return this.ShowInfo(InfoMessages.SuccessfulUpdate, GlobalConstants.FundDetailsRouteName, new { viewModel.Id, viewModel.Date });
             }
 
-            return this.ShowError(ErrorMessages.UnsuccessfulUpdate, GlobalConstants.FundDetailsRouteName, new { model.Id, model.Date });
+            return this.ShowError(ErrorMessages.UnsuccessfulUpdate, GlobalConstants.FundDetailsRouteName, new { viewModel.Id, viewModel.Date });
         }
     }
 }

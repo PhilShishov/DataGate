@@ -25,20 +25,20 @@
         [Route("f/all")]
         public IActionResult All()
         {
-            var model = EntitiesVMSetup.SetGet<EntitiesViewModel>(this.service);
+            var viewModel = EntitiesVMSetup.SetGet<EntitiesViewModel>(this.service);
 
-            return this.View(model);
+            return this.View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult All([Bind("Date,Values,Headers,IsActive,PreSelectedColumns,SelectedColumns,SelectTerm")] EntitiesViewModel model)
+        public IActionResult All([Bind("Date,Values,Headers,IsActive,PreSelectedColumns,SelectedColumns,SelectTerm")] EntitiesViewModel viewModel)
         {
-            EntitiesVMSetup.SetPost(model, this.service);
+            EntitiesVMSetup.SetPost(viewModel, this.service);
 
-            if (model.Values != null && model.Values.Count > 0)
+            if (viewModel.Values != null && viewModel.Values.Count > 0)
             {
                 this.TempData[GlobalConstants.InfoKey] = InfoMessages.SuccessfulUpdate;
-                return this.View(model);
+                return this.View(viewModel);
             }
 
             return this.ShowError(ErrorMessages.TableIsEmpty, GlobalConstants.AllActionName, GlobalConstants.FundsControllerName);

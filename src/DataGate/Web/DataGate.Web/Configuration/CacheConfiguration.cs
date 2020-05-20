@@ -20,11 +20,16 @@
             //    options.TableName = TableName;
             //});
 
-            services.AddMemoryCache();
+            //services.AddDistributedSqlServerCache(options =>
+            //{
+            //    options.ConnectionString = this.configuration.GetConnectionString(GlobalConstants.DataGatevFinaleConnection);
+            //    options.SchemaName = "dbo";
+            //    options.TableName = "CacheRecords";
+            //});
+
+            //services.AddMemoryCache();
             services.AddResponseCaching();
-
             services.Configure<GzipCompressionProviderOptions>(options => options.Level = System.IO.Compression.CompressionLevel.Fastest);
-
             services.AddResponseCompression(options =>
             {
                 options.EnableForHttps = true;
