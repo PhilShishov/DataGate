@@ -25,7 +25,7 @@
                             <td>@role</td>
                         }
                         <td>
-                            <time datetime="@user.LastLogin"> @user.LastLogin</time>
+                            <time datetime="@user.LastLogin.ToString("o")"></time>
                         </td>
                         <td>
                             <a asp-area="Admin"
