@@ -1,5 +1,6 @@
 ﻿namespace DataGate.Web.Areas.Identity.Pages.Account
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -63,7 +64,7 @@
             return this.Redirect(UserIndexUrl);
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(DateTimeOffset dateTime, string returnUrl = null)
         {
             returnUrl = returnUrl ?? this.Url.Content("~/");
 
@@ -77,6 +78,23 @@
                 if (result.Succeeded)
                 {
                     this.logger.LogInformation("User logged in.");
+
+                    var user = await this.userManager.FindByNameAsync(this.Input.Username);
+
+                    if (user == null)
+                    {
+                        return this.NotFound("Unable to load user for update last login.");
+                    }
+
+                    user.LastLoginTime = DateTimeOffset.UtcNow;
+                    var lastLoginResult = await this.userManager.UpdateAsync(user);
+
+                    if (!lastLoginResult.Succeeded)
+                    {
+                        throw new InvalidOperationException($"Unexpected error occurred setting the last login date" +
+                            $" ({lastLoginResult.ToString()}) for user with ID '{user.Id}'.");
+                    }
+
                     return this.Redirect(GlobalConstants.FundAllUrl);
                 }
 
