@@ -24,7 +24,9 @@
                         {
                             <td>@role</td>
                         }
-                        <td>@user.LastLogin</td>
+                        <td>
+                            <time datetime="@user.LastLogin"> @user.LastLogin</time>
+                        </td>
                         <td>
                             <a asp-area="Admin"
                                asp-controller="Admin"
@@ -40,6 +42,8 @@
 </div>
 
 @section Scripts{
+    <script type="text/javascript" src="~/js/moment/time.js" asp-append-version="true"></script>
+
     <script>
         window.onload = () => {
             manageSideNavBar();

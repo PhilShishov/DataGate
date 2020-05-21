@@ -74,6 +74,13 @@
       ]
     },
     {
+      "library": "moment@2.26.0",
+      "destination": "wwwroot/lib/moment/",
+      "files": [
+        "min/moment-with-locales.min.js"
+      ]
+    },
+    {
       "provider": "cdnjs",
       "library": "font-awesome@5.13.0",
       "destination": "wwwroot/lib/font-awesome/",
@@ -97,4 +104,3 @@
     }
   ]
 }
-
