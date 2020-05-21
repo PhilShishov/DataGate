@@ -64,7 +64,7 @@
             return this.Redirect(UserIndexUrl);
         }
 
-        public async Task<IActionResult> OnPostAsync(DateTimeOffset dateTime, string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl = returnUrl ?? this.Url.Content("~/");
 
