@@ -1,5 +1,5 @@
 $(function () {
-    moment.locale("en");
+    moment.locale("de");
     $("time").each(function (i, e) {
         const dateTimeValue = $(e).attr("datetime");
         if (!dateTimeValue) {
@@ -7,7 +7,7 @@ $(function () {
         }
 
         const time = moment.utc(dateTimeValue).local();
-        $(e).html(time.format("llll"));
+        $(e).html(time.format("DD.MM.YYYY HH:mm"));
         $(e).attr("title", $(e).attr("datetime"));
     });
 });

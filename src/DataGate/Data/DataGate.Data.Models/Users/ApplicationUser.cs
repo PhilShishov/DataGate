@@ -21,7 +21,7 @@ namespace DataGate.Data.Models.Users
             this.LastLoginTime = TimeZoneInfo.ConvertTime(this.now, TimeZoneInfo.Local);
         }
 
-        public DateTimeOffset? LastLoginTime { get; set; }
+        public DateTimeOffset LastLoginTime { get; set; }
 
         // Audit info
         public DateTime CreatedOn { get; set; }

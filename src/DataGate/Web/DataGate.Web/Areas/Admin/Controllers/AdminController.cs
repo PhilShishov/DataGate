@@ -41,6 +41,30 @@
             this.logger = logger;
         }
 
+        public async Task<IActionResult> ViewUsers()
+        {
+            List<UserViewModel> usersViewList = new List<UserViewModel>();
+
+            var users = this.userManager.Users.ToList();
+
+            foreach (var user in users)
+            {
+                var roles = await this.userManager.GetRolesAsync(user);
+
+                var userView = new UserViewModel
+                {
+                    Id = user.Id,
+                    Username = user.UserName,
+                    Roles = roles,
+                    LastLogin = user.LastLoginTime,
+                };
+
+                usersViewList.Add(userView);
+            }
+
+            return this.View(usersViewList);
+        }
+
         [HttpGet]
         public IActionResult CreateUser()
         {
@@ -88,32 +112,6 @@
             this.AddErrors(result);
 
             return this.View();
-        }
-
-        public async Task<IActionResult> ViewUsers()
-        {
-            List<UserViewModel> usersViewList = new List<UserViewModel>();
-
-            var users = this.userManager.Users.ToList();
-
-            foreach (var user in users)
-            {
-                var roles = await this.userManager.GetRolesAsync(user);
-
-                var userView = new UserViewModel
-                {
-                    Id = user.Id,
-                    Username = user.UserName,
-                    Roles = roles,
-                    LastLogin = user.LastLoginTime?.ToString(
-                            GlobalConstants.LastLoginTimeDisplay,
-                            CultureInfo.InvariantCulture),
-                };
-
-                usersViewList.Add(userView);
-            }
-
-            return this.View(usersViewList);
         }
 
         [HttpGet("/Admin/Admin/EditUser/{id}")]

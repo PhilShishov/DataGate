@@ -6,6 +6,7 @@
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace DataGate.Web.ViewModels.Users
 {
+    using System;
     using System.Collections.Generic;
 
     public class UserViewModel
@@ -16,7 +17,7 @@ namespace DataGate.Web.ViewModels.Users
 
         public IEnumerable<string> Roles { get; set; }
 
-        public string LastLogin { get; set; }
+        public DateTimeOffset LastLogin { get; set; }
 
         public bool IsLogged { get; set; }
     }
