@@ -1,0 +1,35 @@
+﻿@using DataGate.Common
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@this.ViewData["Title"] | @GlobalConstants.SystemName</title>
+    <meta name="description" content="@this.ViewData["Title"]" />
+    <meta name="keywords" content="" />
+
+    <environment include="Development">
+        <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+        <link type="text/css" rel="stylesheet" href="~/css/home/home.css" asp-append-version="true" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/style.css" asp-append-version="true" />
+
+        <style>
+            body {
+                background: url(../images/Background_Home.png) no-repeat center center fixed;
+            }
+        </style>
+    </environment>
+
+    <environment include="Production, Staging">
+    </environment>
+
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <main>
+        @RenderBody()
+    </main>
+
+    @this.RenderSection("Scripts", required: false)
+</body>
+</html>
