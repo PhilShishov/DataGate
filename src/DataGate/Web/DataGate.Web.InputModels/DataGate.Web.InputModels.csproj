@@ -18,6 +18,7 @@
     <ProjectReference Include="..\..\DataGate.Common\DataGate.Common.csproj" />
     <ProjectReference Include="..\..\Services\DataGate.Services.Mapping\DataGate.Services.Mapping.csproj" />
     <ProjectReference Include="..\DataGate.Web.Dtos\DataGate.Web.Dtos.csproj" />
+    <ProjectReference Include="..\DataGate.Web.Infrastructure\DataGate.Web.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
