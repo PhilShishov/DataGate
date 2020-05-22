@@ -187,15 +187,4 @@
 @section Scripts{
     <script type="text/javascript" src="~/js/format/formatInput.js"></script>
     <script type="text/javascript" src="~/js/confirm/confirmCreate.js"></script>
-
-    <script>
-        window.onload = () => {
-            formatInput();
-            confirmCreate();
-        }
-
-        if (window.history.replaceState) {
-            window.history.replaceState(null, null, window.location.href);
-        }
-    </script>
 }

@@ -245,6 +245,11 @@
         <script src="~/js/multiselect.js" asp-append-version="true"></script>
         <script src="~/js/autocomplete/loadAutocomplete.js" asp-append-version="true"></script>
         <script src="~/js/double-scroll/jquery.doubleScroll.js" asp-append-version="true"></script>
+        <script>
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+            }
+        </script>
     </environment>
 
     @this.RenderSection("Scripts", required: false)

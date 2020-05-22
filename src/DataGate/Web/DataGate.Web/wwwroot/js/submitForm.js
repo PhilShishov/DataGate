@@ -1,4 +1,4 @@
-﻿function submitForm() {
+﻿(function () {
     const checkbox = document.getElementById('activeCheckBox');
     //const select = document.getElementById('SelectTerm');
 
@@ -10,4 +10,4 @@
     function submitForm() {
         updateForm.submit();
     }
-}
+})();

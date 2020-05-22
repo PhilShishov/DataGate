@@ -1,4 +1,4 @@
-﻿function confirmUpdate() {
+﻿(function () {
     const btn = document.getElementById('confirmEditBtn');
     btn.addEventListener('click',
         function (event) {
@@ -7,5 +7,5 @@
             if (!con) {
                 event.preventDefault();
             }
-        });  
-}
+        });
+})();

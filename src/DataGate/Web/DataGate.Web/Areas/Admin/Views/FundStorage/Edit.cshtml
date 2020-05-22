@@ -231,15 +231,4 @@
 @section Scripts{
     <script type="text/javascript" src="~/js/format/formatInput.js"></script>
     <script type="text/javascript" src="~/js/confirm/confirmUpdate.js"></script>
-
-    <script>
-        window.onload = () => {
-            formatInput();
-            confirmUpdate();
-        }
-
-        if (window.history.replaceState) {
-            window.history.replaceState(null, null, window.location.href);
-        }
-    </script>
 }

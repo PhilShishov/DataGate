@@ -127,12 +127,8 @@
     <script type="text/javascript" src="~/js/controllers/subEntitiesController.js" asp-append-version="true"></script>
 
     <script>
-        if (window.history.replaceState) {
-            window.history.replaceState(null, null, window.location.href);
-        }
-
         // Fade timeout for tempdata messages
-        setTimeout(function () {
+        setTimeout(() => {
             $('#infoMessage').fadeOut();
             $('#errorMessage').fadeOut();
         }, 5000);

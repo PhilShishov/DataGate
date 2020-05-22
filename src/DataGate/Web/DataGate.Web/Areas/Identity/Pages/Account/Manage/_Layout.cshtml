@@ -21,15 +21,5 @@
 
 @section Scripts {
     @RenderSection("Scripts", required: false)
-    <script>
-        window.onload = () => {
-            manageSideNavBar();
-            manageDropdowns();
-        }
-
-        if (window.history.replaceState) {
-            window.history.replaceState(null, null, window.location.href);
-        }
-    </script>
 }
 
