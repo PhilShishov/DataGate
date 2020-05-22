@@ -1,15 +1,7 @@
 ﻿@using DataGate.Common
 @{
     this.ViewData["Title"] = "Home Page";
-}
-
-@section Styles
-{
-    <style>
-        body {
-            background: url(../images/Background_Home.png) no-repeat center center fixed;
-        }
-    </style>
+    this.Layout = "_HomeLayout";
 }
 
 @if (!this.User.Identity.IsAuthenticated)
@@ -44,7 +36,6 @@
                             <a class="text-white a-underline mr-1" asp-area="" asp-controller="Legal" asp-action="Privacy">Privacy Policy</a>
                             <a class="text-white a-underline mr-1" asp-area="" asp-controller="Legal" asp-action="Cookie">Cookie Policy</a>
                             <a class="text-white a-underline mr-1" asp-area="" asp-controller="Legal" asp-action="Copyright">Copyright Policy</a>
-                            <a class="text-white a-underline mr-1" asp-area="" asp-controller="Legal" asp-action="UserAgreement">User Agreement</a>
                         </p>
                     </div>
                 </div>
