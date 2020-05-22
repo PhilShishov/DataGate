@@ -1,4 +1,4 @@
-﻿function formatInput() {
+﻿(function () {
     const createFormInputFields = document.getElementById('createForm').querySelectorAll('input:not(#formatName)');
 
     for (var i = 0; i < createFormInputFields.length; i++) {
@@ -10,4 +10,4 @@
         this.value = this.value.trimEnd();
         this.value = this.value.toUpperCase();
     }
-}
+})();

@@ -1,4 +1,4 @@
-﻿function confirmDelete() {
+﻿(function () {
     const buttons = document.getElementsByClassName('confirmDelBtn');
 
     for (var btn of buttons) {
@@ -11,4 +11,4 @@
                 }
             });
     }
-}
+})();

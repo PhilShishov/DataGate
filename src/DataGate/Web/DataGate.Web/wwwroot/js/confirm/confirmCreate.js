@@ -1,4 +1,4 @@
-﻿function confirmCreate() {
+﻿(function () {
     const btn = document.getElementById('confirmCreateBtn');
     btn.addEventListener('click',
         function (event) {
@@ -8,4 +8,4 @@
                 event.preventDefault();
             }
         });
-}
+})();
