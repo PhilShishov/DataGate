@@ -2,6 +2,7 @@
     //import { setDates } from './setDates.js';
     var json = { areaName: areaName };
     $('#btn-upload-document').click(function () {
+        var modalPlaceholder = $('#modal-document-placeholder');
         $.ajax({
             url: '/loadDocUpload',
             type: 'GET',
@@ -9,7 +10,8 @@
             contentType: 'application/json; charset=utf-8',
             headers: { 'X-CSRF-TOKEN': token },
             success: function (response) {
-                $('#docModalBody').html(response);
+                modalPlaceholder.html(response);
+                modalPlaceholder.find('.modal').modal('show');
             }
         })
     });
