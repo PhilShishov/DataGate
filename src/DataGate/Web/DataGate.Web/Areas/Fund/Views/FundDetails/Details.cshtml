@@ -78,7 +78,29 @@
     </div>
 </div>
 
-<div id="modal-document-placeholder"></div>
+<form asp-area=""
+      asp-controller="Upload"
+      asp-action="Document"
+      method="post"
+      enctype="multipart/form-data">
+    <input asp-for="Id" type="hidden">
+    <input asp-for="StartConnection" type="hidden">
+    <input asp-for="EndConnection" type="hidden">
+    <input asp-for="Date" type="hidden">
+    <input name="AreaName" value="@area" type="hidden">
+    <input name="RouteName" value="@route" type="hidden">
+
+    <div class="modal"
+         id="upDocModal"
+         role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body d-grid justify-content-center" id="modal-body-document">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
 
 <form method="post" enctype="multipart/form-data">
     <input asp-for="Id" type="hidden">
@@ -93,7 +115,7 @@
          role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-body d-grid justify-content-center" id="agrModalBody">
+                <div class="modal-body d-grid justify-content-center" id="modal-body-agreement">
                 </div>
             </div>
         </div>
@@ -101,15 +123,10 @@
 </form>
 
 @section Scripts{
-    <script type="text/javascript" src="~/js/loadUploadModals.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/controllers/uploadController.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/controllers/subEntitiesController.js" asp-append-version="true"></script>
 
     <script>
-        window.onload = () => {
-            manageSideNavBar();
-            manageDropdowns();
-        }
-
         if (window.history.replaceState) {
             window.history.replaceState(null, null, window.location.href);
         }
@@ -120,7 +137,7 @@
             $('#errorMessage').fadeOut();
         }, 5000);
 
-        $(document).ready(function () {
+        $(document).ready(() => {
 
             const token = $('#load-form input[name=__RequestVerificationToken]').val();
             const area = '@GlobalConstants.FundAreaName';
@@ -140,15 +157,6 @@
             // Load sub funds, documents, agreements and timelines
 
             loadAddInfo(token, entityId, date, area, container, url);
-
-            // ________________________________________________________
-            //
-            // Automatic Scroll if selected value
-
-            //const JumpTo = document.getElementById('fundAdditionalInfSelect');
-            //if (JumpTo.value == "SubFunds") {
-            //    $(this).scrollTop($(JumpTo).position().top);
-            //}
         });
     </script>
 }

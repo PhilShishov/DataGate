@@ -1,8 +1,8 @@
 ﻿function loadUploadModals(token, areaName) {
     //import { setDates } from './setDates.js';
-    var json = { areaName: areaName };
+    const json = { areaName: areaName };
     $('#btn-upload-document').click(function () {
-        var modalPlaceholder = $('#modal-document-placeholder');
+        const modalPlaceholder = $('#modal-body-document');
         $.ajax({
             url: '/loadDocUpload',
             type: 'GET',
@@ -11,12 +11,12 @@
             headers: { 'X-CSRF-TOKEN': token },
             success: function (response) {
                 modalPlaceholder.html(response);
-                modalPlaceholder.find('.modal').modal('show');
             }
         })
     });
 
     $('#btn-upload-agreement').click(function () {
+        const modalPlaceholder = $('#modal-body-agreement');
         $.ajax({
             url: '/loadAgrUpload',
             type: 'GET',
@@ -24,7 +24,7 @@
             contentType: 'application/json; charset=utf-8',
             headers: { 'X-CSRF-TOKEN': token },
             success: function (response) {
-                $('#agrModalBody').html(response);
+                modalPlaceholder.html(response);
             }
         })
     });

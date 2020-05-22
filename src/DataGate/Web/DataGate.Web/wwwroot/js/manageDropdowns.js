@@ -1,4 +1,4 @@
-﻿function manageDropdowns() {
+﻿(function () {
     const sideNavDropdowns = document.getElementsByName('dr-btn-SideNav');
 
     for (let i = 0; i < sideNavDropdowns.length; i++) {
@@ -26,5 +26,4 @@
             }
         });
     }
-}
-
+})();

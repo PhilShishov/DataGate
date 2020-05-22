@@ -1,6 +1,32 @@
 ﻿@model DataGate.Web.InputModels.Files.UploadDocumentInputModel
 
-<div class="modal"
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+<div class="form-group">
+    <select class="form-control maxw-270" asp-for="DocumentType" required>
+        <option selected disabled value="">-- Choose File Type --</option>
+        @foreach (var type in (List<string>)ViewData["DocumentFileTypes"])
+        {
+            <option value="@type">@type</option>
+        }
+    </select>
+    <span asp-validation-for="DocumentType" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <input asp-for="FileToUpload"
+           type="file"
+           accept="application/pdf"
+           required>
+</div>
+<span asp-validation-for="FileToUpload" class="text-danger"></span>
+
+<button type="submit"        
+        class="btn btn-pharus text-white">
+    Upload Document
+</button>
+
+@*<div class="modal"
      id="upDocModal"
      role="dialog">
     <div class="modal-dialog">
@@ -43,8 +69,4 @@
             </div>
         </div>
     </div>
-</div>
-
-@section Scripts{
-    @await Html.PartialAsync("_ValidationScriptsPartial")
-}
+</div>*@
