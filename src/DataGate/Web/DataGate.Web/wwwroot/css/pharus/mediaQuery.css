@@ -147,9 +147,14 @@
     }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 640px) {
     #toolbar-pharus {
         overflow-x: scroll;
+    }
+
+    .logo-pharus img {
+        height: 120px;
+        width: 120px;
     }
 
     #canvas-aum-pharus {

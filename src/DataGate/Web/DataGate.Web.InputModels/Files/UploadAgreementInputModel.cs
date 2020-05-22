@@ -10,6 +10,7 @@ namespace DataGate.Web.InputModels.Files
     using System;
     using System.ComponentModel.DataAnnotations;
 
+    using DataGate.Web.Infrastructure.Attributes.Validation;
     using Microsoft.AspNetCore.Http;
 
     public class UploadAgreementInputModel
@@ -35,7 +36,10 @@ namespace DataGate.Web.InputModels.Files
         [Required]
         public string Status { get; set; }
 
-        [Required(ErrorMessage = "Please insert File.")]
+        [Required(ErrorMessage = "Please select a file.")]
+        //[DataType(DataType.Upload)]
+        //[MaxFileSize(1 * 1024 * 1024)]
+        //[AllowedExtensions(new string[] { ".pdf" })]
         public IFormFile FileToUpload { get; set; }
 
         public string Date { get; set; }
