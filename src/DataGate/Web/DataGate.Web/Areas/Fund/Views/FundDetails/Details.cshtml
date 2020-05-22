@@ -78,46 +78,15 @@
     </div>
 </div>
 
-<form asp-area=""
-      asp-controller="Upload"
-      asp-action="Document"
-      method="post"
-      enctype="multipart/form-data">
+<div id="modal-document-placeholder"></div>
 
+<form method="post" enctype="multipart/form-data">
     <input asp-for="Id" type="hidden">
     <input asp-for="StartConnection" type="hidden">
     <input asp-for="EndConnection" type="hidden">
     <input asp-for="Date" type="hidden">
     <input name="AreaName" value="@area" type="hidden">
     <input name="RouteName" value="@route" type="hidden">
-
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-    <div class="modal"
-         id="upDocModal"
-         role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body d-grid justify-content-center" id="docModalBody">
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
-
-<form asp-area=""
-      asp-controller="Upload"
-      asp-action="Agreement"
-      enctype="multipart/form-data">
-
-    <input asp-for="Id" type="text" hidden>
-    <input asp-for="StartConnection" type="text" hidden>
-    <input asp-for="EndConnection" type="text" hidden>
-    <input asp-for="Date" type="date" hidden>
-    <input name="AreaName" value="@area" type="hidden">
-    <input name="RouteName" value="@route" type="hidden">
-
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="modal"
          id="upAgrModal"
@@ -132,7 +101,6 @@
 </form>
 
 @section Scripts{
-    @await Html.PartialAsync("_ValidationScriptsPartial")
     <script type="text/javascript" src="~/js/loadUploadModals.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/controllers/subEntitiesController.js" asp-append-version="true"></script>
 

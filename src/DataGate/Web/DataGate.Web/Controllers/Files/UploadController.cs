@@ -31,82 +31,82 @@
             this.environment = environment;
         }
 
-        [HttpPost]
-        [ActionName("Document")]
-        public async Task<IActionResult> OnPostUploadDocumentAsync(
-            [Bind("DocumentType", "FileToUpload", "StartConnection", "EndConnection",
-                  "Date", "Id", "RouteName", "AreaName")] UploadDocumentInputModel model)
-        {
-            if (!this.ModelState.IsValid)
-            {
-                return this.ShowError(
-                    ErrorMessages.ModelUploadErrorMessage,
-                    model.RouteName,
-                    new { area = model.AreaName, id = model.Id, date = model.Date });
-            }
+        //    [HttpPost]
+        //    [ActionName("Document")]
+        //    public async Task<IActionResult> OnPostUploadDocumentAsync(
+        //        [Bind("DocumentType", "FileToUpload", "StartConnection", "EndConnection",
+        //              "Date", "Id", "RouteName", "AreaName")] UploadDocumentInputModel model)
+        //    {
+        //        if (!this.ModelState.IsValid)
+        //        {
+        //            return this.ShowError(
+        //                ErrorMessages.ModelUploadErrorMessage,
+        //                model.RouteName,
+        //                new { area = model.AreaName, id = model.Id, date = model.Date });
+        //        }
 
-            string path = await FileHelpers.ProcessFormFile(model.FileToUpload, this.ModelState, this.permittedExtensions,
-                                                            this.fileSizeLimit, this.environment.WebRootPath, model.AreaName, false);
+        //        string path = await FileHelpers.ProcessFormFile(model.FileToUpload, this.ModelState, this.permittedExtensions,
+        //                                                        this.fileSizeLimit, this.environment.WebRootPath, model.AreaName, false);
 
-            if (!this.ModelState.IsValid)
-            {
-                return this.ShowError(
-                    ErrorMessages.ModelUploadFileErrorMessage,
-                    model.RouteName,
-                    new { area = model.AreaName, id = model.Id, date = model.Date });
-            }
+        //        if (!this.ModelState.IsValid)
+        //        {
+        //            return this.ShowError(
+        //                ErrorMessages.ModelUploadFileErrorMessage,
+        //                model.RouteName,
+        //                new { area = model.AreaName, id = model.Id, date = model.Date });
+        //        }
 
-            await this.service.UploadDocument(model);
+        //        await this.service.UploadDocument(model);
 
-            using (var stream = new FileStream(path, FileMode.Create))
-            {
-                await model.FileToUpload.CopyToAsync(stream);
-                stream.Close();
-            }
+        //        using (var stream = new FileStream(path, FileMode.Create))
+        //        {
+        //            await model.FileToUpload.CopyToAsync(stream);
+        //            stream.Close();
+        //        }
 
-            return this.ShowInfo(
-                InfoMessages.FileUploaded,
-                model.RouteName,
-                new { area = model.AreaName, id = model.Id, date = model.Date });
-        }
+        //        return this.ShowInfo(
+        //            InfoMessages.FileUploaded,
+        //            model.RouteName,
+        //            new { area = model.AreaName, id = model.Id, date = model.Date });
+        //    }
 
-        [HttpPost]
-        [ActionName("Agreement")]
-        public async Task<IActionResult> OnPostUploadAgreementAsync(
-            [Bind("AgrType", "ContractDate", "ActivationDate", "ExpirationDate", "Company", "Status", "FileToUpload",
-                  "Date", "Id", "RouteName", "AreaName")]UploadAgreementInputModel model)
-        {
-            if (!this.ModelState.IsValid)
-            {
-                return this.ShowError(
-                    ErrorMessages.ModelUploadErrorMessage,
-                    model.RouteName,
-                    new { area = model.AreaName, id = model.Id, date = model.Date });
-            }
+        //    [HttpPost]
+        //    [ActionName("Agreement")]
+        //    public async Task<IActionResult> OnPostUploadAgreementAsync(
+        //        [Bind("AgrType", "ContractDate", "ActivationDate", "ExpirationDate", "Company", "Status", "FileToUpload",
+        //              "Date", "Id", "RouteName", "AreaName")]UploadAgreementInputModel model)
+        //    {
+        //        if (!this.ModelState.IsValid)
+        //        {
+        //            return this.ShowError(
+        //                ErrorMessages.ModelUploadErrorMessage,
+        //                model.RouteName,
+        //                new { area = model.AreaName, id = model.Id, date = model.Date });
+        //        }
 
-            string path = await FileHelpers.ProcessFormFile(model.FileToUpload, this.ModelState, this.permittedExtensions,
-                                                            this.fileSizeLimit, this.environment.WebRootPath, model.AreaName, true);
+        //        string path = await FileHelpers.ProcessFormFile(model.FileToUpload, this.ModelState, this.permittedExtensions,
+        //                                                        this.fileSizeLimit, this.environment.WebRootPath, model.AreaName, true);
 
-            if (!this.ModelState.IsValid)
-            {
-                return this.ShowError(
-                    ErrorMessages.ModelUploadFileErrorMessage,
-                    model.RouteName,
-                    new { area = model.AreaName, id = model.Id, date = model.Date });
-            }
+        //        if (!this.ModelState.IsValid)
+        //        {
+        //            return this.ShowError(
+        //                ErrorMessages.ModelUploadFileErrorMessage,
+        //                model.RouteName,
+        //                new { area = model.AreaName, id = model.Id, date = model.Date });
+        //        }
 
-            await this.service.UploadAgreement(model);
+        //        await this.service.UploadAgreement(model);
 
-            using (var stream = new FileStream(path, FileMode.Create))
-            {
-                await model.FileToUpload.CopyToAsync(stream);
-                stream.Close();
-            }
+        //        using (var stream = new FileStream(path, FileMode.Create))
+        //        {
+        //            await model.FileToUpload.CopyToAsync(stream);
+        //            stream.Close();
+        //        }
 
-            return this.ShowInfo(
-                InfoMessages.FileUploaded,
-                model.RouteName,
-                new { area = model.AreaName, id = model.Id, date = model.Date });
-        }
+        //        return this.ShowInfo(
+        //            InfoMessages.FileUploaded,
+        //            model.RouteName,
+        //            new { area = model.AreaName, id = model.Id, date = model.Date });
+        //    }
     }
 }

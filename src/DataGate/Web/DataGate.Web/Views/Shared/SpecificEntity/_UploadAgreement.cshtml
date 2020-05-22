@@ -1,5 +1,7 @@
 ﻿@model DataGate.Web.InputModels.Files.UploadAgreementInputModel
 
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
 <div class="form-group">
     <select class="form-control maxw-270" asp-for="AgrType">
         <option value="">-- Choose Agreement Type --</option>
@@ -38,7 +40,6 @@
            min="2018-01-01"
            class="form-control maxw-270"
            id="expirationDate">
-    <span asp-validation-for="ExpirationDate" class="text-danger"></span>
 </div>
 
 <div class="form-group">
@@ -71,6 +72,14 @@
 <span asp-validation-for="FileToUpload" class="text-danger"></span>
 
 <button type="submit"
-        class="btn bg-pharus text-white">
-    Upload Document
+        asp-area=""
+        asp-controller="Upload"
+        asp-action="Agreement"
+        class="btn btn-pharus text-white">
+    Upload Agreement
 </button>
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
