@@ -1,4 +1,4 @@
-﻿function manageSideNavBar() {
+﻿(function () {
     const sideNavIcon = document.getElementById('sideNavIcon');
     const sideNavFooter = document.getElementById('sidenav-footer');
     sideNavIcon.addEventListener('click', toggleSideNavMenu);
@@ -21,4 +21,4 @@
         document.getElementById('mySidenav').style.width = '0px';
         sideNavFooter.style.display = 'none';
     }
-}
+})();
