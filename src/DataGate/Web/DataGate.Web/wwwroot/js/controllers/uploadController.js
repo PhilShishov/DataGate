@@ -1,11 +1,10 @@
-﻿function uploadModals(token, json) {
+﻿function uploadModalsGet(token, json) {
     const placeholderDocument = $('#modal-placeholder-document');
-    //const placeholderElement = $('#modal-placeholder-document');
+    const placeholderAgreement = $('#modal-placeholder-agreement');
 
-    $(document).on('click', 'button[data-toggle="ajax-modal"]', function (event) {
-        const url = '/loadDocUpload';
+    $(document).on('click', '#btn-upload-document', function (event) {
         $.get({
-            url: url,
+            url: '/loadDocUpload',
             data: json,
             contentType: 'application/json; charset=utf-8',
             headers: { 'X-CSRF-TOKEN': token },
@@ -15,16 +14,16 @@
         });
     });
 
-    //$('#btn-upload-agreement').click(function () {
-    //    $.ajax({
-    //        url: '/loadAgrUpload',
-    //        type: 'GET',
-    //        data: json,
-    //        contentType: 'application/json; charset=utf-8',
-    //        headers: { 'X-CSRF-TOKEN': token },
-    //        success: function (response) {
-    //            modalPlaceholderAgr.html(response);
-    //        }
-    //    })
-    //});
+    $(document).on('click', '#btn-upload-agreement', function (event) {
+        $.get({
+            url: '/loadAgrUpload',
+            data: json,
+            contentType: 'application/json; charset=utf-8',
+            headers: { 'X-CSRF-TOKEN': token },
+        }).done(function (data) {
+            placeholderAgreement.html(data);
+            placeholderAgreement.find('.modal').modal('show');
+        });
+    });
 }
+
