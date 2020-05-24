@@ -1,4 +1,4 @@
-﻿function loadAddInfo(token, id, date, areaName, container, url) {
+﻿function loadAddInfo(token, url, id, date, areaName, container,) {
     // ________________________________________________________
     //
     // Select menu for fund additional information -

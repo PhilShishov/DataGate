@@ -4,16 +4,8 @@
 @{
     this.ViewData["Title"] = GlobalConstants.FundsControllerName;
     this.Layout = "~/Views/Shared/_Layout.cshtml";
-    var entityName = @Model.Entity.ToList()[1][GlobalConstants.IndexEntityNameInTable];
-    var controller = this.ViewContext.RouteData.Values["controller"].ToString();
-    var area = string.Empty;
-    var route = string.Empty;
 
-    if (controller == GlobalConstants.FundDetailsControllerName)
-    {
-        route = GlobalConstants.FundDetailsRouteName;
-        area = GlobalConstants.FundAreaName;
-    }
+    var entityName = @Model.Entity.ToList()[1][GlobalConstants.IndexEntityNameInTable];
 }
 
 <div class="justify-content-between">
@@ -81,38 +73,13 @@
 <!-- Modal placeholder for document-->
 <div id="modal-placeholder-document"></div>
 
-<form asp-area=""
-      asp-controller="Upload"
-      asp-action="Document"
-      method="post"
-      enctype="multipart/form-data"
-      id="form-document">
-    <input asp-for="Id" type="hidden">
-    <input asp-for="StartConnection" type="hidden">
-    <input asp-for="EndConnection" type="hidden">
-    <input asp-for="Date" type="hidden">
-    <input name="AreaName" value="@area" type="hidden">
-    <input name="RouteName" value="@route" type="hidden">
-
-    <div class="modal"
-         id="upDocModal"
-         role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body d-grid justify-content-center" id="modal-body-document">
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
-
 <form method="post" enctype="multipart/form-data">
     <input asp-for="Id" type="hidden">
     <input asp-for="StartConnection" type="hidden">
     <input asp-for="EndConnection" type="hidden">
     <input asp-for="Date" type="hidden">
-    <input name="AreaName" value="@area" type="hidden">
-    <input name="RouteName" value="@route" type="hidden">
+    @*<input name="AreaName" value="@area" type="hidden">
+    <input name="RouteName" value="@route" type="hidden">*@
 
     <div class="modal"
          id="upAgrModal"
@@ -138,24 +105,34 @@
         }, 5000);
 
         const token = $('#load-form input[name=__RequestVerificationToken]').val();
+        const url = '/loadSubFunds';
+
         const area = '@GlobalConstants.FundAreaName';
         const entityId = @Model.Id;
         const date = '@Model.Date';
-        const url = '/loadSubFunds';
         const container = '@entityName';
+
+        const jsonUpload = {
+            areaName: '@GlobalConstants.FundAreaName',
+            routeName: '@GlobalConstants.FundDetailsRouteName',
+            id: @Model.Id,
+            date: '@Model.Date',
+            startConnection : '@Model.StartConnection',
+            endConnection : '@Model.EndConnection',
+        };
 
         $(document).ready(() => {
             // ________________________________________________________
             //
             // Load documents and agreements upload lists
 
-            uploadModals(token, area);
+            uploadModals(token, jsonUpload);
 
             // ________________________________________________________
             //
             // Load sub funds, documents, agreements and timelines
 
-            loadAddInfo(token, entityId, date, area, container, url);
+            loadAddInfo(token, url, entityId, date, area, container);
         });
 
         $(function () {

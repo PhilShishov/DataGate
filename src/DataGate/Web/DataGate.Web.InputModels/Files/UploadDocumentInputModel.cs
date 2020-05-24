@@ -11,10 +11,12 @@ namespace DataGate.Web.InputModels.Files
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    using DataGate.Services.Mapping;
+    using DataGate.Web.Dtos.Documents;
     using DataGate.Web.Infrastructure.Attributes.Validation;
     using Microsoft.AspNetCore.Http;
 
-    public class UploadDocumentInputModel
+    public class UploadDocumentInputModel : IMapFrom<LoadDocumentDto>
     {
         public UploadDocumentInputModel()
         {

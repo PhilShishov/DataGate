@@ -1,5 +1,4 @@
-﻿function uploadModals(token, areaName) {
-    const json = { areaName: areaName };
+﻿function uploadModals(token, json) {
     const placeholderDocument = $('#modal-placeholder-document');
     //const placeholderElement = $('#modal-placeholder-document');
 
