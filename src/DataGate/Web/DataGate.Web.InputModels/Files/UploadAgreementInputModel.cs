@@ -8,12 +8,15 @@
 namespace DataGate.Web.InputModels.Files
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    using DataGate.Services.Mapping;
+    using DataGate.Web.Dtos.Documents;
     using DataGate.Web.Infrastructure.Attributes.Validation;
     using Microsoft.AspNetCore.Http;
 
-    public class UploadAgreementInputModel
+    public class UploadAgreementInputModel : IMapFrom<LoadAgreementDto>
     {
         [Required]
         [Display(Name = "Agreement Type")]
@@ -37,9 +40,9 @@ namespace DataGate.Web.InputModels.Files
         public string Status { get; set; }
 
         [Required(ErrorMessage = "Please select a file.")]
-        //[DataType(DataType.Upload)]
-        //[MaxFileSize(1 * 1024 * 1024)]
-        //[AllowedExtensions(new string[] { ".pdf" })]
+        [DataType(DataType.Upload)]
+        [MaxFileSize(1 * 1024 * 1024)]
+        [AllowedExtensions(new string[] { ".pdf" })]
         public IFormFile FileToUpload { get; set; }
 
         public string Date { get; set; }
@@ -49,5 +52,11 @@ namespace DataGate.Web.InputModels.Files
         public string RouteName { get; set; }
 
         public string AreaName { get; set; }
+
+        public IReadOnlyCollection<string> AgreementsFileTypes { get; set; }
+
+        public IReadOnlyCollection<string> AgreementsStatus { get; set; }
+
+        public IReadOnlyCollection<string> Companies { get; set; }
     }
 }

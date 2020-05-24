@@ -39,16 +39,17 @@
         }
 
         [Route("loadAgrUpload")]
-        public async Task<IActionResult> Agreement(string areaName)
+        public async Task<IActionResult> Agreement(LoadAgreementDto dto)
         {
-            if (areaName == GlobalConstants.FundAreaName)
+            var model = AutoMapperConfig.MapperInstance.Map<UploadAgreementInputModel>(dto);
+            if (model.AreaName == GlobalConstants.FundAreaName)
             {
-                this.ViewData["AgreementsFileTypes"] = await this.fundService.GetAgreementsFileTypes().ToListAsync();
-                this.ViewData["AgreementsStatus"] = await this.fundService.GetAgreementStatus().ToListAsync();
-                this.ViewData["Companies"] = await this.fundService.GetCompanies().ToListAsync();
+                model.AgreementsFileTypes = await this.fundService.GetAgreementsFileTypes().ToListAsync();
+                model.AgreementsStatus = await this.fundService.GetAgreementStatus().ToListAsync();
+                model.Companies = await this.fundService.GetCompanies().ToListAsync();
             }
 
-            return this.PartialView("Upload/_UploadAgreement");
+            return this.PartialView("Upload/_UploadAgreement", model);
         }
 
         [Route("loadAllDoc")]

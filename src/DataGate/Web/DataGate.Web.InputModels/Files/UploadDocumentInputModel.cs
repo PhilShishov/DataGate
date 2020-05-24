@@ -27,8 +27,8 @@ namespace DataGate.Web.InputModels.Files
         public string DocumentType { get; set; }
 
         [Required(ErrorMessage = "Please select a file.")]
-        //[DataType(DataType.Upload)]
-        //[MaxFileSize(1 * 1024 * 1024)]
+        [DataType(DataType.Upload)]
+        [MaxFileSize(1 * 1024 * 1024)]
         [AllowedExtensions(new string[] { ".pdf" })]
         public IFormFile FileToUpload { get; set; }
 

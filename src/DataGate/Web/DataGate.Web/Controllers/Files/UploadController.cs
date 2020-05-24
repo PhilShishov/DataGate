@@ -35,7 +35,7 @@
         [ActionName("Document")]
         public async Task<IActionResult> OnPostUploadDocumentAsync(
             [Bind("DocumentType", "DocumentTypes", "FileToUpload", "StartConnection", "EndConnection",
-                      "Date", "Id", "RouteName", "AreaName")] UploadDocumentInputModel model)
+                  "Date", "Id", "RouteName", "AreaName")] UploadDocumentInputModel model)
         {
             if (!this.ModelState.IsValid)
             {
@@ -70,8 +70,9 @@
         [HttpPost]
         [ActionName("Agreement")]
         public async Task<IActionResult> OnPostUploadAgreementAsync(
-            [Bind("AgrType", "ContractDate", "ActivationDate", "ExpirationDate", "Company", "Status", "FileToUpload",
-                      "Date", "Id", "RouteName", "AreaName")] UploadAgreementInputModel model)
+            [Bind("AgrType", "AgreementsFileTypes", "AgreementsStatus", "Companies", "ContractDate",
+                  "ActivationDate", "ExpirationDate", "Company", "Status", "FileToUpload",
+                  "Date", "Id", "RouteName", "AreaName")] UploadAgreementInputModel model)
         {
             if (!this.ModelState.IsValid)
             {
