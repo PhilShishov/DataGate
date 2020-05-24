@@ -1,7 +1,6 @@
 ﻿namespace DataGate.Web.Areas.Administration.Controllers
 {
     using System.Collections.Generic;
-    using System.Globalization;
     using System.Linq;
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;

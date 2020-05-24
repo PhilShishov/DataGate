@@ -40,7 +40,7 @@
                         <label asp-for="ContractDate" class="text-torshia"></label><br>
                         <input asp-for="ContractDate"
                                type="date"
-                               min="2018-01-01"
+                              
                                class="form-control maxw-270"
                                id="contractDate">
                         <span asp-validation-for="ContractDate" class="text-danger"></span>
@@ -124,6 +124,4 @@
     </div>
 </div>
 
-@section Scripts{
-    <script type="text/javascript" src="~/js/setDates.js" asp-append-version="true"></script>
-}
+<script type="text/javascript" src="~/js/setDates.js" asp-append-version="true"></script>
