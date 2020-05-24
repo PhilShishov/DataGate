@@ -1,27 +1,4 @@
-﻿function loadAddInfo(token, url, id, date, areaName, container,) {
-    // ________________________________________________________
-    //
-    // Select menu for fund additional information -
-    // subentities, timeline changes, all documents
-    // Get selected value and keep select option open
-
-    $('#fundAdditionalInfSelect option').each(function () {
-        if (this.selected) {
-            const dropdownvalue = $('#fundAdditionalInfSelect option:selected').val();
-            if (dropdownvalue == 'SubFunds') {
-                $('#subEntities').css('visibility', 'visible');
-                $('#timelineChanges').addClass('d-none');
-                $('#allDocuments').addClass('d-none');
-                $('#allAgreements').addClass('d-none');
-            } else {
-                $('#subEntities').css('visibility', 'hidden');
-                $('#timelineChanges').addClass('d-none');
-                $('#allDocuments').addClass('d-none');
-                $('#allAgreements').addClass('d-none');
-            }
-        }
-    });
-
+﻿function loadAddInfo(token, url, json) {
     // ________________________________________________________
     //
     // Select menu for fund additional information -
@@ -30,9 +7,6 @@
 
     $('#fundAdditionalInfSelect').on('change', function () {
         const dropdownvalue = $('#fundAdditionalInfSelect option:selected').val();
-        const json = { id: id, areaName: areaName };
-        const fullJson = { id: id, date: date, areaName: areaName };
-        const subEntitiesJson = { id: id, date: date, container: container };
 
         $(this).find('[selected]').removeAttr('selected')
         $(this).find(':selected').attr('selected', 'selected')
@@ -45,7 +19,7 @@
             $.ajax({
                 url: url,
                 type: 'GET',
-                data: subEntitiesJson,
+                data: json,
                 contentType: 'application/json; charset=utf-8',
                 headers: { 'X-CSRF-TOKEN': token },
                 success: function (response) {
@@ -93,7 +67,7 @@
             $.ajax({
                 url: '/loadAllAgr',
                 type: 'GET',
-                data: fullJson,
+                data: json,
                 contentType: 'application/json; charset=utf-8',
                 headers: { 'X-CSRF-TOKEN': token },
                 success: function (response) {
