@@ -7,7 +7,6 @@
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace DataGate.Web.InputModels.Files
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
@@ -22,16 +21,16 @@ namespace DataGate.Web.InputModels.Files
         [Display(Name = "Agreement Type")]
         public string AgrType { get; set; }
 
-        [Required(ErrorMessage = "Contract Date cannot be empty.")]
         [Display(Name = "Contract Date")]
-        public DateTime ContractDate { get; set; }
+        [Required(ErrorMessage = "Contract Date cannot be empty.")]
+        public string ContractDate { get; set; }
 
-        [Required(ErrorMessage = "Activation Date cannot be empty.")]
         [Display(Name = "Activation Date")]
-        public DateTime ActivationDate { get; set; }
+        [Required(ErrorMessage = "Activation Date cannot be empty.")]
+        public string ActivationDate { get; set; }
 
         [Display(Name = "Expiration Date")]
-        public DateTime? ExpirationDate { get; set; }
+        public string ExpirationDate { get; set; }
 
         [Required]
         public string Company { get; set; }
