@@ -106,7 +106,7 @@
                 await this.emailSender.SendEmailAsync("philip.shishov@pharusmanco.lu", "Philip Shishov", inputModel.Email, GlobalConstants.ConfirmEmailSubject, message);
 
                 await this.AssignRoleToUser(inputModel, user);
-                return this.LocalRedirect(returnUrl);
+                return this.ShowInfoLocal(string.Format(InfoMessages.AddUser, user.UserName, inputModel), returnUrl);
             }
 
             this.AddErrors(result);
