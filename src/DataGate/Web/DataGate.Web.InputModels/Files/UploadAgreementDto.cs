@@ -33,8 +33,8 @@ namespace DataGate.Web.InputModels.Files
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<UploadAgreementInputModel, UploadAgreementDto>()
-               .ForMember(dto => dto.ContractDate, action => action.MapFrom(model => model.ContractDate.ToString(GlobalConstants.RequiredSqlDateTimeFormat, CultureInfo.InvariantCulture)))
-               .ForMember(dto => dto.ActivationDate, action => action.MapFrom(model => model.ActivationDate.ToString(GlobalConstants.RequiredSqlDateTimeFormat, CultureInfo.InvariantCulture)))
+               //.ForMember(dto => dto.ContractDate, action => action.MapFrom(model => model.ContractDate.ToString(GlobalConstants.RequiredSqlDateTimeFormat, CultureInfo.InvariantCulture)))
+               //.ForMember(dto => dto.ActivationDate, action => action.MapFrom(model => model.ActivationDate.ToString(GlobalConstants.RequiredSqlDateTimeFormat, CultureInfo.InvariantCulture)))
                .ForMember(dto => dto.FileName, action => action.MapFrom(model => model.FileToUpload.FileName))
                .ForMember(dto => dto.FileExt, action => action.MapFrom(model => Path.GetExtension(model.FileToUpload.FileName).ToLowerInvariant()));
         }

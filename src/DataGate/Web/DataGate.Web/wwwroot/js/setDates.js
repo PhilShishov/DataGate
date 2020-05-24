@@ -1,11 +1,7 @@
 ﻿(function () {
-    const contractDate = document.getElementById('contractDate');
-    const activationDate = document.getElementById('activationDate');
-    const expirationDate = document.getElementById('expirationDate');
-
-    contractDate.value = '';
-    activationDate.value = '';
-    expirationDate = '';
+    let contractDate = document.getElementById('contractDate');
+    let activationDate = document.getElementById('activationDate');
+    let expirationDate = document.getElementById('expirationDate');
 
     contractDate.addEventListener('change', setActivationDate);
 
