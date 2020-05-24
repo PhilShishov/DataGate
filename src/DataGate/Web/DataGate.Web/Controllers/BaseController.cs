@@ -28,5 +28,11 @@
             this.TempData[GlobalConstants.InfoKey] = infoMessage;
             return this.RedirectToRoute(route, routeValues);
         }
+
+        public IActionResult ShowInfoLocal(string infoMessage, string action)
+        {
+            this.TempData[GlobalConstants.InfoKey] = infoMessage;
+            return this.LocalRedirect(action);
+        }
     }
 }
