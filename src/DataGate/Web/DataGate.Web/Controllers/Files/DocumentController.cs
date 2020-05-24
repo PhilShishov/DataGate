@@ -6,6 +6,7 @@
     using DataGate.Common;
     using DataGate.Services.Data.Documents.Contracts;
     using DataGate.Services.DateTime;
+    using DataGate.Web.InputModels.Files;
     using DataGate.Web.ViewModels.Documents;
 
     using Microsoft.AspNetCore.Authorization;
@@ -23,14 +24,15 @@
         }
 
         [Route("loadDocUpload")]
-        public IActionResult LoadDocumentUpload(string areaName)
+        public IActionResult Document(string areaName)
         {
+            var model = new UploadDocumentInputModel { };
             if (areaName == GlobalConstants.FundAreaName)
             {
-                this.ViewData["DocumentFileTypes"] = this.fundService.GetDocumentsFileTypes();
+                model.DocumentTypes = this.fundService.GetDocumentsFileTypes();
             }
 
-            return this.PartialView("SpecificEntity/_UploadDocument");
+            return this.PartialView("Upload/_UploadDocument", model);
         }
 
         [Route("loadAgrUpload")]
