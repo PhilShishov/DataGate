@@ -37,7 +37,6 @@
 
         const form = $(this).parents('.modal').find('form');
         const token = $('input[name=__RequestVerificationToken]', form).val();
-        debugger;
         const actionUrl = form.attr('action');
         const dataToSend = new FormData(form.get(0));
 

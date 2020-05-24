@@ -24,6 +24,7 @@ namespace DataGate.Web.InputModels.Files
         }
 
         [Required]
+        [Display(Name = "Document Type")]
         public string DocumentType { get; set; }
 
         [Required(ErrorMessage = "Please select a file.")]

@@ -3,6 +3,10 @@
     const activationDate = document.getElementById('activationDate');
     const expirationDate = document.getElementById('expirationDate');
 
+    contractDate.value = '';
+    activationDate.value = '';
+    expirationDate = '';
+
     contractDate.addEventListener('change', setActivationDate);
 
     function setActivationDate() {
