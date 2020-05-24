@@ -2,8 +2,8 @@
 @model DataGate.Web.ViewModels.Entities.SpecificEntityViewModel
 
 @{
-    ViewData["Title"] = GlobalConstants.FundsControllerName;
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    this.ViewData["Title"] = GlobalConstants.FundsControllerName;
+    this.Layout = "~/Views/Shared/_Layout.cshtml";
     var entityName = @Model.Entity.ToList()[1][GlobalConstants.IndexEntityNameInTable];
     var controller = this.ViewContext.RouteData.Values["controller"].ToString();
     var area = string.Empty;
@@ -78,11 +78,15 @@
     </div>
 </div>
 
+<!-- Modal placeholder for document-->
+<div id="modal-placeholder-document"></div>
+
 <form asp-area=""
       asp-controller="Upload"
       asp-action="Document"
       method="post"
-      enctype="multipart/form-data">
+      enctype="multipart/form-data"
+      id="form-document">
     <input asp-for="Id" type="hidden">
     <input asp-for="StartConnection" type="hidden">
     <input asp-for="EndConnection" type="hidden">
@@ -133,26 +137,50 @@
             $('#errorMessage').fadeOut();
         }, 5000);
 
+        const token = $('#load-form input[name=__RequestVerificationToken]').val();
+        const area = '@GlobalConstants.FundAreaName';
+        const entityId = @Model.Id;
+        const date = '@Model.Date';
+        const url = '/loadSubFunds';
+        const container = '@entityName';
+
         $(document).ready(() => {
-
-            const token = $('#load-form input[name=__RequestVerificationToken]').val();
-            const area = '@GlobalConstants.FundAreaName';
-            const entityId = @Model.Id;
-            const date = '@Model.Date';
-            const url = '/loadSubFunds';
-            const container = '@entityName';
-
             // ________________________________________________________
             //
             // Load documents and agreements upload lists
 
-            loadUploadModals(token, area);
+            uploadModals(token, area);
 
             // ________________________________________________________
             //
             // Load sub funds, documents, agreements and timelines
 
             loadAddInfo(token, entityId, date, area, container, url);
+        });
+
+        $(function () {
+            const placeholderElement = $('#modal-placeholder-document');
+
+            placeholderElement.on('click', '[data-save="modal"]', function (event) {
+                event.preventDefault();
+
+                const form = $(this).parents('.modal').find('form');
+                const actionUrl = form.attr('action');
+                const dataToSend = new FormData(form.get(0));
+
+                $.ajax({
+                    url: actionUrl,
+                    method: 'post',
+                    data: dataToSend,
+                    processData: false,
+                    contentType: false
+                }).done(function (data) {
+                    const newBody = $('.modal-body', data);
+                    placeholderElement.find('.modal-body').replaceWith(newBody);
+                }).fail(function (request, status, error) {
+                    alert(request.responseText);
+                });
+            });
         });
     </script>
 }
