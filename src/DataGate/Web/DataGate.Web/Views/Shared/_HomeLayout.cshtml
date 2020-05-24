@@ -31,6 +31,10 @@
         @RenderBody()
     </main>
 
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    </environment>
+
     @this.RenderSection("Scripts", required: false)
 </body>
 </html>

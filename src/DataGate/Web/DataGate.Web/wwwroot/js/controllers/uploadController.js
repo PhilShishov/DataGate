@@ -1,31 +1,31 @@
-﻿function loadUploadModals(token, areaName) {
-    //import { setDates } from './setDates.js';
+﻿function uploadModals(token, areaName) {
     const json = { areaName: areaName };
-    $('#btn-upload-document').click(function () {
-        const modalPlaceholder = $('#modal-body-document');
-        $.ajax({
-            url: '/loadDocUpload',
-            type: 'GET',
+    const placeholderDocument = $('#modal-placeholder-document');
+    //const placeholderElement = $('#modal-placeholder-document');
+
+    $(document).on('click', 'button[data-toggle="ajax-modal"]', function (event) {
+        const url = '/loadDocUpload';
+        $.get({
+            url: url,
             data: json,
             contentType: 'application/json; charset=utf-8',
             headers: { 'X-CSRF-TOKEN': token },
-            success: function (response) {
-                modalPlaceholder.html(response);
-            }
-        })
+        }).done(function (data) {
+            placeholderDocument.html(data);
+            placeholderDocument.find('.modal').modal('show');
+        });
     });
 
-    $('#btn-upload-agreement').click(function () {
-        const modalPlaceholder = $('#modal-body-agreement');
-        $.ajax({
-            url: '/loadAgrUpload',
-            type: 'GET',
-            data: json,
-            contentType: 'application/json; charset=utf-8',
-            headers: { 'X-CSRF-TOKEN': token },
-            success: function (response) {
-                modalPlaceholder.html(response);
-            }
-        })
-    });
+    //$('#btn-upload-agreement').click(function () {
+    //    $.ajax({
+    //        url: '/loadAgrUpload',
+    //        type: 'GET',
+    //        data: json,
+    //        contentType: 'application/json; charset=utf-8',
+    //        headers: { 'X-CSRF-TOKEN': token },
+    //        success: function (response) {
+    //            modalPlaceholderAgr.html(response);
+    //        }
+    //    })
+    //});
 }

@@ -1,4 +1,4 @@
-﻿function setDates() {
+﻿(function () {
     const contractDate = document.getElementById('contractDate');
     const activationDate = document.getElementById('activationDate');
     const expirationDate = document.getElementById('expirationDate');
@@ -10,4 +10,4 @@
         expirationDate.setAttribute('min', contractDate.value);
         activationDate.value = contractDate.value;
     }
-}
+})();
