@@ -11,6 +11,14 @@
             </div>
             <div class="modal-body">
                 <form asp-area="" asp-controller="Upload" asp-action="Document" enctype="multipart/form-data">
+
+                    <input asp-for="Id" type="hidden">
+                    <input asp-for="StartConnection" type="hidden">
+                    <input asp-for="EndConnection" type="hidden">
+                    <input asp-for="Date" type="hidden">
+                    <input asp-for="AreaName" type="hidden">
+                    <input asp-for="RouteName" type="hidden">
+
                     <div class="form-group">
                         <select asp-for="DocumentTypes" hidden>
                             @foreach (var type in Model.DocumentTypes)
