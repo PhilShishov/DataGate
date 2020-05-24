@@ -18,22 +18,10 @@
 
         const form = $(this).parents('.modal').find('form');
         const token = $('input[name=__RequestVerificationToken]', form).val();
-        debugger;
         const actionUrl = form.attr('action');
         const dataToSend = new FormData(form.get(0));
-        $.ajax({
-            url: actionUrl,
-            method: 'POST',
-            data: dataToSend,
-            headers: { 'X-CSRF-TOKEN': token },
-            processData: false,
-            contentType: false
-        }).done(function (data) {
-            const newBody = $('.modal-body', data);
-            placeholderDocument.find('.modal-body').replaceWith(newBody);
-        }).fail(function (request, status, error) {
-            alert(request.responseText);
-        });
+
+        postModalRequest(placeholderDocument, actionUrl, dataToSend, token);
     });
 
     // Agreement Upload
@@ -53,6 +41,10 @@
         const actionUrl = form.attr('action');
         const dataToSend = new FormData(form.get(0));
 
+        postModalRequest(placeholderAgreement, actionUrl, dataToSend, token);
+    });
+
+    function postModalRequest(placeholderElement, actionUrl, dataToSend, token) {
         $.ajax({
             url: actionUrl,
             method: 'POST',
@@ -60,13 +52,13 @@
             headers: { 'X-CSRF-TOKEN': token },
             processData: false,
             contentType: false
-        }).done(function (data) {
+        }).done(function(data) {
             const newBody = $('.modal-body', data);
-            placeholderAgreement.find('.modal-body').replaceWith(newBody);
-        }).fail(function (request, status, error) {
+            placeholderElement.find('.modal-body').replaceWith(newBody);
+        }).fail(function(request, status, error) {
             alert(request.responseText);
         });
-    });
+    }
 
     function getModalRequest(placeholderElement, url) {
         $.get({
