@@ -8,16 +8,9 @@
 
     // Document Upload
     const placeholderDocument = $(SELECTORS.PLACEHOLDER_MODAL_DOC);
+    const urlDoc = '/loadDocUpload';
     $(document).on('click', SELECTORS.LOAD_DOC_BUTTON, function (event) {
-        $.get({
-            url: '/loadDocUpload',
-            data: json,
-            contentType: 'application/json; charset=utf-8',
-            headers: { 'X-CSRF-TOKEN': token },
-        }).done(function (data) {
-            placeholderDocument.html(data);
-            placeholderDocument.find('.modal').modal('show');
-        });
+        getModalRequest(placeholderDocument, urlDoc);
     });
 
     placeholderDocument.on('click', '[data-save="modal"]', function (event) {
@@ -28,7 +21,6 @@
         debugger;
         const actionUrl = form.attr('action');
         const dataToSend = new FormData(form.get(0));
-
         $.ajax({
             url: actionUrl,
             method: 'POST',
@@ -46,17 +38,10 @@
 
     // Agreement Upload
     const placeholderAgreement = $(SELECTORS.PLACEHOLDER_MODAL_AGR);
+    const urlAgr = '/loadAgrUpload';
 
     $(document).on('click', SELECTORS.LOAD_AGR_BUTTON, function (event) {
-        $.get({
-            url: '/loadAgrUpload',
-            data: json,
-            contentType: 'application/json; charset=utf-8',
-            headers: { 'X-CSRF-TOKEN': token },
-        }).done(function (data) {
-            placeholderAgreement.html(data);
-            placeholderAgreement.find('.modal').modal('show');
-        });
+        getModalRequest(placeholderAgreement, urlAgr);
     });
 
     placeholderAgreement.on('click', '[data-save="modal"]', function (event) {
@@ -82,4 +67,16 @@
             alert(request.responseText);
         });
     });
+
+    function getModalRequest(placeholderElement, url) {
+        $.get({
+            url: url,
+            data: json,
+            contentType: 'application/json; charset=utf-8',
+            headers: { 'X-CSRF-TOKEN': token },
+        }).done(function (data) {
+            placeholderElement.html(data);
+            placeholderElement.find('.modal').modal('show');
+        });
+    }
 };

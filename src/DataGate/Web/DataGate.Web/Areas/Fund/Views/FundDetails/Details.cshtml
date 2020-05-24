@@ -91,6 +91,9 @@
         const tokenGet = $('#load-form input[name=__RequestVerificationToken]').val();
         const url = '/loadSubFunds';
 
+        // ________________________________________________________
+        //
+        // Manage document and agreement upload modals
         const jsonUpload = {
             areaName: '@GlobalConstants.FundAreaName',
             routeName: '@GlobalConstants.FundDetailsRouteName',
@@ -100,28 +103,18 @@
             endConnection : '@Model.EndConnection',
         };
 
-         @*const jsonAddInfo = {
+        uploadModals(tokenGet, jsonUpload);
+
+        // ________________________________________________________
+        //
+        // Load sub funds, documents, agreements and timelines
+        const jsonAddInfo = {
             id: @Model.Id,
             areaName: '@GlobalConstants.FundAreaName',
             date: '@Model.Date',
             container: '@entityName',
-        };*@
+        };
 
-        @*const area = '@GlobalConstants.FundAreaName';
-        const entityId = @Model.Id;
-        const date = '@Model.Date';
-        const container = '@entityName';*@
-        // ________________________________________________________
-        //
-        // Manage document and agreement upload modals
-        uploadModals(tokenGet, jsonUpload);
-
-        $(document).ready(() => {
-
-            // ________________________________________________________
-            //
-            // Load sub funds, documents, agreements and timelines
-            //loadAddInfo(tokenGet, url, entityId, date, area, container);
-        });
+        loadAddInfo(tokenGet, url, jsonAddInfo);
     </script>
 }
