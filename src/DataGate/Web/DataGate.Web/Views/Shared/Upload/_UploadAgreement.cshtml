@@ -18,13 +18,21 @@
                     <input asp-for="RouteName" type="hidden">
 
                     <div class="form-group">
-                        <select class="form-control maxw-270" asp-for="AgrType">
-                            <option value="">-- Choose Agreement Type --</option>
-                            @foreach (var type in (List<string>)ViewData["AgreementsFileTypes"])
+                        <select asp-for="AgreementsFileTypes" hidden>
+                            @foreach (var type in Model.AgreementsFileTypes)
                             {
                                 <option value="@type">@type</option>
                             }
                         </select>
+
+                        <select class="form-control maxw-270" asp-for="AgrType">
+                            <option selected disabled value="">-- Choose Agreement Type --</option>
+                            @foreach (var type in Model.AgreementsFileTypes)
+                            {
+                                <option value="@type">@type</option>
+                            }
+                        </select>
+
                         <span asp-validation-for="AgrType" class="text-danger"></span>
                     </div>
 
@@ -58,9 +66,17 @@
                     </div>
 
                     <div class="form-group">
+
+                        <select asp-for="AgreementsStatus" hidden>
+                            @foreach (var type in Model.AgreementsStatus)
+                            {
+                                <option value="@type">@type</option>
+                            }
+                        </select>
+
                         <select class="form-control maxw-270" asp-for="Status">
                             <option selected disabled value="">-- Choose Status --</option>
-                            @foreach (var status in (List<string>)ViewData["AgreementsStatus"])
+                            @foreach (var status in Model.AgreementsStatus)
                             {
                                 <option value="@status">@status</option>
                             }
@@ -69,9 +85,16 @@
                     </div>
 
                     <div class="form-group">
+                        <select asp-for="Companies" hidden>
+                            @foreach (var type in Model.Companies)
+                            {
+                                <option value="@type">@type</option>
+                            }
+                        </select>
+
                         <select class="form-control maxw-270" asp-for="Company">
                             <option selected disabled value="">-- Choose Company --</option>
-                            @foreach (var company in (List<string>)ViewData["Companies"])
+                            @foreach (var company in Model.Companies)
                             {
                                 <option value="@company">@company</option>
                             }
