@@ -106,7 +106,7 @@
                 await this.emailSender.SendEmailAsync("philip.shishov@pharusmanco.lu", "Philip Shishov", inputModel.Email, GlobalConstants.ConfirmEmailSubject, message);
 
                 await this.AssignRoleToUser(inputModel, user);
-                return this.ShowInfoLocal(string.Format(InfoMessages.AddUser, user.UserName, inputModel), returnUrl);
+                return this.ShowInfoLocal(string.Format(InfoMessages.AddUser, user.UserName, inputModel.RoleType), returnUrl);
             }
 
             this.AddErrors(result);
@@ -176,7 +176,7 @@
                 {
                     this.logger.LogInformation("User updated.");
 
-                    return this.LocalRedirect(returnUrl);
+                    return this.ShowInfoLocal(string.Format(InfoMessages.UpdateUser, user.UserName), returnUrl);
                 }
             }
             else if (this.HttpContext.Request.Form.ContainsKey("delete_button"))
@@ -187,7 +187,7 @@
                 {
                     this.logger.LogInformation("User deleted.");
 
-                    return this.LocalRedirect(returnUrl);
+                    return this.ShowInfoLocal(string.Format(InfoMessages.RemoveUser, user.UserName), returnUrl);
                 }
             }
 

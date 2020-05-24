@@ -24,6 +24,6 @@
 
         public const string UpdateUser = "{0} was successfully updated.";
 
-        public const string RemoveUser = "{0} was successfully removed as {1}.";
+        public const string RemoveUser = "{0} was successfully removed.";
     }
 }
