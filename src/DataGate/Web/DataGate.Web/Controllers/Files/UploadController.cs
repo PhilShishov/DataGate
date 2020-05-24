@@ -75,10 +75,7 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.ShowError(
-                    ErrorMessages.ModelUploadErrorMessage,
-                    model.RouteName,
-                    new { area = model.AreaName, id = model.Id, date = model.Date });
+                return this.PartialView("Upload/_UploadAgreement", model);
             }
 
             string path = await FileHelpers.ProcessFormFile(model.FileToUpload, this.ModelState, this.permittedExtensions,

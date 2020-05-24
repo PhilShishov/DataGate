@@ -39,7 +39,7 @@
         }
 
         [Route("loadAgrUpload")]
-        public async Task<IActionResult> LoadAgreementUpload(string areaName)
+        public async Task<IActionResult> Agreement(string areaName)
         {
             if (areaName == GlobalConstants.FundAreaName)
             {
@@ -48,7 +48,7 @@
                 this.ViewData["Companies"] = await this.fundService.GetCompanies().ToListAsync();
             }
 
-            return this.PartialView("SpecificEntity/_UploadAgreement");
+            return this.PartialView("Upload/_UploadAgreement");
         }
 
         [Route("loadAllDoc")]
