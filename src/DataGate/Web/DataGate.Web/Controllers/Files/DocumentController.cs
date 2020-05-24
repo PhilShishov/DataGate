@@ -6,6 +6,8 @@
     using DataGate.Common;
     using DataGate.Services.Data.Documents.Contracts;
     using DataGate.Services.DateTime;
+    using DataGate.Services.Mapping;
+    using DataGate.Web.Dtos.Documents;
     using DataGate.Web.InputModels.Files;
     using DataGate.Web.ViewModels.Documents;
 
@@ -24,10 +26,11 @@
         }
 
         [Route("loadDocUpload")]
-        public IActionResult Document(string areaName)
+        public IActionResult Document(LoadDocumentDto dto)
         {
-            var model = new UploadDocumentInputModel { };
-            if (areaName == GlobalConstants.FundAreaName)
+            var model = AutoMapperConfig.MapperInstance.Map<UploadDocumentInputModel>(dto);
+
+            if (model.AreaName == GlobalConstants.FundAreaName)
             {
                 model.DocumentTypes = this.fundService.GetDocumentsFileTypes();
             }
