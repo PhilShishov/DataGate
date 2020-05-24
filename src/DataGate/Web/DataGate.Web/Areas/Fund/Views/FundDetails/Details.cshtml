@@ -89,7 +89,6 @@
         }, 5000);
 
         const tokenGet = $('#load-form input[name=__RequestVerificationToken]').val();
-        const url = '/loadSubFunds';
 
         // ________________________________________________________
         //
@@ -108,6 +107,7 @@
         // ________________________________________________________
         //
         // Load sub funds, documents, agreements and timelines
+        const url = '/loadSubFunds';
         const jsonAddInfo = {
             id: @Model.Id,
             areaName: '@GlobalConstants.FundAreaName',
