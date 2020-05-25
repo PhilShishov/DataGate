@@ -121,7 +121,6 @@
             string query = string.Empty;
 
             UploadAgreementDto dto = AutoMapperConfig.MapperInstance.Map<UploadAgreementDto>(model);
-            //dto.ExpirationDate = model.ExpirationDate?.ToString(GlobalConstants.RequiredSqlDateTimeFormat, CultureInfo.InvariantCulture);
 
             if (model.AreaName == GlobalConstants.FundAreaName)
             {

@@ -14,9 +14,7 @@
             <div class="mobile-none">
                 <hr class="mt-0 mb-auto" />
                 <div class="w-100" id="toolbar-pharus">
-                    <partial name="AllEntities/_Select" />
-                    <partial name="AllEntities/_Update" />
-                    <partial name="AllEntities/_Extract" />
+                    <partial name="AllEntities/_Toolbar" />
                     <div class="justify-content-center w-35">
                         <h2 class="text-center text-torshia" id="entityName">All Funds</h2>
                     </div>
@@ -38,12 +36,14 @@
                 </div>
             }
 
-            <partial name="AllEntities/_Modal" />
-            <partial name="AllEntities/_BindingTable" />
+            <partial name="AllEntities/_ModalSelect" />
             <partial name="AllEntities/_ViewTable" />
         </div>
     </form>
 </div>
+
+<!-- Modal placeholder for excel/pdf extraction-->
+<div id="modal-placeholder-extract"></div>
 
 @section Scripts{
     <script type="text/javascript" src="~/js/submitForm.js" asp-append-version="true"></script>
@@ -57,6 +57,30 @@
             $('#infoMessage').fadeOut();
             $('#errorMessage').fadeOut();
         }, 3000);
+
+        @*const json = {
+            areaName: '@GlobalConstants.FundAreaName',
+            routeName: '@GlobalConstants.FundDetailsRouteName',
+            id: @Model.Id,
+            date: '@Model.Date',
+            startConnection : '@Model.StartConnection',
+            endConnection : '@Model.EndConnection',
+        };*@
+
+        const placeholderElement = $('#modal-placeholder-extract');
+        //const token = $('input[name=__RequestVerificationToken]', form).val();
+
+        $(document).on('click', '#btn-modal-extract', function (event) {
+            $.get({
+                url: '/loadFundExtract',
+                //data: json,
+                contentType: 'application/json; charset=utf-8',
+                //headers: { 'X-CSRF-TOKEN': token },
+            }).done(function (data) {
+                placeholderElement.html(data);
+                placeholderElement.find('.modal').modal('show');
+            });
+        });
 
         $(document).ready(() => {
             var token = $('#update-form input[name=__RequestVerificationToken]').val();

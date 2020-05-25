@@ -20,7 +20,6 @@
                 <hr class="mt-0 mb-auto" />
                 <div class="w-100" id="toolbar-pharus">
                     <partial name="SubEntities/_Select" />
-                    <partial name="SubEntities/_Extract" />
                     <div class="justify-content-center w-35">
                         <h2 class="text-center text-torshia" id="entityName">@Model.Container Sub Funds</h2>
                     </div>
@@ -42,8 +41,8 @@
                 </div>
             }
 
-            <partial name="SubEntities/_Modal" />
-            <partial name="SubEntities/_BindingTable" />
+            <partial name="AllEntities/_ModalExtract" />
+            <partial name="SubEntities/_ModalSelect" />
             <partial name="SubEntities/_ViewTable" />
         </div>
     </form>

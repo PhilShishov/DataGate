@@ -26,8 +26,8 @@ namespace DataGate.Services.Data.Funds
         // ________________________________________________________
         //
         // Table functions names as in DB
-        private readonly string sqlFunctionAllFund = "[fn_all_fund]";
-        private readonly string sqlFunctionAllActiveFund = "[fn_active_fund]";
+        private readonly string sqlFunctionAllFund = "[fn_all_shareclass]";
+        private readonly string sqlFunctionAllActiveFund = "[fn_active_shareclass]";
 
         private readonly ISqlQueryManager sqlManager;
         private readonly IRepository<TbHistoryFund> repository;
@@ -106,7 +106,7 @@ namespace DataGate.Services.Data.Funds
 
         public IEnumerable<string> GetHeaders()
         {
-            return this.GetAllActive(null, 1, 0).FirstOrDefault();
+           return this.GetAllActive(null, 1, 0).FirstOrDefault();
         }
 
         public async Task<ISet<string>> GetNamesAsync(int? id)

@@ -26,8 +26,6 @@ namespace DataGate.Web.ViewModels.Entities
 
         public List<string> HeadersSelection { get; set; }
 
-        public string SearchTerm { get; set; }
-
         public bool IsActive { get; set; }
 
         public IReadOnlyCollection<string> PreSelectedColumns { get; set; }
