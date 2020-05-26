@@ -85,7 +85,6 @@
                 TableValues: tableValues,
                 Date: '@Model.Date',
                 ControllerName: '@controller',
-                RouteName: '@route'
         };
 
         $(document).ready(function () {
@@ -102,7 +101,6 @@
                     data: model,
                     headers: { 'X-CSRF-TOKEN': tokenExtract },
                 }).done(function (data) {
-                    console.log('here2');
                      //$.unblockUI();
                     if (data.fileName != '') {
                         const url = '/Media/Download?fileName=' + data.fileName;
@@ -125,7 +123,10 @@
                     data: model,
                     headers: { 'X-CSRF-TOKEN': tokenExtract },
                 }).done(function (data) {
-                    console.log('here2');
+
+                    if (!data.success) {
+                        alert(data.errorMessage)
+                    }
                     //$.unblockUI();
                     if (data.fileName != '') {
                         const url = '/Media/Download?fileName=' + data.fileName;
