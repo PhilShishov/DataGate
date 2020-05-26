@@ -9,6 +9,7 @@
     using DataGate.Services.Data.Files.Contracts;
     using DataGate.Services.DateTime;
     using DataGate.Web.Filters;
+    using DataGate.Web.Infrastructure.Filters;
     using DataGate.Web.InputModels.Files;
     using DataGate.Web.Utilities;
 
@@ -62,7 +63,8 @@
             return this.ShowError(ErrorMessages.TableReportNotGenerated, model.RouteName);
         }
 
-        //[HttpGet]
+        [HttpGet]
+        [DeleteFileAttribute]
         public IActionResult Download(string fileName, string routeName)
         {
             string fullPath = Path.Combine(Path.GetTempPath(), fileName);
@@ -74,7 +76,10 @@
                 return this.ShowError(ErrorMessages.TableReportNotGenerated, routeName);
             }
 
-            return this.PhysicalFile(fullPath, GlobalConstants.ExcelStreamMimeType, fileName);
+            string streamMimeType = Path.GetExtension(fileName) == GlobalConstants.ExcelFileExtension ?
+                                    GlobalConstants.ExcelStreamMimeType : GlobalConstants.PdfStreamMimeType;
+
+            return this.PhysicalFile(fullPath, streamMimeType, fileName);
         }
 
         [HttpPost]
