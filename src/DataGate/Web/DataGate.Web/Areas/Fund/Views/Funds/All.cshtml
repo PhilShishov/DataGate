@@ -4,52 +4,51 @@
 @{
     ViewData["Title"] = GlobalConstants.FundsControllerName;
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var controller = this.ViewContext.RouteData.Values["controller"].ToString();
+    var route = string.Empty;
+
+    if (controller == GlobalConstants.FundsControllerName)
+    {
+        route = GlobalConstants.FundAllUrl;
+    }
 }
 <div class="justify-content-between">
-    <form asp-controller="Funds"
-          asp-action="All"
-          method="post"
-          id="update-form">
-        <div>
-            <div class="mobile-none">
-                <hr class="mt-0 mb-auto" />
-                <div class="w-100" id="toolbar-pharus">
-                    <partial name="AllEntities/_Toolbar" />
-                    <div class="justify-content-center w-35">
-                        <h2 class="text-center text-torshia" id="entityName">All Funds</h2>
-                    </div>
+    <div>
+        <div class="mobile-none">
+            <hr class="mt-0 mb-auto" />
+            <div class="w-100" id="toolbar-pharus">
+                <partial name="AllEntities/_Toolbar" />
+                <div class="justify-content-center w-35">
+                    <h2 class="text-center text-torshia" id="entityName">All Funds</h2>
                 </div>
-                <hr class="mt-1 mb-0" />
             </div>
-
-            @if (this.TempData[GlobalConstants.InfoKey] != null)
-            {
-                <div class="alert alert-success" id="infoMessage">
-                    @this.TempData[GlobalConstants.InfoKey]
-                </div>
-            }
-
-            @if (this.TempData[GlobalConstants.ErrorKey] != null)
-            {
-                <div class="alert alert-danger" id="errorMessage">
-                    @this.TempData[GlobalConstants.ErrorKey]
-                </div>
-            }
-
-            <partial name="AllEntities/_ModalSelect" />
-            <partial name="AllEntities/_ViewTable" />
+            <hr class="mt-1 mb-0" />
         </div>
-    </form>
-</div>
 
-<!-- Modal placeholder for excel/pdf extraction-->
-<div id="modal-placeholder-extract"></div>
+        @if (this.TempData[GlobalConstants.InfoKey] != null)
+        {
+            <div class="alert alert-success" id="infoMessage">
+                @this.TempData[GlobalConstants.InfoKey]
+            </div>
+        }
+
+        @if (this.TempData[GlobalConstants.ErrorKey] != null)
+        {
+            <div class="alert alert-danger" id="errorMessage">
+                @this.TempData[GlobalConstants.ErrorKey]
+            </div>
+        }
+
+        <partial name="AllEntities/_ViewTable" />
+    </div>
+</div>
 
 @section Scripts{
     <script type="text/javascript" src="~/js/submitForm.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/buttonRedirect.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="~/js/setTableValues.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/inactive.js" asp-append-version="true"></script>
+    @*<script type="text/javascript" src="~/js/jquery.blockUI.js" asp-append-version="true"></script>*@
 
     <script>
         // Fade timeout for tempdata messages
@@ -58,37 +57,69 @@
             $('#errorMessage').fadeOut();
         }, 3000);
 
-        @*const json = {
-            areaName: '@GlobalConstants.FundAreaName',
-            routeName: '@GlobalConstants.FundDetailsRouteName',
-            id: @Model.Id,
-            date: '@Model.Date',
-            startConnection : '@Model.StartConnection',
-            endConnection : '@Model.EndConnection',
-        };*@
+        const SELECTORS = {
+            TOKEN_UPDATE_FORM: '#update-form input[name=__RequestVerificationToken]',
+            TOKEN_EXTRACT: '#extract-form input[name=__RequestVerificationToken]',
+            EXTRACT_EXCEL_BUTTON: 'btn-extract-excel',
+            EXTRACT_PDF_BUTTON: 'btn-extract-pdf',
+            jQ_EXTRACT_EXCEL_BUTTON: '#btn-extract-excel',
+            jQ_EXTRACT_PDF_BUTTON: '#btn-extract-pdf',
+            TABLE_EXTRACT: 'table-entities',
+        };
 
-        const placeholderElement = $('#modal-placeholder-extract');
-        //const token = $('input[name=__RequestVerificationToken]', form).val();
+        const excelValue = document.getElementById(SELECTORS.EXTRACT_EXCEL_BUTTON).getAttribute('value');
+        const pdfValue = document.getElementById(SELECTORS.EXTRACT_PDF_BUTTON).getAttribute('value');
+        const table = document.getElementById(SELECTORS.TABLE_EXTRACT);
 
-        $(document).on('click', '#btn-modal-extract', function (event) {
-            $.get({
-                url: '/loadFundExtract',
-                //data: json,
-                contentType: 'application/json; charset=utf-8',
-                //headers: { 'X-CSRF-TOKEN': token },
-            }).done(function (data) {
-                placeholderElement.html(data);
-                placeholderElement.find('.modal').modal('show');
+        let tableValues = [];
+
+        for (let row of table.rows) {
+            let tableRows = [];
+            for (let cell of row.cells) {
+                tableRows.push(cell.innerText);
+            }
+            tableValues.push(tableRows);
+        }
+
+        let model = {
+                TableValues: tableValues,
+                Date: '@Model.Date',
+                ControllerName: '@controller',
+                RouteName: '@route'
+        };
+
+        $(document).ready(function () {
+
+            $(document).on('click', SELECTORS.jQ_EXTRACT_EXCEL_BUTTON, function (event) {
+                event.preventDefault()
+                model.Command = excelValue;
+                const tokenExtract = $(SELECTORS.TOKEN_EXTRACT).val();
+
+            //$.blockUI({ message: '<h3>Please wait a moment...</h3>' });
+                $.ajax({
+                    url: '/Media/GenerateReport',
+                    type: 'POST',
+                    data: model,
+                    headers: { 'X-CSRF-TOKEN': tokenExtract },
+                }).done(function (data) {
+                    console.log('here2');
+                     //$.unblockUI();
+                    if (data.fileName != "") {
+                        const url = "/Media/Download?fileName=" + data.fileName; 
+                        window.location = url;
+                    }
+                }).fail(function (request, status, error) {
+                    alert(request.responseText);
+                });
             });
-        });
 
-        $(document).ready(() => {
-            var token = $('#update-form input[name=__RequestVerificationToken]').val();
+
             // ________________________________________________________
             //
             // Autocomplete search
-            const controller = '@GlobalConstants.FundsControllerName';
-            loadAutocomplete(token, controller, entityId = null);
+            const controller = '@controller';
+            const tokenUpdate = $(SELECTORS.TOKEN_UPDATE_FORM).val();
+            loadAutocomplete(tokenUpdate, controller, entityId = null);
 
             // ________________________________________________________
             //

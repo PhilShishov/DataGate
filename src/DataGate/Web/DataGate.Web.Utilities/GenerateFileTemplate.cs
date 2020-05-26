@@ -12,7 +12,6 @@ namespace DataGate.Web.Utilities
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
 
     using DataGate.Common;
 
@@ -42,13 +41,11 @@ namespace DataGate.Web.Utilities
         // Extract table data as Excel
         // and preparing for download
         // in controller as filestreamresult
-        public static FileStreamResult Excel(
+        public static string Excel(
                                             IEnumerable<string> headers,
                                             List<string[]> values,
                                             string controllerName)
         {
-            FileStreamResult fileStreamResult;
-
             ExcelPackage.LicenseContext = LicenseContext.Commercial;
 
             using (ExcelPackage package = new ExcelPackage())
@@ -66,27 +63,29 @@ namespace DataGate.Web.Utilities
                     worksheet.Cells[1, counter].Value = header;
                 }
 
-                for (int row = 0; row < values.Count; row++)
+                for (int row = 1; row < values.Count; row++)
                 {
                     for (int col = 0; col < values[row].Length; col++)
                     {
-                        worksheet.Cells[row + 2, col + 1].Value = Convert.ToString(values[row][col]);
+                        worksheet.Cells[row + 1, col + 1].Value = Convert.ToString(values[row][col]);
                     }
                 }
 
                 package.Save();
 
-                MemoryStream stream = new MemoryStream();
-
-                package.SaveAs(stream);
-                stream.Position = 0;
-
-                fileStreamResult = new FileStreamResult(stream, GlobalConstants.ExcelStreamMimeType)
+                string fileName = $"{correctTypeName}{GlobalConstants.ExcelFileExtension}";
+                using (var stream = new MemoryStream())
                 {
-                    FileDownloadName = $"{correctTypeName}{GlobalConstants.ExcelFileExtension}",
-                };
+                    package.SaveAs(stream);
+                    string temp = System.IO.Path.GetTempPath();
 
-                return fileStreamResult;
+                    string fullPath = System.IO.Path.Combine(temp, fileName);
+                    FileStream file = new FileStream(fullPath, FileMode.Create, FileAccess.Write);
+                    stream.WriteTo(file);
+                    file.Close();
+                }
+
+                return fileName;
             }
         }
 
@@ -146,7 +145,7 @@ namespace DataGate.Web.Utilities
 
             }
 
-            for (int row = 0; row < entities.Count; row++)
+            for (int row = 1; row < entities.Count; row++)
             {
                 for (int col = 0; col < entities[0].Length; col++)
                 {
@@ -190,10 +189,12 @@ namespace DataGate.Web.Utilities
                 case GlobalConstants.FundsControllerName:
                     typeName = FundsNameDisplay;
                     break;
-                case GlobalConstants.SubFundsControllerName: case GlobalConstants.FundSubFundsControllerName:
+                case GlobalConstants.SubFundsControllerName:
+                case GlobalConstants.FundSubFundsControllerName:
                     typeName = SubFundsNameDisplay;
                     break;
-                case GlobalConstants.ShareClassesControllerName: case GlobalConstants.SubFundShareClassesControllerName:
+                case GlobalConstants.ShareClassesControllerName:
+                case GlobalConstants.SubFundShareClassesControllerName:
                     typeName = ShareClassesNameDisplay;
                     break;
 
