@@ -1,5 +1,6 @@
 ﻿namespace DataGate.Web.Controllers
 {
+    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
@@ -13,10 +14,11 @@
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
-    [Authorize]
-    [ValidateAntiForgeryToken]
+    //[Authorize]
+    //[ValidateAntiForgeryToken]
     public class MediaController : BaseController
     {
         private readonly IWebHostEnvironment environment;
@@ -31,28 +33,48 @@
         }
 
         [HttpPost]
-        public IActionResult Download(DownloadInputModel model)
+        public IActionResult GenerateReport(DownloadInputModel model)
         {
-            if (model.Values != null && model.Values.Count > 0)
+            if (model.TableValues != null && model.TableValues.Count > 0)
             {
+                IEnumerable<string> tableHeaders = model.TableValues.FirstOrDefault();
+                string fileName = string.Empty;
+
                 if (model.Command == GlobalConstants.CommandExtractExcel)
                 {
-                    return GenerateFileTemplate.Excel(model.Headers, model.Values, model.ControllerName);
+                    fileName = GenerateFileTemplate.Excel(tableHeaders, model.TableValues, model.ControllerName);
                 }
-                else if (model.Command == GlobalConstants.CommandExtractPdf)
-                {
-                    var date = DateTimeParser.WebFormat(model.Date);
+                //else if (model.Command == GlobalConstants.CommandExtractPdf)
+                //{
+                //    var date = DateTimeParser.WebFormat(model.Date);
 
-                    if (model.Headers.ToList().Count > GlobalConstants.NumberOfAllowedColumnsInPdfView)
-                    {
-                        return this.ShowError(ErrorMessages.TooManyColumns, model.RouteName);
-                    }
+                //    if (tableHeaders.ToList().Count > GlobalConstants.NumberOfAllowedColumnsInPdfView)
+                //    {
+                //        return this.ShowError(ErrorMessages.TooManyColumns, model.RouteName);
+                //    }
 
-                    return GenerateFileTemplate.Pdf(model.Headers, model.Values, date, model.ControllerName);
-                }
+                //    return GenerateFileTemplate.Pdf(tableHeaders, model.TableValues, date, model.ControllerName);
+                //}
+
+                return this.Json(new { fileName = fileName, routeName = model.RouteName });
             }
 
             return this.ShowError(ErrorMessages.TableReportNotGenerated, model.RouteName);
+        }
+
+        //[HttpGet]
+        public IActionResult Download(string fileName, string routeName)
+        {
+            string fullPath = Path.Combine(Path.GetTempPath(), fileName);
+
+            var exists = System.IO.File.Exists(fullPath);
+
+            if (fullPath == null || !exists)
+            {
+                return this.ShowError(ErrorMessages.TableReportNotGenerated, routeName);
+            }
+
+            return this.PhysicalFile(fullPath, GlobalConstants.ExcelStreamMimeType, fileName);
         }
 
         [HttpPost]
