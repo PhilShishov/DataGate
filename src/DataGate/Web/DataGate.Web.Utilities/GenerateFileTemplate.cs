@@ -22,8 +22,6 @@ namespace DataGate.Web.Utilities
     using iText.Layout.Element;
     using iText.Layout.Properties;
 
-    using Microsoft.AspNetCore.Mvc;
-
     using OfficeOpenXml;
 
     // _____________________________________________________________
@@ -94,85 +92,88 @@ namespace DataGate.Web.Utilities
         // Extract table data as PDF
         // and preparing for download
         // in controller as filestreamresult
-        public static FileStreamResult Pdf(
+        public static string Pdf(
                                             IEnumerable<string> headers,
                                             List<string[]> entities,
                                             DateTime? chosenDate,
                                             string controllerName)
         {
             string correctTypeName = GetCorrectTypeName(controllerName);
-
             int tableLength = entities[0].Length;
+            string fileName = string.Empty;
 
-            FileStreamResult fileStreamResult;
-            var stream = new MemoryStream();
-            PdfWriter writer = new PdfWriter(stream);
-            writer.SetCloseStream(false);
-
-            PdfDocument pdfDoc = new PdfDocument(writer);
-
-            // Funds table format settings
-            pdfDoc.SetDefaultPageSize(PageSize.A3.Rotate());
-
-            // SubFunds table format settings
-            // ShareClasses table format settings
-            Document document = new Document(pdfDoc);
-
-            string imageFilePath = @".\wwwroot\images\Logo_Pharus_small.jpg";
-            ImageData data = ImageDataFactory.Create(imageFilePath);
-
-            Image img = new Image(data);
-
-            Table table = new Table(tableLength);
-
-            table.SetWidth(UnitValue.CreatePercentValue(100));
-            table.SetFontSize(10);
-
-            foreach (var header in headers)
+            using (var stream = new MemoryStream())
             {
-                string input = header;
-                if (input == null)
+                PdfWriter writer = new PdfWriter(stream);
+                writer.SetCloseStream(false);
+
+                PdfDocument pdfDoc = new PdfDocument(writer);
+
+                // Funds table format settings
+                pdfDoc.SetDefaultPageSize(PageSize.A3.Rotate());
+
+                // SubFunds table format settings
+                // ShareClasses table format settings
+                Document document = new Document(pdfDoc);
+
+                string imageFilePath = @".\wwwroot\images\Logo_Pharus_small.jpg";
+                ImageData data = ImageDataFactory.Create(imageFilePath);
+
+                Image img = new Image(data);
+
+                Table table = new Table(tableLength);
+
+                table.SetWidth(UnitValue.CreatePercentValue(100));
+                table.SetFontSize(10);
+
+                foreach (var header in headers)
                 {
-                    input = " ";
-                }
-
-                Cell cell = new Cell();
-                cell.Add(new Paragraph(input));
-                cell.SetTextAlignment(TextAlignment.CENTER);
-                cell.SetBold();
-
-                table.AddHeaderCell(cell);
-
-            }
-
-            for (int row = 1; row < entities.Count; row++)
-            {
-                for (int col = 0; col < entities[0].Length; col++)
-                {
-                    string input = entities[row][col];
+                    string input = header;
                     if (input == null)
                     {
                         input = " ";
                     }
 
-                    table.AddCell(new Paragraph(input));
+                    Cell cell = new Cell();
+                    cell.Add(new Paragraph(input));
+                    cell.SetTextAlignment(TextAlignment.CENTER);
+                    cell.SetBold();
+
+                    table.AddHeaderCell(cell);
+
                 }
+
+                for (int row = 1; row < entities.Count; row++)
+                {
+                    for (int col = 0; col < entities[0].Length; col++)
+                    {
+                        string input = entities[row][col];
+                        if (input == null)
+                        {
+                            input = " ";
+                        }
+
+                        table.AddCell(new Paragraph(input));
+                    }
+                }
+
+                document.Add(img);
+                document.Add(new Paragraph(" "));
+                document.Add(new Paragraph($"List of {correctTypeName} as of " + chosenDate?.ToString(GlobalConstants.PdfDateTimeFormatDisplay)));
+                document.Add(new Paragraph(" "));
+                document.Add(table);
+                document.Close();
+
+                fileName = $"{correctTypeName}{GlobalConstants.PdfFileExtension}";
+                string temp = System.IO.Path.GetTempPath();
+
+                string fullPath = System.IO.Path.Combine(temp, fileName);
+                FileStream file = new FileStream(fullPath, FileMode.Create, FileAccess.Write);
+                stream.WriteTo(file);
+                file.Close();
             }
 
-            document.Add(img);
-            document.Add(new Paragraph(" "));
-            document.Add(new Paragraph($"List of {correctTypeName} as of " + chosenDate?.ToString(GlobalConstants.PdfDateTimeFormatDisplay)));
-            document.Add(new Paragraph(" "));
-            document.Add(table);
-            document.Close();
-
-            stream.Position = 0;
-            fileStreamResult = new FileStreamResult(stream, GlobalConstants.PdfStreamMimeType)
-            {
-                FileDownloadName = $"{correctTypeName}{GlobalConstants.PdfFileExtension}",
-            };
-
-            return fileStreamResult;
+            return fileName;
         }
 
         // ________________________________________________________
