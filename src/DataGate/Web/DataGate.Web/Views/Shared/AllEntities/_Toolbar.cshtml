@@ -1,27 +1,32 @@
 ﻿@model DataGate.Web.ViewModels.Entities.EntitiesViewModel
 
 <div class="w-30" style="margin-right: -0.3%;">
-    <div class="h-70" id="allselect-div-pharus">
-        <div class=" select-div-pharus">
-            <select asp-for="SelectTerm"
-                    id="SelectTerm"
-                    class="form-control input-sm"
-                    onchange="this.form.submit()">
-                <option value=@Model.SelectTerm selected>@Model.SelectTerm</option>
-            </select>
-        </div>
+    <div class="h-100" id="allselect-div-pharus">
 
-        <div>
-            <button type="button"
-                    class="btn btn-sm ml-2 btn-pharus"
-                    data-toggle="modal"
-                    data-target="#columnModal"
-                    name="showColumnSelection">
-                Column Choice
-            </button>
-        </div>
+        <form class="d-flex"
+              method="post"
+              asp-action="All"
+              id="update-form">
 
-        <div class="ml-2 d-flex">
+            <div class=" select-div-pharus">
+                <select asp-for="SelectTerm"
+                        id="SelectTerm"
+                        class="form-control input-sm"
+                        onchange="this.form.submit()">
+                    <option value=@Model.SelectTerm selected>@Model.SelectTerm</option>
+                </select>
+            </div>
+
+            <div>
+                <button type="button"
+                        class="btn btn-sm ml-2 btn-pharus"
+                        data-toggle="modal"
+                        data-target="#columnModal"
+                        name="showColumnSelection">
+                    Column Choice
+                </button>
+            </div>
+
             <div class="el-switch-div">
                 <label class="el-switch el-switch-sm mt-1">
                     <input type="checkbox"
@@ -39,42 +44,45 @@
                     Reset
                 </button>
             </div>
-        </div>
-    </div>
-</div>
 
-<div class="vertical mx-3"></div>
+            <div class="vertical mx-3"></div>
 
-<div>
-    <div class="d-flex h-70">
+            <div>
+                <input type="date"
+                       id="date-pharus"
+                       asp-for="Date"
+                       min="2018-01-01">
+                <input type="submit"
+                       class="btn btn-pharus btn-sm mb-2p"
+                       name="Command"
+                       value="Update Table"></>
+            </div>
+
+            <partial name="AllEntities/_ModalSelect" />
+        </form>
+
+        <div class="vertical mx-3"></div>
+
         <div>
-            <input type="date"
-                   id="date-pharus"
-                   asp-for="Date"
-                   min="2018-01-01">
-            <input type="submit"
-                   class="btn btn-pharus btn-sm mb-2p"
-                   name="Command"
-                   value="Update Table"></>
+            <form method="post" id="extract-form"></form>
+
+            <button class="btn btn-sm btn-pharus"
+                    id="btn-extract-excel"
+                    type="button"
+                    value="Excel">
+                Excel
+            </button>
+
+            <button class="btn btn-sm btn-pharus ml-4"
+                    id="btn-extract-pdf"
+                    type="button"
+                    value="PDF">
+                PDF
+            </button>
         </div>
+
+        <div class="vertical mx-3"></div>
+
     </div>
     <span asp-validation-for="Date" class="text-danger"></span>
 </div>
-
-<div class="vertical mx-3"></div>
-
-<div>
-    <div class="d-flex h-70">
-        <div>
-            <button type="button"
-                    id="btn-modal-extract"
-                    class="btn btn-pharus btn-sm mb-2"
-                    data-toggle="modal"
-                    data-target="#modal-extract">
-                Extract
-            </button>
-        </div>
-    </div>
-</div>
-
-<div class="vertical mx-3"></div>

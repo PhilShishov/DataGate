@@ -13,14 +13,11 @@
     var entityId = string.Empty;
 }
 <div class="table-responsive border-0 mx-auto" id="tableDoubleScroll">
-    <table class="table table-hover text-nowrap">
+    <table class="table table-hover text-nowrap" id="table-entities">
         <thead>
             <tr>
                 @for (int header = 0; header < Model.Headers.Count; header++)
                 {
-                    <th hidden>
-                        <input class="tblValues" type="hidden" asp-for="@Model.Headers[header]" value="@Model.Headers[header]" readonly />
-                    </th>
                     <th class="text-white pr-3 tableHeaderPharus help"
                         data-toggle="tooltip"
                         data-placement="bottom"
