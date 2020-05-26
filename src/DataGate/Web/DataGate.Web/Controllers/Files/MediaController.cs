@@ -18,7 +18,7 @@
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
-    //[Authorize]
+    [Authorize]
     //[ValidateAntiForgeryToken]
     public class MediaController : BaseController
     {
@@ -34,47 +34,39 @@
         }
 
         [HttpPost]
-        public IActionResult GenerateReport(DownloadInputModel model)
+        public JsonResult GenerateReport(DownloadInputModel model)
         {
+            string fileName = string.Empty;
             if (model.TableValues != null && model.TableValues.Count > 0)
             {
                 IEnumerable<string> tableHeaders = model.TableValues.FirstOrDefault();
-                string fileName = string.Empty;
 
                 if (model.Command == GlobalConstants.CommandExtractExcel)
                 {
                     fileName = GenerateFileTemplate.Excel(tableHeaders, model.TableValues, model.ControllerName);
                 }
-                //else if (model.Command == GlobalConstants.CommandExtractPdf)
-                //{
-                //    var date = DateTimeParser.WebFormat(model.Date);
+                else if (model.Command == GlobalConstants.CommandExtractPdf)
+                {
+                    var date = DateTimeParser.WebFormat(model.Date);
 
-                //    if (tableHeaders.ToList().Count > GlobalConstants.NumberOfAllowedColumnsInPdfView)
-                //    {
-                //        return this.ShowError(ErrorMessages.TooManyColumns, model.RouteName);
-                //    }
+                    //if (tableHeaders.ToList().Count > GlobalConstants.NumberOfAllowedColumnsInPdfView)
+                    //{
+                    //    var errorMessage = ErrorMessages.TooManyColumns;
+                    //    return this.Json(ErrorMessages.TooManyColumns, model.RouteName);
+                    //}
 
-                //    return GenerateFileTemplate.Pdf(tableHeaders, model.TableValues, date, model.ControllerName);
-                //}
-
-                return this.Json(new { fileName = fileName, routeName = model.RouteName });
+                    fileName = GenerateFileTemplate.Pdf(tableHeaders, model.TableValues, date, model.ControllerName);
+                }
             }
 
-            return this.ShowError(ErrorMessages.TableReportNotGenerated, model.RouteName);
+            return this.Json(new { fileName = fileName });
         }
 
         [HttpGet]
         [DeleteFileAttribute]
-        public IActionResult Download(string fileName, string routeName)
+        public IActionResult Download(string fileName)
         {
             string fullPath = Path.Combine(Path.GetTempPath(), fileName);
-
-            var exists = System.IO.File.Exists(fullPath);
-
-            if (fullPath == null || !exists)
-            {
-                return this.ShowError(ErrorMessages.TableReportNotGenerated, routeName);
-            }
 
             string streamMimeType = Path.GetExtension(fileName) == GlobalConstants.ExcelFileExtension ?
                                     GlobalConstants.ExcelStreamMimeType : GlobalConstants.PdfStreamMimeType;

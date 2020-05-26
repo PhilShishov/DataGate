@@ -9,9 +9,13 @@
         {
             filterContext.HttpContext.Response.Body.FlushAsync();
 
-            string filePath = (filterContext.Result as PhysicalFileResult).FileName;
+            var result = filterContext.Result as PhysicalFileResult;
 
-            System.IO.File.Delete(filePath);
+            if (result != null)
+            {
+                string filePath = result.FileName;
+                System.IO.File.Delete(filePath);
+            }
         }
     }
 }

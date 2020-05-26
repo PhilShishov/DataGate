@@ -104,8 +104,31 @@
                 }).done(function (data) {
                     console.log('here2');
                      //$.unblockUI();
-                    if (data.fileName != "") {
-                        const url = "/Media/Download?fileName=" + data.fileName; 
+                    if (data.fileName != '') {
+                        const url = '/Media/Download?fileName=' + data.fileName;
+                        window.location = url;
+                    }
+                }).fail(function (request, status, error) {
+                    alert(request.responseText);
+                });
+            });
+
+            $(document).on('click', SELECTORS.jQ_EXTRACT_PDF_BUTTON, function (event) {
+                event.preventDefault()
+                model.Command = pdfValue;
+                const tokenExtract = $(SELECTORS.TOKEN_EXTRACT).val();
+
+                //$.blockUI({ message: '<h3>Please wait a moment...</h3>' });
+                $.ajax({
+                    url: '/Media/GenerateReport',
+                    type: 'POST',
+                    data: model,
+                    headers: { 'X-CSRF-TOKEN': tokenExtract },
+                }).done(function (data) {
+                    console.log('here2');
+                    //$.unblockUI();
+                    if (data.fileName != '') {
+                        const url = '/Media/Download?fileName=' + data.fileName;
                         window.location = url;
                     }
                 }).fail(function (request, status, error) {

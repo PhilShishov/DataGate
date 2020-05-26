@@ -11,7 +11,7 @@
     using Microsoft.AspNetCore.Routing;
 
     [Area(GlobalConstants.FundAreaName)]
-    //[Authorize]
+    [Authorize]
     public class FundsController : BaseController
     {
         private readonly IFundService service;
