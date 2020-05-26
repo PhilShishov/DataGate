@@ -48,7 +48,7 @@
     <script type="text/javascript" src="~/js/submitForm.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/buttonRedirect.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/inactive.js" asp-append-version="true"></script>
-    @*<script type="text/javascript" src="~/js/jquery.blockUI.js" asp-append-version="true"></script>*@
+    <script type="text/javascript" src="~/js/jquery.blockUI.js" asp-append-version="true"></script>
 
     <script>
         // Fade timeout for tempdata messages
@@ -95,18 +95,18 @@
                 model.Command = excelValue;
                 const tokenExtract = $(SELECTORS.TOKEN_EXTRACT).val();
 
-            //$.blockUI({ message: '<h3>Please wait a moment...</h3>' });
+                $.blockUI({ message: '<h3>Please wait a moment...</h3>' });
                 $.ajax({
                     url: '/Media/GenerateReport',
                     type: 'POST',
                     data: model,
                     headers: { 'X-CSRF-TOKEN': tokenExtract },
                 }).done(function (data) {
-                     //$.unblockUI();
-                    if (data.fileName != '') {
-                        const url = '/Media/Download?fileName=' + data.fileName;
-                        window.location = url;
-                    }
+                    setTimeout($.unblockUI, 1000);
+                    //if (data.fileName != '') {
+                    //    const url = '/Media/Download?fileName=' + data.fileName;
+                    //    window.location = url;
+                    //}
                 }).fail(function (request, status, error) {
                     alert(request.responseText);
                 });
@@ -129,11 +129,8 @@
                     //$.unblockUI();
                     if (!data.success) {
                         alert(data.errorMessage);
-                        window.location.href = data.routeName;
                         return;
                     }
-
-                    console.log('here2');
 
                     if (data.fileName != '') {
                         const url = '/Media/Download?fileName=' + data.fileName;
