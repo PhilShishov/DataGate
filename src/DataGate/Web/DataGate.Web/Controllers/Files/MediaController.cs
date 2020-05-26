@@ -19,7 +19,6 @@
     using Microsoft.AspNetCore.Mvc;
 
     [Authorize]
-    [ValidateAntiForgeryToken]
     public class MediaController : BaseController
     {
         private readonly IWebHostEnvironment environment;
@@ -34,6 +33,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public JsonResult GenerateReport(DownloadInputModel model)
         {
             string fileName = string.Empty;
@@ -51,7 +51,7 @@
 
                     if (tableHeaders.ToList().Count > GlobalConstants.NumberOfAllowedColumnsInPdfView)
                     {
-                        return this.Json(new { success = false, errorMessage = ErrorMessages.TooManyColumns });
+                        return this.Json(new { success = false, errorMessage = ErrorMessages.TooManyColumns, routeName = model.RouteName });
                     }
 
                     fileName = GenerateFileTemplate.Pdf(tableHeaders, model.TableValues, date, model.ControllerName);

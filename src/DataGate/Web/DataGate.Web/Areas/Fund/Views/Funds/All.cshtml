@@ -82,9 +82,10 @@
         }
 
         let model = {
-                TableValues: tableValues,
-                Date: '@Model.Date',
-                ControllerName: '@controller',
+            TableValues: tableValues,
+            Date: '@Model.Date',
+            ControllerName: '@controller',
+            RouteName: '@route',
         };
 
         $(document).ready(function () {
@@ -124,10 +125,16 @@
                     headers: { 'X-CSRF-TOKEN': tokenExtract },
                 }).done(function (data) {
 
-                    if (!data.success) {
-                        alert(data.errorMessage)
-                    }
+                    console.log('here1');
                     //$.unblockUI();
+                    if (!data.success) {
+                        alert(data.errorMessage);
+                        window.location.href = data.routeName;
+                        return;
+                    }
+
+                    console.log('here2');
+
                     if (data.fileName != '') {
                         const url = '/Media/Download?fileName=' + data.fileName;
                         window.location = url;
