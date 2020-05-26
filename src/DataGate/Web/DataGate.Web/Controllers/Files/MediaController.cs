@@ -58,7 +58,7 @@
                 }
             }
 
-            return this.Json(new { fileName = fileName });
+            return this.Json(new { success = true, fileName = fileName });
         }
 
         [HttpGet]
