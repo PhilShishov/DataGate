@@ -19,7 +19,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     [Authorize]
-    //[ValidateAntiForgeryToken]
+    [ValidateAntiForgeryToken]
     public class MediaController : BaseController
     {
         private readonly IWebHostEnvironment environment;
@@ -49,11 +49,10 @@
                 {
                     var date = DateTimeParser.WebFormat(model.Date);
 
-                    //if (tableHeaders.ToList().Count > GlobalConstants.NumberOfAllowedColumnsInPdfView)
-                    //{
-                    //    var errorMessage = ErrorMessages.TooManyColumns;
-                    //    return this.Json(ErrorMessages.TooManyColumns, model.RouteName);
-                    //}
+                    if (tableHeaders.ToList().Count > GlobalConstants.NumberOfAllowedColumnsInPdfView)
+                    {
+                        return this.Json(new { success = false, errorMessage = ErrorMessages.TooManyColumns });
+                    }
 
                     fileName = GenerateFileTemplate.Pdf(tableHeaders, model.TableValues, date, model.ControllerName);
                 }
