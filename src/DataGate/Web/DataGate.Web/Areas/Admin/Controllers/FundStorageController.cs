@@ -75,9 +75,13 @@
         {
             bool doesExist = await this.service.DoesExist(model.FundName);
 
-            if (!this.ModelState.IsValid || doesExist)
+            if (doesExist)
             {
                 this.TempData[GlobalConstants.ErrorKey] = ErrorMessages.ExistingEntityName;
+            }
+
+            if (!this.ModelState.IsValid)
+            {
                 await this.SetViewDataValuesForFundSelectLists();
                 return this.View(model);
             }

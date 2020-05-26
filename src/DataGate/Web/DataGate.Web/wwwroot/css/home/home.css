@@ -24,6 +24,10 @@ img {
     height: auto;
 }
 
+    img:hover {
+        opacity: 0.8;
+    }
+
 .inner {
     padding: 20px;
     font-family: 'Gilroy-Regular ☞';
@@ -64,13 +68,5 @@ img {
 @media only screen and (min-width: 1024px) {
     .text-pharus {
         font-size: 46px;
-    }
-
-    .div-text-pharus {
-        margin-top: 20px;
-    }
-
-    .pharus-btn {
-        margin-top: 55px;
     }
 }

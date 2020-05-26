@@ -59,12 +59,25 @@
 
 @section Scripts{
     <script type="text/javascript" src="~/lib/moment/min/moment-with-locales.min.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="~/js/setLocalTime.js" asp-append-version="true"></script>
     <script>
         // Fade timeout for tempdata messages
         setTimeout(() => {
             $('#infoMessage').fadeOut();
             $('#errorMessage').fadeOut();
         }, 5000);
+
+        $(function () {
+            moment.locale("de");
+            $("time").each(function (i, e) {
+                const dateTimeValue = $(e).attr("datetime");
+                if (!dateTimeValue) {
+                    return;
+                }
+
+                const time = moment.utc(dateTimeValue).local();
+                $(e).html(time.format("DD.MM.YYYY HH:mm"));
+                $(e).attr("title", $(e).attr("datetime"));
+            });
+        });
     </script>
 }
