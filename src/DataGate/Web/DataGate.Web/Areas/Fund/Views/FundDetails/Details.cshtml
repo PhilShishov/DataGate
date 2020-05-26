@@ -76,7 +76,6 @@
 <!-- Modal placeholder for agreement upload-->
 <div id="modal-placeholder-agreement"></div>
 
-
 @section Scripts{
     <script type="text/javascript" src="~/js/controllers/uploadController.js" asp-append-version="true"></script>
     <script type="text/javascript" src="~/js/controllers/subEntitiesController.js" asp-append-version="true"></script>
@@ -88,7 +87,7 @@
             $('#errorMessage').fadeOut();
         }, 5000);
 
-        const tokenGet = $('#load-form input[name=__RequestVerificationToken]').val();
+        const tokenLoadEntities = $('#load-form input[name=__RequestVerificationToken]').val();
 
         // ________________________________________________________
         //
@@ -102,7 +101,7 @@
             endConnection : '@Model.EndConnection',
         };
 
-        uploadModals(tokenGet, jsonUpload);
+        uploadModals(tokenLoadEntities, jsonUpload);
 
         // ________________________________________________________
         //
@@ -115,6 +114,6 @@
             container: '@entityName',
         };
 
-        loadAddInfo(tokenGet, url, jsonAddInfo);
+        loadAddInfo(tokenLoadEntities, url, jsonAddInfo);
     </script>
 }
