@@ -1,12 +1,9 @@
 ﻿namespace DataGate.Web.Areas.Funds.Controllers
 {
-    using System.Collections.Generic;
-
     using DataGate.Common;
     using DataGate.Services.Data.Funds.Contracts;
     using DataGate.Services.Data.ViewSetups;
     using DataGate.Web.Controllers;
-    using DataGate.Web.InputModels.Files;
     using DataGate.Web.ViewModels.Entities;
 
     using Microsoft.AspNetCore.Authorization;
@@ -14,7 +11,7 @@
     using Microsoft.AspNetCore.Routing;
 
     [Area(GlobalConstants.FundAreaName)]
-    [Authorize]
+    //[Authorize]
     public class FundsController : BaseController
     {
         private readonly IFundService service;
@@ -44,19 +41,6 @@
             }
 
             return this.ShowError(ErrorMessages.TableIsEmpty, GlobalConstants.AllActionName, GlobalConstants.FundsControllerName);
-        }
-
-        [HttpGet]
-        [Route("loadFundExtract")]
-        public IActionResult GetExtract(List<string> headers)
-        {
-            var model = new ExtractViewModel
-            {
-                //Headers = headers,
-                //Names = ,
-                //Values = ,
-            };
-            return this.PartialView("Extract/_Extract", model);
         }
     }
 }

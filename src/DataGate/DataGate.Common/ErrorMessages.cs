@@ -6,7 +6,7 @@
         public const string NewPasswordMismatch = "The new password and confirmation password do not match.";
         public const string ChosenDateIsEmpty = "Date cannot be empty!";
 
-        public const string TableReportNotGenerated = "Table report not generated! Please make a new selection.";
+        public const string TableReportNotGenerated = "There was a problem generating your report, please try again.";
         public const string TooManyColumns = "Too many columns! Please make a column selection.";
         public const string TableIsEmpty = "Table is empty! Please make a new selection.";
         public const string UnsuccessfulUpdate = "Update was unsuccessful! Please try again.";
