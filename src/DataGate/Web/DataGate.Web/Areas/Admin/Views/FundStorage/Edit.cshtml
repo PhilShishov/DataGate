@@ -13,8 +13,7 @@
               asp-action="Edit"
               method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="d-inline"
-                 id="createForm">
+            <div class="d-inline" id="div-format-inputs">
 
                 <div class="form-group">
                     <label asp-for="InitialDate" class="text-torshia"></label><br>
@@ -229,6 +228,6 @@
 
 
 @section Scripts{
-    <script type="text/javascript" src="~/js/format/formatInput.js"></script>
-    <script type="text/javascript" src="~/js/confirm/confirmUpdate.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/createEditForms.js" asp-append-version="true"></script>
 }

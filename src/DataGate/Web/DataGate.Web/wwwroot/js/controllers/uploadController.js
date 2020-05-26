@@ -51,10 +51,10 @@
             headers: { 'X-CSRF-TOKEN': token },
             processData: false,
             contentType: false
-        }).done(function(data) {
+        }).done(function (data) {
             const newBody = $('.modal-body', data);
             placeholderElement.find('.modal-body').replaceWith(newBody);
-        }).fail(function(request, status, error) {
+        }).fail(function (request, status, error) {
             alert(request.responseText);
         });
     }
@@ -71,3 +71,20 @@
         });
     }
 };
+
+// Set agreement upload dates
+(function () {
+    let contractDate = document.getElementById('contractDate');
+    let activationDate = document.getElementById('activationDate');
+    let expirationDate = document.getElementById('expirationDate');
+
+    if (contractDate) {
+        contractDate.addEventListener('change', setActivationDate);
+    }
+
+    function setActivationDate() {
+        //activationDate.setAttribute('min', contractDate.value);
+        expirationDate.setAttribute('min', contractDate.value);
+        activationDate.value = contractDate.value;
+    }
+})();
