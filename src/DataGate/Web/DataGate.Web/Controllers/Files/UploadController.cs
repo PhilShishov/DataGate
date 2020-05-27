@@ -5,6 +5,7 @@
 
     using DataGate.Common;
     using DataGate.Services.Data.Files.Contracts;
+    using DataGate.Services.Mapping;
     using DataGate.Web.Helpers;
     using DataGate.Web.InputModels.Files;
 
@@ -47,10 +48,7 @@
 
             if (!this.ModelState.IsValid)
             {
-                return this.ShowError(
-                    ErrorMessages.ModelUploadFileErrorMessage,
-                    model.RouteName,
-                    new { area = model.AreaName, id = model.Id, date = model.Date });
+                return this.PartialView("Upload/_UploadDocument", model);
             }
 
             await this.service.UploadDocument(model);
@@ -61,10 +59,9 @@
                 stream.Close();
             }
 
-            return this.ShowInfo(
-                InfoMessages.FileUploaded,
-                model.RouteName,
-                new { area = model.AreaName, id = model.Id, date = model.Date });
+            var dto = AutoMapperConfig.MapperInstance.Map<UploadOnSuccessDto>(model);
+
+            return this.Json(new { success = true,  data = dto });
         }
 
         [HttpPost]
@@ -102,6 +99,15 @@
                 InfoMessages.FileUploaded,
                 model.RouteName,
                 new { area = model.AreaName, id = model.Id, date = model.Date });
+        }
+
+        public IActionResult OnPostUploadSuccess(
+          [Bind("")] UploadOnSuccessDto dto)
+        {
+            return this.ShowInfo(
+                InfoMessages.FileUploaded,
+                dto.RouteName,
+                new { area = dto.AreaName, id = dto.Id, date = dto.Date });
         }
     }
 }

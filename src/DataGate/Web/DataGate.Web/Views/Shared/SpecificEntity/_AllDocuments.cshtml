@@ -2,9 +2,12 @@
 @model DataGate.Web.ViewModels.Documents.DocumentOverviewViewModel
 
 <form id="form-document" method="post">
-    <table class="table table-bordered table-hover"  id="tbl-documents">
+    <table class="table table-bordered table-hover" id="tbl-documents">
         <thead>
             <tr>
+                <th class="text-secondary p-1" hidden>
+                    Document Id
+                </th>
                 <th class="text-secondary p-1">
                     File Description
                 </th>
@@ -27,6 +30,9 @@
             @foreach (var document in Model.Documents)
             {
                 <tr>
+                    <td class="p-1" hidden>
+                        @document.Description
+                    </td>
                     <td class="p-1">
                         @document.Description
                     </td>
@@ -53,7 +59,7 @@
                         @document.Type
                     </td>
                     <td class="p-1">
-                        <button type="button" class="btn btn-primary btn-sm mr-1 btn-delete">
+                        <button type="button" class="btn btn-pharus btn-sm mr-1 btn-delete">
                             Delete
                         </button>
                     </td>
@@ -93,7 +99,9 @@
                                   alert('Something wrong!');
                                   return false;
                               }
+
                               $("#tbl-documents tr:contains('" + data.data + "')").remove();
+                              alert('The file was successfully deleted.');
                           }
                       });
                   }

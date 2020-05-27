@@ -10,7 +10,7 @@
 
         public const string SuccessfulCreate = "Entity successfully created.";
 
-        public const string SuccessfullyDeletedMessage = "The \"{0}\" was successfully deleted.";
+        public const string SuccessfulDelete = "The file was successfully deleted.";
 
         public const string ChangeUserPasswordSuccessfully = "Your password has been changed.";
 

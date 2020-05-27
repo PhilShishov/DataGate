@@ -1,4 +1,4 @@
-﻿namespace DataGate.Web.Filters
+﻿namespace DataGate.Web.Infrastructure.Filters
 {
     using DataGate.Common;
     using DataGate.Common.Exceptions;

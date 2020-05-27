@@ -1,19 +1,15 @@
 ﻿(function () {
     const sideNavIcon = document.getElementById('sideNavIcon');
     const sideNavFooter = document.getElementById('sidenav-footer');
-    console.log('here');
 
     if (sideNavIcon) {
         sideNavIcon.addEventListener('click', toggleSideNavMenu);
-        console.log('here2');
     }
 
     function toggleSideNavMenu() {
-        console.log('here3');
         const closebtn = document.getElementById('closeBtn');
         closebtn.addEventListener('click', closeNav);
         navMenuStatus = document.getElementById('mySidenav').style.width;
-        debugger;
         if (navMenuStatus == '0px' || navMenuStatus === '') {
             document.getElementById('mySidenav').style.width = '250px';
             sideNavFooter.style.display = 'block';

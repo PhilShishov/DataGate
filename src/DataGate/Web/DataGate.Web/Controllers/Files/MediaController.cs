@@ -8,14 +8,12 @@
     using DataGate.Common;
     using DataGate.Services.Data.Files.Contracts;
     using DataGate.Services.DateTime;
-    using DataGate.Web.Filters;
     using DataGate.Web.Infrastructure.Filters;
     using DataGate.Web.InputModels.Files;
     using DataGate.Web.Utilities;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
 
     [Authorize]
@@ -93,7 +91,7 @@
             return this.RedirectToRoute(GlobalConstants.AllFundsRouteName);
         }
 
-        [EndpointExceptionFilter]
+        [ValidateAntiForgeryToken]
         [Route("media/delete")]
         public async Task<JsonResult> Delete(string docValue, string agrValue, string areaName)
         {

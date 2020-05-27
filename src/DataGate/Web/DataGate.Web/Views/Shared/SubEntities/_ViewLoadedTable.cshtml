@@ -13,83 +13,92 @@
     }
 }
 
-<div class="table-responsive border-0 mx-auto" id="tableDoubleScroll">
-
+<div class="table-responsive border-0 mx-auto">
     <div>
-        <a class="btn btn-pharus btn-sm" 
-           asp-route="@subEntitiesRoute" 
-           asp-route-id="@Model.Id" 
+        <a class="btn btn-pharus btn-sm"
+           asp-route="@subEntitiesRoute"
+           asp-route-id="@Model.Id"
            asp-route-date="@Model.Date"
            asp-route-container="@Model.Container">
             Advanced Selection
         </a>
     </div>
-
-    <table class="table table-hover text-nowrap">
-        <thead>
-            <tr>
-                @for (int row = 0; row < GlobalConstants.RowNumberOfHeadersInTable; row++)
-                {
-                    for (int col = 0; col < Model.Entities[row].Length; col++)
-                    {
-                        <th class="text-white pr-3 tableHeaderPharus help"
-                            data-toggle="tooltip"
-                            data-placement="bottom"
-                            title="@Model.Entities[row][col]">
-                            @Model.Entities[row][col]
-                        </th>
-                    }
-                }
-            </tr>
-        </thead>
-        <tbody id="tbody-entities">
-            @for (int row = GlobalConstants.RowNumberOfHeadersInTable; row < Model.Entities.Count; row++)
-            {
-                var entityId = @Model.Entities[row][GlobalConstants.IndexEntityIdInTable];
+    <div id="tableDoubleScroll">
+        <table class="table table-hover text-nowrap">
+            <thead>
                 <tr>
-                    @for (int col = 0; col < Model.Entities[row].Length; col++)
+                    @for (int row = 0; row < GlobalConstants.RowNumberOfHeadersInTable; row++)
                     {
-                        if (Model.Entities[0][col].Contains("NAME"))
+                        for (int col = 0; col < Model.Entities[row].Length; col++)
                         {
-                            <td class="p-1 tableCellPharus">
-                                <a class="text-dark" asp-route="@targetRoute" asp-route-id="@entityId" asp-route-date="@Model.Date">
-                                    @Model.Entities[row][col]
-                                </a>
-                            </td>
-                        }
-                        else
-                        {
-                            <td class="p-1">
+                            <th class="text-white pr-3 tableHeaderPharus help"
+                                data-toggle="tooltip"
+                                data-placement="bottom"
+                                title="@Model.Entities[row][col]">
                                 @Model.Entities[row][col]
-                            </td>
+                            </th>
                         }
                     }
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody id="tbody-entities">
+                @for (int row = GlobalConstants.RowNumberOfHeadersInTable; row < Model.Entities.Count; row++)
+                {
+                    var entityId = @Model.Entities[row][GlobalConstants.IndexEntityIdInTable];
+                    <tr>
+                        @for (int col = 0; col < Model.Entities[row].Length; col++)
+                        {
+                            if (Model.Entities[0][col].Contains("NAME"))
+                            {
+                                <td class="p-1 tableCellPharus">
+                                    <a class="text-dark" asp-route="@targetRoute" asp-route-id="@entityId" asp-route-date="@Model.Date">
+                                        @Model.Entities[row][col]
+                                    </a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="p-1">
+                                    @Model.Entities[row][col]
+                                </td>
+                            }
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <script>
-    const rows = document.getElementById('tbody-entities').getElementsByTagName('tr');
+    // Add inactive class to entities that have inactive status
+    (function () {
+        const tbody = document.getElementById('tbody-entities');
 
-    for (var row of rows) {
-        const cells = row.getElementsByTagName('td');
-        for (var cell of cells) {
-            if (cell.textContent.includes('Inactive')) {
-                row.classList.add('inactive-entity');
+        if (tbody) {
+            const rows = tbody.getElementsByTagName('tr');
+
+            for (var row of rows) {
+                const cells = row.getElementsByTagName('td');
+                for (var cell of cells) {
+                    if (cell.textContent.includes('Inactive')) {
+                        row.classList.add('inactive-entity');
+                    }
+                }
             }
         }
-    }
+    })();
 
-    // ________________________________________________________
-    //
     // Additional information about headers
-    $(document).ready(function () {
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip({
-                html: true
-            })
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip({
+            html: true
         })
-    });
+    })
+
+    // Double top scroll for wide table
+    $(function () {
+        $('.double-scroll').doubleScroll();
+        $('#tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
+    })
 </script>
