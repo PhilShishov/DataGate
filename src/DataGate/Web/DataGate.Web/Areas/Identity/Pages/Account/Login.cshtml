@@ -38,6 +38,7 @@
                                            id="password"
                                            placeholder="Password">
                                     <span asp-validation-for="Input.Password" class="text-danger d-flex justify-content-center"></span>
+                                    <partial name="_ErrorMessage" model="Model.ErrorMessage" />
                                 </div>
                             </div>
                             <div class="form-group col-md-12">

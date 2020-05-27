@@ -98,6 +98,7 @@
                                   return false;
                               }
                               $("#tbl-agreements tr:contains('" + data.data + "')").remove();
+                              $("#tbl-distinct-agreements tr:contains('" + data.data + "')").remove();
                               alert('The file was successfully deleted.');
                           }
                       });

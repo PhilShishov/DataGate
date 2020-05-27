@@ -2,6 +2,7 @@
 {
     public class ErrorMessages
     {
+        public const string InvalidLogin = "Wrong user name or password have been specified";
         public const string PasswordMismatch = "The password and confirmation password do not match.";
         public const string NewPasswordMismatch = "The new password and confirmation password do not match.";
         public const string ChosenDateIsEmpty = "Date cannot be empty!";

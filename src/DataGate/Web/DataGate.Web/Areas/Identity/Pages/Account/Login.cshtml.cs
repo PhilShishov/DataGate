@@ -122,6 +122,7 @@
 
                     // return Page();
                     this.ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    this.ErrorMessage = ErrorMessages.InvalidLogin;
                     return this.Page();
                 }
             }
