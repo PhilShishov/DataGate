@@ -152,7 +152,11 @@ function uploadModals(token, json) {
             const newBody = $('.modal-body', data);
             placeholderElement.find('.modal-body').replaceWith(newBody);
             if (data.success) {
-
+                console.log(data.dto);
+                const { areaName, date, id, routeName } = data.dto;
+                console.log(routeName);
+                const url = '/Upload/OnUploadSuccess?areaName=' + areaName + '&date=' + date + '&id=' + id + '&routeName=' + routeName;
+                window.location = url;
             }
 
         }).fail(function (request, status, error) {

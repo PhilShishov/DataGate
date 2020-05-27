@@ -61,7 +61,7 @@
 
             var dto = AutoMapperConfig.MapperInstance.Map<UploadOnSuccessDto>(model);
 
-            return this.Json(new { success = true,  data = dto });
+            return this.Json(new { success = true,  dto = dto });
         }
 
         [HttpPost]
@@ -81,10 +81,7 @@
 
             if (!this.ModelState.IsValid)
             {
-                return this.ShowError(
-                    ErrorMessages.ModelUploadFileErrorMessage,
-                    model.RouteName,
-                    new { area = model.AreaName, id = model.Id, date = model.Date });
+                return this.PartialView("Upload/_UploadAgreement", model);
             }
 
             await this.service.UploadAgreement(model);
@@ -95,14 +92,13 @@
                 stream.Close();
             }
 
-            return this.ShowInfo(
-                InfoMessages.FileUploaded,
-                model.RouteName,
-                new { area = model.AreaName, id = model.Id, date = model.Date });
+            var dto = AutoMapperConfig.MapperInstance.Map<UploadOnSuccessDto>(model);
+
+            return this.Json(new { success = true, dto = dto });
         }
 
-        public IActionResult OnPostUploadSuccess(
-          [Bind("")] UploadOnSuccessDto dto)
+        public IActionResult OnUploadSuccess(
+          [Bind("AreaName, Date, Id, RouteName")] UploadOnSuccessDto dto)
         {
             return this.ShowInfo(
                 InfoMessages.FileUploaded,
