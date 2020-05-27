@@ -101,6 +101,7 @@
                               }
 
                               $("#tbl-documents tr:contains('" + data.data + "')").remove();
+                              $("#tbl-distinct-documents tr:contains('" + data.data + "')").remove();
                               alert('The file was successfully deleted.');
                           }
                       });

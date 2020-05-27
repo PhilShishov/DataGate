@@ -149,15 +149,14 @@ function uploadModals(token, json) {
             processData: false,
             contentType: false
         }).done(function (data) {
-            const newBody = $('.modal-body', data);
-            placeholderElement.find('.modal-body').replaceWith(newBody);
             if (data.success) {
-                console.log(data.dto);
                 const { areaName, date, id, routeName } = data.dto;
-                console.log(routeName);
                 const url = '/Upload/OnUploadSuccess?areaName=' + areaName + '&date=' + date + '&id=' + id + '&routeName=' + routeName;
                 window.location = url;
+                return;
             }
+            const newBody = $('.modal-body', data);
+            placeholderElement.find('.modal-body').replaceWith(newBody);
 
         }).fail(function (request, status, error) {
             alert(request.responseText);
