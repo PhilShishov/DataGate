@@ -4,10 +4,9 @@
 
     <div class="col-12 col-lg-6 col-md-6 col-sm-12 footer-text d-inline">
         <div>
-            <a class="a-underline mr-1" asp-area="" asp-controller="Legal" asp-action="Privacy">Privacy Policy</a>
-            <a class="a-underline mr-1" asp-area="" asp-controller="Legal" asp-action="Cookie">Cookie Policy</a>
-            <a class="a-underline mr-1" asp-area="" asp-controller="Legal" asp-action="Copyright">Copyright Policy</a>
-            <a class="a-underline mr-1" asp-area="" asp-controller="Legal" asp-action="UserAgreement">User Agreement</a>
+            <a class="a-underline mr-1" asp-area="Identity" asp-controller="Account" asp-action="Privacy">Privacy Policy</a>
+            <a class="a-underline mr-1" asp-area="Identity" asp-controller="Account" asp-action="Cookie">Cookie Policy</a>
+            <a class="a-underline mr-1" asp-area="Identity" asp-controller="Account" asp-action="Copyright">Copyright Policy</a>
         </div>
         <div>
             &copy; @DateTime.Now.Year @GlobalConstants.DataGateFullFooterDisplay
