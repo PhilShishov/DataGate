@@ -1,6 +1,10 @@
-﻿/*=======================================================================
-Custom home page css
-=========================================================================*/
+﻿/*
+*
+* ==========================================
+* CUSTOM HOME PAGE
+* ==========================================
+*
+*/
 :root {
     font-size: 12px;
 }
@@ -24,7 +28,7 @@ img {
     height: auto;
 }
 
-    img:hover {
+#img-login-home:hover {
         opacity: 0.8;
     }
 
@@ -68,5 +72,463 @@ img {
 @media only screen and (min-width: 1024px) {
     .text-pharus {
         font-size: 46px;
+    }
+}
+
+
+
+
+/*
+*
+* ==========================================
+* STYLE
+* ==========================================
+*
+*/
+
+
+
+
+.bg-pharus {
+    background-color: #202020;
+}
+
+.text-pharus {
+    color: #202020;
+}
+
+.border-pharus {
+    border: 2px solid #d9d9d9;
+    border-radius: 7px;
+}
+
+.nav-link-white {
+    color: #FFFFFF;
+}
+
+.text-right {
+    margin-left: auto;
+}
+
+.hr-2 {
+    height: 2px;
+}
+
+h1 {
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
+}
+
+.w-10 {
+    width: 10%;
+}
+
+.w-35 {
+    width: 35%;
+}
+
+.w-40 {
+    width: 40%;
+}
+
+.w-45 {
+    width: 45%;
+}
+
+.w-60 {
+    width: 60%;
+}
+
+.h-70 {
+    height: 70%;
+}
+
+.maxw-270 {
+    max-width: 270px;
+}
+
+.w-470 {
+    border: 0;
+    border-bottom: 0.6px lightgrey solid;
+    width: 470px;
+}
+
+.maxw-160 {
+    max-width: 160px;
+}
+
+.minw-160 {
+    min-width: 160px;
+}
+
+.minh-100 {
+    min-height: 100px;
+}
+
+.mb-6 {
+    margin-bottom: 20%;
+}
+
+tr {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
+
+textarea {
+    resize: none;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.d-grid {
+    display: grid;
+}
+
+@font-face {
+    font-family: Gilroy-Bold;
+    font-style: normal;
+    src: local("Gilroy-Bold"), url("../../fonts/Gilroy-Bold.ttf") format("truetype"); /* non-IE */
+}
+
+.text-pharus {
+    font-family: 'Gilroy-Regular ☞';
+}
+
+.text-footer-pharus {
+    font-family: 'Gilroy-Regular ☞';
+    font-size: 14px;
+}
+
+.text-color-blue-pharus {
+    color: #005596;
+}
+
+.text-color-grey-pharus {
+    color: #898989;
+}
+
+.text-underline {
+    text-decoration: underline;
+}
+
+.bold-text-pharus {
+    font-family: Gilroy-Bold;
+}
+
+.login-div:hover {
+    opacity: 0.7;
+    transition: .5s ease;
+}
+
+.mb-2p {
+    margin-bottom: 2%;
+}
+
+
+
+/*
+*
+* ==========================================
+* MEDIA QUERY
+* ==========================================
+*
+*/
+
+@media only screen and (min-width: 768px) {
+    #toolbar-pharus {
+        height: 80px;
+        display: flex;
+        margin-top: 3.3%;
+    }
+
+    .sidenav {
+        top: 6.7%;
+    }
+
+    .push {
+        margin-top: 3.6%;
+    }
+
+    #infoAndDocumentsView {
+        display: flex;
+    }
+
+    #table-info-pharus {
+        width: 35%;
+    }
+
+    #adminUserPanel {
+        padding-left: 50px;
+    }
+
+    #div-select-addInfo {
+        width: 25%;
+    }
+
+    #canvas-aum-pharus {
+        width: 70%
+    }
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        border: 0;
+        margin: 0px auto;
+        width: 100%;
+    }
+
+    .footer-pharus {
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .main-container-pharus {
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    #allselect-div-pharus {
+        display: flex;
+    }
+
+    #background-pharus {
+        left: 0px;
+        top: 0px;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        height: 907px;
+        overflow: hidden;
+    }
+
+    #logo-pharus {
+        top: 23%;
+        position: absolute;
+        text-align: center;
+    }
+
+    #logo-linkedin-pharus {
+        top: 86.5%;
+        left: 85%;
+        position: absolute;
+    }
+
+    #logo-login-pharus {
+        top: 13%;
+        left: 12.5%;
+        position: absolute;
+    }
+
+    #img-logo-pharus {
+        width: 70%;
+    }
+
+    #welcome-text-pharus {
+        top: 52%;
+        position: absolute;
+        text-align: center;
+    }
+
+    #login-text-pharus {
+        top: 25%;
+        left: 12.5%;
+        position: absolute;
+        font-size: 42px;
+    }
+
+    /*#btn-login-home {
+        top: 72%;
+        position: absolute;
+    }*/
+
+    #btn-login {
+        outline: none;
+        background: none;
+        border: 0;
+        top: 130%;
+        right: 62%;
+        position: absolute;
+    }
+
+    #footer-home-pharus {
+        top: 97%;
+        position: absolute;
+        text-align: center;
+    }
+
+    #footer-login-pharus {
+        top: 87%;
+        position: absolute;
+        left: 12.5%;
+    }
+
+    #login-form {
+        position: absolute;
+        top: 40%;
+        left: 12.5%;
+    }
+
+    #div-checkbox-password {
+        display: flex;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    #toolbar-pharus {
+        overflow-x: scroll;
+    }
+
+    .logo-pharus img {
+        height: 120px;
+        width: 120px;
+    }
+
+    #canvas-aum-pharus {
+        display: none;
+    }
+
+    .sidenav {
+        top: 9.2%;
+    }
+
+    .mobile-none {
+        display: none;
+    }
+
+    .push-mobile {
+        margin-top: 16.6%;
+    }
+
+    #div-select-addInfo {
+        width: 70%;
+    }
+
+    #allselect-div-pharus {
+        display: inline;
+    }
+
+    #entityName {
+        display: none;
+    }
+
+    #infoAndDocumentsView {
+        display: inline;
+    }
+
+    footer {
+        display: none;
+    }
+
+    .main-container-pharus {
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .lbl-toolbar-pharus {
+        display: none;
+    }
+
+    #background-pharus {
+        left: 0px;
+        top: 0px;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        height: 820px;
+        overflow: hidden;
+    }
+
+    #background-login-pharus {
+        height: 820px;
+        overflow: hidden;
+        display: none;
+    }
+
+    #logo-pharus {
+        top: 2%;
+        position: absolute;
+        text-align: center;
+    }
+
+    #img-logo-pharus {
+        width: 50%;
+    }
+
+    #logo-login-pharus {
+        top: 4%;
+        left: 12.5%;
+        position: absolute;
+    }
+
+    #logo-linkedin-pharus {
+        top: 86.5%;
+        left: 85%;
+        position: absolute;
+    }
+
+    #welcome-text-pharus {
+        top: 30%;
+        position: absolute;
+        text-align: center;
+        font-size: 250%;
+    }
+
+    #login-text-pharus {
+        top: 16%;
+        left: 12.5%;
+        position: absolute;
+        font-size: 42px;
+    }
+
+    #btn-login-home {
+        top: 70%;
+        position: absolute;
+    }
+
+    #btn-login {
+        outline: none;
+        background: none;
+        border: 0;
+        top: 110%;
+        right: 36%;
+        position: absolute;
+    }
+
+    #footer-home-pharus {
+        top: 93%;
+        position: absolute;
+        text-align: center;
+        display: block;
+    }
+
+    #footer-login-pharus {
+        top: 93%;
+        position: absolute;
+        left: 12.5%;
+    }
+
+    #login-form {
+        position: absolute;
+        top: 50%;
+        left: 9%;
+    }
+
+        #login-form input {
+            width: 260px;
+        }
+
+    #div-checkbox-password {
+        display: inline-block;
     }
 }
