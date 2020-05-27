@@ -11,7 +11,6 @@
             </div>
             <div class="modal-body">
                 <form asp-area="" asp-controller="Upload" asp-action="Agreement" enctype="multipart/form-data">
-
                     <input asp-for="Id" type="hidden">
                     <input asp-for="Date" type="hidden">
                     <input asp-for="AreaName" type="hidden">
@@ -39,8 +38,7 @@
                     <div class="form-group">
                         <label asp-for="ContractDate" class="text-torshia"></label><br>
                         <input asp-for="ContractDate"
-                               type="date"
-                              
+                               type="date"                              
                                class="form-control maxw-270"
                                id="contractDate">
                         <span asp-validation-for="ContractDate" class="text-danger"></span>
@@ -108,8 +106,6 @@
                                accept="application/pdf">
                     </div>
                     <span asp-validation-for="FileToUpload" class="text-danger"></span>
-
-
                 </form>
             </div>
             <div class="modal-footer">
@@ -124,4 +120,21 @@
     </div>
 </div>
 
-<script type="text/javascript" src="~/js/setDates.js" asp-append-version="true"></script>
+<script>
+    // Set input date fields on agreement upload
+    (function () {
+        const contractDate = document.getElementById('contractDate');
+        let activationDate = document.getElementById('activationDate');
+        let expirationDate = document.getElementById('expirationDate');
+
+        if (contractDate) {
+            contractDate.addEventListener('change', setActivationDate);
+        }
+
+        function setActivationDate() {
+            //activationDate.setAttribute('min', contractDate.value);
+            expirationDate.setAttribute('min', contractDate.value);
+            activationDate.value = contractDate.value;
+        }
+    })();
+</script>

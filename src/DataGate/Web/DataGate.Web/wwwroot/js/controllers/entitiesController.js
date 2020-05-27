@@ -44,11 +44,12 @@
             data: model,
             headers: { 'X-CSRF-TOKEN': token },
         }).done(function (data) {
-            setTimeout($.unblockUI, 1000);
             if (!data.success) {
+                setTimeout($.unblockUI, 500);
                 alert(data.errorMessage);
                 return;
             }
+            setTimeout($.unblockUI, 1000);
             if (data.fileName != '') {
                 const url = '/Media/Download?fileName=' + data.fileName;
                 window.location = url;

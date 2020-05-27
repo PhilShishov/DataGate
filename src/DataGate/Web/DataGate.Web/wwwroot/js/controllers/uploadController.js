@@ -43,22 +43,6 @@
         postModalRequest(placeholderAgreement, actionUrl, dataToSend, token);
     });
 
-    function postModalRequest(placeholderElement, actionUrl, dataToSend, token) {
-        $.ajax({
-            url: actionUrl,
-            method: 'POST',
-            data: dataToSend,
-            headers: { 'X-CSRF-TOKEN': token },
-            processData: false,
-            contentType: false
-        }).done(function (data) {
-            const newBody = $('.modal-body', data);
-            placeholderElement.find('.modal-body').replaceWith(newBody);
-        }).fail(function (request, status, error) {
-            alert(request.responseText);
-        });
-    }
-
     function getModalRequest(placeholderElement, url) {
         $.get({
             url: url,
@@ -70,21 +54,24 @@
             placeholderElement.find('.modal').modal('show');
         });
     }
+
+    function postModalRequest(placeholderElement, actionUrl, dataToSend, token) {
+        $.ajax({
+            url: actionUrl,
+            method: 'POST',
+            data: dataToSend,
+            headers: { 'X-CSRF-TOKEN': token },
+            processData: false,
+            contentType: false
+        }).done(function (data) {
+            const newBody = $('.modal-body', data);
+            placeholderElement.find('.modal-body').replaceWith(newBody);
+            if (data.success) {
+
+            }
+
+        }).fail(function (request, status, error) {
+            alert(request.responseText);
+        });
+    }
 };
-
-// Set agreement upload dates
-(function () {
-    let contractDate = document.getElementById('contractDate');
-    let activationDate = document.getElementById('activationDate');
-    let expirationDate = document.getElementById('expirationDate');
-
-    if (contractDate) {
-        contractDate.addEventListener('change', setActivationDate);
-    }
-
-    function setActivationDate() {
-        //activationDate.setAttribute('min', contractDate.value);
-        expirationDate.setAttribute('min', contractDate.value);
-        activationDate.value = contractDate.value;
-    }
-})();

@@ -4,6 +4,9 @@
     <table class="table table-bordered table-hover" id="tbl-agreements">
         <thead>
             <tr>
+                <th class="text-secondary p-1" hidden>
+                    Agreement Id
+                </th>
                 <th class="text-secondary p-1">
                     File Description
                 </th>
@@ -25,37 +28,40 @@
         <tbody>
             @foreach (var agreement in Model.Agreements)
             {
-                <tr>
-                    <td class="p-1">
-                        @agreement.Description
-                    </td>
-                    <td class="p-1">
-                        @agreement.ContractDate
-                    </td>
-                    <td class="p-1">
-                        @agreement.ActivationDate
-                    </td>
-                    <td class="p-1">
-                        @agreement.ExpirationDate
-                    </td>
-                    <td class="p-1">
-                        <button class="btn-link-pharus text-left"
-                                formtarget="_blank"
-                                type="submit"
-                                asp-route="files"
-                                asp-route-name="@agreement.Name"
-                                name="agrValue"
-                                value="@agreement.Name">
-                            @Html.Encode(@System.IO.Path.GetFileNameWithoutExtension(agreement.Name))
-                        </button>
+            <tr>
+                <td class="p-1" hidden>
+                    @agreement.Description
+                </td>
+                <td class="p-1">
+                    @agreement.Description
+                </td>
+                <td class="p-1">
+                    @agreement.ContractDate
+                </td>
+                <td class="p-1">
+                    @agreement.ActivationDate
+                </td>
+                <td class="p-1">
+                    @agreement.ExpirationDate
+                </td>
+                <td class="p-1">
+                    <button class="btn-link-pharus text-left"
+                            formtarget="_blank"
+                            type="submit"
+                            asp-route="files"
+                            asp-route-name="@agreement.Name"
+                            name="agrValue"
+                            value="@agreement.Name">
+                        @Html.Encode(@System.IO.Path.GetFileNameWithoutExtension(agreement.Name))
+                    </button>
 
-                    </td>
-                    <td class="p-1">
-                        <button type="button" class="btn btn-primary btn-sm mr-1 btn-delete">
-                            Delete
-                        </button>
-                    </td>
-                </tr>
+                </td>
+                <td class="p-1">
+                    <button type="button" class="btn btn-pharus btn-sm mr-1 btn-delete">
+                        Delete
+                    </button>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
@@ -92,6 +98,7 @@
                                   return false;
                               }
                               $("#tbl-agreements tr:contains('" + data.data + "')").remove();
+                              alert('The file was successfully deleted.');
                           }
                       });
                   }
