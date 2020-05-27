@@ -59,12 +59,6 @@ h3 {
     max-width: 270px;
 }
 
-.w-470 {
-    border: 0;
-    border-bottom: 0.6px lightgrey solid;
-    width: 470px;
-}
-
 .maxw-160 {
     max-width: 160px;
 }
@@ -75,10 +69,6 @@ h3 {
 
 .minh-100 {
     min-height: 100px;
-}
-
-.mb-6 {
-    margin-bottom: 20%;
 }
 
 tr {
@@ -97,10 +87,6 @@ textarea {
     width: 50%;
 }
 
-.d-grid {
-    display: grid;
-}
-
 @font-face {
     font-family: Gilroy-Bold;
     font-style: normal;
@@ -111,30 +97,12 @@ textarea {
     font-family: 'Gilroy-Regular ☞';
 }
 
-.text-footer-pharus {
-    font-family: 'Gilroy-Regular ☞';
-    font-size: 14px;
-}
-
-.text-color-blue-pharus {
-    color: #005596;
-}
-
 .text-color-grey-pharus {
     color: #898989;
 }
 
-.text-underline {
-    text-decoration: underline;
-}
-
 .bold-text-pharus {
     font-family: Gilroy-Bold;
-}
-
-.login-div:hover {
-    opacity: 0.7;
-    transition: .5s ease;
 }
 
 .mb-2p {

@@ -32,32 +32,22 @@ p {
     margin: 0 0 20px 0;
 }
 
-h1,
 h2,
 h3,
-h4,
-h5,
-h6 {
+{
     font-weight: 400;
     font-family: 'Roboto', sans-serif;
     color: #111;
 }
 
-h1,
 h2 {
     line-height: 1.2;
 }
 
-h3,
-h4,
-h5,
-h6 {
+h3 {
     line-height: 1.4;
 }
 
-h1 {
-    font-size: 36px;
-}
 
 ::-moz-placeholder {
     font-size: 1rem;
@@ -72,105 +62,9 @@ h1 {
 }
 /* IE */
 
-@media only screen and (max-width: 1199px) {
-    h1 {
-        font-size: 34px;
-    }
-}
-
-@media only screen and (max-width: 991px) {
-    h1 {
-        font-size: 32px;
-    }
-}
-
-@media only screen and (max-width: 767px) {
-    h1 {
-        font-size: 30px;
-    }
-}
-
 h2 {
     font-size: 28px;
 }
-
-@media only screen and (max-width: 1199px) {
-    h2 {
-        font-size: 26px;
-    }
-}
-
-@media only screen and (max-width: 991px) {
-    h2 {
-        font-size: 24px;
-    }
-}
-
-@media only screen and (max-width: 767px) {
-    h2 {
-        font-size: 22px;
-    }
-}
-
-h3 {
-    font-size: 22px;
-}
-
-@media only screen and (max-width: 991px) {
-    h3 {
-        font-size: 20px;
-    }
-}
-
-@media only screen and (max-width: 767px) {
-    h3 {
-        font-size: 18px;
-    }
-}
-
-h4 {
-    font-size: 20px;
-}
-
-@media only screen and (max-width: 991px) {
-    h4 {
-        font-size: 18px;
-    }
-}
-
-@media only screen and (max-width: 767px) {
-    h4 {
-        font-size: 16px;
-    }
-}
-
-h5 {
-    font-size: 18px;
-}
-
-@media only screen and (max-width: 991px) {
-    h5 {
-        font-size: 16px;
-    }
-}
-/*=======================================================================
-2. Template Default Style
-=========================================================================*/
-a {
-    text-decoration: none;
-}
-
-    a:active,
-    a:hover,
-    a:focus {
-        text-decoration: none;
-    }
-
-    a:active,
-    a:hover,
-    a:focus {
-        outline: 0 none;
-    }
 
 img {
     max-width: 100%;
@@ -183,24 +77,6 @@ ul {
     padding: 0;
 }
 
-.fxt-content-between {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-
-@media only screen and (max-width: 767px) {
-    .fxt-none-767 {
-        display: none !important;
-    }
-}
-
-@media only screen and (max-width: 991px) {
-    .fxt-none-991 {
-        display: none !important;
-    }
-}
 
 /*========================================================================
 5. Demo Layout Two
@@ -699,72 +575,9 @@ ul {
     font-family: 'Gilroy-Regular ☞';
 }*/
 
-.fxt-form label {
-    font-weight: bolder;
-}
-
-.background-image {
-    background-color: #036AB9;
-}
-
-/*@media only screen and (min-width: 992px) {
-
-    #background-pharus {
-        height: 722px;
-    }
-
-    .fxt-template-layout2 .custom-container {
-        margin-left: 1rem;
-        margin-right: 1rem;
-        margin-top: 1rem;
-    }
-
-    .fxt-template-layout2 .fxt-bg-color {
-        border-top-left-radius: 15px;
-        border-top-right-radius: 15px;
-    }
-
-    .footer-text {
-        margin-left: 0px;
-        line-height: 18px;
-        text-align: center;
-    }
-
-    .background-image, .background-color {
-        background-color: #036AB9;
-    }
-
-    #footer-home-pharus {
-        top: 91%;
-        position: absolute;
-        text-align: center;
-    }
-
-    #welcome-text-pharus {
-        top: 40%;
-        position: absolute;
-        text-align: center;
-    }
-
-    #btn-login-home {
-        top: 67%;
-        position: absolute;
-    }
-
-    #logo-pharus {
-        top: 8%;
-        position: absolute;
-        text-align: center;
-    }
-}*/
-
 
 /*mobile*/
 @media only screen and (min-width: 320px) and (max-width: 480px) {
-    #background-pharus {
-        height: 658px;
-    }
-
     .fxt-template-layout2 .custom-container {
         margin-left: 1rem;
         margin-right: 1rem;
@@ -779,33 +592,6 @@ ul {
     .footer-text {
         margin-left: 0px;
         line-height: 18px;
-        text-align: center;
-    }
-
-    .background-image, .background-color {
-        background-color: #036AB9;
-    }
-
-    #footer-home-pharus {
-        top: 91%;
-        position: absolute;
-        text-align: center;
-    }
-
-    #welcome-text-pharus {
-        top: 40%;
-        position: absolute;
-        text-align: center;
-    }
-
-    #btn-login-home {
-        /*top: 67%;
-        position: absolute;*/
-    }
-
-    #logo-pharus {
-        top: 8%;
-        position: absolute;
         text-align: center;
     }
 }
@@ -832,228 +618,6 @@ ul {
         background-color: #036AB9;
         height: 787px;
     }
-
-    #footer-home-pharus {
-        top: 96%;
-        position: absolute;
-        text-align: center;
-    }
-
-    #welcome-text-pharus {
-        top: 52%;
-        position: absolute;
-        text-align: center;
-    }
-
-    #btn-login-home {
-        /*top: 72%;
-        position: absolute;*/
-    }
-
-    #logo-pharus {
-        top: 8%;
-        position: absolute;
-        text-align: center;
-    }
-}
-
-
-
-
-/*Custom landing page starts*/
-.btn-default {
-    color: #fff;
-    text-shadow: none;
-    /* Prevent inheritence from `body` */
-    background-color: transparent;
-    border: 2px solid #fff;
-    border-radius: 20px;
-    padding: 0.5rem 2rem;
-}
-
-    .btn-default:hover,
-    .btn-default:focus {
-        background-color: rgba(255, 255, 255, 0.3);
-    }
-
-/*
- * Base structure
- */
-html,
-body {
-    height: 100%;
-}
-
-body {
-    /*background: url(../images/Background_Home.png) no-repeat center center fixed;*/
-    background-image: none;
-    background-size: cover;
-    font-family: 'Quicksand', sans-serif;
-}
-
-/* Extra markup and styles for table-esque vertical and horizontal centering */
-.site-wrapper {
-    display: table;
-    width: 100%;
-    height: 100%;
-    /* For at least Firefox */
-    min-height: 100%;
-    background: rgba(48, 53, 70, 0.5);
-    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
-}
-
-.site-wrapper-inner {
-    display: table-cell;
-    vertical-align: top;
-    text-align: center;
-}
-
-.cover-container {
-    margin-right: auto;
-    margin-left: auto;
-}
-
-/* Padding for spacing */
-.inner {
-    padding: 20px;
-    font-family: 'Gilroy-Regular ☞';
-}
-
-/*
- * Header
- */
-.masthead-brand {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.nav-masthead {
-    text-align: center;
-    display: block;
-}
-
-    .nav-masthead .nav-link {
-        display: inline-block;
-    }
-
-@media (min-width: 768px) {
-    .masthead-brand {
-        float: left;
-    }
-
-    .nav-masthead {
-        float: right;
-    }
-}
-
-/*
- * Cover
- */
-.cover {
-    padding: 0 20px;
-}
-
-    .cover .btn-notify {
-        padding: 10px 60px;
-        font-weight: 500;
-        text-transform: uppercase;
-        border-radius: 40px;
-    }
-
-.cover-heading {
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 10px;
-    font-size: 2rem;
-    margin-bottom: 5rem;
-}
-
-@media (min-width: 768px) {
-    .cover-heading {
-        font-size: 3.4rem;
-        letter-spacing: 15px;
-    }
-}
-
-.cover-copy {
-    max-width: 500px;
-    margin: 0 auto 3rem;
-}
-
-/*
- * Footer
- */
-.mastfoot {
-    color: #999;
-    /* IE8 proofing */
-    color: rgba(255, 255, 255, 0.5);
-}
-
-/*
- * Subscribe modal box
- */
-#subscribeModal .modal-content {
-    background-color: #303546;
-    color: #fff;
-    text-align: left;
-}
-
-#subscribeModal .modal-header, #subscribeModal .modal-footer {
-    border: 0;
-}
-
-#subscribeModal .close {
-    color: #fff;
-}
-
-#subscribeModal .form-control {
-    margin-top: 1rem;
-    background: rgba(0, 0, 0, 0.4);
-    color: #fff;
-}
-
-    #subscribeModal .form-control:focus {
-        border-color: #49506a;
-    }
-
-/*
- * Affix and center
- */
-@media (min-width: 768px) {
-    /* Pull out the header and footer */
-    .masthead {
-        position: fixed;
-        top: 0;
-    }
-
-    .mastfoot {
-        position: fixed;
-        bottom: 0;
-    }
-    /* Start the vertical centering */
-    .site-wrapper-inner {
-        vertical-align: middle;
-    }
-    /* Handle the widths */
-    .masthead,
-    .mastfoot,
-    .cover-container {
-        width: 100%;
-        /* Must be percentage or pixels for horizontal alignment */
-    }
-}
-
-@media (min-width: 992px) {
-    .masthead,
-    .cover-container {
-        width: 1060px;
-    }
-}
-
-/*Custom landing page ends*/
-
-.logo-pharus {
-    margin-top: 35px;
 }
 
 .pharus-text {
@@ -1071,11 +635,6 @@ body {
 }
 
 @media only screen and (max-width: 640px) {
-    .logo-pharus img {
-        height: 120px;
-        width: 120px;
-    }
-
     .text-pharus {
         font-size: 26px;
     }
@@ -1086,11 +645,6 @@ body {
 
     .pharus-btn {
         margin-top: 55px;
-    }
-
-    .mastfoot {
-        position: fixed;
-        bottom: 0;
     }
 }
 
@@ -1107,15 +661,6 @@ body {
         margin-top: 55px;
     }
 
-    .mastfoot {
-        position: fixed;
-        bottom: 0;
-    }
-
-    #btn-login-home img {
-        width: 500px;
-    }
-
     .extra-space {
         display: none !important;
     }
@@ -1123,3 +668,44 @@ body {
 
 
 /*Custom login css end*/
+
+@media only screen and (max-width: 1199px) {
+    h2 {
+        font-size: 26px;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    h2 {
+        font-size: 24px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    h2 {
+        font-size: 22px;
+    }
+}
+
+h3 {
+    font-size: 22px;
+}
+
+@media only screen and (max-width: 991px) {
+    h3 {
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    h3 {
+        font-size: 18px;
+    }
+}
+
+
+@media only screen and (max-width: 991px) {
+    .fxt-none-991 {
+        display: none !important;
+    }
+}
