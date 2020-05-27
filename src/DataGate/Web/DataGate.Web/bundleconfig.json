@@ -1,25 +1,20 @@
-﻿// Configure bundling and minification for the project.
-// More info at https://go.microsoft.com/fwlink/?LinkId=808241
-// TODO add css and js
-[
+﻿[
   {
-    "outputFileName": "wwwroot/css/site.min.css",
-    // An array of relative input file paths. Globbing patterns supported
+    "outputFileName": "wwwroot/css/ok.min.css",
     "inputFiles": [
-      "wwwroot/css/site.css"
+      "wwwroot/css/ok.css"
+      //[ "wwwroot/**/!(*.min).css" ]
     ]
   },
   {
-    "outputFileName": "wwwroot/js/site.min.js",
-    "inputFiles": [
-      "wwwroot/js/site.js"
+    "outputfilename": "wwwroot/js/ok.min.js",
+    "inputfiles": [
+      "wwwroot/js/ok.js"
     ],
-    // Optionally specify minification options
     "minify": {
       "enabled": true,
       "renameLocals": true
     },
-    // Optionally generate .map file
     "sourceMap": false
   }
 ]
