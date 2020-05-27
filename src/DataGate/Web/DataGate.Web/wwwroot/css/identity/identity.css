@@ -2,7 +2,7 @@
 *
 *
 * ==========================================
-* CUSTOM IDENTITY PAGES -
+* Custom identity pages layout -
   LOGIN, FORGOT PASSWORD, LEGAL
 * ==========================================
 *
@@ -16,7 +16,7 @@ html {
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Gilroy-Regular ☞';
     font-weight: 400;
     height: 100%;
     line-height: 1.7;
@@ -36,7 +36,6 @@ h2,
 h3,
 {
     font-weight: 400;
-    font-family: 'Roboto', sans-serif;
     color: #111;
 }
 
@@ -63,7 +62,11 @@ h3 {
 /* IE */
 
 h2 {
-    font-size: 28px;
+    font-size: 32px;
+}
+
+h3 {
+    font-size: 22px;
 }
 
 img {
@@ -71,15 +74,9 @@ img {
     height: auto;
 }
 
-ul {
-    list-style: outside none none;
-    margin: 0;
-    padding: 0;
-}
-
 
 /*========================================================================
-5. Demo Layout Two
+  fxt-template layout
 =========================================================================*/
 .fxt-template-layout2 {
     min-height: 100vh;
@@ -92,12 +89,6 @@ ul {
     background: -webkit-linear-gradient(-45deg, #ebeff3 0%,#ebeff3 50%,#2989d8 50%,#0575cc 51%,#005596 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(155deg, #ebeff3 0%,#ebeff3 50%,#2989d8 50%,#0575cc 51%,#005596 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebeff3', endColorstr='#005596',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-}
-
-@media only screen and (max-width: 991px) {
-    .fxt-template-layout2 {
-        padding: 15px;
-    }
 }
 
 .fxt-template-layout2 .fxt-checkbox-area {
@@ -136,36 +127,6 @@ ul {
     width: 100%;
     /*box-shadow: 3px 0 79px 0 rgba(0, 0, 0, 0.08);*/
     border-top-left-radius: 5px;
-}
-
-@media only screen and (max-width: 1199px) {
-    .fxt-template-layout2 .fxt-content {
-        padding: 100px 35px 70px 50px;
-    }
-}
-
-@media only screen and (max-width: 991px) {
-    .fxt-template-layout2 .fxt-content {
-        padding: 100px 70px 70px 70px;
-    }
-}
-
-@media only screen and (max-width: 767px) {
-    .fxt-template-layout2 .fxt-content {
-        padding: 80px 50px 50px 50px;
-    }
-}
-
-@media only screen and (max-width: 575px) {
-    .fxt-template-layout2 .fxt-content {
-        padding: 60px 30px 30px 30px;
-    }
-}
-
-@media only screen and (max-width: 479px) {
-    .fxt-template-layout2 .fxt-content {
-        padding: 50px 20px 20px 20px;
-    }
 }
 
 .fxt-template-layout2 .fxt-header {
@@ -235,27 +196,27 @@ ul {
     font-weight: 300;
 }
 
-.fxt-template-layout2 .fxt-btn-fill {
-    font-family: 'Roboto', sans-serif;
-    cursor: pointer;
-    display: inline-block;
-    font-size: 17px;
-    font-weight: 500;
-    box-shadow: none;
-    outline: none;
-    border: 0;
-    color: #fff;
-    border-radius: 40px;
-    background: #0575cb; /* Old browsers */
-    background: -moz-linear-gradient(top, #0575cb 0%, #2989d8 99%, #207cca 100%, #005799 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, #0575cb 0%,#2989d8 99%,#207cca 100%,#005799 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, #0575cb 0%,#2989d8 99%,#207cca 100%,#005799 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0575cb', endColorstr='#005799',GradientType=0 ); /* IE6-9 */
-    padding: 10px 36px;
-    margin-bottom: 10px;
-    width: 100%;
-    transition: all 0.3s ease-in-out;
-}
+    .fxt-template-layout2 .fxt-btn-fill {
+        font-family: 'Gilroy-Regular ☞';
+        cursor: pointer;
+        display: inline-block;
+        font-size: 17px;
+        font-weight: 500;
+        box-shadow: none;
+        outline: none;
+        border: 0;
+        color: #fff;
+        border-radius: 40px;
+        background: #0575cb; /* Old browsers */
+        background: -moz-linear-gradient(top, #0575cb 0%, #2989d8 99%, #207cca 100%, #005799 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, #0575cb 0%,#2989d8 99%,#207cca 100%,#005799 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, #0575cb 0%,#2989d8 99%,#207cca 100%,#005799 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0575cb', endColorstr='#005799',GradientType=0 ); /* IE6-9 */
+        padding: 10px 36px;
+        margin-bottom: 10px;
+        width: 100%;
+        transition: all 0.3s ease-in-out;
+    }
 
     .fxt-template-layout2 .fxt-btn-fill:hover {
         background-color: #da0000;
@@ -348,18 +309,6 @@ ul {
         padding-right: 5px;
         margin-bottom: 10px;
     }
-
-@media only screen and (max-width: 575px) {
-    .fxt-template-layout2 ul.fxt-socials li {
-        flex: 0 0 50%;
-    }
-}
-
-@media only screen and (max-width: 320px) {
-    .fxt-template-layout2 ul.fxt-socials li {
-        flex: 0 0 100%;
-    }
-}
 
 .fxt-template-layout2 ul.fxt-socials li a {
     border-radius: 2px;
@@ -571,10 +520,25 @@ ul {
     display: flex;
 }
 
-/*.text-pharus {
-    font-family: 'Gilroy-Regular ☞';
-}*/
+/*
+*
+* ==========================================
+* MEDIA QUERY - mobile, tablet, desktop
+* ==========================================
+*
+*/
 
+@media only screen and (max-width: 575px) {
+    .fxt-template-layout2 ul.fxt-socials li {
+        flex: 0 0 50%;
+    }
+}
+
+@media only screen and (max-width: 320px) {
+    .fxt-template-layout2 ul.fxt-socials li {
+        flex: 0 0 100%;
+    }
+}
 
 /*mobile*/
 @media only screen and (min-width: 320px) and (max-width: 480px) {
@@ -613,99 +577,64 @@ ul {
         line-height: 18px;
         text-align: center;
     }
-
-    .background-image, .background-color {
-        background-color: #036AB9;
-        height: 787px;
-    }
-}
-
-.pharus-text {
-    margin-top: 35px;
-}
-
-.pharus-btn {
-    margin-top: 35px;
-}
-
-@media only screen and (min-width: 640px) and (max-width: 1024px) {
-    .text-pharus {
-        font-size: 36px;
-    }
-}
-
-@media only screen and (max-width: 640px) {
-    .text-pharus {
-        font-size: 26px;
-    }
-
-    .pharus-text {
-        margin-top: 20px;
-    }
-
-    .pharus-btn {
-        margin-top: 55px;
-    }
 }
 
 @media only screen and (min-width: 1024px) {
-    .text-pharus {
-        font-size: 46px;
-    }
-
-    .pharus-text {
-        margin-top: 20px;
-    }
-
-    .pharus-btn {
-        margin-top: 55px;
-    }
-
     .extra-space {
         display: none !important;
     }
 }
 
-
-/*Custom login css end*/
-
 @media only screen and (max-width: 1199px) {
+    .fxt-template-layout2 .fxt-content {
+        padding: 100px 35px 70px 50px;
+    }
     h2 {
-        font-size: 26px;
+        font-size: 30px;
     }
 }
 
 @media only screen and (max-width: 991px) {
-    h2 {
-        font-size: 24px;
+    .fxt-template-layout2 {
+        padding: 15px;
     }
-}
 
-@media only screen and (max-width: 767px) {
-    h2 {
-        font-size: 22px;
+    .fxt-none-991 {
+        display: none !important;
     }
-}
 
-h3 {
-    font-size: 22px;
-}
-
-@media only screen and (max-width: 991px) {
+    .fxt-template-layout2 .fxt-content {
+        padding: 100px 70px 70px 70px;
+    }
+    
+    h2 {
+        font-size: 28px;
+    }
     h3 {
         font-size: 20px;
     }
 }
 
 @media only screen and (max-width: 767px) {
+    .fxt-template-layout2 .fxt-content {
+        padding: 80px 50px 50px 50px;
+    }
+    h2 {
+        font-size: 26px;
+    }
     h3 {
         font-size: 18px;
     }
 }
 
+@media only screen and (max-width: 575px) {
+    .fxt-template-layout2 .fxt-content {
+        padding: 60px 30px 30px 30px;
+    }
+}
 
-@media only screen and (max-width: 991px) {
-    .fxt-none-991 {
-        display: none !important;
+@media only screen and (max-width: 479px) {
+    .fxt-template-layout2 .fxt-content {
+        padding: 50px 20px 20px 20px;
     }
 }
