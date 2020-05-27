@@ -29,10 +29,6 @@
         width: 35%;
     }
 
-    #adminUserPanel {
-        padding-left: 50px;
-    }
-
     #div-select-addInfo {
         width: 25%;
     }
@@ -49,100 +45,7 @@
         width: 100%;
     }
 
-    .footer-pharus {
-        width: 100%;
-        margin-right: auto;
-        margin-left: auto;
-    }
-
-    .main-container-pharus {
-        width: 100%;
-        margin-right: auto;
-        margin-left: auto;
-    }
-
     #allselect-div-pharus {
-        display: flex;
-    }
-
-    #background-pharus {
-        left: 0px;
-        top: 0px;
-        position: relative;
-        margin-left: auto;
-        margin-right: auto;
-        height: 907px;
-        overflow: hidden;
-    }
-
-    #logo-pharus {
-        top: 23%;
-        position: absolute;
-        text-align: center;
-    }
-
-    #logo-linkedin-pharus {
-        top: 86.5%;
-        left: 85%;
-        position: absolute;
-    }
-
-    #logo-login-pharus {
-        top: 13%;
-        left: 12.5%;
-        position: absolute;
-    }
-
-    #img-logo-pharus {
-        width: 70%;
-    }
-
-    #welcome-text-pharus {
-        top: 52%;
-        position: absolute;
-        text-align: center;
-    }
-
-    #login-text-pharus {
-        top: 25%;
-        left: 12.5%;
-        position: absolute;
-        font-size: 42px;
-    }
-
-    /*#btn-login-home {
-        top: 72%;
-        position: absolute;
-    }*/
-
-    #btn-login {
-        outline: none;
-        background: none;
-        border: 0;
-        top: 130%;
-        right: 62%;
-        position: absolute;
-    }
-
-    #footer-home-pharus {
-        top: 97%;
-        position: absolute;
-        text-align: center;
-    }
-
-    #footer-login-pharus {
-        top: 87%;
-        position: absolute;
-        left: 12.5%;
-    }
-
-    #login-form {
-        position: absolute;
-        top: 40%;
-        left: 12.5%;
-    }
-
-    #div-checkbox-password {
         display: flex;
     }
 }
@@ -157,16 +60,15 @@
         width: 120px;
     }
 
-    #canvas-aum-pharus {
+    #canvas-aum-pharus,
+    .mobile-none,
+    #entityName
+    {
         display: none;
     }
 
     .sidenav {
         top: 9.2%;
-    }
-
-    .mobile-none {
-        display: none;
     }
 
     .push-mobile {
@@ -177,122 +79,11 @@
         width: 70%;
     }
 
-    #allselect-div-pharus {
-        display: inline;
-    }
-
-    #entityName {
-        display: none;
-    }
-
     #infoAndDocumentsView {
         display: inline;
     }
 
     footer {
         display: none;
-    }
-
-    .main-container-pharus {
-        width: 100%;
-        margin-right: auto;
-        margin-left: auto;
-    }
-
-    .lbl-toolbar-pharus {
-        display: none;
-    }
-
-    #background-pharus {
-        left: 0px;
-        top: 0px;
-        position: relative;
-        margin-left: auto;
-        margin-right: auto;
-        height: 820px;
-        overflow: hidden;
-    }
-
-    #background-login-pharus {
-        height: 820px;
-        overflow: hidden;
-        display: none;
-    }
-
-    #logo-pharus {
-        top: 2%;
-        position: absolute;
-        text-align: center;
-    }
-
-    #img-logo-pharus {
-        width: 50%;
-    }
-
-    #logo-login-pharus {
-        top: 4%;
-        left: 12.5%;
-        position: absolute;
-    }
-
-    #logo-linkedin-pharus {
-        top: 86.5%;
-        left: 85%;
-        position: absolute;
-    }
-
-    #welcome-text-pharus {
-        top: 30%;
-        position: absolute;
-        text-align: center;
-        font-size: 250%;
-    }
-
-    #login-text-pharus {
-        top: 16%;
-        left: 12.5%;
-        position: absolute;
-        font-size: 42px;
-    }
-
-    #btn-login-home {
-        top: 70%;
-        position: absolute;
-    }
-
-    #btn-login {
-        outline: none;
-        background: none;
-        border: 0;
-        top: 110%;
-        right: 36%;
-        position: absolute;
-    }
-
-    #footer-home-pharus {
-        top: 93%;
-        position: absolute;
-        text-align: center;
-        display: block;
-    }
-
-    #footer-login-pharus {
-        top: 93%;
-        position: absolute;
-        left: 12.5%;
-    }
-
-    #login-form {
-        position: absolute;
-        top: 50%;
-        left: 9%;
-    }
-
-        #login-form input {
-            width: 260px;
-        }
-
-    #div-checkbox-password {
-        display: inline-block;
     }
 }

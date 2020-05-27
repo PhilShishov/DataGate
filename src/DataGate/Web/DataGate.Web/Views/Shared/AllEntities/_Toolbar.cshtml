@@ -1,7 +1,7 @@
 ﻿@model DataGate.Web.ViewModels.Entities.EntitiesViewModel
 
 <div class="w-30" style="margin-right: -0.3%;">
-    <div class="h-100" id="allselect-div-pharus">
+    <div class="h-100 d-flex" >
 
         <form class="d-flex"
               method="post"
@@ -51,7 +51,7 @@
                        asp-for="Date"
                        min="2018-01-01">
                 <input type="submit"
-                       class="btn btn-pharus btn-sm mb-2p"
+                       class="btn btn-pharus btn-sm mb-2"
                        name="Command"
                        value="Update Table"></>
                 <span asp-validation-for="Date" class="text-danger"></span>
