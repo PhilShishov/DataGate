@@ -8,14 +8,14 @@
     <meta name="keywords" content="" />
 
     <environment include="Development">
-        <link type="text/css" rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" asp-append-version="true" />
         <link type="text/css" rel="stylesheet" href="~/css/identity/identity.css" asp-append-version="true" />
+        <link type="text/css" rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" asp-append-version="true" />
         <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
     </environment>
 
     @RenderSection("Styles", required: false)
 </head>
-<body style="height: auto">
+<body>
     <main>
         @RenderBody()
     </main>
