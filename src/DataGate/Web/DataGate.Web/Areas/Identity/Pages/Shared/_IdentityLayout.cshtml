@@ -8,29 +8,29 @@
     <meta name="keywords" content="" />
 
     <environment include="Development">
+        <link type="text/css" rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" asp-append-version="true" />
+        <link type="text/css" rel="stylesheet" href="~/css/identity/identity.css" asp-append-version="true" />
         <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
-        <link type="text/css" rel="stylesheet" href="~/css/home/home.css" asp-append-version="true" />
-
-        <style>
-            body {
-                background: url(../images/Background_Home.png) no-repeat center center fixed;
-            }
-        </style>
-    </environment>
-
-    <environment include="Production, Staging">
     </environment>
 
     @RenderSection("Styles", required: false)
 </head>
-<body>
+<body style="height: auto">
     <main>
         @RenderBody()
     </main>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+        <script src="~/lib/popperjs/umd/popper.min.js" asp-append-version="true"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+        <partial name="_ValidationScriptsPartial" />
+
+        <script>
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+            }
+        </script>
     </environment>
 
     @this.RenderSection("Scripts", required: false)

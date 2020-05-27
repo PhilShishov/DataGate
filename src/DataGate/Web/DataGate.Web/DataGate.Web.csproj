@@ -54,6 +54,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Identity\Pages\Legal\" />
     <Folder Include="Areas\ShareClass\" />
     <Folder Include="Areas\SubFund\" />
     <Folder Include="wwwroot\FileFolder\Agreement\" />
