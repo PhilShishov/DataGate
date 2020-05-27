@@ -1,35 +1,12 @@
-/**************************************
-
-Template Name: Xmee | Login and Register Form Html Templates
-Template URL: http://html.affixtheme.com/html/xmee
-Description: Creative & Exclusive Login Registration Template
-Author: AffixTheme
-Author URL: https://themeforest.net/user/affixtheme
-Version: 1.0 
-
-======================================  
-        Table Of Contents
-======================================
-1. Typography
-2. Template Default Style
-3. Template Animation
-4. Demo Layout One
-5. Demo Layout Two
-6. Demo Layout Three
-7. Demo Layout Four
-8. Demo Layout Five
-9. Demo Layout Six
-10. Demo Layout Seven
-11. Demo Layout Eight
-12. Demo Layout Nine
-13. Demo Layout Ten
-14. Demo Layout Eleven
-
-
-**************************************/
-/*=======================================================================
-1. Typography
-=========================================================================*/
+/*
+*
+*
+* ==========================================
+* CUSTOM IDENTITY PAGES -
+  LOGIN, FORGOT PASSWORD, LEGAL
+* ==========================================
+*
+*/
 :root {
     font-size: 12px;
 }
@@ -631,7 +608,7 @@ ul {
     }
 
         .fxt-template-layout2 .checkbox input[type="checkbox"]:checked + label::after {
-            font-family: 'FontAwesome';
+            font-family: 'Font Awesome\ 5 Free';
             content: "\f00c";
             font-weight: 900;
             color: #ffffff;
