@@ -40,9 +40,8 @@
                                         </a>
                                     </li>
 
-                                    <li class="dropdown pt-5">
-                                        <a class="dropdown-btn open-submenu"
-                                           name="dr-btn-SideNav">
+                                    <li class="dropdown pt-5 li-bordered">
+                                        <a class="sidenav-dropdown-btn open-submenu">
                                             Funds
                                             <i class="fa fa-caret-down"></i>
                                         </a>
@@ -63,9 +62,8 @@
                                         </div>
                                     </li>
 
-                                    <li class="dropdown">
-                                        <a class="dropdown-btn"
-                                           name="dr-btn-SideNav">
+                                    <li class="dropdown li-bordered mt-3">
+                                        <a class="sidenav-dropdown-btn">
                                             Sub Funds
                                             <i class="fa fa-caret-down"></i>
                                         </a>
@@ -77,9 +75,8 @@
                                             }
                                         </div>
                                     </li>
-                                    <li class="dropdown">
-                                        <a class="dropdown-btn"
-                                           name="dr-btn-SideNav">
+                                    <li class="dropdown li-bordered mt-3">
+                                        <a class="sidenav-dropdown-btn">
                                             Share Classes<i class="fa fa-caret-down"></i>
                                         </a>
                                         <div class="dropdown-container">
@@ -91,7 +88,7 @@
                                         </div>
                                     </li>
 
-                                    <li class="li-bordered">
+                                    <li class="li-bordered mt-3">
                                         <a href="/Agreements/All">
                                             Agreements
                                         </a>
@@ -143,7 +140,7 @@
                         </button>
                     </div>
 
-                    <div class="search-form-wrapper">
+                    <div class="search-form-wrapper mr-5">
                         <form method="post" asp-area="" asp-controller="Search" asp-action="Result">
                             <div class="search-box">
                                 <input type="search"
@@ -165,9 +162,8 @@
                     </div>
 
                     <div>
-                        <button class="ml-3 open-usermenu">
-                            <i class="fas fa-bars fa-2x"></i>
-                        </button>
+                        <a class="ml-3 open-usermenu">
+                        </a>
                     </div>
 
                     <div class="d-none">
@@ -217,8 +213,6 @@
         <partial name="_ValidationScriptsPartial" />
 
         <script src="~/js/navbar.js" asp-append-version="true"></script>
-
-
         <script>
             if (window.history.replaceState) {
                 window.history.replaceState(null, null, window.location.href);
