@@ -164,21 +164,41 @@ a.a-underline:hover {
 * ==========================================
 *
 */
-.open-usermenu {
-    color: white;
-    text-decoration: none;
-    background-color: transparent;
-    border: none;
-    margin-top: 0.5%;
+
+.open-usermenu:focus {
+    outline: none;
 }
 
-    .open-usermenu:focus {
-        outline: none;
-    }
+.open-usermenu::-moz-focus-inner {
+    border: 0;
+}
 
-    .open-usermenu::-moz-focus-inner {
-        border: 0;
-    }
+
+.open-usermenu::before {
+    content: '';
+    cursor:pointer;
+    background: url(../images/bars-solid.svg) no-repeat center center;
+    background-position-x: center;
+    background-position-y: center;
+    background-size: 32px 32px;
+    background-repeat-x: no-repeat;
+    background-repeat-y: no-repeat;
+    background-attachment: initial;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: initial;
+    background-size: 32px 32px;
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+    top: 21%;
+    right: 0.5%;
+    position: absolute;
+    /* opacity: 1; */
+    width: 32px;
+    height: 32px;
+}
 
 .navbar-user {
     justify-content: flex-end;
@@ -189,7 +209,7 @@ a.a-underline:hover {
     z-index: 1;
 }
 
-.navbar a:hover, .dropdown-btn:hover {
+.navbar a:hover, .sidenav-dropdown-btn:hover {
     background-color: deepskyblue;
 }
 /*
@@ -213,6 +233,7 @@ a.a-underline:hover {
 .li-bordered {
     border-bottom: 1px solid;
     border-color: #dee2e6;
+    line-height: 15px;
 }
 
 .sidenav {
@@ -227,7 +248,7 @@ a.a-underline:hover {
     padding-top: 60px;
 }
 
-    .sidenav a, .dropdown-btn {
+    .sidenav a, .sidenav-dropdown-btn {
         cursor: pointer;
         padding: 8px 8px 8px 12px;
         text-decoration: none;
@@ -246,9 +267,9 @@ a.a-underline:hover {
     .sidenav .sidenav-btn-close {
         cursor: pointer;
         position: absolute;
-        top: -15px;
+        top: -1.5%;
         font-size: 30px;
-        margin-left: 206px;
+        margin-left: 84%;
     }
 
         .sidenav .sidenav-btn-close:hover {
@@ -274,7 +295,6 @@ a.a-underline:hover {
 .fa-caret-down {
     float: right;
     margin-right: 2%;
-    margin-top: 2%;
 }
 
 /*
@@ -292,7 +312,7 @@ a.a-underline:hover {
 }
 
     .search-box input {
-        padding: 2px 100px 0 10px;
+        padding: 2px 30px 0 10px;
         outline: none;
         width: 300px;
         height: inherit;
@@ -803,7 +823,7 @@ li.timeline-item::before {
     }
 
     .sidenav {
-        top: 9.2%;
+        top: 9.3%;
     }
 
     .push-mobile {

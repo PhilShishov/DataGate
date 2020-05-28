@@ -3,30 +3,30 @@
     SIDENAV_ICON: 'sidenav-icon',
     SIDENAV_FOOTER: 'sidenav-footer',
     SIDENAV_BTN_CLOSE: 'sidenav-btn-close',
-    PLACEHOLDER_MODAL_AGR: '#modal-placeholder-agreement',
+    SIDENAV_BTNS_DROPDOWN: 'sidenav-dropdown-btn',
 };
 
 (function () {
-    const sidenavIcon = document.getElementById('sidenav-icon');
-    const sideNavFooter = document.getElementById('sidenav-footer');
+    const sidenavIcon = document.getElementById(HTML.SIDENAV_ICON);
+    const sideNavFooter = document.getElementById(HTML.SIDENAV_FOOTER);
 
     if (sidenavIcon) {
         sidenavIcon.addEventListener('click', toggleSideNavMenu);
     }
 
     function toggleSideNavMenu() {
-        const sidenavBtnClose = document.getElementById('sidenav-btn-close');
+        const sidenavBtnClose = document.getElementById(HTML.SIDENAV_BTN_CLOSE);
         sidenavBtnClose.addEventListener('click', closeNav);
-        navMenuStatus = document.getElementById('sidenav-pharus').style.width;
+        navMenuStatus = document.getElementById(HTML.SIDENAV).style.width;
         if (navMenuStatus == '0px' || navMenuStatus === '') {
-            document.getElementById('sidenav-pharus').style.width = '250px';
+            document.getElementById(HTML.SIDENAV).style.width = '250px';
             sideNavFooter.style.display = 'block';
         } else {
-            document.getElementById('sidenav-pharus').style.width = '0px';
+            document.getElementById(HTML.SIDENAV).style.width = '0px';
             sideNavFooter.style.display = 'none';
         }
         function closeNav() {
-            document.getElementById('sidenav-pharus').style.width = '0px';
+            document.getElementById(HTML.SIDENAV).style.width = '0px';
             sideNavFooter.style.display = 'none';
         }
     }
@@ -34,24 +34,10 @@
 })();
 
 (function () {
-    const sideNavDropdowns = document.getElementsByName('dr-btn-SideNav');
+    const sideNavDropdowns = document.getElementsByClassName(HTML.SIDENAV_BTNS_DROPDOWN);
 
     for (let i = 0; i < sideNavDropdowns.length; i++) {
         sideNavDropdowns[i].addEventListener('click', function () {
-            this.classList.toggle('active');
-            let dropdownContent = this.nextElementSibling;
-            if (dropdownContent.style.display === 'block') {
-                dropdownContent.style.display = 'none';
-            } else {
-                dropdownContent.style.display = 'block';
-            }
-        });
-    }
-
-    const subEntDropdowns = document.getElementsByName('dr-btn-SubEntities');
-
-    for (let i = 0; i < subEntDropdowns.length; i++) {
-        subEntDropdowns[i].addEventListener('click', function () {
             this.classList.toggle('active');
             let dropdownContent = this.nextElementSibling;
             if (dropdownContent.style.display === 'block') {
