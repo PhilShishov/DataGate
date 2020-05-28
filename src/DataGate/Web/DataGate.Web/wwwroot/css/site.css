@@ -45,8 +45,6 @@ textarea {
     resize: none;
 }
 
-/* style*/
-
 .bg-pharus {
     background-color: #202020;
 }
@@ -121,10 +119,6 @@ textarea {
     margin-bottom: 2%;
 }
 
-.navbar a:hover, .dropdown-btn:hover {
-    background-color: deepskyblue;
-}
-
 .tableCellPharus {
     cursor: pointer;
 }
@@ -163,9 +157,15 @@ input[type=search]::-webkit-search-cancel-button {
 a.a-underline:hover {
     text-decoration: underline;
 }
-
+/*
+*
+* ==========================================
+* NAVBAR
+* ==========================================
+*
+*/
 .open-usermenu {
-    color: inherit;
+    color: white;
     text-decoration: none;
     background-color: transparent;
     border: none;
@@ -179,6 +179,104 @@ a.a-underline:hover {
     .open-usermenu::-moz-focus-inner {
         border: 0;
     }
+
+.navbar-user {
+    justify-content: flex-end;
+}
+
+.header-pharus {
+    top: 0;
+    z-index: 1;
+}
+
+.navbar a:hover, .dropdown-btn:hover {
+    background-color: deepskyblue;
+}
+/*
+*
+* ==========================================
+* SIDENAV
+* ==========================================
+*
+*/
+#sidenav-footer {
+    position: fixed;
+    margin-left: 0.5%;
+    top: 94%;
+    display: none;
+}
+
+#sidenav-icon {
+    cursor: pointer
+}
+
+.li-bordered {
+    border-bottom: 1px solid;
+    border-color: #dee2e6;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    background-color: #f9f9f9;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+    .sidenav a, .dropdown-btn {
+        cursor: pointer;
+        padding: 8px 8px 8px 12px;
+        text-decoration: none;
+        font-size: 20px;
+        color: black;
+        display: block;
+        transition: 0.3s;
+        margin-bottom: 5%;
+        border: none;
+        background: none;
+        outline: none;
+        width: 100%;
+        text-align: left;
+    }
+
+    .sidenav .sidenav-btn-close {
+        cursor: pointer;
+        position: absolute;
+        top: -15px;
+        font-size: 30px;
+        margin-left: 206px;
+    }
+
+        .sidenav .sidenav-btn-close:hover {
+            background-color: #f9f9f9;
+        }
+
+/*dropdown for sidebar nav*/
+
+.dropdown-container {
+    display: none;
+    background: aliceblue;
+    padding-left: 10px;
+}
+
+    .dropdown-container a {
+        font-size: 17px;
+    }
+
+.show {
+    display: block;
+}
+
+.fa-caret-down {
+    float: right;
+    margin-right: 2%;
+    margin-top: 2%;
+}
+
 /*
 *
 * ==========================================
@@ -187,7 +285,7 @@ a.a-underline:hover {
 *
 */
 .search-box {
-    float: right;
+    /*float: right;*/
     display: inline-block;
     position: relative;
     height: 31px;
@@ -220,89 +318,26 @@ a.a-underline:hover {
             border-color: #0062cc;
         }
 
-.icon-svg search {
-    height: 16px;
-    width: 16px;
-}
-/*
-*
-* ==========================================
-* SIDENAV
-* ==========================================
-*
-*/
-#sidenav-footer {
-    position: fixed;
-    margin-left: 0.5%;
-    top: 96%;
-    display: none;
+.icon-svg-search {
+    width: 20px;
+    height: 20px;
 }
 
-.li-bordered {
-    border-bottom: 1px solid;
-    border-color: #dee2e6;
+.icon-svg-search-responsive {
+    width: 30px;
+    height: 30px;
+    color: white;
 }
 
-.sidenav {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    background-color: #f9f9f9;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
+.open-search-box {
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
 }
 
-    .sidenav a, .dropdown-btn {
-        cursor:pointer;
-        padding: 8px 8px 8px 12px;
-        text-decoration: none;
-        font-size: 20px;
-        color: black;
-        display: block;
-        transition: 0.3s;
-        margin-bottom: 5%;
-        border: none;
-        background: none;
+    .open-search-box:focus {
         outline: none;
-        width: 100%;
-        text-align: left;
     }
-
-    .sidenav .closebtn {
-        position: absolute;
-        top: -15px;
-        font-size: 30px;
-        margin-left: 206px;
-    }
-
-    .sidenav a.closebtn:hover {
-        background-color: #f9f9f9;
-    }
-
-/*dropdown for sidebar nav*/
-
-.dropdown-container {
-    display: none;
-    background: aliceblue;
-    padding-left: 10px;
-}
-
-    .dropdown-container a {
-        font-size: 17px;
-    }
-
-.show {
-    display: block;
-}
-
-.fa-caret-down {
-    float: right;
-    margin-right: 2%;
-    margin-top: 2%;
-}
 
 /*
 *
@@ -749,11 +784,54 @@ li.timeline-item::before {
 *
 */
 
-@media only screen and (min-width: 768px) {
+@media only screen and (max-width: 640px) {
+    #toolbar-pharus {
+        overflow-x: scroll;
+    }
+
+    .logo-pharus img {
+        height: 120px;
+        width: 120px;
+    }
+
+    .mobile-none,
+    .search-form-wrapper,
+    #canvas-aum-pharus,
+    #entityName,
+    footer {
+        display: none;
+    }
+
+    .sidenav {
+        top: 9.2%;
+    }
+
+    .push-mobile {
+        margin-top: 16.6%;
+    }
+
+    #div-select-addInfo {
+        width: 70%;
+    }
+
+    #infoAndDocumentsView {
+        display: inline;
+    }
+}
+
+@media only screen and (min-width: 640px) and (max-width: 1024px) {
+}
+
+
+@media only screen and (min-width: 1024px) {
     #toolbar-pharus {
         height: 80px;
         display: flex;
         margin-top: 3.3%;
+    }
+
+    .search-form-wrapper-responsive {
+        display: none;
     }
 
     .sidenav {
@@ -790,40 +868,5 @@ li.timeline-item::before {
 
     #allselect-div-pharus {
         display: flex;
-    }
-}
-
-@media only screen and (max-width: 640px) {
-    #toolbar-pharus {
-        overflow-x: scroll;
-    }
-
-    .logo-pharus img {
-        height: 120px;
-        width: 120px;
-    }
-
-    #canvas-aum-pharus,
-    #entityName,
-    .mobile-none,
-    .search-box,
-    footer {
-        display: none;
-    }
-
-    .sidenav {
-        top: 9.2%;
-    }
-
-    .push-mobile {
-        margin-top: 16.6%;
-    }
-
-    #div-select-addInfo {
-        width: 70%;
-    }
-
-    #infoAndDocumentsView {
-        display: inline;
     }
 }

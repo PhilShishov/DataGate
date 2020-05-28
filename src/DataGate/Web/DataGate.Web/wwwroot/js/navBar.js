@@ -1,14 +1,22 @@
-﻿(function () {
-    const sideNavIcon = document.getElementById('sideNavIcon');
+﻿const HTML = {
+    SIDENAV: 'sidenav-pharus',
+    SIDENAV_ICON: 'sidenav-icon',
+    SIDENAV_FOOTER: 'sidenav-footer',
+    SIDENAV_BTN_CLOSE: 'sidenav-btn-close',
+    PLACEHOLDER_MODAL_AGR: '#modal-placeholder-agreement',
+};
+
+(function () {
+    const sidenavIcon = document.getElementById('sidenav-icon');
     const sideNavFooter = document.getElementById('sidenav-footer');
 
-    if (sideNavIcon) {
-        sideNavIcon.addEventListener('click', toggleSideNavMenu);
+    if (sidenavIcon) {
+        sidenavIcon.addEventListener('click', toggleSideNavMenu);
     }
 
     function toggleSideNavMenu() {
-        const closebtn = document.getElementById('closeBtn');
-        closebtn.addEventListener('click', closeNav);
+        const sidenavBtnClose = document.getElementById('sidenav-btn-close');
+        sidenavBtnClose.addEventListener('click', closeNav);
         navMenuStatus = document.getElementById('sidenav-pharus').style.width;
         if (navMenuStatus == '0px' || navMenuStatus === '') {
             document.getElementById('sidenav-pharus').style.width = '250px';
