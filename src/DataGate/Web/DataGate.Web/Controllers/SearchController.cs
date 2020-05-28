@@ -6,7 +6,7 @@
     [Authorize]
     public class SearchController : Controller
     {
-        public IActionResult Search(string searchTerm)
+        public IActionResult Result(string searchTerm)
         {
             return this.View();
         }

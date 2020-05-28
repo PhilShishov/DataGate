@@ -26,7 +26,7 @@
         public const string ShareClassesSubEntitiesControllerName = "ShareClassesSubEntities";
 
         // Urls, actions
-        public const string FundAllUrl = "/f/all";
+        public const string FundAllUrl = "/funds";
         public const string DetailsActionName = "Details";
         public const string AllActionName = "All";
         public const string EditActionName = "Edit";
