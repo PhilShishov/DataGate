@@ -126,11 +126,6 @@
             var email = await this.userManager.GetEmailAsync(user);
             this.Email = email;
 
-            this.Input = new InputModel
-            {
-                NewEmail = email,
-            };
-
             this.IsEmailConfirmed = await this.userManager.IsEmailConfirmedAsync(user);
         }
 

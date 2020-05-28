@@ -9,16 +9,16 @@
     function toggleSideNavMenu() {
         const closebtn = document.getElementById('closeBtn');
         closebtn.addEventListener('click', closeNav);
-        navMenuStatus = document.getElementById('mySidenav').style.width;
+        navMenuStatus = document.getElementById('sidenav-pharus').style.width;
         if (navMenuStatus == '0px' || navMenuStatus === '') {
-            document.getElementById('mySidenav').style.width = '250px';
+            document.getElementById('sidenav-pharus').style.width = '250px';
             sideNavFooter.style.display = 'block';
         } else {
-            document.getElementById('mySidenav').style.width = '0px';
+            document.getElementById('sidenav-pharus').style.width = '0px';
             sideNavFooter.style.display = 'none';
         }
         function closeNav() {
-            document.getElementById('mySidenav').style.width = '0px';
+            document.getElementById('sidenav-pharus').style.width = '0px';
             sideNavFooter.style.display = 'none';
         }
     }

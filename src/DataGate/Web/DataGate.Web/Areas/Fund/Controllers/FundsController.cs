@@ -22,7 +22,7 @@
         }
 
         [HttpGet]
-        [Route("f/all")]
+        [Route("funds")]
         public IActionResult All()
         {
             var viewModel = EntitiesVMSetup.SetGet<EntitiesViewModel>(this.service);

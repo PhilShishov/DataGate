@@ -9,6 +9,7 @@
 
     <environment include="Development">
         <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" asp-append-version="true" />
+        <link type="text/css" rel="stylesheet" href="~/lib/font-awesome/css/all.css" asp-append-version="true" />
         <link type="text/css" rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     </environment>
 
@@ -32,7 +33,7 @@
                                          alt="Pharus Management">
                                 </span>
 
-                                <ul id="mySidenav" class="sidenav">
+                                <ul id="sidenav-pharus" class="sidenav">
                                     <li>
                                         <a style="cursor:pointer"
                                            id="closeBtn"
@@ -42,15 +43,16 @@
                                     </li>
 
                                     <li class="dropdown pt-5">
-                                        <button class="dropdown-btn"
-                                                name="dr-btn-SideNav">
-                                            Funds<i class="fa fa-caret-down"></i>
-                                        </button>
-                                        <div id="myDropdown" class="dropdown-container">
+                                        <a class="dropdown-btn open-submenu"
+                                           name="dr-btn-SideNav">
+                                            Funds
+                                            <i class="fa fa-caret-down"></i>
+                                        </a>
+                                        <div class="dropdown-container">
                                             <a class="dropdown-item font-weight-light"
                                                asp-area="Fund"
                                                asp-route="allFunds">
-                                                List
+                                                View All
                                             </a>
                                             @if (this.User.IsInRole("Admin"))
                                             {
@@ -60,39 +62,34 @@
                                                     Create
                                                 </a>
                                             }
-
-                                            <a class="dropdown-item font-weight-light" href="#">Report</a>
                                         </div>
                                     </li>
 
                                     <li class="dropdown">
-                                        <button class="dropdown-btn"
-                                                name="dr-btn-SideNav">
-                                            Sub Funds<i class="fa fa-caret-down"></i>
-                                        </button>
-                                        <div id="myDropdown" class="dropdown-container">
-                                            <a class="dropdown-item font-weight-light" href="/SubFunds/All">List</a>
+                                        <a class="dropdown-btn"
+                                           name="dr-btn-SideNav">
+                                            Sub Funds
+                                            <i class="fa fa-caret-down"></i>
+                                        </a>
+                                        <div class="dropdown-container">
+                                            <a class="dropdown-item font-weight-light" href="/SubFunds/All">View All</a>
                                             @if (this.User.IsInRole("Admin"))
                                             {
                                                 <a class="dropdown-item font-weight-light" href="/SubFunds/CreateSubFund">Create</a>
                                             }
-
-                                            <a class="dropdown-item font-weight-light" href="#">Report</a>
                                         </div>
                                     </li>
                                     <li class="dropdown">
-                                        <button class="dropdown-btn"
-                                                name="dr-btn-SideNav">
+                                        <a class="dropdown-btn"
+                                           name="dr-btn-SideNav">
                                             Share Classes<i class="fa fa-caret-down"></i>
-                                        </button>
-                                        <div id="myDropdown" class="dropdown-container">
-                                            <a class="dropdown-item font-weight-light" href="/ShareClasses/All">List</a>
+                                        </a>
+                                        <div class="dropdown-container">
+                                            <a class="dropdown-item font-weight-light" href="/ShareClasses/All">View All</a>
                                             @if (this.User.IsInRole("Admin"))
                                             {
                                                 <a class="dropdown-item font-weight-light" href="/ShareClasses/CreateShareClass">Create</a>
                                             }
-
-                                            <a class="dropdown-item font-weight-light" href="#">Report</a>
                                         </div>
                                     </li>
 
@@ -138,40 +135,32 @@
                     </div>
                 </div>
 
-                <div class="w-25">
-                    <form method="post" asp-area="" asp-controller="Search" asp-action="Search">
-                        <div class="search-box">
-                            <input type="search"
-                                   name="searchTerm"
-                                   placeholder="Search the site..."
-                                   autocomplete="off"
-                                   autocorrect="off"
-                                   autocapitalize="off" />
+                <div class="w-65">
+                    <div class="d-flex float-right">
+                        <form method="post" asp-area="" asp-controller="Search" asp-action="Result">
+                            <div class="search-box">
+                                <input type="search"
+                                       name="searchTerm"
+                                       placeholder="Search the site..."
+                                       autocomplete="off"
+                                       autocorrect="off"
+                                       autocapitalize="off" />
 
-                            <button type="submit" class="search" title="Search">
-                               
-                            </button>
-                            @*<input type="submit"
-                                class="btn btn-pharus btn-sm"
-                                value="Search"
-                                autocomplete="on" />*@
-                        </div>
-                    </form>
-                </div>
+                                <button type="submit" class="search" title="Search">
+                                    <svg class="icon-svg search" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                                        <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </form>
+                        <button class="ml-3 open-usermenu">
+                            <i class="fas fa-bars fa-2x"></i>
+                        </button>
+                    </div>
 
-                <button class="navbar-toggler ml-auto"
-                        type="button"
-                        data-toggle="collapse"
-                        data-target="#navbarNav"
-                        aria-controls="navbarSupportedContent"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="navbar-collapse collapse" id="navbarNav">
-                    <div id="intro" class="text-right">
-                        <ul class="navbar-nav">
+                    <div class="d-none">
+                        <ul class="navbar-nav text-right">
                             <li class="nav-item active">
                                 <a class="nav-link nav-link-white active"
                                    asp-area=""
@@ -191,16 +180,6 @@
                                    asp-action="Index">Panel</a>
                             </li>
 
-                            @*@if (this.User.IsInRole("Admin"))
-                                {
-                                    <li class="nav-item active">
-                                        <a class="nav-link nav-link-white active"
-                                           asp-area=""
-                                           asp-controller="Settings"
-                                           asp-action="Index">Settings</a>
-                                    </li>
-                                }*@
-
                             <li class="nav-item">
                                 <a class="nav-link nav-link-white active" asp-area="Identity" asp-page="/Account/Manage/Email">@this.User.Identity.Name</a>
                             </li>
@@ -211,6 +190,7 @@
                         </ul>
                     </div>
                 </div>
+
             </nav>
         </header>
         <main>
