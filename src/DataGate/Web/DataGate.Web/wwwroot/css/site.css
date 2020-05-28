@@ -165,42 +165,51 @@ a.a-underline:hover {
 *
 */
 
-.open-usermenu:focus {
-    outline: none;
-}
-
-.open-usermenu::-moz-focus-inner {
-    border: 0;
-}
-
-
-.open-usermenu::before {
+.responsive-menu .open-responsive-menu::before {
     content: '';
-    cursor:pointer;
+    cursor: pointer;
     background: url(../images/bars-solid.svg) no-repeat center center;
     background-position-x: center;
     background-position-y: center;
-    background-size: 32px 32px;
-    background-repeat-x: no-repeat;
-    background-repeat-y: no-repeat;
-    background-attachment: initial;
-    background-origin: initial;
-    background-clip: initial;
-    background-color: initial;
-    background-size: 32px 32px;
     -webkit-transition: all 0.2s linear;
     -moz-transition: all 0.2s linear;
     -o-transition: all 0.2s linear;
     transition: all 0.2s linear;
-    top: 21%;
-    right: 0.5%;
+    right: 1%;
     position: absolute;
-    /* opacity: 1; */
+    opacity: 1;
     width: 32px;
     height: 32px;
 }
 
-.navbar-user {
+.responsive-menu .open-responsive-menu::after {
+    content: '';
+    cursor: pointer;
+    background: url(../images/times-solid.svg) no-repeat center center;
+    background-position-x: center;
+    background-position-y: center;
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+    right: -2.5%;
+    position: absolute;
+    opacity: 0;
+    width: 32px;
+    height: 32px;
+}
+
+.responsive-menu.open .open-responsive-menu:before {
+    opacity: 0;
+    right: -2.5%;
+}
+
+.responsive-menu.open .open-responsive-menu:after {
+    opacity: 1;
+    right: 1%;
+}
+
+.responsive-navbar {
     justify-content: flex-end;
 }
 
