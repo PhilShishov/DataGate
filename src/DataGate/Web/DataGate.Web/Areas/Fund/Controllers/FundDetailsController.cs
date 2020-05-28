@@ -25,7 +25,6 @@
         public IActionResult ByIdAndDate(int id, string date)
         {
             var viewModel = SpecificVMSetup.SetGet<SpecificEntityViewModel>(id, date, this.service);
-
             return this.View(viewModel);
         }
 

@@ -1,0 +1,22 @@
+﻿
+@if (this.TempData[GlobalConstants.InfoKey] != null)
+{
+    <div class="alert alert-success" id="infoMessage">
+        @this.TempData[GlobalConstants.InfoKey]
+    </div>
+}
+
+@if (this.TempData[GlobalConstants.ErrorKey] != null)
+{
+    <div class="alert alert-danger" id="errorMessage">
+        @this.TempData[GlobalConstants.ErrorKey]
+    </div>
+}
+
+<script>
+        // Fade timeout for tempdata messages
+        setTimeout(() => {
+            $('#infoMessage').fadeOut();
+            $('#errorMessage').fadeOut();
+        }, 5000);
+</script>

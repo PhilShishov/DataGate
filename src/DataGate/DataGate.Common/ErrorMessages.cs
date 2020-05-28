@@ -9,7 +9,7 @@
 
         public const string TableReportNotGenerated = "There was a problem generating your report, please try again.";
         public const string TooManyColumns = "Too many columns! Please make a column selection.";
-        public const string TableIsEmpty = "Invalid selection! Please check inactive and try again.";
+        public const string TableIsEmpty = "Inactive/old fund selected! Please make a new selection.";
         public const string UnsuccessfulUpdate = "Update was unsuccessful! Please try again.";
         public const string ExistingEntityName = "Name already exists! Please try another one.";
 
