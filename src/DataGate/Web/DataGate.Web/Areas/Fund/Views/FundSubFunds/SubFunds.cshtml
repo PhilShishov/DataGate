@@ -26,20 +26,7 @@
                 <hr class="mt-1 mb-0" />
             </div>
 
-            @if (this.TempData[GlobalConstants.InfoKey] != null)
-            {
-                <div class="alert alert-success" id="infoMessage">
-                    @this.TempData[GlobalConstants.InfoKey]
-                </div>
-            }
-
-            @if (this.TempData[GlobalConstants.ErrorKey] != null)
-            {
-                <div class="alert alert-danger" id="errorMessage">
-                    @this.TempData[GlobalConstants.ErrorKey]
-                </div>
-            }
-
+            <partial name="_StatusMessage" />
             <partial name="AllEntities/_ModalExtract" />
             <partial name="SubEntities/_ModalSelect" />
             <partial name="SubEntities/_ViewTable" />
@@ -52,12 +39,6 @@
     <script type="text/javascript" src="~/js/inactive.js" asp-append-version="true"></script>
 
     <script>
-        // Fade timeout for tempdata messages
-        setTimeout(function () {
-            $('#infoMessage').fadeOut();
-            $('#errorMessage').fadeOut();
-        }, 3000);
-
         $(document).ready(function () {
             var token = $('#update-form input[name=__RequestVerificationToken]').val();
             // ________________________________________________________

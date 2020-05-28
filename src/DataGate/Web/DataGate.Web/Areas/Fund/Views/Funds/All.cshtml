@@ -31,21 +31,7 @@
             </div>
             <hr class="mt-1 mb-0" />
         </div>
-
-        @if (this.TempData[GlobalConstants.InfoKey] != null)
-        {
-            <div class="alert alert-success" id="infoMessage">
-                @this.TempData[GlobalConstants.InfoKey]
-            </div>
-        }
-
-        @if (this.TempData[GlobalConstants.ErrorKey] != null)
-        {
-            <div class="alert alert-danger" id="errorMessage">
-                @this.TempData[GlobalConstants.ErrorKey]
-            </div>
-        }
-
+        <partial name="_StatusMessage" />
         <partial name="AllEntities/_ViewTable" />
     </div>
 </div>
@@ -57,12 +43,6 @@
     <script src="~/js/plugins.js" asp-append-version="true"></script>
 
     <script>
-        // Fade timeout for tempdata messages
-        setTimeout(() => {
-            $('#infoMessage').fadeOut();
-            $('#errorMessage').fadeOut();
-        }, 3000);
-
         let model = {
             Date: '@Model.Date',
             ControllerName: '@controller',

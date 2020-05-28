@@ -22,46 +22,45 @@
                 <th class="text-secondary p-1">
                     File Name
                 </th>
-                <th class="text-secondary p-1"></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var agreement in Model.Agreements)
             {
-            <tr>
-                <td class="p-1" hidden>
-                    @agreement.Description
-                </td>
-                <td class="p-1">
-                    @agreement.Description
-                </td>
-                <td class="p-1">
-                    @agreement.ContractDate
-                </td>
-                <td class="p-1">
-                    @agreement.ActivationDate
-                </td>
-                <td class="p-1">
-                    @agreement.ExpirationDate
-                </td>
-                <td class="p-1">
-                    <button class="btn-link-pharus text-left"
-                            formtarget="_blank"
-                            type="submit"
-                            asp-route="files"
-                            asp-route-name="@agreement.Name"
-                            name="agrValue"
-                            value="@agreement.Name">
-                        @Html.Encode(@System.IO.Path.GetFileNameWithoutExtension(agreement.Name))
-                    </button>
+                <tr>
+                    <td class="p-1" hidden>
+                        @agreement.Description
+                    </td>
+                    <td class="p-1">
+                        @agreement.Description
+                    </td>
+                    <td class="p-1">
+                        @agreement.ContractDate
+                    </td>
+                    <td class="p-1">
+                        @agreement.ActivationDate
+                    </td>
+                    <td class="p-1">
+                        @agreement.ExpirationDate
+                    </td>
+                    <td class="p-1">
+                        <button class="btn-link-pharus text-left"
+                                formtarget="_blank"
+                                type="submit"
+                                asp-route="files"
+                                asp-route-name="@agreement.Name"
+                                name="agrValue"
+                                value="@agreement.Name">
+                            @Html.Encode(@System.IO.Path.GetFileNameWithoutExtension(agreement.Name))
+                        </button>
 
-                </td>
-                <td class="p-1">
-                    <button type="button" class="btn btn-pharus btn-sm mr-1 btn-delete">
-                        Delete
-                    </button>
-                </td>
-            </tr>
+                    </td>
+                    <td class="p-1">
+                        <button type="button" class="btn btn-pharus btn-sm mr-1 btn-delete">
+                            Delete
+                        </button>
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
@@ -69,41 +68,41 @@
 </form>
 
 <script>
-      $(document).ready(function () {
-            const token = $('#form-agreement input[name=__RequestVerificationToken]').val();
-            const areaName = '@Model.AreaName';
+    const token = $('#form-agreement input[name=__RequestVerificationToken]').val();
+    const areaName = '@Model.AreaName';
 
-            // ________________________________________________________
-            //
-            // Delete selected row from agreements table by confirming
+    $(document).ready(function () {
+        // ________________________________________________________
+        //
+        // Delete selected row from agreements table by confirming
+        $('.btn-delete').on('click', function () {
 
-              $('.btn-delete').on('click', function () {
-                  let con = confirm('Are you sure you want to delete this?');
+            let con = confirm('Are you sure you want to delete this?');
 
-                  if (!con) {
-                      event.preventDefault();
-                  }
-                  else {
-                      const agrValue = $(this).closest('tr').find('button:eq(0)').val();
-                      $.ajax({
-                          url: '/media/delete',
-                          type: 'GET',
-                          dataType: 'json',
-                          contentType: 'application/json; charset=utf-8',
-                          headers: { 'X-CSRF-TOKEN': token },
-                          data: { agrValue: agrValue, areaName: areaName },
-                          success: function (data) {
-                              if (data.data == 'false') {
-                                  alert('Something wrong!');
-                                  return false;
-                              }
-                              $("#tbl-agreements tr:contains('" + data.data + "')").remove();
-                              $("#tbl-distinct-agreements tr:contains('" + data.data + "')").remove();
-                              alert('The file was successfully deleted.');
-                          }
-                      });
-                  }
-              });
+            if (!con) {
+                event.preventDefault();
+            } else {
+                const agrValue = $(this).closest('tr').find('button:eq(0)').val();
+                $.ajax({
+                    url: '/media/delete',
+                    type: 'GET',
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    headers: { 'X-CSRF-TOKEN': token },
+                    data: { agrValue: agrValue, areaName: areaName },
 
+                    success: function (data) {
+
+                        if (data.data == 'false') {
+                            alert('Something wrong!');
+                            return false;
+                        }
+                        $("#tbl-agreements tr:contains('" + data.data + "')").remove();
+                        $("#tbl-distinct-agreements tr:contains('" + data.data + "')").remove();
+                        alert('The file was successfully deleted.');
+                    }
+                });
+            }
         });
+    });
 </script>
