@@ -123,15 +123,36 @@
 
                 <div class="w-50 d-flex responsive-navbar">
                     <div class="search-form-wrapper-responsive">
-                        <button class="open-search-box">
+                        <button class="open-search-box mt-3">
                             <svg class="icon-svg-search-responsive" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
                                 <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
                             </svg>
                         </button>
+
+                        <div class="search-form-wrapper mr-5 d-none">
+                            <form method="post" asp-area="" asp-controller="Search" asp-action="Result">
+                                <div class="search-box-responsive">
+                                    <input type="search"
+                                           name="searchTerm"
+                                           placeholder="Search the site..."
+                                           autocomplete="off"
+                                           autocorrect="off"
+                                           autocapitalize="off"
+                                           required />
+
+                                    <button type="submit" class="search" title="Search">
+                                        <svg class="icon-svg-search" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                                            <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
 
-                    <div class="search-form-wrapper mr-5">
+                    <div class="search-box-wrapper mr-5">
                         <form method="post" asp-area="" asp-controller="Search" asp-action="Result">
                             <div class="search-box">
                                 <input type="search"

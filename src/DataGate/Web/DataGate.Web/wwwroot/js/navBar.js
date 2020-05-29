@@ -21,7 +21,6 @@
     function toggleSideNavMenu() {
         const sidenavBtnsClose = document.getElementsByClassName(HTML.SIDENAV_BTN_CLOSE);
         const sidenav = document.getElementById(HTML.SIDENAV_MAIN);
-        const sidenavResp = document.getElementById(HTML.SIDENAV_RESPONSIVE);
 
         for (var btn of sidenavBtnsClose) {
             btn.addEventListener('click', closeNav);
@@ -37,19 +36,8 @@
             sideNavFooter.style.display = 'none';
         }
 
-        const respNavMenuStatus = sidenavResp.style.width;
-
-        if (respNavMenuStatus == '0px' || respNavMenuStatus === '') {
-            sidenavResp.style.width = '250px';
-            sideNavFooter.style.display = 'block';
-        } else {
-            sidenavResp.style.width = '0px';
-            sideNavFooter.style.display = 'none';
-        }
-
         function closeNav() {
             sidenav.style.width = '0px';
-            sidenavResp.style.width = '0px';
             sideNavFooter.style.display = 'none';
         }
     }
@@ -78,20 +66,20 @@ $(HTML.NAVBAR_USER_MENU).on('click', function () {
 
 (function () {
     const searchMenuToogler = document.getElementsByClassName('search-form-wrapper-responsive')[0];
-    //const searchMenu = document.getElementsByClassName('search-form-responsive')[0];
+    const searchMenu = document.getElementsByClassName('search-form-wrapper')[0];
 
     if (searchMenuToogler) {
         searchMenuToogler.addEventListener('click', toggleSearchMenu);
 
         function toggleSearchMenu() {
             searchMenuToogler.classList.toggle('opened');
-            //const searchMenuStatus = searchMenu.classList.contains('d-none');
+            const searchMenuStatus = searchMenu.classList.contains('d-none');
 
-            //if (searchMenuStatus) {
-            //    userMenu.classList.remove('d-none');
-            //} else {
-            //    userMenu.classList.add('d-none');
-            //}
+            if (searchMenuStatus) {
+                searchMenu.classList.remove('d-none');
+            } else {
+                searchMenu.classList.add('d-none');
+            }
         };
     }
 })();
