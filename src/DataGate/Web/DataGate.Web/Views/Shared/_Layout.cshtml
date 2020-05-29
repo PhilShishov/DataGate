@@ -18,131 +18,124 @@
 <body>
     @if (this.User.Identity.IsAuthenticated)
     {
-        <header class="position-fixed header-pharus w-100">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-pharus">
+        <header>
+            <div class="header-pharus">
+                <div class="w-50 float-left">
+                    <div class="header-pharus-app-navbar d-flex">
+                        <div class="mx-2 mt-2">
+                            <img id="sidenav-icon"
+                                 src="/images/Logo_Pharus.jpg"
+                                 class="img-responsive"
+                                 width="50"
+                                 alt="Pharus Management">
+                            <ul id="sidenav-pharus" class="sidenav">
+                                <li>
+                                    <a id="sidenav-btn-close"
+                                       class="sidenav-btn-close">
+                                        &times;
+                                    </a>
+                                </li>
 
-                <div class="w-35">
-                    <div>
-                        <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
-                                <div id="sidenav-icon">
-                                    <img src="/images/Logo_Pharus.jpg"
-                                         class="img-responsive"
-                                         width="50"
-                                         alt="Pharus Management">
-                                </div>
-
-                                <ul id="sidenav-pharus" class="sidenav">
-                                    <li>
-                                        <a id="sidenav-btn-close"
-                                           class="sidenav-btn-close">
-                                            &times;
+                                <li class="dropdown pt-5 li-bordered">
+                                    <a class="sidenav-dropdown-btn open-submenu">
+                                        Funds
+                                        <i class="fa fa-caret-down"></i>
+                                    </a>
+                                    <div class="dropdown-container">
+                                        <a class="dropdown-item font-weight-light"
+                                           asp-area="Fund"
+                                           asp-route="allFunds">
+                                            View All
                                         </a>
-                                    </li>
-
-                                    <li class="dropdown pt-5 li-bordered">
-                                        <a class="sidenav-dropdown-btn open-submenu">
-                                            Funds
-                                            <i class="fa fa-caret-down"></i>
-                                        </a>
-                                        <div class="dropdown-container">
-                                            <a class="dropdown-item font-weight-light"
-                                               asp-area="Fund"
-                                               asp-route="allFunds">
-                                                View All
+                                        @if (this.User.IsInRole("Admin"))
+                                        {
+                                            <a asp-area="Admin"
+                                               asp-route="newFund"
+                                               class="dropdown-item font-weight-light">
+                                                Create
                                             </a>
-                                            @if (this.User.IsInRole("Admin"))
-                                            {
-                                                <a asp-area="Admin"
-                                                   asp-route="newFund"
-                                                   class="dropdown-item font-weight-light">
-                                                    Create
-                                                </a>
-                                            }
-                                        </div>
-                                    </li>
+                                        }
+                                    </div>
+                                </li>
 
-                                    <li class="dropdown li-bordered mt-3">
-                                        <a class="sidenav-dropdown-btn">
-                                            Sub Funds
-                                            <i class="fa fa-caret-down"></i>
-                                        </a>
-                                        <div class="dropdown-container">
-                                            <a class="dropdown-item font-weight-light" href="/SubFunds/All">View All</a>
-                                            @if (this.User.IsInRole("Admin"))
-                                            {
-                                                <a class="dropdown-item font-weight-light" href="/SubFunds/CreateSubFund">Create</a>
-                                            }
-                                        </div>
-                                    </li>
-                                    <li class="dropdown li-bordered mt-3">
-                                        <a class="sidenav-dropdown-btn">
-                                            Share Classes<i class="fa fa-caret-down"></i>
-                                        </a>
-                                        <div class="dropdown-container">
-                                            <a class="dropdown-item font-weight-light" href="/ShareClasses/All">View All</a>
-                                            @if (this.User.IsInRole("Admin"))
-                                            {
-                                                <a class="dropdown-item font-weight-light" href="/ShareClasses/CreateShareClass">Create</a>
-                                            }
-                                        </div>
-                                    </li>
+                                <li class="dropdown li-bordered mt-3">
+                                    <a class="sidenav-dropdown-btn">
+                                        Sub Funds
+                                        <i class="fa fa-caret-down"></i>
+                                    </a>
+                                    <div class="dropdown-container">
+                                        <a class="dropdown-item font-weight-light" href="/SubFunds/All">View All</a>
+                                        @if (this.User.IsInRole("Admin"))
+                                        {
+                                            <a class="dropdown-item font-weight-light" href="/SubFunds/CreateSubFund">Create</a>
+                                        }
+                                    </div>
+                                </li>
+                                <li class="dropdown li-bordered mt-3">
+                                    <a class="sidenav-dropdown-btn">
+                                        Share Classes<i class="fa fa-caret-down"></i>
+                                    </a>
+                                    <div class="dropdown-container">
+                                        <a class="dropdown-item font-weight-light" href="/ShareClasses/All">View All</a>
+                                        @if (this.User.IsInRole("Admin"))
+                                        {
+                                            <a class="dropdown-item font-weight-light" href="/ShareClasses/CreateShareClass">Create</a>
+                                        }
+                                    </div>
+                                </li>
 
-                                    <li class="li-bordered mt-3">
-                                        <a href="/Agreements/All">
-                                            Agreements
-                                        </a>
-                                    </li>
+                                <li class="li-bordered mt-3">
+                                    <a href="/Agreements/All">
+                                        Agreements
+                                    </a>
+                                </li>
 
-                                    <li class="mt-3 text-color-grey-pharus text-center" id="sidenav-footer">
-                                        <div>
-                                            &copy;  @DateTime.Now.Year @GlobalConstants.DataGateFooterDisplay
-                                        </div>
-                                    </li>
-                                </ul>
+                                <li class="mt-3 text-color-grey-pharus text-center" id="sidenav-footer">
+                                    <div>
+                                        &copy;  @DateTime.Now.Year @GlobalConstants.DataGateFooterDisplay
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
 
-                            </li>
-
-                            <li class="nav-item ml-2 mobile-none mt-3">
-                                <a class="nav-link nav-link-white active"
-                                   asp-area="Fund"
+                        <div class="d-flex align-items-center mt-3">
+                            <div class="ml-2 mobile-none">
+                                <a asp-area="Fund"
                                    asp-route="allFunds">Fund Library</a>
-                            </li>
-                            <li class="nav-item ml-2 mobile-none mt-3">
-                                <a class="nav-link nav-link-white active"
-                                   asp-area=""
+                            </div>
+                            <div class="ml-2 mobile-none">
+                                <a asp-area=""
                                    asp-controller=""
                                    asp-action=""> Sub Fund Library</a>
-                            </li>
-                            <li class="nav-item ml-2 mobile-none mt-3">
-                                <a class="nav-link nav-link-white active"
-                                   asp-area=""
+                            </div>
+                            <div class="ml-2 mobile-none">
+                                <a asp-area=""
                                    asp-controller=""
                                    asp-action="">Share Class Library</a>
-                            </li>
-                            <li class="nav-item ml-2 mobile-none mt-3">
-                                <a class="nav-link nav-link-white active"
-                                   asp-area=""
+                            </div>
+                            <div class="ml-2 mobile-none">
+                                <a asp-area=""
                                    asp-controller=""
                                    asp-action="">Agreements Library</a>
-                            </li>
-                        </ul>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
-                <div class="w-65 d-flex responsive-navbar">
-                    <div class="search-form-wrapper-responsive">
-                        <button class="open-search-box">
-                            <svg class="icon-svg-search-responsive" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
-                                <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
-                            </svg>
-                        </button>
-                    </div>
+                <div class="search-form-wrapper-responsive">
+                    <button class="open-search-box">
+                        <svg class="icon-svg-search-responsive" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                            <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                        </svg>
+                    </button>
+                </div>
 
-                    <div class="search-form-wrapper mr-5">
+                <div class="responsive-navbar float-right">
+                    <div class="search-form-wrapper">
                         <form method="post" asp-area="" asp-controller="Search" asp-action="Result">
-                            <div class="search-box">
+                            <div class="search-box mt-3">
                                 <input type="search"
                                        name="searchTerm"
                                        placeholder="Search the site..."
@@ -161,8 +154,8 @@
                         </form>
                     </div>
 
-                    <div class="responsive-menu ml-5">
-                        <a class="ml-3 open-responsive-menu">
+                    <div class="responsive-menu">
+                        <a class="open-responsive-menu">
                         </a>
                         <div class="responsive-menu-user">
                             <div class="menu-user-container">
@@ -196,7 +189,7 @@
                     </div>
 
                 </div>
-            </nav>
+            </div>
         </header>
         <main>
             <div class="container-fluid push-mobile">
