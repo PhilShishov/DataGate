@@ -2,8 +2,8 @@
 <html>
 <head>
     <script>
-        window.onscroll = function () { myFunction() };
-        function myFunction() {
+        window.onscroll = function () { showBackToTop() };
+        function showBackToTop() {
             if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
                 document.getElementsByClassName("back-to-top")[0].style.display = "inline";
             } else {

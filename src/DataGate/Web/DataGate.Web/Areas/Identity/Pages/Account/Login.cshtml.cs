@@ -8,6 +8,7 @@
 
     using DataGate.Common;
     using DataGate.Data.Models.Users;
+    using DataGate.Web.Infrastructure.Attributes.Validation;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
@@ -142,6 +143,9 @@
 
             [Display(Name = ModelConstants.UserLoginRememberMeDisplayName)]
             public bool RememberMe { get; set; }
+
+            [GoogleReCaptchaValidation]
+            public string RecaptchaValue { get; set; }
         }
     }
 }
