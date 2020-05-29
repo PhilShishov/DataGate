@@ -1,7 +1,9 @@
 ﻿namespace DataGate.Web.InputModels.Users
 {
-    using DataGate.Common;
     using System.ComponentModel.DataAnnotations;
+
+    using DataGate.Common;
+    using DataGate.Web.Infrastructure.Attributes.Validation;
 
     public class EditUserInputModel
     {
@@ -27,5 +29,8 @@
         [Display(Name = ModelConstants.UserConfirmPasswordDisplayName)]
         [Compare(nameof(PasswordHash), ErrorMessage = ErrorMessages.NewPasswordMismatch)]
         public string ConfirmPassword { get; set; }
+
+        [GoogleReCaptchaValidation]
+        public string RecaptchaValue { get; set; }
     }
 }

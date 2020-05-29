@@ -2,6 +2,7 @@
 {
     using System;
 
+    using Microsoft.AspNetCore.Http;
     using Microsoft.Extensions.DependencyInjection;
 
     public static class SessionConfiguration
@@ -14,7 +15,9 @@
             {
                 options.IdleTimeout = TimeSpan.FromDays(SessionIdleTimeout);
                 options.Cookie.HttpOnly = true;
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                 options.Cookie.IsEssential = true;
+                options.Cookie.SameSite = SameSiteMode.Lax;
             });
 
             return services;

@@ -10,8 +10,9 @@
 namespace DataGate.Web.InputModels
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+
+    using DataGate.Web.Infrastructure.Attributes.Validation;
 
     public abstract class BaseEntityInputModel
     {
@@ -39,5 +40,8 @@ namespace DataGate.Web.InputModels
         [RegularExpression(@"^[A-Z0-9_]+$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "LEI Code")]
         public string LEICode { get; set; }
+
+        [GoogleReCaptchaValidation]
+        public string RecaptchaValue { get; set; }
     }
 }
