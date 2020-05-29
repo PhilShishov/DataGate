@@ -8,20 +8,19 @@
 }
 
 <div class="justify-content-between">
-    <form asp-controller="FundDetails"
-          asp-action="Details"
-          method="post">
-
-        <partial name="SpecificEntity/_Toolbar" />
-        <partial name="_StatusMessage" />
-
-        <div class="justify-content-between" id="infoAndDocumentsView">
-            <partial name="SpecificEntity/_Info" />
-            <partial name="SpecificEntity/_Load_Documents" />
+    <div class="mobile-none">
+        <div class="w-100" id="toolbar-pharus">
+            <partial name="SpecificEntity/_Toolbar" />
         </div>
+    </div>
+    <partial name="_StatusMessage" />
 
-        <hr class="bg-pharus hr-2" />
-    </form>
+    <div class="justify-content-between" id="infoAndDocumentsView">
+        <partial name="SpecificEntity/_Info" />
+        <partial name="SpecificEntity/_Load_Documents" />
+    </div>
+
+    <hr class="bg-pharus hr-2" />
 
     <div class="row ml-3" id="div-select-addInfo">
         <label class="text-torshia m-1 pr-3">FUND ADDITIONAL INFORMATION</label>

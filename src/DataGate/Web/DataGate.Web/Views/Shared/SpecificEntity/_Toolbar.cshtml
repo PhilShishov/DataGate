@@ -39,39 +39,45 @@
     //    routeSEName = GlobalConstants.ShareClassSubEntititesRouteName;
     //}
 }
+<div class="mx-auto">
+    <div class="h-100 d-flex">
 
-<div class="w-100 mb-3 mobile-none" id="toolbar-pharus">
+        @if (controllerName == GlobalConstants.FundDetailsControllerName)
+        {
+            <div class="d-flex mt-1 mr-auto"></div>
+        }
+        else
+        {
+            <div class="d-flex mt-1 mr-auto">
+                <p>@containerName CONTAINER: </p>
+                <a href="/@targetRouteContainer/@Model.ContainerId/@Model.Date"
+                   class="text-torshia font-weight-bold ml-1">
+                    @Model.Container
+                </a>
+            </div>
+        }
 
-    @if (controllerName == GlobalConstants.FundDetailsControllerName)
-    {
-        <div class="d-flex mt-1 mr-auto"></div>
-    }
-    else
-    {
-        <div class="d-flex mt-1 mr-auto">
-            <p>@containerName CONTAINER: </p>
-            <a href="/@targetRouteContainer/@Model.ContainerId/@Model.Date"
-               class="text-torshia font-weight-bold ml-1">
-                @Model.Container
-            </a>
-        </div>
-    }
+        <form class="d-flex"
+              method="post"
+              asp-action="Details"
+              id="update-form">
 
-    <div class="d-flex mr-auto">
-        <div>
-            <input type="date"
-                   id="date-pharus"
-                   asp-for="Date"
-                   min="2018-01-01">
+            <div>
+                <input type="date"
+                       id="date-pharus"
+                       asp-for="Date"
+                       min="2018-01-01">
 
-            <input type="submit"
-                   class="btn btn-pharus btn-sm"
-                   asp-for="Command"
-                   asp-action="Update"
-                   asp-route-id="@Model.Id"
-                   value="Update Table"
-                   style="margin-bottom: 2%"></>
-        </div>
+                <input type="submit"
+                       class="btn btn-pharus btn-sm"
+                       asp-for="Command"
+                       asp-action="Update"
+                       asp-route-id="@Model.Id"
+                       value="Update Table"
+                       style="margin-bottom: 2%"></>
+            </div>
+        </form>
+
         <div class="mx-2">
             <a asp-route="@routeName"
                class="btn btn-pharus btn-sm mb-2">
@@ -110,5 +116,6 @@
                 </a>
             </div>
         }
+
     </div>
 </div>
