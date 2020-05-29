@@ -1,11 +1,26 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <script>
+        window.onscroll = function () { myFunction() };
+        function myFunction() {
+            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+                document.getElementsByClassName("back-to-top")[0].style.display = "inline";
+            } else {
+                document.getElementsByClassName("back-to-top")[0].style.display = "none";
+            }
+        }
+
+        function backToTop() {
+            this.scrollTo(0, 0);
+        }
+    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@this.ViewData["Title"] | @GlobalConstants.SystemName</title>
     <meta name="description" content="@this.ViewData["Title"]" />
     <meta name="keywords" content="" />
+
 
     <environment include="Development">
         <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" asp-append-version="true" />
@@ -215,6 +230,11 @@
                 @RenderBody()
             </div>
         </main>
+
+        <a class="back-to-top" href="javascript:backToTop()">
+            <svg aria-hidden="true" class="icon-svg arrow-up" xmlns="http://www.w3.org/2000/svg">
+            </svg>
+        </a>
     }
 
     <environment include="Development">
