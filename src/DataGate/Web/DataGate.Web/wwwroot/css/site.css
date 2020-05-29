@@ -165,6 +165,80 @@ a.a-underline:hover {
 *
 */
 
+.responsive-navbar {
+    justify-content: flex-end;
+}
+
+.responsive-menu .responsive-menu-user {
+    width: 0px;
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    right: -10%;
+    top: 100%;
+    -webkit-transition: all 0.8s ease;
+    -moz-transition: all 0.8s ease;
+    -o-transition: all 0.8s ease;
+    transition: all 0.8s ease;
+}
+
+.responsive-menu.open .responsive-menu-user {
+    width: 180px;
+    opacity: 1;
+    visibility: visible;
+    right: 0%;
+}
+
+.menu-user-container {
+    width: 180px;
+}
+
+    .menu-user-container ul {
+        background: #222;
+        float: right;
+        width: 100%;
+        height: auto;
+        border-top: 1px solid #333;
+    }
+
+        .menu-user-container ul li {
+            float: right;
+            width: 100%;
+            height: auto;
+            border-bottom: 1px solid #333;
+        }
+
+            .menu-user-container ul li a {
+                float: right;
+                width: 100%;
+                height: auto;
+                padding: 10px 40px 12px 15px;
+                position: relative;
+                font-size: 15px;
+                line-height: 19px;
+                color: #fff;
+                text-decoration: none;
+                text-align: right;
+                font-weight: bold;
+                text-transform: uppercase;
+                -webkit-transition: all 0.2s linear;
+                -moz-transition: all 0.2s linear;
+                -o-transition: all 0.2s linear;
+                transition: all 0.2s linear;
+            }
+
+
+
+.header-pharus {
+    top: 0;
+    z-index: 1;
+}
+
+.navbar a:hover, .sidenav-dropdown-btn:hover {
+    background-color: deepskyblue;
+}
+
+
 .responsive-menu .open-responsive-menu::before {
     content: '';
     cursor: pointer;
@@ -207,19 +281,6 @@ a.a-underline:hover {
 .responsive-menu.open .open-responsive-menu:after {
     opacity: 1;
     right: 1%;
-}
-
-.responsive-navbar {
-    justify-content: flex-end;
-}
-
-.header-pharus {
-    top: 0;
-    z-index: 1;
-}
-
-.navbar a:hover, .sidenav-dropdown-btn:hover {
-    background-color: deepskyblue;
 }
 /*
 *
