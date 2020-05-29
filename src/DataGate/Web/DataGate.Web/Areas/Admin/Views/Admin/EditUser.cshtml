@@ -1,4 +1,5 @@
 ﻿@model EditUserInputModel
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
 
 @{
     ViewData["Title"] = "Edit User";
@@ -49,6 +50,7 @@
                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div>
                 <div class="button-holder">
+                    <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
                     <button type="submit"
                             class="btn btn-pharus text-white"
                             name="save_button"
@@ -71,4 +73,13 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script src="~/js/createEditForms.js" asp-append-version="true"></script>
+
+    <script src="https://www.google.com/recaptcha/api.js?render=@this.Configuration["GoogleReCaptcha:Key"]"></script>
+    <script>
+        grecaptcha.ready(async function () {
+            await grecaptcha.execute('@this.Configuration["GoogleReCaptcha:Key"]', { action: 'edit_form' }).then(async function (token) {
+                document.getElementById("RecaptchaValue").value = token;
+            });
+        });
+    </script>
 }

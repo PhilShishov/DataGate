@@ -46,7 +46,6 @@ namespace DataGate.Web.ViewModels.Entities
 
         public DateTime? EndConnection { get; set; }
 
-        // TODO remove scrollto because of partial
         public string SelectAdditionalInf { get; set; }
     }
 }

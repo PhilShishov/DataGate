@@ -57,7 +57,7 @@
                             </div>
                             <div class="form-group col-md-6 col-lg-6 col-sm-12 col-xs-12">
                                 <div class="fxt-transformY-50 fxt-transition-delay-4">
-                                    <input type="hidden" id="RecaptchaValue" name="RecaptchaValue" />
+                                    <input type="hidden" id="RecaptchaValue" asp-for="Input.RecaptchaValue" />
                                     <button type="submit"
                                             class="fxt-btn-fill"
                                             asp-area="Identity"
@@ -85,8 +85,8 @@
 
     <script src="https://www.google.com/recaptcha/api.js?render=@this.Configuration["GoogleReCaptcha:Key"]"></script>
     <script>
-        grecaptcha.ready(function () {
-            grecaptcha.execute('@this.Configuration["GoogleReCaptcha:Key"]', { action: 'login_form' }).then(function (token) {
+        grecaptcha.ready(async function () {
+            await grecaptcha.execute('@this.Configuration["GoogleReCaptcha:Key"]', { action: 'login_form' }).then(async function (token) {
                 document.getElementById("RecaptchaValue").value = token;
             });
         });

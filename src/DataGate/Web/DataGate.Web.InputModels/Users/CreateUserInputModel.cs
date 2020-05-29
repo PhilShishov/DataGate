@@ -1,7 +1,9 @@
 ﻿namespace DataGate.Web.InputModels.Users
 {
-    using DataGate.Common;
     using System.ComponentModel.DataAnnotations;
+
+    using DataGate.Common;
+    using DataGate.Web.Infrastructure.Attributes.Validation;
 
     public class CreateUserInputModel
     {
@@ -26,5 +28,8 @@
         [Required]
         [Display(Name = ModelConstants.UserRoleDisplayName)]
         public string RoleType { get; set; }
+
+        [GoogleReCaptchaValidation]
+        public string RecaptchaValue { get; set; }
     }
 }
