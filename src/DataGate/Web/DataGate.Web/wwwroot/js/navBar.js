@@ -1,6 +1,7 @@
 ﻿const HTML = {
-    SIDENAV: 'sidenav-pharus',
-    SIDENAV_ICON: 'sidenav-icon',
+    SIDENAV_MAIN: 'main-sidenav',
+    SIDENAV_RESPONSIVE: 'sidenav-responsive',
+    SIDENAV_ICONS: 'sidenav-icon',
     SIDENAV_FOOTER: 'sidenav-footer',
     SIDENAV_BTN_CLOSE: 'sidenav-btn-close',
     SIDENAV_BTNS_DROPDOWN: 'sidenav-dropdown-btn',
@@ -8,26 +9,47 @@
 };
 
 (function () {
-    const sidenavIcon = document.getElementById(HTML.SIDENAV_ICON);
+    const sidenavIcons = document.getElementsByClassName(HTML.SIDENAV_ICONS);
     const sideNavFooter = document.getElementById(HTML.SIDENAV_FOOTER);
 
-    if (sidenavIcon) {
-        sidenavIcon.addEventListener('click', toggleSideNavMenu);
+    if (sidenavIcons) {
+        for (let icon of sidenavIcons) {
+            icon.addEventListener('click', toggleSideNavMenu);
+        }
     }
 
     function toggleSideNavMenu() {
-        const sidenavBtnClose = document.getElementById(HTML.SIDENAV_BTN_CLOSE);
-        sidenavBtnClose.addEventListener('click', closeNav);
-        const navMenuStatus = document.getElementById(HTML.SIDENAV).style.width;
+        const sidenavBtnsClose = document.getElementsByClassName(HTML.SIDENAV_BTN_CLOSE);
+        const sidenav = document.getElementById(HTML.SIDENAV_MAIN);
+        const sidenavResp = document.getElementById(HTML.SIDENAV_RESPONSIVE);
+
+        for (var btn of sidenavBtnsClose) {
+            btn.addEventListener('click', closeNav);
+        }
+
+        const navMenuStatus = sidenav.style.width;
+
         if (navMenuStatus == '0px' || navMenuStatus === '') {
-            document.getElementById(HTML.SIDENAV).style.width = '250px';
+            sidenav.style.width = '250px';
             sideNavFooter.style.display = 'block';
         } else {
-            document.getElementById(HTML.SIDENAV).style.width = '0px';
+            sidenav.style.width = '0px';
             sideNavFooter.style.display = 'none';
         }
+
+        const respNavMenuStatus = sidenavResp.style.width;
+
+        if (respNavMenuStatus == '0px' || respNavMenuStatus === '') {
+            sidenavResp.style.width = '250px';
+            sideNavFooter.style.display = 'block';
+        } else {
+            sidenavResp.style.width = '0px';
+            sideNavFooter.style.display = 'none';
+        }
+
         function closeNav() {
-            document.getElementById(HTML.SIDENAV).style.width = '0px';
+            sidenav.style.width = '0px';
+            sidenavResp.style.width = '0px';
             sideNavFooter.style.display = 'none';
         }
     }
