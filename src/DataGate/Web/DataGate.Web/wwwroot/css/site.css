@@ -156,6 +156,7 @@ input[type=search]::-webkit-search-cancel-button {
 a.a-underline:hover {
     text-decoration: underline;
 }
+
 /*
 *
 * ==========================================
@@ -163,7 +164,6 @@ a.a-underline:hover {
 * ==========================================
 *
 */
-
 .header-pharus {
     top: 0;
     z-index: 1;
@@ -171,6 +171,7 @@ a.a-underline:hover {
     width: 100%;
     background: black;
     height: 60px;
+    display: flex;
 }
 
     .header-pharus img {
@@ -188,13 +189,10 @@ a.a-underline:hover {
     text-decoration: none;
 }
 
-    .header-pharus-app-navbar a:hover {
-        color: #0056b3;
-    }
-
 .responsive-navbar {
     justify-content: flex-end;
     align-items: center;
+    display: flex;
 }
 
 .responsive-menu .responsive-menu-user {
@@ -251,9 +249,12 @@ a.a-underline:hover {
                 text-transform: uppercase;
             }
 
-.navbar a:hover, .sidenav-dropdown-btn:hover {
-    background-color: deepskyblue;
-}
+                .navbar a:hover,
+                .sidenav-dropdown-btn:hover,
+                .header-pharus-app-navbar a:hover,
+                .menu-user-container ul li a:hover {
+                    color: #0056b3;
+                }
 
 
 .responsive-menu .open-responsive-menu::before {
@@ -267,7 +268,7 @@ a.a-underline:hover {
     -o-transition: all .6s ease;
     transition: all .6s ease;
     right: 1%;
-    bottom: 25%;
+    bottom: 22%;
     position: absolute;
     opacity: 1;
     width: 32px;
@@ -285,7 +286,7 @@ a.a-underline:hover {
     -o-transition: all .6s ease;
     transition: all .6s ease;
     right: -2.5%;
-    bottom: 25%;
+    bottom: 22%;
     position: absolute;
     opacity: 0;
     width: 32px;
@@ -320,7 +321,7 @@ a.a-underline:hover {
     display: none;
 }
 
-#sidenav-icon {
+.sidenav-icon {
     cursor: pointer
 }
 
@@ -402,7 +403,6 @@ a.a-underline:hover {
     display: inline-block;
     position: relative;
     height: 31px;
-    right: 20%;
 }
 
     .search-box input {
@@ -925,6 +925,10 @@ li.timeline-item::before {
         display: none;
     }
 
+    .responsive-header {
+        display: block;
+    }
+
     .push-mobile {
         margin-top: 16.6%;
     }
@@ -957,7 +961,8 @@ li.timeline-item::before {
         margin-top: 3.6%;
     }
 
-    #infoAndDocumentsView {
+    #infoAndDocumentsView,
+    #allselect-div-pharus {
         display: flex;
     }
 
@@ -979,9 +984,5 @@ li.timeline-item::before {
         border: 0;
         margin: 0px auto;
         width: 100%;
-    }
-
-    #allselect-div-pharus {
-        display: flex;
     }
 }

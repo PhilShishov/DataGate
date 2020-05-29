@@ -20,18 +20,16 @@
     {
         <header>
             <div class="header-pharus">
-                <div class="w-50 float-left">
+                <div class="w-50">
                     <div class="header-pharus-app-navbar d-flex">
                         <div class="mx-2 mt-2">
-                            <img id="sidenav-icon"
-                                 src="/images/Logo_Pharus.jpg"
-                                 class="img-responsive"
+                            <img src="/images/Logo_Pharus.jpg"
+                                 class="img-responsive sidenav-icon"
                                  width="50"
                                  alt="Pharus Management">
-                            <ul id="sidenav-pharus" class="sidenav">
+                            <ul id="main-sidenav" class="sidenav">
                                 <li>
-                                    <a id="sidenav-btn-close"
-                                       class="sidenav-btn-close">
+                                    <a class="sidenav-btn-close">
                                         &times;
                                     </a>
                                 </li>
@@ -123,19 +121,19 @@
                     </div>
                 </div>
 
-                <div class="search-form-wrapper-responsive">
-                    <button class="open-search-box">
-                        <svg class="icon-svg-search-responsive" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
-                            <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
-                        </svg>
-                    </button>
-                </div>
+                <div class="w-50 d-flex responsive-navbar">
+                    <div class="search-form-wrapper-responsive">
+                        <button class="open-search-box">
+                            <svg class="icon-svg-search-responsive" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                                <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                            </svg>
+                        </button>
+                    </div>
 
-                <div class="responsive-navbar float-right">
-                    <div class="search-form-wrapper">
+                    <div class="search-form-wrapper mr-5">
                         <form method="post" asp-area="" asp-controller="Search" asp-action="Result">
-                            <div class="search-box mt-3">
+                            <div class="search-box">
                                 <input type="search"
                                        name="searchTerm"
                                        placeholder="Search the site..."
@@ -154,8 +152,8 @@
                         </form>
                     </div>
 
-                    <div class="responsive-menu">
-                        <a class="open-responsive-menu">
+                    <div class="responsive-menu ml-5">
+                        <a class="ml-3 open-responsive-menu">
                         </a>
                         <div class="responsive-menu-user">
                             <div class="menu-user-container">
