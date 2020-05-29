@@ -10,7 +10,7 @@ html {
 
 body {
     font-family: 'Gilroy-Regular ☞';
-    height: 100%;
+    height: auto;
     line-height: 1.6;
     vertical-align: baseline;
     -webkit-font-smoothing: antialiased;
@@ -302,6 +302,11 @@ a.a-underline:hover {
     opacity: 1;
     right: 1%;
 }
+
+
+.title-responsive {
+    line-height: 2.2;
+}
 /*
 *
 * ==========================================
@@ -309,7 +314,6 @@ a.a-underline:hover {
 * ==========================================
 *
 */
-
 #sidenav-footer {
     position: fixed;
     margin-left: 0.5%;
@@ -408,6 +412,7 @@ a.a-underline:hover {
         outline: none;
         width: 400px;
         height: inherit;
+        border-radius: 3px;
     }
 
         .search-box input:focus::placeholder {
@@ -439,10 +444,14 @@ a.a-underline:hover {
 
 
     .search-box-responsive input {
+        color: white;
+        background: #222 !important;
         padding: 2px 30px 0 10px;
         outline: none;
         width: 300px;
         height: inherit;
+        border-radius: 3px;
+        border: none;
     }
 
         .search-box-responsive input:focus::placeholder {
@@ -464,8 +473,6 @@ a.a-underline:hover {
             background-color: #0069d9;
             border-color: #0062cc;
         }
-
-
 
 .open-search-box {
     text-decoration: none;
@@ -987,7 +994,7 @@ li.timeline-item::before {
     }
 
     .push-mobile {
-        margin-top: 16.6%;
+        margin-top: 61px;
     }
 
     #div-select-addInfo {
@@ -999,18 +1006,19 @@ li.timeline-item::before {
     }
 }
 
-@media only screen and (min-width: 640px) and (max-width: 1024px) {
-}
-
-
 @media only screen and (min-width: 990px) {
     #toolbar-pharus {
         height: 80px;
         display: flex;
-        margin-top: 3.3%;
+        margin-top: 61px;
     }
 
-    .search-form-wrapper-responsive {
+    .container-all-funds {
+        display: flex;
+    }
+
+    .search-form-wrapper-responsive,
+    .title-responsive {
         display: none;
     }
 
