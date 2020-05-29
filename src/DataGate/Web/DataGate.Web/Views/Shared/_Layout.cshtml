@@ -164,38 +164,37 @@
                     <div class="responsive-menu ml-5">
                         <a class="ml-3 open-responsive-menu">
                         </a>
+                        <div class="responsive-menu-user">
+                            <div class="menu-user-container">
+                                <ul>
+                                    <li>
+                                        <a asp-area=""
+                                           asp-controller=""
+                                           asp-action="">Reports</a>
+                                    </li>
+                                    <li>
+                                        <a asp-area=""
+                                           asp-controller=""
+                                           asp-action="">Projects</a>
+                                    </li>
+                                    <li>
+                                        <a asp-area=""
+                                           asp-controller="User"
+                                           asp-action="Index">Panel</a>
+                                    </li>
+
+                                    <li>
+                                        <a asp-area="Identity" asp-page="/Account/Manage/Email">@this.User.Identity.Name</a>
+                                    </li>
+
+                                    <li>
+                                        <a asp-area="Identity" asp-page="/Account/Logout">Logout</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="d-none">
-                        <ul class="navbar-nav text-right">
-                            <li class="nav-item active">
-                                <a class="nav-link nav-link-white active"
-                                   asp-area=""
-                                   asp-controller=""
-                                   asp-action="">Reports</a>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link nav-link-white active"
-                                   asp-area=""
-                                   asp-controller=""
-                                   asp-action="">Projects</a>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link nav-link-white active"
-                                   asp-area=""
-                                   asp-controller="User"
-                                   asp-action="Index">Panel</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link nav-link-white active" asp-area="Identity" asp-page="/Account/Manage/Email">@this.User.Identity.Name</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link nav-link-white active" asp-area="Identity" asp-page="/Account/Logout">Logout</a>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
             </nav>
         </header>
