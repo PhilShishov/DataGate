@@ -30,11 +30,6 @@ h1, h3 {
     text-align: center;
 }
 
-img {
-    max-width: 100%;
-    height: auto;
-}
-
 ul {
     list-style: outside none none;
     margin: 0;
@@ -68,6 +63,10 @@ textarea {
 
 .hr-2 {
     height: 2px;
+}
+
+.w-15 {
+    width: 15%;
 }
 
 .w-35 {
@@ -165,8 +164,37 @@ a.a-underline:hover {
 *
 */
 
+.header-pharus {
+    top: 0;
+    z-index: 1;
+    position: fixed;
+    width: 100%;
+    background: black;
+    height: 60px;
+}
+
+    .header-pharus img {
+        max-width: 100%;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+
+.header-pharus-app-navbar a {
+    margin-top: 2%;
+    color: white;
+    text-decoration: none;
+}
+
+    .header-pharus-app-navbar a:hover {
+        color: #0056b3;
+    }
+
 .responsive-navbar {
     justify-content: flex-end;
+    align-items: center;
 }
 
 .responsive-menu .responsive-menu-user {
@@ -176,10 +204,10 @@ a.a-underline:hover {
     opacity: 0;
     right: -10%;
     top: 100%;
-    -webkit-transition: all 0.8s ease;
-    -moz-transition: all 0.8s ease;
-    -o-transition: all 0.8s ease;
-    transition: all 0.8s ease;
+    -webkit-transition: all .6s ease;
+    -moz-transition: all .6s ease;
+    -o-transition: all .6s ease;
+    transition: all .6s ease;
 }
 
 .responsive-menu.open .responsive-menu-user {
@@ -221,18 +249,7 @@ a.a-underline:hover {
                 text-align: right;
                 font-weight: bold;
                 text-transform: uppercase;
-                -webkit-transition: all 0.2s linear;
-                -moz-transition: all 0.2s linear;
-                -o-transition: all 0.2s linear;
-                transition: all 0.2s linear;
             }
-
-
-
-.header-pharus {
-    top: 0;
-    z-index: 1;
-}
 
 .navbar a:hover, .sidenav-dropdown-btn:hover {
     background-color: deepskyblue;
@@ -245,11 +262,12 @@ a.a-underline:hover {
     background: url(../images/bars-solid.svg) no-repeat center center;
     background-position-x: center;
     background-position-y: center;
-    -webkit-transition: all 0.2s linear;
-    -moz-transition: all 0.2s linear;
-    -o-transition: all 0.2s linear;
-    transition: all 0.2s linear;
+    -webkit-transition: all .6s ease;
+    -moz-transition: all .6s ease;
+    -o-transition: all .6s ease;
+    transition: all .6s ease;
     right: 1%;
+    bottom: 25%;
     position: absolute;
     opacity: 1;
     width: 32px;
@@ -262,11 +280,12 @@ a.a-underline:hover {
     background: url(../images/times-solid.svg) no-repeat center center;
     background-position-x: center;
     background-position-y: center;
-    -webkit-transition: all 0.2s linear;
-    -moz-transition: all 0.2s linear;
-    -o-transition: all 0.2s linear;
-    transition: all 0.2s linear;
+    -webkit-transition: all .6s ease;
+    -moz-transition: all .6s ease;
+    -o-transition: all .6s ease;
+    transition: all .6s ease;
     right: -2.5%;
+    bottom: 25%;
     position: absolute;
     opacity: 0;
     width: 32px;
@@ -289,6 +308,11 @@ a.a-underline:hover {
 * ==========================================
 *
 */
+
+.sidenav {
+    top: 6.6%;
+}
+
 #sidenav-footer {
     position: fixed;
     margin-left: 0.5%;
@@ -375,16 +399,16 @@ a.a-underline:hover {
 *
 */
 .search-box {
-    /*float: right;*/
     display: inline-block;
     position: relative;
     height: 31px;
+    right: 20%;
 }
 
     .search-box input {
         padding: 2px 30px 0 10px;
         outline: none;
-        width: 300px;
+        width: 400px;
         height: inherit;
     }
 
@@ -408,16 +432,6 @@ a.a-underline:hover {
             border-color: #0062cc;
         }
 
-.icon-svg-search {
-    width: 20px;
-    height: 20px;
-}
-
-.icon-svg-search-responsive {
-    width: 30px;
-    height: 30px;
-    color: white;
-}
 
 .open-search-box {
     text-decoration: none;
@@ -429,6 +443,26 @@ a.a-underline:hover {
         outline: none;
     }
 
+.icon-svg-search {
+    width: 20px;
+    height: 20px;
+}
+
+
+.search-form-wrapper-responsive .icon-svg-search-responsive {
+    width: 30px;
+    height: 30px;
+    color: white;
+}
+
+.search-form-wrapper-responsive.opened .icon-svg-search-responsive {
+    color: black;
+}
+
+
+.search-form-wrapper-responsive.opened {
+    background-color: white;
+}
 /*
 *
 * ==========================================
@@ -436,7 +470,6 @@ a.a-underline:hover {
 * ==========================================
 *
 */
-
 #SelectTerm {
     width: 300px;
 }
@@ -874,7 +907,7 @@ li.timeline-item::before {
 *
 */
 
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: 991px) {
     #toolbar-pharus {
         overflow-x: scroll;
     }
@@ -890,10 +923,6 @@ li.timeline-item::before {
     #entityName,
     footer {
         display: none;
-    }
-
-    .sidenav {
-        top: 9.3%;
     }
 
     .push-mobile {
@@ -913,7 +942,7 @@ li.timeline-item::before {
 }
 
 
-@media only screen and (min-width: 1024px) {
+@media only screen and (min-width: 990px) {
     #toolbar-pharus {
         height: 80px;
         display: flex;
@@ -922,10 +951,6 @@ li.timeline-item::before {
 
     .search-form-wrapper-responsive {
         display: none;
-    }
-
-    .sidenav {
-        top: 6.4%;
     }
 
     .push {
