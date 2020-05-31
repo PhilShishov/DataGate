@@ -1,9 +1,9 @@
 ﻿const HTML_ADDITIONAL_INFO = {
     SELECT: '#select-additional-info',
-    DIV_SUBENTITIES: '#subEntities',
-    DIV_TIMELINES: '#timelineChanges',
-    DIV_DOCUMENTS: '#allDocuments',
-    DIV_AGREEMENTS: '#allAgreements',
+    CONTAINER_SUBENTITIES: '#subEntities',
+    CONTAINER_TIMELINES: '#timelineChanges',
+    CONTAINER_DOCUMENTS: '#allDocuments',
+    CONTAINER_AGREEMENTS: '#allAgreements',
 };
 
 const DROPDOWN_VALUES = {
@@ -15,10 +15,12 @@ const DROPDOWN_VALUES = {
 };
 
 const URLS = {
-
+    TIMELINES: '/loadTimelines',
+    DOCUMENTS: '/loadAllDoc',
+    AGREEMENTS: '/loadAllAgr',
 };
 
-function loadAddInfo(token, url, json) {
+function loadAddInfo(token, urlSubEnt, json) {
     // ________________________________________________________
     //
     // Select menu for fund additional information -
@@ -32,70 +34,47 @@ function loadAddInfo(token, url, json) {
         $(this).find(':selected').attr('selected', 'selected')
         if (dropdownvalue == DROPDOWN_VALUES.SUBFUNDS || dropdownvalue == DROPDOWN_VALUES.SHARECLASSES) {
             closeOptions();
-            $('#subEntities').removeClass('d-none');
+            $(HTML_ADDITIONAL_INFO.CONTAINER_SUBENTITIES).removeClass('d-none');
 
-            $.ajax({
-                url: url,
-                type: 'GET',
-                data: json,
-                contentType: 'application/json; charset=utf-8',
-                headers: { 'X-CSRF-TOKEN': token },
-                success: function (response) {
-                    $('#loadSubEntities').html(response);
-                }
-            });
-        } else if (dropdownvalue == 'TimelineChanges') {
+            getSelectMenuRequestHandler(urlSubEnt, HTML_ADDITIONAL_INFO.CONTAINER_SUBENTITIES);
+        } else if (dropdownvalue == DROPDOWN_VALUES.TIMELINES) {
             closeOptions();
-            $('#timelineChanges').removeClass('d-none');
+            $(HTML_ADDITIONAL_INFO.CONTAINER_TIMELINES).removeClass('d-none');
 
-            $.ajax({
-                url: '/loadTimelines',
-                type: 'GET',
-                data: json,
-                contentType: 'application/json; charset=utf-8',
-                headers: { 'X-CSRF-TOKEN': token },
-                success: function (response) {
-                    $('#loadTimelines').html(response);
-                }
-            });
-        } else if (dropdownvalue == 'AllDocuments') {
+            getSelectMenuRequestHandler(URLS.TIMELINES, HTML_ADDITIONAL_INFO.CONTAINER_TIMELINES);
+        } else if (dropdownvalue == DROPDOWN_VALUES.DOCUMENTS) {
             closeOptions();
-            $('#allDocuments').removeClass('d-none');
+            $(HTML_ADDITIONAL_INFO.CONTAINER_DOCUMENTS).removeClass('d-none');
 
-            $.ajax({
-                url: '/loadAllDoc',
-                type: 'GET',
-                data: json,
-                contentType: 'application/json; charset=utf-8',
-                headers: { 'X-CSRF-TOKEN': token },
-                success: function (response) {
-                    $('#loadAllDocuments').html(response);
-                }
-            });
-        } else if (dropdownvalue == 'AllAgreements') {
+            getSelectMenuRequestHandler(URLS.DOCUMENTS, HTML_ADDITIONAL_INFO.CONTAINER_DOCUMENTS);
+        } else if (dropdownvalue == DROPDOWN_VALUES.AGREEMENTS) {
             closeOptions();
-            $('#allAgreements').removeClass('d-none');
+            $(HTML_ADDITIONAL_INFO.CONTAINER_AGREEMENTS).removeClass('d-none');
 
-            $.ajax({
-                url: '/loadAllAgr',
-                type: 'GET',
-                data: json,
-                contentType: 'application/json; charset=utf-8',
-                headers: { 'X-CSRF-TOKEN': token },
-                success: function (response) {
-                    $('#loadAllAgreements').html(response);
-                }
-            });
+            getSelectMenuRequestHandler(URLS.AGREEMENTS, HTML_ADDITIONAL_INFO.CONTAINER_AGREEMENTS);
         } else {
             closeOptions();
         }
     });
 
+    function getSelectMenuRequestHandler(url, placeholder) {
+        $.ajax({
+            url: url,
+            type: 'GET',
+            data: json,
+            contentType: 'application/json; charset=utf-8',
+            headers: { 'X-CSRF-TOKEN': token },
+            success: function (response) {
+                $(placeholder).html(response);
+            }
+        });
+    }
+
     function closeOptions() {
-        $('#subEntities').addClass('d-none');
-        $('#timelineChanges').addClass('d-none');
-        $('#allDocuments').addClass('d-none');
-        $('#allAgreements').addClass('d-none');
+        $(HTML_ADDITIONAL_INFO.CONTAINER_SUBENTITIES).addClass('d-none');
+        $(HTML_ADDITIONAL_INFO.CONTAINER_TIMELINES).addClass('d-none');
+        $(HTML_ADDITIONAL_INFO.CONTAINER_DOCUMENTS).addClass('d-none');
+        $(HTML_ADDITIONAL_INFO.CONTAINER_AGREEMENTS).addClass('d-none');
     }
 }
 
