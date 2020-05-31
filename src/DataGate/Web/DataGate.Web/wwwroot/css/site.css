@@ -41,6 +41,13 @@ textarea {
     resize: none;
 }
 
+    input:focus,
+    select:focus,
+    textarea:focus,
+    button:focus {
+        outline: none;
+    }
+
 .bg-pharus {
     background-color: #202020;
 }
@@ -903,6 +910,7 @@ a.a-underline:hover {
 
     .btn-link-pharus:hover {
         /*color: #0056b3;*/
+        outline: none;
         text-decoration: underline;
     }
 
