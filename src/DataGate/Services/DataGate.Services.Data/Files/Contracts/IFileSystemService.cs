@@ -8,10 +8,10 @@
     {
         Task UploadDocument(UploadDocumentInputModel model);
 
-        Task DeleteDocument(int fileId, string docValue, string areaName);
+        Task DeleteDocument(int fileId, string areaName);
 
         Task UploadAgreement(UploadAgreementInputModel model);
 
-        Task DeleteAgreement(int fileId, string agrValue, string areaName);
+        Task DeleteAgreement(int fileId, string areaName);
     }
 }

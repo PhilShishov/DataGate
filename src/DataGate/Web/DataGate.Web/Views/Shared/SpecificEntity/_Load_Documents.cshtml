@@ -15,7 +15,7 @@
                 <tbody>
                     @foreach (var document in Model.DistinctDocuments)
                     {
-                        <tr>
+                        <tr id="@document.FileId">
                             <td>
                                 <button class="btn-link-pharus text-left"
                                         formtarget="_blank"
@@ -26,9 +26,6 @@
                                         value="@document.DocumentName">
                                     @Html.Encode(System.IO.Path.GetFileNameWithoutExtension(document.DocumentName))
                                 </button>
-                            </td>
-                            <td hidden>
-                                @document.FileId
                             </td>
                         </tr>
                     }
@@ -51,7 +48,7 @@
                     <tbody>
                         @foreach (var document in Model.DistinctDocuments)
                         {
-                            <tr>
+                            <tr id="@document.FileId">
                                 <td>
                                     @document.Description
                                 </td>
@@ -65,9 +62,6 @@
                                             value="@document.DocumentName">
                                         @Html.Encode(System.IO.Path.GetFileNameWithoutExtension(document.DocumentName))
                                     </button>
-                                </td>
-                                <td hidden>
-                                    @document.FileId
                                 </td>
                             </tr>
                         }
@@ -92,7 +86,7 @@
                 <tbody>
                     @foreach (var agreement in Model.DistinctAgreements)
                     {
-                        <tr>
+                        <tr id="@agreement.FileId">
                             <td>
                                 @agreement.Description
                             </td>
@@ -106,9 +100,6 @@
                                         value="@agreement.AgreementName">
                                     @Html.Encode(System.IO.Path.GetFileNameWithoutExtension(agreement.AgreementName))
                                 </button>
-                            </td>
-                            <td hidden>
-                                @agreement.FileId
                             </td>
                         </tr>
                     }

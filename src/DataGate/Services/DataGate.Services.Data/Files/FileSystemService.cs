@@ -30,13 +30,13 @@
                                                         "@activation_date, @expiration_date, @company_id, @status";
 
         // Delete
-        private readonly string sqlProcedureDeleteDocumentFund = "EXEC delete_fund_file_byname @file_name";
-        private readonly string sqlProcedureDeleteDocumentSubFund = "EXEC delete_subfund_file_byname @file_name";
-        private readonly string sqlProcedureDeleteDocumentShareClass = "EXEC delete_shareclass_file_byname @file_name";
+        private readonly string sqlProcedureDeleteDocumentFund = "EXEC delete_fund_file_byid @file_id";
+        private readonly string sqlProcedureDeleteDocumentSubFund = "EXEC delete_subfund_file_byid @file_id";
+        private readonly string sqlProcedureDeleteDocumentShareClass = "EXEC delete_shareclass_file_byid @file_id";
 
-        private readonly string sqlProcedureDeleteAgreementFund = "EXEC delete_agreement_fundfile_byname @file_name";
-        private readonly string sqlProcedureDeleteAgreementSubFund = "EXEC delete_agreement_subfundfile_byname @file_name";
-        private readonly string sqlProcedureDeleteAgreementShareClass = "EXEC delete_agreement_shareclassfile_byname @file_name";
+        private readonly string sqlProcedureDeleteAgreementFund = "EXEC delete_agreement_fundfile_byid @file_id";
+        private readonly string sqlProcedureDeleteAgreementSubFund = "EXEC delete_agreement_subfundfile_byid @file_id";
+        private readonly string sqlProcedureDeleteAgreementShareClass = "EXEC delete_agreement_shareclassfile_byid @file_id";
 
         private readonly ISqlQueryManager sqlManager;
         private readonly IFundDocumentService fundService;
@@ -90,7 +90,7 @@
             await this.sqlManager.ExecuteProcedure(command);
         }
 
-        public async Task DeleteDocument(int fileId, string docValue, string areaName)
+        public async Task DeleteDocument(int fileId, string areaName)
         {
             string query = string.Empty;
 
@@ -108,7 +108,7 @@
             }
 
             SqlCommand command = new SqlCommand(query);
-            command.Parameters.Add(new SqlParameter("@file_name", SqlDbType.NVarChar) { Value = docValue });
+            command.Parameters.Add(new SqlParameter("@file_id", SqlDbType.NVarChar) { Value = fileId });
 
             await this.sqlManager.ExecuteProcedure(command);
         }
@@ -161,7 +161,7 @@
             await this.sqlManager.ExecuteProcedure(command);
         }
 
-        public async Task DeleteAgreement(int fileId, string agrValue, string areaName)
+        public async Task DeleteAgreement(int fileId, string areaName)
         {
             string query = string.Empty;
 
@@ -179,7 +179,7 @@
             }
 
             SqlCommand command = new SqlCommand(query);
-            command.Parameters.Add(new SqlParameter("@file_name", SqlDbType.NVarChar) { Value = agrValue });
+            command.Parameters.Add(new SqlParameter("@file_id", SqlDbType.NVarChar) { Value = fileId });
 
             await this.sqlManager.ExecuteProcedure(command);
         }

@@ -21,15 +21,12 @@
                 </th>
                 <th class="text-secondary p-1">
                 </th>
-                <th class="text-secondary p-1" hidden>
-                    Agreement Id
-                </th>
             </tr>
         </thead>
         <tbody>
             @foreach (var agreement in Model.Agreements)
             {
-                <tr>
+                <tr id="@agreement.FileId">
                     <td class="p-1">
                         @agreement.Description
                     </td>
@@ -59,9 +56,6 @@
                             Delete
                         </button>
                     </td>
-                    <td class="p-1" hidden>
-                        @agreement.FileId
-                    </td>
                 </tr>
             }
         </tbody>
@@ -82,6 +76,8 @@
             event.preventDefault();
         } else {
             const agrValue = $(this).closest('tr').find('button').eq(0).val();
+            const fileId = $(this).closest('tr').attr('id');
+            $.blockUI({ message: `<h3>Please wait a moment...</h3>` });
             $.ajax({
                 url: '/media/delete',
                 type: 'GET',
@@ -89,18 +85,18 @@
                 contentType: 'application/json; charset=utf-8',
                 headers: { 'X-CSRF-TOKEN': tokenAgr },
                 data: { fileId: fileId, agrValue: agrValue, areaName: areaName },
-
-                success: function (data) {
-
+            }).done(function (data) {
                     if (data.fileId == 'false') {
                         alert('Something wrong!');
                         return false;
                     }
-                    $("#tbl-agreements tr:contains('" + data.fileId + "')").remove();
-                    $("#tbl-distinct-agreements tr:contains('" + data.fileId + "')").remove();
-                    alert('The file was successfully deleted.');
-                }
-            });
-        }
+                $("#tbl-agreements").find("tr").attr("id", fileId).remove();
+                $("#tbl-distinct-agreements").find("tr").attr("id", fileId).remove();
+                    setTimeout($.unblockUI, 2000);
+                }).fail(function (request, status, error) {
+                    $.unblockUI();
+                    alert(request.responseText)
+                });
+            }
         });
 </script>

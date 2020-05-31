@@ -21,15 +21,12 @@
                 </th>
                 <th class="text-secondary p-1">
                 </th>
-                <th class="text-secondary p-1" hidden>
-                    Document Id
-                </th>
             </tr>
         </thead>
         <tbody>
             @foreach (var document in Model.Documents)
             {
-                <tr>
+                <tr id="@document.FileId">
                     <td class="p-1">
                         @document.Description
                     </td>
@@ -60,9 +57,6 @@
                             Delete
                         </button>
                     </td>
-                    <td class="p-1" hidden>
-                        @document.FileId
-                    </td>
                 </tr>
             }
         </tbody>
@@ -82,25 +76,27 @@
             event.preventDefault();
         } else {
             const docValue = $(this).closest('tr').find('button').eq(0).val();
-            console.log(docValue);
+            const fileId = $(this).closest('tr').attr('id');
+            $.blockUI({ message: `<h3>Please wait a moment...</h3>` });
             $.ajax({
                 url: '/media/delete',
                 type: 'GET',
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
                 headers: { 'X-CSRF-TOKEN': tokenDoc },
-                data: { fileId: fileId, docValue: docValue, areaName: areaName },
-                success: function (data) {
-                    if (data.fileId == 'false') {
-                        alert('Something wrong!');
-                        return false;
-                    }
-
-                    $("#tbl-documents tr:contains('" + data.fileId + "')").remove();
-                    $("#tbl-distinct-documents tr:contains('" + data.fileId + "')").remove();
-                    alert('The file was successfully deleted.');
+                data: { fileId: fileId, docValue: docValue, areaName: areaName }
+            }).done(function (data) {
+                if (data.fileId == 'false') {
+                    alert('Something wrong!');
+                    return false;
                 }
+                $("#tbl-documents").find("tr").attr("id", fileId).remove();
+                $("#tbl-distinct-documents").find("tr").attr("id", fileId).remove();
+                setTimeout($.unblockUI, 2000);
+            }).fail(function (request, status, error) {
+                $.unblockUI();
+                alert(request.responseText)
             });
         }
-        });
+    });
 </script>
