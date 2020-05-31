@@ -51,6 +51,8 @@
                 return this.PartialView("Upload/_UploadDocument", model);
             }
 
+            var dto = AutoMapperConfig.MapperInstance.Map<UploadOnSuccessDto>(model);
+
             await this.service.UploadDocument(model);
 
             using (var stream = new FileStream(path, FileMode.Create))
@@ -58,8 +60,6 @@
                 await model.FileToUpload.CopyToAsync(stream);
                 stream.Close();
             }
-
-            var dto = AutoMapperConfig.MapperInstance.Map<UploadOnSuccessDto>(model);
 
             return this.Json(new { success = true,  dto = dto });
         }
@@ -84,6 +84,8 @@
                 return this.PartialView("Upload/_UploadAgreement", model);
             }
 
+            var dto = AutoMapperConfig.MapperInstance.Map<UploadOnSuccessDto>(model);
+
             await this.service.UploadAgreement(model);
 
             using (var stream = new FileStream(path, FileMode.Create))
@@ -91,8 +93,6 @@
                 await model.FileToUpload.CopyToAsync(stream);
                 stream.Close();
             }
-
-            var dto = AutoMapperConfig.MapperInstance.Map<UploadOnSuccessDto>(model);
 
             return this.Json(new { success = true, dto = dto });
         }
