@@ -9,11 +9,11 @@
     SELECT_MENU_DERIV_MARKET: 'derivMarket'
 };
 
-const SELECTORS = {
+const SELECTORS_CREATE_EDIT = {
     INPUTS_ALL_EXCEPT_FORMAT_NAME: `input:not(#${HTML_CREATE_EDIT.INPUT_NAME_TO_FORMAT})`
 };
 
-const MESSAGES = {
+const MESSAGES_CREATE_EDIT = {
     CONFIRM_CREATE: 'Are you sure you want to create this?',
     CONFIRM_DELETE: 'Are you sure you want to delete this?',
     CONFIRM_UPDATE: 'Are you sure you want to update this?',
@@ -27,7 +27,7 @@ const MESSAGES = {
         for (let btn of buttons) {
             btn.addEventListener('click',
                 function (event) {
-                    let con = confirm(MESSAGES.CONFIRM_CREATE);
+                    let con = confirm(MESSAGES_CREATE_EDIT.CONFIRM_CREATE);
 
                     if (!con) {
                         event.preventDefault();
@@ -46,7 +46,7 @@ const MESSAGES = {
         for (let btn of buttons) {
             btn.addEventListener('click',
                 function (event) {
-                    let con = confirm(MESSAGES.CONFIRM_DELETE);
+                    let con = confirm(MESSAGES_CREATE_EDIT.CONFIRM_DELETE);
 
                     if (!con) {
                         event.preventDefault();
@@ -64,7 +64,7 @@ const MESSAGES = {
         for (let btn of buttons) {
             btn.addEventListener('click',
                 function (event) {
-                    let con = confirm(MESSAGES.CONFIRM_UPDATE);
+                    let con = confirm(MESSAGES_CREATE_EDIT.CONFIRM_UPDATE);
 
                     if (!con) {
                         event.preventDefault();
@@ -79,7 +79,7 @@ const MESSAGES = {
     const inputFields = document.getElementById(HTML_CREATE_EDIT.DIV_INPUTS_FORMAT);
 
     if (inputFields) {
-        const selectedInputFields = inputFields.querySelectorAll(SELECTORS.INPUTS_ALL_EXCEPT_FORMAT_NAME);
+        const selectedInputFields = inputFields.querySelectorAll(SELECTORS_CREATE_EDIT.INPUTS_ALL_EXCEPT_FORMAT_NAME);
 
         for (var i = 0; i < selectedInputFields.length; i++) {
             selectedInputFields[i].addEventListener('blur', formatInput);
