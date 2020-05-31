@@ -19,6 +19,9 @@
   <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Program.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="EPPlus" Version="5.1.0" />
@@ -58,8 +61,8 @@
     <Folder Include="Areas\SubFund\" />
     <Folder Include="wwwroot\FileFolder\Agreement\" />
     <Folder Include="wwwroot\FileFolder\Fund\" />
-    <Folder Include="wwwroot\FileFolder\temp\" />
     <Folder Include="wwwroot\FileFolder\ShareClass\" />
     <Folder Include="wwwroot\FileFolder\SubFund\" />
+    <Folder Include="wwwroot\FileFolder\temp\" />
   </ItemGroup>
 </Project>
