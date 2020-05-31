@@ -13,7 +13,7 @@
     var entityId = string.Empty;
 }
 <div class="table-responsive border-0 mx-auto" id="tableDoubleScroll">
-    <table class="table table-hover text-nowrap" id="table-entities">
+    <table class="table table-hover text-nowrap" id="table-to-extract">
         <thead>
             <tr>
                 @for (int header = 0; header < Model.Headers.Count; header++)
@@ -27,7 +27,7 @@
                 }
             </tr>
         </thead>
-        <tbody id="tbody-entities">
+        <tbody id="tbody-update-inactive">
             @foreach (var row in Model.Values)
             {
                 entityId = row[GlobalConstants.IndexEntityIdInTable];

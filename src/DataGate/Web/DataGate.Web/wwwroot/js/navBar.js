@@ -11,6 +11,12 @@
     SEARCH_MENU_TOOGLER: 'open-search-box',
 };
 
+const CLASSES_NAVBAR = {
+    ACTIVE: 'active',
+    OPEN: 'open',
+    OPENED: 'opened'
+};
+
 (function () {
     const sidenav = document.getElementById(HTML_NAVBAR.SIDENAV_MAIN);
     const sidenavIcons = document.getElementsByClassName(HTML_NAVBAR.SIDENAV_ICONS);
@@ -29,7 +35,7 @@
 
         for (let i = 0; i < sideNavDropdowns.length; i++) {
             sideNavDropdowns[i].addEventListener('click', function () {
-                this.classList.toggle('active');
+                this.classList.toggle(CLASSES_NAVBAR.ACTIVE);
                 let dropdownContent = this.nextElementSibling;
                 if (dropdownContent.style.display === 'block') {
                     dropdownContent.style.display = 'none';
@@ -46,15 +52,15 @@
 
         function toggleSearchMenu() {
 
-            if (userMenuToogler.classList.contains('open')) {
-                userMenuToogler.classList.toggle('open');
+            if (userMenuToogler.classList.contains(CLASSES_NAVBAR.OPEN)) {
+                userMenuToogler.classList.toggle(CLASSES_NAVBAR.OPEN);
             }
             if (sidenav.style.width != '0px') {
                 sidenav.style.width = '0px';
                 sideNavFooter.style.display = 'none';
             }
 
-            searchMenuParent.classList.toggle('opened');
+            searchMenuParent.classList.toggle(CLASSES_NAVBAR.OPENED);
             const searchMenuStatus = searchMenu.classList.contains('d-none');
 
             if (searchMenuStatus) {
@@ -68,16 +74,15 @@
     // Toggle user menu
     if (userMenuToogler) {
         userMenuToogler.addEventListener('click', () => {
-
             if (!searchMenu.classList.contains('d-none')) {
-                searchMenuParent.classList.toggle('opened');
+                searchMenuParent.classList.toggle(CLASSES_NAVBAR.OPENED);
                 searchMenu.classList.add('d-none');
             }
             if (sidenav.style.width != '0px') {
                 sidenav.style.width = '0px';
                 sideNavFooter.style.display = 'none';
             }
-            userMenuToogler.classList.toggle('open');
+            userMenuToogler.classList.toggle(CLASSES_NAVBAR.OPEN);
         })
     }
 
@@ -92,11 +97,11 @@
 
         if (navMenuStatus == '0px' || navMenuStatus === '') {
             if (!searchMenu.classList.contains('d-none')) {
-                searchMenuParent.classList.toggle('opened');
+                searchMenuParent.classList.toggle(CLASSES_NAVBAR.OPENED);
                 searchMenu.classList.add('d-none');
             }
-            if (userMenuToogler.classList.contains('open')) {
-                userMenuToogler.classList.toggle('open');
+            if (userMenuToogler.classList.contains(CLASSES_NAVBAR.OPEN)) {
+                userMenuToogler.classList.toggle(CLASSES_NAVBAR.OPEN);
             }
             sidenav.style.width = '250px';
             sideNavFooter.style.display = 'block';

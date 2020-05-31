@@ -41,7 +41,7 @@
                     }
                 </tr>
             </thead>
-            <tbody id="tbody-entities">
+            <tbody id="tbody-update-inactive">
                 @for (int row = GlobalConstants.RowNumberOfHeadersInTable; row < Model.Entities.Count; row++)
                 {
                     var entityId = @Model.Entities[row][GlobalConstants.IndexEntityIdInTable];
@@ -73,7 +73,7 @@
 <script>
     // Add inactive class to entities that have inactive status
     (function () {
-        const tbody = document.getElementById('tbody-entities');
+        const tbody = document.getElementById('tbody-update-inactive');
 
         if (tbody) {
             const rows = tbody.getElementsByTagName('tr');

@@ -1,13 +1,29 @@
-﻿const SELECTORS = {
-    TOKEN_EXTRACT: '#extract-form input[name=__RequestVerificationToken]',
+﻿const HTML = {
+    FORM_EXTRACT: '#extract-form',
     BTN_EXTRACT_EXCEL: '#btn-extract-excel',
     BTN_EXTRACT_PDF: '#btn-extract-pdf',
-    TABLE_EXTRACT: 'table-entities',
+    FORM_UPDATE: 'update-form',
+    CHECKBOX_ACTIVE: 'activeCheckBox',
+    TABLE_EXTRACT: 'table-to-extract',
+    TBODY_UPDATE_INACTIVE: 'tbody-update-inactive',
 };
+
+const SELECTORS = {
+    TOKEN_EXTRACT: `${HTML.FORM_EXTRACT} input[name=__RequestVerificationToken]`
+};
+
+const CLASSES = {
+    INACTIVE: 'inactive-entity'
+};
+
+const MESSAGES = {
+    BLOCKUI_USER_MESSAGE: 'Please wait a moment...'
+};
+
 function extract(model) {
-    const excelValue = $(SELECTORS.BTN_EXTRACT_EXCEL).attr('value');
-    const pdfValue = $(SELECTORS.BTN_EXTRACT_PDF).attr('value');
-    const table = document.getElementById(SELECTORS.TABLE_EXTRACT);
+    const excelValue = $(HTML.BTN_EXTRACT_EXCEL).attr('value');
+    const pdfValue = $(HTML.BTN_EXTRACT_PDF).attr('value');
+    const table = document.getElementById(HTML.TABLE_EXTRACT);
 
     let tableValues = [];
 
@@ -22,14 +38,14 @@ function extract(model) {
     model.TableValues = tableValues;
     const token = $(SELECTORS.TOKEN_EXTRACT).val();
 
-    $(document).on('click', SELECTORS.BTN_EXTRACT_EXCEL, function (event) {
+    $(document).on('click', HTML.BTN_EXTRACT_EXCEL, function (event) {
         event.preventDefault()
         model.Command = excelValue;
 
         extractRequestHandler(model, token);
     });
 
-    $(document).on('click', SELECTORS.BTN_EXTRACT_PDF, function (event) {
+    $(document).on('click', HTML.BTN_EXTRACT_PDF, function (event) {
         event.preventDefault()
         model.Command = pdfValue;
 
@@ -37,7 +53,7 @@ function extract(model) {
     });
 
     function extractRequestHandler(model, token) {
-        $.blockUI({ message: '<h3>Please wait a moment...</h3>' });
+        $.blockUI({ message: `<h3>${MESSAGES.BLOCKUI_USER_MESSAGE}</h3>` });
         $.ajax({
             url: '/Media/GenerateReport',
             type: 'POST',
@@ -62,27 +78,26 @@ function extract(model) {
 
 // Submit form on checkbox change - show active and inactive entities
 function submitForm() {
-    const checkbox = document.getElementById('activeCheckBox');
-    //const select = document.getElementById('SelectTerm');
+    const updateForm = document.getElementById(HTML.FORM_UPDATE);
+    const checkbox = document.getElementById(HTML.CHECKBOX_ACTIVE);
 
-    const updateForm = document.getElementById('update-form');
+    if (checkbox) {
+        checkbox.addEventListener('change', submitFormOnChange);
 
-    checkbox.addEventListener('change', submitFormOnChange);
-    //select.addEventListener('change', submitForm);
-
-    function submitFormOnChange() {
-        updateForm.submit();
+        function submitFormOnChange() {
+            updateForm.submit();
+        }
     }
 };
 
 // Add inactive class to entities that have inactive status
 (function () {
-    const rows = document.getElementById('tbody-entities').getElementsByTagName('tr');
+    const rows = document.getElementById(HTML.TBODY_UPDATE_INACTIVE).getElementsByTagName('tr');
     for (var row of rows) {
         const cells = row.getElementsByTagName('td');
         for (var cell of cells) {
             if (cell.textContent.includes('Inactive')) {
-                row.classList.add('inactive-entity');
+                row.classList.add(CLASSES.INACTIVE);
             }
         }
     }
