@@ -1,20 +1,38 @@
-﻿function loadAddInfo(token, url, json) {
+﻿const HTML_ADDITIONAL_INFO = {
+    SELECT: '#select-additional-info',
+    DIV_SUBENTITIES: '#subEntities',
+    DIV_TIMELINES: '#timelineChanges',
+    DIV_DOCUMENTS: '#allDocuments',
+    DIV_AGREEMENTS: '#allAgreements',
+};
+
+const DROPDOWN_VALUES = {
+    SUBFUNDS: 'SubFunds',
+    SHARECLASSES: 'ShareClasses',
+    TIMELINES: 'TimelineChanges',
+    DOCUMENTS: 'AllDocuments',
+    AGREEMENTS: 'AllAgreements',
+};
+
+const URLS = {
+
+};
+
+function loadAddInfo(token, url, json) {
     // ________________________________________________________
     //
     // Select menu for fund additional information -
     // subentities, timeline changes, all documents -
     // On change event for selected value
 
-    $('#fundAdditionalInfSelect').on('change', function () {
-        const dropdownvalue = $('#fundAdditionalInfSelect option:selected').val();
+    $(HTML_ADDITIONAL_INFO.SELECT).on('change', function () {
+        const dropdownvalue = $(`${HTML_ADDITIONAL_INFO.SELECT} option:selected`).val();
 
         $(this).find('[selected]').removeAttr('selected')
         $(this).find(':selected').attr('selected', 'selected')
-        if (dropdownvalue == 'SubFunds') {
-            $('#subEntities').css('visibility', 'visible');
-            $('#timelineChanges').addClass('d-none');
-            $('#allDocuments').addClass('d-none');
-            $('#allAgreements').addClass('d-none');
+        if (dropdownvalue == DROPDOWN_VALUES.SUBFUNDS || dropdownvalue == DROPDOWN_VALUES.SHARECLASSES) {
+            closeOptions();
+            $('#subEntities').removeClass('d-none');
 
             $.ajax({
                 url: url,
@@ -27,10 +45,8 @@
                 }
             });
         } else if (dropdownvalue == 'TimelineChanges') {
+            closeOptions();
             $('#timelineChanges').removeClass('d-none');
-            $('#subEntities').css('visibility', 'hidden');
-            $('#allDocuments').addClass('d-none');
-            $('#allAgreements').addClass('d-none');
 
             $.ajax({
                 url: '/loadTimelines',
@@ -43,10 +59,8 @@
                 }
             });
         } else if (dropdownvalue == 'AllDocuments') {
+            closeOptions();
             $('#allDocuments').removeClass('d-none');
-            $('#timelineChanges').addClass('d-none');
-            $('#subEntities').css('visibility', 'hidden');
-            $('#allAgreements').addClass('d-none');
 
             $.ajax({
                 url: '/loadAllDoc',
@@ -59,10 +73,8 @@
                 }
             });
         } else if (dropdownvalue == 'AllAgreements') {
+            closeOptions();
             $('#allAgreements').removeClass('d-none');
-            $('#timelineChanges').addClass('d-none');
-            $('#subEntities').css('visibility', 'hidden');
-            $('#allDocuments').addClass('d-none');
 
             $.ajax({
                 url: '/loadAllAgr',
@@ -75,26 +87,32 @@
                 }
             });
         } else {
-            $('#subEntities').css('visibility', 'hidden');
-            $('#timelineChanges').addClass('d-none');
-            $('#allDocuments').addClass('d-none');
-            $('#allAgreements').addClass('d-none');
+            closeOptions();
         }
     });
+
+    function closeOptions() {
+        $('#subEntities').addClass('d-none');
+        $('#timelineChanges').addClass('d-none');
+        $('#allDocuments').addClass('d-none');
+        $('#allAgreements').addClass('d-none');
+    }
 }
 
-function uploadModals(token, json) {
-    const SELECTORS = {
-        LOAD_DOC_BUTTON: '#btn-upload-document',
-        LOAD_AGR_BUTTON: '#btn-upload-agreement',
-        PLACEHOLDER_MODAL_DOC: '#modal-placeholder-document',
-        PLACEHOLDER_MODAL_AGR: '#modal-placeholder-agreement',
-    };
+const HTML_UPLOAD = {
+    BTN_LOAD_MODAL_DOC: '#btn-upload-document',
+    BTN_LOAD_MODAL_AGR: '#btn-upload-agreement',
+    PLACEHOLDER_MODAL_DOC: '#modal-placeholder-document',
+    PLACEHOLDER_MODAL_AGR: '#modal-placeholder-agreement',
+    URL_LOAD_DOC: '/loadDocUpload',
+    URL_LOAD_AGR: '/loadAgrUpload'
+};
 
+function uploadModals(token, json) {
     // Document Upload
-    const placeholderDocument = $(SELECTORS.PLACEHOLDER_MODAL_DOC);
-    const urlDoc = '/loadDocUpload';
-    $(document).on('click', SELECTORS.LOAD_DOC_BUTTON, function (event) {
+    const placeholderDocument = $(HTML_UPLOAD.PLACEHOLDER_MODAL_DOC);
+    const urlDoc = HTML_UPLOAD.URL_LOAD_DOC;
+    $(document).on('click', HTML_UPLOAD.BTN_LOAD_MODAL_DOC, function (event) {
         getModalRequest(placeholderDocument, urlDoc);
     });
 
@@ -110,10 +128,10 @@ function uploadModals(token, json) {
     });
 
     // Agreement Upload
-    const placeholderAgreement = $(SELECTORS.PLACEHOLDER_MODAL_AGR);
-    const urlAgr = '/loadAgrUpload';
+    const placeholderAgreement = $(HTML_UPLOAD.PLACEHOLDER_MODAL_AGR);
+    const urlAgr = HTML_UPLOAD.URL_LOAD_AGR;
 
-    $(document).on('click', SELECTORS.LOAD_AGR_BUTTON, function (event) {
+    $(document).on('click', HTML_UPLOAD.BTN_LOAD_MODAL_AGR, function (event) {
         getModalRequest(placeholderAgreement, urlAgr);
     });
 
@@ -165,7 +183,6 @@ function uploadModals(token, json) {
 };
 
 // Double top scroll plugin
-
 (function ($) {
 
     jQuery.fn.doubleScroll = function (userOptions) {

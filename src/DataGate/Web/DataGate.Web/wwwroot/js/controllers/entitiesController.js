@@ -9,7 +9,7 @@
 };
 
 const SELECTORS = {
-    TOKEN_EXTRACT: `${HTML.FORM_EXTRACT} input[name=__RequestVerificationToken]`
+    INPUT_TOKEN_EXTRACT: `${HTML.FORM_EXTRACT} input[name=__RequestVerificationToken]`
 };
 
 const CLASSES = {
@@ -36,7 +36,7 @@ function extract(model) {
     }
 
     model.TableValues = tableValues;
-    const token = $(SELECTORS.TOKEN_EXTRACT).val();
+    const token = $(SELECTORS.INPUT_TOKEN_EXTRACT).val();
 
     $(document).on('click', HTML.BTN_EXTRACT_EXCEL, function (event) {
         event.preventDefault()
