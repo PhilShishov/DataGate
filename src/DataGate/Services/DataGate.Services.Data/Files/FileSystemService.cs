@@ -90,7 +90,7 @@
             await this.sqlManager.ExecuteProcedure(command);
         }
 
-        public async Task DeleteDocument(string docValue, string areaName)
+        public async Task DeleteDocument(int fileId, string docValue, string areaName)
         {
             string query = string.Empty;
 
@@ -161,7 +161,7 @@
             await this.sqlManager.ExecuteProcedure(command);
         }
 
-        public async Task DeleteAgreement(string agrValue, string areaName)
+        public async Task DeleteAgreement(int fileId, string agrValue, string areaName)
         {
             string query = string.Empty;
 

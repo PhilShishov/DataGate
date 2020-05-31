@@ -12,5 +12,7 @@
 
         [Display(Name = "File Name")]
         public string DocumentName { get; set; }
+
+        public int FileId { get; set; }
     }
 }

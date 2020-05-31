@@ -16,6 +16,8 @@ namespace DataGate.Web.Dtos.Queries
 
         public string Name { get; set; }
 
+        public int FileId { get; set; }
+
         public void Parse(IDataReader reader)
         {
             Description = reader["File Description"] as string;
@@ -23,6 +25,7 @@ namespace DataGate.Web.Dtos.Queries
             ActivationDate = reader["Activation Date"] as string;
             ExpirationDate = reader["Expiration Date"] as string;
             Name = reader["File Name"] as string;
+            FileId = (int)reader["File Id"];
         }
     }
 }

@@ -16,6 +16,8 @@ namespace DataGate.Web.Dtos.Queries
 
         public string Type { get; set; }
 
+        public int FileId { get; set; }
+
         public void Parse(IDataReader reader)
         {
             Description = reader["File Description"] as string;
@@ -23,6 +25,7 @@ namespace DataGate.Web.Dtos.Queries
             ValidUntil = reader["Valid until:"] as string;
             Name = reader["File Name"] as string;
             Type = reader["File Type"] as string;
+            FileId = (int)reader["File Id"];
         }
     }
 }

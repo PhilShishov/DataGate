@@ -60,7 +60,7 @@
                         </button>
                     </td>
                     <td class="p-1" hidden>
-                        @agreement.Description
+                        @agreement.FileId
                     </td>
                 </tr>
             }
@@ -88,7 +88,7 @@
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
                 headers: { 'X-CSRF-TOKEN': tokenAgr },
-                data: { agrValue: agrValue, areaName: areaName },
+                data: { fileId: fileId, agrValue: agrValue, areaName: areaName },
 
                 success: function (data) {
 
