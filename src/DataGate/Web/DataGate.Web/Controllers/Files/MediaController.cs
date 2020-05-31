@@ -72,6 +72,7 @@
         }
 
         [HttpPost]
+        [Route("media/{name}")]
         public IActionResult Read(string docValue, string agrValue, string areaName)
         {
             if (!string.IsNullOrEmpty(areaName))
