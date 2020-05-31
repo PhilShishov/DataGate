@@ -4,9 +4,6 @@
     <table class="table table-bordered table-hover" id="tbl-agreements">
         <thead>
             <tr>
-                <th class="text-secondary p-1" hidden>
-                    Agreement Id
-                </th>
                 <th class="text-secondary p-1">
                     File Description
                 </th>
@@ -22,15 +19,17 @@
                 <th class="text-secondary p-1">
                     File Name
                 </th>
+                <th class="text-secondary p-1">
+                </th>
+                <th class="text-secondary p-1" hidden>
+                    Agreement Id
+                </th>
             </tr>
         </thead>
         <tbody>
             @foreach (var agreement in Model.Agreements)
             {
                 <tr>
-                    <td class="p-1" hidden>
-                        @agreement.Description
-                    </td>
                     <td class="p-1">
                         @agreement.Description
                     </td>
@@ -59,6 +58,9 @@
                         <button type="button" class="btn btn-pharus btn-sm mr-1 btn-delete">
                             Delete
                         </button>
+                    </td>
+                    <td class="p-1" hidden>
+                        @agreement.Description
                     </td>
                 </tr>
             }

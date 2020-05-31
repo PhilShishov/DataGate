@@ -1,4 +1,4 @@
-﻿const HTML = {
+﻿const HTML_NAVBAR = {
     SIDENAV_MAIN: 'main-sidenav',
     SIDENAV_RESPONSIVE: 'sidenav-responsive',
     SIDENAV_ICONS: 'sidenav-icon',
@@ -12,14 +12,14 @@
 };
 
 (function () {
-    const sidenav = document.getElementById(HTML.SIDENAV_MAIN);
-    const sidenavIcons = document.getElementsByClassName(HTML.SIDENAV_ICONS);
-    const sideNavFooter = document.getElementById(HTML.SIDENAV_FOOTER);
-    const sideNavDropdowns = document.getElementsByClassName(HTML.SIDENAV_BTNS_DROPDOWN);
-    const searchMenuParent = document.getElementsByClassName(HTML.SEARCH_MENU_PARENT)[0];
-    const searchMenu = document.getElementsByClassName(HTML.SEARCH_MENU)[0];
-    const searchMenuToogler = document.getElementsByClassName(HTML.SEARCH_MENU_TOOGLER)[0];
-    const userMenuToogler = document.getElementsByClassName(HTML.USER_MENU_TOOGLER)[0];
+    const sidenav = document.getElementById(HTML_NAVBAR.SIDENAV_MAIN);
+    const sidenavIcons = document.getElementsByClassName(HTML_NAVBAR.SIDENAV_ICONS);
+    const sideNavFooter = document.getElementById(HTML_NAVBAR.SIDENAV_FOOTER);
+    const sideNavDropdowns = document.getElementsByClassName(HTML_NAVBAR.SIDENAV_BTNS_DROPDOWN);
+    const searchMenuParent = document.getElementsByClassName(HTML_NAVBAR.SEARCH_MENU_PARENT)[0];
+    const searchMenu = document.getElementsByClassName(HTML_NAVBAR.SEARCH_MENU)[0];
+    const searchMenuToogler = document.getElementsByClassName(HTML_NAVBAR.SEARCH_MENU_TOOGLER)[0];
+    const userMenuToogler = document.getElementsByClassName(HTML_NAVBAR.USER_MENU_TOOGLER)[0];
 
     // Toogle sidenav menu and sidenavdropdowns
     if (sidenavIcons) {
@@ -82,7 +82,7 @@
     }
 
     function toggleSideNavMenu() {
-        const sidenavBtnsClose = document.getElementsByClassName(HTML.SIDENAV_BTN_CLOSE);
+        const sidenavBtnsClose = document.getElementsByClassName(HTML_NAVBAR.SIDENAV_BTN_CLOSE);
 
         for (var btn of sidenavBtnsClose) {
             btn.addEventListener('click', closeNav);

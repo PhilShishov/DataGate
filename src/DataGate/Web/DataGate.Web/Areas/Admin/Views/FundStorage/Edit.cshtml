@@ -13,7 +13,7 @@
               asp-action="Edit"
               method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="d-inline" id="div-format-inputs">
+            <div class="d-inline" id="div-inputs-to-format">
 
                 <div class="form-group">
                     <label asp-for="InitialDate" class="text-torshia"></label><br>
@@ -195,16 +195,14 @@
                     <label asp-for="CommentTitle" class="text-torshia"></label><br>
                     <input type="text"
                            class="form-control maxw-270"
-                           asp-for="CommentTitle"
-                           id="regNumberInput">
+                           asp-for="CommentTitle">
                     <span asp-validation-for="CommentTitle" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
                     <label asp-for="CommentArea" class="text-torshia"></label><br>
                     <textarea class="form-control maxw-270"
-                              asp-for="CommentArea"
-                              id="regNumberInput">
+                              asp-for="CommentArea">
                 </textarea>
                     <span asp-validation-for="CommentArea" class="text-danger"></span>
                 </div>
@@ -213,8 +211,7 @@
             <div class="button-holder mt-4">
                 <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
                 <button type="submit"
-                        class="btn btn-pharus btn-sm mb-1"
-                        id="confirmEditBtn"
+                        class="btn btn-pharus btn-sm mb-1 btn-confirm-update"
                         name="update_button"
                         style="margin-right:40px">
                     Update Fund

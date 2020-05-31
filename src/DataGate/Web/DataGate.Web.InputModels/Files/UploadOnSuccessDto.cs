@@ -11,6 +11,5 @@ namespace DataGate.Web.InputModels.Files
         public int Id { get; set; }
 
         public string RouteName { get; set; }
-
     }
 }

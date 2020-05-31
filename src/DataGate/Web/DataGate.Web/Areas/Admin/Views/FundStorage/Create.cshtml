@@ -11,7 +11,7 @@
 
     <form method="post" class="d-inline">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="d-inline" id="div-format-inputs">
+        <div class="d-inline" id="div-inputs-to-format">
 
             <div class="form-group">
                 <label asp-for="InitialDate" class="text-torshia"></label><br>
@@ -106,8 +106,7 @@
                 <label asp-for="FACode" class="text-torshia"></label><br>
                 <input type="text"
                        class="form-control maxw-270"
-                       asp-for="FACode"
-                       id="faCodeInput">
+                       asp-for="FACode">
                 <span asp-validation-for="FACode" class="text-danger"></span>
             </div>
 
@@ -115,8 +114,7 @@
                 <label asp-for="DEPCode" class="text-torshia"></label><br>
                 <input type="text"
                        class="form-control maxw-270"
-                       asp-for="DEPCode"
-                       id="depCodeInput">
+                       asp-for="DEPCode">
                 <span asp-validation-for="DEPCode" class="text-danger"></span>
             </div>
 
@@ -124,8 +122,7 @@
                 <label asp-for="TACode" class="text-torshia"></label><br>
                 <input type="text"
                        class="form-control maxw-270"
-                       asp-for="TACode"
-                       id="taCodeInput">
+                       asp-for="TACode">
                 <span asp-validation-for="TACode" class="text-danger"></span>
             </div>
 
@@ -145,8 +142,7 @@
                 <label asp-for="TinNumber" class="text-torshia"></label><br>
                 <input type="text"
                        class="form-control maxw-270"
-                       asp-for="TinNumber"
-                       id="tinNumberInput">
+                       asp-for="TinNumber">
                 <span asp-validation-for="TinNumber" class="text-danger"></span>
             </div>
 
@@ -154,8 +150,7 @@
                 <label asp-for="LEICode" class="text-torshia"></label><br>
                 <input type="text"
                        class="form-control maxw-270"
-                       asp-for="LEICode"
-                       id="leiCodeInput">
+                       asp-for="LEICode">
                 <span asp-validation-for="LEICode" class="text-danger"></span>
             </div>
 
@@ -163,8 +158,7 @@
                 <label asp-for="RegNumber" class="text-torshia"></label><br>
                 <input type="text"
                        class="form-control maxw-270"
-                       asp-for="RegNumber"
-                       id="regNumberInput">
+                       asp-for="RegNumber">
                 <span asp-validation-for="RegNumber" class="text-danger"></span>
             </div>
         </div>
@@ -172,8 +166,7 @@
         <div class="button-holder mt-4">
             <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
             <button type="submit"
-                    class="btn btn-pharus btn-sm mb-1"
-                    id="confirmCreateBtn"
+                    class="btn btn-pharus btn-sm mb-1 btn-confirm-create"
                     name="create_button"
                     style="margin-right:40px">
                 Create Fund
