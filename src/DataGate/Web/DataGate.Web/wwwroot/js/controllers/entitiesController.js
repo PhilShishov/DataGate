@@ -1,12 +1,12 @@
-﻿function extract(model) {
-    const SELECTORS = {
-        TOKEN_EXTRACT: '#extract-form input[name=__RequestVerificationToken]',
-        EXTRACT_EXCEL_BUTTON: '#btn-extract-excel',
-        EXTRACT_PDF_BUTTON: '#btn-extract-pdf',
-        TABLE_EXTRACT: 'table-entities',
-    };
-    const excelValue = $(SELECTORS.EXTRACT_EXCEL_BUTTON).attr('value');
-    const pdfValue = $(SELECTORS.EXTRACT_PDF_BUTTON).attr('value');
+﻿const SELECTORS = {
+    TOKEN_EXTRACT: '#extract-form input[name=__RequestVerificationToken]',
+    BTN_EXTRACT_EXCEL: '#btn-extract-excel',
+    BTN_EXTRACT_PDF: '#btn-extract-pdf',
+    TABLE_EXTRACT: 'table-entities',
+};
+function extract(model) {
+    const excelValue = $(SELECTORS.BTN_EXTRACT_EXCEL).attr('value');
+    const pdfValue = $(SELECTORS.BTN_EXTRACT_PDF).attr('value');
     const table = document.getElementById(SELECTORS.TABLE_EXTRACT);
 
     let tableValues = [];
@@ -22,14 +22,14 @@
     model.TableValues = tableValues;
     const token = $(SELECTORS.TOKEN_EXTRACT).val();
 
-    $(document).on('click', SELECTORS.EXTRACT_EXCEL_BUTTON, function (event) {
+    $(document).on('click', SELECTORS.BTN_EXTRACT_EXCEL, function (event) {
         event.preventDefault()
         model.Command = excelValue;
 
         extractRequestHandler(model, token);
     });
 
-    $(document).on('click', SELECTORS.EXTRACT_PDF_BUTTON, function (event) {
+    $(document).on('click', SELECTORS.BTN_EXTRACT_PDF, function (event) {
         event.preventDefault()
         model.Command = pdfValue;
 
