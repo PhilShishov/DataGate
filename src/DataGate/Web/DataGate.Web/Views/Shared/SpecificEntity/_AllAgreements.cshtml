@@ -81,7 +81,7 @@
         if (!con) {
             event.preventDefault();
         } else {
-            const agrValue = $(this).closest('tr').find('button:eq(0)').val();
+            const agrValue = $(this).closest('tr').find('button').eq(0).val();
             $.ajax({
                 url: '/media/delete',
                 type: 'GET',
@@ -92,12 +92,12 @@
 
                 success: function (data) {
 
-                    if (data.data == 'false') {
+                    if (data.fileId == 'false') {
                         alert('Something wrong!');
                         return false;
                     }
-                    $("#tbl-agreements tr:contains('" + data.data + "')").remove();
-                    $("#tbl-distinct-agreements tr:contains('" + data.data + "')").remove();
+                    $("#tbl-agreements tr:contains('" + data.fileId + "')").remove();
+                    $("#tbl-distinct-agreements tr:contains('" + data.fileId + "')").remove();
                     alert('The file was successfully deleted.');
                 }
             });

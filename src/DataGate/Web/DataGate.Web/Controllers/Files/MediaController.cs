@@ -101,21 +101,21 @@
 
                 if (System.IO.File.Exists(path))
                 {
-                    if (string.IsNullOrEmpty(agrValue))
-                    {
-                        await this.service.DeleteDocument(fileId, docValue, areaName);
-                    }
-                    else
-                    {
-                        await this.service.DeleteAgreement(fileId, agrValue, areaName);
-                    }
+                    //if (string.IsNullOrEmpty(agrValue))
+                    //{
+                    //    await this.service.DeleteDocument(fileId, docValue, areaName);
+                    //}
+                    //else
+                    //{
+                    //    await this.service.DeleteAgreement(fileId, agrValue, areaName);
+                    //}
 
-                    System.IO.File.Delete(path);
-                    return this.Json(new { data = Path.GetFileNameWithoutExtension(docValue) });
+                    //System.IO.File.Delete(path);
+                    return this.Json(new { fileId = fileId });
                 }
             }
 
-            return this.Json(new { data = "false" });
+            return this.Json(new { fileId = "false" });
         }
 
         private string GetTargetPath(ref string docValue, string agrValue, string areaName)
