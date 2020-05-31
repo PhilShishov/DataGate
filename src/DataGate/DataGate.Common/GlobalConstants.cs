@@ -54,7 +54,7 @@
         public const string AdministratorRoleName = "Admin";
         public const string RiskRoleName = "Risk";
         public const string LegalRoleName = "Legal";
-        public const string InvestmentRoleName = "Investement";
+        public const string InvestmentRoleName = "Investment";
         public const string ComplianceRoleName = "Compliance";
         public const string GuestRoleName = "Guest";
 

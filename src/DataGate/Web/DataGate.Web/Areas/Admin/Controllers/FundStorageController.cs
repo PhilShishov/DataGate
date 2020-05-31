@@ -41,10 +41,10 @@
         [HttpPost]
         [Route("f/edit/{id}/{date}")]
         public async Task<IActionResult> Edit(
-                    [Bind("Id", "InitialDate", "FundName", "CSSFCode", "Status",
+                     [Bind("Id", "InitialDate", "FundName", "CSSFCode", "Status",
                           "LegalForm", "LegalVehicle", "LegalType", "FACode",
                           "DEPCode", "TACode", "CompanyTypeDesc", "TinNumber",
-                          "LEICode", "RegNumber", "CommentTitle", "CommentArea")] EditFundInputModel model)
+                          "LEICode", "RegNumber", "CommentTitle", "CommentArea", "RecaptchaValue")] EditFundInputModel model)
         {
             if (!this.ModelState.IsValid)
             {
@@ -69,9 +69,9 @@
         [HttpPost]
         [Route("f/new")]
         public async Task<IActionResult> Create(
-                    [Bind("InitialDate", "EndDate", "FundName", "CSSFCode", "Status",
+                     [Bind("InitialDate", "EndDate", "FundName", "CSSFCode", "Status",
                           "LegalForm", "LegalVehicle", "LegalType", "FACode", "DEPCode",
-                          "TACode", "CompanyTypeDesc", "TinNumber", "LEICode", "RegNumber")] CreateFundInputModel model)
+                          "TACode", "CompanyTypeDesc", "TinNumber", "LEICode", "RegNumber", "RecaptchaValue" )] CreateFundInputModel model)
         {
             bool doesExist = await this.service.DoesExist(model.FundName);
 

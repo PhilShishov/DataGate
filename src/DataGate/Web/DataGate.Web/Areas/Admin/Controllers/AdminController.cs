@@ -18,7 +18,7 @@
     using Microsoft.Extensions.Logging;
 
     [Area("Admin")]
-    [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+    //[Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     public class AdminController : BaseController
     {
         private const string EmailConfirmationUrl = "/Account/ConfirmEmail";
@@ -73,7 +73,9 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateUser(CreateUserInputModel inputModel)
+        public async Task<IActionResult> CreateUser(
+                     [Bind("Username", "Email", "Password", "ConfirmPassword",
+                            "RoleType", "RecaptchaValue")] CreateUserInputModel inputModel)
         {
             string returnUrl = ViewUsersUrl;
             if (!this.ModelState.IsValid)
@@ -131,7 +133,9 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditUser(EditUserInputModel inputModel, string returnUrl = null)
+        public async Task<IActionResult> EditUser(
+                     [Bind("Id", "Username", "Email", "RoleType", "PasswordHash",
+                           "ConfirmPassword", "RecaptchaValue")] EditUserInputModel inputModel, string returnUrl = null)
         {
             returnUrl = ViewUsersUrl;
 

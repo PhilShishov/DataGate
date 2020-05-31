@@ -29,7 +29,7 @@
         [Display(Name = ModelConstants.UserRoleDisplayName)]
         public string RoleType { get; set; }
 
-        [GoogleReCaptchaValidation]
+        //[GoogleReCaptchaValidation]
         public string RecaptchaValue { get; set; }
     }
 }

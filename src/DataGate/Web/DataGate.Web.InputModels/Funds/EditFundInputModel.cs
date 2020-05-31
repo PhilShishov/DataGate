@@ -4,7 +4,6 @@
 
     using DataGate.Services.Mapping;
     using DataGate.Web.Dtos.Funds;
-    using Ganss.XSS;
 
     public class EditFundInputModel : BaseEntityInputModel, IMapFrom<EditFundGetDto>
     {
