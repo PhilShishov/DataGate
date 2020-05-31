@@ -50,6 +50,15 @@
             RouteName: '@route',
         };
 
+        // ________________________________________________________
+        //
+        // Additional information about headers
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip({
+                html: true
+            })
+        })
+
         $(document).ready(function () {
             // ________________________________________________________
             //
@@ -73,16 +82,7 @@
             //
             // Double top scroll for wide table
             $('.double-scroll').doubleScroll();
-            $('#tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
-
-            // ________________________________________________________
-            //
-            // Additional information about headers
-            $(function () {
-                $('[data-toggle="tooltip"]').tooltip({
-                    html: true
-                })
-            })
+            $('.table-wrapper-double-scroll').doubleScroll({ resetOnWindowResize: true });
         });
     </script>
 }

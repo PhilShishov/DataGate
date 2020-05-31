@@ -23,7 +23,7 @@
             Advanced Selection
         </a>
     </div>
-    <div id="tableDoubleScroll">
+    <div class="table-wrapper-double-scroll">
         <table class="table table-hover text-nowrap">
             <thead>
                 <tr>
@@ -99,6 +99,6 @@
     // Double top scroll for wide table
     $(function () {
         $('.double-scroll').doubleScroll();
-        $('#tableDoubleScroll').doubleScroll({ resetOnWindowResize: true });
+        $('.table-wrapper-double-scroll').doubleScroll({ resetOnWindowResize: true });
     })
 </script>
