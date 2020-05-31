@@ -70,38 +70,35 @@
 </form>
 
 <script>
-    const token = $('#form-document input[name=__RequestVerificationToken]').val();
-    const areaName = '@Model.AreaName';
-
-    $(document).ready(function () {
-        // ________________________________________________________
-        //
-        // Delete selected row from documents table by confirming
-        $('.btn-delete').on('click', function () {            
-            let con = confirm('Are you sure you want to delete this?');
-            if (!con) {
-                event.preventDefault();
-            } else {
-                const docValue = $(this).closest('tr').find('button:eq(0)').val();
-                $.ajax({
-                    url: '/media/delete',
-                    type: 'GET',
-                    dataType: 'json',
-                    contentType: 'application/json; charset=utf-8',
-                    headers: { 'X-CSRF-TOKEN': token },
-                    data: { docValue: docValue, areaName: areaName },
-                    success: function (data) {
-                        if (data.data == 'false') {
-                            alert('Something wrong!');
-                            return false;
-                        }
-
-                        $("#tbl-documents tr:contains('" + data.data + "')").remove();
-                        $("#tbl-distinct-documents tr:contains('" + data.data + "')").remove();
-                        alert('The file was successfully deleted.');
+    // ________________________________________________________
+    //
+    // Delete selected row from documents table by confirming
+    $('.btn-delete').on('click', function () {
+        const tokenDoc = $('#form-document input[name=__RequestVerificationToken]').val();
+        const areaName = '@Model.AreaName';
+        let con = confirm('Are you sure you want to delete this?');
+        if (!con) {
+            event.preventDefault();
+        } else {
+            const docValue = $(this).closest('tr').find('button:eq(0)').val();
+            $.ajax({
+                url: '/media/delete',
+                type: 'GET',
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                headers: { 'X-CSRF-TOKEN': tokenDoc },
+                data: { docValue: docValue, areaName: areaName },
+                success: function (data) {
+                    if (data.data == 'false') {
+                        alert('Something wrong!');
+                        return false;
                     }
-                });
-            }
+
+                    $("#tbl-documents tr:contains('" + data.data + "')").remove();
+                    $("#tbl-distinct-documents tr:contains('" + data.data + "')").remove();
+                    alert('The file was successfully deleted.');
+                }
+            });
+        }
         });
-    });
 </script>
