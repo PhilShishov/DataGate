@@ -93,7 +93,7 @@
 
         [ValidateAntiForgeryToken]
         [Route("media/delete")]
-        public async Task<JsonResult> Delete(string docValue, string agrValue, string areaName)
+        public async Task<JsonResult> Delete(int fileId, string docValue, string agrValue, string areaName)
         {
             if (!string.IsNullOrEmpty(areaName))
             {
@@ -103,11 +103,11 @@
                 {
                     if (string.IsNullOrEmpty(agrValue))
                     {
-                        await this.service.DeleteDocument(docValue, areaName);
+                        await this.service.DeleteDocument(fileId, docValue, areaName);
                     }
                     else
                     {
-                        await this.service.DeleteAgreement(agrValue, areaName);
+                        await this.service.DeleteAgreement(fileId, agrValue, areaName);
                     }
 
                     System.IO.File.Delete(path);

@@ -4,9 +4,6 @@
     <table class="table table-bordered table-hover" id="tbl-documents">
         <thead>
             <tr>
-                <th class="text-secondary p-1" hidden>
-                    Document Id
-                </th>
                 <th class="text-secondary p-1">
                     File Description
                 </th>
@@ -22,47 +19,51 @@
                 <th class="text-secondary p-1">
                     File Type
                 </th>
-                <th class="text-secondary p-1"></th>
+                <th class="text-secondary p-1">
+                </th>
+                <th class="text-secondary p-1" hidden>
+                    Document Id
+                </th>
             </tr>
         </thead>
         <tbody>
             @foreach (var document in Model.Documents)
             {
-                <tr>
-                    <td class="p-1" hidden>
-                        @document.Description
-                    </td>
-                    <td class="p-1">
-                        @document.Description
-                    </td>
-                    <td class="p-1">
-                        @document.ValidFrom
-                    </td>
-                    <td class="p-1">
-                        @document.ValidUntil
-                    </td>
-                    <td class="p-1">
+            <tr>
+                <td class="p-1">
+                    @document.Description
+                </td>
+                <td class="p-1">
+                    @document.ValidFrom
+                </td>
+                <td class="p-1">
+                    @document.ValidUntil
+                </td>
+                <td class="p-1">
 
-                        <button class="btn-link-pharus text-left"
-                                formtarget="_blank"
-                                type="submit"
-                                asp-route="files"
-                                asp-route-name="@document.Name"
-                                name="docValue"
-                                value="@document.Name">
-                            @Html.Encode(@System.IO.Path.GetFileNameWithoutExtension(document.Name))
-                        </button>
+                    <button class="btn-link-pharus text-left"
+                            formtarget="_blank"
+                            type="submit"
+                            asp-route="files"
+                            asp-route-name="@document.Name"
+                            name="docValue"
+                            value="@document.Name">
+                        @Html.Encode(@System.IO.Path.GetFileNameWithoutExtension(document.Name))
+                    </button>
 
-                    </td>
-                    <td class="p-1">
-                        @document.Type
-                    </td>
-                    <td class="p-1">
-                        <button type="button" class="btn btn-pharus btn-sm mr-1 btn-delete">
-                            Delete
-                        </button>
-                    </td>
-                </tr>
+                </td>
+                <td class="p-1">
+                    @document.Type
+                </td>
+                <td class="p-1">
+                    <button type="button" class="btn btn-pharus btn-sm mr-1 btn-delete">
+                        Delete
+                    </button>
+                </td>
+                <td class="p-1" hidden>
+                    @document.FileId
+                </td>
+            </tr>
             }
         </tbody>
     </table>
@@ -87,7 +88,7 @@
                 dataType: 'json',
                 contentType: 'application/json; charset=utf-8',
                 headers: { 'X-CSRF-TOKEN': tokenDoc },
-                data: { docValue: docValue, areaName: areaName },
+                data: { fileId: fileId, docValue: docValue, areaName: areaName },
                 success: function (data) {
                     if (data.data == 'false') {
                         alert('Something wrong!');

@@ -27,6 +27,9 @@
                                     @Html.Encode(System.IO.Path.GetFileNameWithoutExtension(document.DocumentName))
                                 </button>
                             </td>
+                            <td hidden>
+                                @document.FileId
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -62,6 +65,9 @@
                                             value="@document.DocumentName">
                                         @Html.Encode(System.IO.Path.GetFileNameWithoutExtension(document.DocumentName))
                                     </button>
+                                </td>
+                                <td hidden>
+                                    @document.FileId
                                 </td>
                             </tr>
                         }
@@ -100,6 +106,9 @@
                                         value="@agreement.AgreementName">
                                     @Html.Encode(System.IO.Path.GetFileNameWithoutExtension(agreement.AgreementName))
                                 </button>
+                            </td>
+                            <td hidden>
+                                @document.FileId
                             </td>
                         </tr>
                     }

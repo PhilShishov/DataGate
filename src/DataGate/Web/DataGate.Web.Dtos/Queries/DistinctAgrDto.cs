@@ -10,10 +10,13 @@ namespace DataGate.Web.Dtos.Queries
 
         public string AgreementName { get; set; }
 
+        public int FileId { get; set; }
+
         public void Parse(IDataReader reader)
         {
             Description = reader["File Description"] as string;
             AgreementName = reader["File Name"] as string;
+            FileId = (int)reader["File Id"];
         }
     }
 }
