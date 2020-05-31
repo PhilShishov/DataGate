@@ -1,45 +1,90 @@
-﻿@using DataGate.Common
-@model DataGate.Web.ViewModels.Entities.SpecificEntityViewModel
+﻿@model DataGate.Web.ViewModels.Entities.SpecificEntityViewModel
 @{
     var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+    var areaName = string.Empty;
+
+    if (controllerName == GlobalConstants.FundDetailsControllerName)
+    {
+        areaName = GlobalConstants.FundAreaName;
+    }
 }
 
 <div class="w-50">
-    <div class="my-5">
-        @if (controllerName == GlobalConstants.FundDetailsControllerName)
-        {
-            <u class="text-torshia">PROSPECTUS</u><br>
+    <form method="post">
+        <div class="my-5">
+            @if (controllerName == GlobalConstants.FundDetailsControllerName)
+            {
+                <u class="text-torshia">PROSPECTUS</u><br>
 
-            <table class="table table-borderless table-hover w-100"
-                   id="tbl-distinct-documents">
-                <tbody>
-                    @foreach (var document in Model.DistinctDocuments)
-                    {
-                        <tr id="@document.FileId">
-                            <td>
-                                <button class="btn-link-pharus text-left"
-                                        formtarget="_blank"
-                                        type="submit"
-                                        asp-area=""
-                                        asp-route="files"
-                                        asp-route-name="@document.DocumentName"
-                                        name="docValue"
-                                        value="@document.DocumentName">
-                                    @Html.Encode(System.IO.Path.GetFileNameWithoutExtension(document.DocumentName))
-                                </button>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        }
-        else
-        {
-            <u class="text-torshia">DOCUMENTS</u><br>
+                <table class="table table-borderless table-hover w-100"
+                       id="tbl-distinct-documents">
+                    <tbody>
+                        @foreach (var document in Model.DistinctDocuments)
+                        {
+                            <tr id="@document.FileId">
+                                <td>
+                                    <button class="btn-link-pharus text-left"
+                                            formtarget="_blank"
+                                            type="submit"
+                                            asp-area=""
+                                            asp-route="files"
+                                            asp-route-name="@document.Name"
+                                            name="docValue"
+                                            value="@document.Name">
+                                        @Html.Encode(System.IO.Path.GetFileNameWithoutExtension(document.Name))
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <u class="text-torshia">DOCUMENTS</u><br>
+
+                <div class="mt-3">
+                    <table class="table table-hover w-100"
+                           id="tbl-distinct-documents">
+                        <thead>
+                            <tr>
+                                <th class="text-secondary p-1">File Description</th>
+                                <th class="text-secondary p-1">File Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var document in Model.DistinctDocuments)
+                            {
+                                <tr id="@document.FileId">
+                                    <td>
+                                        @document.Description
+                                    </td>
+                                    <td>
+                                        <button class="btn-link-pharus text-left"
+                                                formtarget="_blank"
+                                                type="submit"
+                                                asp-area=""
+                                                asp-route="files"
+                                                asp-route-name="@document.Name"
+                                                name="docValue"
+                                                value="@document.Name">
+                                            @Html.Encode(System.IO.Path.GetFileNameWithoutExtension(document.Name))
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+        </div>
+
+        <div class="mb-5">
+            <u class="text-torshia">AGREEMENTS</u><br>
 
             <div class="mt-3">
                 <table class="table table-hover w-100"
-                       id="tbl-distinct-documents">
+                       id="tbl-distinct-agreements">
                     <thead>
                         <tr>
                             <th class="text-secondary p-1">File Description</th>
@@ -47,11 +92,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var document in Model.DistinctDocuments)
+                        @foreach (var agreement in Model.DistinctAgreements)
                         {
-                            <tr id="@document.FileId">
+                            <tr id="@agreement.FileId">
                                 <td>
-                                    @document.Description
+                                    @agreement.Description
                                 </td>
                                 <td>
                                     <button class="btn-link-pharus text-left"
@@ -59,10 +104,10 @@
                                             type="submit"
                                             asp-area=""
                                             asp-route="files"
-                                            asp-route-name="@document.DocumentName"
-                                            name="docValue"
-                                            value="@document.DocumentName">
-                                        @Html.Encode(System.IO.Path.GetFileNameWithoutExtension(document.DocumentName))
+                                            asp-route-name="@agreement.Name"
+                                            name="agrValue"
+                                            value="@agreement.Name">
+                                        @Html.Encode(System.IO.Path.GetFileNameWithoutExtension(agreement.Name))
                                     </button>
                                 </td>
                             </tr>
@@ -70,46 +115,7 @@
                     </tbody>
                 </table>
             </div>
-        }
-    </div>
-
-    <div class="mb-5">
-        <u class="text-torshia">AGREEMENTS</u><br>
-
-        <div class="mt-3">
-            <table class="table table-hover w-100"
-                   id="tbl-distinct-agreements">
-                <thead>
-                    <tr>
-                        <th class="text-secondary p-1">File Description</th>
-                        <th class="text-secondary p-1">File Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var agreement in Model.DistinctAgreements)
-                    {
-                        <tr id="@agreement.FileId">
-                            <td>
-                                @agreement.Description
-                            </td>
-                            <td>
-                                <button class="btn-link-pharus text-left"
-                                        formtarget="_blank"
-                                        type="submit"
-                                        asp-area=""
-                                        asp-route="files"
-                                        asp-route-name="@agreement.AgreementName"
-                                        name="agrValue"
-                                        value="@agreement.AgreementName">
-                                    @Html.Encode(System.IO.Path.GetFileNameWithoutExtension(agreement.AgreementName))
-                                </button>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
         </div>
-    </div>
-
-    <input type="hidden" name="ControllerName" value="@controllerName" />
+        <input type="hidden" name="AreaName" value="@areaName" />
+    </form>
 </div>

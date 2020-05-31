@@ -11,7 +11,7 @@
         public string Description { get; set; }
 
         [Display(Name = "File Name")]
-        public string AgreementName { get; set; }
+        public string Name { get; set; }
 
         public int FileId { get; set; }
     }

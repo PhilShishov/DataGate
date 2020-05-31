@@ -65,7 +65,7 @@
                 {
                     var document = new DistinctDocDto
                     {
-                        DocumentName = query[row][col],
+                        Name = query[row][col],
                         FileId = int.Parse(query[row][col + 1]),
                     };
                     dto.Add(document);
