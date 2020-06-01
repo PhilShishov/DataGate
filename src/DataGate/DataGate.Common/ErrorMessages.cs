@@ -2,11 +2,12 @@
 {
     public class ErrorMessages
     {
-        public const string InvalidLogin = "Wrong user name or password have been specified";
+        public const string InvalidLoginAttempt = "Wrong user name or password have been specified.";
+        public const string NotConfirmedEmail = "Your email is not confirmed. Please confirm your email before login!";
         public const string PasswordMismatch = "The password and confirmation password do not match.";
         public const string NewPasswordMismatch = "The new password and confirmation password do not match.";
-        public const string ChosenDateIsEmpty = "Date cannot be empty!";
 
+        public const string ChosenDateIsEmpty = "Date cannot be empty!";
         public const string TableReportNotGenerated = "There was a problem generating your report, please try again.";
         public const string TooManyColumns = "Too many columns! Please make a column selection.";
         public const string TableIsEmpty = "Inactive/old fund selected! Please make a new selection.";

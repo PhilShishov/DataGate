@@ -8,6 +8,7 @@
 
     using DataGate.Common;
     using DataGate.Data.Models.Users;
+    using DataGate.Services.Data.User;
     using DataGate.Web.Infrastructure.Attributes.Validation;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
@@ -71,6 +72,15 @@
 
             if (this.ModelState.IsValid)
             {
+                var user = await this.userManager.FindByNameAsync(this.Input.Username);
+
+                if (await this.userManager.IsEmailConfirmedAsync(user) == false)
+                {
+                    this.ErrorMessage = ErrorMessages.NotConfirmedEmail;
+                    this.ModelState.AddModelError(string.Empty, ErrorMessages.NotConfirmedEmail);
+                    return this.Page();
+                }
+
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 Microsoft.AspNetCore.Identity.SignInResult result = await this.signInManager
@@ -79,8 +89,6 @@
                 if (result.Succeeded)
                 {
                     this.logger.LogInformation("User logged in.");
-
-                    var user = await this.userManager.FindByNameAsync(this.Input.Username);
 
                     if (user == null)
                     {
@@ -111,19 +119,8 @@
                 }
                 else
                 {
-                    // TODO check login for confirmed email
-                    // if (userService.IsExistingUserWithNotConfirmedEmail(Input.Username))
-                    // {
-                    //    ModelState.AddModelError(string.Empty, ErrorMessages.NotConfirmedEmail);
-                    // }
-                    // else
-                    // {
-                    //    ModelState.AddModelError(string.Empty, ErrorMessages.InvalidLoginAttempt);
-                    // }
-
-                    // return Page();
-                    this.ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    this.ErrorMessage = ErrorMessages.InvalidLogin;
+                    this.ErrorMessage = ErrorMessages.InvalidLoginAttempt;
+                    this.ModelState.AddModelError(string.Empty, ErrorMessages.InvalidLoginAttempt);
                     return this.Page();
                 }
             }
