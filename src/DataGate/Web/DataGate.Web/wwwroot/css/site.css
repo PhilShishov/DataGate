@@ -126,6 +126,14 @@ textarea {
     margin-bottom: 2%;
 }
 
+/*
+*
+* ==========================================
+* TABLE
+* ==========================================
+*
+*/
+
 .tableCellPharus {
     cursor: pointer;
 }
@@ -159,6 +167,11 @@ input[type=search]::-webkit-search-cancel-button {
     border-left: 1px ridge;
     /*height: 90px;*/
     margin-top: 4px;
+}
+
+.tbl-agreements tr td,
+.tbl-documents tr td {
+    vertical-align: middle;
 }
 
 a.a-underline:hover {
