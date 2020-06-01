@@ -1,7 +1,7 @@
 ﻿@model DataGate.Web.ViewModels.Documents.AgreementOverviewViewModel
 
 <form id="form-agreement" method="post">
-    <table class="table table-bordered table-hover" id="tbl-agreements">
+    <table class="table table-bordered table-hover tbl-agreements">
         <thead>
             <tr>
                 <th class="text-secondary p-1">
@@ -26,7 +26,7 @@
         <tbody>
             @foreach (var agreement in Model.Agreements)
             {
-                <tr id="@agreement.FileId">
+                <tr class="@agreement.FileId">
                     <td class="p-1">
                         @agreement.Description
                     </td>
@@ -77,7 +77,7 @@
             event.preventDefault();
         } else {
             const agrValue = $(this).closest('tr').find('button').eq(0).val();
-            const fileId = $(this).closest('tr').attr('id');
+            const fileId = $(this).closest('tr').attr('class');
             $.blockUI({ message: `<h3>Please wait a moment...</h3>` });
             $.ajax({
                 url: '/media/delete',
@@ -87,13 +87,14 @@
                 headers: { 'X-CSRF-TOKEN': tokenAgr },
                 data: { fileId: fileId, agrValue: agrValue, areaName: areaName },
             }).done(function (data) {
-                    if (data.fileId == 'false') {
-                        alert('Something wrong!');
-                        return false;
-                    }
-                $("#tbl-agreements").find("tr").attr("id", fileId).remove();
-                $("#tbl-distinct-agreements").find("tr").attr("id", fileId).remove();
-                    setTimeout($.unblockUI, 2000);
+                if (data.fileId == 'false') {
+                    alert('Something wrong!');
+                    return false;
+                }
+
+                $('.tbl-agreements .' + data.fileId).remove();
+                $('.tbl-distinct-agreements .' + data.fileId).remove();
+                setTimeout($.unblockUI, 2000);
                 }).fail(function (request, status, error) {
                     $.unblockUI();
                     alert(request.responseText)

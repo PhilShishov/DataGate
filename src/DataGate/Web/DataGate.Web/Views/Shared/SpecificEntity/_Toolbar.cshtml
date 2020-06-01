@@ -1,42 +1,33 @@
-﻿@using DataGate.Common
-@model DataGate.Web.ViewModels.Entities.SpecificEntityViewModel
+﻿@model DataGate.Web.ViewModels.Entities.SpecificEntityViewModel
 @{
     var controllerName = this.ViewContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
     var targetEditRoute = string.Empty;
     var targetRouteContainer = string.Empty;
     var containerName = string.Empty;
-    var documentTypeName = string.Empty;
     var entityName = string.Empty;
     var routeName = string.Empty;
-    var routeSEName = string.Empty;
 
     if (controllerName == GlobalConstants.FundDetailsControllerName)
     {
-        documentTypeName = GlobalConstants.UploadTypeProspectusDisplay;
         entityName = GlobalConstants.FundNameDisplay;
         targetEditRoute = "editFund";
         routeName = GlobalConstants.AllFundsRouteName;
-        //routeSEName;
     }
     //else if (controllerName == GlobalConstants.SubFundSubEntitiesControllerName)
     //{
     //    containerName = GlobalConstants.ContainerFundName;
     //    targetRouteContainer = "f";
-    //    documentTypeName = GlobalConstants.UploadTypeDocumentDisplay;
     //    entityName = GlobalConstants.SubFundNameDisplay;
     //    targetRoute = "sf";
     //    routeName = GlobalConstants.AllSubFundsRouteName;
-    //    routeSEName = GlobalConstants.SubFundSubEntititesRouteName;
     //}
     //else if (controllerName == GlobalConstants.ShareClassesSubEntitiesControllerName)
     //{
     //    containerName = GlobalConstants.ContainerSubFundName;
     //    targetRouteContainer = "sf";
-    //    documentTypeName = GlobalConstants.UploadTypeDocumentDisplay;
     //    entityName = GlobalConstants.ShareClassNameDisplay;
     //    targetRoute = "sc";
-    //    routeName = GlobalConstants.AllShareClassesRouteName;
-    //    routeSEName = GlobalConstants.ShareClassSubEntititesRouteName;
+    //    routeName = GlobalConstants.AllShareClassesRouteName;s
     //}
 }
 <div class="mx-auto">
@@ -90,7 +81,7 @@
                     class="btn btn-pharus btn-sm mb-2"
                     data-toggle="ajax-modal"
                     data-target="#upload-document">
-                Upload @documentTypeName
+                Upload Document
             </button>
         </div>
 

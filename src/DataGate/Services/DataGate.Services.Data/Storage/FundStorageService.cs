@@ -16,7 +16,6 @@
     using DataGate.Web.Dtos.Funds;
     using DataGate.Web.InputModels.Funds;
 
-    using Ganss.XSS;
     using Microsoft.EntityFrameworkCore;
 
     public class FundStorageService : IFundStorageService
