@@ -1,7 +1,7 @@
 ﻿@model DataGate.Web.ViewModels.Documents.DocumentOverviewViewModel
 
 <form id="form-document" method="post">
-    <table class="table table-bordered table-hover" id="tbl-documents">
+    <table class="table table-bordered table-hover tbl-documents">
         <thead>
             <tr>
                 <th class="text-secondary p-1">
@@ -26,7 +26,7 @@
         <tbody>
             @foreach (var document in Model.Documents)
             {
-                <tr id="@document.FileId">
+                <tr class="@document.FileId">
                     <td class="p-1">
                         @document.Description
                     </td>
@@ -77,7 +77,7 @@
             event.preventDefault();
         } else {
             const docValue = $(this).closest('tr').find('button').eq(0).val();
-            const fileId = $(this).closest('tr').attr('id');
+            const fileId = $(this).closest('tr').attr('class');
             $.blockUI({ message: `<h3>Please wait a moment...</h3>` });
             $.ajax({
                 url: '/media/delete',
@@ -91,8 +91,9 @@
                     alert('Something wrong!');
                     return false;
                 }
-                $("#tbl-documents").find("tr").attr("id", fileId).remove();
-                $("#tbl-distinct-documents").find("tr").attr("id", fileId).remove();
+
+                $('.tbl-documents .' + data.fileId).remove();
+                $('.tbl-distinct-documents .' + data.fileId).remove();
                 setTimeout($.unblockUI, 2000);
             }).fail(function (request, status, error) {
                 $.unblockUI();
