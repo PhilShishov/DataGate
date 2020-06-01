@@ -100,7 +100,7 @@
                 string callbackUrl = this.Url.Page(
                     EmailConfirmationUrl,
                     pageHandler: null,
-                    values: new { userId = user.Id, code },
+                    values: new { area = "Identity", userId = user.Id, code },
                     protocol: this.Request.Scheme);
 
                 string message = string.Format(GlobalConstants.EmailConfirmationMessage, HtmlEncoder.Default.Encode(callbackUrl));

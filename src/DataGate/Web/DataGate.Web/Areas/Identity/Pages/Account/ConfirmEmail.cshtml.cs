@@ -41,7 +41,7 @@
             }
 
             this.TempData[GlobalConstants.InfoKey] = InfoMessages.SuccessfullyConfirmedEmail;
-            return this.Redirect("/");
+            return this.Redirect("./Login");
         }
     }
 }
