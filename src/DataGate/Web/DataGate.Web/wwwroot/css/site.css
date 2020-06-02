@@ -112,11 +112,6 @@ textarea {
     width: 50%;
 }
 
-.title-main {
-    width: 20%;
-    text-align: center;
-}
-
 @font-face {
     font-family: Gilroy-Bold;
     font-style: normal;
@@ -130,6 +125,39 @@ textarea {
 .mb-2p {
     margin-bottom: 2%;
 }
+
+
+
+/*
+*
+* ==========================================
+* TITLE
+* ==========================================
+*
+*/
+
+.title-main {
+    width: 10%;
+    text-align: center;
+    margin-left: 115px;
+}
+
+.title-responsive {
+    line-height: 2.2;
+}
+
+@media only screen and (min-width: 990px) and (max-width: 1200px) {
+    .title-main {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 1440px) {
+    .title-main {
+        width: 25%;
+    }
+}
+
 
 /*
 *
@@ -203,7 +231,7 @@ a.a-underline:hover {
     .header-pharus img {
         max-width: 100%;
         height: auto;
-        margin-left: auto;
+        margin-left: 10px;
         margin-right: auto;
         margin-top: auto;
         margin-bottom: auto;
@@ -329,10 +357,6 @@ a.a-underline:hover {
     right: 1%;
 }
 
-
-.title-responsive {
-    line-height: 2.2;
-}
 /*
 *
 * ==========================================
@@ -1022,7 +1046,8 @@ li.timeline-item::before {
 */
 
 @media only screen and (max-width: 991px) {
-    .toolbar-pharus {
+    .toolbar-view-all,
+    .toolbar-view-details {
         overflow-x: scroll;
     }
 
@@ -1056,16 +1081,15 @@ li.timeline-item::before {
     }
 }
 
-@media only screen and (min-width: 990px) and (max-width: 1200px) {
-    .title-main {
-        display: none;
-    }
-}
-
 
 @media only screen and (min-width: 990px) {
-    .toolbar-pharus {
+    .toolbar-view-all {
         margin-top: 61px;
+    }
+
+    .toolbar-view-details {
+        margin-top: 61px;
+        display: flex;
     }
 
     .container-all-funds {
