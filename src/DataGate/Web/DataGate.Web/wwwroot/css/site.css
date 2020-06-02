@@ -23,7 +23,7 @@ body {
 
 h2 {
     font-size: 28px;
-    line-height: 3.2;
+    line-height: 1.9;
     color: black;
 }
 
@@ -110,6 +110,11 @@ textarea {
     margin-left: auto;
     margin-right: auto;
     width: 50%;
+}
+
+.title-main {
+    width: 20%;
+    text-align: center;
 }
 
 @font-face {
@@ -1017,7 +1022,7 @@ li.timeline-item::before {
 */
 
 @media only screen and (max-width: 991px) {
-    #toolbar-pharus {
+    .toolbar-pharus {
         overflow-x: scroll;
     }
 
@@ -1051,10 +1056,15 @@ li.timeline-item::before {
     }
 }
 
+@media only screen and (min-width: 990px) and (max-width: 1200px) {
+    .title-main {
+        display: none;
+    }
+}
+
+
 @media only screen and (min-width: 990px) {
-    #toolbar-pharus {
-        height: 80px;
-        display: flex;
+    .toolbar-pharus {
         margin-top: 61px;
     }
 
