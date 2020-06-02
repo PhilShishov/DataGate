@@ -67,12 +67,14 @@
             else if (model.AreaName == GlobalConstants.SubFundAreaName)
             {
                 query = $"{this.sqlProcedureDocumentSubFund} {this.sqlProcedureDocument}";
-                //dto.DocumentType = await this.service.GetByIdFileType(model.DocumentType);
+
+                // dto.DocumentType = await this.service.GetByIdFileType(model.DocumentType);
             }
             else if (model.AreaName == GlobalConstants.ShareClassAreaName)
             {
                 query = $"{this.sqlProcedureDocumentShareClass} {this.sqlProcedureDocument}";
-                //dto.DocumentType = await this.service.GetByIdFileType(model.DocumentType);
+
+                // dto.DocumentType = await this.service.GetByIdFileType(model.DocumentType);
             }
 
             SqlCommand command = new SqlCommand(query);
@@ -132,25 +134,27 @@
             else if (model.AreaName == GlobalConstants.SubFundAreaName)
             {
                 query = $"{this.sqlProcedureAgreementSubFund} {this.sqlProcedureAgreement}";
-                //dto.AgreementType = await this.fundService.GetByIdAgreementType(model.AgrType);
-                //dto.Status = await this.fundService.GetByIdStatus(model.Status);
-                //dto.Company = await this.fundService.GetByIdCompany(model.Company);
+
+                // dto.AgreementType = await this.fundService.GetByIdAgreementType(model.AgrType);
+                // dto.Status = await this.fundService.GetByIdStatus(model.Status);
+                // dto.Company = await this.fundService.GetByIdCompany(model.Company);
             }
             else if (model.AreaName == GlobalConstants.ShareClassAreaName)
             {
                 query = $"{this.sqlProcedureAgreementShareClass} {this.sqlProcedureAgreement}";
-                //dto.AgreementType = await this.fundService.GetByIdAgreementType(model.AgrType);
-                //dto.Status = await this.fundService.GetByIdStatus(model.Status);
-                //dto.Company = await this.fundService.GetByIdCompany(model.Company);
+
+                // dto.AgreementType = await this.fundService.GetByIdAgreementType(model.AgrType);
+                // dto.Status = await this.fundService.GetByIdStatus(model.Status);
+                // dto.Company = await this.fundService.GetByIdCompany(model.Company);
             }
 
             SqlCommand command = new SqlCommand(query);
             command.Parameters.AddRange(new[]
             {
-                        new SqlParameter("@file_name", SqlDbType.NVarChar) { Value = dto.FileName},
+                        new SqlParameter("@file_name", SqlDbType.NVarChar) { Value = dto.FileName },
                         new SqlParameter("@entity_id", SqlDbType.Int) { Value = dto.Id },
                         new SqlParameter("@file_ext", SqlDbType.NVarChar) { Value = dto.FileExt },
-                        new SqlParameter("@activity_type_id", SqlDbType.Int) { Value = dto.AgreementType},
+                        new SqlParameter("@activity_type_id", SqlDbType.Int) { Value = dto.AgreementType },
                         new SqlParameter("@contract_date", SqlDbType.NVarChar) { Value = dto.ContractDate },
                         new SqlParameter("@activation_date", SqlDbType.NVarChar) { Value = dto.ActivationDate },
                         new SqlParameter("@expiration_date", SqlDbType.NVarChar) { Value = dto.ExpirationDate },

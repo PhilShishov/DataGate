@@ -20,12 +20,12 @@ namespace DataGate.Web.Dtos.Queries
 
         public void Parse(IDataReader reader)
         {
-            Description = reader["File Description"] as string;
-            ContractDate = reader["Contract Date"] as string;
-            ActivationDate = reader["Activation Date"] as string;
-            ExpirationDate = reader["Expiration Date"] as string;
-            Name = reader["File Name"] as string;
-            FileId = (int)reader["File Id"];
+            this.Description = reader["File Description"] as string;
+            this.ContractDate = reader["Contract Date"] as string;
+            this.ActivationDate = reader["Activation Date"] as string;
+            this.ExpirationDate = reader["Expiration Date"] as string;
+            this.Name = reader["File Name"] as string;
+            this.FileId = (int)reader["File Id"];
         }
     }
 }

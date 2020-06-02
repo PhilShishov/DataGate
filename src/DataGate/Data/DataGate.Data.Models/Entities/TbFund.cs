@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace DataGate.Data.Models.Entities
+﻿namespace DataGate.Data.Models.Entities
 {
+    using System.Collections.Generic;
+
     public partial class TbFund
     {
         public TbFund()

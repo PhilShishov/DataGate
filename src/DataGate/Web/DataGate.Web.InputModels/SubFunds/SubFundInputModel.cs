@@ -20,11 +20,11 @@ namespace DataGate.Web.InputModels.SubFunds
         [StringLength(200, ErrorMessage = "The SubFund Name must be no longer than 200 characters")]
         [RegularExpression(@"^[A-Za-z-0-9]+(\s[A-Za-z-0-9]+)*$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "Official Sub Fund Name")]
-        public string SubFundName { get; set; }       
+        public string SubFundName { get; set; }
 
         [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
         [Display(Name = "Depository Bank Code")]
-        public string DBCode { get; set; }      
+        public string DBCode { get; set; }
 
         [Display(Name = "First Nav Date")]
         public DateTime? FirstNavDate { get; set; }
@@ -36,7 +36,7 @@ namespace DataGate.Web.InputModels.SubFunds
         public DateTime? CSSFAuthDate { get; set; }
 
         [Display(Name = "Expiry Date")]
-        public DateTime? ExpiryDate { get; set; }     
+        public DateTime? ExpiryDate { get; set; }
 
         [Display(Name = "Cesr Class")]
         public string CesrClass { get; set; }

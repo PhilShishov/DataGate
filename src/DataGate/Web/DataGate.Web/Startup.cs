@@ -7,7 +7,6 @@
     using DataGate.Data.Seeding;
     using DataGate.Services.Mapping;
     using DataGate.Web.Configuration;
-    using DataGate.Web.InputModels.Files;
     using DataGate.Web.InputModels.Funds;
     using DataGate.Web.ViewModels;
 

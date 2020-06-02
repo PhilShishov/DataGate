@@ -8,7 +8,6 @@
 
     using DataGate.Common;
     using DataGate.Data.Models.Users;
-    using DataGate.Services.Data.User;
     using DataGate.Web.Infrastructure.Attributes.Validation;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;

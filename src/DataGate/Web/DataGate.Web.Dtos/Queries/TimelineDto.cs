@@ -16,10 +16,10 @@ namespace DataGate.Web.Dtos.Queries
 
         public void Parse(IDataReader reader)
         {
-            Comment = reader["f_change_comment"] as string;
-            Title = reader["f_comment_title"] as string;
-            EndDate = reader["f_endDate"] as string;
-            InitialDate = reader["f_initialDate"] as string;
+            this.Comment = reader["f_change_comment"] as string;
+            this.Title = reader["f_comment_title"] as string;
+            this.EndDate = reader["f_endDate"] as string;
+            this.InitialDate = reader["f_initialDate"] as string;
         }
     }
 }

@@ -32,12 +32,9 @@ namespace DataGate.Web.ViewModels.Entities
 
         public string ContainerId { get; set; }
 
-        //public IEnumerable<string[]> TSAllPriceValues { get; set; }
-
-        //public IEnumerable<string> TSPriceDates { get; set; }
-
-        //public IEnumerable<string> TSTypeProviders { get; set; }
-
+        // public IEnumerable<string[]> TSAllPriceValues { get; set; }
+        // public IEnumerable<string> TSPriceDates { get; set; }
+        // public IEnumerable<string> TSTypeProviders { get; set; }
         public IEnumerable<DistinctDocViewModel> DistinctDocuments { get; set; }
 
         public IEnumerable<DistinctAgrViewModel> DistinctAgreements { get; set; }

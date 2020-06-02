@@ -1,4 +1,4 @@
-namespace DataGate.Services.SqlClient.Contracts
+﻿namespace DataGate.Services.SqlClient.Contracts
 {
     using System;
     using System.Collections.Generic;

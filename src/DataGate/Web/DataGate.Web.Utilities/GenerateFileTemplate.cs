@@ -140,7 +140,6 @@ namespace DataGate.Web.Utilities
                     cell.SetBold();
 
                     table.AddHeaderCell(cell);
-
                 }
 
                 for (int row = 1; row < entities.Count; row++)
@@ -198,7 +197,6 @@ namespace DataGate.Web.Utilities
                 case GlobalConstants.SubFundShareClassesControllerName:
                     typeName = ShareClassesNameDisplay;
                     break;
-
             }
 
             return typeName;

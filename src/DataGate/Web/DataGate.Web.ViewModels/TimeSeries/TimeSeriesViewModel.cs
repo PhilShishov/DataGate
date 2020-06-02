@@ -1,9 +1,7 @@
 ﻿// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-// Model Timeseries 
-
+// Model Timeseries
 // Created: 12/2019
 // Author:  Philip Shishov
-
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace DataGate.Web.ViewModels.TimeSeries
 {

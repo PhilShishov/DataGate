@@ -71,7 +71,7 @@
         public async Task<IActionResult> Create(
                      [Bind("InitialDate", "EndDate", "FundName", "CSSFCode", "Status",
                           "LegalForm", "LegalVehicle", "LegalType", "FACode", "DEPCode",
-                          "TACode", "CompanyTypeDesc", "TinNumber", "LEICode", "RegNumber", "RecaptchaValue" )] CreateFundInputModel model)
+                          "TACode", "CompanyTypeDesc", "TinNumber", "LEICode", "RegNumber", "RecaptchaValue")] CreateFundInputModel model)
         {
             bool doesExist = await this.service.DoesExist(model.FundName);
 

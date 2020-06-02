@@ -1,9 +1,9 @@
-﻿using DataGate.Data.Models.Domain;
-using System;
-using System.Collections.Generic;
-
-namespace DataGate.Data.Models.Entities
+﻿namespace DataGate.Data.Models.Entities
 {
+    using System;
+
+    using DataGate.Data.Models.Domain;
+
     public partial class TbMapFileshareclass
     {
         public int FileId { get; set; }

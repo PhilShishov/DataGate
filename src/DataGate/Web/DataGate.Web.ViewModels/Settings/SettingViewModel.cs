@@ -1,9 +1,8 @@
 ﻿namespace DataGate.Web.ViewModels.Settings
 {
+    using AutoMapper;
     using DataGate.Data.Models;
     using DataGate.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {
