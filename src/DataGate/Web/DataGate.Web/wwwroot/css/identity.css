@@ -35,6 +35,7 @@ p {
 h2,
 h3,
 {
+    color: black;
     font-weight: 400;
     color: #111;
 }
@@ -74,7 +75,9 @@ img {
     height: auto;
 }
 
-
+.label-input-login {
+    font-size: 19px;
+}
 /*========================================================================
   fxt-template layout
 =========================================================================*/
@@ -91,110 +94,110 @@ img {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebeff3', endColorstr='#005596',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
-.fxt-template-layout2 .fxt-checkbox-area {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 40px;
-    flex-wrap: wrap;
-}
+    .fxt-template-layout2 .fxt-checkbox-area {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+    }
 
-.fxt-template-layout2 .fxt-bg-color {
-    background-color: #ffffff;
-    width: 100%;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    display: flex;
-    padding: 0;
-    border-top-left-radius: 15px;
-}
+    .fxt-template-layout2 .fxt-bg-color {
+        background-color: #ffffff;
+        width: 100%;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        display: flex;
+        padding: 0;
+        border-top-left-radius: 15px;
+    }
 
-.fxt-template-layout2 .fxt-bg-img {
-    background-color: #ffffff;
-    width: 100%;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    margin: 0;
-    padding: 0;
-    /*box-shadow: 3px 0 79px 0 rgba(0, 0, 0, 0.08);*/
-    border-top-right-radius: 15px;
-}
+    .fxt-template-layout2 .fxt-bg-img {
+        background-color: #ffffff;
+        width: 100%;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        margin: 0;
+        padding: 0;
+        /*box-shadow: 3px 0 79px 0 rgba(0, 0, 0, 0.08);*/
+        border-top-right-radius: 15px;
+    }
 
-.fxt-template-layout2 .fxt-content {
-    padding: 30px 25px 50px 50px;
-    width: 100%;
-    /*box-shadow: 3px 0 79px 0 rgba(0, 0, 0, 0.08);*/
-    border-top-left-radius: 5px;
-}
+    .fxt-template-layout2 .fxt-content {
+        padding: 30px 25px 50px 50px;
+        width: 100%;
+        /*box-shadow: 3px 0 79px 0 rgba(0, 0, 0, 0.08);*/
+        border-top-left-radius: 5px;
+    }
 
-.fxt-template-layout2 .fxt-header {
-    text-align: center;
-}
+    .fxt-template-layout2 .fxt-header {
+        text-align: center;
+    }
 
-.fxt-template-layout2 .fxt-logo {
-    display: block;
-    margin-bottom: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 40vw;
-}
+    .fxt-template-layout2 .fxt-logo {
+        display: block;
+        margin-bottom: 50px;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 40vw;
+    }
 
-.fxt-template-layout2 .fxt-form .form-group {
-    position: relative;
-    z-index: 1;
-    padding-left: 0px;
-}
-
-    .fxt-template-layout2 .fxt-form .form-group i {
-        position: absolute;
+    .fxt-template-layout2 .fxt-form .form-group {
+        position: relative;
         z-index: 1;
-        right: 5px;
-        top: 50%;
-        transform: translateY(-50%);
+        padding-left: 0px;
     }
 
-    .fxt-template-layout2 .fxt-form .form-group [class^="flaticon-"]:before,
-    .fxt-template-layout2 .fxt-form .form-group [class*=" flaticon-"]:before,
-    .fxt-template-layout2 .fxt-form .form-group [class^="flaticon-"]:after,
-    .fxt-template-layout2 .fxt-form .form-group [class*=" flaticon-"]:after {
-        margin-left: 0;
-        font-size: 17px;
+        .fxt-template-layout2 .fxt-form .form-group i {
+            position: absolute;
+            z-index: 1;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .fxt-template-layout2 .fxt-form .form-group [class^="flaticon-"]:before,
+        .fxt-template-layout2 .fxt-form .form-group [class*=" flaticon-"]:before,
+        .fxt-template-layout2 .fxt-form .form-group [class^="flaticon-"]:after,
+        .fxt-template-layout2 .fxt-form .form-group [class*=" flaticon-"]:after {
+            margin-left: 0;
+            font-size: 17px;
+            color: #a1a1a1;
+        }
+
+    .fxt-template-layout2 .fxt-form .form-control {
+        min-height: 35px;
+        box-shadow: none;
+        border: 1px solid #e7e7e7;
+        padding: 10px 15px;
+        color: #111111;
+    }
+
+    .fxt-template-layout2 .fxt-form input::-webkit-input-placeholder {
         color: #a1a1a1;
+        font-size: 15px;
+        font-weight: 300;
     }
 
-.fxt-template-layout2 .fxt-form .form-control {
-    min-height: 35px;
-    box-shadow: none;
-    border: 1px solid #e7e7e7;
-    padding: 10px 15px;
-    color: #111111;
-}
+    .fxt-template-layout2 .fxt-form input::-moz-placeholder {
+        color: #a1a1a1;
+        font-size: 15px;
+        font-weight: 300;
+    }
 
-.fxt-template-layout2 .fxt-form input::-webkit-input-placeholder {
-    color: #a1a1a1;
-    font-size: 15px;
-    font-weight: 300;
-}
+    .fxt-template-layout2 .fxt-form input:-moz-placeholder {
+        color: #a1a1a1;
+        font-size: 15px;
+        font-weight: 300;
+    }
 
-.fxt-template-layout2 .fxt-form input::-moz-placeholder {
-    color: #a1a1a1;
-    font-size: 15px;
-    font-weight: 300;
-}
-
-.fxt-template-layout2 .fxt-form input:-moz-placeholder {
-    color: #a1a1a1;
-    font-size: 15px;
-    font-weight: 300;
-}
-
-.fxt-template-layout2 .fxt-form input:-ms-input-placeholder {
-    color: #a1a1a1;
-    font-size: 15px;
-    font-weight: 300;
-}
+    .fxt-template-layout2 .fxt-form input:-ms-input-placeholder {
+        color: #a1a1a1;
+        font-size: 15px;
+        font-weight: 300;
+    }
 
     .fxt-template-layout2 .fxt-btn-fill {
         font-family: 'Gilroy-Regular ☞';
@@ -218,286 +221,288 @@ img {
         transition: all 0.3s ease-in-out;
     }
 
-    .fxt-template-layout2 .fxt-btn-fill:hover {
-        background-color: #da0000;
-        border-color: #da0000;
-    }
-
-    .fxt-template-layout2 .fxt-btn-fill:focus {
-        outline: none;
-    }
-
-.fxt-template-layout2 .switcher-text {
-    color: #005596;
-    text-decoration: underline;
-    font-weight: bolder;
-    font-size: 1rem;
-    margin-left: 3px;
-    transition: all 0.3s ease-in-out;
-}
-
-    .fxt-template-layout2 .switcher-text:last-child {
-        margin-right: 0;
-    }
-
-    .fxt-template-layout2 .switcher-text:hover {
-        color: #666;
-    }
-
-    .fxt-template-layout2 .switcher-text.active {
-        color: #666;
-    }
-
-.fxt-template-layout2 .fxt-style-line {
-    overflow: hidden;
-    text-align: center;
-}
-
-    .fxt-template-layout2 .fxt-style-line h2 {
-        text-align: center;
-        font-weight: 300;
-        margin-bottom: 30px;
-        font-size: 20px;
-        color: #a4a4a4;
-        display: inline-block;
-        position: relative;
-        padding: 0 25px;
-        z-index: 1;
-    }
-
-        .fxt-template-layout2 .fxt-style-line h2:before {
-            display: inline-block;
-            content: "";
-            height: 1px;
-            width: 100%;
-            background-color: #ebebeb;
-            left: 100%;
-            top: 50%;
-            transform: translateY(-50%);
-            position: absolute;
-            z-index: 1;
+        .fxt-template-layout2 .fxt-btn-fill:hover {
+            background-color: #da0000;
+            border-color: #da0000;
         }
 
-        .fxt-template-layout2 .fxt-style-line h2:after {
-            display: inline-block;
-            content: "";
-            height: 1px;
-            width: 100%;
-            background-color: #ebebeb;
-            right: 100%;
-            top: 50%;
-            transform: translateY(-50%);
-            position: absolute;
-            z-index: 1;
+        .fxt-template-layout2 .fxt-btn-fill:focus {
+            outline: none;
         }
 
-.fxt-template-layout2 ul.fxt-socials {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-right: -5px;
-    margin-left: -5px;
-    margin-bottom: 20px;
-}
-
-    .fxt-template-layout2 ul.fxt-socials li {
-        max-width: 100%;
-        flex: 0 0 33.33333%;
-        padding-left: 5px;
-        padding-right: 5px;
-        margin-bottom: 10px;
-    }
-
-.fxt-template-layout2 ul.fxt-socials li a {
-    border-radius: 2px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: flex-start;
-    -ms-flex-pack: flex-start;
-    justify-content: flex-start;
-    font-size: 14px;
-    height: 45px;
-    color: #ffffff;
-    transition: all 0.3s ease-in-out;
-}
-
-    .fxt-template-layout2 ul.fxt-socials li a i {
-        border-radius: 2px 0 0 2px;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        align-items: center;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-        width: 45px;
-        height: 45px;
-    }
-
-    .fxt-template-layout2 ul.fxt-socials li a span {
-        height: 100%;
-        width: 100%;
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        align-items: center;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-        flex: 1;
-    }
-
-.fxt-template-layout2 ul.fxt-socials li.fxt-facebook a {
-    background-color: #3b5998;
-}
-
-    .fxt-template-layout2 ul.fxt-socials li.fxt-facebook a i {
-        background-color: #4867aa;
-    }
-
-    .fxt-template-layout2 ul.fxt-socials li.fxt-facebook a:hover {
-        background-color: #5676bb;
-    }
-
-.fxt-template-layout2 ul.fxt-socials li.fxt-twitter a {
-    background-color: #00acee;
-}
-
-    .fxt-template-layout2 ul.fxt-socials li.fxt-twitter a i {
-        background-color: #33ccff;
-    }
-
-    .fxt-template-layout2 ul.fxt-socials li.fxt-twitter a:hover {
-        background-color: #3dc5f3;
-    }
-
-.fxt-template-layout2 ul.fxt-socials li.fxt-google a {
-    background-color: #CC3333;
-}
-
-    .fxt-template-layout2 ul.fxt-socials li.fxt-google a i {
-        background-color: #db4437;
-    }
-
-    .fxt-template-layout2 ul.fxt-socials li.fxt-google a:hover {
-        background-color: #e75042;
-    }
-
-.fxt-template-layout2 .checkbox {
-    padding-left: 5px;
-}
-
-    .fxt-template-layout2 .checkbox label {
-        padding-left: 20px;
-        color: #a4a4a4;
-        margin-bottom: 0;
+    .fxt-template-layout2 .switcher-text {
+        color: #005596;
+        text-decoration: underline;
+        font-weight: bolder;
         font-size: 1rem;
-        position: relative;
+        margin-left: 3px;
+        transition: all 0.3s ease-in-out;
     }
 
-        .fxt-template-layout2 .checkbox label:before {
-            content: "";
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            top: 2px;
-            left: 0;
-            margin-left: -5px;
-            border: 1px solid;
-            border-color: #dcdcdc;
-            border-radius: 3px;
-            background-color: #fff;
-            transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+        .fxt-template-layout2 .switcher-text:last-child {
+            margin-right: 0;
         }
 
-        .fxt-template-layout2 .checkbox label:after {
-            position: absolute;
-            margin-left: -20px;
-            padding-left: 3px;
-            font-size: 10px;
-            color: #555555;
+        .fxt-template-layout2 .switcher-text:hover {
+            color: #666;
         }
 
-    .fxt-template-layout2 .checkbox input[type="checkbox"] {
-        display: none;
+        .fxt-template-layout2 .switcher-text.active {
+            color: #666;
+        }
+
+    .fxt-template-layout2 .fxt-style-line {
+        overflow: hidden;
+        text-align: center;
     }
 
-        .fxt-template-layout2 .checkbox input[type="checkbox"]:checked + label::after {
-            font-family: 'Font Awesome\ 5 Free';
-            content: "\f00c";
-            font-weight: 900;
-            color: #ffffff;
-            left: 15px;
-            top: 4px;
+        .fxt-template-layout2 .fxt-style-line h2 {
+            text-align: center;
+            font-weight: 300;
+            margin-bottom: 30px;
+            font-size: 20px;
+            color: #a4a4a4;
+            display: inline-block;
+            position: relative;
+            padding: 0 25px;
+            z-index: 1;
         }
 
-        .fxt-template-layout2 .checkbox input[type="checkbox"]:checked + label::before {
-            background-color: #015fa6;
-            border-color: #015fa6;
+            .fxt-template-layout2 .fxt-style-line h2:before {
+                display: inline-block;
+                content: "";
+                height: 1px;
+                width: 100%;
+                background-color: #ebebeb;
+                left: 100%;
+                top: 50%;
+                transform: translateY(-50%);
+                position: absolute;
+                z-index: 1;
+            }
+
+            .fxt-template-layout2 .fxt-style-line h2:after {
+                display: inline-block;
+                content: "";
+                height: 1px;
+                width: 100%;
+                background-color: #ebebeb;
+                right: 100%;
+                top: 50%;
+                transform: translateY(-50%);
+                position: absolute;
+                z-index: 1;
+            }
+
+    .fxt-template-layout2 ul.fxt-socials {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-right: -5px;
+        margin-left: -5px;
+        margin-bottom: 20px;
+    }
+
+        .fxt-template-layout2 ul.fxt-socials li {
+            max-width: 100%;
+            flex: 0 0 33.33333%;
+            padding-left: 5px;
+            padding-right: 5px;
+            margin-bottom: 10px;
         }
 
-.fxt-template-layout2 .fxt-footer {
-    text-align: left;
-}
+            .fxt-template-layout2 ul.fxt-socials li a {
+                border-radius: 2px;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+                -webkit-box-pack: flex-start;
+                -ms-flex-pack: flex-start;
+                justify-content: flex-start;
+                font-size: 14px;
+                height: 45px;
+                color: #ffffff;
+                transition: all 0.3s ease-in-out;
+            }
 
-/*Custom login css start*/
-.fxt-template-layout2 .custom-container {
-    margin-left: 9rem;
-    margin-right: 9rem;
-    margin-top: 4rem;
-    margin-bottom: 4rem;
-    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
-    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
-    border-radius: 15px;
-}
+                .fxt-template-layout2 ul.fxt-socials li a i {
+                    border-radius: 2px 0 0 2px;
+                    display: -webkit-box;
+                    display: -ms-flexbox;
+                    display: flex;
+                    -webkit-box-align: center;
+                    -ms-flex-align: center;
+                    align-items: center;
+                    -webkit-box-pack: center;
+                    -ms-flex-pack: center;
+                    justify-content: center;
+                    width: 45px;
+                    height: 45px;
+                }
 
-.fxt-template-layout2 .login-brand {
-    margin-top: 20px;
-    font-weight: bolder;
-    letter-spacing: 2px;
-}
+                .fxt-template-layout2 ul.fxt-socials li a span {
+                    height: 100%;
+                    width: 100%;
+                    display: -webkit-box;
+                    display: -ms-flexbox;
+                    display: flex;
+                    -webkit-box-align: center;
+                    -ms-flex-align: center;
+                    align-items: center;
+                    -webkit-box-pack: center;
+                    -ms-flex-pack: center;
+                    justify-content: center;
+                    flex: 1;
+                }
 
-.fxt-template-layout2 .login-title {
-    font-weight: 600;
-    color: #005596;
-    margin-bottom: 20px;
-}
+            .fxt-template-layout2 ul.fxt-socials li.fxt-facebook a {
+                background-color: #3b5998;
+            }
+
+                .fxt-template-layout2 ul.fxt-socials li.fxt-facebook a i {
+                    background-color: #4867aa;
+                }
+
+                .fxt-template-layout2 ul.fxt-socials li.fxt-facebook a:hover {
+                    background-color: #5676bb;
+                }
+
+            .fxt-template-layout2 ul.fxt-socials li.fxt-twitter a {
+                background-color: #00acee;
+            }
+
+                .fxt-template-layout2 ul.fxt-socials li.fxt-twitter a i {
+                    background-color: #33ccff;
+                }
+
+                .fxt-template-layout2 ul.fxt-socials li.fxt-twitter a:hover {
+                    background-color: #3dc5f3;
+                }
+
+            .fxt-template-layout2 ul.fxt-socials li.fxt-google a {
+                background-color: #CC3333;
+            }
+
+                .fxt-template-layout2 ul.fxt-socials li.fxt-google a i {
+                    background-color: #db4437;
+                }
+
+                .fxt-template-layout2 ul.fxt-socials li.fxt-google a:hover {
+                    background-color: #e75042;
+                }
+
+    .fxt-template-layout2 .checkbox {
+        padding-left: 5px;
+    }
+
+        .fxt-template-layout2 .checkbox label {
+            padding-left: 20px;
+            color: #a4a4a4;
+            margin-bottom: 0;
+            font-size: 1rem;
+            position: relative;
+        }
+
+            .fxt-template-layout2 .checkbox label:before {
+                content: "";
+                position: absolute;
+                width: 15px;
+                height: 15px;
+                top: 2px;
+                left: 0;
+                margin-left: -5px;
+                border: 1px solid;
+                border-color: #dcdcdc;
+                border-radius: 3px;
+                background-color: #fff;
+                transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+            }
+
+            .fxt-template-layout2 .checkbox label:after {
+                position: absolute;
+                margin-left: -20px;
+                padding-left: 3px;
+                font-size: 10px;
+                color: #555555;
+            }
+
+        .fxt-template-layout2 .checkbox input[type="checkbox"] {
+            display: none;
+        }
+
+            .fxt-template-layout2 .checkbox input[type="checkbox"]:checked + label::after {
+                font-family: 'Font Awesome\ 5 Free';
+                content: "\f00c";
+                font-weight: 900;
+                color: #ffffff;
+                left: 15px;
+                top: 4px;
+            }
+
+            .fxt-template-layout2 .checkbox input[type="checkbox"]:checked + label::before {
+                background-color: #015fa6;
+                border-color: #015fa6;
+            }
+
+    .fxt-template-layout2 .fxt-footer {
+        text-align: left;
+    }
+
+    /*Custom login css start*/
+    .fxt-template-layout2 .custom-container {
+        margin-left: 9rem;
+        margin-right: 9rem;
+        margin-top: 4rem;
+        margin-bottom: 4rem;
+        -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
+        -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
+        border-radius: 15px;
+    }
+
+    .fxt-template-layout2 .login-brand {
+        color: black;
+        margin-top: 20px;
+        font-weight: bolder;
+        letter-spacing: 2px;
+    }
+
+    .fxt-template-layout2 .login-title {
+        font-weight: 600;
+        color: #005596;
+        margin-bottom: 20px;
+    }
 
 
-.fxt-template-layout2 .login-footer {
-    padding-top: 5px;
-    padding-bottom: 5px;
-    background-color: #ffffff;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
+    .fxt-template-layout2 .login-footer {
+        padding-left: 30px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        background-color: #ffffff;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+    }
 
-.fxt-template-layout2 .fxt-form .form-control {
-    border-left: none;
-    border-right: none;
-    border-top: none;
-    padding-left: 0px;
-}
+    .fxt-template-layout2 .fxt-form .form-control {
+        border-left: none;
+        border-right: none;
+        border-top: none;
+        padding-left: 0px;
+    }
 
-.fxt-template-layout2 .fxt-form {
-    color: #005596;
-}
+    .fxt-template-layout2 .fxt-form {
+        color: #005596;
+    }
 
-.fxt-template-layout2 .left-img {
-    text-align: right;
-    padding-left: 150px;
-}
+    .fxt-template-layout2 .left-img {
+        text-align: right;
+        padding-left: 150px;
+    }
 
 .social-icons {
     text-align: right;
@@ -515,7 +520,7 @@ img {
     }
 
 .footer-text {
-    font-size: 0.8rem;
+    font-size: 12px;
     line-height: 45px;
     display: flex;
 }
@@ -580,15 +585,14 @@ img {
 }
 
 @media only screen and (min-width: 1024px) {
-    .extra-space {
-        display: none !important;
-    }
+   
 }
 
 @media only screen and (max-width: 1199px) {
     .fxt-template-layout2 .fxt-content {
         padding: 100px 35px 70px 50px;
     }
+
     h2 {
         font-size: 30px;
     }
@@ -606,10 +610,11 @@ img {
     .fxt-template-layout2 .fxt-content {
         padding: 100px 70px 70px 70px;
     }
-    
+
     h2 {
         font-size: 28px;
     }
+
     h3 {
         font-size: 20px;
     }
@@ -619,9 +624,11 @@ img {
     .fxt-template-layout2 .fxt-content {
         padding: 80px 50px 50px 50px;
     }
+
     h2 {
         font-size: 26px;
     }
+
     h3 {
         font-size: 18px;
     }
