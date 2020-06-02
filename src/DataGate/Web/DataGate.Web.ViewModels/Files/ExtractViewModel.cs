@@ -1,4 +1,4 @@
-namespace DataGate.Web.ViewModels.Files
+﻿namespace DataGate.Web.ViewModels.Files
 {
     using System.Collections.Generic;
 

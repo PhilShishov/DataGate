@@ -11,8 +11,10 @@
     "documentationRules": {
       "companyName": "DataGate",
       "copyrightText": "Copyright (c) {companyName}. All Rights Reserved.",
+      "xmlHeader": false,
       "documentInterfaces": false,
       "documentInternalElements": false,
+      "documentExposedElements": false,
       "fileNamingConvention": "stylecop"
     },
     "orderingRules": {

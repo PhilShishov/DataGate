@@ -1,4 +1,4 @@
-namespace DataGate.Common
+﻿namespace DataGate.Common
 {
     public class ModelConstants
     {

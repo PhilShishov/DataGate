@@ -1,4 +1,4 @@
-namespace DataGate.Common.Exceptions
+﻿namespace DataGate.Common.Exceptions
 {
     using System;
     using System.Data.SqlClient;

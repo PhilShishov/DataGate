@@ -1,6 +1,6 @@
 namespace DataGate.Web.Dtos.Documents
 {
-    using System; 
+    using System;
 
     public class LoadDocumentDto
     {

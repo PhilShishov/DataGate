@@ -1530,7 +1530,7 @@
                     .HasConstraintName("FK_tb_timeseries_shareclass_tb_dom_ts_provider");
             });
 
-            OnModelCreatingPartial(modelBuilder);
+            this.OnModelCreatingPartial(modelBuilder);
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

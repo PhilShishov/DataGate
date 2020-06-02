@@ -61,7 +61,7 @@
         // Email
         public const string ConfirmEmailSubject = "Confirm your email";
         public const string EmailConfirmationMessage = "Please confirm your account by <a href='{0}'>clicking here</a>.";
-        public const string ResetPasswordEmailSubject = "Reset Password";
+        public const string ResetPasswordEmailSubject = "Reset your password";
         public const string PasswordResetMessage = "Please reset your password by <a href='{0}'>clicking here</a>.";
 
         // SQL Queries

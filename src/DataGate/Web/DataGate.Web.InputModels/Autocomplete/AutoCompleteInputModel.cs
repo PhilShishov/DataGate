@@ -1,5 +1,3 @@
-using System.Security.Principal;
-
 namespace DataGate.Web.InputModels.Autocomplete
 {
     public class AutoCompleteInputModel
