@@ -2,7 +2,7 @@
 {
     public class ErrorMessages
     {
-        public const string InvalidLoginAttempt = "Wrong user name or password have been specified.";
+        public const string InvalidLoginAttempt = "Wrong username or password have been specified.";
         public const string NotConfirmedEmail = "Your email is not confirmed. Please confirm your email before login!";
         public const string PasswordMismatch = "The password and confirmation password do not match.";
         public const string NewPasswordMismatch = "The new password and confirmation password do not match.";
