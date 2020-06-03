@@ -28,6 +28,8 @@
 
         // Urls, actions
         public const string FundAllUrl = "/funds";
+        public const string SubFundAllUrl = "/subfunds";
+        public const string ShareClassAllUrl = "/shareclasses";
         public const string DetailsActionName = "Details";
         public const string AllActionName = "All";
         public const string EditActionName = "Edit";
@@ -36,6 +38,7 @@
         // Routes names
         public const string AllFundsRouteName = "allFunds";
         public const string FundDetailsRouteName = "fundDetails";
+        public const string FundSubFundsRouteName = "fundSubFunds";
 
         public const string AllSubFundsRouteName = "allSubFunds";
         public const string SubFundDetailsRouteName = "subFundDetails";

@@ -5,12 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     var controller = this.ViewContext.RouteData.Values["controller"].ToString();
-    var route = string.Empty;
-
-    if (controller == GlobalConstants.FundsControllerName)
-    {
-        route = GlobalConstants.FundAllUrl;
-    }
 }
 
 @section Styles{
@@ -51,7 +45,6 @@
         let model = {
             Date: '@Model.Date',
             ControllerName: '@controller',
-            RouteName: '@route',
         };
 
         // ________________________________________________________

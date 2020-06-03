@@ -1,5 +1,4 @@
-﻿@using DataGate.Common
-@model DataGate.Web.ViewModels.Entities.SubEntitiesViewModel
+﻿@model SubEntitiesViewModel
 
 @{
     var controller = this.ViewContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
@@ -13,47 +12,47 @@
     var entityId = string.Empty;
 }
 
-<div class="table-responsive border-0 mx-auto table-wrapper-double-scroll">
-    <table class="table table-hover text-nowrap">
-        <thead>
-            <tr>
-                @foreach (var header in Model.Headers)
-                {
-                    <th class="text-white pr-3 tableHeaderPharus help"
-                        data-toggle="tooltip"
-                        data-placement="bottom"
-                        title="@header">
-                        @header
-                    </th>
-                }
-            </tr>
-        </thead>
-        <tbody id="tbody-update-inactive">
-            @foreach (var row in Model.Values)
-            {
-                entityId = row[GlobalConstants.IndexEntityIdInTable];
-
+    <div class="table-responsive border-0 mx-auto table-wrapper-double-scroll">
+        <table class="table table-hover table-view-pharus" id="table-to-extract">
+            <thead>
                 <tr>
-                    @for (int col = 0; col < row.Length; col++)
+                    @for (int header = 0; header < Model.Headers.Count; header++)
                     {
-                        if (Model.Headers.ToList()[col].Contains("NAME"))
-                        {
-                            <td class="p-1 tableCellPharus">
-                                <a class="text-dark" asp-route="@targetRoute" asp-route-id="@entityId" asp-route-date="@Model.Date">
-                                    @row[col]
-                                </a>
-                            </td>
-                        }
-                        else
-                        {
-                            <td class="p-1">
-                                @row[col]
-                            </td>
-                        }
+                        <th class="pr-3"
+                            data-toggle="tooltip"
+                            data-placement="bottom"
+                            title="@Model.Headers[header]">
+                            @Model.Headers[header]
+                        </th>
                     }
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody id="tbody-update-inactive">
+                @foreach (var row in Model.Values)
+                {
+                    entityId = row[GlobalConstants.IndexEntityIdInTable];
+
+                    <tr>
+                        @for (int col = 0; col < row.Length; col++)
+                        {
+                            if (Model.Headers.ToList()[col].Contains("NAME"))
+                            {
+                                <td class="p-1 td-name-link">
+                                    <a asp-route="@targetRoute" asp-route-id="@entityId" asp-route-date="@Model.Date">
+                                        @row[col]
+                                    </a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="p-1">
+                                    @row[col]
+                                </td>
+                            }
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 

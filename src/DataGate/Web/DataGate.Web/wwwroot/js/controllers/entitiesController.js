@@ -61,7 +61,7 @@ function extract(model) {
             headers: { 'X-CSRF-TOKEN': token },
         }).done(function (data) {
             if (!data.success) {
-                setTimeout($.unblockUI, 500);
+                $.unblockUI();
                 alert(data.errorMessage);
                 return;
             }
