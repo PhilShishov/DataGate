@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    using DataGate.Web.ViewModels.Documents;
+    using DataGate.Web.Dtos.Queries;
 
     public class SpecificEntityOverviewGetDto
     {
@@ -11,9 +11,7 @@
 
         public string Date { get; set; }
 
-        public int ContainerId { get; set; }
-
-        public string Container { get; set; }
+        public ContainerDto Container { get; set; }
 
         public IEnumerable<string[]> Entity { get; set; }
 
@@ -21,9 +19,9 @@
 
         public DateTime? EndConnection { get; set; }
 
-        public IEnumerable<DistinctDocViewModel> DistinctDocuments { get; set; }
+        public IEnumerable<DistinctDocDto> DistinctDocuments { get; set; }
 
-        public IEnumerable<DistinctAgrViewModel> DistinctAgreements { get; set; }
+        public IEnumerable<DistinctAgrDto> DistinctAgreements { get; set; }
 
         public IEnumerable<string> Headers { get; set; }
 

@@ -18,7 +18,8 @@
         // ________________________________________________________
         //
         // Table functions names as in DB
-        private readonly string sqlFunctionSubFundId = "[fn_subfund_id]";
+        private readonly string sqlFunctionById = "[fn_subfund_id]";
+        private readonly string sqlFunctionContainer = "[fn_subfund_fund_container]";
         private readonly string sqlFunctionDistinctDocuments = "[fn_view_distinct_documents_subfund]";
         private readonly string sqlFunctionDistinctAgreements = "[fn_view_distinct_agreements_subfund]";
 
@@ -43,15 +44,13 @@
         // with table functions
         public IEnumerable<string[]> GetByIdAndDate(int id, DateTime? date)
         {
-            return this.sqlManager.ExecuteQuery(this.sqlFunctionSubFundId, date, id);
+            return this.sqlManager.ExecuteQuery(this.sqlFunctionById, date, id);
         }
 
-        public Task<string> GetContainer(int id, DateTime? date)
-        {
-            throw new NotImplementedException();
-        }
+        public ContainerDto GetContainer(int id, DateTime? date)
+            => this.sqlManager.ExecuteQueryMapping<ContainerDto>(this.sqlFunctionContainer, id, date).FirstOrDefault();
 
-        public IEnumerable<T> GetDistinctDocuments<T>(int id, DateTime? date)
+        public IEnumerable<DistinctDocDto> GetDistinctDocuments(int id, DateTime? date)
         {
             var query = this.sqlManager
                 .ExecuteQuery(this.sqlFunctionDistinctDocuments, date, id)
@@ -72,15 +71,11 @@
                 }
             }
 
-            return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
+            return dto;
         }
 
-        public IEnumerable<T> GetDistinctAgreements<T>(int id, DateTime? date)
-        {
-            IEnumerable<DistinctAgrDto> dto = this.sqlManager.ExecuteQueryMapping<DistinctAgrDto>(this.sqlFunctionDistinctAgreements, id, date);
-
-            return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
-        }
+        public IEnumerable<DistinctAgrDto> GetDistinctAgreements(int id, DateTime? date)
+                => this.sqlManager.ExecuteQueryMapping<DistinctAgrDto>(this.sqlFunctionDistinctAgreements, id, date);
 
         public void ThrowEntityNotFoundExceptionIfIdDoesNotExist(int id)
         {

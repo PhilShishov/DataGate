@@ -22,6 +22,7 @@
         public const string SubFundShareClassesControllerName = "SubFundShareClasses";
 
         public const string ShareClassesControllerName = "ShareClasses";
+        public const string ShareClassDetailsControllerName = "ShareClassDetails";
         public const string ShareClassAreaName = "ShareClass";
         public const string ShareClassesSubEntitiesControllerName = "ShareClassesSubEntities";
 
