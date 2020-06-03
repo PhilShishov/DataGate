@@ -46,7 +46,7 @@
             return this.sqlManager.ExecuteQuery(this.sqlFunctionById, date, id);
         }
 
-        public Task<string> GetContainer(int id, DateTime? date)
+        public T GetContainer<T>(int id, DateTime? date)
         {
             throw new NotImplementedException();
         }
@@ -91,5 +91,20 @@
         }
 
         private bool Exists(int id) => this.repository.All().Any(x => x.ScId == id);
+
+        public IEnumerable<DistinctDocDto> GetDistinctDocuments(int id, DateTime? date)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<DistinctAgrDto> GetDistinctAgreements(int id, DateTime? date)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ContainerDto GetContainer(int id, DateTime? date)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

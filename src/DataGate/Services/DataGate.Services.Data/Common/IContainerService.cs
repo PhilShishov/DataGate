@@ -1,10 +1,11 @@
 ﻿namespace DataGate.Services.Data.Common
 {
     using System;
-    using System.Threading.Tasks;
+
+    using DataGate.Web.Dtos.Queries;
 
     public interface IContainerService
     {
-        Task<string> GetContainer(int id, DateTime? date);
+        ContainerDto GetContainer(int id, DateTime? date);
     }
 }

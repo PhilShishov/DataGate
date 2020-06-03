@@ -9,7 +9,6 @@
     using DataGate.Data.Common.Repositories;
     using DataGate.Data.Models.Entities;
     using DataGate.Services.Data.Funds.Contracts;
-    using DataGate.Services.Mapping;
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.Dtos.Queries;
 
@@ -18,7 +17,7 @@
         // ________________________________________________________
         //
         // Table functions names as in DB
-        private readonly string sqlFunctionFundId = "[fn_fund_id]";
+        private readonly string sqlFunctionById = "[fn_fund_id]";
         private readonly string sqlFunctionDistinctDocuments = "[fn_view_distinct_documents_fund]";
         private readonly string sqlFunctionDistinctAgreements = "[fn_view_distinct_agreements_fund]";
 
@@ -43,15 +42,10 @@
         // with table functions
         public IEnumerable<string[]> GetByIdAndDate(int id, DateTime? date)
         {
-            return this.sqlManager.ExecuteQuery(this.sqlFunctionFundId, date, id);
+            return this.sqlManager.ExecuteQuery(this.sqlFunctionById, date, id);
         }
 
-        public Task<string> GetContainer(int id, DateTime? date)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<T> GetDistinctDocuments<T>(int id, DateTime? date)
+        public IEnumerable<DistinctDocDto> GetDistinctDocuments(int id, DateTime? date)
         {
             var query = this.sqlManager
                 .ExecuteQuery(this.sqlFunctionDistinctDocuments, date, id)
@@ -72,14 +66,15 @@
                 }
             }
 
-            return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
+            return dto;
         }
 
-        public IEnumerable<T> GetDistinctAgreements<T>(int id, DateTime? date)
-        {
-            IEnumerable<DistinctAgrDto> dto = this.sqlManager.ExecuteQueryMapping<DistinctAgrDto>(this.sqlFunctionDistinctAgreements, id, date);
+        public IEnumerable<DistinctAgrDto> GetDistinctAgreements(int id, DateTime? date)
+            => this.sqlManager.ExecuteQueryMapping<DistinctAgrDto>(this.sqlFunctionDistinctAgreements, id, date);
 
-            return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
+        public ContainerDto GetContainer(int id, DateTime? date)
+        {
+            throw new NotImplementedException();
         }
 
         public void ThrowEntityNotFoundExceptionIfIdDoesNotExist(int id)

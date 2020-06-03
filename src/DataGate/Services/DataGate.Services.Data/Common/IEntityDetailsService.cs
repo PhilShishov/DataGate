@@ -3,12 +3,14 @@
     using System;
     using System.Collections.Generic;
 
+    using DataGate.Web.Dtos.Queries;
+
     public interface IEntityDetailsService : IContainerService, ICustomException
     {
         IEnumerable<string[]> GetByIdAndDate(int id, DateTime? date);
 
-        IEnumerable<T> GetDistinctDocuments<T>(int id, DateTime? date);
+        IEnumerable<DistinctDocDto> GetDistinctDocuments(int id, DateTime? date);
 
-        IEnumerable<T> GetDistinctAgreements<T>(int id, DateTime? date);
+        IEnumerable<DistinctAgrDto> GetDistinctAgreements(int id, DateTime? date);
     }
 }

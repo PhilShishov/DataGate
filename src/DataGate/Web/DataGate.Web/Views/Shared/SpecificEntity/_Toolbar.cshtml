@@ -6,6 +6,7 @@
     var containerName = string.Empty;
     var entityName = string.Empty;
     var routeName = string.Empty;
+    var areaName = string.Empty;
 
     if (controllerName == GlobalConstants.FundDetailsControllerName)
     {
@@ -13,42 +14,43 @@
         targetEditRoute = "editFund";
         routeName = GlobalConstants.AllFundsRouteName;
     }
-    //else if (controllerName == GlobalConstants.SubFundSubEntitiesControllerName)
-    //{
-    //    containerName = GlobalConstants.ContainerFundName;
-    //    targetRouteContainer = "f";
-    //    entityName = GlobalConstants.SubFundNameDisplay;
-    //    targetRoute = "sf";
-    //    routeName = GlobalConstants.AllSubFundsRouteName;
-    //}
-    //else if (controllerName == GlobalConstants.ShareClassesSubEntitiesControllerName)
-    //{
-    //    containerName = GlobalConstants.ContainerSubFundName;
-    //    targetRouteContainer = "sf";
-    //    entityName = GlobalConstants.ShareClassNameDisplay;
-    //    targetRoute = "sc";
-    //    routeName = GlobalConstants.AllShareClassesRouteName;s
-    //}
+    else if (controllerName == GlobalConstants.SubFundDetailsControllerName)
+    {
+        entityName = GlobalConstants.SubFundNameDisplay;
+        containerName = GlobalConstants.ContainerFundName;
+        areaName = GlobalConstants.FundAreaName;
+        targetRouteContainer = GlobalConstants.FundDetailsRouteName;
+        routeName = GlobalConstants.AllSubFundsRouteName;
+    }
+    else if (controllerName == GlobalConstants.ShareClassDetailsControllerName)
+    {
+        entityName = GlobalConstants.ShareClassNameDisplay;
+        containerName = GlobalConstants.ContainerSubFundName;
+        areaName = GlobalConstants.SubFundAreaName;
+        targetRouteContainer = GlobalConstants.SubFundDetailsRouteName;
+        routeName = GlobalConstants.AllShareClassesRouteName;
+    }
 }
-<div class="mx-auto">
+<div class="mx-auto mb-5">
     <div class="h-100 d-flex">
-
         @if (controllerName == GlobalConstants.FundDetailsControllerName)
         {
-            <div class="d-flex mt-1 mr-auto"></div>
+            <div class="div-entity-container-wrapper"></div>
         }
         else
         {
-            <div class="d-flex mt-1 mr-auto">
+            <div class="div-entity-container-wrapper">
                 <p>@containerName CONTAINER: </p>
-                <a href="/@targetRouteContainer/@Model.ContainerId/@Model.Date"
-                   class="text-torshia font-weight-bold ml-1">
-                    @Model.Container
+                <a asp-area="@areaName"
+                   asp-route="@targetRouteContainer"
+                   asp-route-id="@Model.Container.ContainerId"
+                   asp-route-date="@Model.Date">
+                    @Model.Container.ContainerName
                 </a>
             </div>
         }
 
-        <form class="d-flex"
+        <form class="d-flex ml-5"
               method="post"
               asp-action="Details"
               id="update-form">
@@ -107,6 +109,5 @@
                 </a>
             </div>
         }
-
     </div>
 </div>

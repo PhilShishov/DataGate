@@ -8,6 +8,7 @@
     using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
     using DataGate.Web.ViewModels.Documents;
+    using DataGate.Web.ViewModels.Entities;
     using DataGate.Web.ViewModels.Queries;
 
     public class SpecificVMSetup
@@ -30,8 +31,8 @@
                 endConnection = DateTimeParser.SqlFormat(endConnectionString);
             }
 
-            var distinctDocs = service.GetDistinctDocuments<DistinctDocViewModel>(id, dateParsed);
-            var distinctAgrs = service.GetDistinctAgreements<DistinctAgrViewModel>(id, dateParsed);
+            var distinctDocs = service.GetDistinctDocuments(id, dateParsed);
+            var distinctAgrs = service.GetDistinctAgreements(id, dateParsed);
 
             var dto = new SpecificEntityOverviewGetDto()
             {
@@ -46,8 +47,7 @@
 
             if (service.GetType().Name != "FundDetailsService")
             {
-                // dto.Container = service.GetContainer(id, dateParsed);
-                // dto.ContainerId = service.GetContainer(id, dateParsed);
+                dto.Container = service.GetContainer(id, dateParsed);
             }
 
             return AutoMapperConfig.MapperInstance.Map<T>(dto);

@@ -177,12 +177,14 @@ textarea {
         color: #fff !important;
     }
 
-    .table-view-pharus .td-name-link {
+    .table-view-pharus .td-name-link a {
+        color: #0056b3;
         cursor: pointer;
     }
 
-        .table-view-pharus .td-name-link:hover {
+        .table-view-pharus .td-name-link a:hover {
             text-decoration: underline;
+            color: #007bff;
         }
 
     .table-view-pharus tbody tr {
@@ -220,6 +222,18 @@ a.a-underline:hover {
     text-decoration: underline;
 }
 
+.div-entity-container-wrapper {
+    display: flex;
+    margin-top: 5px;
+    position: fixed;
+    top: 61px;
+    left: 18px;
+}
+
+    .div-entity-container-wrapper a {
+        margin-left: 0.25rem !important;
+        font-weight: 700 !important;
+    }
 /*
 *
 * ==========================================
