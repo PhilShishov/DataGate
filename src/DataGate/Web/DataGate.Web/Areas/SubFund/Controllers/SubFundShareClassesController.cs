@@ -1,9 +1,9 @@
-﻿namespace DataGate.Web.Areas.Funds.Controllers
+﻿namespace DataGate.Web.Areas.SubFunds.Controllers
 {
     using System.Threading.Tasks;
 
     using DataGate.Common;
-    using DataGate.Services.Data.Funds.Contracts;
+    using DataGate.Services.Data.SubFunds.Contracts;
     using DataGate.Services.Data.ViewSetups;
     using DataGate.Web.Controllers;
     using DataGate.Web.ViewModels.Entities;
@@ -11,20 +11,20 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    [Area(GlobalConstants.FundAreaName)]
+    [Area(GlobalConstants.SubFundAreaName)]
     [Authorize]
-    public class FundSubFundsController : BaseController
+    public class SubFundShareClassesController : BaseController
     {
-        private readonly IFundSubFundsService service;
+        private readonly ISubFundShareClassesService service;
 
-        public FundSubFundsController(IFundSubFundsService service)
+        public SubFundShareClassesController(ISubFundShareClassesService service)
         {
             this.service = service;
         }
 
         [HttpGet]
-        [Route("loadSubFunds")]
-        public async Task<IActionResult> LoadedSubFunds(int id, string date, string container)
+        [Route("loadShareClasses")]
+        public async Task<IActionResult> LoadedShareClasses(int id, string date, string container)
         {
             var viewModel = await SubEntitiesVMSetup.SetLoadedGet<EntitySubEntitiesViewModel>(id, date, container, this.service);
 
@@ -32,8 +32,8 @@
         }
 
         [HttpGet]
-        [Route("f/{id}/sf")]
-        public async Task<IActionResult> SubFunds(int id, string date, string container)
+        [Route("sf/{id}/sf")]
+        public async Task<IActionResult> ShareClasses(int id, string date, string container)
         {
             var viewModel = await SubEntitiesVMSetup.SetGet<SubEntitiesViewModel>(id, date, container, this.service);
 
@@ -41,13 +41,13 @@
         }
 
         [HttpPost]
-        [Route("f/{id}/sf")]
-        public async Task<IActionResult> SubFunds([Bind("Id, Command, Container, Date,Values,Headers,PreSelectedColumns,SelectedColumns,SelectTerm")]
+        [Route("sf/{id}/sf")]
+        public async Task<IActionResult> ShareClasses([Bind("Id, Command, Container, Date,Values,Headers,PreSelectedColumns,SelectedColumns,SelectTerm")]
                                                    SubEntitiesViewModel viewModel)
         {
             if (viewModel.Command == GlobalConstants.CommandResetTable)
             {
-                return this.RedirectToAction("SubFunds", new { viewModel.Id, viewModel.Date, viewModel.Container });
+                return this.RedirectToAction("ShareClasses", new { viewModel.Id, viewModel.Date, viewModel.Container });
             }
 
             await SubEntitiesVMSetup.SetPost(viewModel, this.service);

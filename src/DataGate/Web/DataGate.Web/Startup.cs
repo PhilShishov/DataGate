@@ -96,10 +96,13 @@
             app.UseEndpoints(
                 endpoints =>
                     {
+                        // Media files
                         endpoints.MapControllerRoute(
                              name: "files",
                              pattern: "media/{name:minlength(5)}",
                              new { controller = "Media", action = "Read" });
+
+                        // Funds
                         endpoints.MapAreaControllerRoute(
                               name: "newFund",
                               areaName: "Admin",
@@ -125,6 +128,37 @@
                                areaName: "Fund",
                                pattern: "f/{id:int:min(1)}/sf",
                                new { area = "Fund", controller = "FundSubFunds", action = "SubFunds" });
+
+                        // Sub Funds
+                        endpoints.MapAreaControllerRoute(
+                               name: "allSubFunds",
+                               areaName: "SubFund",
+                               pattern: "subfunds",
+                               new { area = "SubFund", controller = "SubFunds", action = "All" });
+                        endpoints.MapAreaControllerRoute(
+                               name: "subfundDetails",
+                               areaName: "SubFund",
+                               pattern: "sf/{id:int:min(1)}/{date:required}",
+                               new { area = "SubFund", controller = "SubFundDetails", action = "Details" });
+                        endpoints.MapAreaControllerRoute(
+                               name: "subfundShareClasses",
+                               areaName: "SubFund",
+                               pattern: "sf/{id:int:min(1)}/sf",
+                               new { area = "SubFund", controller = "SubFundShareClasses", action = "ShareClasses" });
+
+                        // Share Classes
+                        endpoints.MapAreaControllerRoute(
+                               name: "allShareClasses",
+                               areaName: "ShareClass",
+                               pattern: "shareclasses",
+                               new { area = "ShareClass", controller = "ShareClasses", action = "All" });
+                        endpoints.MapAreaControllerRoute(
+                               name: "shareclassDetails",
+                               areaName: "ShareClass",
+                               pattern: "sc/{id:int:min(1)}/{date:required}",
+                               new { area = "ShareClass", controller = "ShareClassDetails", action = "Details" });
+
+                        // Default routing
                         endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                         endpoints.MapRazorPages();

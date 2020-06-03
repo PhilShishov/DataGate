@@ -57,8 +57,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\ShareClass\" />
-    <Folder Include="Areas\SubFund\" />
     <Folder Include="wwwroot\FileFolder\Agreement\" />
     <Folder Include="wwwroot\FileFolder\Fund\" />
     <Folder Include="wwwroot\FileFolder\ShareClass\" />

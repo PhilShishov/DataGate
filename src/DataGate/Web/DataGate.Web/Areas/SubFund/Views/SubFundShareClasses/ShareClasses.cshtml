@@ -1,0 +1,72 @@
+﻿@model SubEntitiesViewModel
+
+@{
+    ViewData["Title"] = "Sub Funds";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="justify-content-between">
+    <form asp-controller="FundSubFunds"
+          asp-action="SubFunds"
+          method="post"
+          id="update-form">
+
+        <input asp-for="Date" type="hidden">
+        <input asp-for="Id" type="hidden">
+        <input asp-for="Container" type="hidden">
+
+        <div>
+            <div class="mobile-none">
+                <hr class="mt-0 mb-auto" />
+                <div class="w-100 toolbar-view-all">
+                    <partial name="SubEntities/_Select" />
+                    <div class="justify-content-center w-35">
+                        <h2 class="text-center text-torshia" id="entityName">@Model.Container Sub Funds</h2>
+                    </div>
+                </div>
+                <hr class="mt-1 mb-0" />
+            </div>
+
+            <partial name="_StatusMessage" />
+            <partial name="AllEntities/_ModalExtract" />
+            <partial name="SubEntities/_ModalSelect" />
+            <partial name="SubEntities/_ViewTable" />
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    <script type="text/javascript" src="~/js/setTableValues.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/inactive.js" asp-append-version="true"></script>
+
+    <script>
+        $(document).ready(function () {
+            var token = $('#update-form input[name=__RequestVerificationToken]').val();
+            // ________________________________________________________
+            //
+            // Autocomplete search
+            const controller = '@GlobalConstants.FundSubFundsControllerName';
+            const entityId = @Model.Id;
+            loadAutocomplete(token, controller, entityId);
+
+            // ________________________________________________________
+            //
+            // Modal multiselect for column selection
+            $('.multiselect').multiselect();
+
+            // ________________________________________________________
+            //
+            // Double top scroll for wide table
+            $('.double-scroll').doubleScroll();
+            $('.table-wrapper-double-scroll').doubleScroll({ resetOnWindowResize: true });
+
+            // ________________________________________________________
+            //
+            // Additional information about headers
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip({
+                    html: true
+                })
+            })
+        });
+    </script>
+}

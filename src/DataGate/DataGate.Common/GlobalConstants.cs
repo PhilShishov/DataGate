@@ -82,7 +82,7 @@
         public const string PdfStreamMimeType = "application/pdf";
 
         // Entities
-        public const int IndexEntityIdInTable = 2;
+        public const int IndexEntityIdInTable = 0;
         public const int IndexEntityNameInTable = 3;
         public const int IndexEntityHeadersInTable = 0;
         public const int RowNumberOfHeadersInTable = 1;
