@@ -1,9 +1,12 @@
 ﻿namespace DataGate.Web.Areas.ShareClasses.Controllers
 {
+    using System.Threading.Tasks;
+
     using DataGate.Common;
-    using DataGate.Services.Data.ShareClasses.Contracts;
+    using DataGate.Services.Data.Entities;
     using DataGate.Services.Data.ViewSetups;
     using DataGate.Web.Controllers;
+    using DataGate.Web.Helpers;
     using DataGate.Web.ViewModels.Entities;
 
     using Microsoft.AspNetCore.Authorization;
@@ -14,25 +17,25 @@
     [Authorize]
     public class ShareClassesController : BaseController
     {
-        private readonly IShareClassService service;
+        private readonly IEntityService service;
 
-        public ShareClassesController(IShareClassService service)
+        public ShareClassesController(IEntityService service)
         {
             this.service = service;
         }
 
         [HttpGet]
         [Route("shareclasses")]
-        public IActionResult All()
+        public async Task<IActionResult> All()
         {
-            var viewModel = EntitiesVMSetup.SetGet<EntitiesViewModel>(this.service);
+            var viewModel = await EntitiesVMSetup.SetGet<EntitiesViewModel>(this.service, QueryDictionary.SqlFunctionAllActiveShareClass);
             return this.View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult All([Bind("Date,Values,Headers,IsActive,PreSelectedColumns,SelectedColumns,SelectTerm")] EntitiesViewModel viewModel)
+        public async Task<IActionResult> All([Bind("Date,Values,Headers,IsActive,PreSelectedColumns,SelectedColumns,SelectTerm")] EntitiesViewModel viewModel)
         {
-            EntitiesVMSetup.SetPost(viewModel, this.service);
+            await EntitiesVMSetup.SetPost(viewModel, this.service, QueryDictionary.SqlFunctionAllShareClass, QueryDictionary.SqlFunctionAllActiveShareClass);
 
             if (viewModel.Values != null && viewModel.Values.Count > 0)
             {

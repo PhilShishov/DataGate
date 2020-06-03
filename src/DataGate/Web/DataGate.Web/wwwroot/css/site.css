@@ -226,7 +226,7 @@ a.a-underline:hover {
 .div-entity-container-wrapper {
     display: flex;
     margin-top: 5px;
-    position: fixed;
+    position: absolute;
     top: 67px;
     left: 18px;
 }

@@ -1,16 +1,15 @@
-﻿namespace DataGate.Services.Data.Documents.Common
+﻿namespace DataGate.Services.Data.Documents
 {
-    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public interface IDocumentService
     {
-        IReadOnlyCollection<string> GetDocumentsFileTypes();
+        IReadOnlyCollection<string> GetDocumentsFileTypes(int fileType);
 
         Task<int> GetByIdDocumentType(string documentType);
 
-        IAsyncEnumerable<string> GetAgreementsFileTypes();
+        IAsyncEnumerable<string> GetAgreementsFileTypes(int fileType);
 
         Task<int> GetByIdAgreementType(string agrType);
 
@@ -21,9 +20,5 @@
         IAsyncEnumerable<string> GetCompanies();
 
         Task<int> GetByIdCompany(string company);
-
-        IEnumerable<T> GetAllDocuments<T>(int id);
-
-        IEnumerable<T> GetAllAgreements<T>(int id, DateTime? date);
     }
 }

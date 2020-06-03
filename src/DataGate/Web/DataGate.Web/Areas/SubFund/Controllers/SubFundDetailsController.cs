@@ -1,9 +1,14 @@
 ﻿namespace DataGate.Web.Areas.SubFunds.Controllers
 {
+    using System.Threading.Tasks;
+
     using DataGate.Common;
-    using DataGate.Services.Data.SubFunds.Contracts;
+    using DataGate.Services.Data.Entities;
+    using DataGate.Services.Data.SubFunds;
     using DataGate.Services.Data.ViewSetups;
     using DataGate.Web.Controllers;
+    using DataGate.Web.Dtos.Queries;
+    using DataGate.Web.Helpers;
     using DataGate.Web.ViewModels.Entities;
 
     using Microsoft.AspNetCore.Authorization;
@@ -13,18 +18,30 @@
     [Authorize]
     public class SubFundDetailsController : BaseController
     {
-        private readonly ISubFundDetailsService service;
+        private readonly IEntityDetailsService service;
+        private readonly ISubFundService subFundService;
 
-        public SubFundDetailsController(ISubFundDetailsService service)
+        public SubFundDetailsController(
+                                    IEntityDetailsService service,
+                                    ISubFundService subFundService)
         {
             this.service = service;
+            this.subFundService = subFundService;
         }
 
         [ActionName("Details")]
         [Route("sf/{id}/{date}")]
-        public IActionResult ByIdAndDate(int id, string date)
+        public async Task<IActionResult> ByIdAndDate(int id, string date)
         {
-            var viewModel = SpecificVMSetup.SetGet<SpecificEntityViewModel>(id, date, this.service);
+            var dto = new QueriesToPassDto()
+            {
+                SqlFunctionById = QueryDictionary.SqlFunctionByIdSubFund,
+                SqlFunctionDistinctDocuments = QueryDictionary.SqlFunctionDistinctDocumentsSubFund,
+                SqlFunctionDistinctAgreements = QueryDictionary.SqlFunctionDistinctAgreementsSubFund,
+                SqlFunctionContainer = QueryDictionary.SqlFunctionContainerFund,
+            };
+
+            var viewModel = await SpecificVMSetup.SetGet<SpecificEntityViewModel>(id, date, this.service, this.subFundService, dto);
             return this.View(viewModel);
         }
 

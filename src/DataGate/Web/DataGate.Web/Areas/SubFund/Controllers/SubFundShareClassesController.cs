@@ -3,9 +3,12 @@
     using System.Threading.Tasks;
 
     using DataGate.Common;
-    using DataGate.Services.Data.SubFunds.Contracts;
+    using DataGate.Services.Data.Entities;
+    using DataGate.Services.Data.SubFunds;
     using DataGate.Services.Data.ViewSetups;
     using DataGate.Web.Controllers;
+    using DataGate.Web.Dtos.Queries;
+    using DataGate.Web.Helpers;
     using DataGate.Web.ViewModels.Entities;
 
     using Microsoft.AspNetCore.Authorization;
@@ -15,18 +18,28 @@
     [Authorize]
     public class SubFundShareClassesController : BaseController
     {
-        private readonly ISubFundShareClassesService service;
+        private readonly IEntityService service;
+        private readonly ISubFundService subFundService;
 
-        public SubFundShareClassesController(ISubFundShareClassesService service)
+        public SubFundShareClassesController(IEntityService service, ISubFundService subFundService)
         {
             this.service = service;
+            this.subFundService = subFundService;
         }
 
         [HttpGet]
         [Route("loadShareClasses")]
         public async Task<IActionResult> LoadedShareClasses(int id, string date, string container)
         {
-            var viewModel = await SubEntitiesVMSetup.SetLoadedGet<EntitySubEntitiesViewModel>(id, date, container, this.service);
+            var dto = new EntitySubEntitiesGetDto()
+            {
+                Id = id,
+                Date = date,
+                Container = container,
+            };
+
+            var viewModel = await SubEntitiesVMSetup
+                .SetLoadedGet<EntitySubEntitiesViewModel>(this.service, this.subFundService, dto, QueryDictionary.SqlFunctionSubFundShareClasses);
 
             return this.PartialView("SubEntities/_ViewLoadedTable", viewModel);
         }
@@ -35,7 +48,15 @@
         [Route("sf/{id}/sf")]
         public async Task<IActionResult> ShareClasses(int id, string date, string container)
         {
-            var viewModel = await SubEntitiesVMSetup.SetGet<SubEntitiesViewModel>(id, date, container, this.service);
+            var dto = new SubEntitiesGetDto()
+            {
+                Id = id,
+                Date = date,
+                Container = container,
+            };
+
+            var viewModel = await SubEntitiesVMSetup
+                .SetGet<SubEntitiesViewModel>(this.service, this.subFundService, dto, QueryDictionary.SqlFunctionSubFundShareClasses);
 
             return this.View(viewModel);
         }
@@ -45,12 +66,12 @@
         public async Task<IActionResult> ShareClasses([Bind("Id, Command, Container, Date,Values,Headers,PreSelectedColumns,SelectedColumns,SelectTerm")]
                                                    SubEntitiesViewModel viewModel)
         {
-            if (viewModel.Command == GlobalConstants.CommandResetTable)
+            if (viewModel.Command == GlobalConstants.CommandUpdateTable)
             {
-                return this.RedirectToAction("ShareClasses", new { viewModel.Id, viewModel.Date, viewModel.Container });
+                return this.ShowInfo(InfoMessages.SuccessfulUpdate, GlobalConstants.SubFundShareClassesRouteName, new { viewModel.Id, viewModel.Date, viewModel.Container });
             }
 
-            await SubEntitiesVMSetup.SetPost(viewModel, this.service);
+            await SubEntitiesVMSetup.SetPost(viewModel, this.service, QueryDictionary.SqlFunctionSubFundShareClasses);
 
             if (viewModel.Values != null && viewModel.Values.Count > 0)
             {

@@ -3,12 +3,20 @@
 @{
     var controller = this.ViewContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
     var targetRoute = string.Empty;
+    var targetArea = string.Empty;
     var subEntitiesRoute = string.Empty;
 
     if (controller == GlobalConstants.FundSubFundsControllerName)
     {
-        //targetRoute = "subFunds";
-        subEntitiesRoute = "fundSubFunds";
+        targetArea = GlobalConstants.SubFundAreaName;
+        targetRoute = GlobalConstants.SubFundDetailsRouteName;
+        subEntitiesRoute = GlobalConstants.FundSubFundsRouteName;
+    }
+    else if (controller == GlobalConstants.SubFundShareClassesControllerName)
+    {
+        targetArea = GlobalConstants.ShareClassAreaName;
+        targetRoute = GlobalConstants.ShareClassDetailsRouteName;
+        subEntitiesRoute = GlobalConstants.SubFundShareClassesRouteName;
     }
 }
 
@@ -50,7 +58,7 @@
                             if (Model.Entities[0][col].Contains("NAME"))
                             {
                                 <td class="p-1 td-name-link">
-                                    <a asp-route="@targetRoute" asp-route-id="@entityId" asp-route-date="@Model.Date">
+                                    <a asp-area="@targetArea" asp-route="@targetRoute" asp-route-id="@entityId" asp-route-date="@Model.Date">
                                         @Model.Entities[row][col]
                                     </a>
                                 </td>

@@ -3,9 +3,12 @@
     using System.Threading.Tasks;
 
     using DataGate.Common;
-    using DataGate.Services.Data.Funds.Contracts;
+    using DataGate.Services.Data.Entities;
+    using DataGate.Services.Data.Funds;
     using DataGate.Services.Data.ViewSetups;
     using DataGate.Web.Controllers;
+    using DataGate.Web.Dtos.Queries;
+    using DataGate.Web.Helpers;
     using DataGate.Web.ViewModels.Entities;
 
     using Microsoft.AspNetCore.Authorization;
@@ -15,18 +18,28 @@
     [Authorize]
     public class FundSubFundsController : BaseController
     {
-        private readonly IFundSubFundsService service;
+        private readonly IEntityService service;
+        private readonly IFundService fundService;
 
-        public FundSubFundsController(IFundSubFundsService service)
+        public FundSubFundsController(IEntityService service, IFundService fundService)
         {
             this.service = service;
+            this.fundService = fundService;
         }
 
         [HttpGet]
         [Route("loadSubFunds")]
         public async Task<IActionResult> LoadedSubFunds(int id, string date, string container)
         {
-            var viewModel = await SubEntitiesVMSetup.SetLoadedGet<EntitySubEntitiesViewModel>(id, date, container, this.service);
+            var dto = new EntitySubEntitiesGetDto()
+            {
+                Id = id,
+                Date = date,
+                Container = container,
+            };
+
+            var viewModel = await SubEntitiesVMSetup
+                .SetLoadedGet<EntitySubEntitiesViewModel>(this.service, this.fundService, dto, QueryDictionary.SqlFunctionFundSubFunds);
 
             return this.PartialView("SubEntities/_ViewLoadedTable", viewModel);
         }
@@ -35,14 +48,23 @@
         [Route("f/{id}/sf")]
         public async Task<IActionResult> SubFunds(int id, string date, string container)
         {
-            var viewModel = await SubEntitiesVMSetup.SetGet<SubEntitiesViewModel>(id, date, container, this.service);
+            var dto = new SubEntitiesGetDto()
+            {
+                Id = id,
+                Date = date,
+                Container = container,
+            };
+
+            var viewModel = await SubEntitiesVMSetup
+                .SetGet<SubEntitiesViewModel>(this.service, this.fundService, dto, QueryDictionary.SqlFunctionFundSubFunds);
 
             return this.View(viewModel);
         }
 
         [HttpPost]
         [Route("f/{id}/sf")]
-        public async Task<IActionResult> SubFunds([Bind("Id, Command, Container, Date,Values,Headers,PreSelectedColumns,SelectedColumns,SelectTerm")]
+        public async Task<IActionResult> SubFunds([Bind("Id, Command, Container, Date,Values,Headers," +
+            "                                            PreSelectedColumns,SelectedColumns,SelectTerm")]
                                                    SubEntitiesViewModel viewModel)
         {
             if (viewModel.Command == GlobalConstants.CommandUpdateTable)
@@ -50,7 +72,7 @@
                 return this.ShowInfo(InfoMessages.SuccessfulUpdate, GlobalConstants.FundSubFundsRouteName, new { viewModel.Id, viewModel.Date, viewModel.Container });
             }
 
-            await SubEntitiesVMSetup.SetPost(viewModel, this.service);
+            await SubEntitiesVMSetup.SetPost(viewModel, this.service, QueryDictionary.SqlFunctionFundSubFunds);
 
             if (viewModel.Values != null && viewModel.Values.Count > 0)
             {

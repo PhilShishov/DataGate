@@ -4,10 +4,12 @@
     using System.Threading.Tasks;
 
     using DataGate.Common;
+    using DataGate.Services.Data.Documents;
     using DataGate.Services.Data.Documents.Contracts;
     using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
     using DataGate.Web.Dtos.Documents;
+    using DataGate.Web.Helpers;
     using DataGate.Web.InputModels.Files;
     using DataGate.Web.ViewModels.Documents;
 
@@ -17,12 +19,15 @@
     [Authorize]
     public class DocumentController : Controller
     {
-        private readonly IFundDocumentService fundService;
+        private readonly IDocumentService service;
+        private readonly IEntitiesDocumentService entitiesDocumentService;
 
         public DocumentController(
-                        IFundDocumentService fundService)
+                        IDocumentService service,
+                        IEntitiesDocumentService entitiesDocumentService)
         {
-            this.fundService = fundService;
+            this.service = service;
+            this.entitiesDocumentService = entitiesDocumentService;
         }
 
         [Route("loadDocUpload")]
@@ -32,7 +37,15 @@
 
             if (model.AreaName == GlobalConstants.FundAreaName)
             {
-                model.DocumentTypes = this.fundService.GetDocumentsFileTypes();
+                model.DocumentTypes = this.service.GetDocumentsFileTypes(QueryDictionary.FundFileType);
+            }
+            else if (model.AreaName == GlobalConstants.SubFundAreaName)
+            {
+                model.DocumentTypes = this.service.GetDocumentsFileTypes(QueryDictionary.SubFundFileType);
+            }
+            else if (model.AreaName == GlobalConstants.ShareClassAreaName)
+            {
+                model.DocumentTypes = this.service.GetDocumentsFileTypes(QueryDictionary.ShareClassFileType);
             }
 
             return this.PartialView("Upload/_UploadDocument", model);
@@ -42,11 +55,20 @@
         public async Task<IActionResult> Agreement(LoadAgreementDto dto)
         {
             var model = AutoMapperConfig.MapperInstance.Map<UploadAgreementInputModel>(dto);
+            model.AgreementsStatus = await this.service.GetAgreementStatus().ToListAsync();
+            model.Companies = await this.service.GetCompanies().ToListAsync();
+
             if (model.AreaName == GlobalConstants.FundAreaName)
             {
-                model.AgreementsFileTypes = await this.fundService.GetAgreementsFileTypes().ToListAsync();
-                model.AgreementsStatus = await this.fundService.GetAgreementStatus().ToListAsync();
-                model.Companies = await this.fundService.GetCompanies().ToListAsync();
+                model.AgreementsFileTypes = await this.service.GetAgreementsFileTypes(QueryDictionary.FundFileType).ToListAsync();
+            }
+            else if (model.AreaName == GlobalConstants.SubFundAreaName)
+            {
+                model.AgreementsFileTypes = await this.service.GetAgreementsFileTypes(QueryDictionary.SubFundFileType).ToListAsync();
+            }
+            else if (model.AreaName == GlobalConstants.ShareClassAreaName)
+            {
+                model.AgreementsFileTypes = await this.service.GetAgreementsFileTypes(QueryDictionary.ShareClassFileType).ToListAsync();
             }
 
             return this.PartialView("Upload/_UploadAgreement", model);
@@ -59,7 +81,15 @@
 
             if (areaName == GlobalConstants.FundAreaName)
             {
-                model.Documents = this.fundService.GetAllDocuments<DocumentViewModel>(id);
+                model.Documents = this.entitiesDocumentService.GetAllDocuments<DocumentViewModel>(QueryDictionary.SqlFunctionAllFundDocuments, id);
+            }
+            else if (areaName == GlobalConstants.SubFundAreaName)
+            {
+                model.Documents = this.entitiesDocumentService.GetAllDocuments<DocumentViewModel>(QueryDictionary.SqlFunctionAllSubFundDocuments, id);
+            }
+            else if (areaName == GlobalConstants.ShareClassAreaName)
+            {
+                model.Documents = this.entitiesDocumentService.GetAllDocuments<DocumentViewModel>(QueryDictionary.SqlFunctionAllShareClassesDocuments, id);
             }
 
             return this.PartialView("SpecificEntity/_AllDocuments", model);
@@ -73,7 +103,15 @@
 
             if (areaName == GlobalConstants.FundAreaName)
             {
-                model.Agreements = this.fundService.GetAllAgreements<AgreementViewModel>(id, dateParsed);
+                model.Agreements = this.entitiesDocumentService.GetAllAgreements<AgreementViewModel>(QueryDictionary.SqlFunctionAllFundAgreements, id, dateParsed);
+            }
+            else if (areaName == GlobalConstants.SubFundAreaName)
+            {
+                model.Agreements = this.entitiesDocumentService.GetAllAgreements<AgreementViewModel>(QueryDictionary.SqlFunctionAllSubFundAgreements, id, dateParsed);
+            }
+            else if (areaName == GlobalConstants.ShareClassAreaName)
+            {
+                model.Agreements = this.entitiesDocumentService.GetAllAgreements<AgreementViewModel>(QueryDictionary.SqlFunctionAllShareClassesAgreements, id, dateParsed);
             }
 
             return this.PartialView("SpecificEntity/_AllAgreements", model);

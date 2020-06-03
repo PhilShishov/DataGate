@@ -6,7 +6,7 @@
     using System.Threading.Tasks;
 
     using DataGate.Common;
-    using DataGate.Services.Data.Documents.Contracts;
+    using DataGate.Services.Data.Documents;
     using DataGate.Services.Data.Files.Contracts;
     using DataGate.Services.Mapping;
     using DataGate.Services.SqlClient.Contracts;
@@ -39,14 +39,14 @@
         private readonly string sqlProcedureDeleteAgreementShareClass = "EXEC delete_agreement_shareclassfile_byid @file_id";
 
         private readonly ISqlQueryManager sqlManager;
-        private readonly IFundDocumentService fundService;
+        private readonly IDocumentService service;
 
         public FileSystemService(
                         ISqlQueryManager sqlManager,
-                        IFundDocumentService fundService)
+                        IDocumentService service)
         {
             this.sqlManager = sqlManager;
-            this.fundService = fundService;
+            this.service = service;
         }
 
         // ________________________________________________________
@@ -62,7 +62,7 @@
             if (model.AreaName == GlobalConstants.FundAreaName)
             {
                 query = $"{this.sqlProcedureDocumentFund} {this.sqlProcedureDocument}";
-                dto.DocumentType = await this.fundService.GetByIdDocumentType(model.DocumentType);
+                dto.DocumentType = await this.service.GetByIdDocumentType(model.DocumentType);
             }
             else if (model.AreaName == GlobalConstants.SubFundAreaName)
             {
@@ -127,9 +127,9 @@
             if (model.AreaName == GlobalConstants.FundAreaName)
             {
                 query = $"{this.sqlProcedureAgreementFund} {this.sqlProcedureAgreement}";
-                dto.AgreementType = await this.fundService.GetByIdAgreementType(model.AgrType);
-                dto.Status = await this.fundService.GetByIdStatus(model.Status);
-                dto.Company = await this.fundService.GetByIdCompany(model.Company);
+                dto.AgreementType = await this.service.GetByIdAgreementType(model.AgrType);
+                dto.Status = await this.service.GetByIdStatus(model.Status);
+                dto.Company = await this.service.GetByIdCompany(model.Company);
             }
             else if (model.AreaName == GlobalConstants.SubFundAreaName)
             {
