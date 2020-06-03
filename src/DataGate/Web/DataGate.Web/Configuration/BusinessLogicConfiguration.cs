@@ -6,8 +6,12 @@
     using DataGate.Services.Data.Files.Contracts;
     using DataGate.Services.Data.Funds;
     using DataGate.Services.Data.Funds.Contracts;
+    using DataGate.Services.Data.ShareClasses;
+    using DataGate.Services.Data.ShareClasses.Contracts;
     using DataGate.Services.Data.Storage;
     using DataGate.Services.Data.Storage.Contracts;
+    using DataGate.Services.Data.SubFunds;
+    using DataGate.Services.Data.SubFunds.Contracts;
     using DataGate.Services.Data.Timelines;
     using DataGate.Services.Data.Timelines.Contracts;
     using DataGate.Services.Messaging;
@@ -37,7 +41,14 @@
             services.AddTransient<IFundStorageService, FundStorageService>();
 
             // Sub Funds
+            services.AddTransient<ISubFundService, SubFundService>();
+            services.AddTransient<ISubFundShareClassesService, SubFundShareClassesService>();
+            services.AddTransient<ISubFundDetailsService, SubFundDetailsService>();
+
             // Share Classes
+            services.AddTransient<IShareClassService, ShareClassService>();
+            services.AddTransient<IShareClassDetailsService, ShareClassDetailsService>();
+
             return services;
         }
     }

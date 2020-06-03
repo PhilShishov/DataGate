@@ -1,7 +1,7 @@
-﻿namespace DataGate.Web.Areas.Funds.Controllers
+﻿namespace DataGate.Web.Areas.ShareClasses.Controllers
 {
     using DataGate.Common;
-    using DataGate.Services.Data.Funds.Contracts;
+    using DataGate.Services.Data.ShareClasses.Contracts;
     using DataGate.Services.Data.ViewSetups;
     using DataGate.Web.Controllers;
     using DataGate.Web.ViewModels.Entities;
@@ -10,19 +10,19 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Routing;
 
-    [Area(GlobalConstants.FundAreaName)]
+    [Area(GlobalConstants.ShareClassAreaName)]
     [Authorize]
-    public class FundsController : BaseController
+    public class ShareClassesController : BaseController
     {
-        private readonly IFundService service;
+        private readonly IShareClassService service;
 
-        public FundsController(IFundService service)
+        public ShareClassesController(IShareClassService service)
         {
             this.service = service;
         }
 
         [HttpGet]
-        [Route("funds")]
+        [Route("shareclasses")]
         public IActionResult All()
         {
             var viewModel = EntitiesVMSetup.SetGet<EntitiesViewModel>(this.service);
@@ -40,7 +40,7 @@
                 return this.View(viewModel);
             }
 
-            return this.ShowError(ErrorMessages.TableIsEmpty, GlobalConstants.AllActionName, GlobalConstants.FundsControllerName);
+            return this.ShowError(ErrorMessages.TableIsEmpty, GlobalConstants.AllActionName, GlobalConstants.ShareClassesControllerName);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace DataGate.Services.Data.Funds
+﻿namespace DataGate.Services.Data.SubFunds
 {
     using System;
     using System.Collections.Generic;
@@ -8,39 +8,39 @@
     using DataGate.Common.Exceptions;
     using DataGate.Data.Common.Repositories;
     using DataGate.Data.Models.Entities;
-    using DataGate.Services.Data.Funds.Contracts;
+    using DataGate.Services.Data.SubFunds.Contracts;
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.ViewModels.Queries;
 
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
 
-    public class FundSubFundsService : IFundSubFundsService
+    public class SubFundShareClassesService : ISubFundShareClassesService
     {
         // ________________________________________________________
         //
         // Table functions names as in DB
-        private readonly string sqlFunctionSubFundsForFund = "[fn_active_fund_subfunds]";
+        private readonly string sqlFunctionSubEntities = "[fn_active_subfund_shareclasses]";
 
         private readonly ISqlQueryManager sqlManager;
-        private readonly IRepository<TbHistorySubFund> repository;
-        private readonly IRepository<TbFundSubFund> subsRepository;
+        private readonly IRepository<TbHistoryShareClass> repository;
+        private readonly IRepository<TbSubFundShareClass> subsRepository;
         private readonly IConfiguration configuration;
 
         // ________________________________________________________
         //
         // Constructor: initialize with DI IConfiguration
         // to retrieve appsettings.json connection string
-        public FundSubFundsService(
+        public SubFundShareClassesService(
                     IConfiguration configuration,
                     ISqlQueryManager sqlQueryManager,
-                    IRepository<TbHistorySubFund> repository,
-                    IRepository<TbFundSubFund> subsRepository)
+                    IRepository<TbHistoryShareClass> shareClassesRepository,
+                    IRepository<TbSubFundShareClass> subFundShareClassrepository)
         {
             this.configuration = configuration;
-            this.repository = repository;
+            this.repository = shareClassesRepository;
             this.sqlManager = sqlQueryManager;
-            this.subsRepository = subsRepository;
+            this.subsRepository = subFundShareClassrepository;
         }
 
         // ________________________________________________________
@@ -50,7 +50,7 @@
         public async IAsyncEnumerable<string[]> GetSubEntities(int id, DateTime? date, int? take, int skip)
         {
             var query = this.sqlManager
-                .ExecuteQueryAsync(this.sqlFunctionSubFundsForFund, date, id)
+                .ExecuteQueryAsync(this.sqlFunctionSubEntities, date, id)
                 .Skip(skip);
 
             query = CheckForTakeValue(take, query);
@@ -68,7 +68,7 @@
             List<string> resultColumns = FormatSql.FormatColumns(dto.PreSelectedColumns, dto.SelectedColumns);
 
             var query = this.sqlManager
-                .ExecuteQueryAsync(this.sqlFunctionSubFundsForFund, dto.Date, dto.Id, resultColumns)
+                .ExecuteQueryAsync(this.sqlFunctionSubEntities, dto.Date, dto.Id, resultColumns)
                 .Skip(skip);
 
             query = CheckForTakeValue(take, query);
@@ -81,13 +81,13 @@
 
         public async Task<ISet<string>> GetNamesAsync(int? id)
         {
-            var fundSubfunds = this.subsRepository.All();
-            var subfunds = this.repository.All();
+            var subfundShareClasses = this.subsRepository.All();
+            var shareclasses = this.repository.All();
 
-            var query = await (from sf in subfunds
-                               join fsf in fundSubfunds on sf.SfId equals fsf.SfId
-                               where fsf.FId == id
-                               select sf.SfOfficialSubFundName)
+            var query = await (from sc in shareclasses
+                               join sfsc in subfundShareClasses on sc.ScId equals sfsc.ScId
+                               where sfsc.ScId == id
+                               select sc.ScOfficialShareClassName)
                         .ToListAsync();
 
             return query.ToHashSet();
@@ -111,6 +111,6 @@
             return query;
         }
 
-        private bool Exists(int id) => this.repository.All().Any(x => x.SfId == id);
+        private bool Exists(int id) => this.repository.All().Any(x => x.ScId == id);
     }
 }

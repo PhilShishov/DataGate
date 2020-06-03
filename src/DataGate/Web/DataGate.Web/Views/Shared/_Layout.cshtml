@@ -117,19 +117,16 @@
                                    asp-route="allFunds">Fund Library</a>
                             </div>
                             <div class="ml-2 mobile-none">
-                                <a asp-area=""
-                                   asp-controller=""
-                                   asp-action=""> Sub Fund Library</a>
+                                <a asp-area="SubFund"
+                                   asp-route="allSubFunds">Sub Fund Library</a>
                             </div>
                             <div class="ml-2 mobile-none">
-                                <a asp-area=""
-                                   asp-controller=""
-                                   asp-action="">Share Class Library</a>
+                                <a asp-area="ShareClass"
+                                   asp-route="allShareClasses">Share Class Library</a>
                             </div>
                             <div class="ml-2 mobile-none">
-                                <a asp-area=""
-                                   asp-controller=""
-                                   asp-action="">Agreements Library</a>
+                                <a asp-area="Agreement"
+                                   asp-route="allAgreements">Agreements Library</a>
                             </div>
                         </div>
 
@@ -172,7 +169,7 @@
                             <div class="search-box">
                                 <input type="search"
                                        name="searchTerm"
-                                       placeholder="Search the site..."
+                                       placeholder="Find a Pharus Share Class..."
                                        autocomplete="off"
                                        autocorrect="off"
                                        autocapitalize="off"

@@ -1,7 +1,7 @@
-﻿namespace DataGate.Web.Areas.Funds.Controllers
+﻿namespace DataGate.Web.Areas.SubFunds.Controllers
 {
     using DataGate.Common;
-    using DataGate.Services.Data.Funds.Contracts;
+    using DataGate.Services.Data.SubFunds.Contracts;
     using DataGate.Services.Data.ViewSetups;
     using DataGate.Web.Controllers;
     using DataGate.Web.ViewModels.Entities;
@@ -10,19 +10,19 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Routing;
 
-    [Area(GlobalConstants.FundAreaName)]
+    [Area(GlobalConstants.SubFundAreaName)]
     [Authorize]
-    public class FundsController : BaseController
+    public class SubFundsController : BaseController
     {
-        private readonly IFundService service;
+        private readonly ISubFundService service;
 
-        public FundsController(IFundService service)
+        public SubFundsController(ISubFundService service)
         {
             this.service = service;
         }
 
         [HttpGet]
-        [Route("funds")]
+        [Route("subfunds")]
         public IActionResult All()
         {
             var viewModel = EntitiesVMSetup.SetGet<EntitiesViewModel>(this.service);
@@ -40,7 +40,7 @@
                 return this.View(viewModel);
             }
 
-            return this.ShowError(ErrorMessages.TableIsEmpty, GlobalConstants.AllActionName, GlobalConstants.FundsControllerName);
+            return this.ShowError(ErrorMessages.TableIsEmpty, GlobalConstants.AllActionName, GlobalConstants.SubFundsControllerName);
         }
     }
 }

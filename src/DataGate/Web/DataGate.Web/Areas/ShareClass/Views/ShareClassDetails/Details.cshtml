@@ -1,0 +1,92 @@
+﻿@model SpecificEntityViewModel
+
+@{
+    this.ViewData["Title"] = GlobalConstants.FundsControllerName;
+    this.Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var entityName = @Model.Entity.ToList()[1][GlobalConstants.IndexEntityNameInTable];
+}
+
+<div class="justify-content-between">
+    <div class="mobile-none">
+        <div class="w-100 toolbar-view-details">
+            <partial name="SpecificEntity/_Toolbar" />
+        </div>
+    </div>
+    <partial name="_StatusMessage" />
+
+    <div class="justify-content-between" id="infoAndDocumentsView">
+        <partial name="SpecificEntity/_Info" />
+        <partial name="SpecificEntity/_Load_Documents" />
+    </div>
+
+    <hr class="bg-pharus hr-2" />
+
+    <div class="row ml-3" id="div-select-addInfo">
+        <label class="text-torshia m-1 pr-3">FUND ADDITIONAL INFORMATION</label>
+        <select class="custom-select-lg select-pharus form-control input-sm"
+                id="select-additional-info"
+                asp-for="SelectAdditionalInf">
+            <option value="" selected disabled>Select</option>
+            <option value="SubFunds">Sub Funds</option>
+            <option value="TimelineChanges">Timeline Changes</option>
+            <option value="AllDocuments">All Documents</option>
+            <option value="AllAgreements">All Agreements</option>
+        </select>
+    </div>
+    <form id="load-form" method="get"></form>
+
+    <!-- Container for subentities selected option-->
+    <div id="subEntities" class="mt-4 d-none"></div>
+
+    <!-- Container for documents selected option-->
+    <div id="allDocuments" class="mt-3 d-none"></div>
+
+    <!-- Container for agreements selected option-->
+    <div id="allAgreements" class="mt-3 d-none"></div>
+
+    <!-- Container for timelines selected option-->
+    <div class="container py-5 row d-none" id="timelineChanges"></div>
+
+</div>
+
+<!-- Modal placeholder for document upload-->
+<div id="modal-placeholder-document"></div>
+
+<!-- Modal placeholder for agreement upload-->
+<div id="modal-placeholder-agreement"></div>
+
+@section Scripts{
+    <script type="text/javascript" src="~/js/controllers/detailsController.js" asp-append-version="true"></script>
+    <script src="~/js/plugins.js" asp-append-version="true"></script>
+    <script>
+        const tokenLoadEntities = $('#load-form input[name=__RequestVerificationToken]').val();
+
+        // ________________________________________________________
+        //
+        // Manage document and agreement upload modals
+        const jsonUpload = {
+            areaName: '@GlobalConstants.FundAreaName',
+            routeName: '@GlobalConstants.FundDetailsRouteName',
+            id: @Model.Id,
+            date: '@Model.Date',
+            startConnection : '@Model.StartConnection',
+            endConnection : '@Model.EndConnection',
+        };
+
+        uploadModals(tokenLoadEntities, jsonUpload);
+
+        // ________________________________________________________
+        //
+        // Load sub funds, documents, agreements and timelines
+        const url = '/loadSubFunds';
+        const jsonAddInfo = {
+            id: @Model.Id,
+            areaName: '@GlobalConstants.FundAreaName',
+            date: '@Model.Date',
+            container: '@entityName',
+        };
+
+        loadAddInfo(tokenLoadEntities, url, jsonAddInfo);
+    </script>
+}

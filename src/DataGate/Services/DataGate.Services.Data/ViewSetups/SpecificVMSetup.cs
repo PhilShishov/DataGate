@@ -12,8 +12,8 @@
 
     public class SpecificVMSetup
     {
-        private const int IndexStartConnectionInSQLTable = 0;
-        private const int IndexEndConnectionInSQLTable = 1;
+        private const int IndexStartConnectionInSQLTable = 1;
+        private const int IndexEndConnectionInSQLTable = 2;
 
         public static T SetGet<T>(int id, string date, IEntityDetailsService service)
         {
