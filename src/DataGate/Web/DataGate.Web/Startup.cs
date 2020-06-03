@@ -136,14 +136,14 @@
                                pattern: "subfunds",
                                new { area = "SubFund", controller = "SubFunds", action = "All" });
                         endpoints.MapAreaControllerRoute(
-                               name: "subfundDetails",
+                               name: "subFundDetails",
                                areaName: "SubFund",
                                pattern: "sf/{id:int:min(1)}/{date:required}",
                                new { area = "SubFund", controller = "SubFundDetails", action = "Details" });
                         endpoints.MapAreaControllerRoute(
-                               name: "subfundShareClasses",
+                               name: "subFundShareClasses",
                                areaName: "SubFund",
-                               pattern: "sf/{id:int:min(1)}/sf",
+                               pattern: "sf/{id:int:min(1)}/sc",
                                new { area = "SubFund", controller = "SubFundShareClasses", action = "ShareClasses" });
 
                         // Share Classes
@@ -153,7 +153,7 @@
                                pattern: "shareclasses",
                                new { area = "ShareClass", controller = "ShareClasses", action = "All" });
                         endpoints.MapAreaControllerRoute(
-                               name: "shareclassDetails",
+                               name: "shareClassDetails",
                                areaName: "ShareClass",
                                pattern: "sc/{id:int:min(1)}/{date:required}",
                                new { area = "ShareClass", controller = "ShareClassDetails", action = "Details" });

@@ -3,13 +3,11 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
 
     using DataGate.Common.Exceptions;
     using DataGate.Data.Common.Repositories;
     using DataGate.Data.Models.Entities;
     using DataGate.Services.Data.ShareClasses.Contracts;
-    using DataGate.Services.Mapping;
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.Dtos.Queries;
 
@@ -19,6 +17,7 @@
         //
         // Table functions names as in DB
         private readonly string sqlFunctionById = "[fn_shareclass_id]";
+        private readonly string sqlFunctionContainer = "[fn_shareclass_subfund_container]";
         private readonly string sqlFunctionDistinctDocuments = "[fn_view_distinct_documents_shareclass]";
         private readonly string sqlFunctionDistinctAgreements = "[fn_view_distinct_agreements_shareclass]";
 
@@ -46,41 +45,14 @@
             return this.sqlManager.ExecuteQuery(this.sqlFunctionById, date, id);
         }
 
-        public T GetContainer<T>(int id, DateTime? date)
-        {
-            throw new NotImplementedException();
-        }
+        public ContainerDto GetContainer(int id, DateTime? date)
+             => this.sqlManager.ExecuteQueryMapping<ContainerDto>(this.sqlFunctionContainer, id, date).FirstOrDefault();
 
-        public IEnumerable<T> GetDistinctDocuments<T>(int id, DateTime? date)
-        {
-            var query = this.sqlManager
-                .ExecuteQuery(this.sqlFunctionDistinctDocuments, date, id)
-                .ToList();
+        public IEnumerable<DistinctDocDto> GetDistinctDocuments(int id, DateTime? date)
+         => this.sqlManager.ExecuteQueryMapping<DistinctDocDto>(this.sqlFunctionDistinctDocuments, id, date);
 
-            var dto = new List<DistinctDocDto>();
-
-            for (int row = 1; row < query.Count; row++)
-            {
-                for (int col = 0; col < row; col++)
-                {
-                    var document = new DistinctDocDto
-                    {
-                        Name = query[row][col],
-                        FileId = int.Parse(query[row][col + 1]),
-                    };
-                    dto.Add(document);
-                }
-            }
-
-            return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
-        }
-
-        public IEnumerable<T> GetDistinctAgreements<T>(int id, DateTime? date)
-        {
-            IEnumerable<DistinctAgrDto> dto = this.sqlManager.ExecuteQueryMapping<DistinctAgrDto>(this.sqlFunctionDistinctAgreements, id, date);
-
-            return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
-        }
+        public IEnumerable<DistinctAgrDto> GetDistinctAgreements(int id, DateTime? date)
+                => this.sqlManager.ExecuteQueryMapping<DistinctAgrDto>(this.sqlFunctionDistinctAgreements, id, date);
 
         public void ThrowEntityNotFoundExceptionIfIdDoesNotExist(int id)
         {
@@ -91,20 +63,5 @@
         }
 
         private bool Exists(int id) => this.repository.All().Any(x => x.ScId == id);
-
-        public IEnumerable<DistinctDocDto> GetDistinctDocuments(int id, DateTime? date)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<DistinctAgrDto> GetDistinctAgreements(int id, DateTime? date)
-        {
-            throw new NotImplementedException();
-        }
-
-        public ContainerDto GetContainer(int id, DateTime? date)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

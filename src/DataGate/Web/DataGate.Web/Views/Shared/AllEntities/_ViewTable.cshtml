@@ -7,16 +7,16 @@
 
     if (controller == GlobalConstants.FundsControllerName)
     {
-        targetRoute = "fundDetails";
+        targetRoute = GlobalConstants.FundDetailsRouteName;
     }
 
     else if (controller == GlobalConstants.SubFundsControllerName)
     {
-        targetRoute = "subfundDetails";
+        targetRoute = GlobalConstants.SubFundDetailsRouteName;
     }
     else if (controller == GlobalConstants.ShareClassesControllerName)
     {
-        targetRoute = "shareclassDetails";
+        targetRoute = GlobalConstants.ShareClassDetailsRouteName;
     }
 
     var entityId = string.Empty;
