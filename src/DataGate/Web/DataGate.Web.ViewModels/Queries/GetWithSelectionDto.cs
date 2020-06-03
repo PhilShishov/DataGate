@@ -8,7 +8,7 @@
 
     public class GetWithSelectionDto : IMapFrom<EntitiesViewModel>, IMapFrom<SubEntitiesViewModel>
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         public DateTime? Date { get; set; }
 

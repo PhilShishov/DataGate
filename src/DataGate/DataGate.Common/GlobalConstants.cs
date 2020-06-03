@@ -42,6 +42,7 @@
 
         public const string AllSubFundsRouteName = "allSubFunds";
         public const string SubFundDetailsRouteName = "subFundDetails";
+        public const string SubFundShareClassesRouteName = "subFundShareClasses";
 
         public const string AllShareClassesRouteName = "allShareClasses";
         public const string ShareClassDetailsRouteName = "shareClassDetails";

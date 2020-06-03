@@ -67,44 +67,6 @@ namespace DataGate.Services.SqlClient
             }
         }
 
-        public IEnumerable<string[]> ExecuteQuery(string function, DateTime? date, int? id, IEnumerable<string> columns)
-        {
-            using (SqlConnection connection = new SqlConnection())
-            {
-                SqlCommand command = this.SetUpSqlConnectionCommand(connection);
-
-                if (!date.HasValue)
-                {
-                    command.CommandText = $"select * from {function}({id})";
-                }
-
-                if (id.HasValue)
-                {
-                    if (columns != null)
-                    {
-                        command.CommandText = $"select {string.Join(", ", columns)} from {function}('{date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}', {id})";
-                    }
-                    else
-                    {
-                        command.CommandText = $"select * from {function}('{date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}', {id})";
-                    }
-                }
-                else
-                {
-                    if (columns != null)
-                    {
-                        command.CommandText = $"select {string.Join(", ", columns)} from {function}('{date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}')";
-                    }
-                    else
-                    {
-                        command.CommandText = $"select * from {function}('{date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}')";
-                    }
-                }
-
-                return DataSQLHelper.GetStringData(command);
-            }
-        }
-
         public async IAsyncEnumerable<string[]> ExecuteQueryAsync(string function, DateTime? date, int? id, IEnumerable<string> columns)
         {
             using (SqlConnection connection = new SqlConnection())

@@ -7,106 +7,26 @@
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace DataGate.Services.Data.SubFunds
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
+    using DataGate.Common.Exceptions;
     using DataGate.Data.Common.Repositories;
     using DataGate.Data.Models.Entities;
-    using DataGate.Services.Data.SubFunds.Contracts;
-    using DataGate.Services.SqlClient.Contracts;
-    using DataGate.Web.ViewModels.Queries;
-
     using Microsoft.EntityFrameworkCore;
 
     // _____________________________________________________________
     public class SubFundService : ISubFundService
     {
-        // ________________________________________________________
-        //
-        // Table functions names as in DB
-        private readonly string sqlFunctionAll = "[fn_all_subfund]";
-        private readonly string sqlFunctionAllActive = "[fn_active_subfund]";
-
-        private readonly ISqlQueryManager sqlManager;
         private readonly IRepository<TbHistorySubFund> repository;
+        //private readonly IRepository<TbHistoryShareClass> repository;
+        //private readonly IRepository<TbSubFundShareClass> subsRepository;
 
-        // ________________________________________________________
-        //
-        // Constructor: initialize with DI IConfiguration
-        // to retrieve appsettings.json connection string,
-        // IRepository to connect with dbcontext and
-        // sql manager for executing queries
         public SubFundService(
-                        ISqlQueryManager sqlQueryManager,
                         IRepository<TbHistorySubFund> repository)
         {
-            this.sqlManager = sqlQueryManager;
             this.repository = repository;
-        }
-
-        // ________________________________________________________
-        //
-        // Retrieve query table DB based entities
-        // with table functions
-        public IEnumerable<string[]> GetAll(DateTime? date, int? take, int skip)
-        {
-            var query = this.sqlManager
-                .ExecuteQuery(this.sqlFunctionAll, date)
-                .Skip(skip);
-            query = CheckForTakeValue(take, query);
-
-            return query;
-        }
-
-        public IEnumerable<string[]> GetAllActive(DateTime? date, int? take, int skip)
-        {
-            var query = this.sqlManager
-               .ExecuteQuery(this.sqlFunctionAllActive, date)
-               .Skip(skip);
-            query = CheckForTakeValue(take, query);
-
-            return query;
-        }
-
-        public IEnumerable<string[]> GetAllSelected(
-                                                                GetWithSelectionDto dto,
-                                                                int? take,
-                                                                int skip)
-        {
-            // Create new collection to store
-            // selected without change
-            List<string> resultColumns = FormatSql.FormatColumns(dto.PreSelectedColumns, dto.SelectedColumns);
-
-            var query = this.sqlManager
-                .ExecuteQuery(this.sqlFunctionAll, dto.Date, null, resultColumns)
-                .Skip(skip);
-            query = CheckForTakeValue(take, query);
-
-            return query;
-        }
-
-        public IEnumerable<string[]> GetAllActiveSelected(
-                                                                    GetWithSelectionDto dto,
-                                                                    int? take,
-                                                                    int skip)
-        {
-            // Create new collection to store
-            // selected without change
-            List<string> resultColumns = FormatSql.FormatColumns(dto.PreSelectedColumns, dto.SelectedColumns);
-
-            var query = this.sqlManager
-                .ExecuteQuery(this.sqlFunctionAllActive, dto.Date, null, resultColumns)
-                .Skip(skip);
-            query = CheckForTakeValue(take, query);
-
-            return query;
-        }
-
-        public IEnumerable<string> GetHeaders()
-        {
-           return this.GetAllActive(null, 1, 0).FirstOrDefault();
         }
 
         public async Task<ISet<string>> GetNamesAsync(int? id)
@@ -120,14 +40,28 @@ namespace DataGate.Services.Data.SubFunds
             return query.ToHashSet();
         }
 
-        private static IEnumerable<string[]> CheckForTakeValue(int? take, IEnumerable<string[]> query)
-        {
-            if (take.HasValue)
-            {
-                query = query.Take(take.Value);
-            }
+        //public async Task<ISet<string>> GetNamesAsync(int? id)
+        //{
+        //    var subfundShareClasses = this.subsRepository.All();
+        //    var shareclasses = this.repository.All();
 
-            return query;
+        //    var query = await (from sc in shareclasses
+        //                       join sfsc in subfundShareClasses on sc.ScId equals sfsc.ScId
+        //                       where sfsc.ScId == id
+        //                       select sc.ScOfficialShareClassName)
+        //                .ToListAsync();
+
+        //    return query.ToHashSet();
+        //}
+
+        public void ThrowEntityNotFoundExceptionIfIdDoesNotExist(int id)
+        {
+            if (!this.Exists(id))
+            {
+                throw new EntityNotFoundException(nameof(TbHistorySubFund));
+            }
         }
+
+        private bool Exists(int id) => this.repository.All().Any(x => x.SfId == id);
     }
 }

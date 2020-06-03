@@ -2,9 +2,10 @@
 {
     using System;
     using System.Linq;
+    using System.Threading.Tasks;
 
     using DataGate.Common;
-    using DataGate.Services.Data.Common;
+    using DataGate.Services.Data.Entities;
     using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
     using DataGate.Web.Dtos.Queries;
@@ -13,11 +14,11 @@
 
     public static class EntitiesVMSetup
     {
-        public static T SetGet<T>(IEntityService service)
+        public static async Task<T> SetGet<T>(IEntityService service, string functionActive)
         {
             var today = DateTime.Today;
-            var headers = service.GetHeaders();
-            var values = service.GetAllActive(today, null, 1);
+            var headers = await service.GetAll(functionActive, null, today).FirstOrDefaultAsync();
+            var values = await service.GetAll(functionActive, null, today, 1).ToListAsync();
 
             var entity = new EntitiesOverviewGetDto()
             {
@@ -30,11 +31,11 @@
             return AutoMapperConfig.MapperInstance.Map<T>(entity);
         }
 
-        public static void SetPost(EntitiesViewModel model, IEntityService service)
+        public static async Task SetPost(EntitiesViewModel model, IEntityService service, string functionAll, string functionActive)
         {
-            var headers = service.GetHeaders().ToList();
-            model.Headers = headers;
-            model.HeadersSelection = headers;
+            var headers = await service.GetAll(functionActive).FirstOrDefaultAsync();
+            model.Headers = headers.ToList();
+            model.HeadersSelection = headers.ToList();
 
             bool isInSelectionMode = model.SelectedColumns != null ? true : false;
 
@@ -53,30 +54,32 @@
 
                 if (model.IsActive)
                 {
-                    model.Headers = service.GetAllActiveSelected(dto, 1).FirstOrDefault().ToList();
-                    model.Values = service.GetAllActiveSelected(dto, null, 1).ToList();
+                    headers = await service.GetAllSelected(functionActive, dto).FirstOrDefaultAsync();
+                    model.Headers = headers.ToList();
+                    model.Values = await service.GetAllSelected(functionActive, dto, 1).ToListAsync();
                 }
                 else if (!model.IsActive)
                 {
-                    model.Headers = service.GetAllSelected(dto, 1).FirstOrDefault().ToList();
-                    model.Values = service.GetAllSelected(dto, null, 1).ToList();
+                    headers = await service.GetAllSelected(functionAll, dto, 1).FirstOrDefaultAsync();
+                    model.Headers = headers.ToList();
+                    model.Values = await service.GetAllSelected(functionAll, dto, 1).ToListAsync();
                 }
             }
             else if (!isInSelectionMode)
             {
                 if (model.IsActive)
                 {
-                    model.Values = service.GetAllActive(date, null, 1).ToList();
+                    model.Values = await service.GetAll(functionActive, null, date, 1).ToListAsync();
                 }
                 else if (!model.IsActive)
                 {
-                    model.Values = service.GetAll(date, null, 1).ToList();
+                    model.Values = await service.GetAll(functionAll, null, date, 1).ToListAsync();
                 }
             }
 
             if (model.SelectTerm != null)
             {
-                model.Values = CreateTableView.AddTableToView(model.Values, model.SelectTerm.ToLower());
+                model.Values = await CreateTableView.AddTableToViewAsync(model.Values, model.SelectTerm.ToLower()).ToListAsync();
             }
         }
     }

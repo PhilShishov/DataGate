@@ -22,8 +22,8 @@
 
     <hr class="bg-pharus hr-2" />
 
-    <div class="row ml-3" id="div-select-addInfo">
-        <label class="text-torshia m-1 pr-3">FUND ADDITIONAL INFORMATION</label>
+    <div class="row ml-3 mb-5" id="div-select-addInfo">
+        <label class="text-torshia m-1 pr-3">SHARE CLASS ADDITIONAL INFORMATION</label>
         <select class="custom-select-lg select-pharus form-control input-sm"
                 id="select-additional-info"
                 asp-for="SelectAdditionalInf">
@@ -66,8 +66,8 @@
         //
         // Manage document and agreement upload modals
         const jsonUpload = {
-            areaName: '@GlobalConstants.FundAreaName',
-            routeName: '@GlobalConstants.FundDetailsRouteName',
+            areaName: '@GlobalConstants.ShareClassAreaName',
+            routeName: '@GlobalConstants.ShareClassDetailsRouteName',
             id: @Model.Id,
             date: '@Model.Date',
             startConnection : '@Model.StartConnection',
@@ -82,7 +82,7 @@
         const url = '/loadSubFunds';
         const jsonAddInfo = {
             id: @Model.Id,
-            areaName: '@GlobalConstants.FundAreaName',
+            areaName: '@GlobalConstants.ShareClassAreaName',
             date: '@Model.Date',
             container: '@entityName',
         };

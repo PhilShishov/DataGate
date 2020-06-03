@@ -3,19 +3,20 @@
     using System.Collections.Generic;
 
     using DataGate.Common;
-    using DataGate.Services.Data.Timelines.Contracts;
+    using DataGate.Services.Data.Timelines;
+    using DataGate.Web.Helpers;
     using DataGate.Web.ViewModels.Timelines;
 
     using Microsoft.AspNetCore.Mvc;
 
     public class TimelineController : Controller
     {
-        private readonly IFundTimelineService fundService;
+        private readonly ITimelineService service;
 
         public TimelineController(
-                        IFundTimelineService fundService)
+                        ITimelineService service)
         {
-            this.fundService = fundService;
+            this.service = service;
         }
 
         [Route("loadTimelines")]
@@ -25,7 +26,15 @@
 
             if (areaName == GlobalConstants.FundAreaName)
             {
-                model = this.fundService.GetTimeline<TimelineViewModel>(id);
+                model = this.service.GetTimeline<TimelineViewModel>(QueryDictionary.SqlFunctionTimelineFund, id);
+            }
+            else if (areaName == GlobalConstants.SubFundAreaName)
+            {
+                model = this.service.GetTimeline<TimelineViewModel>(QueryDictionary.SqlFunctionTimelineSubFund, id);
+            }
+            else if (areaName == GlobalConstants.ShareClassAreaName)
+            {
+                model = this.service.GetTimeline<TimelineViewModel>(QueryDictionary.SqlFunctionTimelineShareClass, id);
             }
 
             return this.PartialView("SpecificEntity/_Timeline", model);

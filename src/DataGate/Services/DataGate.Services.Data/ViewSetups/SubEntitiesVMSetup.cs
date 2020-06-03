@@ -3,7 +3,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using DataGate.Services.Data.Common;
+    using DataGate.Services.Data.Entities;
     using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
     using DataGate.Web.Dtos.Queries;
@@ -12,45 +12,37 @@
 
     public class SubEntitiesVMSetup
     {
-        public static async Task<T> SetLoadedGet<T>(int id, string chosenDate, string container, ISubEntitiesService service)
+        public static async Task<T> SetLoadedGet<T>(IEntityService service, IEntityException exceptionService,
+                                                    EntitySubEntitiesGetDto dto, string function)
         {
-            var date = DateTimeParser.WebFormat(chosenDate);
-            var entities = await service.GetSubEntities(id, date).ToListAsync();
+            exceptionService.ThrowEntityNotFoundExceptionIfIdDoesNotExist(dto.Id);
+            var date = DateTimeParser.WebFormat(dto.Date);
+            var entities = await service.GetAll(function, dto.Id, date).ToListAsync();
 
-            var dto = new EntitySubEntitiesGetDto()
-            {
-                Id = id,
-                Date = chosenDate,
-                Container = container,
-                Entities = entities,
-            };
+            dto.Entities = entities;
 
             return AutoMapperConfig.MapperInstance.Map<T>(dto);
         }
 
-        public static async Task<T> SetGet<T>(int id, string chosenDate, string container, ISubEntitiesService service)
+        public static async Task<T> SetGet<T>(IEntityService service, IEntityException exceptionService,
+                                              SubEntitiesGetDto dto, string function)
         {
-            var date = DateTimeParser.WebFormat(chosenDate);
-            var values = await service.GetSubEntities(id, date, null, 1).ToListAsync();
-            var headers = await service.GetSubEntities(id, date).FirstOrDefaultAsync();
+            exceptionService.ThrowEntityNotFoundExceptionIfIdDoesNotExist(dto.Id);
+            var date = DateTimeParser.WebFormat(dto.Date);
+            var values = await service.GetAll(function, dto.Id, date, 1).ToListAsync();
+            var headers = await service.GetAll(function, dto.Id, date).FirstOrDefaultAsync();
 
-            var dto = new SubEntitiesGetDto()
-            {
-                Id = id,
-                Date = chosenDate,
-                Container = container,
-                Values = values,
-                Headers = headers,
-                HeadersSelection = headers,
-            };
+            dto.Values = values;
+            dto.Headers = headers;
+            dto.HeadersSelection = headers;
 
             return AutoMapperConfig.MapperInstance.Map<T>(dto);
         }
 
-        public static async Task SetPost(SubEntitiesViewModel model, ISubEntitiesService service)
+        public static async Task SetPost(SubEntitiesViewModel model, IEntityService service, string function)
         {
             var date = DateTimeParser.WebFormat(model.Date);
-            var headers = await service.GetSubEntities(model.Id, date).FirstOrDefaultAsync();
+            var headers = await service.GetAll(function, model.Id, date).FirstOrDefaultAsync();
             model.Headers = headers.ToList();
             model.HeadersSelection = headers.ToList();
 
@@ -60,13 +52,13 @@
             {
                 var dto = AutoMapperConfig.MapperInstance.Map<GetWithSelectionDto>(model);
 
-                model.Values = await service.GetSubEntitiesSelected(dto, null, 1).ToListAsync();
-                headers = await service.GetSubEntitiesSelected(dto).FirstOrDefaultAsync();
+                model.Values = await service.GetAllSelected(function, dto, 1).ToListAsync();
+                headers = await service.GetAllSelected(function, dto).FirstOrDefaultAsync();
                 model.Headers = headers.ToList();
             }
             else if (!isInSelectionMode)
             {
-                model.Values = await service.GetSubEntities(model.Id, date).ToListAsync();
+                model.Values = await service.GetAll(function, model.Id, date).ToListAsync();
             }
 
             if (model.SelectTerm != null)

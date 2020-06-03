@@ -1,6 +1,6 @@
-﻿namespace DataGate.Services.Data.Common
+﻿namespace DataGate.Services.Data.Entities
 {
-    public interface ICustomException
+    public interface IEntityException
     {
         void ThrowEntityNotFoundExceptionIfIdDoesNotExist(int id);
     }

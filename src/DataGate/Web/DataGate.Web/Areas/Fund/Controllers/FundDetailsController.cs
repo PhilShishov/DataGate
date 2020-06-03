@@ -1,9 +1,14 @@
 ﻿namespace DataGate.Web.Areas.Funds.Controllers
 {
+    using System.Threading.Tasks;
+
     using DataGate.Common;
-    using DataGate.Services.Data.Funds.Contracts;
+    using DataGate.Services.Data.Entities;
+    using DataGate.Services.Data.Funds;
     using DataGate.Services.Data.ViewSetups;
     using DataGate.Web.Controllers;
+    using DataGate.Web.Dtos.Queries;
+    using DataGate.Web.Helpers;
     using DataGate.Web.ViewModels.Entities;
 
     using Microsoft.AspNetCore.Authorization;
@@ -13,18 +18,29 @@
     [Authorize]
     public class FundDetailsController : BaseController
     {
-        private readonly IFundDetailsService service;
+        private readonly IEntityDetailsService service;
+        private readonly IFundService fundService;
 
-        public FundDetailsController(IFundDetailsService service)
+        public FundDetailsController(
+            IEntityDetailsService service,
+            IFundService fundService)
         {
             this.service = service;
+            this.fundService = fundService;
         }
 
         [ActionName("Details")]
         [Route("f/{id}/{date}")]
-        public IActionResult ByIdAndDate(int id, string date)
+        public async Task<IActionResult> ByIdAndDate(int id, string date)
         {
-            var viewModel = SpecificVMSetup.SetGet<SpecificEntityViewModel>(id, date, this.service);
+            var dto = new QueriesToPassDto()
+            {
+                SqlFunctionById = QueryDictionary.SqlFunctionByIdFund,
+                SqlFunctionDistinctDocuments = QueryDictionary.SqlFunctionDistinctDocumentsFund,
+                SqlFunctionDistinctAgreements = QueryDictionary.SqlFunctionDistinctAgreementsFund,
+            };
+
+            var viewModel = await SpecificVMSetup.SetGet<SpecificEntityViewModel>(id, date, this.service, this.fundService, dto);
             return this.View(viewModel);
         }
 
