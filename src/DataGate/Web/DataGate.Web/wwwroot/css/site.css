@@ -170,6 +170,7 @@ textarea {
 }
 
     .table-view-pharus th {
+        text-align: center;
         cursor: help;
         background-color: rgb(0, 65, 118);
         color: #fff !important;
@@ -192,6 +193,7 @@ textarea {
 
         .table-view-pharus tbody tr td {
             vertical-align: middle;
+            text-align: center;
         }
 
 .inactive-entity {
@@ -225,7 +227,7 @@ a.a-underline:hover {
     display: flex;
     margin-top: 5px;
     position: fixed;
-    top: 61px;
+    top: 67px;
     left: 18px;
 }
 
@@ -969,13 +971,13 @@ a.a-underline:hover {
     font-family: inherit;
     font-size: inherit;
     font-weight: 400;
-    color: #007bff;
+    color: #0069d9;
 }
 
     .btn-link-pharus:hover {
-        /*color: #0056b3;*/
         outline: none;
         text-decoration: underline;
+        color: #007bff;
     }
 
 
@@ -1106,11 +1108,11 @@ li.timeline-item::before {
 
 @media only screen and (min-width: 990px) {
     .toolbar-view-all {
-        margin-top: 61px;
+        margin-top: 67px;
     }
 
     .toolbar-view-details {
-        margin-top: 61px;
+        margin-top: 67px;
         display: flex;
     }
 

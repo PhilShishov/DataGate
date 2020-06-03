@@ -1,5 +1,4 @@
-﻿@using DataGate.Common
-@model DataGate.Web.ViewModels.Entities.EntitySubEntitiesViewModel
+﻿@model EntitySubEntitiesViewModel
 
 @{
     var controller = this.ViewContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
@@ -24,14 +23,14 @@
         </a>
     </div>
     <div class="table-wrapper-double-scroll">
-        <table class="table table-hover text-nowrap">
+        <table class="table table-hover table-view-pharus">
             <thead>
                 <tr>
                     @for (int row = 0; row < GlobalConstants.RowNumberOfHeadersInTable; row++)
                     {
                         for (int col = 0; col < Model.Entities[row].Length; col++)
                         {
-                            <th class="text-white pr-3 tableHeaderPharus help"
+                            <th class="text-white pr-3"
                                 data-toggle="tooltip"
                                 data-placement="bottom"
                                 title="@Model.Entities[row][col]">
@@ -50,8 +49,8 @@
                         {
                             if (Model.Entities[0][col].Contains("NAME"))
                             {
-                                <td class="p-1 tableCellPharus">
-                                    <a class="text-dark" asp-route="@targetRoute" asp-route-id="@entityId" asp-route-date="@Model.Date">
+                                <td class="p-1 td-name-link">
+                                    <a asp-route="@targetRoute" asp-route-id="@entityId" asp-route-date="@Model.Date">
                                         @Model.Entities[row][col]
                                     </a>
                                 </td>

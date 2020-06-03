@@ -1,11 +1,29 @@
-﻿@model EntitiesViewModel
+﻿@model SubEntitiesViewModel
+
+@{
+    var controller = this.ViewContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
+    var targetRoute = string.Empty;
+
+    if (controller == GlobalConstants.FundSubFundsControllerName)
+    {
+        targetRoute = "fundDetails";
+    }
+}
 
 <form class="d-flex"
       method="post"
-      asp-action="All"
       id="update-form">
 
-    <div class="select-div-pharus mt-0">
+    <input asp-for="Id" type="hidden">
+    <input asp-for="Container" type="hidden">
+
+    <div>
+        <a class="btn btn-pharus btn-sm mr-2" asp-route="@targetRoute" asp-route-id="@Model.Id" asp-route-date="@Model.Date">
+            Back to Container
+        </a>
+    </div>
+
+    <div class="select-div-pharus mt-0 ml-3">
         <select asp-for="SelectTerm"
                 id="SelectTerm"
                 class="form-control input-sm"
@@ -23,21 +41,11 @@
             Column Choice
         </button>
     </div>
-
-    <div class="el-switch-div ml-4">
-        <label class="el-switch el-switch-sm mt-1">
-            <input type="checkbox"
-                   asp-for="IsActive"
-                   id="activeCheckBox">
-            <span class="el-switch-style"></span>
-            <span class="d-block">Show</span>
-            <span>Active</span>
-        </label>
-    </div>
     <div class="ml-4">
-        <a class="btn btn-pharus btn-sm" asp-action="All">
-            Reset
-        </a>
+        <input type="button"
+               class="btn btn-pharus btn-sm"
+               value="Reset"
+               onClick="document.location.reload(true)">
     </div>
 
     <div class="vertical mx-3"></div>
@@ -53,7 +61,7 @@
         <span asp-validation-for="Date" class="text-danger"></span>
     </div>
 
-    <partial name="AllEntities/_ModalSelect" />
+    <partial name="SubEntities/_ModalSelect" />
 </form>
 
 <div class="vertical mx-3"></div>

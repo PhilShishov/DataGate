@@ -45,9 +45,9 @@
         public async Task<IActionResult> SubFunds([Bind("Id, Command, Container, Date,Values,Headers,PreSelectedColumns,SelectedColumns,SelectTerm")]
                                                    SubEntitiesViewModel viewModel)
         {
-            if (viewModel.Command == GlobalConstants.CommandResetTable)
+            if (viewModel.Command == GlobalConstants.CommandUpdateTable)
             {
-                return this.RedirectToAction("SubFunds", new { viewModel.Id, viewModel.Date, viewModel.Container });
+                return this.ShowInfo(InfoMessages.SuccessfulUpdate, GlobalConstants.FundSubFundsRouteName, new { viewModel.Id, viewModel.Date, viewModel.Container });
             }
 
             await SubEntitiesVMSetup.SetPost(viewModel, this.service);

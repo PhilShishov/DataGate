@@ -49,7 +49,7 @@
 
                     if (tableHeaders.ToList().Count > GlobalConstants.NumberOfAllowedColumnsInPdfView)
                     {
-                        return this.Json(new { success = false, errorMessage = ErrorMessages.TooManyColumns, routeName = model.RouteName });
+                        return this.Json(new { success = false, errorMessage = ErrorMessages.TooManyColumns });
                     }
 
                     fileName = GenerateFileTemplate.Pdf(tableHeaders, model.TableValues, date, model.ControllerName);

@@ -63,4 +63,10 @@
     <Folder Include="wwwroot\FileFolder\SubFund\" />
     <Folder Include="wwwroot\FileFolder\temp\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Shared\SubEntities\_ModalSelect.cshtml" />
+    <None Include="Views\Shared\SubEntities\_ViewLoadedTable.cshtml" />
+    <None Include="Views\Shared\SubEntities\_ViewTable.cshtml" />
+  </ItemGroup>
 </Project>
