@@ -7,21 +7,32 @@
     using DataGate.Common;
     using DataGate.Services.AutoComplete;
     using DataGate.Services.Data.Funds.Contracts;
+    using DataGate.Services.Data.ShareClasses.Contracts;
+    using DataGate.Services.Data.SubFunds.Contracts;
     using DataGate.Web.InputModels.Autocomplete;
 
     using Microsoft.AspNetCore.Mvc;
 
     public class AutoCompleteController : Controller
     {
-        private readonly IFundService fundsService;
-        private readonly IFundSubFundsService fundSubFundservice;
+        private readonly IFundService fundService;
+        private readonly IFundSubFundsService fundSubFundService;
+        private readonly ISubFundService subFundService;
+        private readonly ISubFundShareClassesService subFundShareClassService;
+        private readonly IShareClassService shareClassService;
 
         public AutoCompleteController(
-                            IFundService fundsService,
-                            IFundSubFundsService fundSubFundservice)
+                            IFundService fundService,
+                            IFundSubFundsService fundSubFundService,
+                            ISubFundService subFundService,
+                            ISubFundShareClassesService subFundShareClassService,
+                            IShareClassService shareClassService)
         {
-            this.fundsService = fundsService;
-            this.fundSubFundservice = fundSubFundservice;
+            this.fundService = fundService;
+            this.fundSubFundService = fundSubFundService;
+            this.subFundService = subFundService;
+            this.subFundShareClassService = subFundShareClassService;
+            this.shareClassService = shareClassService;
         }
 
         [Route("api/autocomplete")]
@@ -33,15 +44,15 @@
             {
                 if (input.ControllerToPass == GlobalConstants.ShareClassesControllerName)
                 {
-                    // result = await AutoCompleteService.GetResult(input.SelectTerm, this.fundsService);
+                    result = await AutoCompleteService.GetResult(input.SelectTerm, this.shareClassService);
                 }
                 else if (input.ControllerToPass == GlobalConstants.SubFundsControllerName)
                 {
-                    // result = await AutoCompleteService.GetResult(input.SelectTerm, this.service);
+                    result = await AutoCompleteService.GetResult(input.SelectTerm, this.subFundService);
                 }
                 else if (input.ControllerToPass == GlobalConstants.FundsControllerName)
                 {
-                    result = await AutoCompleteService.GetResult(input.SelectTerm, this.fundsService);
+                    result = await AutoCompleteService.GetResult(input.SelectTerm, this.fundService);
                 }
 
                 var modifiedData = result.Select(fund => new
@@ -55,11 +66,11 @@
 
             if (input.ControllerToPass == GlobalConstants.SubFundShareClassesControllerName)
             {
-                // result = await AutoCompleteService.GetResult(input.SelectTerm, this.fundsService, input.Id);
+                result = await AutoCompleteService.GetResult(input.SelectTerm, this.subFundShareClassService, input.Id);
             }
             else if (input.ControllerToPass == GlobalConstants.FundSubFundsControllerName)
             {
-                result = await AutoCompleteService.GetResult(input.SelectTerm, this.fundSubFundservice, input.Id);
+                result = await AutoCompleteService.GetResult(input.SelectTerm, this.fundSubFundService, input.Id);
             }
 
             var modifiedDataId = result.Select(fund => new

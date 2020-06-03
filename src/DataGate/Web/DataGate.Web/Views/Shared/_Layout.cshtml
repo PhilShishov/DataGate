@@ -77,7 +77,11 @@
                                         <i class="fa fa-caret-down"></i>
                                     </a>
                                     <div class="dropdown-container">
-                                        <a class="dropdown-item font-weight-light" href="/SubFunds/All">View All</a>
+                                        <a class="dropdown-item font-weight-light"
+                                           asp-area="SubFund"
+                                           asp-route="allSubFunds">
+                                            View All
+                                        </a>
                                         @if (this.User.IsInRole("Admin"))
                                         {
                                             <a class="dropdown-item font-weight-light" href="/SubFunds/CreateSubFund">Create</a>
@@ -89,7 +93,11 @@
                                         Share Classes<i class="fa fa-caret-down"></i>
                                     </a>
                                     <div class="dropdown-container">
-                                        <a class="dropdown-item font-weight-light" href="/ShareClasses/All">View All</a>
+                                        <a class="dropdown-item font-weight-light"
+                                           asp-area="ShareClass"
+                                           asp-route="allShareClasses">
+                                            View All
+                                        </a>
                                         @if (this.User.IsInRole("Admin"))
                                         {
                                             <a class="dropdown-item font-weight-light" href="/ShareClasses/CreateShareClass">Create</a>
