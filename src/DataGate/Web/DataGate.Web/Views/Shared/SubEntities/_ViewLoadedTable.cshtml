@@ -1,4 +1,5 @@
 ﻿@model EntitySubEntitiesViewModel
+@inject IStringLocalizer<SharedResources> SharedLocalizer
 
 @{
     var controller = this.ViewContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
@@ -27,7 +28,7 @@
            asp-route-id="@Model.Id"
            asp-route-date="@Model.Date"
            asp-route-container="@Model.Container">
-            Advanced Selection
+            @SharedLocalizer["Advanced Selection"]
         </a>
     </div>
     <div class="table-wrapper-double-scroll">

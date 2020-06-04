@@ -1,18 +1,21 @@
 ﻿@model CreateUserInputModel
 @inject Microsoft.Extensions.Configuration.IConfiguration Configuration
+@inject IStringLocalizer<SharedResources> SharedLocalizer
 @{
-    ViewData["Title"] = "Create User";
+    ViewData["Title"] = SharedLocalizer["Create User"];
 }
 <div class="push">
     <h2 class="text-torshia">Create User</h2>
     <div>
-        <a class="btn btn-pharus text-white mt-2" asp-area="" asp-controller="User" asp-action="Index">Back to Panel</a>
+        <a class="btn btn-pharus text-white mt-2" asp-area="" asp-controller="User" asp-action="Index">@SharedLocalizer["Back to Panel"]</a>
     </div>
     <hr />
     <form class="d-inline" method="post">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <label for="Username" class="text-torshia">Username</label><br>
+            <label for="Username" class="text-torshia">
+                @SharedLocalizer["Username"]
+            </label><br>
             <input type="text"
                    class="form-control maxw-270"
                    id="username"
@@ -22,7 +25,9 @@
             <span asp-validation-for="Username" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label for="Password" class="text-torshia">Password</label><br>
+            <label for="Password" class="text-torshia">
+                @SharedLocalizer["Password"]
+            </label><br>
             <input type="password"
                    class="form-control maxw-270"
                    id="password"
@@ -32,7 +37,9 @@
             <span asp-validation-for="Password" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label for="ConfirmPassword" class="text-torshia">Confirm Password</label><br>
+            <label for="ConfirmPassword" class="text-torshia">
+                @SharedLocalizer["Confirm Password"]
+            </label><br>
             <input type="password"
                    class="form-control maxw-270"
                    id="confirmPassword"
@@ -42,7 +49,9 @@
             <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label for="Email" class="text-torshia">Email</label><br>
+            <label for="Email" class="text-torshia">
+                @SharedLocalizer["Email"]
+            </label><br>
             <input type="email"
                    class="form-control maxw-270"
                    id="email"
@@ -51,9 +60,13 @@
             <span asp-validation-for="Email" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label for="RoleType" class="text-torshia">Role</label><br>
+            <label for="RoleType" class="text-torshia">
+                @SharedLocalizer["Role"]
+            </label><br>
             <select class="form-control maxw-270" id="roletype" asp-for="RoleType">
-                <option selected disabled>-- Choose Role --</option>
+                <option selected disabled>
+                    @SharedLocalizer["-- Choose Role --"]
+                </option>
                 @foreach (var role in (List<ApplicationRole>)ViewData["Roles"])
                 {
                     <option value="@role.Name">@role</option>

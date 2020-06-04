@@ -7,7 +7,9 @@
         public const string DataGateFullFooterDisplay = "- Pharus Management Lux SA 16, Avenue de la Gare L- 1610 Luxembourg T. +352 28 55 69 - 1";
         public const string DataGateFooterDisplay = "- Pharus Management Lux SA";
         public const string FileSizeLimitConfiguration = "FileSizeLimit";
-        public const int MaxAdminCount = 3;
+        public const string CurrentCultureInfo = "en-GB";
+        public const string ItalianCultureInfo = "it-IT";
+        public const int CultureCookieExpirationTimeInMonths = 5;
 
         // Controllers, areas
         public const string ControllerRouteDataValue = "controller";
@@ -56,6 +58,7 @@
         public const string DataGatevFinaleConnection = "DataGate_vFinaleConnection";
 
         // User Roles
+        public const int MaxAdminCount = 3;
         public const string AdministratorRoleName = "Admin";
         public const string RiskRoleName = "Risk";
         public const string LegalRoleName = "Legal";

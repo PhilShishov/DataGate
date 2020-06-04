@@ -1,9 +1,10 @@
 ﻿@page
 @model LoginModel
 @inject Microsoft.Extensions.Configuration.IConfiguration Configuration
+@inject IStringLocalizer<SharedResources> SharedLocalizer
 
 @{
-    ViewData["Title"] = "Login";
+    ViewData["Title"] = SharedLocalizer["Login"];
 }
 <section class="fxt-template-layout2">
     <div class="container-fluid custom-container">
@@ -12,12 +13,12 @@
             <div class="col-xl-4 col-lg-6 col-12 fxt-bg-color">
                 <div class="fxt-content">
                     <partial name="_LoginRedirectPartial" />
-                    <h2 class="login-brand">DataGate </h2>
+                    <h2 class="login-brand">@SharedLocalizer["DataGate"]</h2>
                     <h2 class="login-title">Login</h2>
                     <div class="fxt-form">
                         <form method="POST">
                             <div class="form-group col-md-12">
-                                <label class="label-input-login">Username</label>
+                                <label class="label-input-login">@SharedLocalizer["Username"]</label>
                                 <div class="fxt-transformY-50 fxt-transition-delay-1">
                                     <input type="text"
                                            asp-for="Input.Username"
@@ -30,7 +31,7 @@
                                 </div>
                             </div>
                             <div class="form-group col-md-12">
-                                <label class="label-input-login">Password</label>
+                                <label class="label-input-login">@SharedLocalizer["Password"]</label>
                                 <div class="fxt-transformY-50 fxt-transition-delay-2">
                                     <input type="password"
                                            asp-for="Input.Password"
@@ -47,11 +48,11 @@
                                     <div class="fxt-checkbox-area">
                                         <div class="checkbox">
                                             <input id="checkbox1" type="checkbox" asp-for="Input.RememberMe">
-                                            <label for="checkbox1" asp-for="Input.RememberMe">Remember me?</label>
+                                            <label for="checkbox1" asp-for="Input.RememberMe">@SharedLocalizer["Remember me ?"]</label>
                                         </div>
                                         <a asp-area="Identity"
                                            asp-page="/Account/ForgotPassword"
-                                           class="switcher-text">Forgot Password</a>
+                                           class="switcher-text">@SharedLocalizer["Forgot Password"]</a>
                                     </div>
                                 </div>
                             </div>

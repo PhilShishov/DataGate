@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject IStringLocalizer<SharedResources> SharedLocalizer
+
+<!DOCTYPE html>
 <html>
 <head>
     <script>
@@ -24,7 +26,7 @@
     <environment include="Development">
         <link type="text/css" rel="stylesheet" href="~/lib/jqueryui/themes/base/jquery-ui.min.css" asp-append-version="true">
         <link type="text/css" rel="stylesheet" href="~/lib/jqueryui/themes/smoothness/jquery-ui.min.css" asp-append-version="true" />
-        <link type="text/css" rel="stylesheet" href="~/lib/select2/dist/css/select2.min.css" asp-append-version="true"> 
+        <link type="text/css" rel="stylesheet" href="~/lib/select2/dist/css/select2.min.css" asp-append-version="true">
         <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" asp-append-version="true" />
         <link type="text/css" rel="stylesheet" href="~/lib/font-awesome/css/all.css" asp-append-version="true" />
         <link type="text/css" rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -53,21 +55,21 @@
 
                                 <li class="dropdown pt-5 li-bordered">
                                     <a class="sidenav-dropdown-btn open-submenu">
-                                        Funds
+                                        @SharedLocalizer["Funds"]
                                         <i class="fa fa-caret-down"></i>
                                     </a>
                                     <div class="dropdown-container">
                                         <a class="dropdown-item font-weight-light"
                                            asp-area="Fund"
                                            asp-route="allFunds">
-                                            View All
+                                            @SharedLocalizer["View All"]
                                         </a>
                                         @if (this.User.IsInRole("Admin"))
                                         {
                                             <a asp-area="Admin"
                                                asp-route="newFund"
                                                class="dropdown-item font-weight-light">
-                                                Create
+                                                @SharedLocalizer["Create"]
                                             </a>
                                         }
                                     </div>
@@ -75,41 +77,46 @@
 
                                 <li class="dropdown li-bordered mt-3">
                                     <a class="sidenav-dropdown-btn">
-                                        Sub Funds
+                                        @SharedLocalizer["Sub Funds"]
                                         <i class="fa fa-caret-down"></i>
                                     </a>
                                     <div class="dropdown-container">
                                         <a class="dropdown-item font-weight-light"
                                            asp-area="SubFund"
                                            asp-route="allSubFunds">
-                                            View All
+                                            @SharedLocalizer["View All"]
                                         </a>
                                         @if (this.User.IsInRole("Admin"))
                                         {
-                                            <a class="dropdown-item font-weight-light" href="/SubFunds/CreateSubFund">Create</a>
+                                            <a class="dropdown-item font-weight-light" href="/SubFunds/CreateSubFund">
+                                                @SharedLocalizer["Create"]
+                                            </a>
                                         }
                                     </div>
                                 </li>
                                 <li class="dropdown li-bordered mt-3">
                                     <a class="sidenav-dropdown-btn">
-                                        Share Classes<i class="fa fa-caret-down"></i>
+                                        @SharedLocalizer["Share Classes"]
+                                        <i class="fa fa-caret-down"></i>
                                     </a>
                                     <div class="dropdown-container">
                                         <a class="dropdown-item font-weight-light"
                                            asp-area="ShareClass"
                                            asp-route="allShareClasses">
-                                            View All
+                                            @SharedLocalizer["View All"]
                                         </a>
                                         @if (this.User.IsInRole("Admin"))
                                         {
-                                            <a class="dropdown-item font-weight-light" href="/ShareClasses/CreateShareClass">Create</a>
+                                            <a class="dropdown-item font-weight-light" href="/ShareClasses/CreateShareClass">
+                                                @SharedLocalizer["Create"]
+                                            </a>
                                         }
                                     </div>
                                 </li>
 
                                 <li class="li-bordered mt-3">
                                     <a href="/Agreements/All">
-                                        Agreements
+                                        @SharedLocalizer["Agreements"]
                                     </a>
                                 </li>
 
@@ -124,19 +131,19 @@
                         <div class="d-flex align-items-center mt-3">
                             <div class="ml-2 mobile-none">
                                 <a asp-area="Fund"
-                                   asp-route="allFunds">Fund Library</a>
+                                   asp-route="allFunds">@SharedLocalizer["Fund Library"]</a>
                             </div>
                             <div class="ml-2 mobile-none">
                                 <a asp-area="SubFund"
-                                   asp-route="allSubFunds">Sub Fund Library</a>
+                                   asp-route="allSubFunds">@SharedLocalizer["Sub Fund Library"]</a>
                             </div>
                             <div class="ml-2 mobile-none">
                                 <a asp-area="ShareClass"
-                                   asp-route="allShareClasses">Share Class Library</a>
+                                   asp-route="allShareClasses">@SharedLocalizer["Share Class Library"]</a>
                             </div>
                             <div class="ml-2 mobile-none">
                                 <a asp-area="Agreement"
-                                   asp-route="allAgreements">Agreements Library</a>
+                                   asp-route="allAgreements">@SharedLocalizer["Agreements Library"]</a>
                             </div>
                         </div>
 
@@ -179,7 +186,7 @@
                             <div class="search-box">
                                 <input type="search"
                                        name="searchTerm"
-                                       placeholder="Find a Pharus Share Class..."
+                                       placeholder="@SharedLocalizer["Find a Pharus Share Class..."]"
                                        autocomplete="off"
                                        autocorrect="off"
                                        autocapitalize="off"
@@ -204,17 +211,17 @@
                                     <li>
                                         <a asp-area=""
                                            asp-controller=""
-                                           asp-action="">Reports</a>
+                                           asp-action="">@SharedLocalizer["Reports"]</a>
                                     </li>
                                     <li>
                                         <a asp-area=""
                                            asp-controller=""
-                                           asp-action="">Projects</a>
+                                           asp-action="">@SharedLocalizer["Projects"]</a>
                                     </li>
                                     <li>
                                         <a asp-area=""
                                            asp-controller="User"
-                                           asp-action="Index">Panel</a>
+                                           asp-action="Index">@SharedLocalizer["Panel"]</a>
                                     </li>
 
                                     <li>
@@ -222,7 +229,7 @@
                                     </li>
 
                                     <li>
-                                        <a asp-area="Identity" asp-page="/Account/Logout">Logout</a>
+                                        <a asp-area="Identity" asp-page="/Account/Logout">@SharedLocalizer["Logout"]</a>
                                     </li>
                                 </ul>
                             </div>
@@ -244,27 +251,27 @@
         </a>
     }
 
-<environment include="Development">
-    <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
-    <script src="~/lib/jqueryui/jquery-ui.js" asp-append-version="true"></script>
-    <script src="~/lib/popperjs/umd/popper.js" asp-append-version="true"></script>
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+        <script src="~/lib/jqueryui/jquery-ui.js" asp-append-version="true"></script>
+        <script src="~/lib/popperjs/umd/popper.js" asp-append-version="true"></script>
 
-    @*/*** Handle jQuery plugin naming conflict between jQuery UI and Bootstrap ***/*@
-    <script>
-        $.widget.bridge('uibutton', $.ui.button);
-        $.widget.bridge('uitooltip', $.ui.tooltip);
-    </script>
+        @*/*** Handle jQuery plugin naming conflict between jQuery UI and Bootstrap ***/*@
+        <script>
+            $.widget.bridge('uibutton', $.ui.button);
+            $.widget.bridge('uitooltip', $.ui.tooltip);
+        </script>
 
-    <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
-    <partial name="_ValidationScriptsPartial" />
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
+        <partial name="_ValidationScriptsPartial" />
 
-    <script src="~/js/navbar.js" asp-append-version="true"></script>
-    <script>
-        if (window.history.replaceState) {
-            window.history.replaceState(null, null, window.location.href);
-        }
-    </script>
-</environment>
+        <script src="~/js/navbar.js" asp-append-version="true"></script>
+        <script>
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+            }
+        </script>
+    </environment>
 
     @this.RenderSection("Scripts", required: false)
 </body>

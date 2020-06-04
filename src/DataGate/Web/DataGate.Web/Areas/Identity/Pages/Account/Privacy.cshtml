@@ -1,6 +1,7 @@
 ﻿@page
+@inject IStringLocalizer<SharedResources> SharedLocalizer
 @{
-    this.ViewData["Title"] = "Privacy Policy";
+    this.ViewData["Title"] = SharedLocalizer["Privacy Policy"];
 }
 
 <section class="fxt-template-layout2">
@@ -9,7 +10,7 @@
             <div class="col-xl-4 col-lg-6 col-12 fxt-bg-color">
                 <div class="fxt-content">
                     <partial name="_LoginRedirectPartial" />
-                    <h3 class="login-brand">Privacy Policy</h3>
+                    <h3 class="login-brand">@SharedLocalizer["Privacy Policy"]</h3>
                     <div class="fxt-form">
                     </div>
                     <partial name="_FooterMobile" />

@@ -1,10 +1,13 @@
 ﻿@model DataGate.Web.InputModels.Files.UploadDocumentInputModel
+@inject IStringLocalizer<SharedResources> SharedLocalizer
 
 <div class="modal fade" id="upload-document" tabindex="-1" role="dialog" aria-labelledby="uploadDocumentLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="uploadDocumentLabel">Upload Document</h5>
+                <h5 class="modal-title" id="uploadDocumentLabel">
+                    @SharedLocalizer["Upload Document"]
+                </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -28,7 +31,9 @@
                         </select>
 
                         <select class="form-control maxw-270" asp-for="DocumentType">
-                            <option selected disabled value="">-- Choose File Type --</option>
+                            <option selected disabled value="">
+                                @SharedLocalizer["-- Choose File Type --"]
+                            </option>
                             @foreach (var type in Model.DocumentTypes)
                             {
                                 <option value="@type">@type</option>
@@ -46,11 +51,13 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    @SharedLocalizer["Close"]
+                </button>
                 <button type="button"
                         class="btn btn-pharus text-white"
                         data-save="modal">
-                    Upload Document
+                    @SharedLocalizer["Upload Document"]
                 </button>
             </div>
         </div>

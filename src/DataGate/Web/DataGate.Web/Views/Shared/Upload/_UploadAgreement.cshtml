@@ -1,10 +1,13 @@
 ﻿@model DataGate.Web.InputModels.Files.UploadAgreementInputModel
+@inject IStringLocalizer<SharedResources> SharedLocalizer
 
 <div class="modal fade" id="upload-agreement" tabindex="-1" role="dialog" aria-labelledby="uploadAgreementLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="uploadAgreementLabel">Upload Agreement</h5>
+                <h5 class="modal-title" id="uploadAgreementLabel">
+                    @SharedLocalizer["Upload Agreement"]
+                </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -25,7 +28,9 @@
                         </select>
 
                         <select class="form-control maxw-270" asp-for="AgrType">
-                            <option selected disabled value="">-- Choose Agreement Type --</option>
+                            <option selected disabled value="">
+                                @SharedLocalizer["-- Choose Agreement Type --"]
+                            </option>
                             @foreach (var type in Model.AgreementsFileTypes)
                             {
                                 <option value="@type">@type</option>
@@ -38,7 +43,7 @@
                     <div class="form-group">
                         <label asp-for="ContractDate" class="text-torshia"></label><br>
                         <input asp-for="ContractDate"
-                               type="date"                              
+                               type="date"
                                class="form-control maxw-270"
                                id="contractDate">
                         <span asp-validation-for="ContractDate" class="text-danger"></span>
@@ -73,7 +78,9 @@
                         </select>
 
                         <select class="form-control maxw-270" asp-for="Status">
-                            <option selected disabled value="">-- Choose Status --</option>
+                            <option selected disabled value="">
+                                @SharedLocalizer["-- Choose Status --"]
+                            </option>
                             @foreach (var status in Model.AgreementsStatus)
                             {
                                 <option value="@status">@status</option>
@@ -91,7 +98,9 @@
                         </select>
 
                         <select class="form-control maxw-270" asp-for="Company">
-                            <option selected disabled value="">-- Choose Company --</option>
+                            <option selected disabled value="">
+                                @SharedLocalizer["-- Choose Company --"]
+                            </option>
                             @foreach (var company in Model.Companies)
                             {
                                 <option value="@company">@company</option>
@@ -109,11 +118,13 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    @SharedLocalizer["Close"]
+                </button>
                 <button type="button"
                         class="btn btn-pharus text-white"
                         data-save="modal">
-                    Upload Agreement
+                    @SharedLocalizer["Upload Agreement"]
                 </button>
             </div>
         </div>

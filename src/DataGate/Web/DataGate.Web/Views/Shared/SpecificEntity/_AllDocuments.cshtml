@@ -1,23 +1,24 @@
 ﻿@model DataGate.Web.ViewModels.Documents.DocumentOverviewViewModel
+@inject IStringLocalizer<SharedResources> SharedLocalizer
 
 <form id="form-document" method="post">
     <table class="table table-bordered table-hover tbl-documents">
         <thead>
             <tr>
                 <th class="text-secondary p-1">
-                    File Description
+                    @SharedLocalizer["File Description"]
                 </th>
                 <th class="text-secondary p-1">
-                    Valid From:
+                    @SharedLocalizer["Valid From:"]
                 </th>
                 <th class="text-secondary p-1">
-                    Valid Until:
+                    @SharedLocalizer["Valid Until:"]
                 </th>
                 <th class="text-secondary p-1">
-                    File Name
+                    @SharedLocalizer["File Name"]
                 </th>
                 <th class="text-secondary p-1">
-                    File Type
+                    @SharedLocalizer["File Type"]
                 </th>
                 <th class="text-secondary p-1">
                 </th>
@@ -55,7 +56,7 @@
                     </td>
                     <td class="p-1 text-center">
                         <button type="button" class="btn btn-pharus btn-sm mr-1 btn-delete">
-                            Delete
+                            @SharedLocalizer["Delete"]
                         </button>
                     </td>
                 </tr>

@@ -1,4 +1,5 @@
 ﻿@model SpecificEntityViewModel
+@inject IStringLocalizer<SharedResources> SharedLocalizer
 @{
     var controllerName = this.ViewContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
     var targetEditRoute = string.Empty;
@@ -40,7 +41,9 @@
         else
         {
             <div class="div-entity-container-wrapper">
-                <p>@containerName CONTAINER: </p>
+                <p>
+                    @containerName @SharedLocalizer["CONTAINER"]:
+                </p>
                 <a asp-area="@areaName"
                    asp-route="@targetRouteContainer"
                    asp-route-id="@Model.Container.ContainerId"
@@ -74,7 +77,7 @@
         <div class="mx-2">
             <a asp-route="@routeName"
                class="btn btn-pharus btn-sm mb-2">
-                Back to All
+                @SharedLocalizer["Back to All"]
             </a>
         </div>
         <div>
@@ -83,7 +86,7 @@
                     class="btn btn-pharus btn-sm mb-2"
                     data-toggle="ajax-modal"
                     data-target="#upload-document">
-                Upload Document
+                @SharedLocalizer["Upload Document"]
             </button>
         </div>
 
@@ -93,7 +96,7 @@
                     class="btn btn-pharus btn-sm mb-2"
                     data-toggle="ajax-modal"
                     data-target="#upload-agreement">
-                Upload Agreement
+                @SharedLocalizer["Upload Agreement"]
             </button>
         </div>
 
@@ -105,7 +108,7 @@
                    asp-route-id="@Model.Id"
                    asp-route-date="@Model.Date"
                    class="btn btn-pharus btn-sm mb-2">
-                    Edit @entityName
+                    @SharedLocalizer["Edit"] @entityName
                 </a>
             </div>
         }

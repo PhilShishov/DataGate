@@ -1,8 +1,9 @@
 ﻿@model CreateFundInputModel
 @inject Microsoft.Extensions.Configuration.IConfiguration Configuration
+@inject IStringLocalizer<SharedResources> SharedLocalizer
 
 @{
-    ViewData["Title"] = GlobalConstants.CreateActionName;
+    ViewData["Title"] = SharedLocalizer["New Fund"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 

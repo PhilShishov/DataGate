@@ -1,7 +1,8 @@
 ﻿@model SpecificEntityViewModel
+@inject IStringLocalizer<SharedResources> SharedLocalizer
 
 @{
-    this.ViewData["Title"] = GlobalConstants.ShareClassesControllerName;
+    this.ViewData["Title"] = SharedLocalizer["Share Classes"];
     this.Layout = "~/Views/Shared/_Layout.cshtml";
 
     var entityName = @Model.Entity.ToList()[1][GlobalConstants.IndexEntityNameInTable];
@@ -23,14 +24,16 @@
     <hr class="bg-pharus hr-2" />
 
     <div class="row ml-3 mb-5" id="div-select-addInfo">
-        <label class="text-torshia m-1 pr-3">SHARE CLASS ADDITIONAL INFORMATION</label>
+        <label class="text-torshia m-1 pr-3">
+            @SharedLocalizer["SHARE CLASS ADDITIONAL INFORMATION"]
+        </label>
         <select class="custom-select-lg select-pharus form-control input-sm"
                 id="select-additional-info"
                 asp-for="SelectAdditionalInf">
-            <option value="" selected disabled>Select</option>
-            <option value="TimelineChanges">Timeline Changes</option>
-            <option value="AllDocuments">All Documents</option>
-            <option value="AllAgreements">All Agreements</option>
+            <option value="" selected disabled>@SharedLocalizer["Select"]</option>
+            <option value="TimelineChanges">@SharedLocalizer["Timeline Changes"]</option>
+            <option value="AllDocuments">@SharedLocalizer["All Documents"]</option>
+            <option value="AllAgreements">@SharedLocalizer["All Agreements"]</option>
         </select>
     </div>
     <form id="load-form" method="get"></form>

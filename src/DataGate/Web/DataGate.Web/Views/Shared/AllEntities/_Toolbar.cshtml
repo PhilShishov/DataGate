@@ -1,4 +1,5 @@
 ﻿@model EntitiesViewModel
+@inject IStringLocalizer<SharedResources> SharedLocalizer
 
 <form class="d-flex"
       method="post"
@@ -20,7 +21,7 @@
                 data-toggle="modal"
                 data-target="#columnModal"
                 name="showColumnSelection">
-            Column Choice
+            @SharedLocalizer["Column Choice"]
         </button>
     </div>
 
@@ -30,13 +31,16 @@
                    asp-for="IsActive"
                    id="activeCheckBox">
             <span class="el-switch-style"></span>
-            <span class="d-block">Show</span>
-            <span>Active</span>
+            <span class="d-block">
+                @SharedLocalizer["Show"]
+            </span>
+            <span>@SharedLocalizer["Active"]</span>
+
         </label>
     </div>
     <div class="ml-4">
         <a class="btn btn-pharus btn-sm" asp-action="All">
-            Reset
+            @SharedLocalizer["Reset"]
         </a>
     </div>
 
