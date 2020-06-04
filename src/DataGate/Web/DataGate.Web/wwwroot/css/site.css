@@ -235,6 +235,11 @@ a.a-underline:hover {
         margin-left: 0.25rem !important;
         font-weight: 700 !important;
     }
+
+
+.table-search-wrapper {
+    margin-top: 67px;
+}
 /*
 *
 * ==========================================
