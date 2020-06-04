@@ -51,7 +51,7 @@ namespace DataGate.Services.Data.Funds
             {
                 query = await this.repository
                     .All()
-                    .OrderBy(x => x.FOfficialFundName)
+                    .OrderBy(f => f.FOfficialFundName)
                     .Select(f => f.FOfficialFundName)
                     .ToListAsync();
             }
