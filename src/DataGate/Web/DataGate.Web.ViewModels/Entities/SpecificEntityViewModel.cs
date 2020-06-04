@@ -40,7 +40,5 @@ namespace DataGate.Web.ViewModels.Entities
         public DateTime StartConnection { get; set; }
 
         public DateTime? EndConnection { get; set; }
-
-        public string SelectAdditionalInf { get; set; }
     }
 }

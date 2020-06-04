@@ -132,6 +132,9 @@
   <data name="-- Choose Status --" xml:space="preserve">
     <value />
   </data>
+  <data name="About" xml:space="preserve">
+    <value />
+  </data>
   <data name="Actions" xml:space="preserve">
     <value />
   </data>

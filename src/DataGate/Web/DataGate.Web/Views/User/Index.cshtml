@@ -14,43 +14,72 @@
     }
     else
     {
-<h2 class="text-center">@SharedLocalizer["Hello, "] @this.User.Identity.Name!</h2>
+        <h2 class="text-center">@SharedLocalizer["Hello, "] @this.User.Identity.Name!</h2>
     }
     <hr class="hr-2 bg-pharus">
-    <div class="w-100 d-flex justify-content-between flex-wrap">
+    <div class="container-column-card mx-auto">
+        <div class="row mb-4">
+            <div class="column">
+                <div class="card">
+                    <a asp-area="Fund" asp-route="allFunds">@SharedLocalizer["Fund Library"]</a>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="card">
+                    <a asp-area="SubFund" asp-route="allSubFunds">@SharedLocalizer["Sub Fund Library"]</a>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="card">
+                    <a asp-area="ShareClass" asp-route="allShareClasses">@SharedLocalizer["Share Class Library"]</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="column">
+                <div class="card">
+                    <a asp-area="" asp-route="agreements">@SharedLocalizer["Agreements Library"]</a>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="card">
+                    <a href="">@SharedLocalizer["Reports"]</a>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="card">
+                    <a href="">@SharedLocalizer["Projects"]</a>
+                </div>
+            </div>
+        </div>
 
         @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
         {
-            <div class="bg-white d-inline-block minw-160 minh-100">
-                <div class="border-pharus p-3">
-                    <div class="p-2 d-flex justify-content-between">
-                        <a asp-area="Admin" asp-controller="Admin" asp-action="CreateUser" class="btn btn-pharus text-white m-auto">@Localizer["Create User"]</a>
+            <div class="row">
+                <div class="column">
+                    <div class="card">
+                        <a asp-area="Admin" asp-controller="Admin" asp-action="ViewUsers">@Localizer["Users"]</a>
                     </div>
                 </div>
-            </div>
-            <div class="bg-white d-inline-block minw-160 minh-100">
-                <div class="border-pharus p-3">
-                    <div class="p-2 d-flex justify-content-around">
-                        <a asp-area="Admin" asp-controller="Admin" asp-action="ViewUsers" class="btn btn-pharus text-white">@Localizer["Users"]</a>
+
+                <div class="column">
+                    <div class="card">
+                        <a asp-area="Admin" asp-controller="Admin" asp-action="CreateUser">@Localizer["Create User"]</a>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="card">
+                        <a href="">@SharedLocalizer["About"]</a>
                     </div>
                 </div>
             </div>
         }
-
-        <div class="bg-white d-inline-block minw-160 minh-100">
-            <div class="border-pharus p-3">
-                <div class="p-2 d-flex justify-content-around">
-                    <a href="" class="btn btn-pharus text-white">@SharedLocalizer["Reports"]</a>
-                </div>
-            </div>
-        </div>
-        <div class="bg-white d-inline-block minw-160 minh-100">
-            <div class="border-pharus p-3">
-                <div class="p-2 d-flex justify-content-around">
-                    <a href="" class="btn btn-pharus text-white">@SharedLocalizer["Projects"]</a>
-                </div>
-
-            </div>
-        </div>
     </div>
+
 </div>

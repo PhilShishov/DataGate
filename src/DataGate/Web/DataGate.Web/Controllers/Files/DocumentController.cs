@@ -81,15 +81,15 @@
 
             if (areaName == GlobalConstants.FundAreaName)
             {
-                model.Documents = this.entitiesDocumentService.GetAllDocuments<DocumentViewModel>(QueryDictionary.SqlFunctionAllFundDocuments, id);
+                model.Documents = this.entitiesDocumentService.GetAllDocuments<DocumentViewModel>(QueryDictionary.SqlFunctionDocumentsFund, id);
             }
             else if (areaName == GlobalConstants.SubFundAreaName)
             {
-                model.Documents = this.entitiesDocumentService.GetAllDocuments<DocumentViewModel>(QueryDictionary.SqlFunctionAllSubFundDocuments, id);
+                model.Documents = this.entitiesDocumentService.GetAllDocuments<DocumentViewModel>(QueryDictionary.SqlFunctionDocumentsSubFund, id);
             }
             else if (areaName == GlobalConstants.ShareClassAreaName)
             {
-                model.Documents = this.entitiesDocumentService.GetAllDocuments<DocumentViewModel>(QueryDictionary.SqlFunctionAllShareClassesDocuments, id);
+                model.Documents = this.entitiesDocumentService.GetAllDocuments<DocumentViewModel>(QueryDictionary.SqlFunctionDocumentsShareClass, id);
             }
 
             return this.PartialView("SpecificEntity/_AllDocuments", model);
@@ -103,15 +103,15 @@
 
             if (areaName == GlobalConstants.FundAreaName)
             {
-                model.Agreements = this.entitiesDocumentService.GetAllAgreements<AgreementViewModel>(QueryDictionary.SqlFunctionAllFundAgreements, id, dateParsed);
+                model.Agreements = this.entitiesDocumentService.GetAllAgreements<AgreementViewModel>(QueryDictionary.SqlFunctionAgreementsFund, id, dateParsed);
             }
             else if (areaName == GlobalConstants.SubFundAreaName)
             {
-                model.Agreements = this.entitiesDocumentService.GetAllAgreements<AgreementViewModel>(QueryDictionary.SqlFunctionAllSubFundAgreements, id, dateParsed);
+                model.Agreements = this.entitiesDocumentService.GetAllAgreements<AgreementViewModel>(QueryDictionary.SqlFunctionAgreementsSubFund, id, dateParsed);
             }
             else if (areaName == GlobalConstants.ShareClassAreaName)
             {
-                model.Agreements = this.entitiesDocumentService.GetAllAgreements<AgreementViewModel>(QueryDictionary.SqlFunctionAllShareClassesAgreements, id, dateParsed);
+                model.Agreements = this.entitiesDocumentService.GetAllAgreements<AgreementViewModel>(QueryDictionary.SqlFunctionAgreementsShareClass, id, dateParsed);
             }
 
             return this.PartialView("SpecificEntity/_AllAgreements", model);

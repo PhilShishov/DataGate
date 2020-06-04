@@ -1,6 +1,7 @@
 ﻿namespace DataGate.Web.Configuration
 {
     using DataGate.Services.Data;
+    using DataGate.Services.Data.Agreements;
     using DataGate.Services.Data.Documents;
     using DataGate.Services.Data.Documents.Contracts;
     using DataGate.Services.Data.Entities;
@@ -32,6 +33,7 @@
             services.AddTransient<IEntityService, EntityService>();
             services.AddTransient<IEntityDetailsService, EntityDetailsService>();
             services.AddTransient<ITimelineService, TimelineService>();
+            services.AddTransient<IAgreementsService, AgreementsService>();
 
             // Funds
             services.AddTransient<IFundService, FundService>();

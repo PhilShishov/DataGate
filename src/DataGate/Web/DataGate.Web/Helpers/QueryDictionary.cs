@@ -37,11 +37,16 @@
         public const int FundFileType = 1;
         public const int SubFundFileType = 2;
         public const int ShareClassFileType = 3;
-        public const string SqlFunctionAllFundDocuments = "[fn_view_documents_fund]";
-        public const string SqlFunctionAllFundAgreements = "[fn_view_agreements_fund]";
-        public const string SqlFunctionAllSubFundDocuments = "[fn_view_documents_subfund]";
-        public const string SqlFunctionAllSubFundAgreements = "[fn_view_agreements_subfund]";
-        public const string SqlFunctionAllShareClassesDocuments = "[fn_view_documents_shareclass]";
-        public const string SqlFunctionAllShareClassesAgreements = "[fn_view_agreements_shareclass]";
+        public const string SqlFunctionDocumentsFund = "[fn_view_documents_fund]";
+        public const string SqlFunctionAgreementsFund = "[fn_view_agreements_fund]";
+        public const string SqlFunctionDocumentsSubFund = "[fn_view_documents_subfund]";
+        public const string SqlFunctionAgreementsSubFund = "[fn_view_agreements_subfund]";
+        public const string SqlFunctionDocumentsShareClass = "[fn_view_documents_shareclass]";
+        public const string SqlFunctionAgreementsShareClass = "[fn_view_agreements_shareclass]";
+
+        // Agreements
+        public const string SqlFunctionAllAgreementsFunds = "[fn_view_agreements_all_funds]";
+        public const string SqlFunctionAllAgreementsSubFunds = "[fn_view_agreements_all_subfunds]";
+        public const string SqlFunctionAllAgreementsShareClasses = "[fn_view_agreements_all_shareclasses]";
     }
 }
