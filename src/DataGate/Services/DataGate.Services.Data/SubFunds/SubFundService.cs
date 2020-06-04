@@ -51,8 +51,8 @@ namespace DataGate.Services.Data.SubFunds
             {
                 query = await this.repository
                 .All()
-                .OrderBy(x => x.SfOfficialSubFundName)
-                .Select(f => f.SfOfficialSubFundName)
+                .OrderBy(sf => sf.SfOfficialSubFundName)
+                .Select(sf => sf.SfOfficialSubFundName)
                 .ToListAsync();
             }
 
