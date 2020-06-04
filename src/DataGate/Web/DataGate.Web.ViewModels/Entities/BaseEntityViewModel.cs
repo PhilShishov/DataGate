@@ -13,7 +13,7 @@ namespace DataGate.Web.ViewModels.Entities
 
     public abstract class BaseEntityViewModel
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.ChosenDateIsEmpty)]
         public string Date { get; set; }

@@ -80,7 +80,7 @@
                 return this.View(viewModel);
             }
 
-            this.TempData[GlobalConstants.ErrorKey] = ErrorMessages.UnsuccessfulUpdate;
+            this.TempData[GlobalConstants.ErrorKey] = ErrorMessages.TableIsEmpty;
             return this.View(viewModel);
         }
     }

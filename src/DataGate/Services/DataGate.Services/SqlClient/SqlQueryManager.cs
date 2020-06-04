@@ -75,30 +75,32 @@ namespace DataGate.Services.SqlClient
                 await connection.OpenAsync();
                 SqlCommand command = connection.CreateCommand();
 
+                var sqlDate = date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat);
+
                 if (!date.HasValue)
                 {
                     command.CommandText = $"select * from {function}({id})";
                 }
-                else if (id.HasValue)
+                else if (id.HasValue && id != 0)
                 {
                     if (columns != null)
                     {
-                        command.CommandText = $"select {string.Join(", ", columns)} from {function}('{date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}', {id})";
+                        command.CommandText = $"select {string.Join(", ", columns)} from {function}('{sqlDate}', {id})";
                     }
                     else
                     {
-                        command.CommandText = $"select * from {function}('{date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}', {id})";
+                        command.CommandText = $"select * from {function}('{sqlDate}', {id})";
                     }
                 }
                 else
                 {
                     if (columns != null)
                     {
-                        command.CommandText = $"select {string.Join(", ", columns)} from {function}('{date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}')";
+                        command.CommandText = $"select {string.Join(", ", columns)} from {function}('{sqlDate}')";
                     }
                     else
                     {
-                        command.CommandText = $"select * from {function}('{date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}')";
+                        command.CommandText = $"select * from {function}('{sqlDate}')";
                     }
                 }
 

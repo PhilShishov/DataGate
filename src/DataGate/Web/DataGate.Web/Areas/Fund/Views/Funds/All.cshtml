@@ -7,12 +7,6 @@
     var controller = this.ViewContext.RouteData.Values["controller"].ToString();
 }
 
-@section Styles{
-    <link type="text/css" rel="stylesheet" href="~/lib/select2/dist/css/select2.min.css" asp-append-version="true">
-    <link type="text/css" rel="stylesheet" href="~/lib/jqueryui/themes/base/jquery-ui.min.css" asp-append-version="true">
-    <link type="text/css" rel="stylesheet" href="~/lib/jqueryui/themes/smoothness/jquery-ui.min.css" asp-append-version="true" />
-}
-
 <div class="container-all-funds justify-content-between">
     <div class="w-100">
         <div class="mobile-none">
@@ -47,21 +41,6 @@
             ControllerName: '@controller',
         };
 
-        // ________________________________________________________
-        //
-        // Additional information about headers
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip({
-                html: true
-            })
-        })
-
-        //$('.student-name').tooltip({
-        //    placement: 'top',
-        //    title: 'Student profile is not activated',
-        //    trigger: 'hover'
-        //})
-
         $(document).ready(function () {
             // ________________________________________________________
             //
@@ -75,17 +54,6 @@
             const controller = '@controller';
             const tokenUpdate = $('#update-form input[name=__RequestVerificationToken]').val();
             loadAutocomplete(tokenUpdate, controller, entityId = null);
-
-            // ________________________________________________________
-            //
-            // Modal multiselect for column selection
-            $('.multiselect').multiselect();
-
-            // ________________________________________________________
-            //
-            // Double top scroll for wide table
-            $('.double-scroll').doubleScroll();
-            $('.table-wrapper-double-scroll').doubleScroll({ resetOnWindowResize: true });
         });
     </script>
 }

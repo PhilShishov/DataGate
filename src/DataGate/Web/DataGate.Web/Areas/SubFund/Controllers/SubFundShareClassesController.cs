@@ -45,7 +45,7 @@
         }
 
         [HttpGet]
-        [Route("sf/{id}/sf")]
+        [Route("sf/{id}/sc")]
         public async Task<IActionResult> ShareClasses(int id, string date, string container)
         {
             var dto = new SubEntitiesGetDto()
@@ -62,7 +62,7 @@
         }
 
         [HttpPost]
-        [Route("sf/{id}/sf")]
+        [Route("sf/{id}/sc")]
         public async Task<IActionResult> ShareClasses([Bind("Id, Command, Container, Date,Values,Headers,PreSelectedColumns,SelectedColumns,SelectTerm")]
                                                    SubEntitiesViewModel viewModel)
         {
@@ -79,7 +79,7 @@
                 return this.View(viewModel);
             }
 
-            this.TempData[GlobalConstants.ErrorKey] = ErrorMessages.UnsuccessfulUpdate;
+            this.TempData[GlobalConstants.ErrorKey] = ErrorMessages.TableIsEmpty;
             return this.View(viewModel);
         }
     }
