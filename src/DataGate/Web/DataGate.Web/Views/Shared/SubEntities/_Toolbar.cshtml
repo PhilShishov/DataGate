@@ -1,4 +1,5 @@
 ﻿@model SubEntitiesViewModel
+@inject IStringLocalizer<SharedResources> SharedLocalizer
 
 @{
     var controller = this.ViewContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
@@ -19,7 +20,7 @@
 
     <div>
         <a class="btn btn-pharus btn-sm mr-2" asp-route="@targetRoute" asp-route-id="@Model.Id" asp-route-date="@Model.Date">
-            Back to Container
+            @SharedLocalizer["Back to Container"]
         </a>
     </div>
 
@@ -38,7 +39,7 @@
                 data-toggle="modal"
                 data-target="#columnModal"
                 name="showColumnSelection">
-            Column Choice
+            @SharedLocalizer["Column Choice"]
         </button>
     </div>
     <div class="ml-4">

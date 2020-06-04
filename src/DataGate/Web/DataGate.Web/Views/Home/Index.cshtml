@@ -1,6 +1,8 @@
 ﻿@using DataGate.Common
+@inject IViewLocalizer Localizer
+@inject IStringLocalizer<SharedResources> SharedLocalizer
 @{
-    this.ViewData["Title"] = "Home Page";
+    this.ViewData["Title"] = Localizer["Home Page"];
     this.Layout = "_HomeLayout";
 }
 
@@ -18,7 +20,7 @@
         </div>
         <div class="row">
             <div class="col-md-12 div-text-pharus">
-                <h1 class="text-white text-pharus">Welcome To <span class="bold-text-pharus">Pharus</span> Management<br>DataGate Platform</h1>
+                <h1 class="text-white text-pharus">@Localizer["Welcome To"] <span class="bold-text-pharus">Pharus</span> Management<br>DataGate @Localizer["Platform"]</h1>
             </div>
         </div>
         <div class="row">
@@ -33,9 +35,9 @@
                 <div class="footer-pharus mb-5">
                     <div class="inner text-white">
                         <p>
-                            <a class="text-white a-underline mr-1" asp-area="Identity" asp-controller="Account" asp-action="Privacy">Privacy Policy</a>
-                            <a class="text-white a-underline mr-1" asp-area="Identity" asp-controller="Account" asp-action="Cookie">Cookie Policy</a>
-                            <a class="text-white a-underline mr-1" asp-area="Identity" asp-controller="Account" asp-action="Copyright">Copyright Policy</a>
+                            <a class="text-white a-underline mr-1" asp-area="Identity" asp-controller="Account" asp-action="Privacy">@SharedLocalizer["Privacy Policy"]</a>
+                            <a class="text-white a-underline mr-1" asp-area="Identity" asp-controller="Account" asp-action="Cookie">@SharedLocalizer["Cookie Policy"]</a>
+                            <a class="text-white a-underline mr-1" asp-area="Identity" asp-controller="Account" asp-action="Copyright">@SharedLocalizer["Copyright Policy"]</a>
                         </p>
                     </div>
                 </div>

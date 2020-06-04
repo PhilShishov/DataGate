@@ -1,9 +1,12 @@
 ﻿@model List<UserViewModel>
+@inject IStringLocalizer<SharedResources> SharedLocalizer
 @{
-    ViewData["Title"] = "View User";
+    ViewData["Title"] = SharedLocalizer["View User"];
 }
 <div class="push">
-    <h1 class="text-center text-torshia">User List</h1>
+    <h1 class="text-center text-torshia">
+        @SharedLocalizer["User List"]
+    </h1>
     <hr class="bg-pharus w-50 hr-2" />
 
     @if (this.TempData[GlobalConstants.InfoKey] != null)
@@ -24,10 +27,10 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th scope="col"><h4>Username</h4></th>
-                    <th scope="col"><h4>Roles</h4></th>
-                    <th scope="col"><h4>Last Login</h4></th>
-                    <th scope="col"><h4>Actions</h4></th>
+                    <th scope="col"><h4>@SharedLocalizer["Username"]</h4></th>
+                    <th scope="col"><h4>@SharedLocalizer["Roles"]</h4></th>
+                    <th scope="col"><h4>@SharedLocalizer["Last Login"]</h4></th>
+                    <th scope="col"><h4>@SharedLocalizer["Actions"]</h4></th>
                 </tr>
             </thead>
             <tbody>
@@ -47,7 +50,7 @@
                                asp-controller="Admin"
                                asp-action="EditUser"
                                asp-route-id="@user.Id"
-                               class="btn btn-pharus text-white">Edit</a>
+                               class="btn btn-pharus text-white">@SharedLocalizer["Edit"]</a>
                         </td>
                     </tr>
                 }

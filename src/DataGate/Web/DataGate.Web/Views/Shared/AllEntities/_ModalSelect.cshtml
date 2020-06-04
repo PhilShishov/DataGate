@@ -1,4 +1,6 @@
 ﻿@model EntitiesViewModel
+@inject IStringLocalizer<SharedResources> SharedLocalizer
+
 @{
     var numberPreSelectedColumns = 4;
 }
@@ -10,7 +12,9 @@
         <div class="modal-content">
             <div class="modal-body">
                 <div>
-                    <h2 class="text-center">SELECT COLUMNS </h2>
+                    <h2 class="text-center">
+                        @SharedLocalizer["SELECT COLUMNS"]
+                    </h2>
                     <select asp-for="PreSelectedColumns" style="width:60%" hidden>
                         @for (int col = 0; col < numberPreSelectedColumns; col++)
                         {
@@ -39,7 +43,7 @@
                 <button type="button"
                         class="btn btn-pharus btn-sm ml-2"
                         data-dismiss="modal">
-                    Close
+                    @SharedLocalizer["Close"]
                 </button>
             </div>
         </div>
