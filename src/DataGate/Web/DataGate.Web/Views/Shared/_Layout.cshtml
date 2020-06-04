@@ -153,7 +153,7 @@
                         </button>
 
                         <div class="search-form-wrapper mr-5 d-none">
-                            <form class="w-100" method="post" asp-area="" asp-controller="Search" asp-action="Result">
+                            <form class="w-100" method="post" asp-area="" asp-route="search-results">
                                 <div class="search-box-responsive">
                                     <input type="search"
                                            name="searchTerm"
@@ -175,7 +175,7 @@
                     </div>
 
                     <div class="search-box-wrapper mr-5">
-                        <form method="post" asp-area="" asp-controller="Search" asp-action="Result">
+                        <form method="post" asp-area="" asp-route="search-results">
                             <div class="search-box">
                                 <input type="search"
                                        name="searchTerm"
@@ -249,7 +249,7 @@
     <script src="~/lib/jqueryui/jquery-ui.js" asp-append-version="true"></script>
     <script src="~/lib/popperjs/umd/popper.js" asp-append-version="true"></script>
 
-    /*** Handle jQuery plugin naming conflict between jQuery UI and Bootstrap ***/
+    @*/*** Handle jQuery plugin naming conflict between jQuery UI and Bootstrap ***/*@
     <script>
         $.widget.bridge('uibutton', $.ui.button);
         $.widget.bridge('uitooltip', $.ui.tooltip);

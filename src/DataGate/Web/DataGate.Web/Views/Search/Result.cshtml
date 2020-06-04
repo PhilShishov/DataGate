@@ -1,7 +1,50 @@
-﻿
+﻿@model DataGate.Web.ViewModels.Search.SearchListAllViewModel
+
 @{
-    ViewData["Title"] = "Results";
+    ViewData["Title"] = "Search Results";
+    var targetArea = GlobalConstants.ShareClassAreaName;
+    var targetRoute = GlobalConstants.ShareClassDetailsRouteName;
 }
 
-<h1>Result</h1>
+<div class="table-search-wrapper">
+    <h1>Result</h1>
+    <p>Your search criteria was : @Model.SearchTerm</p>
+    <p>Number of results : @Model.Results.ToList().Count</p>
 
+    @if (Model.Results.Any())
+    {
+        <table class="table-bordered table-hover table-view-pharus w-35 mx-auto">
+            <thead>
+                <tr>
+                    <th class="text-secondary p-1">
+                        ISIN CODE
+                    </th>
+                    <th class="text-secondary p-1">
+                        SHARE NAME
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var result in Model.Results)
+                {
+                    <tr>
+                        <td class="p-1 td-name-link">
+                            <a asp-area="@targetArea" asp-route="@targetRoute" asp-route-id="@result.ScId" asp-route-date="@Model.Date">
+                                @result.ScIsinCode
+                            </a>
+                        </td>
+                        <td>
+                            @result.ScOfficialShareClassName
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No result produced by your request.</p>
+        <p>Please modify your search criteria.</p>
+    }
+
+</div>

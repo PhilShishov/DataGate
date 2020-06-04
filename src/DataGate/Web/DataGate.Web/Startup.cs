@@ -101,6 +101,10 @@
                              name: "files",
                              pattern: "media/{name:minlength(5)}",
                              new { controller = "Media", action = "Read" });
+                        endpoints.MapControllerRoute(
+                              name: "search-results",
+                              pattern: "search-results",
+                              new { controller = "Search", action = "Result" });
 
                         // Funds
                         endpoints.MapAreaControllerRoute(

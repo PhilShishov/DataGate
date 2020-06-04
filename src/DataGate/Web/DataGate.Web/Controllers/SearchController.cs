@@ -19,21 +19,23 @@
         }
 
         [HttpPost]
+        [Route("search-results")]
         public IActionResult Result(string searchTerm)
         {
             var model = new SearchListAllViewModel();
             if (searchTerm != null)
             {
-                var date = DateTime.Today.ToString(GlobalConstants.RequiredWebDateTimeFormat);
+                model.Date = DateTime.Today.ToString(GlobalConstants.RequiredWebDateTimeFormat);
+                model.SearchTerm = searchTerm;
                 bool isIsin = this.service.IsIsin(searchTerm);
 
                 if (isIsin)
                 {
                     var classId = this.service.GetClassByIsin(searchTerm);
-                    return this.RedirectToRoute(GlobalConstants.ShareClassDetailsRouteName, new { area = GlobalConstants.ShareClassAreaName, id = classId, date = date });
+                    return this.RedirectToRoute(GlobalConstants.ShareClassDetailsRouteName, new { area = GlobalConstants.ShareClassAreaName, id = classId, date = model.Date });
                 }
 
-                var results = this.service.SearchClassesByName(searchTerm);
+                model.Results = this.service.SearchClassesByName(searchTerm);
             }
 
             return this.View(model);
