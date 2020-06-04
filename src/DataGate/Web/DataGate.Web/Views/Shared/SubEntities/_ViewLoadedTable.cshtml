@@ -38,7 +38,7 @@
                     {
                         for (int col = 0; col < Model.Entities[row].Length; col++)
                         {
-                            <th class="text-white pr-3"
+                            <th class="pr-3"
                                 data-toggle="tooltip"
                                 data-placement="bottom"
                                 title="@Model.Entities[row][col]">
@@ -98,7 +98,7 @@
 
     // Additional information about headers
     $(function () {
-        $('[data-toggle="tooltip"]').tooltip({
+        $('[data-toggle="tooltip"]').uitooltip({
             html: true
         })
     })

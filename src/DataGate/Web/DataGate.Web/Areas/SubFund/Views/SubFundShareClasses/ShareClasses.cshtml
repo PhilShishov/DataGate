@@ -1,72 +1,60 @@
 ﻿@model SubEntitiesViewModel
 
 @{
-    ViewData["Title"] = "Sub Funds";
+    ViewData["Title"] = GlobalConstants.ShareClassesControllerName;
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var controller = this.ViewContext.RouteData.Values["controller"].ToString();
 }
-<div class="justify-content-between">
-    <form asp-controller="FundSubFunds"
-          asp-action="SubFunds"
-          method="post"
-          id="update-form">
 
-        <input asp-for="Date" type="hidden">
-        <input asp-for="Id" type="hidden">
-        <input asp-for="Container" type="hidden">
-
-        <div>
-            <div class="mobile-none">
-                <hr class="mt-0 mb-auto" />
-                <div class="w-100 toolbar-view-all">
-                    <partial name="SubEntities/_Select" />
-                    <div class="justify-content-center w-35">
-                        <h2 class="text-center text-torshia" id="entityName">@Model.Container Sub Funds</h2>
+<div class="container-all-funds justify-content-between">
+    <div class="w-100">
+        <div class="mobile-none">
+            <hr class="mt-0 mb-auto" />
+            <div class="w-100 toolbar-view-all">
+                <div>
+                    <div class="h-100 d-flex">
+                        <partial name="SubEntities/_Toolbar" />
+                        <div class="title-main">
+                            <h2 id="entityName">@Model.Container Share Classes</h2>
+                        </div>
                     </div>
                 </div>
-                <hr class="mt-1 mb-0" />
             </div>
-
-            <partial name="_StatusMessage" />
-            <partial name="AllEntities/_ModalExtract" />
-            <partial name="SubEntities/_ModalSelect" />
-            <partial name="SubEntities/_ViewTable" />
+            <hr class="mt-1 mb-0" />
         </div>
-    </form>
+        <h2 class="text-center text-torshia title-responsive">@Model.Container Share Classes</h2>
+        <partial name="_StatusMessage" />
+        <partial name="SubEntities/_ViewTable" />
+    </div>
 </div>
 
 @section Scripts{
-    <script type="text/javascript" src="~/js/setTableValues.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="~/js/inactive.js" asp-append-version="true"></script>
+    <script src="~/lib/jqueryui/jquery-ui.min.js" asp-append-version="true"></script>
+    <script src="~/lib/select2/dist/js/select2.min.js" asp-append-version="true"></script>
+    <script src="~/js/controllers/entitiesController.js" asp-append-version="true"></script>
+    <script src="~/js/plugins.js" asp-append-version="true"></script>
 
     <script>
+        let model = {
+            Date: '@Model.Date',
+            ControllerName: '@controller',
+        };
+        const entityId = @Model.Id;
+
         $(document).ready(function () {
-            var token = $('#update-form input[name=__RequestVerificationToken]').val();
+            // ________________________________________________________
+            //
+            // Extract view as excel or pdf
+            extract(model);
+            submitForm();
+
             // ________________________________________________________
             //
             // Autocomplete search
-            const controller = '@GlobalConstants.FundSubFundsControllerName';
-            const entityId = @Model.Id;
-            loadAutocomplete(token, controller, entityId);
-
-            // ________________________________________________________
-            //
-            // Modal multiselect for column selection
-            $('.multiselect').multiselect();
-
-            // ________________________________________________________
-            //
-            // Double top scroll for wide table
-            $('.double-scroll').doubleScroll();
-            $('.table-wrapper-double-scroll').doubleScroll({ resetOnWindowResize: true });
-
-            // ________________________________________________________
-            //
-            // Additional information about headers
-            $(function () {
-                $('[data-toggle="tooltip"]').tooltip({
-                    html: true
-                })
-            })
+            const controller = '@controller';
+            const tokenUpdate = $('#update-form input[name=__RequestVerificationToken]').val();
+            loadAutocomplete(tokenUpdate, controller, entityId);
         });
     </script>
 }

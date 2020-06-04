@@ -20,38 +20,44 @@ namespace DataGate.Services.Data.Funds
     public class FundService : IFundService
     {
         private readonly IRepository<TbHistoryFund> repository;
-        //private readonly IRepository<TbHistorySubFund> repository;
-        //private readonly IRepository<TbFundSubFund> subsRepository;
+        private readonly IRepository<TbHistorySubFund> subFundrepository;
+        private readonly IRepository<TbFundSubFund> fundSubFundRepository;
 
-        public FundService(IRepository<TbHistoryFund> fundRepository)
+        public FundService(
+            IRepository<TbHistoryFund> fundRepository,
+            IRepository<TbHistorySubFund> subFundrepository,
+            IRepository<TbFundSubFund> fundSubFundRepository)
         {
             this.repository = fundRepository;
+            this.subFundrepository = subFundrepository;
+            this.fundSubFundRepository = fundSubFundRepository;
         }
 
         public async Task<ISet<string>> GetNamesAsync(int? id)
         {
-            var query = await this.repository
-                .All()
-                .OrderBy(x => x.FOfficialFundName)
-                .Select(f => f.FOfficialFundName)
-                .ToListAsync();
+            var query = new List<string>();
+            if (id.HasValue)
+            {
+                var fundSubfunds = this.fundSubFundRepository.All();
+                var subfunds = this.subFundrepository.All();
+
+                query = await (from sf in subfunds
+                               join fsf in fundSubfunds on sf.SfId equals fsf.SfId
+                               where fsf.FId == id
+                               select sf.SfOfficialSubFundName)
+                            .ToListAsync();
+            }
+            else
+            {
+                query = await this.repository
+                    .All()
+                    .OrderBy(x => x.FOfficialFundName)
+                    .Select(f => f.FOfficialFundName)
+                    .ToListAsync();
+            }
 
             return query.ToHashSet();
         }
-
-        //public async Task<ISet<string>> GetNamesAsync(int? id)
-        //{
-        //    var fundSubfunds = this.subsRepository.All();
-        //    var subfunds = this.repository.All();
-
-        //    var query = await (from sf in subfunds
-        //                       join fsf in fundSubfunds on sf.SfId equals fsf.SfId
-        //                       where fsf.FId == id
-        //                       select sf.SfOfficialSubFundName)
-        //                .ToListAsync();
-
-        //    return query.ToHashSet();
-        //}
 
         public void ThrowEntityNotFoundExceptionIfIdDoesNotExist(int id)
         {

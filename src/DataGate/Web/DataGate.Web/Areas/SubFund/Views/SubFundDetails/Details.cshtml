@@ -28,7 +28,7 @@
                 id="select-additional-info"
                 asp-for="SelectAdditionalInf">
             <option value="" selected disabled>Select</option>
-            <option value="SubFunds">Sub Funds</option>
+            <option value="ShareClasses">Share Classes</option>
             <option value="TimelineChanges">Timeline Changes</option>
             <option value="AllDocuments">All Documents</option>
             <option value="AllAgreements">All Agreements</option>
@@ -79,7 +79,7 @@
         // ________________________________________________________
         //
         // Load sub funds, documents, agreements and timelines
-        const url = '/loadSubFunds';
+        const url = '/loadShareClasses';
         const jsonAddInfo = {
             id: @Model.Id,
             areaName: '@GlobalConstants.SubFundAreaName',

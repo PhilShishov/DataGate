@@ -33,13 +33,12 @@
 
         public static async Task SetPost(EntitiesViewModel model, IEntityService service, string functionAll, string functionActive)
         {
-            var headers = await service.GetAll(functionActive).FirstOrDefaultAsync();
-            model.Headers = headers.ToList();
-            model.HeadersSelection = headers.ToList();
-
+            var date = DateTimeParser.WebFormat(model.Date);
             bool isInSelectionMode = model.SelectedColumns != null ? true : false;
 
-            var date = DateTimeParser.WebFormat(model.Date);
+            var headers = await service.GetAll(functionActive, null, date).FirstOrDefaultAsync();
+            model.Headers = headers.ToList();
+            model.HeadersSelection = headers.ToList();
 
             // ---------------------------------------------------------
             //
