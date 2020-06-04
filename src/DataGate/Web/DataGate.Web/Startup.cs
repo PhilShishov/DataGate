@@ -110,6 +110,10 @@
                               name: "search-results",
                               pattern: "search-results",
                               new { controller = "Search", action = "Result" });
+                        endpoints.MapControllerRoute(
+                            name: "agreements",
+                            pattern: "agreements",
+                            new { controller = "Agreements", action = "All" });
 
                         // Funds
                         endpoints.MapAreaControllerRoute(

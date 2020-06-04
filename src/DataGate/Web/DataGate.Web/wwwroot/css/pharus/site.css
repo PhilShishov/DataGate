@@ -1,0 +1,148 @@
+﻿:root {
+    font-size: 13px;
+}
+
+html {
+    position: relative;
+    height: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Gilroy-Regular ☞';
+    height: auto;
+    line-height: 1.6;
+    vertical-align: baseline;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    color: #646464;
+    background-color: #fff;
+}
+
+h2 {
+    font-size: 28px;
+    line-height: 1.9;
+    color: black;
+}
+
+h1, h3 {
+    text-align: center;
+}
+
+ul {
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+}
+
+textarea {
+    resize: none;
+}
+
+    input:focus,
+    select:focus,
+    textarea:focus,
+    button:focus {
+        outline: none;
+    }
+
+.bg-pharus {
+    background-color: #202020;
+}
+
+.text-pharus {
+    color: #202020;
+}
+
+.border-pharus {
+    border: 2px solid #d9d9d9;
+    border-radius: 7px;
+}
+
+.nav-link-white {
+    color: #FFFFFF;
+}
+
+.text-right {
+    margin-left: auto;
+}
+
+.hr-2 {
+    height: 2px;
+}
+
+.w-15 {
+    width: 15%;
+}
+
+.w-35 {
+    width: 35%;
+}
+
+.w-65 {
+    width: 65%;
+}
+
+.h-70 {
+    height: 70%;
+}
+
+.maxw-270 {
+    max-width: 270px;
+}
+
+.maxw-160 {
+    max-width: 160px;
+}
+
+.minw-160 {
+    min-width: 160px;
+}
+
+.minh-100 {
+    min-height: 100px;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+@font-face {
+    font-family: Gilroy-Bold;
+    font-style: normal;
+    src: local("Gilroy-Bold"), url("../../fonts/Gilroy-Bold.ttf") format("truetype"); /* non-IE */
+}
+
+.text-color-grey-pharus {
+    color: #898989;
+}
+
+.mb-2p {
+    margin-bottom: 2%;
+}
+
+#errorMessage, #infoMessage {
+    font-size: 14px;
+}
+
+/*
+*
+* ==========================================
+* SCROLLBAR
+* ==========================================
+*
+*/
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: -webkit-gradient(linear,left top,left bottom,from(rgba(34, 59, 120, 1)),to(#909090));
+    box-shadow: inset 2px 2px 2px rgba(255,255,255,.25), inset -2px -2px 2px rgba(0,0,0,.25);
+}

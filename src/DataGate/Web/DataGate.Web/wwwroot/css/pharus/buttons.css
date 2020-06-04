@@ -1,0 +1,61 @@
+﻿/*
+*
+* ==========================================
+* BUTTONS
+* ==========================================
+*
+*/
+
+.btn-pharus {
+    color: #fff;
+    background-color: rgb(0, 65, 118);
+    font-size: 1.0rem;
+}
+
+    .btn-pharus:hover {
+        color: #fff;
+        background-color: #0069d9;
+        border-color: #0062cc;
+    }
+
+.btn-link-pharus {
+    border: 0;
+    outline: none;
+    background: inherit;
+    cursor: pointer;
+    padding: 0;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: 400;
+    color: #0069d9;
+}
+
+    .btn-link-pharus:hover {
+        outline: none;
+        text-decoration: underline;
+        color: #007bff;
+    }
+
+
+.back-to-top {
+    display: none;
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    bottom: 60px;
+    right: 50px;
+    z-index: 800;
+    background-color: black;
+    border: 1px solid #c7c7c7;
+    -webkit-transition: background 0.2s linear;
+    -moz-transition: background 0.2s linear;
+    -o-transition: background 0.2s linear;
+    transition: background 0.2s
+}
+
+    .back-to-top .icon-svg.arrow-up {
+        background: url(../../images/arrow-up-solid.svg) no-repeat center center;
+        width: 26px;
+        height: 26px;
+        margin: 6px 0px 0px 6px;
+    }

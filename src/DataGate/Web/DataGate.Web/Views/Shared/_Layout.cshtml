@@ -29,7 +29,19 @@
         <link type="text/css" rel="stylesheet" href="~/lib/select2/dist/css/select2.min.css" asp-append-version="true">
         <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" asp-append-version="true" />
         <link type="text/css" rel="stylesheet" href="~/lib/font-awesome/css/all.css" asp-append-version="true" />
-        <link type="text/css" rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/buttons.css" asp-append-version="true" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/card.css" asp-append-version="true" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/checkbox.css" asp-append-version="true" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/title.css" asp-append-version="true" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/multiselect.css" asp-append-version="true" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/navbar.css" asp-append-version="true" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/search.css" asp-append-version="true" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/selectMenu.css" asp-append-version="true" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/table.css" asp-append-version="true" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/timeline.css" asp-append-version="true" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/site.css" asp-append-version="true" />
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/mediaQuery.css" asp-append-version="true" />
     </environment>
 
     @RenderSection("Styles", required: false)
@@ -115,7 +127,8 @@
                                 </li>
 
                                 <li class="li-bordered mt-3">
-                                    <a href="/Agreements/All">
+                                    <a asp-area=""
+                                       asp-route="agreements">
                                         @SharedLocalizer["Agreements"]
                                     </a>
                                 </li>
@@ -130,20 +143,16 @@
 
                         <div class="d-flex align-items-center mt-3">
                             <div class="ml-2 mobile-none">
-                                <a asp-area="Fund"
-                                   asp-route="allFunds">@SharedLocalizer["Fund Library"]</a>
+                                <a asp-area="Fund" asp-route="allFunds">@SharedLocalizer["Fund Library"]</a>
                             </div>
                             <div class="ml-2 mobile-none">
-                                <a asp-area="SubFund"
-                                   asp-route="allSubFunds">@SharedLocalizer["Sub Fund Library"]</a>
+                                <a asp-area="SubFund" asp-route="allSubFunds">@SharedLocalizer["Sub Fund Library"]</a>
                             </div>
                             <div class="ml-2 mobile-none">
-                                <a asp-area="ShareClass"
-                                   asp-route="allShareClasses">@SharedLocalizer["Share Class Library"]</a>
+                                <a asp-area="ShareClass" asp-route="allShareClasses">@SharedLocalizer["Share Class Library"]</a>
                             </div>
                             <div class="ml-2 mobile-none">
-                                <a asp-area="Agreement"
-                                   asp-route="allAgreements">@SharedLocalizer["Agreements Library"]</a>
+                                <a asp-area="" asp-route="agreements">@SharedLocalizer["Agreements Library"]</a>
                             </div>
                         </div>
 

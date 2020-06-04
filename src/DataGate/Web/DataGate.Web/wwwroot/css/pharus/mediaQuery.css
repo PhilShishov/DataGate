@@ -1,0 +1,93 @@
+﻿/*
+*
+* ==========================================
+* MEDIA QUERY
+* ==========================================
+*
+*/
+
+@media only screen and (max-width: 991px) {
+    .toolbar-view-all,
+    .toolbar-view-details {
+        overflow-x: scroll;
+    }
+
+    .logo-pharus img {
+        height: 120px;
+        width: 120px;
+    }
+
+    .mobile-none,
+    .search-box-wrapper,
+    #canvas-aum-pharus,
+    #entityName,
+    footer {
+        display: none;
+    }
+
+    .responsive-header {
+        display: block;
+    }
+
+    .push-mobile {
+        margin-top: 61px;
+    }
+
+    #div-select-addInfo {
+        width: 70%;
+    }
+
+    #infoAndDocumentsView {
+        display: inline;
+    }
+}
+
+
+@media only screen and (min-width: 990px) {
+    .toolbar-view-all {
+        margin-top: 67px;
+    }
+
+    .toolbar-view-details {
+        margin-top: 67px;
+        display: flex;
+    }
+
+    .container-all-funds {
+        display: flex;
+    }
+
+    .search-form-wrapper-responsive,
+    .title-responsive {
+        display: none;
+    }
+
+    .push {
+        margin-top: 67px;
+    }
+
+    #infoAndDocumentsView,
+    #allselect-div-pharus {
+        display: flex;
+    }
+
+    #table-info-pharus {
+        width: 35%;
+    }
+
+    #div-select-addInfo {
+        width: 25%;
+    }
+
+    #canvas-aum-pharus {
+        width: 70%
+    }
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        border: 0;
+        margin: 0px auto;
+        width: 100%;
+    }
+}

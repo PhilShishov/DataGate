@@ -1,0 +1,53 @@
+﻿@model DataGate.Web.ViewModels.Agreements.AgreementsViewModel
+@{
+    ViewData["Title"] = "All";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <div>
+        <div class="d-flex w-100" id="toolbar-pharus">
+            <div>
+                <div class="d-flex h-70">
+                    <div>
+                        <input type="date"
+                               asp-for="Date"
+                               id="date-pharus"
+                               min="2018-01-01"
+                               max=@DateTime.Today.ToString("yyyy-MM-dd")>
+
+                        <input type="submit"
+                               class="btn btn-primary btn-sm mb-1"
+                               asp-for="Command"
+                               value="Update Table">
+
+                        <input type="button"
+                               class="btn btn-primary btn-sm mb-1"
+                               id="btn-show-funds"
+                               value="Funds">
+
+                        <input type="button"
+                               class="btn btn-primary btn-sm mb-1"
+                               id="btn-show-subfunds"
+                               value="Sub Funds">
+
+                        <input type="button"
+                               class="btn btn-primary btn-sm mb-1"
+                               id="btn-show-shareclasses"
+                               value="Share Classes">
+                    </div>
+                </div>
+            </div>
+
+            <div class="justify-content-center w-35">
+                <h2 class="text-center text-torshia" id="entityName">All Agreements</h2>
+            </div>
+        </div>
+        <hr class="mt-1 mb-0" />
+    </div>
+</div>
+
+@section Scripts{
+
+
+}

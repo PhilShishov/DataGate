@@ -1,0 +1,27 @@
+﻿/*
+*
+* ==========================================
+* SELECT MENU, TIMELINE, DOCUMENTS
+* ==========================================
+*
+*/
+#SelectTerm {
+    width: 300px;
+}
+
+.select-pharus {
+    background-color: lightcyan;
+    color: darkgrey;
+    border: 0 none;
+    border-radius: 20px;
+    padding: 6px 20px;
+    cursor: pointer;
+}
+
+.select-div-pharus {
+    margin-top: -0.4%
+}
+
+#columnModal {
+    top: 0%;
+}
