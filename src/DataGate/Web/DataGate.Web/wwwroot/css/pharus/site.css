@@ -1,6 +1,6 @@
 ﻿/* Chosen style to be imported on change*/
 .chosen-container .chosen-results li.highlighted {
-    background-color: lavender;
+    background-color: lightgrey;
     background-image: none;
     color: inherit;
 }
@@ -11,7 +11,7 @@
 
 
 .select2-container--classic .select2-results__option--highlighted[aria-selected] {
-    background-color: lavender;
+    background-color: lightgrey;
     color: inherit;
 }
 
