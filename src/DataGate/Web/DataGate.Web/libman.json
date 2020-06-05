@@ -75,6 +75,18 @@
       ]
     },
     {
+      "provider": "cdnjs",
+      "library": "chosen@1.8.7",
+      "destination": "wwwroot/lib/chosen/",
+      "files": [
+        "chosen-sprite.png",
+        "chosen.min.css",
+        "chosen.css",
+        "chosen.jquery.min.js",
+        "chosen.jquery.js"
+      ]
+    },
+    {
       "library": "moment@2.26.0",
       "destination": "wwwroot/lib/moment/",
       "files": [

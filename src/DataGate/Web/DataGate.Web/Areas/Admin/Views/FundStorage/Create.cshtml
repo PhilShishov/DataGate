@@ -57,7 +57,7 @@
 
             <div class="form-group">
                 <label asp-for="Status" class="text-torshia"></label><br>
-                <select class="form-control maxw-270" asp-for="Status">
+                <select class="select-pharus" asp-for="Status">
                     <option selected disabled>-- Choose Status --</option>
                     @foreach (var status in (List<string>)ViewData["Status"])
                     {
@@ -69,7 +69,7 @@
 
             <div class="form-group">
                 <label asp-for="LegalForm" class="text-torshia"></label><br>
-                <select class="form-control maxw-270" asp-for="LegalForm">
+                <select class="select-pharus" asp-for="LegalForm">
                     <option selected disabled>-- Choose Form --</option>
                     @foreach (var form in (List<string>)ViewData["LegalForm"])
                     {
@@ -81,7 +81,7 @@
 
             <div class="form-group">
                 <label asp-for="LegalVehicle" class="text-torshia"></label><br>
-                <select class="form-control maxw-270" asp-for="LegalVehicle">
+                <select class="select-pharus" asp-for="LegalVehicle">
                     <option selected disabled>-- Choose Vehicle --</option>
                     @foreach (var vehicle in (List<string>)ViewData["LegalVehicle"])
                     {
@@ -93,7 +93,7 @@
 
             <div class="form-group">
                 <label asp-for="LegalType" class="text-torshia"></label><br>
-                <select class="form-control maxw-270" asp-for="LegalType">
+                <select class="select-pharus" asp-for="LegalType">
                     <option selected disabled>-- Choose Type --</option>
                     @foreach (var type in (List<string>)ViewData["LegalType"])
                     {
@@ -129,7 +129,7 @@
 
             <div class="form-group">
                 <label asp-for="CompanyTypeDesc" class="text-torshia"></label><br>
-                <select class="form-control maxw-270" asp-for="CompanyTypeDesc">
+                <select class="select-pharus" asp-for="CompanyTypeDesc">
                     <option selected disabled>-- Choose Description --</option>
                     @foreach (var desc in (List<string>)ViewData["CompanyTypeDesc"])
                     {

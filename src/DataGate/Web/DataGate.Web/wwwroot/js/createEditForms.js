@@ -147,3 +147,10 @@ const MESSAGES_CREATE_EDIT = {
         }
     }
 })();
+
+$(function () {
+    $(".select-pharus").chosen({
+        disable_search_threshold: 10,
+        width: "269px",
+    })
+});

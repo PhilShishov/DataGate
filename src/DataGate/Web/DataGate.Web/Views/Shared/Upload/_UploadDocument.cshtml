@@ -30,7 +30,7 @@
                             }
                         </select>
 
-                        <select class="form-control maxw-270" asp-for="DocumentType">
+                        <select class="select-pharus" asp-for="DocumentType">
                             <option selected disabled value="">
                                 @SharedLocalizer["-- Choose File Type --"]
                             </option>
@@ -63,3 +63,5 @@
         </div>
     </div>
 </div>
+
+<partial name="_ChosenScriptsPartial" />
