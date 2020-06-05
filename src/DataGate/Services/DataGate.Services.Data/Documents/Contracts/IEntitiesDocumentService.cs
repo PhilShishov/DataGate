@@ -5,8 +5,8 @@
 
     public interface IEntitiesDocumentService
     {
-        IEnumerable<T> GetAllDocuments<T>(string function, int id);
+        IEnumerable<T> GetDocuments<T>(string function, int id);
 
-        IEnumerable<T> GetAllAgreements<T>(string function, int id, DateTime? date);
+        IEnumerable<T> GetAgreements<T>(string function, int id, DateTime? date);
     }
 }

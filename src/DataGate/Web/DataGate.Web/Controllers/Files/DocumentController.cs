@@ -35,18 +35,8 @@
         {
             var model = AutoMapperConfig.MapperInstance.Map<UploadDocumentInputModel>(dto);
 
-            if (model.AreaName == GlobalConstants.FundAreaName)
-            {
-                model.DocumentTypes = this.service.GetDocumentsFileTypes(QueryDictionary.FundFileType);
-            }
-            else if (model.AreaName == GlobalConstants.SubFundAreaName)
-            {
-                model.DocumentTypes = this.service.GetDocumentsFileTypes(QueryDictionary.SubFundFileType);
-            }
-            else if (model.AreaName == GlobalConstants.ShareClassAreaName)
-            {
-                model.DocumentTypes = this.service.GetDocumentsFileTypes(QueryDictionary.ShareClassFileType);
-            }
+            int fileType = this.GetTargetFileType(model.AreaName);
+            model.DocumentTypes = this.service.GetDocumentsFileTypes(fileType);
 
             return this.PartialView("Upload/_UploadDocument", model);
         }
@@ -55,21 +45,12 @@
         public async Task<IActionResult> Agreement(LoadAgreementDto dto)
         {
             var model = AutoMapperConfig.MapperInstance.Map<UploadAgreementInputModel>(dto);
+
             model.AgreementsStatus = await this.service.GetAgreementStatus().ToListAsync();
             model.Companies = await this.service.GetCompanies().ToListAsync();
 
-            if (model.AreaName == GlobalConstants.FundAreaName)
-            {
-                model.AgreementsFileTypes = await this.service.GetAgreementsFileTypes(QueryDictionary.FundFileType).ToListAsync();
-            }
-            else if (model.AreaName == GlobalConstants.SubFundAreaName)
-            {
-                model.AgreementsFileTypes = await this.service.GetAgreementsFileTypes(QueryDictionary.SubFundFileType).ToListAsync();
-            }
-            else if (model.AreaName == GlobalConstants.ShareClassAreaName)
-            {
-                model.AgreementsFileTypes = await this.service.GetAgreementsFileTypes(QueryDictionary.ShareClassFileType).ToListAsync();
-            }
+            int fileType = this.GetTargetFileType(model.AreaName);
+            model.AgreementsFileTypes = await this.service.GetAgreementsFileTypes(fileType).ToListAsync();
 
             return this.PartialView("Upload/_UploadAgreement", model);
         }
@@ -81,15 +62,15 @@
 
             if (areaName == GlobalConstants.FundAreaName)
             {
-                model.Documents = this.entitiesDocumentService.GetAllDocuments<DocumentViewModel>(QueryDictionary.SqlFunctionDocumentsFund, id);
+                model.Documents = this.entitiesDocumentService.GetDocuments<DocumentViewModel>(QueryDictionary.SqlFunctionDocumentsFund, id);
             }
             else if (areaName == GlobalConstants.SubFundAreaName)
             {
-                model.Documents = this.entitiesDocumentService.GetAllDocuments<DocumentViewModel>(QueryDictionary.SqlFunctionDocumentsSubFund, id);
+                model.Documents = this.entitiesDocumentService.GetDocuments<DocumentViewModel>(QueryDictionary.SqlFunctionDocumentsSubFund, id);
             }
             else if (areaName == GlobalConstants.ShareClassAreaName)
             {
-                model.Documents = this.entitiesDocumentService.GetAllDocuments<DocumentViewModel>(QueryDictionary.SqlFunctionDocumentsShareClass, id);
+                model.Documents = this.entitiesDocumentService.GetDocuments<DocumentViewModel>(QueryDictionary.SqlFunctionDocumentsShareClass, id);
             }
 
             return this.PartialView("SpecificEntity/_AllDocuments", model);
@@ -103,18 +84,38 @@
 
             if (areaName == GlobalConstants.FundAreaName)
             {
-                model.Agreements = this.entitiesDocumentService.GetAllAgreements<AgreementViewModel>(QueryDictionary.SqlFunctionAgreementsFund, id, dateParsed);
+                model.Agreements = this.entitiesDocumentService.GetAgreements<AgreementViewModel>(QueryDictionary.SqlFunctionAgreementsFund, id, dateParsed);
             }
             else if (areaName == GlobalConstants.SubFundAreaName)
             {
-                model.Agreements = this.entitiesDocumentService.GetAllAgreements<AgreementViewModel>(QueryDictionary.SqlFunctionAgreementsSubFund, id, dateParsed);
+                model.Agreements = this.entitiesDocumentService.GetAgreements<AgreementViewModel>(QueryDictionary.SqlFunctionAgreementsSubFund, id, dateParsed);
             }
             else if (areaName == GlobalConstants.ShareClassAreaName)
             {
-                model.Agreements = this.entitiesDocumentService.GetAllAgreements<AgreementViewModel>(QueryDictionary.SqlFunctionAgreementsShareClass, id, dateParsed);
+                model.Agreements = this.entitiesDocumentService.GetAgreements<AgreementViewModel>(QueryDictionary.SqlFunctionAgreementsShareClass, id, dateParsed);
             }
 
             return this.PartialView("SpecificEntity/_AllAgreements", model);
+        }
+
+        private int GetTargetFileType(string area)
+        {
+            int fileType = 0;
+
+            if (area == GlobalConstants.FundAreaName)
+            {
+                fileType = QueryDictionary.FundFileType;
+            }
+            else if (area == GlobalConstants.SubFundAreaName)
+            {
+                fileType = QueryDictionary.SubFundFileType;
+            }
+            else if (area == GlobalConstants.ShareClassAreaName)
+            {
+                fileType = QueryDictionary.ShareClassFileType;
+            }
+
+            return fileType;
         }
     }
 }

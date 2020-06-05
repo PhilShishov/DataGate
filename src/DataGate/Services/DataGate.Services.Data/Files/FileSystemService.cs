@@ -58,23 +58,19 @@
 
             UploadDocumentDto dto = AutoMapperConfig.MapperInstance.Map<UploadDocumentDto>(model);
             dto.EndConnection = model.EndConnection?.ToString(GlobalConstants.RequiredSqlDateTimeFormat, CultureInfo.InvariantCulture);
+            dto.DocumentType = await this.service.GetByIdDocumentType(model.DocumentType);
 
             if (model.AreaName == GlobalConstants.FundAreaName)
             {
                 query = $"{this.sqlProcedureDocumentFund} {this.sqlProcedureDocument}";
-                dto.DocumentType = await this.service.GetByIdDocumentType(model.DocumentType);
             }
             else if (model.AreaName == GlobalConstants.SubFundAreaName)
             {
                 query = $"{this.sqlProcedureDocumentSubFund} {this.sqlProcedureDocument}";
-
-                // dto.DocumentType = await this.service.GetByIdFileType(model.DocumentType);
             }
             else if (model.AreaName == GlobalConstants.ShareClassAreaName)
             {
                 query = $"{this.sqlProcedureDocumentShareClass} {this.sqlProcedureDocument}";
-
-                // dto.DocumentType = await this.service.GetByIdFileType(model.DocumentType);
             }
 
             SqlCommand command = new SqlCommand(query);
@@ -123,29 +119,21 @@
             string query = string.Empty;
 
             UploadAgreementDto dto = AutoMapperConfig.MapperInstance.Map<UploadAgreementDto>(model);
+            dto.AgreementType = await this.service.GetByIdAgreementType(model.AgrType);
+            dto.Status = await this.service.GetByIdStatus(model.Status);
+            dto.Company = await this.service.GetByIdCompany(model.Company);
 
             if (model.AreaName == GlobalConstants.FundAreaName)
             {
                 query = $"{this.sqlProcedureAgreementFund} {this.sqlProcedureAgreement}";
-                dto.AgreementType = await this.service.GetByIdAgreementType(model.AgrType);
-                dto.Status = await this.service.GetByIdStatus(model.Status);
-                dto.Company = await this.service.GetByIdCompany(model.Company);
             }
             else if (model.AreaName == GlobalConstants.SubFundAreaName)
             {
                 query = $"{this.sqlProcedureAgreementSubFund} {this.sqlProcedureAgreement}";
-
-                // dto.AgreementType = await this.fundService.GetByIdAgreementType(model.AgrType);
-                // dto.Status = await this.fundService.GetByIdStatus(model.Status);
-                // dto.Company = await this.fundService.GetByIdCompany(model.Company);
             }
             else if (model.AreaName == GlobalConstants.ShareClassAreaName)
             {
                 query = $"{this.sqlProcedureAgreementShareClass} {this.sqlProcedureAgreement}";
-
-                // dto.AgreementType = await this.fundService.GetByIdAgreementType(model.AgrType);
-                // dto.Status = await this.fundService.GetByIdStatus(model.Status);
-                // dto.Company = await this.fundService.GetByIdCompany(model.Company);
             }
 
             SqlCommand command = new SqlCommand(query);

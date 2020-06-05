@@ -115,20 +115,27 @@ namespace DataGate.Services.SqlClient
         //
         // Convert rows values from a data reader into typed results
         // using IDataReaderParser interface
-        public IEnumerable<T> ExecuteQueryMapping<T>(string function, int id, DateTime? date)
+        public IEnumerable<T> ExecuteQueryMapping<T>(string function, int? id, DateTime? date)
             where T : IDataReaderParser, new()
         {
             using (SqlConnection connection = new SqlConnection())
             {
                 SqlCommand command = this.SetUpSqlConnectionCommand(connection);
 
-                if (date.HasValue)
+                if (id.HasValue)
                 {
-                    command.CommandText = $"select * from {function}('{date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}', {id})";
+                    if (date.HasValue)
+                    {
+                        command.CommandText = $"select * from {function}('{date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}', {id})";
+                    }
+                    else
+                    {
+                        command.CommandText = $"select * from {function}({id})";
+                    }
                 }
                 else
                 {
-                    command.CommandText = $"select * from {function}({id})";
+                    command.CommandText = $"select * from {function}('{date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}')";
                 }
 
                 using (var reader = command.ExecuteReader())

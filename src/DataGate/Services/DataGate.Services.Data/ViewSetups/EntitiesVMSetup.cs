@@ -8,7 +8,7 @@
     using DataGate.Services.Data.Entities;
     using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
-    using DataGate.Web.Dtos.Queries;
+    using DataGate.Web.Dtos.Overviews;
     using DataGate.Web.ViewModels.Entities;
     using DataGate.Web.ViewModels.Queries;
 

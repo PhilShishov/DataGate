@@ -3,11 +3,25 @@ namespace DataGate.Services.Data.Agreements
     using System;
     using System.Collections.Generic;
 
+    using DataGate.Services.Mapping;
+    using DataGate.Services.SqlClient.Contracts;
+    using DataGate.Web.Dtos.Queries;
+
     public class AgreementsService : IAgreementsService
     {
-        public IAsyncEnumerable<string[]> GetAll(string function, DateTime date, int skip = 0)
+        private readonly ISqlQueryManager sqlManager;
+
+        public AgreementsService(
+                            ISqlQueryManager sqlQueryManager)
         {
-            throw new NotImplementedException();
+            this.sqlManager = sqlQueryManager;
+        }
+
+        public IEnumerable<T> GetAll<T>(string function, DateTime date)
+        {
+            IEnumerable<AllAgreementDto> dto = this.sqlManager.ExecuteQueryMapping<AllAgreementDto>(function, null, date);
+
+            return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
         }
     }
 }

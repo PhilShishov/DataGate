@@ -7,6 +7,7 @@
     using DataGate.Services.Data.SubFunds;
     using DataGate.Services.Data.ViewSetups;
     using DataGate.Web.Controllers;
+    using DataGate.Web.Dtos.Overviews;
     using DataGate.Web.Dtos.Queries;
     using DataGate.Web.Helpers;
     using DataGate.Web.ViewModels.Entities;

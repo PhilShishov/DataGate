@@ -1,0 +1,22 @@
+﻿namespace DataGate.Web.ViewModels.Agreements
+{
+    using DataGate.Services.Mapping;
+    using DataGate.Web.Dtos.Queries;
+
+    public class AllAgreementViewModel : IMapFrom<AllAgreementDto>
+    {
+        public string Description { get; set; }
+
+        public string CompanyName { get; set; }
+
+        public string ContractDate { get; set; }
+
+        public string ActivationDate { get; set; }
+
+        public string ExpirationDate { get; set; }
+
+        public string Name { get; set; }
+
+        public int FileId { get; set; }
+    }
+}

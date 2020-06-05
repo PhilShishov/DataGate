@@ -1,21 +1,15 @@
-﻿@using DataGate.Common
-@inject IViewLocalizer Localizer
+﻿@inject IViewLocalizer Localizer
 @inject IStringLocalizer<SharedResources> SharedLocalizer
 @{
     ViewData["Title"] = Localizer["User Panel"];
 }
 
 <div class="push">
-    @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-    {
-        <h2 class="text-center">
-            @SharedLocalizer["Hello, Administrator"] @this.User.Identity.Name!
-        </h2>
-    }
-    else
-    {
-        <h2 class="text-center">@SharedLocalizer["Hello, "] @this.User.Identity.Name!</h2>
-    }
+
+    <h2 class="text-center">
+        @SharedLocalizer["PHARUS DATAGATE PLATFORM"]
+    </h2>
+
     <hr class="hr-2 bg-pharus">
     <div class="container-column-card mx-auto">
         <div class="row mb-4">
@@ -41,7 +35,7 @@
         <div class="row mb-4">
             <div class="column">
                 <div class="card">
-                    <a asp-area="" asp-route="agreements">@SharedLocalizer["Agreements Library"]</a>
+                    <a asp-area="" asp-route="allagreements">@SharedLocalizer["Agreements Library"]</a>
                 </div>
             </div>
 

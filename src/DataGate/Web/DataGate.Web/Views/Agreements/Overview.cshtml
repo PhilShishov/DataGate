@@ -1,0 +1,34 @@
+﻿@inject IStringLocalizer<SharedResources> SharedLocalizer
+@{
+    ViewData["Title"] = SharedLocalizer["Agreements"];
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="push">
+    <h2 class="text-center">
+        @SharedLocalizer["ALL PHARUS AGREEMENTS"]
+    </h2>
+
+    <hr class="hr-2 bg-pharus">
+    <div class="container-column-card mx-auto">
+        <div class="row mb-4">
+            <div class="column">
+                <div class="card">
+                    <a asp-area="" asp-route="agreements" asp-route-type="@GlobalConstants.TypeFund">@SharedLocalizer["Fund Agreements"]</a>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="card">
+                    <a asp-area="" asp-route="agreements" asp-route-type="@GlobalConstants.TypeSubFund">@SharedLocalizer["Sub Fund Agreements"]</a>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="card">
+                    <a asp-area="" asp-route="agreements" asp-route-type="@GlobalConstants.TypeShareClass">@SharedLocalizer["Share Class Agreements"]</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
