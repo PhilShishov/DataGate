@@ -7,12 +7,12 @@
 
     public static class DateTimeParser
     {
-        public static DateTime WebFormat(string date)
+        public static DateTime FromWebFormat(string date)
         {
             return DateTime.ParseExact(date, GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
         }
 
-        public static DateTime SqlFormat(string date)
+        public static DateTime FromSqlFormat(string date)
         {
             return DateTime.ParseExact(date, GlobalConstants.SqlDateTimeFormatParsing, CultureInfo.InvariantCulture);
         }

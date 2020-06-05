@@ -4,6 +4,7 @@
 
     using DataGate.Common;
     using DataGate.Services.Data.Agreements;
+    using DataGate.Services.DateTime;
     using DataGate.Web.Helpers;
     using DataGate.Web.ViewModels.Agreements;
     using Microsoft.AspNetCore.Mvc;
@@ -47,24 +48,29 @@
             return this.View(viewModel);
         }
 
-        //[HttpPost]
-        //public IActionResult All(AgreementsViewModel model)
-        //{
-        //    if (model.ChosenDate != null)
-        //    {
-        //        var chosenDate = DateTime.ParseExact(model.ChosenDate, "yyyy-MM-dd", CultureInfo.InvariantCulture);
+        [HttpPost]
+        public IActionResult All(AllAgreementOverviewViewModel model)
+        {
+            if (model.Date != null)
+            {
+                string function = QuerySwapper.GetResult(model.SelectedType,
+                                                  FunctionDictionary.SqlFunctionAllAgreementsFunds,
+                                                  FunctionDictionary.SqlFunctionAllAgreementsSubFunds,
+                                                  FunctionDictionary.SqlFunctionAllAgreementsShareClasses);
 
-        //        model.Agreements = this.agreementsService.GetAgreementsForAllFunds(chosenDate);
-        //        model.SubFundAgreements = this.agreementsService.GetAgreementsForAllSubFunds(chosenDate);
-        //        model.ShareClassAgreements = this.agreementsService.GetAgreementsForAllShareClasses(chosenDate);
-        //    }
+                var parsedDate = DateTimeParser.FromWebFormat(model.Date);
 
-        //    if (model.FundAgreements != null)
-        //    {
-        //        return this.View(model);
-        //    }
+                model.Agreements = this.service.GetAll<AllAgreementViewModel>(function, parsedDate);
+            }
 
-        //    return this.RedirectToPage("/Agreements/All");
-        //}
+            if (model.Agreements != null)
+            {
+                this.TempData[GlobalConstants.InfoKey] = InfoMessages.SuccessfulUpdate;
+                return this.View(model);
+            }
+
+            this.TempData[GlobalConstants.ErrorKey] = ErrorMessages.UnsuccessfulUpdate;
+            return this.View(model);
+        }
     }
 }

@@ -20,7 +20,7 @@
         {
             exceptionService.ThrowEntityNotFoundExceptionIfIdDoesNotExist(id);
 
-            var dateParsed = DateTimeParser.WebFormat(date);
+            var dateParsed = DateTimeParser.FromWebFormat(date);
             var entity = await service.GetByIdAndDate(queryDto.SqlFunctionById, id, dateParsed).ToListAsync();
             string startConnectionString = entity.ToList()[1][IndexStartConnectionInSQLTable];
             string endConnectionString = entity.ToList()[1][IndexEndConnectionInSQLTable];
@@ -28,7 +28,7 @@
 
             if (!string.IsNullOrWhiteSpace(endConnectionString) && endConnectionString != GlobalConstants.EmptyEndConnectionDisplay)
             {
-                endConnection = DateTimeParser.SqlFormat(endConnectionString);
+                endConnection = DateTimeParser.FromSqlFormat(endConnectionString);
             }
 
             var distinctDocs = service.GetDistinctDocuments(queryDto.SqlFunctionDistinctDocuments, id, dateParsed);
@@ -39,7 +39,7 @@
                 Id = id,
                 Date = date,
                 Entity = entity,
-                StartConnection = DateTimeParser.SqlFormat(startConnectionString),
+                StartConnection = DateTimeParser.FromSqlFormat(startConnectionString),
                 EndConnection = endConnection,
                 DistinctDocuments = distinctDocs,
                 DistinctAgreements = distinctAgrs,

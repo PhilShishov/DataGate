@@ -52,7 +52,7 @@
 /* Style the counter cards */
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    padding: 29px;
+    padding: 4px;
     text-align: center;
     background-color: #f8f9fa;
     height: 200px;

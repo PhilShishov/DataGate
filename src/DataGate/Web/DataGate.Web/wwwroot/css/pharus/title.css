@@ -25,21 +25,3 @@
     .title-main-agreements h2 {
         line-height: 1;
     }
-
-    @media only screen and (min-width: 990px) and (max-width: 1250px) {
-        .title-main {
-        display: none;
-    }
-}
-
-@media only screen and (min-width: 1440px) {
-    .title-main {
-        width: 20%;
-    }
-}
-
-@media only screen and (min-width: 1040px) {
-    .title-responsive {
-        display: none;
-    }
-}
