@@ -160,3 +160,10 @@ function uploadModals(token, json) {
         });
     }
 };
+
+$(function () {
+    $(".select-pharus").chosen({
+        disable_search_threshold: 10,
+        width: "65%",
+    })
+})

@@ -50,7 +50,7 @@
 
                 <div class="form-group">
                     <label asp-for="Status" class="text-torshia"></label><br>
-                    <select class="form-control maxw-270" asp-for="Status">
+                    <select class="select-pharus" asp-for="Status">
                         @foreach (var status in (List<string>)ViewData["Status"])
                         {
                             if (status == Model.Status)
@@ -68,7 +68,7 @@
 
                 <div class="form-group">
                     <label asp-for="LegalForm" class="text-torshia"></label><br>
-                    <select class="form-control maxw-270" asp-for="LegalForm">
+                    <select class="select-pharus" asp-for="LegalForm">
                         @foreach (var form in (List<string>)ViewData["LegalForm"])
                         {
                             if (form == Model.LegalForm)
@@ -86,7 +86,7 @@
 
                 <div class="form-group">
                     <label asp-for="LegalVehicle" class="text-torshia"></label><br>
-                    <select class="form-control maxw-270" asp-for="LegalVehicle">
+                    <select class="select-pharus" asp-for="LegalVehicle">
                         @foreach (var vehicle in (List<string>)ViewData["LegalVehicle"])
                         {
                             if (vehicle == Model.LegalVehicle)
@@ -104,7 +104,7 @@
 
                 <div class="form-group">
                     <label asp-for="LegalType" class="text-torshia"></label><br>
-                    <select class="form-control maxw-270" asp-for="LegalType">
+                    <select class="select-pharus" asp-for="LegalType">
                         @foreach (var type in (List<string>)ViewData["LegalType"])
                         {
                             if (type == Model.LegalType)
@@ -145,7 +145,7 @@
 
                 <div class="form-group">
                     <label asp-for="CompanyTypeDesc" class="text-torshia"></label><br>
-                    <select class="form-control maxw-270" asp-for="CompanyTypeDesc">
+                    <select class="select-pharus" asp-for="CompanyTypeDesc">
                         @foreach (var desc in (List<string>)ViewData["CompanyTypeDesc"])
                         {
                             if (desc == Model.CompanyTypeDesc)
