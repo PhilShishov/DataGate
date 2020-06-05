@@ -1,8 +1,6 @@
 ﻿namespace DataGate.Web.Controllers
 {
     using System;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     using DataGate.Common;
     using DataGate.Services.Data.Agreements;
@@ -12,28 +10,40 @@
 
     public class AgreementsController : BaseController
     {
-        private readonly IAgreementsService agreementsService;
+        private readonly IAgreementsService service;
 
         public AgreementsController(
-            IAgreementsService agreementsService)
+            IAgreementsService service)
         {
-            this.agreementsService = agreementsService;
+            this.service = service;
         }
 
         [HttpGet]
-        [Route("agreements")]
-        public async Task<IActionResult> All()
+        [Route("allagreements")]
+        public IActionResult Overview()
         {
-            var today = DateTime.Today;
+            return this.View();
+        }
 
-            var model = new AgreementsViewModel
+        [HttpGet]
+        [Route("agreements/{type}")]
+        public IActionResult All(string type)
+        {
+            string function = FunctionSwapper.GetResult(type,
+                                                  QueryDictionary.SqlFunctionAllAgreementsFunds,
+                                                  QueryDictionary.SqlFunctionAllAgreementsSubFunds,
+                                                  QueryDictionary.SqlFunctionAllAgreementsShareClasses);
+
+            var today = DateTime.Today;
+            var agreements = this.service.GetAll<AllAgreementViewModel>(function, today);
+
+            var viewModel = new AllAgreementOverviewViewModel()
             {
                 Date = today.ToString(GlobalConstants.RequiredWebDateTimeFormat),
+                Agreements = agreements,
             };
 
-            //model.Agreements = await this.agreementsService.GetAll(QueryDictionary.SqlFunctionAllAgreementsFunds, today).ToListAsync();
-
-            return this.View(model);
+            return this.View(viewModel);
         }
 
         //[HttpPost]
@@ -57,3 +67,26 @@
         //}
     }
 }
+
+
+//private static string GetCorrectTypeName(string controllerName)
+//{
+//    string typeName = string.Empty;
+
+//    switch (controllerName)
+//    {
+//        case GlobalConstants.FundsControllerName:
+//            typeName = FundsNameDisplay;
+//            break;
+//        case GlobalConstants.SubFundsControllerName:
+//        case GlobalConstants.FundSubFundsControllerName:
+//            typeName = SubFundsNameDisplay;
+//            break;
+//        case GlobalConstants.ShareClassesControllerName:
+//        case GlobalConstants.SubFundShareClassesControllerName:
+//            typeName = ShareClassesNameDisplay;
+//            break;
+//    }
+
+//    return typeName;
+//}

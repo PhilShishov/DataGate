@@ -5,6 +5,6 @@
 
     public interface IAgreementsService
     {
-        IAsyncEnumerable<string[]> GetAll(string function, DateTime date, int skip = 0);
+        IEnumerable<T> GetAll<T>(string function, DateTime date);
     }
 }

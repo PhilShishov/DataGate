@@ -1,4 +1,4 @@
-namespace DataGate.Web.Dtos.Queries
+namespace DataGate.Web.Dtos.Overviews
 {
     using System.Collections.Generic;
 

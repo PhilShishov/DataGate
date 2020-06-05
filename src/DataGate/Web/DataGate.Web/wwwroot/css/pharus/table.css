@@ -27,14 +27,14 @@
             color: #007bff;
         }
 
-    .table-view-pharus tbody tr {
-        height: 50px;
-    }
+.table-view-pharus tbody tr {
+    height: 50px;
+}
 
-        .table-view-pharus tbody tr td {
-            vertical-align: middle;
-            text-align: center;
-        }
+    .table-view-pharus tbody tr td {
+        vertical-align: middle;
+        text-align: center;
+    }
 
 .inactive-entity {
     opacity: 0.5;

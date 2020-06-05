@@ -58,8 +58,7 @@
 <div id="modal-placeholder-agreement"></div>
 
 @section Scripts{
-    <script type="text/javascript" src="~/js/controllers/detailsController.js" asp-append-version="true"></script>
-    <script src="~/js/plugins.js" asp-append-version="true"></script>
+    <partial name="_DetailsScriptsPartial" />
     <script>
         const tokenLoadEntities = $('#load-form input[name=__RequestVerificationToken]').val();
 

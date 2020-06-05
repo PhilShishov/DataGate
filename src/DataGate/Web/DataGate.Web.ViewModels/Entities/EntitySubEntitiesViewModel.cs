@@ -3,7 +3,7 @@
     using System.Collections.Generic;
 
     using DataGate.Services.Mapping;
-    using DataGate.Web.Dtos.Queries;
+    using DataGate.Web.Dtos.Overviews;
 
     public class EntitySubEntitiesViewModel : IMapFrom<EntitySubEntitiesGetDto>
     {

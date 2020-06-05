@@ -101,6 +101,11 @@
             app.UseEndpoints(
                 endpoints =>
                     {
+                        endpoints.MapControllerRoute(
+                             name: "userpanel",
+                             pattern: "userpanel",
+                             new { controller = "User", action = "Index" });
+
                         // Media files
                         endpoints.MapControllerRoute(
                              name: "files",
@@ -111,9 +116,13 @@
                               pattern: "search-results",
                               new { controller = "Search", action = "Result" });
                         endpoints.MapControllerRoute(
-                            name: "agreements",
-                            pattern: "agreements",
-                            new { controller = "Agreements", action = "All" });
+                            name: "allagreements",
+                            pattern: "allagreements",
+                            new { controller = "Agreements", action = "Overview" });
+                        endpoints.MapControllerRoute(
+                           name: "agreements",
+                           pattern: "agreements/{type:required}",
+                           new { controller = "Agreements", action = "All" });
 
                         // Funds
                         endpoints.MapAreaControllerRoute(
@@ -144,6 +153,16 @@
 
                         // Sub Funds
                         endpoints.MapAreaControllerRoute(
+                              name: "newSubFund",
+                              areaName: "Admin",
+                              pattern: "sf/new",
+                              new { area = "Admin", controller = "SubFundStorage", action = "Create" });
+                        endpoints.MapAreaControllerRoute(
+                              name: "editSubFund",
+                              areaName: "Admin",
+                              pattern: "sf/edit/{id:int:min(1)}/{date:required}",
+                              new { area = "Admin", controller = "SubFundStorage", action = "Edit" });
+                        endpoints.MapAreaControllerRoute(
                                name: "allSubFunds",
                                areaName: "SubFund",
                                pattern: "subfunds",
@@ -160,6 +179,16 @@
                                new { area = "SubFund", controller = "SubFundShareClasses", action = "ShareClasses" });
 
                         // Share Classes
+                        endpoints.MapAreaControllerRoute(
+                              name: "newShareClass",
+                              areaName: "Admin",
+                              pattern: "sc/new",
+                              new { area = "Admin", controller = "ShareClassStorage", action = "Create" });
+                        endpoints.MapAreaControllerRoute(
+                              name: "editShareClass",
+                              areaName: "Admin",
+                              pattern: "sc/edit/{id:int:min(1)}/{date:required}",
+                              new { area = "Admin", controller = "ShareClassStorage", action = "Edit" });
                         endpoints.MapAreaControllerRoute(
                                name: "allShareClasses",
                                areaName: "ShareClass",

@@ -17,14 +17,14 @@
                     <div class="h-100 d-flex">
                         <partial name="SubEntities/_Toolbar" />
                         <div class="title-main">
-                            <h2 id="entityName">@Model.Container @SharedLocalizer["Sub Funds"]</h2>
+                            <h2>@Model.Container @SharedLocalizer["Sub Funds"]</h2>
                         </div>
                     </div>
                 </div>
             </div>
             <hr class="mt-1 mb-0" />
         </div>
-        <h2 class="text-center text-torshia title-responsive">
+        <h2 class="text-center title-responsive">
             @Model.Container @SharedLocalizer["Sub Funds"]
         </h2>
         <partial name="_StatusMessage" />
@@ -33,10 +33,7 @@
 </div>
 
 @section Scripts{
-    <script src="~/lib/jqueryui/jquery-ui.min.js" asp-append-version="true"></script>
-    <script src="~/lib/select2/dist/js/select2.min.js" asp-append-version="true"></script>
-    <script src="~/js/controllers/entitiesController.js" asp-append-version="true"></script>
-    <script src="~/js/plugins.js" asp-append-version="true"></script>
+    <partial name="_EntitiesScriptsPartial" />
 
     <script>
         let model = {

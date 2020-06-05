@@ -1,6 +1,24 @@
 ﻿@model EntitiesViewModel
 @inject IStringLocalizer<SharedResources> SharedLocalizer
 
+@{
+    var controller = this.ViewContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
+    var createRoute = string.Empty;
+
+    if (controller == GlobalConstants.FundsControllerName)
+    {
+        createRoute = GlobalConstants.FundCreateRouteName;
+    }
+    else if (controller == GlobalConstants.SubFundsControllerName)
+    {
+        createRoute = GlobalConstants.SubFundCreateRouteName;
+    }
+    else if (controller == GlobalConstants.ShareClassesControllerName)
+    {
+        createRoute = GlobalConstants.ShareClassCreateRouteName;
+    }
+}
+
 <form class="d-flex"
       method="post"
       asp-action="All"
@@ -81,3 +99,14 @@
 </div>
 
 <div class="vertical mx-3"></div>
+
+@if (this.User.IsInRole("Admin"))
+{
+    <div>
+        <a asp-area="Admin"
+           asp-route="@createRoute"
+           class="btn btn-sm btn-pharus">
+            @SharedLocalizer["Create"]
+        </a>
+    </div>
+}

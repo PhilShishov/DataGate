@@ -10,6 +10,9 @@
         public const string CurrentCultureInfo = "en-GB";
         public const string ItalianCultureInfo = "it-IT";
         public const int CultureCookieExpirationTimeInMonths = 5;
+        public const string TypeFund = "Fund";
+        public const string TypeSubFund = "SubFund";
+        public const string TypeShareClass = "ShareClass";
 
         // Controllers, areas
         public const string ControllerRouteDataValue = "controller";
@@ -32,6 +35,7 @@
         public const string FundAllUrl = "/funds";
         public const string SubFundAllUrl = "/subfunds";
         public const string ShareClassAllUrl = "/shareclasses";
+        public const string UserPanelUrl = "/userpanel";
         public const string DetailsActionName = "Details";
         public const string AllActionName = "All";
         public const string EditActionName = "Edit";
@@ -41,13 +45,19 @@
         public const string AllFundsRouteName = "allFunds";
         public const string FundDetailsRouteName = "fundDetails";
         public const string FundSubFundsRouteName = "fundSubFunds";
+        public const string FundCreateRouteName = "newFund";
+        public const string FundEditRouteName = "editFund";
 
         public const string AllSubFundsRouteName = "allSubFunds";
         public const string SubFundDetailsRouteName = "subFundDetails";
         public const string SubFundShareClassesRouteName = "subFundShareClasses";
+        public const string SubFundCreateRouteName = "newSubFund";
+        public const string SubFundEditRouteName = "editSubFund";
 
         public const string AllShareClassesRouteName = "allShareClasses";
         public const string ShareClassDetailsRouteName = "shareClassDetails";
+        public const string ShareClassCreateRouteName = "newShareClass";
+        public const string ShareClassEditRouteName = "editShareClass";
 
         // Tempdata Keys
         public const string InfoKey = "info";

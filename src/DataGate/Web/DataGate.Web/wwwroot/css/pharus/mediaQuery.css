@@ -20,17 +20,8 @@
     .mobile-none,
     .search-box-wrapper,
     #canvas-aum-pharus,
-    #entityName,
     footer {
         display: none;
-    }
-
-    .responsive-header {
-        display: block;
-    }
-
-    .push-mobile {
-        margin-top: 61px;
     }
 
     #div-select-addInfo {
@@ -39,6 +30,12 @@
 
     #infoAndDocumentsView {
         display: inline;
+    }
+}
+
+@media only screen and (max-width: 1040px) {
+    .mobile-none {
+        display: none;
     }
 }
 
@@ -57,13 +54,12 @@
         display: flex;
     }
 
-    .search-form-wrapper-responsive,
-    .title-responsive {
+    .search-form-wrapper-responsive {
         display: none;
     }
 
     .push {
-        margin-top: 67px;
+        margin-top: 75px;
     }
 
     #infoAndDocumentsView,
@@ -89,5 +85,11 @@
         border: 0;
         margin: 0px auto;
         width: 100%;
+    }
+}
+
+@media only screen and (max-width: 1040px) {
+    .push-mobile {
+        margin-top: 61px;
     }
 }

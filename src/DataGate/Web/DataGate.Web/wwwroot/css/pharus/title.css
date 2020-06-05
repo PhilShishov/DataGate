@@ -6,7 +6,7 @@
 *
 */
 .title-main {
-    width: 10%;
+    width: 7%;
     text-align: center;
     margin-left: 115px;
     white-space: nowrap;
@@ -24,6 +24,12 @@
 
 @media only screen and (min-width: 1440px) {
     .title-main {
-        width: 25%;
+        width: 20%;
+    }
+}
+
+@media only screen and (min-width: 1040px) {
+    .title-responsive {
+        display: none;
     }
 }

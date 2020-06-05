@@ -55,10 +55,10 @@ const CLASSES_NAVBAR = {
             if (userMenuToogler.classList.contains(CLASSES_NAVBAR.OPEN)) {
                 userMenuToogler.classList.toggle(CLASSES_NAVBAR.OPEN);
             }
-            if (sidenav.style.width != '0px') {
-                sidenav.style.width = '0px';
-                sideNavFooter.style.display = 'none';
-            }
+            //if (sidenav.style.width != '0px') {
+            //    sidenav.style.width = '0px';
+            //    sideNavFooter.style.display = 'none';
+            //}
 
             searchMenuParent.classList.toggle(CLASSES_NAVBAR.OPENED);
             const searchMenuStatus = searchMenu.classList.contains('d-none');
@@ -78,10 +78,10 @@ const CLASSES_NAVBAR = {
                 searchMenuParent.classList.toggle(CLASSES_NAVBAR.OPENED);
                 searchMenu.classList.add('d-none');
             }
-            if (sidenav.style.width != '0px') {
-                sidenav.style.width = '0px';
-                sideNavFooter.style.display = 'none';
-            }
+            //if (sidenav.style.width != '0px') {
+            //    sidenav.style.width = '0px';
+            //    sideNavFooter.style.display = 'none';
+            //}
             userMenuToogler.classList.toggle(CLASSES_NAVBAR.OPEN);
         })
     }

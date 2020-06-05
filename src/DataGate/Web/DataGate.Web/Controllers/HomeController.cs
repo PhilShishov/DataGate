@@ -15,7 +15,7 @@
         {
             if (this.User.Identity.IsAuthenticated)
             {
-                return this.Redirect(GlobalConstants.FundAllUrl);
+                return this.Redirect(GlobalConstants.UserPanelUrl);
             }
 
             return this.View();

@@ -117,253 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="-- Choose Agreement Type --" xml:space="preserve">
+  <data name="and" xml:space="preserve">
     <value />
   </data>
-  <data name="-- Choose Company --" xml:space="preserve">
+  <data name="Configure authenticator app" xml:space="preserve">
     <value />
   </data>
-  <data name="-- Choose File Type --" xml:space="preserve">
+  <data name="Download a two-factor authenticator app like Microsoft Authenticator for" xml:space="preserve">
     <value />
   </data>
-  <data name="-- Choose Role --" xml:space="preserve">
+  <data name="enable QR code generation" xml:space="preserve">
     <value />
   </data>
-  <data name="-- Choose Status --" xml:space="preserve">
+  <data name="Google Authenticator for" xml:space="preserve">
     <value />
   </data>
-  <data name="About" xml:space="preserve">
+  <data name="into your two factor authenticator app. Spaces and casing do not matter" xml:space="preserve">
     <value />
   </data>
-  <data name="Actions" xml:space="preserve">
+  <data name="Learn how to" xml:space="preserve">
     <value />
   </data>
-  <data name="Activation Date" xml:space="preserve">
+  <data name="Once you have scanned the QR code or input the key above, your two factor authentication app will provide you with a unique code. Enter the code in the confirmation box below" xml:space="preserve">
     <value />
   </data>
-  <data name="Active" xml:space="preserve">
+  <data name="or" xml:space="preserve">
     <value />
   </data>
-  <data name="Admin" xml:space="preserve">
+  <data name="Scan the QR Code or enter this key" xml:space="preserve">
     <value />
   </data>
-  <data name="Advanced Selection" xml:space="preserve">
+  <data name="To use an authenticator app go through the following steps" xml:space="preserve">
     <value />
   </data>
-  <data name="AGREEMENTS" xml:space="preserve">
+  <data name="Verification Code" xml:space="preserve">
     <value />
   </data>
-  <data name="Agreements Library" xml:space="preserve">
-    <value />
-  </data>
-  <data name="All Agreements" xml:space="preserve">
-    <value />
-  </data>
-  <data name="All Documents" xml:space="preserve">
-    <value />
-  </data>
-  <data name="ALL PHARUS AGREEMENTS" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Back to All" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Back to Container" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Back to Panel" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Close" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Column Choice" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Confirm Password" xml:space="preserve">
-    <value />
-  </data>
-  <data name="CONTAINER" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Contract Date" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Cookie Policy" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Copyright Policy" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Create User" xml:space="preserve">
-    <value />
-  </data>
-  <data name="DataGate" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Delete" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Delete User" xml:space="preserve">
-    <value />
-  </data>
-  <data name="DOCUMENTS" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Edit" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Edit User" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Email" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Expiration Date" xml:space="preserve">
-    <value />
-  </data>
-  <data name="File Description" xml:space="preserve">
-    <value />
-  </data>
-  <data name="File Name" xml:space="preserve">
-    <value />
-  </data>
-  <data name="File Type" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Find a Pharus Share Class..." xml:space="preserve">
-    <value />
-  </data>
-  <data name="Forgot Password" xml:space="preserve">
-    <value />
-  </data>
-  <data name="FUND ADDITIONAL INFORMATION" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Fund Agreements" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Fund Library" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Funds" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Last Login" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Log out" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Logout" xml:space="preserve">
-    <value />
-  </data>
-  <data name="New Password" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Panel" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Password" xml:space="preserve">
-    <value />
-  </data>
-  <data name="PHARUS DATAGATE PLATFORM" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Pharus Funds" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Pharus Share Classes" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Pharus Sub Funds" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Privacy Policy" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Projects" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Remember me ?" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Reports" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Reset" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Role" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Roles" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Save changes" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Select" xml:space="preserve">
-    <value />
-  </data>
-  <data name="SELECT COLUMNS" xml:space="preserve">
-    <value />
-  </data>
-  <data name="SHARE CLASS ADDITIONAL INFORMATION" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Share Class Agreements" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Share Class Library" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Share Classes" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Show" xml:space="preserve">
-    <value />
-  </data>
-  <data name="SUB FUND ADDITIONAL INFORMATION" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Sub Fund Agreements" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Sub Fund Library" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Sub Funds" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Timeline Changes" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Update password" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Upload Agreement" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Upload Document" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Username" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Valid From:" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Valid Until:" xml:space="preserve">
-    <value />
-  </data>
-  <data name="View All" xml:space="preserve">
-    <value />
-  </data>
-  <data name="View User" xml:space="preserve">
-    <value />
-  </data>
-  <data name="You have successfully logged out of the application." xml:space="preserve">
+  <data name="Verify" xml:space="preserve">
     <value />
   </data>
 </root>

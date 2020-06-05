@@ -18,14 +18,14 @@
             this.sqlManager = sqlQueryManager;
         }
 
-        public IEnumerable<T> GetAllAgreements<T>(string function, int id, DateTime? date)
+        public IEnumerable<T> GetAgreements<T>(string function, int id, DateTime? date)
         {
             IEnumerable<AgreementDto> dto = this.sqlManager.ExecuteQueryMapping<AgreementDto>(function, id, date);
 
             return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
         }
 
-        public IEnumerable<T> GetAllDocuments<T>(string function, int id)
+        public IEnumerable<T> GetDocuments<T>(string function, int id)
         {
             IEnumerable<DocumentDto> dto = this.sqlManager.ExecuteQueryMapping<DocumentDto>(function, id);
 
