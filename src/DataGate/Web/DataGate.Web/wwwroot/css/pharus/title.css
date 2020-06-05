@@ -16,8 +16,18 @@
     line-height: 2.2;
 }
 
-@media only screen and (min-width: 990px) and (max-width: 1250px) {
-    .title-main {
+.title-main-agreements {
+    width: 7%;
+    text-align: center;
+    margin-left: 115px;
+    white-space: nowrap;
+}
+    .title-main-agreements h2 {
+        line-height: 1;
+    }
+
+    @media only screen and (min-width: 990px) and (max-width: 1250px) {
+        .title-main {
         display: none;
     }
 }

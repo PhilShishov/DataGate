@@ -2,7 +2,7 @@
 @inject IStringLocalizer<SharedResources> SharedLocalizer
 
 @{
-    ViewData["Title"] = Model.SelectedType + SharedLocalizer["Agreements"];
+    ViewData["Title"] = SharedLocalizer["Agreements"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -11,21 +11,23 @@
         <div class="mobile-none">
             <hr class="mt-0 mb-auto" />
             <div class="w-100 toolbar-view-details">
-                <div class="mx-auto mb-5">
+                <div class="mx-auto mb-4">
                     <div class="h-100 d-flex">
-
-                        <div class="mx-2">
-                            <a asp-route=""
+                        <div class="mr-2">
+                            <a asp-area=""
+                               asp-route="allagreements"
                                class="btn btn-pharus btn-sm mb-2">
                                 @SharedLocalizer["Back to All"]
                             </a>
                         </div>
 
-                        <form class="d-flex ml-5"
+                        <form class="d-flex mx-3"
                               method="post"
-                              asp-action="All"
+                              asp-route="All"
                               id="update-form">
                             <div>
+                                <input type="hidden" asp-for="SelectedType" />
+
                                 <input type="date"
                                        id="date-pharus"
                                        asp-for="Date"
@@ -37,86 +39,84 @@
                                        style="margin-bottom: 2%"></>
                             </div>
                         </form>
-
-                        <div class="mx-2">
-                            <button type="button"
-                                    id="btn-upload-agreement"
-                                    class="btn btn-pharus btn-sm mb-2"
-                                    data-toggle="ajax-modal"
-                                    data-target="#upload-agreement">
-                                @SharedLocalizer["Upload Agreement"]
-                            </button>
+                        <div class="title-main-agreements">
+                            <h2 class="">@Model.SelectedType @SharedLocalizer["Agreements"]</h2>
                         </div>
-
                     </div>
                 </div>
             </div>
             <hr class="mt-1 mb-0" />
         </div>
+
         <h2 class="text-center title-responsive">@Model.SelectedType @SharedLocalizer["Agreements"]</h2>
+
         <partial name="_StatusMessage" />
 
         <form id="form-agreement" method="post">
-            <table class="table table-bordered table-hover tbl-agreements">
-                <thead>
-                    <tr>
-                        <th class="text-secondary p-1">
-                            @SharedLocalizer["File Description"]
-                        </th>
-                        <th class="text-secondary p-1">
-                            @SharedLocalizer["Contract Date"]
-                        </th>
-                        <th class="text-secondary p-1">
-                            @SharedLocalizer["Activation Date"]
-                        </th>
-                        <th class="text-secondary p-1">
-                            @SharedLocalizer["Expiration Date"]
-                        </th>
-                        <th class="text-secondary p-1">
-                            @SharedLocalizer["File Name"]
-                        </th>
-                        <th class="text-secondary p-1">
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var agreement in Model.Agreements)
-                    {
-                        <tr class="@agreement.FileId">
-                            <td class="p-1">
-                                @agreement.Description
-                            </td>
-                            <td class="p-1">
-                                @agreement.ContractDate
-                            </td>
-                            <td class="p-1">
-                                @agreement.ActivationDate
-                            </td>
-                            <td class="p-1">
-                                @agreement.ExpirationDate
-                            </td>
-                            <td class="p-1">
-                                <button class="btn-link-pharus text-left"
-                                        formtarget="_blank"
-                                        type="submit"
-                                        asp-area=""
-                                        asp-route="files"
-                                        asp-route-name="@agreement.Name"
-                                        name="agrValue"
-                                        value="@agreement.Name">
-                                    @Html.Encode(@System.IO.Path.GetFileNameWithoutExtension(agreement.Name))
-                                </button>
-
-                            </td>
-                            <td class="p-1 text-center">
-                                <button type="button" class="btn btn-pharus btn-sm mr-1 btn-delete">
-                                    @SharedLocalizer["Delete"]
-                                </button>
-                            </td>
+            <div class="table-wrapper-double-scroll">
+                <table class="table table-bordered table-hover tbl-agreements table-view-pharus">
+                    <thead>
+                        <tr>
+                            <th class="text-secondary p-1">
+                                @SharedLocalizer["File Description"]
+                            </th>
+                            <th class="text-secondary p-1">
+                                @SharedLocalizer["Company Name"]
+                            </th>
+                            <th class="text-secondary p-1">
+                                @SharedLocalizer["Contract Date"]
+                            </th>
+                            <th class="text-secondary p-1">
+                                @SharedLocalizer["Activation Date"]
+                            </th>
+                            <th class="text-secondary p-1">
+                                @SharedLocalizer["Expiration Date"]
+                            </th>
+                            <th class="text-secondary p-1">
+                                @SharedLocalizer["File Name"]
+                            </th>
+                            <th></th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach (var agreement in Model.Agreements)
+                        {
+                            <tr class="@agreement.FileId">
+                                <td class="p-1">
+                                    @agreement.Description
+                                </td>
+                                <td class="p-1">
+                                    @agreement.ContractDate
+                                </td>
+                                <td class="p-1">
+                                    @agreement.ActivationDate
+                                </td>
+                                <td class="p-1">
+                                    @agreement.ExpirationDate
+                                </td>
+                                <td class="p-1">
+                                    <button class="btn-link-pharus text-left"
+                                            formtarget="_blank"
+                                            type="submit"
+                                            asp-area=""
+                                            asp-route="files"
+                                            asp-route-name="@agreement.Name"
+                                            name="agrValue"
+                                            value="@agreement.Name">
+                                        @Html.Encode(@System.IO.Path.GetFileNameWithoutExtension(agreement.Name))
+                                    </button>
+
+                                </td>
+                                <td class="p-1 text-center">
+                                    <button type="button" class="btn btn-pharus btn-sm mr-1 btn-delete">
+                                        @SharedLocalizer["Delete"]
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
             <input type="hidden" name="AreaName" value="@Model.SelectedType" />
         </form>
 
@@ -124,6 +124,9 @@
 </div>
 
 @section Scripts{
+    <script src="~/js/plugins.js" asp-append-version="true"></script>
+    <script src="~/js/controllers/entitiesController.js" asp-append-version="true"></script>
+
     <script>
     // ________________________________________________________
     //

@@ -2,71 +2,80 @@
 @inject IStringLocalizer<SharedResources> SharedLocalizer
 
 <form id="form-document" method="post">
-    <table class="table table-bordered table-hover tbl-documents">
-        <thead>
-            <tr>
-                <th class="text-secondary p-1">
-                    @SharedLocalizer["File Description"]
-                </th>
-                <th class="text-secondary p-1">
-                    @SharedLocalizer["Valid From:"]
-                </th>
-                <th class="text-secondary p-1">
-                    @SharedLocalizer["Valid Until:"]
-                </th>
-                <th class="text-secondary p-1">
-                    @SharedLocalizer["File Name"]
-                </th>
-                <th class="text-secondary p-1">
-                    @SharedLocalizer["File Type"]
-                </th>
-                <th class="text-secondary p-1">
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var document in Model.Documents)
-            {
-                <tr class="@document.FileId">
-                    <td class="p-1">
-                        @document.Description
-                    </td>
-                    <td class="p-1">
-                        @document.ValidFrom
-                    </td>
-                    <td class="p-1">
-                        @document.ValidUntil
-                    </td>
-                    <td class="p-1">
-
-                        <button class="btn-link-pharus text-left"
-                                formtarget="_blank"
-                                type="submit"
-                                asp-area=""
-                                asp-route="files"
-                                asp-route-name="@document.Name"
-                                name="docValue"
-                                value="@document.Name">
-                            @Html.Encode(@System.IO.Path.GetFileNameWithoutExtension(document.Name))
-                        </button>
-
-                    </td>
-                    <td class="p-1">
-                        @document.Type
-                    </td>
-                    <td class="p-1 text-center">
-                        <button type="button" class="btn btn-pharus btn-sm mr-1 btn-delete">
-                            @SharedLocalizer["Delete"]
-                        </button>
-                    </td>
+    <div class="table-wrapper-double-scroll">
+        <table class="table table-bordered table-hover tbl-documents table-view-pharus">
+            <thead>
+                <tr>
+                    <th class="text-secondary p-1">
+                        @SharedLocalizer["File Description"]
+                    </th>
+                    <th class="text-secondary p-1">
+                        @SharedLocalizer["Valid From:"]
+                    </th>
+                    <th class="text-secondary p-1">
+                        @SharedLocalizer["Valid Until:"]
+                    </th>
+                    <th class="text-secondary p-1">
+                        @SharedLocalizer["File Name"]
+                    </th>
+                    <th class="text-secondary p-1">
+                        @SharedLocalizer["File Type"]
+                    </th>
+                    <th class="text-secondary p-1">
+                    </th>
                 </tr>
-            }
-        </tbody>
-    </table>
-    <input type="hidden" name="AreaName" value="@Model.AreaName" />
+            </thead>
+            <tbody>
+                @foreach (var document in Model.Documents)
+                {
+                    <tr class="@document.FileId">
+                        <td class="p-1">
+                            @document.Description
+                        </td>
+                        <td class="p-1">
+                            @document.ValidFrom
+                        </td>
+                        <td class="p-1">
+                            @document.ValidUntil
+                        </td>
+                        <td class="p-1">
+
+                            <button class="btn-link-pharus text-left"
+                                    formtarget="_blank"
+                                    type="submit"
+                                    asp-area=""
+                                    asp-route="files"
+                                    asp-route-name="@document.Name"
+                                    name="docValue"
+                                    value="@document.Name">
+                                @Html.Encode(@System.IO.Path.GetFileNameWithoutExtension(document.Name))
+                            </button>
+
+                        </td>
+                        <td class="p-1">
+                            @document.Type
+                        </td>
+                        <td class="p-1 text-center">
+                            <button type="button" class="btn btn-pharus btn-sm mr-1 btn-delete">
+                                @SharedLocalizer["Delete"]
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <input type="hidden" name="AreaName" value="@Model.AreaName" />
+    </div>
 </form>
 
 <script>
+    $(function () {
+        // ________________________________________________________
+        //
+        // Double top scroll for wide table
+        $('.double-scroll').doubleScroll();
+        $('.table-wrapper-double-scroll').doubleScroll({ resetOnWindowResize: true });
+    })
     // ________________________________________________________
     //
     // Delete selected row from documents table by confirming
