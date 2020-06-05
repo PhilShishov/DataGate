@@ -60,18 +60,12 @@
         {
             var model = new DocumentOverviewViewModel { AreaName = areaName };
 
-            if (areaName == GlobalConstants.FundAreaName)
-            {
-                model.Documents = this.entitiesDocumentService.GetDocuments<DocumentViewModel>(QueryDictionary.SqlFunctionDocumentsFund, id);
-            }
-            else if (areaName == GlobalConstants.SubFundAreaName)
-            {
-                model.Documents = this.entitiesDocumentService.GetDocuments<DocumentViewModel>(QueryDictionary.SqlFunctionDocumentsSubFund, id);
-            }
-            else if (areaName == GlobalConstants.ShareClassAreaName)
-            {
-                model.Documents = this.entitiesDocumentService.GetDocuments<DocumentViewModel>(QueryDictionary.SqlFunctionDocumentsShareClass, id);
-            }
+            string function = QuerySwapper.GetResult(areaName,
+                                                FunctionDictionary.SqlFunctionDocumentsFund,
+                                                FunctionDictionary.SqlFunctionDocumentsSubFund,
+                                                FunctionDictionary.SqlFunctionDocumentsShareClass);
+
+            model.Documents = this.entitiesDocumentService.GetDocuments<DocumentViewModel>(function, id);
 
             return this.PartialView("SpecificEntity/_AllDocuments", model);
         }
@@ -82,18 +76,12 @@
             var model = new AgreementOverviewViewModel { AreaName = areaName };
             var dateParsed = DateTimeParser.WebFormat(date);
 
-            if (areaName == GlobalConstants.FundAreaName)
-            {
-                model.Agreements = this.entitiesDocumentService.GetAgreements<AgreementViewModel>(QueryDictionary.SqlFunctionAgreementsFund, id, dateParsed);
-            }
-            else if (areaName == GlobalConstants.SubFundAreaName)
-            {
-                model.Agreements = this.entitiesDocumentService.GetAgreements<AgreementViewModel>(QueryDictionary.SqlFunctionAgreementsSubFund, id, dateParsed);
-            }
-            else if (areaName == GlobalConstants.ShareClassAreaName)
-            {
-                model.Agreements = this.entitiesDocumentService.GetAgreements<AgreementViewModel>(QueryDictionary.SqlFunctionAgreementsShareClass, id, dateParsed);
-            }
+            string function = QuerySwapper.GetResult(areaName,
+                                             FunctionDictionary.SqlFunctionAgreementsFund,
+                                             FunctionDictionary.SqlFunctionAgreementsSubFund,
+                                             FunctionDictionary.SqlFunctionAgreementsShareClass);
+
+            model.Agreements = this.entitiesDocumentService.GetAgreements<AgreementViewModel>(function, id, dateParsed);
 
             return this.PartialView("SpecificEntity/_AllAgreements", model);
         }
@@ -104,15 +92,15 @@
 
             if (area == GlobalConstants.FundAreaName)
             {
-                fileType = QueryDictionary.FundFileType;
+                fileType = FunctionDictionary.FundFileType;
             }
             else if (area == GlobalConstants.SubFundAreaName)
             {
-                fileType = QueryDictionary.SubFundFileType;
+                fileType = FunctionDictionary.SubFundFileType;
             }
             else if (area == GlobalConstants.ShareClassAreaName)
             {
-                fileType = QueryDictionary.ShareClassFileType;
+                fileType = FunctionDictionary.ShareClassFileType;
             }
 
             return fileType;

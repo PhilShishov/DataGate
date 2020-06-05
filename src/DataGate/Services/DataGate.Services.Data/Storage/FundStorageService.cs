@@ -12,6 +12,7 @@
     using DataGate.Services.Data.Storage.Contracts;
     using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
+    using DataGate.Services.SqlClient;
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.Dtos.Funds;
     using DataGate.Web.InputModels.Funds;
@@ -35,23 +36,7 @@
         private const int IndexLEICode = 15;
         private const int IndexRegNumber = 16;
 
-        // ________________________________________________________
-        //
-        // Table functions and procedures as in DB
         private readonly string sqlFunctionFundId = "[fn_fund_id]";
-
-        private readonly string sqlProcedureEditFund = "EXEC sp_modify_fund " +
-                "@f_id, @f_initialDate, @f_status, " +
-                "@f_registrationNumber, @f_officialFundName, @f_shortFundName, " +
-                "@f_leiCode, @f_cssfCode, @f_faCode, @f_depCode, @f_taCode, " +
-                "@f_legalForm, @f_legalType, @f_legal_vehicle, @f_companyType, @f_tinNumber, " +
-                "@comment, @commentTitle";
-
-        private readonly string sqlProcedureCreateFund = "EXEC sp_new_fund " +
-                "@f_initialDate, @f_endDate, @f_status, " +
-                "@f_registrationNumber, @f_officialFundName, " +
-                "@f_leiCode, @f_cssfCode, @f_faCode, @f_depCode, @f_taCode, " +
-                "@f_legalForm, @f_legalType, @f_legal_vehicle, @f_companyType, @f_tinNumber";
 
         private readonly ISqlQueryManager sqlManager;
         private readonly IRepository<TbHistoryFund> repository;
@@ -109,7 +94,7 @@
             dto.LegalType = await this.service.GetByIdLegalType(model.LegalType);
             dto.CompanyTypeDesc = await this.service.GetByIdCompanyType(model.CompanyTypeDesc);
 
-            SqlCommand command = this.AssignBaseParameters(dto, this.sqlProcedureEditFund);
+            SqlCommand command = this.AssignBaseParameters(dto, ProcedureDictionary.SqlProcedureEditFund);
 
             // Assign particular parameters
             command.Parameters.AddRange(new[]
@@ -135,7 +120,7 @@
             dto.LegalType = await this.service.GetByIdLegalType(model.LegalType);
             dto.CompanyTypeDesc = await this.service.GetByIdCompanyType(model.CompanyTypeDesc);
 
-            SqlCommand command = this.AssignBaseParameters(dto, this.sqlProcedureCreateFund);
+            SqlCommand command = this.AssignBaseParameters(dto, ProcedureDictionary.SqlProcedureCreateFund);
 
             // Assign particular parameters
             command.Parameters.Add(new SqlParameter("@f_endDate", SqlDbType.NVarChar) { Value = dto.EndDate });

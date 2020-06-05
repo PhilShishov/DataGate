@@ -9,35 +9,12 @@
     using DataGate.Services.Data.Documents;
     using DataGate.Services.Data.Files.Contracts;
     using DataGate.Services.Mapping;
+    using DataGate.Services.SqlClient;
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.InputModels.Files;
 
     public class FileSystemService : IFileSystemService
     {
-        // ________________________________________________________
-        //
-        // Stored procedures as in DB
-        // Upload
-        private readonly string sqlProcedureDocumentFund = "EXEC sp_insert_map_fund";
-        private readonly string sqlProcedureDocumentSubFund = "EXEC sp_insert_map_subfund";
-        private readonly string sqlProcedureDocumentShareClass = "EXEC sp_insert_map_shareclass";
-        private readonly string sqlProcedureDocument = "@file_name, @entity_id, @start_connection, @end_connection, @file_ext, @filetype_id";
-
-        private readonly string sqlProcedureAgreementFund = "EXEC sp_insert_agreement_fund";
-        private readonly string sqlProcedureAgreementSubFund = "EXEC sp_insert_agreement_subfund";
-        private readonly string sqlProcedureAgreementShareClass = "EXEC sp_insert_agreement_shareclass";
-        private readonly string sqlProcedureAgreement = "@file_name, @entity_id, @file_ext, @activity_type_id, @contract_date, " +
-                                                        "@activation_date, @expiration_date, @company_id, @status";
-
-        // Delete
-        private readonly string sqlProcedureDeleteDocumentFund = "EXEC delete_fund_file_byid @file_id";
-        private readonly string sqlProcedureDeleteDocumentSubFund = "EXEC delete_subfund_file_byid @file_id";
-        private readonly string sqlProcedureDeleteDocumentShareClass = "EXEC delete_shareclass_file_byid @file_id";
-
-        private readonly string sqlProcedureDeleteAgreementFund = "EXEC delete_agreement_fundfile_byid @file_id";
-        private readonly string sqlProcedureDeleteAgreementSubFund = "EXEC delete_agreement_subfundfile_byid @file_id";
-        private readonly string sqlProcedureDeleteAgreementShareClass = "EXEC delete_agreement_shareclassfile_byid @file_id";
-
         private readonly ISqlQueryManager sqlManager;
         private readonly IDocumentService service;
 
@@ -54,24 +31,16 @@
         // Documents
         public async Task UploadDocument(UploadDocumentInputModel model)
         {
-            string query = string.Empty;
-
             UploadDocumentDto dto = AutoMapperConfig.MapperInstance.Map<UploadDocumentDto>(model);
             dto.EndConnection = model.EndConnection?.ToString(GlobalConstants.RequiredSqlDateTimeFormat, CultureInfo.InvariantCulture);
             dto.DocumentType = await this.service.GetByIdDocumentType(model.DocumentType);
 
-            if (model.AreaName == GlobalConstants.FundAreaName)
-            {
-                query = $"{this.sqlProcedureDocumentFund} {this.sqlProcedureDocument}";
-            }
-            else if (model.AreaName == GlobalConstants.SubFundAreaName)
-            {
-                query = $"{this.sqlProcedureDocumentSubFund} {this.sqlProcedureDocument}";
-            }
-            else if (model.AreaName == GlobalConstants.ShareClassAreaName)
-            {
-                query = $"{this.sqlProcedureDocumentShareClass} {this.sqlProcedureDocument}";
-            }
+            string query = QuerySwapper.GetResult(model.AreaName,
+                                                  ProcedureDictionary.SqlProcedureDocumentFund,
+                                                  ProcedureDictionary.SqlProcedureDocumentSubFund,
+                                                  ProcedureDictionary.SqlProcedureDocumentShareClass);
+
+            query += "@file_name, @entity_id, @start_connection, @end_connection, @file_ext, @filetype_id";
 
             SqlCommand command = new SqlCommand(query);
 
@@ -90,20 +59,10 @@
 
         public async Task DeleteDocument(int fileId, string areaName)
         {
-            string query = string.Empty;
-
-            if (areaName == GlobalConstants.FundAreaName)
-            {
-                query = $"{this.sqlProcedureDeleteDocumentFund}";
-            }
-            else if (areaName == GlobalConstants.SubFundAreaName)
-            {
-                query = $"{this.sqlProcedureDeleteDocumentSubFund}";
-            }
-            else if (areaName == GlobalConstants.ShareClassAreaName)
-            {
-                query = $"{this.sqlProcedureDeleteDocumentShareClass}";
-            }
+            string query = QuerySwapper.GetResult(areaName,
+                                                  ProcedureDictionary.SqlProcedureDeleteDocumentFund,
+                                                  ProcedureDictionary.SqlProcedureDeleteDocumentSubFund,
+                                                  ProcedureDictionary.SqlProcedureDeleteDocumentShareClass);
 
             SqlCommand command = new SqlCommand(query);
             command.Parameters.Add(new SqlParameter("@file_id", SqlDbType.NVarChar) { Value = fileId });
@@ -116,25 +75,17 @@
         // Agreements
         public async Task UploadAgreement(UploadAgreementInputModel model)
         {
-            string query = string.Empty;
-
             UploadAgreementDto dto = AutoMapperConfig.MapperInstance.Map<UploadAgreementDto>(model);
             dto.AgreementType = await this.service.GetByIdAgreementType(model.AgrType);
             dto.Status = await this.service.GetByIdStatus(model.Status);
             dto.Company = await this.service.GetByIdCompany(model.Company);
 
-            if (model.AreaName == GlobalConstants.FundAreaName)
-            {
-                query = $"{this.sqlProcedureAgreementFund} {this.sqlProcedureAgreement}";
-            }
-            else if (model.AreaName == GlobalConstants.SubFundAreaName)
-            {
-                query = $"{this.sqlProcedureAgreementSubFund} {this.sqlProcedureAgreement}";
-            }
-            else if (model.AreaName == GlobalConstants.ShareClassAreaName)
-            {
-                query = $"{this.sqlProcedureAgreementShareClass} {this.sqlProcedureAgreement}";
-            }
+            string query = QuerySwapper.GetResult(model.AreaName,
+                                                 ProcedureDictionary.SqlProcedureAgreementFund,
+                                                 ProcedureDictionary.SqlProcedureAgreementSubFund,
+                                                 ProcedureDictionary.SqlProcedureAgreementShareClass);
+
+            query += "@file_name, @entity_id, @file_ext, @activity_type_id, @contract_date, @activation_date, @expiration_date, @company_id, @status";
 
             SqlCommand command = new SqlCommand(query);
             command.Parameters.AddRange(new[]
@@ -155,20 +106,10 @@
 
         public async Task DeleteAgreement(int fileId, string areaName)
         {
-            string query = string.Empty;
-
-            if (areaName == GlobalConstants.FundAreaName)
-            {
-                query = $"{this.sqlProcedureDeleteAgreementFund}";
-            }
-            else if (areaName == GlobalConstants.SubFundAreaName)
-            {
-                query = $"{this.sqlProcedureDeleteAgreementSubFund}";
-            }
-            else if (areaName == GlobalConstants.ShareClassAreaName)
-            {
-                query = $"{this.sqlProcedureDeleteAgreementShareClass}";
-            }
+            string query = QuerySwapper.GetResult(areaName,
+                                                  ProcedureDictionary.SqlProcedureDeleteAgreementFund,
+                                                  ProcedureDictionary.SqlProcedureDeleteAgreementSubFund,
+                                                  ProcedureDictionary.SqlProcedureDeleteAgreementShareClass);
 
             SqlCommand command = new SqlCommand(query);
             command.Parameters.Add(new SqlParameter("@file_id", SqlDbType.NVarChar) { Value = fileId });
