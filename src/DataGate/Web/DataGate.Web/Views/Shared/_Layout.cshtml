@@ -91,7 +91,7 @@
                         </button>
 
                         <div class="search-form-wrapper mr-5 d-none">
-                            <form class="w-100" method="post" asp-area="" asp-route="search-results">
+                            <form class="w-100" method="get" asp-area="" asp-route="search-results">
                                 <div class="search-box-responsive">
                                     <input type="search"
                                            name="searchTerm"
@@ -113,7 +113,7 @@
                     </div>
 
                     <div class="search-box-wrapper mr-5">
-                        <form method="post" asp-area="" asp-route="search-results">
+                        <form method="get" asp-area="" asp-route="search-results">
                             <div class="search-box">
                                 <input type="search"
                                        name="searchTerm"

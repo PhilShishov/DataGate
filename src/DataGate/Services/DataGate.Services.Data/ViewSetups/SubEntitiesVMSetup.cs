@@ -17,7 +17,7 @@
                                                     EntitySubEntitiesGetDto dto, string function)
         {
             exceptionService.ThrowEntityNotFoundExceptionIfIdDoesNotExist(dto.Id);
-            var date = DateTimeParser.WebFormat(dto.Date);
+            var date = DateTimeParser.FromWebFormat(dto.Date);
             var entities = await service.GetAll(function, dto.Id, date).ToListAsync();
 
             dto.Entities = entities;
@@ -29,7 +29,7 @@
                                               SubEntitiesGetDto dto, string function)
         {
             exceptionService.ThrowEntityNotFoundExceptionIfIdDoesNotExist(dto.Id);
-            var date = DateTimeParser.WebFormat(dto.Date);
+            var date = DateTimeParser.FromWebFormat(dto.Date);
             var values = await service.GetAll(function, dto.Id, date, 1).ToListAsync();
             var headers = await service.GetAll(function, dto.Id, date).FirstOrDefaultAsync();
 
@@ -42,7 +42,7 @@
 
         public static async Task SetPost(SubEntitiesViewModel model, IEntityService service, string function)
         {
-            var date = DateTimeParser.WebFormat(model.Date);
+            var date = DateTimeParser.FromWebFormat(model.Date);
             var headers = await service.GetAll(function, model.Id, date).FirstOrDefaultAsync();
             model.Headers = headers.ToList();
             model.HeadersSelection = headers.ToList();

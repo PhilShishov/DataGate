@@ -45,7 +45,7 @@
                 }
                 else if (model.Command == GlobalConstants.CommandExtractPdf)
                 {
-                    var date = DateTimeParser.WebFormat(model.Date);
+                    var date = DateTimeParser.FromWebFormat(model.Date);
 
                     if (tableHeaders.ToList().Count > GlobalConstants.NumberOfAllowedColumnsInPdfView)
                     {

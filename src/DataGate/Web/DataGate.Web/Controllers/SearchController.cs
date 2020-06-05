@@ -18,7 +18,7 @@
             this.service = service;
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("search-results")]
         public IActionResult Result(string searchTerm)
         {

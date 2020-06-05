@@ -74,7 +74,7 @@
         public IActionResult GetAllAgreements(int id, string date, string areaName)
         {
             var model = new AgreementOverviewViewModel { AreaName = areaName };
-            var dateParsed = DateTimeParser.WebFormat(date);
+            var dateParsed = DateTimeParser.FromWebFormat(date);
 
             string function = QuerySwapper.GetResult(areaName,
                                              FunctionDictionary.SqlFunctionAgreementsFund,
