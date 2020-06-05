@@ -41,6 +41,7 @@
             {
                 Date = today.ToString(GlobalConstants.RequiredWebDateTimeFormat),
                 Agreements = agreements,
+                SelectedType = type,
             };
 
             return this.View(viewModel);
