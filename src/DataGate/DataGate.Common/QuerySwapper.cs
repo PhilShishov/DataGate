@@ -1,6 +1,6 @@
 ﻿namespace DataGate.Common
 {
-    public static class FunctionSwapper
+    public static class QuerySwapper
     {
         public static string GetResult(string chosenType, string functionFund, string functionSubFund, string functionShareClass)
         {

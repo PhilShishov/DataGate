@@ -35,10 +35,10 @@
         {
             var dto = new QueriesToPassDto()
             {
-                SqlFunctionById = QueryDictionary.SqlFunctionByIdSubFund,
-                SqlFunctionDistinctDocuments = QueryDictionary.SqlFunctionDistinctDocumentsSubFund,
-                SqlFunctionDistinctAgreements = QueryDictionary.SqlFunctionDistinctAgreementsSubFund,
-                SqlFunctionContainer = QueryDictionary.SqlFunctionContainerFund,
+                SqlFunctionById = FunctionDictionary.SqlFunctionByIdSubFund,
+                SqlFunctionDistinctDocuments = FunctionDictionary.SqlFunctionDistinctDocumentsSubFund,
+                SqlFunctionDistinctAgreements = FunctionDictionary.SqlFunctionDistinctAgreementsSubFund,
+                SqlFunctionContainer = FunctionDictionary.SqlFunctionContainerFund,
             };
 
             var viewModel = await SpecificVMSetup.SetGet<SpecificEntityViewModel>(id, date, this.service, this.subFundService, dto);

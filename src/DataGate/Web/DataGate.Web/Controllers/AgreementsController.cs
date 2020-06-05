@@ -29,10 +29,10 @@
         [Route("agreements/{type}")]
         public IActionResult All(string type)
         {
-            string function = FunctionSwapper.GetResult(type,
-                                                  QueryDictionary.SqlFunctionAllAgreementsFunds,
-                                                  QueryDictionary.SqlFunctionAllAgreementsSubFunds,
-                                                  QueryDictionary.SqlFunctionAllAgreementsShareClasses);
+            string function = QuerySwapper.GetResult(type,
+                                                  FunctionDictionary.SqlFunctionAllAgreementsFunds,
+                                                  FunctionDictionary.SqlFunctionAllAgreementsSubFunds,
+                                                  FunctionDictionary.SqlFunctionAllAgreementsShareClasses);
 
             var today = DateTime.Today;
             var agreements = this.service.GetAll<AllAgreementViewModel>(function, today);
@@ -68,26 +68,3 @@
         //}
     }
 }
-
-
-//private static string GetCorrectTypeName(string controllerName)
-//{
-//    string typeName = string.Empty;
-
-//    switch (controllerName)
-//    {
-//        case GlobalConstants.FundsControllerName:
-//            typeName = FundsNameDisplay;
-//            break;
-//        case GlobalConstants.SubFundsControllerName:
-//        case GlobalConstants.FundSubFundsControllerName:
-//            typeName = SubFundsNameDisplay;
-//            break;
-//        case GlobalConstants.ShareClassesControllerName:
-//        case GlobalConstants.SubFundShareClassesControllerName:
-//            typeName = ShareClassesNameDisplay;
-//            break;
-//    }
-
-//    return typeName;
-//}

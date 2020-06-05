@@ -28,14 +28,14 @@
         [Route("funds")]
         public async Task<IActionResult> All()
         {
-            var viewModel = await EntitiesVMSetup.SetGet<EntitiesViewModel>(this.service, QueryDictionary.SqlFunctionAllActiveFund);
+            var viewModel = await EntitiesVMSetup.SetGet<EntitiesViewModel>(this.service, FunctionDictionary.SqlFunctionAllActiveFund);
             return this.View(viewModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> All([Bind("Date,Values,Headers,IsActive,PreSelectedColumns,SelectedColumns,SelectTerm")] EntitiesViewModel viewModel)
         {
-            await EntitiesVMSetup.SetPost(viewModel, this.service, QueryDictionary.SqlFunctionAllFund, QueryDictionary.SqlFunctionAllActiveFund);
+            await EntitiesVMSetup.SetPost(viewModel, this.service, FunctionDictionary.SqlFunctionAllFund, FunctionDictionary.SqlFunctionAllActiveFund);
 
             if (viewModel.Values != null && viewModel.Values.Count > 0)
             {

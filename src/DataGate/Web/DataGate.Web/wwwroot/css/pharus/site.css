@@ -1,4 +1,21 @@
-﻿:root {
+﻿/* Chosen style to be imported on change*/
+.chosen-container .chosen-results li.highlighted {
+    background-color: lavender;
+    background-image: none;
+    color: inherit;
+}
+
+.chosen-container {
+    font-size: 14px;
+}
+
+
+.select2-container--classic .select2-results__option--highlighted[aria-selected] {
+    background-color: lavender;
+    color: inherit;
+}
+
+:root {
     font-size: 13px;
 }
 
@@ -11,6 +28,7 @@ html {
 body {
     font-family: 'Gilroy-Regular ☞';
     height: auto;
+    font-size: 1.05rem;
     line-height: 1.6;
     vertical-align: baseline;
     -webkit-font-smoothing: antialiased;

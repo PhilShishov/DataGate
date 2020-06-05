@@ -1,6 +1,6 @@
 ﻿namespace DataGate.Web.Helpers
 {
-    public static class QueryDictionary
+    public static class FunctionDictionary
     {
         // ________________________________________________________
         //
