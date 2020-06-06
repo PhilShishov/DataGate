@@ -19,10 +19,6 @@
 
         public DateTime? EndConnection { get; set; }
 
-        public IEnumerable<DistinctDocDto> DistinctDocuments { get; set; }
-
-        public IEnumerable<DistinctAgrDto> DistinctAgreements { get; set; }
-
         public IEnumerable<string> Headers { get; set; }
 
         public IEnumerable<string[]> Values { get; set; }

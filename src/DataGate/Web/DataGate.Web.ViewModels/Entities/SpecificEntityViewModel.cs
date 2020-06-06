@@ -16,7 +16,6 @@ namespace DataGate.Web.ViewModels.Entities
     using System.Collections.Generic;
 
     using DataGate.Services.Mapping;
-    using DataGate.Web.ViewModels.Documents;
     using DataGate.Web.ViewModels.Queries;
 
     public class SpecificEntityViewModel : BaseEntityViewModel, IMapFrom<SpecificEntityOverviewGetDto>
@@ -33,9 +32,6 @@ namespace DataGate.Web.ViewModels.Entities
         // public IEnumerable<string[]> TSAllPriceValues { get; set; }
         // public IEnumerable<string> TSPriceDates { get; set; }
         // public IEnumerable<string> TSTypeProviders { get; set; }
-        public IEnumerable<DistinctDocViewModel> DistinctDocuments { get; set; }
-
-        public IEnumerable<DistinctAgrViewModel> DistinctAgreements { get; set; }
 
         public DateTime StartConnection { get; set; }
 

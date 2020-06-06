@@ -144,6 +144,9 @@
   <data name="Active" xml:space="preserve">
     <value />
   </data>
+  <data name="ADDITIONAL INFORMATION" xml:space="preserve">
+    <value />
+  </data>
   <data name="Admin" xml:space="preserve">
     <value />
   </data>
@@ -156,13 +159,10 @@
   <data name="Agreements Library" xml:space="preserve">
     <value />
   </data>
-  <data name="All Agreements" xml:space="preserve">
-    <value />
-  </data>
-  <data name="All Documents" xml:space="preserve">
-    <value />
-  </data>
   <data name="ALL PHARUS AGREEMENTS" xml:space="preserve">
+    <value />
+  </data>
+  <data name="AuM Chart" xml:space="preserve">
     <value />
   </data>
   <data name="Back to All" xml:space="preserve">
@@ -210,6 +210,9 @@
   <data name="Delete User" xml:space="preserve">
     <value />
   </data>
+  <data name="Distinct" xml:space="preserve">
+    <value />
+  </data>
   <data name="DOCUMENTS" xml:space="preserve">
     <value />
   </data>
@@ -238,9 +241,6 @@
     <value />
   </data>
   <data name="Forgot Password" xml:space="preserve">
-    <value />
-  </data>
-  <data name="FUND ADDITIONAL INFORMATION" xml:space="preserve">
     <value />
   </data>
   <data name="Fund Agreements" xml:space="preserve">
@@ -315,9 +315,6 @@
   <data name="SELECT COLUMNS" xml:space="preserve">
     <value />
   </data>
-  <data name="SHARE CLASS ADDITIONAL INFORMATION" xml:space="preserve">
-    <value />
-  </data>
   <data name="Share Class Agreements" xml:space="preserve">
     <value />
   </data>
@@ -330,9 +327,6 @@
   <data name="Show" xml:space="preserve">
     <value />
   </data>
-  <data name="SUB FUND ADDITIONAL INFORMATION" xml:space="preserve">
-    <value />
-  </data>
   <data name="Sub Fund Agreements" xml:space="preserve">
     <value />
   </data>
@@ -342,7 +336,7 @@
   <data name="Sub Funds" xml:space="preserve">
     <value />
   </data>
-  <data name="Timeline Changes" xml:space="preserve">
+  <data name="Timeline" xml:space="preserve">
     <value />
   </data>
   <data name="Update password" xml:space="preserve">

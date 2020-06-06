@@ -22,7 +22,7 @@
 }
 
 <div class="table-responsive border-0 mx-auto">
-    <div>
+    <div class="text-center">
         <a class="btn btn-pharus btn-sm"
            asp-route="@subEntitiesRoute"
            asp-route-id="@Model.Id"
@@ -32,7 +32,7 @@
         </a>
     </div>
     <div class="table-wrapper-double-scroll">
-        <table class="table table-hover table-view-pharus">
+        <table class="table table-hover table-view-pharus help">
             <thead>
                 <tr>
                     @for (int row = 0; row < GlobalConstants.RowNumberOfHeadersInTable; row++)

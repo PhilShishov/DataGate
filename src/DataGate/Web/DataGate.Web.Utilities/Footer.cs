@@ -1,0 +1,73 @@
+﻿// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+// Utility class for extracting table data
+// as PDF and Excel
+
+// Created: 10/2019
+// Author:  Philip Shishov
+// NugetPackages : itext7 7.1.8, epplus.core 1.5.4
+
+// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+namespace DataGate.Web.Utilities
+{
+    using iText.Kernel.Events;
+    using iText.Kernel.Geom;
+    using iText.Kernel.Pdf;
+    using iText.Kernel.Pdf.Canvas;
+    using iText.Kernel.Pdf.Xobject;
+    using iText.Layout;
+    using iText.Layout.Element;
+    using iText.Layout.Properties;
+
+    public partial class GenerateFileTemplate
+    {
+        // Footer event handler
+        protected class Footer : IEventHandler
+        {
+            private PdfFormXObject placeholder;
+            private float side = 20;
+            private float x = 1140;
+            private float y = 25;
+            private float space = 4.5f;
+            private float descent = 3;
+
+            public Footer()
+            {
+                this.placeholder = new PdfFormXObject(new Rectangle(0, 0, this.side, this.side));
+            }
+
+            public void HandleEvent(Event ev)
+            {
+                PdfDocumentEvent docEvent = (PdfDocumentEvent)ev;
+                PdfDocument pdf = docEvent.GetDocument();
+                PdfPage page = docEvent.GetPage();
+                int pageNumber = pdf.GetPageNumber(page);
+                Rectangle pageSize = page.GetPageSize();
+
+                // Creates drawing canvas
+                PdfCanvas pdfCanvas = new PdfCanvas(page);
+                Canvas canvas = new Canvas(pdfCanvas, pageSize);
+
+                Paragraph p = new Paragraph()
+                        .Add("Page ")
+                        .Add(pageNumber.ToString())
+                        .Add(" of ");
+
+                canvas.ShowTextAligned(p, this.x, this.y, TextAlignment.RIGHT);
+                canvas.Close();
+
+                // Create placeholder object to write number of pages
+                pdfCanvas.AddXObject(this.placeholder, this.x + this.space, this.y - this.descent);
+                pdfCanvas.Release();
+            }
+
+            public void WriteTotal(PdfDocument pdf)
+            {
+                Canvas canvas = new Canvas(this.placeholder, pdf);
+                canvas.ShowTextAligned(
+                    pdf.GetNumberOfPages().ToString(),
+                    0, this.descent, TextAlignment.LEFT);
+                canvas.Close();
+            }
+        }
+    }
+}

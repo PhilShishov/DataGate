@@ -440,8 +440,8 @@ img {
                 content: "\f00c";
                 font-weight: 900;
                 color: #ffffff;
-                left: 15px;
-                top: 4px;
+                left: 14.5px;
+                top: 2px;
             }
 
             .fxt-template-layout2 .checkbox input[type="checkbox"]:checked + label::before {
@@ -492,7 +492,7 @@ img {
         border-left: none;
         border-right: none;
         border-top: none;
-        padding-left: 0px;
+        padding-left: 10px;
     }
 
     .fxt-template-layout2 .fxt-form {

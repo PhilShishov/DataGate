@@ -31,9 +31,6 @@
                 endConnection = DateTimeParser.FromSqlFormat(endConnectionString);
             }
 
-            var distinctDocs = service.GetDistinctDocuments(queryDto.SqlFunctionDistinctDocuments, id, dateParsed);
-            var distinctAgrs = service.GetDistinctAgreements(queryDto.SqlFunctionDistinctAgreements, id, dateParsed);
-
             var dto = new SpecificEntityOverviewGetDto()
             {
                 Id = id,
@@ -41,8 +38,6 @@
                 Entity = entity,
                 StartConnection = DateTimeParser.FromSqlFormat(startConnectionString),
                 EndConnection = endConnection,
-                DistinctDocuments = distinctDocs,
-                DistinctAgreements = distinctAgrs,
             };
 
             if (queryDto.SqlFunctionContainer != null)

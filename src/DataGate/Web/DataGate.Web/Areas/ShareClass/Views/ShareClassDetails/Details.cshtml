@@ -18,37 +18,13 @@
 
     <div class="justify-content-between" id="infoAndDocumentsView">
         <partial name="SpecificEntity/_Info" />
-        <partial name="SpecificEntity/_Load_Documents" />
+        <partial name="SpecificEntity/_Menu_Load_Items" />
     </div>
 
     <hr class="bg-pharus hr-2" />
 
-    <div class="row ml-3 mb-5" id="div-select-addInfo">
-        <label class="text-torshia m-1 pr-3">
-            @SharedLocalizer["SHARE CLASS ADDITIONAL INFORMATION"]
-        </label>
-        <select class="select-pharus"
-                id="select-additional-info">
-            <option value="" selected disabled>@SharedLocalizer["Select an option..."]</option>
-            <option value="TimelineChanges">@SharedLocalizer["Timeline Changes"]</option>
-            <option value="AllDocuments">@SharedLocalizer["All Documents"]</option>
-            <option value="AllAgreements">@SharedLocalizer["All Agreements"]</option>
-        </select>
-    </div>
-    <form id="load-form" method="get"></form>
-
     <!-- Container for subentities selected option-->
     <div id="subEntities" class="mt-4 d-none"></div>
-
-    <!-- Container for documents selected option-->
-    <div id="allDocuments" class="mt-3 d-none"></div>
-
-    <!-- Container for agreements selected option-->
-    <div id="allAgreements" class="mt-3 d-none"></div>
-
-    <!-- Container for timelines selected option-->
-    <div class="container py-5 row d-none" id="timelineChanges"></div>
-
 </div>
 
 <!-- Modal placeholder for document upload-->
