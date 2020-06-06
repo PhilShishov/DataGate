@@ -22,7 +22,8 @@
     <hr />
     <div class="row">
         <div class="col-md-4">
-            <form asp-action="EditUser"
+            <form asp-area="Admin"
+                  asp-controller="Admin"
                   method="post"
                   class="d-inline"
                   id="editForm">
@@ -55,16 +56,14 @@
                 <div class="button-holder">
                     <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
                     <button type="submit"
+                            asp-action="EditUser"
                             class="btn btn-pharus text-white btn-confirm-update"
-                            name="save_button"
-                            value="Update"
                             style="margin-right:40px">
                         @SharedLocalizer["Save changes"]
                     </button>
                     <button type="submit"
-                            class="btn btn-pharus text-white btn-confirm-delete"
-                            name="delete_button"
-                            value="Delete">
+                            asp-action="DeleteUser"
+                            class="btn btn-pharus text-white btn-confirm-delete">
                         @SharedLocalizer["Delete User"]
                     </button>
                 </div>
@@ -74,7 +73,6 @@
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
     <script src="~/js/createEditForms.js" asp-append-version="true"></script>
 
     <script src="https://www.google.com/recaptcha/api.js?render=@this.Configuration["GoogleReCaptcha:Key"]"></script>

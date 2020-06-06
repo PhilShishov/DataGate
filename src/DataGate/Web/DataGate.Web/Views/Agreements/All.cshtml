@@ -131,38 +131,48 @@
     // ________________________________________________________
     //
     // Delete selected row from agreements table by confirming
-    $('.btn-delete').on('click', function () {
+   $('.btn-delete').on('click', function () {
         const tokenAgr = $('#form-agreement input[name=__RequestVerificationToken]').val();
         const areaName = '@Model.SelectedType';
-        let con = confirm('Are you sure you want to delete this?');
+        const agrValue = $(this).closest('tr').find('button').eq(0).val();
+        const fileId = $(this).closest('tr').attr('class');
 
-        if (!con) {
-            event.preventDefault();
-        } else {
-            const agrValue = $(this).closest('tr').find('button').eq(0).val();
-            const fileId = $(this).closest('tr').attr('class');
-            $.blockUI({ message: `<h3>Please wait a moment...</h3>` });
-            $.ajax({
-                url: '/media/delete',
-                type: 'GET',
-                dataType: 'json',
-                contentType: 'application/json; charset=utf-8',
-                headers: { 'X-CSRF-TOKEN': tokenAgr },
-                data: { fileId: fileId, agrValue: agrValue, areaName: areaName },
-            }).done(function (data) {
-                if (data.fileId == 'false') {
-                    alert('Something wrong!');
-                    return false;
-                }
+        var jqXhr = $.ajax({
+            type: 'GET',
+            url: '/media/delete',
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            headers: { 'X-CSRF-TOKEN': tokenDoc },
+            data: { fileId: fileId, agrValue: agrValue, areaName: areaName }
+        });
 
-                $('.tbl-agreements .' + data.fileId).remove();
-                $('.tbl-distinct-agreements .' + data.fileId).remove();
-                setTimeout($.unblockUI, 2000);
-                }).fail(function (request, status, error) {
-                    $.unblockUI();
-                    alert(request.responseText)
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        }).then((isConfirm) => {
+            if (!isConfirm) return;
+            jqXhr
+                .done(function (data) {
+                    if (data.fileId == 'false') {
+                        swal("Error deleting!", "Please try again", {
+                            icon: "error",
+                        });
+                        return false;
+                    }
+                    $('.tbl-agreements .' + data.fileId).remove();
+                    $('.tbl-distinct-agreements .' + data.fileId).remove();
+                    swal("Your file has been deleted!", {
+                        icon: "success",
+                    });
+                })
+                .fail(function (request, status, error) {
+                    swal(request.responseText, {
+                        icon: "error"
+                    })
                 });
-            }
         });
     </script>
 }

@@ -23,6 +23,12 @@
             return this.RedirectToAction(action, controller);
         }
 
+        public IActionResult ShowErrorLocal(string errorMessage, string action)
+        {
+            this.TempData[GlobalConstants.ErrorKey] = errorMessage;
+            return this.LocalRedirect(action);
+        }
+
         public IActionResult ShowInfo(string infoMessage, string route, object routeValues)
         {
             this.TempData[GlobalConstants.InfoKey] = infoMessage;

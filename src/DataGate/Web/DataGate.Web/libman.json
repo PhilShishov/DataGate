@@ -76,6 +76,31 @@
     },
     {
       "provider": "cdnjs",
+      "library": "AlertifyJS@1.13.1",
+      "destination": "wwwroot/lib/alertifyjs/",
+      "files": [
+        "alertify.min.js",
+        "alertify.js",
+        "css/alertify.min.css",
+        "css/alertify.css",
+        "css/themes/bootstrap.min.css",
+        "css/themes/bootstrap.css",
+        "css/themes/default.css",
+        "css/themes/default.min.css",
+        "css/themes/semantic.min.css",
+        "css/themes/semantic.css"
+      ]
+    },
+    {
+      "provider": "cdnjs",
+      "library": "sweetalert@2.1.2",
+      "destination": "wwwroot/lib/sweetalert/",
+      "files": [
+        "sweetalert.min.js"
+      ]
+    },
+    {
+      "provider": "cdnjs",
       "library": "chosen@1.8.7",
       "destination": "wwwroot/lib/chosen/",
       "files": [

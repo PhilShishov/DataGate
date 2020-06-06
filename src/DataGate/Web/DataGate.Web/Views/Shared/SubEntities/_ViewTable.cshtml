@@ -20,12 +20,12 @@
 }
 
 <div class="table-responsive border-0 mx-auto table-wrapper-double-scroll">
-    <table class="table table-hover table-view-pharus help" id="table-to-extract">
+    <table class="table table-hover table-view-pharus" id="table-to-extract">
         <thead>
             <tr>
                 @for (int header = 0; header < Model.Headers.Count; header++)
                 {
-                    <th class="pr-3"
+                    <th class="pr-3 help"
                         data-toggle="tooltip"
                         data-placement="bottom"
                         title="@Model.Headers[header]">

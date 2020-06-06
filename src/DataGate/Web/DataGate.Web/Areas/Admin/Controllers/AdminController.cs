@@ -80,6 +80,7 @@
             string returnUrl = ViewUsersUrl;
             if (!this.ModelState.IsValid)
             {
+                this.ViewData["Roles"] = this.roleManager.Roles.ToList();
                 return this.View(inputModel ?? new CreateUserInputModel());
             }
 
@@ -94,6 +95,7 @@
             if (result.Succeeded)
             {
                 this.logger.LogInformation("User created a new account with password.");
+                await this.AssignRoleToUser(inputModel, user);
 
                 // Upon creation send email confirmation to new user
                 string code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -106,7 +108,6 @@
                 string message = string.Format(GlobalConstants.EmailConfirmationMessage, HtmlEncoder.Default.Encode(callbackUrl));
                 await this.emailSender.SendEmailAsync("philip.shishov@pharusmanco.lu", "Philip Shishov", inputModel.Email, GlobalConstants.ConfirmEmailSubject, message);
 
-                await this.AssignRoleToUser(inputModel, user);
                 return this.ShowInfoLocal(string.Format(InfoMessages.AddUser, user.UserName, inputModel.RoleType), returnUrl);
             }
 
@@ -145,11 +146,11 @@
             }
 
             var user = await this.userManager.FindByIdAsync(inputModel.Id);
-            var roles = await this.userManager.GetRolesAsync(user);
 
-            // TODO case with 2 or more roles for same user
-            if (this.HttpContext.Request.Form.ContainsKey("save_button"))
+            if (user != null)
             {
+                var roles = await this.userManager.GetRolesAsync(user);
+
                 user.UserName = inputModel.Username;
                 user.Email = inputModel.Email;
 
@@ -182,8 +183,28 @@
                     return this.ShowInfoLocal(string.Format(InfoMessages.UpdateUser, user.UserName), returnUrl);
                 }
             }
-            else if (this.HttpContext.Request.Form.ContainsKey("delete_button"))
+
+            return this.ShowErrorLocal(string.Format(ErrorMessages.UnsuccessfulUpdate, user.UserName), returnUrl);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(
+             [Bind("Id", "Username", "Email", "RoleType", "PasswordHash",
+                           "ConfirmPassword", "RecaptchaValue")] EditUserInputModel inputModel, string returnUrl = null)
+        {
+            returnUrl = ViewUsersUrl;
+
+            if (!this.ModelState.IsValid)
             {
+                return this.View(inputModel ?? new EditUserInputModel());
+            }
+
+            var user = await this.userManager.FindByIdAsync(inputModel.Id);
+
+            if (user != null)
+            {
+                var roles = await this.userManager.GetRolesAsync(user);
+
                 await this.userManager.RemoveFromRoleAsync(user, roles.FirstOrDefault());
                 var result = await this.userManager.DeleteAsync(user);
                 if (result.Succeeded)
@@ -194,7 +215,7 @@
                 }
             }
 
-            return this.View();
+            return this.ShowErrorLocal(string.Format(ErrorMessages.UnsuccessfulDelete, user.UserName), returnUrl);
         }
 
         private async Task AssignRoleToUser(CreateUserInputModel inputModel, ApplicationUser user)
@@ -224,6 +245,10 @@
                 else if (role == GlobalConstants.ComplianceRoleName)
                 {
                     await this.userManager.AddToRoleAsync(user, GlobalConstants.ComplianceRoleName);
+                }
+                else if (role == GlobalConstants.GuestRoleName)
+                {
+                    await this.userManager.AddToRoleAsync(user, GlobalConstants.GuestRoleName);
                 }
             }
         }

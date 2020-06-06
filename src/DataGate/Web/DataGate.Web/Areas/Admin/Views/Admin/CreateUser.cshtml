@@ -64,7 +64,7 @@
                 @SharedLocalizer["Role"]
             </label><br>
             <select class="select-pharus" id="roletype" asp-for="RoleType">
-                <option selected disabled>
+                <option selected disabled value="0">
                     @SharedLocalizer["-- Choose Role --"]
                 </option>
                 @foreach (var role in (List<ApplicationRole>)ViewData["Roles"])
@@ -72,8 +72,8 @@
                     <option value="@role.Name">@role</option>
                 }
             </select>
-            <span asp-validation-for="RoleType" class="text-danger"></span>
         </div>
+        <span asp-validation-for="RoleType" class="text-danger"></span>
         <div class="button-holder d-flex">
             <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
             <button type="submit"
@@ -85,7 +85,6 @@
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
     <script src="~/js/createEditForms.js" asp-append-version="true"></script>
     <script src="https://www.google.com/recaptcha/api.js?render=@this.Configuration["GoogleReCaptcha:Key"]"></script>
     <script>

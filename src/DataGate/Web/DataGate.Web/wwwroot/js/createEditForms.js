@@ -13,7 +13,7 @@ const SELECTORS_CREATE_EDIT = {
     INPUTS_ALL_EXCEPT_FORMAT_NAME: `input:not(#${HTML_CREATE_EDIT.INPUT_NAME_TO_FORMAT})`
 };
 
-const MESSAGES_CREATE_EDIT = {
+const MESSAGES = {
     CONFIRM_CREATE: 'Are you sure you want to create this?',
     CONFIRM_DELETE: 'Are you sure you want to delete this?',
     CONFIRM_UPDATE: 'Are you sure you want to update this?',
@@ -27,11 +27,20 @@ const MESSAGES_CREATE_EDIT = {
         for (let btn of buttons) {
             btn.addEventListener('click',
                 function (event) {
-                    let con = confirm(MESSAGES_CREATE_EDIT.CONFIRM_CREATE);
-
-                    if (!con) {
-                        event.preventDefault();
-                    }
+                    const form = $(this).parent().parent();
+                    event.preventDefault();
+                    swal({
+                        title: MESSAGES.CONFIRM_CREATE,
+                        icon: "warning",
+                        buttons: [
+                            'No, cancel it!',
+                            'Yes, I am sure!'
+                        ],
+                    }).then((isConfirm) => {
+                        if (!isConfirm) return;
+                        form.submit();
+                        return true;
+                    });
                 });
         }
     }
@@ -46,11 +55,20 @@ const MESSAGES_CREATE_EDIT = {
         for (let btn of buttons) {
             btn.addEventListener('click',
                 function (event) {
-                    let con = confirm(MESSAGES_CREATE_EDIT.CONFIRM_DELETE);
-
-                    if (!con) {
-                        event.preventDefault();
-                    }
+                    const form = $(this).parent().parent();
+                    event.preventDefault();
+                    swal({
+                        title: MESSAGES.CONFIRM_DELETE,
+                        icon: "warning",
+                        buttons: [
+                            'No, cancel it!',
+                            'Yes, I am sure!'
+                        ],
+                    }).then((isConfirm) => {
+                        if (!isConfirm) return;
+                        form.submit();
+                        return true;
+                    });
                 });
         }
     }
@@ -64,11 +82,20 @@ const MESSAGES_CREATE_EDIT = {
         for (let btn of buttons) {
             btn.addEventListener('click',
                 function (event) {
-                    let con = confirm(MESSAGES_CREATE_EDIT.CONFIRM_UPDATE);
-
-                    if (!con) {
-                        event.preventDefault();
-                    }
+                    const form = $(this).parent().parent();
+                    event.preventDefault();
+                    swal({
+                        title: MESSAGES.CONFIRM_UPDATE,
+                        icon: "warning",
+                        buttons: [
+                            'No, cancel it!',
+                            'Yes, I am sure!'
+                        ],
+                    }).then((isConfirm) => {
+                        if (!isConfirm) return;
+                        form.submit();
+                        return true;
+                    });
                 });
         }
     }
