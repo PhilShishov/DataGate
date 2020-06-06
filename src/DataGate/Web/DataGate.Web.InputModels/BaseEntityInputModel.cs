@@ -12,6 +12,7 @@ namespace DataGate.Web.InputModels
     using System;
     using System.ComponentModel.DataAnnotations;
 
+    using DataGate.Common;
     using DataGate.Web.Infrastructure.Attributes.Validation;
 
     public abstract class BaseEntityInputModel
@@ -24,7 +25,7 @@ namespace DataGate.Web.InputModels
         [Display(Name = "CSSF Code")]
         public string CSSFCode { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = ErrorMessages.NotSelectedValue)]
         [Display(Name = "Status")]
         public string Status { get; set; }
 

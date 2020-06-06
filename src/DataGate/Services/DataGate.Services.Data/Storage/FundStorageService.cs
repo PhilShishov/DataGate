@@ -23,8 +23,8 @@
     {
         private const int SkipHeaders = 1;
         private const int IndexFundName = 3;
-        private const int IndexCSSFCode = 4;
-        private const int IndexStatus = 5;
+        private const int IndexStatus = 4;
+        private const int IndexCSSFCode = 5;
         private const int IndexLegalForm = 6;
         private const int IndexLegalVehicle = 7;
         private const int IndexLegalType = 8;

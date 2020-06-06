@@ -7,7 +7,6 @@
         public const string PasswordMismatch = "The password and confirmation password do not match.";
         public const string NewPasswordMismatch = "The new password and confirmation password do not match.";
         public const string NotSelectedValue = "Please select at least one option!";
-        public const string UnsuccessfulEdit = "Update was unsuccessful! Please try again.";
         public const string UnsuccessfulDelete = "Delete was unsuccessful! Please try again.";
 
         public const string ChosenDateIsEmpty = "Date cannot be empty!";

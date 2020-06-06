@@ -182,6 +182,8 @@
 
                     return this.ShowInfoLocal(string.Format(InfoMessages.UpdateUser, user.UserName), returnUrl);
                 }
+
+                this.AddErrors(resultUser);
             }
 
             return this.ShowErrorLocal(string.Format(ErrorMessages.UnsuccessfulUpdate, user.UserName), returnUrl);
@@ -213,6 +215,8 @@
 
                     return this.ShowInfoLocal(string.Format(InfoMessages.RemoveUser, user.UserName), returnUrl);
                 }
+
+                this.AddErrors(result);
             }
 
             return this.ShowErrorLocal(string.Format(ErrorMessages.UnsuccessfulDelete, user.UserName), returnUrl);

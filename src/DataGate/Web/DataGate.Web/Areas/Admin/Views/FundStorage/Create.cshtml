@@ -58,7 +58,7 @@
             <div class="form-group">
                 <label asp-for="Status" class="text-torshia"></label><br>
                 <select class="select-pharus" asp-for="Status">
-                    <option selected disabled>-- Choose Status --</option>
+                    <option selected disabled value="0">-- Choose Status --</option>
                     @foreach (var status in (List<string>)ViewData["Status"])
                     {
                         <option value="@status">@status</option>
@@ -70,7 +70,7 @@
             <div class="form-group">
                 <label asp-for="LegalForm" class="text-torshia"></label><br>
                 <select class="select-pharus" asp-for="LegalForm">
-                    <option selected disabled>-- Choose Form --</option>
+                    <option selected disabled value="0">-- Choose Form --</option>
                     @foreach (var form in (List<string>)ViewData["LegalForm"])
                     {
                         <option value="@form">@form</option>
@@ -94,7 +94,7 @@
             <div class="form-group">
                 <label asp-for="LegalType" class="text-torshia"></label><br>
                 <select class="select-pharus" asp-for="LegalType">
-                    <option selected disabled>-- Choose Type --</option>
+                    <option selected disabled value="0">-- Choose Type --</option>
                     @foreach (var type in (List<string>)ViewData["LegalType"])
                     {
                         <option value="@type">@type</option>
@@ -130,7 +130,7 @@
             <div class="form-group">
                 <label asp-for="CompanyTypeDesc" class="text-torshia"></label><br>
                 <select class="select-pharus" asp-for="CompanyTypeDesc">
-                    <option selected disabled>-- Choose Description --</option>
+                    <option selected disabled value="0">-- Choose Description --</option>
                     @foreach (var desc in (List<string>)ViewData["CompanyTypeDesc"])
                     {
                         <option value="@desc">@desc</option>
@@ -164,7 +164,7 @@
             </div>
         </div>
 
-        <div class="button-holder mt-4">
+        <div class="button-holder my-4">
             <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
             <button type="submit"
                     class="btn btn-pharus btn-sm mb-1 btn-confirm-create"
@@ -179,7 +179,6 @@
     </form>
 </div>
 @section Scripts{
-    <partial name="_ValidationScriptsPartial" />
     <script src="~/js/createEditForms.js" asp-append-version="true"></script>
 
     <script src="https://www.google.com/recaptcha/api.js?render=@this.Configuration["GoogleReCaptcha:Key"]"></script>
