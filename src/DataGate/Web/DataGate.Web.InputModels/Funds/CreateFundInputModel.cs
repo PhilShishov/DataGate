@@ -3,6 +3,8 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
+    using DataGate.Common;
+
     public class CreateFundInputModel : BaseEntityInputModel
     {
         [Display(Name = "End Date")]
@@ -14,15 +16,15 @@
         [Display(Name = "Official Fund Name")]
         public string FundName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = ErrorMessages.NotSelectedValue)]
         [Display(Name = "Legal Form")]
         public string LegalForm { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = ErrorMessages.NotSelectedValue)]
         [Display(Name = "Legal Vehicle")]
         public string LegalVehicle { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = ErrorMessages.NotSelectedValue)]
         [Display(Name = "Legal Type")]
         public string LegalType { get; set; }
 
@@ -30,7 +32,7 @@
         [Display(Name = "Dep. Code")]
         public string DEPCode { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = ErrorMessages.NotSelectedValue)]
         [Display(Name = "Company Description")]
         public string CompanyTypeDesc { get; set; }
 
