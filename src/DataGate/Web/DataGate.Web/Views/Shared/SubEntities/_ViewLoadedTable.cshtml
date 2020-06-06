@@ -32,14 +32,14 @@
         </a>
     </div>
     <div class="table-wrapper-double-scroll">
-        <table class="table table-hover table-view-pharus help">
+        <table class="table table-hover table-view-pharus">
             <thead>
                 <tr>
                     @for (int row = 0; row < GlobalConstants.RowNumberOfHeadersInTable; row++)
                     {
                         for (int col = 0; col < Model.Entities[row].Length; col++)
                         {
-                            <th class="pr-3"
+                            <th class="pr-3 help"
                                 data-toggle="tooltip"
                                 data-placement="bottom"
                                 title="@Model.Entities[row][col]">

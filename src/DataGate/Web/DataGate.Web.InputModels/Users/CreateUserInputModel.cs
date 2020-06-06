@@ -25,7 +25,7 @@
         [Compare(nameof(Password), ErrorMessage = ErrorMessages.PasswordMismatch)]
         public string ConfirmPassword { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = ErrorMessages.NotSelectedValue)]
         [Display(Name = ModelConstants.UserRoleDisplayName)]
         public string RoleType { get; set; }
 
