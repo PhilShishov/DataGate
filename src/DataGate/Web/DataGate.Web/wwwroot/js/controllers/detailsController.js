@@ -28,9 +28,24 @@ const URLS = {
 // all documents, aum chart
 
 function loadAddInfo(token, urlSubEnt, json) {
-    $(HTML_MENU.BTN_SUBENTITIES).on('click', function () {
+    $(HTML_MENU.BTN_SUBENTITIES).on('click', function (event) {
         beforeCallStyleHandler();
-        getSelectMenuRequestHandler(urlSubEnt, HTML_MENU.CONTAINER_SUBENTITIES);
+
+        $.ajax({
+            url: urlSubEnt,
+            type: 'GET',
+            data: json,
+            contentType: 'application/json; charset=utf-8',
+            headers: { 'X-CSRF-TOKEN': token },
+            success: function (response) {
+                $(HTML_MENU.CONTAINER_SUBENTITIES).html(response);
+
+                $('html, body').animate({
+                    scrollTop: $(HTML_MENU.CONTAINER_SUBENTITIES).position().top - 80
+                }, 'slow');               
+            }
+        });
+
         afterCallStyleHandler(HTML_MENU.CONTAINER_SUBENTITIES, HTML_MENU.BTN_SUBENTITIES);
     });
 
@@ -179,7 +194,6 @@ function uploadModals(token, json) {
     }
 };
 
-
 // ________________________________________________________
 //
 // Select menu from chosen.js initialization
@@ -188,4 +202,4 @@ $(function () {
         disable_search_threshold: 10,
         width: "260px",
     })
-})
+});

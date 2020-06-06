@@ -2,12 +2,6 @@
 @inject IStringLocalizer<SharedResources> SharedLocalizer
 @{
     var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
-    var areaName = string.Empty;
-
-    if (controllerName == GlobalConstants.FundDetailsControllerName)
-    {
-        areaName = GlobalConstants.FundAreaName;
-    }
 }
 <form method="post">
     <div class="mb-5">
@@ -120,5 +114,5 @@
             </table>
         </div>
     </div>
-    <input type="hidden" name="AreaName" value="@areaName" />
+    <input type="hidden" name="AreaName" value="@Model.AreaName" />
 </form>
