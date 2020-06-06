@@ -4,7 +4,6 @@
     var controllerName = this.ViewContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
     var targetEditRoute = string.Empty;
     var targetRouteContainer = string.Empty;
-    var containerName = string.Empty;
     var entityName = string.Empty;
     var routeName = string.Empty;
     var areaName = string.Empty;
@@ -18,7 +17,6 @@
     else if (controllerName == GlobalConstants.SubFundDetailsControllerName)
     {
         entityName = GlobalConstants.SubFundNameDisplay;
-        containerName = GlobalConstants.ContainerFundName;
         areaName = GlobalConstants.FundAreaName;
         targetRouteContainer = GlobalConstants.FundDetailsRouteName;
         routeName = GlobalConstants.AllSubFundsRouteName;
@@ -26,7 +24,6 @@
     else if (controllerName == GlobalConstants.ShareClassDetailsControllerName)
     {
         entityName = GlobalConstants.ShareClassNameDisplay;
-        containerName = GlobalConstants.ContainerSubFundName;
         areaName = GlobalConstants.SubFundAreaName;
         targetRouteContainer = GlobalConstants.SubFundDetailsRouteName;
         routeName = GlobalConstants.AllShareClassesRouteName;
@@ -42,7 +39,7 @@
         {
             <div class="div-entity-container-wrapper">
                 <p>
-                    @containerName @SharedLocalizer["CONTAINER"]:
+                   @SharedLocalizer["CONTAINER"]:
                 </p>
                 <a asp-area="@areaName"
                    asp-route="@targetRouteContainer"

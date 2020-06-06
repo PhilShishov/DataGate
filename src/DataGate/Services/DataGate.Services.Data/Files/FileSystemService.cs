@@ -40,7 +40,7 @@
                                                   ProcedureDictionary.SqlProcedureDocumentSubFund,
                                                   ProcedureDictionary.SqlProcedureDocumentShareClass);
 
-            query += "@file_name, @entity_id, @start_connection, @end_connection, @file_ext, @filetype_id";
+            query += " @file_name, @entity_id, @start_connection, @end_connection, @file_ext, @filetype_id";
 
             SqlCommand command = new SqlCommand(query);
 
@@ -85,7 +85,7 @@
                                                  ProcedureDictionary.SqlProcedureAgreementSubFund,
                                                  ProcedureDictionary.SqlProcedureAgreementShareClass);
 
-            query += "@file_name, @entity_id, @file_ext, @activity_type_id, @contract_date, @activation_date, @expiration_date, @company_id, @status";
+            query += " @file_name, @entity_id, @file_ext, @activity_type_id, @contract_date, @activation_date, @expiration_date, @company_id, @status";
 
             SqlCommand command = new SqlCommand(query);
             command.Parameters.AddRange(new[]

@@ -43,6 +43,12 @@
     }
 }
 
+@media only screen and (max-width: 1200px) {
+    .div-entity-container-wrapper {
+        display: none;
+    }
+}
+
 
 @media only screen and (min-width: 990px) {
     .toolbar-view-all {
