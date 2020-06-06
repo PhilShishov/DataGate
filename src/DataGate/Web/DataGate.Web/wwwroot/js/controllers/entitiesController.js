@@ -77,6 +77,8 @@ function extract(model) {
     }
 }
 
+// ________________________________________________________
+//
 // Submit form on checkbox change - show active and inactive entities
 function submitForm() {
     const updateForm = document.getElementById(HTML.FORM_UPDATE);
@@ -91,6 +93,8 @@ function submitForm() {
     }
 };
 
+// ________________________________________________________
+//
 // Add inactive class to entities that have inactive status
 (function () {
     const tbody = document.getElementById(HTML.TBODY_UPDATE_INACTIVE);
@@ -136,8 +140,9 @@ $(function () {
     $('.table-wrapper-double-scroll').doubleScroll({ resetOnWindowResize: true });
 })
 
-// Autocomplete 
-
+// ________________________________________________________
+//
+// Autocomplete
 function loadAutocomplete(token, controllerToPass, entityId) {
     $('#SelectTerm').select2({
         placeholder: 'Quick Select',
@@ -163,9 +168,9 @@ function loadAutocomplete(token, controllerToPass, entityId) {
     });
 }
 
-
+// ________________________________________________________
+//
 // Multiselect plugin
-
 (function ($) {
 
     $.widget("ui.multiselect", {

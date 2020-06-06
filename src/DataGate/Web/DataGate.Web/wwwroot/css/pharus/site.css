@@ -6,7 +6,7 @@
 }
 
 .chosen-container {
-    font-size: 14px;
+    font-size: 15px;
 }
 
 
@@ -96,6 +96,10 @@ textarea {
 
 .w-35 {
     width: 35%;
+}
+
+.w-60 {
+    width: 60%;
 }
 
 .w-65 {

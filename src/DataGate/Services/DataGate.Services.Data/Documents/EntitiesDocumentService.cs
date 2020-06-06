@@ -18,16 +18,30 @@
             this.sqlManager = sqlQueryManager;
         }
 
+        public IEnumerable<T> GetDistinctDocuments<T>(string function, int id, DateTime? date)
+        {
+            var dto = this.sqlManager.ExecuteQueryMapping<DistinctDocDto>(function, id, date);
+
+            return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
+        }
+
+        public IEnumerable<T> GetDistinctAgreements<T>(string function, int id, DateTime? date)
+        {
+            var dto = this.sqlManager.ExecuteQueryMapping<DistinctAgrDto>(function, id, date);
+
+            return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
+        }
+
         public IEnumerable<T> GetAgreements<T>(string function, int id, DateTime? date)
         {
-            IEnumerable<AgreementDto> dto = this.sqlManager.ExecuteQueryMapping<AgreementDto>(function, id, date);
+            var dto = this.sqlManager.ExecuteQueryMapping<AgreementDto>(function, id, date);
 
             return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
         }
 
         public IEnumerable<T> GetDocuments<T>(string function, int id)
         {
-            IEnumerable<DocumentDto> dto = this.sqlManager.ExecuteQueryMapping<DocumentDto>(function, id);
+            var dto = this.sqlManager.ExecuteQueryMapping<DocumentDto>(function, id);
 
             return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
         }

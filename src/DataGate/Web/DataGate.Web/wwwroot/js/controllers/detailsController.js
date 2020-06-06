@@ -1,61 +1,80 @@
-﻿const HTML_ADDITIONAL_INFO = {
-    SELECT: '#select-additional-info',
+﻿const HTML_MENU = {
+    BTN_SUBENTITIES: '#btn-open-subentities',
+    BTN_DISTINCT: '#btn-open-distinct',
+    BTN_CHART: '#btn-open-chart',
+    BTN_TIMELINE: '#btn-open-timeline',
+    BTN_DOCUMENTS: '#btn-open-documents',
+    BTN_AGREEMENTS: '#btn-open-agreements',
     CONTAINER_SUBENTITIES: '#subEntities',
+    CONTAINER_DISTINCT: '#distinctDocuments',
+    CONTAINER_CHART: '#aumChart',
     CONTAINER_TIMELINES: '#timelineChanges',
     CONTAINER_DOCUMENTS: '#allDocuments',
     CONTAINER_AGREEMENTS: '#allAgreements',
 };
 
-const DROPDOWN_VALUES = {
-    SUBFUNDS: 'SubFunds',
-    SHARECLASSES: 'ShareClasses',
-    TIMELINES: 'TimelineChanges',
-    DOCUMENTS: 'AllDocuments',
-    AGREEMENTS: 'AllAgreements',
-};
-
 const URLS = {
     TIMELINES: '/loadTimelines',
+    TIMESERIES: '/loadTimeseries',
+    DISTINCT: '/loadDistinct',
     DOCUMENTS: '/loadAllDoc',
     AGREEMENTS: '/loadAllAgr',
 };
 
+// ________________________________________________________
+//
+// Menu for fund additional information -
+// subentities, timeline changes, distinct documents,
+// all documents, aum chart
+
 function loadAddInfo(token, urlSubEnt, json) {
-    // ________________________________________________________
-    //
-    // Select menu for fund additional information -
-    // subentities, timeline changes, all documents -
-    // On change event for selected value
-
-    $(HTML_ADDITIONAL_INFO.SELECT).on('change', function () {
-        const dropdownvalue = $(`${HTML_ADDITIONAL_INFO.SELECT} option:selected`).val();
-
-        $(this).find('[selected]').removeAttr('selected')
-        $(this).find(':selected').attr('selected', 'selected')
-        if (dropdownvalue == DROPDOWN_VALUES.SUBFUNDS || dropdownvalue == DROPDOWN_VALUES.SHARECLASSES) {
-            closeOptions();
-            $(HTML_ADDITIONAL_INFO.CONTAINER_SUBENTITIES).removeClass('d-none');
-
-            getSelectMenuRequestHandler(urlSubEnt, HTML_ADDITIONAL_INFO.CONTAINER_SUBENTITIES);
-        } else if (dropdownvalue == DROPDOWN_VALUES.TIMELINES) {
-            closeOptions();
-            $(HTML_ADDITIONAL_INFO.CONTAINER_TIMELINES).removeClass('d-none');
-
-            getSelectMenuRequestHandler(URLS.TIMELINES, HTML_ADDITIONAL_INFO.CONTAINER_TIMELINES);
-        } else if (dropdownvalue == DROPDOWN_VALUES.DOCUMENTS) {
-            closeOptions();
-            $(HTML_ADDITIONAL_INFO.CONTAINER_DOCUMENTS).removeClass('d-none');
-
-            getSelectMenuRequestHandler(URLS.DOCUMENTS, HTML_ADDITIONAL_INFO.CONTAINER_DOCUMENTS);
-        } else if (dropdownvalue == DROPDOWN_VALUES.AGREEMENTS) {
-            closeOptions();
-            $(HTML_ADDITIONAL_INFO.CONTAINER_AGREEMENTS).removeClass('d-none');
-
-            getSelectMenuRequestHandler(URLS.AGREEMENTS, HTML_ADDITIONAL_INFO.CONTAINER_AGREEMENTS);
-        } else {
-            closeOptions();
-        }
+    $(HTML_MENU.BTN_SUBENTITIES).on('click', function () {
+        beforeCallStyleHandler();
+        getSelectMenuRequestHandler(urlSubEnt, HTML_MENU.CONTAINER_SUBENTITIES);
+        afterCallStyleHandler(HTML_MENU.CONTAINER_SUBENTITIES, HTML_MENU.BTN_SUBENTITIES);
     });
+
+    $(HTML_MENU.BTN_DISTINCT).on('click', function () {
+        beforeCallStyleHandler();
+        getSelectMenuRequestHandler(URLS.DISTINCT, HTML_MENU.CONTAINER_DISTINCT);
+        afterCallStyleHandler(HTML_MENU.CONTAINER_DISTINCT, HTML_MENU.BTN_DISTINCT);
+    });
+
+    $(HTML_MENU.BTN_CHART).on('click', function () {
+        beforeCallStyleHandler();
+        getSelectMenuRequestHandler(URLS.TIMESERIES, HTML_MENU.CONTAINER_CHART);
+        afterCallStyleHandler(HTML_MENU.CONTAINER_CHART, HTML_MENU.BTN_CHART);
+    });
+
+    $(HTML_MENU.BTN_TIMELINE).on('click', function () {
+        beforeCallStyleHandler();
+        getSelectMenuRequestHandler(URLS.TIMELINES, HTML_MENU.CONTAINER_TIMELINES);
+        afterCallStyleHandler(HTML_MENU.CONTAINER_TIMELINES, HTML_MENU.BTN_TIMELINE)
+    });
+
+    $(HTML_MENU.BTN_DOCUMENTS).on('click', function () {
+        beforeCallStyleHandler();
+        getSelectMenuRequestHandler(URLS.DOCUMENTS, HTML_MENU.CONTAINER_DOCUMENTS);
+        afterCallStyleHandler(HTML_MENU.CONTAINER_DOCUMENTS, HTML_MENU.BTN_DOCUMENTS);
+    });
+
+    $(HTML_MENU.BTN_AGREEMENTS).on('click', function () {
+        beforeCallStyleHandler();
+        getSelectMenuRequestHandler(URLS.AGREEMENTS, HTML_MENU.CONTAINER_AGREEMENTS);
+        afterCallStyleHandler(HTML_MENU.CONTAINER_AGREEMENTS, HTML_MENU.BTN_AGREEMENTS);
+    });
+
+    function beforeCallStyleHandler() {
+        $('.column-add-info .card-add-info button.clicked-color').removeClass('clicked-color');
+        $('.column-add-info .card-add-info.clicked-bg').removeClass('clicked-bg');
+
+        $(HTML_MENU.CONTAINER_SUBENTITIES).addClass('d-none');
+        $(HTML_MENU.CONTAINER_DISTINCT).addClass('d-none');
+        $(HTML_MENU.CONTAINER_CHART).addClass('d-none');
+        $(HTML_MENU.CONTAINER_TIMELINES).addClass('d-none');
+        $(HTML_MENU.CONTAINER_DOCUMENTS).addClass('d-none');
+        $(HTML_MENU.CONTAINER_AGREEMENTS).addClass('d-none');
+    }
 
     function getSelectMenuRequestHandler(url, placeholder) {
         $.ajax({
@@ -70,11 +89,10 @@ function loadAddInfo(token, urlSubEnt, json) {
         });
     }
 
-    function closeOptions() {
-        $(HTML_ADDITIONAL_INFO.CONTAINER_SUBENTITIES).addClass('d-none');
-        $(HTML_ADDITIONAL_INFO.CONTAINER_TIMELINES).addClass('d-none');
-        $(HTML_ADDITIONAL_INFO.CONTAINER_DOCUMENTS).addClass('d-none');
-        $(HTML_ADDITIONAL_INFO.CONTAINER_AGREEMENTS).addClass('d-none');
+    function afterCallStyleHandler(container, btn) {
+        $(container).removeClass('d-none');
+        $(btn).parent().addClass('clicked-bg');
+        $(btn).addClass('clicked-color');
     }
 }
 
@@ -161,6 +179,10 @@ function uploadModals(token, json) {
     }
 };
 
+
+// ________________________________________________________
+//
+// Select menu from chosen.js initialization
 $(function () {
     $(".select-pharus").chosen({
         disable_search_threshold: 10,

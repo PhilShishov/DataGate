@@ -20,9 +20,8 @@ namespace DataGate.Web.Utilities
     using iText.Kernel.Events;
     using iText.Kernel.Geom;
     using iText.Kernel.Pdf;
-    using iText.Kernel.Pdf.Canvas;
-    using iText.Kernel.Pdf.Xobject;
     using iText.Layout;
+    using iText.Layout.Borders;
     using iText.Layout.Element;
     using iText.Layout.Properties;
 
@@ -30,7 +29,7 @@ namespace DataGate.Web.Utilities
     using OfficeOpenXml.Style;
 
     // _____________________________________________________________
-    public class GenerateFileTemplate
+    public partial class GenerateFileTemplate
     {
         // ---------------------------------------------------------
         //
@@ -80,7 +79,6 @@ namespace DataGate.Web.Utilities
                 }
 
                 worksheet.Cells.AutoFitColumns();
-                //worksheet.Cells["A1:S1"].AutoFilter = true;
                 package.Save();
 
                 string fileName = $"{correctTypeName}{GlobalConstants.ExcelFileExtension}";
@@ -120,11 +118,11 @@ namespace DataGate.Web.Utilities
                 writer.SetCloseStream(false);
 
                 PdfDocument pdfDoc = new PdfDocument(writer);
+                Footer footerHandler = new Footer();
+                pdfDoc.AddEventHandler(PdfDocumentEvent.END_PAGE, footerHandler);
 
                 // Funds table format settings
                 pdfDoc.SetDefaultPageSize(PageSize.A3.Rotate());
-                Footer footerHandler = new Footer();
-                pdfDoc.AddEventHandler(PdfDocumentEvent.END_PAGE, footerHandler);
 
                 // SubFunds table format settings
                 // ShareClasses table format settings
@@ -132,9 +130,7 @@ namespace DataGate.Web.Utilities
 
                 string imageFilePath = @".\wwwroot\images\Logo_Pharus_small.jpg";
                 ImageData data = ImageDataFactory.Create(imageFilePath);
-
                 Image img = new Image(data);
-
                 Table table = new Table(tableLength);
 
                 table.SetWidth(UnitValue.CreatePercentValue(100));
@@ -151,6 +147,7 @@ namespace DataGate.Web.Utilities
                     Cell cell = new Cell();
                     cell.Add(new Paragraph(input));
                     cell.SetTextAlignment(TextAlignment.CENTER);
+                    cell.SetVerticalAlignment(VerticalAlignment.MIDDLE);
                     cell.SetBold();
 
                     table.AddHeaderCell(cell);
@@ -166,15 +163,25 @@ namespace DataGate.Web.Utilities
                             input = " ";
                         }
 
-                        table.AddCell(new Paragraph(input));
+                        Cell cell = new Cell();
+                        cell.Add(new Paragraph(input));
+                        if (row % 2 != 0)
+                        {
+                            cell.SetBackgroundColor(ColorConstants.LIGHT_GRAY);
+                        }
+
+                        table.AddCell(cell);
                     }
                 }
 
+                var headerText = new Paragraph($"List of {correctTypeName} as of " + chosenDate?.ToString(GlobalConstants.PdfDateTimeFormatDisplay));
+
                 document.Add(img);
                 document.Add(new Paragraph(" "));
-                document.Add(new Paragraph($"List of {correctTypeName} as of " + chosenDate?.ToString(GlobalConstants.PdfDateTimeFormatDisplay)));
+                document.Add(headerText);
                 document.Add(new Paragraph(" "));
                 document.Add(table);
+                footerHandler.WriteTotal(pdfDoc);
                 document.Close();
 
                 fileName = $"{correctTypeName}{GlobalConstants.PdfFileExtension}";
@@ -187,57 +194,6 @@ namespace DataGate.Web.Utilities
             }
 
             return fileName;
-        }
-
-        // Footer event handler
-        protected class Footer : IEventHandler
-        {
-            protected PdfFormXObject placeholder;
-            protected float side = 20;
-            protected float x = 1150;
-            protected float y = 25;
-            protected float space = 4.5f;
-            protected float descent = 3;
-
-            public Footer()
-            {
-                placeholder = new PdfFormXObject(new Rectangle(0, 0, side, side));
-            }
-
-            public void HandleEvent(Event ev)
-            {
-                PdfDocumentEvent docEvent = (PdfDocumentEvent)ev;
-                PdfDocument pdf = docEvent.GetDocument();
-                PdfPage page = docEvent.GetPage();
-                int pageNumber = pdf.GetPageNumber(page);
-                int pageCount = pdf.GetNumberOfPages();
-                Rectangle pageSize = page.GetPageSize();
-
-                // Creates drawing canvas
-                PdfCanvas pdfCanvas = new PdfCanvas(page);
-                Canvas canvas = new Canvas(pdfCanvas, pageSize);
-
-                Paragraph p = new Paragraph()
-                        .Add("Page ")
-                        .Add(pageNumber.ToString())
-                        .Add(" of ")
-                        .Add(pageCount.ToString());
-
-                canvas.ShowTextAligned(p, x, y, TextAlignment.RIGHT);
-                canvas.Close();
-
-                // Create placeholder object to write number of pages
-                pdfCanvas.AddXObject(placeholder, x + space, y - descent);
-                pdfCanvas.Release();
-            }
-
-            public void WriteTotal(PdfDocument pdf)
-            {
-                Canvas canvas = new Canvas(placeholder, pdf);
-                canvas.ShowTextAligned(pdf.GetNumberOfPages().ToString(),
-                        0, descent, TextAlignment.LEFT);
-                canvas.Close();
-            }
         }
 
         // ________________________________________________________

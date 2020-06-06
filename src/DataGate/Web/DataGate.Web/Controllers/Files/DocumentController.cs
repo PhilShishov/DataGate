@@ -55,6 +55,28 @@
             return this.PartialView("Upload/_UploadAgreement", model);
         }
 
+        [Route("loadDistinct")]
+        public IActionResult GetDistinct(int id, string date, string areaName)
+        {
+            var model = new DistinctOverviewViewModel { AreaName = areaName };
+            var dateParsed = DateTimeParser.FromWebFormat(date);
+
+            string functionDoc = QuerySwapper.GetResult(areaName,
+                                             FunctionDictionary.SqlFunctionDistinctDocumentsFund,
+                                             FunctionDictionary.SqlFunctionDistinctDocumentsSubFund,
+                                             FunctionDictionary.SqlFunctionDistinctDocumentsShareClass);
+
+            string functionAgr = QuerySwapper.GetResult(areaName,
+                                             FunctionDictionary.SqlFunctionDistinctAgreementsFund,
+                                             FunctionDictionary.SqlFunctionDistinctAgreementsSubFund,
+                                             FunctionDictionary.SqlFunctionDistinctAgreementsShareClass);
+
+            model.Documents = this.entitiesDocumentService.GetDistinctDocuments<DistinctDocViewModel>(functionDoc, id, dateParsed);
+            model.Agreements = this.entitiesDocumentService.GetDistinctAgreements<DistinctAgrViewModel>(functionAgr, id, dateParsed);
+
+            return this.PartialView("SpecificEntity/_DistinctDocuments", model);
+        }
+
         [Route("loadAllDoc")]
         public IActionResult GetAllDocuments(int id, string areaName)
         {

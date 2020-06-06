@@ -21,11 +21,5 @@ namespace DataGate.Services.Data.Entities
 
         public ContainerDto GetContainer(string function, int id, DateTime? date)
              => this.sqlManager.ExecuteQueryMapping<ContainerDto>(function, id, date).FirstOrDefault();
-
-        public IEnumerable<DistinctDocDto> GetDistinctDocuments(string function, int id, DateTime? date)
-            => this.sqlManager.ExecuteQueryMapping<DistinctDocDto>(function, id, date);
-
-        public IEnumerable<DistinctAgrDto> GetDistinctAgreements(string function, int id, DateTime? date)
-            => this.sqlManager.ExecuteQueryMapping<DistinctAgrDto>(function, id, date);
     }
 }

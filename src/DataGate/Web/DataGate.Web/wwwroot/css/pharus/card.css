@@ -42,7 +42,7 @@
 
 /* Responsive columns */
 @media screen and (max-width: 600px) {
-    .column {
+    .column-add-info, .column {
         width: 100%;
         display: block;
         margin-bottom: 20px;
@@ -67,3 +67,37 @@
     .row .column .card a:hover {
         text-decoration: none;
     }
+
+
+.column-add-info {
+    float: left;
+    padding: 0 1px;
+}
+
+.card-add-info {
+    display: grid;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 0px;
+    background-color: #f8f9fa;
+    height: 45px;
+    width: 77px;
+}
+
+.column-add-info .card-add-info button {
+    outline: none;
+    border: none;
+    background: none;
+}
+
+.column-add-info :hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+.clicked-bg {
+    background-color: #0056b3;
+}
+
+.clicked-color {
+    color: white;
+}
