@@ -1,14 +1,14 @@
-﻿@model EditUserInputModel
+﻿@model DeleteUserInputModel
 @inject Microsoft.Extensions.Configuration.IConfiguration Configuration
 @inject IStringLocalizer<SharedResources> SharedLocalizer
 
 @{
-    ViewData["Title"] = SharedLocalizer["Edit User"];
+    ViewData["Title"] = SharedLocalizer["Delete User"];
 }
 <div class="push">
 
     <h2>
-        @SharedLocalizer["Edit User"]
+        @SharedLocalizer["Delete User"]
     </h2>
     <div>
         <a class="btn btn-pharus text-white mt-2"
@@ -25,41 +25,29 @@
             <form asp-area="Admin"
                   asp-controller="Admin"
                   method="post"
-                  class="d-inline"
-                  id="editForm">
+                  class="d-inline">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label for="Username" class="control-label">@SharedLocalizer["Username"]</label>
-                    <input asp-for="Username" class="form-control maxw-270" autocomplete="off" />
+                    <input asp-for="Username" disabled class="form-control maxw-270" autocomplete="off" />
                     <span asp-validation-for="Username" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label for="Email" class="control-label"> @SharedLocalizer["Email"]</label>
-                    <input asp-for="Email" class="form-control maxw-270" />
+                    <input asp-for="Email" disabled class="form-control maxw-270" />
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label for="RoleType" class="control-label">@SharedLocalizer["Role"]</label>
-                    <input asp-for="RoleType" class="form-control maxw-270" />
+                    <input asp-for="RoleType" disabled class="form-control maxw-270" />
                     <span asp-validation-for="RoleType" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label for="PasswordHash" class="control-label">  @SharedLocalizer["New Password"]</label>
-                    <input for="PasswordHash" class="form-control maxw-270" autocomplete="new-password" />
-                    <span asp-validation-for="PasswordHash" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label for="ConfirmPassword" class="control-label">@SharedLocalizer["Confirm Password"]</label>
-                    <input asp-for="ConfirmPassword" class="form-control maxw-270" autocomplete="new-password" />
-                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div>
                 <div class="button-holder">
                     <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
                     <button type="submit"
-                            asp-page-handler="EditUser"
-                            class="btn btn-pharus text-white btn-confirm-update"
-                            style="margin-right:40px">
-                        @SharedLocalizer["Save changes"]
+                            asp-action="DeleteUser"
+                            class="btn btn-pharus text-white btn-confirm-delete">
+                        @SharedLocalizer["Delete User"]
                     </button>
                 </div>
             </form>
@@ -73,7 +61,7 @@
     <script src="https://www.google.com/recaptcha/api.js?render=@this.Configuration["GoogleReCaptcha:Key"]"></script>
     <script>
         grecaptcha.ready(async function () {
-            await grecaptcha.execute('@this.Configuration["GoogleReCaptcha:Key"]', { action: 'edit_form' }).then(async function (token) {
+            await grecaptcha.execute('@this.Configuration["GoogleReCaptcha:Key"]', { action: 'delete_form' }).then(async function (token) {
                 document.getElementById("RecaptchaValue").value = token;
             });
         });

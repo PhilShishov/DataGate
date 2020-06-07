@@ -13,6 +13,7 @@
         public const string TypeFund = "Fund";
         public const string TypeSubFund = "SubFund";
         public const string TypeShareClass = "ShareClass";
+        public const string SweetAlertScript = "<script language='javascript'>swal('{0}', '{1}','{2}')</script>";
 
         // Controllers, areas
         public const string ControllerRouteDataValue = "controller";
@@ -62,6 +63,7 @@
         // Tempdata Keys
         public const string InfoKey = "info";
         public const string ErrorKey = "error";
+        public const string NotifKey = "notification";
 
         // Connection Strings
         public const string DataGateUsersConnection = "DataGateUsersConnection";

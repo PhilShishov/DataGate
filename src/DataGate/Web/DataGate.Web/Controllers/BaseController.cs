@@ -1,9 +1,10 @@
 ﻿namespace DataGate.Web.Controllers
 {
     using DataGate.Common;
+    using DataGate.Data.Models.Enums;
     using Microsoft.AspNetCore.Mvc;
 
-    public class BaseController : Controller
+    public partial class BaseController : Controller
     {
         public IActionResult ShowError(string errorMessage, string route)
         {
@@ -23,9 +24,10 @@
             return this.RedirectToAction(action, controller);
         }
 
-        public IActionResult ShowErrorLocal(string errorMessage, string action)
+        public IActionResult ShowErrorLocal(string errorMessage, NotificationType notificationType, string action)
         {
-            this.TempData[GlobalConstants.ErrorKey] = errorMessage;
+            string result = string.Format(GlobalConstants.SweetAlertScript, notificationType.ToString().ToUpper(), errorMessage, notificationType);
+            this.TempData[GlobalConstants.NotifKey] = result;
             return this.LocalRedirect(action);
         }
 
@@ -35,9 +37,17 @@
             return this.RedirectToRoute(route, routeValues);
         }
 
-        public IActionResult ShowInfoLocal(string infoMessage, string action)
+        public IActionResult ShowInfo(string infoMessage, NotificationType notificationType, string route, object routeValues)
         {
-            this.TempData[GlobalConstants.InfoKey] = infoMessage;
+            string result = string.Format(GlobalConstants.SweetAlertScript, notificationType.ToString().ToUpper(), infoMessage, notificationType);
+            this.TempData[GlobalConstants.NotifKey] = result;
+            return this.RedirectToRoute(route, routeValues);
+        }
+
+        public IActionResult ShowInfoLocal(string infoMessage, NotificationType notificationType, string action)
+        {
+            string result = string.Format(GlobalConstants.SweetAlertScript, notificationType.ToString().ToUpper(), infoMessage, notificationType);
+            this.TempData[GlobalConstants.NotifKey] = result;
             return this.LocalRedirect(action);
         }
     }

@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
 
     using DataGate.Common;
+    using DataGate.Data.Models.Enums;
     using DataGate.Services.Data.Storage.Contracts;
     using DataGate.Web.InputModels.Funds;
 
@@ -55,7 +56,7 @@
             var fundId = await this.service.Edit(model);
             var date = model.InitialDate.ToString(GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
 
-            return this.ShowInfo(InfoMessages.SuccessfulEdit, GlobalConstants.FundDetailsRouteName, new { area = GlobalConstants.FundAreaName, id = fundId, date = date });
+            return this.ShowInfo(InfoMessages.SuccessfulEdit, NotificationType.success, GlobalConstants.FundDetailsRouteName, new { area = GlobalConstants.FundAreaName, id = fundId, date = date });
         }
 
         [Route("f/new")]
@@ -89,7 +90,7 @@
             var fundId = await this.service.Create(model);
             var date = model.InitialDate.ToString(GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
 
-            return this.ShowInfo(InfoMessages.SuccessfulCreate, GlobalConstants.FundDetailsRouteName, new { area = GlobalConstants.FundAreaName, id = fundId, date = date });
+            return this.ShowInfo(InfoMessages.SuccessfulCreate, NotificationType.success, GlobalConstants.FundDetailsRouteName, new { area = GlobalConstants.FundAreaName, id = fundId, date = date });
         }
 
         private async Task SetViewDataValuesForFundSelectLists()

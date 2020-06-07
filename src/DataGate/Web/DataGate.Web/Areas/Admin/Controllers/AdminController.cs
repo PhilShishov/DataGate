@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
 
     using DataGate.Common;
+    using DataGate.Data.Models.Enums;
     using DataGate.Data.Models.Users;
     using DataGate.Services.Messaging;
     using DataGate.Web.Controllers;
@@ -74,8 +75,8 @@
 
         [HttpPost]
         public async Task<IActionResult> CreateUser(
-                     [Bind("Username", "Email", "Password", "ConfirmPassword",
-                            "RoleType", "RecaptchaValue")] CreateUserInputModel inputModel)
+                     [Bind("Username", "Email", "Password", "ConfirmPassword","RoleType", "RecaptchaValue")]
+                     CreateUserInputModel inputModel)
         {
             string returnUrl = ViewUsersUrl;
             if (!this.ModelState.IsValid)
@@ -108,12 +109,12 @@
                 string message = string.Format(GlobalConstants.EmailConfirmationMessage, HtmlEncoder.Default.Encode(callbackUrl));
                 await this.emailSender.SendEmailAsync("philip.shishov@pharusmanco.lu", "Philip Shishov", inputModel.Email, GlobalConstants.ConfirmEmailSubject, message);
 
-                return this.ShowInfoLocal(string.Format(InfoMessages.AddUser, user.UserName, inputModel.RoleType), returnUrl);
+                return this.ShowInfoLocal(string.Format(InfoMessages.AddUser, user.UserName, inputModel.RoleType), NotificationType.success, returnUrl);
             }
 
             this.AddErrors(result);
 
-            return this.View();
+            return this.ShowErrorLocal(string.Format(ErrorMessages.UnsuccessfulCreate, user.UserName), NotificationType.error, returnUrl);
         }
 
         [HttpGet("/Admin/Admin/EditUser/{id}")]
@@ -135,8 +136,8 @@
 
         [HttpPost]
         public async Task<IActionResult> EditUser(
-                     [Bind("Id", "Username", "Email", "RoleType", "PasswordHash",
-                           "ConfirmPassword", "RecaptchaValue")] EditUserInputModel inputModel, string returnUrl = null)
+                     [Bind("Id", "Username", "Email", "RoleType", "PasswordHash", "ConfirmPassword", "RecaptchaValue")]
+                     EditUserInputModel inputModel, string returnUrl = null)
         {
             returnUrl = ViewUsersUrl;
 
@@ -180,26 +181,38 @@
                 {
                     this.logger.LogInformation("User updated.");
 
-                    return this.ShowInfoLocal(string.Format(InfoMessages.UpdateUser, user.UserName), returnUrl);
+                    return this.ShowInfoLocal(string.Format(InfoMessages.UpdateUser, user.UserName), NotificationType.success, returnUrl);
                 }
 
                 this.AddErrors(resultUser);
             }
 
-            return this.ShowErrorLocal(string.Format(ErrorMessages.UnsuccessfulUpdate, user.UserName), returnUrl);
+            return this.ShowErrorLocal(string.Format(ErrorMessages.UnsuccessfulUpdate, user.UserName), NotificationType.error, returnUrl);
+        }
+
+        [HttpGet("/Admin/Admin/DeleteUser/{id}")]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            var user = await this.userManager.FindByIdAsync(id);
+            var roles = await this.userManager.GetRolesAsync(user);
+
+            DeleteUserInputModel deleteUserModel = new DeleteUserInputModel
+            {
+                Id = user.Id,
+                Username = user.UserName,
+                Email = user.Email,
+                RoleType = roles.FirstOrDefault(),
+            };
+
+            return this.View(deleteUserModel);
         }
 
         [HttpPost]
         public async Task<IActionResult> DeleteUser(
-             [Bind("Id", "Username", "Email", "RoleType", "PasswordHash",
-                           "ConfirmPassword", "RecaptchaValue")] EditUserInputModel inputModel, string returnUrl = null)
+              [Bind("Id", "RecaptchaValue")]
+              DeleteUserInputModel inputModel, string returnUrl = null)
         {
             returnUrl = ViewUsersUrl;
-
-            if (!this.ModelState.IsValid)
-            {
-                return this.View(inputModel ?? new EditUserInputModel());
-            }
 
             var user = await this.userManager.FindByIdAsync(inputModel.Id);
 
@@ -213,13 +226,13 @@
                 {
                     this.logger.LogInformation("User deleted.");
 
-                    return this.ShowInfoLocal(string.Format(InfoMessages.RemoveUser, user.UserName), returnUrl);
+                    return this.ShowInfoLocal(string.Format(InfoMessages.RemoveUser, user.UserName), NotificationType.success, returnUrl);
                 }
 
                 this.AddErrors(result);
             }
 
-            return this.ShowErrorLocal(string.Format(ErrorMessages.UnsuccessfulDelete, user.UserName), returnUrl);
+            return this.ShowErrorLocal(string.Format(ErrorMessages.UnsuccessfulDelete, "ok"), NotificationType.error, returnUrl);
         }
 
         private async Task AssignRoleToUser(CreateUserInputModel inputModel, ApplicationUser user)

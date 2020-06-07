@@ -8,9 +8,6 @@
         @SharedLocalizer["User List"]
     </h1>
     <hr class="bg-pharus w-50 hr-2" />
-
-    <partial name="_StatusMessage" />
-
     <div class="table-responsive border-0 w-50 mx-auto">
         <table class="table table-hover">
             <thead>
@@ -39,6 +36,11 @@
                                asp-action="EditUser"
                                asp-route-id="@user.Id"
                                class="btn btn-pharus text-white">@SharedLocalizer["Edit"]</a>
+                            <a asp-area="Admin"
+                               asp-controller="Admin"
+                               asp-action="DeleteUser"
+                               asp-route-id="@user.Id"
+                               class="btn btn-pharus text-white">@SharedLocalizer["Delete"]</a>
                         </td>
                     </tr>
                 }
