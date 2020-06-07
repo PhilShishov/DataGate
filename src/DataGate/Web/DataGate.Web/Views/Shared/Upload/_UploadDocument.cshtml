@@ -31,7 +31,7 @@
                         </select>
 
                         <select class="select-pharus" asp-for="DocumentType">
-                            <option selected disabled value="">
+                            <option selected disabled value="0">
                                 @SharedLocalizer["-- Choose File Type --"]
                             </option>
                             @foreach (var type in Model.DocumentTypes)
@@ -39,8 +39,8 @@
                                 <option value="@type">@type</option>
                             }
                         </select>
-                        <span asp-validation-for="DocumentType" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="DocumentType" class="text-danger"></span>
 
                     <div class="form-group">
                         <input asp-for="FileToUpload"
@@ -48,6 +48,7 @@
                                accept="application/pdf">
                     </div>
                     <span asp-validation-for="FileToUpload" class="text-danger"></span>
+                    <partial name="_ChosenScriptsPartial" />
                 </form>
             </div>
             <div class="modal-footer">
@@ -63,5 +64,3 @@
         </div>
     </div>
 </div>
-
-<partial name="_ChosenScriptsPartial" />

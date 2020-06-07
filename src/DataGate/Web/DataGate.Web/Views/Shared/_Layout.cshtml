@@ -3,20 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script>
-        window.onscroll = function () { showBackToTop() };
-        function showBackToTop() {
-            if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-                document.getElementsByClassName("back-to-top")[0].style.display = "inline";
-            } else {
-                document.getElementsByClassName("back-to-top")[0].style.display = "none";
-            }
-        }
-
-        function backToTop() {
-            this.scrollTo(0, 0);
-        }
-    </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@this.ViewData["Title"] | @GlobalConstants.SystemName</title>
@@ -188,30 +174,32 @@
         </a>
     }
 
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
-        <script src="~/lib/jqueryui/jquery-ui.js" asp-append-version="true"></script>
-        <partial name="_ValidationScriptsPartial" />
-        <script src="~/lib/popperjs/umd/popper.js" asp-append-version="true"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
-        <script src="~/lib/select2/dist/js/select2.js" asp-append-version="true"></script>
-        <script src="~/lib/chosen/chosen.jquery.js" asp-append-version="true"></script>
-        <script src="~/lib/alertifyjs/alertify.js" asp-append-version="true"></script>
-        <script src="~/lib/sweetalert/dist/sweetalert.min.js" asp-append-version="true"></script>
+<environment include="Development">
+    <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+    <script src="~/lib/jqueryui/jquery-ui.js" asp-append-version="true"></script>
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/lib/popperjs/umd/popper.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
+    <script src="~/lib/select2/dist/js/select2.js" asp-append-version="true"></script>
+    <script src="~/lib/chosen/chosen.jquery.js" asp-append-version="true"></script>
+    <script src="~/lib/alertifyjs/alertify.js" asp-append-version="true"></script>
+    <script src="~/lib/sweetalert/dist/sweetalert.min.js" asp-append-version="true"></script>
 
-        @*/*** Handle jQuery plugin naming conflict between jQuery UI and Bootstrap ***/*@
-        <script>
-            $.widget.bridge('uibutton', $.ui.button);
-            $.widget.bridge('uitooltip', $.ui.tooltip);
-        </script>
+    <script src="~/js/scrollTo.js" asp-append-version="true"></script>
 
-        <script src="~/js/navBar.js" asp-append-version="true"></script>
-        <script>
-            if (window.history.replaceState) {
-                window.history.replaceState(null, null, window.location.href);
-            }
-        </script>
-    </environment>
+    @*/*** Handle jQuery plugin naming conflict between jQuery UI and Bootstrap ***/*@
+    <script>
+        $.widget.bridge('uibutton', $.ui.button);
+        $.widget.bridge('uitooltip', $.ui.tooltip);
+    </script>
+
+    <script src="~/js/navBar.js" asp-append-version="true"></script>
+    <script>
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
+        }
+    </script>
+</environment>
 
     @this.RenderSection("Scripts", required: false)
 </body>

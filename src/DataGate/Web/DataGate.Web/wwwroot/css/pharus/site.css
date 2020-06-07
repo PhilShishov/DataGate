@@ -1,9 +1,4 @@
 ﻿/* Chosen style to be imported on change*/
-.chosen-container .chosen-results li.highlighted {
-    background-color: lightgrey;
-    background-image: none;
-    color: inherit;
-}
 
 .chosen-container {
     font-size: 15px;

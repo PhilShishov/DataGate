@@ -10,7 +10,7 @@ namespace DataGate.Web.InputModels.Files
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
+    using DataGate.Common;
     using DataGate.Services.Mapping;
     using DataGate.Web.Dtos.Documents;
     using DataGate.Web.Infrastructure.Attributes.Validation;
@@ -23,14 +23,14 @@ namespace DataGate.Web.InputModels.Files
             this.DocumentTypes = new List<string>();
         }
 
-        [Required]
+        [Required(ErrorMessage = ErrorMessages.NotSelectedValue)]
         [Display(Name = "Document Type")]
         public string DocumentType { get; set; }
 
-        [Required(ErrorMessage = "Please select a file.")]
+        [Required(ErrorMessage = ErrorMessages.FileNotChosen)]
         [DataType(DataType.Upload)]
         [MaxFileSize(10 * 1024 * 1024)]
-        [AllowedExtensions(new string[] { ".pdf" })]
+        [AllowedExtensions(new string[] { GlobalConstants.PdfFileExtension })]
         public IFormFile FileToUpload { get; set; }
 
         public DateTime StartConnection { get; set; }
