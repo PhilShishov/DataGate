@@ -4,7 +4,6 @@
     using System.Threading.Tasks;
 
     using DataGate.Common;
-    using DataGate.Data.Models.Enums;
     using DataGate.Services.Data.Files.Contracts;
     using DataGate.Services.Mapping;
     using DataGate.Web.Helpers;
@@ -103,7 +102,6 @@
         {
             return this.ShowInfo(
                 InfoMessages.FileUploaded,
-                NotificationType.success,
                 dto.RouteName,
                 new { area = dto.AreaName, id = dto.Id, date = dto.Date });
         }

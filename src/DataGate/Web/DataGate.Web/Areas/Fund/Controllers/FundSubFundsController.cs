@@ -65,23 +65,24 @@
         [HttpPost]
         [Route("f/{id}/sf")]
         public async Task<IActionResult> SubFunds([Bind("Id, Command, Container, Date,Values,Headers," +
-            "                                            PreSelectedColumns,SelectedColumns,SelectTerm")]
+                                                        "PreSelectedColumns,SelectedColumns,SelectTerm")]
                                                    SubEntitiesViewModel viewModel)
         {
             if (viewModel.Command == GlobalConstants.CommandUpdateTable)
             {
-                return this.ShowInfo(InfoMessages.SuccessfulUpdate, GlobalConstants.FundSubFundsRouteName, new { viewModel.Id, viewModel.Date, viewModel.Container });
+                return this.RedirectToRoute(
+                   GlobalConstants.FundDetailsRouteName,
+                   new { viewModel.Id, viewModel.Date, viewModel.Container });
             }
 
             await SubEntitiesVMSetup.SetPost(viewModel, this.service, FunctionDictionary.SqlFunctionFundSubFunds);
 
             if (viewModel.Values != null && viewModel.Values.Count > 0)
             {
-                this.TempData[GlobalConstants.InfoKey] = InfoMessages.SuccessfulUpdate;
                 return this.View(viewModel);
             }
 
-            this.TempData[GlobalConstants.ErrorKey] = ErrorMessages.TableIsEmpty;
+            this.ShowErrorAlertify(ErrorMessages.TableIsEmpty);
             return this.View(viewModel);
         }
     }

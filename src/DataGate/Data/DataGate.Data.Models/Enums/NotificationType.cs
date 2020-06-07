@@ -5,6 +5,8 @@
         error,
         success,
         warning,
-        info
+        info,
+        message,
+        custom
     }
 }

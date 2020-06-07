@@ -1,5 +1,10 @@
 ﻿
-@if (TempData[GlobalConstants.NotifKey] != null)
+@if (TempData[GlobalConstants.SweetAlertKey] != null)
 {
-    @Html.Raw(TempData[GlobalConstants.NotifKey])
+    @Html.Raw(TempData[GlobalConstants.SweetAlertKey])
+}
+
+@if (TempData[GlobalConstants.AlertifyKey] != null)
+{
+    @Html.Raw(TempData[GlobalConstants.AlertifyKey])
 }

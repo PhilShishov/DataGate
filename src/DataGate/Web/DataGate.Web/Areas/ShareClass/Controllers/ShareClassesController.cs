@@ -29,22 +29,27 @@
         [Route("shareclasses")]
         public async Task<IActionResult> All()
         {
-            var viewModel = await EntitiesVMSetup.SetGet<EntitiesViewModel>(this.service, FunctionDictionary.SqlFunctionAllActiveShareClass);
+            var viewModel = await EntitiesVMSetup
+                .SetGet<EntitiesViewModel>(this.service, FunctionDictionary.SqlFunctionAllActiveShareClass);
             return this.View(viewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> All([Bind("Date,Values,Headers,IsActive,PreSelectedColumns,SelectedColumns,SelectTerm")] EntitiesViewModel viewModel)
+        public async Task<IActionResult> All([Bind("Date,Values,Headers,IsActive,PreSelectedColumns,SelectedColumns,SelectTerm")]
+                                              EntitiesViewModel viewModel)
         {
-            await EntitiesVMSetup.SetPost(viewModel, this.service, FunctionDictionary.SqlFunctionAllShareClass, FunctionDictionary.SqlFunctionAllActiveShareClass);
+            await EntitiesVMSetup.SetPost(viewModel, this.service,
+                                          FunctionDictionary.SqlFunctionAllShareClass, FunctionDictionary.SqlFunctionAllActiveShareClass);
 
             if (viewModel.Values != null && viewModel.Values.Count > 0)
             {
-                this.TempData[GlobalConstants.InfoKey] = InfoMessages.SuccessfulUpdate;
                 return this.View(viewModel);
             }
 
-            return this.ShowError(ErrorMessages.TableIsEmpty, GlobalConstants.AllActionName, GlobalConstants.ShareClassesControllerName);
+            return this.ShowErrorAlertify(
+               ErrorMessages.TableIsEmpty,
+               GlobalConstants.AllActionName,
+               GlobalConstants.ShareClassesControllerName);
         }
     }
 }

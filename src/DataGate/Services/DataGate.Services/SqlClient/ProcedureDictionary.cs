@@ -40,32 +40,32 @@
                 "@f_legalForm, @f_legalType, @f_legal_vehicle, @f_companyType, @f_tinNumber";
 
         //// Create/edit sub fund
-        //private readonly string sqlFunctionFundId = "[fn_fund_id]";
+        // private readonly string sqlFunctionFundId = "[fn_fund_id]";
 
-        //private readonly string sqlProcedureEditFund = "EXEC sp_modify_fund " +
+        // private readonly string sqlProcedureEditFund = "EXEC sp_modify_fund " +
         //        "@f_id, @f_initialDate, @f_status, " +
         //        "@f_registrationNumber, @f_officialFundName, @f_shortFundName, " +
         //        "@f_leiCode, @f_cssfCode, @f_faCode, @f_depCode, @f_taCode, " +
         //        "@f_legalForm, @f_legalType, @f_legal_vehicle, @f_companyType, @f_tinNumber, " +
         //        "@comment, @commentTitle";
 
-        //private readonly string sqlProcedureCreateFund = "EXEC sp_new_fund " +
+        // private readonly string sqlProcedureCreateFund = "EXEC sp_new_fund " +
         //        "@f_initialDate, @f_endDate, @f_status, " +
         //        "@f_registrationNumber, @f_officialFundName, " +
         //        "@f_leiCode, @f_cssfCode, @f_faCode, @f_depCode, @f_taCode, " +
         //        "@f_legalForm, @f_legalType, @f_legal_vehicle, @f_companyType, @f_tinNumber";
 
         //// Create/edit share class
-        //private readonly string sqlFunctionFundId = "[fn_fund_id]";
+        // private readonly string sqlFunctionFundId = "[fn_fund_id]";
 
-        //private readonly string sqlProcedureEditFund = "EXEC sp_modify_fund " +
+        // private readonly string sqlProcedureEditFund = "EXEC sp_modify_fund " +
         //        "@f_id, @f_initialDate, @f_status, " +
         //        "@f_registrationNumber, @f_officialFundName, @f_shortFundName, " +
         //        "@f_leiCode, @f_cssfCode, @f_faCode, @f_depCode, @f_taCode, " +
         //        "@f_legalForm, @f_legalType, @f_legal_vehicle, @f_companyType, @f_tinNumber, " +
         //        "@comment, @commentTitle";
 
-        //private readonly string sqlProcedureCreateFund = "EXEC sp_new_fund " +
+        // private readonly string sqlProcedureCreateFund = "EXEC sp_new_fund " +
         //        "@f_initialDate, @f_endDate, @f_status, " +
         //        "@f_registrationNumber, @f_officialFundName, " +
         //        "@f_leiCode, @f_cssfCode, @f_faCode, @f_depCode, @f_taCode, " +

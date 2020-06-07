@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using DataGate.Common;
+    using DataGate.Data.Models.Enums;
     using DataGate.Data.Models.Users;
 
     using Microsoft.AspNetCore.Authorization;
@@ -40,7 +41,10 @@
                 throw new InvalidOperationException($"Error confirming email for user with ID '{userId}':");
             }
 
-            this.TempData[GlobalConstants.InfoKey] = InfoMessages.SuccessfullyConfirmedEmail;
+            var notificationType = NotificationType.success;
+            string message = string.Format(GlobalConstants.SweetAlertScript, notificationType.ToString().ToUpper(), InfoMessages.SuccessfullyConfirmedEmail, notificationType);
+
+            this.TempData[GlobalConstants.SweetAlertKey] = message;
             return this.Redirect("./Login");
         }
     }
