@@ -37,8 +37,8 @@
                             }
                         </select>
 
-                        <span asp-validation-for="AgrType" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="AgrType" class="text-danger"></span>
 
                     <div class="form-group">
                         <label asp-for="ContractDate" class="text-torshia"></label><br>
@@ -86,8 +86,8 @@
                                 <option value="@status">@status</option>
                             }
                         </select>
-                        <span asp-validation-for="Status" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="Status" class="text-danger"></span>
 
                     <div class="form-group">
                         <select asp-for="Companies" hidden>
@@ -106,8 +106,8 @@
                                 <option value="@company">@company</option>
                             }
                         </select>
-                        <span asp-validation-for="Company" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="Company" class="text-danger"></span>
 
                     <div class="form-group">
                         <input asp-for="FileToUpload"
@@ -115,6 +115,27 @@
                                accept="application/pdf">
                     </div>
                     <span asp-validation-for="FileToUpload" class="text-danger"></span>
+
+                    <script>
+                        // Set input date fields on agreement upload
+                        (function () {
+                            const contractDate = document.getElementById('contractDate');
+                            let activationDate = document.getElementById('activationDate');
+                            let expirationDate = document.getElementById('expirationDate');
+
+                            if (contractDate) {
+                                contractDate.addEventListener('change', setActivationDate);
+                            }
+
+                            function setActivationDate() {
+                                //activationDate.setAttribute('min', contractDate.value);
+                                expirationDate.setAttribute('min', contractDate.value);
+                                activationDate.value = contractDate.value;
+                            }
+                        })();
+                    </script>
+
+                    <partial name="_ChosenScriptsPartial" />
                 </form>
             </div>
             <div class="modal-footer">
@@ -130,24 +151,3 @@
         </div>
     </div>
 </div>
-
-<partial name="_ChosenScriptsPartial" />
-
-<script>
-    // Set input date fields on agreement upload
-    (function () {
-        const contractDate = document.getElementById('contractDate');
-        let activationDate = document.getElementById('activationDate');
-        let expirationDate = document.getElementById('expirationDate');
-
-        if (contractDate) {
-            contractDate.addEventListener('change', setActivationDate);
-        }
-
-        function setActivationDate() {
-            //activationDate.setAttribute('min', contractDate.value);
-            expirationDate.setAttribute('min', contractDate.value);
-            activationDate.value = contractDate.value;
-        }
-    })();
-</script>

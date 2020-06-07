@@ -189,17 +189,9 @@ function uploadModals(token, json) {
             placeholderElement.find('.modal-body').replaceWith(newBody);
 
         }).fail(function (request, status, error) {
-            alert(request.responseText);
+            swal(request.responseText, {
+                icon: "error"
+            })
         });
     }
 };
-
-// ________________________________________________________
-//
-// Select menu from chosen.js initialization
-$(function () {
-    $(".select-pharus").chosen({
-        disable_search_threshold: 10,
-        width: "260px",
-    })
-});
