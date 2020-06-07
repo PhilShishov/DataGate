@@ -16,6 +16,10 @@
         border-right: 2px solid #dee2e6;
     }
 
+    .table-view-pharus th, .table-view-pharus td {
+        font-size: 15px;
+    }
+
     .table-view-pharus .td-name-link a {
         color: #0056b3;
         cursor: pointer;
@@ -83,4 +87,8 @@ a.a-underline:hover {
 .table-search-wrapper {
     text-align: center;
     margin-top: 67px;
+}
+
+#table-info-pharus{
+    font-size: 15px;
 }

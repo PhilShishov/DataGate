@@ -10,6 +10,7 @@ namespace DataGate.Web.InputModels.Files
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+
     using DataGate.Common;
     using DataGate.Services.Mapping;
     using DataGate.Web.Dtos.Documents;

@@ -39,7 +39,7 @@
                 data-toggle="modal"
                 data-target="#columnModal"
                 name="showColumnSelection">
-            @SharedLocalizer["Column Choice"]
+            @SharedLocalizer["COLUMNS"]
         </button>
     </div>
 
@@ -49,16 +49,13 @@
                    asp-for="IsActive"
                    id="activeCheckBox">
             <span class="el-switch-style"></span>
-            <span class="d-block">
-                @SharedLocalizer["Show"]
-            </span>
-            <span>@SharedLocalizer["Active"]</span>
+            <span class="d-block text-el-switch">@SharedLocalizer["ACTIVE"]</span>
 
         </label>
     </div>
     <div class="ml-4">
         <a class="btn btn-pharus btn-sm" asp-action="All">
-            @SharedLocalizer["Reset"]
+            @SharedLocalizer["RESET"]
         </a>
     </div>
 
@@ -71,7 +68,7 @@
         <input type="submit"
                class="btn btn-pharus btn-sm mb-1"
                name="Command"
-               value="Update Table"></>
+               value="UPDATE"></>
         <span asp-validation-for="Date" class="text-danger"></span>
     </div>
 
@@ -87,7 +84,7 @@
             id="btn-extract-excel"
             type="button"
             value="Excel">
-        Excel
+        EXCEL
     </button>
 
     <button class="btn btn-sm btn-pharus ml-4"
@@ -106,7 +103,7 @@
         <a asp-area="Admin"
            asp-route="@createRoute"
            class="btn btn-sm btn-pharus">
-            @SharedLocalizer["Create"]
+            @SharedLocalizer["CREATE"]
         </a>
     </div>
 }

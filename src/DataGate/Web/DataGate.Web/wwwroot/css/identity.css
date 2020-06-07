@@ -16,7 +16,7 @@ html {
 }
 
 body {
-    font-family: 'Gilroy-Regular ☞';
+    font-family: 'Share', 'Arial Narrow', 'Arial', 'sans-serif';
     font-weight: 400;
     height: 100%;
     line-height: 1.7;
@@ -30,6 +30,10 @@ body {
 
 p {
     margin: 0 0 20px 0;
+}
+
+input[type=text] {
+    font-size: 18px;
 }
 
 h2,
@@ -77,6 +81,19 @@ img {
 
 .label-input-login {
     font-size: 19px;
+}
+
+.container-cookie-consent {
+    font-size: 15px;
+}
+
+.alert-dismissible .close {
+    top: 4px;
+    color:black;
+}
+
+.alert-danger {
+    font-size: 14px;
 }
 /*========================================================================
   fxt-template layout

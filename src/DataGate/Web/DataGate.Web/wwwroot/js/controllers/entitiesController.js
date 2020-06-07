@@ -145,7 +145,7 @@ $(function () {
 // Autocomplete
 function loadAutocomplete(token, controllerToPass, entityId) {
     $('#SelectTerm').select2({
-        placeholder: 'Quick Select',
+        placeholder: 'Select...',
         theme: 'classic',
         ajax: {
             url: '/api/autocomplete',

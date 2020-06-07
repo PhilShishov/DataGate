@@ -52,11 +52,11 @@
 
 @media only screen and (min-width: 990px) {
     .toolbar-view-all {
-        margin-top: 67px;
+        margin-top: 72px;
     }
 
     .toolbar-view-details {
-        margin-top: 67px;
+        margin-top: 72px;
         display: flex;
     }
 
