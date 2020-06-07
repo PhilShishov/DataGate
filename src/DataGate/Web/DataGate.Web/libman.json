@@ -113,6 +113,17 @@
       ]
     },
     {
+      "provider": "cdnjs",
+      "library": "Chart.js@2.9.3",
+      "destination": "wwwroot/lib/chartjs/",
+      "files": [
+        "Chart.min.js",
+        "Chart.js",
+        "Chart.min.css",
+        "Chart.css"
+      ]
+    },
+    {
       "library": "moment@2.26.0",
       "destination": "wwwroot/lib/moment/",
       "files": [

@@ -10,6 +10,8 @@
         Task ExecuteProcedure(SqlCommand command);
 
         IAsyncEnumerable<string[]> ExecuteQueryAsync(string function, DateTime? date = null, int? id = null, IEnumerable<string> columns = null);
+ 
+        IAsyncEnumerable<string[]> ExecuteQueryTimeSeriesAsync(string function);
 
         IEnumerable<T> ExecuteQueryMapping<T>(string function, int? id = null, DateTime? date = null)
             where T : IDataReaderParser, new();

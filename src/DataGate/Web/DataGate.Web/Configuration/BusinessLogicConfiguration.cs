@@ -12,6 +12,7 @@
     using DataGate.Services.Data.Storage.Contracts;
     using DataGate.Services.Data.SubFunds;
     using DataGate.Services.Data.Timelines;
+    using DataGate.Services.Data.TimeSeries;
     using DataGate.Services.Messaging;
     using DataGate.Services.SqlClient;
     using DataGate.Services.SqlClient.Contracts;
@@ -33,6 +34,7 @@
             services.AddTransient<IEntityService, EntityService>();
             services.AddTransient<IEntityDetailsService, EntityDetailsService>();
             services.AddTransient<ITimelineService, TimelineService>();
+            services.AddTransient<ITimeSeriesService, TimeSeriesService>();
             services.AddTransient<IAgreementsService, AgreementsService>();
 
             // Funds

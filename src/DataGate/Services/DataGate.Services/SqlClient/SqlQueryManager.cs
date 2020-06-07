@@ -111,6 +111,23 @@ namespace DataGate.Services.SqlClient
             }
         }
 
+        public async IAsyncEnumerable<string[]> ExecuteQueryTimeSeriesAsync(string function)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString(GlobalConstants.DataGatevFinaleConnection);
+                await connection.OpenAsync();
+                SqlCommand command = connection.CreateCommand();
+
+                command.CommandText = function;
+
+                await foreach (var item in DataSQLHelper.GetStringDataAsync(command))
+                {
+                    yield return item;
+                }
+            }
+        }
+
         // ________________________________________________________
         //
         // Convert rows values from a data reader into typed results

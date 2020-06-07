@@ -37,13 +37,18 @@ function loadAddInfo(token, urlSubEnt, json) {
             data: json,
             contentType: 'application/json; charset=utf-8',
             headers: { 'X-CSRF-TOKEN': token },
-            success: function (response) {
-                $(HTML_MENU.CONTAINER_SUBENTITIES).html(response);
+        }).done(function (data) {
+            if (data) {
+                $(HTML_MENU.CONTAINER_SUBENTITIES).html(data);
 
                 $('html, body').animate({
                     scrollTop: $(HTML_MENU.CONTAINER_SUBENTITIES).position().top - 80
-                }, 'slow');               
+                }, 'slow');
             }
+        }).fail(function (request, status, error) {
+            swal(request.responseText, {
+                icon: "error"
+            })
         });
 
         afterCallStyleHandler(HTML_MENU.CONTAINER_SUBENTITIES, HTML_MENU.BTN_SUBENTITIES);
@@ -98,9 +103,14 @@ function loadAddInfo(token, urlSubEnt, json) {
             data: json,
             contentType: 'application/json; charset=utf-8',
             headers: { 'X-CSRF-TOKEN': token },
-            success: function (response) {
-                $(placeholder).html(response);
+        }).done(function (data) {
+            if (data) {
+                $(placeholder).html(data);
             }
+        }).fail(function (request, status, error) {
+            swal(request.responseText, {
+                icon: "error"
+            })
         });
     }
 
