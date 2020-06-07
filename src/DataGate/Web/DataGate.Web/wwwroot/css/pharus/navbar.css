@@ -16,6 +16,12 @@
     display: flex;
 }
 
+    .header-pharus a {
+        font-family: 'Overpass', 'Arial', 'sans-serif';
+        font-size: 10px;
+        text-transform: uppercase;
+    }
+
     .header-pharus img {
         max-width: 100%;
         height: auto;

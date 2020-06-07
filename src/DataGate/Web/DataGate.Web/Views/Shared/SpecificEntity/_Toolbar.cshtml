@@ -66,7 +66,7 @@
                        asp-for="Command"
                        asp-action="Update"
                        asp-route-id="@Model.Id"
-                       value="Update Table"
+                       value="UPDATE"
                        style="margin-bottom: 2%"></>
             </div>
         </form>
@@ -74,7 +74,7 @@
         <div class="mx-2">
             <a asp-route="@routeName"
                class="btn btn-pharus btn-sm mb-2">
-                @SharedLocalizer["Back to All"]
+                @SharedLocalizer["ALL"]
             </a>
         </div>
         <div>
@@ -83,7 +83,7 @@
                     class="btn btn-pharus btn-sm mb-2"
                     data-toggle="ajax-modal"
                     data-target="#upload-document">
-                @SharedLocalizer["Upload Document"]
+                @SharedLocalizer["UPLOAD Document"]
             </button>
         </div>
 
@@ -93,7 +93,7 @@
                     class="btn btn-pharus btn-sm mb-2"
                     data-toggle="ajax-modal"
                     data-target="#upload-agreement">
-                @SharedLocalizer["Upload Agreement"]
+                @SharedLocalizer["UPLOAD Agreement"]
             </button>
         </div>
 
@@ -105,7 +105,7 @@
                    asp-route-id="@Model.Id"
                    asp-route-date="@Model.Date"
                    class="btn btn-pharus btn-sm mb-2">
-                    @SharedLocalizer["Edit"] @entityName
+                    @SharedLocalizer["EDIT"] @entityName
                 </a>
             </div>
         }

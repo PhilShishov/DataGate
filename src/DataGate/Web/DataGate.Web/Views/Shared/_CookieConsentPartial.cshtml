@@ -9,8 +9,8 @@
 
 @if (showBanner)
 {
-    <div id="cookieConsent" class="alert alert-info alert-dismissible fade show" role="alert">
-        @SharedLocalizer["We use cookies to understand how you use our site and to improve your experience."] <a asp-area="" asp-controller="Legal" asp-action="Privacy">
+    <div id="cookieConsent" class="alert alert-info alert-dismissible fade show container-cookie-consent" role="alert">
+        @SharedLocalizer["We use cookies to understand how you use our site and to improve your experience."] <a asp-area="Identity" asp-controller="Account" asp-action="Privacy">
             @SharedLocalizer["Learn More"]
         </a>.
         <button type="button" class="accept-policy close" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">

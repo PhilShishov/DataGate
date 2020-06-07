@@ -6,6 +6,10 @@
 *
 */
 
+.text-el-switch{
+    font-size:14px;
+}
+
 .checkbox-pharus {
     padding-left: 35px;
     font-size: 16px;
@@ -122,7 +126,7 @@
         }
 
             .el-switch > input[type="checkbox"]:checked + .el-switch-style:before {
-                left: 50%;
+                left: 49%;
             }
 
     /*define size*/

@@ -159,6 +159,9 @@
   <data name="Agreements Library" xml:space="preserve">
     <value />
   </data>
+  <data name="ALL" xml:space="preserve">
+    <value />
+  </data>
   <data name="ALL PHARUS AGREEMENTS" xml:space="preserve">
     <value />
   </data>
@@ -315,6 +318,9 @@
   <data name="SELECT COLUMNS" xml:space="preserve">
     <value />
   </data>
+  <data name="SELECTION" xml:space="preserve">
+    <value />
+  </data>
   <data name="Share Class Agreements" xml:space="preserve">
     <value />
   </data>
@@ -322,6 +328,9 @@
     <value />
   </data>
   <data name="Share Classes" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Shares" xml:space="preserve">
     <value />
   </data>
   <data name="Show" xml:space="preserve">
@@ -334,6 +343,9 @@
     <value />
   </data>
   <data name="Sub Funds" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Subs" xml:space="preserve">
     <value />
   </data>
   <data name="Timeline" xml:space="preserve">

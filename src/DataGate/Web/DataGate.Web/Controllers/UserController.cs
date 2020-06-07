@@ -6,6 +6,7 @@
     [Authorize]
     public class UserController : BaseController
     {
+        [Route("userpanel")]
         public IActionResult Index()
         {
             return this.View();

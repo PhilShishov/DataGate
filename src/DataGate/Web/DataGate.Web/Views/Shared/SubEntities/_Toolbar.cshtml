@@ -20,7 +20,7 @@
 
     <div>
         <a class="btn btn-pharus btn-sm mr-2" asp-route="@targetRoute" asp-route-id="@Model.Id" asp-route-date="@Model.Date">
-            @SharedLocalizer["Back to Container"]
+            @SharedLocalizer["CONTAINER"]
         </a>
     </div>
 
@@ -58,7 +58,7 @@
         <input type="submit"
                class="btn btn-pharus btn-sm mb-1"
                name="Command"
-               value="Update Table"></>
+               value="UPDATE"></>
         <span asp-validation-for="Date" class="text-danger"></span>
     </div>
 
@@ -74,7 +74,7 @@
             id="btn-extract-excel"
             type="button"
             value="Excel">
-        Excel
+        EXCEL
     </button>
 
     <button class="btn btn-sm btn-pharus ml-4"
