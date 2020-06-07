@@ -20,10 +20,10 @@
 
         public const string SuccessfullyConfirmedEmail = "Your email was successfully confirmed.";
 
-        public const string AddUser = "{0} was successfully added as {1}.";
+        public const string AddUser = "{0} was added as {1}.";
 
-        public const string UpdateUser = "{0} was successfully updated.";
+        public const string UpdateUser = "{0} was updated.";
 
-        public const string RemoveUser = "{0} was successfully removed.";
+        public const string RemoveUser = "{0} was removed.";
     }
 }

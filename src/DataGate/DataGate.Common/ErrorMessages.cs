@@ -8,6 +8,7 @@
         public const string NewPasswordMismatch = "The new password and confirmation password do not match.";
         public const string NotSelectedValue = "Please select at least one option!";
         public const string UnsuccessfulDelete = "Delete was unsuccessful! Please try again.";
+        public const string UnsuccessfulCreate = "Create was unsuccessful! Please try again.";
 
         public const string ChosenDateIsEmpty = "Date cannot be empty!";
         public const string TableReportNotGenerated = "There was a problem generating your report, please try again.";

@@ -7,6 +7,7 @@
     using System.Threading.Tasks;
 
     using DataGate.Common;
+    using DataGate.Data.Models.Enums;
     using DataGate.Data.Models.Users;
     using DataGate.Web.Infrastructure.Attributes.Validation;
     using Microsoft.AspNetCore.Authentication;
@@ -103,7 +104,7 @@
                             $" ({lastLoginResult.ToString()}) for user with ID '{user.Id}'.");
                     }
 
-                    return this.Redirect(GlobalConstants.FundAllUrl);
+                    return this.Redirect(GlobalConstants.UserPanelUrl);
                 }
 
                 if (result.RequiresTwoFactor)
