@@ -7,8 +7,7 @@
 */
 
 @media only screen and (max-width: 991px) {
-    .toolbar-view-all,
-    .toolbar-view-details {
+    .toolbar-view-all, .toolbar-view-details {
         overflow-x: scroll;
     }
 
@@ -19,7 +18,7 @@
 
     .mobile-none,
     .search-box-wrapper,
-    #canvas-aum-pharus,
+    #aumChart,
     footer {
         display: none;
     }
@@ -85,7 +84,7 @@
         width: 25%;
     }
 
-    #canvas-aum-pharus {
+    #aumChart {
         width: 70%
     }
 

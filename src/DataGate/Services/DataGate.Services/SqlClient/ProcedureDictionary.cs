@@ -5,8 +5,6 @@
         // ________________________________________________________
         //
         // Stored procedures as in DB
-        // ________________________________________________________
-        //
         // Upload
         public const string SqlProcedureDocumentFund = "EXEC sp_insert_map_fund";
         public const string SqlProcedureDocumentSubFund = "EXEC sp_insert_map_subfund";

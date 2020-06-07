@@ -9,10 +9,10 @@ namespace DataGate.Web.ViewModels.TimeSeries
 
     public class TimeSeriesViewModel
     {
-        public List<string[]> TSAllPriceValues { get; set; }
+        public IEnumerable<string[]> TSAllPriceValues { get; set; }
 
-        public List<string> TSPriceDates { get; set; }
+        public IEnumerable<string> TSPriceDates { get; set; }
 
-        public List<string> TSTypeProviders { get; set; }
+        public IEnumerable<string> TSTypeProviders { get; set; }
     }
 }

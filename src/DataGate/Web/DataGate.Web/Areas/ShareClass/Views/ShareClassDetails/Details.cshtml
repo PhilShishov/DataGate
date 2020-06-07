@@ -19,7 +19,7 @@
         <partial name="SpecificEntity/_Menu_Load_Items" />
     </div>
 
-    <hr class="bg-pharus hr-2"/>
+    <hr class="bg-pharus hr-2" />
 
     <!-- Container for subentities selected option-->
     <div id="subEntities" class="mt-4 d-none"></div>
@@ -33,6 +33,10 @@
 
 @section Scripts{
     <partial name="_DetailsScriptsPartial" />
+
+    <script src="~/lib/chartjs/Chart.min.js" asp-append-version="true"></script>
+    <script src="~/js/chartUtil.js" asp-append-version="true"></script>
+
     <script>
         const tokenLoadEntities = $('#load-form input[name=__RequestVerificationToken]').val();
 
