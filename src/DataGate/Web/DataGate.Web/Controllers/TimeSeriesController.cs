@@ -20,11 +20,15 @@
         [Route("loadTimeseries")]
         public async Task<IActionResult> GetAllTimelines(int id)
         {
+            var dates = await this.service.GetDates(id).ToListAsync();
+            var providers = await this.service.GetProviders(id).ToListAsync();
+            var prices = await this.service.GetData(id).ToListAsync();
+
             var model = new TimeSeriesViewModel()
             {
-                TSPriceDates = await this.service.GetDates(id).ToListAsync(),
-                TSTypeProviders = await this.service.GetProviders(id).ToListAsync(),
-                TSAllPriceValues = await this.service.GetData(id).ToListAsync(),
+                TSPriceDates = dates,
+                TSTypeProviders = providers,
+                TSAllPriceValues = prices,
             };
 
             return this.PartialView("SpecificEntity/_TimeSeries", model);

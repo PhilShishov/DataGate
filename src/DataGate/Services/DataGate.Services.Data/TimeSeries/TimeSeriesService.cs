@@ -18,7 +18,7 @@
         public async IAsyncEnumerable<string[]> GetData(int id, int skip)
         {
             var query = this.sqlManager
-               .ExecuteQueryTimeSeriesAsync(TimeSeriesFunctions.SqlFunctionTimeSeriesData)
+               .ExecuteQueryTimeSeriesAsync(string.Format(TimeSeriesFunctions.SqlFunctionTimeSeriesData, id))
                .Skip(skip);
 
             await foreach (var item in query)
@@ -30,7 +30,7 @@
         public async IAsyncEnumerable<string> GetDates(int id, int skip)
         {
             var query = this.sqlManager
-                .ExecuteQueryTimeSeriesAsync(TimeSeriesFunctions.SqlFunctionTimeSeriesData)
+                .ExecuteQueryTimeSeriesAsync(string.Format(TimeSeriesFunctions.SqlFunctionTimeSeriesDates, id))
                 .Skip(skip)
                 .Select(ts => ts[1]);
 
@@ -43,7 +43,7 @@
         public async IAsyncEnumerable<string> GetProviders(int id, int skip)
         {
             var query = this.sqlManager
-                .ExecuteQueryTimeSeriesAsync(TimeSeriesFunctions.SqlFunctionTimeSeriesData)
+                .ExecuteQueryTimeSeriesAsync(string.Format(TimeSeriesFunctions.SqlFunctionTimeSeriesProviders, id))
                 .Skip(skip)
                 .Select(tt => tt[0]);
 
