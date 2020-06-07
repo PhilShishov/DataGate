@@ -30,7 +30,6 @@ const URLS = {
 function loadAddInfo(token, urlSubEnt, json) {
     $(HTML_MENU.BTN_SUBENTITIES).on('click', function (event) {
         beforeCallStyleHandler();
-
         $.ajax({
             url: urlSubEnt,
             type: 'GET',
