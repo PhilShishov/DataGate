@@ -6,49 +6,78 @@
 
     public partial class BaseController : Controller
     {
-        public IActionResult ShowError(string errorMessage, string route)
+        public void ShowInfoAlertify(string infoMessage)
         {
-            this.TempData[GlobalConstants.ErrorKey] = errorMessage;
-            return this.RedirectToRoute(route);
+            this.TempData[GlobalConstants.AlertifyKey] = FormatInfoAlertify(infoMessage);
         }
 
-        public IActionResult ShowError(string errorMessage, string route, object routeValues)
+        public IActionResult ShowInfoAlertify(string infoMessage, string route, object routeValues)
         {
-            this.TempData[GlobalConstants.ErrorKey] = errorMessage;
+            this.TempData[GlobalConstants.AlertifyKey] = FormatInfoAlertify(infoMessage);
             return this.RedirectToRoute(route, routeValues);
         }
 
-        public IActionResult ShowError(string errorMessage, string action, string controller)
+        public IActionResult ShowInfoAlertify(string infoMessage, string action, string controller)
         {
-            this.TempData[GlobalConstants.ErrorKey] = errorMessage;
+            this.TempData[GlobalConstants.AlertifyKey] = FormatInfoAlertify(infoMessage);
             return this.RedirectToAction(action, controller);
         }
 
-        public IActionResult ShowErrorLocal(string errorMessage, NotificationType notificationType, string action)
+        public void ShowErrorAlertify(string errorMessage)
         {
-            string result = string.Format(GlobalConstants.SweetAlertScript, notificationType.ToString().ToUpper(), errorMessage, notificationType);
-            this.TempData[GlobalConstants.NotifKey] = result;
-            return this.LocalRedirect(action);
+            this.TempData[GlobalConstants.AlertifyKey] = FormatErrorAlertify(errorMessage);
+        }
+
+        public IActionResult ShowErrorAlertify(string errorMessage, string route, object routeValues)
+        {
+            this.TempData[GlobalConstants.AlertifyKey] = FormatErrorAlertify(errorMessage);
+            return this.RedirectToRoute(route, routeValues);
+        }
+
+        public IActionResult ShowErrorAlertify(string errorMessage, string action, string controller)
+        {
+            this.TempData[GlobalConstants.AlertifyKey] = FormatErrorAlertify(errorMessage);
+            return this.RedirectToAction(action, controller);
         }
 
         public IActionResult ShowInfo(string infoMessage, string route, object routeValues)
         {
-            this.TempData[GlobalConstants.InfoKey] = infoMessage;
+            this.TempData[GlobalConstants.SweetAlertKey] = FormatInfoSweetAlert(infoMessage);
             return this.RedirectToRoute(route, routeValues);
         }
 
-        public IActionResult ShowInfo(string infoMessage, NotificationType notificationType, string route, object routeValues)
+        public IActionResult ShowErrorLocal(string errorMessage, string action)
         {
-            string result = string.Format(GlobalConstants.SweetAlertScript, notificationType.ToString().ToUpper(), infoMessage, notificationType);
-            this.TempData[GlobalConstants.NotifKey] = result;
-            return this.RedirectToRoute(route, routeValues);
-        }
-
-        public IActionResult ShowInfoLocal(string infoMessage, NotificationType notificationType, string action)
-        {
-            string result = string.Format(GlobalConstants.SweetAlertScript, notificationType.ToString().ToUpper(), infoMessage, notificationType);
-            this.TempData[GlobalConstants.NotifKey] = result;
+            this.TempData[GlobalConstants.SweetAlertKey] = FormatErrorSweetAlert(errorMessage);
             return this.LocalRedirect(action);
+        }
+
+        public IActionResult ShowInfoLocal(string infoMessage, string action)
+        {
+            this.TempData[GlobalConstants.SweetAlertKey] = FormatInfoSweetAlert(infoMessage);
+            return this.LocalRedirect(action);
+        }
+
+        private static string FormatInfoAlertify(string infoMessage)
+        {
+            return string.Format(GlobalConstants.AlertifyScript, infoMessage, NotificationType.success);
+        }
+
+        private static string FormatErrorAlertify(string errorMessage)
+        {
+            return string.Format(GlobalConstants.AlertifyScript, errorMessage, NotificationType.error);
+        }
+
+        private static string FormatInfoSweetAlert(string infoMessage)
+        {
+            var notificationType = NotificationType.success;
+            return string.Format(GlobalConstants.SweetAlertScript, notificationType.ToString().ToUpper(), infoMessage, notificationType);
+        }
+
+        private static string FormatErrorSweetAlert(string errorMessage)
+        {
+            var notificationType = NotificationType.error;
+            return string.Format(GlobalConstants.SweetAlertScript, notificationType.ToString().ToUpper(), errorMessage, notificationType);
         }
     }
 }

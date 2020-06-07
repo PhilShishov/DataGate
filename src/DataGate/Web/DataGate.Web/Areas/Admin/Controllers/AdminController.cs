@@ -75,7 +75,7 @@
 
         [HttpPost]
         public async Task<IActionResult> CreateUser(
-                     [Bind("Username", "Email", "Password", "ConfirmPassword","RoleType", "RecaptchaValue")]
+                     [Bind("Username", "Email", "Password", "ConfirmPassword", "RoleType", "RecaptchaValue")]
                      CreateUserInputModel inputModel)
         {
             string returnUrl = ViewUsersUrl;
@@ -109,12 +109,12 @@
                 string message = string.Format(GlobalConstants.EmailConfirmationMessage, HtmlEncoder.Default.Encode(callbackUrl));
                 await this.emailSender.SendEmailAsync("philip.shishov@pharusmanco.lu", "Philip Shishov", inputModel.Email, GlobalConstants.ConfirmEmailSubject, message);
 
-                return this.ShowInfoLocal(string.Format(InfoMessages.AddUser, user.UserName, inputModel.RoleType), NotificationType.success, returnUrl);
+                return this.ShowInfoLocal(string.Format(InfoMessages.AddUser, user.UserName, inputModel.RoleType), returnUrl);
             }
 
             this.AddErrors(result);
 
-            return this.ShowErrorLocal(string.Format(ErrorMessages.UnsuccessfulCreate, user.UserName), NotificationType.error, returnUrl);
+            return this.ShowErrorLocal(string.Format(ErrorMessages.UnsuccessfulCreate, user.UserName), returnUrl);
         }
 
         [HttpGet("/Admin/Admin/EditUser/{id}")]
@@ -181,13 +181,13 @@
                 {
                     this.logger.LogInformation("User updated.");
 
-                    return this.ShowInfoLocal(string.Format(InfoMessages.UpdateUser, user.UserName), NotificationType.success, returnUrl);
+                    return this.ShowInfoLocal(string.Format(InfoMessages.UpdateUser, user.UserName), returnUrl);
                 }
 
                 this.AddErrors(resultUser);
             }
 
-            return this.ShowErrorLocal(string.Format(ErrorMessages.UnsuccessfulUpdate, user.UserName), NotificationType.error, returnUrl);
+            return this.ShowErrorLocal(string.Format(ErrorMessages.UnsuccessfulUpdate, user.UserName), returnUrl);
         }
 
         [HttpGet("/Admin/Admin/DeleteUser/{id}")]
@@ -226,13 +226,13 @@
                 {
                     this.logger.LogInformation("User deleted.");
 
-                    return this.ShowInfoLocal(string.Format(InfoMessages.RemoveUser, user.UserName), NotificationType.success, returnUrl);
+                    return this.ShowInfoLocal(string.Format(InfoMessages.RemoveUser, user.UserName), returnUrl);
                 }
 
                 this.AddErrors(result);
             }
 
-            return this.ShowErrorLocal(string.Format(ErrorMessages.UnsuccessfulDelete, "ok"), NotificationType.error, returnUrl);
+            return this.ShowErrorLocal(string.Format(ErrorMessages.UnsuccessfulDelete, "ok"), returnUrl);
         }
 
         private async Task AssignRoleToUser(CreateUserInputModel inputModel, ApplicationUser user)

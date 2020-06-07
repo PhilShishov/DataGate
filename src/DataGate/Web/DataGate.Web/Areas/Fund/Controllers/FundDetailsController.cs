@@ -49,10 +49,15 @@
         {
             if (viewModel.Command == GlobalConstants.CommandUpdateTable)
             {
-                return this.ShowInfo(InfoMessages.SuccessfulUpdate, GlobalConstants.FundDetailsRouteName, new { viewModel.Id, viewModel.Date });
+                return this.RedirectToRoute(
+                           GlobalConstants.FundDetailsRouteName,
+                           new { viewModel.Id, viewModel.Date });
             }
 
-            return this.ShowError(ErrorMessages.UnsuccessfulUpdate, GlobalConstants.FundDetailsRouteName, new { viewModel.Id, viewModel.Date });
+            return this.ShowErrorAlertify(
+                       ErrorMessages.UnsuccessfulUpdate,
+                       GlobalConstants.FundDetailsRouteName,
+                       new { viewModel.Id, viewModel.Date });
         }
     }
 }

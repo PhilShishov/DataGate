@@ -47,8 +47,15 @@
                           "DEPCode", "TACode", "CompanyTypeDesc", "TinNumber",
                           "LEICode", "RegNumber", "CommentTitle", "CommentArea", "RecaptchaValue")] EditFundInputModel model)
         {
-            if (!this.ModelState.IsValid)
+            bool doesExist = await this.service.DoesExist(model.FundName);
+
+            if (!this.ModelState.IsValid || doesExist)
             {
+                if (doesExist)
+                {
+                    this.ShowErrorAlertify(ErrorMessages.ExistingEntityName);
+                }
+
                 await this.SetViewDataValuesForFundSelectLists();
                 return this.View(model);
             }
@@ -58,7 +65,6 @@
 
             return this.ShowInfo(
                 InfoMessages.SuccessfulEdit,
-                NotificationType.success,
                 GlobalConstants.FundDetailsRouteName,
                 new { area = GlobalConstants.FundAreaName, id = fundId, date = date });
         }
@@ -80,13 +86,13 @@
         {
             bool doesExist = await this.service.DoesExist(model.FundName);
 
-            if (doesExist)
+            if (!this.ModelState.IsValid || doesExist)
             {
-                this.TempData[GlobalConstants.ErrorKey] = ErrorMessages.ExistingEntityName;
-            }
+                if (doesExist)
+                {
+                    this.ShowErrorAlertify(ErrorMessages.ExistingEntityName);
+                }
 
-            if (!this.ModelState.IsValid)
-            {
                 await this.SetViewDataValuesForFundSelectLists();
                 return this.View(model);
             }
@@ -96,7 +102,6 @@
 
             return this.ShowInfo(
                 InfoMessages.SuccessfulCreate,
-                NotificationType.success,
                 GlobalConstants.FundDetailsRouteName,
                 new { area = GlobalConstants.FundAreaName, id = fundId, date = date });
         }

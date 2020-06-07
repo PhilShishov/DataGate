@@ -39,11 +39,13 @@
 
             if (viewModel.Values != null && viewModel.Values.Count > 0)
             {
-                this.TempData[GlobalConstants.InfoKey] = InfoMessages.SuccessfulUpdate;
                 return this.View(viewModel);
             }
 
-            return this.ShowError(ErrorMessages.TableIsEmpty, GlobalConstants.AllActionName, GlobalConstants.SubFundsControllerName);
+            return this.ShowErrorAlertify(
+                ErrorMessages.TableIsEmpty,
+                GlobalConstants.AllActionName,
+                GlobalConstants.SubFundsControllerName);
         }
     }
 }

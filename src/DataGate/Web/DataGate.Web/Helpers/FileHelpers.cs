@@ -12,7 +12,7 @@
 
     public static class FileHelpers
     {
-        private static readonly byte[] AllowedChars = { };
+        // private static readonly byte[] AllowedChars = { };
         private static readonly Dictionary<string, List<byte[]>> FileSignature = new Dictionary<string, List<byte[]>>
         {
              { ".pdf", new List<byte[]> { new byte[] { 0x25, 0x50, 0x44, 0x46 } } },

@@ -65,11 +65,10 @@
 
             if (model.Agreements != null)
             {
-                this.TempData[GlobalConstants.InfoKey] = InfoMessages.SuccessfulUpdate;
                 return this.View(model);
             }
 
-            this.TempData[GlobalConstants.ErrorKey] = ErrorMessages.UnsuccessfulUpdate;
+            this.ShowErrorAlertify(ErrorMessages.TableIsEmpty);
             return this.View(model);
         }
     }

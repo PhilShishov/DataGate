@@ -13,7 +13,6 @@
         public const string TypeFund = "Fund";
         public const string TypeSubFund = "SubFund";
         public const string TypeShareClass = "ShareClass";
-        public const string SweetAlertScript = "<script language='javascript'>swal('{0}', '{1}','{2}')</script>";
 
         // Controllers, areas
         public const string ControllerRouteDataValue = "controller";
@@ -61,9 +60,10 @@
         public const string ShareClassEditRouteName = "editShareClass";
 
         // Tempdata Keys
-        public const string InfoKey = "info";
-        public const string ErrorKey = "error";
-        public const string NotifKey = "notification";
+        public const string SweetAlertKey = "sweetalert";
+        public const string SweetAlertScript = "<script type='text/javascript'>swal('{0}', '{1}','{2}');</script>";
+        public const string AlertifyKey = "alertify";
+        public const string AlertifyScript = "<script type='text/javascript'>alertify.set('notifier', 'position', 'top-left'); alertify.notify('{0}', '{1}', 3);</script>";
 
         // Connection Strings
         public const string DataGateUsersConnection = "DataGateUsersConnection";
@@ -117,7 +117,7 @@
         public const string ShareClassNameDisplay = "Share Class";
 
         // Toolbar Commands
-        public const string CommandUpdateTable = "Update Table";
+        public const string CommandUpdateTable = "UPDATE";
         public const string CommandResetTable = "Reset";
         public const string CommandExtractExcel = "Excel";
         public const string CommandExtractPdf = "PDF";

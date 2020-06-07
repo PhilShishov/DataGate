@@ -23,12 +23,12 @@ namespace DataGate.Web.Utilities
         // Footer event handler
         protected class Footer : IEventHandler
         {
-            private PdfFormXObject placeholder;
-            private float side = 20;
-            private float x = 1140;
-            private float y = 25;
-            private float space = 4.5f;
-            private float descent = 3;
+            private readonly PdfFormXObject placeholder;
+            private readonly float side = 20;
+            private readonly float x = 1140;
+            private readonly float y = 25;
+            private readonly float space = 4.5f;
+            private readonly float descent = 3;
 
             public Footer()
             {
