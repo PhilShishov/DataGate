@@ -2,21 +2,46 @@
 {
     public static class StringSwapper
     {
-        public static string GetResult(string chosenType, string functionFund, string functionSubFund, string functionShareClass)
+        public static string ByArea(string currentType, string fund, string subFund, string shareClass)
         {
             string result = string.Empty;
 
-            if (chosenType == GlobalConstants.TypeFund)
+            switch (currentType)
             {
-                result = functionFund;
+                case GlobalConstants.FundAreaName:
+                    result = fund;
+                    break;
+                case GlobalConstants.SubFundAreaName:
+                    result = subFund;
+                    break;
+                case GlobalConstants.ShareClassAreaName:
+                    result = shareClass;
+                    break;
             }
-            else if (chosenType == GlobalConstants.TypeSubFund)
+
+            return result;
+        }
+
+        public static string ByController(string currentType, string fund, string subFund, string shareClass)
+        {
+            string result = string.Empty;
+
+            switch (currentType)
             {
-                result = functionSubFund;
-            }
-            else if (chosenType == GlobalConstants.TypeShareClass)
-            {
-                result = functionShareClass;
+                case GlobalConstants.FundsControllerName:
+                case GlobalConstants.FundDetailsControllerName:
+                case GlobalConstants.FundSubFundsControllerName:
+                    result = fund;
+                    break;
+                case GlobalConstants.SubFundsControllerName:
+                case GlobalConstants.SubFundDetailsControllerName:
+                case GlobalConstants.SubFundShareClassesControllerName:
+                    result = subFund;
+                    break;
+                case GlobalConstants.ShareClassesControllerName:
+                case GlobalConstants.ShareClassDetailsControllerName:
+                    result = shareClass;
+                    break;
             }
 
             return result;

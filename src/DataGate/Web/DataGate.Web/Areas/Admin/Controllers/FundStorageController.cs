@@ -1,12 +1,12 @@
 ﻿namespace DataGate.Web.Controllers.Funds
 {
     using System;
-    using System.Globalization;
     using System.Linq;
     using System.Threading.Tasks;
 
     using DataGate.Common;
     using DataGate.Services.Data.Storage.Contracts;
+    using DataGate.Services.DateTime;
     using DataGate.Web.InputModels.Funds;
 
     using Microsoft.AspNetCore.Authorization;
@@ -60,7 +60,7 @@
             }
 
             var fundId = await this.service.Edit(model);
-            var date = model.InitialDate.ToString(GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
+            var date = DateTimeParser.ToWebFormat(model.InitialDate);
 
             return this.ShowInfo(
                 InfoMessages.SuccessfulEdit,
@@ -97,7 +97,7 @@
             }
 
             var fundId = await this.service.Create(model);
-            var date = model.InitialDate.ToString(GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
+            var date = DateTimeParser.ToWebFormat(model.InitialDate);
 
             return this.ShowInfo(
                 InfoMessages.SuccessfulCreate,

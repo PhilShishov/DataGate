@@ -3,20 +3,10 @@
 
 @{
     var controller = this.ViewContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
-    var createRoute = string.Empty;
-
-    if (controller == GlobalConstants.FundsControllerName)
-    {
-        createRoute = GlobalConstants.FundCreateRouteName;
-    }
-    else if (controller == GlobalConstants.SubFundsControllerName)
-    {
-        createRoute = GlobalConstants.SubFundCreateRouteName;
-    }
-    else if (controller == GlobalConstants.ShareClassesControllerName)
-    {
-        createRoute = GlobalConstants.ShareClassCreateRouteName;
-    }
+    var routeCreate = StringSwapper.ByController(controller,
+                                                 GlobalConstants.FundCreateRouteName,
+                                                 GlobalConstants.SubFundCreateRouteName,
+                                                 GlobalConstants.ShareClassCreateRouteName);
 }
 
 <form class="d-flex"
@@ -101,7 +91,7 @@
 {
     <div>
         <a asp-area="Admin"
-           asp-route="@createRoute"
+           asp-route="@routeCreate"
            class="btn btn-sm btn-pharus">
             @SharedLocalizer["CREATE"]
         </a>

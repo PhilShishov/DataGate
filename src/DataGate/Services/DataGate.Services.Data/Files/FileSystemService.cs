@@ -8,6 +8,7 @@
     using DataGate.Common;
     using DataGate.Services.Data.Documents;
     using DataGate.Services.Data.Files.Contracts;
+    using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
     using DataGate.Services.SqlClient;
     using DataGate.Services.SqlClient.Contracts;
@@ -32,10 +33,10 @@
         public async Task UploadDocument(UploadDocumentInputModel model)
         {
             UploadDocumentDto dto = AutoMapperConfig.MapperInstance.Map<UploadDocumentDto>(model);
-            dto.EndConnection = model.EndConnection?.ToString(GlobalConstants.RequiredSqlDateTimeFormat, CultureInfo.InvariantCulture);
+            dto.EndConnection = DateTimeParser.ToSqlFormat(model.EndConnection);
             dto.DocumentType = await this.service.GetByIdDocumentType(model.DocumentType);
 
-            string query = StringSwapper.GetResult(model.AreaName,
+            string query = StringSwapper.ByArea(model.AreaName,
                                                   ProcedureDictionary.SqlProcedureDocumentFund,
                                                   ProcedureDictionary.SqlProcedureDocumentSubFund,
                                                   ProcedureDictionary.SqlProcedureDocumentShareClass);
@@ -59,7 +60,7 @@
 
         public async Task DeleteDocument(int fileId, string areaName)
         {
-            string query = StringSwapper.GetResult(areaName,
+            string query = StringSwapper.ByArea(areaName,
                                                   ProcedureDictionary.SqlProcedureDeleteDocumentFund,
                                                   ProcedureDictionary.SqlProcedureDeleteDocumentSubFund,
                                                   ProcedureDictionary.SqlProcedureDeleteDocumentShareClass);
@@ -80,7 +81,7 @@
             dto.Status = await this.service.GetByIdStatus(model.Status);
             dto.Company = await this.service.GetByIdCompany(model.Company);
 
-            string query = StringSwapper.GetResult(model.AreaName,
+            string query = StringSwapper.ByArea(model.AreaName,
                                                  ProcedureDictionary.SqlProcedureAgreementFund,
                                                  ProcedureDictionary.SqlProcedureAgreementSubFund,
                                                  ProcedureDictionary.SqlProcedureAgreementShareClass);
@@ -106,7 +107,7 @@
 
         public async Task DeleteAgreement(int fileId, string areaName)
         {
-            string query = StringSwapper.GetResult(areaName,
+            string query = StringSwapper.ByArea(areaName,
                                                   ProcedureDictionary.SqlProcedureDeleteAgreementFund,
                                                   ProcedureDictionary.SqlProcedureDeleteAgreementSubFund,
                                                   ProcedureDictionary.SqlProcedureDeleteAgreementShareClass);

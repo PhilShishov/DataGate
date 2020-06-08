@@ -1,10 +1,9 @@
 namespace DataGate.Web.InputModels.Files
 {
-    using System.Globalization;
     using System.IO;
 
     using AutoMapper;
-    using DataGate.Common;
+    using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
 
     public class UploadDocumentDto : IMapFrom<UploadDocumentInputModel>, IHaveCustomMappings
@@ -25,7 +24,7 @@ namespace DataGate.Web.InputModels.Files
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<UploadDocumentInputModel, UploadDocumentDto>()
-               .ForMember(dto => dto.StartConnection, action => action.MapFrom(model => model.StartConnection.ToString(GlobalConstants.RequiredSqlDateTimeFormat, CultureInfo.InvariantCulture)))
+               .ForMember(dto => dto.StartConnection, action => action.MapFrom(model => DateTimeParser.ToSqlFormat(model.StartConnection)))
                .ForMember(dto => dto.FileName, action => action.MapFrom(model => model.FileToUpload.FileName))
                .ForMember(dto => dto.FileExt, action => action.MapFrom(model => Path.GetExtension(model.FileToUpload.FileName).ToLowerInvariant()));
         }

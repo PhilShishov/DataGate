@@ -4,6 +4,7 @@ namespace DataGate.Web.InputModels.Funds
 
     using AutoMapper;
     using DataGate.Common;
+    using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
 
     public class FundPostDto : IMapFrom<EditFundInputModel>, IMapFrom<CreateFundInputModel>, IHaveCustomMappings
@@ -55,10 +56,10 @@ namespace DataGate.Web.InputModels.Funds
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<EditFundInputModel, FundPostDto>()
-                .ForMember(dto => dto.InitialDate, action => action.MapFrom(model => model.InitialDate.ToString(GlobalConstants.RequiredSqlDateTimeFormat, CultureInfo.InvariantCulture)));
+                .ForMember(dto => dto.InitialDate, action => action.MapFrom(model => DateTimeParser.ToSqlFormat(model.InitialDate)));
 
             configuration.CreateMap<CreateFundInputModel, FundPostDto>()
-                .ForMember(dto => dto.InitialDate, action => action.MapFrom(model => model.InitialDate.ToString(GlobalConstants.RequiredSqlDateTimeFormat, CultureInfo.InvariantCulture)));
+                .ForMember(dto => dto.InitialDate, action => action.MapFrom(model => DateTimeParser.ToSqlFormat(model.InitialDate)));
         }
     }
 }

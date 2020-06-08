@@ -20,7 +20,7 @@
         [Route("loadTimelines")]
         public IActionResult GetAllTimelines(int id, string areaName)
         {
-            string function = StringSwapper.GetResult(areaName,
+            string function = StringSwapper.ByArea(areaName,
                                                      FunctionDictionary.SqlFunctionTimelineFund,
                                                      FunctionDictionary.SqlFunctionTimelineSubFund,
                                                      FunctionDictionary.SqlFunctionTimelineShareClass);
@@ -28,7 +28,7 @@
             var model = this.service.GetTimeline<TimelineViewModel>(function, id);
 
             this.ViewBag.Area = areaName;
-            this.ViewBag.Route = StringSwapper.GetResult(areaName,
+            this.ViewBag.Route = StringSwapper.ByArea(areaName,
                                                         GlobalConstants.FundDetailsRouteName,
                                                         GlobalConstants.SubFundDetailsRouteName,
                                                         GlobalConstants.ShareClassDetailsRouteName);

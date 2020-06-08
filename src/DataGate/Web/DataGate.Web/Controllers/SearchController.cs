@@ -3,7 +3,6 @@
     using System;
 
     using DataGate.Common;
-    using DataGate.Data.Models.Enums;
     using DataGate.Services.Data.ShareClasses;
     using DataGate.Web.ViewModels.Search;
     using Microsoft.AspNetCore.Authorization;

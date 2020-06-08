@@ -1,39 +1,36 @@
 ﻿@model SpecificEntityViewModel
 @inject IStringLocalizer<SharedResources> SharedLocalizer
 @{
-    var controllerName = this.ViewContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
-    var targetEditRoute = string.Empty;
-    var targetRouteContainer = string.Empty;
-    var entityName = string.Empty;
-    var routeName = string.Empty;
-    var areaName = string.Empty;
+    var controller = this.ViewContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
 
-    if (controllerName == GlobalConstants.FundDetailsControllerName)
-    {
-        entityName = GlobalConstants.FundNameDisplay;
-        targetEditRoute = GlobalConstants.FundEditRouteName;
-        routeName = GlobalConstants.AllFundsRouteName;
-    }
-    else if (controllerName == GlobalConstants.SubFundDetailsControllerName)
-    {
-        entityName = GlobalConstants.SubFundNameDisplay;
-        areaName = GlobalConstants.FundAreaName;
-        targetRouteContainer = GlobalConstants.FundDetailsRouteName;
-        targetEditRoute = GlobalConstants.SubFundEditRouteName;
-        routeName = GlobalConstants.AllSubFundsRouteName;
-    }
-    else if (controllerName == GlobalConstants.ShareClassDetailsControllerName)
-    {
-        entityName = GlobalConstants.ShareClassNameDisplay;
-        areaName = GlobalConstants.SubFundAreaName;
-        targetRouteContainer = GlobalConstants.SubFundDetailsRouteName;
-        targetEditRoute = GlobalConstants.ShareClassEditRouteName;
-        routeName = GlobalConstants.AllShareClassesRouteName;
-    }
+    var routeEdit = StringSwapper.ByController(controller,
+                                               GlobalConstants.FundEditRouteName,
+                                               GlobalConstants.SubFundEditRouteName,
+                                               GlobalConstants.ShareClassEditRouteName);
+
+    var routeAll = StringSwapper.ByController(controller,
+                                               GlobalConstants.AllFundsRouteName,
+                                               GlobalConstants.AllSubFundsRouteName,
+                                               GlobalConstants.AllShareClassesRouteName);
+    var routeContainer = StringSwapper.ByController(controller,
+                                                    string.Empty,
+                                                    GlobalConstants.FundDetailsRouteName,
+                                                    GlobalConstants.SubFundDetailsRouteName);
+
+    var areaName = StringSwapper.ByController(controller,
+                                              string.Empty,
+                                              GlobalConstants.FundAreaName,
+                                              GlobalConstants.SubFundAreaName);
+
+    var entityType = StringSwapper.ByController(controller,
+                                                GlobalConstants.FundNameDisplay,
+                                                GlobalConstants.SubFundNameDisplay,
+                                                GlobalConstants.ShareClassNameDisplay);
 }
+
 <div class="mx-auto mb-5">
     <div class="h-100 d-flex">
-        @if (controllerName == GlobalConstants.FundDetailsControllerName)
+        @if (controller == GlobalConstants.FundDetailsControllerName)
         {
             <div class="div-entity-container-wrapper"></div>
         }
@@ -41,10 +38,10 @@
         {
             <div class="div-entity-container-wrapper">
                 <p>
-                   @SharedLocalizer["CONTAINER"]:
+                    @SharedLocalizer["CONTAINER"]:
                 </p>
                 <a asp-area="@areaName"
-                   asp-route="@targetRouteContainer"
+                   asp-route="@routeContainer"
                    asp-route-id="@Model.Container.ContainerId"
                    asp-route-date="@Model.Date">
                     @Model.Container.ContainerName
@@ -73,7 +70,7 @@
         </form>
 
         <div class="mx-2">
-            <a asp-route="@routeName"
+            <a asp-route="@routeAll"
                class="btn btn-pharus btn-sm mb-2">
                 @SharedLocalizer["ALL"]
             </a>
@@ -102,11 +99,11 @@
         {
             <div>
                 <a asp-area="Admin"
-                   asp-route="@targetEditRoute"
+                   asp-route="@routeEdit"
                    asp-route-id="@Model.Id"
                    asp-route-date="@Model.Date"
                    class="btn btn-pharus btn-sm mb-2">
-                    @SharedLocalizer["EDIT"] @entityName
+                    @SharedLocalizer["EDIT"] @entityType
                 </a>
             </div>
         }

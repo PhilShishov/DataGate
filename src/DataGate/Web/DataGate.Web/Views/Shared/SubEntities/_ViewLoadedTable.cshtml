@@ -3,22 +3,21 @@
 
 @{
     var controller = this.ViewContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
-    var targetRoute = string.Empty;
-    var targetArea = string.Empty;
-    var subEntitiesRoute = string.Empty;
 
-    if (controller == GlobalConstants.FundSubFundsControllerName)
-    {
-        targetArea = GlobalConstants.SubFundAreaName;
-        targetRoute = GlobalConstants.SubFundDetailsRouteName;
-        subEntitiesRoute = GlobalConstants.FundSubFundsRouteName;
-    }
-    else if (controller == GlobalConstants.SubFundShareClassesControllerName)
-    {
-        targetArea = GlobalConstants.ShareClassAreaName;
-        targetRoute = GlobalConstants.ShareClassDetailsRouteName;
-        subEntitiesRoute = GlobalConstants.SubFundShareClassesRouteName;
-    }
+    var targetRoute = StringSwapper.ByController(controller,
+                                                 GlobalConstants.SubFundDetailsRouteName,
+                                                 GlobalConstants.ShareClassDetailsRouteName,
+                                                 string.Empty);
+
+    var targetArea = StringSwapper.ByController(controller,
+                                                GlobalConstants.SubFundAreaName,
+                                                GlobalConstants.ShareClassAreaName,
+                                                string.Empty);
+
+    var subEntitiesRoute = StringSwapper.ByController(controller,
+                                                GlobalConstants.FundSubFundsRouteName,
+                                                GlobalConstants.SubFundShareClassesRouteName,
+                                                string.Empty);
 }
 
 <div class="table-responsive border-0 mx-auto">

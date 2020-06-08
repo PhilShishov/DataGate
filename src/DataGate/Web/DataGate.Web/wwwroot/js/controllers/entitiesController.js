@@ -62,7 +62,9 @@ function extract(model) {
         }).done(function (data) {
             if (!data.success) {
                 $.unblockUI();
-                alert(data.errorMessage);
+                swal(data.errorMessage, {
+                    icon: "error"
+                })
                 return;
             }
             setTimeout($.unblockUI, 1000);
@@ -72,7 +74,9 @@ function extract(model) {
             }
         }).fail(function (request, status, error) {
             $.unblockUI();
-            alert(request.responseText);
+            swal(request.responseText, {
+                icon: "error"
+            });
         });
     }
 }

@@ -30,7 +30,7 @@
         [Route("agreements/{type}")]
         public IActionResult All(string type)
         {
-            string function = StringSwapper.GetResult(type,
+            string function = StringSwapper.ByArea(type,
                                                   FunctionDictionary.SqlFunctionAllAgreementsFunds,
                                                   FunctionDictionary.SqlFunctionAllAgreementsSubFunds,
                                                   FunctionDictionary.SqlFunctionAllAgreementsShareClasses);
@@ -53,7 +53,7 @@
         {
             if (model.Date != null)
             {
-                string function = StringSwapper.GetResult(model.SelectedType,
+                string function = StringSwapper.ByArea(model.SelectedType,
                                                   FunctionDictionary.SqlFunctionAllAgreementsFunds,
                                                   FunctionDictionary.SqlFunctionAllAgreementsSubFunds,
                                                   FunctionDictionary.SqlFunctionAllAgreementsShareClasses);

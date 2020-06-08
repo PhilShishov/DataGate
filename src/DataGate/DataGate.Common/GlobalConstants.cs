@@ -10,9 +10,6 @@
         public const string CurrentCultureInfo = "en-GB";
         public const string ItalianCultureInfo = "it-IT";
         public const int CultureCookieExpirationTimeInMonths = 5;
-        public const string TypeFund = "Fund";
-        public const string TypeSubFund = "SubFund";
-        public const string TypeShareClass = "ShareClass";
 
         // Controllers, areas
         public const string ControllerRouteDataValue = "controller";
