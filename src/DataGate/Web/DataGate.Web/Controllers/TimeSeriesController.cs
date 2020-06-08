@@ -11,8 +11,7 @@
     {
         private readonly ITimeSeriesService service;
 
-        public TimeSeriesController(
-                        ITimeSeriesService service)
+        public TimeSeriesController(ITimeSeriesService service)
         {
             this.service = service;
         }
@@ -20,8 +19,8 @@
         [Route("loadTimeseries")]
         public async Task<IActionResult> GetAllTimelines(int id)
         {
-            var dates = await this.service.GetDates(id).ToListAsync();
-            var providers = await this.service.GetProviders(id).ToListAsync();
+            var dates = await this.service.GetDates(id, 1).ToListAsync();
+            var providers = await this.service.GetProviders(id, 1).ToListAsync();
             var prices = await this.service.GetData(id).ToListAsync();
 
             var model = new TimeSeriesViewModel()

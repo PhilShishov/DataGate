@@ -6,6 +6,8 @@
 
     public class TimelineViewModel : IMapFrom<TimelineDto>
     {
+        public int Id { get; set; }
+
         public string InitialDate { get; set; }
 
         public string EndDate { get; set; }

@@ -11,7 +11,7 @@
     if (controllerName == GlobalConstants.FundDetailsControllerName)
     {
         entityName = GlobalConstants.FundNameDisplay;
-        targetEditRoute = "editFund";
+        targetEditRoute = GlobalConstants.FundEditRouteName;
         routeName = GlobalConstants.AllFundsRouteName;
     }
     else if (controllerName == GlobalConstants.SubFundDetailsControllerName)
@@ -19,6 +19,7 @@
         entityName = GlobalConstants.SubFundNameDisplay;
         areaName = GlobalConstants.FundAreaName;
         targetRouteContainer = GlobalConstants.FundDetailsRouteName;
+        targetEditRoute = GlobalConstants.SubFundEditRouteName;
         routeName = GlobalConstants.AllSubFundsRouteName;
     }
     else if (controllerName == GlobalConstants.ShareClassDetailsControllerName)
@@ -26,6 +27,7 @@
         entityName = GlobalConstants.ShareClassNameDisplay;
         areaName = GlobalConstants.SubFundAreaName;
         targetRouteContainer = GlobalConstants.SubFundDetailsRouteName;
+        targetEditRoute = GlobalConstants.ShareClassEditRouteName;
         routeName = GlobalConstants.AllShareClassesRouteName;
     }
 }
@@ -52,7 +54,6 @@
 
         <form class="d-flex ml-5"
               method="post"
-              asp-action="Details"
               id="update-form">
 
             <div>

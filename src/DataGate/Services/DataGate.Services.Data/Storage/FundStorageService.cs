@@ -14,7 +14,7 @@
     using DataGate.Services.Mapping;
     using DataGate.Services.SqlClient;
     using DataGate.Services.SqlClient.Contracts;
-    using DataGate.Web.Dtos.Funds;
+    using DataGate.Web.Dtos.Entities;
     using DataGate.Web.InputModels.Funds;
 
     using Microsoft.EntityFrameworkCore;
@@ -22,7 +22,7 @@
     public class FundStorageService : IFundStorageService
     {
         private const int SkipHeaders = 1;
-        private const int IndexFundName = 3;
+        private const int IndexName = 3;
         private const int IndexStatus = 4;
         private const int IndexCSSFCode = 5;
         private const int IndexLegalForm = 6;
@@ -36,16 +36,16 @@
         private const int IndexLEICode = 15;
         private const int IndexRegNumber = 16;
 
-        private readonly string sqlFunctionFundId = "[fn_fund_id]";
+        private readonly string sqlFunctionId = "[fn_fund_id]";
 
         private readonly ISqlQueryManager sqlManager;
         private readonly IRepository<TbHistoryFund> repository;
-        private readonly IFundsSelectListService service;
+        private readonly IFundSelectListService service;
 
         public FundStorageService(
                         ISqlQueryManager sqlQueryManager,
                         IRepository<TbHistoryFund> repository,
-                        IFundsSelectListService service)
+                        IFundSelectListService service)
         {
             this.sqlManager = sqlQueryManager;
             this.repository = repository;
@@ -58,7 +58,7 @@
 
             var dateParsed = DateTimeParser.FromWebFormat(date);
             var query = await this.sqlManager
-                .ExecuteQueryAsync(this.sqlFunctionFundId, dateParsed, id)
+                .ExecuteQueryAsync(this.sqlFunctionId, dateParsed, id)
                 .Skip(SkipHeaders)
                 .FirstOrDefaultAsync();
 
@@ -66,7 +66,7 @@
             {
                 InitialDate = dateParsed,
                 Id = id,
-                FundName = query[IndexFundName],
+                FundName = query[IndexName],
                 CSSFCode = query[IndexCSSFCode],
                 Status = query[IndexStatus],
                 LegalForm = query[IndexLegalForm],

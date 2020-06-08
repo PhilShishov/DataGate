@@ -4,7 +4,7 @@
 
     using DataGate.Common;
     using DataGate.Services.Mapping;
-    using DataGate.Web.Dtos.Funds;
+    using DataGate.Web.Dtos.Entities;
 
     public class EditFundInputModel : BaseEntityInputModel, IMapFrom<EditFundGetDto>
     {

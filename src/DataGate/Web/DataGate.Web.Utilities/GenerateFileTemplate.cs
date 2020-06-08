@@ -64,7 +64,7 @@ namespace DataGate.Web.Utilities
                     counter++;
                     worksheet.Cells[1, counter].Value = header;
                     worksheet.Cells[1, counter].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                    worksheet.Cells[1, counter].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.FromArgb(68, 114, 196));
+                    worksheet.Cells[1, counter].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.FromArgb(32, 55, 100));
                     worksheet.Cells[1, counter].Style.Font.Color.SetColor(System.Drawing.Color.White);
                 }
 
