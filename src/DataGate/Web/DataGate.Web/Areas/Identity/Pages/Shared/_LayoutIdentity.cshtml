@@ -11,12 +11,15 @@
         <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" asp-append-version="true" />
         <link type="text/css" rel="stylesheet" href="~/lib/font-awesome/css/all.css" asp-append-version="true" />
         <link type="text/css" rel="stylesheet" href="~/css/identity.css" asp-append-version="true" />
+
+        <script src="~/lib/sweetalert/dist/sweetalert.min.js" asp-append-version="true"></script>
     </environment>
 
     @RenderSection("Styles", required: false)
 </head>
 <body>
-    <main>
+    <main>s
+        <partial name="_NotificationPanelMain" />
         @RenderBody()
     </main>
 
