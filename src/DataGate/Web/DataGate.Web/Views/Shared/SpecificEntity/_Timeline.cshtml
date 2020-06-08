@@ -4,14 +4,22 @@
     <ul class="timeline">
         @foreach (var timeline in Model)
         {
+            var date = DateTimeParser.FromSqlFormat(timeline.EndDate);
+
             <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
                 <div class="timeline-arrow"></div>
                 <h2 class="h5 mb-0">@timeline.Title</h2>
                 <span class="small text-gray">
-                    <i class="fa fa-clock-o mr-1"></i>@timeline.InitialDate - @timeline.EndDate
+                    <i class="fa fa-clock-o mr-1"></i>@timeline.InitialDate -
+                    <a asp-area="@ViewBag.Area"
+                       asp-route="@ViewBag.Route"
+                       asp-route-id="@timeline.Id"
+                       asp-route-date="@date.ToString(GlobalConstants.RequiredWebDateTimeFormat)">
+                        @timeline.EndDate
+                    </a>
                 </span>
                 <p class="text-small mt-2 font-weight-light">
-                   @timeline.SanitizedComment
+                    @timeline.SanitizedComment
                 </p>
             </li>
         }

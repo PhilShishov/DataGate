@@ -9,12 +9,22 @@
     {
         public static DateTime FromWebFormat(string date)
         {
-            return DateTime.ParseExact(date, GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
+            if (date != null)
+            {
+                return DateTime.ParseExact(date, GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
+            }
+
+            return DateTime.UtcNow;
         }
 
         public static DateTime FromSqlFormat(string date)
         {
-            return DateTime.ParseExact(date, GlobalConstants.SqlDateTimeFormatParsing, CultureInfo.InvariantCulture);
+            if (date != null)
+            {
+                return DateTime.ParseExact(date, GlobalConstants.SqlDateTimeFormatParsing, CultureInfo.InvariantCulture);
+            }
+
+            return DateTime.UtcNow;
         }
     }
 }

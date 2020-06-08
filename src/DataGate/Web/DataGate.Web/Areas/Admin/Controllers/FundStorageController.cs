@@ -6,7 +6,6 @@
     using System.Threading.Tasks;
 
     using DataGate.Common;
-    using DataGate.Data.Models.Enums;
     using DataGate.Services.Data.Storage.Contracts;
     using DataGate.Web.InputModels.Funds;
 
@@ -18,11 +17,11 @@
     public class FundStorageController : BaseController
     {
         private readonly IFundStorageService service;
-        private readonly IFundsSelectListService serviceSelect;
+        private readonly IFundSelectListService serviceSelect;
 
         public FundStorageController(
                         IFundStorageService fundService,
-                        IFundsSelectListService fundServiceSelect)
+                        IFundSelectListService fundServiceSelect)
         {
             this.service = fundService;
             this.serviceSelect = fundServiceSelect;
@@ -33,7 +32,7 @@
         {
             var model = await this.service.GetByIdAndDate<EditFundInputModel>(id, date);
 
-            await this.SetViewDataValuesForFundSelectLists();
+            await this.SetViewDataValues();
 
             return this.View(model);
         }
@@ -56,7 +55,7 @@
                     this.ShowErrorAlertify(ErrorMessages.ExistingEntityName);
                 }
 
-                await this.SetViewDataValuesForFundSelectLists();
+                await this.SetViewDataValues();
                 return this.View(model);
             }
 
@@ -72,7 +71,7 @@
         [Route("f/new")]
         public async Task<IActionResult> Create()
         {
-            await this.SetViewDataValuesForFundSelectLists();
+            await this.SetViewDataValues();
             return this.View(new CreateFundInputModel { InitialDate = DateTime.Today, });
         }
 
@@ -93,7 +92,7 @@
                     this.ShowErrorAlertify(ErrorMessages.ExistingEntityName);
                 }
 
-                await this.SetViewDataValuesForFundSelectLists();
+                await this.SetViewDataValues();
                 return this.View(model);
             }
 
@@ -106,7 +105,7 @@
                 new { area = GlobalConstants.FundAreaName, id = fundId, date = date });
         }
 
-        private async Task SetViewDataValuesForFundSelectLists()
+        private async Task SetViewDataValues()
         {
             this.ViewData["Status"] = await this.serviceSelect.GetAllTbDomFStatus().ToListAsync();
             this.ViewData["LegalForm"] = await this.serviceSelect.GetAllTbDomLegalForm().ToListAsync();

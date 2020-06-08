@@ -35,7 +35,7 @@
             dto.EndConnection = model.EndConnection?.ToString(GlobalConstants.RequiredSqlDateTimeFormat, CultureInfo.InvariantCulture);
             dto.DocumentType = await this.service.GetByIdDocumentType(model.DocumentType);
 
-            string query = QuerySwapper.GetResult(model.AreaName,
+            string query = StringSwapper.GetResult(model.AreaName,
                                                   ProcedureDictionary.SqlProcedureDocumentFund,
                                                   ProcedureDictionary.SqlProcedureDocumentSubFund,
                                                   ProcedureDictionary.SqlProcedureDocumentShareClass);
@@ -59,7 +59,7 @@
 
         public async Task DeleteDocument(int fileId, string areaName)
         {
-            string query = QuerySwapper.GetResult(areaName,
+            string query = StringSwapper.GetResult(areaName,
                                                   ProcedureDictionary.SqlProcedureDeleteDocumentFund,
                                                   ProcedureDictionary.SqlProcedureDeleteDocumentSubFund,
                                                   ProcedureDictionary.SqlProcedureDeleteDocumentShareClass);
@@ -80,7 +80,7 @@
             dto.Status = await this.service.GetByIdStatus(model.Status);
             dto.Company = await this.service.GetByIdCompany(model.Company);
 
-            string query = QuerySwapper.GetResult(model.AreaName,
+            string query = StringSwapper.GetResult(model.AreaName,
                                                  ProcedureDictionary.SqlProcedureAgreementFund,
                                                  ProcedureDictionary.SqlProcedureAgreementSubFund,
                                                  ProcedureDictionary.SqlProcedureAgreementShareClass);
@@ -106,7 +106,7 @@
 
         public async Task DeleteAgreement(int fileId, string areaName)
         {
-            string query = QuerySwapper.GetResult(areaName,
+            string query = StringSwapper.GetResult(areaName,
                                                   ProcedureDictionary.SqlProcedureDeleteAgreementFund,
                                                   ProcedureDictionary.SqlProcedureDeleteAgreementSubFund,
                                                   ProcedureDictionary.SqlProcedureDeleteAgreementShareClass);

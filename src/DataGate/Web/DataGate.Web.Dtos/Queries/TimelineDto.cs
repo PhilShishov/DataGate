@@ -6,6 +6,8 @@ namespace DataGate.Web.Dtos.Queries
 
     public class TimelineDto : IDataReaderParser
     {
+        public int Id { get; set; }
+
         public string InitialDate { get; set; }
 
         public string EndDate { get; set; }
@@ -16,6 +18,7 @@ namespace DataGate.Web.Dtos.Queries
 
         public void Parse(IDataReader reader)
         {
+            this.Id = (int)reader["ID"];
             this.Comment = reader["COMMENT"] as string;
             this.Title = reader["COMMENT TITLE"] as string;
             this.EndDate = reader["END DATE"] as string;

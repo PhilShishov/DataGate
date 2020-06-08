@@ -27,7 +27,6 @@
             services.AddTransient<IEmailSender>(x => new SendGridEmailSender(configuration.GetValue<string>("SendGrid:ApiKey")));
             services.AddTransient<ISettingsService, SettingsService>();
 
-            services.AddTransient<ISqlQueryManager, SqlQueryManager>();
             services.AddTransient<IFileSystemService, FileSystemService>();
             services.AddTransient<IDocumentService, DocumentService>();
             services.AddTransient<IEntitiesDocumentService, EntitiesDocumentService>();
@@ -39,18 +38,18 @@
 
             // Funds
             services.AddTransient<IFundService, FundService>();
-            services.AddTransient<IFundsSelectListService, FundsSelectListService>();
+            services.AddTransient<IFundSelectListService, FundSelectListService>();
             services.AddTransient<IFundStorageService, FundStorageService>();
 
             // Sub Funds
             services.AddTransient<ISubFundService, SubFundService>();
-            //services.AddTransient<IFundsSelectListService, FundsSelectListService>();
-            //services.AddTransient<IFundStorageService, FundStorageService>();
+            services.AddTransient<ISubFundSelectListService, SubFundSelectListService>();
+            services.AddTransient<ISubFundStorageService, SubFundStorageService>();
 
             // Share Classes
             services.AddTransient<IShareClassService, ShareClassService>();
-            //services.AddTransient<IFundsSelectListService, FundsSelectListService>();
-            //services.AddTransient<IFundStorageService, FundStorageService>();
+            services.AddTransient<IShareClassSelectListService, ShareClassSelectListService>();
+            services.AddTransient<IShareClassStorageService, ShareClassStorageService>();
 
             return services;
         }
