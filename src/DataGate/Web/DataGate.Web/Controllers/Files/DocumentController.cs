@@ -61,12 +61,12 @@
             var model = new DistinctOverviewViewModel { AreaName = areaName };
             var dateParsed = DateTimeParser.FromWebFormat(date);
 
-            string functionDoc = StringSwapper.GetResult(areaName,
+            string functionDoc = StringSwapper.ByArea(areaName,
                                              FunctionDictionary.SqlFunctionDistinctDocumentsFund,
                                              FunctionDictionary.SqlFunctionDistinctDocumentsSubFund,
                                              FunctionDictionary.SqlFunctionDistinctDocumentsShareClass);
 
-            string functionAgr = StringSwapper.GetResult(areaName,
+            string functionAgr = StringSwapper.ByArea(areaName,
                                              FunctionDictionary.SqlFunctionDistinctAgreementsFund,
                                              FunctionDictionary.SqlFunctionDistinctAgreementsSubFund,
                                              FunctionDictionary.SqlFunctionDistinctAgreementsShareClass);
@@ -82,7 +82,7 @@
         {
             var model = new DocumentOverviewViewModel { AreaName = areaName };
 
-            string function = StringSwapper.GetResult(areaName,
+            string function = StringSwapper.ByArea(areaName,
                                                 FunctionDictionary.SqlFunctionDocumentsFund,
                                                 FunctionDictionary.SqlFunctionDocumentsSubFund,
                                                 FunctionDictionary.SqlFunctionDocumentsShareClass);
@@ -98,7 +98,7 @@
             var model = new AgreementOverviewViewModel { AreaName = areaName };
             var dateParsed = DateTimeParser.FromWebFormat(date);
 
-            string function = StringSwapper.GetResult(areaName,
+            string function = StringSwapper.ByArea(areaName,
                                              FunctionDictionary.SqlFunctionAgreementsFund,
                                              FunctionDictionary.SqlFunctionAgreementsSubFund,
                                              FunctionDictionary.SqlFunctionAgreementsShareClass);

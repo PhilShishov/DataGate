@@ -2,13 +2,16 @@
 @inject IStringLocalizer<SharedResources> SharedLocalizer
 
 @{
-    var controller = this.ViewContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
-    var targetRoute = string.Empty;
+    var controller = this.ViewContext
+        .RouteData
+        .Values[GlobalConstants.ControllerRouteDataValue]
+        .ToString();
 
-    if (controller == GlobalConstants.FundSubFundsControllerName)
-    {
-        targetRoute = "fundDetails";
-    }
+    var containerRoute = StringSwapper.ByController(
+                                                controller, 
+                                                GlobalConstants.FundDetailsRouteName, 
+                                                GlobalConstants.SubFundDetailsRouteName, 
+                                                string.Empty);
 }
 
 <form class="d-flex"
@@ -19,7 +22,7 @@
     <input asp-for="Container" type="hidden">
 
     <div>
-        <a class="btn btn-pharus btn-sm mr-2" asp-route="@targetRoute" asp-route-id="@Model.Id" asp-route-date="@Model.Date">
+        <a class="btn btn-pharus btn-sm mr-2" asp-route="@containerRoute" asp-route-id="@Model.Id" asp-route-date="@Model.Date">
             @SharedLocalizer["CONTAINER"]
         </a>
     </div>

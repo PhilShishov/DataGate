@@ -2,21 +2,10 @@
 
 @{
     var controller = this.ViewContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
-    var targetRoute = string.Empty;
-
-    if (controller == GlobalConstants.FundsControllerName)
-    {
-        targetRoute = GlobalConstants.FundDetailsRouteName;
-    }
-
-    else if (controller == GlobalConstants.SubFundsControllerName)
-    {
-        targetRoute = GlobalConstants.SubFundDetailsRouteName;
-    }
-    else if (controller == GlobalConstants.ShareClassesControllerName)
-    {
-        targetRoute = GlobalConstants.ShareClassDetailsRouteName;
-    }
+    var routeDetails = StringSwapper.ByController(controller,
+                                                  GlobalConstants.FundDetailsRouteName,
+                                                  GlobalConstants.SubFundDetailsRouteName,
+                                                  GlobalConstants.ShareClassDetailsRouteName);
 
     var entityId = string.Empty;
 }
@@ -46,7 +35,7 @@
                         if (Model.Headers.ToList()[col].Contains("NAME"))
                         {
                             <td class="p-1 td-name-link">
-                                <a asp-route="@targetRoute" asp-route-id="@entityId" asp-route-date="@Model.Date">
+                                <a asp-route="@routeDetails" asp-route-id="@entityId" asp-route-date="@Model.Date">
                                     @row[col]
                                 </a>
                             </td>

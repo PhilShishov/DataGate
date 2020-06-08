@@ -26,5 +26,25 @@
 
             return DateTime.UtcNow;
         }
+
+        public static string ToWebFormat(DateTime date)
+        {
+            if (date != null)
+            {
+                return date.ToString(GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
+            }
+
+            return string.Empty;
+        }
+
+        public static string ToSqlFormat(DateTime? date)
+        {
+            if (date.HasValue)
+            {
+                return date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat, CultureInfo.InvariantCulture);
+            }
+
+            return string.Empty;
+        }
     }
 }

@@ -1,17 +1,17 @@
 ﻿namespace DataGate.Web.Controllers
 {
+    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using AngleSharp.Common;
     using DataGate.Common;
     using DataGate.Services.Data.Files.Contracts;
     using DataGate.Services.DateTime;
     using DataGate.Web.Infrastructure.Filters;
     using DataGate.Web.InputModels.Files;
     using DataGate.Web.Utilities;
-
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
@@ -39,6 +39,25 @@
             {
                 IEnumerable<string> tableHeaders = model.TableValues.FirstOrDefault();
 
+                if (tableHeaders.ToList().Count > GlobalConstants.NumberOfAllowedColumnsInPdfView)
+                {
+                    var tableValues = new List<string[]>();
+                    foreach (var row in model.TableValues)
+                    {
+                        var tableRow = row.Take(GlobalConstants.NumberOfAllowedColumnsInPdfView).ToArray();
+                        tableValues.Add(tableRow);
+                    }
+
+                    model.TableValues = tableValues;
+
+                    //model.TableValues = model.TableValues
+                    //    .Select(r => r.Take(GlobalConstants.NumberOfAllowedColumnsInPdfView)
+                    //                  .ToArray())
+                    //    .ToList();
+
+                    tableHeaders = model.TableValues.FirstOrDefault();
+                }
+
                 if (model.Command == GlobalConstants.CommandExtractExcel)
                 {
                     fileName = GenerateFileTemplate.Excel(tableHeaders, model.TableValues, model.ControllerName);
@@ -46,12 +65,6 @@
                 else if (model.Command == GlobalConstants.CommandExtractPdf)
                 {
                     var date = DateTimeParser.FromWebFormat(model.Date);
-
-                    if (tableHeaders.ToList().Count > GlobalConstants.NumberOfAllowedColumnsInPdfView)
-                    {
-                        return this.Json(new { success = false, errorMessage = ErrorMessages.TooManyColumns });
-                    }
-
                     fileName = GenerateFileTemplate.Pdf(tableHeaders, model.TableValues, date, model.ControllerName);
                 }
             }
