@@ -1,4 +1,5 @@
 ﻿@model EditSubFundInputModel
+@inject IStringLocalizer<SharedResources> SharedLocalizer
 
 @{
     ViewData["Title"] = GlobalConstants.EditActionName;
@@ -7,7 +8,7 @@
 
 <div class="push">
     <div class="justify-content-between d-inline">
-        <h4>Edit Sub Fund @Model.SubFundName</h4>
+        <h4>@SharedLocalizer["Edit Sub Fund"] @Model.SubFundName</h4>
         <form asp-area="Admin"
               asp-controller="SubFundStorage"
               asp-action="Edit"
@@ -472,10 +473,10 @@
                         class="btn btn-pharus btn-sm mb-1 btn-confirm-update"
                         name="update_button"
                         style="margin-right:40px">
-                    Update Sub Fund
+                    @SharedLocalizer["Update Sub Fund"]
                 </button>
-                <a class="btn btn-pharus btn-sm" asp-area="SubFund" asp-route="allSubFunds">
-                    Back to List
+                <a class="btn btn-pharus btn-sm" asp-area="@GlobalConstants.SubFundAreaName" asp-route="@GlobalConstants.AllSubFundsRouteName">
+                    @SharedLocalizer["Back to List"]
                 </a>
             </div>
         </form>

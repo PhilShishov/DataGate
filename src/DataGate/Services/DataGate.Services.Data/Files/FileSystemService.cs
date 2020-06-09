@@ -37,9 +37,9 @@
             dto.DocumentType = await this.service.GetByIdDocumentType(model.DocumentType);
 
             string query = StringSwapper.ByArea(model.AreaName,
-                                                  ProcedureDictionary.SqlProcedureDocumentFund,
-                                                  ProcedureDictionary.SqlProcedureDocumentSubFund,
-                                                  ProcedureDictionary.SqlProcedureDocumentShareClass);
+                                                  SqlProcedureDictionary.DocumentFund,
+                                                  SqlProcedureDictionary.DocumentSubFund,
+                                                  SqlProcedureDictionary.DocumentShareClass);
 
             query += " @file_name, @entity_id, @start_connection, @end_connection, @file_ext, @filetype_id";
 
@@ -61,9 +61,9 @@
         public async Task DeleteDocument(int fileId, string areaName)
         {
             string query = StringSwapper.ByArea(areaName,
-                                                  ProcedureDictionary.SqlProcedureDeleteDocumentFund,
-                                                  ProcedureDictionary.SqlProcedureDeleteDocumentSubFund,
-                                                  ProcedureDictionary.SqlProcedureDeleteDocumentShareClass);
+                                                  SqlProcedureDictionary.DeleteDocumentFund,
+                                                  SqlProcedureDictionary.DeleteDocumentSubFund,
+                                                  SqlProcedureDictionary.DeleteDocumentShareClass);
 
             SqlCommand command = new SqlCommand(query);
             command.Parameters.Add(new SqlParameter("@file_id", SqlDbType.NVarChar) { Value = fileId });
@@ -82,9 +82,9 @@
             dto.Company = await this.service.GetByIdCompany(model.Company);
 
             string query = StringSwapper.ByArea(model.AreaName,
-                                                 ProcedureDictionary.SqlProcedureAgreementFund,
-                                                 ProcedureDictionary.SqlProcedureAgreementSubFund,
-                                                 ProcedureDictionary.SqlProcedureAgreementShareClass);
+                                                 SqlProcedureDictionary.AgreementFund,
+                                                 SqlProcedureDictionary.AgreementSubFund,
+                                                 SqlProcedureDictionary.AgreementShareClass);
 
             query += " @file_name, @entity_id, @file_ext, @activity_type_id, @contract_date, @activation_date, @expiration_date, @company_id, @status";
 
@@ -108,9 +108,9 @@
         public async Task DeleteAgreement(int fileId, string areaName)
         {
             string query = StringSwapper.ByArea(areaName,
-                                                  ProcedureDictionary.SqlProcedureDeleteAgreementFund,
-                                                  ProcedureDictionary.SqlProcedureDeleteAgreementSubFund,
-                                                  ProcedureDictionary.SqlProcedureDeleteAgreementShareClass);
+                                                  SqlProcedureDictionary.DeleteAgreementFund,
+                                                  SqlProcedureDictionary.DeleteAgreementSubFund,
+                                                  SqlProcedureDictionary.DeleteAgreementShareClass);
 
             SqlCommand command = new SqlCommand(query);
             command.Parameters.Add(new SqlParameter("@file_id", SqlDbType.NVarChar) { Value = fileId });

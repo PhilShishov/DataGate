@@ -1,6 +1,7 @@
 ﻿namespace DataGate.Services.Data.Storage
 {
-    using System;
+    using System.Data;
+    using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -10,6 +11,7 @@
     using DataGate.Services.Data.Storage.Contracts;
     using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
+    using DataGate.Services.SqlClient;
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.Dtos.Entities;
     using DataGate.Web.InputModels.SubFunds;
@@ -17,49 +19,23 @@
 
     public class SubFundStorageService : ISubFundStorageService
     {
-        private const int SkipHeaders = 1;
-        private const int IndexName = 3;
-        private const int IndexStatus = 4;
-        private const int IndexCSSFCode = 5;
-        private const int IndexFACode = 6;
-        private const int IndexDEPCode = 7;
-        private const int IndexTACode = 8;
-        private const int IndexFirstNavDate = 9;
-        private const int IndexLastNavDate = 10;
-        private const int IndexAuthDate = 11;
-        private const int IndexExpiryDate = 12;
-        private const int IndexLEICode = 13;
-        private const int IndexCesrClass = 14;
-        private const int IndexGeoFocus = 15;
-        private const int IndexGlobalExposure = 16;
-        private const int IndexCurrency = 17;
-        private const int IndexFrequency = 18;
-        private const int IndexValuation = 19;
-        private const int IndexCalculation = 20;
-        private const int IndexDerivs = 21;
-        private const int IndexDerivMarket = 22;
-        private const int IndexAssetClass = 23;
-        private const int IndexMarketType = 24;
-        private const int IndexInvestStrategy = 25;
-        private const int IndexClearingCode = 26;
-        private const int IndexMorningStar = 27;
-        private const int IndexSix = 28;
-        private const int IndexBloomberg = 29;
-
         private readonly string sqlFunctionId = "[fn_subfund_id]";
 
         private readonly ISqlQueryManager sqlManager;
+        private readonly ISubFundRepository repositorySelectList;
         private readonly IRepository<TbHistorySubFund> repository;
-        private readonly ISubFundSelectListService service;
+        private readonly IRepository<TbHistoryFund> repositoryContainer;
 
         public SubFundStorageService(
                         ISqlQueryManager sqlQueryManager,
                         IRepository<TbHistorySubFund> repository,
-                        ISubFundSelectListService service)
+                        ISubFundRepository repositorySelectList,
+                        IRepository<TbHistoryFund> repositoryContainer)
         {
             this.sqlManager = sqlQueryManager;
+            this.repositorySelectList = repositorySelectList;
+            this.repositoryContainer = repositoryContainer;
             this.repository = repository;
-            this.service = service;
         }
 
         public T GetByIdAndDate<T>(int id, string date)
@@ -73,59 +49,129 @@
                 .FirstOrDefault();
 
             return AutoMapperConfig.MapperInstance.Map<T>(dto);
-
-            //var query = await this.sqlManager
-            //    .ExecuteQueryAsync(this.sqlFunctionId, dateParsed, id)
-            //    .Skip(SkipHeaders)
-            //    .FirstOrDefaultAsync();
-
-            //var dto = new EditSubFundGetDto
-            //{
-            //    InitialDate = dateParsed,
-            //    Id = id,
-            //    SubFundName = query[IndexName],
-            //    CSSFCode = query[IndexCSSFCode],
-            //    Status = query[IndexStatus],
-            //    FACode = query[IndexFACode],
-            //    TACode = query[IndexTACode],
-            //    LEICode = query[IndexLEICode],
-            //    DBCode = query[IndexLEICode],
-            //    FirstNavDate = query[IndexFirstNavDate],
-            //    LastNavDate = query[IndexLastNavDate],
-            //    CSSFAuthDate = query[IndexAuthDate],
-            //    ExpiryDate = query[IndexExpiryDate],
-            //    CesrClass = query[IndexCesrClass],
-            //    GeographicalFocus = query[IndexGeoFocus],
-            //    GlobalExposure = query[IndexGlobalExposure],
-            //    CurrencyCode = query[IndexCurrency],
-            //    NavFrequency = query[IndexFrequency],
-            //    ValuationDate = query[IndexValuation],
-            //    CalculationDate = query[IndexCalculation],
-            //    Derivatives = query[IndexDerivs],
-            //    DerivMarket = query[IndexDerivMarket],
-            //    PrincipalAssetClass = query[IndexAssetClass],
-            //    TypeOfMarket = query[IndexMarketType],
-            //    PrincipalInvestmentStrategy = query[IndexInvestStrategy],
-            //    ClearingCode = query[IndexClearingCode],
-            //    SfCatMorningStar = query[IndexMorningStar],
-            //    SfCatSix = query[IndexSix],
-            //    SfCatBloomberg = query[IndexBloomberg],
-            //};
         }
 
-        public Task<int> Edit(EditSubFundInputModel model)
+        public async Task<int> Edit(EditSubFundInputModel model)
         {
-            throw new NotImplementedException();
+            SubFundPostDto dto = AutoMapperConfig.MapperInstance.Map<SubFundPostDto>(model);
+
+            SubFundForeignKeysDto dtoForeignKey = AutoMapperConfig.MapperInstance.Map<SubFundForeignKeysDto>(model);
+
+            if (model.Derivatives == "Yes")
+            {
+                dto.IsDerivative = true;
+            }
+
+            await this.SetForeignKeys(dto, dtoForeignKey);
+            SqlCommand command = this.AssignBaseParameters(dto, SqlProcedureDictionary.EditSubFund);
+
+            // Assign particular parameters
+            command.Parameters.AddRange(new[]
+                   {
+                            new SqlParameter("@sf_id", SqlDbType.Int) { Value = dto.Id },
+                            new SqlParameter("@comment", SqlDbType.NVarChar) { Value = dto.CommentArea },
+                            new SqlParameter("@commentTitle", SqlDbType.NVarChar) { Value = dto.CommentTitle },
+                   });
+
+            await this.sqlManager.ExecuteProcedure(command);
+
+            return dto.Id;
         }
 
-        public Task<int> Create(CreateSubFundInputModel model)
+        public async Task<int> Create(CreateSubFundInputModel model)
         {
-            throw new NotImplementedException();
+            SubFundPostDto dto = AutoMapperConfig.MapperInstance.Map<SubFundPostDto>(model);
+
+            SubFundForeignKeysDto dtoForeignKey = AutoMapperConfig.MapperInstance.Map<SubFundForeignKeysDto>(model);
+
+            dto.EndDate = DateTimeParser.ToSqlFormat(model.EndDate);
+            if (model.Derivatives == "Yes")
+            {
+                dto.IsDerivative = true;
+            }
+
+            dto.ContainerId = await this.repositoryContainer.All()
+                  .Where(f => f.FOfficialFundName == model.FundContainer)
+                  .Select(fc => fc.FId)
+                  .FirstOrDefaultAsync();
+
+            await this.SetForeignKeys(dto, dtoForeignKey);
+            SqlCommand command = this.AssignBaseParameters(dto, SqlProcedureDictionary.EditSubFund);
+
+            // Assign particular parameters
+            new SqlParameter("@fundcontainer", SqlDbType.Int) { Value = dto.ContainerId };
+            new SqlParameter("@sf_endDate", SqlDbType.NVarChar) { Value = dto.EndDate };
+
+            await this.sqlManager.ExecuteProcedure(command);
+
+            var subFundId = this.repository.All()
+                .Where(sf => sf.SfOfficialSubFundName == dto.SubFundName)
+                .Select(sf => sf.SfId)
+                .FirstOrDefault();
+
+            return subFundId;
         }
 
         public async Task<bool> DoesExist(string name)
         {
             return await this.repository.All().AnyAsync(sf => sf.SfOfficialSubFundName == name);
+        }
+
+        private async Task SetForeignKeys(SubFundPostDto dto, SubFundForeignKeysDto dtoForeignKey)
+        {
+            dto.Status = await this.repositorySelectList.ByIdST(dtoForeignKey.Status);
+            dto.CesrClass = await this.repositorySelectList.ByIdCC(dtoForeignKey.CesrClass);
+            dto.GeographicalFocus = await this.repositorySelectList.ByIdGF(dtoForeignKey.GeographicalFocus);
+            dto.GlobalExposure = await this.repositorySelectList.ByIdGE(dtoForeignKey.GlobalExposure);
+            dto.NavFrequency = await this.repositorySelectList.ByIdNF(dtoForeignKey.NavFrequency);
+            dto.ValuationDate = await this.repositorySelectList.ByIdVD(dtoForeignKey.ValuationDate);
+            dto.CalculationDate = await this.repositorySelectList.ByIdCD(dtoForeignKey.CalculationDate);
+            dto.DerivMarket = await this.repositorySelectList.ByIdDM(dtoForeignKey.DerivMarket);
+            dto.DerivPurpose = await this.repositorySelectList.ByIdDP(dtoForeignKey.DerivPurpose);
+            dto.PrincipalAssetClass = await this.repositorySelectList.ByIdPAC(dtoForeignKey.PrincipalAssetClass);
+            dto.TypeOfMarket = await this.repositorySelectList.ByIdTM(dtoForeignKey.TypeOfMarket);
+            dto.PrincipalInvestmentStrategy = await this.repositorySelectList.ByIdPIS(dtoForeignKey.PrincipalInvestmentStrategy);
+            dto.SfCatMorningStar = await this.repositorySelectList.ByIdCM(dtoForeignKey.SfCatMorningStar);
+            dto.SfCatSix = await this.repositorySelectList.ByIdCS(dtoForeignKey.SfCatSix);
+            dto.SfCatBloomberg = await this.repositorySelectList.ByIdCB(dtoForeignKey.SfCatBloomberg);
+        }
+
+        private SqlCommand AssignBaseParameters(SubFundPostDto dto, string procedure)
+        {
+            SqlCommand command = new SqlCommand(procedure);
+
+            command.Parameters.AddRange(new[]
+                   {
+                        new SqlParameter("@sf_initialDate", SqlDbType.NVarChar) { Value = dto.InitialDate},
+                        new SqlParameter("@sf_officialSubFundName", SqlDbType.NVarChar) { Value = dto.SubFundName },
+                        new SqlParameter("@sf_cssfCode", SqlDbType.NVarChar) { Value = dto.CSSFCode },
+                        new SqlParameter("@sf_faCode", SqlDbType.NVarChar) { Value = dto.FACode },
+                        new SqlParameter("@sf_depCode", SqlDbType.NVarChar) { Value = dto.DBCode },
+                        new SqlParameter("@sf_firstNavDate", SqlDbType.NVarChar) { Value = dto.FirstNavDate },
+                        new SqlParameter("@sf_lastNavDate", SqlDbType.NVarChar) { Value = dto.LastNavDate },
+                        new SqlParameter("@sf_cssfAuthDate", SqlDbType.NVarChar) { Value = dto.CSSFAuthDate },
+                        new SqlParameter("@sf_expDate", SqlDbType.NVarChar) { Value = dto.ExpiryDate },
+                        new SqlParameter("@sf_status", SqlDbType.Int) { Value = dto.Status },
+                        new SqlParameter("@sf_leiCode", SqlDbType.NVarChar) { Value = dto.LEICode },
+                        new SqlParameter("@sf_cesrClass", SqlDbType.Int) { Value = dto.CesrClass },
+                        new SqlParameter("@sf_cssf_geographical_focus", SqlDbType.Int) { Value = dto.GeographicalFocus },
+                        new SqlParameter("@sf_globalExposure", SqlDbType.Int) { Value = dto.GlobalExposure},
+                        new SqlParameter("@sf_currency", SqlDbType.NChar) { Value = dto.CurrencyCode },
+                        new SqlParameter("@sf_navFrequency", SqlDbType.Int) { Value = dto.NavFrequency },
+                        new SqlParameter("@sf_valutationDate", SqlDbType.Int) { Value = dto.ValuationDate },
+                        new SqlParameter("@sf_calculationDate", SqlDbType.Int) { Value = dto.CalculationDate },
+                        new SqlParameter("@sf_derivatives", SqlDbType.Bit) { Value = dto.IsDerivative },
+                        new SqlParameter("@sf_derivMarket", SqlDbType.Int) { Value = dto.DerivMarket },
+                        new SqlParameter("@sf_derivPurpose", SqlDbType.Int) { Value = dto.DerivPurpose },
+                        new SqlParameter("@sf_principal_asset_class", SqlDbType.Int) { Value = dto.PrincipalAssetClass },
+                        new SqlParameter("@sf_type_of_market", SqlDbType.Int) { Value = dto.TypeOfMarket },
+                        new SqlParameter("@sf_principal_investment_strategy", SqlDbType.Int) { Value = dto.PrincipalInvestmentStrategy },
+                        new SqlParameter("@sf_clearing_code", SqlDbType.NVarChar) { Value = dto.ClearingCode },
+                        new SqlParameter("@sf_cat_morningstar", SqlDbType.Int) { Value = dto.SfCatMorningStar },
+                        new SqlParameter("@sf_category_six", SqlDbType.Int) { Value = dto.SfCatSix},
+                        new SqlParameter("@sf_category_bloomberg", SqlDbType.Int) { Value = dto.SfCatBloomberg },
+                   });
+            return command;
         }
 
         private void ThrowEntityNotFoundExceptionIfIdDoesNotExist(int id)

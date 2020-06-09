@@ -21,9 +21,9 @@
         public IActionResult GetAllTimelines(int id, string areaName)
         {
             string function = StringSwapper.ByArea(areaName,
-                                                     FunctionDictionary.SqlFunctionTimelineFund,
-                                                     FunctionDictionary.SqlFunctionTimelineSubFund,
-                                                     FunctionDictionary.SqlFunctionTimelineShareClass);
+                                                     SqlFunctionDictionary.TimelineFund,
+                                                     SqlFunctionDictionary.TimelineSubFund,
+                                                     SqlFunctionDictionary.TimelineShareClass);
 
             var model = this.service.GetTimeline<TimelineViewModel>(function, id);
 

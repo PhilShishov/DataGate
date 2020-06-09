@@ -6,14 +6,13 @@
     public class ShareClassStorageController : Controller
     {
         private readonly IShareClassStorageService service;
-        private readonly IShareClassSelectListService serviceSelect;
 
         public ShareClassStorageController(
-                        IShareClassStorageService fundService,
-                        IShareClassSelectListService fundServiceSelect)
+                        IShareClassStorageService fundService
+                        )
         {
             this.service = fundService;
-            this.serviceSelect = fundServiceSelect;
+          
         }
 
         public IActionResult Index()

@@ -30,7 +30,7 @@
         public async Task<IActionResult> All()
         {
             var viewModel = await EntitiesVMSetup
-                .SetGet<EntitiesViewModel>(this.service, FunctionDictionary.SqlFunctionAllActiveShareClass);
+                .SetGet<EntitiesViewModel>(this.service, SqlFunctionDictionary.AllActiveShareClass);
             return this.View(viewModel);
         }
 
@@ -39,7 +39,7 @@
                                               EntitiesViewModel viewModel)
         {
             await EntitiesVMSetup.SetPost(viewModel, this.service,
-                                          FunctionDictionary.SqlFunctionAllShareClass, FunctionDictionary.SqlFunctionAllActiveShareClass);
+                                          SqlFunctionDictionary.AllShareClass, SqlFunctionDictionary.AllActiveShareClass);
 
             if (viewModel.Values != null && viewModel.Values.Count > 0)
             {

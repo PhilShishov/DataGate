@@ -30,7 +30,7 @@
         public async Task<IActionResult> All()
         {
             var viewModel = await EntitiesVMSetup
-                .SetGet<EntitiesViewModel>(this.service, FunctionDictionary.SqlFunctionAllActiveFund);
+                .SetGet<EntitiesViewModel>(this.service, SqlFunctionDictionary.AllActiveFund);
             return this.View(viewModel);
         }
 
@@ -38,7 +38,7 @@
         public async Task<IActionResult> All([Bind("Date,Values,Headers,IsActive,PreSelectedColumns,SelectedColumns,SelectTerm")]
                                               EntitiesViewModel viewModel)
         {
-            await EntitiesVMSetup.SetPost(viewModel, this.service, FunctionDictionary.SqlFunctionAllFund, FunctionDictionary.SqlFunctionAllActiveFund);
+            await EntitiesVMSetup.SetPost(viewModel, this.service, SqlFunctionDictionary.AllFund, SqlFunctionDictionary.AllActiveFund);
 
             if (viewModel.Values != null && viewModel.Values.Count > 0)
             {

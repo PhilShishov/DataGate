@@ -62,14 +62,14 @@
             var dateParsed = DateTimeParser.FromWebFormat(date);
 
             string functionDoc = StringSwapper.ByArea(areaName,
-                                             FunctionDictionary.SqlFunctionDistinctDocumentsFund,
-                                             FunctionDictionary.SqlFunctionDistinctDocumentsSubFund,
-                                             FunctionDictionary.SqlFunctionDistinctDocumentsShareClass);
+                                             SqlFunctionDictionary.DistinctDocumentsFund,
+                                             SqlFunctionDictionary.DistinctDocumentsSubFund,
+                                             SqlFunctionDictionary.DistinctDocumentsShareClass);
 
             string functionAgr = StringSwapper.ByArea(areaName,
-                                             FunctionDictionary.SqlFunctionDistinctAgreementsFund,
-                                             FunctionDictionary.SqlFunctionDistinctAgreementsSubFund,
-                                             FunctionDictionary.SqlFunctionDistinctAgreementsShareClass);
+                                             SqlFunctionDictionary.DistinctAgreementsFund,
+                                             SqlFunctionDictionary.DistinctAgreementsSubFund,
+                                             SqlFunctionDictionary.DistinctAgreementsShareClass);
 
             model.Documents = this.entitiesDocumentService.GetDistinctDocuments<DistinctDocViewModel>(functionDoc, id, dateParsed);
             model.Agreements = this.entitiesDocumentService.GetDistinctAgreements<DistinctAgrViewModel>(functionAgr, id, dateParsed);
@@ -83,9 +83,9 @@
             var model = new DocumentOverviewViewModel { AreaName = areaName };
 
             string function = StringSwapper.ByArea(areaName,
-                                                FunctionDictionary.SqlFunctionDocumentsFund,
-                                                FunctionDictionary.SqlFunctionDocumentsSubFund,
-                                                FunctionDictionary.SqlFunctionDocumentsShareClass);
+                                                SqlFunctionDictionary.DocumentsFund,
+                                                SqlFunctionDictionary.DocumentsSubFund,
+                                                SqlFunctionDictionary.DocumentsShareClass);
 
             model.Documents = this.entitiesDocumentService.GetDocuments<DocumentViewModel>(function, id);
 
@@ -99,9 +99,9 @@
             var dateParsed = DateTimeParser.FromWebFormat(date);
 
             string function = StringSwapper.ByArea(areaName,
-                                             FunctionDictionary.SqlFunctionAgreementsFund,
-                                             FunctionDictionary.SqlFunctionAgreementsSubFund,
-                                             FunctionDictionary.SqlFunctionAgreementsShareClass);
+                                             SqlFunctionDictionary.AgreementsFund,
+                                             SqlFunctionDictionary.AgreementsSubFund,
+                                             SqlFunctionDictionary.AgreementsShareClass);
 
             model.Agreements = this.entitiesDocumentService.GetAgreements<AgreementViewModel>(function, id, dateParsed);
 
@@ -114,15 +114,15 @@
 
             if (area == GlobalConstants.FundAreaName)
             {
-                fileType = FunctionDictionary.FundFileType;
+                fileType = SqlFunctionDictionary.FundFileType;
             }
             else if (area == GlobalConstants.SubFundAreaName)
             {
-                fileType = FunctionDictionary.SubFundFileType;
+                fileType = SqlFunctionDictionary.SubFundFileType;
             }
             else if (area == GlobalConstants.ShareClassAreaName)
             {
-                fileType = FunctionDictionary.ShareClassFileType;
+                fileType = SqlFunctionDictionary.ShareClassFileType;
             }
 
             return fileType;
