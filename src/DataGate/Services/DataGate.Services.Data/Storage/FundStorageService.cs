@@ -21,21 +21,6 @@
 
     public class FundStorageService : IFundStorageService
     {
-        private const int SkipHeaders = 1;
-        private const int IndexName = 3;
-        private const int IndexStatus = 4;
-        private const int IndexCSSFCode = 5;
-        private const int IndexLegalForm = 6;
-        private const int IndexLegalVehicle = 7;
-        private const int IndexLegalType = 8;
-        private const int IndexFACode = 9;
-        private const int IndexDEPCode = 10;
-        private const int IndexTACode = 11;
-        private const int IndexCompanyTypeDesc = 12;
-        private const int IndexTinNumber = 14;
-        private const int IndexLEICode = 15;
-        private const int IndexRegNumber = 16;
-
         private readonly string sqlFunctionId = "[fn_fund_id]";
 
         private readonly ISqlQueryManager sqlManager;
@@ -52,36 +37,16 @@
             this.service = service;
         }
 
-        public async Task<TDestination> GetByIdAndDate<TDestination>(int id, string date)
+        public T GetByIdAndDate<T>(int id, string date)
         {
             this.ThrowEntityNotFoundExceptionIfIdDoesNotExist(id);
 
             var dateParsed = DateTimeParser.FromWebFormat(date);
-            var query = await this.sqlManager
-                .ExecuteQueryAsync(this.sqlFunctionId, dateParsed, id)
-                .Skip(SkipHeaders)
-                .FirstOrDefaultAsync();
+            var dto = this.sqlManager
+                .ExecuteQueryMapping<EditFundGetDto>(this.sqlFunctionId, id, dateParsed)
+                .FirstOrDefault();
 
-            var dto = new EditFundGetDto
-            {
-                InitialDate = dateParsed,
-                Id = id,
-                FundName = query[IndexName],
-                CSSFCode = query[IndexCSSFCode],
-                Status = query[IndexStatus],
-                LegalForm = query[IndexLegalForm],
-                LegalVehicle = query[IndexLegalVehicle],
-                LegalType = query[IndexLegalType],
-                FACode = query[IndexFACode],
-                DEPCode = query[IndexDEPCode],
-                TACode = query[IndexTACode],
-                CompanyTypeDesc = query[IndexCompanyTypeDesc],
-                TinNumber = query[IndexTinNumber],
-                LEICode = query[IndexLEICode],
-                RegNumber = query[IndexRegNumber],
-            };
-
-            return AutoMapperConfig.MapperInstance.Map<TDestination>(dto);
+            return AutoMapperConfig.MapperInstance.Map<T>(dto);
         }
 
         public async Task<int> Edit(EditFundInputModel model)

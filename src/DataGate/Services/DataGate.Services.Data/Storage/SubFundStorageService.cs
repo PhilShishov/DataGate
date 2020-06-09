@@ -62,50 +62,55 @@
             this.service = service;
         }
 
-        public async Task<TDestination> GetByIdAndDate<TDestination>(int id, string date)
+        public T GetByIdAndDate<T>(int id, string date)
         {
             this.ThrowEntityNotFoundExceptionIfIdDoesNotExist(id);
 
             var dateParsed = DateTimeParser.FromWebFormat(date);
-            var query = await this.sqlManager
-                .ExecuteQueryAsync(this.sqlFunctionId, dateParsed, id)
-                .Skip(SkipHeaders)
-                .FirstOrDefaultAsync();
 
-            var dto = new EditSubFundGetDto
-            {
-                InitialDate = dateParsed,
-                Id = id,
-                SubFundName = query[IndexName],
-                CSSFCode = query[IndexCSSFCode],
-                Status = query[IndexStatus],
-                FACode = query[IndexFACode],
-                TACode = query[IndexTACode],
-                LEICode = query[IndexLEICode],
-                DBCode = query[IndexLEICode],
-                FirstNavDate = query[IndexFirstNavDate],
-                LastNavDate = query[IndexLastNavDate],
-                CSSFAuthDate = query[IndexAuthDate],
-                ExpiryDate = query[IndexExpiryDate],
-                CesrClass = query[IndexCesrClass],
-                GeographicalFocus = query[IndexGeoFocus],
-                GlobalExposure = query[IndexGlobalExposure],
-                CurrencyCode = query[IndexCurrency],
-                NavFrequency = query[IndexFrequency],
-                ValuationDate = query[IndexValuation],
-                CalculationDate = query[IndexCalculation],
-                Derivatives = query[IndexDerivs],
-                DerivMarket = query[IndexDerivMarket],
-                PrincipalAssetClass = query[IndexAssetClass],
-                TypeOfMarket = query[IndexMarketType],
-                PrincipalInvestmentStrategy = query[IndexInvestStrategy],
-                ClearingCode = query[IndexClearingCode],
-                SfCatMorningStar = query[IndexMorningStar],
-                SfCatSix = query[IndexSix],
-                SfCatBloomberg = query[IndexBloomberg],
-            };
+            var dto = this.sqlManager
+                .ExecuteQueryMapping<EditSubFundGetDto>(this.sqlFunctionId, id, dateParsed)
+                .FirstOrDefault();
 
-            return AutoMapperConfig.MapperInstance.Map<TDestination>(dto);
+            return AutoMapperConfig.MapperInstance.Map<T>(dto);
+
+            //var query = await this.sqlManager
+            //    .ExecuteQueryAsync(this.sqlFunctionId, dateParsed, id)
+            //    .Skip(SkipHeaders)
+            //    .FirstOrDefaultAsync();
+
+            //var dto = new EditSubFundGetDto
+            //{
+            //    InitialDate = dateParsed,
+            //    Id = id,
+            //    SubFundName = query[IndexName],
+            //    CSSFCode = query[IndexCSSFCode],
+            //    Status = query[IndexStatus],
+            //    FACode = query[IndexFACode],
+            //    TACode = query[IndexTACode],
+            //    LEICode = query[IndexLEICode],
+            //    DBCode = query[IndexLEICode],
+            //    FirstNavDate = query[IndexFirstNavDate],
+            //    LastNavDate = query[IndexLastNavDate],
+            //    CSSFAuthDate = query[IndexAuthDate],
+            //    ExpiryDate = query[IndexExpiryDate],
+            //    CesrClass = query[IndexCesrClass],
+            //    GeographicalFocus = query[IndexGeoFocus],
+            //    GlobalExposure = query[IndexGlobalExposure],
+            //    CurrencyCode = query[IndexCurrency],
+            //    NavFrequency = query[IndexFrequency],
+            //    ValuationDate = query[IndexValuation],
+            //    CalculationDate = query[IndexCalculation],
+            //    Derivatives = query[IndexDerivs],
+            //    DerivMarket = query[IndexDerivMarket],
+            //    PrincipalAssetClass = query[IndexAssetClass],
+            //    TypeOfMarket = query[IndexMarketType],
+            //    PrincipalInvestmentStrategy = query[IndexInvestStrategy],
+            //    ClearingCode = query[IndexClearingCode],
+            //    SfCatMorningStar = query[IndexMorningStar],
+            //    SfCatSix = query[IndexSix],
+            //    SfCatBloomberg = query[IndexBloomberg],
+            //};
         }
 
         public Task<int> Edit(EditSubFundInputModel model)

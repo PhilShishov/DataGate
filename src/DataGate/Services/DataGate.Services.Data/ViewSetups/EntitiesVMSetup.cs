@@ -20,7 +20,7 @@
             var headers = await service.GetAll(functionActive, null, today).FirstOrDefaultAsync();
             var values = await service.GetAll(functionActive, null, today, 1).ToListAsync();
 
-            var entity = new EntitiesOverviewGetDto()
+            var dto = new EntitiesOverviewGetDto()
             {
                 IsActive = true,
                 Date = today.ToString(GlobalConstants.RequiredWebDateTimeFormat),
@@ -28,7 +28,8 @@
                 Headers = headers,
                 Values = values,
             };
-            return AutoMapperConfig.MapperInstance.Map<T>(entity);
+
+            return AutoMapperConfig.MapperInstance.Map<T>(dto);
         }
 
         public static async Task SetPost(EntitiesViewModel model, IEntityService service, string functionAll, string functionActive)

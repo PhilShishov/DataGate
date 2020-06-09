@@ -4,7 +4,7 @@
 
     public interface IStorageService
     {
-        Task<TDestination> GetByIdAndDate<TDestination>(int id, string date);
+        T GetByIdAndDate<T>(int id, string date);
 
         Task<bool> DoesExist(string name);
     }

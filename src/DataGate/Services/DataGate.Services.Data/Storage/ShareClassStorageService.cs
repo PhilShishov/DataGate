@@ -23,7 +23,7 @@
             throw new NotImplementedException();
         }
 
-        public Task<TDestination> GetByIdAndDate<TDestination>(int id, string date)
+        public T GetByIdAndDate<T>(int id, string date)
         {
             throw new NotImplementedException();
         }

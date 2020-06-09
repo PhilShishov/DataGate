@@ -1,9 +1,6 @@
 namespace DataGate.Web.InputModels.Funds
 {
-    using System.Globalization;
-
     using AutoMapper;
-    using DataGate.Common;
     using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
 
