@@ -57,11 +57,6 @@
 
             SubFundForeignKeysDto dtoForeignKey = AutoMapperConfig.MapperInstance.Map<SubFundForeignKeysDto>(model);
 
-            if (model.Derivatives == "Yes")
-            {
-                dto.IsDerivative = true;
-            }
-
             await this.SetForeignKeys(dto, dtoForeignKey);
             SqlCommand command = this.AssignBaseParameters(dto, SqlProcedureDictionary.EditSubFund);
 
@@ -85,10 +80,6 @@
             SubFundForeignKeysDto dtoForeignKey = AutoMapperConfig.MapperInstance.Map<SubFundForeignKeysDto>(model);
 
             dto.EndDate = DateTimeParser.ToSqlFormat(model.EndDate);
-            if (model.Derivatives == "Yes")
-            {
-                dto.IsDerivative = true;
-            }
 
             dto.ContainerId = await this.repositoryContainer.All()
                   .Where(f => f.FOfficialFundName == model.FundContainer)

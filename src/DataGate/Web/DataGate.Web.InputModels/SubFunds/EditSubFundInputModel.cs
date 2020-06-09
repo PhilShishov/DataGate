@@ -56,7 +56,7 @@
         public string CalculationDate { get; set; }
 
         [Display(Name = "Derivatives")]
-        public string Derivatives { get; set; }
+        public bool AreDerivatives { get; set; }
 
         [Display(Name = "Deriv. Market")]
         public string DerivMarket { get; set; }

@@ -2,12 +2,12 @@
 @inject IStringLocalizer<SharedResources> SharedLocalizer
 
 @{
-    ViewData["Title"] = GlobalConstants.EditActionName;
+    ViewData["Title"] = SharedLocalizer["Edit Sub Fund"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="push">
-    <div class="justify-content-between d-inline">
+    <div class="d-flex justify-content-center text-center">
         <h4>@SharedLocalizer["Edit Sub Fund"] @Model.SubFundName</h4>
         <form asp-area="Admin"
               asp-controller="SubFundStorage"
@@ -22,7 +22,7 @@
                     <input asp-for="InitialDate"
                            type="date"
                            min="2018-01-01" max=@DateTime.Today.ToString("yyyy-MM-dd")
-                           class="form-control maxw-270">
+                           class="form-control ">
                     <span asp-validation-for="InitialDate" class="text-danger"></span>
                 </div>
 
@@ -30,7 +30,7 @@
                     <label asp-for="Id" class="text-torshia"></label><br>
                     <input type="text"
                            asp-for="Id"
-                           class="form-control maxw-270"
+                           class="form-control "
                            readonly>
                     <span asp-validation-for="Id" class="text-danger"></span>
                 </div>
@@ -38,7 +38,7 @@
                 <div class="form-group">
                     <label asp-for="SubFundName" class="text-torshia"></label><br>
                     <input type="text"
-                           class="form-control maxw-270"
+                           class="form-control "
                            asp-for="SubFundName"
                            id="formatName">
                     <span asp-validation-for="SubFundName" class="text-danger"></span>
@@ -66,7 +66,7 @@
                 <div class="form-group">
                     <label asp-for="CSSFCode" class="text-torshia"></label><br>
                     <input type="text"
-                           class="form-control maxw-270"
+                           class="form-control "
                            asp-for="CSSFCode">
                     <span asp-validation-for="CSSFCode" class="text-danger"></span>
                 </div>
@@ -74,7 +74,7 @@
                 <div class="form-group">
                     <label asp-for="FACode" class="text-torshia"></label><br>
                     <input type="text"
-                           class="form-control maxw-270"
+                           class="form-control "
                            asp-for="FACode"
                            id="faCodeInput">
                     <span asp-validation-for="FACode" class="text-danger"></span>
@@ -83,7 +83,7 @@
                 <div class="form-group">
                     <label asp-for="DBCode" class="text-torshia"></label><br>
                     <input type="text"
-                           class="form-control maxw-270"
+                           class="form-control "
                            asp-for="DBCode"
                            id="depCodeInput">
                     <span asp-validation-for="DBCode" class="text-danger"></span>
@@ -92,7 +92,7 @@
                 <div class="form-group">
                     <label asp-for="TACode" class="text-torshia"></label><br>
                     <input type="text"
-                           class="form-control maxw-270"
+                           class="form-control "
                            asp-for="TACode"
                            id="taCodeInput">
                     <span asp-validation-for="TACode" class="text-danger"></span>
@@ -102,7 +102,7 @@
                     <label asp-for="FirstNavDate" class="text-torshia"></label><br>
                     <input asp-for="FirstNavDate"
                            type="date"
-                           class="form-control maxw-270">
+                           class="form-control ">
                     <span asp-validation-for="FirstNavDate" class="text-danger"></span>
                 </div>
 
@@ -110,7 +110,7 @@
                     <label asp-for="LastNavDate" class="text-torshia"></label><br>
                     <input asp-for="LastNavDate"
                            type="date"
-                           class="form-control maxw-270">
+                           class="form-control ">
                     <span asp-validation-for="LastNavDate" class="text-danger"></span>
                 </div>
 
@@ -118,7 +118,7 @@
                     <label asp-for="CSSFAuthDate" class="text-torshia"></label><br>
                     <input asp-for="CSSFAuthDate"
                            type="date"
-                           class="form-control maxw-270">
+                           class="form-control ">
                     <span asp-validation-for="CSSFAuthDate" class="text-danger"></span>
                 </div>
 
@@ -126,14 +126,14 @@
                     <label asp-for="ExpiryDate" class="text-torshia"></label><br>
                     <input asp-for="ExpiryDate"
                            type="date"
-                           class="form-control maxw-270">
+                           class="form-control ">
                     <span asp-validation-for="ExpiryDate" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
                     <label asp-for="LEICode" class="text-torshia"></label><br>
                     <input type="text"
-                           class="form-control maxw-270"
+                           class="form-control "
                            asp-for="LEICode"
                            id="leiCodeInput">
                     <span asp-validation-for="LEICode" class="text-danger"></span>
@@ -273,14 +273,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="Derivatives" class="text-torshia"></label><br>
-                    <select id="derivatives"
-                            class="form-control maxw-270"
-                            asp-for="Derivatives">
-                        <option value="No">No</option>
-                        <option value="Yes">Yes</option>
-                    </select>
-                    <span asp-validation-for="Derivatives" class="text-danger"></span>
+                    <label asp-for="AreDerivatives" class="text-torshia"></label><br>
+                    <input id="derivatives" type="checkbox" asp-for="AreDerivatives">
                 </div>
 
                 <div class="form-group" id="derivMarket" hidden>
@@ -385,7 +379,7 @@
                 <div class="form-group">
                     <label asp-for="ClearingCode" class="text-torshia"></label><br>
                     <input type="text"
-                           class="form-control maxw-270"
+                           class="form-control "
                            asp-for="ClearingCode"
                            id="leiCodeInput">
                     <span asp-validation-for="ClearingCode" class="text-danger"></span>
@@ -451,7 +445,7 @@
                 <div class="form-group">
                     <label asp-for="CommentTitle" class="text-torshia"></label><br>
                     <input type="text"
-                           class="form-control maxw-270"
+                           class="form-control "
                            asp-for="CommentTitle"
                            id="regNumberInput">
                     <span asp-validation-for="CommentTitle" class="text-danger"></span>
@@ -459,7 +453,7 @@
 
                 <div class="form-group">
                     <label asp-for="CommentArea" class="text-torshia"></label><br>
-                    <textarea class="form-control maxw-270"
+                    <textarea class="form-control "
                               asp-for="CommentArea"
                               id="regNumberInput">
             </textarea>
