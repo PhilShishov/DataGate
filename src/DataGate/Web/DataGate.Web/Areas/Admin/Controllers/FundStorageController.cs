@@ -1,7 +1,6 @@
 ﻿namespace DataGate.Web.Controllers.Funds
 {
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
 
     using DataGate.Common;
@@ -28,11 +27,11 @@
         }
 
         [Route("f/edit/{id}/{date}")]
-        public async Task<IActionResult> Edit(int id, string date)
+        public IActionResult Edit(int id, string date)
         {
-            var model = await this.service.GetByIdAndDate<EditFundInputModel>(id, date);
+            var model = this.service.GetByIdAndDate<EditFundInputModel>(id, date);
 
-            await this.SetViewDataValues();
+            this.SetViewDataValues();
 
             return this.View(model);
         }
@@ -55,7 +54,7 @@
                     this.ShowErrorAlertify(ErrorMessages.ExistingEntityName);
                 }
 
-                await this.SetViewDataValues();
+                this.SetViewDataValues();
                 return this.View(model);
             }
 
@@ -69,9 +68,9 @@
         }
 
         [Route("f/new")]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
-            await this.SetViewDataValues();
+            this.SetViewDataValues();
             return this.View(new CreateFundInputModel { InitialDate = DateTime.Today, });
         }
 
@@ -92,7 +91,7 @@
                     this.ShowErrorAlertify(ErrorMessages.ExistingEntityName);
                 }
 
-                await this.SetViewDataValues();
+                this.SetViewDataValues();
                 return this.View(model);
             }
 
@@ -105,13 +104,13 @@
                 new { area = GlobalConstants.FundAreaName, id = fundId, date = date });
         }
 
-        private async Task SetViewDataValues()
+        private void SetViewDataValues()
         {
-            this.ViewData["Status"] = await this.serviceSelect.GetAllTbDomFStatus().ToListAsync();
-            this.ViewData["LegalForm"] = await this.serviceSelect.GetAllTbDomLegalForm().ToListAsync();
-            this.ViewData["LegalVehicle"] = await this.serviceSelect.GetAllTbDomLegalVehicle().ToListAsync();
-            this.ViewData["LegalType"] = await this.serviceSelect.GetAllTbDomLegalType().ToListAsync();
-            this.ViewData["CompanyTypeDesc"] = await this.serviceSelect.GetAllTbDomCompanyDesc().ToListAsync();
+            this.ViewData["Status"] = this.serviceSelect.GetAllTbDomFStatus();
+            this.ViewData["LegalForm"] = this.serviceSelect.GetAllTbDomLegalForm();
+            this.ViewData["LegalVehicle"] = this.serviceSelect.GetAllTbDomLegalVehicle();
+            this.ViewData["LegalType"] = this.serviceSelect.GetAllTbDomLegalType();
+            this.ViewData["CompanyTypeDesc"] = this.serviceSelect.GetAllTbDomCompanyDesc();
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿namespace DataGate.Web.Areas.Admin.Controllers
 {
-    using System.Globalization;
     using System.Threading.Tasks;
 
     using DataGate.Common;
@@ -26,10 +25,9 @@
         }
 
         [Route("sf/edit/{id}/{date}")]
-        public async Task<IActionResult> Edit(int id, string date)
+        public IActionResult Edit(int id, string date)
         {
-            var model = await this.service.GetByIdAndDate<EditSubFundInputModel>(id, date);
-
+            var model = this.service.GetByIdAndDate<EditSubFundInputModel>(id, date);
             this.SetViewDataValues();
 
             return this.View(model);
@@ -42,6 +40,7 @@
         //{
         //}
 
+        //this.ViewData["FundContainer"] = await this.context.TbHistoryFund.Select(f => f.FOfficialFundName).ToList();
         private void SetViewDataValues()
         {
             this.ViewData["Status"] = this.serviceSelect.GetAllTbDomSFStatus();
@@ -60,8 +59,6 @@
             this.ViewData["SfCatMorningStar"] = this.serviceSelect.GetAllTbDomSfCatMorningStar();
             this.ViewData["SfCatSix"] = this.serviceSelect.GetAllTbDomSfCatSix();
             this.ViewData["SfCatBloomberg"] = this.serviceSelect.GetAllTbDomSfCatBloomberg();
-
-            //this.ViewData["FundContainer"] = await this.context.TbHistoryFund.Select(f => f.FOfficialFundName).ToList();
         }
     }
 }

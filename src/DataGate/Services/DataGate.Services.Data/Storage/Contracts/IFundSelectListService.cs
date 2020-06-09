@@ -5,15 +5,15 @@
 
     public interface IFundSelectListService
     {
-        IAsyncEnumerable<string> GetAllTbDomCompanyDesc();
+        IReadOnlyCollection<string> GetAllTbDomCompanyDesc();
 
-        IAsyncEnumerable<string> GetAllTbDomFStatus();
+        IReadOnlyCollection<string> GetAllTbDomFStatus();
 
-        IAsyncEnumerable<string> GetAllTbDomLegalForm();
+        IReadOnlyCollection<string> GetAllTbDomLegalForm();
 
-        IAsyncEnumerable<string> GetAllTbDomLegalType();
+        IReadOnlyCollection<string> GetAllTbDomLegalType();
 
-        IAsyncEnumerable<string> GetAllTbDomLegalVehicle();
+        IReadOnlyCollection<string> GetAllTbDomLegalVehicle();
 
         Task<int> GetByIdStatus(string status);
 

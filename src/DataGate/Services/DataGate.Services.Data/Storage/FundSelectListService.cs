@@ -31,65 +31,30 @@
             this.repositoryLegalVehicle = repositoryLegalVehicle;
         }
 
-        public async IAsyncEnumerable<string> GetAllTbDomCompanyDesc()
-        {
-            var companyDesc = await this.repositoryCompanyType.All()
+        public IReadOnlyCollection<string> GetAllTbDomCompanyDesc()
+            => this.repositoryCompanyType.All()
                 .Select(tb => tb.CtDesc + " - " + tb.CtAcronym)
-                .ToListAsync();
+                .ToList();
 
-            foreach (var item in companyDesc)
-            {
-                yield return item;
-            }
-        }
-
-        public async IAsyncEnumerable<string> GetAllTbDomFStatus()
-        {
-            var status = await this.repositoryFStatus.All()
+        public IReadOnlyCollection<string> GetAllTbDomFStatus()
+            => this.repositoryFStatus.All()
                .Select(tb => tb.StFDesc)
-               .ToListAsync();
+               .ToList();
 
-            foreach (var item in status)
-            {
-                yield return item;
-            }
-        }
-
-        public async IAsyncEnumerable<string> GetAllTbDomLegalForm()
-        {
-            var legalForms = await this.repositoryLegalForm.All()
+        public IReadOnlyCollection<string> GetAllTbDomLegalForm()
+            => this.repositoryLegalForm.All()
                .Select(tb => tb.LfAcronym)
-               .ToListAsync();
+               .ToList();
 
-            foreach (var item in legalForms)
-            {
-                yield return item;
-            }
-        }
-
-        public async IAsyncEnumerable<string> GetAllTbDomLegalType()
-        {
-            var legalTypes = await this.repositoryLegalType.All()
+        public IReadOnlyCollection<string> GetAllTbDomLegalType()
+            => this.repositoryLegalType.All()
                .Select(tb => tb.LtAcronym)
-               .ToListAsync();
+               .ToList();
 
-            foreach (var item in legalTypes)
-            {
-                yield return item;
-            }
-        }
-
-        public async IAsyncEnumerable<string> GetAllTbDomLegalVehicle()
-        {
-            var legalVehicles = await this.repositoryLegalVehicle.All()
+        public IReadOnlyCollection<string> GetAllTbDomLegalVehicle()
+            => this.repositoryLegalVehicle.All()
               .Select(tb => tb.LvAcronym)
-              .ToListAsync();
-
-            foreach (var item in legalVehicles)
-            {
-                yield return item;
-            }
-        }
+              .ToList();
 
         public async Task<int> GetByIdCompanyType(string companyTypeDesc)
         {
@@ -104,18 +69,18 @@
 
         public async Task<int> GetByIdLegalForm(string legalForm)
         {
-           return await this.repositoryLegalForm.All()
-                        .Where(lf => lf.LfAcronym == legalForm)
-                        .Select(lf => lf.LfId)
-                        .FirstOrDefaultAsync();
+            return await this.repositoryLegalForm.All()
+                         .Where(lf => lf.LfAcronym == legalForm)
+                         .Select(lf => lf.LfId)
+                         .FirstOrDefaultAsync();
         }
 
         public async Task<int> GetByIdLegalType(string legalType)
         {
-           return await this.repositoryLegalType.All()
-                        .Where(lt => lt.LtAcronym == legalType)
-                        .Select(lt => lt.LtId)
-                        .FirstOrDefaultAsync();
+            return await this.repositoryLegalType.All()
+                         .Where(lt => lt.LtAcronym == legalType)
+                         .Select(lt => lt.LtId)
+                         .FirstOrDefaultAsync();
         }
 
         public async Task<int> GetByIdLegalVehicle(string legalVehicle)

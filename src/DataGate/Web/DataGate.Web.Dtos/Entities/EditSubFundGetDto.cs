@@ -1,8 +1,10 @@
 namespace DataGate.Web.Dtos.Entities
 {
-    using System;
+    using System.Data;
 
-    public class EditSubFundGetDto
+    using DataGate.Services.SqlClient.Contracts;
+
+    public class EditSubFundGetDto : IDataReaderParser
     {
         public int Id { get; set; }
 
@@ -52,7 +54,7 @@ namespace DataGate.Web.Dtos.Entities
 
         public string SfCatBloomberg { get; set; }
 
-        public DateTime InitialDate { get; set; }
+        public string InitialDate { get; set; }
 
         public string CSSFCode { get; set; }
 
@@ -63,5 +65,37 @@ namespace DataGate.Web.Dtos.Entities
         public string TACode { get; set; }
 
         public string LEICode { get; set; }
+
+        public void Parse(IDataReader reader)
+        {
+            this.InitialDate = reader["VALID FROM"] as string;
+            this.Id = (int)reader["SUB FUND ID"];
+            this.SubFundName = reader["SUB FUND NAME"] as string;
+            this.Status = reader["STATUS"] as string;
+            this.CSSFCode = reader["CSSF CODE"] as string;
+            this.FACode = reader["ADMIN CODE"] as string;
+            this.DBCode = reader["DEPOSITARY BANK CODE"] as string;
+            this.TACode = reader["TRANSFER AGENT CODE"] as string;
+            this.FirstNavDate = reader["FIRST NAV DATE"] as string;
+            this.LastNavDate = reader["LAST NAV DATE"] as string;
+            this.CSSFAuthDate = reader["CSSF AUTH. DATE"] as string;
+            this.ExpiryDate = reader["EXPIRY DATE"] as string;
+            this.LEICode = reader["LEI CODE"] as string;
+            this.CesrClass = reader["CESR CLASS"] as string;
+            this.GeographicalFocus = reader["GEO FOCUS"] as string;
+            this.GlobalExposure = reader["GLOBAL EXPOSURE"] as string;
+            this.CurrencyCode = reader["CURRENCY"] as string;
+            this.NavFrequency = reader["FREQUENCY"] as string;
+            this.ValuationDate = reader["VALUATION DATE"] as string;
+            this.CalculationDate = reader["CALCULATION DATE"] as string;
+            this.Derivatives = reader["DERIVATIVES"] as string;
+            this.DerivMarket = reader["DERIV. MARKET"] as string;
+            this.DerivPurpose = reader["DERIV. PURPOSE"] as string;
+            this.PrincipalAssetClass = reader["PRINCIPAL ASSET CLASS"] as string;
+            this.ClearingCode = reader["CLEARING CODE"] as string;
+            this.SfCatMorningStar = reader["MORNINGSTAR CATEGORY"] as string;
+            this.SfCatSix = reader["SIX CATEGORY"] as string;
+            this.SfCatBloomberg = reader["BLOOMBERG CATEGORY"] as string;
+        }
     }
 }
