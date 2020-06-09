@@ -58,8 +58,7 @@ namespace DataGate.Web.InputModels.SubFunds
         [IgnoreMap]
         public int CalculationDate { get; set; }
 
-        [IgnoreMap]
-        public bool IsDerivative { get; set; } = false;
+        public bool IsDerivative { get; set; }
 
         [IgnoreMap]
         public int DerivMarket { get; set; }

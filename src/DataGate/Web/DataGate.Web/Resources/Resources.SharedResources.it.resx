@@ -213,6 +213,9 @@
   <data name="Create New Pharus Fund" xml:space="preserve">
     <value />
   </data>
+  <data name="Create New Pharus Sub Fund" xml:space="preserve">
+    <value />
+  </data>
   <data name="Create New Pharus SubFund" xml:space="preserve">
     <value />
   </data>
@@ -289,6 +292,9 @@
     <value />
   </data>
   <data name="New Password" xml:space="preserve">
+    <value />
+  </data>
+  <data name="New Sub Fund" xml:space="preserve">
     <value />
   </data>
   <data name="Panel" xml:space="preserve">

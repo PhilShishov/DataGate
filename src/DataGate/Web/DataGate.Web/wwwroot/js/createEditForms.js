@@ -153,7 +153,9 @@ const MESSAGES = {
     const derivPurpose = document.getElementById(HTML_CREATE_EDIT.SELECT_MENU_DERIV_PURPOSE);
 
     if (deriv) {
+        console.log('here');
         if (deriv.value == 'Yes') {
+            console.log('here');
             derivMarket.removeAttribute('hidden');
             derivPurpose.removeAttribute('hidden');
         } else {

@@ -1,8 +1,7 @@
 ﻿/* Chosen style to be imported on change*/
 
-.ui-tooltip
-{
-     font-size:12px;   
+.ui-tooltip {
+    font-size: 12px;
 }
 
 
@@ -181,6 +180,41 @@ textarea {
     font-size: 14px;
 }
 
+#div-inputs-to-format input[type=date] {
+    border: none;
+    max-width: 330px;
+}
+
+    #div-inputs-to-format input[type=date]:focus {
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0, 65, 118);
+    }
+
+#div-inputs-to-format input[type=text] {
+    border-width: 0 0 2px;
+    border-color: rgb(0, 65, 118);
+    max-width: 330px;
+}
+
+    #div-inputs-to-format input[type=text]:focus {
+        box-shadow: none;
+        background-color: lightgrey;
+    }
+
+
+
+.column-form {
+    float: left;
+    width: 33.33%;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+    .column-form .form-group {
+        width: 75%;
+    }
 /*
 *
 * ==========================================
@@ -188,7 +222,6 @@ textarea {
 * ==========================================
 *
 */
-
 ::-webkit-scrollbar {
     width: 10px;
 }
