@@ -14,8 +14,6 @@
     using DataGate.Services.Data.Timelines;
     using DataGate.Services.Data.TimeSeries;
     using DataGate.Services.Messaging;
-    using DataGate.Services.SqlClient;
-    using DataGate.Services.SqlClient.Contracts;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
@@ -43,12 +41,10 @@
 
             // Sub Funds
             services.AddTransient<ISubFundService, SubFundService>();
-            services.AddTransient<ISubFundSelectListService, SubFundSelectListService>();
             services.AddTransient<ISubFundStorageService, SubFundStorageService>();
 
             // Share Classes
             services.AddTransient<IShareClassService, ShareClassService>();
-            services.AddTransient<IShareClassSelectListService, ShareClassSelectListService>();
             services.AddTransient<IShareClassStorageService, ShareClassStorageService>();
 
             return services;

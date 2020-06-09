@@ -1,9 +1,12 @@
 ﻿namespace DataGate.Web.Areas.Admin.Controllers
 {
+    using System;
     using System.Threading.Tasks;
 
     using DataGate.Common;
+    using DataGate.Data.Common.Repositories;
     using DataGate.Services.Data.Storage.Contracts;
+    using DataGate.Services.DateTime;
     using DataGate.Web.Controllers;
     using DataGate.Web.InputModels.SubFunds;
     using Microsoft.AspNetCore.Authorization;
@@ -14,14 +17,14 @@
     public class SubFundStorageController : BaseController
     {
         private readonly ISubFundStorageService service;
-        private readonly ISubFundSelectListService serviceSelect;
+        private readonly ISubFundRepository repository;
 
         public SubFundStorageController(
                         ISubFundStorageService service,
-                        ISubFundSelectListService serviceSelect)
+                        ISubFundRepository repository)
         {
             this.service = service;
-            this.serviceSelect = serviceSelect;
+            this.repository = repository;
         }
 
         [Route("sf/edit/{id}/{date}")]
@@ -33,32 +36,103 @@
             return this.View(model);
         }
 
-        //[ValidateAntiForgeryToken]
-        //[HttpPost]
-        //[Route("sf/edit/{id}/{date}")]
-        //public async Task<IActionResult> Edit(EditSubFundInputModel model)
-        //{
-        //}
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        [Route("sf/edit/{id}/{date}")]
+        public async Task<IActionResult> Edit(
+                    [Bind("Id", "InitialDate", "SubFundName", "CSSFCode", "Status",
+                          "FACode", "TACode", "LEICode", "DBCode",
+                          "FirstNavDate", "LastNavDate", "CSSFAuthDate", "ExpiryDate",
+                          "CesrClass", "GeographicalFocus", "GlobalExposure", "CurrencyCode",
+                          "NavFrequency", "ValuationDate", "CalculationDate", "Derivatives",
+                          "DerivMarket", "DerivPurpose", "PrincipalAssetClass", "TypeOfMarket",
+                          "PrincipalInvestmentStrategy", "ClearingCode", "SfCatMorningStar", "SfCatSix",
+                          "SfCatBloomberg", "CommentTitle", "CommentArea", "RecaptchaValue")] EditSubFundInputModel model)
+        {
+            bool doesExist = await this.service.DoesExist(model.SubFundName);
 
-        //this.ViewData["FundContainer"] = await this.context.TbHistoryFund.Select(f => f.FOfficialFundName).ToList();
+            if (!this.ModelState.IsValid || doesExist)
+            {
+                if (doesExist)
+                {
+                    this.ShowErrorAlertify(ErrorMessages.ExistingEntityName);
+                }
+
+                this.SetViewDataValues();
+                return this.View(model);
+            }
+
+            var subFundId = await this.service.Edit(model);
+            var date = DateTimeParser.ToWebFormat(model.InitialDate);
+
+            return this.ShowInfo(
+                InfoMessages.SuccessfulEdit,
+                GlobalConstants.SubFundDetailsRouteName,
+                new { area = GlobalConstants.SubFundAreaName, id = subFundId, date = date });
+        }
+
+        [Route("sf/new")]
+        public IActionResult Create()
+        {
+            this.SetViewDataValues();
+            return this.View(new CreateSubFundInputModel { InitialDate = DateTime.Today, });
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        [Route("sf/new")]
+        public async Task<IActionResult> Create(
+                    [Bind("InitialDate", "EndDate", "SubFundName", "CSSFCode", "Status",
+                          "FACode", "TACode", "LEICode", "DBCode",
+                          "FirstNavDate", "LastNavDate", "CSSFAuthDate", "ExpiryDate",
+                          "CesrClass", "GeographicalFocus", "GlobalExposure", "CurrencyCode",
+                          "NavFrequency", "ValuationDate", "CalculationDate", "Derivatives",
+                          "DerivMarket", "DerivPurpose", "PrincipalAssetClass", "TypeOfMarket",
+                          "PrincipalInvestmentStrategy", "ClearingCode", "SfCatMorningStar", "SfCatSix",
+                          "SfCatBloomberg", "RecaptchaValue")] CreateSubFundInputModel model)
+        {
+            bool doesExist = await this.service.DoesExist(model.SubFundName);
+
+            if (!this.ModelState.IsValid || doesExist)
+            {
+                if (doesExist)
+                {
+                    this.ShowErrorAlertify(ErrorMessages.ExistingEntityName);
+                }
+
+                this.SetViewDataValues();
+                return this.View(model);
+            }
+
+            var subFundId = await this.service.Create(model);
+            var date = DateTimeParser.ToWebFormat(model.InitialDate);
+
+            return this.ShowInfo(
+                InfoMessages.SuccessfulCreate,
+                GlobalConstants.SubFundDetailsRouteName,
+                new { area = GlobalConstants.SubFundAreaName, id = subFundId, date = date });
+        }
+
         private void SetViewDataValues()
         {
-            this.ViewData["Status"] = this.serviceSelect.GetAllTbDomSFStatus();
-            this.ViewData["CesrClass"] = this.serviceSelect.GetAllTbDomCesrClass();
-            this.ViewData["GeographicalFocus"] = this.serviceSelect.GetAllTbDomGeographicalFocus();
-            this.ViewData["GlobalExposure"] = this.serviceSelect.GetAllTbDomGlobalExposure();
-            this.ViewData["CurrencyCode"] = this.serviceSelect.GetAllTbDomCurrencyCode();
-            this.ViewData["NavFrequency"] = this.serviceSelect.GetAllTbDomFrequency();
-            this.ViewData["ValuationDate"] = this.serviceSelect.GetAllTbDomValuationDate();
-            this.ViewData["CalculationDate"] = this.serviceSelect.GetAllTbDomCalculationDate();
-            this.ViewData["DerivMarket"] = this.serviceSelect.GetAllTbDomDerivMarket();
-            this.ViewData["DerivPurpose"] = this.serviceSelect.GetAllTbDomDerivPurpose();
-            this.ViewData["PrincipalAssetClass"] = this.serviceSelect.GetAllTbDomPrincipalAssetClass();
-            this.ViewData["TypeOfMarket"] = this.serviceSelect.GetAllTbDomTypeOfMarket();
-            this.ViewData["PrincipalInvestmentStrategy"] = this.serviceSelect.GetAllTbDomPrincipalInvestmentStrategy();
-            this.ViewData["SfCatMorningStar"] = this.serviceSelect.GetAllTbDomSfCatMorningStar();
-            this.ViewData["SfCatSix"] = this.serviceSelect.GetAllTbDomSfCatSix();
-            this.ViewData["SfCatBloomberg"] = this.serviceSelect.GetAllTbDomSfCatBloomberg();
+            this.ViewData["Status"] = this.repository.GetAllTbDomSFStatus();
+            this.ViewData["CesrClass"] = this.repository.GetAllTbDomCesrClass();
+            this.ViewData["GeographicalFocus"] = this.repository.GetAllTbDomGeographicalFocus();
+            this.ViewData["GlobalExposure"] = this.repository.GetAllTbDomGlobalExposure();
+            this.ViewData["CurrencyCode"] = this.repository.GetAllTbDomCurrencyCode();
+            this.ViewData["NavFrequency"] = this.repository.GetAllTbDomFrequency();
+            this.ViewData["ValuationDate"] = this.repository.GetAllTbDomValuationDate();
+            this.ViewData["CalculationDate"] = this.repository.GetAllTbDomCalculationDate();
+            this.ViewData["DerivMarket"] = this.repository.GetAllTbDomDerivMarket();
+            this.ViewData["DerivPurpose"] = this.repository.GetAllTbDomDerivPurpose();
+            this.ViewData["PrincipalAssetClass"] = this.repository.GetAllTbDomPrincipalAssetClass();
+            this.ViewData["TypeOfMarket"] = this.repository.GetAllTbDomTypeOfMarket();
+            this.ViewData["PrincipalInvestmentStrategy"] = this.repository.GetAllTbDomPrincipalInvestmentStrategy();
+            this.ViewData["SfCatMorningStar"] = this.repository.GetAllTbDomSfCatMorningStar();
+            this.ViewData["SfCatSix"] = this.repository.GetAllTbDomSfCatSix();
+            this.ViewData["SfCatBloomberg"] = this.repository.GetAllTbDomSfCatBloomberg();
+
+            this.ViewData["FundContainer"] = this.repository.GetAllContainers();
         }
     }
 }

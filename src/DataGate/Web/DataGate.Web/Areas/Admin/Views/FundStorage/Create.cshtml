@@ -1,5 +1,4 @@
 ﻿@model CreateFundInputModel
-@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
 @inject IStringLocalizer<SharedResources> SharedLocalizer
 
 @{
@@ -8,7 +7,7 @@
 }
 
 <div class="push">
-    <h4>Create New Pharus Fund</h4>
+    <h4>@SharedLocalizer["Create New Pharus Fund"]</h4>
 
     <form method="post" class="d-inline">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -161,12 +160,11 @@
             <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
             <button type="submit"
                     class="btn btn-pharus btn-sm mb-1 btn-confirm-create"
-                    name="create_button"
                     style="margin-right:40px">
-                Create Fund
+                @SharedLocalizer["Create Fund"]
             </button>
-            <a class="btn btn-pharus btn-sm" asp-area="Fund" asp-route="allFunds">
-                Back to List
+            <a class="btn btn-pharus btn-sm" asp-area="@GlobalConstants.FundAreaName" asp-route="@GlobalConstants.AllFundsRouteName">
+                @SharedLocalizer["Back to List"]
             </a>
         </div>
     </form>

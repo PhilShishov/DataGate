@@ -31,9 +31,9 @@
         public IActionResult All(string type)
         {
             string function = StringSwapper.ByArea(type,
-                                                  FunctionDictionary.SqlFunctionAllAgreementsFunds,
-                                                  FunctionDictionary.SqlFunctionAllAgreementsSubFunds,
-                                                  FunctionDictionary.SqlFunctionAllAgreementsShareClasses);
+                                                  SqlFunctionDictionary.AllAgreementsFunds,
+                                                  SqlFunctionDictionary.AllAgreementsSubFunds,
+                                                  SqlFunctionDictionary.AllAgreementsShareClasses);
 
             var today = DateTime.Today;
             var agreements = this.service.GetAll<AllAgreementViewModel>(function, today);
@@ -54,9 +54,9 @@
             if (model.Date != null)
             {
                 string function = StringSwapper.ByArea(model.SelectedType,
-                                                  FunctionDictionary.SqlFunctionAllAgreementsFunds,
-                                                  FunctionDictionary.SqlFunctionAllAgreementsSubFunds,
-                                                  FunctionDictionary.SqlFunctionAllAgreementsShareClasses);
+                                                  SqlFunctionDictionary.AllAgreementsFunds,
+                                                  SqlFunctionDictionary.AllAgreementsSubFunds,
+                                                  SqlFunctionDictionary.AllAgreementsShareClasses);
 
                 var parsedDate = DateTimeParser.FromWebFormat(model.Date);
 

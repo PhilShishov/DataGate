@@ -40,7 +40,7 @@
             };
 
             var viewModel = await SubEntitiesVMSetup
-                .SetLoadedGet<EntitySubEntitiesViewModel>(this.service, this.subFundService, dto, FunctionDictionary.SqlFunctionSubFundShareClasses);
+                .SetLoadedGet<EntitySubEntitiesViewModel>(this.service, this.subFundService, dto, SqlFunctionDictionary.SubFundShareClasses);
 
             return this.PartialView("SubEntities/_ViewLoadedTable", viewModel);
         }
@@ -57,7 +57,7 @@
             };
 
             var viewModel = await SubEntitiesVMSetup
-                .SetGet<SubEntitiesViewModel>(this.service, this.subFundService, dto, FunctionDictionary.SqlFunctionSubFundShareClasses);
+                .SetGet<SubEntitiesViewModel>(this.service, this.subFundService, dto, SqlFunctionDictionary.SubFundShareClasses);
 
             return this.View(viewModel);
         }
@@ -74,7 +74,7 @@
                     new { viewModel.Id, viewModel.Date, viewModel.Container });
             }
 
-            await SubEntitiesVMSetup.SetPost(viewModel, this.service, FunctionDictionary.SqlFunctionSubFundShareClasses);
+            await SubEntitiesVMSetup.SetPost(viewModel, this.service, SqlFunctionDictionary.SubFundShareClasses);
 
             if (viewModel.Values != null && viewModel.Values.Count > 0)
             {

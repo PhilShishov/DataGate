@@ -5,7 +5,6 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using DataGate.Common;
     using DataGate.Common.Exceptions;
     using DataGate.Data.Common.Repositories;
     using DataGate.Data.Models.Entities;
@@ -53,20 +52,17 @@
         {
             FundPostDto dto = AutoMapperConfig.MapperInstance.Map<FundPostDto>(model);
 
-            dto.Status = await this.service.GetByIdStatus(model.Status);
-            dto.LegalForm = await this.service.GetByIdLegalForm(model.LegalForm);
-            dto.LegalVehicle = await this.service.GetByIdLegalVehicle(model.LegalVehicle);
-            dto.LegalType = await this.service.GetByIdLegalType(model.LegalType);
-            dto.CompanyTypeDesc = await this.service.GetByIdCompanyType(model.CompanyTypeDesc);
+            await this.SetForeignKeys(dto, model.Status, model.LegalForm, model.LegalVehicle,
+                                      model.LegalType, model.CompanyTypeDesc);
 
-            SqlCommand command = this.AssignBaseParameters(dto, ProcedureDictionary.SqlProcedureEditFund);
+            SqlCommand command = this.AssignBaseParameters(dto, SqlProcedureDictionary.EditFund);
 
             // Assign particular parameters
             command.Parameters.AddRange(new[]
                    {
                             new SqlParameter("@f_id", SqlDbType.Int) { Value = dto.Id },
                             new SqlParameter("@comment", SqlDbType.NVarChar) { Value = dto.CommentArea },
-                            new SqlParameter("@commentTitle", SqlDbType.NVarChar) { Value = dto.CommentTitle },
+                            new SqlParameter("@comment_title ", SqlDbType.NVarChar) { Value = dto.CommentTitle },
                    });
 
             await this.sqlManager.ExecuteProcedure(command);
@@ -77,22 +73,22 @@
         public async Task<int> Create(CreateFundInputModel model)
         {
             FundPostDto dto = AutoMapperConfig.MapperInstance.Map<FundPostDto>(model);
+            dto.EndDate = DateTimeParser.ToSqlFormat(model.EndDate);
 
-            dto.EndDate = model.EndDate?.ToString(GlobalConstants.RequiredSqlDateTimeFormat);
-            dto.Status = await this.service.GetByIdStatus(model.Status);
-            dto.LegalForm = await this.service.GetByIdLegalForm(model.LegalForm);
-            dto.LegalVehicle = await this.service.GetByIdLegalVehicle(model.LegalVehicle);
-            dto.LegalType = await this.service.GetByIdLegalType(model.LegalType);
-            dto.CompanyTypeDesc = await this.service.GetByIdCompanyType(model.CompanyTypeDesc);
+            await this.SetForeignKeys(dto, model.Status, model.LegalForm, model.LegalVehicle,
+                                      model.LegalType, model.CompanyTypeDesc);
 
-            SqlCommand command = this.AssignBaseParameters(dto, ProcedureDictionary.SqlProcedureCreateFund);
+            SqlCommand command = this.AssignBaseParameters(dto, SqlProcedureDictionary.CreateFund);
 
             // Assign particular parameters
             command.Parameters.Add(new SqlParameter("@f_endDate", SqlDbType.NVarChar) { Value = dto.EndDate });
 
             await this.sqlManager.ExecuteProcedure(command);
 
-            var fundId = this.repository.All().Where(f => f.FOfficialFundName == dto.FundName).Select(f => f.FId).FirstOrDefault();
+            var fundId = this.repository.All()
+                .Where(f => f.FOfficialFundName == dto.FundName)
+                .Select(f => f.FId)
+                .FirstOrDefault();
 
             return fundId;
         }
@@ -100,6 +96,17 @@
         public async Task<bool> DoesExist(string name)
         {
             return await this.repository.All().AnyAsync(f => f.FOfficialFundName == name);
+        }
+
+        private async Task SetForeignKeys(FundPostDto dto, string status,
+                                          string legalform, string legalVehicle,
+                                          string legalType, string companyType)
+        {
+            dto.Status = await this.service.GetByIdStatus(status);
+            dto.LegalForm = await this.service.GetByIdLegalForm(legalform);
+            dto.LegalVehicle = await this.service.GetByIdLegalVehicle(legalVehicle);
+            dto.LegalType = await this.service.GetByIdLegalType(legalType);
+            dto.CompanyTypeDesc = await this.service.GetByIdCompanyType(companyType);
         }
 
         private SqlCommand AssignBaseParameters(FundPostDto dto, string procedure)
