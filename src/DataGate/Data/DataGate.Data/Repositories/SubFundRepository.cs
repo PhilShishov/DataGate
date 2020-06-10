@@ -67,73 +67,73 @@ namespace DataGate.Data.Repositories
         public IReadOnlyCollection<string> GetAllTbDomValuationDate()
             => this.Context.TbDomValutationDate.Select(x => x.VdDesc).ToList();
 
-        public async Task<int> ByIdCB(string sfCatBloomberg)
+        public async Task<int?> ByIdCB(string sfCatBloomberg)
         => await this.Context.TbDomSfCatBloomberg
             .Where(x => x.CatBloombergDesc == sfCatBloomberg)
             .Select(x => x.CatBloombergId)
             .FirstOrDefaultAsync();
 
-        public async Task<int> ByIdCC(string cesrClass)
+        public async Task<int?> ByIdCC(string cesrClass)
         => await this.Context.TbDomCesrClass
             .Where(x => x.CDesc == cesrClass)
             .Select(x => x.CcId)
             .FirstOrDefaultAsync();
 
-        public async Task<int> ByIdCD(string calculationDate)
+        public async Task<int?> ByIdCD(string calculationDate)
         => await this.Context.TbDomCalculationDate
             .Where(x => x.CdDesc == calculationDate)
             .Select(x => x.CdId)
             .FirstOrDefaultAsync();
 
-        public async Task<int> ByIdCM(string sfCatMorningStar)
+        public async Task<int?> ByIdCM(string sfCatMorningStar)
         => await this.Context.TbDomSfCatMorningstar
             .Where(x => x.CMorningstarDesc == sfCatMorningStar)
             .Select(x => x.CMorningstarId)
             .FirstOrDefaultAsync();
 
-        public async Task<int> ByIdCS(string sfCatSix)
+        public async Task<int?> ByIdCS(string sfCatSix)
         => await this.Context.TbDomSfCatSix
             .Where(x => x.CatSixDesc == sfCatSix)
             .Select(x => x.CatSixId)
             .FirstOrDefaultAsync();
 
-        public async Task<int> ByIdDM(string derivMarket)
+        public async Task<int?> ByIdDM(string derivMarket)
         => await this.Context.TbDomDerivMarket
             .Where(x => x.DmDesc == derivMarket)
             .Select(x => x.DmId)
             .FirstOrDefaultAsync();
 
-        public async Task<int> ByIdDP(string derivPurpose)
+        public async Task<int?> ByIdDP(string derivPurpose)
         => await this.Context.TbDomDerivPurpose
             .Where(x => x.DpDesc == derivPurpose)
             .Select(x => x.DpId)
             .FirstOrDefaultAsync();
 
-        public async Task<int> ByIdGE(string globalExposure)
+        public async Task<int?> ByIdGE(string globalExposure)
         => await this.Context.TbDomGlobalExposure
             .Where(x => x.GeDesc == globalExposure)
             .Select(x => x.GeId)
             .FirstOrDefaultAsync();
 
-        public async Task<int> ByIdGF(string geographicalFocus)
+        public async Task<int?> ByIdGF(string geographicalFocus)
         => await this.Context.TbDomCssfGeographicalFocus
             .Where(x => x.GfDesc == geographicalFocus)
             .Select(x => x.GfId)
             .FirstOrDefaultAsync();
 
-        public async Task<int> ByIdNF(string navFrequency)
+        public async Task<int?> ByIdNF(string navFrequency)
         => await this.Context.TbDomNavFrequency
             .Where(x => x.NfDesc == navFrequency)
             .Select(x => x.NfId)
             .FirstOrDefaultAsync();
 
-        public async Task<int> ByIdPAC(string principalAssetClass)
+        public async Task<int?> ByIdPAC(string principalAssetClass)
         => await this.Context.TbDomCssfPrincipalAssetClass
             .Where(x => x.PacDesc == principalAssetClass)
             .Select(x => x.PacId)
             .FirstOrDefaultAsync();
 
-        public async Task<int> ByIdPIS(string principalInvestmentStrategy)
+        public async Task<int?> ByIdPIS(string principalInvestmentStrategy)
         => await this.Context.TbDomPrincipalInvestmentStrategy
             .Where(x => x.PisDesc == principalInvestmentStrategy)
             .Select(x => x.PisId)
@@ -145,13 +145,13 @@ namespace DataGate.Data.Repositories
             .Select(x => x.StId)
             .FirstOrDefaultAsync();
 
-        public async Task<int> ByIdTM(string typeOfMarket)
+        public async Task<int?> ByIdTM(string typeOfMarket)
         => await this.Context.TbDomTypeOfMarket
             .Where(x => x.TomDesc == typeOfMarket)
             .Select(x => x.TomId)
             .FirstOrDefaultAsync();
 
-        public async Task<int> ByIdVD(string valuationDate)
+        public async Task<int?> ByIdVD(string valuationDate)
         => await this.Context.TbDomValutationDate
             .Where(x => x.VdDesc == valuationDate)
             .Select(x => x.VdId)

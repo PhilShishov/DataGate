@@ -48,28 +48,6 @@
             return AutoMapperConfig.MapperInstance.Map<T>(dto);
         }
 
-        public async Task<int> Edit(EditFundInputModel model)
-        {
-            FundPostDto dto = AutoMapperConfig.MapperInstance.Map<FundPostDto>(model);
-
-            await this.SetForeignKeys(dto, model.Status, model.LegalForm, model.LegalVehicle,
-                                      model.LegalType, model.CompanyTypeDesc);
-
-            SqlCommand command = this.AssignBaseParameters(dto, SqlProcedureDictionary.EditFund);
-
-            // Assign particular parameters
-            command.Parameters.AddRange(new[]
-                   {
-                            new SqlParameter("@f_id", SqlDbType.Int) { Value = dto.Id },
-                            new SqlParameter("@comment", SqlDbType.NVarChar) { Value = dto.CommentArea },
-                            new SqlParameter("@comment_title ", SqlDbType.NVarChar) { Value = dto.CommentTitle },
-                   });
-
-            await this.sqlManager.ExecuteProcedure(command);
-
-            return dto.Id;
-        }
-
         public async Task<int> Create(CreateFundInputModel model)
         {
             FundPostDto dto = AutoMapperConfig.MapperInstance.Map<FundPostDto>(model);
@@ -91,6 +69,28 @@
                 .FirstOrDefault();
 
             return fundId;
+        }
+
+        public async Task<int> Edit(EditFundInputModel model)
+        {
+            FundPostDto dto = AutoMapperConfig.MapperInstance.Map<FundPostDto>(model);
+
+            await this.SetForeignKeys(dto, model.Status, model.LegalForm, model.LegalVehicle,
+                                      model.LegalType, model.CompanyTypeDesc);
+
+            SqlCommand command = this.AssignBaseParameters(dto, SqlProcedureDictionary.EditFund);
+
+            // Assign particular parameters
+            command.Parameters.AddRange(new[]
+                   {
+                            new SqlParameter("@f_id", SqlDbType.Int) { Value = dto.Id },
+                            new SqlParameter("@comment", SqlDbType.NVarChar) { Value = dto.CommentArea },
+                            new SqlParameter("@comment_title ", SqlDbType.NVarChar) { Value = dto.CommentTitle },
+                   });
+
+            await this.sqlManager.ExecuteProcedure(command);
+
+            return dto.Id;
         }
 
         public async Task<bool> DoesExist(string name)

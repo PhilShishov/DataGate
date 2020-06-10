@@ -96,8 +96,7 @@
                     <span asp-validation-for="DerivMarket" class="text-danger"></span>
 
                     <div class="form-group" id="derivPurpose" hidden>
-                        <label asp-for="DerivPurpose"
-                               class="text-torshia"></label><br>
+                        <label asp-for="DerivPurpose"></label><br>
                         <select class="select-pharus"
                                 asp-for="DerivPurpose">
                             <option selected disabled>-- Choose Purpose --</option>
@@ -474,9 +473,8 @@
                     @SharedLocalizer["Back to List"]
                 </a>
                 <button type="submit"
-                        class="btn btn-pharus btn-lg btn-confirm-update"
-                        name="update_button"
-                        style="margin-right:40px">
+                        class="btn btn-pharus btn-lg btn-confirm-update ml-5"
+                        name="update_button">
                     @SharedLocalizer["Update Sub Fund"]
                 </button>
             </div>

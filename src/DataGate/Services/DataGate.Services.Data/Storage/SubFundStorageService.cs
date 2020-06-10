@@ -51,28 +51,6 @@
             return AutoMapperConfig.MapperInstance.Map<T>(dto);
         }
 
-        public async Task<int> Edit(EditSubFundInputModel model)
-        {
-            SubFundPostDto dto = AutoMapperConfig.MapperInstance.Map<SubFundPostDto>(model);
-
-            SubFundForeignKeysDto dtoForeignKey = AutoMapperConfig.MapperInstance.Map<SubFundForeignKeysDto>(model);
-
-            await this.SetForeignKeys(dto, dtoForeignKey);
-            SqlCommand command = this.AssignBaseParameters(dto, SqlProcedureDictionary.EditSubFund);
-
-            // Assign particular parameters
-            command.Parameters.AddRange(new[]
-                   {
-                            new SqlParameter("@sf_id", SqlDbType.Int) { Value = dto.Id },
-                            new SqlParameter("@comment", SqlDbType.NVarChar) { Value = dto.CommentArea },
-                            new SqlParameter("@commentTitle", SqlDbType.NVarChar) { Value = dto.CommentTitle },
-                   });
-
-            await this.sqlManager.ExecuteProcedure(command);
-
-            return dto.Id;
-        }
-
         public async Task<int> Create(CreateSubFundInputModel model)
         {
             SubFundPostDto dto = AutoMapperConfig.MapperInstance.Map<SubFundPostDto>(model);
@@ -80,7 +58,6 @@
             SubFundForeignKeysDto dtoForeignKey = AutoMapperConfig.MapperInstance.Map<SubFundForeignKeysDto>(model);
 
             dto.EndDate = DateTimeParser.ToSqlFormat(model.EndDate);
-
             dto.ContainerId = await this.repositoryContainer.All()
                   .Where(f => f.FOfficialFundName == model.FundContainer)
                   .Select(fc => fc.FId)
@@ -105,6 +82,28 @@
                 .FirstOrDefault();
 
             return subFundId;
+        }
+
+        public async Task<int> Edit(EditSubFundInputModel model)
+        {
+            SubFundPostDto dto = AutoMapperConfig.MapperInstance.Map<SubFundPostDto>(model);
+
+            SubFundForeignKeysDto dtoForeignKey = AutoMapperConfig.MapperInstance.Map<SubFundForeignKeysDto>(model);
+
+            await this.SetForeignKeys(dto, dtoForeignKey);
+            SqlCommand command = this.AssignBaseParameters(dto, SqlProcedureDictionary.EditSubFund);
+
+            // Assign particular parameters
+            command.Parameters.AddRange(new[]
+                   {
+                            new SqlParameter("@sf_id", SqlDbType.Int) { Value = dto.Id },
+                            new SqlParameter("@comment", SqlDbType.NVarChar) { Value = dto.CommentArea },
+                            new SqlParameter("@commentTitle", SqlDbType.NVarChar) { Value = dto.CommentTitle },
+                   });
+
+            await this.sqlManager.ExecuteProcedure(command);
+
+            return dto.Id;
         }
 
         public async Task<bool> DoesExist(string name)

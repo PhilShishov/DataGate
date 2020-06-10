@@ -39,52 +39,52 @@ namespace DataGate.Web.InputModels.SubFunds
         public string ExpiryDate { get; set; }
 
         [IgnoreMap]
-        public int CesrClass { get; set; }
+        public int? CesrClass { get; set; }
 
         [IgnoreMap]
-        public int GeographicalFocus { get; set; }
+        public int? GeographicalFocus { get; set; }
 
         [IgnoreMap]
-        public int GlobalExposure { get; set; }
+        public int? GlobalExposure { get; set; }
 
         public string CurrencyCode { get; set; }
 
         [IgnoreMap]
-        public int NavFrequency { get; set; }
+        public int? NavFrequency { get; set; }
 
         [IgnoreMap]
-        public int ValuationDate { get; set; }
+        public int? ValuationDate { get; set; }
 
         [IgnoreMap]
-        public int CalculationDate { get; set; }
+        public int? CalculationDate { get; set; }
 
         public bool AreDerivatives { get; set; }
 
         [IgnoreMap]
-        public int DerivMarket { get; set; }
+        public int? DerivMarket { get; set; }
 
         [IgnoreMap]
-        public int DerivPurpose { get; set; }
+        public int? DerivPurpose { get; set; }
 
         [IgnoreMap]
-        public int PrincipalAssetClass { get; set; }
+        public int? PrincipalAssetClass { get; set; }
 
         [IgnoreMap]
-        public int TypeOfMarket { get; set; }
+        public int? TypeOfMarket { get; set; }
 
         [IgnoreMap]
-        public int PrincipalInvestmentStrategy { get; set; }
+        public int? PrincipalInvestmentStrategy { get; set; }
 
         public string ClearingCode { get; set; }
 
         [IgnoreMap]
-        public int SfCatMorningStar { get; set; }
+        public int? SfCatMorningStar { get; set; }
 
         [IgnoreMap]
-        public int SfCatSix { get; set; }
+        public int? SfCatSix { get; set; }
 
         [IgnoreMap]
-        public int SfCatBloomberg { get; set; }
+        public int? SfCatBloomberg { get; set; }
 
         public string CommentTitle { get; set; }
 
