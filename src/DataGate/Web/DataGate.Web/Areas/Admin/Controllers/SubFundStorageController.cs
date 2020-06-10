@@ -88,10 +88,10 @@
         [Route("sf/new")]
         public async Task<IActionResult> Create(
                     [Bind("InitialDate", "EndDate", "SubFundName", "CSSFCode", "Status",
-                          "FACode", "TACode", "LEICode", "DBCode",
+                          "FACode", "TACode", "LEICode", "DBCode", "FundContainer",
                           "FirstNavDate", "LastNavDate", "CSSFAuthDate", "ExpiryDate",
                           "CesrClass", "GeographicalFocus", "GlobalExposure", "CurrencyCode",
-                          "NavFrequency", "ValuationDate", "CalculationDate", "Derivatives",
+                          "NavFrequency", "ValuationDate", "CalculationDate", "AreDerivatives",
                           "DerivMarket", "DerivPurpose", "PrincipalAssetClass", "TypeOfMarket",
                           "PrincipalInvestmentStrategy", "ClearingCode", "SfCatMorningStar", "SfCatSix",
                           "SfCatBloomberg", "RecaptchaValue")] CreateSubFundInputModel model)

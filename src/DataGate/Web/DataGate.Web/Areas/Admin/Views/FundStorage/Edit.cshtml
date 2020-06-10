@@ -129,8 +129,8 @@
                                 }
                             }
                         </select>
-                        <span asp-validation-for="Status" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="Status" class="text-danger"></span>
                     <div class="form-group">
                         <label asp-for="LegalForm" class="text-torshia"></label><br>
                         <select class="select-pharus" asp-for="LegalForm">
@@ -146,8 +146,8 @@
                                 }
                             }
                         </select>
-                        <span asp-validation-for="LegalForm" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="LegalForm" class="text-danger"></span>
                     <div class="form-group">
                         <label asp-for="LegalVehicle" class="text-torshia"></label><br>
                         <select class="select-pharus" asp-for="LegalVehicle">
@@ -163,8 +163,8 @@
                                 }
                             }
                         </select>
-                        <span asp-validation-for="LegalVehicle" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="LegalVehicle" class="text-danger"></span>
 
                     <div class="form-group">
                         <label asp-for="LegalType" class="text-torshia"></label><br>
@@ -181,8 +181,8 @@
                                 }
                             }
                         </select>
-                        <span asp-validation-for="LegalType" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="LegalType" class="text-danger"></span>
                     <div class="form-group">
                         <label asp-for="CompanyTypeDesc" class="text-torshia"></label><br>
                         <select class="select-pharus" asp-for="CompanyTypeDesc">
@@ -198,22 +198,22 @@
                                 }
                             }
                         </select>
-                        <span asp-validation-for="CompanyTypeDesc" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="CompanyTypeDesc" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="button-holder my-4">
                 <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
+                <a class="btn btn-pharus btn-lg" asp-area="@GlobalConstants.FundAreaName" asp-route="@GlobalConstants.AllFundsRouteName">
+                    @SharedLocalizer["Back to List"]
+                </a>
                 <button type="submit"
                         class="btn btn-pharus btn-lg btn-confirm-update"
                         name="update_button"
                         style="margin-right:40px">
                     @SharedLocalizer["Update Fund"]
                 </button>
-                <a class="btn btn-pharus btn-lg" asp-area="@GlobalConstants.FundAreaName" asp-route="@GlobalConstants.AllFundsRouteName">
-                    @SharedLocalizer["Back to List"]
-                </a>
             </div>
         </form>
     </div>
