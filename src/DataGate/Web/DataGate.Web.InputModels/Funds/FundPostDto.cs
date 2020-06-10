@@ -21,15 +21,15 @@ namespace DataGate.Web.InputModels.Funds
 
         [IgnoreMap]
 
-        public int LegalForm { get; set; }
+        public int? LegalForm { get; set; }
 
         [IgnoreMap]
 
-        public int LegalVehicle { get; set; }
+        public int? LegalVehicle { get; set; }
 
         [IgnoreMap]
 
-        public int LegalType { get; set; }
+        public int? LegalType { get; set; }
 
         public string FACode { get; set; }
 
@@ -38,7 +38,7 @@ namespace DataGate.Web.InputModels.Funds
         public string TACode { get; set; }
 
         [IgnoreMap]
-        public int CompanyTypeDesc { get; set; }
+        public int? CompanyTypeDesc { get; set; }
 
         public string TinNumber { get; set; }
 
