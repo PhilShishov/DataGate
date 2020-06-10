@@ -151,7 +151,7 @@
                         new SqlParameter("@sf_navFrequency", SqlDbType.Int) { Value = dto.NavFrequency },
                         new SqlParameter("@sf_valutationDate", SqlDbType.Int) { Value = dto.ValuationDate },
                         new SqlParameter("@sf_calculationDate", SqlDbType.Int) { Value = dto.CalculationDate },
-                        new SqlParameter("@sf_derivatives", SqlDbType.Bit) { Value = dto.IsDerivative },
+                        new SqlParameter("@sf_derivatives", SqlDbType.Bit) { Value = dto.AreDerivatives },
                         new SqlParameter("@sf_derivMarket", SqlDbType.Int) { Value = dto.DerivMarket },
                         new SqlParameter("@sf_derivPurpose", SqlDbType.Int) { Value = dto.DerivPurpose },
                         new SqlParameter("@sf_principal_asset_class", SqlDbType.Int) { Value = dto.PrincipalAssetClass },

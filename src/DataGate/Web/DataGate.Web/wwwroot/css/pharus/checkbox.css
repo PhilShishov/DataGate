@@ -6,6 +6,11 @@
 *
 */
 
+.checkbox-lg {
+    width: 20px;
+    height: 20px;
+}
+
 .text-el-switch{
     font-size:14px;
 }

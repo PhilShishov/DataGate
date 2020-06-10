@@ -7,7 +7,7 @@
 
     public class CreateFundInputModel : BaseEntityInputModel
     {
-        [Display(Name = "End Date")]
+        [Display(Name = "Valid Until")]
         public DateTime? EndDate { get; set; }
 
         [Required(ErrorMessage = "You must enter a value for the Fund Name!")]

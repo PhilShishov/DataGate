@@ -4,7 +4,7 @@
     BTN_CONFIRM_UPDATE: 'btn-confirm-update',
     DIV_INPUTS_FORMAT: 'div-inputs-to-format',
     INPUT_NAME_TO_FORMAT: 'formatName',
-    SELECT_MENU_DERIVATIVES: 'derivatives',
+    CHECKBOX_DERIVATIVES: 'derivatives',
     SELECT_MENU_DERIV_PURPOSE: 'derivPurpose',
     SELECT_MENU_DERIV_MARKET: 'derivMarket'
 };
@@ -129,52 +129,67 @@ const MESSAGES = {
     }
 
     function formatSubFundAndShareClassName() {
-        this.value = this.value.trimStart();
-        this.value = this.value.trimEnd();
-        this.value = capitalLetter(this.value);
 
-        function capitalLetter(str) {
-            str = str.split(" ");
+        if (this.value) {
+            this.value = this.value.trimStart();
+            this.value = this.value.trimEnd();
+            this.value = capitalLetter(this.value);
 
-            for (let i = 0, x = str.length; i < x; i++) {
-                str[i] = str[i][0].toUpperCase() + str[i].substr(1);
+            function capitalLetter(str) {
+                str = str.split(" ");
+
+                for (let i = 0, x = str.length; i < x; i++) {
+                    str[i] = str[i][0].toUpperCase() + str[i].substr(1);
+                }
+                return str.join(" ");
             }
-
-            return str.join(" ");
         }
     }
 })();
 
 // Open derivatives additional options
 (function () {
-    const deriv = document.getElementById(HTML_CREATE_EDIT.SELECT_MENU_DERIVATIVES);
+    const checkboxDeriv = document.getElementById(HTML_CREATE_EDIT.CHECKBOX_DERIVATIVES);
 
     const derivMarket = document.getElementById(HTML_CREATE_EDIT.SELECT_MENU_DERIV_MARKET);
     const derivPurpose = document.getElementById(HTML_CREATE_EDIT.SELECT_MENU_DERIV_PURPOSE);
 
-    if (deriv) {
-        console.log('here');
-        if (deriv.value == 'Yes') {
-            console.log('here');
-            derivMarket.removeAttribute('hidden');
-            derivPurpose.removeAttribute('hidden');
-        } else {
-            derivMarket.setAttribute('hidden', true);
-            derivPurpose.setAttribute('hidden', true);
-        }
-
-        deriv.addEventListener('change', openDeriv);
+    if (checkboxDeriv) {
+        checkboxDeriv.addEventListener('click', function () {
+            if (this.checked == true) {
+                console.log('here2');
+                derivMarket.removeAttribute('hidden');
+                derivPurpose.removeAttribute('hidden');
+            } else {
+                derivMarket.setAttribute('hidden', true);
+                derivPurpose.setAttribute('hidden', true);
+            }
+        })
     }
 
-    function openDeriv() {
-        if (deriv.options[deriv.selectedIndex].text === 'Yes') {
-            derivMarket.removeAttribute('hidden');
-            derivPurpose.removeAttribute('hidden');
-        } else {
-            derivMarket.setAttribute('hidden', true);
-            derivPurpose.setAttribute('hidden', true);
-        }
-    }
+    //if (deriv) {
+    //    console.log('here');
+    //    if (deriv.value == 'Yes') {
+    //        console.log('here');
+    //        derivMarket.removeAttribute('hidden');
+    //        derivPurpose.removeAttribute('hidden');
+    //    } else {
+    //        derivMarket.setAttribute('hidden', true);
+    //        derivPurpose.setAttribute('hidden', true);
+    //    }
+
+    //    deriv.addEventListener('change', openDeriv);
+    //}
+
+    //function openDeriv() {
+    //    if (deriv.options[deriv.selectedIndex].text === 'Yes') {
+    //        derivMarket.removeAttribute('hidden');
+    //        derivPurpose.removeAttribute('hidden');
+    //    } else {
+    //        derivMarket.setAttribute('hidden', true);
+    //        derivPurpose.setAttribute('hidden', true);
+    //    }
+    //}
 })();
 
 $(function () {

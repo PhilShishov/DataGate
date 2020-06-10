@@ -34,7 +34,7 @@ namespace DataGate.Web.Dtos.Entities
 
         public string CalculationDate { get; set; }
 
-        public bool AreDerivatives { get; set; }
+        public string Derivatives { get; set; }
 
         public string DerivMarket { get; set; }
 
@@ -88,7 +88,7 @@ namespace DataGate.Web.Dtos.Entities
             this.NavFrequency = reader["FREQUENCY"] as string;
             this.ValuationDate = reader["VALUATION DATE"] as string;
             this.CalculationDate = reader["CALCULATION DATE"] as string;
-            this.AreDerivatives = (bool)reader["DERIVATIVES"];
+            this.Derivatives = reader["DERIVATIVES"] as string;
             this.DerivMarket = reader["DERIV. MARKET"] as string;
             this.DerivPurpose = reader["DERIV. PURPOSE"] as string;
             this.PrincipalAssetClass = reader["PRINCIPAL ASSET CLASS"] as string;
