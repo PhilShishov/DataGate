@@ -3,7 +3,6 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    using AutoMapper;
     using DataGate.Services.Mapping;
     using DataGate.Web.Dtos.Entities;
 
@@ -56,7 +55,6 @@
         [Display(Name = "Calculation Date")]
         public string CalculationDate { get; set; }
 
-        [Display(Name = "Derivatives")]
         public string Derivatives { get; set; }
 
         [Display(Name = "Derivatives")]

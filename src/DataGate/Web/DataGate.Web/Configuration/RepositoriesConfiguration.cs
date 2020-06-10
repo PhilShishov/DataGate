@@ -18,6 +18,7 @@
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
             services.AddScoped<ISqlQueryManager, SqlQueryManager>();
             services.AddScoped<ISubFundRepository, SubFundRepository>();
+            services.AddScoped<IShareClassRepository, ShareClassRepository>();
 
             return services;
         }

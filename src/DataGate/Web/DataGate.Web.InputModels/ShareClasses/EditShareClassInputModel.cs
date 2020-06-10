@@ -3,10 +3,13 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class EditShareClassInputModel : BaseEntityInputModel
+    using DataGate.Services.Mapping;
+    using DataGate.Web.Dtos.Entities;
+
+    public class EditShareClassInputModel : BaseEntityInputModel, IMapFrom<EditShareClassGetDto>
     {
-        [Display(Name = "Share Class Id")]
-        public int ShareClassId { get; set; }
+        [Display(Name = "Id")]
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "You must enter a value for the ShareClass Name!")]
         [StringLength(200, ErrorMessage = "The ShareClass Name must be no longer than 200 characters")]
@@ -49,10 +52,14 @@
         public string AccountingCode { get; set; }
 
         [Display(Name = "Hedged")]
-        public string IsHedged { get; set; }
+        public bool IsHedged { get; set; } = false;
+
+        public string Hedged { get; set; }
 
         [Display(Name = "Listed")]
-        public string IsListed { get; set; }
+        public bool IsListed { get; set; } = false;
+
+        public string Listed { get; set; }
 
         [Display(Name = "Bloomberg Market")]
         public string BloombergMarket { get; set; }
