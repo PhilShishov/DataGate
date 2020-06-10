@@ -17,12 +17,12 @@
 
         Task<int> GetByIdStatus(string status);
 
-        Task<int> GetByIdLegalForm(string legalForm);
+        Task<int?> GetByIdLegalForm(string legalForm);
 
-        Task<int> GetByIdLegalVehicle(string legalVehicle);
+        Task<int?> GetByIdLegalVehicle(string legalVehicle);
 
-        Task<int> GetByIdLegalType(string legalType);
+        Task<int?> GetByIdLegalType(string legalType);
 
-        Task<int> GetByIdCompanyType(string companyTypeDesc);
+        Task<int?> GetByIdCompanyType(string companyTypeDesc);
     }
 }

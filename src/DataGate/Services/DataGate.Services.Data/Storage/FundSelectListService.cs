@@ -56,7 +56,7 @@
               .Select(tb => tb.LvAcronym)
               .ToList();
 
-        public async Task<int> GetByIdCompanyType(string companyTypeDesc)
+        public async Task<int?> GetByIdCompanyType(string companyTypeDesc)
         {
             // Split to take only companyTypeDesc for comparing
             string companyTypeDescSplitted = companyTypeDesc.Split(" - ").FirstOrDefault();
@@ -67,7 +67,7 @@
                         .FirstOrDefaultAsync();
         }
 
-        public async Task<int> GetByIdLegalForm(string legalForm)
+        public async Task<int?> GetByIdLegalForm(string legalForm)
         {
             return await this.repositoryLegalForm.All()
                          .Where(lf => lf.LfAcronym == legalForm)
@@ -75,7 +75,7 @@
                          .FirstOrDefaultAsync();
         }
 
-        public async Task<int> GetByIdLegalType(string legalType)
+        public async Task<int?> GetByIdLegalType(string legalType)
         {
             return await this.repositoryLegalType.All()
                          .Where(lt => lt.LtAcronym == legalType)
@@ -83,7 +83,7 @@
                          .FirstOrDefaultAsync();
         }
 
-        public async Task<int> GetByIdLegalVehicle(string legalVehicle)
+        public async Task<int?> GetByIdLegalVehicle(string legalVehicle)
         {
             return await this.repositoryLegalVehicle.All()
                         .Where(lv => lv.LvAcronym == legalVehicle)

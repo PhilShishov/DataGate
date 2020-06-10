@@ -177,11 +177,42 @@ namespace DataGate.Services.SqlClient
 
         private void SetParametersForDB(SqlCommand command)
         {
+            var typeInt = DbType.Int32;
+            var typeString = DbType.String;
+            var typeDatetime = DbType.DateTime;
+            var typeBinary = DbType.Binary;
+
             foreach (SqlParameter parameter in command.Parameters)
             {
                 if (parameter.Value == null)
                 {
                     parameter.Value = DBNull.Value;
+                    continue;
+                }
+
+                try
+                {
+                    if (parameter.DbType == typeInt)
+                    {
+                        if ((int?)parameter.Value <= 0)
+                        {
+                            parameter.Value = DBNull.Value;
+                            continue;
+                        }
+                    }
+
+                    if (parameter.DbType == typeString)
+                    {
+                        if (string.IsNullOrEmpty((string)parameter.Value))
+                        {
+                            parameter.Value = DBNull.Value;
+                            continue;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message); 
                 }
             }
         }
