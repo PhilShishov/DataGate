@@ -92,8 +92,8 @@
                                 }
                             }
                         </select>
-                        <span asp-validation-for="DerivMarket" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="DerivMarket" class="text-danger"></span>
 
                     <div class="form-group" id="derivPurpose" hidden>
                         <label asp-for="DerivPurpose"
@@ -113,8 +113,8 @@
                                 }
                             }
                         </select>
-                        <span asp-validation-for="DerivPurpose" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="DerivPurpose" class="text-danger"></span>
 
                 </div>
 
@@ -213,8 +213,26 @@
                                 }
                             }
                         </select>
-                        <span asp-validation-for="Status" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                    <div class="form-group">
+                        <label asp-for="CurrencyCode" class="text-torshia"></label><br>
+                        <select class="select-pharus" asp-for="CurrencyCode">
+                            <option selected disabled>-- Choose Currency --</option>
+                            @foreach (var currency in (List<string>)ViewData["CurrencyCode"])
+                            {
+                                if (currency == Model.CurrencyCode)
+                                {
+                                    <option selected value="@currency">@currency</option>
+                                }
+                                else
+                                {
+                                    <option value="@currency">@currency</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <span asp-validation-for="CurrencyCode" class="text-danger"></span>
                     <div class="form-group">
                         <label asp-for="CesrClass" class="text-torshia"></label><br>
                         <select class="select-pharus" asp-for="CesrClass">
@@ -231,8 +249,8 @@
                                 }
                             }
                         </select>
-                        <span asp-validation-for="CesrClass" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="CesrClass" class="text-danger"></span>
 
                     <div class="form-group">
                         <label asp-for="GeographicalFocus" class="text-torshia"></label><br>
@@ -250,8 +268,8 @@
                                 }
                             }
                         </select>
-                        <span asp-validation-for="GeographicalFocus" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="GeographicalFocus" class="text-danger"></span>
 
                     <div class="form-group">
                         <label asp-for="GlobalExposure" class="text-torshia"></label><br>
@@ -269,27 +287,8 @@
                                 }
                             }
                         </select>
-                        <span asp-validation-for="GlobalExposure" class="text-danger"></span>
                     </div>
-
-                    <div class="form-group">
-                        <label asp-for="CurrencyCode" class="text-torshia"></label><br>
-                        <select class="select-pharus" asp-for="CurrencyCode">
-                            <option selected disabled>-- Choose Currency --</option>
-                            @foreach (var currency in (List<string>)ViewData["CurrencyCode"])
-                            {
-                                if (currency == Model.CurrencyCode)
-                                {
-                                    <option selected value="@currency">@currency</option>
-                                }
-                                else
-                                {
-                                    <option value="@currency">@currency</option>
-                                }
-                            }
-                        </select>
-                        <span asp-validation-for="CurrencyCode" class="text-danger"></span>
-                    </div>
+                    <span asp-validation-for="GlobalExposure" class="text-danger"></span>
 
                     <div class="form-group">
                         <label asp-for="NavFrequency" class="text-torshia"></label><br>
@@ -307,8 +306,8 @@
                                 }
                             }
                         </select>
-                        <span asp-validation-for="NavFrequency" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="NavFrequency" class="text-danger"></span>
 
                     <div class="form-group">
                         <label asp-for="ValuationDate" class="text-torshia"></label><br>
@@ -326,8 +325,8 @@
                                 }
                             }
                         </select>
-                        <span asp-validation-for="ValuationDate" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="ValuationDate" class="text-danger"></span>
 
                     <div class="form-group">
                         <label asp-for="CalculationDate" class="text-torshia"></label><br>
@@ -345,8 +344,8 @@
                                 }
                             }
                         </select>
-                        <span asp-validation-for="CalculationDate" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="CalculationDate" class="text-danger"></span>
 
 
 
@@ -366,8 +365,8 @@
                                 }
                             }
                         </select>
-                        <span asp-validation-for="PrincipalAssetClass" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="PrincipalAssetClass" class="text-danger"></span>
 
                     <div class="form-group">
                         <label asp-for="TypeOfMarket" class="text-torshia"></label><br>
@@ -385,8 +384,8 @@
                                 }
                             }
                         </select>
-                        <span asp-validation-for="TypeOfMarket" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="TypeOfMarket" class="text-danger"></span>
 
                     <div class="form-group">
                         <label asp-for="PrincipalInvestmentStrategy" class="text-torshia"></label><br>
@@ -404,8 +403,8 @@
                                 }
                             }
                         </select>
-                        <span asp-validation-for="PrincipalInvestmentStrategy" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="PrincipalInvestmentStrategy" class="text-danger"></span>
 
 
                     <div class="form-group">
@@ -424,8 +423,8 @@
                                 }
                             }
                         </select>
-                        <span asp-validation-for="SfCatMorningStar" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="SfCatMorningStar" class="text-danger"></span>
 
                     <div class="form-group">
                         <label asp-for="SfCatSix" class="text-torshia"></label><br>
@@ -443,8 +442,8 @@
                                 }
                             }
                         </select>
-                        <span asp-validation-for="SfCatSix" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="SfCatSix" class="text-danger"></span>
 
                     <div class="form-group">
                         <label asp-for="SfCatBloomberg" class="text-torshia"></label><br>
@@ -462,8 +461,8 @@
                                 }
                             }
                         </select>
-                        <span asp-validation-for="SfCatBloomberg" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="SfCatBloomberg" class="text-danger"></span>
 
 
                 </div>
@@ -471,15 +470,15 @@
 
             <div class="button-holder my-4">
                 <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
+                <a class="btn btn-pharus btn-lg" asp-area="@GlobalConstants.SubFundAreaName" asp-route="@GlobalConstants.AllSubFundsRouteName">
+                    @SharedLocalizer["Back to List"]
+                </a>
                 <button type="submit"
                         class="btn btn-pharus btn-lg btn-confirm-update"
                         name="update_button"
                         style="margin-right:40px">
                     @SharedLocalizer["Update Sub Fund"]
                 </button>
-                <a class="btn btn-pharus btn-lg" asp-area="@GlobalConstants.SubFundAreaName" asp-route="@GlobalConstants.AllSubFundsRouteName">
-                    @SharedLocalizer["Back to List"]
-                </a>
             </div>
         </form>
     </div>

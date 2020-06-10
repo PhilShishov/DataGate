@@ -65,6 +65,56 @@
                                class="form-control ">
                         <span asp-validation-for="ExpiryDate" class="text-danger"></span>
                     </div>
+
+                    <div class="form-group d-flex justify-content-center">
+                        <label asp-for="AreDerivatives"></label><br>
+                        <input id="derivatives"
+                               type="checkbox"
+                               asp-for="AreDerivatives"
+                               class="checkbox-lg mt-1 ml-2">
+                    </div>
+
+                    <div class="form-group" id="derivMarket" hidden>
+                        <label asp-for="DerivMarket"
+                               class="text-torshia"></label><br>
+                        <select class="select-pharus"
+                                asp-for="DerivMarket">
+                            <option selected disabled>-- Choose Market --</option>
+                            @foreach (var market in (List<string>)ViewData["DerivMarket"])
+                            {
+                                if (market == Model.DerivMarket)
+                                {
+                                    <option selected value="@market">@market</option>
+                                }
+                                else
+                                {
+                                    <option value="@market">@market</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <span asp-validation-for="DerivMarket" class="text-danger"></span>
+
+                    <div class="form-group" id="derivPurpose" hidden>
+                        <label asp-for="DerivPurpose"
+                               class="text-torshia"></label><br>
+                        <select class="select-pharus"
+                                asp-for="DerivPurpose">
+                            <option selected disabled>-- Choose Purpose --</option>
+                            @foreach (var purpose in (List<string>)ViewData["DerivPurpose"])
+                            {
+                                if (purpose == Model.DerivPurpose)
+                                {
+                                    <option selected value="@purpose">@purpose</option>
+                                }
+                                else
+                                {
+                                    <option value="@purpose">@purpose</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <span asp-validation-for="DerivPurpose" class="text-danger"></span>
                 </div>
 
                 <div class="column-form">
@@ -129,39 +179,6 @@
                                id="leiCodeInput">
                         <span asp-validation-for="ClearingCode" class="text-danger"></span>
                     </div>
-
-                    <div class="form-group">
-                        <label asp-for="AreDerivatives" class="text-torshia"></label><br>
-                        <input id="derivatives" type="checkbox" asp-for="AreDerivatives">
-                    </div>
-
-                    <div class="form-group" id="derivMarket" hidden>
-                        <label asp-for="DerivMarket"
-                               class="text-torshia"></label><br>
-                        <select class="select-pharus"
-                                asp-for="DerivMarket">
-                            <option selected disabled>-- Choose Market --</option>
-                            @foreach (var market in (List<string>)ViewData["DerivMarket"])
-                            {
-                                <option value="@market">@market</option>
-                            }
-                        </select>
-                        <span asp-validation-for="DerivMarket" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group" id="derivPurpose" hidden>
-                        <label asp-for="DerivPurpose"
-                               class="text-torshia"></label><br>
-                        <select class="select-pharus"
-                                asp-for="DerivPurpose">
-                            <option selected disabled>-- Choose Purpose --</option>
-                            @foreach (var purpose in (List<string>)ViewData["DerivPurpose"])
-                            {
-                                <option value="@purpose">@purpose</option>
-                            }
-                        </select>
-                        <span asp-validation-for="DerivPurpose" class="text-danger"></span>
-                    </div>
                 </div>
 
                 <div class="column-form">
@@ -174,8 +191,8 @@
                                 <option value="@container">@container</option>
                             }
                         </select>
-                        <span asp-validation-for="FundContainer" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="FundContainer" class="text-danger"></span>
                     <div class="form-group">
                         <label asp-for="Status" class="text-torshia"></label><br>
                         <select class="select-pharus" asp-for="Status">
@@ -185,8 +202,19 @@
                                 <option value="@status">@status</option>
                             }
                         </select>
-                        <span asp-validation-for="Status" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                    <div class="form-group">
+                        <label asp-for="CurrencyCode" class="text-torshia"></label><br>
+                        <select class="select-pharus" asp-for="CurrencyCode">
+                            <option selected disabled>-- Choose Currency --</option>
+                            @foreach (var currency in (List<string>)ViewData["CurrencyCode"])
+                            {
+                                <option value="@currency">@currency</option>
+                            }
+                        </select>
+                    </div>
+                    <span asp-validation-for="CurrencyCode" class="text-danger"></span>
                     <div class="form-group">
                         <label asp-for="CesrClass" class="text-torshia"></label><br>
                         <select class="select-pharus" asp-for="CesrClass">
@@ -196,9 +224,8 @@
                                 <option value="@cesr">@cesr</option>
                             }
                         </select>
-                        <span asp-validation-for="CesrClass" class="text-danger"></span>
                     </div>
-
+                    <span asp-validation-for="CesrClass" class="text-danger"></span>
                     <div class="form-group">
                         <label asp-for="GeographicalFocus" class="text-torshia"></label><br>
                         <select class="select-pharus" asp-for="GeographicalFocus">
@@ -208,8 +235,8 @@
                                 <option value="@focus">@focus</option>
                             }
                         </select>
-                        <span asp-validation-for="GeographicalFocus" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="GeographicalFocus" class="text-danger"></span>
 
                     <div class="form-group">
                         <label asp-for="GlobalExposure" class="text-torshia"></label><br>
@@ -220,20 +247,8 @@
                                 <option value="@expo">@expo</option>
                             }
                         </select>
-                        <span asp-validation-for="GlobalExposure" class="text-danger"></span>
                     </div>
-
-                    <div class="form-group">
-                        <label asp-for="CurrencyCode" class="text-torshia"></label><br>
-                        <select class="select-pharus" asp-for="CurrencyCode">
-                            <option selected disabled>-- Choose Currency --</option>
-                            @foreach (var currency in (List<string>)ViewData["CurrencyCode"])
-                            {
-                                <option value="@currency">@currency</option>
-                            }
-                        </select>
-                        <span asp-validation-for="CurrencyCode" class="text-danger"></span>
-                    </div>
+                    <span asp-validation-for="GlobalExposure" class="text-danger"></span>
 
                     <div class="form-group">
                         <label asp-for="NavFrequency" class="text-torshia"></label><br>
@@ -244,8 +259,8 @@
                                 <option value="@frequency">@frequency</option>
                             }
                         </select>
-                        <span asp-validation-for="NavFrequency" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="NavFrequency" class="text-danger"></span>
 
                     <div class="form-group">
                         <label asp-for="ValuationDate" class="text-torshia"></label><br>
@@ -256,8 +271,8 @@
                                 <option value="@date">@date</option>
                             }
                         </select>
-                        <span asp-validation-for="ValuationDate" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="ValuationDate" class="text-danger"></span>
 
                     <div class="form-group">
                         <label asp-for="CalculationDate" class="text-torshia"></label><br>
@@ -268,8 +283,8 @@
                                 <option value="@date">@date</option>
                             }
                         </select>
-                        <span asp-validation-for="CalculationDate" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="CalculationDate" class="text-danger"></span>
 
                     <div class="form-group">
                         <label asp-for="PrincipalAssetClass" class="text-torshia"></label><br>
@@ -280,8 +295,8 @@
                                 <option value="@pac">@pac</option>
                             }
                         </select>
-                        <span asp-validation-for="PrincipalAssetClass" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="PrincipalAssetClass" class="text-danger"></span>
 
                     <div class="form-group">
                         <label asp-for="TypeOfMarket" class="text-torshia"></label><br>
@@ -292,8 +307,8 @@
                                 <option value="@type">@type</option>
                             }
                         </select>
-                        <span asp-validation-for="TypeOfMarket" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="TypeOfMarket" class="text-danger"></span>
 
                     <div class="form-group">
                         <label asp-for="PrincipalInvestmentStrategy" class="text-torshia"></label><br>
@@ -304,8 +319,8 @@
                                 <option value="@strategy">@strategy</option>
                             }
                         </select>
-                        <span asp-validation-for="PrincipalInvestmentStrategy" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="PrincipalInvestmentStrategy" class="text-danger"></span>
                     <div class="form-group">
                         <label asp-for="SfCatMorningStar" class="text-torshia"></label><br>
                         <select class="select-pharus" asp-for="SfCatMorningStar">
@@ -315,8 +330,8 @@
                                 <option value="@ms">@ms</option>
                             }
                         </select>
-                        <span asp-validation-for="SfCatMorningStar" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="SfCatMorningStar" class="text-danger"></span>
 
                     <div class="form-group">
                         <label asp-for="SfCatSix" class="text-torshia"></label><br>
@@ -327,8 +342,8 @@
                                 <option value="@six">@six</option>
                             }
                         </select>
-                        <span asp-validation-for="SfCatSix" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="SfCatSix" class="text-danger"></span>
 
                     <div class="form-group">
                         <label asp-for="SfCatBloomberg" class="text-torshia"></label><br>
@@ -339,23 +354,21 @@
                                 <option value="@bg">@bg</option>
                             }
                         </select>
-                        <span asp-validation-for="SfCatBloomberg" class="text-danger"></span>
                     </div>
+                    <span asp-validation-for="SfCatBloomberg" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="button-holder my-4">
                 <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
-
+                <a class="btn btn-pharus btn-lg" asp-area="@GlobalConstants.SubFundAreaName" asp-route="@GlobalConstants.AllSubFundsRouteName">
+                    @SharedLocalizer["Back to List"]
+                </a>
                 <button type="submit"
                         class="btn btn-pharus btn-lg btn-confirm-create"
                         style="margin-right:40px">
                     @SharedLocalizer["Create SubFund"]
                 </button>
-
-                <a class="btn btn-pharus btn-lg" asp-area="@GlobalConstants.SubFundAreaName" asp-route="@GlobalConstants.AllSubFundsRouteName">
-                    @SharedLocalizer["Back to List"]
-                </a>
             </div>
         </form>
     </div>

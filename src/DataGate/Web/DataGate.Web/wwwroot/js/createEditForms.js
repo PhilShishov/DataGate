@@ -166,30 +166,6 @@ const MESSAGES = {
             }
         })
     }
-
-    //if (deriv) {
-    //    console.log('here');
-    //    if (deriv.value == 'Yes') {
-    //        console.log('here');
-    //        derivMarket.removeAttribute('hidden');
-    //        derivPurpose.removeAttribute('hidden');
-    //    } else {
-    //        derivMarket.setAttribute('hidden', true);
-    //        derivPurpose.setAttribute('hidden', true);
-    //    }
-
-    //    deriv.addEventListener('change', openDeriv);
-    //}
-
-    //function openDeriv() {
-    //    if (deriv.options[deriv.selectedIndex].text === 'Yes') {
-    //        derivMarket.removeAttribute('hidden');
-    //        derivPurpose.removeAttribute('hidden');
-    //    } else {
-    //        derivMarket.setAttribute('hidden', true);
-    //        derivPurpose.setAttribute('hidden', true);
-    //    }
-    //}
 })();
 
 $(function () {

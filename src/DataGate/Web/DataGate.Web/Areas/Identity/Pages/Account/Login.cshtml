@@ -17,8 +17,7 @@
                     <h2 class="login-title">Login</h2>
                     <div class="fxt-form">
                         <form method="POST">
-                            <div class="form-group col-md-12">
-                                <label class="label-input-login">@SharedLocalizer["Username"]</label>
+                            <div class="form-group col-md-12 my-4">
                                 <div class="fxt-transformY-50 fxt-transition-delay-1">
                                     <input type="text"
                                            asp-for="Input.Username"
@@ -30,8 +29,7 @@
                                     <span asp-validation-for="Input.Username" class="text-danger d-flex justify-content-center"></span>
                                 </div>
                             </div>
-                            <div class="form-group col-md-12">
-                                <label class="label-input-login">@SharedLocalizer["Password"]</label>
+                            <div class="form-group col-md-12 mb-5">
                                 <div class="fxt-transformY-50 fxt-transition-delay-2">
                                     <input type="password"
                                            asp-for="Input.Password"
@@ -43,28 +41,24 @@
                                     <partial name="_ErrorMessage" model="Model.ErrorMessage" />
                                 </div>
                             </div>
-                            <div class="form-group col-md-12">
-                                <div class="fxt-transformY-50 fxt-transition-delay-3">
-                                    <div class="fxt-checkbox-area">
-                                        <div class="checkbox">
-                                            <input id="checkbox1" type="checkbox" asp-for="Input.RememberMe">
-                                            <label for="checkbox1" asp-for="Input.RememberMe">@SharedLocalizer["Remember me ?"]</label>
-                                        </div>
-                                        <a asp-area="Identity"
-                                           asp-page="/Account/ForgotPassword"
-                                           class="switcher-text">@SharedLocalizer["Forgot Password"]</a>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="form-group col-md-6 col-lg-6 col-sm-12 col-xs-12">
                                 <div class="fxt-transformY-50 fxt-transition-delay-4">
                                     <input type="hidden" id="RecaptchaValue" asp-for="Input.RecaptchaValue" />
                                     <button type="submit"
-                                            class="fxt-btn-fill"
+                                            class="btn"
                                             asp-area="Identity"
                                             asp-page="/Account/Login">
-                                        Login
+                                        @SharedLocalizer["LOGIN"]
                                     </button>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <div class="fxt-transformY-50 fxt-transition-delay-3">
+                                    <div class="fxt-checkbox-area">
+                                        <a asp-area="Identity"
+                                           asp-page="/Account/ForgotPassword"
+                                           class="switcher-text">@SharedLocalizer["Forgot Password"]</a>
+                                    </div>
                                 </div>
                             </div>
                         </form>

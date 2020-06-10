@@ -87,11 +87,15 @@
                   .FirstOrDefaultAsync();
 
             await this.SetForeignKeys(dto, dtoForeignKey);
-            SqlCommand command = this.AssignBaseParameters(dto, SqlProcedureDictionary.EditSubFund);
+            SqlCommand command = this.AssignBaseParameters(dto, SqlProcedureDictionary.CreateSubFund);
 
             // Assign particular parameters
-            new SqlParameter("@fundcontainer", SqlDbType.Int) { Value = dto.ContainerId };
-            new SqlParameter("@sf_endDate", SqlDbType.NVarChar) { Value = dto.EndDate };
+            // Assign particular parameters
+            command.Parameters.AddRange(new[]
+                   {
+                             new SqlParameter("@fundcontainer", SqlDbType.Int) { Value = dto.ContainerId },
+                             new SqlParameter("@sf_endDate", SqlDbType.NVarChar) { Value = dto.EndDate },
+                   });
 
             await this.sqlManager.ExecuteProcedure(command);
 
@@ -137,6 +141,7 @@
                         new SqlParameter("@sf_officialSubFundName", SqlDbType.NVarChar) { Value = dto.SubFundName },
                         new SqlParameter("@sf_cssfCode", SqlDbType.NVarChar) { Value = dto.CSSFCode },
                         new SqlParameter("@sf_faCode", SqlDbType.NVarChar) { Value = dto.FACode },
+                        new SqlParameter("@sf_taCode", SqlDbType.NVarChar) { Value = dto.TACode },
                         new SqlParameter("@sf_depCode", SqlDbType.NVarChar) { Value = dto.DBCode },
                         new SqlParameter("@sf_firstNavDate", SqlDbType.NVarChar) { Value = dto.FirstNavDate },
                         new SqlParameter("@sf_lastNavDate", SqlDbType.NVarChar) { Value = dto.LastNavDate },
