@@ -7,23 +7,14 @@
 }
 <div class="push">
     <div class="d-flex justify-content-center text-center">
-        <h4>@SharedLocalizer["Edit Fund"] @Model.FundName</h4>
-        <form asp-area="Admin"
-              asp-controller="FundStorage"
+        <form asp-controller="FundStorage"
               asp-action="Edit"
-              method="post">
+              method="post"
+              class="d-inline w-75">
+            <h4 class="mb-5">@SharedLocalizer["Edit Fund"] @Model.FundName</h4>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="d-inline" id="div-inputs-to-format">
-
-                <div class="form-group">
-                    <label asp-for="InitialDate" class="text-torshia"></label><br>
-                    <input asp-for="InitialDate"
-                           type="date"
-                           class="form-control ">
-                    <span asp-validation-for="InitialDate" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
+                <div class="form-group" hidden>
                     <label asp-for="Id" class="text-torshia"></label><br>
                     <input type="text"
                            class="form-control "
@@ -32,192 +23,201 @@
                     <span asp-validation-for="Id" class="text-danger"></span>
                 </div>
 
-                <div class="form-group">
-                    <label asp-for="FundName" class="text-torshia"></label><br>
-                    <input type="text"
-                           class="form-control "
-                           asp-for="FundName">
-                    <span asp-validation-for="FundName" class="text-danger"></span>
+                <div class="column-form">
+                    <div class="form-group">
+                        <label asp-for="InitialDate" class="text-torshia"></label><br>
+                        <input asp-for="InitialDate"
+                               type="date"
+                               class="form-control ">
+                        <span asp-validation-for="InitialDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FundName" class="text-torshia"></label><br>
+                        <input type="text"
+                               class="form-control "
+                               asp-for="FundName">
+                        <span asp-validation-for="FundName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CSSFCode" class="text-torshia"></label><br>
+                        <input type="text"
+                               class="form-control "
+                               asp-for="CSSFCode">
+                        <span asp-validation-for="CSSFCode" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="LEICode" class="text-torshia"></label><br>
+                        <input type="text"
+                               class="form-control "
+                               asp-for="LEICode">
+                        <span asp-validation-for="LEICode" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TinNumber" class="text-torshia"></label><br>
+                        <input type="text"
+                               class="form-control "
+                               asp-for="TinNumber">
+                        <span asp-validation-for="TinNumber" class="text-danger"></span>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label asp-for="CSSFCode" class="text-torshia"></label><br>
-                    <input type="text"
-                           class="form-control "
-                           asp-for="CSSFCode">
-                    <span asp-validation-for="CSSFCode" class="text-danger"></span>
-                </div>
+                <div class="column-form">
+                    <div class="form-group">
+                        <label asp-for="FACode" class="text-torshia"></label><br>
+                        <input type="text"
+                               class="form-control "
+                               asp-for="FACode">
+                        <span asp-validation-for="FACode" class="text-danger"></span>
+                    </div>
 
-                <div class="form-group">
-                    <label asp-for="Status" class="text-torshia"></label><br>
-                    <select class="select-pharus" asp-for="Status">
-                        @foreach (var status in (List<string>)ViewData["Status"])
-                        {
-                            if (status == Model.Status)
-                            {
-                                <option selected value="@status">@status</option>
-                            }
-                            else
-                            {
-                                <option value="@status">@status</option>
-                            }
-                        }
-                    </select>
-                    <span asp-validation-for="Status" class="text-danger"></span>
-                </div>
+                    <div class="form-group">
+                        <label asp-for="DEPCode" class="text-torshia"></label><br>
+                        <input type="text"
+                               class="form-control "
+                               asp-for="DEPCode">
+                        <span asp-validation-for="DEPCode" class="text-danger"></span>
+                    </div>
 
-                <div class="form-group">
-                    <label asp-for="LegalForm" class="text-torshia"></label><br>
-                    <select class="select-pharus" asp-for="LegalForm">
-                        @foreach (var form in (List<string>)ViewData["LegalForm"])
-                        {
-                            if (form == Model.LegalForm)
-                            {
-                                <option selected value="@form">@form</option>
-                            }
-                            else
-                            {
-                                <option value="@form">@form</option>
-                            }
-                        }
-                    </select>
-                    <span asp-validation-for="LegalForm" class="text-danger"></span>
-                </div>
+                    <div class="form-group">
+                        <label asp-for="TACode" class="text-torshia"></label><br>
+                        <input type="text"
+                               class="form-control "
+                               asp-for="TACode">
+                        <span asp-validation-for="TACode" class="text-danger"></span>
+                    </div>
 
-                <div class="form-group">
-                    <label asp-for="LegalVehicle" class="text-torshia"></label><br>
-                    <select class="select-pharus" asp-for="LegalVehicle">
-                        @foreach (var vehicle in (List<string>)ViewData["LegalVehicle"])
-                        {
-                            if (vehicle == Model.LegalVehicle)
-                            {
-                                <option selected value="@vehicle">@vehicle</option>
-                            }
-                            else
-                            {
-                                <option value="@vehicle">@vehicle</option>
-                            }
-                        }
-                    </select>
-                    <span asp-validation-for="LegalVehicle" class="text-danger"></span>
-                </div>
+                    <div class="form-group">
+                        <label asp-for="RegNumber" class="text-torshia"></label><br>
+                        <input type="text"
+                               class="form-control "
+                               asp-for="RegNumber">
+                        <span asp-validation-for="RegNumber" class="text-danger"></span>
+                    </div>
 
-                <div class="form-group">
-                    <label asp-for="LegalType" class="text-torshia"></label><br>
-                    <select class="select-pharus" asp-for="LegalType">
-                        @foreach (var type in (List<string>)ViewData["LegalType"])
-                        {
-                            if (type == Model.LegalType)
-                            {
-                                <option selected value="@type">@type</option>
-                            }
-                            else
-                            {
-                                <option value="@type">@type</option>
-                            }
-                        }
-                    </select>
-                    <span asp-validation-for="LegalType" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="FACode" class="text-torshia"></label><br>
-                    <input type="text"
-                           class="form-control "
-                           asp-for="FACode">
-                    <span asp-validation-for="FACode" class="text-danger"></span>
-                </div>
+                    <div class="form-group">
+                        <label asp-for="CommentTitle" class="text-torshia"></label><br>
+                        <input type="text"
+                               class="form-control "
+                               asp-for="CommentTitle">
+                        <span asp-validation-for="CommentTitle" class="text-danger"></span>
+                    </div>
 
-                <div class="form-group">
-                    <label asp-for="DEPCode" class="text-torshia"></label><br>
-                    <input type="text"
-                           class="form-control "
-                           asp-for="DEPCode">
-                    <span asp-validation-for="DEPCode" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="TACode" class="text-torshia"></label><br>
-                    <input type="text"
-                           class="form-control "
-                           asp-for="TACode">
-                    <span asp-validation-for="TACode" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="CompanyTypeDesc" class="text-torshia"></label><br>
-                    <select class="select-pharus" asp-for="CompanyTypeDesc">
-                        @foreach (var desc in (List<string>)ViewData["CompanyTypeDesc"])
-                        {
-                            if (desc == Model.CompanyTypeDesc)
-                            {
-                                <option selected value="@desc">@desc</option>
-                            }
-                            else
-                            {
-                                <option value="@desc">@desc</option>
-                            }
-                        }
-                    </select>
-                    <span asp-validation-for="CompanyTypeDesc" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="TinNumber" class="text-torshia"></label><br>
-                    <input type="text"
-                           class="form-control "
-                           asp-for="TinNumber">
-                    <span asp-validation-for="TinNumber" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="LEICode" class="text-torshia"></label><br>
-                    <input type="text"
-                           class="form-control "
-                           asp-for="LEICode">
-                    <span asp-validation-for="LEICode" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="RegNumber" class="text-torshia"></label><br>
-                    <input type="text"
-                           class="form-control "
-                           asp-for="RegNumber">
-                    <span asp-validation-for="RegNumber" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="CommentTitle" class="text-torshia"></label><br>
-                    <input type="text"
-                           class="form-control "
-                           asp-for="CommentTitle">
-                    <span asp-validation-for="CommentTitle" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="CommentArea" class="text-torshia"></label><br>
-                    <textarea class="form-control "
-                              asp-for="CommentArea">
+                    <div class="form-group">
+                        <label asp-for="CommentArea" class="text-torshia"></label><br>
+                        <textarea class="form-control "
+                                  asp-for="CommentArea">
                 </textarea>
-                    <span asp-validation-for="CommentArea" class="text-danger"></span>
+                        <span asp-validation-for="CommentArea" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="column-form">
+                    <div class="form-group">
+                        <label asp-for="Status" class="text-torshia"></label><br>
+                        <select class="select-pharus" asp-for="Status">
+                            @foreach (var status in (List<string>)ViewData["Status"])
+                            {
+                                if (status == Model.Status)
+                                {
+                                    <option selected value="@status">@status</option>
+                                }
+                                else
+                                {
+                                    <option value="@status">@status</option>
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="Status" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LegalForm" class="text-torshia"></label><br>
+                        <select class="select-pharus" asp-for="LegalForm">
+                            @foreach (var form in (List<string>)ViewData["LegalForm"])
+                            {
+                                if (form == Model.LegalForm)
+                                {
+                                    <option selected value="@form">@form</option>
+                                }
+                                else
+                                {
+                                    <option value="@form">@form</option>
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="LegalForm" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LegalVehicle" class="text-torshia"></label><br>
+                        <select class="select-pharus" asp-for="LegalVehicle">
+                            @foreach (var vehicle in (List<string>)ViewData["LegalVehicle"])
+                            {
+                                if (vehicle == Model.LegalVehicle)
+                                {
+                                    <option selected value="@vehicle">@vehicle</option>
+                                }
+                                else
+                                {
+                                    <option value="@vehicle">@vehicle</option>
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="LegalVehicle" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="LegalType" class="text-torshia"></label><br>
+                        <select class="select-pharus" asp-for="LegalType">
+                            @foreach (var type in (List<string>)ViewData["LegalType"])
+                            {
+                                if (type == Model.LegalType)
+                                {
+                                    <option selected value="@type">@type</option>
+                                }
+                                else
+                                {
+                                    <option value="@type">@type</option>
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="LegalType" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CompanyTypeDesc" class="text-torshia"></label><br>
+                        <select class="select-pharus" asp-for="CompanyTypeDesc">
+                            @foreach (var desc in (List<string>)ViewData["CompanyTypeDesc"])
+                            {
+                                if (desc == Model.CompanyTypeDesc)
+                                {
+                                    <option selected value="@desc">@desc</option>
+                                }
+                                else
+                                {
+                                    <option value="@desc">@desc</option>
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="CompanyTypeDesc" class="text-danger"></span>
+                    </div>
                 </div>
             </div>
 
             <div class="button-holder my-4">
                 <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
                 <button type="submit"
-                        class="btn btn-pharus btn-sm mb-1 btn-confirm-update"
+                        class="btn btn-pharus btn-lg btn-confirm-update"
                         name="update_button"
                         style="margin-right:40px">
                     @SharedLocalizer["Update Fund"]
                 </button>
-                <a class="btn btn-pharus btn-sm" asp-area="@GlobalConstants.FundAreaName" asp-route="@GlobalConstants.AllFundsRouteName">
+                <a class="btn btn-pharus btn-lg" asp-area="@GlobalConstants.FundAreaName" asp-route="@GlobalConstants.AllFundsRouteName">
                     @SharedLocalizer["Back to List"]
                 </a>
             </div>
         </form>
     </div>
 </div>
-
 
 @section Scripts{
     <partial name="Scripts/_CreateEditScriptsPartial">

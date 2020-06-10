@@ -31,8 +31,13 @@
         public IActionResult Edit(int id, string date)
         {
             var model = this.service.GetByIdAndDate<EditSubFundInputModel>(id, date);
-            this.SetViewDataValues();
 
+            if (model.Derivatives == "Yes")
+            {
+                model.AreDerivatives = true;
+            }
+
+            this.SetViewDataValues();
             return this.View(model);
         }
 

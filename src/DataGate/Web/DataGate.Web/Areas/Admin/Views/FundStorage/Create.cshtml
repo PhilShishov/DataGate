@@ -6,54 +6,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@*mobile-view d-flex justify-content-center text-center*@
-
 <div class="push">
     <div class="d-flex justify-content-center text-center">
-        <form method="post" class="d-inline w-75">
-            <h4>@SharedLocalizer["Create New Pharus Fund"]</h4>
+        <form asp-controller="FundStorage"
+              asp-action="Create"
+              method="post"
+              class="d-inline w-75">
+            <h4 class="mb-5">@SharedLocalizer["Create New Pharus Fund"]</h4>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="d-inline" id="div-inputs-to-format">
 
-                <div class="column-form">
-                    <div class="form-group">
-                        <label asp-for="TinNumber" class="text-torshia"></label><br>
-                        <input type="text"
-                               class="form-control"
-                               asp-for="TinNumber">
-                        <span asp-validation-for="TinNumber" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="FACode" class="text-torshia"></label><br>
-                        <input type="text"
-                               class="form-control "
-                               asp-for="FACode">
-                        <span asp-validation-for="FACode" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="DEPCode" class="text-torshia"></label><br>
-                        <input type="text"
-                               class="form-control "
-                               asp-for="DEPCode">
-                        <span asp-validation-for="DEPCode" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="TACode" class="text-torshia"></label><br>
-                        <input type="text"
-                               class="form-control "
-                               asp-for="TACode">
-                        <span asp-validation-for="TACode" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="RegNumber" class="text-torshia"></label><br>
-                        <input type="text"
-                               class="form-control"
-                               asp-for="RegNumber">
-                        <span asp-validation-for="RegNumber" class="text-danger"></span>
-                    </div>
-                </div>
                 <div class="column-form">
                     <div class="form-group">
                         <label asp-for="InitialDate" class="text-torshia"></label><br>
@@ -95,6 +57,46 @@
                                class="form-control"
                                asp-for="LEICode">
                         <span asp-validation-for="LEICode" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="column-form">
+                    <div class="form-group">
+                        <label asp-for="TinNumber" class="text-torshia"></label><br>
+                        <input type="text"
+                               class="form-control"
+                               asp-for="TinNumber">
+                        <span asp-validation-for="TinNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="FACode" class="text-torshia"></label><br>
+                        <input type="text"
+                               class="form-control "
+                               asp-for="FACode">
+                        <span asp-validation-for="FACode" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="DEPCode" class="text-torshia"></label><br>
+                        <input type="text"
+                               class="form-control "
+                               asp-for="DEPCode">
+                        <span asp-validation-for="DEPCode" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="TACode" class="text-torshia"></label><br>
+                        <input type="text"
+                               class="form-control "
+                               asp-for="TACode">
+                        <span asp-validation-for="TACode" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="RegNumber" class="text-torshia"></label><br>
+                        <input type="text"
+                               class="form-control"
+                               asp-for="RegNumber">
+                        <span asp-validation-for="RegNumber" class="text-danger"></span>
                     </div>
                 </div>
 
@@ -161,11 +163,11 @@
             <div class="button-holder my-4">
                 <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
                 <button type="submit"
-                        class="btn btn-pharus btn-sm btn-confirm-create"
+                        class="btn btn-pharus btn-lg btn-confirm-create"
                         style="margin-right:40px">
                     @SharedLocalizer["Create Fund"]
                 </button>
-                <a class="btn btn-pharus btn-sm" asp-area="@GlobalConstants.FundAreaName" asp-route="@GlobalConstants.AllFundsRouteName">
+                <a class="btn btn-pharus btn-lg" asp-area="@GlobalConstants.FundAreaName" asp-route="@GlobalConstants.AllFundsRouteName">
                     @SharedLocalizer["Back to List"]
                 </a>
             </div>

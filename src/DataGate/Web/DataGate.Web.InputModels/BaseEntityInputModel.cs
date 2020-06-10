@@ -17,8 +17,8 @@ namespace DataGate.Web.InputModels
 
     public abstract class BaseEntityInputModel
     {
-        [Required(ErrorMessage = "Initial Date cannot be empty")]
-        [Display(Name = "Initial Date")]
+        [Required(ErrorMessage = "Valid From cannot be empty")]
+        [Display(Name = "Valid From")]
         public DateTime InitialDate { get; set; }
 
         [RegularExpression(@"^[A-Z0-9_]+$", ErrorMessage = "Not in correct format!")]

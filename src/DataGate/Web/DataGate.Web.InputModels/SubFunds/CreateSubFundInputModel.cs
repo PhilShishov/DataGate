@@ -22,7 +22,7 @@
         [Display(Name = "Depository Bank Code")]
         public string DBCode { get; set; }
 
-        [Display(Name = "End Date")]
+        [Display(Name = "Valid Until")]
         public DateTime? EndDate { get; set; }
 
         [Display(Name = "First Nav Date")]

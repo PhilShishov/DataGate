@@ -16,6 +16,10 @@
         width: 120px;
     }
 
+    .column-form {
+        width: 100%;
+    }
+
     .mobile-none,
     .search-box-wrapper,
     #aumChart,
