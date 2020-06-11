@@ -1,5 +1,6 @@
 ﻿namespace DataGate.Services.Data.Storage.Contracts
 {
+    using System;
     using System.Threading.Tasks;
 
     using DataGate.Services.Data.Common;

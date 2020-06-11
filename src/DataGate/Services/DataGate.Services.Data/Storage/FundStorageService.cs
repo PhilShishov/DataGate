@@ -1,5 +1,6 @@
 ﻿namespace DataGate.Services.Data.Storage
 {
+    using System;
     using System.Data;
     using System.Data.SqlClient;
     using System.Linq;
@@ -86,6 +87,7 @@
                             new SqlParameter("@f_id", SqlDbType.Int) { Value = dto.Id },
                             new SqlParameter("@comment", SqlDbType.NVarChar) { Value = dto.CommentArea },
                             new SqlParameter("@comment_title ", SqlDbType.NVarChar) { Value = dto.CommentTitle },
+                            new SqlParameter("@f_shortFundName", SqlDbType.NVarChar) { Value = dto.FundName },
                    });
 
             await this.sqlManager.ExecuteProcedure(command);
@@ -96,6 +98,11 @@
         public async Task<bool> DoesExist(string name)
         {
             return await this.repository.All().AnyAsync(f => f.FOfficialFundName == name);
+        }
+
+        public async Task<bool> DoesExistAtDate(string name, DateTime initialDate)
+        {
+            return await this.repository.All().AnyAsync(f => f.FOfficialFundName == name && f.FInitialDate == initialDate);
         }
 
         private async Task SetForeignKeys(FundPostDto dto, string status,
@@ -119,7 +126,6 @@
                             new SqlParameter("@f_status", SqlDbType.Int) { Value = dto.Status },
                             new SqlParameter("@f_registrationNumber", SqlDbType.NVarChar) { Value = dto.RegNumber },
                             new SqlParameter("@f_officialFundName", SqlDbType.NVarChar) { Value = dto.FundName },
-                            new SqlParameter("@f_shortFundName", SqlDbType.NVarChar) { Value = dto.FundName },
                             new SqlParameter("@f_leiCode", SqlDbType.NVarChar) { Value = dto.LEICode },
                             new SqlParameter("@f_cssfCode", SqlDbType.NVarChar) { Value = dto.CSSFCode },
                             new SqlParameter("@f_faCode", SqlDbType.NVarChar) { Value = dto.FACode },

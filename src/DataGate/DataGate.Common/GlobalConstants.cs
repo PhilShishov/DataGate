@@ -60,7 +60,7 @@
         public const string SweetAlertKey = "sweetalert";
         public const string SweetAlertScript = "<script type='text/javascript'>swal('{0}', '{1}','{2}');</script>";
         public const string AlertifyKey = "alertify";
-        public const string AlertifyScript = "<script type='text/javascript'>alertify.set('notifier', 'position', 'top-left'); alertify.notify('{0}', '{1}', 3);</script>";
+        public const string AlertifyScript = "<script type='text/javascript'>alertify.set('notifier', 'position', 'top-left'); alertify.notify('{0}', '{1}', 5);</script>";
 
         // Connection Strings
         public const string DataGateUsersConnection = "DataGateUsersConnection";

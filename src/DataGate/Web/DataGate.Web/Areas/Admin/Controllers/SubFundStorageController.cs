@@ -27,60 +27,11 @@
             this.repository = repository;
         }
 
-        [Route("sf/edit/{id}/{date}")]
-        public IActionResult Edit(int id, string date)
-        {
-            var model = this.service.GetByIdAndDate<EditSubFundInputModel>(id, date);
-
-            if (model.Derivatives == "Yes")
-            {
-                model.AreDerivatives = true;
-            }
-
-            this.SetViewDataValues();
-            return this.View(model);
-        }
-
-        [ValidateAntiForgeryToken]
-        [HttpPost]
-        [Route("sf/edit/{id}/{date}")]
-        public async Task<IActionResult> Edit(
-                    [Bind("Id", "InitialDate", "SubFundName", "CSSFCode", "Status",
-                          "FACode", "TACode", "LEICode", "DBCode",
-                          "FirstNavDate", "LastNavDate", "CSSFAuthDate", "ExpiryDate",
-                          "CesrClass", "GeographicalFocus", "GlobalExposure", "CurrencyCode",
-                          "NavFrequency", "ValuationDate", "CalculationDate", "Derivatives",
-                          "DerivMarket", "DerivPurpose", "PrincipalAssetClass", "TypeOfMarket",
-                          "PrincipalInvestmentStrategy", "ClearingCode", "SfCatMorningStar", "SfCatSix",
-                          "SfCatBloomberg", "CommentTitle", "CommentArea", "RecaptchaValue")] EditSubFundInputModel model)
-        {
-            bool doesExist = await this.service.DoesExist(model.SubFundName);
-
-            if (!this.ModelState.IsValid || doesExist)
-            {
-                if (doesExist)
-                {
-                    this.ShowErrorAlertify(ErrorMessages.ExistingEntityName);
-                }
-
-                this.SetViewDataValues();
-                return this.View(model);
-            }
-
-            var subFundId = await this.service.Edit(model);
-            var date = DateTimeParser.ToWebFormat(model.InitialDate);
-
-            return this.ShowInfo(
-                InfoMessages.SuccessfulEdit,
-                GlobalConstants.SubFundDetailsRouteName,
-                new { area = GlobalConstants.SubFundAreaName, id = subFundId, date = date });
-        }
-
         [Route("sf/new")]
         public IActionResult Create()
         {
             this.SetViewDataValues();
-            return this.View(new CreateSubFundInputModel { InitialDate = DateTime.Today, });
+            return this.View(new CreateSubFundInputModel());
         }
 
         [ValidateAntiForgeryToken]
@@ -110,10 +61,59 @@
             }
 
             var subFundId = await this.service.Create(model);
-            var date = DateTimeParser.ToWebFormat(model.InitialDate);
+            var date = DateTimeParser.ToWebFormat(model.InitialDate.AddDays(1));
 
             return this.ShowInfo(
                 InfoMessages.SuccessfulCreate,
+                GlobalConstants.SubFundDetailsRouteName,
+                new { area = GlobalConstants.SubFundAreaName, id = subFundId, date = date });
+        }
+
+        [Route("sf/edit/{id}/{date}")]
+        public IActionResult Edit(int id, string date)
+        {
+            var model = this.service.GetByIdAndDate<EditSubFundInputModel>(id, date);
+
+            if (model.Derivatives == "Yes")
+            {
+                model.AreDerivatives = true;
+            }
+
+            this.SetViewDataValues();
+            return this.View(model);
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        [Route("sf/edit/{id}/{date}")]
+        public async Task<IActionResult> Edit(
+                    [Bind("Id", "InitialDate", "SubFundName", "CSSFCode", "Status",
+                          "FACode", "TACode", "LEICode", "DBCode",
+                          "FirstNavDate", "LastNavDate", "CSSFAuthDate", "ExpiryDate",
+                          "CesrClass", "GeographicalFocus", "GlobalExposure", "CurrencyCode",
+                          "NavFrequency", "ValuationDate", "CalculationDate", "Derivatives",
+                          "DerivMarket", "DerivPurpose", "PrincipalAssetClass", "TypeOfMarket",
+                          "PrincipalInvestmentStrategy", "ClearingCode", "SfCatMorningStar", "SfCatSix",
+                          "SfCatBloomberg", "CommentTitle", "CommentArea", "RecaptchaValue")] EditSubFundInputModel model)
+        {
+            bool doesExistAtDate = await this.service.DoesExistAtDate(model.SubFundName, model.InitialDate);
+
+            if (!this.ModelState.IsValid || doesExistAtDate)
+            {
+                if (doesExistAtDate)
+                {
+                    this.ShowErrorAlertify(ErrorMessages.ExistingEntityAtDate);
+                }
+
+                this.SetViewDataValues();
+                return this.View(model);
+            }
+
+            var subFundId = await this.service.Edit(model);
+            var date = DateTimeParser.ToWebFormat(model.InitialDate.AddDays(1));
+
+            return this.ShowInfo(
+                InfoMessages.SuccessfulEdit,
                 GlobalConstants.SubFundDetailsRouteName,
                 new { area = GlobalConstants.SubFundAreaName, id = subFundId, date = date });
         }

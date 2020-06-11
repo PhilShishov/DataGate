@@ -7,6 +7,11 @@
 
     public class CreateFundInputModel : BaseEntityInputModel
     {
+        public CreateFundInputModel()
+        {
+            this.InitialDate = DateTime.Today;
+        }
+
         [Display(Name = "Valid Until")]
         public DateTime? EndDate { get; set; }
 

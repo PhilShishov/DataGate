@@ -26,52 +26,11 @@
             this.serviceSelect = fundServiceSelect;
         }
 
-        [Route("f/edit/{id}/{date}")]
-        public IActionResult Edit(int id, string date)
-        {
-            var model = this.service.GetByIdAndDate<EditFundInputModel>(id, date);
-
-            this.SetViewDataValues();
-
-            return this.View(model);
-        }
-
-        [ValidateAntiForgeryToken]
-        [HttpPost]
-        [Route("f/edit/{id}/{date}")]
-        public async Task<IActionResult> Edit(
-                     [Bind("Id", "InitialDate", "FundName", "CSSFCode", "Status",
-                          "LegalForm", "LegalVehicle", "LegalType", "FACode",
-                          "DEPCode", "TACode", "CompanyTypeDesc", "TinNumber",
-                          "LEICode", "RegNumber", "CommentTitle", "CommentArea", "RecaptchaValue")] EditFundInputModel model)
-        {
-            bool doesExist = await this.service.DoesExist(model.FundName);
-
-            if (!this.ModelState.IsValid || doesExist)
-            {
-                if (doesExist)
-                {
-                    this.ShowErrorAlertify(ErrorMessages.ExistingEntityName);
-                }
-
-                this.SetViewDataValues();
-                return this.View(model);
-            }
-
-            var fundId = await this.service.Edit(model);
-            var date = DateTimeParser.ToWebFormat(model.InitialDate);
-
-            return this.ShowInfo(
-                InfoMessages.SuccessfulEdit,
-                GlobalConstants.FundDetailsRouteName,
-                new { area = GlobalConstants.FundAreaName, id = fundId, date = date });
-        }
-
         [Route("f/new")]
         public IActionResult Create()
         {
             this.SetViewDataValues();
-            return this.View(new CreateFundInputModel { InitialDate = DateTime.Today, });
+            return this.View(new CreateFundInputModel());
         }
 
         [ValidateAntiForgeryToken]
@@ -96,10 +55,52 @@
             }
 
             var fundId = await this.service.Create(model);
-            var date = DateTimeParser.ToWebFormat(model.InitialDate);
+            var date = DateTimeParser.ToWebFormat(model.InitialDate.AddDays(1));
 
             return this.ShowInfo(
                 InfoMessages.SuccessfulCreate,
+                GlobalConstants.FundDetailsRouteName,
+                new { area = GlobalConstants.FundAreaName, id = fundId, date = date });
+        }
+
+        [Route("f/edit/{id}/{date}")]
+        public IActionResult Edit(int id, string date)
+        {
+            var model = this.service.GetByIdAndDate<EditFundInputModel>(id, date);
+            model.InitialDate = model.InitialDate.AddDays(1);
+
+            this.SetViewDataValues();
+
+            return this.View(model);
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        [Route("f/edit/{id}/{date}")]
+        public async Task<IActionResult> Edit(
+                     [Bind("Id", "InitialDate", "FundName", "CSSFCode", "Status",
+                          "LegalForm", "LegalVehicle", "LegalType", "FACode",
+                          "DEPCode", "TACode", "CompanyTypeDesc", "TinNumber",
+                          "LEICode", "RegNumber", "CommentTitle", "CommentArea", "RecaptchaValue")] EditFundInputModel model)
+        {
+            bool doesExistAtDate = await this.service.DoesExistAtDate(model.FundName, model.InitialDate);
+
+            if (!this.ModelState.IsValid || doesExistAtDate)
+            {
+                if (doesExistAtDate)
+                {
+                    this.ShowErrorAlertify(ErrorMessages.ExistingEntityAtDate);
+                }
+
+                this.SetViewDataValues();
+                return this.View(model);
+            }
+
+            var fundId = await this.service.Edit(model);
+            var date = DateTimeParser.ToWebFormat(model.InitialDate.AddDays(1));
+
+            return this.ShowInfo(
+                InfoMessages.SuccessfulEdit,
                 GlobalConstants.FundDetailsRouteName,
                 new { area = GlobalConstants.FundAreaName, id = fundId, date = date });
         }
