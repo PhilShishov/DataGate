@@ -16,6 +16,7 @@
         public const string TableIsEmpty = "Inactive/old fund selected! Please make a new selection.";
         public const string UnsuccessfulUpdate = "Update was unsuccessful! Please try again.";
         public const string ExistingEntityName = "Name already exists! Please try another one.";
+        public const string ExistingEntityAtDate = "Entity already exists for this time period! Please change Valid From.";
         public const string FileNotChosen = "Please select a file.";
 
         public const string NotFoundEntityMessage = "The required {0} was not found!";

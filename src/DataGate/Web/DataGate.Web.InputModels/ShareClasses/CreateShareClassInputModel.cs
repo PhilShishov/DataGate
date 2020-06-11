@@ -5,12 +5,14 @@
 
     public class CreateShareClassInputModel : BaseEntityInputModel
     {
+        public CreateShareClassInputModel()
+        {
+            this.InitialDate = DateTime.Today;
+        }
+
         [Required(ErrorMessage = "Please choose a subfund container!")]
         [Display(Name = "Sub Fund Container")]
         public string SubFundContainer { get; set; }
-
-        [Display(Name = "Share Class Id")]
-        public int ShareClassId { get; set; }
 
         [Required(ErrorMessage = "You must enter a value for the ShareClass Name!")]
         [StringLength(200, ErrorMessage = "The ShareClass Name must be no longer than 200 characters")]
@@ -56,10 +58,10 @@
         public string AccountingCode { get; set; }
 
         [Display(Name = "Hedged")]
-        public string IsHedged { get; set; }
+        public bool IsHedged { get; set; }
 
         [Display(Name = "Listed")]
-        public string IsListed { get; set; }
+        public bool IsListed { get; set; }
 
         [Display(Name = "Bloomberg Market")]
         public string BloombergMarket { get; set; }

@@ -1,5 +1,6 @@
 ﻿namespace DataGate.Services.Data.Storage
 {
+    using System;
     using System.Data;
     using System.Data.SqlClient;
     using System.Linq;
@@ -14,7 +15,6 @@
     using DataGate.Services.SqlClient;
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.Dtos.Entities;
-    using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.InputModels.SubFunds;
     using Microsoft.EntityFrameworkCore;
 
@@ -99,7 +99,8 @@
                    {
                             new SqlParameter("@sf_id", SqlDbType.Int) { Value = dto.Id },
                             new SqlParameter("@comment", SqlDbType.NVarChar) { Value = dto.CommentArea },
-                            new SqlParameter("@commentTitle", SqlDbType.NVarChar) { Value = dto.CommentTitle },
+                            new SqlParameter("@comment_title", SqlDbType.NVarChar) { Value = dto.CommentTitle },
+                            new SqlParameter("@sf_shortSubFundName ", SqlDbType.NVarChar) { Value = dto.SubFundName },
                    });
 
             await this.sqlManager.ExecuteProcedure(command);
@@ -112,37 +113,28 @@
             return await this.repository.All().AnyAsync(sf => sf.SfOfficialSubFundName == name);
         }
 
+        public async Task<bool> DoesExistAtDate(string name, DateTime initialDate)
+        {
+            return await this.repository.All().AnyAsync(f => f.SfOfficialSubFundName == name && f.SfInitialDate == initialDate);
+        }
+
         private async Task SetForeignKeys(SubFundPostDto dto, SubFundForeignKeysDto dtoForeignKey)
         {
             dto.Status = await this.repositorySelectList.ByIdST(dtoForeignKey.Status);
             dto.CesrClass = await this.repositorySelectList.ByIdCC(dtoForeignKey.CesrClass);
-            dto.CesrClass = IntExtensions.ToNullInt(dto.CesrClass);
             dto.GeographicalFocus = await this.repositorySelectList.ByIdGF(dtoForeignKey.GeographicalFocus);
-            dto.GeographicalFocus = IntExtensions.ToNullInt(dto.GeographicalFocus);
             dto.GlobalExposure = await this.repositorySelectList.ByIdGE(dtoForeignKey.GlobalExposure);
-            dto.GlobalExposure = IntExtensions.ToNullInt(dto.GlobalExposure);
             dto.NavFrequency = await this.repositorySelectList.ByIdNF(dtoForeignKey.NavFrequency);
-            dto.NavFrequency = IntExtensions.ToNullInt(dto.NavFrequency);
             dto.ValuationDate = await this.repositorySelectList.ByIdVD(dtoForeignKey.ValuationDate);
-            dto.ValuationDate = IntExtensions.ToNullInt(dto.ValuationDate);
             dto.CalculationDate = await this.repositorySelectList.ByIdCD(dtoForeignKey.CalculationDate);
-            dto.CalculationDate = IntExtensions.ToNullInt(dto.CalculationDate);
             dto.DerivMarket = await this.repositorySelectList.ByIdDM(dtoForeignKey.DerivMarket);
-            dto.DerivMarket = IntExtensions.ToNullInt(dto.DerivMarket);
             dto.DerivPurpose = await this.repositorySelectList.ByIdDP(dtoForeignKey.DerivPurpose);
-            dto.DerivPurpose = IntExtensions.ToNullInt(dto.DerivPurpose);
             dto.PrincipalAssetClass = await this.repositorySelectList.ByIdPAC(dtoForeignKey.PrincipalAssetClass);
-            dto.PrincipalAssetClass = IntExtensions.ToNullInt(dto.PrincipalAssetClass);
             dto.TypeOfMarket = await this.repositorySelectList.ByIdTM(dtoForeignKey.TypeOfMarket);
-            dto.TypeOfMarket = IntExtensions.ToNullInt(dto.TypeOfMarket);
             dto.PrincipalInvestmentStrategy = await this.repositorySelectList.ByIdPIS(dtoForeignKey.PrincipalInvestmentStrategy);
-            dto.PrincipalInvestmentStrategy = IntExtensions.ToNullInt(dto.PrincipalInvestmentStrategy);
             dto.SfCatMorningStar = await this.repositorySelectList.ByIdCM(dtoForeignKey.SfCatMorningStar);
-            dto.SfCatMorningStar = IntExtensions.ToNullInt(dto.SfCatMorningStar);
             dto.SfCatSix = await this.repositorySelectList.ByIdCS(dtoForeignKey.SfCatSix);
-            //dto.SfCatSix = IntExtensions.ToNullInt(dto.SfCatSix);
             dto.SfCatBloomberg = await this.repositorySelectList.ByIdCB(dtoForeignKey.SfCatBloomberg);
-            //dto.SfCatBloomberg = IntExtensions.ToNullInt(dto.SfCatBloomberg);
         }
 
         private SqlCommand AssignBaseParameters(SubFundPostDto dto, string procedure)

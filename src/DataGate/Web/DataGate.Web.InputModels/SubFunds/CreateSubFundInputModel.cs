@@ -5,12 +5,14 @@
 
     public class CreateSubFundInputModel : BaseEntityInputModel
     {
+        public CreateSubFundInputModel()
+        {
+            this.InitialDate = DateTime.Today;
+        }
+
         [Required(ErrorMessage = "Please choose a fund container!")]
         [Display(Name = "Fund Container")]
         public string FundContainer { get; set; }
-
-        [Display(Name = "Sub Fund Id")]
-        public int SubFundId { get; set; }
 
         [Required(ErrorMessage = "You must enter a value for the SubFund Name!")]
         [StringLength(200, ErrorMessage = "The SubFund Name must be no longer than 200 characters")]

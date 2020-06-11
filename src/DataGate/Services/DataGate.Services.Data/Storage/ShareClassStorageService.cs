@@ -64,7 +64,7 @@
                   .FirstOrDefaultAsync();
 
             await this.SetForeignKeys(dto, dtoForeignKey);
-            SqlCommand command = this.AssignBaseParameters(dto, SqlProcedureDictionary.CreateSubFund);
+            SqlCommand command = this.AssignBaseParameters(dto, SqlProcedureDictionary.CreateShareClass);
 
             // Assign particular parameters
             command.Parameters.AddRange(new[]
@@ -96,7 +96,8 @@
                    {
                             new SqlParameter("@sc_id", SqlDbType.Int) { Value = dto.Id },
                             new SqlParameter("@comment", SqlDbType.NVarChar) { Value = dto.CommentArea },
-                            new SqlParameter("@commentTitle", SqlDbType.NVarChar) { Value = dto.CommentTitle },
+                            new SqlParameter("@comment_title", SqlDbType.NVarChar) { Value = dto.CommentTitle },
+                            new SqlParameter("@sc_shortShareClassName", SqlDbType.NVarChar) { Value = dto.ShareClassName },
                    });
 
             await this.sqlManager.ExecuteProcedure(command);
@@ -107,6 +108,11 @@
         public async Task<bool> DoesExist(string name)
         {
             return await this.repository.All().AnyAsync(sf => sf.ScOfficialShareClassName == name);
+        }
+
+        public async Task<bool> DoesExistAtDate(string name, DateTime initialDate)
+        {
+            return await this.repository.All().AnyAsync(f => f.ScOfficialShareClassName == name && f.ScInitialDate == initialDate);
         }
 
         private async Task SetForeignKeys(ShareClassPostDto dto, ShareClassForeignKeysDto dtoForeignKey)
@@ -126,7 +132,6 @@
                    {
                         new SqlParameter("@sc_initialDate", SqlDbType.NVarChar) { Value = dto.InitialDate},
                         new SqlParameter("@sc_officialShareClassName", SqlDbType.NVarChar) { Value = dto.ShareClassName },
-                        new SqlParameter("@sc_shortShareClassName", SqlDbType.NVarChar) { Value = dto.ShareClassName },
                         new SqlParameter("@sc_investorType", SqlDbType.Int) { Value = dto.InvestorType },
                         new SqlParameter("@sc_shareType", SqlDbType.Int) { Value = dto.ShareType},
                         new SqlParameter("@sc_currency", SqlDbType.NChar) { Value = dto.CurrencyCode},

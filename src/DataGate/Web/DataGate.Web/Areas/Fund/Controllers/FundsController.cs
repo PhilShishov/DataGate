@@ -3,7 +3,6 @@
     using System.Threading.Tasks;
 
     using DataGate.Common;
-    using DataGate.Data.Models.Enums;
     using DataGate.Services.Data.Entities;
     using DataGate.Services.Data.ViewSetups;
     using DataGate.Web.Controllers;

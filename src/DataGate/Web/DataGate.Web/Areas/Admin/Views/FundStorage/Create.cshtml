@@ -30,7 +30,6 @@
                         <label asp-for="EndDate" class="text-torshia"></label><br>
                         <input asp-for="EndDate"
                                type="date"
-                               min="@DateTime.Today.ToString("yyyy-MM-dd")"
                                class="form-control ">
                         <span asp-validation-for="EndDate" class="text-danger"></span>
                     </div>

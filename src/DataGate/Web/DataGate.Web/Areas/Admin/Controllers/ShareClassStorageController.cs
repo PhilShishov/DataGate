@@ -27,6 +27,47 @@
             this.repository = repository;
         }
 
+        [Route("sc/new")]
+        public IActionResult Create()
+        {
+            this.SetViewDataValues();
+            return this.View(new CreateShareClassInputModel());
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        [Route("sc/new")]
+        public async Task<IActionResult> Create(
+                   [Bind("EndDate", "InitialDate", "ShareClassName", "CSSFCode", "Status", "FACode",
+                         "TACode", "LEICode", "InvestorType", "ShareType ", "CurrencyCode",
+                         "CountryIssue", "CountryRisk", "EmissionDate", "InceptionDate", "LastNavDate",
+                         "ExpiryDate", "InitialPrice", "AccountingCode", "IsHedged", "IsListed",
+                         "BloombergMarket", "BloombergCode", "BloombergId", "ISINCode", "ValorCode",
+                         "WKN", "DateBusinessYear", "ProspectusCode", "SubFundContainer",
+                         "RecaptchaValue")] CreateShareClassInputModel model)
+        {
+            bool doesExist = await this.service.DoesExist(model.ShareClassName);
+
+            if (!this.ModelState.IsValid || doesExist)
+            {
+                if (doesExist)
+                {
+                    this.ShowErrorAlertify(ErrorMessages.ExistingEntityName);
+                }
+
+                this.SetViewDataValues();
+                return this.View(model);
+            }
+
+            var subFundId = await this.service.Create(model);
+            var date = DateTimeParser.ToWebFormat(model.InitialDate.AddDays(1));
+
+            return this.ShowInfo(
+                InfoMessages.SuccessfulCreate,
+                GlobalConstants.ShareClassDetailsRouteName,
+                new { area = GlobalConstants.ShareClassAreaName, id = subFundId, date = date });
+        }
+
         [Route("sc/edit/{id}/{date}")]
         public IActionResult Edit(int id, string date)
         {
@@ -50,22 +91,21 @@
         [HttpPost]
         [Route("sc/edit/{id}/{date}")]
         public async Task<IActionResult> Edit(
-                    [Bind("Id", "InitialDate", "SubFundName", "CSSFCode", "Status",
-                          "FACode", "TACode", "LEICode", "DBCode",
-                          "FirstNavDate", "LastNavDate", "CSSFAuthDate", "ExpiryDate",
-                          "CesrClass", "GeographicalFocus", "GlobalExposure", "CurrencyCode",
-                          "NavFrequency", "ValuationDate", "CalculationDate", "Derivatives",
-                          "DerivMarket", "DerivPurpose", "PrincipalAssetClass", "TypeOfMarket",
-                          "PrincipalInvestmentStrategy", "ClearingCode", "SfCatMorningStar", "SfCatSix",
-                          "SfCatBloomberg", "CommentTitle", "CommentArea", "RecaptchaValue")] EditShareClassInputModel model)
+                    [Bind("Id", "InitialDate", "ShareClassName", "CSSFCode", "Status", "FACode",
+                          "TACode", "LEICode", "InvestorType", "ShareType ", "CurrencyCode",
+                          "CountryIssue", "CountryRisk", "EmissionDate", "InceptionDate", "LastNavDate",
+                          "ExpiryDate", "InitialPrice", "AccountingCode", "IsHedged", "IsListed",
+                          "BloombergMarket", "BloombergCode", "BloombergId", "ISINCode", "ValorCode",
+                          "WKN", "DateBusinessYear", "ProspectusCode", "CommentTitle", "CommentArea",
+                          "RecaptchaValue")] EditShareClassInputModel model)
         {
-            bool doesExist = await this.service.DoesExist(model.ShareClassName);
+            bool doesExistAtDate = await this.service.DoesExistAtDate(model.ShareClassName, model.InitialDate);
 
-            if (!this.ModelState.IsValid || doesExist)
+            if (!this.ModelState.IsValid || doesExistAtDate)
             {
-                if (doesExist)
+                if (doesExistAtDate)
                 {
-                    this.ShowErrorAlertify(ErrorMessages.ExistingEntityName);
+                    this.ShowErrorAlertify(ErrorMessages.ExistingEntityAtDate);
                 }
 
                 this.SetViewDataValues();
@@ -73,52 +113,10 @@
             }
 
             var subFundId = await this.service.Edit(model);
-            var date = DateTimeParser.ToWebFormat(model.InitialDate);
+            var date = DateTimeParser.ToWebFormat(model.InitialDate.AddDays(1));
 
             return this.ShowInfo(
                 InfoMessages.SuccessfulEdit,
-                GlobalConstants.ShareClassDetailsRouteName,
-                new { area = GlobalConstants.ShareClassAreaName, id = subFundId, date = date });
-        }
-
-        [Route("sc/new")]
-        public IActionResult Create()
-        {
-            this.SetViewDataValues();
-            return this.View(new CreateShareClassInputModel { InitialDate = DateTime.Today, });
-        }
-
-        [ValidateAntiForgeryToken]
-        [HttpPost]
-        [Route("sc/new")]
-        public async Task<IActionResult> Create(
-                   [Bind("InitialDate", "EndDate", "SubFundName", "CSSFCode", "Status",
-                          "FACode", "TACode", "LEICode", "DBCode", "FundContainer",
-                          "FirstNavDate", "LastNavDate", "CSSFAuthDate", "ExpiryDate",
-                          "CesrClass", "GeographicalFocus", "GlobalExposure", "CurrencyCode",
-                          "NavFrequency", "ValuationDate", "CalculationDate", "AreDerivatives",
-                          "DerivMarket", "DerivPurpose", "PrincipalAssetClass", "TypeOfMarket",
-                          "PrincipalInvestmentStrategy", "ClearingCode", "SfCatMorningStar", "SfCatSix",
-                          "SfCatBloomberg", "RecaptchaValue")] CreateShareClassInputModel model)
-        {
-            bool doesExist = await this.service.DoesExist(model.ShareClassName);
-
-            if (!this.ModelState.IsValid || doesExist)
-            {
-                if (doesExist)
-                {
-                    this.ShowErrorAlertify(ErrorMessages.ExistingEntityName);
-                }
-
-                this.SetViewDataValues();
-                return this.View(model);
-            }
-
-            var subFundId = await this.service.Create(model);
-            var date = DateTimeParser.ToWebFormat(model.InitialDate);
-
-            return this.ShowInfo(
-                InfoMessages.SuccessfulCreate,
                 GlobalConstants.ShareClassDetailsRouteName,
                 new { area = GlobalConstants.ShareClassAreaName, id = subFundId, date = date });
         }

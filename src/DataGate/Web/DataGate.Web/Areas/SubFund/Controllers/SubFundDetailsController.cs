@@ -1,5 +1,6 @@
 ﻿namespace DataGate.Web.Areas.SubFunds.Controllers
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using DataGate.Common;
@@ -42,6 +43,7 @@
             };
 
             var viewModel = await SpecificVMSetup.SetGet<SpecificEntityViewModel>(id, date, this.service, this.subFundService, dto);
+
             return this.View(viewModel);
         }
 

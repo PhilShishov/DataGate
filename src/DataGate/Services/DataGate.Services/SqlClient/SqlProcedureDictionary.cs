@@ -29,7 +29,7 @@ namespace DataGate.Services.SqlClient
                 "@f_registrationNumber, @f_officialFundName, @f_shortFundName, " +
                 "@f_leiCode, @f_cssfCode, @f_faCode, @f_depCode, @f_taCode, " +
                 "@f_legalForm, @f_legalType, @f_legal_vehicle, @f_companyType, @f_tinNumber, " +
-                "@comment, @commentTitle";
+                "@comment, @comment_title";
 
         public const string CreateFund = "EXEC sp_new_fund " +
                 "@f_initialDate, @f_endDate, @f_status, " +
@@ -46,8 +46,8 @@ namespace DataGate.Services.SqlClient
                "@sf_currency, @sf_navFrequency, @sf_valutationDate, @sf_calculationDate, " +
                "@sf_derivatives, @sf_derivMarket, @sf_derivPurpose, @sf_principal_asset_class, " +
                "@sf_type_of_market, @sf_principal_investment_strategy, @sf_clearing_code, " +
-               "@sf_cat_morningstar, @sf_category_six, @sf_category_bloomberg, @sf_change_comment, " +
-               "@sf_comment_title";
+               "@sf_cat_morningstar, @sf_category_six, @sf_category_bloomberg, @comment, " +
+               "@comment_title";
 
         public const string CreateSubFund = "EXEC sp_new_subfund " +
                 "@sf_initialDate, @sf_endDate, @sf_officialSubFundName, " +
@@ -68,11 +68,11 @@ namespace DataGate.Services.SqlClient
                     "@sc_accountingCode, @sc_hedged, @sc_listed, @sc_bloomberMarket, " +
                     "@sc_bloomberCode, @sc_bloomberId, @sc_isinCode, @sc_valorCode, " +
                     "@sc_faCode, @sc_taCode, @sc_WKN, @sc_date_business_year, " +
-                    "@sc_prospectus_code, @sc_change_comment, @sc_comment_title";
+                    "@sc_prospectus_code, @comment, @comment_title";
 
         public const string CreateShareClass = "EXEC sp_new_shareclass " +
                 "@sc_initialDate, @sc_endDate, @sc_officialShareClassName, " +
-                "@sc_shortShareClassName, @sc_investorType, @sc_shareType, @sc_currency, " +
+                "@sc_investorType, @sc_shareType, @sc_currency, " +
                 "@sc_countryIssue, @sc_ultimateParentCountryRisk, @sc_emissionDate, @sc_inceptionDate, " +
                 "@sc_lastNav, @sc_expiryDate, @sc_status, @sc_initialPrice, " +
                 "@sc_accountingCode, @sc_hedged, @sc_listed, @sc_bloomberMarket, " +

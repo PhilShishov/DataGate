@@ -179,6 +179,7 @@ namespace DataGate.Services.SqlClient
         {
             var typeInt = DbType.Int32;
             var typeString = DbType.String;
+            var typeStringFixed = DbType.StringFixedLength;
             var typeDatetime = DbType.DateTime;
             var typeBinary = DbType.Binary;
 
@@ -201,7 +202,7 @@ namespace DataGate.Services.SqlClient
                         }
                     }
 
-                    if (parameter.DbType == typeString)
+                    if (parameter.DbType == typeString || parameter.DbType == typeStringFixed)
                     {
                         if (string.IsNullOrEmpty((string)parameter.Value))
                         {
@@ -210,9 +211,9 @@ namespace DataGate.Services.SqlClient
                         }
                     }
                 }
-                catch (Exception ex)
+                catch (SqlException exception)
                 {
-                    Console.WriteLine(ex.Message); 
+                    throw new CustomSqlException(exception.Message, exception);
                 }
             }
         }
