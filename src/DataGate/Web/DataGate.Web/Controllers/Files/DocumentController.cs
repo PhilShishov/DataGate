@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
 
     using DataGate.Common;
+    using DataGate.Data.Common.Repositories;
     using DataGate.Services.Data.Documents;
     using DataGate.Services.Data.Documents.Contracts;
     using DataGate.Services.DateTime;
@@ -20,13 +21,16 @@
     public class DocumentController : Controller
     {
         private readonly IDocumentService service;
+        private readonly IAgreementsRepository repository;
         private readonly IEntitiesDocumentService entitiesDocumentService;
 
         public DocumentController(
                         IDocumentService service,
+                        IAgreementsRepository repository,
                         IEntitiesDocumentService entitiesDocumentService)
         {
             this.service = service;
+            this.repository = repository;
             this.entitiesDocumentService = entitiesDocumentService;
         }
 
@@ -42,15 +46,15 @@
         }
 
         [Route("loadAgrUpload")]
-        public async Task<IActionResult> Agreement(LoadAgreementDto dto)
+        public IActionResult Agreement(LoadAgreementDto dto)
         {
             var model = AutoMapperConfig.MapperInstance.Map<UploadAgreementInputModel>(dto);
 
-            model.AgreementsStatus = await this.service.GetAgreementStatus().ToListAsync();
-            model.Companies = await this.service.GetCompanies().ToListAsync();
+            model.AgreementsStatus = this.repository.GetAllAgreementStatus();
+            model.Companies = this.repository.GetAllCompanies();
 
             int fileType = this.GetTargetFileType(model.AreaName);
-            model.AgreementsFileTypes = await this.service.GetAgreementsFileTypes(fileType).ToListAsync();
+            model.AgreementsFileTypes = this.repository.GetAllAgreementsFileTypes(fileType);
 
             return this.PartialView("Upload/_UploadAgreement", model);
         }

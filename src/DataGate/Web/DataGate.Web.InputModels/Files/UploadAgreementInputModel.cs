@@ -38,6 +38,12 @@ namespace DataGate.Web.InputModels.Files
         [Required]
         public string Status { get; set; }
 
+        public string Fee { get; set; }
+
+        public string FeeFrequency { get; set; }
+
+        public string FeeType { get; set; }
+
         [Required(ErrorMessage = "Please select a file.")]
         [DataType(DataType.Upload)]
         [MaxFileSize(10 * 1024 * 1024)]
