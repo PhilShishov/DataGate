@@ -6,9 +6,9 @@ namespace DataGate.Services.SqlClient
         //
         // Stored procedures as in DB
         // Upload
-        public const string DocumentFund = "EXEC sp_insert_map_fund";
-        public const string DocumentSubFund = "EXEC sp_insert_map_subfund";
-        public const string DocumentShareClass = "EXEC sp_insert_map_shareclass";
+        public const string DocumentFund = "EXEC sp_insert_document_fund";
+        public const string DocumentSubFund = "EXEC sp_insert_document_subfund";
+        public const string DocumentShareClass = "EXEC sp_insert_document_shareclass";
 
         public const string AgreementFund = "EXEC sp_insert_agreement_fund";
         public const string AgreementSubFund = "EXEC sp_insert_agreement_subfund";

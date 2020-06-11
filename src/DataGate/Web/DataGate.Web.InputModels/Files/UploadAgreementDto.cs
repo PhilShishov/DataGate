@@ -28,6 +28,15 @@ namespace DataGate.Web.InputModels.Files
         [IgnoreMap]
         public int Company { get; set; }
 
+        [IgnoreMap]
+        public int Fee { get; set; }
+
+        [IgnoreMap]
+        public int FeeFrequency { get; set; }
+
+        [IgnoreMap]
+        public int FeeType { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<UploadAgreementInputModel, UploadAgreementDto>()

@@ -2,10 +2,10 @@
 {
     using System.Data;
     using System.Data.SqlClient;
-    using System.Globalization;
     using System.Threading.Tasks;
 
     using DataGate.Common;
+    using DataGate.Data.Common.Repositories;
     using DataGate.Services.Data.Documents;
     using DataGate.Services.Data.Files.Contracts;
     using DataGate.Services.DateTime;
@@ -18,13 +18,16 @@
     {
         private readonly ISqlQueryManager sqlManager;
         private readonly IDocumentService service;
+        private readonly IAgreementsRepository repository;
 
         public FileSystemService(
                         ISqlQueryManager sqlManager,
-                        IDocumentService service)
+                        IDocumentService service,
+                        IAgreementsRepository repository)
         {
             this.sqlManager = sqlManager;
             this.service = service;
+            this.repository = repository;
         }
 
         // ________________________________________________________
@@ -77,16 +80,20 @@
         public async Task UploadAgreement(UploadAgreementInputModel model)
         {
             UploadAgreementDto dto = AutoMapperConfig.MapperInstance.Map<UploadAgreementDto>(model);
-            dto.AgreementType = await this.service.GetByIdAgreementType(model.AgrType);
-            dto.Status = await this.service.GetByIdStatus(model.Status);
-            dto.Company = await this.service.GetByIdCompany(model.Company);
+            dto.AgreementType = await this.repository.GetByIdAgreementType(model.AgrType);
+            dto.Status = await this.repository.GetByIdStatus(model.Status);
+            dto.Company = await this.repository.GetByIdCompany(model.Company);
+            dto.Fee = await this.repository.GetByIdFee(model.Fee);
+            dto.FeeFrequency = await this.repository.GetByIdFeeFrequency(model.FeeFrequency);
+            dto.FeeType = await this.repository.GetByIdFeeType(model.FeeType);
 
             string query = StringSwapper.ByArea(model.AreaName,
                                                  SqlProcedureDictionary.AgreementFund,
                                                  SqlProcedureDictionary.AgreementSubFund,
                                                  SqlProcedureDictionary.AgreementShareClass);
 
-            query += " @file_name, @entity_id, @file_ext, @activity_type_id, @contract_date, @activation_date, @expiration_date, @company_id, @status";
+            query += " @file_name, @entity_id, @file_ext, @activity_type_id, @contract_date,@activation_date, " +
+                      "@expiration_date, @company_id, @status";
 
             SqlCommand command = new SqlCommand(query);
             command.Parameters.AddRange(new[]
