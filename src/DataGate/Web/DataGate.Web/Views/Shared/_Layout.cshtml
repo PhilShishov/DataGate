@@ -36,6 +36,22 @@
         <script src="~/lib/alertifyjs/alertify.js" asp-append-version="true"></script>
     </environment>
 
+    <environment include="Production, Staging">
+        <link type="text/css" rel="stylesheet" href="~/lib/jqueryui/themes/base/jquery-ui.min.css" asp-append-version="true">
+        <link type="text/css" rel="stylesheet" href="~/lib/jqueryui/themes/smoothness/jquery-ui.min.css" asp-append-version="true" />
+        <link type="text/css" rel="stylesheet" href="~/lib/select2/dist/css/select2.min.css" asp-append-version="true">
+        <link type="text/css" rel="stylesheet" href="~/lib/chosen/chosen.min.css" asp-append-version="true">
+        <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+        <link type="text/css" rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" asp-append-version="true" />
+        <link type="text/css" rel="stylesheet" href="~/lib/alertifyjs/css/alertify.min.css" asp-append-version="true" />
+        <link type="text/css" rel="stylesheet" href="~/lib/alertifyjs/css/themes/default.min.css" asp-append-version="true" />
+
+        <link type="text/css" rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+
+        <script src="~/lib/sweetalert/dist/sweetalert.min.js" asp-append-version="true"></script>
+        <script src="~/lib/alertifyjs/alertify.min.js" asp-append-version="true"></script>
+    </environment>
+
     @RenderSection("Styles", required: false)
 </head>
 <body>
@@ -183,23 +199,23 @@
         <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
         <script src="~/lib/select2/dist/js/select2.js" asp-append-version="true"></script>
         <script src="~/lib/chosen/chosen.jquery.js" asp-append-version="true"></script>
-        <script src="~/lib/alertifyjs/alertify.js" asp-append-version="true"></script>
         <script src="~/lib/sweetalert/dist/sweetalert.min.js" asp-append-version="true"></script>
 
-        <script src="~/js/scrollTo.js" asp-append-version="true"></script>
-
-        @*/*** Handle jQuery plugin naming conflict between jQuery UI and Bootstrap ***/*@
-        <script>
-            $.widget.bridge('uibutton', $.ui.button);
-            $.widget.bridge('uitooltip', $.ui.tooltip);
-        </script>
-
+        <script src="~/js/site.js" asp-append-version="true"></script>
         <script src="~/js/navBar.js" asp-append-version="true"></script>
-        <script>
-            if (window.history.replaceState) {
-                window.history.replaceState(null, null, window.location.href);
-            }
-        </script>
+    </environment>
+
+    <environment include="Production, Staging">
+        <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+        <script src="~/lib/jqueryui/jquery-ui.min.js" asp-append-version="true"></script>
+        <partial name="Scripts/_ValidationScriptsPartial" />
+        <script src="~/lib/popperjs/umd/popper.min.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+        <script src="~/lib/select2/dist/js/select2.min.js" asp-append-version="true"></script>
+        <script src="~/lib/chosen/chosen.jquery.min.js" asp-append-version="true"></script>
+        <script src="~/lib/sweetalert/dist/sweetalert.min.js" asp-append-version="true"></script>
+
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 
     @this.RenderSection("Scripts", required: false)

@@ -26,7 +26,10 @@
                                            class="form-control"
                                            id="username"
                                            placeholder="Username">
-                                    <span asp-validation-for="Input.Username" class="text-danger d-flex justify-content-center"></span>
+                                    <div class="d-flex justify-content-center">
+                                        @*<span class="icon-svg-warning"></span>*@
+                                        <span asp-validation-for="Input.Username" class="text-danger"></span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group col-md-12 mb-5">

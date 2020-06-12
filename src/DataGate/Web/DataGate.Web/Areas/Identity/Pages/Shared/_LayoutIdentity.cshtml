@@ -15,6 +15,14 @@
         <script src="~/lib/sweetalert/dist/sweetalert.min.js" asp-append-version="true"></script>
     </environment>
 
+    <environment include="Production, Staging">
+        <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+        <link type="text/css" rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" asp-append-version="true" />
+        <link type="text/css" rel="stylesheet" href="~/css/identity.css" asp-append-version="true" />
+
+        <script src="~/lib/sweetalert/dist/sweetalert.min.js" asp-append-version="true"></script>
+    </environment>
+
     @RenderSection("Styles", required: false)
 </head>
 <body>
@@ -27,6 +35,19 @@
         <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
         <script src="~/lib/popperjs/umd/popper.js" asp-append-version="true"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
+        <partial name="_ValidationScriptsPartial" />
+
+        <script>
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+            }
+        </script>
+    </environment>
+
+    <environment include="Production, Staging">
+        <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+        <script src="~/lib/popperjs/umd/popper.min.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
         <partial name="_ValidationScriptsPartial" />
 
         <script>

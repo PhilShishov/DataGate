@@ -23,6 +23,16 @@
       },
       "sqlDebugging": false,
       "applicationUrl": "https://localhost:5001;http://localhost:5000"
+    },
+    "DataGate (Production)": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
+      },
+      "sqlDebugging": false,
+      "nativeDebugging": false,
+      "applicationUrl": "https://localhost:5001;http://localhost:5000"
     }
   }
 }

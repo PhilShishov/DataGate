@@ -1,6 +1,5 @@
 ﻿namespace DataGate.Web.Areas.Admin.Controllers
 {
-    using System;
     using System.Threading.Tasks;
 
     using DataGate.Common;

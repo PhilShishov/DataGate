@@ -1,6 +1,5 @@
 ﻿namespace DataGate.Web.Controllers.Funds
 {
-    using System;
     using System.Threading.Tasks;
 
     using DataGate.Common;

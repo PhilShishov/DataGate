@@ -1,19 +1,21 @@
 ﻿[
   {
-    "outputFileName": "wwwroot/css/ok.min.css",
+    "outputFileName": "wwwroot/css/site.min.css",
     "inputFiles": [
-      "wwwroot/css/ok.css"
+      "wwwroot/css/pharus/!(*.min).css"
       //[ "wwwroot/**/!(*.min).css" ]
     ]
   },
   {
-    "outputfilename": "wwwroot/js/ok.min.js",
+    "outputfilename": "wwwroot/js/site.min.js",
     "inputfiles": [
-      "wwwroot/js/ok.js"
+      "wwwroot/js/navBar.js",
+      "wwwroot/js/plugins.js",
+      "wwwroot/js/site.js"
     ],
     "minify": {
       "enabled": true,
-      "renameLocals": true
+      "renameLocals": false
     },
     "sourceMap": false
   }

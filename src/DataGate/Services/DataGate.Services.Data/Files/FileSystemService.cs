@@ -69,7 +69,7 @@
                                                   SqlProcedureDictionary.DeleteDocumentShareClass);
 
             SqlCommand command = new SqlCommand(query);
-            command.Parameters.Add(new SqlParameter("@file_id", SqlDbType.NVarChar) { Value = fileId });
+            command.Parameters.Add(new SqlParameter("@file_id", SqlDbType.Int) { Value = fileId });
 
             await this.sqlManager.ExecuteProcedure(command);
         }
@@ -83,9 +83,6 @@
             dto.AgreementType = await this.repository.GetByIdAgreementType(model.AgrType);
             dto.Status = await this.repository.GetByIdStatus(model.Status);
             dto.Company = await this.repository.GetByIdCompany(model.Company);
-            dto.Fee = await this.repository.GetByIdFee(model.Fee);
-            dto.FeeFrequency = await this.repository.GetByIdFeeFrequency(model.FeeFrequency);
-            dto.FeeType = await this.repository.GetByIdFeeType(model.FeeType);
 
             string query = StringSwapper.ByArea(model.AreaName,
                                                  SqlProcedureDictionary.AgreementFund,
@@ -120,7 +117,7 @@
                                                   SqlProcedureDictionary.DeleteAgreementShareClass);
 
             SqlCommand command = new SqlCommand(query);
-            command.Parameters.Add(new SqlParameter("@file_id", SqlDbType.NVarChar) { Value = fileId });
+            command.Parameters.Add(new SqlParameter("@file_id", SqlDbType.Int) { Value = fileId });
 
             await this.sqlManager.ExecuteProcedure(command);
         }
