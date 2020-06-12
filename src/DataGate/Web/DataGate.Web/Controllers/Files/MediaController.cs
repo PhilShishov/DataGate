@@ -1,11 +1,10 @@
 ﻿namespace DataGate.Web.Controllers
 {
-    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
-    using AngleSharp.Common;
+
     using DataGate.Common;
     using DataGate.Services.Data.Files.Contracts;
     using DataGate.Services.DateTime;

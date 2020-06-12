@@ -19,6 +19,14 @@
     </environment>
 
     <environment include="Production, Staging">
+        <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+        <link type="text/css" rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+
+        <style>
+            body {
+                background: url(../images/Background_Home.png) no-repeat center center fixed;
+            }
+        </style>
     </environment>
 
     @RenderSection("Styles", required: false)
@@ -31,6 +39,10 @@
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
+    </environment>
+    <environment include="Production, Staging">
+        <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
     </environment>
 
     @this.RenderSection("Scripts", required: false)
