@@ -5,85 +5,110 @@
     ViewData["Title"] = SharedLocalizer["Create User"];
 }
 <div class="push">
-    <h2 class="text-torshia">Create User</h2>
-    <div>
-        <a class="btn btn-pharus text-white mt-2" asp-area="" asp-controller="User" asp-action="Index">@SharedLocalizer["Back to Panel"]</a>
+    <div class="d-flex justify-content-center text-center">
+        <form class="d-inline w-75" method="post">
+            <h2 class="mb-2"> @SharedLocalizer["Create User"]</h2>
+            <div>
+                <a class="btn btn-pharus text-white mt-2" asp-area="" asp-controller="User" asp-action="Index">@SharedLocalizer["Back to Panel"]</a>
+            </div>
+            <hr />
+            <div class="form-group-user">
+                <input type="text"
+                       class="form-control"
+                       id="username"
+                       placeholder="Username..."
+                       autocomplete="username"
+                       asp-for="Username">
+                <div class="d-flex justify-content-center">
+                    <span></span>
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group-user">
+                <input type="password"
+                       class="form-control"
+                       id="password"
+                       placeholder="Password..."
+                       autocomplete="new-password"
+                       asp-for="Password">
+                <div class="d-flex justify-content-center">
+                    <span></span>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group-user">
+                <input type="password"
+                       class="form-control"
+                       id="confirmPassword"
+                       placeholder="Confirm Password..."
+                       autocomplete="new-password"
+                       asp-for="ConfirmPassword">
+                <div class="d-flex justify-content-center">
+                    <span></span>
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group-user">
+                <input type="email"
+                       class="form-control"
+                       id="email"
+                       placeholder="Email..."
+                       asp-for="Email">
+                <div class="d-flex justify-content-center">
+                    <span></span>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group-user">
+                <select class="select-pharus" id="roletype" asp-for="RoleType">
+                    <option selected disabled value="0">
+                        @SharedLocalizer["-- Choose Role --"]
+                    </option>
+                    @foreach (var role in (List<ApplicationRole>)ViewData["Roles"])
+                    {
+                        <option value="@role.Name">@role</option>
+                    }
+                </select>
+            </div>
+            <div>
+                <span></span>
+                <span asp-validation-for="RoleType" class="text-danger"></span>
+            </div>
+            <div class="button-holder mt-4">
+                <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
+                <button type="submit"
+                        class="btn btn-pharus text-white btn-confirm-create">
+                    @SharedLocalizer["Create User"]
+                </button>
+            </div>
+        </form>
     </div>
-    <hr />
-    <form class="d-inline" method="post">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label for="Username" class="text-torshia">
-                @SharedLocalizer["Username"]
-            </label><br>
-            <input type="text"
-                   class="form-control maxw-270"
-                   id="username"
-                   placeholder="Username..."
-                   autocomplete="username"
-                   asp-for="Username">
-            <span asp-validation-for="Username" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label for="Password" class="text-torshia">
-                @SharedLocalizer["Password"]
-            </label><br>
-            <input type="password"
-                   class="form-control maxw-270"
-                   id="password"
-                   placeholder="Password..."
-                   autocomplete="new-password"
-                   asp-for="Password">
-            <span asp-validation-for="Password" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label for="ConfirmPassword" class="text-torshia">
-                @SharedLocalizer["Confirm Password"]
-            </label><br>
-            <input type="password"
-                   class="form-control maxw-270"
-                   id="confirmPassword"
-                   placeholder="Confirm Password..."
-                   autocomplete="new-password"
-                   asp-for="ConfirmPassword">
-            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label for="Email" class="text-torshia">
-                @SharedLocalizer["Email"]
-            </label><br>
-            <input type="email"
-                   class="form-control maxw-270"
-                   id="email"
-                   placeholder="Email..."
-                   asp-for="Email">
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>
-        <div class="form-group">
-            <label for="RoleType" class="text-torshia">
-                @SharedLocalizer["Role"]
-            </label><br>
-            <select class="select-pharus" id="roletype" asp-for="RoleType">
-                <option selected disabled value="0">
-                    @SharedLocalizer["-- Choose Role --"]
-                </option>
-                @foreach (var role in (List<ApplicationRole>)ViewData["Roles"])
-                {
-                    <option value="@role.Name">@role</option>
-                }
-            </select>
-        </div>
-        <span asp-validation-for="RoleType" class="text-danger"></span>
-        <div class="button-holder d-flex">
-            <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
-            <button type="submit"
-                    class="btn btn-pharus text-white btn-confirm-create">
-                Create
-            </button>
-        </div>
-    </form>
 </div>
 
 @section Scripts {
+    <script>
+        $(function () {
+            $('form').on('submit', function () {
+                const fieldsValidation = $('.field-validation-error');
+                if (fieldsValidation.length != 0) {
+                    fieldsValidation.each(function () {
+                        $(this).siblings('span').addClass('icon-svg-warning');
+                        $(this).parent().removeClass('d-none');
+                        $(this).parent().addClass('d-flex');
+                    });
+                }
+            });
+
+            $('form').keydown(function () {
+                const fieldsValidation = $('.field-validation-error');
+                if (fieldsValidation.length != 0) {
+                    fieldsValidation.each(function () {
+                        $(this).parent().removeClass('d-flex');
+                        $(this).parent().addClass('d-none');
+                    });
+                }
+            });
+        });
+    </script>
     <partial name="Scripts/_CreateEditScriptsPartial">
 }

@@ -101,11 +101,8 @@
                 const fieldsValidation = $('.field-validation-error');
                 if (fieldsValidation.length != 0) {
                     fieldsValidation.each(function () {
-                        //$(this).siblings().removeClass('field-validation-error
                         $(this).parent().removeClass('d-flex');
                         $(this).parent().addClass('d-none');
-                        //$(this).siblings('span').removeClass('icon-svg-warning');
-                        //$(this).siblings('span').removeClass('.field-validation-error');
                     });
                 }
             });

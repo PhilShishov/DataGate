@@ -223,6 +223,34 @@ textarea {
     .column-form .form-group {
         width: 75%;
     }
+
+.icon-svg-warning {
+    background: url(/images/exclamation-triangle-solid.svg) no-repeat center center;
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
+    margin-top: 6px;
+}
+
+.form-group-user {
+    margin-bottom: 30px;
+}
+
+    .form-group-user input {
+        display: initial;
+        border-color: rgb(0, 65, 118);
+        font-size: 18px;
+        max-width: 290px;
+        color: black;
+        font-weight: 400;
+        font-style: italic;
+    }
+
+        .form-group-user input:focus {
+            box-shadow: none;
+            border-color: #80bdff;
+            outline: none;
+        }
 /*
 *
 * ==========================================

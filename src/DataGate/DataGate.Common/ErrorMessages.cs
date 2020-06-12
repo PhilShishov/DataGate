@@ -4,8 +4,9 @@
     {
         public const string InvalidLoginAttempt = "Wrong username or password have been specified.";
         public const string NotConfirmedEmail = "Your email is not confirmed. Please confirm your email before login!";
-        public const string PasswordMismatch = "The password and confirmation password do not match.";
+        public const string PasswordMismatch = "Password and confirmation password do not match.";
         public const string NewPasswordMismatch = "The new password and confirmation password do not match.";
+        public const string PasswordLength = "Must be at least {2} characters.";
         public const string NotSelectedValue = "Please select at least one option!";
         public const string UnsuccessfulDelete = "Delete was unsuccessful! Please try again.";
         public const string UnsuccessfulCreate = "Create was unsuccessful! Please try again.";

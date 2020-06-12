@@ -19,7 +19,11 @@
         [Required]
         public string RoleType { get; set; }
 
-        [StringLength(ModelConstants.UserPasswordMaxLength, MinimumLength = ModelConstants.UserPasswordMinLength)]
+        [Display(Name = "New Password")]
+        [StringLength(
+            ModelConstants.UserPasswordMaxLength,
+            MinimumLength = ModelConstants.UserPasswordMinLength,
+            ErrorMessage = ErrorMessages.PasswordLength)]
         [DataType(DataType.Password)]
         public string PasswordHash { get; set; }
 
