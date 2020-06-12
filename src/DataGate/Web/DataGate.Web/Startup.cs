@@ -62,17 +62,17 @@
                 typeof(EditFundInputModel).GetTypeInfo().Assembly);
 
             // Seed data on application startup
-            using (var serviceScope = app.ApplicationServices.CreateScope())
-            {
-                var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            //using (var serviceScope = app.ApplicationServices.CreateScope())
+            //{
+            //    var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
-                if (env.IsDevelopment())
-                {
-                    dbContext.Database.Migrate();
-                }
+            //    //if (env.IsDevelopment())
+            //    //{
+            //    //    dbContext.Database.Migrate();
+            //    //}
 
-                new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
-            }
+            //    new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
+            //}
 
             if (env.IsDevelopment())
             {
