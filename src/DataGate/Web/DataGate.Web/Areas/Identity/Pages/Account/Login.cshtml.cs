@@ -7,7 +7,6 @@
     using System.Threading.Tasks;
 
     using DataGate.Common;
-    using DataGate.Data.Models.Enums;
     using DataGate.Data.Models.Users;
     using DataGate.Web.Infrastructure.Attributes.Validation;
     using Microsoft.AspNetCore.Authentication;

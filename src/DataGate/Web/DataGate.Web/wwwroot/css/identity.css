@@ -8,6 +8,8 @@
 *
 */
 
+
+
 .icon-svg-warning {
     background: url(/images/exclamation-triangle-solid.svg) no-repeat center center;
     width: 17px;
@@ -157,18 +159,32 @@ img {
     font-size: 19px;
 }
 
-.container-cookie-consent {
-    font-size: 15px;
-}
-
-.alert-dismissible .close {
-    top: 4px;
-    color: black;
-}
-
 .alert-danger {
     font-size: 14px;
 }
+
+.container-cookie-consent {
+    font-size: 15px;
+    width: 100%;
+    text-align: center;
+    z-index: 1;
+}
+
+    .container-cookie-consent a {
+        text-decoration: underline;
+    }
+
+.alert-dismissible .close {
+    top: 2px;
+    right: unset;
+    background: green;
+    color: white;
+    text-shadow: none;
+}
+
+    .alert-dismissible .close:hover {
+        background: rgb(0, 65, 118);
+    }
 /*========================================================================
   fxt-template layout
 =========================================================================*/
