@@ -6,67 +6,100 @@
     ViewData["Title"] = SharedLocalizer["Edit User"];
 }
 <div class="push">
-
-    <h2>
-        @SharedLocalizer["Edit User"]
-    </h2>
-    <div>
-        <a class="btn btn-pharus text-white mt-2"
-           asp-area=""
-           asp-controller="User"
-           asp-action="Index">
-            @SharedLocalizer["Back to Panel"]
-        </a>
-    </div>
-
-    <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-area="Admin"
-                  asp-controller="Admin"
-                  method="post"
-                  class="d-inline"
-                  id="editForm">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label for="Username" class="control-label">@SharedLocalizer["Username"]</label>
-                    <input asp-for="Username" class="form-control maxw-270" autocomplete="off" />
+    <div class="d-flex justify-content-center text-center">
+        <form method="post" class="d-inline w-75">
+            <h2>@SharedLocalizer["Edit User"]</h2>
+            <div>
+                <a class="btn btn-pharus text-white mt-2"
+                   asp-area=""
+                   asp-controller="User"
+                   asp-action="Index">
+                    @SharedLocalizer["Back to Panel"]
+                </a>
+            </div>
+            <hr />
+            <div class="form-group-user">
+                <input asp-for="Username" class="form-control"
+                       autocomplete="off"
+                       placeholder="Username..." />
+                <div class="d-flex justify-content-center">
+                    <span></span>
                     <span asp-validation-for="Username" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label for="Email" class="control-label"> @SharedLocalizer["Email"]</label>
-                    <input asp-for="Email" class="form-control maxw-270" />
+            </div>
+            <div class="form-group-user">
+                <input asp-for="Email" class="form-control"
+                       placeholder="Email..." />
+                <div class="d-flex justify-content-center">
+                    <span></span>
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label for="RoleType" class="control-label">@SharedLocalizer["Role"]</label>
-                    <input asp-for="RoleType" class="form-control maxw-270" />
+            </div>
+            <div class="form-group-user">
+                <input asp-for="RoleType" class="form-control"
+                       placeholder="Role type..." />
+                <div class="d-flex justify-content-center">
+                    <span></span>
                     <span asp-validation-for="RoleType" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label for="PasswordHash" class="control-label">  @SharedLocalizer["New Password"]</label>
-                    <input for="PasswordHash" class="form-control maxw-270" autocomplete="new-password" />
+            </div>
+            <div class="form-group-user">
+                <input asp-for="PasswordHash"
+                       class="form-control"
+                       autocomplete="new-password"
+                       placeholder="New Password..." />
+                <div class="d-flex justify-content-center">
+                    <span></span>
                     <span asp-validation-for="PasswordHash" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label for="ConfirmPassword" class="control-label">@SharedLocalizer["Confirm Password"]</label>
-                    <input asp-for="ConfirmPassword" class="form-control maxw-270" autocomplete="new-password" />
+            </div>
+            <div class="form-group-user">
+                <input asp-for="ConfirmPassword"
+                       class="form-control"
+                       autocomplete="new-password"
+                       placeholder="Confirm Password..." />
+                <div class="d-flex justify-content-center">
+                    <span></span>
                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div>
-                <div class="button-holder">
-                    <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
-                    <button type="submit"
-                            asp-page-handler="EditUser"
-                            class="btn btn-pharus text-white btn-confirm-update"
-                            style="margin-right:40px">
-                        @SharedLocalizer["Save changes"]
-                    </button>
-                </div>
-            </form>
-        </div>
+            </div>
+            <div class="button-holder">
+                <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
+                <button type="submit"
+                        asp-page-handler="EditUser"
+                        class="btn btn-pharus text-white btn-confirm-update"
+                        style="margin-right:40px">
+                    @SharedLocalizer["Save changes"]
+                </button>
+            </div>
+        </form>
     </div>
 </div>
 
 @section Scripts {
+    <script>
+        $(function () {
+            $('form').on('submit', function () {
+                const fieldsValidation = $('.field-validation-error');
+                if (fieldsValidation.length != 0) {
+                    fieldsValidation.each(function () {
+                        $(this).siblings('span').addClass('icon-svg-warning');
+                        $(this).parent().removeClass('d-none');
+                        $(this).parent().addClass('d-flex');
+                    });
+                }
+            });
+
+            $('form').keydown(function () {
+                const fieldsValidation = $('.field-validation-error');
+                if (fieldsValidation.length != 0) {
+                    fieldsValidation.each(function () {
+                        $(this).parent().removeClass('d-flex');
+                        $(this).parent().addClass('d-none');
+                    });
+                }
+            });
+        });
+    </script>
     <partial name="Scripts/_CreateEditScriptsPartial">
 }

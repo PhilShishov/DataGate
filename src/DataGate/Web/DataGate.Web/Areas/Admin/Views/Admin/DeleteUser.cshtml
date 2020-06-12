@@ -6,52 +6,42 @@
     ViewData["Title"] = SharedLocalizer["Delete User"];
 }
 <div class="push">
-
-    <h2>
-        @SharedLocalizer["Delete User"]
-    </h2>
-    <div>
-        <a class="btn btn-pharus text-white mt-2"
-           asp-area=""
-           asp-controller="User"
-           asp-action="Index">
-            @SharedLocalizer["Back to Panel"]
-        </a>
-    </div>
-
-    <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-area="Admin"
-                  asp-controller="Admin"
-                  method="post"
-                  class="d-inline">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label for="Username" class="control-label">@SharedLocalizer["Username"]</label>
-                    <input asp-for="Username" disabled class="form-control maxw-270" autocomplete="off" />
-                    <span asp-validation-for="Username" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label for="Email" class="control-label"> @SharedLocalizer["Email"]</label>
-                    <input asp-for="Email" disabled class="form-control maxw-270" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label for="RoleType" class="control-label">@SharedLocalizer["Role"]</label>
-                    <input asp-for="RoleType" disabled class="form-control maxw-270" />
-                    <span asp-validation-for="RoleType" class="text-danger"></span>
-                </div>
-                <div class="button-holder">
-                    <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
-                    <button type="submit"
-                            asp-action="DeleteUser"
-                            class="btn btn-pharus text-white btn-confirm-delete">
-                        @SharedLocalizer["Delete User"]
-                    </button>
-                </div>
-            </form>
-        </div>
+    <div class="d-flex justify-content-center text-center">
+        <form asp-area="Admin"
+              asp-controller="Admin"
+              method="post"
+              class="d-inline w-75">
+            <h2 class="mb-2">@SharedLocalizer["Delete User"]</h2>
+            <div>
+                <a class="btn btn-pharus text-white mt-2"
+                   asp-area=""
+                   asp-controller="User"
+                   asp-action="Index">
+                    @SharedLocalizer["Back to Panel"]
+                </a>
+            </div>
+            <hr />
+            <div class="form-group-user">
+                <input asp-for="Username" disabled class="form-control" autocomplete="off" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group-user">
+                <input asp-for="Email" disabled class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group-user">
+                <input asp-for="RoleType" disabled class="form-control" />
+                <span asp-validation-for="RoleType" class="text-danger"></span>
+            </div>
+            <div class="button-holder">
+                <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
+                <button type="submit"
+                        asp-action="DeleteUser"
+                        class="btn btn-pharus text-white btn-confirm-delete">
+                    @SharedLocalizer["Delete User"]
+                </button>
+            </div>
+        </form>
     </div>
 </div>
 

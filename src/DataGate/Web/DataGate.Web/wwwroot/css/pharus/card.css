@@ -62,10 +62,12 @@
     font-size: 1.75rem;
     margin-bottom: auto !important;
     margin-top: auto !important;
+    color: royalblue;
 }
 
     .row .column .card a:hover {
         text-decoration: none;
+        color: rgb(0, 65, 118);
     }
 
 

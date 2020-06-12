@@ -137,7 +137,6 @@
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
-            [Display(Name = ModelConstants.UserLoginRememberMeDisplayName)]
             public bool RememberMe { get; set; }
 
             [GoogleReCaptchaValidation]

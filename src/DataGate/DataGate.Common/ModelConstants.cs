@@ -5,13 +5,10 @@
         // User models constants
         public const string UserRoleDisplayName = "Role";
 
-        // Login
-        public const string UserLoginRememberMeDisplayName = "Remember me?";
-
         // Create User
-        public const int UserUsernameMinLength = 3;
+        public const int UserUsernameMinLength = 8;
         public const int UserUsernameMaxLength = 20;
-        public const int UserPasswordMinLength = 3;
+        public const int UserPasswordMinLength = 5;
         public const int UserPasswordMaxLength = 50;
         public const string UserConfirmPasswordDisplayName = "Confirm password";
 
