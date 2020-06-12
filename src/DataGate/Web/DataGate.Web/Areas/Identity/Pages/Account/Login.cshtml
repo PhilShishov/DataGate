@@ -27,7 +27,7 @@
                                            id="username"
                                            placeholder="Username">
                                     <div class="d-flex justify-content-center">
-                                        @*<span class="icon-svg-warning"></span>*@
+                                        <span></span>
                                         <span asp-validation-for="Input.Username" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -40,7 +40,10 @@
                                            class="form-control"
                                            id="password"
                                            placeholder="Password">
-                                    <span asp-validation-for="Input.Password" class="text-danger d-flex justify-content-center"></span>
+                                    <div class="d-flex justify-content-center">
+                                        <span></span>
+                                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                    </div>
                                     <partial name="_ErrorMessage" model="Model.ErrorMessage" />
                                 </div>
                             </div>
@@ -80,6 +83,34 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        $(document).ready(function () {
+            $('form').on('submit', function () {
+                const fieldsValidation = $('.field-validation-error');
+                if (fieldsValidation.length != 0) {
+                    fieldsValidation.each(function () {
+                        $(this).siblings('span').addClass('icon-svg-warning');
+                        $(this).parent().removeClass('d-none');
+                        $(this).parent().addClass('d-flex');
+                    });
+                }
+            });
+
+            $('form').keydown(function () {
+                const fieldsValidation = $('.field-validation-error');
+                if (fieldsValidation.length != 0) {
+                    fieldsValidation.each(function () {
+                        //$(this).siblings().removeClass('field-validation-error
+                        $(this).parent().removeClass('d-flex');
+                        $(this).parent().addClass('d-none');
+                        //$(this).siblings('span').removeClass('icon-svg-warning');
+                        //$(this).siblings('span').removeClass('.field-validation-error');
+                    });
+                }
+            });
+        });
+    </script>
 
     <script src="https://www.google.com/recaptcha/api.js?render=@this.Configuration["GoogleReCaptcha:Key"]"></script>
     <script>

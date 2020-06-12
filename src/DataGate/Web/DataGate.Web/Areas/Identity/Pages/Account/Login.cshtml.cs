@@ -71,15 +71,6 @@
 
             if (this.ModelState.IsValid)
             {
-                var user = await this.userManager.FindByNameAsync(this.Input.Username);
-
-                if (await this.userManager.IsEmailConfirmedAsync(user) == false)
-                {
-                    this.ErrorMessage = ErrorMessages.NotConfirmedEmail;
-                    this.ModelState.AddModelError(string.Empty, ErrorMessages.NotConfirmedEmail);
-                    return this.Page();
-                }
-
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 Microsoft.AspNetCore.Identity.SignInResult result = await this.signInManager
@@ -87,6 +78,8 @@
 
                 if (result.Succeeded)
                 {
+                    var user = await this.userManager.FindByNameAsync(this.Input.Username);
+
                     this.logger.LogInformation("User logged in.");
 
                     if (user == null)
@@ -101,6 +94,13 @@
                     {
                         throw new InvalidOperationException($"Unexpected error occurred setting the last login date" +
                             $" ({lastLoginResult.ToString()}) for user with ID '{user.Id}'.");
+                    }
+
+                    if (await this.userManager.IsEmailConfirmedAsync(user) == false)
+                    {
+                        this.ErrorMessage = ErrorMessages.NotConfirmedEmail;
+                        this.ModelState.AddModelError(string.Empty, ErrorMessages.NotConfirmedEmail);
+                        return this.Page();
                     }
 
                     return this.Redirect(GlobalConstants.UserPanelUrl);

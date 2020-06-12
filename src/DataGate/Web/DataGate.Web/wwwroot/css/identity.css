@@ -8,13 +8,16 @@
 *
 */
 
-
-
 .icon-svg-warning {
     background: url(/images/exclamation-triangle-solid.svg) no-repeat center center;
-    width: 17px;
-    height: 17px;
+    width: 16px;
+    height: 16px;
     margin-right: 4px;
+    margin-top: 2px;
+}
+
+.text-danger {
+    font-size: 14px;
 }
 
 .btn {
@@ -174,15 +177,16 @@ img {
         text-decoration: underline;
     }
 
-.alert-dismissible .close {
-    top: 2px;
+.alert-dismissible .close-cookie-consent {
+    top: 4px;
     right: unset;
     background: green;
     color: white;
     text-shadow: none;
+    border: none;
 }
 
-    .alert-dismissible .close:hover {
+    .alert-dismissible .close-cookie-consent:hover {
         background: rgb(0, 65, 118);
     }
 /*========================================================================

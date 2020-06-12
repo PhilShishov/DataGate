@@ -71,15 +71,16 @@ img {
         text-decoration: underline;
     }
 
-.alert-dismissible .close {
+.alert-dismissible .close-cookie-consent {
     top: 2px;
     right: unset;
     background: green;
     color: white;
     text-shadow: none;
+    border: none;
 }
 
-    .alert-dismissible .close:hover {
+    .alert-dismissible .close-cookie-consent:hover {
         background: rgb(0, 65, 118);
     }
 
