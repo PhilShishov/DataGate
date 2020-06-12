@@ -64,11 +64,25 @@ img {
     font-size: 15px;
     position: fixed;
     width: 100%;
+    text-align: center;
 }
 
+    .container-cookie-consent a {
+        text-decoration: underline;
+    }
+
 .alert-dismissible .close {
-    top: 4px;
+    top: 2px;
+    right: unset;
+    background: green;
+    color: white;
+    text-shadow: none;
 }
+
+    .alert-dismissible .close:hover {
+        background: rgb(0, 65, 118);
+    }
+
 /*
 *
 * ==========================================
