@@ -7,7 +7,7 @@
 
     public static class SessionConfiguration
     {
-        private const int SessionIdleTimeout = 2;
+        private const int SessionIdleTimeout = 30;
 
         public static IServiceCollection ConfigureSession(this IServiceCollection services)
         {
