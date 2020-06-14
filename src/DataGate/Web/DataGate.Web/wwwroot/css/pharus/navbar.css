@@ -22,14 +22,14 @@
         text-transform: uppercase;
     }
 
-    .header-pharus img {
-        max-width: 100%;
-        height: auto;
-        margin-left: 10px;
-        margin-right: auto;
-        margin-top: auto;
-        margin-bottom: auto;
-    }
+.img-home-redirect {
+    max-width: 50px;
+    content: url(../../images/Logo_Pharus.jpg);
+    margin-left: 10px;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
 
 .header-pharus-app-navbar a {
     margin-top: 2%;
@@ -149,90 +149,4 @@
 .responsive-menu.open .open-responsive-menu:after {
     opacity: 1;
     right: 1%;
-}
-
-/*
-*
-* ==========================================
-* SIDENAV
-* ==========================================
-*
-*/
-#sidenav-footer {
-    position: fixed;
-    margin-left: 0.5%;
-    top: 94%;
-    display: none;
-}
-
-.sidenav-icon {
-    cursor: pointer
-}
-
-.li-bordered {
-    border-bottom: 1px solid;
-    border-color: #dee2e6;
-    line-height: 15px;
-}
-
-.sidenav {
-    margin-top: 6px;
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    background-color: #f9f9f9;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
-}
-
-    .sidenav a, .sidenav-dropdown-btn {
-        cursor: pointer;
-        padding: 8px 8px 8px 12px;
-        text-decoration: none;
-        font-size: 20px;
-        color: black;
-        display: block;
-        transition: 0.3s;
-        margin-bottom: 5%;
-        border: none;
-        background: none;
-        outline: none;
-        width: 100%;
-        text-align: left;
-    }
-
-    .sidenav .sidenav-btn-close {
-        cursor: pointer;
-        position: absolute;
-        top: -1.5%;
-        font-size: 30px;
-        margin-left: 84%;
-    }
-
-        .sidenav .sidenav-btn-close:hover {
-            background-color: #f9f9f9;
-        }
-
-/*dropdown for sidebar nav*/
-
-.dropdown-container {
-    display: none;
-    background: aliceblue;
-    padding-left: 10px;
-}
-
-    .dropdown-container a {
-        font-size: 17px;
-    }
-
-.show {
-    display: block;
-}
-
-.fa-caret-down {
-    float: right;
-    margin-right: 2%;
 }
