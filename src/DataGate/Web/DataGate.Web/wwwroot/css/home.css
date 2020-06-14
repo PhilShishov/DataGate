@@ -11,6 +11,7 @@
 
 body {
     font-family: 'Share', 'Arial Narrow', 'Arial', 'sans-serif';
+    background: url(../images/Background_Home.png) no-repeat center center fixed;
 }
 
 html {
@@ -28,14 +29,6 @@ h1 {
 img {
     max-width: 100%;
     height: auto;
-}
-
-#img-login-home:hover {
-    opacity: 0.8;
-}
-
-.logo-pharus {
-    margin-top: 9%;
 }
 
 .pharus-btn {
@@ -84,6 +77,24 @@ img {
         background: rgb(0, 65, 118);
     }
 
+.container-logo {
+    margin-top: 9%;
+}
+
+    .container-logo img {
+        content: url(../images/Layer_Logo.png);
+        height: 180px;
+        width: 180px;
+    }
+
+.container-btn-login img {
+    content: url(../images/Login_Button_Home.png);
+    width: 300px;
+}
+
+    .container-btn-login img:hover {
+        opacity: 0.8;
+    }
 /*
 *
 * ==========================================
@@ -104,7 +115,7 @@ img {
         margin-top: 9%;
     }
 
-    .logo-pharus img {
+    .container-logo img {
         height: 120px;
         width: 120px;
     }
