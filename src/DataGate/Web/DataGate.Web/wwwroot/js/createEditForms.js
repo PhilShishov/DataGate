@@ -174,3 +174,27 @@ $(function () {
         width: "269px",
     })
 });
+
+// Manage validation icons on form submit and keydown
+$(function () {
+    $('form').on('submit', function () {
+        const fieldsValidation = $('.field-validation-error');
+        if (fieldsValidation.length != 0) {
+            fieldsValidation.each(function () {
+                $(this).siblings('span').addClass('icon-svg-warning');
+                $(this).parent().removeClass('d-none');
+                $(this).parent().addClass('d-flex');
+            });
+        }
+    });
+
+    $('form').keydown(function () {
+        const fieldsValidation = $('.field-validation-error');
+        if (fieldsValidation.length != 0) {
+            fieldsValidation.each(function () {
+                $(this).parent().removeClass('d-flex');
+                $(this).parent().addClass('d-none');
+            });
+        }
+    });
+});
