@@ -6,8 +6,6 @@
 
     public static class ManageNavPages
     {
-        public static string Index => "Index";
-
         public static string Email => "Email";
 
         public static string ChangePassword => "ChangePassword";
@@ -19,8 +17,6 @@
         public static string PersonalData => "PersonalData";
 
         public static string TwoFactorAuthentication => "TwoFactorAuthentication";
-
-        public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
 
         public static string EmailNavClass(ViewContext viewContext) => PageNavClass(viewContext, Email);
 
