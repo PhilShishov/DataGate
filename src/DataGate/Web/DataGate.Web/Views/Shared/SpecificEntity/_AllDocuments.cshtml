@@ -40,7 +40,7 @@
                         </td>
                         <td class="p-1">
 
-                            <button class="btn-link-pharus text-left"
+                            <a class="btn-link-pharus text-left"
                                     formtarget="_blank"
                                     type="submit"
                                     asp-area=""
@@ -49,7 +49,7 @@
                                     name="docValue"
                                     value="@document.Name">
                                 @Html.Encode(@System.IO.Path.GetFileNameWithoutExtension(document.Name))
-                            </button>
+                            </a>
 
                         </td>
                         <td class="p-1">

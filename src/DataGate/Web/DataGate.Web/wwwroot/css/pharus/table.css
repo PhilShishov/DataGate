@@ -34,7 +34,7 @@
         height: 50px;
     }
 
-        .table-view-pharus tbody tr:before {
+        /*.table-view-pharus tbody tr:before {
             position: absolute;
             left: -14px;
             display: block;
@@ -46,7 +46,7 @@
             transition: -webkit-transform .3s ease-in-out;
             transition: transform .3s ease-in-out;
             transition: transform .3s ease-in-out,-webkit-transform;
-        }
+        }*/
 
         .table-view-pharus tbody tr:hover:before {
             -webkit-transform: translateX(10px);
