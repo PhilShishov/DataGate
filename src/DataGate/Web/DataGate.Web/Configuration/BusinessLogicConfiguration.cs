@@ -14,6 +14,7 @@
     using DataGate.Services.Data.Timelines;
     using DataGate.Services.Data.TimeSeries;
     using DataGate.Services.Messaging;
+    using DataGate.Services.Slug;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
@@ -24,6 +25,7 @@
             // Application services
             services.AddTransient<IEmailSender>(x => new SendGridEmailSender(configuration.GetValue<string>("SendGrid:ApiKey")));
             services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<ISlugGenerator, SlugGenerator>();
 
             services.AddTransient<IFileSystemService, FileSystemService>();
             services.AddTransient<IDocumentService, DocumentService>();

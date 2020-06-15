@@ -39,18 +39,16 @@
                             @document.ValidUntil
                         </td>
                         <td class="p-1">
-
-                            <a class="btn-link-pharus text-left"
+                            <button class="btn-link-pharus text-left"
                                     formtarget="_blank"
                                     type="submit"
                                     asp-area=""
                                     asp-route="files"
-                                    asp-route-name="@document.Name"
+                                    asp-route-name="@document.SluggedName"
                                     name="docValue"
                                     value="@document.Name">
                                 @Html.Encode(@System.IO.Path.GetFileNameWithoutExtension(document.Name))
-                            </a>
-
+                            </button>
                         </td>
                         <td class="p-1">
                             @document.Type

@@ -4,6 +4,7 @@
     {
         // Application Constants
         public const string SystemName = "DataGate";
+        public const string SystemBaseUrl = "https://pharusdatagate.com";
         public const string DataGateFullFooterDisplay = "- Pharus Management Lux SA 16, Avenue de la Gare L-1610 Luxembourg";
         public const string DataGateFooterDisplay = "- Pharus Management Lux SA";
         public const string FileSizeLimitConfiguration = "FileSizeLimit";

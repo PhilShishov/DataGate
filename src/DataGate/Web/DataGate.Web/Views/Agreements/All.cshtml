@@ -95,7 +95,7 @@
                                     @agreement.ExpirationDate
                                 </td>
                                 <td class="p-1">
-                                    <a class="btn-link-pharus text-left"
+                                    <button class="btn-link-pharus text-left"
                                             formtarget="_blank"
                                             type="submit"
                                             asp-area=""
@@ -104,7 +104,7 @@
                                             name="agrValue"
                                             value="@agreement.Name">
                                         @Html.Encode(@System.IO.Path.GetFileNameWithoutExtension(agreement.Name))
-                                    </a>
+                                    </button>
 
                                 </td>
                                 <td class="p-1 text-center">

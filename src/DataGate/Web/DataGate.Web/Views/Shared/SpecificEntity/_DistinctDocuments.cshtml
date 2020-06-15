@@ -15,7 +15,7 @@
                     {
                         <tr class="@document.FileId">
                             <td>
-                                <a class="btn-link-pharus text-left"
+                                <button class="btn-link-pharus text-left"
                                         formtarget="_blank"
                                         type="submit"
                                         asp-area=""
@@ -24,7 +24,7 @@
                                         name="docValue"
                                         value="@document.Name">
                                     @Html.Encode(System.IO.Path.GetFileNameWithoutExtension(document.Name))
-                                </a>
+                                </button>
                             </td>
                         </tr>
                     }
@@ -55,7 +55,7 @@
                                     @document.Description
                                 </td>
                                 <td>
-                                    <a class="btn-link-pharus text-left"
+                                    <button class="btn-link-pharus text-left"
                                             formtarget="_blank"
                                             type="submit"
                                             asp-area=""
@@ -64,7 +64,7 @@
                                             name="docValue"
                                             value="@document.Name">
                                         @Html.Encode(System.IO.Path.GetFileNameWithoutExtension(document.Name))
-                                    </a>
+                                    </button>
                                 </td>
                             </tr>
                         }
@@ -97,7 +97,7 @@
                                 @agreement.Description
                             </td>
                             <td>
-                                <a class="btn-link-pharus text-left"
+                                <button class="btn-link-pharus text-left"
                                         formtarget="_blank"
                                         type="submit"
                                         asp-area=""
@@ -106,7 +106,7 @@
                                         name="agrValue"
                                         value="@agreement.Name">
                                     @Html.Encode(System.IO.Path.GetFileNameWithoutExtension(agreement.Name))
-                                </a>
+                                </button>
                             </td>
                         </tr>
                     }
