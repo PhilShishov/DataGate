@@ -34,6 +34,25 @@
         height: 50px;
     }
 
+        .table-view-pharus tbody tr:before {
+            position: absolute;
+            left: -14px;
+            display: block;
+            width: 10px;
+            height: inherit;
+            background: rgb(0, 65, 118);
+            content: "";
+            -webkit-transition: -webkit-transform .3s ease-in-out;
+            transition: -webkit-transform .3s ease-in-out;
+            transition: transform .3s ease-in-out;
+            transition: transform .3s ease-in-out,-webkit-transform;
+        }
+
+        .table-view-pharus tbody tr:hover:before {
+            -webkit-transform: translateX(10px);
+            transform: translateX(10px);
+        }
+
         .table-view-pharus tbody tr td {
             vertical-align: middle;
             text-align: center;
@@ -89,6 +108,6 @@ a.a-underline:hover {
     margin-top: 67px;
 }
 
-#table-info-pharus{
+#table-info-pharus {
     font-size: 15px;
 }
