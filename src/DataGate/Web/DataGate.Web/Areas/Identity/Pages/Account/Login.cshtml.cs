@@ -18,11 +18,10 @@
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.Extensions.Logging;
 
-    //[EnableCors]
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
-        private const string UserIndexUrl = "/User/Index";
+        private const string UserIndexUrl = "/userpanel";
 
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
