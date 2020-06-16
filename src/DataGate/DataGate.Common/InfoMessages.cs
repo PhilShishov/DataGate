@@ -6,6 +6,8 @@
 
         public const string FileUploaded = "File uploaded.";
 
+        public const string FeesAdded = "Fees added";
+
         public const string SuccessfulEdit = "Entity edited.";
 
         public const string SuccessfulCreate = "Entity successfully created.";

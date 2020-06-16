@@ -61,7 +61,7 @@
                 stream.Close();
             }
 
-            return this.Json(new { success = true,  dto = dto });
+            return this.Json(new { success = true, dto = dto });
         }
 
         [HttpPost]
@@ -85,21 +85,33 @@
             }
 
             var dto = AutoMapperConfig.MapperInstance.Map<UploadOnSuccessDto>(model);
+            //dto.FileId = 
 
-            await this.service.UploadAgreement(model);
+            //await this.service.UploadAgreement(model);
 
-            using (var stream = new FileStream(path, FileMode.Create))
-            {
-                await model.FileToUpload.CopyToAsync(stream);
-                stream.Close();
-            }
+            //using (var stream = new FileStream(path, FileMode.Create))
+            //{
+            //    await model.FileToUpload.CopyToAsync(stream);
+            //    stream.Close();
+            //}
 
             return this.Json(new { success = true, dto = dto });
         }
 
         public IActionResult OnUploadSuccess(
-          [Bind("AreaName, Date, Id, RouteName")] UploadOnSuccessDto dto)
+          [Bind("AreaName, Date, Id, RouteName, IsFee, FileId")] UploadOnSuccessDto dto)
         {
+            if (dto.IsFee)
+            {
+                return this.ShowInfo(
+                InfoMessages.FileUploaded,
+                GlobalConstants.FeesRouteName,
+                new
+                {
+                    fileId = dto.FileId,
+                });
+            }
+
             return this.ShowInfo(
                 InfoMessages.FileUploaded,
                 dto.RouteName,

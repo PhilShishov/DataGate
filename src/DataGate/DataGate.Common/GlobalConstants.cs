@@ -40,6 +40,7 @@
         public const string CreateActionName = "Create";
 
         // Routes names
+        public const string FeesRouteName = "fees";
         public const string AllFundsRouteName = "allFunds";
         public const string FundDetailsRouteName = "fundDetails";
         public const string FundSubFundsRouteName = "fundSubFunds";
