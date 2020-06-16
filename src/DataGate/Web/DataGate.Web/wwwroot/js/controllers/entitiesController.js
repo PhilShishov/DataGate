@@ -138,11 +138,11 @@ $(function () {
     // Modal multiselect for column selection
     $('.multiselect').multiselect();
 
-    // ________________________________________________________
-    //
-    // Double top scroll for wide table
-    $('.double-scroll').doubleScroll();
-    $('.table-wrapper-double-scroll').doubleScroll({ resetOnWindowResize: true });
+    //// ________________________________________________________
+    ////
+    //// Double top scroll for wide table
+    //$('.double-scroll').doubleScroll();
+    //$('.table-wrapper-double-scroll').doubleScroll({ resetOnWindowResize: true });
 })
 
 // ________________________________________________________

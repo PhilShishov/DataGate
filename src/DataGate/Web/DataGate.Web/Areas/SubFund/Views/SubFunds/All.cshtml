@@ -47,7 +47,10 @@
             // Datatable options - sort, search, pagination
             $.fn.dataTable.moment('DD/MM/YYYY');
 
-            $('.table-view-pharus').DataTable();
+            $('.table-view-pharus').DataTable({
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                "scrollX": true
+            });
 
             // ________________________________________________________
             //
