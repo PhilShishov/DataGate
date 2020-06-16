@@ -52,10 +52,16 @@
                                     value="@agreement.Name">
                                 @Html.Encode(@System.IO.Path.GetFileNameWithoutExtension(agreement.Name))
                             </button>
-
                         </td>
                         <td class="p-1 text-center">
-                            <button type="button" class="btn btn-pharus btn-sm mr-1 btn-delete">
+                            <a class="btn btn-pharus btn-sm mr-1"
+                               asp-area=""
+                               asp-route="fees"
+                               asp-route-fileId="@agreement.FileId">
+                                @SharedLocalizer["Fees"]
+                            </a>
+                            |
+                            <button type="button" class="btn btn-pharus btn-sm mx-1 btn-delete">
                                 @SharedLocalizer["Delete"]
                             </button>
                         </td>

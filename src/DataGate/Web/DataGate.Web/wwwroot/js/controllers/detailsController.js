@@ -159,12 +159,25 @@ function uploadModals(token, json) {
     placeholderAgreement.on('click', '[data-save="modal"]', function (event) {
         event.preventDefault();
 
+        const isFee = false;
         const form = $(this).parents('.modal').find('form');
         const token = $('input[name=__RequestVerificationToken]', form).val();
         const actionUrl = form.attr('action');
         const dataToSend = new FormData(form.get(0));
 
-        postModalRequest(placeholderAgreement, actionUrl, dataToSend, token);
+        postModalRequest(placeholderAgreement, actionUrl, dataToSend, token, isFee);
+    });
+
+    placeholderAgreement.on('click', '[data-save="modalFees"]', function (event) {
+        event.preventDefault();
+
+        const isFee = true;
+        const form = $(this).parents('.modal').find('form');
+        const token = $('input[name=__RequestVerificationToken]', form).val();
+        const actionUrl = form.attr('action');
+        const dataToSend = new FormData(form.get(0));
+
+        postModalRequest(placeholderAgreement, actionUrl, dataToSend, token, isFee);
     });
 
     function getModalRequest(placeholderElement, url) {
@@ -179,7 +192,7 @@ function uploadModals(token, json) {
         });
     }
 
-    function postModalRequest(placeholderElement, actionUrl, dataToSend, token) {
+    function postModalRequest(placeholderElement, actionUrl, dataToSend, token, isFee) {
         $.ajax({
             url: actionUrl,
             method: 'POST',
@@ -190,7 +203,7 @@ function uploadModals(token, json) {
         }).done(function (data) {
             if (data.success) {
                 const { areaName, date, id, routeName } = data.dto;
-                const url = '/Upload/OnUploadSuccess?areaName=' + areaName + '&date=' + date + '&id=' + id + '&routeName=' + routeName;
+                const url = '/Upload/OnUploadSuccess?areaName=' + areaName + '&date=' + date + '&id=' + id + '&routeName=' + routeName + '&isFee=' + isFee;
                 window.location = url;
                 return;
             }

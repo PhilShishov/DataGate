@@ -20,6 +20,10 @@ namespace DataGate.Web.Configuration
                          pattern: "media/{name:minlength(5)}",
                          new { controller = "Media", action = "Read" });
                     endpoints.MapControllerRoute(
+                         name: "fees",
+                         pattern: "fees/{fileId}",
+                         new { controller = "Fees", action = "Index" });
+                    endpoints.MapControllerRoute(
                           name: "search-results",
                           pattern: "search-results",
                           new { controller = "Search", action = "Result" });
