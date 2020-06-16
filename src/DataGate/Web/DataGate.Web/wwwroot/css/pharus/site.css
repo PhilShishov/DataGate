@@ -4,6 +4,10 @@
     font-size: 12px;
 }
 
+.ui-widget-shadow {
+    box-shadow: none;
+}
+
 .chosen-container {
     font-size: 15px;
 }
@@ -11,6 +15,10 @@
 .select2-container--classic .select2-results__option--highlighted[aria-selected] {
     background-color: lightgrey;
     color: inherit;
+}
+
+table.dataTable thead th, table.dataTable thead td {
+    padding: 0.75rem;
 }
 
 :root {

@@ -20,7 +20,7 @@
                                         type="submit"
                                         asp-area=""
                                         asp-route="files"
-                                        asp-route-name="@document.Name"
+                                        asp-route-name="@document.SluggedName"
                                         name="docValue"
                                         value="@document.Name">
                                     @Html.Encode(System.IO.Path.GetFileNameWithoutExtension(document.Name))
@@ -60,7 +60,7 @@
                                             type="submit"
                                             asp-area=""
                                             asp-route="files"
-                                            asp-route-name="@document.Name"
+                                            asp-route-name="@document.SluggedName"
                                             name="docValue"
                                             value="@document.Name">
                                         @Html.Encode(System.IO.Path.GetFileNameWithoutExtension(document.Name))
@@ -102,7 +102,7 @@
                                         type="submit"
                                         asp-area=""
                                         asp-route="files"
-                                        asp-route-name="@agreement.Name"
+                                        asp-route-name="@agreement.SluggedName"
                                         name="agrValue"
                                         value="@agreement.Name">
                                     @Html.Encode(System.IO.Path.GetFileNameWithoutExtension(agreement.Name))

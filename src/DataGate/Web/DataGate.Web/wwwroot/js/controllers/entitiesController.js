@@ -123,6 +123,7 @@ $(function () {
     //
     // Additional information about headers
     $('[data-toggle="tooltip"]').uitooltip({
+        position: { my: "center bottom", at: "center top" },
         html: true
     })
 
