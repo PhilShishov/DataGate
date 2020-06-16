@@ -78,6 +78,7 @@
 
 <script>
     $(function () {
+        $('.table-view-pharus').DataTable();
         // ________________________________________________________
         //
         // Double top scroll for wide table
@@ -95,41 +96,41 @@
         const fileId = $(this).closest('tr').attr('class');
 
         var jqXhr = $.ajax({
-            type: 'GET',
-            url: '/media/delete',
-            dataType: 'json',
-            contentType: 'application/json; charset=utf-8',
-            headers: { 'X-CSRF-TOKEN': tokenAgr },
-            data: { fileId: fileId, agrValue: agrValue, areaName: areaName }
+        type: 'GET',
+        url: '/media/delete',
+        dataType: 'json',
+        contentType: 'application/json; charset=utf-8',
+        headers: { 'X-CSRF-TOKEN': tokenAgr },
+        data: { fileId: fileId, agrValue: agrValue, areaName: areaName }
         });
 
         swal({
-            title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this file!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this file!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
         }).then((isConfirm) => {
-            if (!isConfirm) return;
-            jqXhr
-                .done(function (data) {
-                    if (data.fileId == 'false') {
-                        swal("Error deleting!", "Please try again", {
-                            icon: "error",
-                        });
-                        return false;
-                    }
-                    $('.tbl-agreements .' + data.fileId).remove();
-                    $('.tbl-distinct-agreements .' + data.fileId).remove();
-                    swal("Your file has been deleted!", {
-                        icon: "success",
-                    });
-                })
-                .fail(function (request, status, error) {
-                    swal(request.responseText, {
-                        icon: "error"
-                    })
-                });
+        if (!isConfirm) return;
+        jqXhr
+        .done(function (data) {
+        if (data.fileId == 'false') {
+        swal("Error deleting!", "Please try again", {
+        icon: "error",
         });
-    });
+        return false;
+        }
+        $('.tbl-agreements .' + data.fileId).remove();
+        $('.tbl-distinct-agreements .' + data.fileId).remove();
+        swal("Your file has been deleted!", {
+        icon: "success",
+        });
+        })
+        .fail(function (request, status, error) {
+        swal(request.responseText, {
+        icon: "error"
+        })
+        });
+        });
+        });
 </script>

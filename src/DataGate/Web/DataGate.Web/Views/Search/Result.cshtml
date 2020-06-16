@@ -14,7 +14,7 @@
 
     @if (Model.Results.Any())
     {
-        <table class="table-bordered table-hover table-view-pharus w-35 mx-auto">
+        <table class="table-bordered table-hover table-view-pharus mx-auto" style="width:35%;">
             <thead>
                 <tr>
                     <th class="text-secondary p-1">
@@ -49,3 +49,13 @@
     }
 
 </div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('.table-view-pharus').DataTable({
+                searching: false,
+            });
+        });
+    </script>
+}
