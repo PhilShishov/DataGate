@@ -90,9 +90,7 @@
             if (!string.IsNullOrEmpty(areaName))
             {
                 string path = this.GetTargetPath(ref docValue, agrValue, areaName);
-
                 var fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
-
                 FileStreamResult fileStreamResult = new FileStreamResult(fileStream, $"{GlobalConstants.PdfStreamMimeType}");
 
                 if (fileStreamResult != null)

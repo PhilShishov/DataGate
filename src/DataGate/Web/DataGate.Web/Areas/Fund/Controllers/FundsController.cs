@@ -30,6 +30,7 @@
         {
             var viewModel = await EntitiesVMSetup
                 .SetGet<EntitiesViewModel>(this.service, SqlFunctionDictionary.AllActiveFund);
+
             return this.View(viewModel);
         }
 
@@ -51,3 +52,27 @@
         }
     }
 }
+
+//foreach (var header in headers)
+//{
+//    this.ViewData[$"{header}SortParm"] = sortOrder == header ? $"{header}_desc" : header;
+//}
+
+//if (!string.IsNullOrEmpty(sortOrder))
+//{
+//    foreach (var header in headers)
+//    {
+//        int index = headers.ToList().IndexOf(header);
+
+//        if (sortOrder == $"{header}_desc")
+//        {
+//            values = values.OrderByDescending(v => v[index]).ToList();
+//            break;
+//        }
+//        else if (sortOrder == header)
+//        {
+//            values = values.OrderBy(v => v[index]).ToList();
+//            break;
+//        }
+//    }
+//}

@@ -124,6 +124,20 @@
       ]
     },
     {
+      "provider": "cdnjs",
+      "library": "datatables@1.10.20",
+      "destination": "wwwroot/lib/datatables/",
+      "files": [
+        "css/jquery.dataTables.min.css",
+        "css/jquery.dataTables.css",
+        "js/jquery.dataTables.min.js",
+        "js/jquery.dataTables.js",
+        "images/sort_asc.png",
+        "images/sort_both.png",
+        "images/sort_desc.png"
+      ]
+    },
+    {
       "library": "moment@2.26.0",
       "destination": "wwwroot/lib/moment/",
       "files": [
