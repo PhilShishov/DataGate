@@ -1,7 +1,91 @@
-﻿
+﻿@model FeesInputModel
+@inject IStringLocalizer<SharedResources> SharedLocalizer
+
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = SharedLocalizer["Fees"];
+
+    var containerRoute = StringSwapper.ByArea(
+                                                Model.AreaName,
+                                                GlobalConstants.FundDetailsRouteName,
+                                                GlobalConstants.SubFundDetailsRouteName,
+                                                GlobalConstants.ShareClassDetailsRouteName);
 }
 
-<h1>Index</h1>
+<div class="push">
+    <div class="d-flex justify-content-center text-center">
+        <form asp-area=""
+              asp-controller="Fees"
+              asp-action="Update"
+              method="post"
+              class="d-inline w-75">
+            <h4 class="mb-5">@SharedLocalizer["Adjust Fees"]</h4>
+            <div class="d-inline">
+
+                <div class="column-form">
+                    @*<div class="form-group">
+                            <label asp-for="" class="text-torshia"></label><br>
+                            <input asp-for=""
+                                   type="date"
+                                   min="2018-01-01"
+                                   class="form-control">
+                            <span asp-validation-for="" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="FundName" class="text-torshia"></label><br>
+                            <input type="text"
+                                   class="form-control "
+                                   asp-for="FundName">
+                            <span asp-validation-for="FundName" class="text-danger"></span>
+                        </div>*@
+                </div>
+
+                <div class="column-form">
+                    @*<div class="form-group">
+                            <label asp-for="TinNumber" class="text-torshia"></label><br>
+                            <input type="text"
+                                   class="form-control"
+                                   asp-for="TinNumber">
+                            <span asp-validation-for="TinNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="FACode" class="text-torshia"></label><br>
+                            <input type="text"
+                                   class="form-control "
+                                   asp-for="FACode">
+                            <span asp-validation-for="FACode" class="text-danger"></span>
+                        </div>*@
+
+                </div>
+
+                <div class="column-form">
+                    @*<div class="form-group">
+                            <label asp-for="Status" class="text-torshia"></label><br>
+                            <select class="select-pharus" asp-for="Status">
+                                <option selected disabled value="0">-- Choose Status --</option>
+                                @foreach (var status in (List<string>)ViewData["Status"])
+                                {
+                                    <option value="@status">@status</option>
+                                }
+                            </select>
+                        </div>
+                        <span asp-validation-for="Status" class="text-danger"></span>*@
+                </div>
+            </div>
+
+            <div class="button-holder my-4">
+                <a class="btn btn-pharus btn-lg"asp-area="@Model.AreaName" asp-route="@containerRoute" asp-route-id="@Model.Id" asp-route-date="@Model.Date">
+                    @SharedLocalizer["CONTAINER"]
+                </a>
+
+                <button type="submit"
+                        class="btn btn-pharus btn-lg btn-confirm-create ml-5">
+                    @SharedLocalizer["Update Fees"]
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
 

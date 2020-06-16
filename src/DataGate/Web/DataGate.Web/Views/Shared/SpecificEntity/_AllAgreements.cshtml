@@ -54,12 +54,13 @@
                             </button>
                         </td>
                         <td class="p-1 text-center">
-                            <a class="btn btn-pharus btn-sm mr-1"
-                               asp-area=""
-                               asp-route="fees"
-                               asp-route-fileId="@agreement.FileId">
+                            <button class="btn btn-pharus btn-sm mr-1"
+                                    type="submit"
+                                    asp-area=""
+                                    asp-route="fees"
+                                    asp-route-fileId="@agreement.FileId">
                                 @SharedLocalizer["Fees"]
-                            </a>
+                            </button>
                             |
                             <button type="button" class="btn btn-pharus btn-sm mx-1 btn-delete">
                                 @SharedLocalizer["Delete"]
@@ -70,6 +71,8 @@
             </tbody>
         </table>
         <input type="hidden" name="AreaName" value="@Model.AreaName" />
+        <input type="hidden" name="Id" value="@Model.ContainerId" />
+        <input type="hidden" name="Date" value="@Model.Date" />
     </div>
 </form>
 
