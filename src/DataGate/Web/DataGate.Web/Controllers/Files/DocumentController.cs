@@ -99,7 +99,12 @@
         [Route("loadAllAgr")]
         public IActionResult GetAllAgreements(int id, string date, string areaName)
         {
-            var model = new AgreementOverviewViewModel { AreaName = areaName };
+            var model = new AgreementOverviewViewModel
+            {
+                AreaName = areaName,
+                ContainerId = id,
+                Date = date,
+            };
             var dateParsed = DateTimeParser.FromWebFormat(date);
 
             string function = StringSwapper.ByArea(areaName,

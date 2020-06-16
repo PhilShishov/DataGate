@@ -7,5 +7,9 @@
         public IEnumerable<AgreementViewModel> Agreements { get; set; }
 
         public string AreaName { get; set; }
+
+        public int ContainerId { get; set; }
+
+        public string Date { get; set; }
     }
 }

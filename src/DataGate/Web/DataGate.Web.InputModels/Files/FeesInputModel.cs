@@ -1,8 +1,8 @@
-namespace DataGate.Web.InputModels.Files
+﻿namespace DataGate.Web.InputModels.Files
 {
     using DataGate.Services.Mapping;
 
-    public class UploadOnSuccessDto : IMapFrom<UploadDocumentInputModel>
+    public class FeesInputModel : IMapFrom<UploadOnSuccessDto>
     {
         public string AreaName { get; set; }
 
@@ -10,10 +10,6 @@ namespace DataGate.Web.InputModels.Files
 
         public int Id { get; set; }
 
-        public string RouteName { get; set; }
-
         public int FileId { get; set; }
-
-        public bool IsFee { get; set; }
     }
 }
