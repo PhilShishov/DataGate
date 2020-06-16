@@ -15,13 +15,6 @@
             var viewModel = AutoMapperConfig.MapperInstance.Map<FeesInputModel>(dto);
 
             return this.View(viewModel);
-
-
-
-            //return this.ShowInfo(
-            //   InfoMessages.FileUploaded,
-            //   dto.RouteName,
-            //   new { area = dto.AreaName, id = dto.Id, date = dto.Date });
         }
     }
 }
