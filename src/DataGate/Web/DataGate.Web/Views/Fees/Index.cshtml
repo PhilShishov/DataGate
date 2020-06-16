@@ -5,10 +5,10 @@
     ViewData["Title"] = SharedLocalizer["Fees"];
 
     var containerRoute = StringSwapper.ByArea(
-                                                Model.AreaName,
-                                                GlobalConstants.FundDetailsRouteName,
-                                                GlobalConstants.SubFundDetailsRouteName,
-                                                GlobalConstants.ShareClassDetailsRouteName);
+                    Model.AreaName,
+                    GlobalConstants.FundDetailsRouteName,
+                    GlobalConstants.SubFundDetailsRouteName,
+                    GlobalConstants.ShareClassDetailsRouteName);
 }
 
 <div class="push">
@@ -75,7 +75,7 @@
 
             <div class="button-holder my-4">
                 <a class="btn btn-pharus btn-lg"asp-area="@Model.AreaName" asp-route="@containerRoute" asp-route-id="@Model.Id" asp-route-date="@Model.Date">
-                    @SharedLocalizer["CONTAINER"]
+                    @SharedLocalizer["Container"]
                 </a>
 
                 <button type="submit"
@@ -83,9 +83,6 @@
                     @SharedLocalizer["Update Fees"]
                 </button>
             </div>
-
         </form>
     </div>
 </div>
-
-

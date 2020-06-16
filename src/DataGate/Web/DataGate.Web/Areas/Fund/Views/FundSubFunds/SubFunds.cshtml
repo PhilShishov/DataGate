@@ -44,6 +44,18 @@
         $(document).ready(function () {
             // ________________________________________________________
             //
+            // Datatable options - sort, search, pagination
+            $.fn.dataTable.moment('DD/MM/YYYY');
+
+            $('.table-view-pharus').DataTable({
+                searching: false,
+                paging: false,
+                "pageLength": 35,
+                "autoWidth": false
+            });
+
+            // ________________________________________________________
+            //
             // Extract view as excel or pdf
             extract(model);
             submitForm();
