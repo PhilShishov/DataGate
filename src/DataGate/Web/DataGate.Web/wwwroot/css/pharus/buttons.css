@@ -22,6 +22,7 @@
     -webkit-transition-property: transform;
     transition-property: transform;
     padding: 4px 7px 3px;
+    text-transform: uppercase;
 }
 
     .btn-pharus:hover {
