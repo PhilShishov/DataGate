@@ -6,6 +6,7 @@
     CHECKBOX_ACTIVE: 'activeCheckBox',
     TABLE_EXTRACT: 'table-to-extract',
     TBODY_UPDATE_INACTIVE: 'tbody-update-inactive',
+    BTN_RESET: 'btn-reset',
 };
 
 const SELECTORS = {
@@ -93,6 +94,18 @@ function submitForm() {
 
         function submitFormOnChange() {
             updateForm.submit();
+        }
+    }
+};
+
+function reload() {
+    const resetBtns = document.getElementsByClassName(HTML.BTN_RESET);
+
+    if (resetBtns) {
+        for (let btn of resetBtns) {
+            btn.addEventListener('click', () => {
+                document.location.reload(true);
+            });
         }
     }
 };

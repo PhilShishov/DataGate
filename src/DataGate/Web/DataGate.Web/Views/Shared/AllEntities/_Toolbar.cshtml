@@ -14,15 +14,6 @@
       asp-action="All"
       id="update-form">
 
-    <div class="select-div-pharus mt-0">
-        <select asp-for="SelectTerm"
-                id="SelectTerm"
-                class="form-control input-sm"
-                onchange="this.form.submit()">
-            <option value=@Model.SelectTerm selected>@Model.SelectTerm</option>
-        </select>
-    </div>
-
     <div class="ml-4">
         <button type="button"
                 class="btn btn-sm btn-pharus"

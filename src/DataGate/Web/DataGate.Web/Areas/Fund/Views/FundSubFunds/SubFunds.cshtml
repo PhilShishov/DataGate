@@ -51,7 +51,8 @@
                 searching: false,                
                 "pageLength": 12,
                 "lengthChange": false,
-                "scrollX": true
+                "scrollX": true,
+                stateSave: true
             });
 
             // ________________________________________________________
@@ -59,6 +60,7 @@
             // Extract view as excel or pdf
             extract(model);
             submitForm();
+            reload();
 
             // ________________________________________________________
             //
