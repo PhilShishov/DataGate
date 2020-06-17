@@ -1,0 +1,65 @@
+﻿/*
+*
+* ==========================================
+* DataTable 
+* ==========================================
+*
+*/
+
+
+.dataTables_wrapper .dataTables_filter input[type=search] {
+    border: 1px solid #49505747;
+    border-width: 0 0 2px;
+}
+
+    .dataTables_wrapper .dataTables_filter input[type=search]:focus {
+        box-shadow: none;
+        border-color: #005596;
+        outline: none;
+    }
+
+.dataTables_wrapper .top {
+    background: #e9e9e9;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    border: 1px solid #dddddd;
+    height: 40px;
+}
+
+.dataTables_wrapper .dataTables_info {
+    padding-top: unset;
+}
+
+.dataTables_wrapper .bottom {
+    background: #e9e9e9;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    border: 1px solid #dddddd;
+    height: 40px;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    padding-top: unset;
+}
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        font-size: small;
+        background: #f6f6f6;
+        box-sizing: border-box;
+        display: inline-block;
+        min-width: 1.5em;
+        padding: 0.5em;
+        margin-left: 2px;
+        text-align: center;
+        text-decoration: none !important;
+        cursor: pointer;
+        *cursor: hand;
+        border: 1px solid transparent;
+        height: 30px;
+    }
+
+table.dataTable thead th, table.dataTable thead td {
+    padding: 0.75rem;
+}
