@@ -59,6 +59,7 @@
 
   <ItemGroup>
     <Folder Include="logs\" />
+    <Folder Include="keys\" />
     <Folder Include="wwwroot\FileFolder\Agreement\" />
     <Folder Include="wwwroot\FileFolder\Fund\" />
     <Folder Include="wwwroot\FileFolder\ShareClass\" />
