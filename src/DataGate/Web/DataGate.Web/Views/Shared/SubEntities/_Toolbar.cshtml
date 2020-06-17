@@ -8,9 +8,9 @@
         .ToString();
 
     var containerRoute = StringSwapper.ByController(
-                                                controller, 
-                                                GlobalConstants.FundDetailsRouteName, 
-                                                GlobalConstants.SubFundDetailsRouteName, 
+                                                controller,
+                                                GlobalConstants.FundDetailsRouteName,
+                                                GlobalConstants.SubFundDetailsRouteName,
                                                 string.Empty);
 }
 
@@ -27,15 +27,6 @@
         </a>
     </div>
 
-    <div class="select-div-pharus mt-0 ml-3">
-        <select asp-for="SelectTerm"
-                id="SelectTerm"
-                class="form-control input-sm"
-                onchange="this.form.submit()">
-            <option value=@Model.SelectTerm selected>@Model.SelectTerm</option>
-        </select>
-    </div>
-
     <div class="ml-4">
         <button type="button"
                 class="btn btn-sm btn-pharus"
@@ -47,9 +38,8 @@
     </div>
     <div class="ml-4">
         <input type="button"
-               class="btn btn-pharus btn-sm"
-               value="RESET"
-               onClick="document.location.reload(true)">
+               class="btn btn-pharus btn-sm btn-reset"
+               value="RESET">
     </div>
 
     <div class="vertical mx-3"></div>
