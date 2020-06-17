@@ -3,7 +3,6 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    using DataGate.Services.SqlClient;
     using DataGate.Services.SqlClient.Contracts;
 
     public class TimeSeriesService : ITimeSeriesService
@@ -15,10 +14,10 @@
             this.sqlManager = sqlManager;
         }
 
-        public async IAsyncEnumerable<string[]> GetData(int id, int skip)
+        public async IAsyncEnumerable<string[]> GetPrices(string function, int id, int skip)
         {
             var query = this.sqlManager
-               .ExecuteQueryTimeSeriesAsync(string.Format(TimeSeriesFunctions.SqlFunctionTimeSeriesData, id))
+               .ExecuteQueryTimeSeriesAsync(string.Format(function, id))
                .Skip(skip);
 
             await foreach (var item in query)
@@ -27,10 +26,10 @@
             }
         }
 
-        public async IAsyncEnumerable<string> GetDates(int id, int skip)
+        public async IAsyncEnumerable<string> GetDates(string function, int id, int skip)
         {
             var query = this.sqlManager
-                .ExecuteQueryTimeSeriesAsync(string.Format(TimeSeriesFunctions.SqlFunctionTimeSeriesDates, id))
+                .ExecuteQueryTimeSeriesAsync(string.Format(function, id))
                 .Skip(skip)
                 .Select(ts => ts[1]);
 
@@ -40,10 +39,10 @@
             }
         }
 
-        public async IAsyncEnumerable<string> GetProviders(int id, int skip)
+        public async IAsyncEnumerable<string> GetProviders(string function, int id, int skip)
         {
             var query = this.sqlManager
-                .ExecuteQueryTimeSeriesAsync(string.Format(TimeSeriesFunctions.SqlFunctionTimeSeriesProviders, id))
+                .ExecuteQueryTimeSeriesAsync(string.Format(function, id))
                 .Skip(skip)
                 .Select(tt => tt[0]);
 

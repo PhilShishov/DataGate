@@ -8,7 +8,7 @@
         // Create User
         public const int UserUsernameMinLength = 8;
         public const int UserUsernameMaxLength = 20;
-        public const int UserPasswordMinLength = 5;
+        public const int UserPasswordMinLength = 8;
         public const int UserPasswordMaxLength = 50;
         public const string UserConfirmPasswordDisplayName = "Confirm password";
 

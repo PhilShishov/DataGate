@@ -17,7 +17,7 @@
                     <div class="h-100 d-flex">
                         <partial name="AllEntities/_Toolbar" />
                         <div class="title-main">
-                            <h2 class="text-torshia">@SharedLocalizer["Pharus Share Classes"]</h2>
+                            <h2 class="text-torshia">@SharedLocalizer["Share Classes Managed by ManCo"]</h2>
                         </div>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
             <hr class="mt-1 mb-0" />
         </div>
         <h2 class="text-center text-torshia title-responsive">
-            @SharedLocalizer["Pharus Share Classes"]
+            @SharedLocalizer["Share Classes Managed by ManCo"]
         </h2>
         <partial name="AllEntities/_ViewTable" />
     </div>
@@ -48,15 +48,16 @@
 
             $('.table-view-pharus').DataTable({
                 "dom": '<"top"lf>rt<"bottom"ip><"clear">',
-                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                "lengthMenu": [[-1, 10, 25, 50], ["All", 10, 25, 50]],
                 "scrollX": true,
-                stateSave: true
+                stateSave: true,
+                "autoWidth": false,
             });
 
-            $("select").chosen({
+            $(".dataTables_length select").chosen({
                 disable_search_threshold: 10,
                 width: "50px",
-            })
+            });
 
             // ________________________________________________________
             //
