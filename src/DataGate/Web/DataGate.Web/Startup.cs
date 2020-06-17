@@ -41,7 +41,6 @@
                 .ConfigureSession()
                 .ConfigureCache(this.configuration)
                 .ConfigureLocalization()
-                //.ConfigureCors()
                 .ConfigureMvc()
                 .ConfigureCookies()
                 .ConfigureSettings(this.configuration)
@@ -96,7 +95,6 @@
             app.UseSession();
             app.UseRouting();
 
-            //app.UseCors("DataGatePolicy");
             app.UseAuthentication();
             app.UseAuthorization();
 

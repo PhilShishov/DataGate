@@ -13,10 +13,6 @@
 
         public static IServiceCollection ConfigureLocalization(this IServiceCollection services)
         {
-            services
-                .AddMvcCore()
-                .AddViewLocalization()
-                .AddMvcLocalization();
             services.AddLocalization(options => options.ResourcesPath = ResourcesFolderName);
             return services;
         }
@@ -31,7 +27,7 @@
 
             app.UseRequestLocalization(new RequestLocalizationOptions
             {
-                DefaultRequestCulture = new RequestCulture(GlobalConstants.CurrentCultureInfo),
+                DefaultRequestCulture = new RequestCulture(GlobalConstants.CurrentCultureInfo, GlobalConstants.CurrentCultureInfo),
                 SupportedCultures = supportedCultures,
                 SupportedUICultures = supportedCultures,
             });

@@ -7,16 +7,16 @@
         public static IServiceCollection ConfigureMvc(this IServiceCollection services)
         {
             services
-                .AddMvc()
-                .AddViewLocalization()
-                .AddMvcLocalization();
+               .AddMvcCore()
+               .AddViewLocalization()
+               .AddMvcLocalization();
 
-                // .AddRazorPagesOptions(options =>
-                // {
-                //    options.AllowAreas = true;
-                //    options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
-                //    options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
-                // });
+            // .AddRazorPagesOptions(options =>
+            // {
+            //    options.AllowAreas = true;
+            //    options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
+            //    options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
+            // });
 
             return services;
         }
