@@ -11,8 +11,8 @@
         public static IServiceCollection ConfigureDataProtection(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDataProtection()
-                    .PersistKeysToFileSystem(new DirectoryInfo(@"D:\HostingSpaces\FM86\pharusdatagate.com\data\keys\"));
-                    //.PersistKeysToFileSystem(new DirectoryInfo(configuration.GetValue<string>("WebWiz:KeysPath")));
+                    //.PersistKeysToFileSystem(new DirectoryInfo(@"D:\HostingSpaces\FM86\pharusdatagate.com\data\keys\"));
+                    .PersistKeysToFileSystem(new DirectoryInfo(configuration.GetValue<string>("WebWiz:KeysPath")));
             return services;
         }
     }

@@ -57,7 +57,7 @@
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<EditFundGetDto, EditFundInputModel>()
-              .ForMember(model => model.InitialDate, action => action.MapFrom(dto => DateTimeParser.FromWebFormat(dto.InitialDate)));
+              .ForMember(model => model.InitialDate, action => action.MapFrom(dto => DateTimeParser.FromSqlFormat(dto.InitialDate)));
         }
     }
 }

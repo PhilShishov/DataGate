@@ -3,7 +3,9 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using DataGate.Common;
     using DataGate.Services.Data.TimeSeries;
+    using DataGate.Web.Helpers;
     using DataGate.Web.ViewModels.TimeSeries;
     using Microsoft.AspNetCore.Mvc;
 
@@ -17,11 +19,27 @@
         }
 
         [Route("loadTimeseries")]
-        public async Task<IActionResult> GetAllTimelines(int id)
+        public async Task<IActionResult> GetAllTimelines(int id, string areaName)
         {
-            var dates = await this.service.GetDates(id, 1).ToListAsync();
-            var providers = await this.service.GetProviders(id, 1).ToListAsync();
-            var prices = await this.service.GetData(id).ToListAsync();
+            string functionDates = StringSwapper.ByArea(
+                        areaName,
+                        null,
+                        SqlFunctionTimeSeries.DatesSubFund,
+                        SqlFunctionTimeSeries.DatesShareClass);
+            string functionProviders = StringSwapper.ByArea(
+                        areaName,
+                        null,
+                        SqlFunctionTimeSeries.ProvidersSubFund,
+                        SqlFunctionTimeSeries.ProvidersShareClass);
+            string functionPrices = StringSwapper.ByArea(
+                        areaName,
+                        null,
+                        SqlFunctionTimeSeries.PricesSubFund,
+                        SqlFunctionTimeSeries.PricesShareClass);
+
+            var dates = await this.service.GetDates(functionDates, id, 1).ToListAsync();
+            var providers = await this.service.GetProviders(functionProviders, id, 1).ToListAsync();
+            var prices = await this.service.GetPrices(functionPrices, id).ToListAsync();
 
             var model = new TimeSeriesViewModel()
             {

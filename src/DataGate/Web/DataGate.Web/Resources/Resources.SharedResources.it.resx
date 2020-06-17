@@ -189,6 +189,9 @@
   <data name="Column Choice" xml:space="preserve">
     <value />
   </data>
+  <data name="COLUMNS" xml:space="preserve">
+    <value />
+  </data>
   <data name="Company Name" xml:space="preserve">
     <value />
   </data>
@@ -210,13 +213,13 @@
   <data name="Create Fund" xml:space="preserve">
     <value />
   </data>
-  <data name="Create New Pharus Fund" xml:space="preserve">
+  <data name="Create New Fund" xml:space="preserve">
     <value />
   </data>
-  <data name="Create New Pharus Sub Fund" xml:space="preserve">
+  <data name="Create New Sub Fund" xml:space="preserve">
     <value />
   </data>
-  <data name="Create New Pharus SubFund" xml:space="preserve">
+  <data name="Create New SubFund" xml:space="preserve">
     <value />
   </data>
   <data name="Create SubFund" xml:space="preserve">
@@ -267,7 +270,7 @@
   <data name="File Type" xml:space="preserve">
     <value />
   </data>
-  <data name="Find a Pharus Share Class..." xml:space="preserve">
+  <data name="Find a Share Class..." xml:space="preserve">
     <value />
   </data>
   <data name="Forgot Password" xml:space="preserve">
@@ -280,6 +283,9 @@
     <value />
   </data>
   <data name="Funds" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Funds Managed by ManCo" xml:space="preserve">
     <value />
   </data>
   <data name="Last Login" xml:space="preserve">
@@ -304,15 +310,6 @@
     <value />
   </data>
   <data name="PHARUS DATAGATE PLATFORM" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Pharus Funds" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Pharus Share Classes" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Pharus Sub Funds" xml:space="preserve">
     <value />
   </data>
   <data name="Privacy Policy" xml:space="preserve">
@@ -345,9 +342,6 @@
   <data name="Select an option..." xml:space="preserve">
     <value />
   </data>
-  <data name="SELECT COLUMNS" xml:space="preserve">
-    <value />
-  </data>
   <data name="SELECTION" xml:space="preserve">
     <value />
   </data>
@@ -358,6 +352,9 @@
     <value />
   </data>
   <data name="Share Classes" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Share Classes Managed by ManCo" xml:space="preserve">
     <value />
   </data>
   <data name="Shares" xml:space="preserve">
@@ -373,6 +370,9 @@
     <value />
   </data>
   <data name="Sub Funds" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Sub Funds Managed by ManCo" xml:space="preserve">
     <value />
   </data>
   <data name="Subs" xml:space="preserve">

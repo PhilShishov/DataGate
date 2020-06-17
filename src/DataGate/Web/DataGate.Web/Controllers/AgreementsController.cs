@@ -1,7 +1,7 @@
 ﻿namespace DataGate.Web.Controllers
 {
     using System;
-
+    using System.Text.RegularExpressions;
     using DataGate.Common;
     using DataGate.Services.Data.Agreements;
     using DataGate.Services.DateTime;
@@ -42,7 +42,7 @@
             {
                 Date = today.ToString(GlobalConstants.RequiredWebDateTimeFormat),
                 Agreements = agreements,
-                SelectedType = type,
+                SelectedType = Regex.Replace(type, "(\\B[A-Z])", " $1"),
             };
 
             return this.View(viewModel);

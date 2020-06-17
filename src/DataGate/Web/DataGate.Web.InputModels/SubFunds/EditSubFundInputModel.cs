@@ -99,11 +99,11 @@
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<EditSubFundGetDto, EditSubFundInputModel>()
-              .ForMember(model => model.InitialDate, action => action.MapFrom(dto => DateTimeParser.FromWebFormat(dto.InitialDate)))
-              .ForMember(model => model.CSSFAuthDate, action => action.MapFrom(dto => DateTimeParser.FromWebFormat(dto.CSSFAuthDate)))
-              .ForMember(model => model.ExpiryDate, action => action.MapFrom(dto => DateTimeParser.FromWebFormat(dto.ExpiryDate)))
-              .ForMember(model => model.FirstNavDate, action => action.MapFrom(dto => DateTimeParser.FromWebFormat(dto.FirstNavDate)))
-              .ForMember(model => model.LastNavDate, action => action.MapFrom(dto => DateTimeParser.FromWebFormat(dto.LastNavDate)));
+              .ForMember(model => model.InitialDate, action => action.MapFrom(dto => DateTimeParser.FromSqlFormat(dto.InitialDate)))
+              .ForMember(model => model.CSSFAuthDate, action => action.MapFrom(dto => DateTimeParser.FromSqlFormat(dto.CSSFAuthDate)))
+              .ForMember(model => model.ExpiryDate, action => action.MapFrom(dto => DateTimeParser.FromSqlFormat(dto.ExpiryDate)))
+              .ForMember(model => model.FirstNavDate, action => action.MapFrom(dto => DateTimeParser.FromSqlFormat(dto.FirstNavDate)))
+              .ForMember(model => model.LastNavDate, action => action.MapFrom(dto => DateTimeParser.FromSqlFormat(dto.LastNavDate)));
         }
     }
 }
