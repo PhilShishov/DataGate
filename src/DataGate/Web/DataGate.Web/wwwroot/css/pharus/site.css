@@ -17,6 +17,17 @@
     color: inherit;
 }
 
+.dataTables_wrapper .dataTables_filter input[type=search] {
+    border: 1px solid #49505747;
+    border-width: 0 0 2px;
+}
+
+    .dataTables_wrapper .dataTables_filter input[type=search]:focus {
+        box-shadow: none;
+        border-color: #005596;
+        outline: none;
+    }
+
 table.dataTable thead th, table.dataTable thead td {
     padding: 0.75rem;
 }
