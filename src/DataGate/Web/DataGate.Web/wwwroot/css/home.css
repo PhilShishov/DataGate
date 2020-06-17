@@ -82,13 +82,11 @@ img {
 }
 
     .container-logo img {
-        content: url(../images/Layer_Logo.png);
         height: 180px;
         width: 180px;
     }
 
-.container-btn-login img {
-    content: url(../images/Login_Button_Home.png);
+.container-btn-login img:after {
     width: 300px;
 }
 

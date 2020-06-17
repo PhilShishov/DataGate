@@ -8,7 +8,7 @@
         public const string DataGateFullFooterDisplay = "- Pharus Management Lux SA 16, Avenue de la Gare L-1610 Luxembourg";
         public const string DataGateFooterDisplay = "- Pharus Management Lux SA";
         public const string FileSizeLimitConfiguration = "FileSizeLimit";
-        public const string CurrentCultureInfo = "en-GB";
+        public const string CurrentCultureInfo = "en-US";
         public const string ItalianCultureInfo = "it-IT";
         public const int CultureCookieExpirationTimeInMonths = 5;
 

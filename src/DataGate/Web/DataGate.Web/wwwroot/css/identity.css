@@ -190,9 +190,6 @@ img {
         background: rgb(0, 65, 118);
     }
 
-.img-logo-login {
-    content: url(../images/Logo_Pharus_small.jpg);
-}
 /*========================================================================
   fxt-template layout
 =========================================================================*/
@@ -617,7 +614,6 @@ img {
     .fxt-template-layout2 .left-img {
         text-align: right;
         padding-left: 150px;
-        content: url(../images/Login_Left_Image.png);
     }
 
 .social-icons {
