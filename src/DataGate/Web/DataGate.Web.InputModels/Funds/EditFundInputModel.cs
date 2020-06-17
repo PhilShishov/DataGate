@@ -2,11 +2,13 @@
 {
     using System.ComponentModel.DataAnnotations;
 
+    using AutoMapper;
     using DataGate.Common;
+    using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
     using DataGate.Web.Dtos.Entities;
 
-    public class EditFundInputModel : BaseEntityInputModel, IMapFrom<EditFundGetDto>
+    public class EditFundInputModel : BaseEntityInputModel, IMapFrom<EditFundGetDto>, IHaveCustomMappings
     {
         [Display(Name = "Fund Id Pharus")]
         public int Id { get; set; }
@@ -51,5 +53,11 @@
 
         [Display(Name = "Comment Description")]
         public string CommentArea { get; set; }
+
+        public void CreateMappings(IProfileExpression configuration)
+        {
+            configuration.CreateMap<EditFundGetDto, EditFundInputModel>()
+              .ForMember(model => model.InitialDate, action => action.MapFrom(dto => DateTimeParser.FromWebFormat(dto.InitialDate)));
+        }
     }
 }

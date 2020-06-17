@@ -2,11 +2,12 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-
+    using AutoMapper;
+    using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
     using DataGate.Web.Dtos.Entities;
 
-    public class EditSubFundInputModel : BaseEntityInputModel, IMapFrom<EditSubFundGetDto>
+    public class EditSubFundInputModel : BaseEntityInputModel, IMapFrom<EditSubFundGetDto>, IHaveCustomMappings
     {
         [Display(Name = "Sub Fund Id")]
         public int Id { get; set; }
@@ -94,5 +95,15 @@
 
         [Display(Name = "Comment Description")]
         public string CommentArea { get; set; }
+
+        public void CreateMappings(IProfileExpression configuration)
+        {
+            configuration.CreateMap<EditSubFundGetDto, EditSubFundInputModel>()
+              .ForMember(model => model.InitialDate, action => action.MapFrom(dto => DateTimeParser.FromWebFormat(dto.InitialDate)))
+              .ForMember(model => model.CSSFAuthDate, action => action.MapFrom(dto => DateTimeParser.FromWebFormat(dto.CSSFAuthDate)))
+              .ForMember(model => model.ExpiryDate, action => action.MapFrom(dto => DateTimeParser.FromWebFormat(dto.ExpiryDate)))
+              .ForMember(model => model.FirstNavDate, action => action.MapFrom(dto => DateTimeParser.FromWebFormat(dto.FirstNavDate)))
+              .ForMember(model => model.LastNavDate, action => action.MapFrom(dto => DateTimeParser.FromWebFormat(dto.LastNavDate)));
+        }
     }
 }

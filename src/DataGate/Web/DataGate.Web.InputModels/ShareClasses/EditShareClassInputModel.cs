@@ -2,11 +2,12 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-
+    using AutoMapper;
+    using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
     using DataGate.Web.Dtos.Entities;
 
-    public class EditShareClassInputModel : BaseEntityInputModel, IMapFrom<EditShareClassGetDto>
+    public class EditShareClassInputModel : BaseEntityInputModel, IMapFrom<EditShareClassGetDto>, IHaveCustomMappings
     {
         [Display(Name = "Id")]
         public int Id { get; set; }
@@ -91,5 +92,16 @@
 
         [Display(Name = "Comment Description")]
         public string CommentArea { get; set; }
+
+        public void CreateMappings(IProfileExpression configuration)
+        {
+            configuration.CreateMap<EditShareClassGetDto, EditShareClassInputModel>()
+              .ForMember(model => model.InitialDate, action => action.MapFrom(dto => DateTimeParser.FromWebFormat(dto.InitialDate)))
+              .ForMember(model => model.EmissionDate, action => action.MapFrom(dto => DateTimeParser.FromWebFormat(dto.EmissionDate)))
+              .ForMember(model => model.ExpiryDate, action => action.MapFrom(dto => DateTimeParser.FromWebFormat(dto.ExpiryDate)))
+              .ForMember(model => model.InceptionDate, action => action.MapFrom(dto => DateTimeParser.FromWebFormat(dto.InceptionDate)))
+              .ForMember(model => model.LastNavDate, action => action.MapFrom(dto => DateTimeParser.FromWebFormat(dto.LastNavDate)))
+              .ForMember(model => model.DateBusinessYear, action => action.MapFrom(dto => DateTimeParser.FromWebFormat(dto.DateBusinessYear)));
+        }
     }
 }

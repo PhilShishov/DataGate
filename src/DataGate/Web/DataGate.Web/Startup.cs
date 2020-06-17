@@ -39,6 +39,7 @@
 
             services.ConfigureIdentity()
                 .ConfigureSession()
+                .ConfigureDataProtection(this.configuration)
                 .ConfigureCache(this.configuration)
                 .ConfigureLocalization()
                 .ConfigureMvc()
