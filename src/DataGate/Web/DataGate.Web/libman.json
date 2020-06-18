@@ -16,8 +16,10 @@
       "files": [
         "dist/css/bootstrap.css",
         "dist/css/bootstrap.min.css",
+        "dist/css/bootstrap.min.css.map",
         "dist/js/bootstrap.js",
-        "dist/js/bootstrap.min.js"
+        "dist/js/bootstrap.min.js",
+        "dist/js/bootstrap.min.js.map"
       ]
     },
     {
@@ -71,6 +73,7 @@
       "destination": "wwwroot/lib/popperjs/",
       "files": [
         "umd/popper.min.js",
+        "umd/popper.min.js.map",
         "umd/popper.js"
       ]
     },
@@ -142,7 +145,8 @@
       "destination": "wwwroot/lib/moment/",
       "files": [
         "min/moment-with-locales.min.js",
-        "min/moment.min.js"
+        "min/moment.min.js",
+        "min/moment.min.js.map"
       ]
     },
     {

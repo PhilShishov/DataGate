@@ -31,6 +31,10 @@ img {
     height: auto;
 }
 
+.container-btn-login img {
+    width: 325px;
+}
+
 .pharus-btn {
     margin-top: 35px;
 }
@@ -90,9 +94,9 @@ img {
     width: 300px;
 }
 
-    .container-btn-login img:hover {
-        opacity: 0.8;
-    }
+.container-btn-login img:hover {
+    opacity: 0.8;
+}
 /*
 *
 * ==========================================
@@ -137,6 +141,6 @@ img {
 
 @media only screen and (min-width: 1024px) {
     .text-pharus {
-        font-size: 46px;
+        font-size: 40px;
     }
 }

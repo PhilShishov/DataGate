@@ -1,5 +1,4 @@
 ﻿@model EntitiesViewModel
-@inject IStringLocalizer<SharedResources> SharedLocalizer
 
 @{
     ViewData["Title"] = SharedLocalizer["Sub Funds"];
@@ -17,7 +16,7 @@
                     <div class="h-100 d-flex">
                         <partial name="AllEntities/_Toolbar" />
                         <div class="title-main">
-                            <h2>@SharedLocalizer["Sub Funds Managed by ManCo"]</h2>
+                            <h2>@SharedLocalizer["Sub Funds Managed by Pharus ManCo"]</h2>
                         </div>
                     </div>
                 </div>
@@ -25,7 +24,7 @@
             <hr class="mt-1 mb-0" />
         </div>
         <h2 class="text-center text-torshia title-responsive">
-            @SharedLocalizer["Sub Funds Managed by ManCo"]
+            @SharedLocalizer["Sub Funds Managed by Pharus ManCo"]
         </h2>
         <partial name="AllEntities/_ViewTable" />
     </div>

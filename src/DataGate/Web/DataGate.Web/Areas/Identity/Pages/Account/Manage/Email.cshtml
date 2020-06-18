@@ -1,8 +1,7 @@
 ﻿@page
 @model EmailModel
-@inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = Localizer["Manage email"];
+    ViewData["Title"] = SharedLocalizer["Manage email"];
     ViewData["ActivePage"] = ManageNavPages.Email;
 }
 
@@ -28,7 +27,7 @@
                 <input asp-for="Input.NewEmail" class="form-control" />
                 <span asp-validation-for="Input.NewEmail" class="text-danger"></span>
             </div>
-            <button id="change-email-button" type="submit" asp-page-handler="ChangeEmail" class="btn btn-pharus">@Localizer["CHANGE EMAIL"]</button>
+            <button id="change-email-button" type="submit" asp-page-handler="ChangeEmail" class="btn btn-pharus">@SharedLocalizer["CHANGE EMAIL"]</button>
         </form>
     </div>
 </div>

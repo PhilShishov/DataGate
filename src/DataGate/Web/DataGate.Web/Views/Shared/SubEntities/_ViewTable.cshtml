@@ -1,7 +1,10 @@
 ﻿@model SubEntitiesViewModel
 
 @{
-    var controller = this.ViewContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
+    var controller = this.ViewContext
+        .RouteData
+        .Values[GlobalConstants.ControllerRouteDataValue]
+        .ToString();
 
     var targetRoute = StringSwapper.ByController(controller,
                                                  GlobalConstants.SubFundDetailsRouteName,

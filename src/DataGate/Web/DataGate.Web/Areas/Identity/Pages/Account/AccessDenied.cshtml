@@ -1,9 +1,8 @@
 ﻿@page
 @model AccessDeniedModel
-@inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Access denied"];
+    ViewData["Title"] = SharedLocalizer["Access denied"];
 }
 
-<h2 class="text-center text-danger my-4">@Localizer["You don't have access to this resources"]</h2>
+<h2 class="text-center text-danger my-4">@SharedLocalizer["You don't have access to this resources"]</h2>
