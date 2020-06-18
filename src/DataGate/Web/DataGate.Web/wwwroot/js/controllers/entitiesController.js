@@ -24,31 +24,38 @@ const MESSAGES = {
 function extract(model) {
     const excelValue = $(HTML.BTN_EXTRACT_EXCEL).attr('value');
     const pdfValue = $(HTML.BTN_EXTRACT_PDF).attr('value');
+    const token = $(SELECTORS.INPUT_TOKEN_EXTRACT).val();
     const table = document.getElementById(HTML.TABLE_EXTRACT);
 
-    let tableValues = [];
+    $(document).on('click', HTML.BTN_EXTRACT_EXCEL, function (event) {
+        event.preventDefault();
+        let tableValues = [];
 
-    for (let row of table.rows) {
-        let tableRows = [];
-        for (let cell of row.cells) {
-            tableRows.push(cell.innerText);
+        for (let row of table.rows) {
+            let tableRows = [];
+            for (let cell of row.cells) {
+                tableRows.push(cell.innerText);
+            }
+            tableValues.push(tableRows);
         }
-        tableValues.push(tableRows);
-    }
-    console.log(table.rows);
-    console.log(tableValues);
-    model.TableValues = tableValues;
-    const token = $(SELECTORS.INPUT_TOKEN_EXTRACT).val();
+        model.TableValues = tableValues;
+        model.Command = excelValue;
 
-    //$(document).on('click', HTML.BTN_EXTRACT_EXCEL, function (event) {
-    //    event.preventDefault()
-    //    model.Command = excelValue;
-
-    //    extractRequestHandler(model, token);
-    //});
+        extractRequestHandler(model, token);
+    });
 
     $(document).on('click', HTML.BTN_EXTRACT_PDF, function (event) {
-        event.preventDefault()
+        event.preventDefault();
+        let tableValues = [];
+
+        for (let row of table.rows) {
+            let tableRows = [];
+            for (let cell of row.cells) {
+                tableRows.push(cell.innerText);
+            }
+            tableValues.push(tableRows);
+        }
+        model.TableValues = tableValues;
         model.Command = pdfValue;
 
         extractRequestHandler(model, token);
