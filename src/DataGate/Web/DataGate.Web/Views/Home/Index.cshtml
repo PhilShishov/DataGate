@@ -21,41 +21,41 @@
             <div class="col-md-12 div-text-pharus">
                 <h1 class="text-white text-pharus">
                     @SharedLocalizer["Welcome To"]
-                <span class="bold-text-pharus">Pharus</span> Management<br>DataGate
-                @SharedLocalizer["Platform"]
-            </h1>
+                    <span class="bold-text-pharus">Pharus</span> Management<br>DataGate
+                    @SharedLocalizer["Platform"]
+                </h1>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 pharus-btn container-btn-login">
-            <a asp-area="Identity" asp-page="/Account/Login">
-                <img src="~/images/Login_Button_Home.png">
-            </a>
+        <div class="row">
+            <div class="col-md-12 pharus-btn container-btn-login">
+                <a asp-area="Identity" asp-page="/Account/Login">
+                    <img src="~/images/Login_Button_Home.png">
+                </a>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="footer-pharus mb-5">
-                <div class="inner text-white">
-                    <p>
-                        <a class="text-white a-underline mr-1" asp-area="Identity" asp-controller="Account" asp-action="Privacy">@SharedLocalizer["Privacy Policy"]</a>
-                        <a class="text-white a-underline mr-1" asp-area="Identity" asp-controller="Account" asp-action="Cookie">@SharedLocalizer["Cookie Policy"]</a>
-                        <a class="text-white a-underline mr-1" asp-area="Identity" asp-controller="Account" asp-action="Conditions">@SharedLocalizer["Conditions of Use"]</a>
-                    </p>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="footer-pharus mb-5">
+                    <div class="inner text-white">
+                        <p>
+                            <a class="text-white a-underline mr-1" asp-area="" asp-route="privacy">@SharedLocalizer["Privacy Policy"]</a>
+                            <a class="text-white a-underline mr-1" asp-area="" asp-route="cookie">@SharedLocalizer["Cookie Policy"]</a>
+                            <a class="text-white a-underline mr-1" asp-area="" asp-route="conditions">@SharedLocalizer["Conditions of Use"]</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="footer-pharus mt-5">
+                    <div class="inner text-white">
+                        <p>
+                            &copy; @DateTime.Now.Year @GlobalConstants.DataGateFullFooterDisplay
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="footer-pharus mt-5">
-                <div class="inner text-white">
-                    <p>
-                        &copy; @DateTime.Now.Year @GlobalConstants.DataGateFullFooterDisplay
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 }

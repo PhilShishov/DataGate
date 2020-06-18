@@ -18,6 +18,11 @@
     color: inherit;
 }
 
+.input-file-custom:after {
+    content: " Select a file / max. 15MB";
+    background-color: white;
+}
+
 :root {
     font-size: 13px;
 }

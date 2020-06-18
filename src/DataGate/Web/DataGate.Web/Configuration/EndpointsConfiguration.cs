@@ -14,6 +14,19 @@ namespace DataGate.Web.Configuration
                          pattern: "userpanel",
                          new { controller = "User", action = "Index" });
 
+                    endpoints.MapControllerRoute(
+                         name: "privacy",
+                         pattern: "privacy",
+                         new { controller = "Legal", action = "Privacy" });
+                    endpoints.MapControllerRoute(
+                          name: "cookie",
+                          pattern: "cookie",
+                          new { controller = "Legal", action = "Cookie" });
+                    endpoints.MapControllerRoute(
+                          name: "conditions",
+                          pattern: "conditions",
+                          new { controller = "Legal", action = "Conditions" });
+
                     // Media files
                     endpoints.MapControllerRoute(
                          name: "files",
