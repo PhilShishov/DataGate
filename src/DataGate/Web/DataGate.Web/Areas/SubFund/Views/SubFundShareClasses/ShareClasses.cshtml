@@ -45,8 +45,9 @@
             $.fn.dataTable.moment('DD/MM/YYYY');
 
             $('.table-view-pharus').DataTable({
+                "dom": '<"top"lf>rt<"bottom"ip><"clear">',
                 "autoWidth": false,
-                "lengthMenu": [[-1, 10, 25], ["All", 10, 25]],
+                "lengthMenu": [[-1, 10, 25, 50], ["All", 10, 25, 50]],
                 searching: false,
                 "pageLength": 12,
                 "scrollX": true,
@@ -56,6 +57,7 @@
             $(".dataTables_length select").chosen({
                 disable_search_threshold: 10,
                 width: "50px",
+                placeholder_text_single: "All"
             });
 
             // ________________________________________________________

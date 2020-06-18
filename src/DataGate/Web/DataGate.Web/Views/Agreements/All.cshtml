@@ -14,7 +14,7 @@
                         <div class="mr-2">
                             <a asp-area=""
                                asp-route="allagreements"
-                               class="btn btn-pharus btn-sm mb-2">
+                               class="btn btn-pharus btn-sm mb-1">
                                 @SharedLocalizer["BACK TO ALL"]
                             </a>
                         </div>
@@ -31,9 +31,8 @@
                                        min="2018-01-01">
 
                                 <input type="submit"
-                                       class="btn btn-pharus btn-sm"
-                                       value="UPDATE"
-                                       style="margin-bottom: 2%"></>
+                                       class="btn btn-pharus btn-sm mb-1"
+                                       value="UPDATE"></>
                             </div>
                         </form>
                         <div class="title-main-agreements">
@@ -126,8 +125,16 @@
     <script src="~/js/controllers/entitiesController.js" asp-append-version="true"></script>
 
     <script>
-        $(document).ready(function () {
-            $('.table-view-pharus').DataTable();
+        $('.table-view-pharus').DataTable({
+            "dom": '<"top"lf>rt<"bottom"ip><"clear">',
+            "lengthMenu": [[-1, 10, 25, 50], ["All", 10, 25, 50]],
+            stateSave: true,
+            "processing": true,
+        });
+
+        $(".dataTables_length select").chosen({
+            disable_search_threshold: 10,
+            width: "50px",
         });
 
     // ________________________________________________________

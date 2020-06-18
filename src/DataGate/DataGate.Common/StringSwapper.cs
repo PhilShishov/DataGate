@@ -6,7 +6,7 @@
         {
             string result = string.Empty;
 
-            switch (currentType)
+            switch (currentType.Replace(" ", string.Empty))
             {
                 case GlobalConstants.FundAreaName:
                     result = fund;
@@ -26,7 +26,7 @@
         {
             string result = string.Empty;
 
-            switch (currentType)
+            switch (currentType.Replace(" ", string.Empty))
             {
                 case GlobalConstants.FundsControllerName:
                 case GlobalConstants.FundDetailsControllerName:

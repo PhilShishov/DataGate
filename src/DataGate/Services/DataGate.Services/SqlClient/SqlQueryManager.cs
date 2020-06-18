@@ -16,6 +16,7 @@ namespace DataGate.Services.SqlClient
 
     using DataGate.Common;
     using DataGate.Common.Exceptions;
+    using DataGate.Services.DateTime;
     using DataGate.Services.SqlClient.Contracts;
     using Microsoft.Extensions.Configuration;
 
@@ -75,7 +76,7 @@ namespace DataGate.Services.SqlClient
                 await connection.OpenAsync();
                 SqlCommand command = connection.CreateCommand();
 
-                var sqlDate = date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat);
+                var sqlDate = DateTimeParser.ToSqlFormat(date);
 
                 if (!date.HasValue)
                 {
@@ -139,11 +140,13 @@ namespace DataGate.Services.SqlClient
             {
                 SqlCommand command = this.SetUpSqlConnectionCommand(connection);
 
+                var sqlDate = DateTimeParser.ToSqlFormat(date);
+
                 if (id.HasValue)
                 {
                     if (date.HasValue)
                     {
-                        command.CommandText = $"select * from {function}('{date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}', {id})";
+                        command.CommandText = $"select * from {function}('{sqlDate}', {id})";
                     }
                     else
                     {
@@ -152,7 +155,7 @@ namespace DataGate.Services.SqlClient
                 }
                 else
                 {
-                    command.CommandText = $"select * from {function}('{date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat)}')";
+                    command.CommandText = $"select * from {function}('{sqlDate}')";
                 }
 
                 using (var reader = command.ExecuteReader())

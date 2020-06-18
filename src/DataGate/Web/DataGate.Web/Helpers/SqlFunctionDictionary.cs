@@ -48,5 +48,10 @@
         public const string AllAgreementsFunds = "[fn_view_agreements_all_funds]";
         public const string AllAgreementsSubFunds = "[fn_view_agreements_all_subfunds]";
         public const string AllAgreementsShareClasses = "[fn_view_agreements_all_shareclasses]";
+
+        // Reports
+        public const string ReportsFunds = "[fn_AuM_fund_EOM]";
+        public const string ReportsSubFunds = "[fn_AuM_subfund_EOM]";
+        public const string ReportsShareClasses = "[fn_AuM_shareclass_EOM]";
     }
 }

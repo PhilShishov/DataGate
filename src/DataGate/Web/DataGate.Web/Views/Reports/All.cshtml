@@ -1,0 +1,133 @@
+﻿@model DataGate.Web.ViewModels.Reports.ReportOverviewViewModel
+
+@{
+    ViewData["Title"] = SharedLocalizer["Reports"];
+}
+
+<div class="container-all-funds justify-content-between">
+    <div class="w-100">
+        <div class="mobile-none">
+            <hr class="mt-0 mb-auto" />
+            <div class="w-100 toolbar-view-details">
+                <div class="mx-auto mb-4">
+                    <div class="h-100 d-flex">
+                        <div class="mr-2">
+                            <a asp-area=""
+                               asp-route="allreports"
+                               class="btn btn-pharus btn-sm mb-1">
+                                @SharedLocalizer["BACK TO ALL"]
+                            </a>
+                        </div>
+
+                        <form class="d-flex mx-3"
+                              method="post"
+                              asp-route="All"
+                              id="update-form">
+                            <div>
+                                <input type="hidden" asp-for="SelectedType" />
+
+                                <input type="month" asp-for="Date">
+
+                                <input type="submit"
+                                       class="btn btn-pharus btn-sm mb-1"
+                                       value="UPDATE"></>
+                            </div>
+                        </form>
+                        <div class="title-main-reports">
+                            <h2 class="">@Model.SelectedType @SharedLocalizer["Reports"]</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-1 mb-0" />
+        </div>
+
+        <h2 class="text-center title-responsive">@Model.SelectedType @SharedLocalizer["Reports"]</h2>
+
+        <form id="form-report" method="post">
+            <div class="table-wrapper-double-scroll">
+                <table class="table table-bordered table-hover tbl-reports table-view-pharus">
+                    <thead>
+                        <tr>
+                            <th class="text-secondary p-1">
+                                @SharedLocalizer["Fund Name"]
+                            </th>
+                            <th class="text-secondary p-1">
+                                @SharedLocalizer["Fund Admin SF Code"]
+                            </th>
+                            <th class="text-secondary p-1">
+                                @SharedLocalizer["SubFund Name"]
+                            </th>
+                            <th class="text-secondary p-1">
+                                @SharedLocalizer["CCY"]
+                            </th>
+                            <th class="text-secondary p-1">
+                                @SharedLocalizer["NAV Frequency"]
+                            </th>
+                            <th class="text-secondary p-1">
+                                @SharedLocalizer["EOM NAV date"]
+                            </th>
+                            <th class="text-secondary p-1">
+                                @SharedLocalizer["AuM in EUR"]
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var report in Model.Reports)
+                        {
+                            <tr>
+                                <td class="p-1">
+                                    @report.FundName
+                                </td>
+                                <td class="p-1">
+                                    @report.FundAdminSFCode
+                                </td>
+                                <td class="p-1">
+                                    @report.SubFundName
+                                </td>
+                                <td class="p-1">
+                                    @report.CCY
+                                </td>
+                                <td class="p-1">
+                                    @report.NAVFrequency
+                                </td>
+                                <td class="p-1">
+                                    @report.EOMNAVDate
+                                </td>
+                                <td class="p-1">
+                                    @report.AuMInEUR
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <input type="hidden" name="AreaName" value="@Model.SelectedType" />
+        </form>
+
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/plugins.js" asp-append-version="true"></script>
+    <script src="~/js/controllers/entitiesController.js" asp-append-version="true"></script>
+
+    <script>
+        // ________________________________________________________
+        //
+        // Datatable options - sort, search, pagination
+        $.fn.dataTable.moment('DD/MM/YYYY');
+
+        $('.table-view-pharus').DataTable({
+            "dom": '<"top"lf>rt<"bottom"ip><"clear">',
+            "lengthMenu": [[-1, 10, 25, 50], ["All", 10, 25, 50]],
+            stateSave: true,
+            "processing": true,
+        });
+
+        $(".dataTables_length select").chosen({
+            disable_search_threshold: 10,
+            width: "50px",
+        });
+    </script>
+}

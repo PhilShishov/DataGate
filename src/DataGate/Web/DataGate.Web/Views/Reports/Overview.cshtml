@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = SharedLocalizer["Reports"];
+}
+
+<div class="push">
+    <h2 class="text-center">
+        @SharedLocalizer["ALL PHARUS REPORTS"]
+    </h2>
+
+    <hr class="hr-2 bg-pharus">
+    <div class="container-column-card mx-auto">
+        <div class="row mb-4">
+            <div class="column">
+                <div class="card">
+                    <a asp-area="" asp-route="reports">@SharedLocalizer["Fund Reports"]</a>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="card">
+                    <a asp-area="" asp-route="reports" asp-route-type="@GlobalConstants.SubFundAreaName">@SharedLocalizer["Sub Fund Reports"]</a>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="card">
+                    <a asp-area="" asp-route="reports">@SharedLocalizer["Share Class Reports"]</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
