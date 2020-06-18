@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = SharedLocalizer["Reports"];
+
+    var date = DateTimeParser.ToWebFormat(Model.Date);
 }
 
 <div class="container-all-funds justify-content-between">
@@ -76,14 +78,24 @@
                         @foreach (var report in Model.Reports)
                         {
                             <tr>
-                                <td class="p-1">
-                                    @report.FundName
+                                <td class="p-1 td-name-link">
+                                    <a asp-area="@GlobalConstants.FundAreaName" 
+                                       asp-route="@GlobalConstants.FundDetailsRouteName" 
+                                       asp-route-id="@report.FundId" 
+                                       asp-route-date="@date">
+                                        @report.FundName
+                                    </a>
                                 </td>
                                 <td class="p-1">
                                     @report.FundAdminSFCode
                                 </td>
-                                <td class="p-1">
-                                    @report.SubFundName
+                                <td class="p-1 td-name-link">
+                                    <a asp-area="@GlobalConstants.SubFundAreaName" 
+                                       asp-route="@GlobalConstants.SubFundDetailsRouteName" 
+                                       asp-route-id="@report.SubFundId" 
+                                       asp-route-date="@date">
+                                        @report.SubFundName
+                                    </a>
                                 </td>
                                 <td class="p-1">
                                     @report.CCY

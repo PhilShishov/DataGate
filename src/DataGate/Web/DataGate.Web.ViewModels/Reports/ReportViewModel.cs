@@ -18,5 +18,9 @@ namespace DataGate.Web.ViewModels.Reports
         public string EOMNAVDate { get; set; }
 
         public decimal AuMInEUR { get; set; }
+
+        public int FundId { get; set; }
+
+        public int SubFundId { get; set; }
     }
 }

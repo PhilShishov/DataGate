@@ -4,7 +4,6 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using DataGate.Common;
     using DataGate.Services.Data.Entities;
     using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
@@ -23,7 +22,7 @@
             var dto = new EntitiesOverviewGetDto()
             {
                 IsActive = true,
-                Date = today.ToString(GlobalConstants.RequiredWebDateTimeFormat),
+                Date = DateTimeParser.ToWebFormat(today),
                 HeadersSelection = headers,
                 Headers = headers,
                 Values = values,
