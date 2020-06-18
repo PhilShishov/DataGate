@@ -38,7 +38,7 @@ input[type=text], input[type=email], input[type=password] {
     margin-top: 2px
 }
 
-.toolbar-view-details input[type=date] {
+.toolbar-view-details input[type=date], .toolbar-view-details input[type=month] {
     font-size: 16px;
     line-height: normal;
     margin-top: 0px

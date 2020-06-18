@@ -16,12 +16,12 @@
     line-height: 2.2;
 }
 
-.title-main-agreements {
+.title-main-agreements, .title-main-reports {
     width: 7%;
     text-align: center;
     margin-left: 115px;
     white-space: nowrap;
 }
-    .title-main-agreements h2 {
+    .title-main-agreements h2, .title-main-reports h2 {
         line-height: 1;
     }

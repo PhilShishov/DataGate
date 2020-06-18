@@ -171,6 +171,9 @@
   <data name="ALL PHARUS AGREEMENTS" xml:space="preserve">
     <value>ALL PHARUS AGREEMENTS</value>
   </data>
+  <data name="ALL PHARUS REPORTS" xml:space="preserve">
+    <value>ALL PHARUS REPORTS</value>
+  </data>
   <data name="AuM Chart" xml:space="preserve">
     <value>AuM Chart</value>
   </data>
@@ -309,6 +312,9 @@
   <data name="Fund Library" xml:space="preserve">
     <value>Fund Library</value>
   </data>
+  <data name="Fund Reports" xml:space="preserve">
+    <value>Fund Reports</value>
+  </data>
   <data name="Funds" xml:space="preserve">
     <value>Funds</value>
   </data>
@@ -420,6 +426,9 @@
   <data name="Share Class Library" xml:space="preserve">
     <value>Share Class Library</value>
   </data>
+  <data name="Share Class Reports" xml:space="preserve">
+    <value>Share Class Reports</value>
+  </data>
   <data name="Share Classes" xml:space="preserve">
     <value>Share Classes</value>
   </data>
@@ -437,6 +446,9 @@
   </data>
   <data name="Sub Fund Library" xml:space="preserve">
     <value>Sub Fund Library</value>
+  </data>
+  <data name="Sub Fund Reports" xml:space="preserve">
+    <value>Sub Fund Reports</value>
   </data>
   <data name="Sub Funds" xml:space="preserve">
     <value>Sub Funds</value>

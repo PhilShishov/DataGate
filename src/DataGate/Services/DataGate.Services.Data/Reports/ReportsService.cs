@@ -1,4 +1,4 @@
-namespace DataGate.Services.Data.Agreements
+﻿namespace DataGate.Services.Data.Reports
 {
     using System;
     using System.Collections.Generic;
@@ -7,18 +7,18 @@ namespace DataGate.Services.Data.Agreements
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.Dtos.Queries;
 
-    public class AgreementsService : IAgreementsService
+    public class ReportsService : IReportsService
     {
         private readonly ISqlQueryManager sqlManager;
 
-        public AgreementsService(ISqlQueryManager sqlQueryManager)
+        public ReportsService(ISqlQueryManager sqlQueryManager)
         {
             this.sqlManager = sqlQueryManager;
         }
 
         public IEnumerable<T> GetAll<T>(string function, DateTime date)
         {
-            IEnumerable<AllAgreementDto> dto = this.sqlManager.ExecuteQueryMapping<AllAgreementDto>(function, null, date);
+            IEnumerable<ReportDto> dto = this.sqlManager.ExecuteQueryMapping<ReportDto>(function, null, date);
 
             return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
         }

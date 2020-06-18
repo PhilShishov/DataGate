@@ -1,0 +1,34 @@
+namespace DataGate.Web.Dtos.Queries
+{
+    using System.Data;
+
+    using DataGate.Services.SqlClient.Contracts;
+
+    public class ReportDto : IDataReaderParser
+    {
+        public string FundName { get; set; }
+
+        public string FundAdminSFCode { get; set; }
+
+        public string SubFundName { get; set; }
+
+        public string CCY { get; set; }
+
+        public string NAVFrequency { get; set; }
+
+        public string EOMNAVDate { get; set; }
+
+        public decimal AuMInEUR { get; set; }
+
+        public void Parse(IDataReader reader)
+        {
+            this.FundName = reader["Fund Name"] as string;
+            this.FundAdminSFCode = reader["Fund Admin SF Code"] as string;
+            this.SubFundName = reader["SubFund Name"] as string;
+            this.CCY = reader["CCY"] as string;
+            this.NAVFrequency = reader["NAV Frequency"] as string;
+            this.EOMNAVDate = reader["EOM NAV date"] as string;
+            this.AuMInEUR = (decimal)reader["AuM in EUR"];
+        }
+    }
+}
