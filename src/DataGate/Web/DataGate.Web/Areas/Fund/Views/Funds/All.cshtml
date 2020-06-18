@@ -44,18 +44,21 @@
             $.fn.dataTable.moment('DD/MM/YYYY');
 
             $('.table-view-pharus').DataTable({
-                "dom": 'rt<"bottom"ip><"clear">',
                 "autoWidth": false,
                 searching: false,
                 paging: false,
+                "info": false,
                 "scrollX": true,
             });
+
+            $('.table-view-pharus').removeAttr('hidden');
 
             // ________________________________________________________
             //
             // Extract view as excel or pdf
             extract(model);
             submitForm();
+
 
             // ________________________________________________________
             //

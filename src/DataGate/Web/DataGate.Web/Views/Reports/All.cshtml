@@ -79,9 +79,9 @@
                         {
                             <tr>
                                 <td class="p-1 td-name-link">
-                                    <a asp-area="@GlobalConstants.FundAreaName" 
-                                       asp-route="@GlobalConstants.FundDetailsRouteName" 
-                                       asp-route-id="@report.FundId" 
+                                    <a asp-area="@GlobalConstants.FundAreaName"
+                                       asp-route="@GlobalConstants.FundDetailsRouteName"
+                                       asp-route-id="@report.FundId"
                                        asp-route-date="@date">
                                         @report.FundName
                                     </a>
@@ -90,9 +90,9 @@
                                     @report.FundAdminSFCode
                                 </td>
                                 <td class="p-1 td-name-link">
-                                    <a asp-area="@GlobalConstants.SubFundAreaName" 
-                                       asp-route="@GlobalConstants.SubFundDetailsRouteName" 
-                                       asp-route-id="@report.SubFundId" 
+                                    <a asp-area="@GlobalConstants.SubFundAreaName"
+                                       asp-route="@GlobalConstants.SubFundDetailsRouteName"
+                                       asp-route-id="@report.SubFundId"
                                        asp-route-date="@date">
                                         @report.SubFundName
                                     </a>
@@ -121,9 +121,6 @@
 </div>
 
 @section Scripts{
-    <script src="~/js/plugins.js" asp-append-version="true"></script>
-    <script src="~/js/controllers/entitiesController.js" asp-append-version="true"></script>
-
     <script>
         // ________________________________________________________
         //
@@ -139,7 +136,7 @@
 
         $(".dataTables_length select").chosen({
             disable_search_threshold: 10,
-            width: "50px",
+            width: "55px",
         });
     </script>
 }
