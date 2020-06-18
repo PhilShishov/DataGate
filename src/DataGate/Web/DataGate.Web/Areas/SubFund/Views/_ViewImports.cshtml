@@ -1,10 +1,12 @@
-﻿@using Microsoft.AspNetCore.Mvc.Localization
-@using Microsoft.AspNetCore.Localization
+﻿@using DataGate.Common
+@using DataGate.Web
 @using DataGate.Web.Resources
+@using DataGate.Web.ViewModels.Entities
+
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
 @using Microsoft.Extensions.Localization;
 
-@using DataGate.Web
-@using DataGate.Common
-@using DataGate.Web.ViewModels.Entities
+@inject IStringLocalizer<SharedResources> SharedLocalizer
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @addTagHelper *, DataGate.Web

@@ -1,7 +1,5 @@
-﻿@inject IViewLocalizer Localizer
-@inject IStringLocalizer<SharedResources> SharedLocalizer
-@{
-    ViewData["Title"] = Localizer["User Panel"];
+﻿@{
+    ViewData["Title"] = SharedLocalizer["User Panel"];
 }
 
 <div class="push">
@@ -57,13 +55,13 @@
             <div class="row">
                 <div class="column">
                     <div class="card">
-                        <a asp-area="Admin" asp-controller="Admin" asp-action="ViewUsers">@Localizer["View Users"]</a>
+                        <a asp-area="Admin" asp-controller="Admin" asp-action="ViewUsers">@SharedLocalizer["View Users"]</a>
                     </div>
                 </div>
 
                 <div class="column">
                     <div class="card">
-                        <a asp-area="Admin" asp-controller="Admin" asp-action="CreateUser">@Localizer["Create User"]</a>
+                        <a asp-area="Admin" asp-controller="Admin" asp-action="CreateUser">@SharedLocalizer["Create User"]</a>
                     </div>
                 </div>
 

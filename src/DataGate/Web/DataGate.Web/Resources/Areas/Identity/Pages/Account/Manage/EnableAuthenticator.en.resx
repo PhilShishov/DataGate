@@ -117,13 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Accept" xml:space="preserve">
-    <value />
+  <data name="and" xml:space="preserve">
+    <value>and</value>
   </data>
-  <data name="Learn More" xml:space="preserve">
-    <value />
+  <data name="Configure authenticator app" xml:space="preserve">
+    <value>Configure authenticator app</value>
   </data>
-  <data name="We use cookies to understand how you use our site and to improve your experience." xml:space="preserve">
-    <value />
+  <data name="Download a two-factor authenticator app like Microsoft Authenticator for" xml:space="preserve">
+    <value>Download a two-factor authenticator app like Microsoft Authenticator for</value>
+  </data>
+  <data name="enable QR code generation" xml:space="preserve">
+    <value>enable QR code generation</value>
+  </data>
+  <data name="Google Authenticator for" xml:space="preserve">
+    <value>Google Authenticator for</value>
+  </data>
+  <data name="into your two factor authenticator app. Spaces and casing do not matter" xml:space="preserve">
+    <value>into your two factor authenticator app. Spaces and casing do not matter</value>
+  </data>
+  <data name="Learn how to" xml:space="preserve">
+    <value>Learn how to</value>
+  </data>
+  <data name="Once you have scanned the QR code or input the key above, your two factor authentication app will provide you with a unique code. Enter the code in the confirmation box below" xml:space="preserve">
+    <value>Once you have scanned the QR code or input the key above, your two factor authentication app will provide you with a unique code. Enter the code in the confirmation box below</value>
+  </data>
+  <data name="or" xml:space="preserve">
+    <value>or</value>
+  </data>
+  <data name="Scan the QR Code or enter this key" xml:space="preserve">
+    <value>Scan the QR Code or enter this key</value>
+  </data>
+  <data name="To use an authenticator app go through the following steps" xml:space="preserve">
+    <value>To use an authenticator app go through the following steps</value>
+  </data>
+  <data name="Verification Code" xml:space="preserve">
+    <value>Verification Code</value>
+  </data>
+  <data name="Verify" xml:space="preserve">
+    <value>Verify</value>
   </data>
 </root>

@@ -1,7 +1,10 @@
 ﻿@model EntitiesViewModel
 
 @{
-    var controller = this.ViewContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
+    var controller = this.ViewContext
+        .RouteData
+        .Values[GlobalConstants.ControllerRouteDataValue]
+        .ToString();
     var routeDetails = StringSwapper.ByController(controller,
                                                   GlobalConstants.FundDetailsRouteName,
                                                   GlobalConstants.SubFundDetailsRouteName,

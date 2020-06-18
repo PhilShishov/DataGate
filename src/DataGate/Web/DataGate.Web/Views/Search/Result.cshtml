@@ -1,16 +1,15 @@
 ﻿@model DataGate.Web.ViewModels.Search.SearchListAllViewModel
-@inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = Localizer["Search Results"];
+    ViewData["Title"] = SharedLocalizer["Search Results"];
     var targetArea = GlobalConstants.ShareClassAreaName;
     var targetRoute = GlobalConstants.ShareClassDetailsRouteName;
 }
 
 <div class="table-search-wrapper">
-    <h1>@Localizer["Result"]</h1>
-    <p>@Localizer["Your search criteria was"] : @Model.SearchTerm</p>
-    <p>@Localizer["Number of results"] : @Model.Results.ToList().Count</p>
+    <h1>@SharedLocalizer["Result"]</h1>
+    <p>@SharedLocalizer["Your search criteria was:"] @Model.SearchTerm</p>
+    <p>@SharedLocalizer["Number of results:"] @Model.Results.ToList().Count</p>
 
     @if (Model.Results.Any())
     {
@@ -44,8 +43,8 @@
     }
     else
     {
-        <p>@Localizer["No result produced by your request."]</p>
-        <p>@Localizer["Please modify your search criteria."]</p>
+        <p>@SharedLocalizer["No result produced by your request."]</p>
+        <p>@SharedLocalizer["Please modify your search criteria."]</p>
     }
 
 </div>

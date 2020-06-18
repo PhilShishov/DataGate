@@ -1,14 +1,13 @@
 ﻿@page
 @model ConfirmEmailModel
-@inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = Localizer["Confirm email"];
+    ViewData["Title"] = SharedLocalizer["Confirm email"];
 }
 
 <h1>@ViewData["Title"]</h1>
 <div>
     <p>
-        @Localizer["Thank you for confirming your email."]
+        @SharedLocalizer["Thank you for confirming your email."]
     </p>
 </div>
