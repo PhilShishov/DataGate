@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-xl-4 col-lg-6 col-12 fxt-bg-color">
                 <div class="fxt-content">
-                    <partial name="_LoginRedirectPartial" />
+                    <partial name="Identity/_LoginRedirectPartial" />
                     <h2 class="login-brand">@SharedLocalizer["DataGate"]</h2>
                     <h2 class="login-title">@SharedLocalizer["Login"]</h2>
                     <div class="fxt-form">
@@ -42,7 +42,7 @@
                                         <span></span>
                                         <span asp-validation-for="Input.Password" class="text-danger"></span>
                                     </div>
-                                    <partial name="_ErrorMessage" model="Model.ErrorMessage" />
+                                    <partial name="Identity/_ErrorMessage" model="Model.ErrorMessage" />
                                 </div>
                             </div>
                             <div class="form-group col-md-6 col-lg-6 col-sm-12 col-xs-12">
@@ -67,18 +67,18 @@
                             </div>
                         </form>
                     </div>
-                    <partial name="_FooterMobile" />
+                    <partial name="Identity/_FooterMobile" />
                 </div>
             </div>
             <div class="col-lg-2 col-md-2 d-none d-lg-block d-xl-block extra-space" style="background-color: #ffffff;"></div>
-            <partial name="_LoginSideImagePartial" />
+            <partial name="Identity/_LoginSideImagePartial" />
         </div>
-        <partial name="_FooterPartial" />
+        <partial name="Identity/_FooterPartial" />
     </div>
 </section>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    <partial name="Scripts/_ValidationScriptsPartial" />
 
     <script>
         $(document).ready(function () {

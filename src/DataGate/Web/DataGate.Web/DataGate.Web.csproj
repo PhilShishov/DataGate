@@ -10,13 +10,6 @@
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Views\Shared\Identity\**" />
-    <Content Remove="Views\Shared\Identity\**" />
-    <EmbeddedResource Remove="Views\Shared\Identity\**" />
-    <None Remove="Views\Shared\Identity\**" />
-  </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
   </ItemGroup>

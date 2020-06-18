@@ -44,9 +44,20 @@
                     <div class="form-group">
                         <input asp-for="FileToUpload"
                                type="file"
-                               accept="application/pdf">
+                               accept="application/pdf"
+                               id="input-file"
+                               class="input-file-custom">
                     </div>
                     <span asp-validation-for="FileToUpload" class="text-danger"></span>
+
+                    <script>
+
+                        $('#input-file').change(function () {
+                            $(this).removeClass("input-file-custom");
+                        })
+                    </script>
+
+
                     <partial name="Scripts/_ChosenScriptsPartial" />
                 </form>
             </div>

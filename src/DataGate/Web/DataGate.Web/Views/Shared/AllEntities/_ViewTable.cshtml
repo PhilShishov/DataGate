@@ -45,7 +45,7 @@
                 <tr>
                     @for (int col = 0; col < row.Length; col++)
                     {
-                        if (Model.Headers.ToList()[col].Contains("NAME"))
+                        if (Model.Headers.ToList()[col] == "NAME")
                         {
                             <td class="p-1 td-name-link">
                                 <a asp-route="@routeDetails" asp-route-id="@entityId" asp-route-date="@Model.Date">
