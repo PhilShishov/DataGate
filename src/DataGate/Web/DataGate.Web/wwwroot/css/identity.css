@@ -8,6 +8,23 @@
 *
 */
 
+h4 {
+    color: black;
+}
+
+h3 {
+    color: black;
+    font-weight: bolder;
+}
+
+.div-legal-text {
+    font-size: 13px;
+    overflow-y: scroll;
+    height: 390px;
+}
+
+
+
 .icon-svg-warning {
     background: url(/images/exclamation-triangle-solid.svg) no-repeat center center;
     width: 16px;
@@ -581,7 +598,7 @@ img {
         color: black;
         margin-top: 20px;
         font-weight: bolder;
-        letter-spacing: 2px;
+        letter-spacing: 1.5px;
     }
 
     .fxt-template-layout2 .login-title {

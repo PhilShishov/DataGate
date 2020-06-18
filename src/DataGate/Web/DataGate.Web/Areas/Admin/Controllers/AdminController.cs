@@ -106,7 +106,7 @@
                     protocol: this.Request.Scheme);
 
                 string message = string.Format(GlobalConstants.EmailConfirmationMessage, HtmlEncoder.Default.Encode(callbackUrl));
-                await this.emailSender.SendEmailAsync("philip.shishov@pharusmanco.lu", "Philip Shishov", inputModel.Email, GlobalConstants.ConfirmEmailSubject, message);
+                await this.emailSender.SendEmailAsync("philip.shishov@pharusmanco.lu", "Pharus Management Lux SA", inputModel.Email, GlobalConstants.ConfirmEmailSubject, message);
 
                 return this.ShowInfoLocal(string.Format(InfoMessages.AddUser, user.UserName, inputModel.RoleType), returnUrl);
             }
