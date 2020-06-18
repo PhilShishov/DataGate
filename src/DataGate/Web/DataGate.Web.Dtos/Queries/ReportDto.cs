@@ -20,6 +20,10 @@ namespace DataGate.Web.Dtos.Queries
 
         public decimal AuMInEUR { get; set; }
 
+        public int FundId { get; set; }
+
+        public int SubFundId { get; set; }
+
         public void Parse(IDataReader reader)
         {
             this.FundName = reader["Fund Name"] as string;
@@ -29,6 +33,8 @@ namespace DataGate.Web.Dtos.Queries
             this.NAVFrequency = reader["NAV Frequency"] as string;
             this.EOMNAVDate = reader["EOM NAV date"] as string;
             this.AuMInEUR = (decimal)reader["AuM in EUR"];
+            this.FundId = (int)reader["Fund Id"];
+            this.SubFundId = (int)reader["SubFund Id"];
         }
     }
 }
