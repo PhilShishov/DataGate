@@ -195,6 +195,9 @@
   <data name="Company Name" xml:space="preserve">
     <value />
   </data>
+  <data name="Conditions of Use" xml:space="preserve">
+    <value />
+  </data>
   <data name="Confirm Password" xml:space="preserve">
     <value />
   </data>
@@ -205,9 +208,6 @@
     <value />
   </data>
   <data name="Cookie Policy" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Copyright Policy" xml:space="preserve">
     <value />
   </data>
   <data name="Create Fund" xml:space="preserve">
