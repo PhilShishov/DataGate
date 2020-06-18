@@ -18,12 +18,22 @@
             <tr>
                 @for (int header = 0; header < Model.Headers.Count; header++)
                 {
-                    <th
-                        data-toggle="tooltip"
-                        data-placement="top"
-                        title="@Model.Headers[header]">
-                        @Model.Headers[header]
-                    </th>
+                    if (Model.Headers[header] == "NAME")
+                    {
+                        <th class="th-name" data-toggle="tooltip"
+                            data-placement="top"
+                            title="@Model.Headers[header]">
+                            @Model.Headers[header]
+                        </th>
+                    }
+                    else
+                    {
+                        <th data-toggle="tooltip"
+                            data-placement="top"
+                            title="@Model.Headers[header]">
+                            @Model.Headers[header]
+                        </th>
+                    }
                 }
             </tr>
         </thead>

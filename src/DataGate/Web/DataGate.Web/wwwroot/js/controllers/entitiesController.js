@@ -35,16 +35,17 @@ function extract(model) {
         }
         tableValues.push(tableRows);
     }
-
+    console.log(table.rows);
+    console.log(tableValues);
     model.TableValues = tableValues;
     const token = $(SELECTORS.INPUT_TOKEN_EXTRACT).val();
 
-    $(document).on('click', HTML.BTN_EXTRACT_EXCEL, function (event) {
-        event.preventDefault()
-        model.Command = excelValue;
+    //$(document).on('click', HTML.BTN_EXTRACT_EXCEL, function (event) {
+    //    event.preventDefault()
+    //    model.Command = excelValue;
 
-        extractRequestHandler(model, token);
-    });
+    //    extractRequestHandler(model, token);
+    //});
 
     $(document).on('click', HTML.BTN_EXTRACT_PDF, function (event) {
         event.preventDefault()
