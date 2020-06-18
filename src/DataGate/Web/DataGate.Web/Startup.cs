@@ -42,6 +42,7 @@
                 .ConfigureDataProtection(this.configuration)
                 .ConfigureCache(this.configuration)
                 .ConfigureLocalization()
+                //.ConfigureRouting()
                 .ConfigureMvc()
                 .ConfigureCookies()
                 .ConfigureSettings(this.configuration)

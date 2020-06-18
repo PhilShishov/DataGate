@@ -18,12 +18,10 @@ h3 {
 }
 
 .div-legal-text {
-    font-size: 13px;
     overflow-y: scroll;
     height: 390px;
+    font: 12px/1.5 Arial,Helvetica,sans-serif;
 }
-
-
 
 .icon-svg-warning {
     background: url(/images/exclamation-triangle-solid.svg) no-repeat center center;
@@ -112,7 +110,7 @@ html {
 }
 
 body {
-    font-family: 'Share', 'Arial Narrow', 'Arial', 'sans-serif';
+    font-family: Arial,Helvetica,sans-serif;
     font-weight: 400;
     height: 100%;
     line-height: 1.7;
@@ -649,7 +647,7 @@ img {
     }
 
 .footer-text {
-    font-size: 12px;
+    font-size: 11px;
     line-height: 45px;
     display: flex;
 }

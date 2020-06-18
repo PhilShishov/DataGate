@@ -10,7 +10,7 @@
 }
 
 body {
-    font-family: 'Share', 'Arial Narrow', 'Arial', 'sans-serif';
+    font-family: Arial,Helvetica,sans-serif;
     background: url(../images/Background_Home.png) no-repeat center center fixed;
 }
 
@@ -97,6 +97,11 @@ img {
 .container-btn-login img:hover {
     opacity: 0.8;
 }
+
+.footer-pharus p {
+    font: 12px/1.5 Arial,Helvetica,sans-serif;
+}
+
 /*
 *
 * ==========================================

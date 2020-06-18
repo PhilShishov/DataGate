@@ -116,6 +116,9 @@
         public const string FundNameDisplay = "Fund";
         public const string SubFundNameDisplay = "Sub Fund";
         public const string ShareClassNameDisplay = "Share Class";
+        public const string FundType = "fund";
+        public const string SubFundType = "subfund";
+        public const string ShareClassType = "shareclass";
 
         // Toolbar Commands
         public const string CommandUpdateTable = "UPDATE";
