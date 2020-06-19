@@ -148,22 +148,10 @@ $(function () {
         html: true
     })
 
-    //$('.student-name').tooltip({
-    //    placement: 'top',
-    //    title: 'Student profile is not activated',
-    //    trigger: 'hover'
-    //})
-
     // ________________________________________________________
     //
     // Modal multiselect for column selection
     $('.multiselect').multiselect();
-
-    //// ________________________________________________________
-    ////
-    //// Double top scroll for wide table
-    //$('.double-scroll').doubleScroll();
-    //$('.table-wrapper-double-scroll').doubleScroll({ resetOnWindowResize: true });
 })
 
 // ________________________________________________________

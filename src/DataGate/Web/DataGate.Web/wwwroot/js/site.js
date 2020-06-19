@@ -12,7 +12,6 @@ function backToTop() {
     this.scrollTo(0, 0);
 }
 
-
 /*** Handle jQuery plugin naming conflict between jQuery UI and Bootstrap ***/
 
 $.widget.bridge('uibutton', $.ui.button);

@@ -13,16 +13,44 @@
      // ________________________________________________________
      //
      // Chart js for Asset under management
-    (function () {
-        let ctx = document.getElementById('canvas-chart-aum').getContext('2d');
-        let chart = new Chart(ctx, setConfigChart(@dates, @providers));
 
-        function setConfigChart(dates, providers) {
-            const config = {
+    $(function () {
+        const ChartColors = [
+            'rgb(54, 162, 235)',
+            'rgb(255, 159, 64)',
+            'rgb(255, 205, 86)',
+            'rgb(75, 192, 192)',
+            'rgb(153, 102, 255)',
+            'rgb(255, 99, 132)',
+            'rgb(201, 203, 207)'
+        ];
+
+        let chartData = [];
+        $.each(@providers, function (index, provider) {
+            let prices = @Json.Serialize(Model.TSAllPriceValues);
+            let priceObj = prices
+                .filter(ts => ts[2] === provider)
+                .map(ts => ts[1]);
+            let price = Object.values(priceObj);
+
+            chartData.push({
+                data: price,
+                label: provider,
+                backgroundColor: ChartColors[index],
+                borderColor: ChartColors[index],
+                fill: false,
+            });
+        });
+
+        let ctx = document.getElementById('canvas-chart-aum').getContext('2d');
+        let chart = new Chart(ctx, setConfigChart(@dates, chartData));
+
+        function setConfigChart(dates, chartData) {
+            let config = {
                 type: 'line',
                 data: {
                     labels: dates,
-                    datasets: []
+                    datasets: chartData,
                 },
                 options: {
                     responsive: true,
@@ -56,22 +84,7 @@
                     }
                 }
             };
-
-            $.each(providers, function (index, provider) {
-                const prices = JSON.parse('@Html.Raw(Json.Serialize(Model.TSAllPriceValues))');
-                const currentPrice = prices
-                    .filter(ts => ts[2] === provider)
-                    .map(ts => ts[1]);
-
-                config.data.datasets.push({
-                    label: provider,
-                    backgroundColor: window.chartColors[index],
-                    borderColor: window.chartColors[index],
-                    data: currentPrice,
-                    fill: false,
-                });
-            });
             return config;
-        }
-    })();
+        };
+    });
 </script>

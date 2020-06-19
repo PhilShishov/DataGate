@@ -9,10 +9,10 @@
   {
     "outputfilename": "wwwroot/js/site.min.js",
     "inputfiles": [
-      "wwwroot/js/navBar.js",
+      "wwwroot/js/loading.js",
       "wwwroot/js/plugins.js",
-      "wwwroot/js/site.js",
-      "wwwroot/js/loading-bar.js"
+      "wwwroot/js/navBar.js",
+      "wwwroot/js/site.js"
     ],
     "minify": {
       "enabled": true,
