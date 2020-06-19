@@ -19,6 +19,8 @@
         <link type="text/css" rel="stylesheet" href="~/lib/alertifyjs/css/themes/default.css" asp-append-version="true" />
         <link type="text/css" rel="stylesheet" href="~/lib/datatables/css/jquery.dataTables.css" asp-append-version="true" />
 
+        <link type="text/css" rel="stylesheet" href="~/css/pharus/loading.css" asp-append-version="true" />
+
         <link type="text/css" rel="stylesheet" href="~/css/pharus/buttons.css" asp-append-version="true" />
         <link type="text/css" rel="stylesheet" href="~/css/pharus/card.css" asp-append-version="true" />
         <link type="text/css" rel="stylesheet" href="~/css/pharus/checkbox.css" asp-append-version="true" />
@@ -203,8 +205,16 @@
         <script src="~/lib/moment/min/moment.min.js" asp-append-version="true"></script>
         <script src="https://cdn.datatables.net/plug-ins/1.10.21/sorting/datetime-moment.js" asp-append-version="true"></script>
 
+        <script src="~/js/loading.js" asp-append-version="true"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
         <script src="~/js/navBar.js" asp-append-version="true"></script>
+
+        <script>
+            $(document).ready(function () {
+                $('.table-responsive').loading();
+            });
+        </script>
+
     </environment>
 
     <environment include="Production, Staging">

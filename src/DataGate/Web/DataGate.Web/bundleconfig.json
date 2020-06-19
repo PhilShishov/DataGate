@@ -11,7 +11,8 @@
     "inputfiles": [
       "wwwroot/js/navBar.js",
       "wwwroot/js/plugins.js",
-      "wwwroot/js/site.js"
+      "wwwroot/js/site.js",
+      "wwwroot/js/loading-bar.js"
     ],
     "minify": {
       "enabled": true,

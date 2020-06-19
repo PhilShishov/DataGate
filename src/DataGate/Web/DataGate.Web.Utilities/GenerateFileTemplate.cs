@@ -208,14 +208,17 @@ namespace DataGate.Web.Utilities
             switch (controllerName)
             {
                 case GlobalConstants.FundsControllerName:
+                case GlobalConstants.FundNameDisplay:
                     typeName = FundsNameDisplay;
                     break;
                 case GlobalConstants.SubFundsControllerName:
                 case GlobalConstants.FundSubFundsControllerName:
+                case GlobalConstants.SubFundNameDisplay:
                     typeName = SubFundsNameDisplay;
                     break;
                 case GlobalConstants.ShareClassesControllerName:
                 case GlobalConstants.SubFundShareClassesControllerName:
+                case GlobalConstants.ShareClassNameDisplay:
                     typeName = ShareClassesNameDisplay;
                     break;
             }
