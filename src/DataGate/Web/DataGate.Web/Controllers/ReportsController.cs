@@ -7,8 +7,10 @@
     using DataGate.Services.Data.Reports;
     using DataGate.Web.Helpers;
     using DataGate.Web.ViewModels.Reports;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    [Authorize]
     public class ReportsController : BaseController
     {
         private const int FixedDayNavValue = 5;

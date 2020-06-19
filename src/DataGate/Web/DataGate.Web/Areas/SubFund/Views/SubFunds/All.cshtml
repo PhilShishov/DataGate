@@ -60,7 +60,10 @@
                 placeholder_text_single: "All"
             });
 
-            $('.table-view-pharus').removeAttr('hidden');
+            setInterval(function () {
+                $('.table-responsive').loading('stop');
+                $('.table-view-pharus').removeAttr('hidden');
+            }, 500);
 
             // ________________________________________________________
             //
