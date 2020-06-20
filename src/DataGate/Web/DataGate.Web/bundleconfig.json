@@ -9,7 +9,6 @@
   },
   {
     "inputfiles": [
-      "wwwroot/js/carousel.js",
       "wwwroot/js/plugins.js",
       "wwwroot/js/navBar.js",
       "wwwroot/js/site.js"

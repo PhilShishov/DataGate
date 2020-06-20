@@ -48,7 +48,7 @@
 
         <form id="form-report" method="post">
             <div class="">
-                <table class="table table-bordered table-hover tbl-reports table-view-pharus" id="table-to-extract">
+                <table class="table table-bordered table-hover tbl-reports table-view-pharus table-striped" id="table-to-extract">
                     <thead>
                         <tr>
                             @for (int row = 0; row < GlobalConstants.RowNumberOfHeadersInTable; row++)
@@ -82,7 +82,7 @@
                                     else if (Model.Reports[0][col] != "ID" && Model.Reports[0][col] != "NAME")
                                     {
                                         <td class="p-1">
-                                            &euro;@Model.Reports[row][col]
+                                            &euro; @Model.Reports[row][col]
                                         </td>
                                     }
                                     else
@@ -95,12 +95,18 @@
                             </tr>
                         }
                     </tbody>
-                    @*<tfoot>
-                            <tr>
-                                <th colspan="6" style="text-align:right">Total:</th>
-                                <th></th>
-                            </tr>
-                        </tfoot>*@
+                    <tfoot>
+                        <tr>
+                            @*@for (int row = 0; row < GlobalConstants.RowNumberOfHeadersInTable; row++)
+                            {
+                                for (int col = 0; col < Model.Reports[row].Length; col++)
+                                {
+                                    <th class="text-secondary p-1">
+                                    </th>
+                                }
+                            }*@
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
             <input type="hidden" name="AreaName" value="@GlobalConstants.FundAreaName" />
@@ -124,7 +130,7 @@
             // Datatable options - sort, search, pagination
             $.fn.dataTable.moment('DD/MM/YYYY');
 
-            $('.table-view-pharus').DataTable({
+            let table = $('.table-view-pharus').DataTable({
                 "dom": '<"top">t<"bottom"><"clear">',
                 "autoWidth": false,
                 "scrollX": true,
@@ -132,38 +138,16 @@
                     $('.dataTables_scrollBody thead tr').css({ visibility: 'collapse' });
                 },
                 stateSave: true,
-                //"footerCallback": function (row, data, start, end, display) {
-                //    var api = this.api(), data;
+            });
 
-                //    // Remove the formatting to get integer data for summation
-                //    var intVal = function (i) {
-                //        return typeof i === 'string' ?
-                //            i.replace(/[\€,]/g, '') * 1 :
-                //            typeof i === 'number' ?
-                //                i : 0;
-                //    };
+            table.columns('.sum').every(function () {
+                var sum = this
+                    .data()
+                    .reduce(function (a, b) {
+                        return a + b;
+                    });
 
-                //    // Total over all pages
-                //    total = api
-                //        .column(6)
-                //        .data()
-                //        .reduce(function (a, b) {
-                //            return intVal(a) + intVal(b);
-                //        }, 0);
-
-                //    // Total over this page
-                //    pageTotal = api
-                //        .column(6, { page: 'current' })
-                //        .data()
-                //        .reduce(function (a, b) {
-                //            return intVal(a) + intVal(b);
-                //        }, 0);
-
-                //    // Update footer
-                //    $(api.column(6).footer()).html(
-                //        '€' + pageTotal.toFixed(2) + ' ( €' + total.toFixed(2) + ' total)'
-                //    );
-                //}
+                $(el).html('Total: ' + sum);
             });
 
             $(".dataTables_length select").chosen({

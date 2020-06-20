@@ -103,3 +103,13 @@ a.a-underline:hover {
 #table-info-pharus {
     font-size: 15px;
 }
+
+.table-view-pharus tbody .td-aum-container {
+    background-color: #eee;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.table-view-pharus tbody .th-aum-total-container {
+    font-size: 16px;
+}
