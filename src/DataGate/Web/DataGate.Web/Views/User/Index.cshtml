@@ -18,8 +18,18 @@
             {
                 <div class="carousel-column">
                     <div class="carousel-card">
-                        <h5 class="mt-5 mb-3">@item.ScOfficialShareClassName</h5>
-                        <p>@item.ScInitialDate.ToString("dd-MMM-yyyy")</p>
+                        <h5 class="mt-5 mb-3">
+                            <a asp-area="@GlobalConstants.ShareClassAreaName"
+                               asp-route="@GlobalConstants.ShareClassDetailsRouteName"
+                               asp-route-id="@item.ScId"
+                               asp-route-date="@DateTimeParser.ToWebFormat(DateTime.UtcNow)">
+                                @item.ScOfficialShareClassName
+                            </a>
+                        </h5>
+                        <p>
+                            &euro;@item.ScInitialPrice<br />
+                            @item.ScInitialDate.ToString("dd-MMM-yyyy")
+                        </p>
                     </div>
                 </div>
             }
