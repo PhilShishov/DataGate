@@ -6,6 +6,10 @@
 *
 */
 
+.dataTables_wrapper .bottom {
+    margin-bottom: 1.5rem !important;
+}
+
 .dataTables_scrollHeadInner table {
     width: 100%;
 }

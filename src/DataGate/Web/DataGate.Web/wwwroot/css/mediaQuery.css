@@ -22,8 +22,10 @@
 
     .mobile-none,
     .search-box-wrapper,
-    .div-carousel-center, 
+    .div-carousel-center,
     .slick-slider,
+    .dataTables_wrapper .top,
+    .dataTables_wrapper .bottom,
     #aumChart,
     footer {
         display: none;
