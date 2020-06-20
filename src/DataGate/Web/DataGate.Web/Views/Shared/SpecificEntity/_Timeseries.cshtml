@@ -27,14 +27,13 @@
 
         let chartData = [];
         $.each(@providers, function (index, provider) {
-            let prices = @Json.Serialize(Model.TSAllPriceValues);
-            let priceObj = prices
+            let pricesJson = @Json.Serialize(Model.TSAllPriceValues);
+            let pricesArr = pricesJson
                 .filter(ts => ts[2] === provider)
-                .map(ts => ts[1]);
-            let price = Object.values(priceObj);
+                .map(ts => Number(ts[1]));
 
             chartData.push({
-                data: price,
+                data: pricesArr,
                 label: provider,
                 backgroundColor: ChartColors[index],
                 borderColor: ChartColors[index],
@@ -54,6 +53,7 @@
                 },
                 options: {
                     responsive: true,
+                    animation: true,
                     title: {
                         display: true,
                         text: 'Time Series'
