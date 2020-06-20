@@ -465,6 +465,9 @@
   <data name="Timeline" xml:space="preserve">
     <value>Timeline</value>
   </data>
+  <data name="Total Price:" xml:space="preserve">
+    <value>Total Price:</value>
+  </data>
   <data name="Two-factor authentication" xml:space="preserve">
     <value>Two-factor authentication</value>
   </data>
