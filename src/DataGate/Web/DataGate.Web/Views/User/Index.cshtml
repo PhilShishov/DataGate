@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<DataGate.Data.Models.Entities.TbHistoryShareClass>
+
+@{
     ViewData["Title"] = SharedLocalizer["User Panel"];
 }
 
@@ -8,69 +10,101 @@
         @SharedLocalizer["PHARUS DATAGATE PLATFORM"]
     </h2>
 
-    <hr class="hr-2 bg-pharus">
-    <div class="container-column-card mx-auto">
-        <div class="row mb-4">
-            <div class="column">
-                <div class="card">
-                    <a asp-area="Fund" asp-route="allFunds">@SharedLocalizer["Fund Library"]</a>
-                </div>
-            </div>
+    <hr class="hr-2 bg-pharus mb-4">
 
-            <div class="column">
-                <div class="card">
-                    <a asp-area="SubFund" asp-route="allSubFunds">@SharedLocalizer["Sub Fund Library"]</a>
+    <div class="d-flex">
+        <div class="div-carousel-center">
+            @foreach (var item in Model)
+            {
+                <div class="carousel-column">
+                    <div class="carousel-card">
+                        <h5 class="mt-5 mb-3">@item.ScOfficialShareClassName</h5>
+                        <p>@item.ScInitialDate.ToString("dd-MMM-yyyy")</p>
+                    </div>
                 </div>
-            </div>
-
-            <div class="column">
-                <div class="card">
-                    <a asp-area="ShareClass" asp-route="allShareClasses">@SharedLocalizer["Share Class Library"]</a>
-                </div>
-            </div>
+            }
         </div>
 
-        <div class="row mb-4">
-            <div class="column">
-                <div class="card">
-                    <a asp-area="" asp-route="allagreements">@SharedLocalizer["Agreements Library"]</a>
+        <div class="container-column-card mx-auto">
+            <div class="row mb-4">
+                <div class="column">
+                    <div class="card">
+                        <a asp-area="Fund" asp-route="allFunds">@SharedLocalizer["Fund Library"]</a>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="card">
+                        <a asp-area="SubFund" asp-route="allSubFunds">@SharedLocalizer["Sub Fund Library"]</a>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="card">
+                        <a asp-area="ShareClass" asp-route="allShareClasses">@SharedLocalizer["Share Class Library"]</a>
+                    </div>
                 </div>
             </div>
 
-            <div class="column">
-                <div class="card">
-                    <a asp-area="" asp-route="allreports">@SharedLocalizer["Reports"]</a>
+            <div class="row mb-4">
+                <div class="column">
+                    <div class="card">
+                        <a asp-area="" asp-route="allagreements">@SharedLocalizer["Agreements Library"]</a>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="card">
+                        <a asp-area="" asp-route="allreports">@SharedLocalizer["Reports"]</a>
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="card">
+                        <a href="">@SharedLocalizer["Projects"]</a>
+                    </div>
                 </div>
             </div>
 
-            <div class="column">
-                <div class="card">
-                    <a href="">@SharedLocalizer["Projects"]</a>
+            @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            {
+                <div class="row">
+                    <div class="column">
+                        <div class="card">
+                            <a asp-area="Admin" asp-controller="Admin" asp-action="ViewUsers">@SharedLocalizer["View Users"]</a>
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <div class="card">
+                            <a asp-area="Admin" asp-controller="Admin" asp-action="CreateUser">@SharedLocalizer["Create User"]</a>
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <div class="card">
+                            <a href="">@SharedLocalizer["About"]</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            }
         </div>
-
-        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-        {
-            <div class="row">
-                <div class="column">
-                    <div class="card">
-                        <a asp-area="Admin" asp-controller="Admin" asp-action="ViewUsers">@SharedLocalizer["View Users"]</a>
-                    </div>
-                </div>
-
-                <div class="column">
-                    <div class="card">
-                        <a asp-area="Admin" asp-controller="Admin" asp-action="CreateUser">@SharedLocalizer["Create User"]</a>
-                    </div>
-                </div>
-
-                <div class="column">
-                    <div class="card">
-                        <a href="">@SharedLocalizer["About"]</a>
-                    </div>
-                </div>
-            </div>
-        }
     </div>
 </div>
+
+@section Scripts{
+    <script src="~/lib/slick/slick.min.js" asp-append-version="true"></script>
+    <script>
+        $(document).ready(function () {
+            $('.div-carousel-center').slick({
+                vertical: true,
+                verticalSwiping: true,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                arrows: true,
+                prevArrow: '<div class="slick-prev"></div>',
+                nextArrow: '<div class="slick-next"></div>',
+            });
+        });
+    </script>
+}
