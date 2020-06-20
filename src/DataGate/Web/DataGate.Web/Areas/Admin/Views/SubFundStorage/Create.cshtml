@@ -17,7 +17,7 @@
 
                 <div class="column-form">
                     <div class="form-group">
-                        <label asp-for="InitialDate" class="text-torshia"></label><br>
+                        <label asp-for="InitialDate" ></label><br>
                         <input asp-for="InitialDate"
                                type="date"
                                min="2018-01-01"
@@ -25,7 +25,7 @@
                         <span asp-validation-for="InitialDate" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="EndDate" class="text-torshia"></label><br>
+                        <label asp-for="EndDate" ></label><br>
                         <input asp-for="EndDate"
                                type="date"
                                class="form-control ">
@@ -33,7 +33,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="FirstNavDate" class="text-torshia"></label><br>
+                        <label asp-for="FirstNavDate" ></label><br>
                         <input asp-for="FirstNavDate"
                                type="date"
                                class="form-control ">
@@ -41,7 +41,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="LastNavDate" class="text-torshia"></label><br>
+                        <label asp-for="LastNavDate" ></label><br>
                         <input asp-for="LastNavDate"
                                type="date"
                                class="form-control ">
@@ -49,7 +49,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="CSSFAuthDate" class="text-torshia"></label><br>
+                        <label asp-for="CSSFAuthDate" ></label><br>
                         <input asp-for="CSSFAuthDate"
                                type="date"
                                class="form-control ">
@@ -57,7 +57,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="ExpiryDate" class="text-torshia"></label><br>
+                        <label asp-for="ExpiryDate" ></label><br>
                         <input asp-for="ExpiryDate"
                                type="date"
                                class="form-control ">
@@ -74,7 +74,7 @@
 
                     <div class="form-group" id="derivMarket" hidden>
                         <label asp-for="DerivMarket"
-                               class="text-torshia"></label><br>
+                               ></label><br>
                         <select class="select-pharus"
                                 asp-for="DerivMarket">
                             <option selected disabled>-- Choose Market --</option>
@@ -95,7 +95,7 @@
 
                     <div class="form-group" id="derivPurpose" hidden>
                         <label asp-for="DerivPurpose"
-                               class="text-torshia"></label><br>
+                               ></label><br>
                         <select class="select-pharus"
                                 asp-for="DerivPurpose">
                             <option selected disabled>-- Choose Purpose --</option>
@@ -117,7 +117,7 @@
 
                 <div class="column-form">
                     <div class="form-group">
-                        <label asp-for="SubFundName" class="text-torshia"></label><br>
+                        <label asp-for="SubFundName" ></label><br>
                         <input type="text"
                                asp-for="SubFundName"
                                class="form-control "
@@ -125,7 +125,7 @@
                         <span asp-validation-for="SubFundName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="CSSFCode" class="text-torshia"></label><br>
+                        <label asp-for="CSSFCode" ></label><br>
                         <input type="text"
                                class="form-control "
                                asp-for="CSSFCode">
@@ -133,7 +133,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="FACode" class="text-torshia"></label><br>
+                        <label asp-for="FACode" ></label><br>
                         <input type="text"
                                class="form-control "
                                asp-for="FACode"
@@ -142,7 +142,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="DBCode" class="text-torshia"></label><br>
+                        <label asp-for="DBCode" ></label><br>
                         <input type="text"
                                class="form-control "
                                asp-for="DBCode"
@@ -151,7 +151,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="TACode" class="text-torshia"></label><br>
+                        <label asp-for="TACode" ></label><br>
                         <input type="text"
                                class="form-control "
                                asp-for="TACode"
@@ -161,7 +161,7 @@
 
 
                     <div class="form-group">
-                        <label asp-for="LEICode" class="text-torshia"></label><br>
+                        <label asp-for="LEICode" ></label><br>
                         <input type="text"
                                class="form-control "
                                asp-for="LEICode"
@@ -170,7 +170,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="ClearingCode" class="text-torshia"></label><br>
+                        <label asp-for="ClearingCode" ></label><br>
                         <input type="text"
                                class="form-control "
                                asp-for="ClearingCode"
@@ -181,7 +181,7 @@
 
                 <div class="column-form">
                     <div class="form-group">
-                        <label asp-for="FundContainer" class="text-torshia"></label><br>
+                        <label asp-for="FundContainer" ></label><br>
                         <select class="select-pharus" asp-for="FundContainer">
                             <option selected disabled>-- Choose Container --</option>
                             @foreach (var container in (HashSet<string>)ViewData["FundContainer"])
@@ -192,7 +192,7 @@
                     </div>
                     <span asp-validation-for="FundContainer" class="text-danger"></span>
                     <div class="form-group">
-                        <label asp-for="Status" class="text-torshia"></label><br>
+                        <label asp-for="Status" ></label><br>
                         <select class="select-pharus" asp-for="Status">
                             <option selected disabled>-- Choose Status --</option>
                             @foreach (var status in (List<string>)ViewData["Status"])
@@ -203,7 +203,7 @@
                     </div>
                     <span asp-validation-for="Status" class="text-danger"></span>
                     <div class="form-group">
-                        <label asp-for="CurrencyCode" class="text-torshia"></label><br>
+                        <label asp-for="CurrencyCode" ></label><br>
                         <select class="select-pharus" asp-for="CurrencyCode">
                             <option selected disabled>-- Choose Currency --</option>
                             @foreach (var currency in (List<string>)ViewData["CurrencyCode"])
@@ -214,7 +214,7 @@
                     </div>
                     <span asp-validation-for="CurrencyCode" class="text-danger"></span>
                     <div class="form-group">
-                        <label asp-for="CesrClass" class="text-torshia"></label><br>
+                        <label asp-for="CesrClass" ></label><br>
                         <select class="select-pharus" asp-for="CesrClass">
                             <option selected disabled>-- Choose Class --</option>
                             @foreach (var cesr in (List<string>)ViewData["CesrClass"])
@@ -225,7 +225,7 @@
                     </div>
                     <span asp-validation-for="CesrClass" class="text-danger"></span>
                     <div class="form-group">
-                        <label asp-for="GeographicalFocus" class="text-torshia"></label><br>
+                        <label asp-for="GeographicalFocus" ></label><br>
                         <select class="select-pharus" asp-for="GeographicalFocus">
                             <option selected disabled>-- Choose GeoFocus --</option>
                             @foreach (var focus in (List<string>)ViewData["GeographicalFocus"])
@@ -237,7 +237,7 @@
                     <span asp-validation-for="GeographicalFocus" class="text-danger"></span>
 
                     <div class="form-group">
-                        <label asp-for="GlobalExposure" class="text-torshia"></label><br>
+                        <label asp-for="GlobalExposure" ></label><br>
                         <select class="select-pharus" asp-for="GlobalExposure">
                             <option selected disabled>-- Choose Exposure --</option>
                             @foreach (var expo in (List<string>)ViewData["GlobalExposure"])
@@ -249,7 +249,7 @@
                     <span asp-validation-for="GlobalExposure" class="text-danger"></span>
 
                     <div class="form-group">
-                        <label asp-for="NavFrequency" class="text-torshia"></label><br>
+                        <label asp-for="NavFrequency" ></label><br>
                         <select class="select-pharus" asp-for="NavFrequency">
                             <option selected disabled>-- Choose Frequency --</option>
                             @foreach (var frequency in (List<string>)ViewData["NavFrequency"])
@@ -261,7 +261,7 @@
                     <span asp-validation-for="NavFrequency" class="text-danger"></span>
 
                     <div class="form-group">
-                        <label asp-for="ValuationDate" class="text-torshia"></label><br>
+                        <label asp-for="ValuationDate" ></label><br>
                         <select class="select-pharus" asp-for="ValuationDate">
                             <option selected disabled>-- Choose Valuation --</option>
                             @foreach (var date in (List<string>)ViewData["ValuationDate"])
@@ -273,7 +273,7 @@
                     <span asp-validation-for="ValuationDate" class="text-danger"></span>
 
                     <div class="form-group">
-                        <label asp-for="CalculationDate" class="text-torshia"></label><br>
+                        <label asp-for="CalculationDate" ></label><br>
                         <select class="select-pharus" asp-for="CalculationDate">
                             <option selected disabled>-- Choose Calculation --</option>
                             @foreach (var date in (List<string>)ViewData["CalculationDate"])
@@ -285,7 +285,7 @@
                     <span asp-validation-for="CalculationDate" class="text-danger"></span>
 
                     <div class="form-group">
-                        <label asp-for="PrincipalAssetClass" class="text-torshia"></label><br>
+                        <label asp-for="PrincipalAssetClass" ></label><br>
                         <select class="select-pharus" asp-for="PrincipalAssetClass">
                             <option selected disabled>-- Choose Class --</option>
                             @foreach (var pac in (List<string>)ViewData["PrincipalAssetClass"])
@@ -297,7 +297,7 @@
                     <span asp-validation-for="PrincipalAssetClass" class="text-danger"></span>
 
                     <div class="form-group">
-                        <label asp-for="TypeOfMarket" class="text-torshia"></label><br>
+                        <label asp-for="TypeOfMarket" ></label><br>
                         <select class="select-pharus" asp-for="TypeOfMarket">
                             <option selected disabled>-- Choose Market --</option>
                             @foreach (var type in (List<string>)ViewData["TypeOfMarket"])
@@ -309,7 +309,7 @@
                     <span asp-validation-for="TypeOfMarket" class="text-danger"></span>
 
                     <div class="form-group">
-                        <label asp-for="PrincipalInvestmentStrategy" class="text-torshia"></label><br>
+                        <label asp-for="PrincipalInvestmentStrategy" ></label><br>
                         <select class="select-pharus" asp-for="PrincipalInvestmentStrategy">
                             <option selected disabled>-- Choose Strategy --</option>
                             @foreach (var strategy in (List<string>)ViewData["PrincipalInvestmentStrategy"])
@@ -320,7 +320,7 @@
                     </div>
                     <span asp-validation-for="PrincipalInvestmentStrategy" class="text-danger"></span>
                     <div class="form-group">
-                        <label asp-for="SfCatMorningStar" class="text-torshia"></label><br>
+                        <label asp-for="SfCatMorningStar" ></label><br>
                         <select class="select-pharus" asp-for="SfCatMorningStar">
                             <option selected disabled>-- Choose Category --</option>
                             @foreach (var ms in (List<string>)ViewData["SfCatMorningStar"])
@@ -332,7 +332,7 @@
                     <span asp-validation-for="SfCatMorningStar" class="text-danger"></span>
 
                     <div class="form-group">
-                        <label asp-for="SfCatSix" class="text-torshia"></label><br>
+                        <label asp-for="SfCatSix" ></label><br>
                         <select class="select-pharus" asp-for="SfCatSix">
                             <option selected disabled>-- Choose Category --</option>
                             @foreach (var six in (List<string>)ViewData["SfCatSix"])
@@ -344,7 +344,7 @@
                     <span asp-validation-for="SfCatSix" class="text-danger"></span>
 
                     <div class="form-group">
-                        <label asp-for="SfCatBloomberg" class="text-torshia"></label><br>
+                        <label asp-for="SfCatBloomberg" ></label><br>
                         <select class="select-pharus" asp-for="SfCatBloomberg">
                             <option selected disabled>-- Choose Category --</option>
                             @foreach (var bg in (List<string>)ViewData["SfCatBloomberg"])

@@ -17,11 +17,11 @@ namespace DataGate.Web.InputModels
 
     public abstract class BaseEntityInputModel
     {
-        [Required(ErrorMessage = "Valid From cannot be empty")]
+        [Required(ErrorMessage = "{0} cannot be empty")]
         [Display(Name = "Valid From")]
         public DateTime InitialDate { get; set; }
 
-        [RegularExpression(@"^[A-Z0-9_]+$", ErrorMessage = "Not in correct format!")]
+        [RegularExpression(@"^[A-Z0-9_]+$", ErrorMessage = ErrorMessages.UnvalidFormat)]
         [Display(Name = "CSSF Code")]
         public string CSSFCode { get; set; }
 
@@ -29,16 +29,16 @@ namespace DataGate.Web.InputModels
         [Display(Name = "Status")]
         public string Status { get; set; }
 
-        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
+        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = ErrorMessages.UnvalidFormat)]
         [Display(Name = "Fund Admin Code")]
         [Required]
         public string FACode { get; set; }
 
-        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
+        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = ErrorMessages.UnvalidFormat)]
         [Display(Name = "Transfer Agent Code")]
         public string TACode { get; set; }
 
-        [RegularExpression(@"^[A-Z0-9_]+$", ErrorMessage = "Not in correct format!")]
+        [RegularExpression(@"^[A-Z0-9_]+$", ErrorMessage = ErrorMessages.UnvalidFormat)]
         [Display(Name = "LEI Code")]
         public string LEICode { get; set; }
 

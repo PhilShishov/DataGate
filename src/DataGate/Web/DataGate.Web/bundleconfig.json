@@ -1,15 +1,14 @@
 ﻿[
   {
-    "outputFileName": "wwwroot/css/site.min.css",
     "inputFiles": [
-      "wwwroot/css/pharus/!(*.min).css"
-      //[ "wwwroot/**/!(*.min).css" ]
-    ]
+      "wwwroot/lib/chosen/chosen.css",
+      "wwwroot/css/pharus/!(*.min).css",
+      "wwwroot/css/mediaQuery.css"
+    ],
+    "outputFileName": "wwwroot/css/site.min.css"
   },
   {
-    "outputfilename": "wwwroot/js/site.min.js",
     "inputfiles": [
-      "wwwroot/js/loading.js",
       "wwwroot/js/plugins.js",
       "wwwroot/js/navBar.js",
       "wwwroot/js/site.js"
@@ -18,6 +17,7 @@
       "enabled": true,
       "renameLocals": false
     },
+    "outputfilename": "wwwroot/js/site.min.js",
     "sourceMap": false
   }
 ]

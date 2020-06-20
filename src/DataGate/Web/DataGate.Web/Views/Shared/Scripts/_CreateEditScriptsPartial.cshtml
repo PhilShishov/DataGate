@@ -1,6 +1,8 @@
 ﻿@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
 
 <script src="~/js/createEditForms.js" asp-append-version="true"></script>
+<script src="~/lib/jquery-validation/dist/jquery.validate.js" asp-append-version="true"></script>
+<script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
 
 <script src="https://www.google.com/recaptcha/api.js?render=@this.Configuration["GoogleReCaptcha:Key"]"></script>
 <script>

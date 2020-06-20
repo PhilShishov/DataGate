@@ -32,8 +32,6 @@
 
 @section Scripts{
     <partial name="Scripts/_EntitiesScriptsPartial" />
-
-
     <script>
         let model = {
             Date: '@Model.Date',
@@ -41,6 +39,7 @@
         };
 
         $(document).ready(function () {
+            $('.table-view-pharus').removeAttr('hidden');
             // ________________________________________________________
             //
             // Datatable options - sort, search, pagination
@@ -49,30 +48,22 @@
             $('.table-view-pharus').DataTable({
                 "dom": '<"top"lf>rt<"bottom"ip><"clear">',
                 "lengthMenu": [[-1, 10, 25, 50], ["All", 10, 25, 50]],
-                "scrollX": true,
                 stateSave: true,
                 "autoWidth": false,
+                "scrollX": true,
             });
 
             $(".dataTables_length select").chosen({
                 disable_search_threshold: 10,
                 width: "55px",
-                placeholder_text_single: "All"
+                placeholder_text_single: ""
             });
 
-            $('.table-view-pharus').removeAttr('hidden');
             // ________________________________________________________
             //
             // Extract view as excel or pdf
             extract(model);
             submitForm();
-
-            // ________________________________________________________
-            //
-            // Autocomplete search
-            const controller = '@controller';
-            const tokenUpdate = $('#update-form input[name=__RequestVerificationToken]').val();
-            loadAutocomplete(tokenUpdate, controller, entityId = null);
         });
     </script>
 }

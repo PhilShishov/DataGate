@@ -2,7 +2,9 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+
     using AutoMapper;
+    using DataGate.Common;
     using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
     using DataGate.Web.Dtos.Entities;
@@ -12,13 +14,13 @@
         [Display(Name = "Sub Fund Id")]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "You must enter a value for the SubFund Name!")]
-        [StringLength(200, ErrorMessage = "The SubFund Name must be no longer than 200 characters")]
-        [RegularExpression(@"^[A-Za-z-0-9]+(\s[A-Za-z-0-9]+)*$", ErrorMessage = "Not in correct format!")]
+        [Required(ErrorMessage = "You must enter a value for the Sub Fund Name!")]
+        [StringLength(200, ErrorMessage = "The Sub Fund Name must be no longer than 200 characters")]
+        [RegularExpression(@"^[A-Za-z-0-9]+(\s[A-Za-z-0-9]+)*$", ErrorMessage = ErrorMessages.UnvalidFormat)]
         [Display(Name = "Official Sub Fund Name")]
         public string SubFundName { get; set; }
 
-        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
+        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = ErrorMessages.UnvalidFormat)]
         [Display(Name = "Depository Bank Code")]
         public string DBCode { get; set; }
 
@@ -76,7 +78,7 @@
         [Display(Name = "Principal Investment Strategy")]
         public string PrincipalInvestmentStrategy { get; set; }
 
-        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = "Not in correct format!")]
+        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = ErrorMessages.UnvalidFormat)]
         [Display(Name = "Clearing Code")]
         public string ClearingCode { get; set; }
 

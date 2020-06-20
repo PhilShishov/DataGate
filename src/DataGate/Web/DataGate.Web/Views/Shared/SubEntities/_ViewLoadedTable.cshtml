@@ -40,9 +40,7 @@
                     {
                         for (int col = 0; col < Model.Entities[row].Length; col++)
                         {
-                            <th class="pr-3 help"
-                                data-toggle="tooltip"
-                                data-placement="bottom"
+                            <th class="pr-3"
                                 title="@Model.Entities[row][col]">
                                 @Model.Entities[row][col]
                             </th>
@@ -97,13 +95,6 @@
             }
         }
     })();
-
-    // Additional information about headers
-    $(function () {
-        $('[data-toggle="tooltip"]').uitooltip({
-            html: true
-        })
-    })
 
     // Double top scroll for wide table
     $(function () {
