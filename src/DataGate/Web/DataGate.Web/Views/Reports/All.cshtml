@@ -65,7 +65,7 @@
         <h2 class="text-center title-responsive">@Model.SelectedType @SharedLocalizer["Reports"]</h2>
 
         <form id="form-report" method="post">
-            <div class="table-wrapper-double-scroll">
+            <div class="table-responsive mx-auto">
                 <table class="table table-bordered table-hover tbl-reports table-view-pharus" id="table-to-extract">
                     <thead>
                         <tr>
@@ -159,10 +159,11 @@
             // Datatable options - sort, search, pagination
             $.fn.dataTable.moment('DD/MM/YYYY');
 
-            $('#table-to-extract').DataTable({
-                //"dom": '<"top"lf>rt<"bottom"ip><"clear">',
+            $('.table-view-pharus').DataTable({
+                "dom": '<"top"lf>rt<"bottom"ip><"clear">',
                 "lengthMenu": [[-1, 10, 25, 50], ["All", 10, 25, 50]],
-                //stateSave: true,
+                "autoWidth": false,
+                stateSave: true,
                 "footerCallback": function (row, data, start, end, display) {
                     var api = this.api(), data;
 
