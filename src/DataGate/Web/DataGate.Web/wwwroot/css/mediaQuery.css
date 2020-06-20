@@ -22,6 +22,8 @@
 
     .mobile-none,
     .search-box-wrapper,
+    .div-carousel-center, 
+    .slick-slider,
     #aumChart,
     footer {
         display: none;
