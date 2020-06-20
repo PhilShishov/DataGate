@@ -43,9 +43,8 @@
             // Datatable options - sort, search, pagination
             $.fn.dataTable.moment('DD/MM/YYYY');
 
-            $('.table-view-pharus').DataTable({              
-                paging: false,
-                searching: false,
+            $('.table-view-pharus').DataTable({ 
+                "dom": '<"top"l>t<"bottom"ip><"clear">',
                 stateSave: true,
                  "autoWidth": false,
                 "scrollX": true,

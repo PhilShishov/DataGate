@@ -45,10 +45,9 @@
             $.fn.dataTable.moment('DD/MM/YYYY');
 
             $('.table-view-pharus').DataTable({
+                "dom": '<"top">t<"bottom"><"clear">',
                 "autoWidth": false,
-                searching: false,
-                paging: false,
-                "info": false,
+                "scrollX": true,
             });
 
             // ________________________________________________________

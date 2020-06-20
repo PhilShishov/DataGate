@@ -22,5 +22,8 @@
 
             return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
         }
+
+        public IAsyncEnumerable<string[]> GetAll(string function, DateTime date)
+        => this.sqlManager.ExecuteQueryReportsAsync(function, date);
     }
 }

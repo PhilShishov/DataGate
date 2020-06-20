@@ -56,6 +56,10 @@ namespace DataGate.Web.Configuration
                        name: "reports",
                        pattern: "reports/{type:required}",
                        new { controller = "Reports", action = "All" });
+                    endpoints.MapControllerRoute(
+                      name: "fundreports",
+                      pattern: "reports/fund",
+                      new { controller = "Reports", action = "FundReports" });
 
                     // Funds
                     endpoints.MapAreaControllerRoute(

@@ -129,6 +129,26 @@ namespace DataGate.Services.SqlClient
             }
         }
 
+        public async IAsyncEnumerable<string[]> ExecuteQueryReportsAsync(string function, DateTime date)
+        {
+            using (SqlConnection connection = new SqlConnection())
+            {
+                connection.ConnectionString = this.configuration.GetConnectionString(GlobalConstants.DataGatevFinaleConnection);
+                await connection.OpenAsync();
+                SqlCommand command = connection.CreateCommand();
+                var sqlDate = DateTimeParser.ToSqlFormat(date);
+
+                command.CommandText = function;
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.Add(new SqlParameter("@datereport", SqlDbType.Date) { Value = date });
+
+                await foreach (var item in DataSQLHelper.GetStringDataAsync(command))
+                {
+                    yield return item;
+                }
+            }
+        }
+
         // ________________________________________________________
         //
         // Convert rows values from a data reader into typed results

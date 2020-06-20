@@ -1,7 +1,9 @@
 ﻿namespace DataGate.Web.Controllers
 {
     using System;
+    using System.Linq;
     using System.Text.RegularExpressions;
+    using System.Threading.Tasks;
 
     using DataGate.Common;
     using DataGate.Services.Data.Reports;
@@ -36,7 +38,7 @@
             string function = StringSwapper.ByArea(
                             type,
                             null,
-                            SqlFunctionDictionary.ReportsSubFunds,
+                            SqlFunctionDictionary.ReportSubFunds,
                             null);
 
             var date = new DateTime(DateTime.Today.Year, DateTime.Today.Month - 1, FixedDayNavValue);
@@ -58,7 +60,7 @@
             string function = StringSwapper.ByArea(
                             model.SelectedType,
                             null,
-                            SqlFunctionDictionary.ReportsSubFunds,
+                            SqlFunctionDictionary.ReportSubFunds,
                             null);
 
             var parsedDate = new DateTime(model.Date.Year, model.Date.Month, FixedDayNavValue);
@@ -70,7 +72,37 @@
                 return this.View(model);
             }
 
-            this.ShowErrorAlertify(ErrorMessages.TableIsEmpty);
+            return this.View(model);
+        }
+
+        [HttpGet]
+        [Route("reports/fund")]
+        public async Task<IActionResult> FundReports()
+        {
+            var date = new DateTime(DateTime.Today.Year, DateTime.Today.Month - 1, FixedDayNavValue);
+            var reports = await this.service.GetAll(SqlFunctionDictionary.ReportFunds, date).ToListAsync();
+
+            var viewModel = new FundReportOverviewViewModel()
+            {
+                Date = date,
+                Reports = reports,
+            };
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> FundReports(FundReportOverviewViewModel model)
+        {
+            var parsedDate = new DateTime(model.Date.Year, model.Date.Month, FixedDayNavValue);
+
+            model.Reports = await this.service.GetAll(SqlFunctionDictionary.ReportFunds, parsedDate).ToListAsync();
+
+            if (model.Reports != null)
+            {
+                return this.View(model);
+            }
+
             return this.View(model);
         }
     }
