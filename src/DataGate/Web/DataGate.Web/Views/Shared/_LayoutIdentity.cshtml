@@ -35,9 +35,7 @@
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
-        <script src="~/lib/popperjs/umd/popper.js" asp-append-version="true"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
-        <partial name="Scripts/_ValidationScriptsPartial" />
 
         <script>
             if (window.history.replaceState) {
@@ -48,9 +46,7 @@
 
     <environment include="Production, Staging">
         <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
-        <script src="~/lib/popperjs/umd/popper.min.js" asp-append-version="true"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
-        <partial name="Scripts/_ValidationScriptsPartial" />
 
         <script>
             if (window.history.replaceState) {

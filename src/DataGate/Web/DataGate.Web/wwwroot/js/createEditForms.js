@@ -109,14 +109,11 @@ const MESSAGES = {
         const selectedInputFields = inputFields.querySelectorAll(SELECTORS_CREATE_EDIT.INPUTS_ALL_EXCEPT_FORMAT_NAME);
 
         for (var i = 0; i < selectedInputFields.length; i++) {
-            selectedInputFields[i].addEventListener('blur', formatInput);
+            selectedInputFields[i].addEventListener('input', function (event) {
+                let input = event.target;                
+                input.value = input.value.toUpperCase();
+            });
         }
-    }
-
-    function formatInput() {
-        this.value = this.value.trimStart();
-        this.value = this.value.trimEnd();
-        this.value = this.value.toUpperCase();
     }
 })();
 
@@ -173,28 +170,4 @@ $(function () {
         disable_search_threshold: 10,
         width: "269px",
     })
-});
-
-// Manage validation icons on form submit and keydown
-$(function () {
-    $('form').on('submit', function () {
-        const fieldsValidation = $('.field-validation-error');
-        if (fieldsValidation.length != 0) {
-            fieldsValidation.each(function () {
-                $(this).siblings('span').addClass('icon-svg-warning');
-                $(this).parent().removeClass('d-none');
-                $(this).parent().addClass('d-flex');
-            });
-        }
-    });
-
-    $('form').keydown(function () {
-        const fieldsValidation = $('.field-validation-error');
-        if (fieldsValidation.length != 0) {
-            fieldsValidation.each(function () {
-                $(this).parent().removeClass('d-flex');
-                $(this).parent().addClass('d-none');
-            });
-        }
-    });
 });

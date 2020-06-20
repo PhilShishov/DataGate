@@ -9,17 +9,12 @@
 
     <environment include="Development">
         <link rel="icon" href="~/images/Logo_Pharus_small.jpg" type="image/x-icon">
-        <link type="text/css" rel="stylesheet" href="~/lib/jqueryui/themes/base/jquery-ui.css" asp-append-version="true">
-        <link type="text/css" rel="stylesheet" href="~/lib/jqueryui/themes/smoothness/jquery-ui.css" asp-append-version="true" />
-        <link type="text/css" rel="stylesheet" href="~/lib/select2/dist/css/select2.css" asp-append-version="true">
-        <link type="text/css" rel="stylesheet" href="~/lib/chosen/chosen.css" asp-append-version="true">
         <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" asp-append-version="true" />
-        <link type="text/css" rel="stylesheet" href="~/lib/font-awesome/css/all.css" asp-append-version="true" />
+        <link type="text/css" rel="stylesheet" href="~/lib/jqueryui/themes/smoothness/jquery-ui.css" asp-append-version="true" />
+        <link type="text/css" rel="stylesheet" href="~/lib/chosen/chosen.css" asp-append-version="true">
         <link type="text/css" rel="stylesheet" href="~/lib/alertifyjs/css/alertify.css" asp-append-version="true" />
         <link type="text/css" rel="stylesheet" href="~/lib/alertifyjs/css/themes/default.css" asp-append-version="true" />
         <link type="text/css" rel="stylesheet" href="~/lib/datatables/css/jquery.dataTables.css" asp-append-version="true" />
-
-        <link type="text/css" rel="stylesheet" href="~/css/pharus/loading.css" asp-append-version="true" />
 
         <link type="text/css" rel="stylesheet" href="~/css/pharus/buttons.css" asp-append-version="true" />
         <link type="text/css" rel="stylesheet" href="~/css/pharus/card.css" asp-append-version="true" />
@@ -33,7 +28,7 @@
         <link type="text/css" rel="stylesheet" href="~/css/pharus/timeline.css" asp-append-version="true" />
         <link type="text/css" rel="stylesheet" href="~/css/pharus/site.css" asp-append-version="true" />
         <link type="text/css" rel="stylesheet" href="~/css/pharus/dataTable.css" asp-append-version="true" />
-        <link type="text/css" rel="stylesheet" href="~/css/pharus/mediaQuery.css" asp-append-version="true" />
+        <link type="text/css" rel="stylesheet" href="~/css/mediaQuery.css" asp-append-version="true" />
 
         <script src="~/lib/sweetalert/dist/sweetalert.min.js" asp-append-version="true"></script>
         <script src="~/lib/alertifyjs/alertify.js" asp-append-version="true"></script>
@@ -41,16 +36,9 @@
 
     <environment include="Production, Staging">
         <link rel="icon" href="~/images/Logo_Pharus_small.jpg" type="image/x-icon">
-        <link type="text/css" rel="stylesheet" href="~/lib/jqueryui/themes/base/jquery-ui.min.css" asp-append-version="true">
-        <link type="text/css" rel="stylesheet" href="~/lib/jqueryui/themes/smoothness/jquery-ui.min.css" asp-append-version="true" />
-        <link type="text/css" rel="stylesheet" href="~/lib/select2/dist/css/select2.min.css" asp-append-version="true">
-        <link type="text/css" rel="stylesheet" href="~/lib/chosen/chosen.min.css" asp-append-version="true">
         <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
-        <link type="text/css" rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" asp-append-version="true" />
-        <link type="text/css" rel="stylesheet" href="~/lib/alertifyjs/css/alertify.min.css" asp-append-version="true" />
-        <link type="text/css" rel="stylesheet" href="~/lib/alertifyjs/css/themes/default.min.css" asp-append-version="true" />
+        <link type="text/css" rel="stylesheet" href="~/lib/jqueryui/themes/smoothness/jquery-ui.min.css" asp-append-version="true" />
         <link type="text/css" rel="stylesheet" href="~/lib/datatables/css/jquery.dataTables.min.css" asp-append-version="true" />
-
         <link type="text/css" rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
 
         <script src="~/lib/sweetalert/dist/sweetalert.min.js" asp-append-version="true"></script>
@@ -192,38 +180,23 @@
         </a>
     }
 
-<environment include="Development">
-    <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
-    <script src="~/lib/jqueryui/jquery-ui.js" asp-append-version="true"></script>
-    <partial name="Scripts/_ValidationScriptsPartial" />
-    <script src="~/lib/popperjs/umd/popper.js" asp-append-version="true"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
-    <script src="~/lib/select2/dist/js/select2.js" asp-append-version="true"></script>
-    <script src="~/lib/chosen/chosen.jquery.js" asp-append-version="true"></script>
-    <script src="~/lib/sweetalert/dist/sweetalert.min.js" asp-append-version="true"></script>
-    <script src="~/lib/datatables/js/jquery.dataTables.js" asp-append-version="true"></script>
-    <script src="~/lib/moment/min/moment.min.js" asp-append-version="true"></script>
-    <script src="https://cdn.datatables.net/plug-ins/1.10.21/sorting/datetime-moment.js" asp-append-version="true"></script>
-    <script src="~/lib/chartjs/Chart.min.js" asp-append-version="true"></script>
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
+        <script src="~/lib/chosen/chosen.jquery.js" asp-append-version="true"></script>
+        <script src="~/lib/datatables/js/jquery.dataTables.js" asp-append-version="true"></script>
+        <script src="~/lib/moment/min/moment.min.js" asp-append-version="true"></script>
 
-    <script src="~/js/loading.js" asp-append-version="true"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/navBar.js" asp-append-version="true"></script>
-</environment>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/navBar.js" asp-append-version="true"></script>
+    </environment>
 
     <environment include="Production, Staging">
         <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
-        <script src="~/lib/jqueryui/jquery-ui.min.js" asp-append-version="true"></script>
-        <partial name="Scripts/_ValidationScriptsPartial" />
-        <script src="~/lib/popperjs/umd/popper.min.js" asp-append-version="true"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
-        <script src="~/lib/select2/dist/js/select2.min.js" asp-append-version="true"></script>
-        <script src="~/lib/chosen/chosen.jquery.min.js" asp-append-version="true"></script>
-        <script src="~/lib/sweetalert/dist/sweetalert.min.js" asp-append-version="true"></script>
         <script src="~/lib/datatables/js/jquery.dataTables.min.js" asp-append-version="true"></script>
         <script src="~/lib/moment/min/moment.min.js" asp-append-version="true"></script>
-        <script src="https://cdn.datatables.net/plug-ins/1.10.21/sorting/datetime-moment.js" asp-append-version="true"></script>
-        <script src="~/lib/chartjs/Chart.min.js" asp-append-version="true"></script>
+        <script src="~/lib/chosen/chosen.jquery.min.js" asp-append-version="true"></script>
 
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>

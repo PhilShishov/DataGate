@@ -36,7 +36,6 @@
             Date: '@Model.Date',
             ControllerName: '@controller',
         };
-        const entityId = @Model.Id;
 
         $(document).ready(function () {
             // ________________________________________________________
@@ -55,7 +54,7 @@
             $(".dataTables_length select").chosen({
                 disable_search_threshold: 10,
                 width: "55px",
-                placeholder_text_single: "All"
+                placeholder_text_single: ""
             });
 
             // ________________________________________________________
@@ -64,13 +63,6 @@
             extract(model);
             submitForm();
             reload();
-
-            // ________________________________________________________
-            //
-            // Autocomplete search
-            const controller = '@controller';
-            const tokenUpdate = $('#update-form input[name=__RequestVerificationToken]').val();
-            loadAutocomplete(tokenUpdate, controller, entityId);
         });
     </script>
 }

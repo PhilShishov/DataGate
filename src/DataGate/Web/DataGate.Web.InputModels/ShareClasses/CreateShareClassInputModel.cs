@@ -3,6 +3,8 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
+    using DataGate.Common;
+
     public class CreateShareClassInputModel : BaseEntityInputModel
     {
         public CreateShareClassInputModel()
@@ -14,9 +16,9 @@
         [Display(Name = "Sub Fund Container")]
         public string SubFundContainer { get; set; }
 
-        [Required(ErrorMessage = "You must enter a value for the ShareClass Name!")]
-        [StringLength(200, ErrorMessage = "The ShareClass Name must be no longer than 200 characters")]
-        [RegularExpression(@"^[A-Za-z-0-9]+(\s[A-Za-z-0-9]+)*$", ErrorMessage = "Not in correct format!")]
+        [Required(ErrorMessage = "You must enter a value for the Share Class Name!")]
+        [StringLength(200, ErrorMessage = "The Share Class Name must be no longer than 200 characters")]
+        [RegularExpression(@"^[A-Za-z-0-9]+(\s[A-Za-z-0-9]+)*$", ErrorMessage = ErrorMessages.UnvalidFormat)]
         [Display(Name = "Official ShareClass Name")]
         public string ShareClassName { get; set; }
 

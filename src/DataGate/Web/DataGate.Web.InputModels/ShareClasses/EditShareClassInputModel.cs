@@ -2,7 +2,9 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+
     using AutoMapper;
+    using DataGate.Common;
     using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
     using DataGate.Web.Dtos.Entities;
@@ -12,10 +14,10 @@
         [Display(Name = "Id")]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "You must enter a value for the ShareClass Name!")]
-        [StringLength(200, ErrorMessage = "The ShareClass Name must be no longer than 200 characters")]
-        [RegularExpression(@"^[A-Za-z-0-9]+(\s[A-Za-z-0-9]+)*$", ErrorMessage = "Not in correct format!")]
-        [Display(Name = "Official ShareClass Name")]
+        [Required(ErrorMessage = "You must enter a value for the Share Class Name!")]
+        [StringLength(200, ErrorMessage = "The Share Class Name must be no longer than 200 characters")]
+        [RegularExpression(@"^[A-Za-z-0-9]+(\s[A-Za-z-0-9]+)*$", ErrorMessage = ErrorMessages.UnvalidFormat)]
+        [Display(Name = "Official Share Class Name")]
         public string ShareClassName { get; set; }
 
         [Display(Name = "Investor Type")]

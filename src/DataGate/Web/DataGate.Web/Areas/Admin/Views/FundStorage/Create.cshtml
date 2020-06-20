@@ -17,7 +17,7 @@
 
                 <div class="column-form">
                     <div class="form-group">
-                        <label asp-for="InitialDate" class="text-torshia"></label><br>
+                        <label asp-for="InitialDate"></label><br>
                         <input asp-for="InitialDate"
                                type="date"
                                min="2018-01-01"
@@ -26,7 +26,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="EndDate" class="text-torshia"></label><br>
+                        <label asp-for="EndDate"></label><br>
                         <input asp-for="EndDate"
                                type="date"
                                class="form-control ">
@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="FundName" class="text-torshia"></label><br>
+                        <label asp-for="FundName"></label><br>
                         <input type="text"
                                class="form-control "
                                asp-for="FundName">
@@ -42,7 +42,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="CSSFCode" class="text-torshia"></label><br>
+                        <label asp-for="CSSFCode"></label><br>
                         <input type="text"
                                class="form-control "
                                asp-for="CSSFCode">
@@ -50,7 +50,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="LEICode" class="text-torshia"></label><br>
+                        <label asp-for="LEICode"></label><br>
                         <input type="text"
                                class="form-control"
                                asp-for="LEICode">
@@ -60,14 +60,14 @@
 
                 <div class="column-form">
                     <div class="form-group">
-                        <label asp-for="TinNumber" class="text-torshia"></label><br>
+                        <label asp-for="TinNumber"></label><br>
                         <input type="text"
                                class="form-control"
                                asp-for="TinNumber">
                         <span asp-validation-for="TinNumber" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="FACode" class="text-torshia"></label><br>
+                        <label asp-for="FACode"></label><br>
                         <input type="text"
                                class="form-control "
                                asp-for="FACode">
@@ -75,7 +75,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="DEPCode" class="text-torshia"></label><br>
+                        <label asp-for="DEPCode"></label><br>
                         <input type="text"
                                class="form-control "
                                asp-for="DEPCode">
@@ -83,14 +83,14 @@
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="TACode" class="text-torshia"></label><br>
+                        <label asp-for="TACode"></label><br>
                         <input type="text"
                                class="form-control "
                                asp-for="TACode">
                         <span asp-validation-for="TACode" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="RegNumber" class="text-torshia"></label><br>
+                        <label asp-for="RegNumber"></label><br>
                         <input type="text"
                                class="form-control"
                                asp-for="RegNumber">
@@ -100,57 +100,57 @@
 
                 <div class="column-form">
                     <div class="form-group">
-                        <label asp-for="Status" class="text-torshia"></label><br>
+                        <label asp-for="Status"></label><br>
                         <select class="select-pharus" asp-for="Status">
                             <option selected disabled value="0">-- Choose Status --</option>
                             @foreach (var status in (List<string>)ViewData["Status"])
                             {
-                                <option value="@status">@status</option>
+                            <option value="@status">@status</option>
                             }
                         </select>
                     </div>
                     <span asp-validation-for="Status" class="text-danger"></span>
                     <div class="form-group">
-                        <label asp-for="LegalForm" class="text-torshia"></label><br>
+                        <label asp-for="LegalForm"></label><br>
                         <select class="select-pharus" asp-for="LegalForm">
                             <option selected disabled value="0">-- Choose Form --</option>
                             @foreach (var form in (List<string>)ViewData["LegalForm"])
                             {
-                                <option value="@form">@form</option>
+                            <option value="@form">@form</option>
                             }
                         </select>
                     </div>
                     <span asp-validation-for="LegalForm" class="text-danger"></span>
 
                     <div class="form-group">
-                        <label asp-for="LegalVehicle" class="text-torshia"></label><br>
+                        <label asp-for="LegalVehicle"></label><br>
                         <select class="select-pharus" asp-for="LegalVehicle">
                             <option selected disabled>-- Choose Vehicle --</option>
                             @foreach (var vehicle in (List<string>)ViewData["LegalVehicle"])
                             {
-                                <option value="@vehicle">@vehicle</option>
+                            <option value="@vehicle">@vehicle</option>
                             }
                         </select>
                     </div>
                     <span asp-validation-for="LegalVehicle" class="text-danger"></span>
                     <div class="form-group">
-                        <label asp-for="LegalType" class="text-torshia"></label><br>
+                        <label asp-for="LegalType"></label><br>
                         <select class="select-pharus" asp-for="LegalType">
                             <option selected disabled value="0">-- Choose Type --</option>
                             @foreach (var type in (List<string>)ViewData["LegalType"])
                             {
-                                <option value="@type">@type</option>
+                            <option value="@type">@type</option>
                             }
                         </select>
                     </div>
                     <span asp-validation-for="LegalType" class="text-danger"></span>
                     <div class="form-group">
-                        <label asp-for="CompanyTypeDesc" class="text-torshia"></label><br>
+                        <label asp-for="CompanyTypeDesc"></label><br>
                         <select class="select-pharus" asp-for="CompanyTypeDesc">
                             <option selected disabled value="0">-- Choose Description --</option>
                             @foreach (var desc in (List<string>)ViewData["CompanyTypeDesc"])
                             {
-                                <option value="@desc">@desc</option>
+                            <option value="@desc">@desc</option>
                             }
                         </select>
                     </div>
@@ -174,4 +174,20 @@
 </div>
 @section Scripts{
     <partial name="Scripts/_CreateEditScriptsPartial">
+
+        @*<script>
+            // Manage validation icons on form submit and keydown
+            $(function () {
+               
+
+                $('form').keydown(function () {
+                    const fieldsValidation = $('.field-validation-error');
+                    if (fieldsValidation.length != 0) {
+                            
+                            $(this).addClass('d-none');
+                      
+                    }
+                });
+            });
+        </script>*@
 }

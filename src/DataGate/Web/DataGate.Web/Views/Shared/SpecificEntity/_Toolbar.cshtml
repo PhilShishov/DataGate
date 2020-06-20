@@ -28,25 +28,25 @@
 }
 
 <div class="mx-auto mb-5">
+    @if (controller == GlobalConstants.FundDetailsControllerName)
+    {
+        <div class="div-entity-container-wrapper"></div>
+    }
+    else
+    {
+        <div class="div-entity-container-wrapper">
+            <p>
+                @SharedLocalizer["CONTAINER"]:
+            </p>
+            <a asp-area="@areaName"
+               asp-route="@routeContainer"
+               asp-route-id="@Model.Container.ContainerId"
+               asp-route-date="@Model.Date">
+                @Model.Container.ContainerName
+            </a>
+        </div>
+    }
     <div class="h-100 d-flex">
-        @if (controller == GlobalConstants.FundDetailsControllerName)
-        {
-            <div class="div-entity-container-wrapper"></div>
-        }
-        else
-        {
-            <div class="div-entity-container-wrapper">
-                <p>
-                    @SharedLocalizer["CONTAINER"]:
-                </p>
-                <a asp-area="@areaName"
-                   asp-route="@routeContainer"
-                   asp-route-id="@Model.Container.ContainerId"
-                   asp-route-date="@Model.Date">
-                    @Model.Container.ContainerName
-                </a>
-            </div>
-        }
 
         <form class="d-flex ml-5"
               method="post"

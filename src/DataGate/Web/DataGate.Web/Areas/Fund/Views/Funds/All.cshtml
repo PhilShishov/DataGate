@@ -38,6 +38,7 @@
         };
 
         $(document).ready(function () {
+            $('.table-view-pharus').removeAttr('hidden');
             // ________________________________________________________
             //
             // Datatable options - sort, search, pagination
@@ -48,22 +49,13 @@
                 searching: false,
                 paging: false,
                 "info": false,
-                "scrollX": true,
             });
 
-            $('.table-view-pharus').removeAttr('hidden');
             // ________________________________________________________
             //
             // Extract view as excel or pdf
             extract(model);
             submitForm();
-
-            // ________________________________________________________
-            //
-            // Autocomplete search
-            const controller = '@controller';
-            const tokenUpdate = $('#update-form input[name=__RequestVerificationToken]').val();
-            loadAutocomplete(tokenUpdate, controller, entityId = null);
         });
     </script>
 }

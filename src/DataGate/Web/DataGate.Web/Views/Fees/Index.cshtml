@@ -22,7 +22,7 @@
 
                 <div class="column-form">
                     @*<div class="form-group">
-                            <label asp-for="" class="text-torshia"></label><br>
+                            <label asp-for="" ></label><br>
                             <input asp-for=""
                                    type="date"
                                    min="2018-01-01"
@@ -31,7 +31,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label asp-for="FundName" class="text-torshia"></label><br>
+                            <label asp-for="FundName" ></label><br>
                             <input type="text"
                                    class="form-control "
                                    asp-for="FundName">
@@ -41,14 +41,14 @@
 
                 <div class="column-form">
                     @*<div class="form-group">
-                            <label asp-for="TinNumber" class="text-torshia"></label><br>
+                            <label asp-for="TinNumber" ></label><br>
                             <input type="text"
                                    class="form-control"
                                    asp-for="TinNumber">
                             <span asp-validation-for="TinNumber" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="FACode" class="text-torshia"></label><br>
+                            <label asp-for="FACode" ></label><br>
                             <input type="text"
                                    class="form-control "
                                    asp-for="FACode">
@@ -59,7 +59,7 @@
 
                 <div class="column-form">
                     @*<div class="form-group">
-                            <label asp-for="Status" class="text-torshia"></label><br>
+                            <label asp-for="Status" ></label><br>
                             <select class="select-pharus" asp-for="Status">
                                 <option selected disabled value="0">-- Choose Status --</option>
                                 @foreach (var status in (List<string>)ViewData["Status"])
