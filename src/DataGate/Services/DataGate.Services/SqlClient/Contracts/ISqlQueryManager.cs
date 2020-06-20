@@ -13,6 +13,8 @@
 
         IAsyncEnumerable<string[]> ExecuteQueryTimeSeriesAsync(string function);
 
+        IAsyncEnumerable<string[]> ExecuteQueryReportsAsync(string function, DateTime date);
+
         IEnumerable<T> ExecuteQueryMapping<T>(string function, int? id = null, DateTime? date = null)
             where T : IDataReaderParser, new();
     }

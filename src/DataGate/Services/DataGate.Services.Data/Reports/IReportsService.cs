@@ -6,5 +6,7 @@ namespace DataGate.Services.Data.Reports
     public interface IReportsService
     {
         IEnumerable<T> GetAll<T>(string function, DateTime date);
+
+        IAsyncEnumerable<string[]> GetAll(string function, DateTime date);
     }
 }

@@ -1,0 +1,177 @@
+﻿@model DataGate.Web.ViewModels.Reports.FundReportOverviewViewModel
+
+@{
+    ViewData["Title"] = SharedLocalizer["Reports"];
+
+    var date = DateTimeParser.ToWebFormat(Model.Date);
+}
+
+<div class="container-all-funds justify-content-between">
+    <div class="w-100">
+        <div class="mobile-none">
+            <hr class="mt-0 mb-auto" />
+            <div class="w-100 toolbar-view-details">
+                <div class="mx-auto mb-4">
+                    <div class="h-100 d-flex">
+                        <div>
+                            <form method="post" id="extract-form"></form>
+                            <a asp-area=""
+                               asp-route="allreports"
+                               class="btn btn-pharus btn-sm mb-1 mr-3">
+                                @SharedLocalizer["BACK TO ALL"]
+                            </a>
+
+                            <button class="btn btn-sm btn-pharus mb-1 mr-2"
+                                    id="btn-extract-excel"
+                                    type="button"
+                                    value="Excel">
+                                EXCEL
+                            </button>
+
+                            <button class="btn btn-sm btn-pharus mb-1 mx-2"
+                                    id="btn-extract-pdf"
+                                    type="button"
+                                    value="PDF">
+                                PDF
+                            </button>
+                        </div>
+                        <div class="title-main-reports">
+                            <h2 class="">@GlobalConstants.FundAreaName @SharedLocalizer["Reports"]</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-1 mb-0" />
+        </div>
+
+        <h2 class="text-center title-responsive">@GlobalConstants.FundAreaName @SharedLocalizer["Reports"]</h2>
+
+        <form id="form-report" method="post">
+            <div class="">
+                <table class="table table-bordered table-hover tbl-reports table-view-pharus" id="table-to-extract">
+                    <thead>
+                        <tr>
+                            @for (int row = 0; row < GlobalConstants.RowNumberOfHeadersInTable; row++)
+                            {
+                                for (int col = 0; col < Model.Reports[row].Length; col++)
+                                {
+                                    <th class="text-secondary p-1"
+                                        title="@Model.Reports[row][col]">
+                                        @Model.Reports[row][col]
+                                    </th>
+                                }
+                            }
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int row = GlobalConstants.RowNumberOfHeadersInTable; row < Model.Reports.Count; row++)
+                        {
+                            var entityId = @Model.Reports[row][GlobalConstants.IndexEntityIdInTable];
+                            <tr>
+                                @for (int col = 0; col < Model.Reports[row].Length; col++)
+                                {
+                                    if (Model.Reports[0][col] == "NAME")
+                                    {
+                                        <td class="p-1 td-name-link">
+                                            <a asp-area="@GlobalConstants.FundAreaName" asp-route="@GlobalConstants.FundDetailsRouteName" asp-route-id="@entityId" asp-route-date="@date">
+                                                @Model.Reports[row][col]
+                                            </a>
+                                        </td>
+                                    }
+                                    else if (Model.Reports[0][col] != "ID" && Model.Reports[0][col] != "NAME")
+                                    {
+                                        <td class="p-1">
+                                            &euro;@Model.Reports[row][col]
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td class="p-1">
+                                            @Model.Reports[row][col]
+                                        </td>
+                                    }
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                    @*<tfoot>
+                            <tr>
+                                <th colspan="6" style="text-align:right">Total:</th>
+                                <th></th>
+                            </tr>
+                        </tfoot>*@
+                </table>
+            </div>
+            <input type="hidden" name="AreaName" value="@GlobalConstants.FundAreaName" />
+        </form>
+
+    </div>
+</div>
+
+@section Scripts{
+    <partial name="Scripts/_EntitiesScriptsPartial" />
+
+    <script>
+         let model = {
+            Date: '@date',
+            ControllerName: '@GlobalConstants.FundAreaName',
+        };
+
+        $(document).ready(function () {
+            // ________________________________________________________
+            //
+            // Datatable options - sort, search, pagination
+            $.fn.dataTable.moment('DD/MM/YYYY');
+
+            $('.table-view-pharus').DataTable({
+                "dom": '<"top">t<"bottom"><"clear">',
+                "autoWidth": false,
+                "scrollX": true,
+                "initComplete": function (settings, json) {
+                    $('.dataTables_scrollBody thead tr').css({ visibility: 'collapse' });
+                },
+                stateSave: true,
+                //"footerCallback": function (row, data, start, end, display) {
+                //    var api = this.api(), data;
+
+                //    // Remove the formatting to get integer data for summation
+                //    var intVal = function (i) {
+                //        return typeof i === 'string' ?
+                //            i.replace(/[\€,]/g, '') * 1 :
+                //            typeof i === 'number' ?
+                //                i : 0;
+                //    };
+
+                //    // Total over all pages
+                //    total = api
+                //        .column(6)
+                //        .data()
+                //        .reduce(function (a, b) {
+                //            return intVal(a) + intVal(b);
+                //        }, 0);
+
+                //    // Total over this page
+                //    pageTotal = api
+                //        .column(6, { page: 'current' })
+                //        .data()
+                //        .reduce(function (a, b) {
+                //            return intVal(a) + intVal(b);
+                //        }, 0);
+
+                //    // Update footer
+                //    $(api.column(6).footer()).html(
+                //        '€' + pageTotal.toFixed(2) + ' ( €' + total.toFixed(2) + ' total)'
+                //    );
+                //}
+            });
+
+            $(".dataTables_length select").chosen({
+                disable_search_threshold: 10,
+                width: "55px",
+            });
+
+            extract(model);
+        });
+    </script>
+}
