@@ -52,7 +52,7 @@
         <h2 class="text-center title-responsive">@GlobalConstants.FundAreaName @SharedLocalizer["Reports"]</h2>
 
         <form id="form-report" method="post">
-            <div class="">
+            <div class="table-responsive mx-auto">
                 <table class="table table-bordered table-hover tbl-reports table-view-pharus table-striped" id="table-to-extract">
                     <thead>
                         <tr>
@@ -91,7 +91,7 @@
                                             {
                                                 @*@String.Format("€ {0:N2}", aum)*@
 
-                                                @aum.ToString("##,0.##", culture)
+                                                @aum.ToString("€ " + "##,0.##", culture)
                                                 @*@aum.ToString("N2");*@
                                             }
                                             else
