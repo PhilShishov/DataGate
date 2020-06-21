@@ -351,6 +351,9 @@
   <data name="No result produced by your request." xml:space="preserve">
     <value>No result produced by your request.</value>
   </data>
+  <data name="Not available" xml:space="preserve">
+    <value>Not available</value>
+  </data>
   <data name="Number of results:" xml:space="preserve">
     <value>Number of results: </value>
   </data>

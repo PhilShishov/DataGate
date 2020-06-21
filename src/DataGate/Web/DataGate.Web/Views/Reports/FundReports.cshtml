@@ -1,9 +1,14 @@
 ﻿@model DataGate.Web.ViewModels.Reports.FundReportOverviewViewModel
+@using System.Globalization;
 
 @{
     ViewData["Title"] = SharedLocalizer["Reports"];
 
     var date = DateTimeParser.ToWebFormat(Model.Date);
+
+    decimal aum;
+
+    var culture = CultureInfo.CreateSpecificCulture("en-US");
 }
 
 <div class="container-all-funds justify-content-between">
@@ -82,7 +87,17 @@
                                     else if (Model.Reports[0][col] != "ID" && Model.Reports[0][col] != "NAME")
                                     {
                                         <td class="p-1">
-                                            &euro; @Model.Reports[row][col]
+                                            @if (decimal.TryParse(Model.Reports[row][col], out aum))
+                                            {
+                                                @*@String.Format("€ {0:N2}", aum)*@
+
+                                                @aum.ToString("##,0.##", culture)
+                                                @*@aum.ToString("N2");*@
+                                            }
+                                            else
+                                            {
+                                                @SharedLocalizer["Not available"]
+                                            }
                                         </td>
                                     }
                                     else
@@ -98,13 +113,13 @@
                     <tfoot>
                         <tr>
                             @*@for (int row = 0; row < GlobalConstants.RowNumberOfHeadersInTable; row++)
-                            {
-                                for (int col = 0; col < Model.Reports[row].Length; col++)
                                 {
-                                    <th class="text-secondary p-1">
-                                    </th>
-                                }
-                            }*@
+                                    for (int col = 0; col < Model.Reports[row].Length; col++)
+                                    {
+                                        <th class="text-secondary p-1">
+                                        </th>
+                                    }
+                                }*@
                         </tr>
                     </tfoot>
                 </table>

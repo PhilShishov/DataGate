@@ -30,7 +30,11 @@
             let pricesJson = @Json.Serialize(Model.TSAllPriceValues);
             let pricesArr = pricesJson
                 .filter(ts => ts[2] === provider)
-                .map(ts => Number(ts[1]));
+                .map(ts => parseFloat(ts[1]));
+
+            //let arr = [5537335.32, 5395388.99, 5532726.53, 5755894.74,
+            //    5033676.81, 5084669.12, 5163553.57, 5205828.06,
+            //    5065253.11, 5111903.57, 4948932.06, 4409094.49, 4655016.69, 4654240.56];
 
             chartData.push({
                 data: pricesArr,
@@ -53,7 +57,6 @@
                 },
                 options: {
                     responsive: true,
-                    animation: true,
                     title: {
                         display: true,
                         text: 'Time Series'

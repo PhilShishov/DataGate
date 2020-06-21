@@ -17,6 +17,10 @@ h3 {
     font-weight: bolder;
 }
 
+h2 {
+    font-size: 30px;
+}
+
 .div-legal-text {
     overflow-y: scroll;
     height: 390px;
@@ -159,10 +163,6 @@ h3 {
     font-size: 1rem;
 }
 /* IE */
-
-h2 {
-    font-size: 32px;
-}
 
 h3 {
     font-size: 22px;

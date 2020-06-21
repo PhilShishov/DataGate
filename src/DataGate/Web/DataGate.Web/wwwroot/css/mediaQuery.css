@@ -11,6 +11,10 @@
         overflow-x: scroll;
     }
 
+    h2 {
+        font-size: 24px;
+    }
+
     .logo-pharus img {
         height: 120px;
         width: 120px;
@@ -111,9 +115,13 @@
     }
 }
 
-@media only screen and (min-width: 1440px) {
+@media only screen and (min-width: 1540px) {
     .title-main {
         width: 20%;
+    }
+
+    .header-pharus a {
+        font-size: 9px;
     }
 }
 

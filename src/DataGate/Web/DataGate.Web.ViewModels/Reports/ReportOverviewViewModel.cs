@@ -12,5 +12,7 @@
         public string SelectedType { get; set; }
 
         public IEnumerable<ReportViewModel> Reports { get; set; }
+
+        public IEnumerable<FundReportViewModel> FundReports { get; set; }
     }
 }
