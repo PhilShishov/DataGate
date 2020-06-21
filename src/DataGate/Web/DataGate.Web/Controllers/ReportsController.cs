@@ -90,20 +90,5 @@
 
             return this.View(viewModel);
         }
-
-        [HttpPost]
-        public async Task<IActionResult> FundReports(FundReportOverviewViewModel model)
-        {
-            var parsedDate = new DateTime(model.Date.Year, model.Date.Month, FixedDayNavValue);
-
-            model.Reports = await this.service.GetAll(SqlFunctionDictionary.ReportFunds, parsedDate).ToListAsync();
-
-            if (model.Reports != null)
-            {
-                return this.View(model);
-            }
-
-            return this.View(model);
-        }
     }
 }

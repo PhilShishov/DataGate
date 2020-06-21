@@ -133,10 +133,7 @@ namespace DataGate.Services.SqlClient
         {
             using (SqlConnection connection = new SqlConnection())
             {
-                connection.ConnectionString = this.configuration.GetConnectionString(GlobalConstants.DataGatevFinaleConnection);
-                await connection.OpenAsync();
-                SqlCommand command = connection.CreateCommand();
-                var sqlDate = DateTimeParser.ToSqlFormat(date);
+                SqlCommand command = this.SetUpSqlConnectionCommand(connection);
 
                 command.CommandText = function;
                 command.CommandType = CommandType.StoredProcedure;
@@ -159,7 +156,6 @@ namespace DataGate.Services.SqlClient
             using (SqlConnection connection = new SqlConnection())
             {
                 SqlCommand command = this.SetUpSqlConnectionCommand(connection);
-
                 var sqlDate = DateTimeParser.ToSqlFormat(date);
 
                 if (id.HasValue)

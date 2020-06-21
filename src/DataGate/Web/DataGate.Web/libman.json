@@ -39,16 +39,6 @@
       ]
     },
     {
-      "library": "select2@4.0.13",
-      "destination": "wwwroot/lib/select2/",
-      "files": [
-        "dist/js/select2.js",
-        "dist/js/select2.min.js",
-        "dist/css/select2.min.css",
-        "dist/css/select2.css"
-      ]
-    },
-    {
       "provider": "cdnjs",
       "library": "jqueryui@1.12.1",
       "destination": "wwwroot/lib/jqueryui/",
@@ -65,16 +55,6 @@
         "themes/smoothness/images/ui-icons_454545_256x240.png",
         "themes/smoothness/images/ui-bg_highlight-soft_75_cccccc_1x100.png",
         "themes/smoothness/images/ui-bg_glass_55_fbf9ee_1x400.png"
-      ]
-    },
-    {
-      "provider": "cdnjs",
-      "library": "popper.js@2.4.2",
-      "destination": "wwwroot/lib/popperjs/",
-      "files": [
-        "umd/popper.min.js",
-        "umd/popper.min.js.map",
-        "umd/popper.js"
       ]
     },
     {

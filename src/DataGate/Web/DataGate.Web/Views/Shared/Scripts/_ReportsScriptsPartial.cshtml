@@ -5,6 +5,11 @@
         // Datatable options - sort, search, pagination
         $.fn.dataTable.moment('DD/MM/YYYY');
 
+        var formatter = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'EUR',
+        });
+
         $('.table-view-pharus').DataTable({
             "dom": '<"top"lf>rt<"bottom"ip><"clear">',
             "lengthMenu": [[-1, 10, 25, 50], ["All", 10, 25, 50]],
@@ -39,7 +44,7 @@
 
                 // Update footer
                 $(api.column(6).footer()).html(
-                    '€ ' + pageTotal.toFixed(2) + ' (€ ' + total.toFixed(2) + ' total)'
+                   formatter.format(pageTotal) + ' (' + formatter.format(total) + ' total)'
                 );
             }
         });
