@@ -58,13 +58,13 @@
 
 .slick-prev {
     top: -3%;
-    left: 42%;
+    left: 44%;
     z-index: 10;
     transform: rotate(90deg);
 }
 
 .slick-next {
-    left: 42%;
+    left: 44%;
     top: 98%;
     z-index: 20;
     transform: rotate(90deg);
