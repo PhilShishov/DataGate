@@ -149,12 +149,10 @@ function dataTableInitializationHandler(controller) {
     });
 }
 
+// ________________________________________________________
+//
+// Datatables for reports - sort, search, pagination and total result
 function dataTableReportHandler(type) {
-
-    //Subfunds reports
-    // ________________________________________________________
-    //
-    // Datatable options - sort, search, pagination
     $.fn.dataTable.moment('DD/MM/YYYY');
 
     const formatter = new Intl.NumberFormat('en-US', {
@@ -162,66 +160,54 @@ function dataTableReportHandler(type) {
         currency: 'EUR',
     });
 
-    $('.table-view-pharus').DataTable({
-        "dom": '<"top"lf>rt<"bottom"ip><"clear">',
-        "lengthMenu": [[-1, 10, 25, 50], ["All", 10, 25, 50]],
-        "autoWidth": false,
-        stateSave: true,
-        "footerCallback": function (row, data, start, end, display) {
-            var api = this.api(), data;
+    if (type === 'Fund') {
+        $('.table-view-pharus').DataTable({
+            "dom": '<"top">t<"bottom"><"clear">',
+            "autoWidth": false,
+            "scrollX": true,
+            stateSave: true,
+        });
+    } else {
+        $('.table-view-pharus').DataTable({
+            "dom": '<"top"lf>rt<"bottom"ip><"clear">',
+            "lengthMenu": [[-1, 10, 25, 50], ["All", 10, 25, 50]],
+            "autoWidth": false,
+            "scrollX": true,
+            stateSave: true,
+            "footerCallback": function (row, data, start, end, display) {
+                var api = this.api(), data;
 
-            // Remove the formatting to get integer data for summation
-            var intVal = function (input) {
-                return typeof input === 'string' ?
-                    input.replace(/[\€,]/g, '') * 1 :
-                    typeof input === 'number' ?
-                        input : 0;
-            };
+                // Remove the formatting to get integer data for total
+                var intVal = function (input) {
+                    return typeof input === 'string' ?
+                        input.replace(/[\€,]/g, '') * 1 :
+                        typeof input === 'number' ?
+                            input : 0;
+                };
 
-            // Total over all pages
-            total = api
-                .column(6)
-                .data()
-                .reduce(function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0);
+                // Total over all pages
+                total = api
+                    .column(6)
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
 
-            // Total over this page
-            pageTotal = api
-                .column(6, { page: 'current' })
-                .data()
-                .reduce(function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0);
+                // Total over this page
+                pageTotal = api
+                    .column(6, { page: 'current' })
+                    .data()
+                    .reduce(function (a, b) {
+                        return intVal(a) + intVal(b);
+                    }, 0);
 
-            // Update footer
-            $(api.column(6).footer()).html(
-                formatter.format(pageTotal) + ' | ' + formatter.format(total) + ' total |'
-            );
-        }
-    });
-
-    $(".dataTables_length select").chosen({
-        disable_search_threshold: 10,
-        width: "55px",
-    });
-
-
-    // fund reports
-    // ________________________________________________________
-    //
-    // Datatable options - sort, search, pagination
-    $.fn.dataTable.moment('DD/MM/YYYY');
-
-    let table = $('.table-view-pharus').DataTable({
-        "dom": '<"top">t<"bottom"><"clear">',
-        "autoWidth": false,
-        "scrollX": true,
-        "initComplete": function (settings, json) {
-            $('.dataTables_scrollBody thead tr').css({ visibility: 'collapse' });
-        },
-        stateSave: true,
-    });
+                // Update footer
+                $(api.column(6).footer()).html(
+                    formatter.format(pageTotal) + ' | ' + formatter.format(total) + ' total |'
+                );
+            }
+        });
+    }
 
     $(".dataTables_length select").chosen({
         disable_search_threshold: 10,
