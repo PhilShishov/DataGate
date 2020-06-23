@@ -519,8 +519,8 @@
   <data name="You don't have access to this resources" xml:space="preserve">
     <value>You don't have access to this resources</value>
   </data>
-  <data name="You have successfully logged out of the application" xml:space="preserve">
-    <value>You have successfully logged out of the application</value>
+  <data name="You have successfully logged out of Pharus DataGate." xml:space="preserve">
+    <value>You have successfully logged out of Pharus DataGate.</value>
   </data>
   <data name="Your search criteria was:" xml:space="preserve">
     <value>Your search criteria was:</value>

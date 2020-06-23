@@ -155,7 +155,7 @@ namespace DataGate.Web.Utilities
 
                 for (int row = 1; row < entities.Count; row++)
                 {
-                    for (int col = 0; col < entities[0].Length; col++)
+                    for (int col = 0; col < entities[row].Length; col++)
                     {
                         string input = entities[row][col];
                         if (input == null)

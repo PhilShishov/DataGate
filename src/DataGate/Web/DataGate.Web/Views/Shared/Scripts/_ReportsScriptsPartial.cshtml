@@ -5,7 +5,7 @@
         // Datatable options - sort, search, pagination
         $.fn.dataTable.moment('DD/MM/YYYY');
 
-        var formatter = new Intl.NumberFormat('en-US', {
+        const formatter = new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: 'EUR',
         });
@@ -19,11 +19,11 @@
                 var api = this.api(), data;
 
                 // Remove the formatting to get integer data for summation
-                var intVal = function (i) {
-                    return typeof i === 'string' ?
-                        i.replace(/[\€,]/g, '') * 1 :
-                        typeof i === 'number' ?
-                            i : 0;
+                var intVal = function (input) {
+                    return typeof input === 'string' ?
+                        input.replace(/[\€,]/g, '') * 1 :
+                        typeof input === 'number' ?
+                            input : 0;
                 };
 
                 // Total over all pages
@@ -44,7 +44,7 @@
 
                 // Update footer
                 $(api.column(6).footer()).html(
-                   formatter.format(pageTotal) + ' (' + formatter.format(total) + ' total)'
+                   formatter.format(pageTotal) + ' | ' + formatter.format(total) + ' total |'
                 );
             }
         });

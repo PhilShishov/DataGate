@@ -1,5 +1,5 @@
 ﻿@model DataGate.Web.ViewModels.Reports.FundReportOverviewViewModel
-@using System.Globalization;
+@using System.Globalization
 
 @{
     ViewData["Title"] = SharedLocalizer["Reports"];
@@ -91,7 +91,7 @@
                                             {
                                                 @*@String.Format("€ {0:N2}", aum)*@
 
-                                                @aum.ToString("€ " + "##,0.##", culture)
+                                                @aum.ToString("€" + "##,0.##", culture)
                                                 @*@aum.ToString("N2");*@
                                             }
                                             else

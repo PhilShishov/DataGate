@@ -6,9 +6,9 @@
 *
 */
 
-.dataTables_scrollBody table thead tr {
+/*.dataTables_scrollBody table thead tr {
     visibility: collapse;
-}
+}*/
 
 .dataTables_wrapper .bottom {
     margin-bottom: 1.5rem !important;
