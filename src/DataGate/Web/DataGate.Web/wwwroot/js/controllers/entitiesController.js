@@ -120,6 +120,117 @@ function reload() {
 
 // ________________________________________________________
 //
+// Datatables - sort, search, pagination
+function dataTableInitializationHandler(controller) {
+    $('.table-view-pharus').removeAttr('hidden');
+    $.fn.dataTable.moment('DD/MM/YYYY');
+
+    if (controller === 'Funds') {
+        $('.table-view-pharus').DataTable({
+            "dom": '<"top">rt<"bottom"><"clear">',
+            stateSave: true,
+            "autoWidth": false,
+            "scrollX": true,
+        });
+    } else {
+        $('.table-view-pharus').DataTable({
+            "dom": '<"top"lf>rt<"bottom"ip><"clear">',
+            "lengthMenu": [[-1, 10, 25, 50], ["All", 10, 25, 50]],
+            stateSave: true,
+            "autoWidth": false,
+            "scrollX": true,
+        });
+    }
+
+    $(".dataTables_length select").chosen({
+        disable_search_threshold: 10,
+        width: "55px",
+        placeholder_text_single: ""
+    });
+}
+
+function dataTableReportHandler(type) {
+
+    //Subfunds reports
+    // ________________________________________________________
+    //
+    // Datatable options - sort, search, pagination
+    $.fn.dataTable.moment('DD/MM/YYYY');
+
+    const formatter = new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'EUR',
+    });
+
+    $('.table-view-pharus').DataTable({
+        "dom": '<"top"lf>rt<"bottom"ip><"clear">',
+        "lengthMenu": [[-1, 10, 25, 50], ["All", 10, 25, 50]],
+        "autoWidth": false,
+        stateSave: true,
+        "footerCallback": function (row, data, start, end, display) {
+            var api = this.api(), data;
+
+            // Remove the formatting to get integer data for summation
+            var intVal = function (input) {
+                return typeof input === 'string' ?
+                    input.replace(/[\€,]/g, '') * 1 :
+                    typeof input === 'number' ?
+                        input : 0;
+            };
+
+            // Total over all pages
+            total = api
+                .column(6)
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+
+            // Total over this page
+            pageTotal = api
+                .column(6, { page: 'current' })
+                .data()
+                .reduce(function (a, b) {
+                    return intVal(a) + intVal(b);
+                }, 0);
+
+            // Update footer
+            $(api.column(6).footer()).html(
+                formatter.format(pageTotal) + ' | ' + formatter.format(total) + ' total |'
+            );
+        }
+    });
+
+    $(".dataTables_length select").chosen({
+        disable_search_threshold: 10,
+        width: "55px",
+    });
+
+
+    // fund reports
+    // ________________________________________________________
+    //
+    // Datatable options - sort, search, pagination
+    $.fn.dataTable.moment('DD/MM/YYYY');
+
+    let table = $('.table-view-pharus').DataTable({
+        "dom": '<"top">t<"bottom"><"clear">',
+        "autoWidth": false,
+        "scrollX": true,
+        "initComplete": function (settings, json) {
+            $('.dataTables_scrollBody thead tr').css({ visibility: 'collapse' });
+        },
+        stateSave: true,
+    });
+
+    $(".dataTables_length select").chosen({
+        disable_search_threshold: 10,
+        width: "55px",
+    });
+}
+
+// ________________________________________________________
+//
 // Add inactive class to entities that have inactive status
 (function () {
     const tbody = document.getElementById(HTML.TBODY_UPDATE_INACTIVE);
@@ -140,7 +251,6 @@ function reload() {
 
 /*** Handle jQuery plugin naming conflict between jQuery UI and Bootstrap ***/
 
-$.widget.bridge('uibutton', $.ui.button);
 $.widget.bridge('uitooltip', $.ui.tooltip);
 
 $(function () {
@@ -156,6 +266,7 @@ $(function () {
     //
     // Modal multiselect for column selection
     $('.multiselect').multiselect();
+
 });
 
 // ________________________________________________________

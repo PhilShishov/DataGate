@@ -38,18 +38,7 @@
         };
 
         $(document).ready(function () {
-            $('.table-view-pharus').removeAttr('hidden');
-            // ________________________________________________________
-            //
-            // Datatable options - sort, search, pagination
-            $.fn.dataTable.moment('DD/MM/YYYY');
-
-            $('.table-view-pharus').DataTable({
-                "dom": '<"top">rt<"bottom"><"clear">',
-                "autoWidth": false,
-                "scrollX": true,
-            });
-
+            dataTableInitializationHandler('@controller');
             // ________________________________________________________
             //
             // Extract view as excel or pdf

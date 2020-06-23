@@ -150,7 +150,6 @@
 
 @section Scripts{
     <partial name="Scripts/_EntitiesScriptsPartial" />
-    <partial name="Scripts/_ReportsScriptsPartial" />
 
     <script>
          let model = {
@@ -159,6 +158,7 @@
         };
 
         $(document).ready(function () {
+            dataTableReportHandler('@Model.SelectedType');
             extract(model);
         });
     </script>
