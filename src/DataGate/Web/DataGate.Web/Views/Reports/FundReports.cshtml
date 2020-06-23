@@ -140,36 +140,7 @@
         };
 
         $(document).ready(function () {
-            // ________________________________________________________
-            //
-            // Datatable options - sort, search, pagination
-            $.fn.dataTable.moment('DD/MM/YYYY');
-
-            let table = $('.table-view-pharus').DataTable({
-                "dom": '<"top">t<"bottom"><"clear">',
-                "autoWidth": false,
-                "scrollX": true,
-                "initComplete": function (settings, json) {
-                    $('.dataTables_scrollBody thead tr').css({ visibility: 'collapse' });
-                },
-                stateSave: true,
-            });
-
-            table.columns('.sum').every(function () {
-                var sum = this
-                    .data()
-                    .reduce(function (a, b) {
-                        return a + b;
-                    });
-
-                $(el).html('Total: ' + sum);
-            });
-
-            $(".dataTables_length select").chosen({
-                disable_search_threshold: 10,
-                width: "55px",
-            });
-
+            dataTableReportHandler('@GlobalConstants.FundAreaName');
             extract(model);
         });
     </script>

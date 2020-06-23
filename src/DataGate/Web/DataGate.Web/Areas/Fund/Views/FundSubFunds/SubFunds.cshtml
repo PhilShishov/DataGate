@@ -40,24 +40,7 @@
         };
 
         $(document).ready(function () {
-            // ________________________________________________________
-            //
-            // Datatable options - sort, search, pagination
-            $.fn.dataTable.moment('DD/MM/YYYY');
-
-            $('.table-view-pharus').DataTable({
-                "dom": '<"top"l>t<"bottom"ip><"clear">',
-                "lengthMenu": [[-1, 10, 25], ["All", 10, 25]],
-                stateSave: true,
-                "autoWidth": false,
-                "scrollX": true,
-            });
-
-            $(".dataTables_length select").chosen({
-                disable_search_threshold: 10,
-                width: "55px",
-                placeholder_text_single: ""
-            });
+            dataTableInitializationHandler('@controller');
 
             // ________________________________________________________
             //
