@@ -1,31 +1,20 @@
 ﻿namespace DataGate.Web.Controllers
 {
-    using System.Linq;
-
-    using DataGate.Data.Common.Repositories;
-    using DataGate.Data.Models.Entities;
+    using DataGate.Services.Data.ShareClasses;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     [Authorize]
     public class UserController : BaseController
     {
-        private readonly IRepository<TbHistoryShareClass> repository;
+        private readonly IShareClassService service;
 
-        public UserController(IRepository<TbHistoryShareClass> repository)
+        public UserController(IShareClassService service)
         {
-            this.repository = repository;
+            this.service = service;
         }
 
         [Route("userpanel")]
-        public IActionResult Index()
-        {
-            var latest = this.repository.All()
-                .OrderByDescending(sc => sc.ScInitialDate)
-                .Take(10)
-                .ToList();
-
-            return this.View(latest);
-        }
+        public IActionResult Index() => this.View(this.service.ByDate());
     }
 }

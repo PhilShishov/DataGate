@@ -48,6 +48,12 @@ namespace DataGate.Services.Data.ShareClasses
             return query.ToHashSet();
         }
 
+        public IEnumerable<TbHistoryShareClass> ByDate()
+            => this.repository.All()
+                .OrderByDescending(sc => sc.ScInitialDate)
+                .Take(10)
+                .ToList();
+
         public IEnumerable<ResultViewModel> SearchClassesByName(string searchTerm)
              => this.repository.All()
                 .Where(sc => sc.ScOfficialShareClassName.Contains(searchTerm))

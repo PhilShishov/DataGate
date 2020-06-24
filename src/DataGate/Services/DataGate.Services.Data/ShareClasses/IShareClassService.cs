@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
 
+    using DataGate.Data.Models.Entities;
     using DataGate.Services.Data.Common;
     using DataGate.Services.Data.Entities;
     using DataGate.Web.ViewModels.Search;
@@ -9,6 +10,8 @@
     public interface IShareClassService : IEntityAutocompleteService, IEntityException
     {
         IEnumerable<ResultViewModel> SearchClassesByName(string searchTerm);
+
+        IEnumerable<TbHistoryShareClass> ByDate();
 
         bool IsIsin(string searchTerm);
 
