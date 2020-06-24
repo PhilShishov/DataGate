@@ -4,14 +4,13 @@
     using System.Data.SqlClient;
     using System.Threading.Tasks;
 
-    using DataGate.Common;
     using DataGate.Data.Common.Repositories;
     using DataGate.Services.Data.Documents;
     using DataGate.Services.Data.Files.Contracts;
-    using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
     using DataGate.Services.SqlClient;
     using DataGate.Services.SqlClient.Contracts;
+    using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.InputModels.Files;
 
     public class FileSystemService : IFileSystemService

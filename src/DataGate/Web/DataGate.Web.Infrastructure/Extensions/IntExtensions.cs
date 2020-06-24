@@ -2,7 +2,7 @@
 {
     public static class IntExtensions
     {
-        public static int? ToNullInt(int? value)
+        public static int? ToNullInt(this int? value)
         {
             if (value <= 0)
             {

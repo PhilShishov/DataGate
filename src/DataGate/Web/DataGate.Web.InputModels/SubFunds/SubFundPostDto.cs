@@ -1,8 +1,8 @@
 namespace DataGate.Web.InputModels.SubFunds
 {
     using AutoMapper;
-    using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
+    using DataGate.Web.Infrastructure.Extensions;
 
     public class SubFundPostDto : IMapFrom<EditSubFundInputModel>, IMapFrom<CreateSubFundInputModel>, IHaveCustomMappings
     {

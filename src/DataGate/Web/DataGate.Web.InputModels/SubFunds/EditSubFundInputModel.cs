@@ -5,9 +5,9 @@
 
     using AutoMapper;
     using DataGate.Common;
-    using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
     using DataGate.Web.Dtos.Entities;
+    using DataGate.Web.Infrastructure.Extensions;
 
     public class EditSubFundInputModel : BaseEntityInputModel, IMapFrom<EditSubFundGetDto>, IHaveCustomMappings
     {

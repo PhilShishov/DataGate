@@ -3,9 +3,9 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using DataGate.Common;
     using DataGate.Services.Data.TimeSeries;
     using DataGate.Web.Helpers;
+    using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.ViewModels.TimeSeries;
     using Microsoft.AspNetCore.Mvc;
 

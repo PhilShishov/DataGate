@@ -4,7 +4,7 @@
 
     using DataGate.Common;
     using DataGate.Services.Data.Storage.Contracts;
-    using DataGate.Services.DateTime;
+    using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.InputModels.Funds;
 
     using Microsoft.AspNetCore.Authorization;

@@ -6,9 +6,9 @@
 
     using DataGate.Common;
     using DataGate.Services.Data.Entities;
-    using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
     using DataGate.Web.Dtos.Queries;
+    using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.ViewModels.Queries;
 
     public class SpecificVMSetup

@@ -3,8 +3,8 @@ namespace DataGate.Web.InputModels.Files
     using System.IO;
 
     using AutoMapper;
-    using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
+    using DataGate.Web.Infrastructure.Extensions;
 
     public class UploadDocumentDto : IMapFrom<UploadDocumentInputModel>, IHaveCustomMappings
     {
