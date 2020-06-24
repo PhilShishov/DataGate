@@ -6,12 +6,6 @@
 *
 */
 
-/*.dataTables_scrollBody table thead tr {
-    visibility: collapse;
-
-    not working
-}*/
-
 .dataTables_wrapper .bottom {
     margin-bottom: 1.5rem !important;
 }
