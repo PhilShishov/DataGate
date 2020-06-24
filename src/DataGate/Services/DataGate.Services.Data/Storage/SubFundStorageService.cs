@@ -10,11 +10,11 @@
     using DataGate.Data.Common.Repositories;
     using DataGate.Data.Models.Entities;
     using DataGate.Services.Data.Storage.Contracts;
-    using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
     using DataGate.Services.SqlClient;
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.Dtos.Entities;
+    using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.InputModels.SubFunds;
     using Microsoft.EntityFrameworkCore;
 

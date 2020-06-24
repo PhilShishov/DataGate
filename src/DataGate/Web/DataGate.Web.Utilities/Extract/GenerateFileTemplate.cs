@@ -7,7 +7,7 @@
 // NugetPackages : itext7 7.1.8, epplus.core 1.5.4
 
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-namespace DataGate.Web.Utilities
+namespace DataGate.Web.Utilities.Extract
 {
     using System;
     using System.Collections.Generic;
@@ -21,7 +21,6 @@ namespace DataGate.Web.Utilities
     using iText.Kernel.Geom;
     using iText.Kernel.Pdf;
     using iText.Layout;
-    using iText.Layout.Borders;
     using iText.Layout.Element;
     using iText.Layout.Properties;
 

@@ -5,8 +5,8 @@
 
     using DataGate.Common;
     using DataGate.Services.Data.Agreements;
-    using DataGate.Services.DateTime;
     using DataGate.Web.Helpers;
+    using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.ViewModels.Agreements;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;

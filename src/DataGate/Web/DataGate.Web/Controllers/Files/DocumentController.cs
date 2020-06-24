@@ -1,16 +1,13 @@
 ﻿namespace DataGate.Web.Controllers.Files
 {
-    using System.Linq;
-    using System.Threading.Tasks;
-
     using DataGate.Common;
     using DataGate.Data.Common.Repositories;
     using DataGate.Services.Data.Documents;
     using DataGate.Services.Data.Documents.Contracts;
-    using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
     using DataGate.Web.Dtos.Documents;
     using DataGate.Web.Helpers;
+    using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.InputModels.Files;
     using DataGate.Web.ViewModels.Documents;
 

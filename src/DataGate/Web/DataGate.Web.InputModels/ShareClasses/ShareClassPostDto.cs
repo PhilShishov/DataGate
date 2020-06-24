@@ -1,8 +1,8 @@
 namespace DataGate.Web.InputModels.ShareClasses
 {
     using AutoMapper;
-    using DataGate.Services.DateTime;
     using DataGate.Services.Mapping;
+    using DataGate.Web.Infrastructure.Extensions;
 
     public class ShareClassPostDto : IMapFrom<EditShareClassInputModel>, IMapFrom<CreateShareClassInputModel>, IHaveCustomMappings
     {

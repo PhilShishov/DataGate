@@ -18,14 +18,27 @@
             <div class="w-100 toolbar-view-details">
                 <div class="mx-auto mb-4">
                     <div class="h-100 d-flex">
-                        <div>
-                            <form method="post" id="extract-form"></form>
+                        <div class="mr-2">
                             <a asp-area=""
                                asp-route="allreports"
-                               class="btn btn-pharus btn-sm mb-1 mr-3">
+                               class="btn btn-pharus btn-sm mb-1">
                                 @SharedLocalizer["BACK TO ALL"]
                             </a>
+                        </div>
 
+                        <form class="d-flex mx-3"
+                              method="post"
+                              id="update-form">
+                            <div>
+                                <input type="month" asp-for="Date">
+
+                                <input type="submit"
+                                       class="btn btn-pharus btn-sm mb-1 mr-2"
+                                       value="UPDATE"></>
+                            </div>
+                        </form>
+                        <div>
+                            <form method="post" id="extract-form"></form>
                             <button class="btn btn-sm btn-pharus mb-1 mr-2"
                                     id="btn-extract-excel"
                                     type="button"
@@ -58,10 +71,9 @@
                         <tr>
                             @for (int row = 0; row < GlobalConstants.RowNumberOfHeadersInTable; row++)
                             {
-                                for (int col = 0; col < Model.Reports[row].Length; col++)
+                                for (int col = 1; col < Model.Reports[row].Length; col++)
                                 {
-                                    <th 
-                                        title="@Model.Reports[row][col]">
+                                    <th title="@Model.Reports[row][col]">
                                         @Model.Reports[row][col]
                                     </th>
                                 }
@@ -74,7 +86,7 @@
                         {
                             var entityId = @Model.Reports[row][GlobalConstants.IndexEntityIdInTable];
                             <tr>
-                                @for (int col = 0; col < Model.Reports[row].Length; col++)
+                                @for (int col = 1; col < Model.Reports[row].Length; col++)
                                 {
                                     if (Model.Reports[0][col] == "NAME")
                                     {
@@ -84,7 +96,7 @@
                                             </a>
                                         </td>
                                     }
-                                    else if (Model.Reports[0][col] != "ID" && Model.Reports[0][col] != "NAME")
+                                    else if (Model.Reports[0][col] != "NAME")
                                     {
                                         <td class="p-1">
                                             @if (decimal.TryParse(Model.Reports[row][col], out aum))

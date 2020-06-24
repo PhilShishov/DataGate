@@ -1,12 +1,8 @@
 ﻿@model DataGate.Web.ViewModels.Reports.ReportOverviewViewModel
-@using System.Globalization
-
 @{
     ViewData["Title"] = SharedLocalizer["Reports"];
 
     var date = DateTimeParser.ToWebFormat(Model.Date);
-
-    var culture = CultureInfo.CreateSpecificCulture("en-US");
 }
 
 <div class="container-all-funds justify-content-between">
@@ -127,9 +123,7 @@
                                     @report.EOMNAVDate
                                 </td>
                                 <td class="p-1 td-aum-container">
-                                    @*&euro; @report.AuMInEUR.ToString("N2")*@
-
-                                    @report.AuMInEUR.ToString("€" + "##,0.##", culture)
+                                    @CurrencyFormatter.ToString(report.AuMInEUR)
                                 </td>
                             </tr>
                         }
@@ -144,7 +138,6 @@
             </div>
             <input type="hidden" name="AreaName" value="@Model.SelectedType" />
         </form>
-
     </div>
 </div>
 

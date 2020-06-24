@@ -5,8 +5,8 @@
     using DataGate.Common;
     using DataGate.Data.Common.Repositories;
     using DataGate.Services.Data.Storage.Contracts;
-    using DataGate.Services.DateTime;
     using DataGate.Web.Controllers;
+    using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.InputModels.SubFunds;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;

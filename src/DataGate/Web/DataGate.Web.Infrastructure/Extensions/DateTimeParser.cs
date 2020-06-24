@@ -1,4 +1,4 @@
-﻿namespace DataGate.Services.DateTime
+﻿namespace DataGate.Web.Infrastructure.Extensions
 {
     using System;
     using System.Globalization;
@@ -7,7 +7,7 @@
 
     public static class DateTimeParser
     {
-        public static DateTime FromWebFormat(string date)
+        public static DateTime FromWebFormat(this string date)
         {
             if (date != null)
             {
@@ -17,7 +17,7 @@
             return DateTime.UtcNow;
         }
 
-        public static DateTime FromSqlFormat(string date)
+        public static DateTime FromSqlFormat(this string date)
         {
             if (date != null)
             {
@@ -27,7 +27,7 @@
             return DateTime.UtcNow;
         }
 
-        public static string ToWebFormat(DateTime date)
+        public static string ToWebFormat(this DateTime date)
         {
             if (date != null)
             {
@@ -37,7 +37,7 @@
             return string.Empty;
         }
 
-        public static string ToSqlFormat(DateTime? date)
+        public static string ToSqlFormat(this DateTime? date)
         {
             if (date.HasValue)
             {

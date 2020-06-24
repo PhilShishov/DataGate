@@ -5,9 +5,9 @@
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
 
-    using DataGate.Common;
     using DataGate.Services.Data.Reports;
     using DataGate.Web.Helpers;
+    using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.ViewModels.Reports;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;

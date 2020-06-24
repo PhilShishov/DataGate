@@ -3,6 +3,7 @@
     using DataGate.Common;
     using DataGate.Services.Data.Timelines;
     using DataGate.Web.Helpers;
+    using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.ViewModels.Timelines;
 
     using Microsoft.AspNetCore.Mvc;

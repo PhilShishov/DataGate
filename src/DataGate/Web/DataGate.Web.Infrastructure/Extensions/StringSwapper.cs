@@ -1,5 +1,7 @@
-﻿namespace DataGate.Common
+﻿namespace DataGate.Web.Infrastructure.Extensions
 {
+    using DataGate.Common;
+
     public static class StringSwapper
     {
         public static string ByArea(string currentType, string fund, string subFund, string shareClass)

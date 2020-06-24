@@ -7,7 +7,7 @@
 // NugetPackages : itext7 7.1.8, epplus.core 1.5.4
 
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-namespace DataGate.Web.Utilities
+namespace DataGate.Web.Utilities.Extract
 {
     using iText.Kernel.Events;
     using iText.Kernel.Geom;

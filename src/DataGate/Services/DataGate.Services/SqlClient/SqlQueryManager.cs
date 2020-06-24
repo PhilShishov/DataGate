@@ -16,8 +16,8 @@ namespace DataGate.Services.SqlClient
 
     using DataGate.Common;
     using DataGate.Common.Exceptions;
-    using DataGate.Services.DateTime;
     using DataGate.Services.SqlClient.Contracts;
+    using DataGate.Web.Infrastructure.Extensions;
     using Microsoft.Extensions.Configuration;
 
     // _____________________________________________________________

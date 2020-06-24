@@ -7,10 +7,10 @@
 
     using DataGate.Common;
     using DataGate.Services.Data.Files.Contracts;
-    using DataGate.Services.DateTime;
+    using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.Infrastructure.Filters;
     using DataGate.Web.InputModels.Files;
-    using DataGate.Web.Utilities;
+    using DataGate.Web.Utilities.Extract;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
