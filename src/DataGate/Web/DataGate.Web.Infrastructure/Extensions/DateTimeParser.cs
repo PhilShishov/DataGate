@@ -11,7 +11,7 @@
         {
             if (date != null)
             {
-                return DateTime.ParseExact(date, GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
+                return DateTime.ParseExact(date, GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.CurrentUICulture);
             }
 
             return DateTime.UtcNow;
@@ -21,7 +21,7 @@
         {
             if (date != null)
             {
-                return DateTime.ParseExact(date, GlobalConstants.SqlDateTimeFormatParsing, CultureInfo.InvariantCulture);
+                return DateTime.ParseExact(date, GlobalConstants.SqlDateTimeFormatParsing, CultureInfo.CurrentUICulture);
             }
 
             return DateTime.UtcNow;
@@ -31,7 +31,7 @@
         {
             if (date != null)
             {
-                return date.ToString(GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.InvariantCulture);
+                return date.ToString(GlobalConstants.RequiredWebDateTimeFormat, CultureInfo.CurrentUICulture);
             }
 
             return string.Empty;
@@ -41,7 +41,7 @@
         {
             if (date.HasValue)
             {
-                return date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat, CultureInfo.InvariantCulture);
+                return date?.ToString(GlobalConstants.RequiredSqlDateTimeFormat, CultureInfo.CurrentUICulture);
             }
 
             return string.Empty;

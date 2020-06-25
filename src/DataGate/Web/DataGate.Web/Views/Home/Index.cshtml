@@ -1,6 +1,4 @@
-﻿@using DataGate.Common
-@inject IStringLocalizer<SharedResources> SharedLocalizer
-@{
+﻿@{
     this.ViewData["Title"] = SharedLocalizer["Home Page"];
     this.Layout = "_LayoutHome";
 }
@@ -10,6 +8,9 @@
     <partial name="Scripts/_CookieConsentPartial" />
 
     <div class="container-fluid text-center">
+        <div class="wrapper-language-bar">
+            <partial name="_SelectLanguagePartial" />
+        </div>
         <div class="row">
             <div class="col-md-12 container-logo">
                 <a asp-area="" asp-controller="Home" asp-action="Index">
@@ -20,7 +21,7 @@
         <div class="row">
             <div class="col-md-12 div-text-pharus">
                 <h1 class="text-white text-pharus">
-                    @SharedLocalizer["Welcome To"]
+                    @SharedLocalizer["Welcome To "]
                     Pharus Management<br>DataGate
                     @SharedLocalizer["Platform"]
                 </h1>
