@@ -1,4 +1,4 @@
-namespace DataGate.Services.Data.Agreements
+﻿namespace DataGate.Services.Data.Agreements
 {
     using System;
     using System.Collections.Generic;

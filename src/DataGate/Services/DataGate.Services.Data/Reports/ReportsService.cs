@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     using DataGate.Services.Mapping;
     using DataGate.Services.SqlClient.Contracts;
@@ -23,7 +24,7 @@
             return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
         }
 
-        public IAsyncEnumerable<string[]> GetAll(string function, DateTime date)
-        => this.sqlManager.ExecuteQueryReportsAsync(function, date);
+        public IAsyncEnumerable<string[]> GetAll(string function, DateTime date, int skip)
+        => this.sqlManager.ExecuteQueryReportsAsync(function, date).Skip(skip);
     }
 }

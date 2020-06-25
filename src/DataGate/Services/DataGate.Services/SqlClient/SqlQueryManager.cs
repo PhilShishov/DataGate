@@ -199,8 +199,6 @@ namespace DataGate.Services.SqlClient
             var typeInt = DbType.Int32;
             var typeString = DbType.String;
             var typeStringFixed = DbType.StringFixedLength;
-            var typeDatetime = DbType.DateTime;
-            var typeBinary = DbType.Binary;
 
             foreach (SqlParameter parameter in command.Parameters)
             {

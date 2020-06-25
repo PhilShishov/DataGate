@@ -8,8 +8,6 @@
 
         public string FundName { get; set; }
 
-        public IEnumerable<string> LastTwelveMonths { get; set; }
-
         public IEnumerable<decimal> AuMPerMonth { get; set; }
     }
 }

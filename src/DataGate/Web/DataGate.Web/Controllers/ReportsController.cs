@@ -80,12 +80,14 @@
         public async Task<IActionResult> FundReports()
         {
             var date = new DateTime(DateTime.Today.Year, DateTime.Today.Month - 1, FixedDayNavValue);
-            var reports = await this.service.GetAll(SqlFunctionDictionary.ReportFunds, date).ToListAsync();
+            var values = await this.service.GetAll(SqlFunctionDictionary.ReportFunds, date, 1).ToListAsync();
+            var headers = await this.service.GetAll(SqlFunctionDictionary.ReportFunds, date).FirstOrDefaultAsync();
 
             var viewModel = new FundReportOverviewViewModel()
             {
                 Date = date,
-                Reports = reports,
+                Headers = headers,
+                Values = values,
             };
 
             return this.View(viewModel);

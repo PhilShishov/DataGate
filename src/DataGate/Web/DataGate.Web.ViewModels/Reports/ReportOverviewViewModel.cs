@@ -13,6 +13,6 @@
 
         public IEnumerable<ReportViewModel> Reports { get; set; }
 
-        public IEnumerable<FundReportViewModel> FundReports { get; set; }
+        public List<string[]> FundReports { get; set; }
     }
 }

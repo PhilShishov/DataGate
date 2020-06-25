@@ -1,4 +1,4 @@
-namespace DataGate.Web.ViewModels.Reports
+﻿namespace DataGate.Web.ViewModels.Reports
 {
     using DataGate.Services.Mapping;
     using DataGate.Web.Dtos.Queries;

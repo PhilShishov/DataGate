@@ -1,14 +1,10 @@
 ﻿@model DataGate.Web.ViewModels.Reports.FundReportOverviewViewModel
-@using System.Globalization
 
 @{
     ViewData["Title"] = SharedLocalizer["Reports"];
 
     var date = DateTimeParser.ToWebFormat(Model.Date);
-
     decimal aum;
-
-    var culture = CultureInfo.CreateSpecificCulture("en-US");
 }
 
 <div class="container-all-funds justify-content-between">
@@ -37,16 +33,17 @@
                                        value="UPDATE"></>
                             </div>
                         </form>
-                        <div>
-                            <form method="post" id="extract-form"></form>
-                            <button class="btn btn-sm btn-pharus mb-1 mr-2"
+                        <form method="post" id="extract-form"></form>
+                        <div class="mr-3">
+                            <button class="btn btn-sm btn-pharus mb-1"
                                     id="btn-extract-excel"
                                     type="button"
                                     value="Excel">
                                 EXCEL
                             </button>
-
-                            <button class="btn btn-sm btn-pharus mb-1 mx-2"
+                        </div>
+                        <div class="mx-2">
+                            <button class="btn btn-sm btn-pharus mb-1"
                                     id="btn-extract-pdf"
                                     type="button"
                                     value="PDF">
@@ -69,42 +66,35 @@
                 <table class="table table-bordered table-hover tbl-reports table-view-pharus table-striped" id="table-to-extract">
                     <thead>
                         <tr>
-                            @for (int row = 0; row < GlobalConstants.RowNumberOfHeadersInTable; row++)
+                            @foreach (var header in Model.Headers.Skip(1))
                             {
-                                for (int col = 1; col < Model.Reports[row].Length; col++)
-                                {
-                                    <th title="@Model.Reports[row][col]">
-                                        @Model.Reports[row][col]
-                                    </th>
-                                }
+                                <th title="@header">
+                                    @header
+                                </th>
                             }
-
                         </tr>
                     </thead>
                     <tbody>
-                        @for (int row = GlobalConstants.RowNumberOfHeadersInTable; row < Model.Reports.Count; row++)
+                        @for (int row = 0; row < Model.Values.Count; row++)
                         {
-                            var entityId = @Model.Reports[row][GlobalConstants.IndexEntityIdInTable];
+                            var entityId = @Model.Values[row][GlobalConstants.IndexEntityIdInTable];
                             <tr>
-                                @for (int col = 1; col < Model.Reports[row].Length; col++)
+                                @for (int col = 1; col < Model.Values[row].Length; col++)
                                 {
-                                    if (Model.Reports[0][col] == "NAME")
+                                    if (Model.Headers.ToList()[col] == "NAME")
                                     {
                                         <td class="p-1 td-name-link">
                                             <a asp-area="@GlobalConstants.FundAreaName" asp-route="@GlobalConstants.FundDetailsRouteName" asp-route-id="@entityId" asp-route-date="@date">
-                                                @Model.Reports[row][col]
+                                                @Model.Values[row][col]
                                             </a>
                                         </td>
                                     }
-                                    else if (Model.Reports[0][col] != "NAME")
+                                    else if (Model.Headers.ToList()[col] != "NAME")
                                     {
                                         <td class="p-1">
-                                            @if (decimal.TryParse(Model.Reports[row][col], out aum))
+                                            @if (decimal.TryParse(Model.Values[row][col], out aum))
                                             {
-                                                @*@String.Format("€ {0:N2}", aum)*@
-
-                                                @aum.ToString("€" + "##,0.##", culture)
-                                                @*@aum.ToString("N2");*@
+                                                @CurrencyFormatter.ToString(aum)
                                             }
                                             else
                                             {
@@ -115,7 +105,7 @@
                                     else
                                     {
                                         <td class="p-1">
-                                            @Model.Reports[row][col]
+                                            @Model.Values[row][col]
                                         </td>
                                     }
                                 }
@@ -124,14 +114,11 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            @*@for (int row = 0; row < GlobalConstants.RowNumberOfHeadersInTable; row++)
-                                {
-                                    for (int col = 0; col < Model.Reports[row].Length; col++)
-                                    {
-                                        <th >
-                                        </th>
-                                    }
-                                }*@
+                            <th style="text-align:right">@SharedLocalizer["TOTAL:"]</th>
+                            @foreach (var header in Model.Headers.Skip(2))
+                            {
+                                <th></th>
+                            }
                         </tr>
                     </tfoot>
                 </table>
