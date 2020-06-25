@@ -7,6 +7,6 @@
         private static readonly CultureInfo Culture = CultureInfo.CreateSpecificCulture("en-US");
 
         public static string ToString(this decimal currency)
-                => currency.ToString("€" + "##,0.##", Culture);
+                => currency.ToString("€" + "##,0.00", Culture);
     }
 }

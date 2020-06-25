@@ -162,16 +162,32 @@ function dataTableReportHandler(type) {
 
     // Remove the formatting to get aum data for total
     let aumValue = function (input) {
-        console.log(input);
         return typeof input === 'string' && input !='Not available' ?
             input.replace(/[\€,]/g, '') * 1 :
             typeof input === 'number' ?
                 input : 0;
     };
 
+    jQuery.extend(jQuery.fn.dataTableExt.oSort, {
+        "formatted-num-pre": function (a) {
+            a = (a === "-" || a === "") ? 0 : a.replace(/[^\d\-\.]/g, "");
+            return parseFloat(a);
+        },
+        "formatted-num-asc": function (a, b) {
+            return a - b;
+        },
+        "formatted-num-desc": function (a, b) {
+            return b - a;
+        }
+    });
+    
     if (type === 'Fund') {
         $('.table-view-pharus').DataTable({
             "dom": '<"top">t<"bottom"><"clear">',
+            columnDefs: [
+                { type: 'formatted-num', targets: "_all" }
+            ],
+            "pageLength": 50,
             "scrollX": true,
             stateSave: true,
             "footerCallback": function (row, data, start, end, display) {
