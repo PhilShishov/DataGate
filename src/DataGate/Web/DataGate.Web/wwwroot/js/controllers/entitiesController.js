@@ -162,7 +162,7 @@ function dataTableReportHandler(type) {
 
     // Remove the formatting to get aum data for total
     let aumValue = function (input) {
-        return typeof input === 'string' && input !='Not available' ?
+        return typeof input === 'string' && input != 'Not available' ?
             input.replace(/[\€,]/g, '') * 1 :
             typeof input === 'number' ?
                 input : 0;
@@ -180,7 +180,7 @@ function dataTableReportHandler(type) {
             return b - a;
         }
     });
-    
+
     if (type === 'Fund') {
         $('.table-view-pharus').DataTable({
             "dom": '<"top">t<"bottom"><"clear">',
@@ -214,6 +214,7 @@ function dataTableReportHandler(type) {
             "dom": '<"top"lf>rt<"bottom"ip><"clear">',
             "lengthMenu": [[-1, 10, 25, 50], ["All", 10, 25, 50]],
             "scrollX": true,
+            "autoWidth": false,
             stateSave: true,
             "footerCallback": function (row, data, start, end, display) {
                 var api = this.api(), data;

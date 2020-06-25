@@ -38,7 +38,6 @@ namespace DataGate.Web.InputModels
         [Display(Name = "Transfer Agent Code")]
         public string TACode { get; set; }
 
-        [RegularExpression(@"^[A-Z0-9_]+$", ErrorMessage = ErrorMessages.UnvalidFormat)]
         [Display(Name = "LEI Code")]
         public string LEICode { get; set; }
 

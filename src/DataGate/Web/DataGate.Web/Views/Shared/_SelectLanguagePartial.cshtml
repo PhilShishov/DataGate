@@ -1,0 +1,29 @@
+﻿@{
+    var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
+    returnUrl += Context.Request.QueryString.ToString();
+    IRequestCultureFeature currentCulture = Context.Features.Get<IRequestCultureFeature>();
+    string requestedCultureName = string.Empty;
+    string requestedCultureDisplayName = string.Empty;
+    var flag = string.Empty;
+
+    if (currentCulture.RequestCulture.Culture.Name == GlobalConstants.CurrentCultureInfo)
+    {
+        requestedCultureName = GlobalConstants.ItalianCultureInfo;
+        requestedCultureDisplayName = "IT";
+        flag = "flag-italy.svg";
+    }
+    else
+    {
+        requestedCultureName = GlobalConstants.CurrentCultureInfo;
+        requestedCultureDisplayName = "EN";
+        flag = "flag-usa.svg";
+    }
+}
+
+<a asp-controller="Home"
+   asp-action="SetLanguage"
+   asp-route-culture="@requestedCultureName"
+   asp-route-returnUrl="@returnUrl">
+    @requestedCultureDisplayName
+    <img src="~/images/@flag">
+</a>

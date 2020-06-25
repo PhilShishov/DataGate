@@ -55,7 +55,6 @@ img {
 
 .container-cookie-consent {
     font-size: 15px;
-    position: fixed;
     width: 100%;
     text-align: center;
 }
@@ -93,6 +92,18 @@ img {
     font: 12px/1.5 Arial,Helvetica,sans-serif;
 }
 
+.wrapper-language-bar {
+    margin-top: 30px;
+}
+
+    .wrapper-language-bar a {
+        color: white;
+    }
+    .wrapper-language-bar img {
+        width: 30px;
+        height: 30px;
+        margin-left: 6px;
+    }
 /*
 *
 * ==========================================
