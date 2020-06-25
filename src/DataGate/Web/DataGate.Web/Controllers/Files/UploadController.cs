@@ -108,7 +108,10 @@
                 GlobalConstants.FeesRouteName,
                 new
                 {
-                    fileId = dto.FileId, id = dto.Id, date = dto.Date, areaName = dto.AreaName,
+                    fileId = dto.FileId,
+                    id = dto.Id,
+                    date = dto.Date,
+                    areaName = dto.AreaName,
                 });
             }
 

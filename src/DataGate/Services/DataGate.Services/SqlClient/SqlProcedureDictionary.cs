@@ -1,4 +1,4 @@
-namespace DataGate.Services.SqlClient
+﻿namespace DataGate.Services.SqlClient
 {
     public class SqlProcedureDictionary
     {

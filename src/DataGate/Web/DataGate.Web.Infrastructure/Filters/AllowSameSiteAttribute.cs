@@ -1,4 +1,4 @@
-namespace DataGate.Web.Infrastructure.Filters
+﻿namespace DataGate.Web.Infrastructure.Filters
 {
     using Microsoft.AspNetCore.Mvc.Filters;
 

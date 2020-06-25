@@ -143,7 +143,7 @@
 
             command.Parameters.AddRange(new[]
                    {
-                        new SqlParameter("@sf_initialDate", SqlDbType.NVarChar) { Value = dto.InitialDate},
+                        new SqlParameter("@sf_initialDate", SqlDbType.NVarChar) { Value = dto.InitialDate },
                         new SqlParameter("@sf_officialSubFundName", SqlDbType.NVarChar) { Value = dto.SubFundName },
                         new SqlParameter("@sf_cssfCode", SqlDbType.NVarChar) { Value = dto.CSSFCode },
                         new SqlParameter("@sf_faCode", SqlDbType.NVarChar) { Value = dto.FACode },
@@ -157,7 +157,7 @@
                         new SqlParameter("@sf_leiCode", SqlDbType.NVarChar) { Value = dto.LEICode },
                         new SqlParameter("@sf_cesrClass", SqlDbType.Int) { Value = dto.CesrClass },
                         new SqlParameter("@sf_cssf_geographical_focus", SqlDbType.Int) { Value = dto.GeographicalFocus },
-                        new SqlParameter("@sf_globalExposure", SqlDbType.Int) { Value = dto.GlobalExposure},
+                        new SqlParameter("@sf_globalExposure", SqlDbType.Int) { Value = dto.GlobalExposure },
                         new SqlParameter("@sf_currency", SqlDbType.NChar) { Value = dto.CurrencyCode },
                         new SqlParameter("@sf_navFrequency", SqlDbType.Int) { Value = dto.NavFrequency },
                         new SqlParameter("@sf_valutationDate", SqlDbType.Int) { Value = dto.ValuationDate },
@@ -170,7 +170,7 @@
                         new SqlParameter("@sf_principal_investment_strategy", SqlDbType.Int) { Value = dto.PrincipalInvestmentStrategy },
                         new SqlParameter("@sf_clearing_code", SqlDbType.NVarChar) { Value = dto.ClearingCode },
                         new SqlParameter("@sf_cat_morningstar", SqlDbType.Int) { Value = dto.SfCatMorningStar },
-                        new SqlParameter("@sf_category_six", SqlDbType.Int) { Value = dto.SfCatSix},
+                        new SqlParameter("@sf_category_six", SqlDbType.Int) { Value = dto.SfCatSix },
                         new SqlParameter("@sf_category_bloomberg", SqlDbType.Int) { Value = dto.SfCatBloomberg },
                    });
             return command;

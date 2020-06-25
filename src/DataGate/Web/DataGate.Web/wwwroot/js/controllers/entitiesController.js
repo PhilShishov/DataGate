@@ -160,51 +160,66 @@ function dataTableReportHandler(type) {
         currency: 'EUR',
     });
 
+    // Remove the formatting to get aum data for total
+    let aumValue = function (input) {
+        console.log(input);
+        return typeof input === 'string' && input !='Not available' ?
+            input.replace(/[\€,]/g, '') * 1 :
+            typeof input === 'number' ?
+                input : 0;
+    };
+
     if (type === 'Fund') {
         $('.table-view-pharus').DataTable({
             "dom": '<"top">t<"bottom"><"clear">',
-            "autoWidth": false,
-            "scrollX": true,
-            stateSave: true,
-        });
-    } else {
-        $('.table-view-pharus').DataTable({
-            "dom": '<"top"lf>rt<"bottom"ip><"clear">',
-            "lengthMenu": [[-1, 10, 25, 50], ["All", 10, 25, 50]],
-            "autoWidth": false,
             "scrollX": true,
             stateSave: true,
             "footerCallback": function (row, data, start, end, display) {
                 var api = this.api(), data;
 
-                // Remove the formatting to get integer data for total
-                var intVal = function (input) {
-                    return typeof input === 'string' ?
-                        input.replace(/[\€,]/g, '') * 1 :
-                        typeof input === 'number' ?
-                            input : 0;
-                };
+                const colCount = $(this).find("tr:first td").length;
 
-                // Total over all pages
-                total = api
-                    .column(6)
-                    .data()
-                    .reduce(function (a, b) {
-                        return intVal(a) + intVal(b);
-                    }, 0);
+                for (let i = 1; i < colCount; i++) {
+                    total = api
+                        .column(i)
+                        .data()
+                        .reduce(function (a, b) {
+                            return aumValue(a) + aumValue(b);
+                        }, 0);
+
+                    // Update footer
+                    $(api.column(i).footer()).html(formatter.format(total));
+                }
+
+            }
+        });
+    } else {
+        $('.table-view-pharus').DataTable({
+            "dom": '<"top"lf>rt<"bottom"ip><"clear">',
+            "lengthMenu": [[-1, 10, 25, 50], ["All", 10, 25, 50]],
+            "scrollX": true,
+            stateSave: true,
+            "footerCallback": function (row, data, start, end, display) {
+                var api = this.api(), data;
 
                 // Total over this page
                 pageTotal = api
                     .column(6, { page: 'current' })
                     .data()
                     .reduce(function (a, b) {
-                        return intVal(a) + intVal(b);
+                        return aumValue(a) + aumValue(b);
+                    }, 0);
+
+                // Total over all pages
+                total = api
+                    .column(6)
+                    .data()
+                    .reduce(function (a, b) {
+                        return aumValue(a) + aumValue(b);
                     }, 0);
 
                 // Update footer
-                $(api.column(6).footer()).html(
-                    formatter.format(pageTotal) + ' | ' + formatter.format(total) + ' total |'
-                );
+                $(api.column(6).footer()).html(formatter.format(pageTotal) + ' | ' + formatter.format(total) + ' total |');
             }
         });
     }

@@ -9,6 +9,8 @@
         [Required]
         public DateTime Date { get; set; }
 
-        public List<string[]> Reports { get; set; }
+        public IEnumerable<string> Headers { get; set; }
+
+        public List<string[]> Values { get; set; }
     }
 }

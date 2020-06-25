@@ -1,4 +1,4 @@
-namespace DataGate.Services.Data.Reports
+﻿namespace DataGate.Services.Data.Reports
 {
     using System;
     using System.Collections.Generic;
@@ -7,6 +7,6 @@ namespace DataGate.Services.Data.Reports
     {
         IEnumerable<T> GetAll<T>(string function, DateTime date);
 
-        IAsyncEnumerable<string[]> GetAll(string function, DateTime date);
+        IAsyncEnumerable<string[]> GetAll(string function, DateTime date, int skip = 0);
     }
 }
