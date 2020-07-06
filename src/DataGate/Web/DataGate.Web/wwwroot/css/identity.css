@@ -168,11 +168,6 @@ h3 {
     font-size: 22px;
 }
 
-img {
-    max-width: 100%;
-    height: auto;
-}
-
 .label-input-login {
     font-size: 19px;
 }
@@ -204,6 +199,17 @@ img {
     .alert-dismissible .close-cookie-consent:hover {
         background: rgb(0, 65, 118);
     }
+
+.wrapper-language-bar a {
+    color: white;
+}
+
+.wrapper-language-bar img {
+    width: 30px;
+    height: 30px;
+    margin-left: 6px;
+    float: right;
+}
 
 /*========================================================================
   fxt-template layout

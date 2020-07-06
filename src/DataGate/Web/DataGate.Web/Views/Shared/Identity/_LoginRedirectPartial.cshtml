@@ -1,3 +1,10 @@
-﻿<a asp-area="Identity" asp-page="/Account/Login">
-    <img src="~/images/Logo_Pharus_small.jpg" />
-</a>
+﻿<div class="d-flex">
+    <div class="mr-5">
+        <a asp-area="Identity" asp-page="/Account/Login">
+            <img src="~/images/Logo_Pharus_small.jpg" />
+        </a>
+    </div>
+    <div class="wrapper-language-bar w-100 ml-5">
+        <partial name="_SelectLanguagePartial" />
+    </div>
+</div>
