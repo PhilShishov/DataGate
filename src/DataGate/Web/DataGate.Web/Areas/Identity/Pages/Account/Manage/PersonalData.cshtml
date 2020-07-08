@@ -14,10 +14,10 @@
             <strong>Deleting this data will permanently remove your account, and this cannot be recovered.</strong>
         </p>
         <form id="download-data" asp-page="DownloadPersonalData" method="post" class="form-group">
-            <button class="btn btn-pharus" type="submit">DOWNLOAD</button>
+            <button class="btn btn-pharus" type="submit">@SharedLocalizer["Download"]</button>
         </form>
         <p>
-            <a id="delete" asp-page="DeletePersonalData" class="btn btn-pharus">DELETE</a>
+            <a id="delete" asp-page="DeletePersonalData" class="btn btn-pharus">@SharedLocalizer["Delete"]</a>
         </p>
     </div>
 </div>

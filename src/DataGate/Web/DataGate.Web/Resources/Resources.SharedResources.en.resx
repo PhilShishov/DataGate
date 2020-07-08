@@ -264,6 +264,9 @@
   <data name="Documents" xml:space="preserve">
     <value>Documents</value>
   </data>
+  <data name="Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
@@ -278,6 +281,9 @@
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
+  </data>
+  <data name="Enter your email" xml:space="preserve">
+    <value>Enter your email</value>
   </data>
   <data name="Expiration Date" xml:space="preserve">
     <value>Expiration Date</value>
@@ -354,9 +360,6 @@
   <data name="No result produced by your request." xml:space="preserve">
     <value>No result produced by your request.</value>
   </data>
-  <data name="Not available" xml:space="preserve">
-    <value>Not available</value>
-  </data>
   <data name="Number of results:" xml:space="preserve">
     <value>Number of results: </value>
   </data>
@@ -372,8 +375,8 @@
   <data name="Platform" xml:space="preserve">
     <value>Platform</value>
   </data>
-  <data name="Please check your email to reset your password" xml:space="preserve">
-    <value>Please check your email to reset your password</value>
+  <data name="Please check your email to reset your password." xml:space="preserve">
+    <value>Please check your email to reset your password.</value>
   </data>
   <data name="Please modify your search criteria." xml:space="preserve">
     <value>Please modify your search criteria.</value>
@@ -474,9 +477,6 @@
   <data name="Total Price:" xml:space="preserve">
     <value>Total Price:</value>
   </data>
-  <data name="TOTAL:" xml:space="preserve">
-    <value>TOTAL:</value>
-  </data>
   <data name="Two-factor authentication" xml:space="preserve">
     <value>Two-factor authentication</value>
   </data>
@@ -508,10 +508,10 @@
     <value>Valid From:</value>
   </data>
   <data name="Valid Until:" xml:space="preserve">
-    <value>Valid Until:</value>
+    <value>Valid Until</value>
   </data>
   <data name="View All" xml:space="preserve">
-    <value>View All</value>
+    <value>Valid Until</value>
   </data>
   <data name="View User" xml:space="preserve">
     <value>View User</value>
@@ -525,8 +525,8 @@
   <data name="Welcome To" xml:space="preserve">
     <value>Welcome To</value>
   </data>
-  <data name="You don't have access to this resources" xml:space="preserve">
-    <value>You don't have access to this resources</value>
+  <data name="You don't have access to this resources." xml:space="preserve">
+    <value>You don't have access to this resources.</value>
   </data>
   <data name="You have successfully logged out of Pharus DataGate." xml:space="preserve">
     <value>You have successfully logged out of Pharus DataGate.</value>

@@ -135,8 +135,8 @@
   <data name="Setup authenticator app" xml:space="preserve">
     <value>Setup authenticator app</value>
   </data>
-  <data name="Two-factor authentication (2FA)" xml:space="preserve">
-    <value>Two-factor authentication (2FA)</value>
+  <data name="Two-factor authentication" xml:space="preserve">
+    <value>Two-factor authentication</value>
   </data>
   <data name="You can generate a new set of recovery codes." xml:space="preserve">
     <value>You can generate a new set of recovery codes.</value>
