@@ -159,7 +159,7 @@
   <data name="Advanced Selection" xml:space="preserve">
     <value>Selezione avanzata</value>
   </data>
-  <data name="AGREEMENTS" xml:space="preserve">
+  <data name="Agreements" xml:space="preserve">
     <value>Agreements</value>
   </data>
   <data name="Agreements Library" xml:space="preserve">
@@ -195,7 +195,7 @@
   <data name="Change your account settings" xml:space="preserve">
     <value>Cambia impostazioni account</value>
   </data>
-  <data name="CHARTS" xml:space="preserve">
+  <data name="Charts" xml:space="preserve">
     <value>Grafici</value>
   </data>
   <data name="Close" xml:space="preserve">
@@ -204,7 +204,7 @@
   <data name="Column Choice" xml:space="preserve">
     <value>Scegli colonna</value>
   </data>
-  <data name="COLUMNS" xml:space="preserve">
+  <data name="Columns" xml:space="preserve">
     <value>Colonne</value>
   </data>
   <data name="Company Name" xml:space="preserve">
@@ -227,6 +227,9 @@
   </data>
   <data name="Cookie Policy" xml:space="preserve">
     <value>Cookie policy</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Crea</value>
   </data>
   <data name="Create Fund" xml:space="preserve">
     <value>Crea Fondo</value>
@@ -258,7 +261,7 @@
   <data name="Distinct" xml:space="preserve">
     <value>Separa</value>
   </data>
-  <data name="DOCUMENTS" xml:space="preserve">
+  <data name="Documents" xml:space="preserve">
     <value>Documenti</value>
   </data>
   <data name="Edit" xml:space="preserve">
@@ -364,7 +367,7 @@
     <value>Password</value>
   </data>
   <data name="PHARUS DATAGATE PLATFORM" xml:space="preserve">
-    <value>PHARUS DATAGATE PLATFORM</value>
+    <value>PHARUS DATAGATE PIATTAFORMA</value>
   </data>
   <data name="Platform" xml:space="preserve">
     <value>Piattaforma</value>
@@ -477,6 +480,9 @@
   <data name="Two-factor authentication" xml:space="preserve">
     <value>Two-factor authentication</value>
   </data>
+  <data name="Update" xml:space="preserve">
+    <value>Aggiorna</value>
+  </data>
   <data name="Update Fund" xml:space="preserve">
     <value>Aggiorna Fondo</value>
   </data>
@@ -498,11 +504,11 @@
   <data name="Users" xml:space="preserve">
     <value>Utenti</value>
   </data>
-  <data name="Valid From" xml:space="preserve">
-    <value>Valido da</value>
+  <data name="Valid From:" xml:space="preserve">
+    <value>Valido da:</value>
   </data>
-  <data name="Valid Until" xml:space="preserve">
-    <value>Valido fino al</value>
+  <data name="Valid Until:" xml:space="preserve">
+    <value>Valido fino al:</value>
   </data>
   <data name="View All" xml:space="preserve">
     <value>Vedi tutti</value>
