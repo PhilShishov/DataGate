@@ -2,8 +2,8 @@
     var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
     returnUrl += Context.Request.QueryString.ToString();
     IRequestCultureFeature currentCulture = Context.Features.Get<IRequestCultureFeature>();
-    string requestedCultureName = string.Empty;
-    string requestedCultureDisplayName = string.Empty;
+    var requestedCultureName = string.Empty;
+    var requestedCultureDisplayName = string.Empty;
     var flag = string.Empty;
 
     if (currentCulture.RequestCulture.Culture.Name == GlobalConstants.CurrentCultureInfo)

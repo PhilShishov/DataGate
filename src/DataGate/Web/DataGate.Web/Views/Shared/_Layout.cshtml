@@ -56,7 +56,7 @@
     {
         <header>
             <div class="header-pharus">
-                <div class="w-50">
+                <div class="w-45">
                     <div class="header-pharus-app-navbar d-flex">
                         <div class="mx-2 mt-2">
                             <a asp-area="" asp-route="userpanel">
@@ -78,9 +78,13 @@
                                 <a asp-area="" asp-route="allagreements">@SharedLocalizer["Agreements Library"]</a>
                             </div>
                         </div>
-
                     </div>
                 </div>
+
+                <div class="wrapper-language-bar mt-3 ml-5 w-5">
+                    <partial name="_SelectLanguagePartial" />
+                </div>
+
 
                 <div class="w-50 d-flex responsive-navbar">
                     <div class="search-form-wrapper-responsive">

@@ -242,7 +242,7 @@
 
             if (roleExist)
             {
-                if (role == GlobalConstants.AdministratorRoleName && admins.Count <= GlobalConstants.MaxAdminCount)
+                if (role == GlobalConstants.AdministratorRoleName /*&& admins.Count <= GlobalConstants.MaxAdminCount*/)
                 {
                     await this.userManager.AddToRoleAsync(user, GlobalConstants.AdministratorRoleName);
                 }

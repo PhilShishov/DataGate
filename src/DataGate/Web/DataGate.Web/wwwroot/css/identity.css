@@ -201,14 +201,14 @@ h3 {
     }
 
 .wrapper-language-bar a {
-    color: white;
+    color: black;
+    float: right;
 }
 
 .wrapper-language-bar img {
     width: 30px;
     height: 30px;
     margin-left: 6px;
-    float: right;
 }
 
 /*========================================================================

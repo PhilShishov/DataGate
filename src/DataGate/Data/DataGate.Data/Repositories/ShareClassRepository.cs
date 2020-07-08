@@ -33,7 +33,7 @@ namespace DataGate.Data.Repositories
         => this.Context.TbDomShareStatus.Select(tb => tb.ScSDesc).ToList();
 
         public IReadOnlyCollection<string> GetAllTbDomShareType()
-        => this.Context.TbDomShareStatus.Select(tb => tb.ScSDesc).ToList();
+        => this.Context.TbDomShareType.Select(tb => tb.StDesc).ToList();
 
         public async Task<string> ByNameCountry(string countryToFormat)
         {
