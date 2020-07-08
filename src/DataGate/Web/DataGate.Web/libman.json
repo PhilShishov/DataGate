@@ -23,7 +23,7 @@
       ]
     },
     {
-      "library": "jquery-validation@1.19.1",
+      "library": "jquery-validation@1.19.2",
       "destination": "wwwroot/lib/jquery-validation/",
       "files": [
         "dist/jquery.validate.js",
@@ -139,7 +139,7 @@
       ]
     },
     {
-      "library": "moment@2.26.0",
+      "library": "moment@2.27.0",
       "destination": "wwwroot/lib/moment/",
       "files": [
         "min/moment-with-locales.min.js",
@@ -149,7 +149,7 @@
     },
     {
       "provider": "cdnjs",
-      "library": "font-awesome@5.13.0",
+      "library": "font-awesome@5.13.1",
       "destination": "wwwroot/lib/font-awesome/",
       "files": [
         "css/all.min.css",

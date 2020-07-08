@@ -264,6 +264,9 @@
   <data name="Documents" xml:space="preserve">
     <value>Documenti</value>
   </data>
+  <data name="Download" xml:space="preserve">
+    <value>Scarica</value>
+  </data>
   <data name="Edit" xml:space="preserve">
     <value>Modifica</value>
   </data>
@@ -278,6 +281,9 @@
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
+  </data>
+  <data name="Enter your e-mail" xml:space="preserve">
+    <value>Inserisci il tuo e-mail</value>
   </data>
   <data name="Expiration Date" xml:space="preserve">
     <value>Data Scadenza</value>
@@ -354,9 +360,6 @@
   <data name="No result produced by your request." xml:space="preserve">
     <value>Nessun risultato per questa richiesta</value>
   </data>
-  <data name="Not available" xml:space="preserve">
-    <value>Non disponibile</value>
-  </data>
   <data name="Number of results:" xml:space="preserve">
     <value>Numero di risultati:</value>
   </data>
@@ -372,8 +375,8 @@
   <data name="Platform" xml:space="preserve">
     <value>Piattaforma</value>
   </data>
-  <data name="Please check your email to reset your password" xml:space="preserve">
-    <value>Controlla la tua posta per il reset della password</value>
+  <data name="Please check your email to reset your password." xml:space="preserve">
+    <value>Controlla la tua posta per il reset della password.</value>
   </data>
   <data name="Please modify your search criteria." xml:space="preserve">
     <value>Modifica il criterio di ricerca</value>
@@ -391,13 +394,13 @@
     <value>Report</value>
   </data>
   <data name="Reset" xml:space="preserve">
-    <value>Reset</value>
+    <value>Resetta</value>
   </data>
   <data name="Reset password" xml:space="preserve">
-    <value>Reset Password</value>
+    <value>Resetta password</value>
   </data>
   <data name="Reset your password" xml:space="preserve">
-    <value>Reset your password</value>
+    <value>Reimposta la tua password</value>
   </data>
   <data name="Result" xml:space="preserve">
     <value>Risultati</value>
@@ -474,9 +477,6 @@
   <data name="Total Price:" xml:space="preserve">
     <value>Prezzo totale</value>
   </data>
-  <data name="TOTAL:" xml:space="preserve">
-    <value>Totale:</value>
-  </data>
   <data name="Two-factor authentication" xml:space="preserve">
     <value>Two-factor authentication</value>
   </data>
@@ -525,8 +525,8 @@
   <data name="Welcome To" xml:space="preserve">
     <value>Benvenuto in</value>
   </data>
-  <data name="You don't have access to this resources" xml:space="preserve">
-    <value>Non hai accesso a questa sezione</value>
+  <data name="You don't have access to this resources." xml:space="preserve">
+    <value>Non hai accesso a questa sezione.</value>
   </data>
   <data name="You have successfully logged out of Pharus DataGate." xml:space="preserve">
     <value>Disconnessione riuscita da Pharus DataGate.</value>
