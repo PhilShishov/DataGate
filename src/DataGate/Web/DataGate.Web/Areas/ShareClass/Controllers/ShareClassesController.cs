@@ -39,7 +39,8 @@
                                               EntitiesViewModel viewModel)
         {
             await EntitiesVMSetup.SetPost(viewModel, this.service,
-                                          SqlFunctionDictionary.AllShareClass, SqlFunctionDictionary.AllActiveShareClass);
+                                          SqlFunctionDictionary.AllShareClass,
+                                          SqlFunctionDictionary.AllActiveShareClass);
 
             if (viewModel.Values != null && viewModel.Values.Count > 0)
             {
