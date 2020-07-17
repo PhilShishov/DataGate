@@ -1,12 +1,33 @@
 # DataGate Platform
-A private web application for managing funds, sub funds and share classes. It is developed to be used by Pharus Management Lux S.A 
-in order to improve the efficiency and automate some parts of Risk and Legal department work.
+A private web application for managing more than 300 funds. It is developed to be used by Pharus Management Lux S.A 
+in order to improve the efficiency and automate some parts of Risk and Legal department.
 
 [![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/DataGate-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=2&branchName=master)
 
 [![Build Status](https://dev.azure.com/nasko01vasilev/JudgeSystem/_apis/build/status/JudgeSystem-CI?branchName=master)](https://dev.azure.com/nasko01vasilev/JudgeSystem/_build/latest?definitionId=2&branchName=master)
 
 ## Description
+The application can display NAV reports on chosen time period and 
+detailed information about the UCITS and AIF handled by the management company such as: 
+* General related entity view
+* Sub entities
+* Timeline changes
+* Timeseries AuM charts
+* Distinct related documents and agreements
+* All related documents
+* All related agreements
+* Fees related to agreements
+
+Other features: 
+ - **Create and edit fund**
+ - **Excel and PDF extraction**  
+ - **Upload documents and agreements**  
+
+The purpose of this platform is to be used in a financial environment. It can make the work 
+of Risk and Legal Department easier by finding the correct information faster. 
+
+
+
 Applicaiton can evaluate user's programming code automatically.
 Aims of this platform are to be used in schools. It can make the work of our teachers more easier and also students will be
 able to solve more problems and check their solutions faster. I beleive that using this application, more students will become
@@ -94,13 +115,13 @@ Follow these steps to set up your development environmet:
 * ASP.NET Core 2.2
 * ASP.NET Core MVC
 * Entity Framework Core 2.2
-* Azure
+* GoogleDrive (test purposes)
 * xUnit, MyTested.AspNetCore.Mvc
 * jQuery, Bootstrap, JavaScript
 * Automapper, SendGrid
 
-## Languages and compilers
-- C#
+## Third-parties 
+- Chosen, DataTable
 - Java 11 – compiler javac 11.0.4
 - C++ - compiler g++ (MinGW GCC-8.2.0-3) 8.2.0
 
