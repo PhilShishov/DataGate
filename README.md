@@ -19,23 +19,13 @@ detailed information about the UCITS and AIF handled by the management company s
 * Fees related to agreements
 
 Other features: 
- - **Create and edit fund**
- - **Excel and PDF extraction**  
- - **Upload documents and agreements**  
-
-The purpose of this platform is to be used in a financial environment. It can make the work 
-of Risk and Legal Department easier by finding the correct information faster. 
-
-
-
-Applicaiton can evaluate user's programming code automatically.
-Aims of this platform are to be used in schools. It can make the work of our teachers more easier and also students will be
-able to solve more problems and check their solutions faster. I beleive that using this application, more students will become
-passionate about programming and may become successfull developers one day.
+ * Create and edit fund
+ * Excel and PDF extraction
+ * Upload documents and agreements 
 
 ## Documentation
-You can find the documentation by navigating to the following path: Documentation/JudgeSystem - Documentation.docx.
-Or if you prefer watching to reading. You can watch videos about the system.
+You can read the documentation [here](https://youtu.be/SEKTWCcHH-k).
+You can watch videos about the platform:
 * In [this](https://youtu.be/SEKTWCcHH-k) video you can watch how I presnet my JudgeSystem.
 * In [this](https://www.youtube.com/embed/FbM2rhNMFVs) video you can watch how users can work in the system.
 * In [this](https://www.youtube.com/watch?v=JjZ8iy4g0K0) video you can watch how administrators can work in the system.
