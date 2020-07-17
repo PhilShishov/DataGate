@@ -2,7 +2,7 @@
 A private web application for managing funds, sub funds and share classes. It is developed to be used by Pharus Management Lux S.A 
 in order to improve the efficiency and automate some parts of Risk and Legal department work.
 
-[![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/JudgeSystem-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=2&branchName=master)
+[![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/DataGate-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=2&branchName=master)
 
 ## Description
 Applicaiton can evaluate user's programming code automatically.
