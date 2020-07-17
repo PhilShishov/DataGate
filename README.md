@@ -1,10 +1,8 @@
-# Judge System
-An open-source judge system for evaluating programmming code and managing problems, lectures, exams and competitions. It is developed to
-be used in schools in informatics lessons in order to improve the education and automate some parts of teachers' work.
+# DataGate Platform
+A private web application for managing funds, sub funds and share classes. It is developed to be used by Pharus Management Lux S.A 
+in order to improve the efficiency and automate some parts of Risk and Legal department work.
 
-[![Build Status](https://dev.azure.com/nasko01vasilev/JudgeSystem/_apis/build/status/JudgeSystem-CI?branchName=master)](https://dev.azure.com/nasko01vasilev/JudgeSystem/_build/latest?definitionId=2&branchName=master)
-
-[![Build Status](https://dev.azure.com/nasko01vasilev/JudgeSystem/_apis/build/status/JudgeSystem-CI?branchName=develop)](https://dev.azure.com/nasko01vasilev/JudgeSystem/_build/latest?definitionId=2&branchName=develop)
+[![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/JudgeSystem-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=2&branchName=master)
 
 ## Description
 Applicaiton can evaluate user's programming code automatically.
@@ -24,16 +22,6 @@ Or if you prefer watching to reading. You can watch videos about the system.
 * In [this](https://youtu.be/PUJqR24i65E) video you can watch how to test web project in the system. For example, ASP.NET Core web application.
 * In [this](https://youtu.be/2HQStWCF4D0) video you can watch how to create problem which to be tested with automated tests(Unit tests, Integration tests).
 * In [this](https://youtu.be/9V-F4xVxpoc) video you can watch how to add multiple tests for specific problem. How to download tests directly from systems like [INFOS](http://www.math.bas.bg/infos/) and import them in the system.
-
-
-## Awards
-* Финален проект за курса: ASP.NET Core MVC - June 2019 в SoftUni - оценка: 6.00 и проекта беше част от петте най-добри приложения в курса.
-* НТИТ - Национален есенен турнир по информационни технологии „Джон Атанасов“ – първо място в направление „Интернет приложения“ 🏆
-* Двадесетата ученическа конференция (УК’20) на УчИМИ – златен медал и отлично преставяне 🏅
-* Двадесетата ученическа секция, 49.Пролетна конференция на СМБ – медал за отлично представяне 🏅
-* Лауреат на Националната олимпиада по информационни технологии
-
-Click [here](https://github.com/NaskoVasilev/JudgeSystem/tree/master/Documentation/Awards) to see certificates, medals and awards from the contests above.
 
 ## Getting Started
 ### Prerequisites
@@ -245,3 +233,8 @@ else if(programmingLanguage == ProgrammingLanguage.Python)
   ### Lectures
   - Each lecture can be one of the tree types(Homework, Exercise or Exam)
   - Lecture can be added with some password which is really convenient for exam lecture
+  
+  ## Authors
+
+- [Nikolay Kostov](https://github.com/NikolayIT)
+- [Vladislav Karamfilov](https://github.com/vladislav-karamfilov)
