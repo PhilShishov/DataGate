@@ -2,6 +2,12 @@
 A private web application for managing more than 300 funds. It is developed to be used by Pharus Management Lux S.A 
 in order to improve the efficiency and automate some parts of Risk and Legal department.
 
+
+## Try it now
+https://pharusdatagate.com/
+Username: datagate_guest
+Password: datagate_guest
+
 [![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/DataGate-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=1&branchName=master)
 
 ## Description
@@ -19,7 +25,9 @@ detailed information about the UCITS and AIF handled by the management company s
 Other features: 
  * Create and edit fund
  * Excel and PDF extraction
- * Upload documents and agreements 
+ * Upload documents and agreements
+ 
+ 
 
 ## Documentation
 You can read the documentation [here](https://youtu.be/SEKTWCcHH-k).
