@@ -3,7 +3,7 @@ A private web application for managing more than 300 funds. It is developed to b
 in order to improve the efficiency and automate some parts of Risk and Legal department.
 
 
-## Try it with guest account
+## Guest account
 https://pharusdatagate.com/ <br />
 Username: datagate_guest <br />
 Password: datagate_guest <br />
