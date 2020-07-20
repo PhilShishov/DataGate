@@ -47,6 +47,7 @@ You can watch videos about the platform:
 * Testing - xUnit, MyTested.AspNetCore.Mvc
 * Project Management - TortoiseGit, GitHub, Azure DevOps, Jira, Trello
 * Hosting and File Storage - GoDaddy WebWiz
+* UI/UX design - Photoshop, HTML/CSS, Bootstrap
 
 ![ArchitectureProject](Documentation/ArchitectureProject.jpg)
 
