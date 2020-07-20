@@ -44,7 +44,7 @@ You will need the following tools:
 * .NET Core 3.1
 * ASP.NET Core 3.1
 * ASP.NET Core MVC
-* Entity Framework Core 3.1
+* MSSQL Server, Entity Framework Core 3.1
 * xUnit, MyTested.AspNetCore.Mvc
 * jQuery, Bootstrap, JavaScript
 
@@ -58,8 +58,9 @@ You will need the following tools:
 - SendGrid 9.18
 
   
-## Project Architecture
-![Architecture](Documentation/Architecture.jpg)
+![ArchitectureProject](Documentation/ArchitectureProject.jpg)
+
+
 * Data access layer - works with the database using Entity Franework Core 2.2, this layer is independent from the others. It consists of two other layers:
   * Domain Layer - contains all entities, enums. Classes which represent tables in the database
   * Persistence Layer - contains database context, all configurations, migrations and data seeding logic. It is responsible for data persistance. Here is implmented Repository desing pattern which help us to accomplish more abstraction between data access logic and business logic. As a result we can our database provider without making so many changes to the code. For example we can chnage MS SQL with MongoDB without changing some business logic.
@@ -126,6 +127,8 @@ You will need the following tools:
   ### Lectures
   - Each lecture can be one of the tree types(Homework, Exercise or Exam)
   - Lecture can be added with some password which is really convenient for exam lecture
+  
+  ## :dash: Road To
   
   ## Authors
 
