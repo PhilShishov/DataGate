@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/DataGate-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=1&branchName=master)
+
 # DataGate Platform
 A private web application for managing more than 300 funds. It is developed to be used by Pharus Management Lux S.A 
 in order to improve the efficiency and automate some parts of Risk and Legal department.
