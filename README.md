@@ -42,139 +42,21 @@ You will need the following tools:
 * [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
 * [.NET Core SDK 3.1.6](https://www.microsoft.com/net/download/dotnet-core/3.1)
 
-### Setup
-Follow these steps to set up your development environmet:
-
-  1. Clone the repository
-  2. Create your own [Send Grid](https://sendgrid.com/) account or use existing one. Go to Settings/Api Keys and create new Api Key and then copy ApiKey Name and API Key ID.
-  4. If you have some account in [Microsoft Azure](https://azure.microsoft.com/en-us/) create storge account. 
-  If you do not want to create storage account in azure ```open StartUp.cs and commnent method ConfigureAzureBlobStorage```.
-  You just will not be able to upload files.
-  5. If you want to submit java code, install [JDK](https://www.microsoft.com/net/download/dotnet-core/2.2)
-  6. Open JudgeSystem.sln file, right click on JudgeSystem.Web -> Add -> New Item. In the search bar search for `app settings` and then add ```App Settings File```. Replce its content with the following one and then replcae each value which starts with ```your```.
-     ```
-     {
-        "ConnectionStrings": {
-          "DefaultConnection": "Server=your server name;Database=JudgeSystem;Trusted_Connection=True;MultipleActiveResultSets=true"
-        },
-        "Logging": {
-            "IncludeScopes": false,
-             "LogLevel": {
-                  "Default": "Warning"
-             }
-          },
-          "SendGrid": {
-            "SendGridKey": "your API Key ID from SendGrid",
-            "SendGridUser": "your ApiKey Name from Send Grid"
-          },
-          "AzureBlob": {
-              "StorageConnectionString": "azure storage connection string",
-              "AccountKey": " your azure storage api key",
-              "AccountName": "yourazure storage acount name",
-              "ContainerName": "your azure storage container name"
-          },
-          "Email": {
-            "Name": "your first name",
-            "Surname": "your last name",
-            "Username": "your email"
-          },
-          "App": {
-            "Name": "Judge System"
-          },
-          "Admin": {
-            "Username": "your admin name",
-            "Password": "your admin password",
-            "Email": "your admin email",
-            "Name": "your admin first name",
-            "Surname": "your admin last name"
-          },
-          "Compilers": {
-            "Java": "your path to javac.exe and java.exe. For exmaple C:\\Program Files\\Java\\jdk1.8.0_181\\bin",
-            "CPlusPlus": "C:\\Users\\Nasko\\Desktop\\JudgeSystem\\Web\\JudgeSystem.Web\\wwwroot\\Compilers\\MinGW\\bin"
-          }
-      } 
-       ```
-
-  7. Open package manager console, choose as Defaut project: JudgeSystem.Data and run the following command: ```update-database```
-  8. Press Ctrl + F5
-
 ## Technologies
-* .NET Core 2.2
-* ASP.NET Core 2.2
+* .NET Core 3.1
+* ASP.NET Core 3.1
 * ASP.NET Core MVC
-* Entity Framework Core 2.2
+* Entity Framework Core 3.1
 * GoogleDrive (test purposes)
 * xUnit, MyTested.AspNetCore.Mvc
 * jQuery, Bootstrap, JavaScript
-* Automapper, SendGrid
 
 ## Third-parties 
-- Chosen, DataTable
-- Java 11 – compiler javac 11.0.4
-- C++ - compiler g++ (MinGW GCC-8.2.0-3) 8.2.0
+- EPPlus 5.2
+- itext7 7.1.11
+- Automapper 10.0
+- SendGrid 9.18
 
-## Add new programming language
-Follow this steps to add Python as another option for programming language
-1. Create class ```PythonCompiler``` in project ```JudgeSystem.Comilers``` which implements ```ICompiler``` interface
-```
-using System.Collections.Generic;
-
-using JudgeSystem.Workers.Common;
-
-namespace JudgeSystem.Compilers
-{
-    public class PythonCompiler : ICompiler
-    {
-        public CompileResult Compile(string fileName, string workingDirectory, IEnumerable<string> sources = null)
-        {
-            var baseCompiler = new Compiler();
-            string arguments = "Place Python compilation arguments here";
-            return baseCompiler.Compile(arguments);
-        }
-    }
-}
-```
-2. Add the following line in ```enum ProgrammingLanguages```:
-```Python = 4```
-3. Add the following code in class ```CompilerFactory```
-```
-case ProgrammingLanguage.Python:
-    return new PythonCompiler();
-```
-4. Create class ```PythonExecutor ``` in project ```JudgeSystem.Executors``` which implements ```IExecutor``` interface
-```
-using System;
-using System.Threading.Tasks;
-
-using JudgeSystem.Workers.Common;
-
-namespace JudgeSystem.Executors
-{
-    public class PythonExecutor : IExecutor
-    {
-        public Task<ExecutionResult> Execute(string filePath, string input, int timeLimit, int memoryLimit)
-        {
-            var baseExecutor = new Executor();
-            string arguments = "Place Python program execution arguments here";
-            return baseExecutor.Execute(arguments, input, timeLimit, memoryLimit);
-        }
-    }
-}
-```
-5. Add the following code in ```ExecutorFactory```
-```
-case ProgrammingLanguage.Python:
-    return new PythonExecutor();
-```
-6. Add the followong line in ```GlobalConstants ```:
-```public const string PythonFileExtension = ".py";```
-7. Add the following check in method ```GetFileExtension``` in class ```UtilityService``` in project ```JudgeSystem.Services ```
-```
-else if(programmingLanguage == ProgrammingLanguage.Python)
-{
-    return GlobalConstants.PythonFileExtension;
-}
-```
   
 ## Project Architecture
 ![Architecture](Documentation/Architecture.jpg)
@@ -247,5 +129,4 @@ else if(programmingLanguage == ProgrammingLanguage.Python)
   
   ## Authors
 
-- [Nikolay Kostov](https://github.com/NikolayIT)
-- [Vladislav Karamfilov](https://github.com/vladislav-karamfilov)
+- [Philip Shishov](https://github.com/PhilShishov)
