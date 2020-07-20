@@ -26,15 +26,13 @@ Other features:
 ## Documentation
 You can read the documentation [here](https://youtu.be/SEKTWCcHH-k).
 You can watch videos about the platform:
-* In [this](https://youtu.be/SEKTWCcHH-k) video you can watch how I presnet my JudgeSystem.
-* In [this](https://www.youtube.com/embed/FbM2rhNMFVs) video you can watch how users can work in the system.
-* In [this](https://www.youtube.com/watch?v=JjZ8iy4g0K0) video you can watch how administrators can work in the system.
-* In [this](https://www.youtube.com/watch?v=GqCLoFPXkPs&feature=youtu.be) video you can watch how administrators can create lesson, add problem and resource to it, add tests to the problem and finally create contest for this lesson.
-* In [this](https://www.youtube.com/watch?v=pQtEAqjQcIg&feature=youtu.be) video you can watch how users can submit solutions.
-* In [this](https://www.youtube.com/watch?v=DA2GwSgnLx4&feature=youtu.be) video you can watch how administrators can review users' results and submissions.
-* In [this](https://youtu.be/PUJqR24i65E) video you can watch how to test web project in the system. For example, ASP.NET Core web application.
-* In [this](https://youtu.be/2HQStWCF4D0) video you can watch how to create problem which to be tested with automated tests(Unit tests, Integration tests).
-* In [this](https://youtu.be/9V-F4xVxpoc) video you can watch how to add multiple tests for specific problem. How to download tests directly from systems like [INFOS](http://www.math.bas.bg/infos/) and import them in the system.
+* In [this]() video you can watch the presentation of DataGate.
+* In [this]() video you can watch how users use the system.
+* In [this]() video you can watch how legal users can work in the system.
+* In [this]() video you can watch how administrators can work in the system.
+* In [this]() video you can watch how users can create/edit an entity.
+* In [this]() video you can watch how users can upload a document or agreement.
+* In [this]() video you can watch how users can add fees to an agreement.
 
 ## Getting Started
 ### Prerequisites
@@ -42,7 +40,7 @@ You will need the following tools:
 
 * [Visual Studio](https://www.visualstudio.com/downloads/)
 * [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
-* [.NET Core SDK 2.2](https://www.microsoft.com/net/download/dotnet-core/2.2)
+* [.NET Core SDK 3.1.6](https://www.microsoft.com/net/download/dotnet-core/3.1)
 
 ### Setup
 Follow these steps to set up your development environmet:
