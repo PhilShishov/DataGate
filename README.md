@@ -32,13 +32,13 @@ Other features:
 ## Documentation
 You can read the documentation [here](https://youtu.be/SEKTWCcHH-k).
 You can watch videos about the platform:
-* In [this]() video you can watch the presentation of DataGate.
-* In [this]() video you can watch how users use the system.
-* In [this]() video you can watch how legal users can work in the system.
-* In [this]() video you can watch how administrators can work in the system.
-* In [this]() video you can watch how users can create/edit an entity.
-* In [this]() video you can watch how users can upload a document or agreement.
-* In [this]() video you can watch how users can add fees to an agreement.
+* [Presentation of DataGate]()
+* [DataGate guide]()
+* [Legal users guide]()
+* [Adminstrators guide]()
+* [Create/edit a fund]()
+* [Upload a document or agreement]()
+* [Add agreement fees ]()
 
 ## Getting Started
 ### Prerequisites
