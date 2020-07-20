@@ -45,9 +45,11 @@ You will need the following tools:
 * ASP.NET Core 3.1
 * ASP.NET Core MVC
 * Entity Framework Core 3.1
-* GoogleDrive (test purposes)
 * xUnit, MyTested.AspNetCore.Mvc
 * jQuery, Bootstrap, JavaScript
+
+## Hosting
+* GoDaddy WebWiz
 
 ## Third-parties 
 - EPPlus 5.2
