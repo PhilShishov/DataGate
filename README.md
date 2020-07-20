@@ -39,24 +39,15 @@ You can watch videos about the platform:
 * [Upload a document or agreement]()
 * [Add agreement fees ]()
 
-## Technologies
-* .NET Core 3.1
-* ASP.NET Core 3.1
-* ASP.NET Core MVC
-* MSSQL Server, Entity Framework Core 3.1
-* xUnit, MyTested.AspNetCore.Mvc
-* jQuery, Bootstrap, JavaScript
+### :wrench: :hammer: Technologies
+* Backend - C# .NET Core 3.1, MVC, REST
+* Frontend - RAZOR, CSS, JavaScript ES6, jQuery
+* Frameworks - ASP.NET Core 3.1, Bootstrap
+* Database - MSSQL Server, Entity Framework Core 3.1
+* Testing - xUnit, MyTested.AspNetCore.Mvc
+* Project Management - TortoiseGit, GitHub, Azure DevOps, Jira, Trello
+* Hosting and File Storage - GoDaddy WebWiz
 
-## Hosting
-* GoDaddy WebWiz
-
-## Third-parties 
-- EPPlus 5.2
-- itext7 7.1.11
-- Automapper 10.0
-- SendGrid 9.18
-
-  
 ![ArchitectureProject](Documentation/ArchitectureProject.jpg)
 
 ## Functionality
