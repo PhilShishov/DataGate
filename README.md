@@ -3,14 +3,14 @@ A private web application for managing more than 300 funds. It is developed to b
 in order to improve the efficiency and automate some parts of Risk and Legal department.
 
 
-## Try it now
+## Try it with guest account
 https://pharusdatagate.com/ <br />
 Username: datagate_guest <br />
 Password: datagate_guest <br />
 
 [![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/DataGate-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=1&branchName=master)
 
-## Description
+## :pencil2: Description
 The application can display NAV reports on chosen time period and 
 detailed information about the UCITS and AIF handled by the management company such as: 
 * General related entity view
@@ -115,7 +115,7 @@ You can watch videos about the platform:
   - Each lecture can be one of the tree types(Homework, Exercise or Exam)
   - Lecture can be added with some password which is really convenient for exam lecture
   
-  ## :dash: To be released
+  ## :soon: To be released
   
   ## Authors
 
