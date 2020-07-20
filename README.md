@@ -28,7 +28,7 @@ Other features:
  * Upload documents and agreements
  
 
-## Documentation
+## :page_facing_up: Documentation
 You can read the documentation [here](https://youtu.be/SEKTWCcHH-k).
 You can watch videos about the platform:
 * [Presentation of DataGate]()
@@ -116,7 +116,3 @@ You can watch videos about the platform:
   - Lecture can be added with some password which is really convenient for exam lecture
   
   ## :soon: To be released
-  
-  ## Authors
-
-- [Philip Shishov](https://github.com/PhilShishov)
