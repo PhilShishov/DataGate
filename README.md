@@ -4,9 +4,9 @@ in order to improve the efficiency and automate some parts of Risk and Legal dep
 
 
 ## Try it now
-https://pharusdatagate.com/
-Username: datagate_guest
-Password: datagate_guest
+https://pharusdatagate.com/ <br />
+Username: datagate_guest <br />
+Password: datagate_guest <br />
 
 [![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/DataGate-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=1&branchName=master)
 
