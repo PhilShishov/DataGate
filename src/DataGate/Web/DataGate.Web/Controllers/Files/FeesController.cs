@@ -7,14 +7,14 @@
     using DataGate.Web.InputModels.Files;
     using Microsoft.AspNetCore.Mvc;
 
-    public class FeesController : BaseController
-    {
-        [Route("fees/{fileId}")]
-        public async Task<IActionResult> Index(UploadOnSuccessDto dto)
-        {
-            var viewModel = AutoMapperConfig.MapperInstance.Map<FeesInputModel>(dto);
+    //public class FeesController : BaseController
+    //{
+    //    [Route("fees/{fileId}")]
+    //    public async Task<IActionResult> Index(UploadOnSuccessDto dto)
+    //    {
+    //        var viewModel = AutoMapperConfig.MapperInstance.Map<FeesInputModel>(dto);
 
-            return this.View(viewModel);
-        }
-    }
+    //        return this.View(viewModel);
+    //    }
+    //}
 }

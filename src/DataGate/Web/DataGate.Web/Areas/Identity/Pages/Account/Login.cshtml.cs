@@ -9,10 +9,8 @@
     using DataGate.Common;
     using DataGate.Data.Models.Users;
     using DataGate.Web.Infrastructure.Attributes.Validation;
-    using DataGate.Web.Infrastructure.Filters;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Cors;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;

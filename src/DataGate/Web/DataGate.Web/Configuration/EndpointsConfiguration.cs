@@ -1,4 +1,4 @@
-namespace DataGate.Web.Configuration
+﻿namespace DataGate.Web.Configuration
 {
     using Microsoft.AspNetCore.Builder;
 
