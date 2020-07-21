@@ -1,3 +1,6 @@
+![Project Architecture](Documentation/Resources/Project Architecture.JPG)
+
+
 # DataGate Platform
 A private web application for managing more than 300 funds. It is developed to be used by Pharus Management Lux S.A 
 in order to improve the efficiency and automate some parts of Risk and Legal department.
@@ -50,8 +53,6 @@ You can watch videos about the platform:
 * DevOps - Azure Pipelines
 * Hosting and File Storage - GoDaddy WebWiz
 * UI/UX design - Photoshop, HTML/CSS, Bootstrap
-
-![ScopeOverview](Documentation/Resources/ScopeOverview.JPG)
 
 ## Functionality
 ### Guest Users
