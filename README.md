@@ -1,6 +1,3 @@
-![Project-Architecture](Documentation/Resources/Project-Architecture.JPG)
-
-
 # DataGate Platform
 A private web application for managing more than 300 funds. It is developed to be used by Pharus Management Lux S.A 
 in order to improve the efficiency and automate some parts of Risk and Legal department.
@@ -30,6 +27,17 @@ Other features:
  * Excel and PDF extraction
  * Upload documents and agreements
  
+ ### :hammer: Technologies
+* Backend - C# .NET Core 3.1, MVC, REST
+* Frontend - RAZOR, CSS, JavaScript ES6, jQuery
+* Frameworks - ASP.NET Core 3.1, Bootstrap
+* Database - MSSQL Server, Entity Framework Core 3.1
+* Testing - xUnit, MyTested.AspNetCore.Mvc
+* Project Management - Jira, Trello
+* Version Control - Git, TortoiseGit, GitHub
+* DevOps - Azure Pipelines
+* Hosting and File Storage - GoDaddy WebWiz
+* UI/UX design - Photoshop, HTML/CSS, Bootstrap 
 
 ## :page_facing_up: Documentation
 You can read the documentation [here]().
@@ -42,17 +50,10 @@ You can watch videos about the platform:
 * [Upload a document or agreement]()
 * [Add agreement fees ]()
 
-### :hammer: Technologies
-* Backend - C# .NET Core 3.1, MVC, REST
-* Frontend - RAZOR, CSS, JavaScript ES6, jQuery
-* Frameworks - ASP.NET Core 3.1, Bootstrap
-* Database - MSSQL Server, Entity Framework Core 3.1
-* Testing - xUnit, MyTested.AspNetCore.Mvc
-* Project Management - Jira, Trello
-* Version Control - Git, TortoiseGit, GitHub
-* DevOps - Azure Pipelines
-* Hosting and File Storage - GoDaddy WebWiz
-* UI/UX design - Photoshop, HTML/CSS, Bootstrap
+![Project-Architecture](Documentation/Resources/Project-Architecture.JPG)
+![Application-Architecture](Documentation/Resources/Application-Architecture.JPG)
+![Application-Structure](Documentation/Resources/Application-Structure.JPG)
+![ResponsiveDesign](Documentation/Resources/ResponsiveDesign.JPG)
 
 ## Functionality
 ### Guest Users
