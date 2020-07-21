@@ -5,7 +5,7 @@ in order to improve the efficiency and automate some parts of Risk and Legal dep
 ## Table of contents
 * [General Info](#general-info)
 * [Guest Account](#guest-account)
-* [:hammer: Technologies](#technologies)
+* [Technologies](#technologies)
 * [Documentation](#documentation)
 * [Features](#features)
 * [Status](#status)
@@ -37,7 +37,7 @@ https://pharusdatagate.com/ <br />
 Username: datagate_guest <br />
 Password: datagate_guest <br />
  
- ## :hammer: Technologies
+ ## Technologies :hammer:
 * Backend - C# .NET Core 3.1, MVC, REST
 * Frontend - RAZOR, CSS, JavaScript ES6, jQuery
 * Frameworks - ASP.NET Core 3.1, Bootstrap
