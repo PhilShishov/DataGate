@@ -138,7 +138,7 @@
   <data name="Accept" xml:space="preserve">
     <value>Accetta</value>
   </data>
-  <data name="Access denied" xml:space="preserve">
+  <data name="Access Denied" xml:space="preserve">
     <value>Accesso negato</value>
   </data>
   <data name="Actions" xml:space="preserve">
@@ -378,6 +378,9 @@
   <data name="Please check your email to reset your password." xml:space="preserve">
     <value>Controlla la tua posta per il reset della password.</value>
   </data>
+  <data name="Please contact your company administrator." xml:space="preserve">
+    <value>Si prega di contattare l'amministratore dell'azienda.</value>
+  </data>
   <data name="Please modify your search criteria." xml:space="preserve">
     <value>Modifica il criterio di ricerca</value>
   </data>
@@ -525,8 +528,8 @@
   <data name="Welcome To" xml:space="preserve">
     <value>Benvenuto in</value>
   </data>
-  <data name="You don't have access to this resources." xml:space="preserve">
-    <value>Non hai accesso a questa sezione.</value>
+  <data name="You don't have access to this resource." xml:space="preserve">
+    <value>Non hai accesso a questa risorsa.</value>
   </data>
   <data name="You have successfully logged out of Pharus DataGate." xml:space="preserve">
     <value>Disconnessione riuscita da Pharus DataGate.</value>

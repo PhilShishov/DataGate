@@ -13,7 +13,7 @@
                 {
                     options.LoginPath = "/Account/Login";
                     options.LogoutPath = "/Account/Logout";
-                    options.AccessDeniedPath = "/Account/AccessDenied";
+                    options.AccessDeniedPath = "/Home/AccessDenied";
                 })
                 .Configure<CookiePolicyOptions>(options =>
                 {

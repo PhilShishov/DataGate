@@ -21,6 +21,8 @@
             return this.View();
         }
 
+        public IActionResult AccessDenied() => this.View();
+
         public IActionResult SetLanguage(string culture, string returnUrl)
         {
             string cookie = CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture));
