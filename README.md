@@ -84,4 +84,4 @@ You can watch videos about the platform:
   [![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/DataGate-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=1&branchName=master)
   
   ## Contact
-Created by [@philshishov](https://github.com/PhilShishov) - feel free to contact me!
+Created by [Philip Shishov](https://github.com/PhilShishov) - feel free to contact me!
