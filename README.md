@@ -12,8 +12,6 @@ in order to improve the efficiency and automate some parts of Risk and Legal dep
 
 ## General Info
 
-[![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/DataGate-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=1&branchName=master)
-
 The application can display NAV reports on chosen time period and 
 detailed information about the UCITS and AIF handled by the management company such as: 
 * General related entity view
@@ -118,3 +116,10 @@ You can watch videos about the platform:
   ### Lectures
   - Each lecture can be one of the tree types(Homework, Exercise or Exam)
   - Lecture can be added with some password which is really convenient for exam lecture
+  
+  ## Status
+  [![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/DataGate-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=1&branchName=master)
+First release of project: 22.06.2020
+  
+  ## Contact
+Created by [@philshishov](https://github.com/PhilShishov) - feel free to contact me!
