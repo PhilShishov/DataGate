@@ -47,15 +47,14 @@ Password: datagate_guest <br />
 
 ## Functionality 
 ### Logged in Users
- - Manage account(GDPR) - email, password, two-factor, personal data
- - Consult global libraries and agreements
+ - Consult libraries and agreements
  - Consult particular view - sub entities, timeseries, documents, agreements, timelines, fees
  - View active and unactive entities
  - Consult NAV reports
  - Update views by chosen date
  - Choose and sort header columns for large table views
  - Perform a global search for a share class
- - Extract view tables as PDF and Excel 
+ - Extract view tables as PDF and Excel
  ### Users in role "Legal"
   - All the functionalities of logged in user
   - Upload and delete documents, agreements and fees
