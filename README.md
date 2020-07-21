@@ -29,7 +29,7 @@ Other features:
  
 
 ## :page_facing_up: Documentation
-You can read the documentation [here](https://youtu.be/SEKTWCcHH-k).
+You can read the documentation [here]().
 You can watch videos about the platform:
 * [Presentation of DataGate]()
 * [DataGate guide]()
@@ -39,7 +39,7 @@ You can watch videos about the platform:
 * [Upload a document or agreement]()
 * [Add agreement fees ]()
 
-### :wrench: :hammer: Technologies
+### :hammer: Technologies
 * Backend - C# .NET Core 3.1, MVC, REST
 * Frontend - RAZOR, CSS, JavaScript ES6, jQuery
 * Frameworks - ASP.NET Core 3.1, Bootstrap
