@@ -1,8 +1,9 @@
-# ![Logo_Pharus](Documentation/Resources/Logo_Pharus_small.jpg)  DataGate Platform - https://pharusdatagate.com/
+# DataGate Platform 
+https://pharusdatagate.com/
 
 A private web application for managing more than 300 funds. <br />
-It is developed to be used by Pharus Management Lux S.A  <br />
-in order to improve the efficiency and automate some parts of Risk and Legal department.
+It is developed to be used by Pharus Management Lux S.A in order to <br />
+improve the efficiency and automate some parts of Risk and Legal department.
 
 
 ## Table of contents
@@ -16,7 +17,7 @@ in order to improve the efficiency and automate some parts of Risk and Legal dep
 
 ## General Info
 
-The application can display NAV reports on chosen time period and 
+The application can display NAV reports on chosen time period and <br />
 detailed information about the UCITS and AIF handled by the management company such as: 
 * General related entity view
 * Sub entities
