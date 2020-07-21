@@ -5,23 +5,27 @@
         <table class="table table-bordered table-hover tbl-agreements table-view-pharus">
             <thead>
                 <tr>
-                    <th >
+                    <th>
                         @SharedLocalizer["File Description"]
                     </th>
-                    <th >
+                    <th>
                         @SharedLocalizer["Contract Date"]
                     </th>
-                    <th >
+                    <th>
                         @SharedLocalizer["Activation Date"]
                     </th>
-                    <th >
+                    <th>
                         @SharedLocalizer["Expiration Date"]
                     </th>
-                    <th >
+                    <th>
                         @SharedLocalizer["File Name"]
                     </th>
-                    <th >
-                    </th>
+                    @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.IsInRole(GlobalConstants.LegalRoleName))
+                    {
+                        <th>
+                            @SharedLocalizer["Actions"]
+                        </th>
+                    }
                 </tr>
             </thead>
             <tbody>
@@ -52,19 +56,22 @@
                                 @Html.Encode(@System.IO.Path.GetFileNameWithoutExtension(agreement.Name))
                             </button>
                         </td>
-                        <td class="p-1 text-center">
-                            @*<button class="btn btn-pharus btn-sm mr-1"
-                                        type="submit"
-                                        asp-area=""
-                                        asp-route="fees"
-                                        asp-route-fileId="@agreement.FileId">
-                                    @SharedLocalizer["FEES"]
+                        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.IsInRole(GlobalConstants.LegalRoleName))
+                        {
+                            <td class="p-1 text-center">
+                                @*<button class="btn btn-pharus btn-sm mr-1"
+                                            type="submit"
+                                            asp-area=""
+                                            asp-route="fees"
+                                            asp-route-fileId="@agreement.FileId">
+                                        @SharedLocalizer["FEES"]
+                                    </button>
+                                    |*@
+                                <button type="button" class="btn btn-pharus btn-sm mx-1 btn-delete">
+                                    @SharedLocalizer["DELETE"]
                                 </button>
-                                |*@
-                            <button type="button" class="btn btn-pharus btn-sm mx-1 btn-delete">
-                                @SharedLocalizer["DELETE"]
-                            </button>
-                        </td>
+                            </td>
+                        }
                     </tr>
                 }
             </tbody>

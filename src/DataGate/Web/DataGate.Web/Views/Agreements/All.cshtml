@@ -69,7 +69,12 @@
                             <th class="th-padding-fxt">
                                 @SharedLocalizer["File Name"]
                             </th>
-                            <th></th>
+                            @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.IsInRole(GlobalConstants.LegalRoleName))
+                            {
+                                <th>
+                                    @SharedLocalizer["File Name"]
+                                </th>
+                            }
                         </tr>
                     </thead>
                     <tbody>
@@ -102,13 +107,16 @@
                                             value="@agreement.Name">
                                         @Html.Encode(@System.IO.Path.GetFileNameWithoutExtension(agreement.Name))
                                     </button>
+                                </td>
 
-                                </td>
-                                <td class="p-1 text-center">
-                                    <button type="button" class="btn btn-pharus btn-sm mr-1 btn-delete">
-                                        @SharedLocalizer["Delete"]
-                                    </button>
-                                </td>
+                                @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.IsInRole(GlobalConstants.LegalRoleName))
+                                {
+                                    <td class="p-1 text-center">
+                                        <button type="button" class="btn btn-pharus btn-sm mr-1 btn-delete">
+                                            @SharedLocalizer["Delete"]
+                                        </button>
+                                    </td>
+                                }
                             </tr>
                         }
                     </tbody>

@@ -5,23 +5,27 @@
         <table class="table table-bordered table-hover tbl-documents table-view-pharus">
             <thead>
                 <tr>
-                    <th >
+                    <th>
                         @SharedLocalizer["File Description"]
                     </th>
-                    <th >
+                    <th>
                         @SharedLocalizer["Valid From:"]
                     </th>
-                    <th >
+                    <th>
                         @SharedLocalizer["Valid Until:"]
                     </th>
-                    <th >
+                    <th>
                         @SharedLocalizer["File Name"]
                     </th>
-                    <th >
+                    <th>
                         @SharedLocalizer["File Type"]
                     </th>
-                    <th >
-                    </th>
+                    @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.IsInRole(GlobalConstants.LegalRoleName))
+                    {
+                        <th>
+                            @SharedLocalizer["Actions"]
+                        </th>
+                    }
                 </tr>
             </thead>
             <tbody>
@@ -52,11 +56,14 @@
                         <td class="p-1">
                             @document.Type
                         </td>
-                        <td class="p-1 text-center">
-                            <button type="button" class="btn btn-pharus btn-sm mr-1 btn-delete">
-                                @SharedLocalizer["Delete"]
-                            </button>
-                        </td>
+                        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.IsInRole(GlobalConstants.LegalRoleName))
+                        {
+                            <td class="p-1 text-center">
+                                <button type="button" class="btn btn-pharus btn-sm mr-1 btn-delete">
+                                    @SharedLocalizer["Delete"]
+                                </button>
+                            </td>
+                        }
                     </tr>
                 }
             </tbody>

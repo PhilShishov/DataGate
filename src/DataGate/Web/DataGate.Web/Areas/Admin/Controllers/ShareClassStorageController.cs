@@ -12,7 +12,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     [Area("Admin")]
-    [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+    [Authorize(Roles = GlobalConstants.AdministratorRoleName + "," + GlobalConstants.LegalRoleName)]
     public class ShareClassStorageController : BaseController
     {
         private readonly IShareClassStorageService service;
