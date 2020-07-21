@@ -12,7 +12,7 @@ in order to improve the efficiency and automate some parts of Risk and Legal dep
 * [Inspiration](#inspiration)
 * [Contact](#contact)
 
-## :pencil2: General Info
+## General Info
 
 [![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/DataGate-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=1&branchName=master)
 
