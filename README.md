@@ -61,23 +61,6 @@ Password: datagate_guest <br />
  - Create, edit and delete user
  - Have access to view users panel
 
-## Brief description of main functionalities
-### Student profile
- - When student profile is added to the database, activation key is automatically generated, that is sent to the student's email
- - When the user enter this activation key, he becomes student and role "Student" is added to his roles
- - In this way he obtain full name, student email, number in class, name of class and some other privileges
- 
- ### Submissions
-  - If there is compile time error, the user can see what is the error
-  - If solution is compiled successfully, all tests for this problem are executed over this solution
-  - Execution results of tests are: (Success, Run time error, Memory limit, Time limit).
-  - User can receive points in range 0 to problem's max points for his solution
-  - The system finds user's best solution when process contests' results
-  
-  ### Lectures
-  - Each lecture can be one of the tree types(Homework, Exercise or Exam)
-  - Lecture can be added with some password which is really convenient for exam lecture
-
 ## Documentation
 You can read the documentation [here]().
 You can watch videos about the platform:
