@@ -2,11 +2,15 @@
 A private web application for managing more than 300 funds. It is developed to be used by Pharus Management Lux S.A 
 in order to improve the efficiency and automate some parts of Risk and Legal department.
 
-[![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/DataGate-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=2&branchName=master)
 
-[![Build Status](https://dev.azure.com/nasko01vasilev/JudgeSystem/_apis/build/status/JudgeSystem-CI?branchName=master)](https://dev.azure.com/nasko01vasilev/JudgeSystem/_build/latest?definitionId=2&branchName=master)
+## Guest account
+https://pharusdatagate.com/ <br />
+Username: datagate_guest <br />
+Password: datagate_guest <br />
 
-## Description
+[![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/DataGate-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=1&branchName=master)
+
+## :pencil2: Description
 The application can display NAV reports on chosen time period and 
 detailed information about the UCITS and AIF handled by the management company such as: 
 * General related entity view
@@ -21,175 +25,33 @@ detailed information about the UCITS and AIF handled by the management company s
 Other features: 
  * Create and edit fund
  * Excel and PDF extraction
- * Upload documents and agreements 
+ * Upload documents and agreements
+ 
 
-## Documentation
-You can read the documentation [here](https://youtu.be/SEKTWCcHH-k).
+## :page_facing_up: Documentation
+You can read the documentation [here]().
 You can watch videos about the platform:
-* In [this](https://youtu.be/SEKTWCcHH-k) video you can watch how I presnet my JudgeSystem.
-* In [this](https://www.youtube.com/embed/FbM2rhNMFVs) video you can watch how users can work in the system.
-* In [this](https://www.youtube.com/watch?v=JjZ8iy4g0K0) video you can watch how administrators can work in the system.
-* In [this](https://www.youtube.com/watch?v=GqCLoFPXkPs&feature=youtu.be) video you can watch how administrators can create lesson, add problem and resource to it, add tests to the problem and finally create contest for this lesson.
-* In [this](https://www.youtube.com/watch?v=pQtEAqjQcIg&feature=youtu.be) video you can watch how users can submit solutions.
-* In [this](https://www.youtube.com/watch?v=DA2GwSgnLx4&feature=youtu.be) video you can watch how administrators can review users' results and submissions.
-* In [this](https://youtu.be/PUJqR24i65E) video you can watch how to test web project in the system. For example, ASP.NET Core web application.
-* In [this](https://youtu.be/2HQStWCF4D0) video you can watch how to create problem which to be tested with automated tests(Unit tests, Integration tests).
-* In [this](https://youtu.be/9V-F4xVxpoc) video you can watch how to add multiple tests for specific problem. How to download tests directly from systems like [INFOS](http://www.math.bas.bg/infos/) and import them in the system.
+* [Presentation of DataGate]()
+* [DataGate guide]()
+* [Legal users guide]()
+* [Adminstrators guide]()
+* [Create/edit a fund]()
+* [Upload a document or agreement]()
+* [Add agreement fees ]()
 
-## Getting Started
-### Prerequisites
-You will need the following tools:
+### :hammer: Technologies
+* Backend - C# .NET Core 3.1, MVC, REST
+* Frontend - RAZOR, CSS, JavaScript ES6, jQuery
+* Frameworks - ASP.NET Core 3.1, Bootstrap
+* Database - MSSQL Server, Entity Framework Core 3.1
+* Testing - xUnit, MyTested.AspNetCore.Mvc
+* Project Management - Jira, Trello
+* Version Control - Git, TortoiseGit, GitHub
+* DevOps - Azure Pipelines
+* Hosting and File Storage - GoDaddy WebWiz
+* UI/UX design - Photoshop, HTML/CSS, Bootstrap
 
-* [Visual Studio](https://www.visualstudio.com/downloads/)
-* [Microsoft SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
-* [.NET Core SDK 2.2](https://www.microsoft.com/net/download/dotnet-core/2.2)
-
-### Setup
-Follow these steps to set up your development environmet:
-
-  1. Clone the repository
-  2. Create your own [Send Grid](https://sendgrid.com/) account or use existing one. Go to Settings/Api Keys and create new Api Key and then copy ApiKey Name and API Key ID.
-  4. If you have some account in [Microsoft Azure](https://azure.microsoft.com/en-us/) create storge account. 
-  If you do not want to create storage account in azure ```open StartUp.cs and commnent method ConfigureAzureBlobStorage```.
-  You just will not be able to upload files.
-  5. If you want to submit java code, install [JDK](https://www.microsoft.com/net/download/dotnet-core/2.2)
-  6. Open JudgeSystem.sln file, right click on JudgeSystem.Web -> Add -> New Item. In the search bar search for `app settings` and then add ```App Settings File```. Replce its content with the following one and then replcae each value which starts with ```your```.
-     ```
-     {
-        "ConnectionStrings": {
-          "DefaultConnection": "Server=your server name;Database=JudgeSystem;Trusted_Connection=True;MultipleActiveResultSets=true"
-        },
-        "Logging": {
-            "IncludeScopes": false,
-             "LogLevel": {
-                  "Default": "Warning"
-             }
-          },
-          "SendGrid": {
-            "SendGridKey": "your API Key ID from SendGrid",
-            "SendGridUser": "your ApiKey Name from Send Grid"
-          },
-          "AzureBlob": {
-              "StorageConnectionString": "azure storage connection string",
-              "AccountKey": " your azure storage api key",
-              "AccountName": "yourazure storage acount name",
-              "ContainerName": "your azure storage container name"
-          },
-          "Email": {
-            "Name": "your first name",
-            "Surname": "your last name",
-            "Username": "your email"
-          },
-          "App": {
-            "Name": "Judge System"
-          },
-          "Admin": {
-            "Username": "your admin name",
-            "Password": "your admin password",
-            "Email": "your admin email",
-            "Name": "your admin first name",
-            "Surname": "your admin last name"
-          },
-          "Compilers": {
-            "Java": "your path to javac.exe and java.exe. For exmaple C:\\Program Files\\Java\\jdk1.8.0_181\\bin",
-            "CPlusPlus": "C:\\Users\\Nasko\\Desktop\\JudgeSystem\\Web\\JudgeSystem.Web\\wwwroot\\Compilers\\MinGW\\bin"
-          }
-      } 
-       ```
-
-  7. Open package manager console, choose as Defaut project: JudgeSystem.Data and run the following command: ```update-database```
-  8. Press Ctrl + F5
-
-## Technologies
-* .NET Core 2.2
-* ASP.NET Core 2.2
-* ASP.NET Core MVC
-* Entity Framework Core 2.2
-* GoogleDrive (test purposes)
-* xUnit, MyTested.AspNetCore.Mvc
-* jQuery, Bootstrap, JavaScript
-* Automapper, SendGrid
-
-## Third-parties 
-- Chosen, DataTable
-- Java 11 – compiler javac 11.0.4
-- C++ - compiler g++ (MinGW GCC-8.2.0-3) 8.2.0
-
-## Add new programming language
-Follow this steps to add Python as another option for programming language
-1. Create class ```PythonCompiler``` in project ```JudgeSystem.Comilers``` which implements ```ICompiler``` interface
-```
-using System.Collections.Generic;
-
-using JudgeSystem.Workers.Common;
-
-namespace JudgeSystem.Compilers
-{
-    public class PythonCompiler : ICompiler
-    {
-        public CompileResult Compile(string fileName, string workingDirectory, IEnumerable<string> sources = null)
-        {
-            var baseCompiler = new Compiler();
-            string arguments = "Place Python compilation arguments here";
-            return baseCompiler.Compile(arguments);
-        }
-    }
-}
-```
-2. Add the following line in ```enum ProgrammingLanguages```:
-```Python = 4```
-3. Add the following code in class ```CompilerFactory```
-```
-case ProgrammingLanguage.Python:
-    return new PythonCompiler();
-```
-4. Create class ```PythonExecutor ``` in project ```JudgeSystem.Executors``` which implements ```IExecutor``` interface
-```
-using System;
-using System.Threading.Tasks;
-
-using JudgeSystem.Workers.Common;
-
-namespace JudgeSystem.Executors
-{
-    public class PythonExecutor : IExecutor
-    {
-        public Task<ExecutionResult> Execute(string filePath, string input, int timeLimit, int memoryLimit)
-        {
-            var baseExecutor = new Executor();
-            string arguments = "Place Python program execution arguments here";
-            return baseExecutor.Execute(arguments, input, timeLimit, memoryLimit);
-        }
-    }
-}
-```
-5. Add the following code in ```ExecutorFactory```
-```
-case ProgrammingLanguage.Python:
-    return new PythonExecutor();
-```
-6. Add the followong line in ```GlobalConstants ```:
-```public const string PythonFileExtension = ".py";```
-7. Add the following check in method ```GetFileExtension``` in class ```UtilityService``` in project ```JudgeSystem.Services ```
-```
-else if(programmingLanguage == ProgrammingLanguage.Python)
-{
-    return GlobalConstants.PythonFileExtension;
-}
-```
-  
-## Project Architecture
-![Architecture](Documentation/Architecture.jpg)
-* Data access layer - works with the database using Entity Franework Core 2.2, this layer is independent from the others. It consists of two other layers:
-  * Domain Layer - contains all entities, enums. Classes which represent tables in the database
-  * Persistence Layer - contains database context, all configurations, migrations and data seeding logic. It is responsible for data persistance. Here is implmented Repository desing pattern which help us to accomplish more abstraction between data access logic and business logic. As a result we can our database provider without making so many changes to the code. For example we can chnage MS SQL with MongoDB without changing some business logic.
-* Business Layer - main logic of the appliaction. It depends only on Data access layer but it uses repositories to access data so the coupling is very loose. It can be reuced in multiple appliactions. For example if we want to create some mobile version of the system, can reuse logic in this layer and we should also implement the new user intreface.
-* Application Layer - consists of those elements that are specific to this application. It do the binding between the application and your business layer. It depends on business layer. It uses specific technologies and conceptions like: ASP.NET CORE, Middlewares and others. In our situation it's main functionality is to receive the request and send response to the clients.
-* Presentation Layer -  contains all presentation logic. It used Razor view engine to generate html and also use technologies like: JavaScript, jQuery, AJAX.
-* Common Layer - contains all the logic which is shared in the application. Contains global constants, custom exceptions and extension methods.
-* Workers - .NET Standard class libraries which contains some more complicated logic. They are used by the business layer in order to keep the code simple there. The most compilacted logic in the appllication is related to complication and execution of submissions. So this logic is implemented here in two differnet projects.
-* Tests - the system is tested with a lot of automated tests - unit tests and integration tests. We use libraries like Moq, xUnit and Microsoft.EntityFrameworkCore.InMemory to the all the logic in business layer.
-* Code quality - project follows SOLID principles and all other principles of high quality code. Also there are ```.editorconfig``` file in which are defained all code styles and conventions in order the code of the project to be consistent.
+![ArchitectureProject](Documentation/ArchitectureProject.jpg)
 
 ## Functionality
 ### Guest Users
@@ -247,7 +109,4 @@ else if(programmingLanguage == ProgrammingLanguage.Python)
   - Each lecture can be one of the tree types(Homework, Exercise or Exam)
   - Lecture can be added with some password which is really convenient for exam lecture
   
-  ## Authors
-
-- [Nikolay Kostov](https://github.com/NikolayIT)
-- [Vladislav Karamfilov](https://github.com/vladislav-karamfilov)
+  ## :soon: To be released
