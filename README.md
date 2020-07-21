@@ -51,7 +51,7 @@ You can watch videos about the platform:
 * Hosting and File Storage - GoDaddy WebWiz
 * UI/UX design - Photoshop, HTML/CSS, Bootstrap
 
-![Project Architecture](./Documentation/Resources/Project Architecture.jpg)
+![ScopeOverview](Documentation/Resources/ScopeOverview.JPG)
 
 ## Functionality
 ### Guest Users
