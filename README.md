@@ -5,11 +5,9 @@ in order to improve the efficiency and automate some parts of Risk and Legal dep
 ## Table of contents
 * [General Info](#general-info)
 * [Guest Account](#guest-account)
-* [Technologies :hammer:](#technologies)
+* [Technologies](#technologies)
 * [Documentation](#documentation)
-* [Features](#features)
 * [Status](#status)
-* [Inspiration](#inspiration)
 * [Contact](#contact)
 
 ## General Info
@@ -37,7 +35,7 @@ https://pharusdatagate.com/ <br />
 Username: datagate_guest <br />
 Password: datagate_guest <br />
  
- ## Technologies :hammer:
+ ## Technologies
 * Backend - C# .NET Core 3.1, MVC, REST
 * Frontend - RAZOR, CSS, JavaScript ES6, jQuery
 * Frameworks - ASP.NET Core 3.1, Bootstrap
@@ -49,7 +47,7 @@ Password: datagate_guest <br />
 * Hosting and File Storage - GoDaddy WebWiz
 * UI/UX design - Photoshop, HTML/CSS, Bootstrap 
 
-## :page_facing_up: Documentation
+## Documentation
 You can read the documentation [here]().
 You can watch videos about the platform:
 * [Presentation of DataGate]()
@@ -120,5 +118,3 @@ You can watch videos about the platform:
   ### Lectures
   - Each lecture can be one of the tree types(Homework, Exercise or Exam)
   - Lecture can be added with some password which is really convenient for exam lecture
-  
-  ## :soon: To be released
