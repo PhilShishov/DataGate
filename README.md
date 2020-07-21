@@ -46,7 +46,7 @@ You can watch videos about the platform:
 * Database - MSSQL Server, Entity Framework Core 3.1
 * Testing - xUnit, MyTested.AspNetCore.Mvc
 * Project Management - Jira, Trello
-* Version Control - TortoiseGit, GitHub
+* Version Control - Git, TortoiseGit, GitHub
 * DevOps - Azure Pipelines
 * Hosting and File Storage - GoDaddy WebWiz
 * UI/UX design - Photoshop, HTML/CSS, Bootstrap
