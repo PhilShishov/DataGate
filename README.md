@@ -1,4 +1,5 @@
 # DataGate Platform - https://pharusdatagate.com/
+![Logo_Pharus](Documentation/Resources/Logo_Pharus.jpg)
 A private web application for managing more than 300 funds. It is developed to be used by Pharus Management Lux S.A 
 in order to improve the efficiency and automate some parts of Risk and Legal department.
 
