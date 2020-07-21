@@ -78,7 +78,7 @@
         public const string GuestRoleName = "Guest";
 
         // Email
-        public const string ConfirmEmailSubject = "PHARUS DATAGATE: Confirm your email";
+        public const string ConfirmEmailSubject = "Action required: Confirm your email";
         public const string EmailConfirmationMessage = "This is an automatic email sent by Pharus DataGate to authorize your account with chosen username and password.<br>" +
                                                        "Please confirm your account by <a href='{0}'>clicking here</a>.";
 
