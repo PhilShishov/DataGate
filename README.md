@@ -1,5 +1,5 @@
 # DataGate Platform 
-https://pharusdatagate.com/
+https://pharusdatagate.com/ <br />
 ![Logo_Pharus](Documentation/Resources/Logo_Pharus_small.jpg)  
 
 A private web application for managing more than 300 funds. <br />
