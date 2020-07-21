@@ -2,15 +2,20 @@
 A private web application for managing more than 300 funds. It is developed to be used by Pharus Management Lux S.A 
 in order to improve the efficiency and automate some parts of Risk and Legal department.
 
+## Table of contents
+* [General Info](#general-info)
+* [Guest Account](#guest-account)
+* [Technologies](#technologies)
+* [Documentation](#documentation)
+* [Features](#features)
+* [Status](#status)
+* [Inspiration](#inspiration)
+* [Contact](#contact)
 
-## Guest account
-https://pharusdatagate.com/ <br />
-Username: datagate_guest <br />
-Password: datagate_guest <br />
+## :pencil2: General Info
 
 [![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/DataGate-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=1&branchName=master)
 
-## :pencil2: Description
 The application can display NAV reports on chosen time period and 
 detailed information about the UCITS and AIF handled by the management company such as: 
 * General related entity view
@@ -26,6 +31,11 @@ Other features:
  * Create and edit fund
  * Excel and PDF extraction
  * Upload documents and agreements
+ 
+ ## Guest Account
+https://pharusdatagate.com/ <br />
+Username: datagate_guest <br />
+Password: datagate_guest <br />
  
  ### :hammer: Technologies
 * Backend - C# .NET Core 3.1, MVC, REST
