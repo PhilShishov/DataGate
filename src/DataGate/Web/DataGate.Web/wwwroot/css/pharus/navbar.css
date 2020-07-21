@@ -149,3 +149,17 @@
     opacity: 1;
     right: 1%;
 }
+
+.wrapper-language-bar {
+    margin-left: 110px !important;
+}
+
+    .wrapper-language-bar a {
+        color: white;
+    }
+
+    .wrapper-language-bar img {
+        width: 30px;
+        height: 30px;
+        margin-left: 6px;
+    }
