@@ -12,7 +12,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     [Area("Admin")]
-    [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+    [Authorize(Roles = GlobalConstants.AdministratorRoleName + "," + GlobalConstants.LegalRoleName)]
     public class SubFundStorageController : BaseController
     {
         private readonly ISubFundStorageService service;

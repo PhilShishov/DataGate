@@ -80,7 +80,7 @@
 
 <div class="vertical mx-3"></div>
 
-@if (this.User.IsInRole("Admin"))
+@if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.IsInRole(GlobalConstants.LegalRoleName))
 {
     <div>
         <a asp-area="Admin"

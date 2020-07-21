@@ -69,28 +69,29 @@
                 @SharedLocalizer["ALL"]
             </a>
         </div>
-        <div>
-            <button type="button"
-                    id="btn-upload-document"
-                    class="btn btn-pharus btn-sm mb-2"
-                    data-toggle="ajax-modal"
-                    data-target="#upload-document">
-                @SharedLocalizer["Upload Document"]
-            </button>
-        </div>
-
-        <div class="mx-2">
-            <button type="button"
-                    id="btn-upload-agreement"
-                    class="btn btn-pharus btn-sm mb-2"
-                    data-toggle="ajax-modal"
-                    data-target="#upload-agreement">
-                @SharedLocalizer["Upload Agreement"]
-            </button>
-        </div>
-
-        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.IsInRole(GlobalConstants.LegalRoleName))
         {
+            <div>
+                <button type="button"
+                        id="btn-upload-document"
+                        class="btn btn-pharus btn-sm mb-2"
+                        data-toggle="ajax-modal"
+                        data-target="#upload-document">
+                    @SharedLocalizer["Upload Document"]
+                </button>
+            </div>
+
+            <div class="mx-2">
+                <button type="button"
+                        id="btn-upload-agreement"
+                        class="btn btn-pharus btn-sm mb-2"
+                        data-toggle="ajax-modal"
+                        data-target="#upload-agreement">
+                    @SharedLocalizer["Upload Agreement"]
+                </button>
+            </div>
+
+
             <div>
                 <a asp-area="Admin"
                    asp-route="@routeEdit"
