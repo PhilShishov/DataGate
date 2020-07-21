@@ -345,6 +345,9 @@
   <data name="Logout" xml:space="preserve">
     <value>Disconnetti</value>
   </data>
+  <data name="Main Website" xml:space="preserve">
+    <value>Sito Web Principale</value>
+  </data>
   <data name="Manage email" xml:space="preserve">
     <value>Gestisci email</value>
   </data>
