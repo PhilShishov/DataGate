@@ -45,7 +45,9 @@ You can watch videos about the platform:
 * Frameworks - ASP.NET Core 3.1, Bootstrap
 * Database - MSSQL Server, Entity Framework Core 3.1
 * Testing - xUnit, MyTested.AspNetCore.Mvc
-* Project Management - TortoiseGit, GitHub, Azure DevOps, Jira, Trello
+* Project Management - Jira, Trello
+* Version Control - TortoiseGit, GitHub
+* DevOps - Azure Pipelines
 * Hosting and File Storage - GoDaddy WebWiz
 * UI/UX design - Photoshop, HTML/CSS, Bootstrap
 
