@@ -1,4 +1,4 @@
-![Project Architecture](Documentation/Resources/Project Architecture.JPG)
+![Project-Architecture](Documentation/Resources/Project-Architecture.JPG)
 
 
 # DataGate Platform
