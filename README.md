@@ -8,7 +8,7 @@ improve the efficiency and automate some parts of Risk and Legal department.
 
 ## Table of contents
 * [General Info](#general-info)
-* [Guest Account](#guest-account)
+* [Registration](#registration)
 * [Technologies](#technologies)
 * [Functionality](#functionality)
 * [Documentation](#documentation)
@@ -28,10 +28,12 @@ detailed information about the UCITS and AIF handled by the management company s
 * All related agreements
 * Fees related to agreements
  
- ## Guest Account
-https://pharusdatagate.com/ <br />
+ ## Registration
+Registration is only possible through an email invitation and confirmation.
+Howerever a guest account has been set-up for free use. 
 Username: datagate_guest <br />
 Password: datagate_guest <br />
+https://pharusdatagate.com/ <br />
  
  ## Technologies
 * Backend - C# .NET Core 3.1, MVC, REST
@@ -47,6 +49,7 @@ Password: datagate_guest <br />
 
 ## Functionality 
 ### Logged in Users
+ - Slide through recent share classes
  - Consult libraries and agreements
  - Consult particular view - sub entities, timeseries, documents, agreements, timelines, fees
  - View active and unactive entities
@@ -55,6 +58,7 @@ Password: datagate_guest <br />
  - Choose and sort header columns for large table views
  - Perform a global search for a share class
  - Extract view tables as PDF and Excel
+ - Two language support - English and Italian
  ### Users in role "Legal"
   - All the functionalities of logged in user
   - Upload and delete documents, agreements and fees
