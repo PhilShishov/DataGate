@@ -58,7 +58,7 @@ https://pharusdatagate.com <br />
  - Consult NAV reports
  - Update views by chosen date
  - Choose and sort header columns for large table views
- - Perform a global search for a share class
+ - Perform a global share class search
  - Extract view tables as PDF and Excel
  - Two language support - English and Italian
  ### Users in role "Legal"
