@@ -1,6 +1,5 @@
 # DataGate Platform 
 
-<a href="https://pharusdatagate.com" target="_blank">DataGate</a>
 https://pharusdatagate.com <br />
 
 A private web application for managing more than 300 funds. <br />
@@ -36,7 +35,7 @@ A guest account has been set-up for free use. <br />
 
 Username: **datagate_guest** <br />
 Password: **datagate_guest** <br />
-https://pharusdatagate.com/ <br />
+https://pharusdatagate.com <br />
  
  ## Technologies
 * Backend - C# .NET Core 3.1, MVC, REST
