@@ -284,7 +284,6 @@ $(function () {
     //
     // Modal multiselect for column selection
     $('.multiselect').multiselect();
-
 });
 
 // ________________________________________________________

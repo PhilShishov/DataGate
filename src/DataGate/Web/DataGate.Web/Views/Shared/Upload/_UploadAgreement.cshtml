@@ -118,17 +118,14 @@
                     <span asp-validation-for="FileToUpload" class="text-danger"></span>
 
                     <script>
-
                         $('#input-file').change(function () {
                             $(this).removeClass("input-file-custom");
-                        })
-
+                        });
                         // Set input date fields on agreement upload
                         (function () {
                             const contractDate = document.getElementById('contractDate');
                             let activationDate = document.getElementById('activationDate');
                             let expirationDate = document.getElementById('expirationDate');
-
                             if (contractDate) {
                                 contractDate.addEventListener('change', setActivationDate);
                             }

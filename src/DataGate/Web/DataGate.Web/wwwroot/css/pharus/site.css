@@ -1,4 +1,9 @@
-﻿/* Chosen style to be imported on change*/
+﻿
+/* Chosen style to be imported on change*/
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+}
 
 .ui-tooltip {
     font-size: 12px;

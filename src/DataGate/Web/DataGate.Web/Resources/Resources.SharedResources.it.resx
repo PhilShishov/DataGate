@@ -327,7 +327,7 @@
   <data name="Funds" xml:space="preserve">
     <value>Fondi</value>
   </data>
-  <data name="Funds Managed by Pharus ManCo" xml:space="preserve">
+  <data name="Funds managed by Pharus ManCo" xml:space="preserve">
     <value>Fondi gestiti da Pharus ManCo</value>
   </data>
   <data name="Home Page" xml:space="preserve">
@@ -397,7 +397,7 @@
     <value>Ricordami</value>
   </data>
   <data name="Reports" xml:space="preserve">
-    <value>Report</value>
+    <value>Rapporti</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Resetta</value>
@@ -447,7 +447,7 @@
   <data name="Share Classes" xml:space="preserve">
     <value>Share Class</value>
   </data>
-  <data name="Share Classes Managed by Pharus ManCo" xml:space="preserve">
+  <data name="Share Classes managed by Pharus ManCo" xml:space="preserve">
     <value>Share Class gestite da Pharus ManCo</value>
   </data>
   <data name="Shares" xml:space="preserve">
@@ -468,7 +468,7 @@
   <data name="Sub Funds" xml:space="preserve">
     <value>Sub Fund</value>
   </data>
-  <data name="Sub Funds Managed by Pharus ManCo" xml:space="preserve">
+  <data name="Sub Funds managed by Pharus ManCo" xml:space="preserve">
     <value>Sub Funds gestiti da Pharus ManCo</value>
   </data>
   <data name="Subs" xml:space="preserve">
