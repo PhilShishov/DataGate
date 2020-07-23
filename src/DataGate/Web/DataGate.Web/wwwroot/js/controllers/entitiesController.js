@@ -62,7 +62,15 @@ function extract(model) {
     });
 
     function extractRequestHandler(model, token) {
-        $.blockUI({ message: `<h3>${MESSAGES.BLOCKUI_USER_MESSAGE}</h3>` });
+        $.blockUI({
+            message: $('#blockui-panel'),
+            css: {
+                border: 'none',
+                padding: '15px',
+                '-webkit-border-radius': '10px',
+                '-moz-border-radius': '10px',
+            },
+        });
         $.ajax({
             url: '/Media/GenerateReport',
             type: 'POST',
