@@ -1,4 +1,24 @@
 ﻿
+@{ 
+    var controller = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<script>
+        let model = {
+            Date: '@Model.Date',
+            ControllerName: '@controller',
+        };
+
+        $(document).ready(function () {
+            dataTableInitializationHandler('@controller');
+            // ________________________________________________________
+            //
+            // Extract view as excel or pdf
+            extract(model);
+            submitForm();
+        });
+</script>
+
 <environment include="Development">
     <script src="~/lib/jqueryui/jquery-ui.min.js" asp-append-version="true"></script>
     <script src="~/js/controllers/entitiesController.js" asp-append-version="true"></script>
