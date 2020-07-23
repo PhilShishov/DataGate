@@ -275,6 +275,11 @@ textarea {
             outline: none;
         }
 
+.text-danger {
+    font-size: 14px;
+    font-weight: bold;
+}
+
 /*
 *
 * ==========================================
