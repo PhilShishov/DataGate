@@ -84,8 +84,8 @@
             .menu-user-container ul li a {
                 float: right;
                 width: 100%;
-                height: auto;
-                padding: 10px 40px 12px 15px;
+                height: 41px;
+                padding: 10px 17px 12px 15px;
                 position: relative;
                 font-size: 15px;
                 line-height: 19px;
