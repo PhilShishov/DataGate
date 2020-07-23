@@ -121,7 +121,7 @@
         public const string ShareClassType = "shareclass";
 
         // Toolbar Commands
-        public const string CommandUpdateTable = "UPDATE";
+        public const string CommandUpdateTable = "Update";
         public const string CommandResetTable = "Reset";
         public const string CommandExtractExcel = "Excel";
         public const string CommandExtractPdf = "PDF";
