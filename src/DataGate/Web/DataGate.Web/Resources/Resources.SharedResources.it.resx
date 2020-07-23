@@ -390,6 +390,9 @@
   <data name="Please modify your search criteria." xml:space="preserve">
     <value>Modifica il criterio di ricerca</value>
   </data>
+  <data name="Please wait a moment..." xml:space="preserve">
+    <value>Per favore aspetta un momento...</value>
+  </data>
   <data name="Privacy Policy" xml:space="preserve">
     <value>Privacy Policy</value>
   </data>

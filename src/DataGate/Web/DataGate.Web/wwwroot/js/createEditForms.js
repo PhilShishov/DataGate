@@ -13,10 +13,23 @@ const SELECTORS_CREATE_EDIT = {
     INPUTS_ALL_EXCEPT_FORMAT_NAME: `input:not(#${HTML_CREATE_EDIT.INPUT_NAME_TO_FORMAT})`
 };
 
-const MESSAGES = {
-    CONFIRM_CREATE: 'Are you sure you want to create this?',
-    CONFIRM_DELETE: 'Are you sure you want to delete this?',
-    CONFIRM_UPDATE: 'Are you sure you want to update this?',
+const lang = navigator.language || navigator.userLanguage;
+
+console.log(lang);
+
+const env = process.env,
+    language = env.LANG || env.LANGUAGE || env.LC_ALL || env.LC_MESSAGES;
+console.log(language);
+
+const CONFIRMATIONS = {
+    CREATE: 'Are you sure you want to create this?',
+    DELETE: 'Are you sure you want to delete this?',
+    UPDATE: 'Are you sure you want to update this?',
+};
+
+const MESSAGES_BTN = {
+    FAIL: 'No, cancel it!',
+    SUCCESS: 'Yes, I am sure!',
 };
 
 // Confirm create
@@ -30,11 +43,11 @@ const MESSAGES = {
                     const form = $(this).parent().parent();
                     event.preventDefault();
                     swal({
-                        title: MESSAGES.CONFIRM_CREATE,
+                        title: CONFIRMATIONS.CREATE,
                         icon: "warning",
                         buttons: [
-                            'No, cancel it!',
-                            'Yes, I am sure!'
+                            MESSAGES_BTN.FAIL,
+                            MESSAGES_BTN.SUCCESS
                         ],
                     }).then((isConfirm) => {
                         if (!isConfirm) return;
@@ -58,11 +71,11 @@ const MESSAGES = {
                     const form = $(this).parent().parent();
                     event.preventDefault();
                     swal({
-                        title: MESSAGES.CONFIRM_DELETE,
+                        title: CONFIRMATIONS.DELETE,
                         icon: "warning",
                         buttons: [
-                            'No, cancel it!',
-                            'Yes, I am sure!'
+                            MESSAGES_BTN.FAIL,
+                            MESSAGES_BTN.SUCCESS
                         ],
                     }).then((isConfirm) => {
                         if (!isConfirm) return;
@@ -85,11 +98,11 @@ const MESSAGES = {
                     const form = $(this).parent().parent();
                     event.preventDefault();
                     swal({
-                        title: MESSAGES.CONFIRM_UPDATE,
+                        title: CONFIRMATIONS.UPDATE,
                         icon: "warning",
                         buttons: [
-                            'No, cancel it!',
-                            'Yes, I am sure!'
+                            MESSAGES_BTN.FAIL,
+                            MESSAGES_BTN.SUCCESS
                         ],
                     }).then((isConfirm) => {
                         if (!isConfirm) return;
@@ -110,7 +123,7 @@ const MESSAGES = {
 
         for (var i = 0; i < selectedInputFields.length; i++) {
             selectedInputFields[i].addEventListener('input', function (event) {
-                let input = event.target;                
+                let input = event.target;
                 input.value = input.value.toUpperCase();
             });
         }

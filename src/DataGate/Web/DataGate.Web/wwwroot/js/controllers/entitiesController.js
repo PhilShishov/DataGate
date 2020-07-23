@@ -17,10 +17,6 @@ const CLASSES = {
     INACTIVE: 'inactive-entity'
 };
 
-const MESSAGES = {
-    BLOCKUI_USER_MESSAGE: 'Please wait a moment...'
-};
-
 function extract(model) {
     const excelValue = $(HTML.BTN_EXTRACT_EXCEL).attr('value');
     const pdfValue = $(HTML.BTN_EXTRACT_PDF).attr('value');

@@ -3,8 +3,6 @@
 @{
     ViewData["Title"] = SharedLocalizer["Sub Funds"];
     Layout = "~/Views/Shared/_Layout.cshtml";
-
-    var controller = this.ViewContext.RouteData.Values["controller"].ToString();
 }
 
 <div class="container-all-funds justify-content-between">
@@ -32,19 +30,4 @@
 
 @section Scripts{
     <partial name="Scripts/_EntitiesScriptsPartial" />
-    <script>
-        let model = {
-            Date: '@Model.Date',
-            ControllerName: '@controller',
-        };
-
-        $(document).ready(function () {
-            dataTableInitializationHandler('@controller');
-            // ________________________________________________________
-            //
-            // Extract view as excel or pdf
-            extract(model);
-            submitForm();
-        });
-    </script>
 }
