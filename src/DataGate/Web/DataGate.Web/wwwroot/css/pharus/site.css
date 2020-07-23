@@ -280,6 +280,13 @@ textarea {
     font-weight: bold;
 }
 
+#blockui-panel {
+    display: none;
+}
+
+    #blockui-panel img {
+        width: 100px;
+    }
 /*
 *
 * ==========================================
