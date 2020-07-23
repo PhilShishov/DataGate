@@ -333,6 +333,9 @@
   <data name="Home Page" xml:space="preserve">
     <value>Pagina principale</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Linguaggio</value>
+  </data>
   <data name="Last Login" xml:space="preserve">
     <value>Ultima connessione</value>
   </data>

@@ -81,11 +81,6 @@
                     </div>
                 </div>
 
-                <div class="wrapper-language-bar mt-3 ml-5 w-5">
-                    <partial name="_SelectLanguagePartial" />
-                </div>
-
-
                 <div class="w-50 d-flex responsive-navbar">
                     <div class="search-form-wrapper-responsive">
                         <button class="open-search-box mt-3">
@@ -162,6 +157,10 @@
 
                                     <li>
                                         <a asp-area="Identity" asp-page="/Account/Manage/Email">@this.User.Identity.Name</a>
+                                    </li>
+
+                                    <li class="wrapper-language-bar">
+                                        <partial name="_SelectLanguagePartial" />
                                     </li>
 
                                     <li>

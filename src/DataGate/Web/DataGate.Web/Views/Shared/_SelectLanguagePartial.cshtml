@@ -3,19 +3,16 @@
     returnUrl += Context.Request.QueryString.ToString();
     IRequestCultureFeature currentCulture = Context.Features.Get<IRequestCultureFeature>();
     var requestedCultureName = string.Empty;
-    var requestedCultureDisplayName = string.Empty;
     var flag = string.Empty;
 
     if (currentCulture.RequestCulture.Culture.Name == GlobalConstants.CurrentCultureInfo)
     {
         requestedCultureName = GlobalConstants.ItalianCultureInfo;
-        requestedCultureDisplayName = "IT";
         flag = "flag-italy.svg";
     }
     else
     {
         requestedCultureName = GlobalConstants.CurrentCultureInfo;
-        requestedCultureDisplayName = "EN";
         flag = "flag-usa.svg";
     }
 }
@@ -25,6 +22,6 @@
    asp-action="SetLanguage"
    asp-route-culture="@requestedCultureName"
    asp-route-returnUrl="@returnUrl">
-    @requestedCultureDisplayName
+    @SharedLocalizer["Language"]
     <img src="~/images/@flag">
 </a>
