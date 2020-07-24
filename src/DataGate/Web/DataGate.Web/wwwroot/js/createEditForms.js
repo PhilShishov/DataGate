@@ -13,106 +13,91 @@ const SELECTORS_CREATE_EDIT = {
     INPUTS_ALL_EXCEPT_FORMAT_NAME: `input:not(#${HTML_CREATE_EDIT.INPUT_NAME_TO_FORMAT})`
 };
 
-const lang = navigator.language || navigator.userLanguage;
+function createEdit(confirmations, messages_btn) {
+    const CONFIRMATIONS = confirmations;
+    const MESSAGES_BTN = messages_btn;
 
-console.log(lang);
+    // Confirm create
+    (function () {
+        const buttons = document.getElementsByClassName(HTML_CREATE_EDIT.BTN_CONFIRM_CREATE);
 
-const env = process.env,
-    language = env.LANG || env.LANGUAGE || env.LC_ALL || env.LC_MESSAGES;
-console.log(language);
-
-const CONFIRMATIONS = {
-    CREATE: 'Are you sure you want to create this?',
-    DELETE: 'Are you sure you want to delete this?',
-    UPDATE: 'Are you sure you want to update this?',
-};
-
-const MESSAGES_BTN = {
-    FAIL: 'No, cancel it!',
-    SUCCESS: 'Yes, I am sure!',
-};
-
-// Confirm create
-(function () {
-    const buttons = document.getElementsByClassName(HTML_CREATE_EDIT.BTN_CONFIRM_CREATE);
-
-    if (buttons) {
-        for (let btn of buttons) {
-            btn.addEventListener('click',
-                function (event) {
-                    const form = $(this).parent().parent();
-                    event.preventDefault();
-                    swal({
-                        title: CONFIRMATIONS.CREATE,
-                        icon: "warning",
-                        buttons: [
-                            MESSAGES_BTN.FAIL,
-                            MESSAGES_BTN.SUCCESS
-                        ],
-                    }).then((isConfirm) => {
-                        if (!isConfirm) return;
-                        form.submit();
-                        return true;
+        if (buttons) {
+            for (let btn of buttons) {
+                btn.addEventListener('click',
+                    function (event) {
+                        const form = $(this).parent().parent();
+                        event.preventDefault();
+                        swal({
+                            title: CONFIRMATIONS.CREATE,
+                            icon: "warning",
+                            buttons: [
+                                MESSAGES_BTN.FAIL,
+                                MESSAGES_BTN.SUCCESS
+                            ],
+                        }).then((isConfirm) => {
+                            if (!isConfirm) return;
+                            form.submit();
+                            return true;
+                        });
                     });
-                });
+            }
         }
-    }
-})();
+    })();
 
+    // Confirm delete
+    (function () {
+        const buttons = document.getElementsByClassName(HTML_CREATE_EDIT.BTN_CONFIRM_DELETE);
 
-// Confirm delete
-(function () {
-    const buttons = document.getElementsByClassName(HTML_CREATE_EDIT.BTN_CONFIRM_DELETE);
-
-    if (buttons) {
-        for (let btn of buttons) {
-            btn.addEventListener('click',
-                function (event) {
-                    const form = $(this).parent().parent();
-                    event.preventDefault();
-                    swal({
-                        title: CONFIRMATIONS.DELETE,
-                        icon: "warning",
-                        buttons: [
-                            MESSAGES_BTN.FAIL,
-                            MESSAGES_BTN.SUCCESS
-                        ],
-                    }).then((isConfirm) => {
-                        if (!isConfirm) return;
-                        form.submit();
-                        return true;
+        if (buttons) {
+            for (let btn of buttons) {
+                btn.addEventListener('click',
+                    function (event) {
+                        const form = $(this).parent().parent();
+                        event.preventDefault();
+                        swal({
+                            title: CONFIRMATIONS.DELETE,
+                            icon: "warning",
+                            buttons: [
+                                MESSAGES_BTN.FAIL,
+                                MESSAGES_BTN.SUCCESS
+                            ],
+                        }).then((isConfirm) => {
+                            if (!isConfirm) return;
+                            form.submit();
+                            return true;
+                        });
                     });
-                });
+            }
         }
-    }
-})();
+    })();
 
-// Confirm edit
-(function () {
-    const buttons = document.getElementsByClassName(HTML_CREATE_EDIT.BTN_CONFIRM_UPDATE);
+    // Confirm edit
+    (function () {
+        const buttons = document.getElementsByClassName(HTML_CREATE_EDIT.BTN_CONFIRM_UPDATE);
 
-    if (buttons) {
-        for (let btn of buttons) {
-            btn.addEventListener('click',
-                function (event) {
-                    const form = $(this).parent().parent();
-                    event.preventDefault();
-                    swal({
-                        title: CONFIRMATIONS.UPDATE,
-                        icon: "warning",
-                        buttons: [
-                            MESSAGES_BTN.FAIL,
-                            MESSAGES_BTN.SUCCESS
-                        ],
-                    }).then((isConfirm) => {
-                        if (!isConfirm) return;
-                        form.submit();
-                        return true;
+        if (buttons) {
+            for (let btn of buttons) {
+                btn.addEventListener('click',
+                    function (event) {
+                        const form = $(this).parent().parent();
+                        event.preventDefault();
+                        swal({
+                            title: CONFIRMATIONS.UPDATE,
+                            icon: "warning",
+                            buttons: [
+                                MESSAGES_BTN.FAIL,
+                                MESSAGES_BTN.SUCCESS
+                            ],
+                        }).then((isConfirm) => {
+                            if (!isConfirm) return;
+                            form.submit();
+                            return true;
+                        });
                     });
-                });
+            }
         }
-    }
-})();
+    })();
+}
 
 // Format input fields 
 (function () {

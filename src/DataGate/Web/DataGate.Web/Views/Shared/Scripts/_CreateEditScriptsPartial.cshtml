@@ -4,6 +4,24 @@
 <script src="~/lib/jquery-validation/dist/jquery.validate.js" asp-append-version="true"></script>
 <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js" asp-append-version="true"></script>
 
+<script>
+    const CONFIRMATIONS = {
+        CREATE: '@Html.Raw(SharedLocalizer["Are you sure you want to create this?"].Value.ToString())',
+        DELETE: '@Html.Raw(SharedLocalizer["Are you sure you want to delete this?"].Value.ToString())',
+        UPDATE: '@Html.Raw(SharedLocalizer["Are you sure you want to update this?"].Value.ToString())',
+    };
+
+    const MESSAGES_BTN = {
+        FAIL: '@Html.Raw(SharedLocalizer["No, cancel it!"].Value.ToString())',
+        SUCCESS: '@Html.Raw(SharedLocalizer["Yes, I am sure!"].Value.ToString())',
+    };
+
+    $(document).ready(function () {
+        createEdit(CONFIRMATIONS, MESSAGES_BTN);
+    });
+</script>
+
+
 <script src="https://www.google.com/recaptcha/api.js?render=@this.Configuration["GoogleReCaptcha:Key"]"></script>
 <script>
         grecaptcha.ready(async function () {

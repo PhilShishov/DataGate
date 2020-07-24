@@ -1,8 +1,8 @@
 ﻿
 /* Chosen style to be imported on change*/
 
-input[type="date"]::-webkit-calendar-picker-indicator {
-    cursor: pointer;
+.swal-footer {
+    text-align: center;
 }
 
 .ui-tooltip {
