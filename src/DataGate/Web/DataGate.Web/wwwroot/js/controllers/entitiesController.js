@@ -132,7 +132,7 @@ function dataTableInitializationHandler(controller) {
     if (controller === 'Funds') {
         $('.table-view-pharus').DataTable({
             "dom": '<"top">rt<"bottom"><"clear">',
-            stateSave: true,
+            "pageLength": 50,
             "autoWidth": false,
             "scrollX": true,
         });

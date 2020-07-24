@@ -98,10 +98,10 @@
 
         const tokenAgr = $('#form-agreement input[name=__RequestVerificationToken]').val(),
             areaName = '@Model.AreaName',
-            table = '.tbl-agreements',
-            table_dist = '.tbl-distinct-agreements';
+            tableAgr = '.tbl-agreements',
+            tableAgr_dist = '.tbl-distinct-agreements';
 
-        const MESSAGES_DOC = {
+        const MESSAGES_DELETE_AGR = {
             TITLE: '@Html.Raw(SharedLocalizer["Are you sure?"].Value.ToString())',
             TEXT: '@Html.Raw(SharedLocalizer["Once deleted, you will not be able to recover this file!"].Value.ToString())',
             BTN_CANCEL: '@Html.Raw(SharedLocalizer["Cancel"].Value.ToString())',
@@ -110,6 +110,6 @@
             TITLE_SUCCESS: '@Html.Raw(SharedLocalizer["Your file has been deleted!"].Value.ToString())'
         };
 
-        deleteFile(tokenDoc, areaName, table, table_dist, MESSAGES_DOC);
+        deleteFile(tokenAgr, areaName, tableAgr, tableAgr_dist, MESSAGES_DELETE_AGR);
     })
 </script>
