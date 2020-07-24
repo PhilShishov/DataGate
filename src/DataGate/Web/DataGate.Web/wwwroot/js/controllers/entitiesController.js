@@ -151,6 +151,8 @@ function dataTableInitializationHandler(controller) {
         width: "55px",
         placeholder_text_single: ""
     });
+
+    setTimeout($.unblockUI, 500);
 }
 
 // ________________________________________________________

@@ -7,14 +7,17 @@
 */
 .table-view-pharus {
     white-space: nowrap !important;
+    z-index: 0;
 }
 
     .table-view-pharus .th-name {
         min-width: 410px;
     }
+
     .table-view-pharus .th-subfund-name {
         min-width: 420px;
     }
+
     .table-view-pharus .th-fund-name {
         min-width: 140px;
     }
