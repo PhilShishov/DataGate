@@ -108,16 +108,16 @@
 
                 if (System.IO.File.Exists(path))
                 {
-                    if (string.IsNullOrEmpty(agrValue))
-                    {
-                        await this.service.DeleteDocument(fileId, areaName);
-                    }
-                    else
-                    {
-                        await this.service.DeleteAgreement(fileId, areaName);
-                    }
+                    //if (string.IsNullOrEmpty(agrValue))
+                    //{
+                    //    await this.service.DeleteDocument(fileId, areaName);
+                    //}
+                    //else
+                    //{
+                    //    await this.service.DeleteAgreement(fileId, areaName);
+                    //}
 
-                    System.IO.File.Delete(path);
+                    //System.IO.File.Delete(path);
                     return this.Json(new { fileId = fileId });
                 }
             }
