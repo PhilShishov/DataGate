@@ -90,6 +90,15 @@
         const docValue = $(this).closest('tr').find('button').eq(0).val();
         const fileId = $(this).closest('tr').attr('class');
 
+         const MESSAGES_DOC = {
+            TITLE: '@Html.Raw(SharedLocalizer["Are you sure?"].Value.ToString())',
+            TEXT: '@Html.Raw(SharedLocalizer["Once deleted, you will not be able to recover this file!"].Value.ToString())',
+            BTN_CANCEL: '@Html.Raw(SharedLocalizer["Cancel"].Value.ToString())',
+            TITLE_FAIL: '@Html.Raw(SharedLocalizer["Error deleting!"].Value.ToString())',
+            TEXT_FAIL: '@Html.Raw(SharedLocalizer["Please try again"].Value.ToString())',
+            TITLE_SUCCESS: '@Html.Raw(SharedLocalizer["Your file has been deleted!"].Value.ToString())'
+        };
+
         var jqXhr = $.ajax({
             type: 'GET',
             url: '/media/delete',
@@ -100,24 +109,26 @@
         });
 
         swal({
-            title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this file!",
+            title: MESSAGES_DOC.TITLE,
+            text: MESSAGES_DOC.TEXT,
             icon: "warning",
-            buttons: true,
+            buttons: [MESSAGES_DOC.BTN_CANCEL, "OK"],
             dangerMode: true
         }).then((isConfirm) => {
             if (!isConfirm) return;
             jqXhr
             .done(function (data) {
                 if (data.fileId == 'false') {
-                    swal("Error deleting!", "Please try again", {
+                    swal({
+                        title: MESSAGES_DOC.TITLE_FAIL,
+                        text: MESSAGES_DOC.TEXT_FAIL,
                         icon: "error",
                     });
                     return false;
                 }
                 $('.tbl-documents .' + data.fileId).remove();
                 $('.tbl-distinct-documents .' + data.fileId).remove();
-                swal("Your file has been deleted!", {
+                swal(MESSAGES_DOC.TITLE_SUCCESS, {
                     icon: "success",
                 });
             })

@@ -183,6 +183,9 @@
   <data name="Are you sure you want to update this?" xml:space="preserve">
     <value>Sei sicuro di voler aggiornare questo?</value>
   </data>
+  <data name="Are you sure?" xml:space="preserve">
+    <value>Sei sicuro?</value>
+  </data>
   <data name="AuM Chart" xml:space="preserve">
     <value>Aum Chart</value>
   </data>
@@ -197,6 +200,9 @@
   </data>
   <data name="Back to Panel" xml:space="preserve">
     <value>Indietro al pannello</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annulla</value>
   </data>
   <data name="Change email" xml:space="preserve">
     <value>Cambia email</value>
@@ -294,6 +300,9 @@
   <data name="Enter your e-mail" xml:space="preserve">
     <value>Inserisci il tuo e-mail</value>
   </data>
+  <data name="Error deleting!" xml:space="preserve">
+    <value>Errore durante l\'eliminazione!</value>
+  </data>
   <data name="Expiration Date" xml:space="preserve">
     <value>Data Scadenza</value>
   </data>
@@ -381,6 +390,9 @@
   <data name="Number of results:" xml:space="preserve">
     <value>Numero di risultati:</value>
   </data>
+  <data name="Once deleted, you will not be able to recover this file!" xml:space="preserve">
+    <value>Una volta eliminato, non sarai in grado di recuperare questo file!</value>
+  </data>
   <data name="Panel" xml:space="preserve">
     <value>Pannello</value>
   </data>
@@ -401,6 +413,9 @@
   </data>
   <data name="Please modify your search criteria." xml:space="preserve">
     <value>Modifica il criterio di ricerca</value>
+  </data>
+  <data name="Please try again" xml:space="preserve">
+    <value>Per favore riprova</value>
   </data>
   <data name="Please wait a moment..." xml:space="preserve">
     <value>Per favore aspetta un momento...</value>
@@ -557,6 +572,9 @@
   </data>
   <data name="You have successfully logged out of Pharus DataGate." xml:space="preserve">
     <value>Disconnessione riuscita da Pharus DataGate.</value>
+  </data>
+  <data name="Your file has been deleted!" xml:space="preserve">
+    <value>Il tuo file è stato cancellato!</value>
   </data>
   <data name="Your search criteria was:" xml:space="preserve">
     <value>Il tuo criterio di ricerca era:</value>
