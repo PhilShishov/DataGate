@@ -1,7 +1,7 @@
 ﻿
 /* Chosen style to be imported on change*/
 
-.swal-footer {
+.swal-footer, .swal-text {
     text-align: center;
 }
 

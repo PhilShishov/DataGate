@@ -82,6 +82,8 @@
     </div>
 </form>
 
+<script src="~/js/deleteFile.js" asp-append-version="true"></script>
+
 <script>
     $(function () {
         // ________________________________________________________
@@ -89,53 +91,25 @@
         // Double top scroll for wide table
         $('.double-scroll').doubleScroll();
         $('.table-wrapper-double-scroll').doubleScroll({ resetOnWindowResize: true });
-    });
 
-    // ________________________________________________________
-    //
-    // Delete selected row from agreements table by confirming
-    $('.btn-delete').on('click', function () {
-        const tokenAgr = $('#form-agreement input[name=__RequestVerificationToken]').val();
-        const areaName = '@Model.AreaName';
-        const agrValue = $(this).closest('tr').find('button').eq(0).val();
-        const fileId = $(this).closest('tr').attr('class');
+        // ________________________________________________________
+        //
+        // Delete selected row from file table and DB by confirming
 
-        var jqXhr = $.ajax({
-        type: 'GET',
-        url: '/media/delete',
-        dataType: 'json',
-        contentType: 'application/json; charset=utf-8',
-        headers: { 'X-CSRF-TOKEN': tokenAgr },
-        data: { fileId: fileId, agrValue: agrValue, areaName: areaName }
-        });
+        const tokenAgr = $('#form-agreement input[name=__RequestVerificationToken]').val(),
+            areaName = '@Model.AreaName',
+            table = '.tbl-agreements',
+            table_dist = '.tbl-distinct-agreements';
 
-        swal({
-        title: "Are you sure?",
-        text: "Once deleted, you will not be able to recover this file!",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true
-        }).then((isConfirm) => {
-        if (!isConfirm) return;
-        jqXhr
-        .done(function (data) {
-        if (data.fileId == 'false') {
-        swal("Error deleting!", "Please try again", {
-        icon: "error",
-        });
-        return false;
-        }
-        $('.tbl-agreements .' + data.fileId).remove();
-        $('.tbl-distinct-agreements .' + data.fileId).remove();
-        swal("Your file has been deleted!", {
-        icon: "success",
-        });
-        })
-        .fail(function (request, status, error) {
-        swal(request.responseText, {
-        icon: "error"
-            })
-        });
-        });
-    });
+        const MESSAGES_DOC = {
+            TITLE: '@Html.Raw(SharedLocalizer["Are you sure?"].Value.ToString())',
+            TEXT: '@Html.Raw(SharedLocalizer["Once deleted, you will not be able to recover this file!"].Value.ToString())',
+            BTN_CANCEL: '@Html.Raw(SharedLocalizer["Cancel"].Value.ToString())',
+            TITLE_FAIL: '@Html.Raw(SharedLocalizer["Error deleting!"].Value.ToString())',
+            TEXT_FAIL: '@Html.Raw(SharedLocalizer["Please try again"].Value.ToString())',
+            TITLE_SUCCESS: '@Html.Raw(SharedLocalizer["Your file has been deleted!"].Value.ToString())'
+        };
+
+        deleteFile(tokenDoc, areaName, table, table_dist, MESSAGES_DOC);
+    })
 </script>
