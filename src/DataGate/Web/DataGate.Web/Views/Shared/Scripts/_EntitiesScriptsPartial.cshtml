@@ -1,5 +1,5 @@
 ﻿
-@{ 
+@{
     var controller = this.ViewContext.RouteData.Values["controller"].ToString();
 }
 
@@ -15,17 +15,28 @@
 </environment>
 
 <script>
-        let model = {
-            Date: '@Model.Date',
-            ControllerName: '@controller',
-        };
+    let model = {
+        Date: '@Model.Date',
+        ControllerName: '@controller',
+    };
 
-        $(document).ready(function () {
-            dataTableInitializationHandler('@controller');
-            // ________________________________________________________
-            //
-            // Extract view as excel or pdf
-            extract(model);
-            submitForm();
-        });
+    $.blockUI({
+        message: $('#blockui-panel'),
+        css: {
+            border: 'none',
+            padding: '15px',
+            '-webkit-border-radius': '10px',
+            '-moz-border-radius': '10px',
+        },
+    });
+
+    $(function () {
+        dataTableInitializationHandler('@controller');
+        // ________________________________________________________
+        //
+        // Extract view as excel or pdf
+
+        extract(model);
+        submitForm();
+    });
 </script>
