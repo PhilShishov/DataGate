@@ -3,6 +3,17 @@
     var controller = this.ViewContext.RouteData.Values["controller"].ToString();
 }
 
+<environment include="Development">
+    <script src="~/lib/jqueryui/jquery-ui.min.js" asp-append-version="true"></script>
+    <script src="~/js/controllers/entitiesController.js" asp-append-version="true"></script>
+    <script src="~/js/plugins.js" asp-append-version="true"></script>
+</environment>
+
+<environment include="Production, Staging">
+    <script src="~/lib/jqueryui/jquery-ui.min.js" asp-append-version="true"></script>
+    <script src="~/js/controllers/entitiesController.js" asp-append-version="true"></script>
+</environment>
+
 <script>
         let model = {
             Date: '@Model.Date',
@@ -18,14 +29,3 @@
             submitForm();
         });
 </script>
-
-<environment include="Development">
-    <script src="~/lib/jqueryui/jquery-ui.min.js" asp-append-version="true"></script>
-    <script src="~/js/controllers/entitiesController.js" asp-append-version="true"></script>
-    <script src="~/js/plugins.js" asp-append-version="true"></script>
-</environment>
-
-<environment include="Production, Staging">
-    <script src="~/lib/jqueryui/jquery-ui.min.js" asp-append-version="true"></script>
-    <script src="~/js/controllers/entitiesController.js" asp-append-version="true"></script>
-</environment>
