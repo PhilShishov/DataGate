@@ -23,7 +23,7 @@
             </p>
         </li>
         <li>
-            <p>@Localizer["Scan the QR Code or enter this key "]<kbd>@Model.SharedKey</kbd> @Localizer["into your two factor authenticator app. Spaces and casing do not matter"].</p>
+            <p>@Localizer["Scan the QR Code or enter this key"] <kbd>@Model.SharedKey</kbd> @Localizer["into your two factor authenticator app. Spaces and casing do not matter"].</p>
             <div class="alert alert-info">@Localizer["Learn how to"] <a href="https://go.microsoft.com/fwlink/?Linkid=852423">@Localizer["enable QR code generation"]</a>.</div>
             <div id="qrCode"></div>
             <div id="qrCodeData" data-url="@Html.Raw(@Model.AuthenticatorUri)"></div>
