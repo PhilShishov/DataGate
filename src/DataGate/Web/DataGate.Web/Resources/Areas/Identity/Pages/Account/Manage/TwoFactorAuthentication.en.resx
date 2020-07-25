@@ -120,6 +120,9 @@
   <data name="Add authenticator app" xml:space="preserve">
     <value>Add authenticator app</value>
   </data>
+  <data name="Authenticator app" xml:space="preserve">
+    <value>Authenticator app</value>
+  </data>
   <data name="Disable 2FA" xml:space="preserve">
     <value>Disable 2FA</value>
   </data>

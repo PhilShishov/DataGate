@@ -118,42 +118,42 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="and" xml:space="preserve">
-    <value />
+    <value>e</value>
   </data>
   <data name="Configure authenticator app" xml:space="preserve">
-    <value />
+    <value>Configura l'app di autenticazione</value>
   </data>
   <data name="Download a two-factor authenticator app like Microsoft Authenticator for" xml:space="preserve">
-    <value />
+    <value>Scarica un'app di autenticazione a due fattori come Microsoft Authenticator per</value>
   </data>
   <data name="enable QR code generation" xml:space="preserve">
-    <value />
+    <value>abilitare la generazione del codice QR</value>
   </data>
   <data name="Google Authenticator for" xml:space="preserve">
-    <value />
+    <value>Google Authenticator per</value>
   </data>
   <data name="into your two factor authenticator app. Spaces and casing do not matter" xml:space="preserve">
-    <value />
+    <value>nella tua app di autenticazione a due fattori. Spazi e involucri non contano</value>
   </data>
   <data name="Learn how to" xml:space="preserve">
-    <value />
+    <value>Impara come</value>
   </data>
   <data name="Once you have scanned the QR code or input the key above, your two factor authentication app will provide you with a unique code. Enter the code in the confirmation box below" xml:space="preserve">
-    <value />
+    <value>Dopo aver scansionato il codice QR o inserito la chiave sopra, l'app di autenticazione a due fattori ti fornirà un codice univoco. Inserisci il codice nella casella di conferma in basso</value>
   </data>
   <data name="or" xml:space="preserve">
-    <value />
+    <value>o</value>
   </data>
   <data name="Scan the QR Code or enter this key" xml:space="preserve">
-    <value />
+    <value>Scansiona il codice QR o inserisci questo tasto</value>
   </data>
   <data name="To use an authenticator app go through the following steps" xml:space="preserve">
-    <value />
+    <value>Per utilizzare un'app di autenticazione, procedere come segue</value>
   </data>
   <data name="Verification Code" xml:space="preserve">
-    <value />
+    <value>Codice di verifica</value>
   </data>
   <data name="Verify" xml:space="preserve">
-    <value />
+    <value>Verificare</value>
   </data>
 </root>
