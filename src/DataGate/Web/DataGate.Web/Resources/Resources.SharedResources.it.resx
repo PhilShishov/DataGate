@@ -207,6 +207,9 @@
   <data name="Change email" xml:space="preserve">
     <value>Cambia email</value>
   </data>
+  <data name="Change password" xml:space="preserve">
+    <value>Cambia la password</value>
+  </data>
   <data name="Change your account settings" xml:space="preserve">
     <value>Cambia impostazioni account</value>
   </data>
@@ -230,6 +233,9 @@
   </data>
   <data name="Confirm email" xml:space="preserve">
     <value>Conferma email</value>
+  </data>
+  <data name="Confirm new password" xml:space="preserve">
+    <value>Conferma la nuova password</value>
   </data>
   <data name="Confirm Password" xml:space="preserve">
     <value>Conferma password</value>
@@ -264,6 +270,9 @@
   <data name="Create User" xml:space="preserve">
     <value>Crea Utente</value>
   </data>
+  <data name="Current password" xml:space="preserve">
+    <value>Password attuale</value>
+  </data>
   <data name="DataGate" xml:space="preserve">
     <value>DataGate</value>
   </data>
@@ -272,6 +281,9 @@
   </data>
   <data name="Delete User" xml:space="preserve">
     <value>Cancella Utente</value>
+  </data>
+  <data name="Deleting this data will permanently remove your account, and this cannot be recovered." xml:space="preserve">
+    <value>L'eliminazione di questi dati rimuoverà definitivamente il tuo account e questo non può essere recuperato.</value>
   </data>
   <data name="Distinct" xml:space="preserve">
     <value>Separa</value>
@@ -375,7 +387,10 @@
   <data name="Manage your account" xml:space="preserve">
     <value>Gestisci account</value>
   </data>
-  <data name="New Password" xml:space="preserve">
+  <data name="New email" xml:space="preserve">
+    <value>Nuova email</value>
+  </data>
+  <data name="New password" xml:space="preserve">
     <value>Nuova password</value>
   </data>
   <data name="New Sub Fund" xml:space="preserve">
@@ -398,6 +413,9 @@
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="Personal data" xml:space="preserve">
+    <value>Dati personali</value>
   </data>
   <data name="PHARUS DATAGATE PLATFORM" xml:space="preserve">
     <value>PHARUS DATAGATE PIATTAFORMA</value>
@@ -517,7 +535,7 @@
     <value>Prezzo totale</value>
   </data>
   <data name="Two-factor authentication" xml:space="preserve">
-    <value>Two-factor authentication</value>
+    <value>Autenticazione a due fattori</value>
   </data>
   <data name="Update" xml:space="preserve">
     <value>Aggiorna</value>
@@ -572,6 +590,9 @@
   </data>
   <data name="You have successfully logged out of Pharus DataGate." xml:space="preserve">
     <value>Disconnessione riuscita da Pharus DataGate.</value>
+  </data>
+  <data name="Your account contains personal data that you have given us. This page allows you to download or delete that data." xml:space="preserve">
+    <value>Il tuo account contiene dati personali che ci hai fornito. Questa pagina consente di scaricare o eliminare tali dati.</value>
   </data>
   <data name="Your file has been deleted!" xml:space="preserve">
     <value>Il tuo file è stato cancellato!</value>

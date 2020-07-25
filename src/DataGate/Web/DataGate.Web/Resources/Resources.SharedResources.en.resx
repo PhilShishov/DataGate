@@ -207,6 +207,9 @@
   <data name="Change email" xml:space="preserve">
     <value>Change email</value>
   </data>
+  <data name="Change password" xml:space="preserve">
+    <value>Change password</value>
+  </data>
   <data name="Change your account settings" xml:space="preserve">
     <value>Change your account settings</value>
   </data>
@@ -231,8 +234,11 @@
   <data name="Confirm email" xml:space="preserve">
     <value>Confirm email</value>
   </data>
-  <data name="Confirm Password" xml:space="preserve">
-    <value>Confirm Password</value>
+  <data name="Confirm new password" xml:space="preserve">
+    <value>Confirm new password</value>
+  </data>
+  <data name="Confirm password" xml:space="preserve">
+    <value>Confirm password</value>
   </data>
   <data name="CONTAINER" xml:space="preserve">
     <value>CONTAINER</value>
@@ -264,6 +270,9 @@
   <data name="Create User" xml:space="preserve">
     <value>Create User</value>
   </data>
+  <data name="Current password" xml:space="preserve">
+    <value>Current password</value>
+  </data>
   <data name="DataGate" xml:space="preserve">
     <value>DataGate</value>
   </data>
@@ -272,6 +281,9 @@
   </data>
   <data name="Delete User" xml:space="preserve">
     <value>Delete User</value>
+  </data>
+  <data name="Deleting this data will permanently remove your account, and this cannot be recovered." xml:space="preserve">
+    <value>Deleting this data will permanently remove your account, and this cannot be recovered.</value>
   </data>
   <data name="Distinct" xml:space="preserve">
     <value>Distinct</value>
@@ -375,8 +387,11 @@
   <data name="Manage your account" xml:space="preserve">
     <value>Manage your account</value>
   </data>
-  <data name="New Password" xml:space="preserve">
-    <value>New Password</value>
+  <data name="New email" xml:space="preserve">
+    <value>New email</value>
+  </data>
+  <data name="New password" xml:space="preserve">
+    <value>New password</value>
   </data>
   <data name="New Sub Fund" xml:space="preserve">
     <value>New Sub Fund</value>
@@ -398,6 +413,9 @@
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="Personal data" xml:space="preserve">
+    <value>Personal data</value>
   </data>
   <data name="PHARUS DATAGATE PLATFORM" xml:space="preserve">
     <value>PHARUS DATAGATE PLATFORM</value>
@@ -572,6 +590,9 @@
   </data>
   <data name="You have successfully logged out of Pharus DataGate." xml:space="preserve">
     <value>You have successfully logged out of Pharus DataGate.</value>
+  </data>
+  <data name="Your account contains personal data that you have given us. This page allows you to download or delete that data." xml:space="preserve">
+    <value>Your account contains personal data that you have given us. This page allows you to download or delete that data.</value>
   </data>
   <data name="Your file has been deleted!" xml:space="preserve">
     <value>Your file has been deleted!</value>
