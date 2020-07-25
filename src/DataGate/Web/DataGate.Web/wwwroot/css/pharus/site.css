@@ -35,8 +35,12 @@
 input[type=date] {
     font-size: 16px;
     line-height: normal;
-    margin-top: 2px
+    margin-top: 2px;
 }
+
+    ::-webkit-calendar-picker-indicator, ::-webkit-search-cancel-button, ::-webkit-inner-spin-button, ::-webkit-color-datetime-edit, input[type=date] ::-webkit-color-datetime-edit-day-field, ::-webkit-color-datetime-edit-fields-wrapper, input[type=date] ::-webkit-color-datetime-edit-month-field {
+        cursor: pointer;
+    }
 
 input[type=text], input[type=email], input[type=password] {
     font-size: 16px;
