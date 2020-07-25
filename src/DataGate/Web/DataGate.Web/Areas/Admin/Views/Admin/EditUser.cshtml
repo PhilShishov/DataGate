@@ -45,7 +45,7 @@
                 <input asp-for="PasswordHash"
                        class="form-control"
                        autocomplete="new-password"
-                       placeholder="New Password..." />
+                       placeholder="@SharedLocalizer["New password"]..." />
                 <div class="d-flex justify-content-center">
                     <span></span>
                     <span asp-validation-for="PasswordHash" class="text-danger"></span>
@@ -55,7 +55,7 @@
                 <input asp-for="ConfirmPassword"
                        class="form-control"
                        autocomplete="new-password"
-                       placeholder="Confirm Password..." />
+                       placeholder="@SharedLocalizer["Confirm password"]..." />
                 <div class="d-flex justify-content-center">
                     <span></span>
                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
