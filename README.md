@@ -39,18 +39,15 @@ Password: **datagate_guest** <br />
 https://pharusdatagate.com <br />
  
  ## Technologies
- * Frameworks - ASP.NET Core 3.1, Bootstrap
-  <br />
+ * Frameworks - ASP.NET Core 3.1, Bootstrap  <br />
 * Backend - C# .NET Core 3.1, MVC, REST
 * Database - MSSQL Server, Entity Framework Core 3.1
 * Testing - xUnit, MyTested.AspNetCore.Mvc
-* SendGrid, AutoMapper, ReCapchta
- <br />
+* SendGrid, AutoMapper, ReCapchta <br />
 * Frontend - RAZOR, CSS, JavaScript ES6, jQuery
 * JS/jQuery - Chart, Chosen, Moment, Slick, SweetAlert
 * HTML5 - SVG, Canvas
-* UI/UX design - Photoshop, HTML/CSS, Bootstrap
- <br />
+* UI/UX design - Photoshop, HTML/CSS, Bootstrap <br />
 * Project Management - Jira, Trello
 * Version Control - Git, TortoiseGit, GitHub
 * DevOps - Azure Pipelines
