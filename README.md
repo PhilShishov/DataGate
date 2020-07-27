@@ -58,6 +58,15 @@ https://pharusdatagate.com <br />
 * UI/UX design - Photoshop, HTML/CSS, Bootstrap
 
 ### Security
+ * ASP.Net Core
+ * Recaptcha
+ * X-CSRF
+ * XSS
+ * Antiforgery
+ * Overposting
+ * HTML Sanitization
+ * SQL Injection
+ * SSL
 
 ## Functionality 
 ### Logged in Users
