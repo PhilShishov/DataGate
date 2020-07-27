@@ -39,7 +39,8 @@ Password: **datagate_guest** <br />
 https://pharusdatagate.com <br />
  
  ## Technologies
- * Frameworks - ASP.NET Core 3.1, Bootstrap  <br />
+* Frameworks - ASP.NET Core 3.1, Bootstrap  <br />
+*  <br/>
 * Backend - C# .NET Core 3.1, MVC, REST
 * Database - MSSQL Server, Entity Framework Core 3.1
 * Testing - xUnit, MyTested.AspNetCore.Mvc
