@@ -49,7 +49,7 @@ https://pharusdatagate.com <br />
 * C# .NET Core 3.1, MVC, REST
 * Database - MSSQL Server, Entity Framework Core 3.1
 * Testing - xUnit, MyTested.AspNetCore.Mvc
-* SendGrid, AutoMapper, ReCapchta
+* SendGrid, AutoMapper
 
 ### Frontend
 * RAZOR, CSS, JavaScript ES6, jQuery
@@ -59,7 +59,7 @@ https://pharusdatagate.com <br />
 
 ### Security
  * ASP.Net Core
- * Recaptcha
+ * ReCaptcha
  * X-CSRF
  * XSS
  * Antiforgery
