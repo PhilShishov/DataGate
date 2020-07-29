@@ -6,9 +6,10 @@
     using DataGate.Services.Data.Storage.Contracts;
     using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.InputModels.Funds;
-
+    using DataGate.Web.Resources;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Localization;
 
     [Area("Admin")]
     [Authorize(Roles = GlobalConstants.AdministratorRoleName + "," + GlobalConstants.LegalRoleName)]
@@ -16,13 +17,16 @@
     {
         private readonly IFundStorageService service;
         private readonly IFundSelectListService serviceSelect;
+        private readonly IStringLocalizer<SharedResource> sharedLocalizer;
 
         public FundStorageController(
                         IFundStorageService fundService,
-                        IFundSelectListService fundServiceSelect)
+                        IFundSelectListService fundServiceSelect,
+                        IStringLocalizer<SharedResource> sharedLocalizer)
         {
             this.service = fundService;
             this.serviceSelect = fundServiceSelect;
+            this.sharedLocalizer = sharedLocalizer;
         }
 
         [Route("f/new")]
@@ -57,7 +61,7 @@
             var date = DateTimeParser.ToWebFormat(model.InitialDate.AddDays(1));
 
             return this.ShowInfo(
-                InfoMessages.SuccessfulCreate,
+                this.sharedLocalizer[InfoMessages.SuccessfulCreate],
                 GlobalConstants.FundDetailsRouteName,
                 new { area = GlobalConstants.FundAreaName, id = fundId, date = date });
         }
@@ -99,7 +103,7 @@
             var date = DateTimeParser.ToWebFormat(model.InitialDate.AddDays(1));
 
             return this.ShowInfo(
-                InfoMessages.SuccessfulEdit,
+                this.sharedLocalizer[InfoMessages.SuccessfulEdit],
                 GlobalConstants.FundDetailsRouteName,
                 new { area = GlobalConstants.FundAreaName, id = fundId, date = date });
         }
