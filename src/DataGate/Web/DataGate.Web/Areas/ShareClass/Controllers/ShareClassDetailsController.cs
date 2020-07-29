@@ -9,6 +9,7 @@
     using DataGate.Web.Controllers;
     using DataGate.Web.Dtos.Queries;
     using DataGate.Web.Helpers;
+    using DataGate.Web.Resources;
     using DataGate.Web.ViewModels.Entities;
 
     using Microsoft.AspNetCore.Authorization;
@@ -20,13 +21,16 @@
     {
         private readonly IEntityDetailsService service;
         private readonly IShareClassService shareClassService;
+        private readonly SharedLocalizationService sharedLocalizer;
 
         public ShareClassDetailsController(
             IEntityDetailsService service,
-            IShareClassService shareClassService)
+            IShareClassService shareClassService,
+            SharedLocalizationService sharedLocalizer)
         {
             this.service = service;
             this.shareClassService = shareClassService;
+            this.sharedLocalizer = sharedLocalizer;
         }
 
         [ActionName("Details")]
@@ -55,10 +59,10 @@
                            new { viewModel.Id, viewModel.Date });
             }
 
-            return this.ShowErrorAlertify(
-                           ErrorMessages.UnsuccessfulUpdate,
-                           GlobalConstants.ShareClassDetailsRouteName,
-                           new { viewModel.Id, viewModel.Date });
+            return this.ShowError(
+                  this.sharedLocalizer.GetHtmlString(ErrorMessages.UnsuccessfulUpdate),
+                  GlobalConstants.ShareClassDetailsRouteName,
+                  new { viewModel.Id, viewModel.Date });
         }
     }
 }

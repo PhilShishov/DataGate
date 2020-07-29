@@ -10,6 +10,7 @@
     using DataGate.Web.Dtos.Overviews;
     using DataGate.Web.Dtos.Queries;
     using DataGate.Web.Helpers;
+    using DataGate.Web.Resources;
     using DataGate.Web.ViewModels.Entities;
 
     using Microsoft.AspNetCore.Authorization;
@@ -21,11 +22,16 @@
     {
         private readonly IEntityService service;
         private readonly ISubFundService subFundService;
+        private readonly SharedLocalizationService sharedLocalizer;
 
-        public SubFundShareClassesController(IEntityService service, ISubFundService subFundService)
+        public SubFundShareClassesController(
+            IEntityService service,
+            ISubFundService subFundService,
+            SharedLocalizationService sharedLocalizer)
         {
             this.service = service;
             this.subFundService = subFundService;
+            this.sharedLocalizer = sharedLocalizer;
         }
 
         [HttpGet]
@@ -81,7 +87,7 @@
                 return this.View(viewModel);
             }
 
-            this.ShowErrorAlertify(ErrorMessages.TableIsEmpty);
+            this.ShowError(this.sharedLocalizer.GetHtmlString(ErrorMessages.UnsuccessfulUpdate));
             return this.View(viewModel);
         }
     }

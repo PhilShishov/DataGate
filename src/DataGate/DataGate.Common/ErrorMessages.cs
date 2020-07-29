@@ -5,13 +5,12 @@
         public const string EmailNotConfirmed = "emailNotConfirmed";
         public const string InvalidLoginAttempt = "invalidLogin";
 
+        public const string UnsuccessfulUpdate = "unsuccessfulUpdate";
         public const string UnsuccessfulDelete = "Delete was unsuccessful! Please try again.";
         public const string UnsuccessfulCreate = "Create was unsuccessful! Please try again.";
 
-        public const string TableIsEmpty = "Table is empty! Please make a new selection.";
-        public const string UnsuccessfulUpdate = "Update was unsuccessful! Please try again.";
-        public const string ExistingEntityName = "Name already exists! Please try another one.";
-        public const string ExistingEntityAtDate = "Entity already exists for this time period! Please change Valid From.";
+        public const string ExistingEntityName = "existingEntityName";
+        public const string ExistingEntityAtDate = "existingEntityAtDate";
 
         public const string NotFoundEntity = "The required {0} was not found!";
         public const string EndpointError = "Some error occurs.";

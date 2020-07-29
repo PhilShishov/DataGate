@@ -7,6 +7,7 @@
     using DataGate.Services.Data.ViewSetups;
     using DataGate.Web.Controllers;
     using DataGate.Web.Helpers;
+    using DataGate.Web.Resources;
     using DataGate.Web.ViewModels.Entities;
 
     using Microsoft.AspNetCore.Authorization;
@@ -19,10 +20,14 @@
     {
         private const int PerPageDefaultValue = 30;
         private readonly IEntityService service;
+        private readonly SharedLocalizationService sharedLocalizer;
 
-        public ShareClassesController(IEntityService service)
+        public ShareClassesController(
+            IEntityService service,
+            SharedLocalizationService sharedLocalizer)
         {
             this.service = service;
+            this.sharedLocalizer = sharedLocalizer;
         }
 
         [HttpGet]
@@ -47,10 +52,10 @@
                 return this.View(viewModel);
             }
 
-            return this.ShowErrorAlertify(
-               ErrorMessages.TableIsEmpty,
-               GlobalConstants.AllActionName,
-               GlobalConstants.ShareClassesControllerName);
+            return this.ShowError(
+                  this.sharedLocalizer.GetHtmlString(ErrorMessages.UnsuccessfulUpdate),
+                  GlobalConstants.AllActionName,
+                  GlobalConstants.ShareClassesControllerName);
         }
     }
 }

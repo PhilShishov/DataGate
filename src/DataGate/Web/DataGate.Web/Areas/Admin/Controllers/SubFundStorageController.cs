@@ -57,7 +57,7 @@
             {
                 if (doesExist)
                 {
-                    this.ShowErrorAlertify(ErrorMessages.ExistingEntityName);
+                    this.ShowError(this.sharedLocalizer.GetHtmlString(ErrorMessages.ExistingEntityName));
                 }
 
                 this.SetViewDataValues();
@@ -106,7 +106,7 @@
             {
                 if (doesExistAtDate)
                 {
-                    this.ShowErrorAlertify(ErrorMessages.ExistingEntityAtDate);
+                    this.ShowError(this.sharedLocalizer.GetHtmlString(ErrorMessages.ExistingEntityAtDate));
                 }
 
                 this.SetViewDataValues();
