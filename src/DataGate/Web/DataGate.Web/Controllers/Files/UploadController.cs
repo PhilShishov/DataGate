@@ -8,11 +8,12 @@
     using DataGate.Services.Mapping;
     using DataGate.Web.Helpers;
     using DataGate.Web.InputModels.Files;
-
+    using DataGate.Web.Resources;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.Localization;
 
     [Authorize]
     public class UploadController : BaseController
@@ -20,16 +21,19 @@
         private readonly long fileSizeLimit;
         private readonly string[] permittedExtensions = { GlobalConstants.PdfFileExtension };
         private readonly IWebHostEnvironment environment;
+        private readonly IStringLocalizer<SharedResource> sharedLocalizer;
         private readonly IFileSystemService service;
 
         public UploadController(
                        IFileSystemService service,
                        IWebHostEnvironment environment,
-                       IConfiguration config)
+                       IConfiguration config,
+                       IStringLocalizer<SharedResource> sharedLocalizer)
         {
             this.service = service;
             this.fileSizeLimit = config.GetValue<long>(GlobalConstants.FileSizeLimitConfiguration);
             this.environment = environment;
+            this.sharedLocalizer = sharedLocalizer;
         }
 
         [HttpPost]
@@ -104,7 +108,7 @@
             if (dto.IsFee)
             {
                 return this.ShowInfo(
-                InfoMessages.FileUploaded,
+                this.sharedLocalizer[InfoMessages.FileUploaded],
                 GlobalConstants.FeesRouteName,
                 new
                 {
@@ -116,7 +120,7 @@
             }
 
             return this.ShowInfo(
-                InfoMessages.FileUploaded,
+                this.sharedLocalizer[InfoMessages.FileUploaded],
                 dto.RouteName,
                 new { area = dto.AreaName, id = dto.Id, date = dto.Date });
         }
