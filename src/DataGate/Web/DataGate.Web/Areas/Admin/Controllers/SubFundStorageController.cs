@@ -8,8 +8,10 @@
     using DataGate.Web.Controllers;
     using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.InputModels.SubFunds;
+    using DataGate.Web.Resources;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Localization;
 
     [Area("Admin")]
     [Authorize(Roles = GlobalConstants.AdministratorRoleName + "," + GlobalConstants.LegalRoleName)]
@@ -17,13 +19,16 @@
     {
         private readonly ISubFundStorageService service;
         private readonly ISubFundRepository repository;
+        private readonly IStringLocalizer<SharedResource> sharedLocalizer;
 
         public SubFundStorageController(
                         ISubFundStorageService service,
-                        ISubFundRepository repository)
+                        ISubFundRepository repository,
+                        IStringLocalizer<SharedResource> sharedLocalizer)
         {
             this.service = service;
             this.repository = repository;
+            this.sharedLocalizer = sharedLocalizer;
         }
 
         [Route("sf/new")]
@@ -63,7 +68,7 @@
             var date = DateTimeParser.ToWebFormat(model.InitialDate.AddDays(1));
 
             return this.ShowInfo(
-                InfoMessages.SuccessfulCreate,
+                this.sharedLocalizer[InfoMessages.SuccessfulCreate],
                 GlobalConstants.SubFundDetailsRouteName,
                 new { area = GlobalConstants.SubFundAreaName, id = subFundId, date = date });
         }
@@ -112,7 +117,7 @@
             var date = DateTimeParser.ToWebFormat(model.InitialDate.AddDays(1));
 
             return this.ShowInfo(
-                InfoMessages.SuccessfulEdit,
+                this.sharedLocalizer[InfoMessages.SuccessfulEdit],
                 GlobalConstants.SubFundDetailsRouteName,
                 new { area = GlobalConstants.SubFundAreaName, id = subFundId, date = date });
         }

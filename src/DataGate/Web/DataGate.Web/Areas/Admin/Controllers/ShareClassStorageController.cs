@@ -8,8 +8,10 @@
     using DataGate.Web.Controllers;
     using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.InputModels.ShareClasses;
+    using DataGate.Web.Resources;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Localization;
 
     [Area("Admin")]
     [Authorize(Roles = GlobalConstants.AdministratorRoleName + "," + GlobalConstants.LegalRoleName)]
@@ -17,13 +19,16 @@
     {
         private readonly IShareClassStorageService service;
         private readonly IShareClassRepository repository;
+        private readonly IStringLocalizer<SharedResource> sharedLocalizer;
 
         public ShareClassStorageController(
                         IShareClassStorageService service,
-                        IShareClassRepository repository)
+                        IShareClassRepository repository,
+                        IStringLocalizer<SharedResource> sharedLocalizer)
         {
             this.service = service;
             this.repository = repository;
+            this.sharedLocalizer = sharedLocalizer;
         }
 
         [Route("sc/new")]
@@ -62,7 +67,7 @@
             var date = DateTimeParser.ToWebFormat(model.InitialDate.AddDays(1));
 
             return this.ShowInfo(
-                InfoMessages.SuccessfulCreate,
+                this.sharedLocalizer[InfoMessages.SuccessfulCreate],
                 GlobalConstants.ShareClassDetailsRouteName,
                 new { area = GlobalConstants.ShareClassAreaName, id = subFundId, date = date });
         }
@@ -115,7 +120,7 @@
             var date = DateTimeParser.ToWebFormat(model.InitialDate.AddDays(1));
 
             return this.ShowInfo(
-                InfoMessages.SuccessfulEdit,
+                this.sharedLocalizer[InfoMessages.SuccessfulEdit],
                 GlobalConstants.ShareClassDetailsRouteName,
                 new { area = GlobalConstants.ShareClassAreaName, id = subFundId, date = date });
         }

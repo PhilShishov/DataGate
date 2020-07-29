@@ -110,15 +110,22 @@
                     values: new { area = "Identity", userId = user.Id, code },
                     protocol: this.Request.Scheme);
 
-                string message = string.Format(GlobalConstants.EmailConfirmationMessage, HtmlEncoder.Default.Encode(callbackUrl));
-                await this.emailSender.SendEmailAsync("philip.shishov@pharusmanco.lu", "Pharus Management Lux SA", inputModel.Email, GlobalConstants.ConfirmEmailSubject, message);
+                string emailMessage = string.Format(GlobalConstants.EmailConfirmationMessage, HtmlEncoder.Default.Encode(callbackUrl));
+                await this.emailSender.SendEmailAsync(
+                    "philip.shishov@pharusmanco.lu",
+                    "Pharus Management Lux SA",
+                    inputModel.Email,
+                    GlobalConstants.ConfirmEmailSubject,
+                    emailMessage);
 
-                return this.ShowInfoLocal(string.Format(this.sharedLocalizer[InfoMessages.AddUser], user.UserName, inputModel.RoleType), returnUrl);
+                string infoMessage = string.Format(this.sharedLocalizer[InfoMessages.AddUser], user.UserName, inputModel.RoleType);
+
+                return this.ShowInfoLocal(infoMessage, returnUrl);
             }
 
             this.AddErrors(result);
 
-            return this.ShowErrorLocal(string.Format(ErrorMessages.UnsuccessfulCreate, user.UserName), returnUrl);
+            return this.ShowErrorLocal(this.sharedLocalizer[ErrorMessages.UnsuccessfulCreate], returnUrl);
         }
 
         [HttpGet("/Admin/Admin/EditUser/{id}")]
@@ -185,13 +192,15 @@
                 {
                     this.logger.LogInformation("User updated.");
 
-                    return this.ShowInfoLocal(string.Format(InfoMessages.UpdateUser, user.UserName), returnUrl);
+                    string infoMessage = string.Format(this.sharedLocalizer[InfoMessages.UpdateUser], user.UserName);
+
+                    return this.ShowInfoLocal(infoMessage, returnUrl);
                 }
 
                 this.AddErrors(resultUser);
             }
 
-            return this.ShowErrorLocal(string.Format(ErrorMessages.UnsuccessfulUpdate, user.UserName), returnUrl);
+            return this.ShowErrorLocal(this.sharedLocalizer[ErrorMessages.UnsuccessfulUpdate], returnUrl);
         }
 
         [HttpGet("/Admin/Admin/DeleteUser/{id}")]
@@ -230,13 +239,15 @@
                 {
                     this.logger.LogInformation("User deleted.");
 
-                    return this.ShowInfoLocal(string.Format(InfoMessages.RemoveUser, user.UserName), returnUrl);
+                    string infoMessage = string.Format(this.sharedLocalizer[InfoMessages.RemoveUser], user.UserName);
+
+                    return this.ShowInfoLocal(infoMessage, returnUrl);
                 }
 
                 this.AddErrors(result);
             }
 
-            return this.ShowErrorLocal(string.Format(ErrorMessages.UnsuccessfulDelete, "ok"), returnUrl);
+            return this.ShowErrorLocal(this.sharedLocalizer[ErrorMessages.UnsuccessfulDelete], returnUrl);
         }
 
         private async Task AssignRoleToUser(CreateUserInputModel inputModel, ApplicationUser user)

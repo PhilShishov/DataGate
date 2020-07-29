@@ -6,20 +6,25 @@
     using DataGate.Common;
     using DataGate.Data.Models.Enums;
     using DataGate.Data.Models.Users;
-
+    using DataGate.Web.Resources;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
+    using Microsoft.Extensions.Localization;
 
     [AllowAnonymous]
     public class ConfirmEmailModel : PageModel
     {
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IStringLocalizer<SharedResource> sharedLocalizer;
 
-        public ConfirmEmailModel(UserManager<ApplicationUser> userManager)
+        public ConfirmEmailModel(
+            UserManager<ApplicationUser> userManager,
+            IStringLocalizer<SharedResource> sharedLocalizer)
         {
             this.userManager = userManager;
+            this.sharedLocalizer = sharedLocalizer;
         }
 
         public async Task<IActionResult> OnGetAsync(string userId, string code)
@@ -42,9 +47,12 @@
             }
 
             var notificationType = NotificationType.success;
-            string message = string.Format(GlobalConstants.SweetAlertScript, notificationType.ToString().ToUpper(), InfoMessages.SuccessfullyConfirmedEmail, notificationType);
+            var notificationTypeUpper = notificationType.ToString().ToUpper();
+            string message = this.sharedLocalizer[InfoMessages.SuccessfullyConfirmedEmail];
 
-            this.TempData[GlobalConstants.SweetAlertKey] = message;
+            string notification = string.Format(GlobalConstants.SweetAlertScript, notificationTypeUpper, message, notificationType);
+
+            this.TempData[GlobalConstants.SweetAlertKey] = notification;
             return this.Redirect("./Login");
         }
     }
