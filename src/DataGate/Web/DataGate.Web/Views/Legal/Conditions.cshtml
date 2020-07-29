@@ -1,6 +1,6 @@
 ﻿@{
     this.Layout = "_LayoutIdentity";
-    this.ViewData["Title"] = SharedLocalizer["Conditions of Use"];
+    this.ViewData["Title"] = SharedLocalizer.GetHtmlString("Conditions of Use");
 }
 
 <section class="fxt-template-layout2">
@@ -11,7 +11,7 @@
                 <div class="fxt-content">
                     <partial name="Identity/_LoginRedirectPartial" />
                     <h3 class="mt-3">
-                        @SharedLocalizer["Conditions of Use"]
+                        @SharedLocalizer.GetHtmlString("Conditions of Use")
                     </h3>
                     <div class="div-legal-text">
                         <p>

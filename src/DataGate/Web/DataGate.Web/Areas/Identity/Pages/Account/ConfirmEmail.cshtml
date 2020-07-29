@@ -2,7 +2,7 @@
 @model ConfirmEmailModel
 
 @{
-    ViewData["Title"] = SharedLocalizer["Confirm email"];
+    ViewData["Title"] = SharedLocalizer.GetHtmlString("Confirm email");
 }
 
 <section class="fxt-template-layout2">
@@ -12,7 +12,7 @@
                 <div class="fxt-content">
                     <partial name="Identity/_LoginRedirectPartial" />
                     <h3 class="login-brand">
-                        @SharedLocalizer["Thank you for confirming your email."]
+                        @SharedLocalizer.GetHtmlString("Thank you for confirming your email.")
                     </h3>
                     <div class="fxt-form">
                     </div>

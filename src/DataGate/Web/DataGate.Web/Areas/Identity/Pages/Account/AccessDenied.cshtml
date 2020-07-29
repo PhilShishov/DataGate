@@ -2,7 +2,7 @@
 @model AccessDeniedModel
 
 @{
-    ViewData["Title"] = SharedLocalizer["Access Denied"];
+    ViewData["Title"] = SharedLocalizer.GetHtmlString("Access Denied");
 }
 
-<h2 class="text-center text-danger my-4">@SharedLocalizer["You don't have access to this resource."]</h2>
+<h2 class="text-center text-danger my-4">@SharedLocalizer.GetHtmlString("You don't have access to this resource.")</h2>

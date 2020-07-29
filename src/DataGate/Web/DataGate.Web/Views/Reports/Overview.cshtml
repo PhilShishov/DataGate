@@ -1,10 +1,10 @@
 ﻿@{
-    ViewData["Title"] = SharedLocalizer["Reports"];
+    ViewData["Title"] = SharedLocalizer.GetHtmlString("Reports");
 }
 
 <div class="push">
     <h2 class="text-center">
-        @SharedLocalizer["ALL PHARUS REPORTS"]
+        @SharedLocalizer.GetHtmlString("ALL PHARUS REPORTS")
     </h2>
 
     <hr class="hr-2 bg-pharus">
@@ -12,19 +12,19 @@
         <div class="row mb-4">
             <div class="column">
                 <div class="card">
-                    <a asp-area="" asp-route="fundreports">@SharedLocalizer["Fund Reports"]</a>
+                    <a asp-area="" asp-route="fundreports">@SharedLocalizer.GetHtmlString("Fund Reports")</a>
                 </div>
             </div>
 
             <div class="column">
                 <div class="card">
-                    <a asp-area="" asp-route="reports" asp-route-type="@GlobalConstants.SubFundAreaName">@SharedLocalizer["Sub Fund Reports"]</a>
+                    <a asp-area="" asp-route="reports" asp-route-type="@GlobalConstants.SubFundAreaName">@SharedLocalizer.GetHtmlString("Sub Fund Reports")</a>
                 </div>
             </div>
 
             <div class="column">
                 <div class="card">
-                    <a asp-area="" asp-route="reports">@SharedLocalizer["Share Class Reports"]</a>
+                    <a asp-area="" asp-route="reports">@SharedLocalizer.GetHtmlString("Share Class Reports")</a>
                 </div>
             </div>
         </div>

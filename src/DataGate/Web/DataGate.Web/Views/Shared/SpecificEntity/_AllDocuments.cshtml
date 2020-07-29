@@ -6,24 +6,24 @@
             <thead>
                 <tr>
                     <th>
-                        @SharedLocalizer["File Description"]
+                        @SharedLocalizer.GetHtmlString("File Description")
                     </th>
                     <th>
-                        @SharedLocalizer["Valid From:"]
+                        @SharedLocalizer.GetHtmlString("Valid From:")
                     </th>
                     <th>
-                        @SharedLocalizer["Valid Until:"]
+                        @SharedLocalizer.GetHtmlString("Valid Until:")
                     </th>
                     <th>
-                        @SharedLocalizer["File Name"]
+                        @SharedLocalizer.GetHtmlString("File Name")
                     </th>
                     <th>
-                        @SharedLocalizer["File Type"]
+                        @SharedLocalizer.GetHtmlString("File Type")
                     </th>
                     @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.IsInRole(GlobalConstants.LegalRoleName))
                     {
                         <th>
-                            @SharedLocalizer["Actions"]
+                            @SharedLocalizer.GetHtmlString("Actions")
                         </th>
                     }
                 </tr>
@@ -60,7 +60,7 @@
                         {
                             <td class="p-1 text-center">
                                 <button type="button" class="btn btn-pharus btn-sm mr-1 btn-delete">
-                                    @SharedLocalizer["Delete"]
+                                    @SharedLocalizer.GetHtmlString("Delete")
                                 </button>
                             </td>
                         }
@@ -92,12 +92,12 @@
              tableDoc_dist = '.tbl-distinct-documents';
 
         const MESSAGES_DELETE_DOC = {
-            TITLE: '@Html.Raw(SharedLocalizer["Are you sure?"].Value.ToString())',
-            TEXT: '@Html.Raw(SharedLocalizer["Once deleted, you will not be able to recover this file!"].Value.ToString())',
-            BTN_CANCEL: '@Html.Raw(SharedLocalizer["Cancel"].Value.ToString())',
-            TITLE_FAIL: '@Html.Raw(SharedLocalizer["Error deleting!"].Value.ToString())',
-            TEXT_FAIL: '@Html.Raw(SharedLocalizer["Please try again"].Value.ToString())',
-            TITLE_SUCCESS: '@Html.Raw(SharedLocalizer["Your file has been deleted!"].Value.ToString())'
+            TITLE: '@Html.Raw(SharedLocalizer.GetHtmlString("Are you sure?").Value.ToString())',
+            TEXT: '@Html.Raw(SharedLocalizer.GetHtmlString("Once deleted, you will not be able to recover this file!").Value.ToString())',
+            BTN_CANCEL: '@Html.Raw(SharedLocalizer.GetHtmlString("Cancel").Value.ToString())',
+            TITLE_FAIL: '@Html.Raw(SharedLocalizer.GetHtmlString("Error deleting!").Value.ToString())',
+            TEXT_FAIL: '@Html.Raw(SharedLocalizer.GetHtmlString("Please try again").Value.ToString())',
+            TITLE_SUCCESS: '@Html.Raw(SharedLocalizer.GetHtmlString("Your file has been deleted!").Value.ToString())'
         };
 
         deleteFile(tokenDoc, areaName, tableDoc, tableDoc_dist, MESSAGES_DELETE_DOC);

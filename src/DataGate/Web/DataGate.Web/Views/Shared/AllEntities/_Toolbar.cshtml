@@ -22,7 +22,7 @@
                 data-toggle="modal"
                 data-target="#columnModal"
                 name="showColumnSelection">
-            @SharedLocalizer["Columns"]
+            @SharedLocalizer.GetHtmlString("Columns")
         </button>
     </div>
 
@@ -32,13 +32,13 @@
                    asp-for="IsActive"
                    id="activeCheckBox">
             <span class="el-switch-style"></span>
-            <span class="d-block text-el-switch">@SharedLocalizer["Active"]</span>
+            <span class="d-block text-el-switch">@SharedLocalizer.GetHtmlString("Active")</span>
 
         </label>
     </div>
     <div class="ml-4">
         <a class="btn btn-pharus btn-sm" asp-action="All">
-            @SharedLocalizer["Reset"]
+            @SharedLocalizer.GetHtmlString("Reset")
         </a>
     </div>
 
@@ -52,7 +52,7 @@
         <input type="submit"
                class="btn btn-pharus btn-sm mb-1"
                name="Command"
-               value="@SharedLocalizer["Update"]"></>
+               value="@SharedLocalizer.GetHtmlString("Update")"></>
         <span asp-validation-for="Date" class="text-danger"></span>
     </div>
 
@@ -87,7 +87,7 @@
         <a asp-area="Admin"
            asp-route="@routeCreate"
            class="btn btn-sm btn-pharus">
-            @SharedLocalizer["Create"]
+            @SharedLocalizer.GetHtmlString("Create")
         </a>
     </div>
 }

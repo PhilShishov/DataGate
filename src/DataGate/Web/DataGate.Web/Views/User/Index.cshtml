@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<DataGate.Data.Models.Entities.TbHistoryShareClass>
 
 @{
-    ViewData["Title"] = SharedLocalizer["User Panel"];
+    ViewData["Title"] = SharedLocalizer.GetHtmlString("User Panel");
 }
 
 @section Styles{
@@ -10,7 +10,7 @@
 
 <div class="push">
     <h2 class="text-center">
-        @SharedLocalizer["PHARUS DATAGATE PLATFORM"]
+        @SharedLocalizer.GetHtmlString("PHARUS DATAGATE PLATFORM")
     </h2>
 
     <hr class="hr-2 bg-pharus mb-4">
@@ -42,19 +42,19 @@
             <div class="row mb-4">
                 <div class="column">
                     <div class="card">
-                        <a asp-area="Fund" asp-route="allFunds">@SharedLocalizer["Fund Library"]</a>
+                        <a asp-area="Fund" asp-route="allFunds">@SharedLocalizer.GetHtmlString("Fund Library")</a>
                     </div>
                 </div>
 
                 <div class="column">
                     <div class="card">
-                        <a asp-area="SubFund" asp-route="allSubFunds">@SharedLocalizer["Sub Fund Library"]</a>
+                        <a asp-area="SubFund" asp-route="allSubFunds">@SharedLocalizer.GetHtmlString("Sub Fund Library")</a>
                     </div>
                 </div>
 
                 <div class="column">
                     <div class="card">
-                        <a asp-area="ShareClass" asp-route="allShareClasses">@SharedLocalizer["Share Class Library"]</a>
+                        <a asp-area="ShareClass" asp-route="allShareClasses">@SharedLocalizer.GetHtmlString("Share Class Library")</a>
                     </div>
                 </div>
             </div>
@@ -62,19 +62,19 @@
             <div class="row mb-4">
                 <div class="column">
                     <div class="card">
-                        <a asp-area="" asp-route="allagreements">@SharedLocalizer["Agreements Library"]</a>
+                        <a asp-area="" asp-route="allagreements">@SharedLocalizer.GetHtmlString("Agreements Library")</a>
                     </div>
                 </div>
 
                 <div class="column">
                     <div class="card">
-                        <a asp-area="" asp-route="allreports">@SharedLocalizer["Reports"]</a>
+                        <a asp-area="" asp-route="allreports">@SharedLocalizer.GetHtmlString("Reports")</a>
                     </div>
                 </div>
 
                 <div class="column">
                     <div class="card">
-                        <a href="https://www.pharusmanco.lu/" target="_blank">@SharedLocalizer["Main Website"]</a>
+                        <a href="https://www.pharusmanco.lu/" target="_blank">@SharedLocalizer.GetHtmlString("Main Website")</a>
                     </div>
                 </div>
             </div>
@@ -84,17 +84,17 @@
                 <div class="row">
                     <div class="column">
                         <div class="card">
-                            <a href="">@SharedLocalizer["Projects"]</a>
+                            <a href="">@SharedLocalizer.GetHtmlString("Projects")</a>
                         </div>
                     </div>
                     <div class="column">
                         <div class="card">
-                            <a asp-area="Admin" asp-controller="Admin" asp-action="ViewUsers">@SharedLocalizer["View Users"]</a>
+                            <a asp-area="Admin" asp-controller="Admin" asp-action="ViewUsers">@SharedLocalizer.GetHtmlString("View Users")</a>
                         </div>
                     </div>
                     <div class="column">
                         <div class="card">
-                            <a asp-area="Admin" asp-controller="Admin" asp-action="CreateUser">@SharedLocalizer["Create User"]</a>
+                            <a asp-area="Admin" asp-controller="Admin" asp-action="CreateUser">@SharedLocalizer.GetHtmlString("Create User")</a>
                         </div>
                     </div>
                 </div>

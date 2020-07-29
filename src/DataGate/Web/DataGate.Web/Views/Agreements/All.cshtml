@@ -1,7 +1,7 @@
 ﻿@model DataGate.Web.ViewModels.Agreements.AllAgreementOverviewViewModel
 
 @{
-    ViewData["Title"] = SharedLocalizer["Agreements"];
+    ViewData["Title"] = SharedLocalizer.GetHtmlString("Agreements");
 }
 
 <div class="container-all-funds justify-content-between">
@@ -15,7 +15,7 @@
                             <a asp-area=""
                                asp-route="allagreements"
                                class="btn btn-pharus btn-sm mb-1">
-                                @SharedLocalizer["Back to All"]
+                                @SharedLocalizer.GetHtmlString("Back to All")
                             </a>
                         </div>
 
@@ -32,11 +32,11 @@
 
                                 <input type="submit"
                                        class="btn btn-pharus btn-sm mb-1"
-                                       value=@SharedLocalizer["Update"]></>
+                                       value=@SharedLocalizer.GetHtmlString("Update")></>
                             </div>
                         </form>
                         <div class="title-main-agreements">
-                            <h2 class="">@Model.SelectedType @SharedLocalizer["Agreements"]</h2>
+                            <h2 class="">@Model.SelectedType @SharedLocalizer.GetHtmlString("Agreements")</h2>
                         </div>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
             <hr class="mt-1 mb-0" />
         </div>
 
-        <h2 class="text-center title-responsive">@Model.SelectedType @SharedLocalizer["Agreements"]</h2>
+        <h2 class="text-center title-responsive">@Model.SelectedType @SharedLocalizer.GetHtmlString("Agreements")</h2>
 
         <form id="form-agreement" method="post">
             <div class="table-wrapper-double-scroll">
@@ -52,27 +52,27 @@
                     <thead>
                         <tr>
                             <th class="th-padding-fxt">
-                                @SharedLocalizer["File Description"]
+                                @SharedLocalizer.GetHtmlString("File Description")
                             </th>
                             <th class="th-padding-fxt">
-                                @SharedLocalizer["Company Name"]
+                                @SharedLocalizer.GetHtmlString("Company Name")
                             </th>
                             <th class="th-padding-fxt">
-                                @SharedLocalizer["Contract Date"]
+                                @SharedLocalizer.GetHtmlString("Contract Date")
                             </th>
                             <th class="th-padding-fxt">
-                                @SharedLocalizer["Activation Date"]
+                                @SharedLocalizer.GetHtmlString("Activation Date")
                             </th>
                             <th class="th-padding-fxt">
-                                @SharedLocalizer["Expiration Date"]
+                                @SharedLocalizer.GetHtmlString("Expiration Date")
                             </th>
                             <th class="th-padding-fxt">
-                                @SharedLocalizer["File Name"]
+                                @SharedLocalizer.GetHtmlString("File Name")
                             </th>
                             @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.IsInRole(GlobalConstants.LegalRoleName))
                             {
                                 <th>
-                                    @SharedLocalizer["File Name"]
+                                    @SharedLocalizer.GetHtmlString("File Name")
                                 </th>
                             }
                         </tr>
@@ -113,7 +113,7 @@
                                 {
                                     <td class="p-1 text-center">
                                         <button type="button" class="btn btn-pharus btn-sm mr-1 btn-delete">
-                                            @SharedLocalizer["Delete"]
+                                            @SharedLocalizer.GetHtmlString("Delete")
                                         </button>
                                     </td>
                                 }
@@ -143,12 +143,12 @@
             tableAgr_dist = '.tbl-distinct-agreements';
 
         const MESSAGES_DELETE_AGR = {
-            TITLE: '@Html.Raw(SharedLocalizer["Are you sure?"].Value.ToString())',
-            TEXT: '@Html.Raw(SharedLocalizer["Once deleted, you will not be able to recover this file!"].Value.ToString())',
-            BTN_CANCEL: '@Html.Raw(SharedLocalizer["Cancel"].Value.ToString())',
-            TITLE_FAIL: '@Html.Raw(SharedLocalizer["Error deleting!"].Value.ToString())',
-            TEXT_FAIL: '@Html.Raw(SharedLocalizer["Please try again"].Value.ToString())',
-            TITLE_SUCCESS: '@Html.Raw(SharedLocalizer["Your file has been deleted!"].Value.ToString())'
+            TITLE: '@Html.Raw(SharedLocalizer.GetHtmlString("Are you sure?").Value.ToString())',
+            TEXT: '@Html.Raw(SharedLocalizer.GetHtmlString("Once deleted, you will not be able to recover this file!").Value.ToString())',
+            BTN_CANCEL: '@Html.Raw(SharedLocalizer.GetHtmlString("Cancel").Value.ToString())',
+            TITLE_FAIL: '@Html.Raw(SharedLocalizer.GetHtmlString("Error deleting!").Value.ToString())',
+            TEXT_FAIL: '@Html.Raw(SharedLocalizer.GetHtmlString("Please try again").Value.ToString())',
+            TITLE_SUCCESS: '@Html.Raw(SharedLocalizer.GetHtmlString("Your file has been deleted!").Value.ToString())'
         };
 
         deleteFile(tokenAgr, areaName, tableAgr, tableAgr_dist, MESSAGES_DELETE_AGR);

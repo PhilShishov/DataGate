@@ -2,7 +2,7 @@
 @model LoginModel
 
 @{
-    ViewData["Title"] = SharedLocalizer["Login"];
+    ViewData["Title"] = SharedLocalizer.GetHtmlString("Login");
 }
 <section class="fxt-template-layout2">
     <div class="container-fluid custom-container">
@@ -11,8 +11,8 @@
             <div class="col-xl-4 col-lg-6 col-12 fxt-bg-color">
                 <div class="fxt-content">
                     <partial name="Identity/_LoginRedirectPartial" />
-                    <h2 class="login-brand">@SharedLocalizer["DataGate"]</h2>
-                    <h2 class="login-title">@SharedLocalizer["Login"]</h2>
+                    <h2 class="login-brand">@SharedLocalizer.GetHtmlString("DataGate")</h2>
+                    <h2 class="login-title">@SharedLocalizer.GetHtmlString("Login")</h2>
                     <div class="fxt-form">
                         <form method="POST" autocomplete="on">
                             <div class="form-group col-md-12 my-4">
@@ -22,7 +22,7 @@
                                            autofocus
                                            class="form-control"
                                            id="username"
-                                           placeholder=@SharedLocalizer["Username"]>
+                                           placeholder=@SharedLocalizer.GetHtmlString("Username")>
                                     <div class="d-flex justify-content-center">
                                         <span></span>
                                         <span asp-validation-for="Input.Username" class="text-danger"></span>
@@ -51,7 +51,7 @@
                                             class="btn"
                                             asp-area="Identity"
                                             asp-page="/Account/Login">
-                                        @SharedLocalizer["LOGIN"]
+                                        @SharedLocalizer.GetHtmlString("LOGIN")
                                     </button>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
                                     <div class="fxt-checkbox-area">
                                         <a asp-area="Identity"
                                            asp-page="/Account/ForgotPassword"
-                                           class="switcher-text">@SharedLocalizer["Forgot Password"]</a>
+                                           class="switcher-text">@SharedLocalizer.GetHtmlString("Forgot Password")</a>
                                     </div>
                                 </div>
                             </div>

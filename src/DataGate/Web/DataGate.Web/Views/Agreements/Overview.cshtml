@@ -1,10 +1,10 @@
 ﻿@{
-    ViewData["Title"] = SharedLocalizer["Agreements"];
+    ViewData["Title"] = SharedLocalizer.GetHtmlString("Agreements");
 }
 
 <div class="push">
     <h2 class="text-center">
-        @SharedLocalizer["ALL PHARUS AGREEMENTS"]
+        @SharedLocalizer.GetHtmlString("ALL PHARUS AGREEMENTS")
     </h2>
 
     <hr class="hr-2 bg-pharus">
@@ -12,19 +12,19 @@
         <div class="row mb-4">
             <div class="column">
                 <div class="card">
-                    <a asp-area="" asp-route="agreements" asp-route-type="@GlobalConstants.FundAreaName">@SharedLocalizer["Fund Agreements"]</a>
+                    <a asp-area="" asp-route="agreements" asp-route-type="@GlobalConstants.FundAreaName">@SharedLocalizer.GetHtmlString("Fund Agreements")</a>
                 </div>
             </div>
 
             <div class="column">
                 <div class="card">
-                    <a asp-area="" asp-route="agreements" asp-route-type="@GlobalConstants.SubFundAreaName">@SharedLocalizer["Sub Fund Agreements"]</a>
+                    <a asp-area="" asp-route="agreements" asp-route-type="@GlobalConstants.SubFundAreaName">@SharedLocalizer.GetHtmlString("Sub Fund Agreements")</a>
                 </div>
             </div>
 
             <div class="column">
                 <div class="card">
-                    <a asp-area="" asp-route="agreements" asp-route-type="@GlobalConstants.ShareClassAreaName">@SharedLocalizer["Share Class Agreements"]</a>
+                    <a asp-area="" asp-route="agreements" asp-route-type="@GlobalConstants.ShareClassAreaName">@SharedLocalizer.GetHtmlString("Share Class Agreements")</a>
                 </div>
             </div>
         </div>

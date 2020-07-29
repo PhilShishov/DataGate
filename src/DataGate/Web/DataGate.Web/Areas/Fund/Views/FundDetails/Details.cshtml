@@ -1,7 +1,7 @@
 ﻿@model SpecificEntityViewModel
 
 @{
-    this.ViewData["Title"] = SharedLocalizer["Funds"];
+    this.ViewData["Title"] = SharedLocalizer.GetHtmlString("Funds");
     this.Layout = "~/Views/Shared/_Layout.cshtml";
 
     var entityName = @Model.Entity.ToList()[1][GlobalConstants.IndexEntityNameInTable];

@@ -1,6 +1,6 @@
 ﻿@model DataGate.Web.ViewModels.Reports.ReportOverviewViewModel
 @{
-    ViewData["Title"] = SharedLocalizer["Reports"];
+    ViewData["Title"] = SharedLocalizer.GetHtmlString("Reports");
 
     var date = DateTimeParser.ToWebFormat(Model.Date);
 }
@@ -16,7 +16,7 @@
                             <a asp-area=""
                                asp-route="allreports"
                                class="btn btn-pharus btn-sm mb-1">
-                                @SharedLocalizer["Back to All"]
+                                @SharedLocalizer.GetHtmlString("Back to All")
                             </a>
                         </div>
 
@@ -30,7 +30,7 @@
 
                                 <input type="submit"
                                        class="btn btn-pharus btn-sm mb-1 mr-2"
-                                       value=@SharedLocalizer["Update"]></>
+                                       value=@SharedLocalizer.GetHtmlString("Update")></>
                             </div>
                         </form>
 
@@ -53,7 +53,7 @@
                         </div>
 
                         <div class="title-main-reports">
-                            <h2 class="">@Model.SelectedType @SharedLocalizer["Reports"]</h2>
+                            <h2 class="">@Model.SelectedType @SharedLocalizer.GetHtmlString("Reports")</h2>
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
             <hr class="mt-1 mb-0" />
         </div>
 
-        <h2 class="text-center title-responsive">@Model.SelectedType @SharedLocalizer["Reports"]</h2>
+        <h2 class="text-center title-responsive">@Model.SelectedType @SharedLocalizer.GetHtmlString("Reports")</h2>
 
         <form id="form-report" method="post">
             <div class="table-responsive mx-auto">
@@ -69,25 +69,25 @@
                     <thead>
                         <tr>
                             <th class="th-fund-name">
-                                @SharedLocalizer["Fund Name"]
+                                @SharedLocalizer.GetHtmlString("Fund Name")
                             </th>
                             <th>
-                                @SharedLocalizer["Fund Admin SF Code"]
+                                @SharedLocalizer.GetHtmlString("Fund Admin SF Code")
                             </th>
                             <th class="th-subfund-name">
-                                @SharedLocalizer["SubFund Name"]
+                                @SharedLocalizer.GetHtmlString("SubFund Name")
                             </th>
                             <th>
-                                @SharedLocalizer["CCY"]
+                                @SharedLocalizer.GetHtmlString("CCY")
                             </th>
                             <th>
-                                @SharedLocalizer["NAV Frequency"]
+                                @SharedLocalizer.GetHtmlString("NAV Frequency")
                             </th>
                             <th>
-                                @SharedLocalizer["EOM NAV date"]
+                                @SharedLocalizer.GetHtmlString("EOM NAV date")
                             </th>
                             <th>
-                                @SharedLocalizer["AuM in EUR"]
+                                @SharedLocalizer.GetHtmlString("AuM in EUR")
                             </th>
                         </tr>
                     </thead>
@@ -131,7 +131,7 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th colspan="6" style="text-align:right">@SharedLocalizer["TOTAL:"]</th>
+                            <th colspan="6" style="text-align:right">@SharedLocalizer.GetHtmlString("TOTAL:")</th>
                             <th class="th-aum-total-container"></th>
                         </tr>
                     </tfoot>

@@ -1,7 +1,7 @@
 ﻿@model EditSubFundInputModel
 
 @{
-    ViewData["Title"] = SharedLocalizer["Edit Sub Fund"];
+    ViewData["Title"] = SharedLocalizer.GetHtmlString("Edit Sub Fund");
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -11,7 +11,7 @@
               asp-action="Edit"
               method="post"
               class="d-inline w-75">
-            <h4 class="mb-5">@SharedLocalizer["Edit Sub Fund"] @Model.SubFundName</h4>
+            <h4 class="mb-5">@SharedLocalizer.GetHtmlString("Edit Sub Fund") @Model.SubFundName</h4>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="d-inline" id="div-inputs-to-format">
 
@@ -469,12 +469,12 @@
             <div class="button-holder my-4">
                 <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
                 <a class="btn btn-pharus btn-lg" asp-area="@GlobalConstants.SubFundAreaName" asp-route="@GlobalConstants.AllSubFundsRouteName">
-                    @SharedLocalizer["Back to List"]
+                    @SharedLocalizer.GetHtmlString("Back to List")
                 </a>
                 <button type="submit"
                         class="btn btn-pharus btn-lg btn-confirm-update ml-5"
                         name="update_button">
-                    @SharedLocalizer["Update Sub Fund"]
+                    @SharedLocalizer.GetHtmlString("Update Sub Fund")
                 </button>
             </div>
         </form>

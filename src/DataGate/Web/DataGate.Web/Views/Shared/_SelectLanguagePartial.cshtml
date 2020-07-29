@@ -5,14 +5,14 @@
     var requestedCultureName = string.Empty;
     var flag = string.Empty;
 
-    if (currentCulture.RequestCulture.Culture.Name == GlobalConstants.CurrentCultureInfo)
+    if (currentCulture.RequestCulture.Culture.Name == GlobalConstants.DefaultCultureInfo)
     {
         requestedCultureName = GlobalConstants.ItalianCultureInfo;
         flag = "flag-italy.svg";
     }
     else
     {
-        requestedCultureName = GlobalConstants.CurrentCultureInfo;
+        requestedCultureName = GlobalConstants.DefaultCultureInfo;
         flag = "flag-usa.svg";
     }
 }
@@ -22,6 +22,6 @@
    asp-action="SetLanguage"
    asp-route-culture="@requestedCultureName"
    asp-route-returnUrl="@returnUrl">
-    @SharedLocalizer["Language"]
+    @SharedLocalizer.GetHtmlString("Language")
     <img src="~/images/@flag">
 </a>
