@@ -18,6 +18,9 @@
     [Authorize]
     public class UploadController : BaseController
     {
+        private const string UploadDocumentPartialView = "Upload/_UploadDocument";
+        private const string UploadAgreementPartialView = "Upload/_UploadAgreement";
+
         private readonly long fileSizeLimit;
         private readonly string[] permittedExtensions = { GlobalConstants.PdfFileExtension };
         private readonly IWebHostEnvironment environment;
@@ -44,7 +47,7 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.PartialView("Upload/_UploadDocument", model);
+                return this.PartialView(UploadDocumentPartialView, model);
             }
 
             string path = await FileHelpers.ProcessFormFile(model.FileToUpload, this.ModelState, this.permittedExtensions,
@@ -52,7 +55,7 @@
 
             if (!this.ModelState.IsValid)
             {
-                return this.PartialView("Upload/_UploadDocument", model);
+                return this.PartialView(UploadDocumentPartialView, model);
             }
 
             var dto = AutoMapperConfig.MapperInstance.Map<UploadOnSuccessDto>(model);
@@ -77,7 +80,7 @@
         {
             if (!this.ModelState.IsValid)
             {
-                return this.PartialView("Upload/_UploadAgreement", model);
+                return this.PartialView(UploadAgreementPartialView, model);
             }
 
             string path = await FileHelpers.ProcessFormFile(model.FileToUpload, this.ModelState, this.permittedExtensions,
@@ -85,7 +88,7 @@
 
             if (!this.ModelState.IsValid)
             {
-                return this.PartialView("Upload/_UploadAgreement", model);
+                return this.PartialView(UploadAgreementPartialView, model);
             }
 
             var dto = AutoMapperConfig.MapperInstance.Map<UploadOnSuccessDto>(model);

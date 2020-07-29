@@ -20,15 +20,15 @@
         [Display(Name = "Official Fund Name")]
         public string FundName { get; set; }
 
-        [Required(ErrorMessage = ErrorMessages.NotSelectedValue)]
+        [Required(ErrorMessage = ValidationMessages.NotSelectedValue)]
         [Display(Name = "Legal Form")]
         public string LegalForm { get; set; }
 
-        [Required(ErrorMessage = ErrorMessages.NotSelectedValue)]
+        [Required(ErrorMessage = ValidationMessages.NotSelectedValue)]
         [Display(Name = "Legal Vehicle")]
         public string LegalVehicle { get; set; }
 
-        [Required(ErrorMessage = ErrorMessages.NotSelectedValue)]
+        [Required(ErrorMessage = ValidationMessages.NotSelectedValue)]
         [Display(Name = "Legal Type")]
         public string LegalType { get; set; }
 
@@ -36,7 +36,7 @@
         [Display(Name = "Dep. Code")]
         public string DEPCode { get; set; }
 
-        [Required(ErrorMessage = ErrorMessages.NotSelectedValue)]
+        [Required(ErrorMessage = ValidationMessages.NotSelectedValue)]
         [Display(Name = "Company Description")]
         public string CompanyTypeDesc { get; set; }
 

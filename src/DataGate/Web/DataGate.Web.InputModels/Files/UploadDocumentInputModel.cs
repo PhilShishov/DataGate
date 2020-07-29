@@ -24,7 +24,7 @@ namespace DataGate.Web.InputModels.Files
             this.DocumentTypes = new List<string>();
         }
 
-        [Required(ErrorMessage = ErrorMessages.NotSelectedValue)]
+        [Required(ErrorMessage = ValidationMessages.NotSelectedValue)]
         [Display(Name = "Document Type")]
         public string DocumentType { get; set; }
 

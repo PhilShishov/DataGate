@@ -6,23 +6,6 @@
 
     public partial class BaseController : Controller
     {
-        public void ShowInfoAlertify(string infoMessage)
-        {
-            this.TempData[GlobalConstants.AlertifyKey] = FormatInfoAlertify(infoMessage);
-        }
-
-        public IActionResult ShowInfoAlertify(string infoMessage, string route, object routeValues)
-        {
-            this.TempData[GlobalConstants.AlertifyKey] = FormatInfoAlertify(infoMessage);
-            return this.RedirectToRoute(route, routeValues);
-        }
-
-        public IActionResult ShowInfoAlertify(string infoMessage, string action, string controller)
-        {
-            this.TempData[GlobalConstants.AlertifyKey] = FormatInfoAlertify(infoMessage);
-            return this.RedirectToAction(action, controller);
-        }
-
         public void ShowErrorAlertify(string errorMessage)
         {
             this.TempData[GlobalConstants.AlertifyKey] = FormatErrorAlertify(errorMessage);
@@ -56,11 +39,6 @@
         {
             this.TempData[GlobalConstants.SweetAlertKey] = FormatInfoSweetAlert(infoMessage);
             return this.LocalRedirect(action);
-        }
-
-        private static string FormatInfoAlertify(string infoMessage)
-        {
-            return string.Format(GlobalConstants.AlertifyScript, infoMessage, NotificationType.success);
         }
 
         private static string FormatErrorAlertify(string errorMessage)

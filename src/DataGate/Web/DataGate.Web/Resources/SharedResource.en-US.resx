@@ -319,7 +319,10 @@
     <value>Your email is not confirmed. Please confirm your email before login!</value>
   </data>
   <data name="emailRequired" xml:space="preserve">
-    <value>Email Required</value>
+    <value>Email required</value>
+  </data>
+  <data name="emailValid" xml:space="preserve">
+    <value>Email is not a valid email address.</value>
   </data>
   <data name="Enter your email" xml:space="preserve">
     <value>Enter your email</value>
@@ -411,11 +414,17 @@
   <data name="New Sub Fund" xml:space="preserve">
     <value>New Sub Fund</value>
   </data>
+  <data name="newPasswordMismatch" xml:space="preserve">
+    <value>New password and confirmation password do not match.</value>
+  </data>
   <data name="No result produced by your request." xml:space="preserve">
     <value>No result produced by your request.</value>
   </data>
   <data name="No, cancel it!" xml:space="preserve">
     <value>No, cancel it!</value>
+  </data>
+  <data name="notSelectedValue" xml:space="preserve">
+    <value>Please select at least one option!</value>
   </data>
   <data name="Number of results:" xml:space="preserve">
     <value>Number of results: </value>
@@ -429,8 +438,14 @@
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="passwordLength" xml:space="preserve">
+    <value>Password must be at least {2} characters.</value>
+  </data>
+  <data name="passwordMismatch" xml:space="preserve">
+    <value>Password and confirmation password do not match.</value>
+  </data>
   <data name="passwordRequired" xml:space="preserve">
-    <value>Password Required</value>
+    <value>Password required</value>
   </data>
   <data name="Personal Data" xml:space="preserve">
     <value>Personal Data</value>
@@ -482,6 +497,9 @@
   </data>
   <data name="Role" xml:space="preserve">
     <value>Role</value>
+  </data>
+  <data name="roleRequired" xml:space="preserve">
+    <value> Role Type required</value>
   </data>
   <data name="Roles" xml:space="preserve">
     <value>Roles</value>
@@ -579,8 +597,11 @@
   <data name="Username" xml:space="preserve">
     <value>Username</value>
   </data>
+  <data name="usernameLength" xml:space="preserve">
+    <value>Username must be between {2} and {1} characters.</value>
+  </data>
   <data name="usernameRequired" xml:space="preserve">
-    <value>Username Required</value>
+    <value>Username required</value>
   </data>
   <data name="Users" xml:space="preserve">
     <value>Users</value>

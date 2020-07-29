@@ -319,7 +319,10 @@
     <value>La tua email non è confermata Conferma la tua email prima dell'accesso!</value>
   </data>
   <data name="emailRequired" xml:space="preserve">
-    <value>Email Richiesto</value>
+    <value>Email richiesto</value>
+  </data>
+  <data name="emailValid" xml:space="preserve">
+    <value>L'email non è un indirizzo email valido.</value>
   </data>
   <data name="Enter your e-mail" xml:space="preserve">
     <value>Inserisci il tuo e-mail</value>
@@ -411,11 +414,17 @@
   <data name="New Sub Fund" xml:space="preserve">
     <value>Nuovo Subfund</value>
   </data>
+  <data name="newPasswordMismatch" xml:space="preserve">
+    <value>La nuova password e la password di conferma non corrispondono.</value>
+  </data>
   <data name="No result produced by your request." xml:space="preserve">
     <value>Nessun risultato per questa richiesta</value>
   </data>
   <data name="No, cancel it!" xml:space="preserve">
     <value>No, cancellalo!</value>
+  </data>
+  <data name="notSelectedValue" xml:space="preserve">
+    <value>Seleziona almeno un'opzione!</value>
   </data>
   <data name="Number of results:" xml:space="preserve">
     <value>Numero di risultati:</value>
@@ -429,8 +438,14 @@
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="passwordLength" xml:space="preserve">
+    <value>La password deve essere di almeno {2} caratteri.</value>
+  </data>
+  <data name="passwordMismatch" xml:space="preserve">
+    <value>Password e password di conferma non corrispondono.</value>
+  </data>
   <data name="passwordRequired" xml:space="preserve">
-    <value>Password Richiesto</value>
+    <value>Password richiesto</value>
   </data>
   <data name="Personal Data" xml:space="preserve">
     <value>Dati Personali</value>
@@ -482,6 +497,9 @@
   </data>
   <data name="Role" xml:space="preserve">
     <value>Ruolo</value>
+  </data>
+  <data name="roleRequired" xml:space="preserve">
+    <value>Tipo di Ruolo richiesto</value>
   </data>
   <data name="Roles" xml:space="preserve">
     <value>Ruoli</value>
@@ -579,8 +597,11 @@
   <data name="Username" xml:space="preserve">
     <value>Nome Utente</value>
   </data>
+  <data name="usernameLength" xml:space="preserve">
+    <value>Il nome utente deve contenere da {2} a {1} caratteri.</value>
+  </data>
   <data name="usernameRequired" xml:space="preserve">
-    <value>Nome Utente Richiesto</value>
+    <value>Nome Utente richiesto</value>
   </data>
   <data name="Users" xml:space="preserve">
     <value>Utenti</value>
