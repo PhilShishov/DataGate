@@ -315,6 +315,9 @@
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="emailNotConfirmed" xml:space="preserve">
+    <value>Your email is not confirmed. Please confirm your email before login!</value>
+  </data>
   <data name="emailRequired" xml:space="preserve">
     <value>Email Required</value>
   </data>
@@ -371,6 +374,9 @@
   </data>
   <data name="Home Page" xml:space="preserve">
     <value>Home Page</value>
+  </data>
+  <data name="invalidLogin" xml:space="preserve">
+    <value>Wrong username or password have been specified.</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>

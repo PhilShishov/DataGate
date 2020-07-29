@@ -9,6 +9,7 @@
     using DataGate.Common;
     using DataGate.Data.Models.Users;
     using DataGate.Web.Infrastructure.Attributes.Validation;
+    using DataGate.Web.Resources;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
@@ -22,15 +23,18 @@
         private const string UserIndexUrl = "/userpanel";
 
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly SharedLocalizationService sharedLocalizer;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly ILogger<LoginModel> logger;
 
         public LoginModel(
             SignInManager<ApplicationUser> signInManager,
             ILogger<LoginModel> logger,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            SharedLocalizationService sharedLocalizer)
         {
             this.userManager = userManager;
+            this.sharedLocalizer = sharedLocalizer;
             this.signInManager = signInManager;
             this.logger = logger;
         }
@@ -98,8 +102,8 @@
 
                     if (await this.userManager.IsEmailConfirmedAsync(user) == false)
                     {
-                        this.ErrorMessage = ErrorMessages.NotConfirmedEmail;
-                        this.ModelState.AddModelError(string.Empty, ErrorMessages.NotConfirmedEmail);
+                        this.ErrorMessage = this.sharedLocalizer.GetHtmlString(ErrorMessages.EmailNotConfirmed);
+                        this.ModelState.AddModelError(string.Empty, ErrorMessages.EmailNotConfirmed);
                         return this.Page();
                     }
 
@@ -118,7 +122,7 @@
                 }
                 else
                 {
-                    this.ErrorMessage = ErrorMessages.InvalidLoginAttempt;
+                    this.ErrorMessage = this.sharedLocalizer.GetHtmlString(ErrorMessages.InvalidLoginAttempt);
                     this.ModelState.AddModelError(string.Empty, ErrorMessages.InvalidLoginAttempt);
                     return this.Page();
                 }
