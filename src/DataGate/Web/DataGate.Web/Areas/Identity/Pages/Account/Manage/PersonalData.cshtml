@@ -1,7 +1,7 @@
 ﻿@page
 @model PersonalDataModel
 @{
-    ViewData["Title"] = "Personal Data";
+    ViewData["Title"] = SharedLocalizer.GetHtmlString("Personal Data");
     ViewData["ActivePage"] = ManageNavPages.PersonalData;
 }
 
@@ -9,15 +9,15 @@
 
 <div class="row">
     <div class="col-md-6">
-        <p>@SharedLocalizer["Your account contains personal data that you have given us. This page allows you to download or delete that data."]</p>
+        <p>@SharedLocalizer.GetHtmlString("Your account contains personal data that you have given us. This page allows you to download or delete that data.")</p>
         <p>
-            <strong>@SharedLocalizer["Deleting this data will permanently remove your account, and this cannot be recovered."]</strong>
+            <strong>@SharedLocalizer.GetHtmlString("Deleting this data will permanently remove your account, and this cannot be recovered.")</strong>
         </p>
         <form id="download-data" asp-page="DownloadPersonalData" method="post" class="form-group">
-            <button class="btn btn-pharus" type="submit">@SharedLocalizer["Download"]</button>
+            <button class="btn btn-pharus" type="submit">@SharedLocalizer.GetHtmlString("Download")</button>
         </form>
         <p>
-            <a id="delete" asp-page="DeletePersonalData" class="btn btn-pharus">@SharedLocalizer["Delete"]</a>
+            <a id="delete" asp-page="DeletePersonalData" class="btn btn-pharus">@SharedLocalizer.GetHtmlString("Delete")</a>
         </p>
     </div>
 </div>

@@ -5,7 +5,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="uploadDocumentLabel">
-                    @SharedLocalizer["Upload Document"]
+                    @SharedLocalizer.GetHtmlString("Upload Document")
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -31,7 +31,7 @@
 
                         <select class="select-pharus" asp-for="DocumentType">
                             <option selected disabled value="0">
-                                @SharedLocalizer["-- Choose File Type --"]
+                                @SharedLocalizer.GetHtmlString("-- Choose File Type --")
                             </option>
                             @foreach (var type in Model.DocumentTypes)
                             {
@@ -63,12 +63,12 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                    @SharedLocalizer["Close"]
+                    @SharedLocalizer.GetHtmlString("Close")
                 </button>
                 <button type="button"
                         class="btn btn-pharus text-white"
                         data-save="modal">
-                    @SharedLocalizer["Upload Document"]
+                    @SharedLocalizer.GetHtmlString("Upload Document")
                 </button>
             </div>
         </div>

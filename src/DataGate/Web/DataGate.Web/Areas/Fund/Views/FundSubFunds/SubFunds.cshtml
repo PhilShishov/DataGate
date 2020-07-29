@@ -1,7 +1,7 @@
 ﻿@model SubEntitiesViewModel
 
 @{
-    ViewData["Title"] = SharedLocalizer["Sub Funds"];
+    ViewData["Title"] = SharedLocalizer.GetHtmlString("Sub Funds");
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     var controller = this.ViewContext.RouteData.Values["controller"].ToString();
@@ -16,7 +16,7 @@
                     <div class="h-100 d-flex">
                         <partial name="SubEntities/_Toolbar" />
                         <div class="title-main">
-                            <h2>@Model.Container @SharedLocalizer["Sub Funds"]</h2>
+                            <h2>@Model.Container @SharedLocalizer.GetHtmlString("Sub Funds")</h2>
                         </div>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
             <hr class="mt-1 mb-0" />
         </div>
         <h2 class="text-center title-responsive">
-            @Model.Container @SharedLocalizer["Sub Funds"]
+            @Model.Container @SharedLocalizer.GetHtmlString("Sub Funds")
         </h2>
         <partial name="SubEntities/_ViewTable" />
     </div>

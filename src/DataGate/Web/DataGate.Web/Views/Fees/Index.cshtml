@@ -1,7 +1,7 @@
 ﻿@model FeesInputModel
 
 @{
-    ViewData["Title"] = SharedLocalizer["Fees"];
+    ViewData["Title"] = SharedLocalizer.GetHtmlString("Fees");
 
     var containerRoute = StringSwapper.ByArea(
                     Model.AreaName,
@@ -17,7 +17,7 @@
               asp-action="Update"
               method="post"
               class="d-inline w-75">
-            <h4 class="mb-5">@SharedLocalizer["Adjust Fees"]</h4>
+            <h4 class="mb-5">@SharedLocalizer.GetHtmlString("Adjust Fees")</h4>
             <div class="d-inline">
 
                 <div class="column-form">
@@ -74,12 +74,12 @@
 
             <div class="button-holder my-4">
                 <a class="btn btn-pharus btn-lg"asp-area="@Model.AreaName" asp-route="@containerRoute" asp-route-id="@Model.Id" asp-route-date="@Model.Date">
-                    @SharedLocalizer["Container"]
+                    @SharedLocalizer.GetHtmlString("Container")
                 </a>
 
                 <button type="submit"
                         class="btn btn-pharus btn-lg btn-confirm-create ml-5">
-                    @SharedLocalizer["Update Fees"]
+                    @SharedLocalizer.GetHtmlString("Update Fees")
                 </button>
             </div>
         </form>

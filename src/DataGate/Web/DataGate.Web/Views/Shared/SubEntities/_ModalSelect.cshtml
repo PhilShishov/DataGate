@@ -11,7 +11,7 @@
             <div class="modal-body">
                 <div>
                     <h2 class="text-center">
-                        @SharedLocalizer["SELECT COLUMNS"]
+                        @SharedLocalizer.GetHtmlString("SELECT COLUMNS")
                     </h2>
                     <select asp-for="PreSelectedColumns" style="width:60%" hidden>
                         @for (int col = 0; col < numberPreSelectedColumns; col++)
@@ -35,7 +35,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary mr-2" data-dismiss="modal">
-                    @SharedLocalizer["Close"]
+                    @SharedLocalizer.GetHtmlString("Close")
                 </button>
                 <input type="submit"
                        name="Command"

@@ -1,7 +1,7 @@
 ﻿@model DataGate.Web.ViewModels.Reports.FundReportOverviewViewModel
 
 @{
-    ViewData["Title"] = SharedLocalizer["Reports"];
+    ViewData["Title"] = SharedLocalizer.GetHtmlString("Reports");
 
     var date = DateTimeParser.ToWebFormat(Model.Date);
     decimal aum;
@@ -18,7 +18,7 @@
                             <a asp-area=""
                                asp-route="allreports"
                                class="btn btn-pharus btn-sm mb-1">
-                                @SharedLocalizer["Back to All"]
+                                @SharedLocalizer.GetHtmlString("Back to All")
                             </a>
                         </div>
 
@@ -30,7 +30,7 @@
 
                                 <input type="button"
                                        class="btn btn-pharus btn-sm mb-1 mr-2"
-                                       value=@SharedLocalizer["Update"]></>
+                                       value=@SharedLocalizer.GetHtmlString("Update")></>
                             </div>
                         </form>
                         <form method="post" id="extract-form"></form>
@@ -51,7 +51,7 @@
                             </button>
                         </div>
                         <div class="title-main-reports">
-                            <h2 class="">@GlobalConstants.FundAreaName @SharedLocalizer["Reports"]</h2>
+                            <h2 class="">@GlobalConstants.FundAreaName @SharedLocalizer.GetHtmlString("Reports")</h2>
                         </div>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
             <hr class="mt-1 mb-0" />
         </div>
 
-        <h2 class="text-center title-responsive">@GlobalConstants.FundAreaName @SharedLocalizer["Reports"]</h2>
+        <h2 class="text-center title-responsive">@GlobalConstants.FundAreaName @SharedLocalizer.GetHtmlString("Reports")</h2>
 
         <form id="form-report" method="post">
             <div class="table-responsive mx-auto">
@@ -98,7 +98,7 @@
                                             }
                                             else
                                             {
-                                                @SharedLocalizer["Not available"]
+                                                @SharedLocalizer.GetHtmlString("Not available")
                                             }
                                         </td>
                                     }

@@ -1,18 +1,18 @@
 ﻿@model EditUserInputModel
 
 @{
-    ViewData["Title"] = SharedLocalizer["Edit User"];
+    ViewData["Title"] = SharedLocalizer.GetHtmlString("Edit User");
 }
 <div class="push">
     <div class="d-flex justify-content-center text-center">
         <form method="post" class="d-inline w-75">
-            <h2>@SharedLocalizer["Edit User"]</h2>
+            <h2>@SharedLocalizer.GetHtmlString("Edit User")</h2>
             <div>
                 <a class="btn btn-pharus text-white mt-2"
                    asp-area=""
                    asp-controller="User"
                    asp-action="Index">
-                    @SharedLocalizer["Back to Panel"]
+                    @SharedLocalizer.GetHtmlString("Back to Panel")
                 </a>
             </div>
             <hr />
@@ -45,7 +45,7 @@
                 <input asp-for="PasswordHash"
                        class="form-control"
                        autocomplete="new-password"
-                       placeholder="@SharedLocalizer["New password"]..." />
+                       placeholder="@SharedLocalizer.GetHtmlString("New password")..." />
                 <div class="d-flex justify-content-center">
                     <span></span>
                     <span asp-validation-for="PasswordHash" class="text-danger"></span>
@@ -55,7 +55,7 @@
                 <input asp-for="ConfirmPassword"
                        class="form-control"
                        autocomplete="new-password"
-                       placeholder="@SharedLocalizer["Confirm password"]..." />
+                       placeholder="@SharedLocalizer.GetHtmlString("Confirm password")..." />
                 <div class="d-flex justify-content-center">
                     <span></span>
                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
@@ -67,7 +67,7 @@
                         asp-page-handler="EditUser"
                         class="btn btn-pharus text-white btn-confirm-update"
                         style="margin-right:40px">
-                    @SharedLocalizer["Save changes"]
+                    @SharedLocalizer.GetHtmlString("Save changes")
                 </button>
             </div>
         </form>

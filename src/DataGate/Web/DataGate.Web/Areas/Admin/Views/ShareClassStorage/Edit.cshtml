@@ -1,7 +1,7 @@
 ﻿@model EditShareClassInputModel
 
 @{
-    ViewData["Title"] = SharedLocalizer["Edit Share Class"];
+    ViewData["Title"] = SharedLocalizer.GetHtmlString("Edit Share Class");
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="push">
@@ -10,7 +10,7 @@
               asp-action="Edit"
               method="post"
               class="d-inline w-75">
-            <h4 class="mb-5">@SharedLocalizer["Edit Share Class Fund"] @Model.ShareClassName</h4>
+            <h4 class="mb-5">@SharedLocalizer.GetHtmlString("Edit Share Class Fund") @Model.ShareClassName</h4>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="d-inline" id="div-inputs-to-format">
 
@@ -319,12 +319,12 @@
             <div class="button-holder my-4">
                 <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
                 <a class="btn btn-pharus btn-lg" asp-area="@GlobalConstants.ShareClassAreaName" asp-route="@GlobalConstants.AllShareClassesRouteName">
-                    @SharedLocalizer["Back to List"]
+                    @SharedLocalizer.GetHtmlString("Back to List")
                 </a>
                 <button type="submit"
                         class="btn btn-pharus btn-lg btn-confirm-update ml-5"
                         name="update_button">
-                    @SharedLocalizer["Update Share Class"]
+                    @SharedLocalizer.GetHtmlString("Update Share Class")
                 </button>
             </div>
         </form>

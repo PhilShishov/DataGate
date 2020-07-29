@@ -6,24 +6,24 @@
             <thead>
                 <tr>
                     <th>
-                        @SharedLocalizer["File Description"]
+                        @SharedLocalizer.GetHtmlString("File Description")
                     </th>
                     <th>
-                        @SharedLocalizer["Contract Date"]
+                        @SharedLocalizer.GetHtmlString("Contract Date")
                     </th>
                     <th>
-                        @SharedLocalizer["Activation Date"]
+                        @SharedLocalizer.GetHtmlString("Activation Date")
                     </th>
                     <th>
-                        @SharedLocalizer["Expiration Date"]
+                        @SharedLocalizer.GetHtmlString("Expiration Date")
                     </th>
                     <th>
-                        @SharedLocalizer["File Name"]
+                        @SharedLocalizer.GetHtmlString("File Name")
                     </th>
                     @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.IsInRole(GlobalConstants.LegalRoleName))
                     {
                         <th>
-                            @SharedLocalizer["Actions"]
+                            @SharedLocalizer.GetHtmlString("Actions")
                         </th>
                     }
                 </tr>
@@ -64,11 +64,11 @@
                                             asp-area=""
                                             asp-route="fees"
                                             asp-route-fileId="@agreement.FileId">
-                                        @SharedLocalizer["FEES"]
+                                        @SharedLocalizer.GetHtmlString("FEES")
                                     </button>
                                     |*@
                                 <button type="button" class="btn btn-pharus btn-sm mx-1 btn-delete">
-                                    @SharedLocalizer["DELETE"]
+                                    @SharedLocalizer.GetHtmlString("DELETE")
                                 </button>
                             </td>
                         }
@@ -102,12 +102,12 @@
             tableAgr_dist = '.tbl-distinct-agreements';
 
         const MESSAGES_DELETE_AGR = {
-            TITLE: '@Html.Raw(SharedLocalizer["Are you sure?"].Value.ToString())',
-            TEXT: '@Html.Raw(SharedLocalizer["Once deleted, you will not be able to recover this file!"].Value.ToString())',
-            BTN_CANCEL: '@Html.Raw(SharedLocalizer["Cancel"].Value.ToString())',
-            TITLE_FAIL: '@Html.Raw(SharedLocalizer["Error deleting!"].Value.ToString())',
-            TEXT_FAIL: '@Html.Raw(SharedLocalizer["Please try again"].Value.ToString())',
-            TITLE_SUCCESS: '@Html.Raw(SharedLocalizer["Your file has been deleted!"].Value.ToString())'
+            TITLE: '@Html.Raw(SharedLocalizer.GetHtmlString("Are you sure?").Value.ToString())',
+            TEXT: '@Html.Raw(SharedLocalizer.GetHtmlString("Once deleted, you will not be able to recover this file!").Value.ToString())',
+            BTN_CANCEL: '@Html.Raw(SharedLocalizer.GetHtmlString("Cancel").Value.ToString())',
+            TITLE_FAIL: '@Html.Raw(SharedLocalizer.GetHtmlString("Error deleting!").Value.ToString())',
+            TEXT_FAIL: '@Html.Raw(SharedLocalizer.GetHtmlString("Please try again").Value.ToString())',
+            TITLE_SUCCESS: '@Html.Raw(SharedLocalizer.GetHtmlString("Your file has been deleted!").Value.ToString())'
         };
 
         deleteFile(tokenAgr, areaName, tableAgr, tableAgr_dist, MESSAGES_DELETE_AGR);

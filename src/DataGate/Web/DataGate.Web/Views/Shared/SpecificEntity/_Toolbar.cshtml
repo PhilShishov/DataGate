@@ -31,7 +31,7 @@
     {
         <div class="div-entity-container-wrapper">
             <p>
-                @SharedLocalizer["CONTAINER"]:
+                @SharedLocalizer.GetHtmlString("CONTAINER"):
             </p>
             <a asp-area="@areaName"
                asp-route="@routeContainer"
@@ -57,7 +57,7 @@
                        asp-for="Command"
                        asp-action="Update"
                        asp-route-id="@Model.Id"
-                       value=@SharedLocalizer["Update"]
+                       value=@SharedLocalizer.GetHtmlString("Update")
                        style="margin-bottom: 2%"></>
             </div>
         </form>
@@ -65,7 +65,7 @@
         <div class="mx-2">
             <a asp-route="@routeAll"
                class="btn btn-pharus btn-sm mb-2">
-                @SharedLocalizer["ALL"]
+                @SharedLocalizer.GetHtmlString("ALL")
             </a>
         </div>
         @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.IsInRole(GlobalConstants.LegalRoleName))
@@ -76,7 +76,7 @@
                         class="btn btn-pharus btn-sm mb-2"
                         data-toggle="ajax-modal"
                         data-target="#upload-document">
-                    @SharedLocalizer["Upload Document"]
+                    @SharedLocalizer.GetHtmlString("Upload Document")
                 </button>
             </div>
 
@@ -86,7 +86,7 @@
                         class="btn btn-pharus btn-sm mb-2"
                         data-toggle="ajax-modal"
                         data-target="#upload-agreement">
-                    @SharedLocalizer["Upload Agreement"]
+                    @SharedLocalizer.GetHtmlString("Upload Agreement")
                 </button>
             </div>
 
@@ -97,7 +97,7 @@
                    asp-route-id="@Model.Id"
                    asp-route-date="@Model.Date"
                    class="btn btn-pharus btn-sm mb-2">
-                    @SharedLocalizer["Edit"]
+                    @SharedLocalizer.GetHtmlString("Edit")
                 </a>
             </div>
         }

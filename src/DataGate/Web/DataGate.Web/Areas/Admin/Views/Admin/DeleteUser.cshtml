@@ -1,7 +1,7 @@
 ﻿@model DeleteUserInputModel
 
 @{
-    ViewData["Title"] = SharedLocalizer["Delete User"];
+    ViewData["Title"] = SharedLocalizer.GetHtmlString("Delete User");
 }
 <div class="push">
     <div class="d-flex justify-content-center text-center">
@@ -9,13 +9,13 @@
               asp-controller="Admin"
               method="post"
               class="d-inline w-75">
-            <h2 class="mb-2">@SharedLocalizer["Delete User"]</h2>
+            <h2 class="mb-2">@SharedLocalizer.GetHtmlString("Delete User")</h2>
             <div>
                 <a class="btn btn-pharus text-white mt-2"
                    asp-area=""
                    asp-controller="User"
                    asp-action="Index">
-                    @SharedLocalizer["Back to Panel"]
+                    @SharedLocalizer.GetHtmlString("Back to Panel")
                 </a>
             </div>
             <hr />
@@ -36,7 +36,7 @@
                 <button type="submit"
                         asp-action="DeleteUser"
                         class="btn btn-pharus text-white btn-confirm-delete">
-                    @SharedLocalizer["Delete User"]
+                    @SharedLocalizer.GetHtmlString("Delete User")
                 </button>
             </div>
         </form>

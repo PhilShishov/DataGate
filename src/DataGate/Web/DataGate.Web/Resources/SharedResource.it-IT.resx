@@ -279,6 +279,12 @@
   <data name="Delete" xml:space="preserve">
     <value>Cancella</value>
   </data>
+  <data name="Delete data and close my account" xml:space="preserve">
+    <value>Elimina i dati e chiudi il mio account</value>
+  </data>
+  <data name="Delete Personal Data" xml:space="preserve">
+    <value>Elimina i Dati Personali</value>
+  </data>
   <data name="Delete User" xml:space="preserve">
     <value>Cancella Utente</value>
   </data>
@@ -414,8 +420,8 @@
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
-  <data name="Personal data" xml:space="preserve">
-    <value>Dati personali</value>
+  <data name="Personal Data" xml:space="preserve">
+    <value>Dati Personali</value>
   </data>
   <data name="PHARUS DATAGATE PLATFORM" xml:space="preserve">
     <value>PHARUS DATAGATE PIATTAFORMA</value>

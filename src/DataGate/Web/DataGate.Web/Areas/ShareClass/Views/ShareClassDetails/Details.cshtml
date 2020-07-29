@@ -1,7 +1,7 @@
 ﻿@model SpecificEntityViewModel
 
 @{
-    this.ViewData["Title"] = SharedLocalizer["Share Classes"];
+    this.ViewData["Title"] = SharedLocalizer.GetHtmlString("Share Classes");
     this.Layout = "~/Views/Shared/_Layout.cshtml";
 
     var entityName = @Model.Entity.ToList()[1][GlobalConstants.IndexEntityNameInTable];

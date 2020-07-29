@@ -1,5 +1,5 @@
 ﻿@{
-    this.ViewData["Title"] = SharedLocalizer["Home Page"];
+    this.ViewData["Title"] = SharedLocalizer.GetHtmlString("Home Page");
     this.Layout = "_LayoutHome";
 }
 
@@ -21,9 +21,9 @@
         <div class="row">
             <div class="col-md-12 div-text-pharus">
                 <h1 class="text-white text-pharus">
-                    @SharedLocalizer["Welcome To"]
+                    @SharedLocalizer.GetHtmlString("Welcome To")
                     Pharus Management<br>DataGate
-                    @SharedLocalizer["Platform"]
+                    @SharedLocalizer.GetHtmlString("Platform")
                 </h1>
             </div>
         </div>
@@ -39,9 +39,9 @@
                 <div class="footer-pharus mb-5">
                     <div class="inner text-white">
                         <p>
-                            <a class="text-white a-underline mr-1" asp-area="" asp-route="privacy">@SharedLocalizer["Privacy Policy"]</a>
-                            <a class="text-white a-underline mr-1" asp-area="" asp-route="cookie">@SharedLocalizer["Cookie Policy"]</a>
-                            <a class="text-white a-underline mr-1" asp-area="" asp-route="conditions">@SharedLocalizer["Conditions of Use"]</a>
+                            <a class="text-white a-underline mr-1" asp-area="" asp-route="privacy">@SharedLocalizer.GetHtmlString("Privacy Policy")</a>
+                            <a class="text-white a-underline mr-1" asp-area="" asp-route="cookie">@SharedLocalizer.GetHtmlString("Cookie Policy")</a>
+                            <a class="text-white a-underline mr-1" asp-area="" asp-route="conditions">@SharedLocalizer.GetHtmlString("Conditions of Use")</a>
                         </p>
                     </div>
                 </div>

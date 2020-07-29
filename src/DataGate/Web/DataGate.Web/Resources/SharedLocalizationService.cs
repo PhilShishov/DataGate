@@ -15,7 +15,7 @@
             this.localizer = factory.Create("SharedResource", assemblyName.Name);
         }
 
-        public LocalizedString GetLocalizedHtmlString(string key)
+        public LocalizedString GetHtmlString(string key)
         {
             return this.localizer[key];
         }
