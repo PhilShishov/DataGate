@@ -19,12 +19,12 @@
     {
         private readonly ISubFundStorageService service;
         private readonly ISubFundRepository repository;
-        private readonly IStringLocalizer<SharedResource> sharedLocalizer;
+        private readonly SharedLocalizationService sharedLocalizer;
 
         public SubFundStorageController(
                         ISubFundStorageService service,
                         ISubFundRepository repository,
-                        IStringLocalizer<SharedResource> sharedLocalizer)
+                        SharedLocalizationService sharedLocalizer)
         {
             this.service = service;
             this.repository = repository;
@@ -68,7 +68,7 @@
             var date = DateTimeParser.ToWebFormat(model.InitialDate.AddDays(1));
 
             return this.ShowInfo(
-                this.sharedLocalizer[InfoMessages.SuccessfulCreate],
+                this.sharedLocalizer.GetHtmlString(InfoMessages.SuccessfulCreate),
                 GlobalConstants.SubFundDetailsRouteName,
                 new { area = GlobalConstants.SubFundAreaName, id = subFundId, date = date });
         }
@@ -117,7 +117,7 @@
             var date = DateTimeParser.ToWebFormat(model.InitialDate.AddDays(1));
 
             return this.ShowInfo(
-                this.sharedLocalizer[InfoMessages.SuccessfulEdit],
+                this.sharedLocalizer.GetHtmlString(InfoMessages.SuccessfulEdit),
                 GlobalConstants.SubFundDetailsRouteName,
                 new { area = GlobalConstants.SubFundAreaName, id = subFundId, date = date });
         }

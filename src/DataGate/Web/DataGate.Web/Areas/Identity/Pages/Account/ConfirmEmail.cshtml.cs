@@ -17,11 +17,11 @@
     public class ConfirmEmailModel : PageModel
     {
         private readonly UserManager<ApplicationUser> userManager;
-        private readonly IStringLocalizer<SharedResource> sharedLocalizer;
+        private readonly SharedLocalizationService sharedLocalizer;
 
         public ConfirmEmailModel(
             UserManager<ApplicationUser> userManager,
-            IStringLocalizer<SharedResource> sharedLocalizer)
+            SharedLocalizationService sharedLocalizer)
         {
             this.userManager = userManager;
             this.sharedLocalizer = sharedLocalizer;
@@ -48,7 +48,7 @@
 
             var notificationType = NotificationType.success;
             var notificationTypeUpper = notificationType.ToString().ToUpper();
-            string message = this.sharedLocalizer[InfoMessages.SuccessfullyConfirmedEmail];
+            string message = this.sharedLocalizer.GetHtmlString(InfoMessages.SuccessfullyConfirmedEmail);
 
             string notification = string.Format(GlobalConstants.SweetAlertScript, notificationTypeUpper, message, notificationType);
 

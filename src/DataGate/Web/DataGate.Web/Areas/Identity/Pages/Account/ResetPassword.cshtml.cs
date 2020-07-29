@@ -72,11 +72,11 @@
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = ErrorMessages.EmailRequired)]
             [EmailAddress]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = ErrorMessages.PasswordRequired)]
             [StringLength(ModelConstants.UserPasswordMaxLength, MinimumLength = ModelConstants.UserPasswordMinLength)]
             [DataType(DataType.Password)]
             public string Password { get; set; }
