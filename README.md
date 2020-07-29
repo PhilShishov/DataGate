@@ -1,12 +1,17 @@
-# DataGate Platform - https://pharusdatagate.com/
-![Logo_Pharus](Documentation/Resources/Logo_Pharus.jpg)
-A private web application for managing more than 300 funds. It is developed to be used by Pharus Management Lux S.A 
-in order to improve the efficiency and automate some parts of Risk and Legal department.
+# DataGate Platform 
+
+https://pharusdatagate.com <br />
+
+A private web application for managing more than 300 funds. <br />
+It is developed to be used by Pharus Management Lux S.A in order to <br />
+improve the efficiency and automate some parts of Risk and Legal department.
+
 
 ## Table of contents
 * [General Info](#general-info)
-* [Guest Account](#guest-account)
+* [Registration](#registration)
 * [Technologies](#technologies)
+* [Security](#security)
 * [Functionality](#functionality)
 * [Documentation](#documentation)
 * [Status](#status)
@@ -14,7 +19,7 @@ in order to improve the efficiency and automate some parts of Risk and Legal dep
 
 ## General Info
 
-The application can display NAV reports on chosen time period and 
+The application can display NAV reports on chosen time period and <br />
 detailed information about the UCITS and AIF handled by the management company such as: 
 * General related entity view
 * Sub entities
@@ -25,34 +30,56 @@ detailed information about the UCITS and AIF handled by the management company s
 * All related agreements
 * Fees related to agreements
  
- ## Guest Account
-https://pharusdatagate.com/ <br />
-Username: datagate_guest <br />
-Password: datagate_guest <br />
+ ## Registration
+Registration is only possible through email invitation and confirmation. <br />
+A guest account has been set-up for free use. <br />
+
+Username: **datagate_guest** <br />
+Password: **datagate_guest** <br />
+https://pharusdatagate.com <br />
  
  ## Technologies
-* Backend - C# .NET Core 3.1, MVC, REST
-* Frontend - RAZOR, CSS, JavaScript ES6, jQuery
 * Frameworks - ASP.NET Core 3.1, Bootstrap
-* Database - MSSQL Server, Entity Framework Core 3.1
-* Testing - xUnit, MyTested.AspNetCore.Mvc
 * Project Management - Jira, Trello
 * Version Control - Git, TortoiseGit, GitHub
 * DevOps - Azure Pipelines
 * Hosting and File Storage - GoDaddy WebWiz
-* UI/UX design - Photoshop, HTML/CSS, Bootstrap 
+
+### Backend 
+* C# .NET Core 3.1, MVC, REST
+* Database - MSSQL Server, Entity Framework Core 3.1
+* Testing - xUnit, MyTested.AspNetCore.Mvc
+* SendGrid, AutoMapper
+
+### Frontend
+* RAZOR, CSS, JavaScript ES6, jQuery
+* JS/jQuery - Chart, Chosen, Moment, Slick, SweetAlert
+* HTML5 - SVG, Canvas
+* UI/UX design - Photoshop, HTML/CSS, Bootstrap
+
+### Security
+ * ASP.Net Core
+ * ReCaptcha
+ * X-CSRF
+ * XSS
+ * Antiforgery
+ * Overposting
+ * HTML Sanitization
+ * SQL Injection
+ * SSL
 
 ## Functionality 
 ### Logged in Users
- - Manage account(GDPR) - email, password, two-factor, personal data
- - Consult global libraries and agreements
+ - Slide through recent share classes
+ - Consult libraries and agreements
  - Consult particular view - sub entities, timeseries, documents, agreements, timelines, fees
  - View active and unactive entities
  - Consult NAV reports
  - Update views by chosen date
  - Choose and sort header columns for large table views
- - Perform a global search for a share class
- - Extract view tables as PDF and Excel 
+ - Perform a global share class search
+ - Extract view tables as PDF and Excel
+ - Two language support - English and Italian
  ### Users in role "Legal"
   - All the functionalities of logged in user
   - Upload and delete documents, agreements and fees
@@ -82,4 +109,4 @@ You can watch videos about the platform:
   [![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/DataGate-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=1&branchName=master)
   
   ## Contact
-Created by [@philshishov](https://github.com/PhilShishov) - feel free to contact me!
+Created by [Philip Shishov](https://github.com/PhilShishov) - feel free to contact me!
