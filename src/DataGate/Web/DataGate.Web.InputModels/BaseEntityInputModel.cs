@@ -25,7 +25,7 @@ namespace DataGate.Web.InputModels
         [Display(Name = "CSSF Code")]
         public string CSSFCode { get; set; }
 
-        [Required(ErrorMessage = ErrorMessages.NotSelectedValue)]
+        [Required(ErrorMessage = ValidationMessages.NotSelectedValue)]
         [Display(Name = "Status")]
         public string Status { get; set; }
 

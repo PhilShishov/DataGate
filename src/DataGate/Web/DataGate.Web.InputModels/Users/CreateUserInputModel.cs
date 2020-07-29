@@ -7,29 +7,30 @@
 
     public class CreateUserInputModel
     {
-        [Required(ErrorMessage = ErrorMessages.UsernameRequired)]
-        [StringLength(ModelConstants.UserUsernameMaxLength, MinimumLength = ModelConstants.UserUsernameMinLength)]
+        [Required(ErrorMessage = ValidationMessages.UsernameRequired)]
+        [StringLength(
+            ModelConstants.UserUsernameMaxLength,
+            MinimumLength = ModelConstants.UserUsernameMinLength,
+            ErrorMessage = ValidationMessages.UsernameLength)]
         public string Username { get; set; }
 
-        [Required(ErrorMessage = ErrorMessages.EmailRequired)]
-        [EmailAddress]
+        [Required(ErrorMessage = ValidationMessages.EmailRequired)]
+        [EmailAddress(ErrorMessage = ValidationMessages.EmailValid)]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = ErrorMessages.PasswordRequired)]
+        [Required(ErrorMessage = ValidationMessages.PasswordRequired)]
         [StringLength(
             ModelConstants.UserPasswordMaxLength,
             MinimumLength = ModelConstants.UserPasswordMinLength,
-            ErrorMessage = ErrorMessages.PasswordLength)]
+            ErrorMessage = ValidationMessages.PasswordLength)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = ModelConstants.UserConfirmPasswordDisplayName)]
-        [Compare(nameof(Password), ErrorMessage = ErrorMessages.PasswordMismatch)]
+        [Compare(nameof(Password), ErrorMessage = ValidationMessages.PasswordMismatch)]
         public string ConfirmPassword { get; set; }
 
-        [Required(ErrorMessage = ErrorMessages.NotSelectedValue)]
-        [Display(Name = ModelConstants.UserRoleDisplayName)]
+        [Required(ErrorMessage = ValidationMessages.NotSelectedValue)]
         public string RoleType { get; set; }
 
         [GoogleReCaptchaValidation]

@@ -132,7 +132,7 @@
 
         public class InputModel
         {
-            [Required(ErrorMessage = ErrorMessages.EmailRequired)]
+            [Required(ErrorMessage = ValidationMessages.EmailRequired)]
             [EmailAddress]
             [Display(Name = "New email")]
             public string NewEmail { get; set; }

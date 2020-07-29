@@ -9,26 +9,29 @@
     {
         public string Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = ValidationMessages.UsernameRequired)]
+        [StringLength(
+             ModelConstants.UserUsernameMaxLength,
+             MinimumLength = ModelConstants.UserUsernameMinLength,
+             ErrorMessage = ValidationMessages.UsernameLength)]
         public string Username { get; set; }
 
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = ValidationMessages.EmailRequired)]
+        [EmailAddress(ErrorMessage = ValidationMessages.EmailValid)]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = ValidationMessages.RoleRequired)]
         public string RoleType { get; set; }
 
-        [Display(Name = "New Password")]
         [StringLength(
             ModelConstants.UserPasswordMaxLength,
             MinimumLength = ModelConstants.UserPasswordMinLength,
-            ErrorMessage = ErrorMessages.PasswordLength)]
+            ErrorMessage = ValidationMessages.PasswordLength)]
         [DataType(DataType.Password)]
         public string PasswordHash { get; set; }
 
         [DataType(DataType.Password)]
-        [Compare(nameof(PasswordHash), ErrorMessage = ErrorMessages.NewPasswordMismatch)]
+        [Compare(nameof(PasswordHash), ErrorMessage = ValidationMessages.NewPasswordMismatch)]
         public string ConfirmPassword { get; set; }
 
         [GoogleReCaptchaValidation]
