@@ -10,11 +10,13 @@
     using DataGate.Services.Messaging;
     using DataGate.Web.Controllers;
     using DataGate.Web.InputModels.Users;
+    using DataGate.Web.Resources;
     using DataGate.Web.ViewModels.Users;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Localization;
     using Microsoft.Extensions.Logging;
 
     [Area("Admin")]
@@ -27,16 +29,19 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ILogger<AdminController> logger;
         private readonly IEmailSender emailSender;
+        private readonly IStringLocalizer<SharedResource> sharedLocalizer;
 
         public AdminController(
             UserManager<ApplicationUser> userManager,
             RoleManager<ApplicationRole> roleManager,
             IEmailSender emailSender,
+            IStringLocalizer<SharedResource> sharedLocalizer,
             ILogger<AdminController> logger)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
             this.emailSender = emailSender;
+            this.sharedLocalizer = sharedLocalizer;
             this.logger = logger;
         }
 
@@ -108,7 +113,7 @@
                 string message = string.Format(GlobalConstants.EmailConfirmationMessage, HtmlEncoder.Default.Encode(callbackUrl));
                 await this.emailSender.SendEmailAsync("philip.shishov@pharusmanco.lu", "Pharus Management Lux SA", inputModel.Email, GlobalConstants.ConfirmEmailSubject, message);
 
-                return this.ShowInfoLocal(string.Format(InfoMessages.AddUser, user.UserName, inputModel.RoleType), returnUrl);
+                return this.ShowInfoLocal(string.Format(this.sharedLocalizer[InfoMessages.AddUser], user.UserName, inputModel.RoleType), returnUrl);
             }
 
             this.AddErrors(result);

@@ -2,8 +2,6 @@
 {
     public static class InfoMessages
     {
-        public const string SuccessfulUpdate = "Table successfully updated.";
-
         public const string FileUploaded = "File uploaded.";
 
         public const string FeesAdded = "Fees added";
