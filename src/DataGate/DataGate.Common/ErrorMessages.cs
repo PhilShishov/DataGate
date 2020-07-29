@@ -5,10 +5,13 @@
         public const string UsernameRequired = "usernameRequired";
         public const string PasswordRequired = "passwordRequired";
         public const string EmailRequired = "emailRequired";
+        public const string EmailNotConfirmed = "emailNotConfirmed";
+        public const string InvalidLoginAttempt = "invalidLogin";
+
         public const string PasswordLength = "Must be at least {2} characters.";
 
-        public const string InvalidLoginAttempt = "Wrong username or password have been specified.";
-        public const string NotConfirmedEmail = "Your email is not confirmed. Please confirm your email before login!";
+
+
         public const string PasswordMismatch = "Password and confirmation password do not match.";
         public const string NewPasswordMismatch = "The new password and confirmation password do not match.";
         public const string NotSelectedValue = "Please select at least one option!";
