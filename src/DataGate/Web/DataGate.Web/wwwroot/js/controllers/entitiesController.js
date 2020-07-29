@@ -125,9 +125,17 @@ function reload() {
 // ________________________________________________________
 //
 // Datatables - sort, search, pagination
-function dataTableInitializationHandler(controller) {
+function dataTableInitializationHandler(controller, language) {
     $('.table-view-pharus').removeAttr('hidden');
     $.fn.dataTable.moment('DD/MM/YYYY');
+
+    let languageUrl;
+
+    if (language === 'it-IT') {
+        languageUrl = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Italian.json";
+    } else {
+        languageUrl = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/English.json";
+    }
 
     if (controller === 'Funds') {
         $('.table-view-pharus').DataTable({
@@ -143,6 +151,9 @@ function dataTableInitializationHandler(controller) {
             stateSave: true,
             "autoWidth": false,
             "scrollX": true,
+            "language": {
+                "url": languageUrl
+            }
         });
     }
 

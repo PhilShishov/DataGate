@@ -1,6 +1,7 @@
 ﻿
 @{
     var controller = this.ViewContext.RouteData.Values["controller"].ToString();
+    IRequestCultureFeature currentCulture = Context.Features.Get<IRequestCultureFeature>();
 }
 
 <environment include="Development">
@@ -31,7 +32,7 @@
     });
 
     $(function () {
-        dataTableInitializationHandler('@controller');
+        dataTableInitializationHandler('@controller', '@currentCulture.RequestCulture.Culture.Name');
         // ________________________________________________________
         //
         // Extract view as excel or pdf
