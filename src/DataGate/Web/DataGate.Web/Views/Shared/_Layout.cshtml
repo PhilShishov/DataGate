@@ -66,16 +66,16 @@
 
                         <div class="d-flex align-items-center mt-2">
                             <div class="ml-2 mobile-none">
-                                <a asp-area="Fund" asp-route="allFunds">@SharedLocalizer["Fund Library"]</a>
+                                <a asp-area="Fund" asp-route="allFunds">@SharedLocalizer.GetHtmlString("Fund Library")</a>
                             </div>
                             <div class="ml-2 mobile-none">
-                                <a asp-area="SubFund" asp-route="allSubFunds">@SharedLocalizer["Sub Fund Library"]</a>
+                                <a asp-area="SubFund" asp-route="allSubFunds">@SharedLocalizer.GetHtmlString("Sub Fund Library")</a>
                             </div>
                             <div class="ml-2 mobile-none">
-                                <a asp-area="ShareClass" asp-route="allShareClasses">@SharedLocalizer["Share Class Library"]</a>
+                                <a asp-area="ShareClass" asp-route="allShareClasses">@SharedLocalizer.GetHtmlString("Share Class Library")</a>
                             </div>
                             <div class="ml-2 mobile-none">
-                                <a asp-area="" asp-route="allagreements">@SharedLocalizer["Agreements Library"]</a>
+                                <a asp-area="" asp-route="allagreements">@SharedLocalizer.GetHtmlString("Agreements Library")</a>
                             </div>
                         </div>
                     </div>
@@ -95,7 +95,7 @@
                                 <div class="search-box-responsive">
                                     <input type="search"
                                            name="searchTerm"
-                                           placeholder="@SharedLocalizer["Find a Share Class..."]"
+                                           placeholder="@SharedLocalizer.GetHtmlString("Find a Share Class...")"
                                            autocomplete="off"
                                            autocorrect="off"
                                            autocapitalize="off"
@@ -117,7 +117,7 @@
                             <div class="search-box">
                                 <input type="search"
                                        name="searchTerm"
-                                       placeholder="@SharedLocalizer["Find a Share Class..."]"
+                                       placeholder="@SharedLocalizer.GetHtmlString("Find a Share Class...")"
                                        autocomplete="off"
                                        autocorrect="off"
                                        autocapitalize="off"
@@ -141,17 +141,17 @@
                                 <ul>
                                     <li>
                                         <a asp-area=""
-                                           asp-route="allreports">@SharedLocalizer["Reports"]</a>
+                                           asp-route="allreports">@SharedLocalizer.GetHtmlString("Reports")</a>
                                     </li>
                                     <li>
                                         <a asp-area=""
                                            asp-controller=""
-                                           asp-action="">@SharedLocalizer["Projects"]</a>
+                                           asp-action="">@SharedLocalizer.GetHtmlString("Projects")</a>
                                     </li>
                                     <li>
                                         <a asp-area=""
                                            asp-route="userpanel">
-                                            @SharedLocalizer["Panel"]
+                                            @SharedLocalizer.GetHtmlString("Panel")
                                         </a>
                                     </li>
 
@@ -164,7 +164,7 @@
                                     </li>
 
                                     <li>
-                                        <a asp-area="Identity" asp-page="/Account/Logout">@SharedLocalizer["Logout"]</a>
+                                        <a asp-area="Identity" asp-page="/Account/Logout">@SharedLocalizer.GetHtmlString("Logout")</a>
                                     </li>
                                 </ul>
                             </div>

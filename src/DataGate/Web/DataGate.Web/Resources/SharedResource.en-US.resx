@@ -420,6 +420,9 @@
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="passwordRequired" xml:space="preserve">
+    <value>Password Required</value>
+  </data>
   <data name="Personal Data" xml:space="preserve">
     <value>Personal Data</value>
   </data>
@@ -566,6 +569,9 @@
   </data>
   <data name="Username" xml:space="preserve">
     <value>Username</value>
+  </data>
+  <data name="usernameRequired" xml:space="preserve">
+    <value>Username Required</value>
   </data>
   <data name="Users" xml:space="preserve">
     <value>Users</value>

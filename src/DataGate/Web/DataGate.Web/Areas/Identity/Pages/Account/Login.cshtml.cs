@@ -130,10 +130,10 @@
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "usernameRequired")]
             public string Username { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "passwordRequired")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 

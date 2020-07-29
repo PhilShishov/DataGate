@@ -12,6 +12,7 @@
 body {
     font-family: Arial,Helvetica,sans-serif;
     background: url(../images/Background_Home_New.png) no-repeat center center fixed;
+    background-size: cover;
 }
 
 html {
@@ -99,6 +100,7 @@ img {
     .wrapper-language-bar a {
         color: white;
     }
+
     .wrapper-language-bar img {
         width: 30px;
         height: 30px;
