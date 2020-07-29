@@ -17,12 +17,12 @@
     {
         private readonly IFundStorageService service;
         private readonly IFundSelectListService serviceSelect;
-        private readonly IStringLocalizer<SharedResource> sharedLocalizer;
+        private readonly SharedLocalizationService sharedLocalizer;
 
         public FundStorageController(
                         IFundStorageService fundService,
                         IFundSelectListService fundServiceSelect,
-                        IStringLocalizer<SharedResource> sharedLocalizer)
+                        SharedLocalizationService sharedLocalizer)
         {
             this.service = fundService;
             this.serviceSelect = fundServiceSelect;
@@ -61,7 +61,7 @@
             var date = DateTimeParser.ToWebFormat(model.InitialDate.AddDays(1));
 
             return this.ShowInfo(
-                this.sharedLocalizer[InfoMessages.SuccessfulCreate],
+                this.sharedLocalizer.GetHtmlString(InfoMessages.SuccessfulCreate),
                 GlobalConstants.FundDetailsRouteName,
                 new { area = GlobalConstants.FundAreaName, id = fundId, date = date });
         }
@@ -103,7 +103,7 @@
             var date = DateTimeParser.ToWebFormat(model.InitialDate.AddDays(1));
 
             return this.ShowInfo(
-                this.sharedLocalizer[InfoMessages.SuccessfulEdit],
+                this.sharedLocalizer.GetHtmlString(InfoMessages.SuccessfulEdit),
                 GlobalConstants.FundDetailsRouteName,
                 new { area = GlobalConstants.FundAreaName, id = fundId, date = date });
         }

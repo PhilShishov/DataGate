@@ -3,7 +3,7 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.Threading.Tasks;
-
+    using DataGate.Common;
     using DataGate.Data.Models.Users;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -77,7 +77,7 @@
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = ErrorMessages.PasswordRequired)]
             [DataType(DataType.Password)]
             public string Password { get; set; }
         }

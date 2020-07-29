@@ -247,7 +247,7 @@
     <value>Data Contratto</value>
   </data>
   <data name="Cookie Policy" xml:space="preserve">
-    <value>Cookie policy</value>
+    <value>Cookie Policy</value>
   </data>
   <data name="Create" xml:space="preserve">
     <value>Crea</value>
@@ -314,6 +314,9 @@
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
+  </data>
+  <data name="emailRequired" xml:space="preserve">
+    <value>Email Richiesto</value>
   </data>
   <data name="Enter your e-mail" xml:space="preserve">
     <value>Inserisci il tuo e-mail</value>
@@ -421,7 +424,7 @@
     <value>Password</value>
   </data>
   <data name="passwordRequired" xml:space="preserve">
-    <value>Password è Obbligatorio</value>
+    <value>Password Richiesto</value>
   </data>
   <data name="Personal Data" xml:space="preserve">
     <value>Dati Personali</value>
@@ -571,7 +574,7 @@
     <value>Nome Utente</value>
   </data>
   <data name="usernameRequired" xml:space="preserve">
-    <value>Nome Utente è Obbligatorio</value>
+    <value>Nome Utente Richiesto</value>
   </data>
   <data name="Users" xml:space="preserve">
     <value>Utenti</value>

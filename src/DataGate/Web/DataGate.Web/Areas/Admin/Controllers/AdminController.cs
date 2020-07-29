@@ -29,13 +29,13 @@
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ILogger<AdminController> logger;
         private readonly IEmailSender emailSender;
-        private readonly IStringLocalizer<SharedResource> sharedLocalizer;
+        private readonly SharedLocalizationService sharedLocalizer;
 
         public AdminController(
             UserManager<ApplicationUser> userManager,
             RoleManager<ApplicationRole> roleManager,
             IEmailSender emailSender,
-            IStringLocalizer<SharedResource> sharedLocalizer,
+            SharedLocalizationService sharedLocalizer,
             ILogger<AdminController> logger)
         {
             this.userManager = userManager;
@@ -118,14 +118,14 @@
                     GlobalConstants.ConfirmEmailSubject,
                     emailMessage);
 
-                string infoMessage = string.Format(this.sharedLocalizer[InfoMessages.AddUser], user.UserName, inputModel.RoleType);
+                string infoMessage = string.Format(this.sharedLocalizer.GetHtmlString(InfoMessages.AddUser), user.UserName, inputModel.RoleType);
 
                 return this.ShowInfoLocal(infoMessage, returnUrl);
             }
 
             this.AddErrors(result);
 
-            return this.ShowErrorLocal(this.sharedLocalizer[ErrorMessages.UnsuccessfulCreate], returnUrl);
+            return this.ShowErrorLocal(this.sharedLocalizer.GetHtmlString(ErrorMessages.UnsuccessfulCreate), returnUrl);
         }
 
         [HttpGet("/Admin/Admin/EditUser/{id}")]
@@ -192,7 +192,7 @@
                 {
                     this.logger.LogInformation("User updated.");
 
-                    string infoMessage = string.Format(this.sharedLocalizer[InfoMessages.UpdateUser], user.UserName);
+                    string infoMessage = string.Format(this.sharedLocalizer.GetHtmlString(InfoMessages.UpdateUser), user.UserName);
 
                     return this.ShowInfoLocal(infoMessage, returnUrl);
                 }
@@ -200,7 +200,7 @@
                 this.AddErrors(resultUser);
             }
 
-            return this.ShowErrorLocal(this.sharedLocalizer[ErrorMessages.UnsuccessfulUpdate], returnUrl);
+            return this.ShowErrorLocal(this.sharedLocalizer.GetHtmlString(ErrorMessages.UnsuccessfulUpdate), returnUrl);
         }
 
         [HttpGet("/Admin/Admin/DeleteUser/{id}")]
@@ -239,7 +239,7 @@
                 {
                     this.logger.LogInformation("User deleted.");
 
-                    string infoMessage = string.Format(this.sharedLocalizer[InfoMessages.RemoveUser], user.UserName);
+                    string infoMessage = string.Format(this.sharedLocalizer.GetHtmlString(InfoMessages.RemoveUser), user.UserName);
 
                     return this.ShowInfoLocal(infoMessage, returnUrl);
                 }
@@ -247,7 +247,7 @@
                 this.AddErrors(result);
             }
 
-            return this.ShowErrorLocal(this.sharedLocalizer[ErrorMessages.UnsuccessfulDelete], returnUrl);
+            return this.ShowErrorLocal(this.sharedLocalizer.GetHtmlString(ErrorMessages.UnsuccessfulDelete), returnUrl);
         }
 
         private async Task AssignRoleToUser(CreateUserInputModel inputModel, ApplicationUser user)

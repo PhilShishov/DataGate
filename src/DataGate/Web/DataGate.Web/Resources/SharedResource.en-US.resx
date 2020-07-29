@@ -315,6 +315,9 @@
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
+  <data name="emailRequired" xml:space="preserve">
+    <value>Email Required</value>
+  </data>
   <data name="Enter your email" xml:space="preserve">
     <value>Enter your email</value>
   </data>

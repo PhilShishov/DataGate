@@ -21,14 +21,14 @@
         private readonly long fileSizeLimit;
         private readonly string[] permittedExtensions = { GlobalConstants.PdfFileExtension };
         private readonly IWebHostEnvironment environment;
-        private readonly IStringLocalizer<SharedResource> sharedLocalizer;
+        private readonly SharedLocalizationService sharedLocalizer;
         private readonly IFileSystemService service;
 
         public UploadController(
                        IFileSystemService service,
                        IWebHostEnvironment environment,
                        IConfiguration config,
-                       IStringLocalizer<SharedResource> sharedLocalizer)
+                       SharedLocalizationService sharedLocalizer)
         {
             this.service = service;
             this.fileSizeLimit = config.GetValue<long>(GlobalConstants.FileSizeLimitConfiguration);
@@ -108,7 +108,7 @@
             if (dto.IsFee)
             {
                 return this.ShowInfo(
-                this.sharedLocalizer[InfoMessages.FileUploaded],
+                this.sharedLocalizer.GetHtmlString(InfoMessages.FileUploaded),
                 GlobalConstants.FeesRouteName,
                 new
                 {
@@ -120,7 +120,7 @@
             }
 
             return this.ShowInfo(
-                this.sharedLocalizer[InfoMessages.FileUploaded],
+                this.sharedLocalizer.GetHtmlString(InfoMessages.FileUploaded),
                 dto.RouteName,
                 new { area = dto.AreaName, id = dto.Id, date = dto.Date });
         }

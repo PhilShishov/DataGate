@@ -19,12 +19,12 @@
     {
         private readonly IShareClassStorageService service;
         private readonly IShareClassRepository repository;
-        private readonly IStringLocalizer<SharedResource> sharedLocalizer;
+        private readonly SharedLocalizationService sharedLocalizer;
 
         public ShareClassStorageController(
                         IShareClassStorageService service,
                         IShareClassRepository repository,
-                        IStringLocalizer<SharedResource> sharedLocalizer)
+                        SharedLocalizationService sharedLocalizer)
         {
             this.service = service;
             this.repository = repository;
@@ -67,7 +67,7 @@
             var date = DateTimeParser.ToWebFormat(model.InitialDate.AddDays(1));
 
             return this.ShowInfo(
-                this.sharedLocalizer[InfoMessages.SuccessfulCreate],
+                this.sharedLocalizer.GetHtmlString(InfoMessages.SuccessfulCreate),
                 GlobalConstants.ShareClassDetailsRouteName,
                 new { area = GlobalConstants.ShareClassAreaName, id = subFundId, date = date });
         }
@@ -120,7 +120,7 @@
             var date = DateTimeParser.ToWebFormat(model.InitialDate.AddDays(1));
 
             return this.ShowInfo(
-                this.sharedLocalizer[InfoMessages.SuccessfulEdit],
+                this.sharedLocalizer.GetHtmlString(InfoMessages.SuccessfulEdit),
                 GlobalConstants.ShareClassDetailsRouteName,
                 new { area = GlobalConstants.ShareClassAreaName, id = subFundId, date = date });
         }

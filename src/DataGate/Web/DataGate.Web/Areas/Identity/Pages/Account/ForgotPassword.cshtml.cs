@@ -75,7 +75,7 @@
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = ErrorMessages.EmailRequired)]
             [EmailAddress]
             public string Email { get; set; }
         }

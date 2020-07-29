@@ -7,16 +7,19 @@
 
     public class CreateUserInputModel
     {
-        [Required]
+        [Required(ErrorMessage = ErrorMessages.UsernameRequired)]
         [StringLength(ModelConstants.UserUsernameMaxLength, MinimumLength = ModelConstants.UserUsernameMinLength)]
         public string Username { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = ErrorMessages.EmailRequired)]
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(ModelConstants.UserPasswordMaxLength, MinimumLength = ModelConstants.UserPasswordMinLength)]
+        [Required(ErrorMessage = ErrorMessages.PasswordRequired)]
+        [StringLength(
+            ModelConstants.UserPasswordMaxLength,
+            MinimumLength = ModelConstants.UserPasswordMinLength,
+            ErrorMessage = ErrorMessages.PasswordLength)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

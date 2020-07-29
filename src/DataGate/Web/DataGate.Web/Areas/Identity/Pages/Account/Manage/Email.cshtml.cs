@@ -5,6 +5,7 @@
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
 
+    using DataGate.Common;
     using DataGate.Data.Models.Users;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.UI.Services;
@@ -131,7 +132,7 @@
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = ErrorMessages.EmailRequired)]
             [EmailAddress]
             [Display(Name = "New email")]
             public string NewEmail { get; set; }
