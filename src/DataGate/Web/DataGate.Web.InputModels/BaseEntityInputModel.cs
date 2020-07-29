@@ -17,11 +17,11 @@ namespace DataGate.Web.InputModels
 
     public abstract class BaseEntityInputModel
     {
-        [Required(ErrorMessage = "{0} cannot be empty")]
+        [Required(ErrorMessage = ValidationMessages.DateRequired)]
         [Display(Name = "Valid From")]
         public DateTime InitialDate { get; set; }
 
-        [RegularExpression(@"^[A-Z0-9_]+$", ErrorMessage = ErrorMessages.UnvalidFormat)]
+        [RegularExpression(@"^[A-Z0-9_]+$", ErrorMessage = ValidationMessages.UnvalidFormat)]
         [Display(Name = "CSSF Code")]
         public string CSSFCode { get; set; }
 
@@ -29,12 +29,12 @@ namespace DataGate.Web.InputModels
         [Display(Name = "Status")]
         public string Status { get; set; }
 
-        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = ErrorMessages.UnvalidFormat)]
+        [Required(ErrorMessage = ValidationMessages.FundAdminCodeRequired)]
+        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = ValidationMessages.UnvalidFormat)]
         [Display(Name = "Fund Admin Code")]
-        [Required]
         public string FACode { get; set; }
 
-        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = ErrorMessages.UnvalidFormat)]
+        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = ValidationMessages.UnvalidFormat)]
         [Display(Name = "Transfer Agent Code")]
         public string TACode { get; set; }
 

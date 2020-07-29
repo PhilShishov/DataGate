@@ -14,9 +14,9 @@
         [Display(Name = "Id")]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "You must enter a value for the Share Class Name!")]
-        [StringLength(200, ErrorMessage = "The Share Class Name must be no longer than 200 characters")]
-        [RegularExpression(@"^[A-Za-z-0-9]+(\s[A-Za-z-0-9]+)*$", ErrorMessage = ErrorMessages.UnvalidFormat)]
+        [Required(ErrorMessage = ValidationMessages.FundRequired)]
+        [StringLength(200, ErrorMessage = ValidationMessages.FundLength)]
+        [RegularExpression(@"^[A-Za-z-0-9]+(\s[A-Za-z-0-9]+)*$", ErrorMessage = ValidationMessages.UnvalidFormat)]
         [Display(Name = "Official Share Class Name")]
         public string ShareClassName { get; set; }
 
@@ -26,7 +26,7 @@
         [Display(Name = "Share Type")]
         public string ShareType { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = ValidationMessages.CurrencyRequired)]
         [Display(Name = "Currency")]
         public string CurrencyCode { get; set; }
 
@@ -88,7 +88,7 @@
         [Display(Name = "Prospectus Code")]
         public string ProspectusCode { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = ValidationMessages.CommentTitleRequired)]
         [Display(Name = "Comment Title")]
         public string CommentTitle { get; set; }
 

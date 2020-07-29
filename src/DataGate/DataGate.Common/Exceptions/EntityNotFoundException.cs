@@ -12,7 +12,7 @@
         }
 
         public EntityNotFoundException(string entityName)
-            : base(string.Format(ErrorMessages.NotFoundEntityMessage, entityName))
+            : base(string.Format(ErrorMessages.NotFoundEntity, entityName))
         {
         }
 

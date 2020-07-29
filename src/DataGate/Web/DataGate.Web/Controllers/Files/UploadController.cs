@@ -13,7 +13,6 @@
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.Localization;
 
     [Authorize]
     public class UploadController : BaseController

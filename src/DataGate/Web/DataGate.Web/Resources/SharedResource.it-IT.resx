@@ -165,6 +165,9 @@
   <data name="Agreements Library" xml:space="preserve">
     <value>Libreria Agreement</value>
   </data>
+  <data name="agrTypeRequired" xml:space="preserve">
+    <value>Tipo di accordo richiesto</value>
+  </data>
   <data name="ALL" xml:space="preserve">
     <value>Tutto</value>
   </data>
@@ -225,6 +228,9 @@
   <data name="Columns" xml:space="preserve">
     <value>Colonne</value>
   </data>
+  <data name="commentTitleRequired" xml:space="preserve">
+    <value>Titolo del commento richiesto.</value>
+  </data>
   <data name="Company Name" xml:space="preserve">
     <value>Nome Società</value>
   </data>
@@ -242,6 +248,9 @@
   </data>
   <data name="CONTAINER" xml:space="preserve">
     <value>Livelllo precedente</value>
+  </data>
+  <data name="containerRequired" xml:space="preserve">
+    <value>Scegli un contenitore!</value>
   </data>
   <data name="Contract Date" xml:space="preserve">
     <value>Data Contratto</value>
@@ -270,11 +279,17 @@
   <data name="Create User" xml:space="preserve">
     <value>Crea Utente</value>
   </data>
+  <data name="currencyRequired" xml:space="preserve">
+    <value>Codice valuta richiesto</value>
+  </data>
   <data name="Current password" xml:space="preserve">
     <value>Password attuale</value>
   </data>
   <data name="DataGate" xml:space="preserve">
     <value>DataGate</value>
+  </data>
+  <data name="dateRequired" xml:space="preserve">
+    <value>La data non può essere vuota!</value>
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Cancella</value>
@@ -318,23 +333,35 @@
   <data name="emailNotConfirmed" xml:space="preserve">
     <value>La tua email non è confermata Conferma la tua email prima dell'accesso!</value>
   </data>
-  <data name="emailRequired" xml:space="preserve">
-    <value>Email richiesto</value>
-  </data>
   <data name="emailValid" xml:space="preserve">
     <value>L'email non è un indirizzo email valido.</value>
   </data>
   <data name="Enter your e-mail" xml:space="preserve">
     <value>Inserisci il tuo e-mail</value>
   </data>
+  <data name="error" xml:space="preserve">
+    <value>Errore</value>
+  </data>
   <data name="Error deleting!" xml:space="preserve">
     <value>Errore durante l\'eliminazione!</value>
+  </data>
+  <data name="errorRequestStatus" xml:space="preserve">
+    <value>Si è verificato un errore durante l'elaborazione della richiesta.</value>
   </data>
   <data name="Expiration Date" xml:space="preserve">
     <value>Data Scadenza</value>
   </data>
   <data name="External logins" xml:space="preserve">
     <value>Connessioni esterne</value>
+  </data>
+  <data name="FACodeRequired" xml:space="preserve">
+    <value>È richiesto il codice amministratore del fondo.</value>
+  </data>
+  <data name="fieldLength" xml:space="preserve">
+    <value>Deve contenere da {2} a {1} caratteri.</value>
+  </data>
+  <data name="fieldRequired" xml:space="preserve">
+    <value>{0} richiesto</value>
   </data>
   <data name="File Description" xml:space="preserve">
     <value>Descrizione File</value>
@@ -344,6 +371,9 @@
   </data>
   <data name="File Type" xml:space="preserve">
     <value>Tipo File</value>
+  </data>
+  <data name="fileRequired" xml:space="preserve">
+    <value>Seleziona un file.</value>
   </data>
   <data name="Find a Share Class..." xml:space="preserve">
     <value>Trova Share Class...</value>
@@ -368,6 +398,12 @@
   </data>
   <data name="Fund Reports" xml:space="preserve">
     <value>Reportistica Fondi</value>
+  </data>
+  <data name="fundLength" xml:space="preserve">
+    <value>Non deve contenere più di {2} caratteri!</value>
+  </data>
+  <data name="fundRequired" xml:space="preserve">
+    <value>Devi inserire un valore per il nome del fondo!</value>
   </data>
   <data name="Funds" xml:space="preserve">
     <value>Fondi</value>
@@ -414,6 +450,9 @@
   <data name="New Sub Fund" xml:space="preserve">
     <value>Nuovo Subfund</value>
   </data>
+  <data name="newpassRequired" xml:space="preserve">
+    <value>Nuova password richiesta</value>
+  </data>
   <data name="newPasswordMismatch" xml:space="preserve">
     <value>La nuova password e la password di conferma non corrispondono.</value>
   </data>
@@ -429,6 +468,9 @@
   <data name="Number of results:" xml:space="preserve">
     <value>Numero di risultati:</value>
   </data>
+  <data name="oldpassRequired" xml:space="preserve">
+    <value>È richiesta una vecchia password</value>
+  </data>
   <data name="Once deleted, you will not be able to recover this file!" xml:space="preserve">
     <value>Una volta eliminato, non sarai in grado di recuperare questo file!</value>
   </data>
@@ -443,9 +485,6 @@
   </data>
   <data name="passwordMismatch" xml:space="preserve">
     <value>Password e password di conferma non corrispondono.</value>
-  </data>
-  <data name="passwordRequired" xml:space="preserve">
-    <value>Password richiesto</value>
   </data>
   <data name="Personal Data" xml:space="preserve">
     <value>Dati Personali</value>
@@ -499,7 +538,7 @@
     <value>Ruolo</value>
   </data>
   <data name="roleRequired" xml:space="preserve">
-    <value>Tipo di Ruolo richiesto</value>
+    <value>Tipo di ruolo richiesto</value>
   </data>
   <data name="Roles" xml:space="preserve">
     <value>Ruoli</value>
@@ -573,6 +612,9 @@
   <data name="Two-factor authentication" xml:space="preserve">
     <value>Autenticazione a due fattori</value>
   </data>
+  <data name="unvalidFormat" xml:space="preserve">
+    <value>Non nel formato corretto!</value>
+  </data>
   <data name="Update" xml:space="preserve">
     <value>Aggiorna</value>
   </data>
@@ -596,12 +638,6 @@
   </data>
   <data name="Username" xml:space="preserve">
     <value>Nome Utente</value>
-  </data>
-  <data name="usernameLength" xml:space="preserve">
-    <value>Il nome utente deve contenere da {2} a {1} caratteri.</value>
-  </data>
-  <data name="usernameRequired" xml:space="preserve">
-    <value>Nome Utente richiesto</value>
   </data>
   <data name="Users" xml:space="preserve">
     <value>Utenti</value>

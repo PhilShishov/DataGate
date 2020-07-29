@@ -15,8 +15,9 @@
         [Display(Name = "Valid Until")]
         public DateTime? EndDate { get; set; }
 
-        [Required(ErrorMessage = "You must enter a value for the Fund Name!")]
-        [RegularExpression(@"^[A-Z-0-9]+(\s[A-Z-0-9]+)*$", ErrorMessage = ErrorMessages.UnvalidFormat)]
+        [Required(ErrorMessage = ValidationMessages.FundRequired)]
+        [StringLength(200, ErrorMessage = ValidationMessages.FundLength)]
+        [RegularExpression(@"^[A-Z-0-9]+(\s[A-Z-0-9]+)*$", ErrorMessage = ValidationMessages.UnvalidFormat)]
         [Display(Name = "Official Fund Name")]
         public string FundName { get; set; }
 
@@ -32,7 +33,7 @@
         [Display(Name = "Legal Type")]
         public string LegalType { get; set; }
 
-        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = ErrorMessages.UnvalidFormat)]
+        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = ValidationMessages.UnvalidFormat)]
         [Display(Name = "Dep. Code")]
         public string DEPCode { get; set; }
 
@@ -40,11 +41,11 @@
         [Display(Name = "Company Description")]
         public string CompanyTypeDesc { get; set; }
 
-        [RegularExpression(@"^[0-9]+(\s[0-9]+)*$", ErrorMessage = ErrorMessages.UnvalidFormat)]
+        [RegularExpression(@"^[0-9]+(\s[0-9]+)*$", ErrorMessage = ValidationMessages.UnvalidFormat)]
         [Display(Name = "TIN Number")]
         public string TinNumber { get; set; }
 
-        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = ErrorMessages.UnvalidFormat)]
+        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = ValidationMessages.UnvalidFormat)]
         [Display(Name = "Reg. Number")]
         public string RegNumber { get; set; }
     }

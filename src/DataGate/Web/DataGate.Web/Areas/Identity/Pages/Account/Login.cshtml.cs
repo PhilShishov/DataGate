@@ -134,10 +134,10 @@
 
         public class InputModel
         {
-            [Required(ErrorMessage = ValidationMessages.UsernameRequired)]
+            [Required(ErrorMessage = ValidationMessages.FieldRequired)]
             public string Username { get; set; }
 
-            [Required(ErrorMessage = ValidationMessages.PasswordRequired)]
+            [Required(ErrorMessage = ValidationMessages.FieldRequired)]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 

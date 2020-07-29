@@ -12,13 +12,13 @@
             this.InitialDate = DateTime.Today;
         }
 
-        [Required(ErrorMessage = "Please choose a subfund container!")]
+        [Required(ErrorMessage = ValidationMessages.ContainerRequired)]
         [Display(Name = "Sub Fund Container")]
         public string SubFundContainer { get; set; }
 
-        [Required(ErrorMessage = "You must enter a value for the Share Class Name!")]
-        [StringLength(200, ErrorMessage = "The Share Class Name must be no longer than 200 characters")]
-        [RegularExpression(@"^[A-Za-z-0-9]+(\s[A-Za-z-0-9]+)*$", ErrorMessage = ErrorMessages.UnvalidFormat)]
+        [Required(ErrorMessage = ValidationMessages.FundRequired)]
+        [StringLength(200, ErrorMessage = ValidationMessages.FundLength)]
+        [RegularExpression(@"^[A-Za-z-0-9]+(\s[A-Za-z-0-9]+)*$", ErrorMessage = ValidationMessages.UnvalidFormat)]
         [Display(Name = "Official ShareClass Name")]
         public string ShareClassName { get; set; }
 
@@ -31,7 +31,7 @@
         [Display(Name = "Share Type")]
         public string ShareType { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = ValidationMessages.CurrencyRequired)]
         [Display(Name = "Currency")]
         public string CurrencyCode { get; set; }
 

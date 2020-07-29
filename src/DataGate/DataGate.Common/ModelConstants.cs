@@ -2,18 +2,10 @@
 {
     public class ModelConstants
     {
-        // User models constants
-        public const string UserRoleDisplayName = "Role";
-
         // Create User
-        public const int UserUsernameMinLength = 8;
-        public const int UserUsernameMaxLength = 20;
-        public const int UserPasswordMinLength = 8;
-        public const int UserPasswordMaxLength = 50;
-        public const string UserConfirmPasswordDisplayName = "Confirm password";
-
-        // Edit User
-        public const string UserOldPasswordDisplayName = "Current password";
-        public const string UserNewPasswordDisplayName = "New password";
+        public const int UsernameMinLength = 8;
+        public const int UsernameMaxLength = 20;
+        public const int PasswordMinLength = 8;
+        public const int PasswordMaxLength = 50;
     }
 }

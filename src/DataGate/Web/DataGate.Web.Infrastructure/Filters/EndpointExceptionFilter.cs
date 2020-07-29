@@ -10,7 +10,7 @@
     {
         public override void OnException(ExceptionContext context)
         {
-            string errorMessage = ErrorMessages.EndpointErrorMessage;
+            string errorMessage = ErrorMessages.EndpointError;
             if (context.Exception is EntityNotFoundException entityNotFoundException)
             {
                 errorMessage = entityNotFoundException.Message;
