@@ -41,7 +41,6 @@
                 .ConfigureDataProtection(this.configuration)
                 .ConfigureCache(this.configuration)
                 .ConfigureLocalization()
-                .ConfigureMvc()
                 .ConfigureCookies()
                 .ConfigureSettings(this.configuration)
                 .ConfigureForms()
