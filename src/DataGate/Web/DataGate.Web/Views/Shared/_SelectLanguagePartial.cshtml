@@ -21,7 +21,8 @@
    asp-controller="SetLanguage"
    asp-action="SetLanguage"
    asp-route-culture="@requestedCultureName"
-   asp-route-returnUrl="@returnUrl">
+   asp-route-returnUrl="@returnUrl"
+   class="no-link">
     @SharedLocalizer.GetHtmlString("Language")
     <img src="~/images/@flag">
 </a>

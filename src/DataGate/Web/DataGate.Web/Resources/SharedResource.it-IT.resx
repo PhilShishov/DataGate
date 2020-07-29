@@ -171,11 +171,11 @@
   <data name="ALL" xml:space="preserve">
     <value>Tutto</value>
   </data>
-  <data name="ALL PHARUS AGREEMENTS" xml:space="preserve">
-    <value>Tutti gli agreement di Pharus</value>
+  <data name="allPharusAgreements" xml:space="preserve">
+    <value>Tutti gli Agreement di Pharus</value>
   </data>
-  <data name="ALL PHARUS REPORTS" xml:space="preserve">
-    <value>Tutti i report di Pharus</value>
+  <data name="allPharusReports" xml:space="preserve">
+    <value>Tutti i Report di Pharus</value>
   </data>
   <data name="Are you sure you want to create this?" xml:space="preserve">
     <value>Sei sicuro di voler creare questo?</value>
@@ -403,7 +403,7 @@
     <value>Libreria Fondi</value>
   </data>
   <data name="Fund Reports" xml:space="preserve">
-    <value>Reportistica Fondi</value>
+    <value>Report Fund</value>
   </data>
   <data name="fundLength" xml:space="preserve">
     <value>Non deve contenere più di {2} caratteri!</value>
