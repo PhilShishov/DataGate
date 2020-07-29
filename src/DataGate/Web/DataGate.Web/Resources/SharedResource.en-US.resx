@@ -171,11 +171,11 @@
   <data name="ALL" xml:space="preserve">
     <value>ALL</value>
   </data>
-  <data name="ALL PHARUS AGREEMENTS" xml:space="preserve">
-    <value>ALL PHARUS AGREEMENTS</value>
+  <data name="allPharusAgreements" xml:space="preserve">
+    <value>All Pharus Agreements</value>
   </data>
-  <data name="ALL PHARUS REPORTS" xml:space="preserve">
-    <value>ALL PHARUS REPORTS</value>
+  <data name="allPharusReports" xml:space="preserve">
+    <value>All Pharus Reports</value>
   </data>
   <data name="Are you sure you want to create this?" xml:space="preserve">
     <value>Are you sure you want to create this?</value>

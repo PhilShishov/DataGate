@@ -101,6 +101,11 @@ img {
         color: white;
     }
 
+        .wrapper-language-bar a:hover {
+            text-decoration: underline;
+            color: white;
+        }
+
     .wrapper-language-bar img {
         width: 30px;
         height: 30px;

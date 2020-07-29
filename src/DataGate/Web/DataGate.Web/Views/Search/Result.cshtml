@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = SharedLocalizer.GetHtmlString("Search Results");
+    IRequestCultureFeature currentCulture = Context.Features.Get<IRequestCultureFeature>();
     var targetArea = GlobalConstants.ShareClassAreaName;
     var targetRoute = GlobalConstants.ShareClassDetailsRouteName;
 }
@@ -51,9 +52,19 @@
 
 @section Scripts{
     <script>
+        let languageUrl;
+
+        if ('@currentCulture.RequestCulture.Culture.Name' === 'it-IT') {
+            languageUrl = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Italian.json";
+        } else {
+            languageUrl = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/English.json";
+        }
+
         $(document).ready(function () {
             $('.table-view-pharus').DataTable({
-                searching: false,
+                "language": {
+                    "url": languageUrl
+                },
             });
             $(".dataTables_length select").chosen({
                 disable_search_threshold: 10,
