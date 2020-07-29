@@ -9,7 +9,7 @@ namespace DataGate.Web.InputModels.Files
     {
         public List<string[]> TableValues { get; set; }
 
-        [Required(ErrorMessage = ErrorMessages.ChosenDateIsEmpty)]
+        [Required(ErrorMessage = ValidationMessages.DateRequired)]
         public string Date { get; set; }
 
         public string ControllerName { get; set; }

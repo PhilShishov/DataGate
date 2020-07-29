@@ -15,7 +15,7 @@ namespace DataGate.Web.ViewModels.Entities
     {
         public int? Id { get; set; }
 
-        [Required(ErrorMessage = ErrorMessages.ChosenDateIsEmpty)]
+        [Required(ErrorMessage = ValidationMessages.DateRequired)]
         public string Date { get; set; }
 
         public string Command { get; set; }

@@ -28,7 +28,7 @@ namespace DataGate.Web.InputModels.Files
         [Display(Name = "Document Type")]
         public string DocumentType { get; set; }
 
-        [Required(ErrorMessage = ErrorMessages.FileNotChosen)]
+        [Required(ErrorMessage = ValidationMessages.FileRequired)]
         [DataType(DataType.Upload)]
         [MaxFileSize(15 * 1024 * 1024)]
         [AllowedExtensions(new string[] { GlobalConstants.PdfFileExtension })]

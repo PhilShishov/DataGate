@@ -9,7 +9,7 @@ namespace DataGate.Web.InputModels.Files
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
+    using DataGate.Common;
     using DataGate.Services.Mapping;
     using DataGate.Web.Dtos.Documents;
     using DataGate.Web.Infrastructure.Attributes.Validation;
@@ -17,16 +17,16 @@ namespace DataGate.Web.InputModels.Files
 
     public class UploadAgreementInputModel : IMapFrom<LoadAgreementDto>, IMapTo<UploadOnSuccessDto>
     {
-        [Required]
+        [Required(ErrorMessage = ValidationMessages.AgrTypeRequired)]
         [Display(Name = "Agreement Type")]
         public string AgrType { get; set; }
 
         [Display(Name = "Contract Date")]
-        [Required(ErrorMessage = "Contract Date cannot be empty.")]
+        [Required(ErrorMessage = ValidationMessages.DateRequired)]
         public string ContractDate { get; set; }
 
         [Display(Name = "Activation Date")]
-        [Required(ErrorMessage = "Activation Date cannot be empty.")]
+        [Required(ErrorMessage = ValidationMessages.DateRequired)]
         public string ActivationDate { get; set; }
 
         [Display(Name = "Expiration Date")]
@@ -38,10 +38,10 @@ namespace DataGate.Web.InputModels.Files
         [Required]
         public string Status { get; set; }
 
-        [Required(ErrorMessage = "Please select a file.")]
+        [Required(ErrorMessage = ValidationMessages.FileRequired)]
         [DataType(DataType.Upload)]
         [MaxFileSize(15 * 1024 * 1024)]
-        [AllowedExtensions(new string[] { ".pdf" })]
+        [AllowedExtensions(new string[] { GlobalConstants.PdfFileExtension })]
         public IFormFile FileToUpload { get; set; }
 
         public string Date { get; set; }

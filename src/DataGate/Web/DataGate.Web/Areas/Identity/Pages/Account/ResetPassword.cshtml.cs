@@ -72,17 +72,16 @@
 
         public class InputModel
         {
-            [Required(ErrorMessage = ValidationMessages.EmailRequired)]
+            [Required(ErrorMessage = ValidationMessages.FieldRequired)]
             [EmailAddress]
             public string Email { get; set; }
 
-            [Required(ErrorMessage = ValidationMessages.PasswordRequired)]
-            [StringLength(ModelConstants.UserPasswordMaxLength, MinimumLength = ModelConstants.UserPasswordMinLength)]
+            [Required(ErrorMessage = ValidationMessages.FieldRequired)]
+            [StringLength(ModelConstants.PasswordMaxLength, MinimumLength = ModelConstants.PasswordMinLength)]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = ModelConstants.UserConfirmPasswordDisplayName)]
             [Compare(nameof(Password))]
             public string ConfirmPassword { get; set; }
 

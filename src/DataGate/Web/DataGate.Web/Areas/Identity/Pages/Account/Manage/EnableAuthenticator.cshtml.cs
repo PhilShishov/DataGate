@@ -5,7 +5,7 @@
     using System.Text;
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
-
+    using DataGate.Common;
     using DataGate.Data.Models.Users;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -146,8 +146,8 @@
 
         public class InputModel
         {
-            [Required]
-            [StringLength(7, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = ValidationMessages.FieldRequired)]
+            [StringLength(7, MinimumLength = 6, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.")]
             [DataType(DataType.Text)]
             [Display(Name = "Verification Code")]
             public string Code { get; set; }

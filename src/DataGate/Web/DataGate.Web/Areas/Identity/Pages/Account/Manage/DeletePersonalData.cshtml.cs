@@ -77,7 +77,7 @@
 
         public class InputModel
         {
-            [Required(ErrorMessage = ValidationMessages.PasswordRequired)]
+            [Required(ErrorMessage = ValidationMessages.FieldRequired)]
             [DataType(DataType.Password)]
             public string Password { get; set; }
         }
