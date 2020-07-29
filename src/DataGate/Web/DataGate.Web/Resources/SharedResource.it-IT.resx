@@ -348,6 +348,12 @@
   <data name="errorRequestStatus" xml:space="preserve">
     <value>Si è verificato un errore durante l'elaborazione della richiesta.</value>
   </data>
+  <data name="existingEntityAtDate" xml:space="preserve">
+    <value>L'entità esiste già per questo periodo di tempo! Modifica il valore per Valido da.</value>
+  </data>
+  <data name="existingEntityName" xml:space="preserve">
+    <value>Name already exists! Please try another one.</value>
+  </data>
   <data name="Expiration Date" xml:space="preserve">
     <value>Data Scadenza</value>
   </data>
@@ -611,6 +617,9 @@
   </data>
   <data name="Two-factor authentication" xml:space="preserve">
     <value>Autenticazione a due fattori</value>
+  </data>
+  <data name="unsuccessfulUpdate" xml:space="preserve">
+    <value>L'aggiornamento non è andato a buon fine! Per favore riprova.</value>
   </data>
   <data name="unvalidFormat" xml:space="preserve">
     <value>Non nel formato corretto!</value>

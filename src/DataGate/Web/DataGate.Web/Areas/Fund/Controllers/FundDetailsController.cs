@@ -9,6 +9,7 @@
     using DataGate.Web.Controllers;
     using DataGate.Web.Dtos.Queries;
     using DataGate.Web.Helpers;
+    using DataGate.Web.Resources;
     using DataGate.Web.ViewModels.Entities;
 
     using Microsoft.AspNetCore.Authorization;
@@ -20,13 +21,16 @@
     {
         private readonly IEntityDetailsService service;
         private readonly IFundService fundService;
+        private readonly SharedLocalizationService sharedLocalizer;
 
         public FundDetailsController(
             IEntityDetailsService service,
-            IFundService fundService)
+            IFundService fundService,
+            SharedLocalizationService sharedLocalizer)
         {
             this.service = service;
             this.fundService = fundService;
+            this.sharedLocalizer = sharedLocalizer;
         }
 
         [ActionName("Details")]
@@ -54,10 +58,10 @@
                            new { viewModel.Id, viewModel.Date });
             }
 
-            return this.ShowErrorAlertify(
-                       ErrorMessages.UnsuccessfulUpdate,
-                       GlobalConstants.FundDetailsRouteName,
-                       new { viewModel.Id, viewModel.Date });
+            return this.ShowError(
+                  this.sharedLocalizer.GetHtmlString(ErrorMessages.UnsuccessfulUpdate),
+                  GlobalConstants.FundDetailsRouteName,
+                  new { viewModel.Id, viewModel.Date });
         }
     }
 }

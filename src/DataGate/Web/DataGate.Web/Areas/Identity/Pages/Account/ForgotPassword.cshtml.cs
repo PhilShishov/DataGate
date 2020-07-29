@@ -65,7 +65,12 @@
                     protocol: this.Request.Scheme);
 
                 string message = string.Format(GlobalConstants.PasswordResetMessage, HtmlEncoder.Default.Encode(callbackUrl));
-                await this.emailSender.SendEmailAsync("philip.shishov@pharusmanco.lu", "Philip Shishov", this.Input.Email, GlobalConstants.ResetPasswordEmailSubject, message);
+                await this.emailSender.SendEmailAsync(
+                    "philip.shishov@pharusmanco.lu",
+                    "Pharus Management Lux S.A.",
+                    this.Input.Email,
+                    GlobalConstants.ResetPasswordEmailSubject,
+                    message);
 
                 return this.RedirectToPage(ForgotPasswordConfirmationUrl);
             }

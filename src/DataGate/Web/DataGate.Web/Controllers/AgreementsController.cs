@@ -7,6 +7,7 @@
     using DataGate.Services.Data.Agreements;
     using DataGate.Web.Helpers;
     using DataGate.Web.Infrastructure.Extensions;
+    using DataGate.Web.Resources;
     using DataGate.Web.ViewModels.Agreements;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -15,11 +16,14 @@
     public class AgreementsController : BaseController
     {
         private readonly IAgreementsService service;
+        private readonly SharedLocalizationService sharedLocalizer;
 
         public AgreementsController(
-            IAgreementsService service)
+            IAgreementsService service,
+            SharedLocalizationService sharedLocalizer)
         {
             this.service = service;
+            this.sharedLocalizer = sharedLocalizer;
         }
 
         [HttpGet]
@@ -71,7 +75,7 @@
                 return this.View(model);
             }
 
-            this.ShowErrorAlertify(ErrorMessages.TableIsEmpty);
+            this.ShowError(this.sharedLocalizer.GetHtmlString(ErrorMessages.UnsuccessfulUpdate));
             return this.View(model);
         }
     }
