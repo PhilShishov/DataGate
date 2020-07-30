@@ -31,11 +31,11 @@
 
                 if (isIsin)
                 {
-                    var classId = this.service.GetClassByIsin(searchTerm);
+                    var classId = this.service.ByIsin(searchTerm);
                     return this.RedirectToRoute(GlobalConstants.ShareClassDetailsRouteName, new { area = GlobalConstants.ShareClassAreaName, id = classId, date = model.Date });
                 }
 
-                model.Results = this.service.SearchClassesByName(searchTerm);
+                model.Results = this.service.ByName(searchTerm);
             }
 
             return this.View(model);

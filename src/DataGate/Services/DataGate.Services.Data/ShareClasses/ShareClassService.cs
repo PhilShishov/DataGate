@@ -54,14 +54,14 @@ namespace DataGate.Services.Data.ShareClasses
                 .Take(10)
                 .ToList();
 
-        public IEnumerable<ResultViewModel> SearchClassesByName(string searchTerm)
+        public IEnumerable<ResultViewModel> ByName(string searchTerm)
              => this.repository.All()
                 .Where(sc => sc.ScOfficialShareClassName.Contains(searchTerm))
                 .OrderBy(sc => sc.ScOfficialShareClassName)
                 .To<ResultViewModel>()
                 .ToList();
 
-        public int GetClassByIsin(string searchTerm)
+        public int ByIsin(string searchTerm)
             => this.repository.All()
                .Where(sc => sc.ScIsinCode == searchTerm)
                .Select(sc => sc.ScId)
