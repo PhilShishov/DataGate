@@ -9,12 +9,12 @@
 
     public interface IShareClassService : IEntityAutocompleteService, IEntityException
     {
-        IEnumerable<ResultViewModel> SearchClassesByName(string searchTerm);
+        IEnumerable<ResultViewModel> ByName(string searchTerm);
 
         IEnumerable<TbHistoryShareClass> ByDate();
 
         bool IsIsin(string searchTerm);
 
-        int GetClassByIsin(string searchTerm);
+        int ByIsin(string searchTerm);
     }
 }
