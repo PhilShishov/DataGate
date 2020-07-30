@@ -177,6 +177,9 @@
   <data name="allPharusReports" xml:space="preserve">
     <value>All Pharus Reports</value>
   </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Apply</value>
+  </data>
   <data name="Are you sure you want to create this?" xml:space="preserve">
     <value>Are you sure you want to create this?</value>
   </data>
@@ -338,6 +341,9 @@
   </data>
   <data name="Enter your email" xml:space="preserve">
     <value>Enter your email</value>
+  </data>
+  <data name="entries" xml:space="preserve">
+    <value>entries</value>
   </data>
   <data name="error" xml:space="preserve">
     <value>Error</value>
@@ -546,9 +552,6 @@
   <data name="roleRequired" xml:space="preserve">
     <value>Role type required</value>
   </data>
-  <data name="Roles" xml:space="preserve">
-    <value>Roles</value>
-  </data>
   <data name="Save changes" xml:space="preserve">
     <value>Save changes</value>
   </data>
@@ -560,6 +563,9 @@
   </data>
   <data name="Select an option..." xml:space="preserve">
     <value>Select an option...</value>
+  </data>
+  <data name="selectColumns" xml:space="preserve">
+    <value>Select Columns</value>
   </data>
   <data name="SELECTION" xml:space="preserve">
     <value>SELECTION</value>
@@ -669,8 +675,8 @@
   <data name="We use cookies to understand how you use our site and to improve your experience" xml:space="preserve">
     <value>We use cookies to understand how you use our site and to improve your experience</value>
   </data>
-  <data name="Welcome To" xml:space="preserve">
-    <value>Welcome To</value>
+  <data name="welcomeMessage" xml:space="preserve">
+    <value>Welcome to Pharus DataGate Platform</value>
   </data>
   <data name="Yes, I am sure!" xml:space="preserve">
     <value>Yes, I am sure!</value>

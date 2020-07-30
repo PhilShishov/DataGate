@@ -9,18 +9,21 @@
 
 <div class="table-search-wrapper">
     <h1>@SharedLocalizer.GetHtmlString("Result")</h1>
-    <p>@SharedLocalizer.GetHtmlString("Your search criteria was:") @Model.SearchTerm</p>
-    <p>@SharedLocalizer.GetHtmlString("Number of results:") @Model.Results.ToList().Count</p>
+    <p>@SharedLocalizer.GetHtmlString("Your search criteria was:") <strong> @Model.SearchTerm</strong></p>
+    <p>
+        @SharedLocalizer.GetHtmlString("Number of results:") @Model.Results.ToList().Count
+        @SharedLocalizer.GetHtmlString("entries")
+    </p>
 
     @if (Model.Results.Any())
     {
         <table class="table-bordered table-hover table-view-pharus mx-auto" style="width:50%;">
             <thead>
                 <tr>
-                    <th >
+                    <th>
                         ISIN CODE
                     </th>
-                    <th >
+                    <th>
                         SHARE NAME
                     </th>
                 </tr>
@@ -52,23 +55,41 @@
 
 @section Scripts{
     <script>
-        let languageUrl;
+        let cultureObj = {};
 
         if ('@currentCulture.RequestCulture.Culture.Name' === 'it-IT') {
-            languageUrl = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Italian.json";
-        } else {
-            languageUrl = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/English.json";
+            cultureObj = {
+                "sEmptyTable": "Nessun dato presente nella tabella",
+                "sInfo": "Vista da _START_ a _END_ di _TOTAL_ elementi",
+                "sInfoEmpty": "Vista da 0 a 0 di 0 elementi",
+                "sInfoFiltered": "(filtrati da _MAX_ elementi totali)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ",",
+                "sLengthMenu": "Visualizza _MENU_ elementi",
+                "sLoadingRecords": "Caricamento...",
+                "sProcessing": "Elaborazione...",
+                "sSearch": "Cerca:",
+                "sZeroRecords": "La ricerca non ha portato alcun risultato.",
+                "oPaginate": {
+                    "sFirst": "Inizio",
+                    "sPrevious": "Precedente",
+                    "sNext": "Successivo",
+                    "sLast": "Fine"
+                },
+                "oAria": {
+                    "sSortAscending": ": attiva per ordinare la colonna in ordine crescente",
+                    "sSortDescending": ": attiva per ordinare la colonna in ordine decrescente"
+                }
+            };
         }
 
         $(document).ready(function () {
             $('.table-view-pharus').DataTable({
-                "language": {
-                    "url": languageUrl
-                },
+                "language": cultureObj
             });
             $(".dataTables_length select").chosen({
                 disable_search_threshold: 10,
-                width: "55px",
+                width: "64px",
                 placeholder_text_single: "All"
             });
         });

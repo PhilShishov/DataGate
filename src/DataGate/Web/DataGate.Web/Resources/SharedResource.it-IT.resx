@@ -177,6 +177,9 @@
   <data name="allPharusReports" xml:space="preserve">
     <value>Tutti i Report di Pharus</value>
   </data>
+  <data name="Apply" xml:space="preserve">
+    <value>Applicare</value>
+  </data>
   <data name="Are you sure you want to create this?" xml:space="preserve">
     <value>Sei sicuro di voler creare questo?</value>
   </data>
@@ -243,7 +246,7 @@
   <data name="Confirm new password" xml:space="preserve">
     <value>Conferma la nuova password</value>
   </data>
-  <data name="Confirm Password" xml:space="preserve">
+  <data name="Confirm password" xml:space="preserve">
     <value>Conferma password</value>
   </data>
   <data name="CONTAINER" xml:space="preserve">
@@ -339,6 +342,9 @@
   <data name="Enter your e-mail" xml:space="preserve">
     <value>Inserisci il tuo e-mail</value>
   </data>
+  <data name="entries" xml:space="preserve">
+    <value>elementi</value>
+  </data>
   <data name="error" xml:space="preserve">
     <value>Errore</value>
   </data>
@@ -424,7 +430,7 @@
     <value>Sono stati specificati un nome utente o una password errati.</value>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>Linguaggio</value>
+    <value>Lingua</value>
   </data>
   <data name="Last Login" xml:space="preserve">
     <value>Ultima connessione</value>
@@ -496,7 +502,7 @@
     <value>Dati Personali</value>
   </data>
   <data name="PHARUS DATAGATE PLATFORM" xml:space="preserve">
-    <value>PHARUS DATAGATE PIATTAFORMA</value>
+    <value>PIATTAFORMA PHARUS DATAGATE</value>
   </data>
   <data name="Platform" xml:space="preserve">
     <value>Piattaforma</value>
@@ -546,9 +552,6 @@
   <data name="roleRequired" xml:space="preserve">
     <value>Tipo di ruolo richiesto</value>
   </data>
-  <data name="Roles" xml:space="preserve">
-    <value>Ruoli</value>
-  </data>
   <data name="Save changes" xml:space="preserve">
     <value>Salva cambiamenti</value>
   </data>
@@ -560,6 +563,9 @@
   </data>
   <data name="Select an option..." xml:space="preserve">
     <value>Seleziona un'opzione</value>
+  </data>
+  <data name="selectColumns" xml:space="preserve">
+    <value>Seleziona Colonne</value>
   </data>
   <data name="SELECTION" xml:space="preserve">
     <value>SELEZIONA</value>
@@ -669,8 +675,8 @@
   <data name="We use cookies to understand how you use our site and to improve your experience" xml:space="preserve">
     <value>Noi utilizziamo cookie per capire come utilizzi il nostro sito e migliorare l'esperienza di navigazione.</value>
   </data>
-  <data name="Welcome To" xml:space="preserve">
-    <value>Benvenuto in</value>
+  <data name="welcomeMessage" xml:space="preserve">
+    <value>Benvenuto nella Piattaforma Pharus DataGate</value>
   </data>
   <data name="Yes, I am sure!" xml:space="preserve">
     <value>Sì, sono sicuro!</value>

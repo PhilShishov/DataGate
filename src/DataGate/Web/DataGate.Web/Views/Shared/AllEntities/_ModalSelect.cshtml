@@ -12,7 +12,7 @@
             <div class="modal-body">
                 <div>
                     <h2 class="text-center">
-                        @SharedLocalizer.GetHtmlString("SELECT COLUMNS")
+                        @SharedLocalizer.GetHtmlString("selectColumns")
                     </h2>
                     <select asp-for="PreSelectedColumns" style="width:60%" hidden>
                         @for (int col = 0; col < numberPreSelectedColumns; col++)
@@ -42,7 +42,7 @@
 
                 <input type="submit"
                        name="Command"
-                       value="Apply"
+                       value=@SharedLocalizer.GetHtmlString("Apply")
                        class="btn btn-pharus ml-2" />
             </div>
         </div>
