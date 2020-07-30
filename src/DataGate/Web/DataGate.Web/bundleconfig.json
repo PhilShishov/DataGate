@@ -1,7 +1,6 @@
 ﻿[
   {
     "inputFiles": [
-      "wwwroot/lib/chosen/chosen.css",
       "wwwroot/css/pharus/!(*.min).css",
       "wwwroot/css/mediaQuery.css"
     ],

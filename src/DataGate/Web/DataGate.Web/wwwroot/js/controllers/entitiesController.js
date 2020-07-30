@@ -129,14 +129,6 @@ function dataTableInitializationHandler(controller, language) {
     $('.table-view-pharus').removeAttr('hidden');
     $.fn.dataTable.moment('DD/MM/YYYY');
 
-    let languageUrl;
-
-    if (language === 'it-IT') {
-        languageUrl = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Italian.json";
-    } else {
-        languageUrl = "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/English.json";
-    }
-
     if (controller === 'Funds') {
         $('.table-view-pharus').DataTable({
             "dom": '<"top">rt<"bottom"><"clear">',
@@ -145,20 +137,47 @@ function dataTableInitializationHandler(controller, language) {
             "scrollX": true,
         });
     } else {
+        let cultureObj = {};
+
+        if (language === 'it-IT') {
+            cultureObj = {
+                "sEmptyTable": "Nessun dato presente nella tabella",
+                "sInfo": "Vista da _START_ a _END_ di _TOTAL_ elementi",
+                "sInfoEmpty": "Vista da 0 a 0 di 0 elementi",
+                "sInfoFiltered": "(filtrati da _MAX_ elementi totali)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ",",
+                "sLengthMenu": "Visualizza _MENU_ elementi",
+                "sLoadingRecords": "Caricamento...",
+                "sProcessing": "Elaborazione...",
+                "sSearch": "Cerca:",
+                "sZeroRecords": "La ricerca non ha portato alcun risultato.",
+                "oPaginate": {
+                    "sFirst": "Inizio",
+                    "sPrevious": "Precedente",
+                    "sNext": "Successivo",
+                    "sLast": "Fine"
+                },
+                "oAria": {
+                    "sSortAscending": ": attiva per ordinare la colonna in ordine crescente",
+                    "sSortDescending": ": attiva per ordinare la colonna in ordine decrescente"
+                }
+            };
+        }
+
         $('.table-view-pharus').DataTable({
             "dom": '<"top"lf>rt<"bottom"ip><"clear">',
             "lengthMenu": [[-1, 10, 25, 50], ["All", 10, 25, 50]],
             stateSave: true,
             "autoWidth": false,
             "scrollX": true,
-            "language": {
-                "url": languageUrl
-            }
+            "language": cultureObj,
         });
     }
 
     $(".dataTables_length select").chosen({
         disable_search_threshold: 10,
+
         width: "55px",
         placeholder_text_single: ""
     });
