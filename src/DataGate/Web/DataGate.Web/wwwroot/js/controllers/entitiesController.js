@@ -231,7 +231,6 @@ $(function () {
 
     $.widget("ui.multiselect", {
         options: {
-            sortable: true,
             searchable: true,
             doubleClickable: true,
             animated: 'fast',
