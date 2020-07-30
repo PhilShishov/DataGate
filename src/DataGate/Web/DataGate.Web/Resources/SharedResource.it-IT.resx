@@ -403,7 +403,7 @@
     <value>Libreria Fondi</value>
   </data>
   <data name="Fund Reports" xml:space="preserve">
-    <value>Report Fund</value>
+    <value>Report Fondo</value>
   </data>
   <data name="fundLength" xml:space="preserve">
     <value>Non deve contenere più di {2} caratteri!</value>
@@ -526,7 +526,7 @@
     <value>Ricordami</value>
   </data>
   <data name="Reports" xml:space="preserve">
-    <value>Rapporti</value>
+    <value>Report</value>
   </data>
   <data name="Reset" xml:space="preserve">
     <value>Resetta</value>
@@ -601,7 +601,7 @@
     <value>Sub Fund</value>
   </data>
   <data name="Sub Funds managed by Pharus ManCo" xml:space="preserve">
-    <value>Sub Funds gestiti da Pharus ManCo</value>
+    <value>Sub Fund gestiti da Pharus ManCo</value>
   </data>
   <data name="Subs" xml:space="preserve">
     <value>Subs</value>
