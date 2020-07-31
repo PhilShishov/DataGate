@@ -321,17 +321,11 @@
   <data name="Download" xml:space="preserve">
     <value>Scarica</value>
   </data>
-  <data name="Edit" xml:space="preserve">
-    <value>Modifica</value>
-  </data>
-  <data name="Edit Fund" xml:space="preserve">
-    <value>Modifica Fondo</value>
-  </data>
-  <data name="Edit Sub Fund" xml:space="preserve">
-    <value>Modifica Subfund</value>
-  </data>
   <data name="Edit User" xml:space="preserve">
     <value>Modifica Utente</value>
+  </data>
+  <data name="editData" xml:space="preserve">
+    <value>Modifica dati</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
