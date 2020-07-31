@@ -45,6 +45,17 @@
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
 
+    <script>
+        var $buoop = { required: { e: -1, f: -1, o: -1, s: -1, c: -1 }, insecure: true, style: "corner", api: 2020.07 };
+        function $buo_f() {
+            var e = document.createElement("script");
+            e.src = "//browser-update.org/update.min.js";
+            document.body.appendChild(e);
+        };
+        try { document.addEventListener("DOMContentLoaded", $buo_f, false) }
+        catch (e) { window.attachEvent("onload", $buo_f) }
+    </script>
+
     @this.RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -21,14 +21,18 @@
         <div class="row">
             <div class="col-md-12 div-text-pharus">
                 <h1 class="text-white text-pharus">
-                    @SharedLocalizer.GetHtmlString("welcomeMessage")
+                    <i>
+                        @SharedLocalizer.GetHtmlString("welcomeMessage")
+                        <br />
+                        @SharedLocalizer.GetHtmlString("dataGatePlatform")
+                    </i>
                 </h1>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12 pharus-btn container-btn-login">
                 <a asp-area="Identity" asp-page="/Account/Login">
-                    <img src="~/images/Login_Button_Home.png">
+                    <img src="~/images/Login_Button.png">
                 </a>
             </div>
         </div>
