@@ -387,6 +387,9 @@
   <data name="fileRequired" xml:space="preserve">
     <value>Seleziona un file.</value>
   </data>
+  <data name="fillSearchBox" xml:space="preserve">
+    <value>Si prega di compilare la casella di ricerca!</value>
+  </data>
   <data name="Find a Share Class..." xml:space="preserve">
     <value>Trova Share Class...</value>
   </data>

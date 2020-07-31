@@ -188,6 +188,6 @@ function dataTableReportHandler(type) {
 
     $(".dataTables_length select").chosen({
         disable_search_threshold: 10,
-        width: "55px",
+        width: "68px",
     });
 }
