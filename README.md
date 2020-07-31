@@ -112,9 +112,9 @@ You can watch videos about the platform:
   ## History  
 **2020-07-14** Updated to ASP.NET Core 3.1.6
 
-**2020-06-22** Released version 2 of DataGate
+**2020-06-22** Released DataGate v2.0
 
-**2020-02-28** Released version 1 of DataGate with ASP.NET Core 2.1
+**2020-02-28** Released DataGate v1.0 with ASP.NET Core 2.1
   
   ## Contact
 Created by [Philip Shishov](https://github.com/PhilShishov) - feel free to contact me!
