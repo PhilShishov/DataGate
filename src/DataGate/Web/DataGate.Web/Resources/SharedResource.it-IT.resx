@@ -165,6 +165,9 @@
   <data name="Agreements Library" xml:space="preserve">
     <value>Libreria Agreement</value>
   </data>
+  <data name="agreementsArchive" xml:space="preserve">
+    <value>Archivio Agreement</value>
+  </data>
   <data name="agrTypeRequired" xml:space="preserve">
     <value>Tipo di accordo richiesto</value>
   </data>
@@ -307,13 +310,13 @@
     <value>Cancella Utente</value>
   </data>
   <data name="Deleting this data will permanently remove your account, and this cannot be recovered." xml:space="preserve">
-    <value>L'eliminazione di questi dati rimuoverà definitivamente il tuo account e questo non può essere recuperato.</value>
-  </data>
-  <data name="Distinct" xml:space="preserve">
-    <value>Separa</value>
+    <value>L\'eliminazione di questi dati rimuoverà definitivamente il tuo account e questo non può essere recuperato.</value>
   </data>
   <data name="Documents" xml:space="preserve">
     <value>Documenti</value>
+  </data>
+  <data name="documentsArchive" xml:space="preserve">
+    <value>Archivio Documenti</value>
   </data>
   <data name="Download" xml:space="preserve">
     <value>Scarica</value>
@@ -334,10 +337,10 @@
     <value>Email</value>
   </data>
   <data name="emailNotConfirmed" xml:space="preserve">
-    <value>La tua email non è confermata Conferma la tua email prima dell'accesso!</value>
+    <value>La tua email non è confermata Conferma la tua email prima dell\'accesso!</value>
   </data>
   <data name="emailValid" xml:space="preserve">
-    <value>L'email non è un indirizzo email valido.</value>
+    <value>L\'email non è un indirizzo email valido.</value>
   </data>
   <data name="Enter your e-mail" xml:space="preserve">
     <value>Inserisci il tuo e-mail</value>
@@ -352,10 +355,10 @@
     <value>Errore durante l\'eliminazione!</value>
   </data>
   <data name="errorRequestStatus" xml:space="preserve">
-    <value>Si è verificato un errore durante l'elaborazione della richiesta.</value>
+    <value>Si è verificato un errore durante l\'elaborazione della richiesta.</value>
   </data>
   <data name="existingEntityAtDate" xml:space="preserve">
-    <value>L'entità esiste già per questo periodo di tempo! Modifica il valore per Valido da.</value>
+    <value>L\'entità esiste già per questo periodo di tempo! Modifica il valore per Valido da.</value>
   </data>
   <data name="existingEntityName" xml:space="preserve">
     <value>Name already exists! Please try another one.</value>
@@ -483,6 +486,9 @@
   <data name="Number of results:" xml:space="preserve">
     <value>Numero di risultati:</value>
   </data>
+  <data name="officialUpdate" xml:space="preserve">
+    <value>Aggiornamento ufficiale</value>
+  </data>
   <data name="oldpassRequired" xml:space="preserve">
     <value>È richiesta una vecchia password</value>
   </data>
@@ -565,7 +571,7 @@
     <value>Seleziona</value>
   </data>
   <data name="Select an option..." xml:space="preserve">
-    <value>Seleziona un'opzione</value>
+    <value>Seleziona un\'opzione</value>
   </data>
   <data name="selectColumns" xml:space="preserve">
     <value>Seleziona Colonne</value>
@@ -628,7 +634,7 @@
     <value>Autenticazione a due fattori</value>
   </data>
   <data name="unsuccessfulUpdate" xml:space="preserve">
-    <value>L'aggiornamento non è andato a buon fine! Per favore riprova.</value>
+    <value>L\'aggiornamento non è andato a buon fine! Per favore riprova.</value>
   </data>
   <data name="unvalidFormat" xml:space="preserve">
     <value>Non nel formato corretto!</value>
@@ -676,7 +682,7 @@
     <value>Vedi utenti</value>
   </data>
   <data name="We use cookies to understand how you use our site and to improve your experience" xml:space="preserve">
-    <value>Noi utilizziamo cookie per capire come utilizzi il nostro sito e migliorare l'esperienza di navigazione.</value>
+    <value>Noi utilizziamo cookie per capire come utilizzi il nostro sito e migliorare l\'esperienza di navigazione.</value>
   </data>
   <data name="welcomeMessage" xml:space="preserve">
     <value>Benvenuto nella Piattaforma Pharus DataGate</value>
