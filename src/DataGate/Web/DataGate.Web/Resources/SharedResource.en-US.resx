@@ -324,6 +324,9 @@
   <data name="Edit User" xml:space="preserve">
     <value>Edit User</value>
   </data>
+  <data name="editData" xml:space="preserve">
+    <value>Edit data</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
