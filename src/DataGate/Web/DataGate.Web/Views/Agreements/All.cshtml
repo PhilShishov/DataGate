@@ -72,7 +72,7 @@
                             @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.IsInRole(GlobalConstants.LegalRoleName))
                             {
                                 <th>
-                                    @SharedLocalizer.GetHtmlString("File Name")
+                                    @SharedLocalizer.GetHtmlString("Actions")
                                 </th>
                             }
                         </tr>
@@ -112,6 +112,14 @@
                                 @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.IsInRole(GlobalConstants.LegalRoleName))
                                 {
                                     <td class="p-1 text-center">
+                                        <button class="btn btn-pharus btn-sm mr-1"
+                                                type="submit"
+                                                asp-area=""
+                                                asp-route="fees"
+                                                asp-route-fileId="@agreement.FileId">
+                                            @SharedLocalizer.GetHtmlString("fees")
+                                        </button>
+                                        |
                                         <button type="button" class="btn btn-pharus btn-sm mr-1 btn-delete">
                                             @SharedLocalizer.GetHtmlString("Delete")
                                         </button>
