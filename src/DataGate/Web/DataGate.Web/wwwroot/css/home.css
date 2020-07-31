@@ -25,6 +25,7 @@ p {
 
 h1 {
     text-align: center;
+    line-height: unset;
 }
 
 img {
@@ -47,7 +48,7 @@ img {
 }
 
 .div-text-pharus {
-    margin-top: 4%;
+    margin-top: 2%;
 }
 
 .text-pharus {

@@ -61,6 +61,17 @@
                     <button id="btn-open-agreements">@SharedLocalizer.GetHtmlString("agreementsArchive")</button>
                 </div>
             </div>
+
+            @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            {
+
+                <div class="column-add-info">
+                    <div class="card-add-info">
+                        <button id="">@SharedLocalizer.GetHtmlString("countryDistribution")</button>
+                    </div>
+                </div>
+            }
+
         </div>
     </div>
     <form id="load-form" method="get"></form>

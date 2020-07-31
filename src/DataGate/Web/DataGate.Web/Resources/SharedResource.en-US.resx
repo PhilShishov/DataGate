@@ -264,6 +264,9 @@
   <data name="Cookie Policy" xml:space="preserve">
     <value>Cookie Policy</value>
   </data>
+  <data name="countryDistribution" xml:space="preserve">
+    <value>Country of Distribution</value>
+  </data>
   <data name="Create" xml:space="preserve">
     <value>Create</value>
   </data>
@@ -293,6 +296,9 @@
   </data>
   <data name="DataGate" xml:space="preserve">
     <value>DataGate</value>
+  </data>
+  <data name="dataGatePlatform" xml:space="preserve">
+    <value>Pharus DataGate Platform</value>
   </data>
   <data name="dateRequired" xml:space="preserve">
     <value>Date cannot be empty!</value>
@@ -365,6 +371,9 @@
   </data>
   <data name="FACodeRequired" xml:space="preserve">
     <value>Fund admin code is required.</value>
+  </data>
+  <data name="fees" xml:space="preserve">
+    <value>FEES</value>
   </data>
   <data name="fieldLength" xml:space="preserve">
     <value>Must be between {2} and {1} characters long.</value>
@@ -679,7 +688,7 @@
     <value>We use cookies to understand how you use our site and to improve your experience</value>
   </data>
   <data name="welcomeMessage" xml:space="preserve">
-    <value>Welcome to Pharus DataGate Platform</value>
+    <value>Welcome to</value>
   </data>
   <data name="Yes, I am sure!" xml:space="preserve">
     <value>Yes, I am sure!</value>
