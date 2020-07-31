@@ -15,6 +15,7 @@ improve the efficiency and automate some parts of Risk and Legal department.
 * [Functionality](#functionality)
 * [Documentation](#documentation)
 * [Status](#status)
+* [History](#history)
 * [Contact](#contact)
 
 ## General Info
@@ -107,6 +108,12 @@ You can watch videos about the platform:
   
   ## Status
   [![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/DataGate-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=1&branchName=master)
+  
+  ## History  
+<strong>2020-07-14</strong> Updated to ASP.NET Core 3.1.6
+<strong>2020-06-22</strong> Released version 2 of DataGate
+<strong>2020-02-28</strong> Released version 1 of DataGate
+<strong>2019-11-19</strong> Updated to ASP.NET Core 2.1.14
   
   ## Contact
 Created by [Philip Shishov](https://github.com/PhilShishov) - feel free to contact me!
