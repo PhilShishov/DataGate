@@ -207,6 +207,14 @@
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 
+    <script>
+        $(function () {
+            // Localization for search box
+            $('input[type=search]').attr('oninvalid', "this.setCustomValidity('@Html.Raw(SharedLocalizer.GetHtmlString("fillSearchBox").Value.ToString())')");
+            $('input[type=search]').attr('oninput', "setCustomValidity('')");
+        });
+    </script>
+
     @this.RenderSection("Scripts", required: false)
 </body>
 </html>

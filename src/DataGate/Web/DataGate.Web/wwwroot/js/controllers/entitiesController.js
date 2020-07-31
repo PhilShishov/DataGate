@@ -138,6 +138,7 @@ function dataTableInitializationHandler(controller, language) {
         });
     } else {
         let cultureObj = {};
+        let lengthMenuArr = [[-1, 10, 25, 50], ["All", 10, 25, 50]];
 
         if (language === 'it-IT') {
             cultureObj = {
@@ -163,11 +164,14 @@ function dataTableInitializationHandler(controller, language) {
                     "sSortDescending": ": attiva per ordinare la colonna in ordine decrescente"
                 }
             };
+
+            lengthMenuArr = [[-1, 10, 25, 50], ["Tutti", 10, 25, 50]];
+
         }
 
         $('.table-view-pharus').DataTable({
             "dom": '<"top"lf>rt<"bottom"ip><"clear">',
-            "lengthMenu": [[-1, 10, 25, 50], ["All", 10, 25, 50]],
+            "lengthMenu": lengthMenuArr,
             stateSave: true,
             "autoWidth": false,
             "scrollX": true,
@@ -178,7 +182,7 @@ function dataTableInitializationHandler(controller, language) {
     $(".dataTables_length select").chosen({
         disable_search_threshold: 10,
 
-        width: "55px",
+        width: "68px",
         placeholder_text_single: ""
     });
 
