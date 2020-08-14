@@ -4,7 +4,9 @@ https://pharusdatagate.com <br />
 
 A private web application for managing more than 300 funds. <br />
 It is developed to be used by Pharus Management Lux S.A in order to <br />
-improve the efficiency and automate some parts of Risk and Legal department.
+centralize internal data and allow each user to be able to <br />
+find relevant information in a fast way, saving time, reducing operational errors <br />
+and automating some parts of the Risk and Legal department.
 
 
 ## Table of contents
