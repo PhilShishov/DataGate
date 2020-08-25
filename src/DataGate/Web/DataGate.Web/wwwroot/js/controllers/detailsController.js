@@ -21,6 +21,8 @@ const HTML_MENU = {
     CONTAINER_TIMELINES: '#timelineChanges',
     CONTAINER_DOCUMENTS: '#allDocuments',
     CONTAINER_AGREEMENTS: '#allAgreements',
+    ICONS_EDITOR: 'icon-edit',
+    TABLE_INFO: 'table-info-pharus',
 };
 
 const URLS = {
@@ -30,6 +32,25 @@ const URLS = {
     DOCUMENTS: '/loadAllDoc',
     AGREEMENTS: '/loadAllAgr',
 };
+
+$(function () {
+    // ________________________________________________________
+    //
+    // Quick editor text
+    const rows = document.getElementById(HTML_MENU.TABLE_INFO).getElementsByTagName('tr');
+
+    for (var row of rows) {
+        row.addEventListener('mouseenter', function (event) {
+            const icon = event.target.getElementsByClassName(HTML_MENU.ICONS_EDITOR)[0];
+            icon.style.visibility = 'visible';
+
+        });
+        row.addEventListener('mouseleave', function (event) {
+            const icon = event.target.getElementsByClassName(HTML_MENU.ICONS_EDITOR)[0];
+            icon.style.visibility = 'hidden';
+        });
+    }
+});
 
 // ________________________________________________________
 //

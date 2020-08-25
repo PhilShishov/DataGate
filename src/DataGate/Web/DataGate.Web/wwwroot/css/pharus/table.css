@@ -5,6 +5,21 @@
 * ==========================================
 *
 */
+
+.icon-edit {
+    content: '';
+    cursor: pointer;
+    background: url(../../images/pen-solid.svg) no-repeat center center;
+    position: absolute;
+    opacity: 1;
+    width: 20px;
+    height: 20px;
+    visibility: hidden;
+    left: 32.2%;
+}
+
+
+
 .table-view-pharus {
     white-space: nowrap !important;
 }
