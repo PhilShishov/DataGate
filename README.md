@@ -50,7 +50,7 @@ https://pharusdatagate.com <br />
 
 ### Backend 
 * C# .NET Core 3.1, MVC, REST
-* Database - MSSQL Server, Entity Framework Core 3.1
+* Database - MSSQL Server, SQL Lite, Entity Framework Core 3.1
 * Testing - xUnit, MyTested.AspNetCore.Mvc
 * SendGrid, AutoMapper, EPPlus, itext7
 
