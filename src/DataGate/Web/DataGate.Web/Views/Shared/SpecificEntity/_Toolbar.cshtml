@@ -43,16 +43,6 @@
     }
 
     <div class="h-100 d-flex">
-        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.IsInRole(GlobalConstants.LegalRoleName))
-        {
-            <div class="mr-5">
-                <a href=""
-                   class="btn btn-pharus btn-sm mb-2">
-                    @SharedLocalizer.GetHtmlString("editData")
-                </a>
-            </div>
-        }
-
         <form class="d-flex ml-5"
               method="post"
               id="update-form">

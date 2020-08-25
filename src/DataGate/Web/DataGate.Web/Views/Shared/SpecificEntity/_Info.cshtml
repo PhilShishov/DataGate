@@ -6,11 +6,16 @@
                 @for (int col = 0; col < Model.Entity[row].Length; col++)
                 {
                     <tr>
-                        <th >
+                        <th>
                             @Model.Entity[0][col]
                         </th>
                         <td>
                             @Model.Entity[row][col]
+                            @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.IsInRole(GlobalConstants.LegalRoleName))
+                            {
+                                <span class="icon-edit">
+                                </span>
+                            }
                         </td>
                     </tr>
                 }
