@@ -45,7 +45,7 @@ https://pharusdatagate.com <br />
 * Frameworks - ASP.NET Core 3.1, Bootstrap
 * Project Management - Jira, Trello
 * Version Control - Git, TortoiseGit, GitHub
-* DevOps - Azure Pipelines
+* DevOps - Application Insights, Azure Pipelines
 * Hosting and File Storage - GoDaddy WebWiz
 
 ### Backend 
