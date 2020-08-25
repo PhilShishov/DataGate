@@ -9,6 +9,7 @@
 
   <PropertyGroup>
     <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+    <ApplicationInsightsResourceId>/subscriptions/0b49a758-f385-4863-be10-310effb9dba5/resourcegroups/DataGateApplication/providers/Microsoft.Insights/components/DataGate.Web</ApplicationInsightsResourceId>
   </PropertyGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
