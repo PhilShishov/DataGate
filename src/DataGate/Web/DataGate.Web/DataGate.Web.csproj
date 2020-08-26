@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="EPPlus" Version="5.2.0" />
+    <PackageReference Include="EPPlus" Version="5.3.0" />
     <PackageReference Include="itext7" Version="7.1.11" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.14.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.6">
