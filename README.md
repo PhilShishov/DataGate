@@ -4,7 +4,9 @@ https://pharusdatagate.com <br />
 
 A private web application for managing more than 300 funds. <br />
 It is developed to be used by Pharus Management Lux S.A in order to <br />
-improve the efficiency and automate some parts of Risk and Legal department.
+centralize internal data and allow each user to be able to <br />
+find relevant information in a fast way, saving time, reducing operational errors <br />
+and automating some parts of the Risk and Legal department.
 
 
 ## Table of contents
@@ -15,6 +17,7 @@ improve the efficiency and automate some parts of Risk and Legal department.
 * [Functionality](#functionality)
 * [Documentation](#documentation)
 * [Status](#status)
+* [History](#history)
 * [Contact](#contact)
 
 ## General Info
@@ -42,12 +45,12 @@ https://pharusdatagate.com <br />
 * Frameworks - ASP.NET Core 3.1, Bootstrap
 * Project Management - Jira, Trello
 * Version Control - Git, TortoiseGit, GitHub
-* DevOps - Azure Pipelines
+* DevOps - Application Insights, Azure Pipelines
 * Hosting and File Storage - GoDaddy WebWiz
 
 ### Backend 
 * C# .NET Core 3.1, MVC, REST
-* Database - MSSQL Server, Entity Framework Core 3.1
+* Database - MSSQL Server, SQL Lite, Entity Framework Core 3.1
 * Testing - xUnit, MyTested.AspNetCore.Mvc
 * SendGrid, AutoMapper, EPPlus, itext7
 
@@ -107,6 +110,13 @@ You can watch videos about the platform:
   
   ## Status
   [![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/DataGate-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=1&branchName=master)
+  
+  ## History  
+**2020-07-14** Updated to ASP.NET Core 3.1.6
+
+**2020-06-22** Released DataGate v2.0
+
+**2020-02-28** Released DataGate v1.0 with ASP.NET Core 2.1
   
   ## Contact
 Created by [Philip Shishov](https://github.com/PhilShishov) - feel free to contact me!
