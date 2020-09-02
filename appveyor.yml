@@ -1,6 +1,7 @@
 version: 1.0.{build}
 os: Visual Studio 2019
 before_build:
-- nuget restore src\DataGate\DataGate.sln
+- dotnet restore src\DataGate\DataGate.sln
 build:
+  project: src\DataGate\DataGate.sln
   verbosity: minimal
