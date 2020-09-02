@@ -11,13 +11,10 @@
     {
         private readonly IConfiguration configuration;
 
-        public Pharus_vFinaleDbContext()
-        {
-        }
-
-        public Pharus_vFinaleDbContext(DbContextOptions<Pharus_vFinaleDbContext> options)
+        public Pharus_vFinaleDbContext(DbContextOptions<Pharus_vFinaleDbContext> options, IConfiguration configuration)
             : base(options)
         {
+            this.configuration = configuration;
         }
 
         public virtual DbSet<TbCompanies> TbCompanies { get; set; }
