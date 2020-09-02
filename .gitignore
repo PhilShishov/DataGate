@@ -356,6 +356,5 @@ MigrationBackup/
 **/wwwroot/FileFolder/
 **/wwwroot/lib/
 appsettings.Staging.json
-appsettings.Production.json
 *.min.css
 *.min.js
