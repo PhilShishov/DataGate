@@ -9,7 +9,7 @@ find relevant information in a fast way, saving time, reducing operational error
 and automating some parts of the Risk and Legal department.
 
   ## Status
-  [![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/DataGate-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=1&branchName=master) [![Build status](https://ci.appveyor.com/api/projects/status/8mh906osm91rlvv1?svg=true)](https://ci.appveyor.com/project/PhilShishov/datagate)
+  [![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/DataGate-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=1&branchName=master) [![Build status](https://ci.appveyor.com/api/projects/status/thvsvj1du6d595m6?svg=true)](https://ci.appveyor.com/project/PhilShishov/datagate)
 
 
 ## Table of contents
