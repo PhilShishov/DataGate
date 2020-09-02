@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="EPPlus" Version="5.3.0" />
-    <PackageReference Include="itext7" Version="7.1.11" />
+    <PackageReference Include="itext7" Version="7.1.12" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
   </ItemGroup>
 
