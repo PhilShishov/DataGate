@@ -34,9 +34,12 @@
                                     <input type="password"
                                            asp-for="Input.Password"
                                            autocomplete="off"
-                                           class="form-control"
+                                           class="form-control active"
                                            id="password"
                                            placeholder="Password">
+                                    <div class="icon-show-pass-container">
+                                        <i id="icon-show-pass" class="fas fa-eye-slash"></i>
+                                    </div>
                                     <div class="d-flex justify-content-center">
                                         <span></span>
                                         <span asp-validation-for="Input.Password" class="text-danger"></span>
@@ -101,6 +104,27 @@
                     });
                 }
             });
+
+            // eye
+            const inputPass = document.getElementById('password'),
+                icon = document.getElementById('icon-show-pass');
+
+            icon.onclick = function () {
+
+                if (inputPass.className == 'form-control active') {
+                    inputPass.setAttribute('type', 'text');
+                    icon.className = 'fas fa-eye';
+                    inputPass.className = 'form-control';
+
+                } else {
+                    inputPass.setAttribute('type', 'password');
+                    icon.className = 'fas fa-eye-slash';
+                    inputPass.className = 'form-control active';
+                }
+
+            }
+
+
         });
     </script>
 
