@@ -41,7 +41,10 @@
                             SqlFunctionDictionary.ReportSubFunds,
                             null);
 
-            var date = new DateTime(DateTime.Today.Year, DateTime.Today.Month - 1, FixedDayNavValue);
+            var date = new DateTime(
+                DateTime.Today.Year, 
+                DateTime.Today.Month - 1, 
+                DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month - 1));
             var reports = this.service.GetAll<ReportViewModel>(function, date);
 
             var viewModel = new ReportOverviewViewModel()
@@ -63,7 +66,10 @@
                             SqlFunctionDictionary.ReportSubFunds,
                             null);
 
-            var parsedDate = new DateTime(model.Date.Year, model.Date.Month, FixedDayNavValue);
+            var parsedDate = new DateTime(
+                model.Date.Year, 
+                model.Date.Month, 
+                DateTime.DaysInMonth(model.Date.Year, model.Date.Month));
 
             model.Reports = this.service.GetAll<ReportViewModel>(function, parsedDate);
 
