@@ -96,7 +96,7 @@
         public const string PdfDateTimeFormatDisplay = "dd MMMM yyyy";
         public const string EmptyEndConnectionDisplay = "STILL VALID";
 
-        // Folder names, mime types, formats, file names
+        // Formats, mime types
         public const string ExcelFileExtension = ".xlsx";
         public const string PdfFileExtension = ".pdf";
         public const string ExcelStreamMimeType = "application/excel";
