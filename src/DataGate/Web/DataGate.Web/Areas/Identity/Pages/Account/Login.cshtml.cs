@@ -79,11 +79,10 @@
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 Microsoft.AspNetCore.Identity.SignInResult result = await this.signInManager
                     .PasswordSignInAsync(this.Input.Username, this.Input.Password, this.Input.RememberMe, lockoutOnFailure: false);
+                var user = await this.userManager.FindByNameAsync(this.Input.Username);
 
                 if (result.Succeeded)
                 {
-                    var user = await this.userManager.FindByNameAsync(this.Input.Username);
-
                     this.logger.LogInformation("User logged in.");
 
                     if (user == null)
@@ -108,6 +107,13 @@
                     }
 
                     return this.Redirect(GlobalConstants.UserPanelUrl);
+                }
+
+                if (await this.userManager.IsEmailConfirmedAsync(user) == false)
+                {
+                    this.ErrorMessage = this.sharedLocalizer.GetHtmlString(ErrorMessages.EmailNotConfirmed);
+                    this.ModelState.AddModelError(string.Empty, ErrorMessages.EmailNotConfirmed);
+                    return this.Page();
                 }
 
                 if (result.RequiresTwoFactor)
