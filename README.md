@@ -65,7 +65,7 @@ https://pharusdatagate.com <br />
 * UI/UX design - Photoshop, HTML/CSS, Bootstrap
 
 ### Security
- * ASP.Net Core
+ * ASP.NET Core
  * ReCaptcha
  * X-CSRF
  * XSS
@@ -77,7 +77,7 @@ https://pharusdatagate.com <br />
  
   ## Data Manipulation Layer
  
-  [Report Processor](https://github.com/PhilShishov/ReportProcessor) - .Net Core application running on SFTP Server.  </br>
+  [Report Processor](https://github.com/PhilShishov/ReportProcessor) - .NET Core application running on SFTP Server.  </br>
 
 ![Data-Manipulation-Layer](Documentation/Resources/Data-Manipulation-Layer.JPG)
 
