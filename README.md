@@ -17,8 +17,8 @@ and automating some parts of the Risk and Legal department.
 * [Registration](#registration)
 * [Technologies](#technologies)
 * [Security](#security)
-* [Functionality](#functionality)
 * [Data Manipulation Layer](#data-manipulation-layer)
+* [Functionality](#functionality)
 * [Documentation](#documentation)
 * [Status](#status)
 * [History](#history)
@@ -74,6 +74,16 @@ https://pharusdatagate.com <br />
  * HTML Sanitization
  * SQL Injection
  * SSL
+ 
+  ## Data Manipulation Layer
+ 
+  [Report Processor](https://github.com/PhilShishov/ReportProcessor)  </br>
+ 
+.Net Core console application running on Ubuntu 20.04 SFTP Linux Server.  </br>
+Main function:
+ 1. Receive input from client AuM reports: EDR, NT and CACEIS
+ 2. Manipulate data through an SFTP Server
+ 3. Send processed data to DataGate DB to be displayed in web platform
 
 ## Functionality 
 ### Logged in Users
@@ -95,16 +105,6 @@ https://pharusdatagate.com <br />
  - All the functionalities of legal user
  - Create, edit and delete user
  - Have access to view users panel
- 
- ## Data Manipulation Layer
- 
-  [Report Processor](https://github.com/PhilShishov/ReportProcessor)  </br>
- 
-.Net Core console application running on Ubuntu 20.04 SFTP Linux Server.  </br>
-Main function:
- 1. Receive input from client AuM reports: EDR, NT and CACEIS
- 2. Manipulate data through an SFTP Server
- 3. Send processed data to DataGate DB to be displayed in web platform
 
 ## Documentation
 You can read the documentation [here]().
