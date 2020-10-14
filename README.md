@@ -47,7 +47,7 @@ https://pharusdatagate.com <br />
  
  ## Technologies
 * Frameworks - ASP.NET Core 3.1, Bootstrap
-* Project Management - Jira, Trello
+* Project Management - Jira, Trello - https://trello.com/pharusit
 * Version Control - Git, TortoiseGit, GitHub
 * DevOps - Application Insights, Azure Pipelines
 * Hosting and File Storage - GoDaddy WebWiz
