@@ -1,4 +1,4 @@
-# DataGate Platform 
+# DataGate Web Platform 
 
 https://pharusdatagate.com <br />
 
