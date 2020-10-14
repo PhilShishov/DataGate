@@ -109,7 +109,7 @@ Main function is automatic data feed of internal database from Fund Admin (Asset
 
 ## Documentation
 You can read the documentation [here]().
-You can watch videos about the platform:
+Videos about the platform:
 * [Presentation of DataGate]()
 * [DataGate guide]()
 * [Legal users guide]()
@@ -123,7 +123,7 @@ You can watch videos about the platform:
 ![Application-Structure](Documentation/Resources/Application-Structure.JPG)
 ![ResponsiveDesign](Documentation/Resources/ResponsiveDesign.JPG)
   
-  ## History  
+  ## History
 **2020-10-12** SFTP Data Manipulation Layer - [Report Processor](https://github.com/PhilShishov/ReportProcessor)
 
 **2020-09-02** Updated to ASP.NET Core 3.1.7
