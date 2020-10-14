@@ -1,4 +1,4 @@
-# DataGate Platform 
+# DataGate Web Platform 
 
 https://pharusdatagate.com <br />
 
@@ -17,6 +17,7 @@ and automating some parts of the Risk and Legal department.
 * [Registration](#registration)
 * [Technologies](#technologies)
 * [Security](#security)
+* [Data Manipulation Layer](#data-manipulation-layer)
 * [Functionality](#functionality)
 * [Documentation](#documentation)
 * [Status](#status)
@@ -73,6 +74,16 @@ https://pharusdatagate.com <br />
  * HTML Sanitization
  * SQL Injection
  * SSL
+ 
+  ## Data Manipulation Layer
+ 
+  [Report Processor](https://github.com/PhilShishov/ReportProcessor)  </br>
+ 
+.Net Core application running on SFTP Server.  </br>
+Main function is automatic data feed of internal database from Fund Admin (Asset under management, Subscription, Redeption, Net asset value)
+ 1. Receive input from client reports - .csv, .xlsx
+ 2. Manipulate data through SFTP Server
+ 3. Send processed data to DataGate DB to be displayed in web platform 
 
 ## Functionality 
 ### Logged in Users
@@ -112,8 +123,10 @@ You can watch videos about the platform:
 ![ResponsiveDesign](Documentation/Resources/ResponsiveDesign.JPG)
   
   ## History  
+**2020-10-12** SFTP Data Manipulation Layer - [Report Processor](https://github.com/PhilShishov/ReportProcessor)
+
 **2020-09-02** Updated to ASP.NET Core 3.1.7
-  
+
 **2020-07-14** Updated to ASP.NET Core 3.1.6
 
 **2020-06-22** Released DataGate v2.0
