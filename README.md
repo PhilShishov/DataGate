@@ -112,10 +112,10 @@ You can watch videos about the platform:
 ![ResponsiveDesign](Documentation/Resources/ResponsiveDesign.JPG)
   
   ## History  
-**2020-10-12** SFTP Data Manipulation Layer - [Report Processor](https://github.com/PhilShishov/ReportProcessor) 
-  
+**2020-10-12** SFTP Data Manipulation Layer - [Report Processor](https://github.com/PhilShishov/ReportProcessor)
+
 **2020-09-02** Updated to ASP.NET Core 3.1.7
-  
+
 **2020-07-14** Updated to ASP.NET Core 3.1.6
 
 **2020-06-22** Released DataGate v2.0
