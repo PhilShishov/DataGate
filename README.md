@@ -77,9 +77,7 @@ https://pharusdatagate.com <br />
  
   ## Data Manipulation Layer
  
-  [Report Processor](https://github.com/PhilShishov/ReportProcessor)  </br>
- 
-.Net Core application running on SFTP Server.  </br>
+  [Report Processor](https://github.com/PhilShishov/ReportProcessor) - .Net Core application running on SFTP Server.  </br>
 
 ![Data-Manipulation-Layer](Documentation/Resources/Data-Manipulation-Layer.JPG)
 
