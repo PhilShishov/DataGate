@@ -79,11 +79,11 @@ https://pharusdatagate.com <br />
  
   [Report Processor](https://github.com/PhilShishov/ReportProcessor)  </br>
  
-.Net Core console application running on Ubuntu 20.04 SFTP Linux Server.  </br>
-Main function:
- 1. Receive input from client AuM reports: EDR, NT and CACEIS
+.Net Core application running on SFTP Server.  </br>
+Main function is automatic data feed of internal database from Fund Admin (Asset under management, Subscription, Redeption, Net asset value)
+ 1. Receive input from client reports - .csv, .xlsx
  2. Manipulate data through SFTP Server
- 3. Send processed data to DataGate DB to be displayed in web platform
+ 3. Send processed data to DataGate DB to be displayed in web platform 
 
 ## Functionality 
 ### Logged in Users
