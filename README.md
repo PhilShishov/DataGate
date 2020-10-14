@@ -97,9 +97,9 @@ https://pharusdatagate.com <br />
  - Have access to view users panel
  
  ## Data Manipulation Layer
- [Report Processor](https://github.com/PhilShishov/ReportProcessor)
  
 .Net Core console application running on Ubuntu 20.04 SFTP Linux Server.  </br>
+ [Report Processor](https://github.com/PhilShishov/ReportProcessor)
 Main function:
  1. Receive input from client AuM reports: EDR, NT and CACEIS
  2. Manipulate data through an SFTP Server
