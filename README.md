@@ -80,6 +80,9 @@ https://pharusdatagate.com <br />
   [Report Processor](https://github.com/PhilShishov/ReportProcessor)  </br>
  
 .Net Core application running on SFTP Server.  </br>
+
+![Data-Manipulation-Layer](Documentation/Resources/Data-Manipulation-Layer.JPG)
+
 Main function is automatic data feed of internal database from Fund Admin (Asset under management, Subscription, Redeption, Net asset value)
  1. Receive input from client reports - .csv, .xlsx
  2. Manipulate data through SFTP Server
