@@ -20,7 +20,6 @@ and automating some parts of the Risk and Legal department.
 * [Data Manipulation Layer](#data-manipulation-layer)
 * [Functionality](#functionality)
 * [Documentation](#documentation)
-* [Status](#status)
 * [History](#history)
 * [Contact](#contact)
 
