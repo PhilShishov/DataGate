@@ -1,4 +1,9 @@
-# DataGate Web Platform 
+## Project Introduction
+
+**"DataGate"** project is consisted of two parts: **DataGate Web Platform** and **DataGate Report Processor**
+![Project-Architecture](Documentation/Resources/Project-Architecture.JPG)
+
+## DataGate Web Platform 
 
 https://pharusdatagate.com <br />
 
@@ -113,7 +118,6 @@ Videos about the platform:
 * [Upload a document or agreement]()
 * [Add agreement fees ]()
 
-![Project-Architecture](Documentation/Resources/Project-Architecture.JPG)
 ![Application-Architecture](Documentation/Resources/Application-Architecture.JPG)
 ![Application-Structure](Documentation/Resources/Application-Structure.JPG)
 ![ResponsiveDesign](Documentation/Resources/ResponsiveDesign.JPG)
