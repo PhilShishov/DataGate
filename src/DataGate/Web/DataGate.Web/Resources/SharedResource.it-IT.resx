@@ -621,9 +621,6 @@
   <data name="Sub Funds managed by Pharus ManCo" xml:space="preserve">
     <value>Sub Fund gestiti da Pharus ManCo</value>
   </data>
-  <data name="Subs" xml:space="preserve">
-    <value>Subs</value>
-  </data>
   <data name="Thank you for confirming your email." xml:space="preserve">
     <value>Grazie per aver confermato l'email</value>
   </data>
@@ -669,11 +666,11 @@
   <data name="Users" xml:space="preserve">
     <value>Utenti</value>
   </data>
-  <data name="Valid From:" xml:space="preserve">
-    <value>Valido da:</value>
+  <data name="Valid From" xml:space="preserve">
+    <value>Valido da</value>
   </data>
-  <data name="Valid Until:" xml:space="preserve">
-    <value>Valido fino al:</value>
+  <data name="Valid Until" xml:space="preserve">
+    <value>Valido fino al</value>
   </data>
   <data name="View All" xml:space="preserve">
     <value>Vedi tutti</value>
