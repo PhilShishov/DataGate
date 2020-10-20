@@ -3,6 +3,18 @@
 **"DataGate"** project is consisted of two parts: **DataGate Web Platform** and **DataGate Report Processor**
 ![Project-Architecture](Documentation/Resources/Project-Architecture.JPG)
 
+## Table of contents
+* [DataGate Web Platform](#web-platform)
+* [General Info](#general-info)
+* [Registration](#registration)
+* [Technologies](#technologies)
+* [Security](#security)
+* [DataGate Report Processor](#data-manipulation-layer)
+* [Functionality](#functionality)
+* [Documentation](#documentation)
+* [History](#history)
+* [Contact](#contact)
+
 ## DataGate Web Platform 
 
 https://pharusdatagate.com <br />
@@ -15,18 +27,6 @@ and automating some parts of the Risk and Legal department.
 
   ## Status
   [![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/DataGate-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=1&branchName=master) [![Build status](https://ci.appveyor.com/api/projects/status/thvsvj1du6d595m6?svg=true)](https://ci.appveyor.com/project/PhilShishov/datagate)
-
-
-## Table of contents
-* [General Info](#general-info)
-* [Registration](#registration)
-* [Technologies](#technologies)
-* [Security](#security)
-* [Data Manipulation Layer](#data-manipulation-layer)
-* [Functionality](#functionality)
-* [Documentation](#documentation)
-* [History](#history)
-* [Contact](#contact)
 
 ## General Info
 
