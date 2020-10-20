@@ -64,6 +64,8 @@
         color: #fff !important;
         border-right: 2px solid #dee2e6;
         padding-right: 2rem !important;
+        position: sticky;
+        top: 0;
     }
 
         .table-view-pharus th.th-padding-fxt {
@@ -74,7 +76,7 @@
         }
 
     .table-view-pharus th, .table-view-pharus td {
-        font-size: 15px;
+        font-size: 14px;
     }
 
     .table-view-pharus .td-name-link a {
@@ -87,18 +89,28 @@
             color: #007bff;
         }
 
-    .table-view-pharus tbody tr {
-        height: 50px;
+    .table-view-pharus thead {
+        display: table; /* to take the same width as tr */
+        width: calc(100% - 17px); /* - 17px because of the scrollbar width */
     }
 
-        .table-view-pharus tbody tr:hover {
-            background-color: #0041760d;
+    .table-view-pharus tbody {
+        display: block; /* to enable vertical scrolling */
+        max-height: 600px; 
+    }
+
+        .table-view-pharus tbody tr {
+            height: 50px;
         }
 
-        .table-view-pharus tbody tr td {
-            vertical-align: middle;
-            text-align: center;
-        }
+            .table-view-pharus tbody tr:hover {
+                background-color: #0041760d;
+            }
+
+            .table-view-pharus tbody tr td {
+                vertical-align: middle;
+                text-align: center;
+            }
 
 .help {
     cursor: help;
@@ -153,7 +165,7 @@ a.a-underline:hover {
 }
 
 #table-info-pharus {
-    font-size: 15px;
+    font-size: 14px;
 }
 
 .table-view-pharus tbody .td-aum-container {
