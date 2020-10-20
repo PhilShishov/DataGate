@@ -10,6 +10,11 @@
                                                   GlobalConstants.SubFundDetailsRouteName,
                                                   GlobalConstants.ShareClassDetailsRouteName);
 
+    var entityAbr = StringSwapper.ByController(controller,
+                                            GlobalConstants.FundAbbreviation,
+                                            GlobalConstants.SubFundAbbreviation,
+                                            GlobalConstants.ShareClassAbbreviation);
+
     var entityId = string.Empty;
 }
 
@@ -52,6 +57,12 @@
                                 <a asp-route="@routeDetails" asp-route-id="@entityId" asp-route-date="@Model.Date">
                                     @row[col]
                                 </a>
+                            </td>
+                        }
+                        else if (Model.Headers.ToList()[col] == "ID")
+                        {
+                            <td class="p-1">
+                                @row[col]_@entityAbr
                             </td>
                         }
                         else

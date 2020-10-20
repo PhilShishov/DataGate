@@ -29,6 +29,11 @@
         public const string ShareClassAreaName = "ShareClass";
         public const string ShareClassesSubEntitiesControllerName = "ShareClassesSubEntities";
 
+        // Abbreviations
+        public const string FundAbbreviation = "F";
+        public const string SubFundAbbreviation = "SF";
+        public const string ShareClassAbbreviation = "SC";
+
         // Urls, actions
         public const string FundAllUrl = "/funds";
         public const string SubFundAllUrl = "/subfunds";
