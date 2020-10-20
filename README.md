@@ -4,12 +4,12 @@
 ![Project-Architecture](Documentation/Resources/Project-Architecture.JPG)
 
 ## Table of contents
-* [DataGate Web Platform](#web-platform)
+* [DataGate Web Platform](#datagate-web-platform)
 * [General Info](#general-info)
 * [Registration](#registration)
 * [Technologies](#technologies)
 * [Security](#security)
-* [DataGate Report Processor](#data-manipulation-layer)
+* [DataGate Report Processor](#datagate-report-processor)
 * [Functionality](#functionality)
 * [Documentation](#documentation)
 * [History](#history)
@@ -79,7 +79,7 @@ https://pharusdatagate.com <br />
  * SQL Injection
  * SSL
  
-  ## Data Manipulation Layer
+  ## DataGate Report Processor
  
   [Report Processor](https://github.com/PhilShishov/ReportProcessor) - .NET Core application running on SFTP Server.  </br>
 
