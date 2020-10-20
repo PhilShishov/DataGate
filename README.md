@@ -5,12 +5,12 @@
 
 ## Table of contents
 * [DataGate Web Platform](#datagate-web-platform)
-* [General Info](#general-info)
-* [Registration](#registration)
-* [Technologies](#technologies)
-* [Security](#security)
+  * [General Info](#general-info)
+  * [Registration](#registration)
+  * [Technologies](#technologies)
+  * [Security](#security)
+  * [Functionality](#functionality)
 * [DataGate Report Processor](#datagate-report-processor)
-* [Functionality](#functionality)
 * [Documentation](#documentation)
 * [History](#history)
 * [Contact](#contact)
@@ -78,13 +78,6 @@ https://pharusdatagate.com <br />
  * HTML Sanitization
  * SQL Injection
  * SSL
- 
-  ## DataGate Report Processor
- 
-  [Report Processor](https://github.com/PhilShishov/ReportProcessor) - .NET Core application running on SFTP Server.  </br>
-
-The main function is automatic feeding of data into an internal database by the Fund Admin (Asset under management, Subscription, Redeption, Net asset value, Fee)
-![Data-Manipulation-Layer](Documentation/Resources/Data-Manipulation-Layer.JPG)
 
 ## Functionality 
 ### Logged in Users
@@ -106,6 +99,13 @@ The main function is automatic feeding of data into an internal database by the 
  - All the functionalities of legal user
  - Create, edit and delete user
  - Have access to view users panel
+ 
+   ## DataGate Report Processor
+ 
+  [Report Processor](https://github.com/PhilShishov/ReportProcessor) - .NET Core application running on SFTP Server.  </br>
+
+The main function is automatic feeding of data into an internal database by the Fund Admin (Asset under management, Subscription, Redeption, Net asset value, Fee)
+![Data-Manipulation-Layer](Documentation/Resources/Data-Manipulation-Layer.JPG)
 
 ## Documentation
 You can read the documentation [here]().
