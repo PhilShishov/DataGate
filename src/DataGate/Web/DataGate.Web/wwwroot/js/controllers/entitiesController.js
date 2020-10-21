@@ -172,7 +172,7 @@ function dataTableInitializationHandler(controller, language) {
         $('.table-view-pharus').DataTable({
             "dom": '<"top"lf>rt<"bottom"ip><"clear">',
             "lengthMenu": lengthMenuArr,
-            //stateSave: true,
+            stateSave: true,
             "autoWidth": false,
             "scrollX": true,
             "language": cultureObj,

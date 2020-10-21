@@ -119,6 +119,14 @@ img {
 * ==========================================
 *
 */
+
+@media only screen and (max-height:800px) {
+    .footer-pharus {
+        position: initial;
+        margin: 0 !important;
+    }
+}
+
 @media only screen and (max-width: 640px) {
     .text-pharus {
         font-size: 26px;

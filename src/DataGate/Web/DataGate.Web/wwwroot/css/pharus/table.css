@@ -74,7 +74,8 @@
         }
 
     .table-view-pharus th, .table-view-pharus td {
-        font-size: 14px;
+        font-size: 13px;
+        min-width: 80px;
     }
 
     .table-view-pharus .td-name-link a {
@@ -86,6 +87,10 @@
             text-decoration: underline;
             color: #007bff;
         }
+
+/*    .table-view-pharus tbody {
+        white-space: nowrap;
+    }*/
 
         .table-view-pharus tbody tr {
             height: 50px;
