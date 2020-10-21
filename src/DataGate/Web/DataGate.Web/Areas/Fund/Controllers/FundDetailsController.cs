@@ -40,7 +40,7 @@
             var dto = new QueriesToPassDto()
             {
                 SqlFunctionById = SqlFunctionDictionary.ByIdFund,
-                SqlFunctionActiveSE = SqlFunctionDictionary.FundSubFunds,
+                SqlFunctionActiveSE = SqlFunctionDictionary.FundActiveSubFunds,
                 SqlFunctionDistinctDocuments = SqlFunctionDictionary.DistinctDocumentsFund,
                 SqlFunctionDistinctAgreements = SqlFunctionDictionary.DistinctAgreementsFund,
             };

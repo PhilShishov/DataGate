@@ -41,6 +41,7 @@
             var dto = new QueriesToPassDto()
             {
                 SqlFunctionById = SqlFunctionDictionary.ByIdSubFund,
+                SqlFunctionActiveSE = SqlFunctionDictionary.SubFundActiveShareClasses,
                 SqlFunctionDistinctDocuments = SqlFunctionDictionary.DistinctDocumentsSubFund,
                 SqlFunctionDistinctAgreements = SqlFunctionDictionary.DistinctAgreementsSubFund,
                 SqlFunctionContainer = SqlFunctionDictionary.ContainerFund,

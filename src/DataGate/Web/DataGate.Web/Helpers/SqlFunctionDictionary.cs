@@ -10,6 +10,7 @@
         public const string AllActiveFund = "[fn_active_fund]";
         public const string ByIdFund = "[fn_fund_id]";
         public const string FundSubFunds = "[fn_active_fund_subfunds]";
+        public const string FundActiveSubFunds = "[fn_active_fund_active_subfunds]";
         public const string TimelineFund = "[fn_timeline_fund]";
 
         // Sub Funds
@@ -18,6 +19,7 @@
         public const string ByIdSubFund = "[fn_subfund_id]";
         public const string ContainerFund = "[fn_subfund_fund_container]";
         public const string SubFundShareClasses = "[fn_active_subfund_shareclasses]";
+        public const string SubFundActiveShareClasses = "[fn_active_subfund_active_shareclasses]";
         public const string TimelineSubFund = "[fn_timeline_subfund]";
 
         // Share Classes
