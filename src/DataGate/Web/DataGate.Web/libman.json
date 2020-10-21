@@ -130,6 +130,7 @@
       "destination": "wwwroot/lib/moment/",
       "files": [
         "min/moment-with-locales.min.js",
+        "min/moment-with-locales.min.js.map",
         "min/moment.min.js",
         "min/moment.min.js.map"
       ]
