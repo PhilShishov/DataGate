@@ -22,6 +22,7 @@
 
             var dateParsed = DateTimeParser.FromWebFormat(date);
             var entity = await service.GetByIdAndDate(queryDto.SqlFunctionById, id, dateParsed).ToListAsync();
+            var subEntities = await service.GetSubEntities(queryDto.SqlFunctionActiveSE, id, dateParsed, 1).ToListAsync();
             string startConnectionString = entity.ToList()[1][IndexStartConnectionInSQLTable];
             string endConnectionString = entity.ToList()[1][IndexEndConnectionInSQLTable];
             DateTime? endConnection = null;
@@ -38,6 +39,7 @@
                 Entity = entity,
                 StartConnection = DateTimeParser.FromSqlFormat(startConnectionString),
                 EndConnection = endConnection,
+                SubEntityCount = subEntities.Count,                
             };
 
             if (queryDto.SqlFunctionContainer != null)

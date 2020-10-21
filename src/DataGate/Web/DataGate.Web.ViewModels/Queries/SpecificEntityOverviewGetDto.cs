@@ -24,5 +24,7 @@
         public IEnumerable<string[]> Values { get; set; }
 
         public IEnumerable<string> HeadersSelection { get; set; }
+
+        public int SubEntityCount { get; set; }
     }
 }

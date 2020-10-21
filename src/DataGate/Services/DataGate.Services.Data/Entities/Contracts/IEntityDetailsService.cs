@@ -10,5 +10,11 @@
         IAsyncEnumerable<string[]> GetByIdAndDate(string function, int id, DateTime? date);
 
         ContainerDto GetContainer(string function, int id, DateTime? date);
+
+        IAsyncEnumerable<string[]> GetSubEntities(
+                                   string function,
+                                   int? id = null,
+                                   DateTime? date = null,
+                                   int skip = 0);
     }
 }

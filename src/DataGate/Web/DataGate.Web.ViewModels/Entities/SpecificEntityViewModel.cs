@@ -27,6 +27,8 @@ namespace DataGate.Web.ViewModels.Entities
         // data from DB for a specific entity
         public IEnumerable<string[]> Entity { get; set; }
 
+        public int SubEntityCount { get; set; }
+
         public ContainerViewModel Container { get; set; }
 
         // public IEnumerable<string[]> TSAllPriceValues { get; set; }
