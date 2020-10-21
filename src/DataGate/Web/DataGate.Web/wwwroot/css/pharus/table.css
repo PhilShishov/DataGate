@@ -64,8 +64,6 @@
         color: #fff !important;
         border-right: 2px solid #dee2e6;
         padding-right: 2rem !important;
-        position: sticky;
-        top: 0;
     }
 
         .table-view-pharus th.th-padding-fxt {
@@ -88,16 +86,6 @@
             text-decoration: underline;
             color: #007bff;
         }
-
-    .table-view-pharus thead {
-        display: table; /* to take the same width as tr */
-        width: calc(100% - 17px); /* - 17px because of the scrollbar width */
-    }
-
-    .table-view-pharus tbody {
-        display: block; /* to enable vertical scrolling */
-        max-height: 600px; 
-    }
 
         .table-view-pharus tbody tr {
             height: 50px;
@@ -176,4 +164,8 @@ a.a-underline:hover {
 
 .table-view-pharus tbody .th-aum-total-container {
     font-size: 16px;
+}
+
+.dataTables_scrollBody {
+    max-height: 600px;
 }
