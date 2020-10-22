@@ -42,8 +42,8 @@
                             null);
 
             var date = new DateTime(
-                DateTime.Today.Year, 
-                DateTime.Today.Month - 1, 
+                DateTime.Today.Year,
+                DateTime.Today.Month - 1,
                 DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month - 1));
             var reports = this.service.GetAll<ReportViewModel>(function, date);
 
@@ -67,16 +67,11 @@
                             null);
 
             var parsedDate = new DateTime(
-                model.Date.Year, 
-                model.Date.Month, 
+                model.Date.Year,
+                model.Date.Month,
                 DateTime.DaysInMonth(model.Date.Year, model.Date.Month));
 
             model.Reports = this.service.GetAll<ReportViewModel>(function, parsedDate);
-
-            if (model.Reports != null)
-            {
-                return this.View(model);
-            }
 
             return this.View(model);
         }
@@ -97,6 +92,16 @@
             };
 
             return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> FundReports(FundReportOverviewViewModel model)
+        {
+            var date = new DateTime(model.Date.Year, model.Date.Month - 1, FixedDayNavValue);
+            model.Values = await this.service.GetAll(SqlFunctionDictionary.ReportFunds, date, 1).ToListAsync();
+            model.Headers = await this.service.GetAll(SqlFunctionDictionary.ReportFunds, date).FirstOrDefaultAsync();
+
+            return this.View(model);
         }
     }
 }
