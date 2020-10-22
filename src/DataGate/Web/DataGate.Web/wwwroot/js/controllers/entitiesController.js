@@ -135,6 +135,9 @@ function dataTableInitializationHandler(controller, language) {
             "pageLength": 50,
             "autoWidth": false,
             "scrollX": true,
+            "columnDefs": [
+                { type: 'natural', targets: 0 }
+            ]
         });
     } else {
         let cultureObj = {};
@@ -176,6 +179,9 @@ function dataTableInitializationHandler(controller, language) {
             "autoWidth": false,
             "scrollX": true,
             "language": cultureObj,
+            "columnDefs": [
+                { type: 'natural', targets: 0 }
+            ]
         });
     }
 
