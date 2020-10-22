@@ -88,22 +88,22 @@
             color: #007bff;
         }
 
-/*    .table-view-pharus tbody {
+    /*    .table-view-pharus tbody {
         white-space: nowrap;
     }*/
 
-        .table-view-pharus tbody tr {
-            height: 50px;
+    .table-view-pharus tbody tr {
+        height: 50px;
+    }
+
+        .table-view-pharus tbody tr:hover {
+            background-color: #0041760d;
         }
 
-            .table-view-pharus tbody tr:hover {
-                background-color: #0041760d;
-            }
-
-            .table-view-pharus tbody tr td {
-                vertical-align: middle;
-                text-align: center;
-            }
+        .table-view-pharus tbody tr td {
+            vertical-align: middle;
+            text-align: center;
+        }
 
 .help {
     cursor: help;
@@ -129,7 +129,7 @@ input[type=search]::-webkit-search-cancel-button {
 
 .tbl-agreements tr td,
 .tbl-documents tr td,
-.tbl-reports tr td,
+.tbl-reports tr td
 {
     vertical-align: middle;
 }
@@ -142,8 +142,9 @@ a.a-underline:hover {
     display: flex;
     margin-top: 5px;
     position: absolute;
-    top: 103px;
+    top: 110px;
     left: 18px;
+    font-size: 14px;
 }
 
     .div-entity-container-wrapper a {
@@ -160,6 +161,10 @@ a.a-underline:hover {
 #table-info-pharus {
     font-size: 14px;
 }
+
+    #table-info-pharus th {
+        text-transform: uppercase;
+    }
 
 .table-view-pharus tbody .td-aum-container {
     background-color: #eee;

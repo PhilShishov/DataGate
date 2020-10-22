@@ -1,23 +1,79 @@
-﻿<div class="table-responsive border-0" id="table-info-pharus">
+﻿@{
+    var controller = this.ViewContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
+
+    var entityType = StringSwapper.ByController(controller,
+                                               GlobalConstants.SubFundNameDisplay,
+                                               GlobalConstants.ShareClassNameDisplay,
+                                               string.Empty);
+}
+
+<div class="table-responsive border-0" id="table-info-pharus">
     <table class="table table-hover">
         <tbody>
             @for (int row = 1; row < Model.Entity.Count; row++)
             {
                 @for (int col = 0; col < Model.Entity[row].Length; col++)
                 {
-                    <tr>
-                        <th>
-                            @Model.Entity[0][col]
-                        </th>
-                        <td>
-                            @Model.Entity[row][col]
-                            @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.IsInRole(GlobalConstants.LegalRoleName))
-                            {
-                                <span class="icon-edit">
-                                </span>
-                            }
-                        </td>
-                    </tr>
+                    if (string.IsNullOrEmpty(entityType))
+                    {
+                         <tr>
+                            <th>
+                                @Model.Entity[0][col]
+                            </th>
+                            <td>
+                                @Model.Entity[row][col]
+                                @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.IsInRole(GlobalConstants.LegalRoleName))
+                                {
+                                    <span class="icon-edit">
+                                    </span>
+                                }
+                            </td>
+                        </tr>
+
+                    }
+                    else
+                    {
+                        if (Model.Entity[0][col] == "STATUS")
+                        {
+                            <tr>
+                                <th>
+                                    @Model.Entity[0][col]
+                                </th>
+                                <td>
+                                    @Model.Entity[row][col]
+                                    @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.IsInRole(GlobalConstants.LegalRoleName))
+                                    {
+                                        <span class="icon-edit">
+                                        </span>
+                                    }
+                                </td>
+                            </tr>
+
+                             <tr>
+                                <th>
+                                   ACTIVE @entityType
+                                </th>
+                                <td>
+                                    @Model.SubEntityCount
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <th>
+                                    @Model.Entity[0][col]
+                                </th>
+                                <td>
+                                    @Model.Entity[row][col]
+                                    @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.IsInRole(GlobalConstants.LegalRoleName))
+                                    {
+                            <span class="icon-edit">
+                            </span>}
+                                </td>
+                            </tr>
+                        }
+                    }
                 }
             }
         </tbody>
