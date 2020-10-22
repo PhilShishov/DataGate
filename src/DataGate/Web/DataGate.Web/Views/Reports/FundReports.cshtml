@@ -23,12 +23,11 @@
                         </div>
 
                         <form class="d-flex mx-3"
-                              method="post"
-                              id="update-form">
+                              method="post">
                             <div>
-                                <input type="month" asp-for="Date">
+                                <input type="month" asp-for="Date" min="2020-02">
 
-                                <input type="button"
+                                <input type="submit"
                                        class="btn btn-pharus btn-sm mb-1 mr-2"
                                        value=@SharedLocalizer.GetHtmlString("Update")></>
                             </div>

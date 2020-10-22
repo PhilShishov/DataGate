@@ -95,9 +95,10 @@
         }
 
         [HttpPost]
+        [Route("reports/fund")]
         public async Task<IActionResult> FundReports(FundReportOverviewViewModel model)
         {
-            var date = new DateTime(model.Date.Year, model.Date.Month - 1, FixedDayNavValue);
+            var date = new DateTime(model.Date.Year, model.Date.Month, FixedDayNavValue);
             model.Values = await this.service.GetAll(SqlFunctionDictionary.ReportFunds, date, 1).ToListAsync();
             model.Headers = await this.service.GetAll(SqlFunctionDictionary.ReportFunds, date).FirstOrDefaultAsync();
 
