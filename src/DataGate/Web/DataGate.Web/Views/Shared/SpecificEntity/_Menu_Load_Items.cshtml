@@ -1,48 +1,33 @@
 ﻿@{
     var controller = this.ViewContext.RouteData.Values["controller"].ToString();
+
+    var entityType = (controller == GlobalConstants.FundDetailsControllerName) ?
+                        "Sub Funds" : "Shares";
 }
 
 <div class="w-60">
     <div>
         <div class="row">
-            @if (controller == GlobalConstants.FundDetailsControllerName)
+            @if (controller != GlobalConstants.ShareClassDetailsControllerName)
             {
                 <div class="column-add-info mb-2">
                     <div class="card-add-info">
-                        <button id="btn-open-subentities">@SharedLocalizer.GetHtmlString("Sub Funds")</button>
+                        <button id="btn-open-subentities">@SharedLocalizer.GetHtmlString(entityType)</button>
                     </div>
                 </div>
             }
 
-            @if (controller == GlobalConstants.SubFundDetailsControllerName)
-            {
-                <div class="column-add-info mb-2">
-                    <div class="card-add-info">
-                        <button id="btn-open-subentities">@SharedLocalizer.GetHtmlString("Shares")</button>
-                    </div>
+            <div class="column-add-info">
+                <div class="card-add-info">
+                    <button id="btn-open-chart">@SharedLocalizer.GetHtmlString("Charts")</button>
                 </div>
-
-                <div class="column-add-info">
-                    <div class="card-add-info">
-                        <button id="btn-open-chart">@SharedLocalizer.GetHtmlString("Charts")</button>
-                    </div>
-                </div>
-            }
+            </div>
 
             <div class="column-add-info mb-2">
                 <div class="card-add-info">
                     <button id="btn-open-distinct">@SharedLocalizer.GetHtmlString("Documents")</button>
                 </div>
             </div>
-
-            @if (controller == GlobalConstants.ShareClassDetailsControllerName)
-            {
-                <div class="column-add-info">
-                    <div class="card-add-info">
-                        <button id="btn-open-chart">@SharedLocalizer.GetHtmlString("Charts")</button>
-                    </div>
-                </div>
-            }
 
             <div class="column-add-info">
                 <div class="card-add-info">

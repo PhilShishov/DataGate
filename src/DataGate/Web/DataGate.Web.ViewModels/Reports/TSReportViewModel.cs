@@ -10,6 +10,8 @@
         [Required(ErrorMessage = ValidationMessages.DateRequired)]
         public DateTime Date { get; set; }
 
+        public string SelectedType { get; set; }
+
         public IEnumerable<string> Headers { get; set; }
 
         public List<string[]> Values { get; set; }

@@ -14,5 +14,7 @@ namespace DataGate.Web.ViewModels.TimeSeries
         public IEnumerable<string> TSPriceDates { get; set; }
 
         public IEnumerable<string> TSTypeProviders { get; set; }
+
+        public string AreaName { get; set; }
     }
 }

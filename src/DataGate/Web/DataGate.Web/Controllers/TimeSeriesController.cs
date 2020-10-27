@@ -43,6 +43,7 @@
 
             var model = new TimeSeriesViewModel()
             {
+                AreaName = areaName,
                 TSPriceDates = dates,
                 TSTypeProviders = providers,
                 TSAllPriceValues = prices,

@@ -6,7 +6,7 @@
 
     using DataGate.Common;
 
-    public class AuMViewModel
+    public class AuMReportViewModel
     {
         [Required(ErrorMessage = ValidationMessages.DateRequired)]
         public DateTime Date { get; set; }
