@@ -1,7 +1,6 @@
 ﻿namespace DataGate.Web.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -71,34 +70,24 @@
             return this.View(viewModel);
         }
 
-        //[HttpPost]
-        //public IActionResult AuMReports(AuMOverviewViewModel model)
-        //{
-        //    string function = StringSwapper.ByArea(
-        //                    model.SelectedType,
-        //                    null,
-        //                    SqlFunctionDictionary.ReportSubFunds,
-        //                    null);
+        [HttpPost]
+        public async Task<IActionResult> AuMReports(AuMViewModel model)
+        {
+            string function = StringSwapper.ByArea(
+                            model.SelectedType,
+                            SqlFunctionDictionary.ReportFunds,
+                            SqlFunctionDictionary.ReportSubFunds,
+                            null);
 
-        //    var parsedDate = new DateTime(
-        //        model.Date.Year,
-        //        model.Date.Month,
-        //        DateTime.DaysInMonth(model.Date.Year, model.Date.Month));
+            int day = (model.SelectedType == GlobalConstants.FundAreaName) ?
+                FixedDayNavValue :
+                DateTime.DaysInMonth(model.Date.Year, model.Date.Month);
+            var date = new DateTime(model.Date.Year, model.Date.Month, day);
 
-        //    model.Reports = this.service.GetAll<ReportViewModel>(function, parsedDate);
+            model.Headers = await this.service.GetAll(function, date).FirstOrDefaultAsync();
+            model.Values = await this.service.GetAll(function, date, 1).ToListAsync();
 
-        //    return this.View(model);
-        //}
-
-        //[HttpPost]
-        //[Route("reports/fund")]
-        //public async Task<IActionResult> FundReports(FundReportViewModel model)
-        //{
-        //    var date = new DateTime(model.Date.Year, model.Date.Month, FixedDayNavValue);
-        //    model.Values = await this.service.GetAll(SqlFunctionDictionary.ReportFunds, date, 1).ToListAsync();
-        //    model.Headers = await this.service.GetAll(SqlFunctionDictionary.ReportFunds, date).FirstOrDefaultAsync();
-
-        //    return this.View(model);
-        //}
+            return this.View(model);
+        }
     }
 }

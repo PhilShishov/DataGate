@@ -134,6 +134,7 @@ function dataTableReportHandler(type) {
             ],
             "pageLength": 50,
             "scrollX": true,
+            "autoWidth": false,
             stateSave: true,
             "footerCallback": function (row, data, start, end, display) {
                 var api = this.api(), data;

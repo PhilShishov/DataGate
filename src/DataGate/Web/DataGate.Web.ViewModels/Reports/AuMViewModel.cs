@@ -13,8 +13,6 @@
 
         public string SelectedType { get; set; }
 
-        public IEnumerable<ReportViewModel> Reports { get; set; }
-
         public IEnumerable<string> Headers { get; set; }
 
         public List<string[]> Values { get; set; }

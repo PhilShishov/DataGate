@@ -28,6 +28,8 @@
                             <div>
                                 <input type="month" asp-for="Date" min="2020-02">
 
+                                <input asp-for="SelectedType" hidden>
+
                                 <input type="submit"
                                        class="btn btn-pharus btn-sm mb-1 mr-2"
                                        value=@SharedLocalizer.GetHtmlString("Update")></>
@@ -63,7 +65,7 @@
 
         <form id="form-report" method="post">
             <div class="table-responsive mx-auto">
-                <table class="table table-bordered table-hover tbl-reports table-view-pharus table-striped" id="table-to-extract">
+                <table class="table table-bordered table-hover tbl-reports table-view-pharus table-striped w-100" id="table-to-extract">
 
                     @if (Model.SelectedType == GlobalConstants.FundAreaName)
                     {
