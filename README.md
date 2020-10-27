@@ -78,6 +78,8 @@ https://pharusdatagate.com <br />
  * HTML Sanitization
  * SQL Injection
  * SSL
+ 
+ ### GDPR
 
 ## Functionality 
 ### Logged in Users
