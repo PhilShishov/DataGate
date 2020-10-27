@@ -2,7 +2,8 @@
 
 @{
     var dates = @Html.Raw(Json.Serialize(Model.TSPriceDates));
-    var providers = @Html.Raw(Json.Serialize(Model.TSTypeProviders));
+    var neededProviders = Model.TSTypeProviders.Where(pr => pr.Contains("AuM") || pr.Contains("Price"));
+    var providers = @Html.Raw(Json.Serialize(neededProviders));
 }
 
 <div>
