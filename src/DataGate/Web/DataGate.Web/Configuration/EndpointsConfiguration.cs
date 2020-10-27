@@ -51,20 +51,20 @@
 
                     // Reports
                     endpoints.MapControllerRoute(
+                      name: "reportoverview",
+                      pattern: "reportoverview",
+                      new { controller = "Reports", action = "MainOverview" });
+                    endpoints.MapControllerRoute(
                        name: "allreports",
-                       pattern: "reports",
-                       new { controller = "Reports", action = "Overview" });
-                    endpoints.MapControllerRoute(
-                       name: "reports",
                        pattern: "reports/{type:required}",
-                       new { controller = "Reports", action = "All" });
+                       new { controller = "Reports", action = "SubOverview" });
                     endpoints.MapControllerRoute(
-                      name: "fundreports",
-                      pattern: "reports/fund",
-                      new { controller = "Reports", action = "FundReports" });
+                       name: "aumreports",
+                       pattern: "reports/{type:required}/aum",
+                       new { controller = "Reports", action = "AuMReports" });
                     endpoints.MapControllerRoute(
                      name: "timeseriesreports",
-                     pattern: "reports/timeseries",
+                     pattern: "reports/{type:required}/timeseries",
                      new { controller = "Reports", action = "TSReports" });
 
                     // Funds

@@ -6,7 +6,7 @@
 
     using DataGate.Common;
 
-    public class ReportOverviewViewModel
+    public class AuMViewModel
     {
         [Required(ErrorMessage = ValidationMessages.DateRequired)]
         public DateTime Date { get; set; }
@@ -15,6 +15,8 @@
 
         public IEnumerable<ReportViewModel> Reports { get; set; }
 
-        public List<string[]> FundReports { get; set; }
+        public IEnumerable<string> Headers { get; set; }
+
+        public List<string[]> Values { get; set; }
     }
 }

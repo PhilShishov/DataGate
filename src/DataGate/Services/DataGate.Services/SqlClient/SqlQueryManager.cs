@@ -136,8 +136,17 @@ namespace DataGate.Services.SqlClient
                 SqlCommand command = this.SetUpSqlConnectionCommand(connection);
 
                 command.CommandText = function;
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.Add(new SqlParameter("@datereport", SqlDbType.Date) { Value = date });
+
+                if (function.Contains("fn"))
+                {
+                    var sqlDate = DateTimeParser.ToSqlFormat(date);
+                    command.CommandText = $"select * from {function}('{sqlDate}')";
+                }
+                else
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.Add(new SqlParameter("@datereport", SqlDbType.Date) { Value = date });
+                }
 
                 await foreach (var item in DataSQLHelper.GetStringDataAsync(command))
                 {

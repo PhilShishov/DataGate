@@ -5,8 +5,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using DataGate.Common;
-
-    public class FundReportOverviewViewModel
+    public class TSReportViewModel
     {
         [Required(ErrorMessage = ValidationMessages.DateRequired)]
         public DateTime Date { get; set; }

@@ -1,10 +1,11 @@
 ﻿namespace DataGate.Web.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
-    using System.Text.RegularExpressions;
     using System.Threading.Tasks;
 
+    using DataGate.Common;
     using DataGate.Services.Data.Reports;
     using DataGate.Web.Helpers;
     using DataGate.Web.Infrastructure.Extensions;
@@ -25,113 +26,79 @@
         }
 
         [HttpGet]
-        [Route("reports")]
-        public IActionResult Overview()
+        [Route("reportoverview")]
+        public IActionResult MainOverview()
         {
             return this.View();
         }
 
         [HttpGet]
         [Route("reports/{type}")]
-        public IActionResult All(string type)
+        public IActionResult SubOverview(string type)
+        {
+            var viewModel = new AuMViewModel()
+            {
+                SelectedType = type,
+            };
+
+            return this.View(viewModel);
+        }
+
+        [HttpGet]
+        [Route("reports/{type}/aum")]
+        public async Task<IActionResult> AuMReports(string type)
         {
             string function = StringSwapper.ByArea(
                             type,
-                            null,
+                            SqlFunctionDictionary.ReportFunds,
                             SqlFunctionDictionary.ReportSubFunds,
                             null);
+            int day = (type == GlobalConstants.FundAreaName) ?
+                FixedDayNavValue :
+                DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month - 1);
+            var date = new DateTime(DateTime.Today.Year, DateTime.Today.Month - 1, day);
+            var headers = await this.service.GetAll(function, date).FirstOrDefaultAsync();
+            var values = await this.service.GetAll(function, date, 1).ToListAsync();
 
-            var date = new DateTime(
-                DateTime.Today.Year,
-                DateTime.Today.Month - 1,
-                DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month - 1));
-            var reports = this.service.GetAll<ReportViewModel>(function, date);
-
-            var viewModel = new ReportOverviewViewModel()
-            {
-                Date = date,
-                Reports = reports,
-                SelectedType = Regex.Replace(type, "(\\B[A-Z])", " $1"),
-            };
-
-            return this.View(viewModel);
-        }
-
-        [HttpPost]
-        public IActionResult All(ReportOverviewViewModel model)
-        {
-            string function = StringSwapper.ByArea(
-                            model.SelectedType,
-                            null,
-                            SqlFunctionDictionary.ReportSubFunds,
-                            null);
-
-            var parsedDate = new DateTime(
-                model.Date.Year,
-                model.Date.Month,
-                DateTime.DaysInMonth(model.Date.Year, model.Date.Month));
-
-            model.Reports = this.service.GetAll<ReportViewModel>(function, parsedDate);
-
-            return this.View(model);
-        }
-
-        [HttpGet]
-        [Route("reports/fund")]
-        public async Task<IActionResult> FundReports()
-        {
-            var date = new DateTime(DateTime.Today.Year, DateTime.Today.Month - 1, FixedDayNavValue);
-            var values = await this.service.GetAll(SqlFunctionDictionary.ReportFunds, date, 1).ToListAsync();
-            var headers = await this.service.GetAll(SqlFunctionDictionary.ReportFunds, date).FirstOrDefaultAsync();
-
-            var viewModel = new FundReportOverviewViewModel()
+            var viewModel = new AuMViewModel
             {
                 Date = date,
                 Headers = headers,
                 Values = values,
+                SelectedType = type,
             };
 
             return this.View(viewModel);
         }
 
-        [HttpPost]
-        [Route("reports/fund")]
-        public async Task<IActionResult> FundReports(FundReportOverviewViewModel model)
-        {
-            var date = new DateTime(model.Date.Year, model.Date.Month, FixedDayNavValue);
-            model.Values = await this.service.GetAll(SqlFunctionDictionary.ReportFunds, date, 1).ToListAsync();
-            model.Headers = await this.service.GetAll(SqlFunctionDictionary.ReportFunds, date).FirstOrDefaultAsync();
+        //[HttpPost]
+        //public IActionResult AuMReports(AuMOverviewViewModel model)
+        //{
+        //    string function = StringSwapper.ByArea(
+        //                    model.SelectedType,
+        //                    null,
+        //                    SqlFunctionDictionary.ReportSubFunds,
+        //                    null);
 
-            return this.View(model);
-        }
+        //    var parsedDate = new DateTime(
+        //        model.Date.Year,
+        //        model.Date.Month,
+        //        DateTime.DaysInMonth(model.Date.Year, model.Date.Month));
 
-        [HttpGet]
-        [Route("reports/timeseries")]
-        public async Task<IActionResult> TSReports()
-        {
-            var date = new DateTime(DateTime.Today.Year, DateTime.Today.Month - 1, FixedDayNavValue);
-            var values = await this.service.GetAll(SqlFunctionDictionary.ReportFunds, date, 1).ToListAsync();
-            var headers = await this.service.GetAll(SqlFunctionDictionary.ReportFunds, date).FirstOrDefaultAsync();
+        //    model.Reports = this.service.GetAll<ReportViewModel>(function, parsedDate);
 
-            var viewModel = new FundReportOverviewViewModel()
-            {
-                Date = date,
-                Headers = headers,
-                Values = values,
-            };
+        //    return this.View(model);
+        //}
 
-            return this.View(viewModel);
-        }
+        //[HttpPost]
+        //[Route("reports/fund")]
+        //public async Task<IActionResult> FundReports(FundReportViewModel model)
+        //{
+        //    var date = new DateTime(model.Date.Year, model.Date.Month, FixedDayNavValue);
+        //    model.Values = await this.service.GetAll(SqlFunctionDictionary.ReportFunds, date, 1).ToListAsync();
+        //    model.Headers = await this.service.GetAll(SqlFunctionDictionary.ReportFunds, date).FirstOrDefaultAsync();
 
-        [HttpPost]
-        [Route("reports/timeseries")]
-        public async Task<IActionResult> TSReports(FundReportOverviewViewModel model)
-        {
-            var date = new DateTime(model.Date.Year, model.Date.Month, FixedDayNavValue);
-            model.Values = await this.service.GetAll(SqlFunctionDictionary.ReportFunds, date, 1).ToListAsync();
-            model.Headers = await this.service.GetAll(SqlFunctionDictionary.ReportFunds, date).FirstOrDefaultAsync();
-
-            return this.View(model);
-        }
+        //    return this.View(model);
+        //}
     }
 }

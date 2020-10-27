@@ -1,13 +1,18 @@
 ﻿namespace DataGate.Web.ViewModels.Reports
 {
+    using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
+    using DataGate.Common;
 
     public class FundReportViewModel
     {
-        public int FundId { get; set; }
+        [Required(ErrorMessage = ValidationMessages.DateRequired)]
+        public DateTime Date { get; set; }
 
-        public string FundName { get; set; }
+        public IEnumerable<string> Headers { get; set; }
 
-        public IEnumerable<decimal> AuMPerMonth { get; set; }
+        public List<string[]> Values { get; set; }
     }
 }
