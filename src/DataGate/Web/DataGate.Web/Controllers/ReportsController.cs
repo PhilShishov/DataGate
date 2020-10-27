@@ -104,5 +104,34 @@
 
             return this.View(model);
         }
+
+        [HttpGet]
+        [Route("reports/timeseries")]
+        public async Task<IActionResult> TSReports()
+        {
+            var date = new DateTime(DateTime.Today.Year, DateTime.Today.Month - 1, FixedDayNavValue);
+            var values = await this.service.GetAll(SqlFunctionDictionary.ReportFunds, date, 1).ToListAsync();
+            var headers = await this.service.GetAll(SqlFunctionDictionary.ReportFunds, date).FirstOrDefaultAsync();
+
+            var viewModel = new FundReportOverviewViewModel()
+            {
+                Date = date,
+                Headers = headers,
+                Values = values,
+            };
+
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        [Route("reports/timeseries")]
+        public async Task<IActionResult> TSReports(FundReportOverviewViewModel model)
+        {
+            var date = new DateTime(model.Date.Year, model.Date.Month, FixedDayNavValue);
+            model.Values = await this.service.GetAll(SqlFunctionDictionary.ReportFunds, date, 1).ToListAsync();
+            model.Headers = await this.service.GetAll(SqlFunctionDictionary.ReportFunds, date).FirstOrDefaultAsync();
+
+            return this.View(model);
+        }
     }
 }

@@ -48,6 +48,8 @@
                        name: "agreements",
                        pattern: "agreements/{type:required}",
                        new { controller = "Agreements", action = "All" });
+
+                    // Reports
                     endpoints.MapControllerRoute(
                        name: "allreports",
                        pattern: "reports",
@@ -60,6 +62,10 @@
                       name: "fundreports",
                       pattern: "reports/fund",
                       new { controller = "Reports", action = "FundReports" });
+                    endpoints.MapControllerRoute(
+                     name: "timeseriesreports",
+                     pattern: "reports/timeseries",
+                     new { controller = "Reports", action = "TSReports" });
 
                     // Funds
                     endpoints.MapAreaControllerRoute(

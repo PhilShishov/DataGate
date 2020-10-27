@@ -8,12 +8,16 @@
 
 <div>
     <canvas id="canvas-chart-aum"></canvas>
+
+    <div class="mt-3">
+        <a class="btn btn-pharus" asp-area="" asp-route="timeseriesreports">@SharedLocalizer.GetHtmlString("Time Series Reports")</a>
+    </div>
 </div>
 
 <script>
      // ________________________________________________________
      //
-     // Chart js for Asset under management
+     // Chart js for Asset under management and share prices
 
     $(function () {
         const ChartColors = [

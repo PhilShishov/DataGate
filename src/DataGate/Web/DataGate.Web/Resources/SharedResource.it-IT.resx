@@ -624,8 +624,14 @@
   <data name="Thank you for confirming your email." xml:space="preserve">
     <value>Grazie per aver confermato l'email</value>
   </data>
+  <data name="Time Series" xml:space="preserve">
+    <value>Serie Storiche</value>
+  </data>
+  <data name="Time Series Reports" xml:space="preserve">
+    <value>Report Serie Storiche</value>
+  </data>
   <data name="Timeline" xml:space="preserve">
-    <value>Timeline</value>
+    <value>Sequenza Temporale</value>
   </data>
   <data name="Total Price:" xml:space="preserve">
     <value>Prezzo totale</value>
