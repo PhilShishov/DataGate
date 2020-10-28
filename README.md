@@ -55,10 +55,11 @@ https://pharusdatagate.com <br />
 * Version Control - Git, TortoiseGit, GitHub
 * DevOps - Application Insights, Azure Pipelines
 * Hosting and File Storage - GoDaddy WebWiz
+* Code review, StyleCop
 
 ### Backend 
 * C# .NET Core 3.1
-* Database - MSSQL Server, SQL Lite, Entity Framework Core 3.1
+* Database - MSSQL Server, SQL Lite, Entity Framework Core 3.1, Scaffold, LINQ
 * Design Pattern - DAO, DI, TAP, MVC, REST, Repository, SOLID
 * SendGrid, AutoMapper, EPPlus, itext7
 
@@ -78,6 +79,8 @@ https://pharusdatagate.com <br />
  * HTML Sanitization
  * SQL Injection
  * SSL
+ 
+ ### GDPR
 
 ## Functionality 
 ### Logged in Users
