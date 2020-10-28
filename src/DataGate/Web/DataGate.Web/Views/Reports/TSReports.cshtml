@@ -1,9 +1,9 @@
-﻿@model DataGate.Web.ViewModels.Reports.TSReportViewModel
+﻿@model DataGate.Web.ViewModels.Reports.TSReportOverviewViewModel
 
 @{
     ViewData["Title"] = SharedLocalizer.GetHtmlString("Reports");
 
-    var date = DateTimeParser.ToWebFormat(Model.Date);
+    //var date = DateTimeParser.ToWebFormat(Model.Date);
     decimal aum;
 }
 
@@ -17,7 +17,7 @@
                         <div class="mr-2">
                             <a asp-area=""
                                asp-route="allreports"
-                               asp-route-type="@Model.SelectedType"
+                               asp-route-type="@Model.AreaName"
                                class="btn btn-pharus btn-sm mb-1">
                                 @SharedLocalizer.GetHtmlString("Back to All")
                             </a>
@@ -26,9 +26,43 @@
                         <form class="d-flex mx-3"
                               method="post">
                             <div>
-                                <input type="month" asp-for="Date" min="2020-02">
+                                <div class="form-group">
+                                    <label asp-for="Entity"></label><br>
+                                    <select class="select-pharus" asp-for="Entity">
+                                        <option selected disabled>-- Choose Entity Name --</option>
+                                        @foreach (var entity in (HashSet<string>)ViewData["Entity"])
+                                        {
+                                            if (entity == Model.Entity)
+                                            {
+                                                <option selected value="@entity">@entity</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@entity">@entity</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                                <span asp-validation-for="Entity" class="text-danger"></span>
 
-                                <input asp-for="SelectedType" hidden>
+                                <div class="form-group">
+                                    <label asp-for="TimeSeriesType"></label><br>
+                                    <select class="select-pharus" asp-for="TimeSeriesType">
+                                        <option selected disabled>-- Choose Time Series Type --</option>
+                                        @foreach (var container in (IEnumerable<string>)ViewData["TimeSeriesType"])
+                                        {
+                                            <option value="@container">@container</option>
+                                        }
+                                    </select>
+                                </div>
+                                <span asp-validation-for="TimeSeriesType" class="text-danger"></span>
+
+
+                                <input type="month" asp-for="StartDate" min="2020-02">
+
+                                <input type="month" asp-for="EndDate" min="2020-02">
+
+                                <input asp-for="AreaName" hidden>
 
                                 <input type="submit"
                                        class="btn btn-pharus btn-sm mb-1 mr-2"
@@ -53,7 +87,7 @@
                             </button>
                         </div>
                         <div class="title-main-reports">
-                            <h2 class="">@Model.SelectedType @SharedLocalizer.GetHtmlString("Reports")</h2>
+                            <h2 class="">@Model.AreaName @SharedLocalizer.GetHtmlString("Reports")</h2>
                         </div>
                     </div>
                 </div>
@@ -66,158 +100,10 @@
         <form id="form-report" method="post">
             <div class="table-responsive mx-auto">
                 <table class="table table-bordered table-hover tbl-reports table-view-pharus table-striped w-100" id="table-to-extract">
-
-                    @if (Model.SelectedType == GlobalConstants.FundAreaName)
-                    {
-                        <thead>
-                            <tr>
-                                @foreach (var header in Model.Headers.Skip(1))
-                                {
-                                    <th title="@header">
-                                        @header
-                                    </th>
-                                }
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @for (int row = 0; row < Model.Values.Count; row++)
-                            {
-                                var entityId = @Model.Values[row][GlobalConstants.IndexEntityIdInTable];
-                                <tr>
-                                    @for (int col = 1; col < Model.Values[row].Length; col++)
-                                    {
-                                        if (Model.Headers.ToList()[col] == "NAME")
-                                        {
-                                            <td class="p-1 td-name-link">
-                                                <a asp-area="@GlobalConstants.FundAreaName" asp-route="@GlobalConstants.FundDetailsRouteName" asp-route-id="@entityId" asp-route-date="@date">
-                                                    @Model.Values[row][col]
-                                                </a>
-                                            </td>
-                                        }
-                                        else if (Model.Headers.ToList()[col] != "NAME")
-                                        {
-                                            <td class="p-1">
-                                                @if (decimal.TryParse(Model.Values[row][col], out aum))
-                                                {
-                                                    @CurrencyFormatter.ToString(aum)
-                                                }
-                                                else
-                                                {
-                                                    @SharedLocalizer.GetHtmlString("Not available")
-                                                }
-                                            </td>
-                                        }
-                                        else
-                                        {
-                                            <td class="p-1">
-                                                @Model.Values[row][col]
-                                            </td>
-                                        }
-                                    }
-                                </tr>
-                            }
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th style="text-align:right">TOTAL:</th>
-                                @foreach (var header in Model.Headers.Skip(2))
-                                {
-                                    <th></th>
-                                }
-                            </tr>
-                        </tfoot>
-                    }
-                    else if (Model.SelectedType == GlobalConstants.SubFundAreaName)
-                    {
-                        <thead>
-                            <tr>
-                                @foreach (var header in Model.Headers.SkipLast(2))
-                                {
-                                    <th title="@header">
-                                        @header
-                                    </th>
-                                }
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @for (int row = 0; row < Model.Values.Count; row++)
-                            {
-                                var entityId = @Model.Values[row][GlobalConstants.IndexEntityIdInTable];
-                                <tr>
-                                    @for (int col = 0; col < Model.Values[row].Length - 2; col++)
-                                    {
-                                        if (Model.Headers.ToList()[col] == "Fund Name")
-                                        {
-                                            <td class="p-1 td-name-link">
-                                                <a asp-area="@GlobalConstants.FundAreaName"
-                                                   asp-route="@GlobalConstants.FundDetailsRouteName"
-                                                   asp-route-id="@Model.Values[row][7]"
-                                                   asp-route-date="@date">
-                                                    @Model.Values[row][col]
-                                                </a>
-                                            </td>
-                                        }
-                                        else if (Model.Headers.ToList()[col] == "SubFund Name")
-                                        {
-                                            <td class="p-1 td-name-link">
-                                                <a asp-area="@GlobalConstants.SubFundAreaName"
-                                                   asp-route="@GlobalConstants.SubFundDetailsRouteName"
-                                                   asp-route-id="@Model.Values[row][8]"
-                                                   asp-route-date="@date">
-                                                    @Model.Values[row][col]
-                                                </a>
-                                            </td>
-                                        }
-                                        else if (Model.Headers.ToList()[col] == "AuM in EUR")
-                                        {
-                                            <td class="p-1 td-aum-container">
-                                                @if (decimal.TryParse(Model.Values[row][col], out aum))
-                                                {
-                                                    @CurrencyFormatter.ToString(aum)
-                                                }
-                                                else
-                                                {
-                                                    @SharedLocalizer.GetHtmlString("Not available")
-                                                }
-                                            </td>
-                                        }
-                                        else
-                                        {
-                                            <td class="p-1">
-                                                @Model.Values[row][col]
-                                            </td>
-                                        }
-                                    }
-                                </tr>
-                            }
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th colspan="6" style="text-align:right">@SharedLocalizer.GetHtmlString("TOTAL:")</th>
-                                <th class="th-aum-total-container"></th>
-                            </tr>
-                        </tfoot>
-                    }
                 </table>
             </div>
-            <input type="hidden" name="AreaName" value="@Model.SelectedType" />
+            @*<input type="hidden" name="AreaName" value="@Model.AreaName" />*@
         </form>
 
     </div>
 </div>
-
-@section Scripts{
-    <partial name="Scripts/_ReportsScriptsPartial" />
-
-    <script>
-         let model = {
-            Date: '@date',
-            ControllerName: '@Model.SelectedType',
-        };
-
-        $(document).ready(function () {
-            dataTableReportHandler('@Model.SelectedType');
-            extract(model);
-        });
-    </script>
-}

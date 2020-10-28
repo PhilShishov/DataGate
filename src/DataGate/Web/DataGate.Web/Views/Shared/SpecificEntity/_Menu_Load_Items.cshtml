@@ -17,11 +17,14 @@
                 </div>
             }
 
-            <div class="column-add-info">
-                <div class="card-add-info">
-                    <button id="btn-open-chart">@SharedLocalizer.GetHtmlString("Charts")</button>
+            @if (controller != GlobalConstants.FundDetailsControllerName)
+            {
+                <div class="column-add-info">
+                    <div class="card-add-info">
+                        <button id="btn-open-chart">@SharedLocalizer.GetHtmlString("Charts")</button>
+                    </div>
                 </div>
-            </div>
+            }
 
             <div class="column-add-info mb-2">
                 <div class="card-add-info">

@@ -19,6 +19,7 @@
             services.AddScoped<ISqlQueryManager, SqlQueryManager>();
             services.AddScoped<ISubFundRepository, SubFundRepository>();
             services.AddScoped<IShareClassRepository, ShareClassRepository>();
+            services.AddScoped<IEntityRepository, EntityRepository>();
             services.AddScoped<IAgreementsRepository, AgreementsRepository>();
 
             return services;

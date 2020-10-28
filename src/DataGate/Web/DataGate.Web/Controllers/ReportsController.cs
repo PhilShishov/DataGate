@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
 
     using DataGate.Common;
+    using DataGate.Data.Common.Repositories;
     using DataGate.Services.Data.Reports;
     using DataGate.Web.Helpers;
     using DataGate.Web.Infrastructure.Extensions;
@@ -17,11 +18,14 @@
     {
         private const int FixedDayNavValue = 5;
         private readonly IReportsService service;
+        private readonly IEntityRepository repository;
 
         public ReportsController(
-            IReportsService service)
+            IReportsService service,
+            IEntityRepository entityRepository)
         {
             this.service = service;
+            this.repository = entityRepository;
         }
 
         [HttpGet]
@@ -92,26 +96,20 @@
 
         [HttpGet]
         [Route("reports/{type}/timeseries")]
-        public async Task<IActionResult> TSReports(string type)
+        public async Task<IActionResult> TSReports(string type, int? id)
         {
-            string function = StringSwapper.ByArea(
-                            type,
-                            SqlFunctionDictionary.ReportFunds,
-                            SqlFunctionDictionary.ReportSubFunds,
-                            null);
-            int day = (type == GlobalConstants.FundAreaName) ?
-                FixedDayNavValue :
-                DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month - 1);
-            var date = new DateTime(DateTime.Today.Year, DateTime.Today.Month - 1, day);
-            var headers = await this.service.GetAll(function, date).FirstOrDefaultAsync();
-            var values = await this.service.GetAll(function, date, 1).ToListAsync();
+            int typeIndex = (type == GlobalConstants.SubFundAreaName) ?
+                      2 : 3;  
 
-            var viewModel = new TSReportViewModel
+            this.SetViewDataValues(type, typeIndex);
+
+            if (id.HasValue)
             {
-                Date = date,
-                Headers = headers,
-                Values = values,
-                SelectedType = type,
+            }
+
+            var viewModel = new TSReportOverviewViewModel
+            {
+                AreaName = type,
             };
 
             return this.View(viewModel);
@@ -136,5 +134,11 @@
 
         //    return this.View(model);
         //}
+
+        private void SetViewDataValues(string area, int type)
+        {
+            this.ViewData["TimeSeriesType"] = this.repository.GetAllTbDomTimeSeriesType(type);
+            this.ViewData["Entity"] = this.repository.GetAll(area);
+        }
     }
 }
