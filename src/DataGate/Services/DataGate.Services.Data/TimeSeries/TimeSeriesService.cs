@@ -51,5 +51,10 @@
                 yield return item;
             }
         }
+
+        //public async IAsyncEnumerable<TimeSerieReport> GetAllTSReports(string type, int? id, string timeSeriesType)
+        //{
+
+        //}
     }
 }

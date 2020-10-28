@@ -1,6 +1,7 @@
 ﻿namespace DataGate.Web.ViewModels.Reports
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     using DataGate.Common;
@@ -21,7 +22,7 @@
         [Display(Name = "Time Serie Type")]
         public string TimeSeriesType { get; set; }
 
-        public TimeSerieReport TimeSerieReport { get; set; }
+        public IEnumerable<TimeSerieReport> TimeSerieReports { get; set; }
 
         public string AreaName { get; set; }
     }

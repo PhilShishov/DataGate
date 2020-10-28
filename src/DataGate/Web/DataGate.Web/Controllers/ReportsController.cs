@@ -19,11 +19,11 @@
     {
         private const int FixedDayNavValue = 5;
         private readonly IReportsService service;
-        private readonly IEntityRepository repository;
+        private readonly ITimeSeriesRepository repository;
 
         public ReportsController(
             IReportsService service,
-            IEntityRepository entityRepository)
+            ITimeSeriesRepository entityRepository)
         {
             this.service = service;
             this.repository = entityRepository;
@@ -110,6 +110,8 @@
                 StartDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month - 1, DateTime.Today.Day),
                 EndDate = DateTime.Today,
             };
+
+            //viewModel.TimeSerieReports = await this.repository.GetAllTSReports(type, id, viewModel.TimeSeriesType);
 
             if (id.HasValue)
             {

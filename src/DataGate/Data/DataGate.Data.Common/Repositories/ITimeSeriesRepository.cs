@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    public interface IEntityRepository : IDisposable
+    public interface ITimeSeriesRepository : IDisposable
     {
         ISet<string> GetAll(string area);
 

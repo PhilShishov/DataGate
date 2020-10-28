@@ -9,9 +9,9 @@
     using DataGate.Data.Common.Repositories;
     using Microsoft.EntityFrameworkCore;
 
-    public class EntityRepository : IEntityRepository
+    public class TimeSeriesRepository : ITimeSeriesRepository
     {
-        public EntityRepository(Pharus_vFinaleDbContext context)
+        public TimeSeriesRepository(Pharus_vFinaleDbContext context)
         {
             this.Context = context ?? throw new ArgumentNullException(nameof(context));
         }
