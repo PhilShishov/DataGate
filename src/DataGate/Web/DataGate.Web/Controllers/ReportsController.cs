@@ -103,14 +103,15 @@
 
             this.SetViewDataValues(type, typeIndex);
 
-            if (id.HasValue)
-            {
-            }
-
             var viewModel = new TSReportOverviewViewModel
             {
-                AreaName = type,
+                AreaName = type 
             };
+
+            if (id.HasValue)
+            {
+                viewModel.TimeSeriesType = await this.repository.ByName(type, id);
+            }
 
             return this.View(viewModel);
         }

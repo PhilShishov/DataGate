@@ -4,8 +4,10 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using DataGate.Common;
     using DataGate.Data.Common.Repositories;
+    using Microsoft.EntityFrameworkCore;
 
     public class EntityRepository : IEntityRepository
     {
@@ -16,19 +18,37 @@
 
         protected Pharus_vFinaleDbContext Context { get; set; }
 
-        public Task<string> ByName(string area, int id)
+        public async Task<string> ByName(string area, int? id)
         {
-            throw new System.NotImplementedException();
+            var result = string.Empty;
+
+            if (area == GlobalConstants.SubFundAreaName)
+            {
+                result = await this.Context.TbHistorySubFund
+                    .Where(sf => sf.SfId == id)
+                    .Select(f => f.SfOfficialSubFundName)
+                    .FirstOrDefaultAsync();
+            }
+            else if (area == GlobalConstants.ShareClassAreaName)
+            {
+                result = await this.Context.TbHistoryShareClass
+                   .Where(sf => sf.ScId == id)
+                   .Select(f => f.ScOfficialShareClassName)
+                   .FirstOrDefaultAsync();
+            }
+
+            return result;
+
         }
 
         public ISet<string> GetAll(string area)
         {
-            var result = new HashSet<string>(); 
+            var result = new HashSet<string>();
             if (area == GlobalConstants.SubFundAreaName)
             {
                 result = this.Context.TbHistorySubFund.Select(f => f.SfOfficialSubFundName).ToHashSet();
             }
-            else if(area == GlobalConstants.ShareClassAreaName)
+            else if (area == GlobalConstants.ShareClassAreaName)
             {
                 result = this.Context.TbHistoryShareClass.Select(f => f.ScOfficialShareClassName).ToHashSet();
             }

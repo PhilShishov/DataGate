@@ -10,6 +10,6 @@
 
         IReadOnlyCollection<string> GetAllTbDomTimeSeriesType(int type);
 
-        Task<string> ByName(string area, int id);
+        Task<string> ByName(string area, int? id);
     }
 }
