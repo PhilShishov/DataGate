@@ -47,6 +47,7 @@
                 TSPriceDates = dates,
                 TSTypeProviders = providers,
                 TSAllPriceValues = prices,
+                Id = id,
             };
 
             return this.PartialView("SpecificEntity/_TimeSeries", model);

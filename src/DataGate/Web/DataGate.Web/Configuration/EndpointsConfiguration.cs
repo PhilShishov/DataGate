@@ -64,7 +64,7 @@
                        new { controller = "Reports", action = "AuMReports" });
                     endpoints.MapControllerRoute(
                      name: "timeseriesreports",
-                     pattern: "reports/{type:required}/timeseries",
+                     pattern: "reports/{type:required}/timeseries/{id?}",
                      new { controller = "Reports", action = "TSReports" });
 
                     // Funds

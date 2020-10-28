@@ -95,7 +95,7 @@
         }
 
         [HttpGet]
-        [Route("reports/{type}/timeseries")]
+        [Route("reports/{type}/timeseries/{id?}")]
         public async Task<IActionResult> TSReports(string type, int? id)
         {
             int typeIndex = (type == GlobalConstants.SubFundAreaName) ?
@@ -105,12 +105,12 @@
 
             var viewModel = new TSReportOverviewViewModel
             {
-                AreaName = type 
+                AreaName = type
             };
 
             if (id.HasValue)
             {
-                viewModel.TimeSeriesType = await this.repository.ByName(type, id);
+                viewModel.Entity = await this.repository.ByName(type, id);
             }
 
             return this.View(viewModel);
