@@ -1,6 +1,7 @@
 ﻿namespace DataGate.Web.Controllers
 {
     using System;
+    using System.Globalization;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -105,7 +106,9 @@
 
             var viewModel = new TSReportOverviewViewModel
             {
-                AreaName = type
+                AreaName = type,
+                StartDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month - 1, DateTime.Today.Day),
+                EndDate = DateTime.Today,
             };
 
             if (id.HasValue)

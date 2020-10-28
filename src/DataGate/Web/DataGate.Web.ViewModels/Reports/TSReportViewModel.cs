@@ -6,12 +6,12 @@
     using DataGate.Common;
     public class TSReportOverviewViewModel
     {
-        [Required(ErrorMessage = ValidationMessages.DateRequired)]
-        [Display(Name = "Valid From")]
+        //[Required(ErrorMessage = ValidationMessages.DateRequired)]
+        //[Display(Name = "Valid From")]
         public DateTime StartDate { get; set; }
 
-        [Required(ErrorMessage = ValidationMessages.DateRequired)]
-        [Display(Name = "Valid Until")]
+        //[Required(ErrorMessage = ValidationMessages.DateRequired)]
+        //[Display(Name = "Valid Until")]
         public DateTime EndDate { get; set; }
 
         [Required(ErrorMessage = ValidationMessages.FundRequired)]

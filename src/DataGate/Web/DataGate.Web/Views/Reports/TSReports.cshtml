@@ -2,9 +2,6 @@
 
 @{
     ViewData["Title"] = SharedLocalizer.GetHtmlString("Reports");
-
-    //var date = DateTimeParser.ToWebFormat(Model.Date);
-    decimal aum;
 }
 
 <div class="container-all-funds justify-content-between">
@@ -14,7 +11,7 @@
             <div class="w-100 toolbar-view-details">
                 <div class="mx-auto mb-4">
                     <div class="h-100 d-flex">
-                        <div class="mr-2">
+                        <div class="mr-2 m-auto">
                             <a asp-area=""
                                asp-route="allreports"
                                asp-route-type="@Model.AreaName"
@@ -26,7 +23,7 @@
                         <form class="d-flex mx-3"
                               method="post">
                             <div>
-                                <div class="form-group">
+                                <div class="form-group text-center">
                                     <label asp-for="Entity"></label><br>
                                     <select class="select-pharus" asp-for="Entity">
                                         <option selected disabled>-- Choose Entity Name --</option>
@@ -45,10 +42,10 @@
                                 </div>
                                 <span asp-validation-for="Entity" class="text-danger"></span>
 
-                                <div class="form-group">
+                                <div class="form-group text-center">
                                     <label asp-for="TimeSeriesType"></label><br>
                                     <select class="select-pharus" asp-for="TimeSeriesType">
-                                        <option selected disabled>-- Choose Time Series Type --</option>
+                                        <option selected disabled>-- Choose Time Serie Type --</option>
                                         @foreach (var container in (IEnumerable<string>)ViewData["TimeSeriesType"])
                                         {
                                             <option value="@container">@container</option>
@@ -57,10 +54,9 @@
                                 </div>
                                 <span asp-validation-for="TimeSeriesType" class="text-danger"></span>
 
+                                <input asp-for="StartDate" type="month" min="2019-04">
 
-                                <input type="month" asp-for="StartDate" min="2020-02">
-
-                                <input type="month" asp-for="EndDate" min="2020-02">
+                                <input asp-for="EndDate" type="month" min="2019-04">
 
                                 <input asp-for="AreaName" hidden>
 
@@ -70,7 +66,7 @@
                             </div>
                         </form>
                         <form method="post" id="extract-form"></form>
-                        <div class="mr-3">
+                        <div class="mr-3 m-auto">
                             <button class="btn btn-sm btn-pharus mb-1"
                                     id="btn-extract-excel"
                                     type="button"
@@ -78,7 +74,7 @@
                                 EXCEL
                             </button>
                         </div>
-                        <div class="mx-2">
+                        <div class="mx-2 m-auto">
                             <button class="btn btn-sm btn-pharus mb-1"
                                     id="btn-extract-pdf"
                                     type="button"
@@ -86,7 +82,7 @@
                                 PDF
                             </button>
                         </div>
-                        <div class="title-main-reports">
+                        <div class="title-main-reports m-auto">
                             <h2 class="">@Model.AreaName @SharedLocalizer.GetHtmlString("Reports")</h2>
                         </div>
                     </div>
@@ -107,3 +103,18 @@
 
     </div>
 </div>
+
+@section Scripts{
+    <script>
+        $(function () {
+
+            console.log(document.getElementById('StartDate').value);
+            console.log(document.getElementById('EndDate').value);
+
+            $(".select-pharus").chosen({
+                disable_search_threshold: 10,
+                width: "269px",
+            })
+        });
+    </script>
+}
