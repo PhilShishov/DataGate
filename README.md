@@ -59,7 +59,7 @@ https://pharusdatagate.com <br />
 
 ### Backend 
 * C# .NET Core 3.1
-* Database - MSSQL Server, SQL Lite, ADO.NET, Entity Framework Core 3.1
+* Database - MSSQL Server, SQL Lite, Entity Framework Core 3.1, Scaffold, LINQ
 * Design Pattern - DAO, DI, TAP, MVC, REST, Repository, SOLID
 * SendGrid, AutoMapper, EPPlus, itext7
 
