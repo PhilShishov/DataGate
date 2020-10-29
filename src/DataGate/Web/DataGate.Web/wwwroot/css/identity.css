@@ -234,9 +234,9 @@ h3 {
     justify-content: space-between;
     /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ebeff3+0,ebeff3+50,2989d8+50,0575cc+51,005596+100 */
     background: #ebeff3; /* Old browsers */
-    background: -moz-linear-gradient(-45deg, #ebeff3 0%, #ebeff3 50%, #2989d8 50%, #0575cc 51%, #005596 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(-45deg, #ebeff3 0%,#ebeff3 50%,#2989d8 50%,#0575cc 51%,#005596 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(155deg, #ebeff3 0%,#ebeff3 50%,#2989d8 50%,#0575cc 51%,#005596 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background: -moz-linear-gradient(-45deg, #ebeff3 0%, #ebeff3 50%, #193F7E 50%, #193F7E 51%, #005596 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg, #ebeff3 0%,#ebeff3 50%,#193F7E 50%,#193F7E 51%,#005596 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(155deg, #ebeff3 0%,#ebeff3 50%,#193F7E 50%,#193F7E 51%,#005596 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebeff3', endColorstr='#005596',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
@@ -647,7 +647,7 @@ h3 {
 
     .fxt-template-layout2 .left-img {
         text-align: right;
-        padding-left: 150px;
+        border-radius: 15%;
     }
 
 .social-icons {
