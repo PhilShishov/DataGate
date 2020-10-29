@@ -78,7 +78,7 @@ img {
 .container-logo {
     position: absolute;
     top: 0;
-    left: 5%;
+    left: 0;
 }
 
 .container-home {
@@ -88,15 +88,22 @@ img {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 850px;
+    height: 800px;
+    justify-content:space-evenly;
 }
 
 .welcome-message {
-    height: 300px;
+    flex: 1 0 160px;
+    align-items: flex-end;
+}
+
+.container-btn {
+    align-items: flex-start;
+    flex: 1 0 210px;
 }
 
 .row {
-    align-items: center;
+    /*    align-items: center;*/
 }
 
 .container-btn-login img:after {
@@ -112,7 +119,8 @@ img {
 }
 
 .wrapper-language-bar {
-    margin: 5%;
+    margin: 3%;
+    text-align:center;
 }
 
     .wrapper-language-bar a {
@@ -136,7 +144,7 @@ img {
 }
 
 .footer-first {
-    bottom: 8%;
+    bottom: 4%;
 }
 
 .footer-second {
@@ -166,6 +174,14 @@ img {
 
     .footer-pharus {
         padding-right: 0px;
+    }
+
+    .footer-first {
+        bottom: 8%;
+    }
+
+    .welcome-message {
+        flex: 1 0 250px;
     }
 
     .div-text-pharus {
