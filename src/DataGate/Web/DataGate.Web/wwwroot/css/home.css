@@ -34,6 +34,7 @@ img {
 }
 
 .inner {
+    font-size: 14px;
     padding: 20px;
 }
 
@@ -89,7 +90,7 @@ img {
     flex-direction: column;
     align-items: center;
     height: 800px;
-    justify-content:space-evenly;
+    justify-content: space-evenly;
 }
 
 .welcome-message {
@@ -120,7 +121,7 @@ img {
 
 .wrapper-language-bar {
     margin: 3%;
-    text-align:center;
+    text-align: center;
 }
 
     .wrapper-language-bar a {
