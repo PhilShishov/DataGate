@@ -65,7 +65,7 @@ https://pharusdatagate.com <br />
 
 ### Frontend
 * RAZOR, CSS, JavaScript ES6, jQuery
-* JS/jQuery - DataTable, Chart, Chosen, Moment, Slick, SweetAlert
+* JS/jQuery - DataTable, Chart, Chosen, Moment, Slick, SweetAlert, Browser-Update
 * HTML5 - SVG, Canvas
 * UI/UX design - Photoshop, HTML/CSS, Bootstrap
 
@@ -79,6 +79,7 @@ https://pharusdatagate.com <br />
  * HTML Sanitization
  * SQL Injection
  * SSL
+ * Browser Update
  
  ### GDPR
 
