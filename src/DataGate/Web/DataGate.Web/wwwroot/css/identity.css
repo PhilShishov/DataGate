@@ -647,7 +647,6 @@ h3 {
 
     .fxt-template-layout2 .left-img {
         text-align: right;
-        border-radius: 15%;
     }
 
 .social-icons {
@@ -671,6 +670,12 @@ h3 {
     display: flex;
 }
 
+.login-redirect-language {
+    display: flex;
+    align-items: center;
+    width: 95%;
+    justify-content: space-between;
+}
 /*
 *
 * ==========================================
@@ -678,7 +683,6 @@ h3 {
 * ==========================================
 *
 */
-
 @media only screen and (max-width: 575px) {
     .fxt-template-layout2 ul.fxt-socials li {
         flex: 0 0 50%;

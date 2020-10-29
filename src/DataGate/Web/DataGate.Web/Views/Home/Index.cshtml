@@ -6,8 +6,7 @@
 @if (!this.User.Identity.IsAuthenticated)
 {
     <partial name="Scripts/_CookieConsentPartial" />
-
-    <div class="container-home text-center">
+    <header>
         <div class="wrapper-language-bar">
             <partial name="_SelectLanguagePartial" />
         </div>
@@ -17,7 +16,10 @@
                 <img src="~/images/Layer_Logo.png">
             </a>
         </div>
-        <div class="row welcome-message">
+    </header>
+
+    <div class="container-home text-center">
+        <div class="row welcome-message mb-4">
             <div class="col-md-12 div-text-pharus">
                 <h1 class="text-white text-pharus">
                     <i>
@@ -28,7 +30,7 @@
                 </h1>
             </div>
         </div>
-        <div class="row">
+        <div class="row container-btn">
             <div class="col-md-12 pharus-btn container-btn-login">
                 <a asp-area="Identity" asp-page="/Account/Login">
                     <img src="~/images/Login_Button.png">
