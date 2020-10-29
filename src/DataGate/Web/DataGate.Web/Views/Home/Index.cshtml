@@ -7,18 +7,17 @@
 {
     <partial name="Scripts/_CookieConsentPartial" />
 
-    <div class="container-fluid text-center">
+    <div class="container-home text-center">
         <div class="wrapper-language-bar">
             <partial name="_SelectLanguagePartial" />
         </div>
-        <div class="row">
-            <div class="col-md-12 container-logo">
-                <a asp-area="" asp-controller="Home" asp-action="Index">
-                    <img src="~/images/Layer_Logo.png">
-                </a>
-            </div>
+
+        <div class="container-logo">
+            <a asp-area="" asp-controller="Home" asp-action="Index">
+                <img src="~/images/Layer_Logo.png">
+            </a>
         </div>
-        <div class="row">
+        <div class="row welcome-message">
             <div class="col-md-12 div-text-pharus">
                 <h1 class="text-white text-pharus">
                     <i>
@@ -36,9 +35,9 @@
                 </a>
             </div>
         </div>
-        <div class="row">
+        <div class="row footer-first">
             <div class="col-md-12">
-                <div class="footer-pharus mb-5">
+                <div class="">
                     <div class="inner text-white">
                         <p>
                             <a class="text-white a-underline mr-1" asp-area="" asp-route="privacy">@SharedLocalizer.GetHtmlString("Privacy Policy")</a>
@@ -49,9 +48,9 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row footer-second">
             <div class="col-md-12">
-                <div class="footer-pharus mt-5">
+                <div class="">
                     <div class="inner text-white">
                         <p>
                             &copy; @DateTime.Now.Year @GlobalConstants.DataGateFullFooterDisplay
