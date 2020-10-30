@@ -3,9 +3,9 @@
 
 .branch-background {
     background: url(../../images/bg-branch.jpg) no-repeat center center fixed;
-    background-size: cover;
+/*    background-size: cover;*/
     overflow: hidden;
-    height: 820px;
+    height: 815px;
 }
 
 .branch-background h2{
