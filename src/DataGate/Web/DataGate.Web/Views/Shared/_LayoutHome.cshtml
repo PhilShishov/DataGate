@@ -10,13 +10,13 @@
     <environment include="Development">
         <link rel="icon" href="~/images/Logo_Pharus_small.jpg" type="image/x-icon">
         <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" asp-append-version="true" />
-        <link type="text/css" rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+        <link type="text/css" rel="stylesheet" href="~/css/home/style.css" asp-append-version="true" />
     </environment>
 
     <environment include="Production, Staging">
         <link rel="icon" href="~/images/Logo_Pharus_small.jpg" type="image/x-icon">
         <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
-        <link type="text/css" rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+        <link type="text/css" rel="stylesheet" href="~/css/home/style.min.css" asp-append-version="true" />
     </environment>
 
     @RenderSection("Styles", required: false)

@@ -1,0 +1,34 @@
+﻿
+$fontSize: 14px;
+$fontFamily: Arial,Helvetica,sans-serif;
+
+body {
+    font-family: $fontFamily;
+    text-align:center;
+}
+
+.container-cookie-consent {
+    font-size: $fontSize;
+
+    a {
+        text-decoration: underline;
+    }
+}
+
+.wrapper-language-bar {
+    margin: 3%;    
+}
+
+.wrapper-language-bar img {
+    margin-left: 6px;
+}
+
+.container-home {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.inner {
+    font-size: $fontSize;
+    padding: 20px;
+}

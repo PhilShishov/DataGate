@@ -11,6 +11,10 @@
     <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
     <ApplicationInsightsResourceId>/subscriptions/0b49a758-f385-4863-be10-310effb9dba5/resourcegroups/DataGateApplication/providers/Microsoft.Insights/components/DataGate.Web</ApplicationInsightsResourceId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="compilerconfig.json" />
+  </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
   </ItemGroup>
@@ -49,6 +53,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\css\identity\" />
     <Folder Include="wwwroot\FileFolder\Agreement\" />
     <Folder Include="wwwroot\FileFolder\Fund\" />
     <Folder Include="wwwroot\FileFolder\ShareClass\" />
@@ -57,6 +62,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="compilerconfig.json" />
     <None Include="Views\Shared\SubEntities\_ModalSelect.cshtml" />
     <None Include="Views\Shared\SubEntities\_ViewLoadedTable.cshtml" />
     <None Include="Views\Shared\SubEntities\_ViewTable.cshtml" />
