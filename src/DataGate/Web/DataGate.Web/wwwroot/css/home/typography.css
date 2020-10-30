@@ -1,0 +1,22 @@
+﻿body {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center; }
+
+.container-cookie-consent {
+  font-size: 14px; }
+  .container-cookie-consent a {
+    text-decoration: underline; }
+
+.wrapper-language-bar {
+  margin: 3%; }
+
+.wrapper-language-bar img {
+  margin-left: 6px; }
+
+.container-home {
+  padding-right: 15px;
+  padding-left: 15px; }
+
+.inner {
+  font-size: 14px;
+  padding: 20px; }

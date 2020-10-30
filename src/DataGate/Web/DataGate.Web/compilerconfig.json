@@ -1,0 +1,18 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/home/layout.css",
+    "inputFile": "wwwroot/css/home/layout.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/home/responsive.css",
+    "inputFile": "wwwroot/css/home/responsive.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/home/typography.css",
+    "inputFile": "wwwroot/css/home/typography.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/home/style.css",
+    "inputFile": "wwwroot/css/home/style.scss"
+  }
+]

@@ -1,0 +1,71 @@
+﻿body {
+  background: url(../../images/Background_Home_New.png) no-repeat center center fixed;
+  background-size: cover;
+  overflow: hidden; }
+
+p {
+  margin: 0; }
+
+h1 {
+  line-height: unset; }
+
+img {
+  max-width: 100%;
+  height: auto; }
+
+/* Cookie Consent Styling*/
+.container-cookie-consent {
+  width: 100%; }
+
+.alert-dismissible .close-cookie-consent {
+  top: 2px;
+  right: unset;
+  background: green;
+  color: white;
+  text-shadow: none;
+  border: none; }
+  .alert-dismissible .close-cookie-consent .close-cookie-consent:hover {
+    background: #004176; }
+
+/* Main Styling */
+.container-logo {
+  position: absolute;
+  top: 0;
+  left: 0; }
+
+.wrapper-language-bar a {
+  color: white; }
+
+.wrapper-language-bar a:hover {
+  text-decoration: underline;
+  color: white; }
+
+.wrapper-language-bar img {
+  width: 30px;
+  height: 30px; }
+
+.container-home {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 800px;
+  justify-content: space-evenly; }
+
+.welcome-message {
+  flex: 1 0 160px;
+  align-items: flex-end; }
+
+.container-btn {
+  align-items: flex-start;
+  flex: 1 0 210px; }
+
+/* Footer Styling */
+.footer-first, .footer-second {
+  position: fixed; }
+
+.footer-first {
+  bottom: 4%; }
+
+.footer-second {
+  bottom: 0; }

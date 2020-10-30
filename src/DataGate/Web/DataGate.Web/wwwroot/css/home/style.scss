@@ -1,0 +1,10 @@
+﻿*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+@import 'layout.scss';
+@import 'typography.scss';
+@import 'responsive.scss';
+
