@@ -20,3 +20,23 @@
 .inner {
   font-size: 14px;
   padding: 20px; }
+
+@media (max-width: 599px) {
+  .text-pharus {
+    font-size: 26px; } }
+
+@media (min-width: 600px) {
+  .text-pharus {
+    font-size: 32px; } }
+
+@media (min-width: 900px) {
+  .text-pharus {
+    font-size: 34px; } }
+
+@media (min-width: 1200px) {
+  .text-pharus {
+    font-size: 36px; } }
+
+@media (min-width: 1800px) {
+  .text-pharus {
+    font-size: 40px; } }

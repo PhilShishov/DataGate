@@ -32,6 +32,26 @@ img {
   position: absolute;
   top: 0;
   left: 0; }
+  @media (max-width: 599px) {
+    .container-logo img {
+      height: 55px;
+      width: 55px; } }
+  @media (min-width: 600px) {
+    .container-logo img {
+      height: 65px;
+      width: 65px; } }
+  @media (min-width: 900px) {
+    .container-logo img {
+      height: 80px;
+      width: 80px; } }
+  @media (min-width: 1200px) {
+    .container-logo img {
+      height: 100px;
+      width: 100px; } }
+  @media (min-width: 1800px) {
+    .container-logo img {
+      height: 120px;
+      width: 120px; } }
 
 .wrapper-language-bar a {
   color: white; }
