@@ -30,7 +30,7 @@ namespace DataGate.Web.InputModels.Files
 
         [Required(ErrorMessage = ValidationMessages.FileRequired)]
         [DataType(DataType.Upload)]
-        [MaxFileSize(45 * 1024 * 1024)]
+        [MaxFileSize(GlobalConstants.FileSizeLimit)]
         [AllowedExtensions(new string[] { GlobalConstants.PdfFileExtension })]
         public IFormFile FileToUpload { get; set; }
 

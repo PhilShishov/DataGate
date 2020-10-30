@@ -58,6 +58,32 @@ img {
       height: 120px;
       width: 120px; } }
 
+.container-btn-login img:after {
+  width: 300px; }
+
+.container-btn-login img:hover {
+  opacity: 0.8; }
+
+@media (max-width: 599px) {
+  .container-btn-login img {
+    width: 240px; } }
+
+@media (min-width: 600px) {
+  .container-btn-login img {
+    width: 260px; } }
+
+@media (min-width: 900px) {
+  .container-btn-login img {
+    width: 280px; } }
+
+@media (min-width: 1200px) {
+  .container-btn-login img {
+    width: 300px; } }
+
+@media (min-width: 1800px) {
+  .container-btn-login img {
+    width: 320px; } }
+
 .wrapper-language-bar a {
   color: white; }
 

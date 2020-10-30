@@ -75,6 +75,39 @@ img {
     }
 }
 
+.container-btn-login {
+
+    img:after {
+        width: 300px;
+    }
+
+    img:hover {
+        opacity: 0.8;
+    }
+
+    img {
+        @include for-phone-only {
+            width: 240px;
+        }
+
+        @include for-tablet-portrait-up {
+            width: 260px;
+        }
+
+        @include for-tablet-landscape-up {
+            width: 280px;
+        }
+
+        @include for-desktop-up {
+            width: 300px;
+        }
+
+        @include for-big-desktop-up {
+            width: 320px;
+        }
+    }
+}
+
 .wrapper-language-bar {
     a {
         color: $colorWhite;
