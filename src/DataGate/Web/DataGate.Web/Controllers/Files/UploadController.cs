@@ -93,13 +93,13 @@
             var dto = AutoMapperConfig.MapperInstance.Map<UploadOnSuccessDto>(model);
             //dto.FileId = 
 
-            //await this.service.UploadAgreement(model);
+            await this.service.UploadAgreement(model);
 
-            //using (var stream = new FileStream(path, FileMode.Create))
-            //{
-            //    await model.FileToUpload.CopyToAsync(stream);
-            //    stream.Close();
-            //}
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                await model.FileToUpload.CopyToAsync(stream);
+                stream.Close();
+            }
 
             return this.Json(new { success = true, dto = dto });
         }
