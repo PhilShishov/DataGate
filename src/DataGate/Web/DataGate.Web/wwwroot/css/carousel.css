@@ -42,7 +42,7 @@
 
     .carousel-card a {
         outline: none;
-        color: #0056b3;
+        color: white;
     }
 
 /* Slick Arrows */
@@ -51,7 +51,7 @@
     font-size: 20px;
     line-height: 1;
     opacity: .75;
-    color: #0056b3;
+    color: white;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }

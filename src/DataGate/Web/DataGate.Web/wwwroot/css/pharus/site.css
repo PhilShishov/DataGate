@@ -1,6 +1,17 @@
 ﻿
 /* Chosen style to be imported on change*/
 
+.branch-background {
+    background: url(../../images/bg-branch.jpg) no-repeat center center fixed;
+    background-size: cover;
+    overflow: hidden;
+    height: 820px;
+}
+
+.branch-background h2{
+    color: white;
+}
+
 .swal-footer, .swal-text {
     text-align: center;
 }
@@ -80,6 +91,7 @@ body {
 h1, h2, h3, h4 {
     color: black;
 }
+
 
 h2 {
     font-size: 25px;
