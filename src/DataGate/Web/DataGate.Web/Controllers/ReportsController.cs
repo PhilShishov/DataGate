@@ -1,7 +1,6 @@
 ﻿namespace DataGate.Web.Controllers
 {
     using System;
-    using System.Globalization;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -122,8 +121,9 @@
         }
 
         //[HttpPost]
-        //public async Task<IActionResult> AuMReports(TSReportViewModel model)
+        //public async Task<IActionResult> TSReports(TSReportViewModel model)
         //{
+        //    this.SetViewDataValues(type, typeIndex);
         //    string function = StringSwapper.ByArea(
         //                    model.SelectedType,
         //                    SqlFunctionDictionary.ReportFunds,
