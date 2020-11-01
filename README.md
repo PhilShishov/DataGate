@@ -99,20 +99,20 @@ https://pharusdatagate.com <br />
  , [Sub Fund](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/SubFundLibrary.png)
  , [Share Class](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/ShareClassLibrary.png)
  , [Agreements](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/AgreementsLibrary.png)
- - Consult particular view - [sub entities and their connections](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/DetailFundView.png), 
- [time series](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/TimeSeries.png), 
- [documents](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Documents.png), 
- [agreements](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Agreements.png), 
- [timelines](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Timelines.png), 
- fees
+ - Consult particular view - [Sub entities and their connections](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/DetailFundView.png), 
+ [Time Series](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/TimeSeries.png), 
+ [Documents](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Documents.png), 
+ [Agreements](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Agreements.png), 
+ [Timelines](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Timelines.png), 
+ Fees
  - Manage tool menu - 
-  [Layout](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/ToolMenu/Layout.png)
- [View active and inactive entities](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/ToolMenu/ActiveInactive.png),
- Update timeline by date
+  [Layout](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/ToolMenu/Layout.png),
+ [Toogle inactive entities](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/ToolMenu/Inactive.png),
+ [Update timeline by date](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/ToolMenu/UpdateDate.png)
 
   - Extract view tables as [PDF](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/Extraction/Funds.pdf) 
  and [Excel](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/Extraction/Funds.xlsx)
- - Consult AuM NAV [Fund](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/FundReports.png)/ [Sub Fund](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/SubFundReports.png) and Time Series reports
+ - Consult AuM NAV [Fund](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/FundReports.png) / [Sub Fund](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/SubFundReports.png) and Time Series reports
  - Update views by chosen date
  - Choose and sort header columns for large table views
  - Perform a global [share class search](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/SearchView.png)
@@ -121,14 +121,12 @@ https://pharusdatagate.com <br />
  ### Users in role "Legal"
   - All the functionalities of logged in user
   - Upload
-   [documents](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/UploadDocument.png),
-   [agreements](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/UploadAgreement.png) and fees
- -  Delete
-  [document](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/DeleteDocument.png),
-   [agreement](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/DeleteAgreement.png)
-  - [Create](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Create.png) 
-  /[Official Update](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/OffUpdate.png)
-  entity
+   [document](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/UploadDocument.png),
+   [agreement](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/UploadAgreement.png) and
+   fees
+ -  Delete document, agreement
+  - [Create Entity](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Create.png)
+  / [Official Update](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/OffUpdate.png)
  ### Administrators
  - All the functionalities of legal user
  - Create, edit and delete user
