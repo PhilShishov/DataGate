@@ -120,7 +120,12 @@ https://pharusdatagate.com <br />
  - Two language support - English and [Italian](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/UserPanelItalian.png)
  ### Users in role "Legal"
   - All the functionalities of logged in user
-  - Upload and delete documents, agreements and fees
+  - Upload
+   [documents](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/UploadDocument.png),
+   [agreements](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/UploadAgreement.png) and fees
+ -  Delete
+  [document](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/DeleteDocument.png),
+   [agreement](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/DeleteAgreement.png)
   - [Create](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Create.png) 
   /[Official Update](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/OffUpdate.png)
   entity
