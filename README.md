@@ -63,7 +63,7 @@ https://pharusdatagate.com <br />
 * Code review, StyleCop
 
 ### Database 
-* MSSQL Server, mylittleadmin
+* MSSQL Server, mylittleadmin - [Diagrams](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/DB-Diagrams)
 * Entity Framework Core 3.1, Scaffold, LINQ
 
 ### Backend
@@ -93,8 +93,8 @@ https://pharusdatagate.com <br />
 
 ## Functionality 
 ### Logged in Users
- - Manage Account
- - Consult libraries and agreements - 
+ - [Manage Account](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/ManageAccount.png)
+ - Consult libraries - 
    [Fund](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/FundLibrary.png)
  , [Sub Fund](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/SubFundLibrary.png)
  , [Share Class](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/ShareClassLibrary.png)
@@ -148,7 +148,6 @@ The main function is automatic feeding of data into an internal database by the 
 
 ![Application-Architecture](Documentation/Presentation/Application-Architecture.JPG)
 ![Application-Structure](Documentation/Presentation/Application-Structure.JPG)
-![ResponsiveDesign](Documentation/Presentation/ResponsiveDesign.JPG)
   
   ## History
 **2020-10-30** Updated to ASP.NET Core 3.1.9
