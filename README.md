@@ -79,14 +79,14 @@ https://pharusdatagate.com <br />
 
 ### Security
  * ASP.NET Core
- * ReCaptcha
  * X-CSRF
- * XSS
+ * Cross-site Scripting (XSS)
  * Antiforgery
  * Overposting
  * HTML Sanitization
  * SQL Injection
  * SSL
+ * ReCaptcha
  * Browser Update
  
  ### GDPR
@@ -94,21 +94,36 @@ https://pharusdatagate.com <br />
 ## Functionality 
 ### Logged in Users
  - Manage Account
- - Consult libraries and agreements
- - Consult particular view - sub entities and their connections, timeseries, documents, agreements, timelines, fees
- - View active and unactive entities
- - Consult AuM NAV and Time Series reports
+ - Consult libraries and agreements - 
+   [Fund](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/FundLibrary.png)
+ , [Sub Fund](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/SubFundLibrary.png)
+ , [Share Class](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/ShareClassLibrary.png)
+ , [Agreements](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/AgreementsLibrary.png)
+ - Consult particular view - [sub entities and their connections](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/DetailFundView.png), 
+ [time series](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/TimeSeries.png), 
+ [documents](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Documents.png), 
+ [agreements](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Agreements.png), 
+ [timelines](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Timelines.png), 
+ fees
+ - Manage tool menu - 
+  [Layout](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/ToolMenu/Layout.png)
+ [View active and inactive entities](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/ToolMenu/ActiveInactive.png),
+ Update timeline by date
+
+  - Extract view tables as [PDF](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/Extraction/Funds.pdf) 
+ and [Excel](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/Extraction/Funds.xlsx)
+ - Consult AuM NAV [Fund](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/FundReports.png)/ [Sub Fund](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/SubFundReports.png) and Time Series reports
  - Update views by chosen date
  - Choose and sort header columns for large table views
- - Perform a global share class search
- - Extract view tables as [PDF](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/Extraction/Funds.pdf) 
- and [Excel](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/Extraction/Funds.xlsx)
+ - Perform a global [share class search](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/SearchView.png)
   - Slide through recent share classes
- - Two language support - English and Italian
+ - Two language support - English and [Italian](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/UserPanelItalian.png)
  ### Users in role "Legal"
   - All the functionalities of logged in user
   - Upload and delete documents, agreements and fees
-  - Create/edit fund
+  - [Create](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Create.png) 
+  /[Official Update](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/OffUpdate.png)
+  entity
  ### Administrators
  - All the functionalities of legal user
  - Create, edit and delete user
