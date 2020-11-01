@@ -1,7 +1,7 @@
 ## Project Introduction
 
 **"DataGate"** project is consisted of two parts: **DataGate Web Platform** and **DataGate Report Processor**
-![Project-Architecture](Documentation/Resources/Project-Architecture.JPG)
+![Project-Architecture](Documentation/Presentation/Project-Architecture.JPG)
 
 ## Table of contents
 * [DataGate Web Platform](#datagate-web-platform)
@@ -19,11 +19,16 @@
 
 https://pharusdatagate.com <br />
 
-A private web application for managing more than 300 funds. <br />
+![HomePage](Documentation/Screenshots/App/HomePage.png)
+![UserPanel](Documentation/Screenshots/App/UserPanel.png)
+
+A private web application for managing more than 250 funds. <br />
 It is developed to be used by Pharus Management Lux S.A in order to <br />
 centralize internal data and allow each user to be able to <br />
 find relevant information in a fast way, saving time, reducing operational errors <br />
 and automating some parts of the Risk and Legal department.
+
+For more [screenshots](https://github.com/PhilShishov/DataGate/tree/master/Documentation/Screenshots/App)
 
   ## Status
   [![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/DataGate-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=1&branchName=master) [![Build status](https://ci.appveyor.com/api/projects/status/thvsvj1du6d595m6?svg=true)](https://ci.appveyor.com/project/PhilShishov/datagate)
@@ -36,7 +41,6 @@ detailed information about the UCITS and AIF handled by the management company s
 * Sub entities
 * Timeline changes
 * Timeseries AuM charts
-* Distinct related documents and agreements
 * All related documents
 * All related agreements
 * Fees related to agreements
@@ -50,24 +54,28 @@ Password: **datagate_guest** <br />
 https://pharusdatagate.com <br />
  
  ## Technologies
-* Frameworks - ASP.NET Core 3.1, Bootstrap
-* Project Management - Jira, Trello - https://trello.com/pharusit
+* IDE - Visual Studio 2019, VS Code
+* Framework - ASP.NET Core 3.1
 * Version Control - Git, TortoiseGit, GitHub
 * DevOps - Application Insights, Azure Pipelines
 * Hosting and File Storage - GoDaddy WebWiz
+* Project Management - Jira, Trello - https://trello.com/pharusit
 * Code review, StyleCop
 
-### Backend 
-* C# .NET Core 3.1
-* Database - MSSQL Server, SQL Lite, Entity Framework Core 3.1, Scaffold, LINQ
-* Design Pattern - DAO, DI, TAP, MVC, REST, Repository, SOLID
-* SendGrid, AutoMapper, EPPlus, itext7
+### Database 
+* MSSQL Server, mylittleadmin
+* Entity Framework Core 3.1, Scaffold, LINQ
 
-### Frontend
-* RAZOR, CSS, JavaScript ES6, jQuery
-* JS/jQuery - DataTable, Chart, Chosen, Moment, Slick, SweetAlert, Browser-Update
-* HTML5 - SVG, Canvas
-* UI/UX design - Photoshop, HTML/CSS, Bootstrap
+### Backend
+* C# .NET Core 3.1
+* Design Pattern - DAO, DI, TAP, MVC, REST, Repository, SOLID
+* SendGrid, AutoMapper, IStringLocalizer/IHtmlLocalizer, EPPlus, itext7
+
+### Client-side
+* RAZOR, JavaScript ES6, jQuery, Bootstrap
+* JS/jQuery - DataTable, Chart, Chosen, Moment, Slick, SweetAlert, Browser-Update, Cookie
+* Libman, Bundle, WebCompiler
+* UI/UX design - Photoshop, HTML5 (SVG, Canvas), SCSS/CSS3
 
 ### Security
  * ASP.NET Core
@@ -85,15 +93,17 @@ https://pharusdatagate.com <br />
 
 ## Functionality 
 ### Logged in Users
- - Slide through recent share classes
+ - Manage Account
  - Consult libraries and agreements
- - Consult particular view - sub entities, timeseries, documents, agreements, timelines, fees
+ - Consult particular view - sub entities and their connections, timeseries, documents, agreements, timelines, fees
  - View active and unactive entities
- - Consult NAV reports
+ - Consult AuM NAV and Time Series reports
  - Update views by chosen date
  - Choose and sort header columns for large table views
  - Perform a global share class search
- - Extract view tables as PDF and Excel
+ - Extract view tables as [PDF](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/Extraction/Funds.pdf) 
+ and [Excel](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/Extraction/Funds.xlsx)
+  - Slide through recent share classes
  - Two language support - English and Italian
  ### Users in role "Legal"
   - All the functionalities of logged in user
@@ -109,24 +119,22 @@ https://pharusdatagate.com <br />
   [Report Processor](https://github.com/PhilShishov/ReportProcessor) - .NET Core application running on SFTP Server.  </br>
 
 The main function is automatic feeding of data into an internal database by the Fund Admin (Asset under management, Subscription, Redeption, Net asset value, Fee)
-![Data-Manipulation-Layer](Documentation/Resources/Data-Manipulation-Layer.JPG)
+![Data-Manipulation-Layer](Documentation/Presentation/Data-Manipulation-Layer.JPG)
 
 ## Documentation
-You can read the documentation [here]().
-Videos about the platform:
-* [Presentation of DataGate]()
-* [DataGate guide]()
-* [Legal users guide]()
-* [Adminstrators guide]()
-* [Create/edit a fund]()
-* [Upload a document or agreement]()
-* [Add agreement fees ]()
 
-![Application-Architecture](Documentation/Resources/Application-Architecture.JPG)
-![Application-Structure](Documentation/Resources/Application-Structure.JPG)
-![ResponsiveDesign](Documentation/Resources/ResponsiveDesign.JPG)
+[Code Metrics Processor](https://github.com/PhilShishov/DataGate/blob/master/Documentation/DataGate_CodeMetricsAnalyzis_20200720.xlsx)
+
+[Responsive Web Design](https://github.com/PhilShishov/DataGate/tree/master/Documentation/Screenshots/App/Responsive)
+
+
+![Application-Architecture](Documentation/Presentation/Application-Architecture.JPG)
+![Application-Structure](Documentation/Presentation/Application-Structure.JPG)
+![ResponsiveDesign](Documentation/Presentation/ResponsiveDesign.JPG)
   
   ## History
+**2020-10-30** Updated to ASP.NET Core 3.1.9
+  
 **2020-10-12** SFTP Data Manipulation Layer - [Report Processor](https://github.com/PhilShishov/ReportProcessor)
 
 **2020-09-02** Updated to ASP.NET Core 3.1.7
