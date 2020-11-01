@@ -1,9 +1,19 @@
 ﻿
 /* Chosen style to be imported on change*/
 
+.modal-dialog-document {
+    margin:0;
+    transform: translateY(100%) translateX(100%) !important;
+}
+
+.modal-dialog-agreement {
+    margin: 0;
+    transform: translateY(40%) translateX(100%) !important;
+}
+
 .branch-background {
     background: url(../../images/bg-branch.jpg) no-repeat center center fixed;
-/*    background-size: cover;*/
+    /*    background-size: cover;*/
     overflow: hidden;
     height: 815px;
 }
