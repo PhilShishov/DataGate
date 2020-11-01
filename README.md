@@ -28,8 +28,6 @@ centralize internal data and allow each user to be able to <br />
 find relevant information in a fast way, saving time, reducing operational errors <br />
 and automating some parts of the Risk and Legal department.
 
-For more [screenshots](https://github.com/PhilShishov/DataGate/tree/master/Documentation/Screenshots/App)
-
   ## Status
   [![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/DataGate-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=1&branchName=master) [![Build status](https://ci.appveyor.com/api/projects/status/thvsvj1du6d595m6?svg=true)](https://ci.appveyor.com/project/PhilShishov/datagate)
 
@@ -63,7 +61,7 @@ https://pharusdatagate.com <br />
 * Code review, StyleCop
 
 ### Database 
-* MSSQL Server, mylittleadmin - [Diagrams](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/DB-Diagrams)
+* MSSQL Server, mylittleadmin - Diagrams
 * Entity Framework Core 3.1, Scaffold, LINQ
 
 ### Backend
@@ -99,7 +97,7 @@ https://pharusdatagate.com <br />
  [Time Series](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/TimeSeries.png), 
  [Documents](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Documents.png), 
  [Agreements](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Agreements.png), 
- [Timelines](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Timelines.png), 
+ [Timeline](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Timeline.png), 
  Fees
  - Manage tool menu - Layout, Toogle inactive entities, Update views by date
  - Extract view tables as [PDF](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/Extraction/Funds.pdf) 
@@ -107,10 +105,10 @@ https://pharusdatagate.com <br />
  - Consult AuM NAV [Fund](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/FundReports.png) / [Sub Fund](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/SubFundReports.png) and Time Series reports
  - Choose and sort header columns for large table views
  - Perform a global [share class search](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/SearchView.png)
-  - Slide through recent share classes
+ - Slide through recent share classes
  - Two language support - 
  [English](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/UserPanel.png) and 
- [Italian](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/UserPanelItalian.png)
+ [Italian](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Italian.png)
  ### Users in role "Legal"
   - All the functionalities of logged in user
   - Upload
