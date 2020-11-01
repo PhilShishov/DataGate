@@ -94,30 +94,23 @@ https://pharusdatagate.com <br />
 ## Functionality 
 ### Logged in Users
  - [Manage Account](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/ManageAccount.png)
- - Consult libraries - 
-   [Fund](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/FundLibrary.png)
- , [Sub Fund](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/SubFundLibrary.png)
- , [Share Class](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/ShareClassLibrary.png)
- , [Agreements](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/AgreementsLibrary.png)
+ - Consult libraries - Fund, Sub Fund, Share Class, Agreements
  - Consult particular view - [Sub entities and their connections](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/DetailFundView.png), 
  [Time Series](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/TimeSeries.png), 
  [Documents](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Documents.png), 
  [Agreements](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Agreements.png), 
  [Timelines](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Timelines.png), 
  Fees
- - Manage tool menu - 
-  [Layout](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/ToolMenu/Layout.png),
- [Toogle inactive entities](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/ToolMenu/Inactive.png),
- [Update timeline by date](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/ToolMenu/UpdateDate.png)
-
-  - Extract view tables as [PDF](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/Extraction/Funds.pdf) 
+ - Manage tool menu - Layout, Toogle inactive entities, Update views by date
+ - Extract view tables as [PDF](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/Extraction/Funds.pdf) 
  and [Excel](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/Extraction/Funds.xlsx)
  - Consult AuM NAV [Fund](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/FundReports.png) / [Sub Fund](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/SubFundReports.png) and Time Series reports
- - Update views by chosen date
  - Choose and sort header columns for large table views
  - Perform a global [share class search](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/SearchView.png)
   - Slide through recent share classes
- - Two language support - English and [Italian](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/UserPanelItalian.png)
+ - Two language support - 
+ [English](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/UserPanel.png) and 
+ [Italian](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/UserPanelItalian.png)
  ### Users in role "Legal"
   - All the functionalities of logged in user
   - Upload
@@ -126,7 +119,7 @@ https://pharusdatagate.com <br />
    fees
  -  Delete document, agreement
   - [Create Entity](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Create.png)
-  / [Official Update](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/OffUpdate.png)
+  / [Official Update](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/OfficialUpdate.png)
  ### Administrators
  - All the functionalities of legal user
  - Create, edit and delete user
