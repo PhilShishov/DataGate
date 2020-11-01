@@ -171,7 +171,7 @@ body {
 * ==========================================
 *
 */
-@media only screen and (max-width: 640px) {
+@media only screen and (max-width: 599px) {
   .footer-first {
     bottom: 8%; }
   .welcome-message {

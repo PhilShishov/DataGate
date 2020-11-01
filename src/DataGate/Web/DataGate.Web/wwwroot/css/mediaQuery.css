@@ -7,6 +7,11 @@
 */
 
 @media only screen and (max-width: 991px) {
+
+    .branch-background {
+        overflow: scroll;
+    }
+
     .toolbar-view-all, .toolbar-view-details {
         overflow-x: scroll;
     }

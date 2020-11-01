@@ -8,6 +8,8 @@
 *
 */
 
+/*<link type="text/css" rel="stylesheet" href="~/lib/font-awesome/css/all.css" asp-append-version="true" / >*/
+
 h4 {
     color: black;
 }

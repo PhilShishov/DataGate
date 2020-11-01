@@ -53,7 +53,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\css\identity\" />
     <Folder Include="wwwroot\FileFolder\Agreement\" />
     <Folder Include="wwwroot\FileFolder\Fund\" />
     <Folder Include="wwwroot\FileFolder\ShareClass\" />
