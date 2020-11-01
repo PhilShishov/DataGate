@@ -1,7 +1,7 @@
 ## Project Introduction
 
 **"DataGate"** project is consisted of two parts: **DataGate Web Platform** and **DataGate Report Processor**
-![Project-Architecture](Documentation/Resources/Project-Architecture.JPG)
+![Project-Architecture](Documentation/Presentation/Project-Architecture.JPG)
 
 ## Table of contents
 * [DataGate Web Platform](#datagate-web-platform)
@@ -19,11 +19,16 @@
 
 https://pharusdatagate.com <br />
 
-A private web application for managing more than 300 funds. <br />
+![HomePage](Documentation/Screenshots/App/HomePage.png)
+![UserPanel](Documentation/Screenshots/App/UserPanel.png)
+
+A private web application for managing more than 250 funds. <br />
 It is developed to be used by Pharus Management Lux S.A in order to <br />
 centralize internal data and allow each user to be able to <br />
 find relevant information in a fast way, saving time, reducing operational errors <br />
 and automating some parts of the Risk and Legal department.
+
+For more [screenshots](https://github.com/PhilShishov/DataGate/tree/master/Documentation/Screenshots/App)
 
   ## Status
   [![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/DataGate-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=1&branchName=master) [![Build status](https://ci.appveyor.com/api/projects/status/thvsvj1du6d595m6?svg=true)](https://ci.appveyor.com/project/PhilShishov/datagate)
@@ -36,7 +41,6 @@ detailed information about the UCITS and AIF handled by the management company s
 * Sub entities
 * Timeline changes
 * Timeseries AuM charts
-* Distinct related documents and agreements
 * All related documents
 * All related agreements
 * Fees related to agreements
@@ -50,55 +54,79 @@ Password: **datagate_guest** <br />
 https://pharusdatagate.com <br />
  
  ## Technologies
-* Frameworks - ASP.NET Core 3.1, Bootstrap
-* Project Management - Jira, Trello - https://trello.com/pharusit
+* IDE - Visual Studio 2019, VS Code
+* Framework - ASP.NET Core 3.1
 * Version Control - Git, TortoiseGit, GitHub
 * DevOps - Application Insights, Azure Pipelines
 * Hosting and File Storage - GoDaddy WebWiz
+* Project Management - Jira, Trello - https://trello.com/pharusit
 * Code review, StyleCop
 
-### Backend 
-* C# .NET Core 3.1
-* Database - MSSQL Server, SQL Lite, Entity Framework Core 3.1, Scaffold, LINQ
-* Design Pattern - DAO, DI, TAP, MVC, REST, Repository, SOLID
-* SendGrid, AutoMapper, EPPlus, itext7
+### Database 
+* MSSQL Server, mylittleadmin - [Diagrams](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/DB-Diagrams)
+* Entity Framework Core 3.1, Scaffold, LINQ
 
-### Frontend
-* RAZOR, CSS, JavaScript ES6, jQuery
-* JS/jQuery - DataTable, Chart, Chosen, Moment, Slick, SweetAlert, Browser-Update
-* HTML5 - SVG, Canvas
-* UI/UX design - Photoshop, HTML/CSS, Bootstrap
+### Backend
+* C# .NET Core 3.1
+* Design Pattern - DAO, DI, TAP, MVC, REST, Repository, SOLID
+* SendGrid, AutoMapper, IStringLocalizer/IHtmlLocalizer, EPPlus, itext7
+
+### Client-side
+* RAZOR, JavaScript ES6, jQuery, Bootstrap
+* JS/jQuery - DataTable, Chart, Chosen, Moment, Slick, SweetAlert, Browser-Update, Cookie
+* Libman, Bundle, WebCompiler
+* UI/UX design - Photoshop, HTML5 (SVG, Canvas), SCSS/CSS3
 
 ### Security
  * ASP.NET Core
- * ReCaptcha
  * X-CSRF
- * XSS
+ * Cross-site Scripting (XSS)
  * Antiforgery
  * Overposting
  * HTML Sanitization
  * SQL Injection
  * SSL
+ * ReCaptcha
  * Browser Update
  
  ### GDPR
 
 ## Functionality 
 ### Logged in Users
- - Slide through recent share classes
- - Consult libraries and agreements
- - Consult particular view - sub entities, timeseries, documents, agreements, timelines, fees
- - View active and unactive entities
- - Consult NAV reports
+ - [Manage Account](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/ManageAccount.png)
+ - Consult libraries - 
+   [Fund](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/FundLibrary.png)
+ , [Sub Fund](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/SubFundLibrary.png)
+ , [Share Class](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/ShareClassLibrary.png)
+ , [Agreements](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/AgreementsLibrary.png)
+ - Consult particular view - [Sub entities and their connections](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/DetailFundView.png), 
+ [Time Series](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/TimeSeries.png), 
+ [Documents](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Documents.png), 
+ [Agreements](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Agreements.png), 
+ [Timelines](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Timelines.png), 
+ Fees
+ - Manage tool menu - 
+  [Layout](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/ToolMenu/Layout.png),
+ [Toogle inactive entities](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/ToolMenu/Inactive.png),
+ [Update timeline by date](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/ToolMenu/UpdateDate.png)
+
+  - Extract view tables as [PDF](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/Extraction/Funds.pdf) 
+ and [Excel](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/Extraction/Funds.xlsx)
+ - Consult AuM NAV [Fund](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/FundReports.png) / [Sub Fund](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/SubFundReports.png) and Time Series reports
  - Update views by chosen date
  - Choose and sort header columns for large table views
- - Perform a global share class search
- - Extract view tables as PDF and Excel
- - Two language support - English and Italian
+ - Perform a global [share class search](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/SearchView.png)
+  - Slide through recent share classes
+ - Two language support - English and [Italian](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/UserPanelItalian.png)
  ### Users in role "Legal"
   - All the functionalities of logged in user
-  - Upload and delete documents, agreements and fees
-  - Create/edit fund
+  - Upload
+   [document](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/UploadDocument.png),
+   [agreement](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/UploadAgreement.png) and
+   fees
+ -  Delete document, agreement
+  - [Create Entity](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Create.png)
+  / [Official Update](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/OffUpdate.png)
  ### Administrators
  - All the functionalities of legal user
  - Create, edit and delete user
@@ -109,24 +137,21 @@ https://pharusdatagate.com <br />
   [Report Processor](https://github.com/PhilShishov/ReportProcessor) - .NET Core application running on SFTP Server.  </br>
 
 The main function is automatic feeding of data into an internal database by the Fund Admin (Asset under management, Subscription, Redeption, Net asset value, Fee)
-![Data-Manipulation-Layer](Documentation/Resources/Data-Manipulation-Layer.JPG)
+![Data-Manipulation-Layer](Documentation/Presentation/Data-Manipulation-Layer.JPG)
 
 ## Documentation
-You can read the documentation [here]().
-Videos about the platform:
-* [Presentation of DataGate]()
-* [DataGate guide]()
-* [Legal users guide]()
-* [Adminstrators guide]()
-* [Create/edit a fund]()
-* [Upload a document or agreement]()
-* [Add agreement fees ]()
 
-![Application-Architecture](Documentation/Resources/Application-Architecture.JPG)
-![Application-Structure](Documentation/Resources/Application-Structure.JPG)
-![ResponsiveDesign](Documentation/Resources/ResponsiveDesign.JPG)
+[Code Metrics Processor](https://github.com/PhilShishov/DataGate/blob/master/Documentation/DataGate_CodeMetricsAnalyzis_20200720.xlsx)
+
+[Responsive Web Design](https://github.com/PhilShishov/DataGate/tree/master/Documentation/Screenshots/App/Responsive)
+
+
+![Application-Architecture](Documentation/Presentation/Application-Architecture.JPG)
+![Application-Structure](Documentation/Presentation/Application-Structure.JPG)
   
   ## History
+**2020-10-30** Updated to ASP.NET Core 3.1.9
+  
 **2020-10-12** SFTP Data Manipulation Layer - [Report Processor](https://github.com/PhilShishov/ReportProcessor)
 
 **2020-09-02** Updated to ASP.NET Core 3.1.7
