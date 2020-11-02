@@ -61,7 +61,16 @@ https://pharusdatagate.com <br />
 * Code review, StyleCop
 
 ### Database 
-* MSSQL Server, mylittleadmin - Diagrams
+* MSSQL Server, mylittleadmin
+* Diagrams -
+[Funds](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/DB-Diagrams/Funds.png),
+[Sub Funds](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/DB-Diagrams/SubFunds.png),
+[Share Classes](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/DB-Diagrams/ShareClasses.png),
+[Fund Sub Fund Connection](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/DB-Diagrams/FundSubFundConnection.png),
+[Sub Fund Share Class Connection](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/DB-Diagrams/SubFundShareClassConnection.png),
+[Agreements](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/DB-Diagrams/Agreements.png),
+[Documents](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/DB-Diagrams/Documents.png),
+[Time Series](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/DB-Diagrams/TimeSeries.png)
 * Entity Framework Core 3.1, Scaffold, LINQ
 
 ### Backend
