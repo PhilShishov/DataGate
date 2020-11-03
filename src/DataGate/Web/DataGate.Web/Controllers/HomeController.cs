@@ -12,7 +12,7 @@
         {
             if (this.User.Identity.IsAuthenticated)
             {
-                return this.Redirect(GlobalConstants.Slash + GlobalConstants.UserPanelUrl);
+                return this.Redirect(EndpointsConstants.Slash + EndpointsConstants.UserPanelUrl);
             }
 
             return this.View();

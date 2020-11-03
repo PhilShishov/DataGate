@@ -3,8 +3,8 @@
 @{
     ViewData["Title"] = SharedLocalizer.GetHtmlString("Search Results");
     IRequestCultureFeature currentCulture = Context.Features.Get<IRequestCultureFeature>();
-    var targetArea = GlobalConstants.ShareClassAreaName;
-    var targetRoute = GlobalConstants.ShareClassDetailsRouteName;
+    var targetArea = EndpointsConstants.ShareClassAreaName;
+    var targetRoute = EndpointsConstants.ShareClassDetailsRouteName;
 }
 
 <div class="table-search-wrapper">

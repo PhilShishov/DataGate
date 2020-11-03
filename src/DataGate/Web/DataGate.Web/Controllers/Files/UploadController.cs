@@ -111,7 +111,7 @@
             {
                 return this.ShowInfo(
                 this.sharedLocalizer.GetHtmlString(InfoMessages.FileUploaded),
-                GlobalConstants.RouteNameFees,
+                EndpointsConstants.RouteNameFees,
                 new
                 {
                     fileId = dto.FileId,

@@ -118,15 +118,15 @@
         {
             int fileType = 0;
 
-            if (area == GlobalConstants.FundAreaName)
+            if (area == EndpointsConstants.FundAreaName)
             {
                 fileType = SqlFunctionDictionary.FundFileType;
             }
-            else if (area == GlobalConstants.SubFundAreaName)
+            else if (area == EndpointsConstants.SubFundAreaName)
             {
                 fileType = SqlFunctionDictionary.SubFundFileType;
             }
-            else if (area == GlobalConstants.ShareClassAreaName)
+            else if (area == EndpointsConstants.ShareClassAreaName)
             {
                 fileType = SqlFunctionDictionary.ShareClassFileType;
             }

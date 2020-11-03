@@ -30,9 +30,9 @@
 
             this.ViewBag.Area = areaName;
             this.ViewBag.Route = StringSwapper.ByArea(areaName,
-                                                        GlobalConstants.FundDetailsRouteName,
-                                                        GlobalConstants.SubFundDetailsRouteName,
-                                                        GlobalConstants.ShareClassDetailsRouteName);
+                                                        EndpointsConstants.FundDetailsRouteName,
+                                                        EndpointsConstants.SubFundDetailsRouteName,
+                                                        EndpointsConstants.ShareClassDetailsRouteName);
 
             return this.PartialView("SpecificEntity/_Timeline", model);
         }

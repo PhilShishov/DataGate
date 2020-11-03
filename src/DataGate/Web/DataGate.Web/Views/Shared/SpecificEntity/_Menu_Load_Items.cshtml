@@ -1,14 +1,14 @@
 ﻿@{
     var controller = this.ViewContext.RouteData.Values["controller"].ToString();
 
-    var entityType = (controller == GlobalConstants.FundDetailsControllerName) ?
+    var entityType = (controller == EndpointsConstants.FundDetailsControllerName) ?
                         "Sub Funds" : "Shares";
 }
 
 <div class="w-60">
     <div>
         <div class="row">
-            @if (controller != GlobalConstants.ShareClassDetailsControllerName)
+            @if (controller != EndpointsConstants.ShareClassDetailsControllerName)
             {
                 <div class="column-add-info mb-2">
                     <div class="card-add-info">
@@ -17,7 +17,7 @@
                 </div>
             }
 
-            @if (controller != GlobalConstants.FundDetailsControllerName)
+            @if (controller != EndpointsConstants.FundDetailsControllerName)
             {
                 <div class="column-add-info">
                     <div class="card-add-info">

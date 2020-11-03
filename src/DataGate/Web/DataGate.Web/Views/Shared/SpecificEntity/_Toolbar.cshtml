@@ -1,29 +1,29 @@
 ﻿@model SpecificEntityViewModel
 @{
-    var controller = this.ViewContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
+    var controller = this.ViewContext.RouteData.Values[EndpointsConstants.ControllerRouteDataValue].ToString();
 
     var routeEdit = StringSwapper.ByController(controller,
-                                               GlobalConstants.FundEditRouteName,
-                                               GlobalConstants.SubFundEditRouteName,
-                                               GlobalConstants.ShareClassEditRouteName);
+                                               EndpointsConstants.FundEditRouteName,
+                                               EndpointsConstants.SubFundEditRouteName,
+                                               EndpointsConstants.ShareClassEditRouteName);
 
     var routeAll = StringSwapper.ByController(controller,
-                                               @GlobalConstants.DisplayAll + @GlobalConstants.FundsControllerName,
-                                               GlobalConstants.AllSubFundsRouteName,
-                                               GlobalConstants.AllShareClassesRouteName);
+                                               EndpointsConstants.DisplayAll + EndpointsConstants.FundsControllerName,
+                                               EndpointsConstants.AllSubFundsRouteName,
+                                               EndpointsConstants.AllShareClassesRouteName);
     var routeContainer = StringSwapper.ByController(controller,
                                                     string.Empty,
-                                                    GlobalConstants.FundDetailsRouteName,
-                                                    GlobalConstants.SubFundDetailsRouteName);
+                                                    EndpointsConstants.FundDetailsRouteName,
+                                                    EndpointsConstants.SubFundDetailsRouteName);
 
     var areaName = StringSwapper.ByController(controller,
                                               string.Empty,
-                                              GlobalConstants.FundAreaName,
-                                              GlobalConstants.SubFundAreaName);
+                                              EndpointsConstants.FundAreaName,
+                                              EndpointsConstants.SubFundAreaName);
 }
 
 <div class="mx-auto mb-5">
-    @if (controller == GlobalConstants.FundDetailsControllerName)
+    @if (controller == EndpointsConstants.FundDetailsControllerName)
     {
         <div class="div-entity-container-wrapper"></div>
     }

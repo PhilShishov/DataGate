@@ -61,13 +61,13 @@
             <hr class="mt-1 mb-0" />
         </div>
 
-        <h2 class="text-center title-responsive">@GlobalConstants.FundAreaName @SharedLocalizer.GetHtmlString("Reports")</h2>
+        <h2 class="text-center title-responsive">@EndpointsConstants.FundAreaName @SharedLocalizer.GetHtmlString("Reports")</h2>
 
         <form id="form-report" method="post">
             <div class="table-responsive mx-auto">
                 <table class="table table-bordered table-hover tbl-reports table-view-pharus table-striped w-100" id="table-to-extract">
 
-                    @if (Model.SelectedType == GlobalConstants.FundAreaName)
+                    @if (Model.SelectedType == EndpointsConstants.FundAreaName)
                     {
                         <thead>
                             <tr>
@@ -89,7 +89,7 @@
                                         if (Model.Headers.ToList()[col] == "NAME")
                                         {
                                             <td class="p-1 td-name-link">
-                                                <a asp-area="@GlobalConstants.FundAreaName" asp-route="@GlobalConstants.FundDetailsRouteName" asp-route-id="@entityId" asp-route-date="@date">
+                                                <a asp-area="@EndpointsConstants.FundAreaName" asp-route="@EndpointsConstants.FundDetailsRouteName" asp-route-id="@entityId" asp-route-date="@date">
                                                     @Model.Values[row][col]
                                                 </a>
                                             </td>
@@ -127,7 +127,7 @@
                             </tr>
                         </tfoot>
                     }
-                    else if (Model.SelectedType == GlobalConstants.SubFundAreaName)
+                    else if (Model.SelectedType == EndpointsConstants.SubFundAreaName)
                     {
                         <thead>
                             <tr>
@@ -149,8 +149,8 @@
                                         if (Model.Headers.ToList()[col] == "Fund Name")
                                         {
                                             <td class="p-1 td-name-link">
-                                                <a asp-area="@GlobalConstants.FundAreaName"
-                                                   asp-route="@GlobalConstants.FundDetailsRouteName"
+                                                <a asp-area="@EndpointsConstants.FundAreaName"
+                                                   asp-route="@EndpointsConstants.FundDetailsRouteName"
                                                    asp-route-id="@Model.Values[row][7]"
                                                    asp-route-date="@date">
                                                     @Model.Values[row][col]
@@ -160,8 +160,8 @@
                                         else if (Model.Headers.ToList()[col] == "SubFund Name")
                                         {
                                             <td class="p-1 td-name-link">
-                                                <a asp-area="@GlobalConstants.SubFundAreaName"
-                                                   asp-route="@GlobalConstants.SubFundDetailsRouteName"
+                                                <a asp-area="@EndpointsConstants.SubFundAreaName"
+                                                   asp-route="@EndpointsConstants.SubFundDetailsRouteName"
                                                    asp-route-id="@Model.Values[row][8]"
                                                    asp-route-date="@date">
                                                     @Model.Values[row][col]

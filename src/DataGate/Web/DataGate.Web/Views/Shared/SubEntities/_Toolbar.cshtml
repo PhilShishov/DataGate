@@ -3,13 +3,13 @@
 @{
     var controller = this.ViewContext
         .RouteData
-        .Values[GlobalConstants.ControllerRouteDataValue]
+        .Values[EndpointsConstants.ControllerRouteDataValue]
         .ToString();
 
     var containerRoute = StringSwapper.ByController(
                                                 controller,
-                                                GlobalConstants.FundDetailsRouteName,
-                                                GlobalConstants.SubFundDetailsRouteName,
+                                                EndpointsConstants.FundDetailsRouteName,
+                                                EndpointsConstants.SubFundDetailsRouteName,
                                                 string.Empty);
 }
 

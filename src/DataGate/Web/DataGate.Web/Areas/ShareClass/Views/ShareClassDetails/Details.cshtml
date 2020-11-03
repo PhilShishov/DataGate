@@ -40,8 +40,8 @@
         //
         // Manage document and agreement upload modals
         const jsonUpload = {
-            areaName: '@GlobalConstants.ShareClassAreaName',
-            routeName: '@GlobalConstants.ShareClassDetailsRouteName',
+            areaName: '@EndpointsConstants.ShareClassAreaName',
+            routeName: '@EndpointsConstants.ShareClassDetailsRouteName',
             id: @Model.Id,
             date: '@Model.Date',
             startConnection : '@Model.StartConnection',
@@ -56,7 +56,7 @@
         const url = '/loadSubFunds';
         const jsonAddInfo = {
             id: @Model.Id,
-            areaName: '@GlobalConstants.ShareClassAreaName',
+            areaName: '@EndpointsConstants.ShareClassAreaName',
             date: '@Model.Date',
             container: '@entityName',
         };

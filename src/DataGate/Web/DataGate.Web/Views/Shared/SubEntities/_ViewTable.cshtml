@@ -3,17 +3,17 @@
 @{
     var controller = this.ViewContext
         .RouteData
-        .Values[GlobalConstants.ControllerRouteDataValue]
+        .Values[EndpointsConstants.ControllerRouteDataValue]
         .ToString();
 
     var targetRoute = StringSwapper.ByController(controller,
-                                                 GlobalConstants.SubFundDetailsRouteName,
-                                                 GlobalConstants.ShareClassDetailsRouteName,
+                                                 EndpointsConstants.SubFundDetailsRouteName,
+                                                 EndpointsConstants.ShareClassDetailsRouteName,
                                                  string.Empty);
 
     var targetArea = StringSwapper.ByController(controller,
-                                                GlobalConstants.SubFundAreaName,
-                                                GlobalConstants.ShareClassAreaName,
+                                                EndpointsConstants.SubFundAreaName,
+                                                EndpointsConstants.ShareClassAreaName,
                                                 string.Empty);
 
     var entityId = string.Empty;
