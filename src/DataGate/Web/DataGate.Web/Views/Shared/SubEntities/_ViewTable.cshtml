@@ -7,12 +7,12 @@
         .ToString();
 
     var targetRoute = StringSwapper.ByController(controller,
-                                                 EndpointsConstants.SubFundDetailsRouteName,
-                                                 EndpointsConstants.ShareClassDetailsRouteName,
+                                                 EndpointsConstants.RouteDetails + EndpointsConstants.DisplaySub + EndpointsConstants.FundArea,
+                                                 EndpointsConstants.RouteDetails + EndpointsConstants.ShareClassArea,
                                                  string.Empty);
 
     var targetArea = StringSwapper.ByController(controller,
-                                                EndpointsConstants.DisplaySub@EndpointsConstants.FundArea,
+                                                EndpointsConstants.DisplaySub + EndpointsConstants.FundArea,
                                                 EndpointsConstants.ShareClassArea,
                                                 string.Empty);
 

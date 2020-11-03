@@ -77,7 +77,7 @@
             if (viewModel.Command == GlobalConstants.CommandUpdateTable)
             {
                 return this.RedirectToRoute(
-                   EndpointsConstants.FundDetailsRouteName,
+                   EndpointsConstants.RouteDetails + EndpointsConstants.FundArea,
                    new { viewModel.Id, viewModel.Date, viewModel.Container });
             }
 

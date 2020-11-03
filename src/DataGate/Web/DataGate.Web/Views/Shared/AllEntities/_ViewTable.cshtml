@@ -6,9 +6,9 @@
         .Values[EndpointsConstants.ControllerRouteDataValue]
         .ToString();
     var routeDetails = StringSwapper.ByController(controller,
-                                                  EndpointsConstants.FundDetailsRouteName,
-                                                  EndpointsConstants.SubFundDetailsRouteName,
-                                                  EndpointsConstants.ShareClassDetailsRouteName);
+                                                  EndpointsConstants.RouteDetails + EndpointsConstants.FundArea,
+                                                  EndpointsConstants.RouteDetails + EndpointsConstants.DisplaySub + EndpointsConstants.FundArea,
+                                                  EndpointsConstants.RouteDetails + EndpointsConstants.ShareClassArea);
 
     var entityAbr = StringSwapper.ByController(controller,
                                             EndpointsConstants.FundAbbreviation,

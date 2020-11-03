@@ -80,14 +80,14 @@
                           pattern: "f/edit/{id:int:min(1)}/{date:required}",
                           new { area = "Admin", controller = "FundStorage", action = "Edit" });
                     endpoints.MapAreaControllerRoute(
-                           name: EndpointsConstants.DisplayAll + EndpointsConstants.FundsController,
+                           name: EndpointsConstants.RouteAll + EndpointsConstants.FundsController,
                            areaName: EndpointsConstants.FundArea,
                            pattern: EndpointsConstants.FundsController.ToLower(),
                            new { area = EndpointsConstants.FundArea, 
                                  controller = EndpointsConstants.FundsController, 
                                  action = EndpointsConstants.ActionAll });
                     endpoints.MapAreaControllerRoute(
-                           name: EndpointsConstants.DisplayDetails + EndpointsConstants.FundArea,
+                           name: EndpointsConstants.RouteDetails + EndpointsConstants.FundArea,
                            areaName: EndpointsConstants.FundArea,
                            pattern: "f/{id:int:min(1)}/{date:required}",
                            new { area = EndpointsConstants.FundArea, 

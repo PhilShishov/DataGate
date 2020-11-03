@@ -106,7 +106,7 @@
                         return this.Page();
                     }
 
-                    return this.Redirect(EndpointsConstants.Slash + EndpointsConstants.UserPanelUrl);
+                    return this.Redirect(EndpointsConstants.Slash + EndpointsConstants.RouteUserPanel);
                 }
 
                 if (await this.userManager.IsEmailConfirmedAsync(user) == false)

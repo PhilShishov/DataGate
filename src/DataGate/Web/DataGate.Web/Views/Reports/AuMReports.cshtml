@@ -67,7 +67,7 @@
             <div class="table-responsive mx-auto">
                 <table class="table table-bordered table-hover tbl-reports table-view-pharus table-striped w-100" id="table-to-extract">
 
-                    @if (Model.SelectedType == EndpointsConstants.FundAreaName)
+                    @if (Model.SelectedType == EndpointsConstants.FundArea)
                     {
                         <thead>
                             <tr>
@@ -89,7 +89,7 @@
                                         if (Model.Headers.ToList()[col] == "NAME")
                                         {
                                             <td class="p-1 td-name-link">
-                                                <a asp-area="@EndpointsConstants.FundArea" asp-route="@EndpointsConstants.FundDetailsRouteName" asp-route-id="@entityId" asp-route-date="@date">
+                                                <a asp-area="@EndpointsConstants.FundArea" asp-route="@EndpointsConstants.RouteDetails@EndpointsConstants.FundArea" asp-route-id="@entityId" asp-route-date="@date">
                                                     @Model.Values[row][col]
                                                 </a>
                                             </td>
@@ -127,7 +127,7 @@
                             </tr>
                         </tfoot>
                     }
-                    else if (Model.SelectedType == EndpointsConstants.DisplaySub@EndpointsConstants.FundArea)
+                    else if (Model.SelectedType == EndpointsConstants.DisplaySub + EndpointsConstants.FundArea)
                     {
                         <thead>
                             <tr>
@@ -150,7 +150,7 @@
                                         {
                                             <td class="p-1 td-name-link">
                                                 <a asp-area="@EndpointsConstants.FundArea"
-                                                   asp-route="@EndpointsConstants.FundDetailsRouteName"
+                                                   asp-route="@EndpointsConstants.RouteDetails@EndpointsConstants.FundArea"
                                                    asp-route-id="@Model.Values[row][7]"
                                                    asp-route-date="@date">
                                                     @Model.Values[row][col]
@@ -161,7 +161,7 @@
                                         {
                                             <td class="p-1 td-name-link">
                                                 <a asp-area="@EndpointsConstants.DisplaySub@EndpointsConstants.FundArea"
-                                                   asp-route="@EndpointsConstants.SubFundDetailsRouteName"
+                                                   asp-route="@EndpointsConstants.RouteDetails@EndpointsConstants.DisplaySub@EndpointsConstants.FundArea"
                                                    asp-route-id="@Model.Values[row][8]"
                                                    asp-route-date="@date">
                                                     @Model.Values[row][col]

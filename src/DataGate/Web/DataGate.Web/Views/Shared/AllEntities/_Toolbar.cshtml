@@ -6,9 +6,9 @@
         .Values[EndpointsConstants.ControllerRouteDataValue]
         .ToString();
     var routeCreate = StringSwapper.ByController(controller,
-                                                 EndpointsConstants.FundCreateRouteName,
-                                                 EndpointsConstants.SubFundCreateRouteName,
-                                                 EndpointsConstants.ShareClassCreateRouteName);
+                                                 EndpointsConstants.RouteCreate + EndpointsConstants.FundArea,
+                                                 EndpointsConstants.RouteCreate + EndpointsConstants.DisplaySub + EndpointsConstants.FundArea,
+                                                 EndpointsConstants.RouteCreate + EndpointsConstants.ShareClassArea);
 }
 
 <form class="d-flex"

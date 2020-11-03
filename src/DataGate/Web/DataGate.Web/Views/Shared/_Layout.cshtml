@@ -59,23 +59,34 @@
                 <div class="w-50">
                     <div class="header-pharus-app-navbar d-flex">
                         <div class="mx-2 mt-2">
-                            <a asp-area="" asp-route="userpanel">
+                            <a asp-area=""
+                               asp-route="@EndpointsConstants.RouteUserPanel">
                                 <img src="~/images/Logo_Pharus_small.jpg" class="img-home-redirect" alt="Pharus Management">
                             </a>
                         </div>
 
                         <div class="d-flex align-items-center mt-2">
                             <div class="ml-2 mobile-none">
-                                <a asp-area="Fund" asp-route="allFunds">@SharedLocalizer.GetHtmlString("Fund Library")</a>
+                                <a asp-area="@EndpointsConstants.FundArea"
+                                   asp-route="@EndpointsConstants.RouteAll@EndpointsConstants.FundsController">
+                                    @SharedLocalizer.GetHtmlString("Fund Library")
+                                </a>
                             </div>
                             <div class="ml-2 mobile-none">
-                                <a asp-area="SubFund" asp-route="allSubFunds">@SharedLocalizer.GetHtmlString("Sub Fund Library")</a>
+                                <a asp-area="@EndpointsConstants.DisplaySub@EndpointsConstants.FundArea"
+                                   asp-route="@EndpointsConstants.RouteAll@EndpointsConstants.DisplaySub@EndpointsConstants.FundsController">
+                                    @SharedLocalizer.GetHtmlString("Sub Fund Library")
+                                </a>
                             </div>
                             <div class="ml-2 mobile-none">
-                                <a asp-area="ShareClass" asp-route="allShareClasses">@SharedLocalizer.GetHtmlString("Share Class Library")</a>
+                                <a asp-area="@EndpointsConstants.ShareClassArea"
+                                   asp-route="@EndpointsConstants.RouteAll@EndpointsConstants.ShareClassesController">
+                                    @SharedLocalizer.GetHtmlString("Share Class Library")
+                                </a>
                             </div>
                             <div class="ml-2 mobile-none">
-                                <a asp-area="" asp-route="allagreements">@SharedLocalizer.GetHtmlString("Agreements Library")</a>
+                                <a asp-area=""
+                                   asp-route="@EndpointsConstants.RouteAll@EndpointsConstants.RouteAgreements">@SharedLocalizer.GetHtmlString("Agreements Library")</a>
                             </div>
                         </div>
                     </div>
@@ -91,7 +102,7 @@
                         </button>
 
                         <div class="search-form-wrapper mr-5 d-none">
-                            <form class="w-100" method="get" asp-area="" asp-route="search-results">
+                            <form class="w-100" method="get" asp-area="" asp-route="@EndpointsConstants.RouteSearch">
                                 <div class="search-box-responsive">
                                     <input type="search"
                                            name="searchTerm"
@@ -113,7 +124,7 @@
                     </div>
 
                     <div class="search-box-wrapper mr-5">
-                        <form method="get" asp-area="" asp-route="search-results">
+                        <form method="get" asp-area="" asp-route="@EndpointsConstants.RouteSearch">
                             <div class="search-box">
                                 <input type="search"
                                        name="searchTerm"
@@ -141,7 +152,8 @@
                                 <ul>
                                     <li>
                                         <a asp-area=""
-                                           asp-route="reportoverview">@SharedLocalizer.GetHtmlString("Reports")</a>
+                                           asp-route="@EndpointsConstants.RouteReports">
+                                        @SharedLocalizer.GetHtmlString("Reports")</a>
                                     </li>
                                     <li>
                                         <a asp-area=""
@@ -150,13 +162,14 @@
                                     </li>
                                     <li>
                                         <a asp-area=""
-                                           asp-route="userpanel">
+                                           asp-route="@EndpointsConstants.RouteUserPanel">
                                             @SharedLocalizer.GetHtmlString("Panel")
                                         </a>
                                     </li>
 
                                     <li>
-                                        <a asp-area="Identity" asp-page="/Account/Manage/Email">@this.User.Identity.Name</a>
+                                        <a asp-area="@EndpointsConstants.IdentityAreaName" 
+                                           asp-page="/Account/Manage/Email">@this.User.Identity.Name</a>
                                     </li>
 
                                     <li class="wrapper-language-bar">
@@ -164,7 +177,8 @@
                                     </li>
 
                                     <li>
-                                        <a asp-area="Identity" asp-page="/Account/Logout">@SharedLocalizer.GetHtmlString("Logout")</a>
+                                        <a asp-area="@EndpointsConstants.IdentityAreaName" 
+                                           asp-page="/Account/Logout">@SharedLocalizer.GetHtmlString("Logout")</a>
                                     </li>
                                 </ul>
                             </div>
@@ -189,15 +203,15 @@
         <partial name="_BlockUIPanel" />
     }
 
-<environment include="Development">
-    <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
-    <script src="~/lib/chosen/chosen.jquery.js" asp-append-version="true"></script>
-    <script src="~/lib/datatables/js/jquery.dataTables.js" asp-append-version="true"></script>
-    <script src="~/lib/moment/min/moment.min.js" asp-append-version="true"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/navBar.js" asp-append-version="true"></script>
-</environment>
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
+        <script src="~/lib/chosen/chosen.jquery.js" asp-append-version="true"></script>
+        <script src="~/lib/datatables/js/jquery.dataTables.js" asp-append-version="true"></script>
+        <script src="~/lib/moment/min/moment.min.js" asp-append-version="true"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/navBar.js" asp-append-version="true"></script>
+    </environment>
 
     <environment include="Production, Staging">
         <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>

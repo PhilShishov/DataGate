@@ -58,13 +58,13 @@
             if (viewModel.Command == GlobalConstants.CommandUpdateTable)
             {
                 return this.RedirectToRoute(
-                   EndpointsConstants.SubFundDetailsRouteName,
+                   EndpointsConstants.RouteDetails + EndpointsConstants.DisplaySub + EndpointsConstants.FundArea,
                    new { viewModel.Id, viewModel.Date });
             }
 
             return this.ShowError(
                 this.sharedLocalizer.GetHtmlString(ErrorMessages.UnsuccessfulUpdate),
-                EndpointsConstants.SubFundDetailsRouteName,
+                EndpointsConstants.RouteDetails + EndpointsConstants.DisplaySub + EndpointsConstants.FundArea,
                 new { viewModel.Id, viewModel.Date });
         }
     }

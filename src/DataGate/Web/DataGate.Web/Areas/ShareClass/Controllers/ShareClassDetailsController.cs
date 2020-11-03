@@ -55,13 +55,13 @@
             if (viewModel.Command == GlobalConstants.CommandUpdateTable)
             {
                 return this.RedirectToRoute(
-                           EndpointsConstants.ShareClassDetailsRouteName,
+                           EndpointsConstants.RouteDetails + EndpointsConstants.ShareClassArea,
                            new { viewModel.Id, viewModel.Date });
             }
 
             return this.ShowError(
                   this.sharedLocalizer.GetHtmlString(ErrorMessages.UnsuccessfulUpdate),
-                  EndpointsConstants.ShareClassDetailsRouteName,
+                  EndpointsConstants.RouteDetails + EndpointsConstants.ShareClassArea,
                   new { viewModel.Id, viewModel.Date });
         }
     }

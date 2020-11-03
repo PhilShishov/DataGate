@@ -68,7 +68,7 @@
 
             return this.ShowInfo(
                 this.sharedLocalizer.GetHtmlString(InfoMessages.SuccessfulCreate),
-                EndpointsConstants.SubFundDetailsRouteName,
+                EndpointsConstants.RouteDetails + EndpointsConstants.DisplaySub + EndpointsConstants.FundArea,
                 new { area = EndpointsConstants.DisplaySub + EndpointsConstants.FundArea, id = subFundId, date = date });
         }
 
@@ -117,7 +117,7 @@
 
             return this.ShowInfo(
                 this.sharedLocalizer.GetHtmlString(InfoMessages.SuccessfulEdit),
-                EndpointsConstants.SubFundDetailsRouteName,
+                EndpointsConstants.RouteDetails + EndpointsConstants.DisplaySub + EndpointsConstants.FundArea,
                 new { area = EndpointsConstants.DisplaySub + EndpointsConstants.FundArea, id = subFundId, date = date });
         }
 

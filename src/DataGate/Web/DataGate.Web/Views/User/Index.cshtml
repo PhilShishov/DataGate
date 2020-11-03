@@ -23,7 +23,7 @@
                     <div class="carousel-card">
                         <h5 class="mt-5 mb-3">
                             <a asp-area="@EndpointsConstants.ShareClassArea"
-                               asp-route="@EndpointsConstants.ShareClassDetailsRouteName"
+                               asp-route="@EndpointsConstants.RouteDetails@EndpointsConstants.ShareClassArea"
                                asp-route-id="@item.ScId"
                                asp-route-date="@DateTimeParser.ToWebFormat(DateTime.UtcNow)">
                                 @item.ScOfficialShareClassName

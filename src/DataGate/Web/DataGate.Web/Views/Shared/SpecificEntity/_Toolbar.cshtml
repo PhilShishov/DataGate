@@ -3,27 +3,27 @@
     var controller = this.ViewContext.RouteData.Values[EndpointsConstants.ControllerRouteDataValue].ToString();
 
     var routeEdit = StringSwapper.ByController(controller,
-                                               EndpointsConstants.FundEditRouteName,
-                                               EndpointsConstants.SubFundEditRouteName,
-                                               EndpointsConstants.ShareClassEditRouteName);
+                                               EndpointsConstants.RouteEdit + EndpointsConstants.FundArea,
+                                               EndpointsConstants.RouteEdit + EndpointsConstants.DisplaySub + EndpointsConstants.FundArea,
+                                               EndpointsConstants.RouteEdit + EndpointsConstants.ShareClassArea);
 
     var routeAll = StringSwapper.ByController(controller,
-                                               EndpointsConstants.DisplayAll + EndpointsConstants.FundsControllerName,
-                                               EndpointsConstants.AllSubFundsRouteName,
-                                               EndpointsConstants.AllShareClassesRouteName);
+                                               EndpointsConstants.RouteAll + EndpointsConstants.FundsController,
+                                               EndpointsConstants.RouteAll + EndpointsConstants.DisplaySub + EndpointsConstants.FundsController,
+                                               EndpointsConstants.RouteAll + EndpointsConstants.ShareClassesController);
     var routeContainer = StringSwapper.ByController(controller,
                                                     string.Empty,
-                                                    EndpointsConstants.FundDetailsRouteName,
-                                                    EndpointsConstants.SubFundDetailsRouteName);
+                                                    EndpointsConstants.RouteDetails + EndpointsConstants.FundArea,
+                                                    EndpointsConstants.RouteDetails + EndpointsConstants.DisplaySub + EndpointsConstants.FundArea);
 
     var areaName = StringSwapper.ByController(controller,
                                               string.Empty,
-                                              EndpointsConstants.FundAreaName,
-                                              EndpointsConstants.DisplaySub@EndpointsConstants.FundArea);
+                                              EndpointsConstants.FundArea,
+                                              EndpointsConstants.DisplaySub + EndpointsConstants.FundArea);
 }
 
 <div class="mx-auto mb-5">
-    @if (controller == EndpointsConstants.FundAreaName + EndpointsConstants.ActionDetails)
+    @if (controller == EndpointsConstants.FundArea + EndpointsConstants.ActionDetails)
     {
         <div class="div-entity-container-wrapper"></div>
     }

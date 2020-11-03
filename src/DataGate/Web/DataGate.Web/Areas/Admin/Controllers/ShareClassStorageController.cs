@@ -68,7 +68,7 @@
 
             return this.ShowInfo(
                 this.sharedLocalizer.GetHtmlString(InfoMessages.SuccessfulCreate),
-                EndpointsConstants.ShareClassDetailsRouteName,
+                EndpointsConstants.RouteDetails + EndpointsConstants.ShareClassArea,
                 new { area = EndpointsConstants.ShareClassArea, id = subFundId, date = date });
         }
 
@@ -121,7 +121,7 @@
 
             return this.ShowInfo(
                 this.sharedLocalizer.GetHtmlString(InfoMessages.SuccessfulEdit),
-                EndpointsConstants.ShareClassDetailsRouteName,
+                EndpointsConstants.RouteDetails + EndpointsConstants.ShareClassArea,
                 new { area = EndpointsConstants.ShareClassArea, id = subFundId, date = date });
         }
 

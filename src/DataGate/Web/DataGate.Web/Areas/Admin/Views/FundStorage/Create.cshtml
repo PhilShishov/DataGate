@@ -160,7 +160,7 @@
 
             <div class="button-holder my-4">
                 <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
-                <a class="btn btn-pharus btn-lg" asp-area="@EndpointsConstants.FundArea" asp-route="@EndpointsConstants.DisplayAll@EndpointsConstants.FundsControllerName">
+                <a class="btn btn-pharus btn-lg" asp-area="@EndpointsConstants.FundArea" asp-route="@EndpointsConstants.RouteAll@EndpointsConstants.FundsController">
                     @SharedLocalizer.GetHtmlString("Back to List")
                 </a>
                 <button type="submit"
