@@ -231,12 +231,6 @@
   <data name="Close" xml:space="preserve">
     <value>Close</value>
   </data>
-  <data name="Column Choice" xml:space="preserve">
-    <value>Column Choice</value>
-  </data>
-  <data name="COLUMNS" xml:space="preserve">
-    <value>COLUMNS</value>
-  </data>
   <data name="commentTitleRequired" xml:space="preserve">
     <value>Comment title required</value>
   </data>
@@ -446,6 +440,9 @@
   </data>
   <data name="Last Login" xml:space="preserve">
     <value>Last Login</value>
+  </data>
+  <data name="Layout" xml:space="preserve">
+    <value>Layout</value>
   </data>
   <data name="Learn More" xml:space="preserve">
     <value>Learn More</value>

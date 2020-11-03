@@ -231,12 +231,6 @@
   <data name="Close" xml:space="preserve">
     <value>Chiudi</value>
   </data>
-  <data name="Column Choice" xml:space="preserve">
-    <value>Scegli colonna</value>
-  </data>
-  <data name="Columns" xml:space="preserve">
-    <value>Colonne</value>
-  </data>
   <data name="commentTitleRequired" xml:space="preserve">
     <value>Titolo del commento richiesto.</value>
   </data>
@@ -446,6 +440,9 @@
   </data>
   <data name="Last Login" xml:space="preserve">
     <value>Ultima connessione</value>
+  </data>
+  <data name="Layout" xml:space="preserve">
+    <value>Disposizione</value>
   </data>
   <data name="Learn More" xml:space="preserve">
     <value>Vedi di più</value>
