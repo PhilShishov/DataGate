@@ -63,7 +63,7 @@
             return this.ShowInfo(
                 this.sharedLocalizer.GetHtmlString(InfoMessages.SuccessfulCreate),
                 EndpointsConstants.FundDetailsRouteName,
-                new { area = EndpointsConstants.FundAreaName, id = fundId, date = date });
+                new { area = EndpointsConstants.FundArea, id = fundId, date = date });
         }
 
         [Route("f/edit/{id}/{date}")]
@@ -105,7 +105,7 @@
             return this.ShowInfo(
                 this.sharedLocalizer.GetHtmlString(InfoMessages.SuccessfulEdit),
                 EndpointsConstants.FundDetailsRouteName,
-                new { area = EndpointsConstants.FundAreaName, id = fundId, date = date });
+                new { area = EndpointsConstants.FundArea, id = fundId, date = date });
         }
 
         private void SetViewDataValues()

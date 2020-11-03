@@ -19,11 +19,11 @@
     var areaName = StringSwapper.ByController(controller,
                                               string.Empty,
                                               EndpointsConstants.FundAreaName,
-                                              EndpointsConstants.SubFundAreaName);
+                                              EndpointsConstants.DisplaySub@EndpointsConstants.FundArea);
 }
 
 <div class="mx-auto mb-5">
-    @if (controller == EndpointsConstants.FundDetailsControllerName)
+    @if (controller == EndpointsConstants.FundAreaName + EndpointsConstants.ActionDetails)
     {
         <div class="div-entity-container-wrapper"></div>
     }

@@ -15,7 +15,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    [Area(EndpointsConstants.ShareClassAreaName)]
+    [Area(EndpointsConstants.ShareClassArea)]
     [Authorize]
     public class ShareClassDetailsController : BaseController
     {

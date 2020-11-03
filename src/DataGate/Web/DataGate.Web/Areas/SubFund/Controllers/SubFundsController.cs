@@ -14,7 +14,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Routing;
 
-    [Area(EndpointsConstants.SubFundAreaName)]
+    [Area(EndpointsConstants.DisplaySub + EndpointsConstants.FundArea)]
     [Authorize]
     public class SubFundsController : BaseController
     {
@@ -49,8 +49,8 @@
 
             return this.ShowError(
                   this.sharedLocalizer.GetHtmlString(ErrorMessages.UnsuccessfulUpdate),
-                  EndpointsConstants.ActionNameAll,
-                  EndpointsConstants.SubFundsControllerName);
+                  EndpointsConstants.ActionAll,
+                  EndpointsConstants.DisplaySub + EndpointsConstants.FundsController);
         }
     }
 }

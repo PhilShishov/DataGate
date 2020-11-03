@@ -80,19 +80,19 @@
                           pattern: "f/edit/{id:int:min(1)}/{date:required}",
                           new { area = "Admin", controller = "FundStorage", action = "Edit" });
                     endpoints.MapAreaControllerRoute(
-                           name: EndpointsConstants.DisplayAll + EndpointsConstants.FundsControllerName,
-                           areaName: EndpointsConstants.FundAreaName,
-                           pattern: EndpointsConstants.FundsControllerName.ToLower(),
-                           new { area = EndpointsConstants.FundAreaName, 
-                                 controller = EndpointsConstants.FundsControllerName, 
-                                 action = EndpointsConstants.ActionNameAll });
+                           name: EndpointsConstants.DisplayAll + EndpointsConstants.FundsController,
+                           areaName: EndpointsConstants.FundArea,
+                           pattern: EndpointsConstants.FundsController.ToLower(),
+                           new { area = EndpointsConstants.FundArea, 
+                                 controller = EndpointsConstants.FundsController, 
+                                 action = EndpointsConstants.ActionAll });
                     endpoints.MapAreaControllerRoute(
-                           name: EndpointsConstants.DispayDetails + EndpointsConstants.FundAreaName,
-                           areaName: EndpointsConstants.FundAreaName,
+                           name: EndpointsConstants.DisplayDetails + EndpointsConstants.FundArea,
+                           areaName: EndpointsConstants.FundArea,
                            pattern: "f/{id:int:min(1)}/{date:required}",
-                           new { area = EndpointsConstants.FundAreaName, 
-                               controller = EndpointsConstants.FundAreaName + EndpointsConstants.ActionNameDetails, 
-                               action = EndpointsConstants.ActionNameDetails });
+                           new { area = EndpointsConstants.FundArea, 
+                               controller = EndpointsConstants.FundArea + EndpointsConstants.ActionDetails, 
+                               action = EndpointsConstants.ActionDetails });
                     endpoints.MapAreaControllerRoute(
                            name: "fundSubFunds",
                            areaName: "Fund",

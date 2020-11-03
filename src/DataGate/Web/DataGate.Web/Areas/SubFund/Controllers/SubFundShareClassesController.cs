@@ -16,7 +16,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    [Area(EndpointsConstants.SubFundAreaName)]
+    [Area(EndpointsConstants.DisplaySub + EndpointsConstants.FundArea)]
     [Authorize]
     public class SubFundShareClassesController : BaseController
     {

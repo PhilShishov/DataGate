@@ -56,7 +56,7 @@
                             SqlFunctionDictionary.ReportFunds,
                             SqlFunctionDictionary.ReportSubFunds,
                             null);
-            int day = (type == EndpointsConstants.FundAreaName) ?
+            int day = (type == EndpointsConstants.FundArea) ?
                 FixedDayNavValue :
                 DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month - 1);
             var date = new DateTime(DateTime.Today.Year, DateTime.Today.Month - 1, day);
@@ -83,7 +83,7 @@
                             SqlFunctionDictionary.ReportSubFunds,
                             null);
 
-            int day = (model.SelectedType == EndpointsConstants.FundAreaName) ?
+            int day = (model.SelectedType == EndpointsConstants.FundArea) ?
                 FixedDayNavValue :
                 DateTime.DaysInMonth(model.Date.Year, model.Date.Month);
             var date = new DateTime(model.Date.Year, model.Date.Month, day);
@@ -98,7 +98,7 @@
         [Route("reports/{type}/timeseries/{id?}")]
         public async Task<IActionResult> TSReports(string type, int? id)
         {
-            int typeIndex = (type == EndpointsConstants.SubFundAreaName) ?
+            int typeIndex = (type == EndpointsConstants.DisplaySub + EndpointsConstants.FundArea) ?
                       2 : 3;  
 
             this.SetViewDataValues(type, typeIndex);

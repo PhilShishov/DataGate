@@ -2,34 +2,20 @@
 {
     public class EndpointsConstants
     {
-
         // Controllers, areas
         public const string AdminAreaName = "Admin";
 
         public const string ControllerRouteDataValue = "controller";
-        public const string FundAreaName = "Fund";
-        public const string FundsControllerName = "Funds";
-        public const string FundDetailsControllerName = "FundDetails";
-        public const string FundSubFundsControllerName = "FundSubFunds";
+        public const string FundArea = "Fund";
+        public const string FundsController = "Funds";
 
-        public const string SubFundAreaName = "SubFund";
-        public const string SubFundsControllerName = "SubFunds";
-        public const string SubFundDetailsControllerName = "SubFundDetails";
-        public const string SubFundShareClassesControllerName = "SubFundShareClasses";
+        public const string ShareClassArea = "ShareClass";
+        public const string ShareClassesController = "ShareClasses";
 
-        public const string ShareClassAreaName = "ShareClass";
-        public const string ShareClassesControllerName = "ShareClasses";
-        public const string ShareClassDetailsControllerName = "ShareClassDetails";
-        public const string ShareClassesSubEntitiesControllerName = "ShareClassesSubEntities";
+        public const string SubFundShareClassesController = DisplaySub + FundArea + ShareClassesController;
 
-        public const string ContainerFundName = "FUND";
-        public const string ContainerSubFundName = "SUB FUND";
-        public const string FundNameDisplay = "Fund";
         public const string SubFundNameDisplay = "Sub Fund";
         public const string ShareClassNameDisplay = "Share Class";
-        public const string FundType = "fund";
-        public const string SubFundType = "subfund";
-        public const string ShareClassType = "shareclass";
 
         // Abbreviations
         public const string FundAbbreviation = "F";
@@ -39,13 +25,14 @@
         // Urls, actions
         public const string Slash = "/";
         public const string UserPanelUrl = "userpanel";
-        public const string ActionNameAll = "All";
-        public const string ActionNameDetails = "Details";
+        public const string ActionAll = "All";
+        public const string ActionDetails = "Details";
 
         // Routes names
-        public const string RouteNameFees = "fees";
+        public const string RouteFees = "fees";
+        public const string DisplaySub = "Sub";
         public const string DisplayAll = "all";
-        public const string DispayDetails = "details";
+        public const string DisplayDetails = "details";
 
         public const string FundDetailsRouteName = "detailsFund";
         public const string FundSubFundsRouteName = "fundSubFunds";

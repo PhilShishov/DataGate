@@ -36,15 +36,15 @@
 
             if (!input.Id.HasValue)
             {
-                if (input.ControllerToPass == EndpointsConstants.ShareClassesControllerName)
+                if (input.ControllerToPass == EndpointsConstants.ShareClassesController)
                 {
                     result = await AutoCompleteService.GetResult(input.SelectTerm, this.shareClassService);
                 }
-                else if (input.ControllerToPass == EndpointsConstants.SubFundsControllerName)
+                else if (input.ControllerToPass == EndpointsConstants.DisplaySub + EndpointsConstants.FundsController)
                 {
                     result = await AutoCompleteService.GetResult(input.SelectTerm, this.subFundService);
                 }
-                else if (input.ControllerToPass == EndpointsConstants.FundsControllerName)
+                else if (input.ControllerToPass == EndpointsConstants.FundsController)
                 {
                     result = await AutoCompleteService.GetResult(input.SelectTerm, this.fundService);
                 }
@@ -58,11 +58,11 @@
                 return this.Json(modifiedData);
             }
 
-            if (input.ControllerToPass == EndpointsConstants.SubFundShareClassesControllerName)
+            if (input.ControllerToPass == EndpointsConstants.SubFundShareClassesController)
             {
                 result = await AutoCompleteService.GetResult(input.SelectTerm, this.subFundService, input.Id);
             }
-            else if (input.ControllerToPass == EndpointsConstants.FundSubFundsControllerName)
+            else if (input.ControllerToPass == EndpointsConstants.FundArea + EndpointsConstants.DisplaySub + EndpointsConstants.FundsController)
             {
                 result = await AutoCompleteService.GetResult(input.SelectTerm, this.fundService, input.Id);
             }

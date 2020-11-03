@@ -32,7 +32,7 @@
                 if (isIsin)
                 {
                     var classId = this.service.ByIsin(searchTerm);
-                    return this.RedirectToRoute(EndpointsConstants.ShareClassDetailsRouteName, new { area = EndpointsConstants.ShareClassAreaName, id = classId, date = model.Date });
+                    return this.RedirectToRoute(EndpointsConstants.ShareClassDetailsRouteName, new { area = EndpointsConstants.ShareClassArea, id = classId, date = model.Date });
                 }
 
                 model.Results = this.service.ByName(searchTerm);

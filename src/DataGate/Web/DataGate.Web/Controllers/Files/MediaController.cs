@@ -95,7 +95,7 @@
                 }
             }
 
-            return this.RedirectToRoute(EndpointsConstants.DisplayAll + EndpointsConstants.FundsControllerName);
+            return this.RedirectToRoute(EndpointsConstants.DisplayAll + EndpointsConstants.FundsController);
         }
 
         [ValidateAntiForgeryToken]

@@ -41,7 +41,7 @@
         //
         // Manage document and agreement upload modals
         const jsonUpload = {
-            areaName: '@EndpointsConstants.SubFundAreaName',
+            areaName: '@EndpointsConstants.DisplaySub@EndpointsConstants.FundArea',
             routeName: '@EndpointsConstants.SubFundDetailsRouteName',
             id: @Model.Id,
             date: '@Model.Date',
@@ -57,7 +57,7 @@
         const url = '/loadShareClasses';
         const jsonAddInfo = {
             id: @Model.Id,
-            areaName: '@EndpointsConstants.SubFundAreaName',
+            areaName: '@EndpointsConstants.DisplaySub@EndpointsConstants.FundArea',
             date: '@Model.Date',
             container: '@entityName',
         };

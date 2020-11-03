@@ -12,19 +12,19 @@
         <div class="row mb-4">
             <div class="column">
                 <div class="card">
-                    <a asp-area="" asp-route="allreports" asp-route-type="@EndpointsConstants.FundAreaName">@SharedLocalizer.GetHtmlString("Fund Reports")</a>
+                    <a asp-area="" asp-route="allreports" asp-route-type="@EndpointsConstants.FundArea">@SharedLocalizer.GetHtmlString("Fund Reports")</a>
                 </div>
             </div>
 
             <div class="column">
                 <div class="card">
-                    <a asp-area="" asp-route="allreports" asp-route-type="@EndpointsConstants.SubFundAreaName">@SharedLocalizer.GetHtmlString("Sub Fund Reports")</a>
+                    <a asp-area="" asp-route="allreports" asp-route-type="@EndpointsConstants.DisplaySub@EndpointsConstants.FundArea">@SharedLocalizer.GetHtmlString("Sub Fund Reports")</a>
                 </div>
             </div>
 
             <div class="column">
                 <div class="card">
-                    <a asp-area="" asp-route="allreports" asp-route-type="@EndpointsConstants.ShareClassAreaName">@SharedLocalizer.GetHtmlString("Share Class Reports")</a>
+                    <a asp-area="" asp-route="allreports" asp-route-type="@EndpointsConstants.ShareClassArea">@SharedLocalizer.GetHtmlString("Share Class Reports")</a>
                 </div>
             </div>
         </div>

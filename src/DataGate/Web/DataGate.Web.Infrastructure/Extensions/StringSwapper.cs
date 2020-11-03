@@ -10,13 +10,13 @@
 
             switch (currentType.Replace(" ", string.Empty))
             {
-                case EndpointsConstants.FundAreaName:
+                case EndpointsConstants.FundArea:
                     result = fund;
                     break;
-                case EndpointsConstants.SubFundAreaName:
+                case EndpointsConstants.DisplaySub + EndpointsConstants.FundArea:
                     result = subFund;
                     break;
-                case EndpointsConstants.ShareClassAreaName:
+                case EndpointsConstants.ShareClassArea:
                     result = shareClass;
                     break;
             }
@@ -30,18 +30,18 @@
 
             switch (currentType.Replace(" ", string.Empty))
             {
-                case EndpointsConstants.FundsControllerName:
-                case EndpointsConstants.FundDetailsControllerName:
-                case EndpointsConstants.FundSubFundsControllerName:
+                case EndpointsConstants.FundsController:
+                case EndpointsConstants.FundArea + EndpointsConstants.ActionDetails:
+                case EndpointsConstants.FundArea + EndpointsConstants.DisplaySub + EndpointsConstants.FundsController:
                     result = fund;
                     break;
-                case EndpointsConstants.SubFundsControllerName:
-                case EndpointsConstants.SubFundDetailsControllerName:
-                case EndpointsConstants.SubFundShareClassesControllerName:
+                case EndpointsConstants.DisplaySub + EndpointsConstants.FundsController:
+                case EndpointsConstants.DisplaySub + EndpointsConstants.FundArea + EndpointsConstants.ActionDetails:
+                case EndpointsConstants.SubFundShareClassesController:
                     result = subFund;
                     break;
-                case EndpointsConstants.ShareClassesControllerName:
-                case EndpointsConstants.ShareClassDetailsControllerName:
+                case EndpointsConstants.ShareClassesController:
+                case EndpointsConstants.ShareClassArea + EndpointsConstants.ActionDetails:
                     result = shareClass;
                     break;
             }
