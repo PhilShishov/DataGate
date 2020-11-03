@@ -15,7 +15,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    [Area(GlobalConstants.FundAreaName)]
+    [Area(EndpointsConstants.FundAreaName)]
     [Authorize]
     public class FundDetailsController : BaseController
     {
@@ -55,13 +55,13 @@
             if (viewModel.Command == GlobalConstants.CommandUpdateTable)
             {
                 return this.RedirectToRoute(
-                           GlobalConstants.FundDetailsRouteName,
+                           EndpointsConstants.FundDetailsRouteName,
                            new { viewModel.Id, viewModel.Date });
             }
 
             return this.ShowError(
                   this.sharedLocalizer.GetHtmlString(ErrorMessages.UnsuccessfulUpdate),
-                  GlobalConstants.FundDetailsRouteName,
+                  EndpointsConstants.FundDetailsRouteName,
                   new { viewModel.Id, viewModel.Date });
         }
     }

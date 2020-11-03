@@ -10,13 +10,13 @@
 
             switch (currentType.Replace(" ", string.Empty))
             {
-                case GlobalConstants.FundAreaName:
+                case EndpointsConstants.FundAreaName:
                     result = fund;
                     break;
-                case GlobalConstants.SubFundAreaName:
+                case EndpointsConstants.SubFundAreaName:
                     result = subFund;
                     break;
-                case GlobalConstants.ShareClassAreaName:
+                case EndpointsConstants.ShareClassAreaName:
                     result = shareClass;
                     break;
             }
@@ -30,18 +30,18 @@
 
             switch (currentType.Replace(" ", string.Empty))
             {
-                case GlobalConstants.FundsControllerName:
-                case GlobalConstants.FundDetailsControllerName:
-                case GlobalConstants.FundSubFundsControllerName:
+                case EndpointsConstants.FundsControllerName:
+                case EndpointsConstants.FundDetailsControllerName:
+                case EndpointsConstants.FundSubFundsControllerName:
                     result = fund;
                     break;
-                case GlobalConstants.SubFundsControllerName:
-                case GlobalConstants.SubFundDetailsControllerName:
-                case GlobalConstants.SubFundShareClassesControllerName:
+                case EndpointsConstants.SubFundsControllerName:
+                case EndpointsConstants.SubFundDetailsControllerName:
+                case EndpointsConstants.SubFundShareClassesControllerName:
                     result = subFund;
                     break;
-                case GlobalConstants.ShareClassesControllerName:
-                case GlobalConstants.ShareClassDetailsControllerName:
+                case EndpointsConstants.ShareClassesControllerName:
+                case EndpointsConstants.ShareClassDetailsControllerName:
                     result = shareClass;
                     break;
             }

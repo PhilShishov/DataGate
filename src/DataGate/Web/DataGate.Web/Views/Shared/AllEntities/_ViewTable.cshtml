@@ -3,17 +3,17 @@
 @{
     var controller = this.ViewContext
         .RouteData
-        .Values[GlobalConstants.ControllerRouteDataValue]
+        .Values[EndpointsConstants.ControllerRouteDataValue]
         .ToString();
     var routeDetails = StringSwapper.ByController(controller,
-                                                  GlobalConstants.FundDetailsRouteName,
-                                                  GlobalConstants.SubFundDetailsRouteName,
-                                                  GlobalConstants.ShareClassDetailsRouteName);
+                                                  EndpointsConstants.FundDetailsRouteName,
+                                                  EndpointsConstants.SubFundDetailsRouteName,
+                                                  EndpointsConstants.ShareClassDetailsRouteName);
 
     var entityAbr = StringSwapper.ByController(controller,
-                                            GlobalConstants.FundAbbreviation,
-                                            GlobalConstants.SubFundAbbreviation,
-                                            GlobalConstants.ShareClassAbbreviation);
+                                            EndpointsConstants.FundAbbreviation,
+                                            EndpointsConstants.SubFundAbbreviation,
+                                            EndpointsConstants.ShareClassAbbreviation);
 
     var entityId = string.Empty;
 }

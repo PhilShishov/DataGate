@@ -16,7 +16,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    [Area(GlobalConstants.SubFundAreaName)]
+    [Area(EndpointsConstants.SubFundAreaName)]
     [Authorize]
     public class SubFundDetailsController : BaseController
     {
@@ -58,13 +58,13 @@
             if (viewModel.Command == GlobalConstants.CommandUpdateTable)
             {
                 return this.RedirectToRoute(
-                   GlobalConstants.SubFundDetailsRouteName,
+                   EndpointsConstants.SubFundDetailsRouteName,
                    new { viewModel.Id, viewModel.Date });
             }
 
             return this.ShowError(
                 this.sharedLocalizer.GetHtmlString(ErrorMessages.UnsuccessfulUpdate),
-                GlobalConstants.SubFundDetailsRouteName,
+                EndpointsConstants.SubFundDetailsRouteName,
                 new { viewModel.Id, viewModel.Date });
         }
     }

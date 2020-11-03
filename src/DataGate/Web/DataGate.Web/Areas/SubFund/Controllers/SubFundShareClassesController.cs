@@ -16,7 +16,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    [Area(GlobalConstants.SubFundAreaName)]
+    [Area(EndpointsConstants.SubFundAreaName)]
     [Authorize]
     public class SubFundShareClassesController : BaseController
     {
@@ -76,7 +76,7 @@
             if (viewModel.Command == GlobalConstants.CommandUpdateTable)
             {
                 return this.RedirectToRoute(
-                    GlobalConstants.SubFundShareClassesRouteName,
+                    EndpointsConstants.SubFundShareClassesRouteName,
                     new { viewModel.Id, viewModel.Date, viewModel.Container });
             }
 

@@ -14,7 +14,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Routing;
 
-    [Area(GlobalConstants.ShareClassAreaName)]
+    [Area(EndpointsConstants.ShareClassAreaName)]
     [Authorize]
     public class ShareClassesController : BaseController
     {
@@ -54,8 +54,8 @@
 
             return this.ShowError(
                   this.sharedLocalizer.GetHtmlString(ErrorMessages.UnsuccessfulUpdate),
-                  GlobalConstants.AllActionName,
-                  GlobalConstants.ShareClassesControllerName);
+                  EndpointsConstants.ActionNameAll,
+                  EndpointsConstants.ShareClassesControllerName);
         }
     }
 }

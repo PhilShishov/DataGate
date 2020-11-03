@@ -3,12 +3,12 @@
 @{
     var controller = this.ViewContext
         .RouteData
-        .Values[GlobalConstants.ControllerRouteDataValue]
+        .Values[EndpointsConstants.ControllerRouteDataValue]
         .ToString();
     var routeCreate = StringSwapper.ByController(controller,
-                                                 GlobalConstants.FundCreateRouteName,
-                                                 GlobalConstants.SubFundCreateRouteName,
-                                                 GlobalConstants.ShareClassCreateRouteName);
+                                                 EndpointsConstants.FundCreateRouteName,
+                                                 EndpointsConstants.SubFundCreateRouteName,
+                                                 EndpointsConstants.ShareClassCreateRouteName);
 }
 
 <form class="d-flex"

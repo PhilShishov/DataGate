@@ -16,20 +16,20 @@
         {
             if (this.User.Identity.IsAuthenticated)
             {
-                return this.Redirect(GlobalConstants.FundAllUrl);
+                return this.Redirect(GlobalConstants.Slash + GlobalConstants.FundsControllerName.ToLower());
             }
 
-            return this.Redirect(GlobalConstants.FundAllUrl);
+            return this.Redirect(GlobalConstants.Slash + GlobalConstants.FundsControllerName.ToLower());
         }
 
         public IActionResult OnPost(string returnUrl = null)
         {
             if (this.User.Identity.IsAuthenticated)
             {
-                return this.Redirect(GlobalConstants.FundAllUrl);
+                return this.Redirect(GlobalConstants.Slash + GlobalConstants.FundsControllerName.ToLower());
             }
 
-            return this.Redirect(GlobalConstants.FundAllUrl);
+            return this.Redirect(GlobalConstants.Slash + GlobalConstants.FundsControllerName.ToLower());
         }
     }
 }

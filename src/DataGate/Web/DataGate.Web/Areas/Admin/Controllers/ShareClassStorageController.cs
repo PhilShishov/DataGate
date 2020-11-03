@@ -68,8 +68,8 @@
 
             return this.ShowInfo(
                 this.sharedLocalizer.GetHtmlString(InfoMessages.SuccessfulCreate),
-                GlobalConstants.ShareClassDetailsRouteName,
-                new { area = GlobalConstants.ShareClassAreaName, id = subFundId, date = date });
+                EndpointsConstants.ShareClassDetailsRouteName,
+                new { area = EndpointsConstants.ShareClassAreaName, id = subFundId, date = date });
         }
 
         [Route("sc/edit/{id}/{date}")]
@@ -121,8 +121,8 @@
 
             return this.ShowInfo(
                 this.sharedLocalizer.GetHtmlString(InfoMessages.SuccessfulEdit),
-                GlobalConstants.ShareClassDetailsRouteName,
-                new { area = GlobalConstants.ShareClassAreaName, id = subFundId, date = date });
+                EndpointsConstants.ShareClassDetailsRouteName,
+                new { area = EndpointsConstants.ShareClassAreaName, id = subFundId, date = date });
         }
 
         private void SetViewDataValues()

@@ -206,18 +206,18 @@ namespace DataGate.Web.Utilities.Extract
 
             switch (controllerName)
             {
-                case GlobalConstants.FundsControllerName:
-                case GlobalConstants.FundNameDisplay:
+                case EndpointsConstants.FundsControllerName:
+                case EndpointsConstants.FundNameDisplay:
                     typeName = FundsNameDisplay;
                     break;
-                case GlobalConstants.SubFundsControllerName:
-                case GlobalConstants.FundSubFundsControllerName:
-                case GlobalConstants.SubFundNameDisplay:
+                case EndpointsConstants.SubFundsControllerName:
+                case EndpointsConstants.FundSubFundsControllerName:
+                case EndpointsConstants.SubFundNameDisplay:
                     typeName = SubFundsNameDisplay;
                     break;
-                case GlobalConstants.ShareClassesControllerName:
-                case GlobalConstants.SubFundShareClassesControllerName:
-                case GlobalConstants.ShareClassNameDisplay:
+                case EndpointsConstants.ShareClassesControllerName:
+                case EndpointsConstants.SubFundShareClassesControllerName:
+                case EndpointsConstants.ShareClassNameDisplay:
                     typeName = ShareClassesNameDisplay;
                     break;
             }

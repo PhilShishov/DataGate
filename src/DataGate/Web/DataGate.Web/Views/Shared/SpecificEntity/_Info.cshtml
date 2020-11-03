@@ -1,9 +1,9 @@
 ﻿@{
-    var controller = this.ViewContext.RouteData.Values[GlobalConstants.ControllerRouteDataValue].ToString();
+    var controller = this.ViewContext.RouteData.Values[EndpointsConstants.ControllerRouteDataValue].ToString();
 
     var entityType = StringSwapper.ByController(controller,
-                                               GlobalConstants.SubFundNameDisplay,
-                                               GlobalConstants.ShareClassNameDisplay,
+                                               EndpointsConstants.SubFundNameDisplay,
+                                               EndpointsConstants.ShareClassNameDisplay,
                                                string.Empty);
 }
 

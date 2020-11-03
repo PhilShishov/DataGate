@@ -1,5 +1,6 @@
 ﻿namespace DataGate.Web.Configuration
 {
+    using DataGate.Common;
     using Microsoft.AspNetCore.Builder;
 
     public static class EndpointsConfiguration
@@ -79,15 +80,19 @@
                           pattern: "f/edit/{id:int:min(1)}/{date:required}",
                           new { area = "Admin", controller = "FundStorage", action = "Edit" });
                     endpoints.MapAreaControllerRoute(
-                           name: "allFunds",
-                           areaName: "Fund",
-                           pattern: "funds",
-                           new { area = "Fund", controller = "Funds", action = "All" });
+                           name: GlobalConstants.DisplayAll + GlobalConstants.FundsControllerName,
+                           areaName: GlobalConstants.FundAreaName,
+                           pattern: GlobalConstants.FundsControllerName.ToLower(),
+                           new { area = GlobalConstants.FundAreaName, 
+                                 controller = GlobalConstants.FundsControllerName, 
+                                 action = GlobalConstants.ActionNameAll });
                     endpoints.MapAreaControllerRoute(
-                           name: "fundDetails",
-                           areaName: "Fund",
+                           name: GlobalConstants.DispayDetails + GlobalConstants.FundAreaName,
+                           areaName: GlobalConstants.FundAreaName,
                            pattern: "f/{id:int:min(1)}/{date:required}",
-                           new { area = "Fund", controller = "FundDetails", action = "Details" });
+                           new { area = GlobalConstants.FundAreaName, 
+                               controller = GlobalConstants.FundAreaName + GlobalConstants.ActionNameDetails, 
+                               action = GlobalConstants.ActionNameDetails });
                     endpoints.MapAreaControllerRoute(
                            name: "fundSubFunds",
                            areaName: "Fund",
@@ -111,7 +116,7 @@
                            pattern: "subfunds",
                            new { area = "SubFund", controller = "SubFunds", action = "All" });
                     endpoints.MapAreaControllerRoute(
-                           name: "subFundDetails",
+                           name: "detailsSubFund",
                            areaName: "SubFund",
                            pattern: "sf/{id:int:min(1)}/{date:required}",
                            new { area = "SubFund", controller = "SubFundDetails", action = "Details" });
@@ -138,7 +143,7 @@
                            pattern: "shareclasses",
                            new { area = "ShareClass", controller = "ShareClasses", action = "All" });
                     endpoints.MapAreaControllerRoute(
-                           name: "shareClassDetails",
+                           name: "detailsShareClass",
                            areaName: "ShareClass",
                            pattern: "sc/{id:int:min(1)}/{date:required}",
                            new { area = "ShareClass", controller = "ShareClassDetails", action = "Details" });

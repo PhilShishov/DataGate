@@ -22,14 +22,14 @@
         {
             var result = string.Empty;
 
-            if (area == GlobalConstants.SubFundAreaName)
+            if (area == EndpointsConstants.SubFundAreaName)
             {
                 result = await this.Context.TbHistorySubFund
                     .Where(sf => sf.SfId == id)
                     .Select(f => f.SfOfficialSubFundName)
                     .FirstOrDefaultAsync();
             }
-            else if (area == GlobalConstants.ShareClassAreaName)
+            else if (area == EndpointsConstants.ShareClassAreaName)
             {
                 result = await this.Context.TbHistoryShareClass
                    .Where(sf => sf.ScId == id)
@@ -44,11 +44,11 @@
         public ISet<string> GetAll(string area)
         {
             var result = new HashSet<string>();
-            if (area == GlobalConstants.SubFundAreaName)
+            if (area == EndpointsConstants.SubFundAreaName)
             {
                 result = this.Context.TbHistorySubFund.Select(f => f.SfOfficialSubFundName).ToHashSet();
             }
-            else if (area == GlobalConstants.ShareClassAreaName)
+            else if (area == EndpointsConstants.ShareClassAreaName)
             {
                 result = this.Context.TbHistoryShareClass.Select(f => f.ScOfficialShareClassName).ToHashSet();
             }

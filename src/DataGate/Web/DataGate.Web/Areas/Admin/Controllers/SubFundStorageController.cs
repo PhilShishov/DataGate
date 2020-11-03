@@ -68,8 +68,8 @@
 
             return this.ShowInfo(
                 this.sharedLocalizer.GetHtmlString(InfoMessages.SuccessfulCreate),
-                GlobalConstants.SubFundDetailsRouteName,
-                new { area = GlobalConstants.SubFundAreaName, id = subFundId, date = date });
+                EndpointsConstants.SubFundDetailsRouteName,
+                new { area = EndpointsConstants.SubFundAreaName, id = subFundId, date = date });
         }
 
         [Route("sf/edit/{id}/{date}")]
@@ -117,8 +117,8 @@
 
             return this.ShowInfo(
                 this.sharedLocalizer.GetHtmlString(InfoMessages.SuccessfulEdit),
-                GlobalConstants.SubFundDetailsRouteName,
-                new { area = GlobalConstants.SubFundAreaName, id = subFundId, date = date });
+                EndpointsConstants.SubFundDetailsRouteName,
+                new { area = EndpointsConstants.SubFundAreaName, id = subFundId, date = date });
         }
 
         private void SetViewDataValues()

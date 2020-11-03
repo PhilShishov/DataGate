@@ -15,7 +15,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    [Area(GlobalConstants.ShareClassAreaName)]
+    [Area(EndpointsConstants.ShareClassAreaName)]
     [Authorize]
     public class ShareClassDetailsController : BaseController
     {
@@ -55,13 +55,13 @@
             if (viewModel.Command == GlobalConstants.CommandUpdateTable)
             {
                 return this.RedirectToRoute(
-                           GlobalConstants.ShareClassDetailsRouteName,
+                           EndpointsConstants.ShareClassDetailsRouteName,
                            new { viewModel.Id, viewModel.Date });
             }
 
             return this.ShowError(
                   this.sharedLocalizer.GetHtmlString(ErrorMessages.UnsuccessfulUpdate),
-                  GlobalConstants.ShareClassDetailsRouteName,
+                  EndpointsConstants.ShareClassDetailsRouteName,
                   new { viewModel.Id, viewModel.Date });
         }
     }

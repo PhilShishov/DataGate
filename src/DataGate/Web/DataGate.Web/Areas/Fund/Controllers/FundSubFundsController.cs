@@ -16,7 +16,7 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
-    [Area(GlobalConstants.FundAreaName)]
+    [Area(EndpointsConstants.FundAreaName)]
     [Authorize]
     public class FundSubFundsController : BaseController
     {
@@ -77,7 +77,7 @@
             if (viewModel.Command == GlobalConstants.CommandUpdateTable)
             {
                 return this.RedirectToRoute(
-                   GlobalConstants.FundDetailsRouteName,
+                   EndpointsConstants.FundDetailsRouteName,
                    new { viewModel.Id, viewModel.Date, viewModel.Container });
             }
 
