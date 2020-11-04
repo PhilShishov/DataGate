@@ -34,9 +34,9 @@ namespace DataGate.Services.SqlClient
             this.configuration = config;
         }
 
-        //// ________________________________________________________
-        ////
-        //// Execute parameterized stored procedure
+        // ________________________________________________________
+        //
+        // Execute parameterized stored procedure
         public async Task ExecuteProcedure(SqlCommand command)
         {
             using (SqlConnection connection = new SqlConnection())

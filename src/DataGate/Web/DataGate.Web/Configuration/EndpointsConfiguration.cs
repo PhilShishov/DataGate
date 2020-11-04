@@ -10,144 +10,242 @@
             app.UseEndpoints(
                 endpoints =>
                 {
+                    // ________________________________________________________
+                    //
+                    // Endpoint names not globalized for readability
+
                     endpoints.MapControllerRoute(
                          name: "userpanel",
                          pattern: "userpanel",
                          new { controller = "User", action = "Index" });
 
+
                     endpoints.MapControllerRoute(
                          name: "privacy",
                          pattern: "privacy",
-                         new { controller = "Legal", action = "Privacy" });
+                         new { controller = EndpointsConstants.LegalController, action = "Privacy" });
+
                     endpoints.MapControllerRoute(
                           name: "cookie",
                           pattern: "cookie",
-                          new { controller = "Legal", action = "Cookie" });
+                          new { controller = EndpointsConstants.LegalController, action = "Cookie" });
+
                     endpoints.MapControllerRoute(
                           name: "conditions",
                           pattern: "conditions",
-                          new { controller = "Legal", action = "Conditions" });
+                          new { controller = EndpointsConstants.LegalController, action = "Conditions" });
 
+                    // ________________________________________________________
+                    //
                     // Media files
                     endpoints.MapControllerRoute(
                          name: "files",
                          pattern: "media/{name:minlength(5)}",
                          new { controller = "Media", action = "Read" });
+
                     endpoints.MapControllerRoute(
                          name: "fees",
                          pattern: "fees/{fileId}",
                          new { controller = "Fees", action = "Index" });
+
                     endpoints.MapControllerRoute(
                           name: "search-results",
                           pattern: "search-results",
                           new { controller = "Search", action = "Result" });
+
                     endpoints.MapControllerRoute(
                         name: "allagreements",
                         pattern: "allagreements",
-                        new { controller = "Agreements", action = "Overview" });
+                        new { controller = EndpointsConstants.AgreementsController, action = "Overview" });
+
                     endpoints.MapControllerRoute(
                        name: "agreements",
-                       pattern: "agreements/{type:required}",
-                       new { controller = "Agreements", action = "All" });
+                       pattern: $"agreements/{EndpointsConstants.RoutePropertyType}",
+                       new { controller = EndpointsConstants.AgreementsController, action = EndpointsConstants.ActionAll });
 
+                    // ________________________________________________________
+                    //
                     // Reports
                     endpoints.MapControllerRoute(
                       name: "reportoverview",
                       pattern: "reportoverview",
-                      new { controller = "Reports", action = "MainOverview" });
+                      new { controller = EndpointsConstants.ReportsController, action = "MainOverview" });
+
                     endpoints.MapControllerRoute(
                        name: "allreports",
-                       pattern: "reports/{type:required}",
-                       new { controller = "Reports", action = "SubOverview" });
+                       pattern: $"reports/{EndpointsConstants.RoutePropertyType}",
+                       new { controller = EndpointsConstants.ReportsController, action = "SubOverview" });
+
                     endpoints.MapControllerRoute(
                        name: "aumreports",
-                       pattern: "reports/{type:required}/aum",
-                       new { controller = "Reports", action = "AuMReports" });
+                       pattern: $"reports/{EndpointsConstants.RoutePropertyType}/aum",
+                       new { controller = EndpointsConstants.ReportsController, action = "AuMReports" });
+
                     endpoints.MapControllerRoute(
                      name: "timeseriesreports",
-                     pattern: "reports/{type:required}/timeseries/{id?}",
-                     new { controller = "Reports", action = "TSReports" });
+                     pattern: $"reports/{EndpointsConstants.RoutePropertyType}/timeseries/{EndpointsConstants.RoutePropertyIdNull}",
+                     new { controller = EndpointsConstants.ReportsController, action = "TSReports" });
 
+                    // ________________________________________________________
+                    //
                     // Funds
                     endpoints.MapAreaControllerRoute(
                           name: "newFund",
-                          areaName: "Admin",
+                          areaName: EndpointsConstants.AdminAreaName,
                           pattern: "f/new",
-                          new { area = "Admin", controller = "FundStorage", action = "Create" });
+                          new
+                          {
+                              area = EndpointsConstants.AdminAreaName,
+                              controller = EndpointsConstants.FundArea + EndpointsConstants.DisplayStorage,
+                              action = EndpointsConstants.ActionCreate
+                          });
+
                     endpoints.MapAreaControllerRoute(
                           name: "editFund",
-                          areaName: "Admin",
-                          pattern: "f/edit/{id:int:min(1)}/{date:required}",
-                          new { area = "Admin", controller = "FundStorage", action = "Edit" });
+                          areaName: EndpointsConstants.AdminAreaName,
+                          pattern: $"f/edit/{EndpointsConstants.RoutePropertyId}/{EndpointsConstants.RoutePropertyDate}",
+                          new
+                          {
+                              area = EndpointsConstants.AdminAreaName,
+                              controller = EndpointsConstants.FundArea + EndpointsConstants.DisplayStorage,
+                              action = EndpointsConstants.ActionEdit
+                          });
+
                     endpoints.MapAreaControllerRoute(
-                           name: EndpointsConstants.RouteAll + EndpointsConstants.FundsController,
+                           name: "allFunds",
                            areaName: EndpointsConstants.FundArea,
-                           pattern: EndpointsConstants.FundsController.ToLower(),
-                           new { area = EndpointsConstants.FundArea, 
-                                 controller = EndpointsConstants.FundsController, 
-                                 action = EndpointsConstants.ActionAll });
+                           pattern: "funds",
+                           new
+                           {
+                               area = EndpointsConstants.FundArea,
+                               controller = EndpointsConstants.FundsController,
+                               action = EndpointsConstants.ActionAll
+                           });
+
                     endpoints.MapAreaControllerRoute(
-                           name: EndpointsConstants.RouteDetails + EndpointsConstants.FundArea,
+                           name: "detailsFund",
                            areaName: EndpointsConstants.FundArea,
-                           pattern: "f/{id:int:min(1)}/{date:required}",
-                           new { area = EndpointsConstants.FundArea, 
-                               controller = EndpointsConstants.FundArea + EndpointsConstants.ActionDetails, 
-                               action = EndpointsConstants.ActionDetails });
+                           pattern: $"f/{EndpointsConstants.RoutePropertyId}/{EndpointsConstants.RoutePropertyDate}",
+                           new
+                           {
+                               area = EndpointsConstants.FundArea,
+                               controller = EndpointsConstants.FundArea + EndpointsConstants.ActionDetails,
+                               action = EndpointsConstants.ActionDetails
+                           });
+
                     endpoints.MapAreaControllerRoute(
                            name: "fundSubFunds",
-                           areaName: "Fund",
-                           pattern: "f/{id:int:min(1)}/sf",
-                           new { area = "Fund", controller = "FundSubFunds", action = "SubFunds" });
+                           areaName: EndpointsConstants.FundArea,
+                           pattern: $"f/{EndpointsConstants.RoutePropertyId}/sf",
+                           new { area = EndpointsConstants.FundArea, controller = "FundSubFunds", action = "SubFunds" });
 
+                    // ________________________________________________________
+                    //
                     // Sub Funds
                     endpoints.MapAreaControllerRoute(
                           name: "newSubFund",
-                          areaName: "Admin",
+                          areaName: EndpointsConstants.AdminAreaName,
                           pattern: "sf/new",
-                          new { area = "Admin", controller = "SubFundStorage", action = "Create" });
+                          new
+                          {
+                              area = EndpointsConstants.AdminAreaName,
+                              controller = EndpointsConstants.DisplaySub + EndpointsConstants.FundArea + EndpointsConstants.DisplayStorage,
+                              action = EndpointsConstants.ActionCreate
+                          });
+
                     endpoints.MapAreaControllerRoute(
                           name: "editSubFund",
-                          areaName: "Admin",
-                          pattern: "sf/edit/{id:int:min(1)}/{date:required}",
-                          new { area = "Admin", controller = "SubFundStorage", action = "Edit" });
+                          areaName: EndpointsConstants.AdminAreaName,
+                          pattern: $"sf/edit/{EndpointsConstants.RoutePropertyId}/{EndpointsConstants.RoutePropertyDate}",
+                          new
+                          {
+                              area = EndpointsConstants.AdminAreaName,
+                              controller = EndpointsConstants.DisplaySub + EndpointsConstants.FundArea + EndpointsConstants.DisplayStorage,
+                              action = EndpointsConstants.ActionEdit
+                          });
+
                     endpoints.MapAreaControllerRoute(
                            name: "allSubFunds",
-                           areaName: "SubFund",
+                           areaName: EndpointsConstants.DisplaySub + EndpointsConstants.FundArea,
                            pattern: "subfunds",
-                           new { area = "SubFund", controller = "SubFunds", action = "All" });
+                           new
+                           {
+                               area = EndpointsConstants.DisplaySub + EndpointsConstants.FundArea,
+                               controller = EndpointsConstants.DisplaySub + EndpointsConstants.FundsController,
+                               action = EndpointsConstants.ActionAll
+                           });
+
                     endpoints.MapAreaControllerRoute(
                            name: "detailsSubFund",
-                           areaName: "SubFund",
-                           pattern: "sf/{id:int:min(1)}/{date:required}",
-                           new { area = "SubFund", controller = "SubFundDetails", action = "Details" });
+                           areaName: EndpointsConstants.DisplaySub + EndpointsConstants.FundArea,
+                           pattern: $"sf/{EndpointsConstants.RoutePropertyId}/{EndpointsConstants.RoutePropertyDate}",
+                           new
+                           {
+                               area = EndpointsConstants.DisplaySub + EndpointsConstants.FundArea,
+                               controller = "SubFundDetails",
+                               action = EndpointsConstants.ActionDetails
+                           });
+
                     endpoints.MapAreaControllerRoute(
                            name: "subFundShareClasses",
-                           areaName: "SubFund",
-                           pattern: "sf/{id:int:min(1)}/sc",
-                           new { area = "SubFund", controller = "SubFundShareClasses", action = "ShareClasses" });
+                           areaName: EndpointsConstants.DisplaySub + EndpointsConstants.FundArea,
+                           pattern: $"sf/{EndpointsConstants.RoutePropertyId}/sc",
+                           new
+                           {
+                               area = EndpointsConstants.DisplaySub + EndpointsConstants.FundArea,
+                               controller = "SubFundShareClasses",
+                               action = "ShareClasses"
+                           });
 
+                    // ________________________________________________________
+                    //
                     // Share Classes
                     endpoints.MapAreaControllerRoute(
                           name: "newShareClass",
-                          areaName: "Admin",
+                          areaName: EndpointsConstants.AdminAreaName,
                           pattern: "sc/new",
-                          new { area = "Admin", controller = "ShareClassStorage", action = "Create" });
+                          new
+                          {
+                              area = EndpointsConstants.AdminAreaName,
+                              controller = EndpointsConstants.ShareClassArea + EndpointsConstants.DisplayStorage,
+                              action = EndpointsConstants.ActionCreate
+                          });
+
                     endpoints.MapAreaControllerRoute(
                           name: "editShareClass",
-                          areaName: "Admin",
-                          pattern: "sc/edit/{id:int:min(1)}/{date:required}",
-                          new { area = "Admin", controller = "ShareClassStorage", action = "Edit" });
+                          areaName: EndpointsConstants.AdminAreaName,
+                          pattern: $"sc/edit/{EndpointsConstants.RoutePropertyId}/{EndpointsConstants.RoutePropertyDate}",
+                          new
+                          {
+                              area = EndpointsConstants.AdminAreaName,
+                              controller = EndpointsConstants.ShareClassArea + EndpointsConstants.DisplayStorage,
+                              action = EndpointsConstants.ActionEdit
+                          });
+
                     endpoints.MapAreaControllerRoute(
                            name: "allShareClasses",
-                           areaName: "ShareClass",
+                           areaName: EndpointsConstants.ShareClassArea,
                            pattern: "shareclasses",
-                           new { area = "ShareClass", controller = "ShareClasses", action = "All" });
+                           new
+                           {
+                               area = EndpointsConstants.ShareClassArea,
+                               controller = EndpointsConstants.ShareClassesController,
+                               action = EndpointsConstants.ActionAll
+                           });
+
                     endpoints.MapAreaControllerRoute(
                            name: "detailsShareClass",
-                           areaName: "ShareClass",
-                           pattern: "sc/{id:int:min(1)}/{date:required}",
-                           new { area = "ShareClass", controller = "ShareClassDetails", action = "Details" });
+                           areaName: EndpointsConstants.ShareClassArea,
+                           pattern: $"sc/{EndpointsConstants.RoutePropertyId}/{EndpointsConstants.RoutePropertyDate}",
+                           new
+                           {
+                               area = EndpointsConstants.ShareClassArea,
+                               controller = EndpointsConstants.ShareClassArea + EndpointsConstants.ActionDetails,
+                               action = EndpointsConstants.ActionDetails
+                           });
 
+                    // ________________________________________________________
+                    //
                     // Default routing
                     endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                     endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
