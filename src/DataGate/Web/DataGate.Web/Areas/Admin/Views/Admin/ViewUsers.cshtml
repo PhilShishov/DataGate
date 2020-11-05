@@ -52,7 +52,8 @@
 @section Scripts{
     <script type="text/javascript" src="~/lib/moment/min/moment-with-locales.min.js" asp-append-version="true"></script>
     <script>
-        $(function () {
+        $(document).ready(function () {
+
             moment.locale("de");
             $("time").each(function (i, e) {
                 const dateTimeValue = $(e).attr("datetime");
@@ -63,6 +64,15 @@
                 const time = moment.utc(dateTimeValue).local();
                 $(e).html(time.format("DD.MM.YYYY HH:mm"));
                 $(e).attr("title", $(e).attr("datetime"));
+            });
+
+            $.fn.dataTable.moment('DD.MM.YYYY HH:mm');
+
+            $('.table').DataTable({
+                "dom": '<"top"f>rt<"bottom"ip><"clear">',
+                stateSave: true,
+                "autoWidth": false,
+                "scrollX": true,
             });
         });
     </script>
