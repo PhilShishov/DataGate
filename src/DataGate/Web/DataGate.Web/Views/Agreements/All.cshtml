@@ -50,6 +50,20 @@
             <div class="table-wrapper-double-scroll">
                 <table class="table table-bordered table-hover tbl-agreements table-view-pharus">
                     <thead>
+                        <tr class="dropdown">
+                            <td class="file-description"></td>
+                            <td class="company-name"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+
+                            @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.IsInRole(GlobalConstants.LegalRoleName))
+                            {
+                                <td></td>
+                            }
+                        </tr>
+
                         <tr>
                             <th class="th-padding-fxt">
                                 @SharedLocalizer.GetHtmlString("File Description")
@@ -140,26 +154,78 @@
     <script src="~/js/deleteFile.js" asp-append-version="true"></script>
 
     <script>
-    $(function () {
-        // ________________________________________________________
-        //
-        // Delete selected row from file table and DB by confirming
+        $(function () {
+            // ________________________________________________________
+            //
+            // Delete selected row from file table and DB by confirming
 
-        const tokenAgr = $('#form-agreement input[name=__RequestVerificationToken]').val(),
-            areaName = '@Model.SelectedType',
-            tableAgr = '.tbl-agreements',
-            tableAgr_dist = '.tbl-distinct-agreements';
+            const tokenAgr = $('#form-agreement input[name=__RequestVerificationToken]').val(),
+                areaName = '@Model.SelectedType',
+                tableAgr = '.tbl-agreements',
+                tableAgr_dist = '.tbl-distinct-agreements';
 
-        const MESSAGES_DELETE_AGR = {
-            TITLE: '@Html.Raw(SharedLocalizer.GetHtmlString("Are you sure?").Value.ToString())',
-            TEXT: '@Html.Raw(SharedLocalizer.GetHtmlString("Once deleted, you will not be able to recover this file!").Value.ToString())',
-            BTN_CANCEL: '@Html.Raw(SharedLocalizer.GetHtmlString("Cancel").Value.ToString())',
-            TITLE_FAIL: '@Html.Raw(SharedLocalizer.GetHtmlString("Error deleting!").Value.ToString())',
-            TEXT_FAIL: '@Html.Raw(SharedLocalizer.GetHtmlString("Please try again").Value.ToString())',
-            TITLE_SUCCESS: '@Html.Raw(SharedLocalizer.GetHtmlString("Your file has been deleted!").Value.ToString())'
-        };
+            const MESSAGES_DELETE_AGR = {
+                TITLE: '@Html.Raw(SharedLocalizer.GetHtmlString("Are you sure?").Value.ToString())',
+                TEXT: '@Html.Raw(SharedLocalizer.GetHtmlString("Once deleted, you will not be able to recover this file!").Value.ToString())',
+                BTN_CANCEL: '@Html.Raw(SharedLocalizer.GetHtmlString("Cancel").Value.ToString())',
+                TITLE_FAIL: '@Html.Raw(SharedLocalizer.GetHtmlString("Error deleting!").Value.ToString())',
+                TEXT_FAIL: '@Html.Raw(SharedLocalizer.GetHtmlString("Please try again").Value.ToString())',
+                TITLE_SUCCESS: '@Html.Raw(SharedLocalizer.GetHtmlString("Your file has been deleted!").Value.ToString())'
+            };
 
-        deleteFile(tokenAgr, areaName, tableAgr, tableAgr_dist, MESSAGES_DELETE_AGR);
+            deleteFile(tokenAgr, areaName, tableAgr, tableAgr_dist, MESSAGES_DELETE_AGR);
+
+            $.fn.dataTable.moment('DD/MM/YYYY');
+
+            $('.table').DataTable({
+                "dom": '<"top"lf>rt<"bottom"ip><"clear">',
+                stateSave: true,
+                "autoWidth": false,
+
+                initComplete: function () {
+                    this.api().columns([0]).every(function () {
+                        var column = this;
+                        var select = $('<select><option value=""/></select>')
+                            .appendTo($('.dropdown .file-description').empty())
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    });
+
+                    this.api().columns([1]).every(function () {
+                        var column = this;
+                        var select = $('<select><option value=""/></select>')
+                            .appendTo($('.dropdown .company-name').empty())
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    });
+                    // this.api function
+                } //initComplete function
+            });
+
+            $(".dataTables_length select").chosen({
+                disable_search_threshold: 10,
+
+                width: "68px",
+                placeholder_text_single: ""
+            });
     })
     </script>
 }

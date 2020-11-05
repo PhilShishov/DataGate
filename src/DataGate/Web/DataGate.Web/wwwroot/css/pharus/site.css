@@ -1,8 +1,16 @@
 ﻿
 /* Chosen style to be imported on change*/
 
+.dropdown td {
+    border: none;
+}
+
+.dataTables_scrollBody thead {
+/*    display: none;*/
+}
+
 .modal-dialog-document {
-    margin:0;
+    margin: 0;
     transform: translateY(100%) translateX(100%) !important;
 }
 
@@ -18,9 +26,9 @@
     height: 815px;
 }
 
-.branch-background h2{
-    color: white;
-}
+    .branch-background h2 {
+        color: white;
+    }
 
 .swal-footer, .swal-text {
     text-align: center;
