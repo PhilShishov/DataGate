@@ -56,7 +56,7 @@ namespace DataGate.Web.Utilities.Extract
                 canvas.Close();
 
                 // Create placeholder object to write number of pages
-                pdfCanvas.AddXObject(this.placeholder, this.x + this.space, this.y - this.descent);
+                pdfCanvas.AddXObjectAt(this.placeholder, this.x + this.space, this.y - this.descent);
                 pdfCanvas.Release();
             }
 
