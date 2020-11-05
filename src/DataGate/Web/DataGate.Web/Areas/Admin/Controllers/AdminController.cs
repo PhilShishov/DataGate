@@ -49,7 +49,9 @@
         {
             List<UserViewModel> usersViewList = new List<UserViewModel>();
 
-            var users = this.userManager.Users.ToList();
+            var users = this.userManager.Users
+                .OrderByDescending(u => u.LastLoginTime)
+                .ToList();
 
             foreach (var user in users)
             {
