@@ -49,6 +49,15 @@ a {
 
 /* Main Styling */
 
+
+html, body, main {
+    height: 100%;
+}
+
+main {
+    background: linear-gradient(155deg, #ebeff3 0%,#ebeff3 50%,#193F7E 50.1%,#193F7E 51%,#005596 100%);
+}
+
 #icon-show-pass {
     right: 6%;
     bottom: 0;
@@ -56,7 +65,7 @@ a {
     color: $colorTheme;
     position: absolute;
     z-index: 1;
-    transform: translateY(-60%);
+    transform: translateY(-100%);
 }
 
 .icon-svg-warning {
@@ -69,11 +78,16 @@ a {
 
 .login-layout {
     display: flex;
-    background: #ebeff3; /* Old browsers */
-    background: -moz-linear-gradient(-45deg, #ebeff3 0%, #ebeff3 50%, #193F7E 50.1%, #193F7E 51%, #005596 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(-45deg, #ebeff3 0%,#ebeff3 50%,#193F7E 50.1%,#193F7E 51%,#005596 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(155deg, #ebeff3 0%,#ebeff3 50%,#193F7E 50.1%,#193F7E 51%,#005596 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebeff3', endColorstr='#005596',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    min-height: 100vh;
+    align-items: center;
+
+    @include for-tablet-landscape-up {
+        padding: 15px;
+    }
+
+    @include for-desktop-up {
+        padding: 0;
+    }
 }
 
 .login-content-container {
@@ -99,6 +113,14 @@ a {
 
 .extra-space-container {
     background-color: $colorWhite;
+
+    @include for-tablet-landscape-up {
+        display: none;
+    }
+
+    @include for-desktop-up {
+        display: block;
+    }
 }
 
 /* Right Image Styling */

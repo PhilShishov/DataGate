@@ -7,7 +7,7 @@
     <div class="container-fluid login-layout-container">
         <partial name="Scripts/_CookieConsentPartial" />
         <div class="row">
-            <div class="col-xl-4 col-lg-6 col-12">
+            <div class="col-xl-4 col-lg-6 col-12 login-content-container">
                 <div class="login-content">
                     <partial name="Identity/_LoginRedirectPartial" />
                     <h3 class="mt-3">@SharedLocalizer.GetHtmlString("Privacy Policy")</h3>
@@ -246,7 +246,7 @@
                     <partial name="Identity/_FooterMobile" />
                 </div>
             </div>
-            <div class="col-lg-2 col-md-2 d-none d-lg-block d-xl-block extra-space" style="background-color: #ffffff;"></div>
+            <div class="col-lg-2 col-md-2 extra-space-container" style="background-color: #ffffff;"></div>
             <partial name="Identity/_LoginSideImagePartial" />
         </div>
         <partial name="Identity/_FooterPartial" />

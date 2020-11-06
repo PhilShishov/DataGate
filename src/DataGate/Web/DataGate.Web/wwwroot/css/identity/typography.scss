@@ -16,26 +16,48 @@ body {
     text-rendering: optimizeLegibility;
 }
 
-::-moz-placeholder {
-    font-size: 1rem;
-}
-/* Firefox 19+ */
-:-moz-placeholder {
-    font-size: 1rem;
-}
-/* Firefox 18- */
-:-ms-input-placeholder {
-    font-size: 1rem;
-}
-/* IE */
-
 h2 {
-    font-size: 30px;
-}
+    @include for-phone-only {
+        font-size: 22px;
+    }
 
+    @include for-tablet-portrait-up {
+        font-size: 24px;
+    }
+
+    @include for-tablet-landscape-up {
+        font-size: 26px;
+    }
+
+    @include for-desktop-up {
+        font-size: 28px;
+    }
+
+    @include for-big-desktop-up {
+        font-size: 30px;
+    }
+}
 
 h3 {
-    font-size: 22px;
+    @include for-phone-only {
+        font-size: 16px;
+    }
+
+    @include for-tablet-portrait-up {
+        font-size: 18px;
+    }
+
+    @include for-tablet-landscape-up {
+        font-size: 20px;
+    }
+
+    @include for-desktop-up {
+        font-size: 22px;
+    }
+
+    @include for-big-desktop-up {
+        font-size: 24px;
+    }
 }
 
 h2,
@@ -88,15 +110,41 @@ input::-webkit-input-placeholder {
 }
 
 .login-layout-container {
-    margin: 4rem 9rem;
     -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
     -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
+
+    @include for-phone-only {
+        margin: 2rem;
+    }
+
+    @include for-tablet-portrait-up {
+        margin: 2rem 4rem;
+    }
+
+    @include for-tablet-landscape-up {
+        margin: 3rem 6rem;
+    }
+
+    @include for-desktop-up {
+        margin: 4rem 8rem;
+    }
 }
 
 .login-content {
-    padding: 30px 25px 50px 50px;
     width: 100%;
+
+    @include for-phone-only {
+        padding: 50px 25px 25px 25px;
+    }
+
+    @include for-tablet-portrait-up {
+        padding: 60px 35px 35px 35px;
+    }
+
+    @include for-tablet-landscape-up {
+        padding: 70px 45px 45px 45px;
+    }
 }
 
 .form-group {
@@ -136,17 +184,55 @@ input::-webkit-input-placeholder {
 }
 
 .social-icons {
-    text-align: right;
-
     div {
         text-align: center;
         border-radius: 50%;
         line-height: $lineHeightFooter;
         margin-left: 10px;
     }
+
+    @include for-phone-only {
+        text-align: center;
+    }
+
+    @include for-tablet-portrait-up {
+        text-align: center;
+    }
+
+    @include for-tablet-landscape-up {
+        text-align: right;
+    }
+
+    @include for-desktop-up {
+        text-align: right;
+    }
 }
 
 .footer-text {
-    font-size: $fontSizeOthers;
-    line-height: $lineHeightFooter;
+    @include for-phone-only {
+        font-size: 0.9em;
+        margin-left: 0px;
+        line-height: 1.5;
+        text-align: center;
+    }
+
+    @include for-tablet-portrait-up {
+        font-size: 0.9em;
+        margin-left: 0px;
+        line-height: 2;
+        text-align: center;
+    }
+
+    @include for-tablet-landscape-up {
+        font-size: 0.9em;
+        margin-left: 0px;
+        line-height: 2;
+        text-align: unset;
+    }
+
+    @include for-desktop-up {
+        font-size: $fontSizeOthers;
+        line-height: $lineHeightFooter;
+        text-align: unset;
+    }
 }
