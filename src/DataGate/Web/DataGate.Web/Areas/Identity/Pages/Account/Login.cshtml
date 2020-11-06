@@ -4,19 +4,19 @@
 @{
     ViewData["Title"] = SharedLocalizer.GetHtmlString("Login");
 }
-<section class="fxt-template-layout2">
-    <div class="container-fluid custom-container">
+<section class="login-layout">
+    <div class="container-fluid login-layout-container">
         <partial name="Scripts/_CookieConsentPartial" />
         <div class="row">
-            <div class="col-xl-4 col-lg-6 col-12 fxt-bg-color">
-                <div class="fxt-content">
+            <div class="col-xl-4 col-lg-6 col-12 login-content-container">
+                <div class="login-content">
                     <partial name="Identity/_LoginRedirectPartial" />
                     <h2 class="login-brand">@SharedLocalizer.GetHtmlString("DataGate")</h2>
                     <h2 class="login-title">@SharedLocalizer.GetHtmlString("Login")</h2>
-                    <div class="fxt-form">
+                    <div class="login-form">
                         <form method="POST" autocomplete="on">
                             <div class="form-group col-md-12 my-4">
-                                <div class="fxt-transformY-50 fxt-transition-delay-1">
+                                <div>
                                     <input type="text"
                                            asp-for="Input.Username"
                                            autofocus
@@ -30,14 +30,14 @@
                                 </div>
                             </div>
                             <div class="form-group col-md-12 mb-5">
-                                <div class="fxt-transformY-50 fxt-transition-delay-2">
+                                <div>
                                     <input type="password"
                                            asp-for="Input.Password"
                                            autocomplete="off"
                                            class="form-control active"
                                            id="password"
                                            placeholder="Password">
-                                    <div class="icon-show-pass-container">
+                                    <div>
                                         <i id="icon-show-pass" class="fas fa-eye-slash"></i>
                                     </div>
                                     <div class="d-flex justify-content-center">
@@ -48,7 +48,7 @@
                                 </div>
                             </div>
                             <div class="form-group col-md-6 col-lg-6 col-sm-12 col-xs-12">
-                                <div class="fxt-transformY-50 fxt-transition-delay-4">
+                                <div>
                                     <input type="hidden" id="RecaptchaValue" asp-for="Input.RecaptchaValue" />
                                     <button type="submit"
                                             class="btn"
@@ -59,11 +59,11 @@
                                 </div>
                             </div>
                             <div class="form-group col-md-12">
-                                <div class="fxt-transformY-50 fxt-transition-delay-3">
-                                    <div class="fxt-checkbox-area">
+                                <div>
+                                    <div>
                                         <a asp-area="Identity"
                                            asp-page="/Account/ForgotPassword"
-                                           class="switcher-text">@SharedLocalizer.GetHtmlString("Forgot Password")</a>
+                                           class="forgot-password-text">@SharedLocalizer.GetHtmlString("Forgot Password")</a>
                                     </div>
                                 </div>
                             </div>

@@ -1,0 +1,152 @@
+﻿
+@import '../settings/breakpoints.scss';
+
+$fontSizeMain: 0.8em;
+$fontSizeOthers: 1em;
+$fontFamily: Arial,Helvetica,sans-serif;
+$lineHeight: 1.5;
+$lineHeightFooter: 3;
+$borderRadius: 15px;
+
+body {
+    font: $fontSizeMain $fontFamily;
+    line-height: $lineHeight;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+::-moz-placeholder {
+    font-size: 1rem;
+}
+/* Firefox 19+ */
+:-moz-placeholder {
+    font-size: 1rem;
+}
+/* Firefox 18- */
+:-ms-input-placeholder {
+    font-size: 1rem;
+}
+/* IE */
+
+h2 {
+    font-size: 30px;
+}
+
+
+h3 {
+    font-size: 22px;
+}
+
+h2,
+h3,
+.text-danger {
+    font-weight: bold;
+}
+
+/* Cookie Consent Styling*/
+.alert-danger {
+    font-size: $fontSizeOthers;
+}
+
+.container-cookie-consent {
+    font-size: $fontSizeOthers;
+    text-align: center;
+
+    a {
+        text-decoration: underline;
+    }
+}
+
+/* Main Styling */
+
+input[type=text], input[type=password] {
+    letter-spacing: 1px;
+    font-size: 18px;
+    border-width: 0 0 2px;
+    border-color: rgb(0, 65, 118);
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: 1px solid #e7e7e7;
+    padding-left: 10px;
+
+    &:focus {
+        box-shadow: none;
+        border-color: #005596;
+        outline: none;
+    }
+}
+
+input::-webkit-input-placeholder {
+    color: #a1a1a1;
+    font-size: $fontSizeMain;
+}
+
+.login-content-container {
+    padding: 0;
+}
+
+.login-layout-container {
+    margin: 4rem 9rem;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.25);
+}
+
+.login-content {
+    padding: 30px 25px 50px 50px;
+    width: 100%;
+}
+
+.form-group {
+    padding-left: 0;
+}
+
+.login-brand {
+    margin-top: 20px;
+    letter-spacing: 1.5px;
+}
+
+.text-danger {
+    font-size: $fontSizeOthers;
+}
+
+.forgot-password-text {
+    text-decoration: underline;
+    font-weight: bolder;
+    font-size: $fontSizeOthers;
+    margin-left: 3px;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+        color: #004176;
+    }
+}
+
+.right-img-container {
+    margin: 0;
+    padding: 0;
+}
+
+/* Footer Styling */
+
+.login-footer {
+    padding: 5px 25px;
+}
+
+.social-icons {
+    text-align: right;
+
+    div {
+        text-align: center;
+        border-radius: 50%;
+        line-height: $lineHeightFooter;
+        margin-left: 10px;
+    }
+}
+
+.footer-text {
+    font-size: $fontSizeOthers;
+    line-height: $lineHeightFooter;
+}

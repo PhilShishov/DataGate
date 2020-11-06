@@ -1,7 +1,7 @@
 ﻿[
   {
     "inputFiles": [
-      "wwwroot/css/pharus/!(*.min).css",
+      "wwwroot/css/main/!(*.min).css",
       "wwwroot/css/mediaQuery.css"
     ],
     "outputFileName": "wwwroot/css/site.min.css"

@@ -1,4 +1,12 @@
-﻿*,
+﻿/*
+*
+*
+* ==========================================
+* Home Page Layout
+* ==========================================
+*
+*/
+*,
 *::after,
 *::before {
   box-sizing: border-box; }
@@ -35,8 +43,8 @@ img {
 /* Main Styling */
 .container-logo {
   position: absolute;
-  top: 0;
-  left: 0; }
+  top: -1px;
+  left: -2px; }
   @media (max-width: 599px) {
     .container-logo img {
       height: 55px;

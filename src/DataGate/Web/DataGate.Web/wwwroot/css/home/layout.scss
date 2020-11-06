@@ -44,8 +44,8 @@ img {
 
 .container-logo {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: -1px;
+    left: -2px;
 
     img {
         @include for-phone-only {

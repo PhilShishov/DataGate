@@ -1,0 +1,122 @@
+﻿
+@import '../settings/breakpoints.scss';
+@import 'button.scss';
+$colorBlack: black;
+$colorWhite: white;
+$colorTheme: #005596;
+
+h2,
+h3,
+h4 {
+    color: $colorBlack;
+}
+
+a {
+    color: $colorTheme;
+}
+
+/* Cookie Consent Styling*/
+
+.alert-dismissible {
+    .close-cookie-consent {
+        background: green;
+        color: white;
+        text-shadow: none;
+        border: none;
+        outline: none;
+    }
+
+    .close-cookie-consent:hover {
+        background: rgb(0, 65, 118);
+    }
+}
+
+/* Header Styling */
+
+.login-redirect-language {
+    display: flex;
+    align-items: center;
+    width: 95%;
+    justify-content: space-between;
+}
+
+.wrapper-language-bar img {
+    width: 30px;
+    height: 30px;
+    margin-left: 6px;
+}
+
+
+/* Main Styling */
+
+#icon-show-pass {
+    right: 6%;
+    bottom: 0;
+    cursor: pointer;
+    color: $colorTheme;
+    position: absolute;
+    z-index: 1;
+    transform: translateY(-60%);
+}
+
+.icon-svg-warning {
+    background: url(/images/exclamation-triangle-solid.svg) no-repeat center center;
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
+    margin-top: 2px;
+}
+
+.login-layout {
+    display: flex;
+    background: #ebeff3; /* Old browsers */
+    background: -moz-linear-gradient(-45deg, #ebeff3 0%, #ebeff3 50%, #193F7E 50.1%, #193F7E 51%, #005596 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg, #ebeff3 0%,#ebeff3 50%,#193F7E 50.1%,#193F7E 51%,#005596 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(155deg, #ebeff3 0%,#ebeff3 50%,#193F7E 50.1%,#193F7E 51%,#005596 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebeff3', endColorstr='#005596',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.login-content-container {
+    background-color: $colorWhite;
+}
+
+.login-brand {
+    color: $colorBlack;
+}
+
+.login-title {
+    color: $colorTheme;
+}
+
+.login-footer {
+    background-color: $colorWhite;
+}
+
+.div-legal-text {
+    overflow-y: scroll;
+    height: 390px;
+}
+
+.extra-space-container {
+    background-color: $colorWhite;
+}
+
+/* Right Image Styling */
+
+.right-img-container {
+    background-color: $colorWhite;
+
+    .right-img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* Footer Styling */
+
+.social-icons div {
+    background-color: #edf2f6;
+    width: 35px;
+    height: 35px;
+    display: inline-block;
+}

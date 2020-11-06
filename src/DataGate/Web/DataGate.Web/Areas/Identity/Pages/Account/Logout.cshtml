@@ -4,14 +4,14 @@
     ViewData["Title"] = SharedLocalizer.GetHtmlString("Log out");
 }
 
-<section class="fxt-template-layout2">
-    <div class="container-fluid custom-container">
+<section class="login-layout">
+    <div class="container-fluid login-layout-container">
         <div class="row">
-            <div class="col-xl-4 col-lg-6 col-12 fxt-bg-color">
-                <div class="fxt-content">
+            <div class="col-xl-4 col-lg-6 col-12 login-content-container">
+                <div class="login-content">
                     <partial name="Identity/_LoginRedirectPartial" />
                     <h3 class="login-brand">@SharedLocalizer.GetHtmlString("You have successfully logged out of Pharus DataGate.")</h3>
-                    <div class="fxt-form">
+                    <div class="login-form">
                     </div>
                     <partial name="Identity/_FooterMobile" />
                 </div>

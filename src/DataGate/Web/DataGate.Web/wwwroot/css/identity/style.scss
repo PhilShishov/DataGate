@@ -1,0 +1,19 @@
+﻿/*
+*
+*
+* ==========================================
+* Identity Layout
+* ==========================================
+*
+*/
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+@import 'layout.scss';
+@import 'typography.scss';
+@import 'responsive.scss';
+@import '../../lib/font-awesome/css/all.min.css';
