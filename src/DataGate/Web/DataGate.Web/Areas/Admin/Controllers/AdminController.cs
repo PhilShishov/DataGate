@@ -290,7 +290,15 @@
         {
             foreach (var error in result.Errors)
             {
-                this.ModelState.AddModelError(string.Empty, error.Description);
+                if (error.Code.Contains("Password"))
+                {
+                    ViewData["Password"] = ViewData["Password"] + error.Description;
+                }
+                else
+                {
+                    this.ModelState.AddModelError(error.Code, error.Description);
+                }
+
             }
         }
     }
