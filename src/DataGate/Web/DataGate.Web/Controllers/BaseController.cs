@@ -10,17 +10,16 @@
         {
             this.TempData[GlobalConstants.SweetAlertKey] = FormatErrorSweetAlert(errorMessage);
         }
+        public IActionResult ShowError(string errorMessage, string action, string controller)
+        {
+            this.TempData[GlobalConstants.SweetAlertKey] = FormatErrorSweetAlert(errorMessage);
+            return this.RedirectToAction(action, controller);
+        }
 
         public IActionResult ShowError(string errorMessage, string route, object routeValues)
         {
             this.TempData[GlobalConstants.SweetAlertKey] = FormatErrorSweetAlert(errorMessage);
             return this.RedirectToRoute(route, routeValues);
-        }
-
-        public IActionResult ShowError(string errorMessage, string action, string controller)
-        {
-            this.TempData[GlobalConstants.SweetAlertKey] = FormatErrorSweetAlert(errorMessage);
-            return this.RedirectToAction(action, controller);
         }
 
         public IActionResult ShowInfo(string infoMessage, string route, object routeValues)

@@ -1,0 +1,34 @@
+{
+  "Logging": {
+    "IncludeScopes": false,
+    "LogLevel": {
+      "Default": "Debug",
+      "System": "Information",
+      "Microsoft": "Information",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "ConnectionStrings": {
+    "DataGateUsersConnection": "Server=serverName;Database=databaseName;Uid=Username;Password=password;",
+    "DataGate_vFinaleConnection": "Server=serverName;Database=databaseName;Uid=Username;Password=password;"
+  },
+  "SendGrid": {
+    "ApiKey": "Your SendGrid ApiKey"
+  },
+  "GoogleReCaptcha": {
+    "Key": "Your GoogleReCapcha Key",
+    "Secret": "Your GoogleReCaptcha Secret"
+  },
+  "Email": {
+    "Address": "Your work email address",
+    "Sender": "Your email sender"
+  },
+  "WebWiz": {
+    "KeysPath": "Your HostingSpaces Keys Path"
+  },
+  "FileSizeLimit": 47185920,
+  "ApplicationInsights": {
+    "InstrumentationKey": "Your Azure Instrumentation Key"
+  },
+  "AllowedHosts": "*"
+}
