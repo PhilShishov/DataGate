@@ -18,13 +18,12 @@ namespace DataGate.Web.Tests.Controllers
         private const string InfoMessage = "Some info message.";
         private string FormatedInfoMessage = string.Format(
                               GlobalConstants.SweetAlertScript,
-                              NotificationType.error.ToString().ToUpper(),
-                              ErrorMessage,
-                              NotificationType.error);
+                              NotificationType.success.ToString().ToUpper(),
+                              InfoMessage,
+                              NotificationType.success);
         private const string Action = "Index";
         private const string Controller = "Home";
         private const string Route = "default";
-        private const string Area = GlobalConstants.AdministratorRoleName;
 
         [Fact]
         public void ShowError_WithErrorMessage_ShouldAddErrorToTempData() =>
@@ -64,68 +63,45 @@ namespace DataGate.Web.Tests.Controllers
             .RedirectToRoute(Route, routeValues);
         }
 
-        //[Fact]
-        //public void ShowError_WithErrorMessageActionControllerAndArea_ShouldReturnRedirectResultAndAddErrorToTempData() =>
-        //   MyController<BaseController>
-        //   .Instance()
-        //   .Calling(c => c.ShowError(ErrorMessage, Action, Controller, new { Area }))
-        //   .ShouldHave()
-        //   .TempData(tempData => tempData.ContainingEntry(GlobalConstants.SweetAlertKey, ErrorMessage))
-        //   .AndAlso()
-        //   .ShouldReturn()
-        //   .RedirectToAction(Action, Controller, new { Area });
+        [Fact]
+        public void ShowErrorLocal_WithErrorMessageAndAction_ShouldReturnLocalRedirectAndAddErrorToTempData() =>        
+            MyController<BaseController>
+            .Instance()
+            .Calling(c => c.ShowErrorLocal(ErrorMessage, Action))
+            .ShouldHave()
+            .TempData(tempData => tempData
+            .ContainingEntry(GlobalConstants.SweetAlertKey, FormatedErrorMessage))
+            .AndAlso()
+            .ShouldReturn()
+            .LocalRedirect(Action);        
 
-        //[Fact]
-        //public void ShowError_WithErrorMessageActionControllerAndRouteValues_ShouldReturnRedirectResultAndAddErrorToTempData()
-        //{
-        //    var routeValues = new { Area, LessonId = 5, ContestId = 45 };
-        //    MyController<BaseController>
-        //    .Instance()
-        //    .Calling(c => c.ShowError(ErrorMessage, Action, Controller, routeValues))
-        //    .ShouldHave()
-        //    .TempData(tempData => tempData.ContainingEntry(GlobalConstants.SweetAlertKey, ErrorMessage))
-        //    .AndAlso()
-        //    .ShouldReturn()
-        //    .RedirectToAction(Action, Controller, routeValues);
-        //}
+        [Fact]
+        public void ShowInfo_WithInfoMessageRouteAndValues_ShouldReturnRedirectResultAndAddInfoToTempData()
+        {
+            var routeValues = new { id = 1, date = "20200101" };
+            MyController<BaseController>
+            .Instance()
+            .Calling(c => c.ShowInfo(InfoMessage, Route, routeValues))
+            .ShouldHave()
+            .TempData(tempData => tempData
+            .ContainingEntry(GlobalConstants.SweetAlertKey, FormatedInfoMessage))
+            .AndAlso()
+            .ShouldReturn()
+            .RedirectToRoute(Route, routeValues);
+        }
 
-        //[Fact]
-        //public void ShowInfo_WithInfoMessageActionAndController_ShouldReturnRedirectResultAndAddInfoMessageToTempData() =>
-        //   MyController<BaseController>
-        //   .Instance()
-        //   .Calling(c => c.ShowInfo(InfoMessage, Action, Controller))
-        //   .ShouldHave()
-        //   .TempData(tempData => tempData.ContainingEntry(GlobalConstants.SweetAlertKey, InfoMessage))
-        //   .AndAlso()
-        //   .ShouldReturn()
-        //   .RedirectToAction(Action, Controller);
-
-        //[Fact]
-        //public void ShowInfo_WithInfoMessageActionControllerAndRouteValues_ShouldReturnRedirectResultAndAddInfoToTempData()
-        //{
-        //    var routeValues = new { Area, LessonId = 5, ContestId = 45 };
-        //    MyController<BaseController>
-        //    .Instance()
-        //    .Calling(c => c.ShowInfo(InfoMessage, Action, Controller, routeValues))
-        //    .ShouldHave()
-        //    .TempData(tempData => tempData.ContainingEntry(GlobalConstants.SweetAlertKey, InfoMessage))
-        //    .AndAlso()
-        //    .ShouldReturn()
-        //    .RedirectToAction(Action, Controller, routeValues);
-        //}
-
-        //[Fact]
-        //public void ShowInfo_WithInfoMessageActionAndRouteValues_ShouldReturnRedirectResultAndAddInfoToTempData()
-        //{
-        //    var routeValues = new { Area, LessonId = 5, ContestId = 45 };
-        //    MyController<BaseController>
-        //    .Instance()
-        //    .Calling(c => c.ShowInfo(InfoMessage, Action, routeValues))
-        //    .ShouldHave()
-        //    .TempData(tempData => tempData.ContainingEntry(GlobalConstants.SweetAlertKey, InfoMessage))
-        //    .AndAlso()
-        //    .ShouldReturn()
-        //    .RedirectToAction(Action, routeValues);
-        //}
+        [Fact]
+        public void ShowInfoLocal_WithInfoMessageAndAction_ShouldReturnLocalRedirectAndAddInfoToTempData()
+        {
+            MyController<BaseController>
+            .Instance()
+            .Calling(c => c.ShowInfoLocal(InfoMessage, Action))
+            .ShouldHave()
+            .TempData(tempData => tempData
+            .ContainingEntry(GlobalConstants.SweetAlertKey, FormatedInfoMessage))
+            .AndAlso()
+            .ShouldReturn()
+            .LocalRedirect(Action);
+        }
     }
 }
