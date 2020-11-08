@@ -39,7 +39,7 @@
             services.ConfigureIdentity()
                 .ConfigureSession()
                 .ConfigureDataProtection(this.configuration)
-                .ConfigureCache(this.configuration)
+                .ConfigureCache()
                 .ConfigureLocalization()
                 .ConfigureCookies()
                 .ConfigureSettings(this.configuration)

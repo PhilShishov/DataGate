@@ -8,6 +8,8 @@
     using System.Text.Json;
     using System.Text.Json.Serialization;
 
+    using DataGate.Common;
+    using DataGate.Common.Settings;
     using Microsoft.Extensions.Configuration;
 
     public class GoogleReCaptchaValidationAttribute : ValidationAttribute
@@ -22,7 +24,7 @@
             }
 
             var configuration = (IConfiguration)validationContext.GetService(typeof(IConfiguration));
-            if (configuration == null || string.IsNullOrWhiteSpace(configuration["GoogleReCaptcha:Secret"]))
+            if (configuration == null || string.IsNullOrWhiteSpace(configuration[$"{AppSettingsSections.GoogleReCaptchaSection}:{GoogleReCaptchaOptions.Secret}"]))
             {
                 return new ValidationResult(
                     "Google reCAPTCHA validation failed. Secret key not found.",
@@ -33,7 +35,7 @@
             var content = new FormUrlEncodedContent(
                 new[]
                     {
-                        new KeyValuePair<string, string>("secret", configuration["GoogleReCaptcha:Secret"]),
+                        new KeyValuePair<string, string>("secret", configuration[$"{AppSettingsSections.GoogleReCaptchaSection}:{GoogleReCaptchaOptions.Secret}"]),
                         new KeyValuePair<string, string>("response", value.ToString()),
                         //// new KeyValuePair<string, string>("remoteip", remoteIp),
                     });

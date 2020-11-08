@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
 
     using DataGate.Common;
+    using DataGate.Common.Settings;
     using DataGate.Data.Models.Users;
     using DataGate.Services.Messaging;
     using DataGate.Web.Controllers;
@@ -16,9 +17,10 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Logging;
 
-    [Area("Admin")]
+    [Area(EndpointsConstants.AdminAreaName)]
     [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
     public class AdminController : BaseController
     {
@@ -27,21 +29,25 @@
         private readonly RoleManager<ApplicationRole> roleManager;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ILogger<AdminController> logger;
+        private readonly IConfiguration configuration;
         private readonly IEmailSender emailSender;
         private readonly SharedLocalizationService sharedLocalizer;
+
 
         public AdminController(
             UserManager<ApplicationUser> userManager,
             RoleManager<ApplicationRole> roleManager,
             IEmailSender emailSender,
             SharedLocalizationService sharedLocalizer,
-            ILogger<AdminController> logger)
+            ILogger<AdminController> logger,
+            IConfiguration configuration)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
             this.emailSender = emailSender;
             this.sharedLocalizer = sharedLocalizer;
             this.logger = logger;
+            this.configuration = configuration;
         }
 
         public async Task<IActionResult> ViewUsers()
@@ -113,8 +119,8 @@
 
                 string emailMessage = string.Format(GlobalConstants.EmailConfirmationMessage, HtmlEncoder.Default.Encode(callbackUrl));
                 await this.emailSender.SendEmailAsync(
-                    "philip.shishov@pharusmanco.lu",
-                    "Pharus Management Lux SA",
+                    this.configuration.GetValue<string>($"{AppSettingsSections.EmailSection}:{EmailOptions.Address}"),
+                    this.configuration.GetValue<string>($"{AppSettingsSections.EmailSection}:{EmailOptions.Sender}"),
                     inputModel.Email,
                     GlobalConstants.ConfirmEmailSubject,
                     emailMessage);

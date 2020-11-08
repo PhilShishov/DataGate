@@ -1,5 +1,7 @@
 ﻿namespace DataGate.Web.Configuration
 {
+    using DataGate.Common;
+    using DataGate.Common.Settings;
     using DataGate.Services.Data;
     using DataGate.Services.Data.Agreements;
     using DataGate.Services.Data.Documents;
@@ -24,7 +26,8 @@
         public static IServiceCollection AddBusinessLogicServices(this IServiceCollection services, IConfiguration configuration)
         {
             // Application services
-            services.AddTransient<IEmailSender>(x => new SendGridEmailSender(configuration.GetValue<string>("SendGrid:ApiKey")));
+            services.AddTransient<IEmailSender>(x => new SendGridEmailSender(configuration
+                .GetValue<string>($"{AppSettingsSections.SendGridSection}:{SendGridOptions.ApiKey}")));
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<ISlugGenerator, SlugGenerator>();
 

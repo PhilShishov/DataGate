@@ -128,10 +128,10 @@
         });
     </script>
 
-    <script src="https://www.google.com/recaptcha/api.js?render=@this.Configuration["GoogleReCaptcha:Key"]"></script>
+    <script src="https://www.google.com/recaptcha/api.js?render=@this.Configuration[$"{AppSettingsSections.GoogleReCaptchaSection}:{GoogleReCaptchaOptions.Key}"]"></script>
     <script>
         grecaptcha.ready(async function () {
-            await grecaptcha.execute('@this.Configuration["GoogleReCaptcha:Key"]', { action: 'login_form' }).then(async function (token) {
+            await grecaptcha.execute('@this.Configuration[$"{AppSettingsSections.GoogleReCaptchaSection}:{GoogleReCaptchaOptions.Key}"]', { action: 'login_form' }).then(async function (token) {
                 document.getElementById("RecaptchaValue").value = token;
             });
         });

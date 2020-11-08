@@ -2,12 +2,11 @@
 {
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.ResponseCompression;
-    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
     public static class CacheConfiguration
     {
-        public static IServiceCollection ConfigureCache(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection ConfigureCache(this IServiceCollection services)
         {
             services.AddResponseCaching();
             services.Configure<GzipCompressionProviderOptions>(options => options.Level = System.IO.Compression.CompressionLevel.Fastest);
