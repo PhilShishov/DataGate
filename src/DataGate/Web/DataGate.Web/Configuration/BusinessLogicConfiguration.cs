@@ -1,7 +1,5 @@
 ﻿namespace DataGate.Web.Configuration
 {
-    using DataGate.Common;
-    using DataGate.Common.Settings;
     using DataGate.Services.Data;
     using DataGate.Services.Data.Agreements;
     using DataGate.Services.Data.Documents;
@@ -16,18 +14,15 @@
     using DataGate.Services.Data.SubFunds;
     using DataGate.Services.Data.Timelines;
     using DataGate.Services.Data.TimeSeries;
-    using DataGate.Services.Messaging;
     using DataGate.Services.Slug;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
     public static class BusinessLogicConfiguration
     {
-        public static IServiceCollection AddBusinessLogicServices(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddBusinessLogicServices(this IServiceCollection services)
         {
             // Application services
-            services.AddTransient<IEmailSender>(x => new SendGridEmailSender(configuration
-                .GetValue<string>($"{AppSettingsSections.SendGridSection}:{SendGridOptions.ApiKey}")));
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<ISlugGenerator, SlugGenerator>();
 

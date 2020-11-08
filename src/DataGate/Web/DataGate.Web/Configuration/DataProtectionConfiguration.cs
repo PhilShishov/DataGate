@@ -11,9 +11,12 @@
     {
         public static IServiceCollection ConfigureDataProtection(this IServiceCollection services, IConfiguration configuration)
         {
+            var options = configuration
+                .GetSection(AppSettingsSections.WebWizSection)
+                .Get<WebWizOptions>();
+
             services.AddDataProtection()
-                    .PersistKeysToFileSystem(new DirectoryInfo(configuration
-                    .GetValue<string>($"{AppSettingsSections.WebWizSection}:{WebWizOptions.KeysPath}")));
+                    .PersistKeysToFileSystem(new DirectoryInfo(options.KeysPath));
             return services;
         }
     }

@@ -1,7 +1,7 @@
 ﻿namespace DataGate.Common.Settings
 {
-    public static class SendGridOptions
+    public class SendGridOptions
     {
-        public static string ApiKey { get; set; }
+        public string ApiKey { get; set; }
     }
 }

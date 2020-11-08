@@ -48,7 +48,8 @@
                 .ConfigureRouting()
                 .ConfigureAuthorization()
                 .AddRepositories()
-                .AddBusinessLogicServices(this.configuration);
+                .AddEmailSendingService(this.configuration)
+                .AddBusinessLogicServices();
             services.AddApplicationInsightsTelemetry();
         }
 
