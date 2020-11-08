@@ -12,7 +12,7 @@
     public class EfRepository<TEntity> : IRepository<TEntity>
         where TEntity : class
     {
-        public EfRepository(Pharus_vFinaleDbContext context)
+        public EfRepository(ApplicationDbContext context)
         {
             this.Context = context ?? throw new ArgumentNullException(nameof(context));
             this.DbSet = this.Context.Set<TEntity>();
@@ -20,7 +20,7 @@
 
         protected DbSet<TEntity> DbSet { get; set; }
 
-        protected Pharus_vFinaleDbContext Context { get; set; }
+        protected ApplicationDbContext Context { get; set; }
 
         public virtual IQueryable<TEntity> All() => this.DbSet;
 

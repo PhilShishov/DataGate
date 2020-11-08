@@ -1,7 +1,7 @@
 ﻿namespace DataGate.Common.Settings
 {
-    public class AppInsightsOptions
+    public static class AppInsightsOptions
     {
-        public string InstrumentationKey { get; set; }
+        public const string InstrumentationKey = "InstrumentationKey";
     }
 }

@@ -10,12 +10,12 @@ namespace DataGate.Data.Repositories
 
     public class SubFundRepository : ISubFundRepository
     {
-        public SubFundRepository(Pharus_vFinaleDbContext context)
+        public SubFundRepository(ApplicationDbContext context)
         {
             this.Context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        protected Pharus_vFinaleDbContext Context { get; set; }
+        protected ApplicationDbContext Context { get; set; }
 
         public ISet<string> GetAllContainers()
         => this.Context.TbHistoryFund.Select(f => f.FOfficialFundName).ToHashSet();

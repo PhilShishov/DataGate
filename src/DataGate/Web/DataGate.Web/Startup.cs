@@ -30,10 +30,10 @@
             // ---------------------------------------------------------
             //
             // Database Connection settings
-            services.AddDbContext<ApplicationDbContext>(
+            services.AddDbContext<UsersDbContext>(
                 options => options.UseSqlServer(this.configuration.GetConnectionString(GlobalConstants.DataGateUsersConnection)));
 
-            services.AddDbContext<Pharus_vFinaleDbContext>(
+            services.AddDbContext<ApplicationDbContext>(
                options => options.UseSqlServer(this.configuration.GetConnectionString(GlobalConstants.DataGatevFinaleConnection)));
 
             services.ConfigureIdentity()

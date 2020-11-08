@@ -11,12 +11,12 @@
 
     public class TimeSeriesRepository : ITimeSeriesRepository
     {
-        public TimeSeriesRepository(Pharus_vFinaleDbContext context)
+        public TimeSeriesRepository(ApplicationDbContext context)
         {
             this.Context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        protected Pharus_vFinaleDbContext Context { get; set; }
+        protected ApplicationDbContext Context { get; set; }
 
         public async Task<string> ByName(string area, int? id)
         {

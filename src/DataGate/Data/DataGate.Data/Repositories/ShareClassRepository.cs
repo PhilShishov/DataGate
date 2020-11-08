@@ -10,12 +10,12 @@ namespace DataGate.Data.Repositories
 
     public class ShareClassRepository : IShareClassRepository
     {
-        public ShareClassRepository(Pharus_vFinaleDbContext context)
+        public ShareClassRepository(ApplicationDbContext context)
         {
             this.Context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        protected Pharus_vFinaleDbContext Context { get; set; }
+        protected ApplicationDbContext Context { get; set; }
 
         public ISet<string> GetAllContainers()
         => this.Context.TbHistorySubFund.Select(f => f.SfOfficialSubFundName).ToHashSet();

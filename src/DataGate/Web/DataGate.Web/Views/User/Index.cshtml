@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DataGate.Data.Models.Entities.TbHistoryShareClass>
+﻿@model DataGate.Web.ViewModels.Users.UserPanelViewModel
 
 @{
     ViewData["Title"] = SharedLocalizer.GetHtmlString("User Panel");
@@ -17,7 +17,7 @@
 
     <div class="d-flex">
         <div class="div-carousel-center">
-            @foreach (var item in Model)
+            @foreach (var item in Model.ShareClasses)
             {
                 <div class="carousel-column">
                     <div class="carousel-card">

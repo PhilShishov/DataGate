@@ -2,8 +2,8 @@
 {
     public static class EmailOptions
     {
-        public static string Address { get; set; }
+        public const string Address = "Address";
 
-        public static string Sender { get; set; }
+        public const string Sender = "Sender";
     }
 }
