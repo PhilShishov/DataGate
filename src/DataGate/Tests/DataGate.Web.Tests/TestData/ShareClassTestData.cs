@@ -7,12 +7,20 @@
     {
         public static IEnumerable<TbHistoryShareClass> GenerateShareClasses() 
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 5; i++)
             {
                 yield return new TbHistoryShareClass
                 {
                     ScId = i + 1,
-                    ScOfficialShareClassName = $"resource#{i}",
+                    ScOfficialShareClassName = $"pharus#{i}",
+                };
+            }
+            for (int i = 5; i < 8; i++)
+            {
+                yield return new TbHistoryShareClass
+                {
+                    ScId = i + 1,
+                    ScOfficialShareClassName = $"multi#{i}",
                 };
             }
         }

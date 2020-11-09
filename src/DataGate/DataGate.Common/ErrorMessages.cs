@@ -16,6 +16,8 @@
         public const string EndpointError = "Some error occurs.";
 
         public const string UploadInvalid = "Inputs are not valid!";
-        public const string UploadFileError = "The file must be a PDF and less than 10mb!";
+        public static string UploadFileError = $"The file must be a PDF and less than {GlobalConstants.FileSizeLimit} MB.";
+
+        public const string InvalidSearchKeyword = "Search term must be at least one symbol long!";
     }
 }

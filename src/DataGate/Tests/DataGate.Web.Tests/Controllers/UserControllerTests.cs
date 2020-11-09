@@ -35,9 +35,15 @@
             .WithModelOfType<UserPanelViewModel>()
                 .Passing(model =>
                 {
-                    var actualResources = model.ShareClasses.ToList();
+                    var actual = model.ShareClasses.ToList();
 
-                    Assert.Equal(actualResources.Count, shareClasses.Count);
+                    Assert.Equal(actual.Count, shareClasses.Count);
+
+                    for (int i = 0; i < shareClasses.Count; i++)
+                    {
+                        Assert.Equal(shareClasses[i].ScId, actual[i].ScId);
+                        Assert.Equal(shareClasses[i].ScOfficialShareClassName, actual[i].ScOfficialShareClassName);
+                    }
                 }));
         }
     }

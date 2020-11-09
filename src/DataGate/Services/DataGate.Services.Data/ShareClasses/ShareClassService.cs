@@ -1,5 +1,5 @@
 ﻿// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-// Service class for managing funds
+// Service class for managing share classes
 
 // Created: 09/2019
 // Author:  Philip Shishov

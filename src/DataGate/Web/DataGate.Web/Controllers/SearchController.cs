@@ -1,8 +1,8 @@
 ﻿namespace DataGate.Web.Controllers
 {
     using System;
-
     using DataGate.Common;
+    using DataGate.Common.Exceptions;
     using DataGate.Services.Data.ShareClasses;
     using DataGate.Web.ViewModels.Search;
     using Microsoft.AspNetCore.Authorization;
@@ -22,21 +22,25 @@
         [Route("search-results")]
         public IActionResult Result(string searchTerm)
         {
-            var model = new SearchListAllViewModel();
-            if (searchTerm != null)
+            if (string.IsNullOrEmpty(searchTerm))
             {
-                model.Date = DateTime.Today.ToString(GlobalConstants.RequiredWebDateTimeFormat);
-                model.SearchTerm = searchTerm;
-                bool isIsin = this.service.IsIsin(searchTerm);
-
-                if (isIsin)
-                {
-                    var classId = this.service.ByIsin(searchTerm);
-                    return this.RedirectToRoute(EndpointsConstants.RouteDetails + EndpointsConstants.ShareClassArea, new { area = EndpointsConstants.ShareClassArea, id = classId, date = model.Date });
-                }
-
-                model.Results = this.service.ByName(searchTerm);
+                throw new BadRequestException(ErrorMessages.InvalidSearchKeyword);
             }
+
+            var model = new SearchListAllViewModel();
+
+            model.Date = DateTime.Today.ToString(GlobalConstants.RequiredWebDateTimeFormat);
+            model.SearchTerm = searchTerm;
+            bool isIsin = this.service.IsIsin(searchTerm);
+
+            if (isIsin)
+            {
+                var classId = this.service.ByIsin(searchTerm);
+                return this.RedirectToRoute(EndpointsConstants.RouteDetails + EndpointsConstants.ShareClassArea, new { area = EndpointsConstants.ShareClassArea, id = classId, date = model.Date });
+            }
+
+            model.Results = this.service.ByName(searchTerm);
+
 
             return this.View(model);
         }

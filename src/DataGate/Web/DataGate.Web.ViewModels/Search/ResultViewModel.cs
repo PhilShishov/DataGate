@@ -7,7 +7,7 @@
 
     public class ResultViewModel : IMapFrom<TbHistoryShareClass>
     {
-        public string ScId { get; set; }
+        public int ScId { get; set; }
 
         [Display(Name = "ISIN")]
         public string ScIsinCode { get; set; }
