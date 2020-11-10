@@ -41,7 +41,6 @@
 
             model.Results = this.service.ByName(searchTerm);
 
-
             return this.View(model);
         }
     }

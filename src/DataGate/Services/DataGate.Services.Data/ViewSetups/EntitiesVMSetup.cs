@@ -16,8 +16,8 @@
         public static async Task<T> SetGet<T>(IEntityService service, string functionActive)
         {
             var today = DateTime.Today;
-            var headers = await service.GetAll(functionActive, null, today).FirstOrDefaultAsync();
-            var values = await service.GetAll(functionActive, null, today, 1).ToListAsync();
+            var headers = await service.All(functionActive, null, today).FirstOrDefaultAsync();
+            var values = await service.All(functionActive, null, today, 1).ToListAsync();
 
             var dto = new EntitiesOverviewGetDto()
             {
@@ -36,7 +36,7 @@
             var date = DateTimeParser.FromWebFormat(model.Date);
             bool isInSelectionMode = model.SelectedColumns != null ? true : false;
 
-            var headers = await service.GetAll(functionActive, null, date).FirstOrDefaultAsync();
+            var headers = await service.All(functionActive, null, date).FirstOrDefaultAsync();
             model.Headers = headers.ToList();
             model.HeadersSelection = headers.ToList();
 
@@ -53,26 +53,26 @@
 
                 if (model.IsActive)
                 {
-                    headers = await service.GetAllSelected(functionActive, dto).FirstOrDefaultAsync();
+                    headers = await service.AllSelected(functionActive, dto).FirstOrDefaultAsync();
                     model.Headers = headers.ToList();
-                    model.Values = await service.GetAllSelected(functionActive, dto, 1).ToListAsync();
+                    model.Values = await service.AllSelected(functionActive, dto, 1).ToListAsync();
                 }
                 else if (!model.IsActive)
                 {
-                    headers = await service.GetAllSelected(functionAll, dto, 1).FirstOrDefaultAsync();
+                    headers = await service.AllSelected(functionAll, dto, 1).FirstOrDefaultAsync();
                     model.Headers = headers.ToList();
-                    model.Values = await service.GetAllSelected(functionAll, dto, 1).ToListAsync();
+                    model.Values = await service.AllSelected(functionAll, dto, 1).ToListAsync();
                 }
             }
             else if (!isInSelectionMode)
             {
                 if (model.IsActive)
                 {
-                    model.Values = await service.GetAll(functionActive, null, date, 1).ToListAsync();
+                    model.Values = await service.All(functionActive, null, date, 1).ToListAsync();
                 }
                 else if (!model.IsActive)
                 {
-                    model.Values = await service.GetAll(functionAll, null, date, 1).ToListAsync();
+                    model.Values = await service.All(functionAll, null, date, 1).ToListAsync();
                 }
             }
 

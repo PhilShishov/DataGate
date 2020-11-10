@@ -20,7 +20,7 @@
         //
         // Retrieve query table DB based entities
         // with table functions
-        public async IAsyncEnumerable<string[]> GetAll(string function, int? id, DateTime? date, int skip)
+        public async IAsyncEnumerable<string[]> All(string function, int? id, DateTime? date, int skip)
         {
             var query = this.sqlManager
                 .ExecuteQueryAsync(function, date, id)
@@ -32,7 +32,7 @@
             }
         }
 
-        public async IAsyncEnumerable<string[]> GetAllSelected(
+        public async IAsyncEnumerable<string[]> AllSelected(
                                                     string function,
                                                     GetWithSelectionDto dto,
                                                     int skip)

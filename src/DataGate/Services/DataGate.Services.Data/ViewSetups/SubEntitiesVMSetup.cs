@@ -18,7 +18,7 @@
         {
             exceptionService.ThrowEntityNotFoundExceptionIfIdDoesNotExist(dto.Id);
             var date = DateTimeParser.FromWebFormat(dto.Date);
-            var entities = await service.GetAll(function, dto.Id, date).ToListAsync();
+            var entities = await service.All(function, dto.Id, date).ToListAsync();
 
             dto.Entities = entities;
 
@@ -30,8 +30,8 @@
         {
             exceptionService.ThrowEntityNotFoundExceptionIfIdDoesNotExist(dto.Id);
             var date = DateTimeParser.FromWebFormat(dto.Date);
-            var values = await service.GetAll(function, dto.Id, date, 1).ToListAsync();
-            var headers = await service.GetAll(function, dto.Id, date).FirstOrDefaultAsync();
+            var values = await service.All(function, dto.Id, date, 1).ToListAsync();
+            var headers = await service.All(function, dto.Id, date).FirstOrDefaultAsync();
 
             dto.Values = values;
             dto.Headers = headers;
@@ -43,7 +43,7 @@
         public static async Task SetPost(SubEntitiesViewModel model, IEntityService service, string function)
         {
             var date = DateTimeParser.FromWebFormat(model.Date);
-            var headers = await service.GetAll(function, model.Id, date).FirstOrDefaultAsync();
+            var headers = await service.All(function, model.Id, date).FirstOrDefaultAsync();
             model.Headers = headers.ToList();
             model.HeadersSelection = headers.ToList();
 
@@ -53,13 +53,13 @@
             {
                 var dto = AutoMapperConfig.MapperInstance.Map<GetWithSelectionDto>(model);
 
-                model.Values = await service.GetAllSelected(function, dto, 1).ToListAsync();
-                headers = await service.GetAllSelected(function, dto).FirstOrDefaultAsync();
+                model.Values = await service.AllSelected(function, dto, 1).ToListAsync();
+                headers = await service.AllSelected(function, dto).FirstOrDefaultAsync();
                 model.Headers = headers.ToList();
             }
             else if (!isInSelectionMode)
             {
-                model.Values = await service.GetAll(function, model.Id, date).ToListAsync();
+                model.Values = await service.All(function, model.Id, date).ToListAsync();
             }
 
             if (model.SelectTerm != null)

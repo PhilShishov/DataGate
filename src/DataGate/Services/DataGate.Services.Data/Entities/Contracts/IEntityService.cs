@@ -15,13 +15,13 @@ namespace DataGate.Services.Data.Entities
 
     public interface IEntityService
     {
-        IAsyncEnumerable<string[]> GetAll(
+        IAsyncEnumerable<string[]> All(
                                     string function,
                                     int? id = null,
                                     DateTime? date = null,
                                     int skip = 0);
 
-        IAsyncEnumerable<string[]> GetAllSelected(
+        IAsyncEnumerable<string[]> AllSelected(
                                     string function,
                                     GetWithSelectionDto dto,
                                     int skip = 0);
