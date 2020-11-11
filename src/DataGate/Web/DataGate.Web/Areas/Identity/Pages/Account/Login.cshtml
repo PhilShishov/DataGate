@@ -1,9 +1,7 @@
 ﻿@page
 @model LoginModel
 
-@{
-    ViewData["Title"] = SharedLocalizer.GetHtmlString("Login");
-}
+@{ ViewData["Title"] = SharedLocalizer.GetHtmlString("Login"); }
 <section class="login-layout">
     <div class="container-fluid login-layout-container">
         <partial name="Scripts/_CookieConsentPartial" />
@@ -85,6 +83,9 @@
 
     <script>
         $(document).ready(function () {
+
+            $('#username').val(localStorage.getItem('username-login'));
+
             $('form').on('submit', function () {
                 const fieldsValidation = $('.field-validation-error');
                 if (fieldsValidation.length != 0) {
@@ -93,6 +94,9 @@
                         $(this).parent().removeClass('d-none');
                         $(this).parent().addClass('d-flex');
                     });
+                } else {
+                    const username = $("#username").val();
+                    localStorage.setItem('username-login', username);
                 }
             });
 
@@ -122,14 +126,8 @@
                     icon.className = 'fas fa-eye-slash';
                     inputPass.className = 'form-control active';
                 }
-
             }
-
-
         });
-
-
-        var options = 
     </script>
 
     <script src="https://www.google.com/recaptcha/api.js?render=@this.Configuration[$"{AppSettingsSections.GoogleReCaptchaSection}:{GoogleReCaptchaOptions.Key}"]"></script>
