@@ -16,6 +16,7 @@
         public static async Task<T> SetGet<T>(IEntityService service, string functionActive)
         {
             var today = DateTime.Today;
+
             var headers = await service.All(functionActive, null, today).FirstOrDefaultAsync();
             var values = await service.All(functionActive, null, today, 1).ToListAsync();
 
@@ -44,12 +45,11 @@
             //
             // Algorithm for getting values and headers based on:
             // 1. Date update of table
-            // 2. Selection mode as columns or not
-            // 3. Active entities or not
-            // 4. Selected entity or not
+            // 2. Selected Layout Mode
+            // 3. Active entities
             if (isInSelectionMode)
             {
-                var dto = AutoMapperConfig.MapperInstance.Map<GetWithSelectionDto>(model);
+                var dto = AutoMapperConfig.MapperInstance.Map<AllSelectedDto>(model);
 
                 if (model.IsActive)
                 {
@@ -76,10 +76,10 @@
                 }
             }
 
-            if (model.SelectTerm != null)
-            {
-                model.Values = await CreateTableView.AddTableToViewAsync(model.Values, model.SelectTerm.ToLower()).ToListAsync();
-            }
+            //if (model.SelectTerm != null)
+            //{
+            //    model.Values = await CreateTableView.AddTableToViewAsync(model.Values, model.SelectTerm.ToLower()).ToListAsync();
+            //}
         }
     }
 }

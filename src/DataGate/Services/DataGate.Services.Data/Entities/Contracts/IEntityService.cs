@@ -23,7 +23,7 @@ namespace DataGate.Services.Data.Entities
 
         IAsyncEnumerable<string[]> AllSelected(
                                     string function,
-                                    GetWithSelectionDto dto,
+                                    AllSelectedDto dto,
                                     int skip = 0);
     }
 }

@@ -5,21 +5,18 @@
     using System.Linq;
 
     using DataGate.Services.Redis;
+    using DataGate.Services.Redis.Configuration;
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.ViewModels.Queries;
-    using Microsoft.Extensions.Caching.Distributed;
 
     public class EntityService : IEntityService
     {
         private readonly ISqlQueryManager sqlManager;
-        private readonly IDistributedCache distributedCache;
+        private const int IndexEntityId = 0;
 
-        public EntityService(
-            ISqlQueryManager sqlQueryManager,
-            IDistributedCache distributedCache)
+        public EntityService(ISqlQueryManager sqlQueryManager)
         {
             this.sqlManager = sqlQueryManager;
-            this.distributedCache = distributedCache;
         }
 
         // ________________________________________________________
@@ -28,6 +25,27 @@
         // with table functions
         public async IAsyncEnumerable<string[]> All(string function, int? id, DateTime? date, int skip)
         {
+            var data = SetupRedis();
+
+            if (data.Values().Result.Count == 0 || data.Keys().Result.Count == 0)
+            {
+                var query = this.sqlManager
+                   .ExecuteQueryAsync(function, date, id)
+                   .Skip(skip);
+
+                await foreach (var item in query)
+                {
+                    await data.Set(item[IndexEntityId], item);
+                }
+            }
+
+            var ordered = data.OrderBy(d => int.TryParse(d.Key, out var x) ? x : -1);
+
+            await foreach (var item in ordered)
+            {
+                yield return item.Value;
+            }
+
             //var query = this.sqlManager
             //    .ExecuteQueryAsync(function, date, id)
             //    .Skip(skip);
@@ -36,55 +54,11 @@
             //{
             //    yield return item;
             //}
-
-            var data = this.distributedCache.Get("CacheRecords");
-            var deserialized = new List<string[]>();
-
-            if (data == null)
-            {
-                //var query = this.sqlManager
-                //    .ExecuteQueryAsync(function, date, id)
-                //    .Skip(skip);
-
-                //await foreach (var item in query)
-                //{
-                //    var serialized = Serializer.ObjectToByteArray<string>(item);
-                //    this.distributedCache.Set(
-                //        $" {item[3]}",
-                //        serialized,
-                //        new DistributedCacheEntryOptions
-                //        {
-                //            AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(10),
-                //        });
-
-                //    deserialized.Add(Deserializer.ByteArrayToObject<string>(serialized).ToArray());
-                //}
-                //foreach (var item in deserialized)
-                //{
-                //    yield return item;
-                //}
-
-                var query = this.sqlManager
-                   .ExecuteQueryAsync(function, date, id);
-                //.Skip(skip);
-
-                List<string[]> result = await query.ToListAsync();
-
-                data = Serializer.ObjectToByteArray<string>(result.FirstOrDefault());
-                this.distributedCache.Set("CacheRecords", data, new DistributedCacheEntryOptions
-                {
-                    AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(10),
-                });
-                deserialized.Add(Deserializer.ByteArrayToObject<string>(data).ToArray());
-
-            }
-
-            yield return Deserializer.ByteArrayToObject<string>(data).ToArray();
         }
 
         public async IAsyncEnumerable<string[]> AllSelected(
                                                     string function,
-                                                    GetWithSelectionDto dto,
+                                                    AllSelectedDto dto,
                                                     int skip)
         {
             // Create new collection to store
@@ -99,6 +73,18 @@
             {
                 yield return item;
             }
+        }
+
+        private static RedisHash<string, string[]> SetupRedis()
+        {
+            //var cacheType = StringSwapper.ByArea(area, )
+            //var optionsRedis = 
+
+            var connection = new RedisConnection("127.0.0.1:6379,abortConnect=false");
+            var container = new RedisContainer(connection, "DataGate_Cache_Container");
+
+            var data = container.GetKey<RedisHash<string, string[]>>("FundCacheRecords");
+            return data;
         }
     }
 }

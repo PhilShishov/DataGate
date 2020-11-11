@@ -51,7 +51,7 @@
 
             if (isInSelectionMode)
             {
-                var dto = AutoMapperConfig.MapperInstance.Map<GetWithSelectionDto>(model);
+                var dto = AutoMapperConfig.MapperInstance.Map<AllSelectedDto>(model);
 
                 model.Values = await service.AllSelected(function, dto, 1).ToListAsync();
                 headers = await service.AllSelected(function, dto).FirstOrDefaultAsync();

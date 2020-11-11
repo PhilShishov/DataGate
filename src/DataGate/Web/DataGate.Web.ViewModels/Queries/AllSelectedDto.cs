@@ -6,7 +6,7 @@
     using DataGate.Services.Mapping;
     using DataGate.Web.ViewModels.Entities;
 
-    public class GetWithSelectionDto : IMapFrom<EntitiesViewModel>, IMapFrom<SubEntitiesViewModel>
+    public class AllSelectedDto : IMapFrom<EntitiesViewModel>, IMapFrom<SubEntitiesViewModel>
     {
         public int? Id { get; set; }
 

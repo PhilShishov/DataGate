@@ -36,12 +36,6 @@
             services.AddDbContext<ApplicationDbContext>(
                options => options.UseSqlServer(this.configuration.GetConnectionString(GlobalConstants.DataGatevFinaleConnection)));
 
-            services.AddStackExchangeRedisCache(options =>
-            {
-                options.Configuration = configuration.GetValue<string>("Redis:Host");
-                options.InstanceName = configuration.GetValue<string>("Redis:InstanceName");
-            });
-
             services.ConfigureIdentity()
                 .ConfigureSession()
                 .ConfigureDataProtection(this.configuration)
