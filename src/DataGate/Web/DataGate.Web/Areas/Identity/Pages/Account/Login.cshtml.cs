@@ -83,6 +83,13 @@
 
                 if (result.Succeeded)
                 {
+                    if (await this.userManager.IsEmailConfirmedAsync(user) == false)
+                    {
+                        this.ErrorMessage = this.sharedLocalizer.GetHtmlString(ErrorMessages.EmailNotConfirmed);
+                        this.ModelState.AddModelError(string.Empty, ErrorMessages.EmailNotConfirmed);
+                        return this.Page();
+                    }
+
                     this.logger.LogInformation("User logged in.");
 
                     if (user == null)
@@ -99,21 +106,7 @@
                             $" ({lastLoginResult.ToString()}) for user with ID '{user.Id}'.");
                     }
 
-                    if (await this.userManager.IsEmailConfirmedAsync(user) == false)
-                    {
-                        this.ErrorMessage = this.sharedLocalizer.GetHtmlString(ErrorMessages.EmailNotConfirmed);
-                        this.ModelState.AddModelError(string.Empty, ErrorMessages.EmailNotConfirmed);
-                        return this.Page();
-                    }
-
                     return this.Redirect(EndpointsConstants.Slash + EndpointsConstants.RouteUserPanel);
-                }
-
-                if (await this.userManager.IsEmailConfirmedAsync(user) == false)
-                {
-                    this.ErrorMessage = this.sharedLocalizer.GetHtmlString(ErrorMessages.EmailNotConfirmed);
-                    this.ModelState.AddModelError(string.Empty, ErrorMessages.EmailNotConfirmed);
-                    return this.Page();
                 }
 
                 if (result.RequiresTwoFactor)

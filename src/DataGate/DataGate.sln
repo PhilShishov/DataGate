@@ -23,8 +23,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataGate.Data", "Data\DataG
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataGate.Data.Common", "Data\DataGate.Data.Common\DataGate.Data.Common.csproj", "{D0D59508-CF8B-4656-A344-396C530BB9DF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataGate.Common", "DataGate.Common\DataGate.Common.csproj", "{A2288C46-0FBF-43B6-80B6-3072FD65BC32}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataGate.Web.Infrastructure", "Web\DataGate.Web.Infrastructure\DataGate.Web.Infrastructure.csproj", "{7A7A7986-1F5B-4EBD-9B17-8B41F8FABA58}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataGate.Services.Data", "Services\DataGate.Services.Data\DataGate.Services.Data.csproj", "{4D39C126-3FB5-4B26-B08C-1BF48EFFA23E}"
@@ -46,6 +44,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataGate.Web.Utilities", "Web\DataGate.Web.Utilities\DataGate.Web.Utilities.csproj", "{8F722B97-5FF5-4C58-A0AA-95AA4D14902B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataGate.Services.Tests", "DataGate.Services.Tests\DataGate.Services.Tests.csproj", "{EDC095DC-E98C-4E58-B87B-2AE67B6B5548}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataGate.Common", "DataGate.Common\DataGate.Common.csproj", "{068F885E-6643-47B7-B36C-496A394C1679}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,10 +77,6 @@ Global
 		{D0D59508-CF8B-4656-A344-396C530BB9DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D0D59508-CF8B-4656-A344-396C530BB9DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D0D59508-CF8B-4656-A344-396C530BB9DF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A2288C46-0FBF-43B6-80B6-3072FD65BC32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A2288C46-0FBF-43B6-80B6-3072FD65BC32}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A2288C46-0FBF-43B6-80B6-3072FD65BC32}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A2288C46-0FBF-43B6-80B6-3072FD65BC32}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7A7A7986-1F5B-4EBD-9B17-8B41F8FABA58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7A7A7986-1F5B-4EBD-9B17-8B41F8FABA58}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A7A7986-1F5B-4EBD-9B17-8B41F8FABA58}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -125,6 +121,10 @@ Global
 		{EDC095DC-E98C-4E58-B87B-2AE67B6B5548}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDC095DC-E98C-4E58-B87B-2AE67B6B5548}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDC095DC-E98C-4E58-B87B-2AE67B6B5548}.Release|Any CPU.Build.0 = Release|Any CPU
+		{068F885E-6643-47B7-B36C-496A394C1679}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{068F885E-6643-47B7-B36C-496A394C1679}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{068F885E-6643-47B7-B36C-496A394C1679}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{068F885E-6643-47B7-B36C-496A394C1679}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
