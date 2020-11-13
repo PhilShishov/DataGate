@@ -16,7 +16,7 @@
             this.sqlManager = sqlManager;
         }
 
-        public IAsyncEnumerable<string[]> GetByIdAndDate(string function, int id, DateTime? date)
+        public IAsyncEnumerable<string[]> ByIdAndDate(string function, int id, DateTime? date)
             => this.sqlManager.ExecuteQueryAsync(function, date, id);
 
         public ContainerDto GetContainer(string function, int id, DateTime? date)

@@ -9,7 +9,6 @@
     using DataGate.Web.Helpers;
     using DataGate.Web.Resources;
     using DataGate.Web.ViewModels.Entities;
-
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Routing;

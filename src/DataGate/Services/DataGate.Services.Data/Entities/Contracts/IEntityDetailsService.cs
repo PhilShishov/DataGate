@@ -7,7 +7,7 @@
 
     public interface IEntityDetailsService
     {
-        IAsyncEnumerable<string[]> GetByIdAndDate(string function, int id, DateTime? date);
+        IAsyncEnumerable<string[]> ByIdAndDate(string function, int id, DateTime? date);
 
         ContainerDto GetContainer(string function, int id, DateTime? date);
 

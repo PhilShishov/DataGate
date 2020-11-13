@@ -12,7 +12,7 @@
     using DataGate.Web.Helpers;
     using DataGate.Web.Resources;
     using DataGate.Web.ViewModels.Entities;
-
+    using DataGate.Web.ViewModels.Queries;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
@@ -70,7 +70,7 @@
 
         [HttpPost]
         [Route("sf/{id}/sc")]
-        public async Task<IActionResult> ShareClasses([Bind("Id, Command, Container, Date,Values,Headers,PreSelectedColumns,SelectedColumns,SelectTerm")]
+        public async Task<IActionResult> ShareClasses([Bind("Id,Command,Container,Date,Values,Headers,PreSelectedColumns,SelectedColumns,SelectTerm")]
                                                    SubEntitiesViewModel viewModel)
         {
             if (viewModel.Command == GlobalConstants.CommandUpdateTable)

@@ -4,7 +4,6 @@
     using System.Text.Json;
     using System.Threading.Tasks;
 
-    using DataGate.Services.Redis.Configuration;
     using DataGate.Services.Redis.Contracts;
     using StackExchange.Redis;
 
@@ -14,7 +13,7 @@
         private RedisContainer container;
         private IProxy RedisMulti;
 
-        public RedisObject(string keyName) => this.BaseKeyName = this.keyName;
+        public RedisObject(string receivedName) => this.BaseKeyName = receivedName;
 
         public RedisContainer Container
         {
@@ -49,9 +48,15 @@
             internal set => this.keyName = value;
         }
 
-        public Task<bool> ExpireAt(DateTime dt)
+        public async Task<bool> Expire(int seconds)
         {
-            return Executor.KeyExpireAsync(this.KeyName, dt);
+            var ts = TimeSpan.FromSeconds(seconds);
+            return await Executor.KeyExpireAsync(KeyName, ts);
+        }
+
+        public Task<bool> DeleteKey()
+        {
+            return Executor.KeyDeleteAsync(KeyName);
         }
 
         public static RedisValue ToRedisValue(object element)

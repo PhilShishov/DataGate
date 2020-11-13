@@ -12,7 +12,7 @@
     using DataGate.Web.Helpers;
     using DataGate.Web.Resources;
     using DataGate.Web.ViewModels.Entities;
-
+    using DataGate.Web.ViewModels.Queries;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 

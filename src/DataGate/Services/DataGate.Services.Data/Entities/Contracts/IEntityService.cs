@@ -22,8 +22,8 @@ namespace DataGate.Services.Data.Entities
                                     int skip = 0);
 
         IAsyncEnumerable<string[]> AllSelected(
-                                    string function,
-                                    AllSelectedDto dto,
-                                    int skip = 0);
+                                        string function,
+                                        AllSelectedDto dto, 
+                                        int skip = 0);
     }
 }

@@ -18,7 +18,7 @@ namespace DataGate.Web.ViewModels.Entities
     using DataGate.Services.Mapping;
     using DataGate.Web.ViewModels.Queries;
 
-    public class SpecificEntityViewModel : BaseEntityViewModel, IMapFrom<SpecificEntityOverviewGetDto>
+    public class SpecificEntityViewModel : BaseEntityViewModel, IMapFrom<DetailsDto>
     {
         // ________________________________________________________
         //

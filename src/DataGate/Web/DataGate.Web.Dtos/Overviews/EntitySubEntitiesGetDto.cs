@@ -10,6 +10,8 @@ namespace DataGate.Web.Dtos.Overviews
 
         public string Container { get; set; }
 
+        public string Function { get; set; }
+
         public IEnumerable<string[]> Entities { get; set; }
     }
 }

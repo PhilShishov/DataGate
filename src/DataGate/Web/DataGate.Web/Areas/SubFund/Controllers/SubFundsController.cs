@@ -9,7 +9,6 @@
     using DataGate.Web.Helpers;
     using DataGate.Web.Resources;
     using DataGate.Web.ViewModels.Entities;
-
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Routing;
@@ -38,9 +37,12 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> All([Bind("Date,Values,Headers,IsActive,PreSelectedColumns,SelectedColumns,SelectTerm")] EntitiesViewModel viewModel)
+        public async Task<IActionResult> All([Bind("Date,Values,Headers,IsActive,PreSelectedColumns,SelectedColumns,SelectTerm")] 
+                                              EntitiesViewModel viewModel)
         {
-            await EntitiesVMSetup.SetPost(viewModel, this.service, SqlFunctionDictionary.AllSubFund, SqlFunctionDictionary.AllActiveSubFund);
+            await EntitiesVMSetup.SetPost(viewModel, this.service, 
+                                          SqlFunctionDictionary.AllSubFund, 
+                                          SqlFunctionDictionary.AllActiveSubFund);
 
             if (viewModel.Values != null && viewModel.Values.Count > 0)
             {

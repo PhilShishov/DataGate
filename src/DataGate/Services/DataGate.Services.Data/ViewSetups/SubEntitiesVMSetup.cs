@@ -13,7 +13,8 @@
 
     public class SubEntitiesVMSetup
     {
-        public static async Task<T> SetLoadedGet<T>(IEntityService service, IEntityException exceptionService,
+        public static async Task<T> SetLoadedGet<T>(IEntityService service, 
+                                                    IEntityException exceptionService,
                                                     EntitySubEntitiesGetDto dto, string function)
         {
             exceptionService.ThrowEntityNotFoundExceptionIfIdDoesNotExist(dto.Id);
@@ -60,11 +61,6 @@
             else if (!isInSelectionMode)
             {
                 model.Values = await service.All(function, model.Id, date).ToListAsync();
-            }
-
-            if (model.SelectTerm != null)
-            {
-                model.Values = await CreateTableView.AddTableToViewAsync(model.Values, model.SelectTerm.ToLower()).ToListAsync();
             }
         }
     }

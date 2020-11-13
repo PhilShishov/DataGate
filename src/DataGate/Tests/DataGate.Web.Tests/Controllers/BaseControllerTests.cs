@@ -1,12 +1,12 @@
-﻿using DataGate.Common;
-using DataGate.Data.Models.Enums;
-using DataGate.Web.Controllers;
-
-using MyTested.AspNetCore.Mvc;
-using Xunit;
-
-namespace DataGate.Web.Tests.Controllers
+﻿namespace DataGate.Web.Tests.Controllers
 {
+    using DataGate.Common;
+    using DataGate.Data.Models.Enums;
+    using DataGate.Web.Controllers;
+
+    using MyTested.AspNetCore.Mvc;
+    using Xunit;
+
     public class BaseControllerTests
     {
         private const string ErrorMessage = "Some error message.";
@@ -64,7 +64,7 @@ namespace DataGate.Web.Tests.Controllers
         }
 
         [Fact]
-        public void ShowErrorLocal_WithErrorMessageAndAction_ShouldReturnLocalRedirectAndAddErrorToTempData() =>        
+        public void ShowErrorLocal_WithErrorMessageAndAction_ShouldReturnLocalRedirectAndAddErrorToTempData() =>
             MyController<BaseController>
             .Instance()
             .Calling(c => c.ShowErrorLocal(ErrorMessage, Action))
@@ -73,7 +73,7 @@ namespace DataGate.Web.Tests.Controllers
             .ContainingEntry(GlobalConstants.SweetAlertKey, FormatedErrorMessage))
             .AndAlso()
             .ShouldReturn()
-            .LocalRedirect(Action);        
+            .LocalRedirect(Action);
 
         [Fact]
         public void ShowInfo_WithInfoMessageRouteAndValues_ShouldReturnRedirectResultAndAddInfoToTempData()

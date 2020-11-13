@@ -21,7 +21,7 @@
             exceptionService.ThrowEntityNotFoundExceptionIfIdDoesNotExist(id);
 
             var dateParsed = DateTimeParser.FromWebFormat(date);
-            var entity = await service.GetByIdAndDate(queryDto.SqlFunctionById, id, dateParsed).ToListAsync();
+            var entity = await service.ByIdAndDate(queryDto.SqlFunctionById, id, dateParsed).ToListAsync();
             string startConnectionString = entity.ToList()[1][IndexStartConnectionInSQLTable];
             string endConnectionString = entity.ToList()[1][IndexEndConnectionInSQLTable];
             DateTime? endConnection = null;
@@ -31,7 +31,7 @@
                 endConnection = DateTimeParser.FromSqlFormat(endConnectionString);
             }
 
-            var dto = new SpecificEntityOverviewGetDto()
+            var dto = new DetailsDto()
             {
                 Id = id,
                 Date = date,

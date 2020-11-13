@@ -16,7 +16,6 @@
         public static async Task<T> SetGet<T>(IEntityService service, string functionActive)
         {
             var today = DateTime.Today;
-
             var headers = await service.All(functionActive, null, today).FirstOrDefaultAsync();
             var values = await service.All(functionActive, null, today, 1).ToListAsync();
 
@@ -49,19 +48,19 @@
             // 3. Active entities
             if (isInSelectionMode)
             {
-                var dto = AutoMapperConfig.MapperInstance.Map<AllSelectedDto>(model);
+                var dtoSelected = AutoMapperConfig.MapperInstance.Map<AllSelectedDto>(model);
 
                 if (model.IsActive)
                 {
-                    headers = await service.AllSelected(functionActive, dto).FirstOrDefaultAsync();
+                    headers = await service.AllSelected(functionActive, dtoSelected).FirstOrDefaultAsync();
                     model.Headers = headers.ToList();
-                    model.Values = await service.AllSelected(functionActive, dto, 1).ToListAsync();
+                    model.Values = await service.AllSelected(functionActive, dtoSelected, 1).ToListAsync();
                 }
                 else if (!model.IsActive)
                 {
-                    headers = await service.AllSelected(functionAll, dto, 1).FirstOrDefaultAsync();
+                    headers = await service.AllSelected(functionAll, dtoSelected, 1).FirstOrDefaultAsync();
                     model.Headers = headers.ToList();
-                    model.Values = await service.AllSelected(functionAll, dto, 1).ToListAsync();
+                    model.Values = await service.AllSelected(functionAll, dtoSelected, 1).ToListAsync();
                 }
             }
             else if (!isInSelectionMode)
@@ -75,11 +74,6 @@
                     model.Values = await service.All(functionAll, null, date, 1).ToListAsync();
                 }
             }
-
-            //if (model.SelectTerm != null)
-            //{
-            //    model.Values = await CreateTableView.AddTableToViewAsync(model.Values, model.SelectTerm.ToLower()).ToListAsync();
-            //}
         }
     }
 }

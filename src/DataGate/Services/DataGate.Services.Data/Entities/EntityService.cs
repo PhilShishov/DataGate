@@ -4,19 +4,26 @@
     using System.Collections.Generic;
     using System.Linq;
 
+    using DataGate.Common;
+    using DataGate.Common.Settings;
     using DataGate.Services.Redis;
     using DataGate.Services.Redis.Configuration;
     using DataGate.Services.SqlClient.Contracts;
+    using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.ViewModels.Queries;
+    using Microsoft.Extensions.Configuration;
 
     public class EntityService : IEntityService
     {
         private readonly ISqlQueryManager sqlManager;
-        private const int IndexEntityId = 0;
+        private readonly IConfiguration configuration;
 
-        public EntityService(ISqlQueryManager sqlQueryManager)
+        public EntityService(
+            ISqlQueryManager sqlQueryManager,
+            IConfiguration configuration)
         {
             this.sqlManager = sqlQueryManager;
+            this.configuration = configuration;
         }
 
         // ________________________________________________________
@@ -25,34 +32,38 @@
         // with table functions
         public async IAsyncEnumerable<string[]> All(string function, int? id, DateTime? date, int skip)
         {
-            var data = SetupRedis();
+            var query = this.sqlManager
+                .ExecuteQueryAsync(function, date, id)
+                .Skip(skip);
 
-            if (data.Values().Result.Count == 0 || data.Keys().Result.Count == 0)
+            await foreach (var item in query)
             {
-                var query = this.sqlManager
-                   .ExecuteQueryAsync(function, date, id)
-                   .Skip(skip);
-
-                await foreach (var item in query)
-                {
-                    await data.Set(item[IndexEntityId], item);
-                }
+                yield return item;
             }
 
-            var ordered = data.OrderBy(d => int.TryParse(d.Key, out var x) ? x : -1);
+            // ________________________________________________________
+            //
+            // Working Redis code on localhost and dedicated server, not working in shared server
+            //var data = SetupRedis(this.configuration, function);
+            //await data.Expire(GlobalConstants.RedisCacheExpirationTimeInSeconds);
 
-            await foreach (var item in ordered)
-            {
-                yield return item.Value;
-            }
-
-            //var query = this.sqlManager
-            //    .ExecuteQueryAsync(function, date, id)
-            //    .Skip(skip);
-
-            //await foreach (var item in query)
+            //if (data.Values().Result.Count == 0 || data.Keys().Result.Count == 0)
             //{
-            //    yield return item;
+            //    var query = this.sqlManager
+            //       .ExecuteQueryAsync(function, date, id)
+            //       .Skip(skip);
+
+            //    await foreach (var item in query)
+            //    {
+            //        await data.Set(item[IndexEntityId], item);
+            //    }
+            //}
+
+            //var ordered = data.OrderBy(d => int.TryParse(d.Key, out var x) ? x : -1);
+
+            //await foreach (var item in ordered)
+            //{
+            //    yield return item.Value;
             //}
         }
 
@@ -75,15 +86,18 @@
             }
         }
 
-        private static RedisHash<string, string[]> SetupRedis()
+        private static RedisHash<string, string[]> SetupRedis(IConfiguration configuration, string function)
         {
-            //var cacheType = StringSwapper.ByArea(area, )
-            //var optionsRedis = 
+            var optionsRedis = configuration
+                .GetSection(AppSettingsSections.RedisSection)
+                .Get<RedisOptions>();
 
-            var connection = new RedisConnection("127.0.0.1:6379,abortConnect=false");
-            var container = new RedisContainer(connection, "DataGate_Cache_Container");
+            //RedisServer.Run();
 
-            var data = container.GetKey<RedisHash<string, string[]>>("FundCacheRecords");
+            var connection = new RedisConnection($"{optionsRedis.Host}:{optionsRedis.Port}, {GlobalConstants.AbortConnect}");
+            var container = new RedisContainer(connection, optionsRedis.InstanceName);
+
+            var data = container.GetKey<RedisHash<string, string[]>>(GlobalConstants.RedisCacheRecords + function);
             return data;
         }
     }

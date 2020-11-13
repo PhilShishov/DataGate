@@ -5,6 +5,7 @@
     public interface IProxy
     {
         string KeyNameSpace { get; }
+
         IDatabaseAsync DB { get; }
     }
 }
