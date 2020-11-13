@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
 
+    using DataGate.Services.Data.Agreements.Contracts;
     using DataGate.Services.Mapping;
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.Dtos.Queries;

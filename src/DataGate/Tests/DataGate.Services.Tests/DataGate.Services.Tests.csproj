@@ -22,6 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Messaging\" />
+    <Folder Include="Mapping\" />
+    <Folder Include="Slug\" />
     <Folder Include="TestData\" />
   </ItemGroup>
 

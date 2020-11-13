@@ -1,7 +1,7 @@
 ﻿namespace DataGate.Web.Configuration
 {
-    using DataGate.Services.Data;
     using DataGate.Services.Data.Agreements;
+    using DataGate.Services.Data.Agreements.Contracts;
     using DataGate.Services.Data.Documents;
     using DataGate.Services.Data.Documents.Contracts;
     using DataGate.Services.Data.Entities;
@@ -15,7 +15,6 @@
     using DataGate.Services.Data.Timelines;
     using DataGate.Services.Data.TimeSeries;
     using DataGate.Services.Slug;
-    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
     public static class BusinessLogicConfiguration
@@ -23,10 +22,9 @@
         public static IServiceCollection AddBusinessLogicServices(this IServiceCollection services)
         {
             // Application services
-            services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<ISlugGenerator, SlugGenerator>();
 
-            services.AddTransient<IFileSystemService, FileSystemService>();
+            services.AddTransient<IFileSystemService, FileService>();
             services.AddTransient<IDocumentService, DocumentService>();
             services.AddTransient<IEntitiesDocumentService, EntitiesDocumentService>();
             services.AddTransient<IEntityService, EntityService>();

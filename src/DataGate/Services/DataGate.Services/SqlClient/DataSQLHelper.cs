@@ -15,43 +15,9 @@ namespace DataGate.Services.SqlClient
     using DataGate.Common;
 
     // _____________________________________________________________
-    public class DataSQLHelper
+    public class DataSqlHelper
     {
         private const int StartingIndex = 0;
-
-        // ________________________________________________________
-        //
-        // Create a model by reading table data
-        // from SQL Server with headers and values
-        public static IEnumerable<string[]> GetStringData(SqlCommand command)
-        {
-            using (var reader = command.ExecuteReader())
-            {
-                var model = new List<string[]>();
-
-                // Performance overhead :
-                // array of strings and for loop is with fastest access time
-
-                // ________________________________________________________
-                //
-                // Iterate through each value of the
-                // header row and return their values
-                var headers = new string[reader.FieldCount];
-                for (int i = 0; i < headers.Length; i++)
-                {
-                    headers[i] = reader.GetName(i);
-                }
-
-                var values = GetValues(reader);
-
-                model.Add(headers);
-                model.AddRange(values);
-
-                Validator.NotFoundExceptionIfEntityIsNull(model, nameof(model));
-
-                return model.ToArray();
-            }
-        }
 
         public static async IAsyncEnumerable<string[]> GetStringDataAsync(SqlCommand command)
         {

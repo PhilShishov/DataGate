@@ -13,7 +13,6 @@
     using DataGate.Data.Models.Users;
     using DataGate.Data.Repositories;
     using DataGate.Data.Seeding;
-    using DataGate.Services.Data;
     using DataGate.Services.Messaging;
 
     using Microsoft.EntityFrameworkCore;
@@ -54,9 +53,6 @@
         {
             var sw = Stopwatch.StartNew();
 
-            var settingsService = serviceProvider.GetService<ISettingsService>();
-            Console.WriteLine($"Count of settings: {settingsService.GetCount()}");
-
             Console.WriteLine(sw.Elapsed);
             return await Task.FromResult(0);
         }
@@ -83,7 +79,6 @@
 
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
-            services.AddTransient<ISettingsService, SettingsService>();
         }
     }
 }

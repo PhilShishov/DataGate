@@ -1,6 +1,7 @@
 ﻿namespace DataGate.Web.Controllers
 {
     using System;
+
     using DataGate.Common;
     using DataGate.Common.Exceptions;
     using DataGate.Services.Data.ShareClasses;
@@ -12,14 +13,12 @@
     public class SearchController : BaseController
     {
         private readonly IShareClassService service;
-        private readonly IRepository<TbHistoryShareClass> repository;
 
         public SearchController(
-            IShareClassService service,
-            IRepository<TbHistoryShareClass> repository)
+            IShareClassService service
+            )
         {
             this.service = service;
-            this.repository = repository;
         }
 
         [HttpGet]
@@ -42,16 +41,16 @@
                 var classId = this.service.ByIsin(searchTerm);
                 return this.RedirectToRoute(EndpointsConstants.RouteDetails + EndpointsConstants.ShareClassArea, new { area = EndpointsConstants.ShareClassArea, id = classId, date = model.Date });
             }
-            //model.Results = this.service.ByName(searchTerm);
+            model.Results = this.service.ByName(searchTerm);
 
-            var query = this.repository.All();
-            query = query.Where(sc =>
-            EF.Functions.Like(sc.ScOfficialShareClassName, searchTerm) ||
-            EF.Functions.Like(sc.ScIsinCode, searchTerm));
+            //var query = this.repository.All();
+            //query = query.Where(sc =>
+            //EF.Functions.Like(sc.ScOfficialShareClassName, searchTerm) ||
+            //EF.Functions.Like(sc.ScIsinCode, searchTerm));
 
-            model.Results = query
-                .OrderBy(sc => sc.ScOfficialShareClassName)
-                .To<ResultViewModel>().ToList();
+            //model.Results = query
+            //    .OrderBy(sc => sc.ScOfficialShareClassName)
+                //.To<ResultViewModel>().ToList();
 
             return this.View(model);
         }

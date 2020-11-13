@@ -1,7 +1,6 @@
 ﻿namespace DataGate.Services.Slug
 {
     using System;
-    using System.Text.RegularExpressions;
 
     public class SlugGenerator : ISlugGenerator
     {

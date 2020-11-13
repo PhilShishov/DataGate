@@ -4,7 +4,7 @@
     using System.Text.RegularExpressions;
 
     using DataGate.Common;
-    using DataGate.Services.Data.Agreements;
+    using DataGate.Services.Data.Agreements.Contracts;
     using DataGate.Web.Helpers;
     using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.Resources;
