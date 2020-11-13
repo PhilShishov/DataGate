@@ -45,7 +45,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataGate.Web.Utilities", "W
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataGate.Common", "DataGate.Common\DataGate.Common.csproj", "{068F885E-6643-47B7-B36C-496A394C1679}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataGate.Services.Tests", "Tests\DataGate.Services.Tests\DataGate.Services.Tests.csproj", "{5E75AEAE-0356-4673-83F6-33B4F71E8E68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataGate.Services.Tests", "Tests\DataGate.Services.Tests\DataGate.Services.Tests.csproj", "{5E75AEAE-0356-4673-83F6-33B4F71E8E68}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataGate.Services.Redis", "Services\DataGate.Services.Redis\DataGate.Services.Redis.csproj", "{7CB18022-7305-4D1A-8ED1-E60AFF09B9C6}"
 EndProject

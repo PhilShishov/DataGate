@@ -6,6 +6,8 @@
 
         public const string SendGridSection = "SendGrid";
 
+        public const string RedisSection = "Redis";
+
         public const string GoogleReCaptchaSection = "GoogleReCaptcha";
 
         public const string WebWizSection = "WebWiz";

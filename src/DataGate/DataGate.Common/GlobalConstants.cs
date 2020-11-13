@@ -10,6 +10,8 @@
         public const string DefaultCultureInfo = "en-US";
         public const string ItalianCultureInfo = "it-IT";
         public const int CultureCookieExpirationTimeInMonths = 5;
+        public const int RedisCacheExpirationTimeInSeconds = 60 * 60 * 8;
+        public const string AbortConnect = "abortConnect=false";
 
         // Tempdata Keys
         public const string SweetAlertKey = "sweetalert";
@@ -20,6 +22,9 @@
         // Connection Strings
         public const string DataGateUsersConnection = "DataGateUsersConnection";
         public const string DataGatevFinaleConnection = "DataGate_vFinaleConnection";
+
+        // Redis Cache
+        public const string RedisCacheRecords = "CacheRecords_";
 
         // User Roles
         public const int MaxAdminCount = 3;
