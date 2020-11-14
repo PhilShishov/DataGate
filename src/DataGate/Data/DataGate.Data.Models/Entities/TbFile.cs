@@ -1,22 +1,21 @@
-﻿namespace DataGate.Data.Models.Domain
+﻿namespace DataGate.Data.Models.Entities
 {
     using System.Collections.Generic;
-    using DataGate.Data.Models.Entities;
 
-    public partial class TbDomFileType
+    public partial class TbFile
     {
-        public TbDomFileType()
+        public TbFile()
         {
             TbMapFilefund = new HashSet<TbMapFilefund>();
             TbMapFileshareclass = new HashSet<TbMapFileshareclass>();
             TbMapFilesubfund = new HashSet<TbMapFilesubfund>();
         }
 
-        public int FiletypeId { get; set; }
-        public string FiletypeDesc { get; set; }
-        public int FiletypeEntity { get; set; }
+        public int FileId { get; set; }
 
-        public virtual TbDomEntity FiletypeEntityNavigation { get; set; }
+        public virtual TbServiceAgreementFund TbServiceAgreementFund { get; set; }
+        public virtual TbServiceAgreementShareclass TbServiceAgreementShareclass { get; set; }
+        public virtual TbServiceAgreementSubfund TbServiceAgreementSubfund { get; set; }
         public virtual ICollection<TbMapFilefund> TbMapFilefund { get; set; }
         public virtual ICollection<TbMapFileshareclass> TbMapFileshareclass { get; set; }
         public virtual ICollection<TbMapFilesubfund> TbMapFilesubfund { get; set; }

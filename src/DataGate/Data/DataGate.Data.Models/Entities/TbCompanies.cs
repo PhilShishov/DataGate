@@ -6,9 +6,9 @@
     {
         public TbCompanies()
         {
-            this.TbServiceAgreementFund = new HashSet<TbServiceAgreementFund>();
-            this.TbServiceAgreementShareclass = new HashSet<TbServiceAgreementShareclass>();
-            this.TbServiceAgreementSubfund = new HashSet<TbServiceAgreementSubfund>();
+            TbServiceAgreementFund = new HashSet<TbServiceAgreementFund>();
+            TbServiceAgreementShareclass = new HashSet<TbServiceAgreementShareclass>();
+            TbServiceAgreementSubfund = new HashSet<TbServiceAgreementSubfund>();
         }
 
         public int CId { get; set; }

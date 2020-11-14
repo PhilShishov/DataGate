@@ -1,10 +1,9 @@
 ﻿namespace DataGate.Data.Models.Entities
 {
     using System;
-
     using DataGate.Data.Models.Domain;
 
-    public partial class TbHistoryShareClass
+    public partial class TbHistoryShareClassCopy
     {
         public int ScId { get; set; }
         public DateTime ScInitialDate { get; set; }

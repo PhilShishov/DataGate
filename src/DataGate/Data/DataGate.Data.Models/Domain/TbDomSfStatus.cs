@@ -1,14 +1,13 @@
 ﻿namespace DataGate.Data.Models.Domain
 {
     using System.Collections.Generic;
-
     using DataGate.Data.Models.Entities;
 
     public partial class TbDomSfStatus
     {
         public TbDomSfStatus()
         {
-            this.TbHistorySubFund = new HashSet<TbHistorySubFund>();
+            TbHistorySubFund = new HashSet<TbHistorySubFund>();
         }
 
         public int StId { get; set; }

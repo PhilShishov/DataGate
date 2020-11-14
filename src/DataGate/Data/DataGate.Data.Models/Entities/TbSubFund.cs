@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace DataGate.Data.Models.Entities
+﻿namespace DataGate.Data.Models.Entities
 {
+    using System.Collections.Generic;
+
     public partial class TbSubFund
     {
         public TbSubFund()
         {
-            this.TbFundSubFund = new HashSet<TbFundSubFund>();
-            this.TbHistorySubFund = new HashSet<TbHistorySubFund>();
-            this.TbMapFilesubfund = new HashSet<TbMapFilesubfund>();
-            this.TbServiceAgreementSubfund = new HashSet<TbServiceAgreementSubfund>();
-            this.TbSubFundShareClass = new HashSet<TbSubFundShareClass>();
+            TbFundSubFund = new HashSet<TbFundSubFund>();
+            TbHistorySubFund = new HashSet<TbHistorySubFund>();
+            TbMapFilesubfund = new HashSet<TbMapFilesubfund>();
+            TbServiceAgreementSubfund = new HashSet<TbServiceAgreementSubfund>();
+            TbSubFundShareClass = new HashSet<TbSubFundShareClass>();
+            TbTimeseriesSubfund = new HashSet<TbTimeseriesSubfund>();
         }
 
         public int IdSubFund { get; set; }
@@ -21,5 +21,6 @@ namespace DataGate.Data.Models.Entities
         public virtual ICollection<TbMapFilesubfund> TbMapFilesubfund { get; set; }
         public virtual ICollection<TbServiceAgreementSubfund> TbServiceAgreementSubfund { get; set; }
         public virtual ICollection<TbSubFundShareClass> TbSubFundShareClass { get; set; }
+        public virtual ICollection<TbTimeseriesSubfund> TbTimeseriesSubfund { get; set; }
     }
 }

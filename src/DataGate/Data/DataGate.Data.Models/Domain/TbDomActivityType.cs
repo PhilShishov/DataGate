@@ -1,16 +1,15 @@
 ﻿namespace DataGate.Data.Models.Domain
 {
     using System.Collections.Generic;
-
     using DataGate.Data.Models.Entities;
 
     public partial class TbDomActivityType
     {
         public TbDomActivityType()
         {
-            this.TbServiceAgreementFund = new HashSet<TbServiceAgreementFund>();
-            this.TbServiceAgreementShareclass = new HashSet<TbServiceAgreementShareclass>();
-            this.TbServiceAgreementSubfund = new HashSet<TbServiceAgreementSubfund>();
+            TbServiceAgreementFund = new HashSet<TbServiceAgreementFund>();
+            TbServiceAgreementShareclass = new HashSet<TbServiceAgreementShareclass>();
+            TbServiceAgreementSubfund = new HashSet<TbServiceAgreementSubfund>();
         }
 
         public int AtId { get; set; }

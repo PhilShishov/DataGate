@@ -1,7 +1,6 @@
 ﻿namespace DataGate.Data.Models.Entities
 {
     using System;
-
     using DataGate.Data.Models.Domain;
 
     public partial class TbHistorySubFund

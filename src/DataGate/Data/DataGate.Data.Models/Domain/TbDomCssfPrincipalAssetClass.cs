@@ -1,14 +1,12 @@
 ﻿namespace DataGate.Data.Models.Domain
 {
     using System.Collections.Generic;
-
     using DataGate.Data.Models.Entities;
-
     public partial class TbDomCssfPrincipalAssetClass
     {
         public TbDomCssfPrincipalAssetClass()
         {
-            this.TbHistorySubFund = new HashSet<TbHistorySubFund>();
+            TbHistorySubFund = new HashSet<TbHistorySubFund>();
         }
 
         public int PacId { get; set; }

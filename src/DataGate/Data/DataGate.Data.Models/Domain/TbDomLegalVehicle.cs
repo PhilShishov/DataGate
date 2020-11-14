@@ -1,14 +1,13 @@
 ﻿namespace DataGate.Data.Models.Domain
 {
     using System.Collections.Generic;
-
     using DataGate.Data.Models.Entities;
 
     public partial class TbDomLegalVehicle
     {
         public TbDomLegalVehicle()
         {
-            this.TbHistoryFund = new HashSet<TbHistoryFund>();
+            TbHistoryFund = new HashSet<TbHistoryFund>();
         }
 
         public int LvId { get; set; }

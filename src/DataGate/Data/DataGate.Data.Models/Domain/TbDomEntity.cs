@@ -6,9 +6,9 @@
     {
         public TbDomEntity()
         {
-            this.TbDomActivityType = new HashSet<TbDomActivityType>();
-            this.TbDomFileType = new HashSet<TbDomFileType>();
-            this.TbDomTimeseriesType = new HashSet<TbDomTimeseriesType>();
+            TbDomActivityType = new HashSet<TbDomActivityType>();
+            TbDomFileType = new HashSet<TbDomFileType>();
+            TbDomTimeseriesType = new HashSet<TbDomTimeseriesType>();
         }
 
         public int EntityId { get; set; }

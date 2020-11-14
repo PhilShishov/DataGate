@@ -6,7 +6,7 @@
     {
         public TbDomLegalType()
         {
-            this.TbDomLegalVehicle = new HashSet<TbDomLegalVehicle>();
+            TbDomLegalVehicle = new HashSet<TbDomLegalVehicle>();
         }
 
         public int LtId { get; set; }

@@ -6,10 +6,10 @@
     {
         public TbFund()
         {
-            this.TbFundSubFund = new HashSet<TbFundSubFund>();
-            this.TbHistoryFund = new HashSet<TbHistoryFund>();
-            this.TbMapFilefund = new HashSet<TbMapFilefund>();
-            this.TbServiceAgreementFund = new HashSet<TbServiceAgreementFund>();
+            TbFundSubFund = new HashSet<TbFundSubFund>();
+            TbHistoryFund = new HashSet<TbHistoryFund>();
+            TbMapFilefund = new HashSet<TbMapFilefund>();
+            TbServiceAgreementFund = new HashSet<TbServiceAgreementFund>();
         }
 
         public int FId { get; set; }
