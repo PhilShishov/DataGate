@@ -14,8 +14,7 @@
     {
         private readonly IShareClassService service;
 
-        public SearchController(
-            IShareClassService service)
+        public SearchController(IShareClassService service)
         {
             this.service = service;
         }

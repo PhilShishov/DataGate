@@ -5,6 +5,6 @@
 
     public class UserPanelViewModel
     {
-        public IEnumerable<TbHistoryShareClass> ShareClasses { get; set; }
+        public IEnumerable<TbPrimeShareClass> ShareClasses { get; set; }
     }
 }

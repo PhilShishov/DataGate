@@ -21,10 +21,10 @@ namespace DataGate.Services.Data.ShareClasses
     // _____________________________________________________________
     public class ShareClassService : IShareClassService
     {
-        private readonly IRepository<TbHistoryShareClass> repository;
+        private readonly IRepository<TbPrimeShareClass> repository;
 
         public ShareClassService(
-                        IRepository<TbHistoryShareClass> repository)
+                        IRepository<TbPrimeShareClass> repository)
         {
             this.repository = repository;
         }
@@ -48,33 +48,30 @@ namespace DataGate.Services.Data.ShareClasses
             return query.ToHashSet();
         }
 
-        public IEnumerable<TbHistoryShareClass> ByDate()
+        public IEnumerable<TbPrimeShareClass> ByDate()
             => this.repository.All()
                 .OrderByDescending(sc => sc.ScInitialDate)
                 .Take(10)
                 .ToList();
 
         public IEnumerable<ResultViewModel> ByName(string searchTerm)
-             => this.repository.All()
-                .Where(sc => sc.ScOfficialShareClassName.Contains(searchTerm))
+        {
+            var query = this.repository.All()
+                .Where(sc =>
+               EF.Functions.Contains(sc.ScOfficialShareClassName, searchTerm) ||
+               EF.Functions.Contains(sc.ScIsinCode, searchTerm));
+
+            return query
                 .OrderBy(sc => sc.ScOfficialShareClassName)
                 .To<ResultViewModel>()
                 .ToList();
+        }
 
         public int ByIsin(string searchTerm)
             => this.repository.All()
                .Where(sc => sc.ScIsinCode == searchTerm)
                .Select(sc => sc.ScId)
                .FirstOrDefault();
-
-        //var query = this.repository.All();
-        //query = query.Where(sc =>
-        //    EF.Functions.Contains(sc.ScOfficialShareClassName, searchTerm) ||
-        //    EF.Functions.Contains(sc.ScIsinCode, searchTerm));
-
-        //    model.Results = query
-        //        .OrderBy(sc => sc.ScOfficialShareClassName)
-        //        .To<ResultViewModel>().ToList();
 
         public void ThrowEntityNotFoundExceptionIfIdDoesNotExist(int id)
         {

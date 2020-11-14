@@ -1,31 +1,32 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <LangVersion>latest</LangVersion>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<LangVersion>latest</LangVersion>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <ItemGroup>
-    <AdditionalFiles Include="..\..\stylecop.json" />
+	<PropertyGroup>
+		<CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+	</PropertyGroup>
+	<ItemGroup>
+		<AdditionalFiles Include="..\..\stylecop.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.9" />
+		<PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+		<PackageReference Include="System.Linq.Async" Version="4.1.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
-    <PackageReference Include="System.Linq.Async" Version="4.1.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\DataGate.Common\DataGate.Common.csproj" />
-    <ProjectReference Include="..\..\Data\DataGate.Data.Common\DataGate.Data.Common.csproj" />
-    <ProjectReference Include="..\..\Data\DataGate.Data.Models\DataGate.Data.Models.csproj" />
-    <ProjectReference Include="..\..\Web\DataGate.Web.Dtos\DataGate.Web.Dtos.csproj" />
-    <ProjectReference Include="..\..\Web\DataGate.Web.ViewModels\DataGate.Web.ViewModels.csproj" />
-    <ProjectReference Include="..\DataGate.Services.Mapping\DataGate.Services.Mapping.csproj" />
-    <ProjectReference Include="..\DataGate.Services.Redis\DataGate.Services.Redis.csproj" />
-    <ProjectReference Include="..\DataGate.Services\DataGate.Services.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\DataGate.Common\DataGate.Common.csproj" />
+		<ProjectReference Include="..\..\Data\DataGate.Data.Common\DataGate.Data.Common.csproj" />
+		<ProjectReference Include="..\..\Data\DataGate.Data.Models\DataGate.Data.Models.csproj" />
+		<ProjectReference Include="..\..\Web\DataGate.Web.Dtos\DataGate.Web.Dtos.csproj" />
+		<ProjectReference Include="..\..\Web\DataGate.Web.ViewModels\DataGate.Web.ViewModels.csproj" />
+		<ProjectReference Include="..\DataGate.Services.Mapping\DataGate.Services.Mapping.csproj" />
+		<ProjectReference Include="..\DataGate.Services.Redis\DataGate.Services.Redis.csproj" />
+		<ProjectReference Include="..\DataGate.Services\DataGate.Services.csproj" />
+	</ItemGroup>
 
 </Project>

@@ -11,7 +11,7 @@
     {
         IEnumerable<ResultViewModel> ByName(string searchTerm);
 
-        IEnumerable<TbHistoryShareClass> ByDate();
+        IEnumerable<TbPrimeShareClass> ByDate();
 
         bool IsIsin(string searchTerm);
 
