@@ -2,9 +2,17 @@
 {
     public static class GlobalConstants
     {
-        // Application Constants
+        // Meta data
         public const string AppName = "DataGate";
-        public const string DataGateFullFooterDisplay = "- Pharus Management Lux SA 16, Avenue de la Gare L-1610 Luxembourg";
+        public const string AuthorName = "Philip Shishov";
+        public const string Keywords = 
+            "ASP.NET Core, JavaScript, jQuery, " +
+            "MSSQL, Git, GitHub, Fund Management Software, " +
+            "Fund of Funds Software, Alternative Funds, Philip Shishov";
+
+        // Application Constants
+        public const string DataGateFullFooterDisplay = 
+            "- Pharus Management Lux SA 16, Avenue de la Gare L-1610 Luxembourg";
         public const string FileSizeLimitConfiguration = "FileSizeLimit";
         public const int FileSizeLimit = 45 * 1024 * 1024;
         public const string DefaultCultureInfo = "en-US";
@@ -17,7 +25,8 @@
         public const string SweetAlertKey = "sweetalert";
         public const string SweetAlertScript = "<script type='text/javascript'>swal('{0}', '{1}','{2}');</script>";
         public const string AlertifyKey = "alertify";
-        public const string AlertifyScript = "<script type='text/javascript'>alertify.set('notifier', 'position', 'top-left'); alertify.notify('{0}', '{1}', 5);</script>";
+        public const string AlertifyScript = 
+            "<script type='text/javascript'>alertify.set('notifier', 'position', 'top-left'); alertify.notify('{0}', '{1}', 5);</script>";
 
         // Connection Strings
         public const string DataGateUsersConnection = "DataGateUsersConnection";

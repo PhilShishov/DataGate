@@ -103,7 +103,7 @@
 
             this.SetViewDataValues(type, typeIndex);
 
-            var viewModel = new TSReportOverviewViewModel
+            var viewModel = new TimeSerieReportsListViewModel
             {
                 AreaName = type,
                 StartDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month - 1, DateTime.Today.Day),

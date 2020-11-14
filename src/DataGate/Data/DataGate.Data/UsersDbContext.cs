@@ -7,7 +7,6 @@
     using System.Threading.Tasks;
 
     using DataGate.Data.Common.Models;
-    using DataGate.Data.Models;
     using DataGate.Data.Models.Users;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
@@ -23,8 +22,6 @@
             : base(options)
         {
         }
-
-        public DbSet<Setting> Settings { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

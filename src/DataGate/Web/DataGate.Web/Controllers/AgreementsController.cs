@@ -43,9 +43,9 @@
                                                   SqlFunctionDictionary.AllAgreementsShareClasses);
 
             var today = DateTime.Today;
-            var agreements = this.service.GetAll<AllAgreementViewModel>(function, today);
+            var agreements = this.service.GetAll<AgreementViewModel>(function, today);
 
-            var viewModel = new AllAgreementOverviewViewModel()
+            var viewModel = new AgreementOverviewViewModel()
             {
                 Date = today.ToString(GlobalConstants.RequiredWebDateTimeFormat),
                 Agreements = agreements,
@@ -56,7 +56,7 @@
         }
 
         [HttpPost]
-        public IActionResult All(AllAgreementOverviewViewModel model)
+        public IActionResult All(AgreementOverviewViewModel model)
         {
             if (model.Date != null)
             {
@@ -67,7 +67,7 @@
 
                 var parsedDate = DateTimeParser.FromWebFormat(model.Date);
 
-                model.Agreements = this.service.GetAll<AllAgreementViewModel>(function, parsedDate);
+                model.Agreements = this.service.GetAll<AgreementViewModel>(function, parsedDate);
             }
 
             if (model.Agreements != null)
