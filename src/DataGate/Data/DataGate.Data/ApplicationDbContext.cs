@@ -71,7 +71,7 @@
         public virtual DbSet<TbMapFileshareclass> TbMapFileshareclass { get; set; }
         public virtual DbSet<TbMapFilesubfund> TbMapFilesubfund { get; set; }
         public virtual DbSet<TbMapNavFrequencyValuation> TbMapNavFrequencyValuation { get; set; }
-        public virtual DbSet<TbSearchShareClass> TbSearchShareClass { get; set; }
+        public virtual DbSet<TbPrimeShareClass> TbPrimeShareClass { get; set; }
         public virtual DbSet<TbServiceAgreementFund> TbServiceAgreementFund { get; set; }
         public virtual DbSet<TbServiceAgreementShareclass> TbServiceAgreementShareclass { get; set; }
         public virtual DbSet<TbServiceAgreementSubfund> TbServiceAgreementSubfund { get; set; }
@@ -1581,34 +1581,158 @@
                     .HasConstraintName("FK_tb_map_nav_frequency_valuation_tb_dom_valutationDate");
             });
 
-            modelBuilder.Entity<TbSearchShareClass>(entity =>
+            modelBuilder.Entity<TbPrimeShareClass>(entity =>
             {
-                entity.HasKey(e => e.ScId);
+                entity.HasKey(e => new { e.ScId, e.ScInitialDate });
 
-                entity.ToTable("tb_searchShareClass");
+                entity.ToTable("tb_primeShareClass");
 
                 entity.HasIndex(e => e.ScId)
                     .HasName("uidx_sc_id")
                     .IsUnique();
 
-                entity.Property(e => e.ScId)
-                    .HasColumnName("sc_id")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.ScId).HasColumnName("sc_id");
+
+                entity.Property(e => e.ScInitialDate)
+                    .HasColumnName("sc_initialDate")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.ScAccountingCode)
+                    .HasColumnName("sc_accountingCode")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.ScBloombedCode)
+                    .HasColumnName("sc_bloombedCode")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.ScBloombedId)
+                    .HasColumnName("sc_bloombedId")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.ScBloomberMarket)
+                    .HasColumnName("sc_bloomberMarket")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.ScChangeComment).HasColumnName("sc_change_comment");
+
+                entity.Property(e => e.ScCommentTitle)
+                    .HasColumnName("sc_comment_title")
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.ScCountryIssue)
+                    .HasColumnName("sc_countryIssue")
+                    .HasMaxLength(2)
+                    .IsFixedLength();
+
+                entity.Property(e => e.ScCurrency)
+                    .HasColumnName("sc_currency")
+                    .HasMaxLength(3)
+                    .IsFixedLength();
+
+                entity.Property(e => e.ScDateBusinessYear)
+                    .HasColumnName("sc_date_business_year")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.ScEmissionDate)
+                    .HasColumnName("sc_emissionDate")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.ScEndDate)
+                    .HasColumnName("sc_endDate")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.ScExpiryDate)
+                    .HasColumnName("sc_expiryDate")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.ScFaCode)
+                    .HasColumnName("sc_faCode")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.ScHedged).HasColumnName("sc_hedged");
+
+                entity.Property(e => e.ScInceptionDate)
+                    .HasColumnName("sc_inceptionDate")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.ScInitialPrice).HasColumnName("sc_initialPrice");
+
+                entity.Property(e => e.ScInvestorType).HasColumnName("sc_investorType");
 
                 entity.Property(e => e.ScIsinCode)
                     .HasColumnName("sc_isinCode")
                     .HasMaxLength(12)
                     .IsFixedLength();
 
+                entity.Property(e => e.ScLastNav)
+                    .HasColumnName("sc_lastNav")
+                    .HasColumnType("datetime");
+
+                entity.Property(e => e.ScListed).HasColumnName("sc_listed");
+
                 entity.Property(e => e.ScOfficialShareClassName)
                     .HasColumnName("sc_officialShareClassName")
                     .HasMaxLength(100);
 
+                entity.Property(e => e.ScProspectusCode)
+                    .HasColumnName("sc_prospectus_code")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.ScShareType).HasColumnName("sc_shareType");
+
+                entity.Property(e => e.ScShortShareClassName)
+                    .HasColumnName("sc_shortShareClassName")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.ScStatus).HasColumnName("sc_status");
+
+                entity.Property(e => e.ScTaCode)
+                    .HasColumnName("sc_taCode")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.ScUltimateParentCountryRisk)
+                    .HasColumnName("sc_ultimateParentCountryRisk")
+                    .HasMaxLength(2)
+                    .IsFixedLength();
+
+                entity.Property(e => e.ScValorCode)
+                    .HasColumnName("sc_valorCode")
+                    .HasMaxLength(100);
+
+                entity.Property(e => e.ScWkn)
+                    .HasColumnName("sc_WKN")
+                    .HasMaxLength(100);
+
+                entity.HasOne(d => d.ScCountryIssueNavigation)
+                    .WithMany(p => p.TbPrimeShareClass)
+                    .HasForeignKey(d => d.ScCountryIssue)
+                    .HasConstraintName("FK_tb_primeShareClass_tb_dom_iso_country");
+
+                entity.HasOne(d => d.ScCurrencyNavigation)
+                    .WithMany(p => p.TbPrimeShareClass)
+                    .HasForeignKey(d => d.ScCurrency)
+                    .HasConstraintName("FK_tb_primeShareClass_tb_dom_iso_currency");
+
                 entity.HasOne(d => d.Sc)
-                    .WithOne(p => p.TbSearchShareClass)
-                    .HasForeignKey<TbSearchShareClass>(d => d.ScId)
+                    .WithOne(p => p.TbPrimeShareClass)
+                    .HasForeignKey<TbPrimeShareClass>(d => d.ScId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_tb_searchShareClass_tb_shareClass");
+                    .HasConstraintName("FK_tb_primeShareClass_tb_shareClass");
+
+                entity.HasOne(d => d.ScInvestorTypeNavigation)
+                    .WithMany(p => p.TbPrimeShareClass)
+                    .HasForeignKey(d => d.ScInvestorType)
+                    .HasConstraintName("FK_tb_primeShareClass_tb_dom_investor_type");
+
+                entity.HasOne(d => d.ScShareTypeNavigation)
+                    .WithMany(p => p.TbPrimeShareClass)
+                    .HasForeignKey(d => d.ScShareType)
+                    .HasConstraintName("FK_tb_primeShareClass_tb_dom_share_type");
+
+                entity.HasOne(d => d.ScStatusNavigation)
+                    .WithMany(p => p.TbPrimeShareClass)
+                    .HasForeignKey(d => d.ScStatus)
+                    .HasConstraintName("FK_tb_primeShareClass_tb_dom_share_status");
             });
 
             modelBuilder.Entity<TbServiceAgreementFund>(entity =>

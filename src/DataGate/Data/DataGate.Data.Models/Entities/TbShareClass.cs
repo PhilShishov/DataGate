@@ -18,7 +18,7 @@
 
         public int IdSc { get; set; }
 
-        public virtual TbSearchShareClass TbSearchShareClass { get; set; }
+        public virtual TbPrimeShareClass TbPrimeShareClass { get; set; }
         public virtual ICollection<TbCountryDistributionShares> TbCountryDistributionShares { get; set; }
         public virtual ICollection<TbHistoryShareClass> TbHistoryShareClass { get; set; }
         public virtual ICollection<TbHistoryShareClassCopy> TbHistoryShareClassCopy { get; set; }

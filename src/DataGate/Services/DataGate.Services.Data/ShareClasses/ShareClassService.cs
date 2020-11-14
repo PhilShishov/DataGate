@@ -67,6 +67,15 @@ namespace DataGate.Services.Data.ShareClasses
                .Select(sc => sc.ScId)
                .FirstOrDefault();
 
+        //var query = this.repository.All();
+        //query = query.Where(sc =>
+        //    EF.Functions.Contains(sc.ScOfficialShareClassName, searchTerm) ||
+        //    EF.Functions.Contains(sc.ScIsinCode, searchTerm));
+
+        //    model.Results = query
+        //        .OrderBy(sc => sc.ScOfficialShareClassName)
+        //        .To<ResultViewModel>().ToList();
+
         public void ThrowEntityNotFoundExceptionIfIdDoesNotExist(int id)
         {
             if (!this.Exists(id))

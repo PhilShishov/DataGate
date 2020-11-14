@@ -5,7 +5,7 @@
     using DataGate.Data.Models.Entities;
     using DataGate.Services.Mapping;
 
-    public class ResultViewModel : IMapFrom<TbHistoryShareClass>
+    public class ResultViewModel : IMapFrom<TbPrimeShareClass>
     {
         public int ScId { get; set; }
 

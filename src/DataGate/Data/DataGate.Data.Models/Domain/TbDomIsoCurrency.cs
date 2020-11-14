@@ -23,6 +23,7 @@
         public virtual ICollection<TbHistoryShareClass> TbHistoryShareClass { get; set; }
         public virtual ICollection<TbHistoryShareClassCopy> TbHistoryShareClassCopy { get; set; }
         public virtual ICollection<TbHistorySubFund> TbHistorySubFund { get; set; }
+        public virtual ICollection<TbPrimeShareClass> TbPrimeShareClass { get; set; }
         public virtual ICollection<TbShareclassTsTest> TbShareclassTsTest { get; set; }
         public virtual ICollection<TbTimeseriesShareclass> TbTimeseriesShareclass { get; set; }
         public virtual ICollection<TbTimeseriesSubfund> TbTimeseriesSubfund { get; set; }

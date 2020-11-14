@@ -15,8 +15,7 @@
         private readonly IShareClassService service;
 
         public SearchController(
-            IShareClassService service
-            )
+            IShareClassService service)
         {
             this.service = service;
         }
@@ -42,15 +41,6 @@
                 return this.RedirectToRoute(EndpointsConstants.RouteDetails + EndpointsConstants.ShareClassArea, new { area = EndpointsConstants.ShareClassArea, id = classId, date = model.Date });
             }
             model.Results = this.service.ByName(searchTerm);
-
-            //var query = this.repository.All();
-            //query = query.Where(sc =>
-            //EF.Functions.Like(sc.ScOfficialShareClassName, searchTerm) ||
-            //EF.Functions.Like(sc.ScIsinCode, searchTerm));
-
-            //model.Results = query
-            //    .OrderBy(sc => sc.ScOfficialShareClassName)
-                //.To<ResultViewModel>().ToList();
 
             return this.View(model);
         }

@@ -16,5 +16,6 @@
 
         public virtual ICollection<TbHistoryShareClass> TbHistoryShareClass { get; set; }
         public virtual ICollection<TbHistoryShareClassCopy> TbHistoryShareClassCopy { get; set; }
+        public virtual ICollection<TbPrimeShareClass> TbPrimeShareClass { get; set; }
     }
 }
