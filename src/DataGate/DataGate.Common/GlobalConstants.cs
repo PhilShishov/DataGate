@@ -30,7 +30,7 @@
 
         // Connection Strings
         public const string DataGateUsersConnection = "DataGateUsersConnection";
-        public const string DataGatevFinaleConnection = "DataGate_vFinaleConnection";
+        public const string DataGateAppConnection = "DataGateAppConnection";
 
         // Redis Cache
         public const string RedisCacheRecords = "CacheRecords_";

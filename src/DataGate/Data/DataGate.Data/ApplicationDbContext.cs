@@ -74,7 +74,7 @@
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(this.configuration.GetConnectionString(GlobalConstants.DataGatevFinaleConnection));
+                optionsBuilder.UseSqlServer(this.configuration.GetConnectionString(GlobalConstants.DataGateAppConnection));
             }
         }
 

@@ -41,7 +41,7 @@ namespace DataGate.Services.SqlClient
         {
             using (SqlConnection connection = new SqlConnection())
             {
-                connection.ConnectionString = this.configuration.GetConnectionString(GlobalConstants.DataGatevFinaleConnection);
+                connection.ConnectionString = this.configuration.GetConnectionString(GlobalConstants.DataGateAppConnection);
                 try
                 {
                     if (connection.State == ConnectionState.Closed)
@@ -72,7 +72,7 @@ namespace DataGate.Services.SqlClient
         {
             using (SqlConnection connection = new SqlConnection())
             {
-                connection.ConnectionString = this.configuration.GetConnectionString(GlobalConstants.DataGatevFinaleConnection);
+                connection.ConnectionString = this.configuration.GetConnectionString(GlobalConstants.DataGateAppConnection);
                 await connection.OpenAsync();
                 SqlCommand command = connection.CreateCommand();
 
@@ -116,7 +116,7 @@ namespace DataGate.Services.SqlClient
         {
             using (SqlConnection connection = new SqlConnection())
             {
-                connection.ConnectionString = this.configuration.GetConnectionString(GlobalConstants.DataGatevFinaleConnection);
+                connection.ConnectionString = this.configuration.GetConnectionString(GlobalConstants.DataGateAppConnection);
                 await connection.OpenAsync();
                 SqlCommand command = connection.CreateCommand();
 
@@ -197,7 +197,7 @@ namespace DataGate.Services.SqlClient
 
         private SqlCommand SetUpSqlConnectionCommand(SqlConnection connection)
         {
-            connection.ConnectionString = this.configuration.GetConnectionString(GlobalConstants.DataGatevFinaleConnection);
+            connection.ConnectionString = this.configuration.GetConnectionString(GlobalConstants.DataGateAppConnection);
             connection.Open();
             SqlCommand command = connection.CreateCommand();
             return command;
