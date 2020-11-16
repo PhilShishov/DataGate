@@ -2,6 +2,7 @@
 @{
     var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
 }
+
 <form method="post">
     <div class="mb-5">
         @if (controllerName == EndpointsConstants.FundArea + EndpointsConstants.ActionDetails)
@@ -22,7 +23,7 @@
                                         asp-route-name="@document.SluggedName"
                                         name="docValue"
                                         value="@document.Name">
-                                    @Html.Encode(StringExtensions.GetFileName(document.Name))
+                                    @Html.Raw(StringExtensions.GetFileName(document.Name))
                                 </button>
                             </td>
                         </tr>
@@ -62,7 +63,7 @@
                                             asp-route-name="@document.SluggedName"
                                             name="docValue"
                                             value="@document.Name">
-                                        @Html.Encode(StringExtensions.GetFileName(document.Name))
+                                        @Html.Raw(StringExtensions.GetFileName(document.Name))
                                     </button>
                                 </td>
                             </tr>
@@ -104,7 +105,7 @@
                                         asp-route-name="@agreement.SluggedName"
                                         name="agrValue"
                                         value="@agreement.Name">
-                                    @Html.Encode(StringExtensions.GetFileName(agreement.Name))
+                                    @Html.Raw(StringExtensions.GetFileName(agreement.Name))
                                 </button>
                             </td>
                         </tr>

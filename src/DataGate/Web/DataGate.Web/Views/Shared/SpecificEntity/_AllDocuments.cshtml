@@ -50,7 +50,7 @@
                                     asp-route-name="@document.SluggedName"
                                     name="docValue"
                                     value="@document.Name">
-                                @Html.Encode(StringExtensions.GetFileName(document.Name))
+                                @Html.Raw(StringExtensions.GetFileName(document.Name))
                             </button>
                         </td>
                         <td class="p-1">

@@ -120,7 +120,7 @@
                                             asp-route-name="@agreement.SluggedName"
                                             name="agrValue"
                                             value="@agreement.Name">
-                                        @Html.Encode(StringExtensions.GetFileName(agreement.Name))
+                                        @Html.Raw(StringExtensions.GetFileName(agreement.Name))
                                     </button>
                                 </td>
 
