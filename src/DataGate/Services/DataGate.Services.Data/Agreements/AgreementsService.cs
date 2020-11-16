@@ -19,7 +19,7 @@
 
         public IEnumerable<T> GetAll<T>(string function, DateTime date)
         {
-            IEnumerable<AllAgreementDto> dto = this.sqlManager.ExecuteQueryMapping<AllAgreementDto>(function, null, date);
+            IEnumerable<AgreementLibraryDto> dto = this.sqlManager.ExecuteQueryMapping<AgreementLibraryDto>(function, null, date);
 
             return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
         }

@@ -4,7 +4,7 @@
     using DataGate.Services.Slug;
     using DataGate.Web.Dtos.Queries;
 
-    public class AgreementViewModel : IMapFrom<AllAgreementDto>
+    public class AgreementLibraryViewModel : IMapFrom<AgreementLibraryDto>
     {
         public string Description { get; set; }
 

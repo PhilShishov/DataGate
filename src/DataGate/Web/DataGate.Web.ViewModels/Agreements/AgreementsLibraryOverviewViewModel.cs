@@ -12,6 +12,6 @@
 
         public string SelectedType { get; set; }
 
-        public IEnumerable<AgreementViewModel> Agreements { get; set; }
+        public IEnumerable<AgreementLibraryViewModel> Agreements { get; set; }
     }
 }
