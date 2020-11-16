@@ -37,7 +37,7 @@
                 {
                     var actual = model.ShareClasses.ToList();
 
-                    Assert.Equal(actual.Count, shareClasses.Count);
+                    Assert.Equal(shareClasses.Count, actual.Count);
 
                     for (int i = 0; i < shareClasses.Count; i++)
                     {

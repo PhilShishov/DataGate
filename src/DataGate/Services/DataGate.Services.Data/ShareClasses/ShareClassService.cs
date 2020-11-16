@@ -54,7 +54,7 @@ namespace DataGate.Services.Data.ShareClasses
                 .Take(10)
                 .ToList();
 
-        public IEnumerable<ResultViewModel> ByName(string searchTerm)
+        public IEnumerable<SearchViewModel> ByName(string searchTerm)
         {
             var query = this.repository.All()
                 .Where(sc =>
@@ -63,7 +63,7 @@ namespace DataGate.Services.Data.ShareClasses
 
             return query
                 .OrderBy(sc => sc.ScOfficialShareClassName)
-                .To<ResultViewModel>()
+                .To<SearchViewModel>()
                 .ToList();
         }
 

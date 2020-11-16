@@ -15,8 +15,12 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.1.9" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
+    <PackageReference Include="MyTested.AspNetCore.Mvc.Authentication" Version="3.1.2" />
+    <PackageReference Include="MyTested.AspNetCore.Mvc.Controllers" Version="3.1.2" />
+    <PackageReference Include="MyTested.AspNetCore.Mvc.EntityFrameworkCore" Version="3.1.2" />
+    <PackageReference Include="MyTested.AspNetCore.Mvc.Helpers" Version="3.1.2" />
     <PackageReference Include="MyTested.AspNetCore.Mvc.Licensing" Version="3.1.2" />
-    <PackageReference Include="MyTested.AspNetCore.Mvc.Universe" Version="3.1.2" />
+    <PackageReference Include="MyTested.AspNetCore.Mvc.TempData" Version="3.1.2" />
     <PackageReference Include="Selenium.Support" Version="3.141.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
     <PackageReference Include="xunit" Version="2.4.1" />

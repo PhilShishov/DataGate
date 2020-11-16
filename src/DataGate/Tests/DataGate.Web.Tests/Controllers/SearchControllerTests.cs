@@ -1,14 +1,15 @@
 ﻿namespace DataGate.Web.Tests.Controllers
 {
+    using System.Linq;
+
+    using Xunit;
+    using MyTested.AspNetCore.Mvc;
     using DataGate.Common;
     using DataGate.Common.Exceptions;
     using DataGate.Data;
     using DataGate.Web.Controllers;
     using DataGate.Web.Tests.TestData;
-    using DataGate.Web.ViewModels.Search;
-    using MyTested.AspNetCore.Mvc;
-    using System.Linq;
-    using Xunit;
+    using System;
 
     public class SearchControllerTests
     {
@@ -16,7 +17,6 @@
         [InlineData(null)]
         [InlineData("")]
         [InlineData("        ")]
-        [InlineData("\0")]
         public void Result_WithInvalidSearchTerm_ShouldThrowException(string searchTerm) =>
             MyController<SearchController>
             .Instance()
@@ -26,69 +26,67 @@
             .OfType<BadRequestException>()
             .WithMessage(ErrorMessages.InvalidSearchKeyword);
 
+
+        // Unit testing not implemented with EF.Functions.Contains
+        //[Theory]
+        //[InlineData("pharus")]
+        //[InlineData("multi")]
+        //[InlineData("LU00000000")]
+        //[InlineData("empty view")]
+        //public void Result_WithValidSearchTermAndNoISIN_ShouldReturnViewWithRelatedOrEmptyData(string searchTerm)
+        //{
+        //    var shareClasses = ShareClassTestData
+        //       .GenerateShareClasses()
+        //       .Where(sc => sc.ScOfficialShareClassName.Contains(searchTerm))
+        //       .ToList();
+
+        //    MyController<SearchController>
+        //    .Instance()
+        //    .WithData(data => data.WithEntities<ApplicationDbContext>(shareClasses))
+        //    .Calling(c => c.Result(searchTerm))
+        //    .ShouldReturn()
+        //    .View(result => result
+        //        .WithModelOfType<SearchResultsViewModel>()
+        //        .Passing(model =>
+        //        {
+        //            var actual = model.Results.ToList();
+
+        //            //Assert.NotNull(actual);
+        //            Assert.Equal(shareClasses.Count, actual.Count);
+
+        //            for (int i = 0; i < shareClasses.Count; i++)
+        //            {
+        //                Assert.Equal(shareClasses[i].ScId, actual[i].ScId);
+        //                Assert.Equal(shareClasses[i].ScOfficialShareClassName, actual[i].ScOfficialShareClassName);
+        //            }
+        //        }));
+        //}
+
         [Theory]
-        [InlineData("pharus")]
-        [InlineData("multi")]
-        [InlineData("LU00000000")]
-        [InlineData("empty view")]
-        public void Result_WithValidSearchTermAndNoISIN_ShouldReturnViewWithRelatedOrEmptyData(string searchTerm)
+        [InlineData("LU00001")]
+        public void Result_WithValidISIN_ShouldRedirectToDetailsView(string searchTerm)
         {
-            var shareClasses = ShareClassTestData
+            var shareClass = ShareClassTestData
                .GenerateShareClasses()
-               .Where(sc => sc.ScOfficialShareClassName.Contains(searchTerm))
-               .ToList();
+               .FirstOrDefault(sc => sc.ScIsinCode == searchTerm);
+
+            var date = DateTime.Today.ToString(GlobalConstants.RequiredWebDateTimeFormat);
+
+            var routeValues = new
+            {
+                area = EndpointsConstants.ShareClassArea,
+                id = shareClass.ScId,
+                date = date
+            };
 
             MyController<SearchController>
             .Instance()
-            .WithData(data => data.WithEntities<ApplicationDbContext>(shareClasses))
+            .WithData(data => data.WithEntities<ApplicationDbContext>(shareClass))
             .Calling(c => c.Result(searchTerm))
             .ShouldReturn()
-            .View(result => result
-                .WithModelOfType<SearchListAllViewModel>()
-                .Passing(model =>
-                {
-                    var actual = model.Results.ToList();
-
-                    //Assert.NotNull(actual);
-                    Assert.Equal(actual.Count, shareClasses.Count);
-
-                    for (int i = 0; i < shareClasses.Count; i++)
-                    {
-                        Assert.Equal(shareClasses[i].ScId, actual[i].ScId);
-                        Assert.Equal(shareClasses[i].ScOfficialShareClassName, actual[i].ScOfficialShareClassName);
-                    }
-                }));
-        }
-
-        [Theory]
-        [InlineData("LU00000000")]
-        public void Result_WithValidISIN_ShouldReturnViewWithData(string searchTerm)
-        {
-            var shareClasses = ShareClassTestData
-               .GenerateShareClasses()
-               .Where(sc => sc.ScOfficialShareClassName.Contains(searchTerm))
-               .ToList();
-
-            MyController<SearchController>
-            .Instance()
-            .WithData(data => data.WithEntities<ApplicationDbContext>(shareClasses))
-            .Calling(c => c.Result(searchTerm))
-            .ShouldReturn()
-            .View(result => result
-                .WithModelOfType<SearchListAllViewModel>()
-                .Passing(model =>
-                {
-                    var actual = model.Results.ToList();
-
-                    //Assert.NotNull(actual);
-                    Assert.Equal(actual.Count, shareClasses.Count);
-
-                    for (int i = 0; i < shareClasses.Count; i++)
-                    {
-                        Assert.Equal(shareClasses[i].ScId, actual[i].ScId);
-                        Assert.Equal(shareClasses[i].ScOfficialShareClassName, actual[i].ScOfficialShareClassName);
-                    }
-                }));
+            .RedirectToRoute(
+                EndpointsConstants.RouteDetails + EndpointsConstants.ShareClassArea,
+                routeValues);
         }
     }
 }

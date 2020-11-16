@@ -5,7 +5,7 @@
     using DataGate.Data.Models.Entities;
     using DataGate.Services.Mapping;
 
-    public class ResultViewModel : IMapFrom<TbPrimeShareClass>
+    public class SearchViewModel : IMapFrom<TbPrimeShareClass>
     {
         public int ScId { get; set; }
 

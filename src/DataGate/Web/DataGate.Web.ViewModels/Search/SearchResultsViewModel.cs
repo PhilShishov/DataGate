@@ -1,17 +1,17 @@
 ﻿namespace DataGate.Web.ViewModels.Search
 {
     using System.Collections.Generic;
-    using DataGate.Web.Infrastructure.Extensions;
-    using Ganss.XSS;
 
-    public class SearchListAllViewModel
+    using DataGate.Web.Infrastructure.Extensions;
+
+    public class SearchResultsViewModel
     {
-        public SearchListAllViewModel()
+        public SearchResultsViewModel()
         {
-            this.Results = new HashSet<ResultViewModel>();
+            this.Results = new HashSet<SearchViewModel>();
         }
 
-        public IEnumerable<ResultViewModel> Results { get; set; }
+        public IEnumerable<SearchViewModel> Results { get; set; }
 
         public string Date { get; set; }
 

@@ -9,7 +9,7 @@
 
     public interface IShareClassService : IEntityAutocompleteService, IEntityException
     {
-        IEnumerable<ResultViewModel> ByName(string searchTerm);
+        IEnumerable<SearchViewModel> ByName(string searchTerm);
 
         IEnumerable<TbPrimeShareClass> ByDate();
 

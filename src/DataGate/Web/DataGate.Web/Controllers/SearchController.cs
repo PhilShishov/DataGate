@@ -23,7 +23,7 @@
         [Route("search-results")]
         public IActionResult Result(string searchTerm)
         {
-            var model = new SearchListAllViewModel();
+            var model = new SearchResultsViewModel();
             model.Date = DateTime.Today.ToString(GlobalConstants.RequiredWebDateTimeFormat);
             model.SearchTerm = searchTerm;
 
@@ -37,7 +37,9 @@
             if (isIsin)
             {
                 var classId = this.service.ByIsin(model.CleanedSearch);
-                return this.RedirectToRoute(EndpointsConstants.RouteDetails + EndpointsConstants.ShareClassArea, new { area = EndpointsConstants.ShareClassArea, id = classId, date = model.Date });
+                return this.RedirectToRoute(
+                    EndpointsConstants.RouteDetails + EndpointsConstants.ShareClassArea, 
+                    new { area = EndpointsConstants.ShareClassArea, id = classId, date = model.Date });
             }
             model.Results = this.service.ByName(model.CleanedSearch);
 
