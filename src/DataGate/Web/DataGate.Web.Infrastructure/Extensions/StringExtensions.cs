@@ -1,6 +1,7 @@
 ﻿namespace DataGate.Web.Infrastructure.Extensions
 {
     using System.Collections.Generic;
+    using System.IO;
 
     public static class StringExtensions
     {
@@ -15,8 +16,9 @@
             {
                 s = s.Replace(c, "");
             }
-
             return s;
         }
+
+        public static string GetFileName(string fileName) => Path.GetFileNameWithoutExtension(fileName);
     }
 }

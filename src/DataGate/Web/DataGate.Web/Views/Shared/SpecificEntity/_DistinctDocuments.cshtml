@@ -22,7 +22,7 @@
                                         asp-route-name="@document.SluggedName"
                                         name="docValue"
                                         value="@document.Name">
-                                    @Html.Encode(System.IO.Path.GetFileNameWithoutExtension(document.Name))
+                                    @Html.Encode(StringExtensions.GetFileName(document.Name))
                                 </button>
                             </td>
                         </tr>
@@ -62,7 +62,7 @@
                                             asp-route-name="@document.SluggedName"
                                             name="docValue"
                                             value="@document.Name">
-                                        @Html.Encode(System.IO.Path.GetFileNameWithoutExtension(document.Name))
+                                        @Html.Encode(StringExtensions.GetFileName(document.Name))
                                     </button>
                                 </td>
                             </tr>
@@ -104,7 +104,7 @@
                                         asp-route-name="@agreement.SluggedName"
                                         name="agrValue"
                                         value="@agreement.Name">
-                                    @Html.Encode(System.IO.Path.GetFileNameWithoutExtension(agreement.Name))
+                                    @Html.Encode(StringExtensions.GetFileName(agreement.Name))
                                 </button>
                             </td>
                         </tr>

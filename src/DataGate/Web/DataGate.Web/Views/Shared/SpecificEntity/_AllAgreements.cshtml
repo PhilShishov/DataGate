@@ -53,7 +53,7 @@
                                     asp-route-name="@agreement.SluggedName"
                                     name="agrValue"
                                     value="@agreement.Name">
-                                @Html.Encode(@System.IO.Path.GetFileNameWithoutExtension(agreement.Name))
+                                @Html.Encode(StringExtensions.GetFileName(agreement.Name))
                             </button>
                         </td>
                         @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.IsInRole(GlobalConstants.LegalRoleName))

@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = SharedLocalizer.GetHtmlString("Agreements");
+    var fileName = string.Empty;
 }
 
 <div class="container-all-funds justify-content-between">
@@ -119,7 +120,7 @@
                                             asp-route-name="@agreement.SluggedName"
                                             name="agrValue"
                                             value="@agreement.Name">
-                                        @Html.Encode(@System.IO.Path.GetFileNameWithoutExtension(agreement.Name))
+                                        @Html.Encode(StringExtensions.GetFileName(agreement.Name))
                                     </button>
                                 </td>
 
