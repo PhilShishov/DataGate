@@ -9,7 +9,7 @@
 
 <div class="table-search-wrapper">
     <h1>@SharedLocalizer.GetHtmlString("Result")</h1>
-    <p>@SharedLocalizer.GetHtmlString("Your search criteria was:") <strong> @Model.SearchTerm</strong></p>
+    <p>@SharedLocalizer.GetHtmlString("Your search criteria was:") <strong> @Model.CleanedSearch</strong></p>
     <p>
         @SharedLocalizer.GetHtmlString("Number of results:") @Model.Results.ToList().Count
         @SharedLocalizer.GetHtmlString("entries")

@@ -23,23 +23,23 @@
         [Route("search-results")]
         public IActionResult Result(string searchTerm)
         {
-            if (string.IsNullOrEmpty(searchTerm))
+            var model = new SearchListAllViewModel();
+            model.Date = DateTime.Today.ToString(GlobalConstants.RequiredWebDateTimeFormat);
+            model.SearchTerm = searchTerm;
+
+            if (string.IsNullOrWhiteSpace(model.CleanedSearch))
             {
                 throw new BadRequestException(ErrorMessages.InvalidSearchKeyword);
             }
 
-            var model = new SearchListAllViewModel();
-
-            model.Date = DateTime.Today.ToString(GlobalConstants.RequiredWebDateTimeFormat);
-            model.SearchTerm = searchTerm;
-            bool isIsin = this.service.IsIsin(searchTerm);
+            bool isIsin = this.service.IsIsin(model.CleanedSearch);
 
             if (isIsin)
             {
-                var classId = this.service.ByIsin(searchTerm);
+                var classId = this.service.ByIsin(model.CleanedSearch);
                 return this.RedirectToRoute(EndpointsConstants.RouteDetails + EndpointsConstants.ShareClassArea, new { area = EndpointsConstants.ShareClassArea, id = classId, date = model.Date });
             }
-            model.Results = this.service.ByName(searchTerm);
+            model.Results = this.service.ByName(model.CleanedSearch);
 
             return this.View(model);
         }
