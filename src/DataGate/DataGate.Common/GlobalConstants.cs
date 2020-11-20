@@ -25,6 +25,7 @@
         public const string RedisConnectionString = "127.0.0.1:4455,abortConnect=false";
         public const string TestContainer = "test-container";
         public const string TestHashContainer = "test-hash-container";
+        public const string WwwRootPath = "D:\\Projects\\DataGate\\src\\DataGate\\Web\\DataGate.Web\\wwwroot";
 
         // Tempdata Keys
         public const string SweetAlertKey = "sweetalert";

@@ -1,10 +1,11 @@
 ﻿namespace DataGate.Services.Tests.Redis
 {
     using System.Threading.Tasks;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     using DataGate.Common;
     using DataGate.Services.Redis;
     using DataGate.Services.Redis.Configuration;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
     public class RedisContainerTests
@@ -15,7 +16,7 @@
         [ClassInitialize]
         public static void ClassInit(TestContext context)
         {
-            redisConnection = new RedisConnection(GlobalConstants.RedisConnectionString, "");
+            redisConnection = new RedisConnection(GlobalConstants.RedisConnectionString, GlobalConstants.WwwRootPath);
         }
 
         [TestInitialize]

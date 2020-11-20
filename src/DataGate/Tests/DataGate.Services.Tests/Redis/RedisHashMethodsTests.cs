@@ -19,7 +19,7 @@
         [ClassInitialize]
         public static void ClassInit(TestContext context)
         {
-            redisConnection = new RedisConnection(GlobalConstants.RedisConnectionString, "");
+            redisConnection = new RedisConnection(GlobalConstants.RedisConnectionString, GlobalConstants.WwwRootPath);
         }
 
         [TestInitialize]

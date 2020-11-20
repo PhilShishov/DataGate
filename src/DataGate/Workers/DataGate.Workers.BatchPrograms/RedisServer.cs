@@ -12,7 +12,7 @@
         {
             using (var process = new Process())
             {
-                process.StartInfo.FileName = $"{FileNames.RedisServerBatch}";
+                process.StartInfo.FileName = $"{dirPath}\\batch\\{FileNames.RedisServerBatch}";
                 process.StartInfo.CreateNoWindow = true;
                 process.StartInfo.UseShellExecute = false;
 
