@@ -1,7 +1,8 @@
-﻿namespace DataGate.Services.Redis.Tests
+﻿namespace DataGate.Services.Tests.Redis
 {
     using System.Threading.Tasks;
 
+    using DataGate.Services.Redis;
     using DataGate.Services.Redis.Configuration;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 

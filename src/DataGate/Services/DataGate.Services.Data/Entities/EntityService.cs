@@ -92,8 +92,6 @@
                 .GetSection(AppSettingsSections.RedisSection)
                 .Get<RedisOptions>();
 
-            //RedisServer.Run();
-
             var connection = new RedisConnection($"{optionsRedis.Host}:{optionsRedis.Port}, {GlobalConstants.AbortConnect}");
             var container = new RedisContainer(connection, optionsRedis.InstanceName);
 

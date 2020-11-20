@@ -1,11 +1,12 @@
-﻿namespace DataGate.Services.Redis
+﻿namespace DataGate.Workers.BatchPrograms
 {
-    using System;
     using System.Diagnostics;
 
-    public static class RedisServer
+    using DataGate.Workers.BatchPrograms.Contracts;
+
+    public class RedisServer : IExecutor
     {
-        public static void Run()
+        public void Execute()
         {
             var process = new Process();
             process.StartInfo.FileName = "C:\\redis-server-launch.bat";
@@ -13,13 +14,11 @@
             process.StartInfo.UseShellExecute = false;
 
             process.StartInfo.RedirectStandardError = true;
-            process.ErrorDataReceived += (sender, data) => {
-                Console.WriteLine(data.Data);
-            };
+            //process.ErrorDataReceived += (sender, data) =>
+            //{
+            //    Console.WriteLine(data.Data);
+            //};
             var started = process.Start();
-
-            //process.HasExited()
         }
     }
-
 }
