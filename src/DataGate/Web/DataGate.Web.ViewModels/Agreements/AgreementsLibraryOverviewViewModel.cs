@@ -5,7 +5,7 @@
 
     using DataGate.Common;
 
-    public class AgreementOverviewViewModel
+    public class AgreementsLibraryOverviewViewModel
     {
         [Required(ErrorMessage = ValidationMessages.DateRequired)]
         public string Date { get; set; }

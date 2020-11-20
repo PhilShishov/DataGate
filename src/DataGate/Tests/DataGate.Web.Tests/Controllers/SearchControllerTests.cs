@@ -1,5 +1,6 @@
 ﻿namespace DataGate.Web.Tests.Controllers
 {
+    using System;
     using System.Linq;
 
     using Xunit;
@@ -9,7 +10,6 @@
     using DataGate.Data;
     using DataGate.Web.Controllers;
     using DataGate.Web.Tests.TestData;
-    using System;
 
     public class SearchControllerTests
     {

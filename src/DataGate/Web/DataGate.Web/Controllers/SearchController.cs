@@ -23,9 +23,11 @@
         [Route("search-results")]
         public IActionResult Result(string searchTerm)
         {
-            var model = new SearchResultsViewModel();
-            model.Date = DateTime.Today.ToString(GlobalConstants.RequiredWebDateTimeFormat);
-            model.SearchTerm = searchTerm;
+            var model = new SearchResultsViewModel
+            {
+                Date = DateTime.Today.ToString(GlobalConstants.RequiredWebDateTimeFormat),
+                SearchTerm = searchTerm
+            };
 
             if (string.IsNullOrWhiteSpace(model.CleanedSearch))
             {
