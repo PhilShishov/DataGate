@@ -60,8 +60,8 @@
                 FixedDayNavValue :
                 DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month - 1);
             var date = new DateTime(DateTime.Today.Year, DateTime.Today.Month - 1, day);
-            var headers = await this.service.GetAll(function, date).FirstOrDefaultAsync();
-            var values = await this.service.GetAll(function, date, 1).ToListAsync();
+            var headers = await this.service.All(function, date).FirstOrDefaultAsync();
+            var values = await this.service.All(function, date, 1).ToListAsync();
 
             var viewModel = new AuMReportViewModel
             {
@@ -88,8 +88,8 @@
                 DateTime.DaysInMonth(model.Date.Year, model.Date.Month);
             var date = new DateTime(model.Date.Year, model.Date.Month, day);
 
-            model.Headers = await this.service.GetAll(function, date).FirstOrDefaultAsync();
-            model.Values = await this.service.GetAll(function, date, 1).ToListAsync();
+            model.Headers = await this.service.All(function, date).FirstOrDefaultAsync();
+            model.Values = await this.service.All(function, date, 1).ToListAsync();
 
             return this.View(model);
         }
@@ -143,8 +143,8 @@
 
         private void SetViewDataValues(string area, int type)
         {
-            this.ViewData["TimeSeriesType"] = this.repository.GetAllTbDomTimeSeriesType(type);
-            this.ViewData["Entity"] = this.repository.GetAll(area);
+            this.ViewData["TimeSeriesType"] = this.repository.AllTbDomTimeSeriesType(type);
+            this.ViewData["Entity"] = this.repository.All(area);
         }
     }
 }

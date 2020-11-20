@@ -17,7 +17,7 @@
             this.sqlManager = sqlQueryManager;
         }
 
-        public IEnumerable<T> GetAll<T>(string function, DateTime date)
+        public IEnumerable<T> All<T>(string function, DateTime date)
         {
             IEnumerable<AgreementLibraryDto> dto = this.sqlManager.ExecuteQueryMapping<AgreementLibraryDto>(function, null, date);
 

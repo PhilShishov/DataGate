@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <Content Remove="compilerconfig.json" />
+    <Content Remove="wwwroot\batch\redis-server-launch.bat" />
   </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
@@ -65,6 +66,7 @@
     <None Include="Views\Shared\SubEntities\_ModalSelect.cshtml" />
     <None Include="Views\Shared\SubEntities\_ViewLoadedTable.cshtml" />
     <None Include="Views\Shared\SubEntities\_ViewTable.cshtml" />
+    <None Include="wwwroot\batch\redis-server-launch.bat" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>

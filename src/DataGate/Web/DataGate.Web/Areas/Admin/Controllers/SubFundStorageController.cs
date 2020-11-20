@@ -75,7 +75,7 @@
         [Route("sf/edit/{id}/{date}")]
         public IActionResult Edit(int id, string date)
         {
-            var model = this.service.GetByIdAndDate<EditSubFundInputModel>(id, date);
+            var model = this.service.ByIdAndDate<EditSubFundInputModel>(id, date);
 
             if (model.Derivatives == "Yes")
             {
@@ -123,22 +123,22 @@
 
         private void SetViewDataValues()
         {
-            this.ViewData["Status"] = this.repository.GetAllTbDomSFStatus();
-            this.ViewData["CesrClass"] = this.repository.GetAllTbDomCesrClass();
-            this.ViewData["GeographicalFocus"] = this.repository.GetAllTbDomGeographicalFocus();
-            this.ViewData["GlobalExposure"] = this.repository.GetAllTbDomGlobalExposure();
-            this.ViewData["CurrencyCode"] = this.repository.GetAllTbDomCurrencyCode();
-            this.ViewData["NavFrequency"] = this.repository.GetAllTbDomFrequency();
-            this.ViewData["ValuationDate"] = this.repository.GetAllTbDomValuationDate();
-            this.ViewData["CalculationDate"] = this.repository.GetAllTbDomCalculationDate();
-            this.ViewData["DerivMarket"] = this.repository.GetAllTbDomDerivMarket();
-            this.ViewData["DerivPurpose"] = this.repository.GetAllTbDomDerivPurpose();
-            this.ViewData["PrincipalAssetClass"] = this.repository.GetAllTbDomPrincipalAssetClass();
-            this.ViewData["TypeOfMarket"] = this.repository.GetAllTbDomTypeOfMarket();
-            this.ViewData["PrincipalInvestmentStrategy"] = this.repository.GetAllTbDomPrincipalInvestmentStrategy();
-            this.ViewData["SfCatMorningStar"] = this.repository.GetAllTbDomSfCatMorningStar();
-            this.ViewData["SfCatSix"] = this.repository.GetAllTbDomSfCatSix();
-            this.ViewData["SfCatBloomberg"] = this.repository.GetAllTbDomSfCatBloomberg();
+            this.ViewData["Status"] = this.repository.AllTbDomSFStatus();
+            this.ViewData["CesrClass"] = this.repository.AllTbDomCesrClass();
+            this.ViewData["GeographicalFocus"] = this.repository.AllTbDomGeographicalFocus();
+            this.ViewData["GlobalExposure"] = this.repository.AllTbDomGlobalExposure();
+            this.ViewData["CurrencyCode"] = this.repository.AllTbDomCurrencyCode();
+            this.ViewData["NavFrequency"] = this.repository.AllTbDomFrequency();
+            this.ViewData["ValuationDate"] = this.repository.AllTbDomValuationDate();
+            this.ViewData["CalculationDate"] = this.repository.AllTbDomCalculationDate();
+            this.ViewData["DerivMarket"] = this.repository.AllTbDomDerivMarket();
+            this.ViewData["DerivPurpose"] = this.repository.AllTbDomDerivPurpose();
+            this.ViewData["PrincipalAssetClass"] = this.repository.AllTbDomPrincipalAssetClass();
+            this.ViewData["TypeOfMarket"] = this.repository.AllTbDomTypeOfMarket();
+            this.ViewData["PrincipalInvestmentStrategy"] = this.repository.AllTbDomPrincipalInvestmentStrategy();
+            this.ViewData["SfCatMorningStar"] = this.repository.AllTbDomSfCatMorningStar();
+            this.ViewData["SfCatSix"] = this.repository.AllTbDomSfCatSix();
+            this.ViewData["SfCatBloomberg"] = this.repository.AllTbDomSfCatBloomberg();
 
             this.ViewData["FundContainer"] = this.repository.GetAllContainers();
         }

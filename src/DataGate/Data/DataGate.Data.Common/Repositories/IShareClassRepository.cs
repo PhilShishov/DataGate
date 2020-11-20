@@ -6,12 +6,12 @@
 
     public interface IShareClassRepository : IDisposable
     {
-        ISet<string> GetAllContainers();
-        IReadOnlyCollection<string> GetAllTbDomShareStatus();
-        IReadOnlyCollection<string> GetAllTbDomInvestorType();
-        IReadOnlyCollection<string> GetAllTbDomShareType();
-        IReadOnlyCollection<string> GetAllTbDomCurrencyCode();
-        IReadOnlyCollection<string> GetAllTbDomCountry();
+        ISet<string> AllContainers();
+        IReadOnlyCollection<string> AllTbDomShareStatus();
+        IReadOnlyCollection<string> AllTbDomInvestorType();
+        IReadOnlyCollection<string> AllTbDomShareType();
+        IReadOnlyCollection<string> AllTbDomCurrencyCode();
+        IReadOnlyCollection<string> AllTbDomCountry();
         Task<string> ByNameCountry(string countryToFormat);
         Task<int?> ByIdInvestorType(string investorType);
         Task<int?> ByIdShareType(string shareType);

@@ -17,22 +17,22 @@ namespace DataGate.Data.Repositories
 
         protected ApplicationDbContext Context { get; set; }
 
-        public ISet<string> GetAllContainers()
+        public ISet<string> AllContainers()
         => this.Context.TbHistorySubFund.Select(f => f.SfOfficialSubFundName).ToHashSet();
 
-        public IReadOnlyCollection<string> GetAllTbDomCountry()
+        public IReadOnlyCollection<string> AllTbDomCountry()
         => this.Context.TbDomIsoCountry.Select(tb => tb.IsoCountryIso2 + " - " + tb.IsoCountryDesc).ToList();
 
-        public IReadOnlyCollection<string> GetAllTbDomCurrencyCode()
+        public IReadOnlyCollection<string> AllTbDomCurrencyCode()
         => this.Context.TbDomIsoCurrency.Select(tb => tb.IsoCcyCode).ToList();
 
-        public IReadOnlyCollection<string> GetAllTbDomInvestorType()
+        public IReadOnlyCollection<string> AllTbDomInvestorType()
         => this.Context.TbDomInvestorType.Select(tb => tb.ItDesc).ToList();
 
-        public IReadOnlyCollection<string> GetAllTbDomShareStatus()
+        public IReadOnlyCollection<string> AllTbDomShareStatus()
         => this.Context.TbDomShareStatus.Select(tb => tb.ScSDesc).ToList();
 
-        public IReadOnlyCollection<string> GetAllTbDomShareType()
+        public IReadOnlyCollection<string> AllTbDomShareType()
         => this.Context.TbDomShareType.Select(tb => tb.StDesc).ToList();
 
         public async Task<string> ByNameCountry(string countryToFormat)

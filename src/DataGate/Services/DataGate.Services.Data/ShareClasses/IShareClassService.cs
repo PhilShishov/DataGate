@@ -4,10 +4,9 @@
 
     using DataGate.Data.Models.Entities;
     using DataGate.Services.Data.Common;
-    using DataGate.Services.Data.Entities;
     using DataGate.Web.ViewModels.Search;
 
-    public interface IShareClassService : IEntityAutocompleteService, IEntityException
+    public interface IShareClassService : IEntityException
     {
         IEnumerable<SearchViewModel> ByName(string searchTerm);
 

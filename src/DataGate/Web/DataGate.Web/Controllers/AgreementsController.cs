@@ -43,7 +43,7 @@
                                                   SqlFunctionDictionary.AllAgreementsShareClasses);
 
             var today = DateTime.Today;
-            var agreements = this.service.GetAll<AgreementLibraryViewModel>(function, today);
+            var agreements = this.service.All<AgreementLibraryViewModel>(function, today);
 
             var viewModel = new AgreementsLibraryOverviewViewModel()
             {
@@ -67,7 +67,7 @@
 
                 var parsedDate = DateTimeParser.FromWebFormat(model.Date);
 
-                model.Agreements = this.service.GetAll<AgreementLibraryViewModel>(function, parsedDate);
+                model.Agreements = this.service.All<AgreementLibraryViewModel>(function, parsedDate);
             }
 
             if (model.Agreements != null)

@@ -36,7 +36,7 @@
         {
             UploadDocumentDto dto = AutoMapperConfig.MapperInstance.Map<UploadDocumentDto>(model);
             dto.EndConnection = DateTimeParser.ToSqlFormat(model.EndConnection);
-            dto.DocumentType = await this.service.GetByIdDocumentType(model.DocumentType);
+            dto.DocumentType = await this.service.ByIdDocumentType(model.DocumentType);
 
             string query = StringSwapper.ByArea(model.AreaName,
                                                   SqlProcedureDictionary.DocumentFund,
@@ -79,9 +79,9 @@
         public async Task UploadAgreement(UploadAgreementInputModel model)
         {
             UploadAgreementDto dto = AutoMapperConfig.MapperInstance.Map<UploadAgreementDto>(model);
-            dto.AgreementType = await this.repository.GetByIdAgreementType(model.AgrType);
-            dto.Status = await this.repository.GetByIdStatus(model.Status);
-            dto.Company = await this.repository.GetByIdCompany(model.Company);
+            dto.AgreementType = await this.repository.ByIdAgreementType(model.AgrType);
+            dto.Status = await this.repository.ByIdStatus(model.Status);
+            dto.Company = await this.repository.ByIdCompany(model.Company);
 
             string query = StringSwapper.ByArea(model.AreaName,
                                                  SqlProcedureDictionary.AgreementFund,

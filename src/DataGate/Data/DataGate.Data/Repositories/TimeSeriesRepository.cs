@@ -41,7 +41,7 @@
 
         }
 
-        public ISet<string> GetAll(string area)
+        public ISet<string> All(string area)
         {
             var result = new HashSet<string>();
             if (area == EndpointsConstants.DisplaySub + EndpointsConstants.FundArea)
@@ -56,7 +56,7 @@
             return result;
         }
 
-        public IReadOnlyCollection<string> GetAllTbDomTimeSeriesType(int type)
+        public IReadOnlyCollection<string> AllTbDomTimeSeriesType(int type)
         => this.Context.TbDomTimeseriesType
             .Where(tst => tst.EntityType == type)
             .Select(tst => tst.DescTs)

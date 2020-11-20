@@ -6,9 +6,9 @@
 
     public interface ITimeSeriesRepository : IDisposable
     {
-        ISet<string> GetAll(string area);
+        ISet<string> All(string area);
 
-        IReadOnlyCollection<string> GetAllTbDomTimeSeriesType(int type);
+        IReadOnlyCollection<string> AllTbDomTimeSeriesType(int type);
 
         Task<string> ByName(string area, int? id);
     }

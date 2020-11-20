@@ -39,7 +39,7 @@
             this.repository = repository;
         }
 
-        public T GetByIdAndDate<T>(int id, string date)
+        public T ByIdAndDate<T>(int id, string date)
         {
             this.ThrowEntityNotFoundExceptionIfIdDoesNotExist(id);
 

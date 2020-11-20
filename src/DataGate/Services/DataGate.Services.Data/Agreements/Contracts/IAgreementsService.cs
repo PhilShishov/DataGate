@@ -5,6 +5,6 @@
 
     public interface IAgreementsService
     {
-        IEnumerable<T> GetAll<T>(string function, DateTime date);
+        IEnumerable<T> All<T>(string function, DateTime date);
     }
 }

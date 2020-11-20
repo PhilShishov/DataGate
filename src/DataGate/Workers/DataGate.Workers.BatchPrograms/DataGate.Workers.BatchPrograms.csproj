@@ -8,8 +8,4 @@
     <ProjectReference Include="..\DataGate.Workers.Common\DataGate.Workers.Common.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
-
 </Project>

@@ -12,7 +12,7 @@
 
         IQueryable<TEntity> AllAsNoTrackingWithDeleted();
 
-        Task<TEntity> GetByIdWithDeletedAsync(params object[] id);
+        Task<TEntity> ByIdWithDeletedAsync(params object[] id);
 
         void HardDelete(TEntity entity);
 

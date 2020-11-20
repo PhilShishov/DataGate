@@ -17,14 +17,14 @@
             this.sqlManager = sqlQueryManager;
         }
 
-        public IEnumerable<T> GetAll<T>(string function, DateTime date)
+        public IEnumerable<T> All<T>(string function, DateTime date)
         {
             IEnumerable<ReportDto> dto = this.sqlManager.ExecuteQueryMapping<ReportDto>(function, null, date);
 
             return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
         }
 
-        public IAsyncEnumerable<string[]> GetAll(string function, DateTime date, int skip)
+        public IAsyncEnumerable<string[]> All(string function, DateTime date, int skip)
         => this.sqlManager.ExecuteQueryReportsAsync(function, date).Skip(skip);
     }
 }

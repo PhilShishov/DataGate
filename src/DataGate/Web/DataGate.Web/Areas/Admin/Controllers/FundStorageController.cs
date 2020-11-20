@@ -68,7 +68,7 @@
         [Route("f/edit/{id}/{date}")]
         public IActionResult Edit(int id, string date)
         {
-            var model = this.service.GetByIdAndDate<EditFundInputModel>(id, date);
+            var model = this.service.ByIdAndDate<EditFundInputModel>(id, date);
             model.InitialDate = model.InitialDate.AddDays(1);
 
             this.SetViewDataValues();
@@ -109,11 +109,11 @@
 
         private void SetViewDataValues()
         {
-            this.ViewData["Status"] = this.serviceSelect.GetAllTbDomFStatus();
-            this.ViewData["LegalForm"] = this.serviceSelect.GetAllTbDomLegalForm();
-            this.ViewData["LegalVehicle"] = this.serviceSelect.GetAllTbDomLegalVehicle();
-            this.ViewData["LegalType"] = this.serviceSelect.GetAllTbDomLegalType();
-            this.ViewData["CompanyTypeDesc"] = this.serviceSelect.GetAllTbDomCompanyDesc();
+            this.ViewData["Status"] = this.serviceSelect.AllTbDomFStatus();
+            this.ViewData["LegalForm"] = this.serviceSelect.AllTbDomLegalForm();
+            this.ViewData["LegalVehicle"] = this.serviceSelect.AllTbDomLegalVehicle();
+            this.ViewData["LegalType"] = this.serviceSelect.AllTbDomLegalType();
+            this.ViewData["CompanyTypeDesc"] = this.serviceSelect.AllTbDomCompanyDesc();
         }
     }
 }

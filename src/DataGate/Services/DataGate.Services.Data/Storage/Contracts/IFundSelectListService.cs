@@ -5,24 +5,24 @@
 
     public interface IFundSelectListService
     {
-        IReadOnlyCollection<string> GetAllTbDomCompanyDesc();
+        IReadOnlyCollection<string> AllTbDomCompanyDesc();
 
-        IReadOnlyCollection<string> GetAllTbDomFStatus();
+        IReadOnlyCollection<string> AllTbDomFStatus();
 
-        IReadOnlyCollection<string> GetAllTbDomLegalForm();
+        IReadOnlyCollection<string> AllTbDomLegalForm();
 
-        IReadOnlyCollection<string> GetAllTbDomLegalType();
+        IReadOnlyCollection<string> AllTbDomLegalType();
 
-        IReadOnlyCollection<string> GetAllTbDomLegalVehicle();
+        IReadOnlyCollection<string> AllTbDomLegalVehicle();
 
-        Task<int> GetByIdStatus(string status);
+        Task<int> ByIdStatus(string status);
 
-        Task<int?> GetByIdLegalForm(string legalForm);
+        Task<int?> ByIdLegalForm(string legalForm);
 
-        Task<int?> GetByIdLegalVehicle(string legalVehicle);
+        Task<int?> ByIdLegalVehicle(string legalVehicle);
 
-        Task<int?> GetByIdLegalType(string legalType);
+        Task<int?> ByIdLegalType(string legalType);
 
-        Task<int?> GetByIdCompanyType(string companyTypeDesc);
+        Task<int?> ByIdCompanyType(string companyTypeDesc);
     }
 }

@@ -74,7 +74,7 @@
         [Route("sc/edit/{id}/{date}")]
         public IActionResult Edit(int id, string date)
         {
-            var model = this.service.GetByIdAndDate<EditShareClassInputModel>(id, date);
+            var model = this.service.ByIdAndDate<EditShareClassInputModel>(id, date);
 
             if (model.Hedged == "Yes")
             {
@@ -126,13 +126,13 @@
 
         private void SetViewDataValues()
         {
-            this.ViewData["Status"] = this.repository.GetAllTbDomShareStatus();
-            this.ViewData["InvestorType"] = this.repository.GetAllTbDomInvestorType();
-            this.ViewData["ShareType"] = this.repository.GetAllTbDomShareType();
-            this.ViewData["CurrencyCode"] = this.repository.GetAllTbDomCurrencyCode();
-            this.ViewData["Country"] = this.repository.GetAllTbDomCountry();
+            this.ViewData["Status"] = this.repository.AllTbDomShareStatus();
+            this.ViewData["InvestorType"] = this.repository.AllTbDomInvestorType();
+            this.ViewData["ShareType"] = this.repository.AllTbDomShareType();
+            this.ViewData["CurrencyCode"] = this.repository.AllTbDomCurrencyCode();
+            this.ViewData["Country"] = this.repository.AllTbDomCountry();
 
-            this.ViewData["SubFundContainer"] = this.repository.GetAllContainers();
+            this.ViewData["SubFundContainer"] = this.repository.AllContainers();
         }
     }
 }

@@ -11,7 +11,7 @@
         private static Lazy<ConnectionMultiplexer> connection;
         private readonly IExecutor executor;
 
-        public RedisConnection(string configuration)
+        public RedisConnection(string configuration, string dirPath)
         {
             this.executor = new RedisServer();
 
@@ -21,9 +21,7 @@
 
                 if (!connMultiplexer.IsConnected)
                 {
-                    this.executor.Execute();
-
-                    //RedisServer.Run();
+                    this.executor.Execute(dirPath);
                 }
 
                 return connMultiplexer;

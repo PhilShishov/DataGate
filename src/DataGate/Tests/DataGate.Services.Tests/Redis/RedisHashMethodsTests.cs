@@ -5,6 +5,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using DataGate.Common;
     using DataGate.Services.Redis;
     using DataGate.Services.Redis.Configuration;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -18,13 +19,13 @@
         [ClassInitialize]
         public static void ClassInit(TestContext context)
         {
-            redisConnection = new RedisConnection("127.0.0.1:4455,abortConnect=false");
+            redisConnection = new RedisConnection(GlobalConstants.RedisConnectionString, "");
         }
 
         [TestInitialize]
         public void Init()
         {
-            container = new RedisContainer(redisConnection, "hash-container");
+            container = new RedisContainer(redisConnection, GlobalConstants.TestHashContainer);
         }
 
         [TestCleanup()]

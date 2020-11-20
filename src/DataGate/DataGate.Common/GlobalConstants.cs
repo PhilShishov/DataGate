@@ -19,7 +19,12 @@
         public const string ItalianCultureInfo = "it-IT";
         public const int CultureCookieExpirationTimeInMonths = 5;
         public const int RedisCacheExpirationTimeInSeconds = 60 * 60 * 8;
+
+        // Redis Constants
         public const string AbortConnect = "abortConnect=false";
+        public const string RedisConnectionString = "127.0.0.1:4455,abortConnect=false";
+        public const string TestContainer = "test-container";
+        public const string TestHashContainer = "test-hash-container";
 
         // Tempdata Keys
         public const string SweetAlertKey = "sweetalert";

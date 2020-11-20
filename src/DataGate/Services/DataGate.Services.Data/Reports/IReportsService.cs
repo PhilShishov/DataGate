@@ -5,8 +5,8 @@
 
     public interface IReportsService
     {
-        IEnumerable<T> GetAll<T>(string function, DateTime date);
+        IEnumerable<T> All<T>(string function, DateTime date);
 
-        IAsyncEnumerable<string[]> GetAll(string function, DateTime date, int skip = 0);
+        IAsyncEnumerable<string[]> All(string function, DateTime date, int skip = 0);
     }
 }

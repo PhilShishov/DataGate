@@ -7,6 +7,6 @@
     {
         IReadOnlyCollection<string> GetDocumentsFileTypes(int fileType);
 
-        Task<int> GetByIdDocumentType(string documentType);
+        Task<int> ByIdDocumentType(string documentType);
     }
 }

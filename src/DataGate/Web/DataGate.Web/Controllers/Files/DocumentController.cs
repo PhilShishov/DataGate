@@ -47,11 +47,11 @@
         {
             var model = AutoMapperConfig.MapperInstance.Map<UploadAgreementInputModel>(dto);
 
-            model.AgreementsStatus = this.repository.GetAllAgreementStatus();
-            model.Companies = this.repository.GetAllCompanies();
+            model.AgreementsStatus = this.repository.AllAgreementStatus();
+            model.Companies = this.repository.AllCompanies();
 
             int fileType = this.GetTargetFileType(model.AreaName);
-            model.AgreementsFileTypes = this.repository.GetAllAgreementsFileTypes(fileType);
+            model.AgreementsFileTypes = this.repository.AllAgreementsFileTypes(fileType);
 
             return this.PartialView("Upload/_UploadAgreement", model);
         }

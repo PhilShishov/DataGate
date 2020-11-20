@@ -17,65 +17,65 @@ namespace DataGate.Data.Repositories
 
         protected ApplicationDbContext Context { get; set; }
 
-        public IReadOnlyCollection<string> GetAllAgreementsFileTypes(int fileType)
+        public IReadOnlyCollection<string> AllAgreementsFileTypes(int fileType)
         => this.Context.TbDomActivityType
                 .Where(at => at.AtEntity == fileType)
                 .Select(at => at.AtDesc)
                 .ToList();
 
-        public IReadOnlyCollection<string> GetAllAgreementStatus()
+        public IReadOnlyCollection<string> AllAgreementStatus()
         => this.Context.TbDomAgreementStatus
                 .Select(ast => ast.ASDesc)
                 .ToList();
 
-        public IReadOnlyCollection<string> GetAllCompanies()
+        public IReadOnlyCollection<string> AllCompanies()
         => this.Context.TbCompanies
                 .Select(c => c.CName)
                 .ToList();
 
-        public IReadOnlyCollection<string> GetAllFeeFrequency()
+        public IReadOnlyCollection<string> AllFeeFrequency()
         {
             throw new NotImplementedException();
         }
 
-        public IReadOnlyCollection<string> GetAllFees()
+        public IReadOnlyCollection<string> AllFees()
         {
             throw new NotImplementedException();
         }
 
-        public IReadOnlyCollection<string> GetAllFeeTypes()
+        public IReadOnlyCollection<string> AllFeeTypes()
         {
             throw new NotImplementedException();
         }
 
-        public Task<int> GetByIdAgreementType(string agrType)
+        public Task<int> ByIdAgreementType(string agrType)
         => this.Context.TbDomActivityType
                         .Where(at => at.AtDesc == agrType)
                         .Select(at => at.AtId)
                         .FirstOrDefaultAsync();
 
-        public Task<int> GetByIdCompany(string company)
+        public Task<int> ByIdCompany(string company)
         => this.Context.TbCompanies
                         .Where(c => c.CName == company)
                         .Select(c => c.CId)
                         .FirstOrDefaultAsync();
 
-        public Task<int> GetByIdFee(string fee)
+        public Task<int> ByIdFee(string fee)
         {
             throw new NotImplementedException();
         }
 
-        public Task<int> GetByIdFeeFrequency(string feeFrequency)
+        public Task<int> ByIdFeeFrequency(string feeFrequency)
         {
             throw new NotImplementedException();
         }
 
-        public Task<int> GetByIdFeeType(string feeType)
+        public Task<int> ByIdFeeType(string feeType)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<int> GetByIdStatus(string status)
+        public async Task<int> ByIdStatus(string status)
         => await this.Context.TbDomAgreementStatus
                         .Where(s => s.ASDesc == status)
                         .Select(s => s.ASId)

@@ -6,18 +6,18 @@
 
     public interface IAgreementsRepository : IDisposable
     {
-        IReadOnlyCollection<string> GetAllAgreementsFileTypes(int fileType);
-        IReadOnlyCollection<string> GetAllAgreementStatus();
-        IReadOnlyCollection<string> GetAllCompanies();
-        IReadOnlyCollection<string> GetAllFees();
-        IReadOnlyCollection<string> GetAllFeeFrequency();
-        IReadOnlyCollection<string> GetAllFeeTypes();
+        IReadOnlyCollection<string> AllAgreementsFileTypes(int fileType);
+        IReadOnlyCollection<string> AllAgreementStatus();
+        IReadOnlyCollection<string> AllCompanies();
+        IReadOnlyCollection<string> AllFees();
+        IReadOnlyCollection<string> AllFeeFrequency();
+        IReadOnlyCollection<string> AllFeeTypes();
 
-        Task<int> GetByIdAgreementType(string agrType);
-        Task<int> GetByIdCompany(string company);
-        Task<int> GetByIdFee(string fee);
-        Task<int> GetByIdFeeFrequency(string feeFrequency);
-        Task<int> GetByIdFeeType(string feeType);
-        Task<int> GetByIdStatus(string status);
+        Task<int> ByIdAgreementType(string agrType);
+        Task<int> ByIdCompany(string company);
+        Task<int> ByIdFee(string fee);
+        Task<int> ByIdFeeFrequency(string feeFrequency);
+        Task<int> ByIdFeeType(string feeType);
+        Task<int> ByIdStatus(string status);
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace DataGate.Services.Data.Entities
+﻿namespace DataGate.Services.Data.Common
 {
     public interface IEntityException
     {

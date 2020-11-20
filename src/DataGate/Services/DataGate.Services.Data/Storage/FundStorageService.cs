@@ -37,7 +37,7 @@
             this.service = service;
         }
 
-        public T GetByIdAndDate<T>(int id, string date)
+        public T ByIdAndDate<T>(int id, string date)
         {
             this.ThrowEntityNotFoundExceptionIfIdDoesNotExist(id);
 
@@ -109,11 +109,11 @@
                                           string legalform, string legalVehicle,
                                           string legalType, string companyType)
         {
-            dto.Status = await this.service.GetByIdStatus(status);
-            dto.LegalForm = await this.service.GetByIdLegalForm(legalform);
-            dto.LegalVehicle = await this.service.GetByIdLegalVehicle(legalVehicle);
-            dto.LegalType = await this.service.GetByIdLegalType(legalType);
-            dto.CompanyTypeDesc = await this.service.GetByIdCompanyType(companyType);
+            dto.Status = await this.service.ByIdStatus(status);
+            dto.LegalForm = await this.service.ByIdLegalForm(legalform);
+            dto.LegalVehicle = await this.service.ByIdLegalVehicle(legalVehicle);
+            dto.LegalType = await this.service.ByIdLegalType(legalType);
+            dto.CompanyTypeDesc = await this.service.ByIdCompanyType(companyType);
         }
 
         private SqlCommand AssignBaseParameters(FundPostDto dto, string procedure)

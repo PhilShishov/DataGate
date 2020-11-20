@@ -23,7 +23,7 @@
                 .Select(ft => ft.FiletypeDesc)
                 .ToList();
 
-        public async Task<int> GetByIdDocumentType(string documentType)
+        public async Task<int> ByIdDocumentType(string documentType)
         => await this.repositoryFileType.All()
                         .Where(ft => ft.FiletypeDesc == documentType)
                         .Select(ft => ft.FiletypeId)

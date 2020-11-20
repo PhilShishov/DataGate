@@ -2,6 +2,6 @@
 {
     public interface IExecutor
     {
-        void Execute();
+        void Execute(string dirPath);
     }
 }
