@@ -1,45 +1,63 @@
 ﻿namespace DataGate.Services.Tests.Redis
 {
+    using System;
     using System.Threading.Tasks;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+    using Xunit;
 
     using DataGate.Common;
     using DataGate.Services.Redis;
-    using DataGate.Services.Redis.Configuration;
+    using DataGate.Services.Tests.ClassFixtures;
 
-    [TestClass]
-    public class RedisContainerTests
+    public class RedisContainerTests : IClassFixture<RedisFixture>, IDisposable
     {
-        public static RedisConnection redisConnection;
-        public RedisContainer container;
+        public readonly RedisContainer container;
 
-        [ClassInitialize]
-        public static void ClassInit(TestContext context)
+        public RedisContainerTests(RedisFixture fixture)
         {
-            redisConnection = new RedisConnection(GlobalConstants.RedisConnectionString, GlobalConstants.WwwRootPath);
+            container = new RedisContainer(fixture.RedisConnection, GlobalConstants.TestContainer);
         }
 
-        [TestInitialize]
-        public void Init()
-        {
-            container = new RedisContainer(redisConnection, GlobalConstants.TestContainer);
-        }
-
-        [TestCleanup()]
-        public void Cleanup()
+        public void Dispose()
         {
             container.DeleteTrackedKeys().Wait();
         }
 
-        [TestMethod]
+        [Fact]
+        public async Task DeleteKey_And_KeyExists_WithNonExistantKey_ShouldReturnFalse()
+        {
+            Assert.False(await container.DeleteKey("not-exists"));
+            Assert.False(await container.KeyExists("not-exists"));
+        }
+
+        //[TestMethod]
+        //public async Task SetKey_WithIntType_ShouldReturnTrue()
+        //{
+        //    var key = container.GetKey<RedisItem<int>>("intkey");
+        //    await key.Set(1);
+        //    Assert.IsTrue(await container.KeyExists("intkey"));
+        //}
+
+        [Theory]
+        [InlineData(null, "stringkey")]
+        [InlineData("intkey")]
+        public async Task SetKey_WithPrimitiveTypeAndKeyName_ShouldReturnTrue(string keyName)
+        {
+            //Type type = value.GetType();
+
+
+            var key = container.GetKey<RedisItem<string>>(keyName);
+            await key.Set("stringkey-value");
+            Assert.True(await container.KeyExists(keyName));
+        }
+
+        [Fact]
         public async Task KeyMethods()
         {
-            Assert.IsFalse(await container.DeleteKey("not-exists"));
-            Assert.IsFalse(await container.KeyExists("not-exists"));
             var key = container.GetKey<RedisItem<int>>("intkey");
             await key.Set(1);
-            Assert.IsTrue(await container.KeyExists("intkey"));
-            Assert.IsTrue(await container.DeleteKey(key.KeyName, false));
+            Assert.True(await container.KeyExists("intkey"));
+            Assert.True(await container.DeleteKey(key.KeyName, false));
         }
     }
 }

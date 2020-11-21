@@ -12,7 +12,7 @@
     public class RedisContainer : IProxy
     {
         private readonly RedisConnection connection;
-        private Dictionary<string, RedisObject> trackedObjects = 
+        private Dictionary<string, RedisObject> trackedObjects =
             new Dictionary<string, RedisObject>();
 
         public RedisContainer(RedisConnection redisConnection, string keyNameSpace = "")
@@ -28,16 +28,18 @@
 
         public string KeyNameSpace { get; }
 
-        public T AddToContainer<T>(T obj) 
+        public T AddToContainer<T>(T obj)
             where T : RedisObject
         {
             obj.Container = this;
-            obj.KeyName = string.IsNullOrWhiteSpace(this.KeyNameSpace) ? 
-                $"{obj.BaseKeyName}" : 
+            obj.KeyName = string.IsNullOrWhiteSpace(this.KeyNameSpace) ?
+                $"{obj.BaseKeyName}" :
                 $"{this.KeyNameSpace}:{obj.BaseKeyName}";
 
             if (!this.TrackedKeys.Contains(obj.KeyName))
+            {
                 this.trackedObjects.Add(obj.KeyName, obj);
+            }
 
             return obj;
         }
@@ -52,7 +54,10 @@
             RedisObject obj;
             var fullKeyName = $"{this.KeyNameSpace}:{keyName}";
 
-            if (this.trackedObjects.TryGetValue(fullKeyName, out obj)) return obj;
+            if (this.trackedObjects.TryGetValue(fullKeyName, out obj))
+            {
+                return obj;
+            }
 
             var instance = Activator.CreateInstance(keyType, keyName) as RedisObject;
             this.AddToContainer(instance);
@@ -68,7 +73,7 @@
 
         public IList<string> TrackedKeys
         {
-            get { return this.trackedObjects.Select(p => p.Key).ToList(); }
+            get { return this.trackedObjects.Select(x => x.Key).ToList(); }
         }
     }
 }
