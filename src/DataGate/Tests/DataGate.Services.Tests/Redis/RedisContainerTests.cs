@@ -12,16 +12,16 @@
 
     public class RedisContainerTests : IClassFixture<RedisFixture>, IDisposable
     {
-        public readonly RedisContainer container;
+        private readonly RedisContainer container;
 
         public RedisContainerTests(RedisFixture fixture)
         {
-            container = new RedisContainer(fixture.RedisConnection, GlobalConstants.TestContainer);
+            this.container = new RedisContainer(fixture.RedisConnection, GlobalConstants.TestContainer);
         }
 
         public void Dispose()
         {
-            container.DeleteTrackedKeys().Wait();
+            this.container.DeleteTrackedKeys().Wait();
         }
 
         [Fact]
@@ -36,7 +36,7 @@
         [InlineData(TypeCode.Int32, "intkey")]
         [InlineData(TypeCode.Boolean, "boolkey")]
         [InlineData(TypeCode.Char, "charkey")]
-        public async Task SetKey_WithPrimitiveTypeAndKeyName_ShouldReturnTrue(TypeCode typeCode, string keyName)
+        public async Task Set_WithPrimitiveTypeAndKeyName_ShouldCreateNewKey(TypeCode typeCode, string keyName)
         {
             switch (typeCode)
             {
@@ -65,7 +65,7 @@
         [InlineData(null)]
         [InlineData("")]
         [InlineData("       ")]
-        public void SetKey_WithInvalidKeyName_ShouldThrowError(string keyName)
+        public void GetKey_WithInvalidKeyName_ShouldThrowException(string keyName)
         {
             Action act = () => container.GetKey<RedisItem<string>>(keyName);
 

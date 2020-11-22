@@ -1,3 +1,3 @@
 cd \
-cd d:\Applications\Redis
+cd "C:\Program Files\Redis"
 redis-server --port 4455

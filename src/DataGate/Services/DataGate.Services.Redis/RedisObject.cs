@@ -3,7 +3,7 @@
     using System;
     using System.Text.Json;
     using System.Threading.Tasks;
-
+    using DataGate.Common;
     using DataGate.Services.Redis.Contracts;
     using StackExchange.Redis;
 
@@ -70,15 +70,20 @@
         {
             if (element == null)
             {
-                return RedisValue.Null;
+                throw new ArgumentException(ErrorMessages.InvalidValue);
             }
             if (element is byte[] b)
             {
                 return b;
             }
-            if (element is RedisValue x)
+            if (element is RedisValue val)
             {
-                return x;
+                if (val.IsNullOrEmpty)
+                {
+                    throw new ArgumentException(ErrorMessages.InvalidValue);
+                }
+
+                return val;
             }
             if (element is IConvertible _)
             {
@@ -147,7 +152,12 @@
                 case Int64 b: return b;
                 case sbyte b: return b;
                 case Single b: return b;
-                case string b: return b;
+                case string b:
+                    if (string.IsNullOrWhiteSpace(b))
+                    {
+                        throw new ArgumentException(ErrorMessages.InvalidValue);
+                    }
+                    return b;
                 case UInt16 b: return (uint)b;
                 case UInt32 b: return b;
                 case UInt64 b: return b;

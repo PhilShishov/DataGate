@@ -20,5 +20,6 @@
 
         public const string InvalidSearchKeyword = "Search term must be at least one symbol long!";
         public const string InvalidKeyName = "Key name cannot be empty!";
+        public const string InvalidValue = "Value cannot be empty!";
     }
 }
