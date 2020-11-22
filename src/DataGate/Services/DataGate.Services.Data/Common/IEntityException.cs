@@ -2,6 +2,6 @@
 {
     public interface IEntityException
     {
-        void ThrowEntityNotFoundExceptionIfIdDoesNotExist(int id);
+        bool DoesEntityExist(int id);
     }
 }

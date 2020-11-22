@@ -21,11 +21,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Messaging\" />
-		<Folder Include="Mapping\" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<ProjectReference Include="..\..\Services\DataGate.Services.Redis\DataGate.Services.Redis.csproj" />
 		<ProjectReference Include="..\..\Services\DataGate.Services\DataGate.Services.csproj" />
 	</ItemGroup>

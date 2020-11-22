@@ -18,7 +18,7 @@
                                                     IEntityException exceptionService,
                                                     EntitySubEntitiesGetDto dto, string function)
         {
-            exceptionService.ThrowEntityNotFoundExceptionIfIdDoesNotExist(dto.Id);
+            exceptionService.DoesEntityExist(dto.Id);
             var date = DateTimeParser.FromWebFormat(dto.Date);
             var entities = await service.All(function, dto.Id, date).ToListAsync();
 
@@ -30,7 +30,7 @@
         public static async Task<T> SetGet<T>(IEntityService service, IEntityException exceptionService,
                                               SubEntitiesGetDto dto, string function)
         {
-            exceptionService.ThrowEntityNotFoundExceptionIfIdDoesNotExist(dto.Id);
+            exceptionService.DoesEntityExist(dto.Id);
             var date = DateTimeParser.FromWebFormat(dto.Date);
             var values = await service.All(function, dto.Id, date, 1).ToListAsync();
             var headers = await service.All(function, dto.Id, date).FirstOrDefaultAsync();

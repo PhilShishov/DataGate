@@ -1,20 +1,10 @@
-﻿// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-// Service class for managing funds
-
-// Created: 09/2019
-// Author:  Philip Shishov
-
-// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-namespace DataGate.Services.Data.SubFunds
+﻿namespace DataGate.Services.Data.SubFunds
 {
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
 
     using DataGate.Common.Exceptions;
     using DataGate.Data.Common.Repositories;
     using DataGate.Data.Models.Entities;
-    using Microsoft.EntityFrameworkCore;
 
     // _____________________________________________________________
     public class SubFundService : ISubFundService
@@ -26,14 +16,16 @@ namespace DataGate.Services.Data.SubFunds
             this.repository = repository;
         }
 
-        public void ThrowEntityNotFoundExceptionIfIdDoesNotExist(int id)
+        public bool DoesEntityExist(int id)
         {
-            if (!this.Exists(id))
-            {
-                throw new EntityNotFoundException(nameof(TbHistorySubFund));
-            }
-        }
+            var exists = this.repository.All().Any(x => x.SfId == id);
 
-        private bool Exists(int id) => this.repository.All().Any(x => x.SfId == id);
+            if (!exists)
+            {
+                throw new EntityNotFoundException(nameof(TbHistoryFund));
+            }
+
+            return exists;
+        }
     }
 }

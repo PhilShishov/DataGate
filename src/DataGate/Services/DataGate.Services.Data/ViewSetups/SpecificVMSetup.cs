@@ -19,7 +19,7 @@
 
         public static async Task<T> SetGet<T>(int id, string date, IEntityDetailsService service, IEntityException exceptionService, QueriesToPassDto queryDto)
         {
-            exceptionService.ThrowEntityNotFoundExceptionIfIdDoesNotExist(id);
+            exceptionService.DoesEntityExist(id);
 
             var dateParsed = DateTimeParser.FromWebFormat(date);
             var entity = await service.ByIdAndDate(queryDto.SqlFunctionById, id, dateParsed).ToListAsync();

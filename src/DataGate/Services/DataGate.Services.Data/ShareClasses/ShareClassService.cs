@@ -23,8 +23,7 @@ namespace DataGate.Services.Data.ShareClasses
     {
         private readonly IRepository<TbPrimeShareClass> repository;
 
-        public ShareClassService(
-                        IRepository<TbPrimeShareClass> repository)
+        public ShareClassService(IRepository<TbPrimeShareClass> repository)
         {
             this.repository = repository;
         }
@@ -63,14 +62,16 @@ namespace DataGate.Services.Data.ShareClasses
                .Select(sc => sc.ScId)
                .FirstOrDefault();
 
-        public void ThrowEntityNotFoundExceptionIfIdDoesNotExist(int id)
+        public bool DoesEntityExist(int id)
         {
-            if (!this.Exists(id))
-            {
-                throw new EntityNotFoundException(nameof(TbHistoryShareClass));
-            }
-        }
+            var exists = this.repository.All().Any(x => x.ScId == id);
 
-        private bool Exists(int id) => this.repository.All().Any(x => x.ScId == id);
+            if (!exists)
+            {
+                throw new EntityNotFoundException(nameof(TbHistoryFund));
+            }
+
+            return exists;
+        }
     }
 }

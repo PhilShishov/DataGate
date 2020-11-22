@@ -1,11 +1,4 @@
-﻿// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-// Service class for managing funds
-
-// Created: 09/2019
-// Author:  Philip Shishov
-
-// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-namespace DataGate.Services.Data.Funds
+﻿namespace DataGate.Services.Data.Funds
 {
     using System.Linq;
 
@@ -23,14 +16,16 @@ namespace DataGate.Services.Data.Funds
             this.repository = fundRepository;
         }
 
-        public void ThrowEntityNotFoundExceptionIfIdDoesNotExist(int id)
+        public bool DoesEntityExist(int id)
         {
-            if (!this.Exists(id))
+            var exists = this.repository.All().Any(x => x.FId == id);
+
+            if (!exists)
             {
                 throw new EntityNotFoundException(nameof(TbHistoryFund));
             }
-        }
 
-        private bool Exists(int id) => this.repository.All().Any(x => x.FId == id);
+            return exists;
+        }
     }
 }
