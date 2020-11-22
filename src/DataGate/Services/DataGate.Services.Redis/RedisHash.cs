@@ -79,14 +79,14 @@
             return Executor.HashExistsAsync(KeyName, ToRedisValue(key));
         }
 
-        public Task<long> Increment(TKey key, long value = 1)
+        public Task<long> Increment(TKey key, long increase = 1)
         {
-            return Executor.HashIncrementAsync(KeyName, ToRedisValue(key), value);
+            return Executor.HashIncrementAsync(KeyName, ToRedisValue(key), increase);
         }
 
-        public Task<long> Decrement(TKey key, long value = 1)
+        public Task<long> Decrement(TKey key, long decrease = 1)
         {
-            return Executor.HashDecrementAsync(KeyName, ToRedisValue(key), value);
+            return Executor.HashDecrementAsync(KeyName, ToRedisValue(key), decrease);
         }
 
         public async IAsyncEnumerator<KeyValuePair<TKey, TValue>> GetAsyncEnumerator()
