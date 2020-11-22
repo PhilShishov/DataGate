@@ -78,7 +78,7 @@
             }
             if (element is RedisValue val)
             {
-                if (val.IsNullOrEmpty)
+                if (string.IsNullOrWhiteSpace(val.ToString()))
                 {
                     throw new ArgumentException(ErrorMessages.InvalidValue);
                 }

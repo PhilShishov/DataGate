@@ -15,7 +15,6 @@
     {
         private readonly RedisContainer container;
         private readonly RedisValueHash item;
-        private const string ItemNameInt = "numbers";
 
         public RedisHashTests(RedisFixture fixture)
         {
@@ -72,9 +71,10 @@
         [InlineData(5)]
         public async Task Increment_WithIncreaseValue_ShouldIncrease(long increase)
         {
-            await this.item.Set(ItemNameInt, 100);
+            string itemNameInt = "numbers";
+            await this.item.Set(itemNameInt, 100);
 
-            var actual = await this.item.Increment(ItemNameInt, increase);
+            var actual = await this.item.Increment(itemNameInt, increase);
             var expected = 100 + increase;
 
             Assert.Equal(expected, actual);
@@ -85,9 +85,10 @@
         [InlineData(5)]
         public async Task Decrement_WithDecreaseValue_ShouldDecrease(long decrease)
         {
-            await this.item.Set(ItemNameInt, 100);
+            string itemNameInt = "numbers";
+            await this.item.Set(itemNameInt, 100);
 
-            var actual = await this.item.Decrement(ItemNameInt, decrease);
+            var actual = await this.item.Decrement(itemNameInt, decrease);
             var expected = 100 - decrease;
 
             Assert.Equal(expected, actual);
@@ -106,14 +107,23 @@
             Assert.False(await item.ContainsKey(itemName));
         }
 
-        //[TestMethod]
-        //public async Task RedisHash_Set_ContainsKey_Get_Increment_Decrement_Remove_Count()
-        //{
-        //    await foreach (var field in item)
-        //    {
-        //        Console.WriteLine($"{field.Key} = {field.Value}");
-        //    }
-        //    Assert.IsTrue((await item.Count()) == 4);
-        //}
+        [Fact]
+        public async Task Count_ShouldReturnCorrectNumberOfItems()
+        {
+            await this.item.Set("link", "https://github.com");
+            await this.item.Set("numbers", 88);
+            await this.item.Set("time", DateTime.Now.Ticks);
+
+            await foreach (var field in this.item)
+            {
+                Console.WriteLine($"{field.Key} = {field.Value}");
+            }
+
+            var actual = await this.item.Count();
+            var expected = 3;
+
+            Assert.Equal(expected, actual);
+
+        }
     }
 }
