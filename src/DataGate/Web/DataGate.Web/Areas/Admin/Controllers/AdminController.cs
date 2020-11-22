@@ -261,7 +261,7 @@
         {
             var role = inputModel.RoleType;
             var roleExist = await this.roleManager.RoleExistsAsync(role);
-            var admins = this.userManager.GetUsersInRoleAsync(GlobalConstants.AdministratorRoleName).Result;
+            //var admins = this.userManager.GetUsersInRoleAsync(GlobalConstants.AdministratorRoleName).Result;
 
             if (roleExist)
             {

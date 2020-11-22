@@ -5,7 +5,8 @@
 
     public class RedisItem<T> : RedisObject
     {
-        public RedisItem(string keyName) : base(keyName) { }
+        public RedisItem(string keyName) 
+            : base(keyName) { }
 
         public Task<bool> Set(T value, TimeSpan? expiration = null, 
             StackExchange.Redis.When when = StackExchange.Redis.When.Always)

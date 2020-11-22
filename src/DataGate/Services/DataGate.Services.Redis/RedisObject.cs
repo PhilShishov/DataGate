@@ -11,9 +11,21 @@
     {
         private string keyName;
         private RedisContainer container;
-        private IProxy RedisMulti;
+        private readonly IProxy RedisMulti;
+        private const string UnsupportedType = "Unsupported type";
 
-        public RedisObject(string receivedName) => this.BaseKeyName = receivedName;
+        public RedisObject(string receivedName)
+        {
+            this.BaseKeyName = receivedName;
+        }
+
+        public string BaseKeyName { get; }
+
+        public string KeyName
+        {
+            get => this.keyName ?? this.BaseKeyName;
+            internal set => this.keyName = value;
+        }
 
         public RedisContainer Container
         {
@@ -35,17 +47,12 @@
         {
             get
             {
-                if (this.RedisMulti != null) return this.RedisMulti.DB;
+                if (this.RedisMulti != null)
+                {
+                    return this.RedisMulti.ProxyDatabase;
+                }
                 return this.Container.Database;
             }
-        }
-
-        public string BaseKeyName { get; }
-
-        public string KeyName
-        {
-            get => this.keyName ?? this.BaseKeyName;
-            internal set => this.keyName = value;
         }
 
         public async Task<bool> Expire(int seconds)
@@ -61,19 +68,44 @@
 
         public static RedisValue ToRedisValue(object element)
         {
-            if (element == null) return RedisValue.Null;
-            if (element is byte[] b) return b;
-            if (element is RedisValue x) return x;
-            if (element is IConvertible _) return ConvertToRedisValue(element);
+            if (element == null)
+            {
+                return RedisValue.Null;
+            }
+            if (element is byte[] b)
+            {
+                return b;
+            }
+            if (element is RedisValue x)
+            {
+                return x;
+            }
+            if (element is IConvertible _)
+            {
+                return ConvertToRedisValue(element);
+            }
+
             return JsonSerializer.Serialize(element);
         }
 
         public static T ToElement<T>(RedisValue value)
         {
-            if (value.HasValue == false) return default;
-            if (typeof(byte[]) == typeof(T)) return (T)Convert.ChangeType(value, typeof(T));
-            if (typeof(RedisValue) == typeof(T)) return (T)Convert.ChangeType(value, typeof(T));
-            if (typeof(IConvertible).IsAssignableFrom(typeof(T))) return (T)ConvertFromRedisValue(typeof(T), value);
+            if (value.HasValue == false)
+            {
+                return default;
+            }
+            if (typeof(byte[]) == typeof(T))
+            {
+                return (T)Convert.ChangeType(value, typeof(T));
+            }
+            if (typeof(RedisValue) == typeof(T))
+            {
+                return (T)Convert.ChangeType(value, typeof(T));
+            }
+            if (typeof(IConvertible).IsAssignableFrom(typeof(T)))
+            {
+                return (T)ConvertFromRedisValue(typeof(T), value);
+            }
             return JsonSerializer.Deserialize<T>(value);
         }
 
@@ -96,7 +128,7 @@
                 case TypeCode.UInt32: return uint.Parse(value);
                 case TypeCode.UInt64: return ulong.Parse(value);
                 default:
-                    throw new Exception("Unsupported type");
+                    throw new Exception(UnsupportedType);
             }
         }
 
@@ -120,7 +152,7 @@
                 case UInt32 b: return b;
                 case UInt64 b: return b;
                 default:
-                    throw new Exception("Unsupported type");
+                    throw new Exception(UnsupportedType);
             }
         }
     }

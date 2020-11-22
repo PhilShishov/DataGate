@@ -1,4 +1,4 @@
-﻿namespace DataGate.Services.Redis
+﻿namespace DataGate.Web.Infrastructure.Extensions
 {
     using System;
     using System.Threading.Tasks;
@@ -17,7 +17,7 @@
             var fullKeyName = useKeyNameSpace ? 
                 $"{proxy.KeyNameSpace}:{keyName}" : 
                 keyName;
-            return proxy.DB.KeyExistsAsync(fullKeyName);
+            return proxy.ProxyDatabase.KeyExistsAsync(fullKeyName);
         }
 
         public static Task<bool> DeleteKey(this IProxy proxy, string keyName, bool useKeyNameSpace = true)
@@ -29,7 +29,7 @@
             var fullKeyName = useKeyNameSpace ? 
                 $"{proxy.KeyNameSpace}:{keyName}" : 
                 keyName;
-            return proxy.DB.KeyDeleteAsync(fullKeyName);
+            return proxy.ProxyDatabase.KeyDeleteAsync(fullKeyName);
         }
     }
 }

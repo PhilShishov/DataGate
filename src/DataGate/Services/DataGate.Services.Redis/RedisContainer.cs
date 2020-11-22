@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using DataGate.Common;
     using DataGate.Services.Redis.Configuration;
     using DataGate.Services.Redis.Contracts;
     using StackExchange.Redis;
@@ -12,7 +12,7 @@
     public class RedisContainer : IProxy
     {
         private readonly RedisConnection connection;
-        private Dictionary<string, RedisObject> trackedObjects =
+        private readonly Dictionary<string, RedisObject> trackedObjects =
             new Dictionary<string, RedisObject>();
 
         public RedisContainer(RedisConnection redisConnection, string keyNameSpace = "")
@@ -24,37 +24,42 @@
 
         public IDatabase Database { get; private set; }
 
-        IDatabaseAsync IProxy.DB => this.Database;
+        IDatabaseAsync IProxy.ProxyDatabase => this.Database;
 
         public string KeyNameSpace { get; }
 
-        public T AddToContainer<T>(T obj)
+        public T AddToContainer<T>(T instance)
             where T : RedisObject
         {
-            obj.Container = this;
-            obj.KeyName = string.IsNullOrWhiteSpace(this.KeyNameSpace) ?
-                $"{obj.BaseKeyName}" :
-                $"{this.KeyNameSpace}:{obj.BaseKeyName}";
+            instance.Container = this;
+            instance.KeyName = string.IsNullOrWhiteSpace(this.KeyNameSpace) ?
+                $"{instance.BaseKeyName}" :
+                $"{this.KeyNameSpace}:{instance.BaseKeyName}";
 
-            if (!this.TrackedKeys.Contains(obj.KeyName))
+            if (!this.TrackedKeys.Contains(instance.KeyName))
             {
-                this.trackedObjects.Add(obj.KeyName, obj);
+                this.trackedObjects.Add(instance.KeyName, instance);
             }
 
-            return obj;
+            return instance;
         }
 
-        public T GetKey<T>(string keyName) where T : RedisObject
+        public T GetKey<T>(string keyName) 
+            where T : RedisObject
         {
+            if (string.IsNullOrWhiteSpace(keyName))
+            {
+                throw new ArgumentException(ErrorMessages.InvalidKeyName);
+            }
+
             return GetKey(typeof(T), keyName) as T;
         }
 
         public RedisObject GetKey(Type keyType, string keyName)
         {
-            RedisObject obj;
             var fullKeyName = $"{this.KeyNameSpace}:{keyName}";
 
-            if (this.trackedObjects.TryGetValue(fullKeyName, out obj))
+            if (this.trackedObjects.TryGetValue(fullKeyName, out RedisObject obj))
             {
                 return obj;
             }

@@ -19,5 +19,6 @@
         public static string UploadFileError = $"The file must be a PDF and less than {GlobalConstants.FileSizeLimit} MB.";
 
         public const string InvalidSearchKeyword = "Search term must be at least one symbol long!";
+        public const string InvalidKeyName = "Key name cannot be empty!";
     }
 }

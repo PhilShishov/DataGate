@@ -6,6 +6,6 @@
     {
         string KeyNameSpace { get; }
 
-        IDatabaseAsync DB { get; }
+        IDatabaseAsync ProxyDatabase { get; }
     }
 }
