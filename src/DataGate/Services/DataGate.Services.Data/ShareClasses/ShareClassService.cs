@@ -9,14 +9,14 @@ namespace DataGate.Services.Data.ShareClasses
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
+
+    using Microsoft.EntityFrameworkCore;
 
     using DataGate.Common.Exceptions;
     using DataGate.Data.Common.Repositories;
     using DataGate.Data.Models.Entities;
     using DataGate.Services.Mapping;
     using DataGate.Web.ViewModels.Search;
-    using Microsoft.EntityFrameworkCore;
 
     // _____________________________________________________________
     public class ShareClassService : IShareClassService
@@ -36,16 +36,6 @@ namespace DataGate.Services.Data.ShareClasses
               .ToList();
 
             return isinList.Any(i => i == searchTerm);
-        }
-
-        public async Task<ISet<string>> GetNamesAsync(int? id = null)
-        {
-            var query = await this.repository.All()
-                .OrderBy(sc => sc.ScOfficialShareClassName)
-                .Select(sc => sc.ScOfficialShareClassName)
-                .ToListAsync();
-
-            return query.ToHashSet();
         }
 
         public IEnumerable<TbPrimeShareClass> ByDate()
