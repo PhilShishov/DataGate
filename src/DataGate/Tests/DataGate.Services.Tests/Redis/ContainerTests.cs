@@ -10,11 +10,11 @@
     using DataGate.Services.Tests.ClassFixtures;
     using DataGate.Web.Infrastructure.Extensions;
 
-    public class RedisContainerTests : IClassFixture<RedisFixture>, IDisposable
+    public class ContainerTests : IClassFixture<RedisFixture>, IDisposable
     {
         private readonly RedisContainer container;
 
-        public RedisContainerTests(RedisFixture fixture)
+        public ContainerTests(RedisFixture fixture)
         {
             this.container = new RedisContainer(fixture.RedisConnection, GlobalConstants.TestContainer);
         }

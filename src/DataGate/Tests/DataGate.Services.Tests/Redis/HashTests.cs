@@ -11,16 +11,16 @@
     using DataGate.Services.Tests.ClassFixtures;
     using DataGate.Services.Tests.TestData;
 
-    public class RedisHashTests : IClassFixture<RedisFixture>, IDisposable
+    public class HashTests : IClassFixture<RedisFixture>, IDisposable
     {
         private readonly RedisContainer container;
-        private readonly RedisValueHash item;
+        private readonly RedisValueHash hashItem;
 
-        public RedisHashTests(RedisFixture fixture)
+        public HashTests(RedisFixture fixture)
         {
             this.container = new RedisContainer(fixture.RedisConnection, GlobalConstants.TestHashContainer);
-            this.item = new RedisValueHash("hashkey");
-            this.container.AddToContainer(this.item);
+            this.hashItem = new RedisValueHash("hashkey");
+            this.container.AddToContainer(this.hashItem);
         }
 
         public void Dispose()
@@ -33,12 +33,12 @@
         public async Task Set_WithKeyNameAndValueOfDifferentType_ShouldCreateHashKey(string itemName, object value)
         {
             RedisValue redisValue = RedisObject.ToRedisValue(value);
-            await this.item.Set(itemName, redisValue);
+            await this.hashItem.Set(itemName, redisValue);
 
-            var actual = this.item.Get(itemName).Result;
+            var actual = this.hashItem.Get(itemName).Result;
             var expected = redisValue;
 
-            Assert.True(await this.item.ContainsKey(itemName));
+            Assert.True(await this.hashItem.ContainsKey(itemName));
             Assert.Equal(expected, actual);
         }
 
@@ -61,7 +61,7 @@
         {
             RedisValue redisValue = RedisObject.ToRedisValue(value);
 
-            Func<Task> task = async () => await this.item.Set(itemName, redisValue);
+            Func<Task> task = async () => await this.hashItem.Set(itemName, redisValue);
 
             await Assert.ThrowsAsync<ArgumentException>(task);
         }
@@ -72,9 +72,9 @@
         public async Task Increment_WithIncreaseValue_ShouldIncrease(long increase)
         {
             string itemNameInt = "numbers";
-            await this.item.Set(itemNameInt, 100);
+            await this.hashItem.Set(itemNameInt, 100);
 
-            var actual = await this.item.Increment(itemNameInt, increase);
+            var actual = await this.hashItem.Increment(itemNameInt, increase);
             var expected = 100 + increase;
 
             Assert.Equal(expected, actual);
@@ -86,9 +86,9 @@
         public async Task Decrement_WithDecreaseValue_ShouldDecrease(long decrease)
         {
             string itemNameInt = "numbers";
-            await this.item.Set(itemNameInt, 100);
+            await this.hashItem.Set(itemNameInt, 100);
 
-            var actual = await this.item.Decrement(itemNameInt, decrease);
+            var actual = await this.hashItem.Decrement(itemNameInt, decrease);
             var expected = 100 - decrease;
 
             Assert.Equal(expected, actual);
@@ -98,28 +98,28 @@
         public async Task Remove_ShouldDeleteItemFromContainer()
         {
             var itemName = "todelete";
-            await this.item.Set(itemName, "todeletevalue");
+            await this.hashItem.Set(itemName, "todeletevalue");
 
-            var actual = await this.item.Remove(itemName);
+            var actual = await this.hashItem.Remove(itemName);
             var expected = true;
 
             Assert.Equal(expected, actual);
-            Assert.False(await item.ContainsKey(itemName));
+            Assert.False(await hashItem.ContainsKey(itemName));
         }
 
         [Fact]
         public async Task Count_ShouldReturnCorrectNumberOfItems()
         {
-            await this.item.Set("link", "https://github.com");
-            await this.item.Set("numbers", 88);
-            await this.item.Set("time", DateTime.Now.Ticks);
+            await this.hashItem.Set("link", "https://github.com");
+            await this.hashItem.Set("numbers", 88);
+            await this.hashItem.Set("time", DateTime.Now.Ticks);
 
-            await foreach (var field in this.item)
+            await foreach (var field in this.hashItem)
             {
                 Console.WriteLine($"{field.Key} = {field.Value}");
             }
 
-            var actual = await this.item.Count();
+            var actual = await this.hashItem.Count();
             var expected = 3;
 
             Assert.Equal(expected, actual);
