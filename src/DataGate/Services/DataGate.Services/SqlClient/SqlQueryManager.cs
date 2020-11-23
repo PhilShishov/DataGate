@@ -14,11 +14,12 @@ namespace DataGate.Services.SqlClient
     using System.Data.SqlClient;
     using System.Threading.Tasks;
 
+    using Microsoft.Extensions.Configuration;
+
     using DataGate.Common;
     using DataGate.Common.Exceptions;
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.Infrastructure.Extensions;
-    using Microsoft.Extensions.Configuration;
 
     // _____________________________________________________________
     public class SqlQueryManager : ISqlQueryManager

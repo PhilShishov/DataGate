@@ -1,18 +1,18 @@
 ﻿namespace DataGate.Services.Data.Tests
 {
+    using Xunit;
+
     using DataGate.Data;
     using DataGate.Services.Data.Tests.ClassFixtures;
     using DataGate.Services.Data.Tests.Factories;
 
-    using Xunit;
-
-    public class TransientDbContextProvider : IClassFixture<MappingsProvider>
+    public class InMemoryContextProvider : IClassFixture<MappingsProvider>
     {
         protected readonly ApplicationDbContext context;
 
-        public TransientDbContextProvider()
+        public InMemoryContextProvider()
         {
-            context = ApplicationDbContextFactory.CreateInMemoryDatabase();
+            context = ConnectionFactory.CreateContextForInMemory();
         }
     }
 }

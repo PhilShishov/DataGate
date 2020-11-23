@@ -7,6 +7,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.9" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
 		<PackageReference Include="Moq" Version="4.14.7" />
 		<PackageReference Include="xunit" Version="2.4.1" />
@@ -21,8 +24,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\Data\DataGate.Data\DataGate.Data.csproj" />
+		<ProjectReference Include="..\..\Services\DataGate.Services.Mapping\DataGate.Services.Mapping.csproj" />
 		<ProjectReference Include="..\..\Services\DataGate.Services.Redis\DataGate.Services.Redis.csproj" />
 		<ProjectReference Include="..\..\Services\DataGate.Services\DataGate.Services.csproj" />
+		<ProjectReference Include="..\..\Web\DataGate.Web.ViewModels\DataGate.Web.ViewModels.csproj" />
 	</ItemGroup>
 
 </Project>

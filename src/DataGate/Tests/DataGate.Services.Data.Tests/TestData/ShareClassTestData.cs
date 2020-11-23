@@ -1,5 +1,6 @@
 ﻿namespace DataGate.Services.Data.Tests.TestData
 {
+    using System;
     using System.Collections.Generic;
 
     using DataGate.Data;
@@ -12,22 +13,25 @@
     {
         public static IEnumerable<TbPrimeShareClass> GenerateShareClasses() 
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 1; i < 10; i++)
             {
                 yield return new TbPrimeShareClass
                 {
-                    ScId = i + 1,
+                    ScId = i,
                     ScOfficialShareClassName = $"pharus#{i}",
                     ScIsinCode = $"LU0000{i}",
+                    ScInitialDate = new DateTime(2020, 01, i),
                 };
             }
-            for (int i = 5; i < 8; i++)
+            for (int i = 10; i <= 20; i++)
             {
                 yield return new TbPrimeShareClass
                 {
-                    ScId = i + 1,
+                    ScId = i,
                     ScOfficialShareClassName = $"multi#{i}",
                     ScIsinCode = $"LU0000{i}",
+                    ScInitialDate = new DateTime(2020, 01, i),
+
                 };
             }
         }

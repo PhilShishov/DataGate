@@ -28,15 +28,6 @@ namespace DataGate.Services.Data.ShareClasses
             this.repository = repository;
         }
 
-        public bool IsIsin(string searchTerm)
-        {
-            var isinList = this.repository.All()
-              .Select(sc => sc.ScIsinCode)
-              .ToList();
-
-            return isinList.Any(i => i == searchTerm);
-        }
-
         public IEnumerable<TbPrimeShareClass> ByDate()
             => this.repository.All()
                 .OrderByDescending(sc => sc.ScInitialDate)
@@ -61,6 +52,15 @@ namespace DataGate.Services.Data.ShareClasses
                .Where(sc => sc.ScIsinCode == searchTerm)
                .Select(sc => sc.ScId)
                .FirstOrDefault();
+
+        public bool IsIsin(string searchTerm)
+        {
+            var isinList = this.repository.All()
+              .Select(sc => sc.ScIsinCode)
+              .ToList();
+
+            return isinList.Any(i => i == searchTerm);
+        }
 
         public bool DoesEntityExist(int id)
         {
