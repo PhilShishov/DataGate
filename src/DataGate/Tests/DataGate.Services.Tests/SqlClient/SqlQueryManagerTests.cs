@@ -1,6 +1,7 @@
 ﻿namespace DataGate.Services.Tests.SqlClient
 {
-    public class SqlQueryManagerTests
+    public class SqlQueryManagerTests : SqlServerContextProvider
     {
+
     }
 }
