@@ -31,6 +31,7 @@
   "WebWiz": {
     "KeysPath": "Your HostingSpaces Keys Path"
   },
+  "License": "1337-ziJ5T9ddM/rvfClSniP2NFQfvhDwRCqaiwxH6piN7UTxguW6TOGzP3/R4hW9T1ZbQGJQ50eEoofhjKBpDu+0+Shl4s6WDtShKx8E8DHVGu/swAxIiFuKzseqKDL6odICqvgqe4MPS5Z1ByAUctzTilXoxLBeb756wJAHeFYS3iAxMzM3OjIwMjEtMDUtMjM6UGhpbGlwIFNoaXNob3Y6UGhpbGlwIFNoaXNob3Y6Q29tbXVuaXR5OkRhdGFHYXRlLjpTdWJzY3JpcHRpb24=",
   "FileSizeLimit": 47185920,
   "ApplicationInsights": {
     "InstrumentationKey": "Your Azure Instrumentation Key"
