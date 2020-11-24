@@ -3,11 +3,12 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Mvc;
+
     using DataGate.Services.Data.TimeSeries;
     using DataGate.Web.Helpers;
     using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.ViewModels.TimeSeries;
-    using Microsoft.AspNetCore.Mvc;
 
     public class TimeSeriesController : BaseController
     {
@@ -19,7 +20,7 @@
         }
 
         [Route("loadTimeseries")]
-        public async Task<IActionResult> GetAllTimelines(int id, string areaName)
+        public async Task<IActionResult> GetAllTimeSeries(int id, string areaName)
         {
             string functionDates = StringSwapper.ByArea(
                         areaName,

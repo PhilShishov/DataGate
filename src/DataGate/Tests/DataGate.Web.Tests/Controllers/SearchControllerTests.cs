@@ -64,6 +64,7 @@
 
         [Theory]
         [InlineData("LU00001")]
+        [InlineData("LU00005")]
         public void Result_WithValidISIN_ShouldRedirectToDetailsView(string searchTerm)
         {
             var shareClass = ShareClassTestData

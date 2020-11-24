@@ -1,11 +1,11 @@
 ﻿namespace DataGate.Web.Tests.Controllers
 {
+    using Xunit;
+    using Microsoft.AspNetCore.Localization;
+    using MyTested.AspNetCore.Mvc;
 
     using DataGate.Common;
     using DataGate.Web.Controllers;
-    using Microsoft.AspNetCore.Localization;
-    using MyTested.AspNetCore.Mvc;
-    using Xunit;
 
     public class SetLanguageControllerTests
     {

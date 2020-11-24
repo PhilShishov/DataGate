@@ -23,16 +23,16 @@
         [Route("search-results")]
         public IActionResult Result(string searchTerm)
         {
+            if (string.IsNullOrWhiteSpace(searchTerm))
+            {
+                throw new BadRequestException(ErrorMessages.InvalidSearchKeyword);
+            }
+
             var model = new SearchResultsViewModel
             {
                 Date = DateTime.Today.ToString(GlobalConstants.RequiredWebDateTimeFormat),
                 SearchTerm = searchTerm
             };
-
-            if (string.IsNullOrWhiteSpace(model.CleanedSearch))
-            {
-                throw new BadRequestException(ErrorMessages.InvalidSearchKeyword);
-            }
 
             bool isIsin = this.service.IsIsin(model.CleanedSearch);
 

@@ -32,19 +32,19 @@
             .Calling(c => c.Index())
             .ShouldReturn()
             .View(result => result
-            .WithModelOfType<UserPanelViewModel>()
-                .Passing(model =>
-                {
-                    var actual = model.ShareClasses.ToList();
-
-                    Assert.Equal(shareClasses.Count, actual.Count);
-
-                    for (int i = 0; i < shareClasses.Count; i++)
+                .WithModelOfType<UserPanelViewModel>()
+                    .Passing(model =>
                     {
-                        Assert.Equal(shareClasses[i].ScId, actual[i].ScId);
-                        Assert.Equal(shareClasses[i].ScOfficialShareClassName, actual[i].ScOfficialShareClassName);
-                    }
-                }));
+                        var actual = model.ShareClasses.ToList();
+
+                        Assert.Equal(shareClasses.Count, actual.Count);
+
+                        for (int i = 0; i < shareClasses.Count; i++)
+                        {
+                            Assert.Equal(shareClasses[i].ScId, actual[i].ScId);
+                            Assert.Equal(shareClasses[i].ScOfficialShareClassName, actual[i].ScOfficialShareClassName);
+                        }
+                    }));
         }
     }
 }

@@ -11,7 +11,6 @@
     using DataGate.Web.ViewModels.Agreements;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.Hosting.Internal;
 
     [Authorize]
     public class AgreementsController : BaseController

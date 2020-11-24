@@ -1,4 +1,4 @@
-﻿namespace DataGate.Services
+﻿namespace DataGate.Services.SqlClient
 {
     using System.Collections.Generic;
     using System.Linq;

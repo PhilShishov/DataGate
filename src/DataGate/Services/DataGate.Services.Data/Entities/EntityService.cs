@@ -11,6 +11,7 @@
     using DataGate.Common.Settings;
     using DataGate.Services.Redis;
     using DataGate.Services.Redis.Configuration;
+    using DataGate.Services.SqlClient;
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.ViewModels.Queries;
 

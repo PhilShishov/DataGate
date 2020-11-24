@@ -14,12 +14,11 @@
 
   <ItemGroup>
     <Content Remove="compilerconfig.json" />
-  </ItemGroup>
-  <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Program.cs" />
+    <Content Update="testsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
