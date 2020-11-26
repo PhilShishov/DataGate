@@ -106,7 +106,7 @@ namespace DataGate.Services.SqlClient
                     }
                 }
 
-                await foreach (var item in DataSqlHelper.GetStringDataAsync(command))
+                await foreach (var item in DataSQLHelper.GetStringDataAsync(command))
                 {
                     yield return item;
                 }
@@ -123,7 +123,7 @@ namespace DataGate.Services.SqlClient
 
                 command.CommandText = function;
 
-                await foreach (var item in DataSqlHelper.GetStringDataAsync(command))
+                await foreach (var item in DataSQLHelper.GetStringDataAsync(command))
                 {
                     yield return item;
                 }
@@ -149,7 +149,7 @@ namespace DataGate.Services.SqlClient
                     command.Parameters.Add(new SqlParameter("@datereport", SqlDbType.Date) { Value = date });
                 }
 
-                await foreach (var item in DataSqlHelper.GetStringDataAsync(command))
+                await foreach (var item in DataSQLHelper.GetStringDataAsync(command))
                 {
                     yield return item;
                 }
