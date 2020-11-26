@@ -15,7 +15,7 @@ namespace DataGate.Services.SqlClient
     using DataGate.Common;
 
     // _____________________________________________________________
-    public class DataSQLHelper
+    public class ReadSqlHelper
     {
         private const int StartingIndex = 0;
 
