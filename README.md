@@ -1,6 +1,7 @@
 ## Project Introduction
 
-**"DataGate"** project is consisted of two parts: **DataGate Web Platform** and **DataGate Report Processor**
+**"DataGate"** is a Fund Management Software and consists of two parts:  <br />
+**DataGate Web Platform** and **DataGate Report Processor**
 ![Project-Architecture](Documentation/Presentation/Project-Architecture.JPG)
 
 ## Table of contents
@@ -8,11 +9,11 @@
   * [General Info](#general-info)
   * [Registration](#registration)
   * [Technologies](#technologies)
-  * [Security](#security)
   * [Functionality](#functionality)
 * [DataGate Report Processor](#datagate-report-processor)
 * [Documentation](#documentation)
 * [History](#history)
+* [License](#license)
 * [Contact](#contact)
 
 ## DataGate Web Platform 
@@ -23,13 +24,14 @@ https://pharusdatagate.com <br />
 ![UserPanel](Documentation/Screenshots/App/UserPanel.png)
 
 A private web application for managing more than 250 funds. <br />
-It is developed to be used by Pharus Management Lux S.A in order to <br />
-centralize internal data and allow each user to be able to <br />
-find relevant information in a fast way, saving time, reducing operational errors <br />
+It is developed in order to centralize internal data <br />
+and allow each user to be able to find relevant information  <br />
+in a fast way, saving time, reducing operational errors <br />
 and automating some parts of the Risk and Legal department.
 
   ## Status
   [![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/DataGate-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=1&branchName=master) [![Build status](https://ci.appveyor.com/api/projects/status/thvsvj1du6d595m6?svg=true)](https://ci.appveyor.com/project/PhilShishov/datagate)
+  [![GitHub license](https://img.shields.io/github/license/philshishov/DataGate?color=brightgreen)](https://github.com/PhilShishov/DataGate/blob/master/LICENSE)
 
 ## General Info
 
@@ -56,12 +58,13 @@ https://pharusdatagate.com <br />
 * Framework - ASP.NET Core 3.1
 * Version Control - Git, TortoiseGit, GitHub
 * DevOps - Application Insights, Azure Pipelines
-* Hosting and File Storage - GoDaddy WebWiz
-* Project Management - Jira, Trello - https://trello.com/pharusit
+* Hosting and File Storage - GoDaddy WebWiz, Web Deploy
+* Project Management - Jira, Trello - [link](https://trello.com/pharusit)
 * Code review, StyleCop
 
 ### Database 
-* MSSQL Server, mylittleadmin
+* Two Databases - Identity Users and App
+* MS SQL Server, mylittleadmin
 * Diagrams -
 [Funds](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/DB-Diagrams/Funds.png),
 [Sub Funds](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/DB-Diagrams/SubFunds.png),
@@ -72,17 +75,28 @@ https://pharusdatagate.com <br />
 [Documents](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/DB-Diagrams/Documents.png),
 [Time Series](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/DB-Diagrams/TimeSeries.png)
 * Entity Framework Core 3.1, Scaffold, LINQ
+* Distributed Cache - Redis 3.0.5, StackExchange
 
 ### Backend
 * C# .NET Core 3.1
 * Design Pattern - DAO, DI, TAP, MVC, REST, Repository, SOLID
-* SendGrid, AutoMapper, IStringLocalizer/IHtmlLocalizer, EPPlus, itext7
+* Also build with:
+  * SendGrid
+  * AutoMapper 
+  * IStringLocalizer/IHtmlLocalizer
+  * EPPlus
+  * itext7
+  * Full-text search
 
 ### Client-side
-* RAZOR, JavaScript ES6, jQuery, Bootstrap
+* RAZOR, JavaScript ES6, jQuery, Ajax, Bootstrap
 * JS/jQuery - DataTable, Chart, Chosen, Moment, Slick, SweetAlert, Browser-Update, Cookie
 * Libman, Bundle, WebCompiler
-* UI/UX design - Photoshop, HTML5 (SVG, Canvas), SCSS/CSS3
+* SCSS/CSS3, HTML5 (SVG, Canvas, localStorage)
+
+### Testing
+* Unit - xUnit, [MyTested.AspNetCore.Mvc](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc)
+* Integration - Moq, In-memory Database
 
 ### Security
  * ASP.NET Core
@@ -161,6 +175,22 @@ The main function is automatic feeding of data into an internal database by the 
 **2020-06-22** Released DataGate v2.0
 
 **2020-02-28** Released DataGate v1.0 with ASP.NET Core 2.1
+
+## License
+This project is licensed under the [MIT License](LICENSE)
   
-  ## Contact
-Created by [Philip Shishov](https://github.com/PhilShishov) - feel free to contact me!
+## Contact
+:boy: **Philip Shishov**
+
+- Facebook: [@philip.shishov](https://www.facebook.com/philip.shishov/)
+- LinkedIn: [@philshishov](https://www.linkedin.com/in/philshishov/)
+- Github: [@philshishov](https://github.com/philshishov)
+
+### :handshake: Contributing
+
+Contributions, issues and feature requests are welcome!
+
+### :man_astronaut: Show your support
+
+Give a :star: if you like this project!
+
