@@ -1,7 +1,8 @@
 ## Project Introduction
 
 **"DataGate"** is a Fund Management Software and consists of two parts:  <br />
-**DataGate Web Platform** and **DataGate Report Processor**
+   ★ **DataGate Web Platform**  <br />
+   ★ **DataGate Report Processor**
 ![Project-Architecture](Documentation/Presentation/Project-Architecture.JPG)
 
 ## Table of contents
@@ -20,14 +21,12 @@
 
 https://pharusdatagate.com <br />
 
-![HomePage](Documentation/Screenshots/App/HomePage.png)
 ![UserPanel](Documentation/Screenshots/App/UserPanel.png)
 
 A private web application for managing more than 250 funds. <br />
-It is developed in order to centralize internal data <br />
-and allow each user to be able to find relevant information  <br />
-in a fast way, saving time, reducing operational errors <br />
-and automating some parts of the Risk and Legal department.
+It is developed in order to centralize internal data and allow each user <br />
+to be able to find relevant information in a fast way, saving time, <br />
+reducing operational errors and automating some parts of the Risk and Legal department.
 
   ## Status
   [![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/DataGate-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=1&branchName=master) [![Build status](https://ci.appveyor.com/api/projects/status/thvsvj1du6d595m6?svg=true)](https://ci.appveyor.com/project/PhilShishov/datagate)
@@ -95,8 +94,9 @@ https://pharusdatagate.com <br />
 * SCSS/CSS3, HTML5 (SVG, Canvas, localStorage)
 
 ### Testing
-* Unit - xUnit, [MyTested.AspNetCore.Mvc](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc)
-* Integration - Moq, In-memory Database
+* xUnit
+* [MyTested.AspNetCore.Mvc](https://github.com/ivaylokenov/MyTested.AspNetCore.Mvc)
+* Moq, In-memory Database
 
 ### Security
  * ASP.NET Core
