@@ -154,9 +154,9 @@ https://pharusdatagate.com <br />
  - Create, edit and delete user
  - Have access to view users panel
  
-   ## DataGate Report Processor
+ ## DataGate Report
  
-  [Report Processor](https://github.com/PhilShishov/ReportProcessor) - .NET Core application running on SFTP Server.  </br>
+  [DataGate Report](https://github.com/PhilShishov/DataGate-Report) - .NET Core application running on SFTP Server.  </br>
 
 The main function is automatic feeding of data into an internal database by the Fund Admin (Asset under management, Subscription, Redeption, Net asset value, Fee)
 ![Data-Manipulation-Layer](Documentation/Presentation/Data-Manipulation-Layer.png)
