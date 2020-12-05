@@ -3,7 +3,7 @@ os: Visual Studio 2019
 before_build:
 - nuget install redis-64 -excludeversion
 - redis-64\tools\redis-server.exe --service-install
-- redis-64\tools\redis-server.exe --redis-server --port 6379
+- redis-64\tools\redis-server.exe redis-server --port 6379
 - dotnet restore src\DataGate\DataGate.sln
 build:
   project: src\DataGate\DataGate.sln
