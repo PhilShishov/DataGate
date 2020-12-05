@@ -4,10 +4,12 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
+    using StackExchange.Redis;
+
     using DataGate.Common;
     using DataGate.Services.Redis.Configuration;
     using DataGate.Services.Redis.Contracts;
-    using StackExchange.Redis;
 
     public class RedisContainer : IProxy
     {

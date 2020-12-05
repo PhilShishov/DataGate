@@ -2,9 +2,10 @@
 {
     using System;
 
+    using StackExchange.Redis;
+
     using DataGate.Workers.BatchPrograms;
     using DataGate.Workers.BatchPrograms.Contracts;
-    using StackExchange.Redis;
 
     public class RedisConnection
     {
@@ -28,7 +29,6 @@
             });
         }
 
-        public ConnectionMultiplexer Connection()
-        => connection.Value;
+        public ConnectionMultiplexer Connection() => connection.Value;
     }
 }

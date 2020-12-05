@@ -1,7 +1,7 @@
 ﻿namespace DataGate.Services.Tests.Redis
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections;
     using System.Threading.Tasks;
 
     using Xunit;
@@ -10,7 +10,6 @@
     using DataGate.Services.Tests.ClassFixtures;
     using DataGate.Services.Redis;
     using DataGate.Web.Tests.TestData;
-    using System.Collections;
 
     public class HashDictionaryTests : IClassFixture<RedisFixture>, IDisposable
     {
