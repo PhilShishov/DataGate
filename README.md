@@ -1,32 +1,40 @@
 ## Project Introduction
 
 **"DataGate"** is a Fund Management Software and consists of two parts:  <br />
-   ★ **DataGate Web Platform**  <br />
-   ★ **DataGate Report Processor**
-![Project-Architecture](Documentation/Presentation/Project-Architecture.JPG)
+   ★ **DataGate Web**  <br />
+   ★ **DataGate Report**
+![Project-Architecture](Documentation/Presentation/Project-Architecture.png)
 
 ## Table of contents
-* [DataGate Web Platform](#datagate-web-platform)
+* [DataGate Web](#datagate-web)
   * [General Info](#general-info)
   * [Registration](#registration)
   * [Technologies](#technologies)
   * [Functionality](#functionality)
-* [DataGate Report Processor](#datagate-report-processor)
+* [DataGate Report](#datagate-report)
 * [Documentation](#documentation)
 * [History](#history)
 * [License](#license)
 * [Contact](#contact)
 
-## DataGate Web Platform 
+## DataGate Web 
 
 https://pharusdatagate.com <br />
 
 ![UserPanel](Documentation/Screenshots/App/UserPanel.png)
 
-A private web application for managing more than 250 funds. <br />
-It is developed in order to centralize internal data and allow each user <br />
-to be able to find relevant information in a fast way, saving time, <br />
-reducing operational errors and automating some parts of the Risk and Legal department.
+An internal web application for managing more than 250 funds. <br />
+
+★ Increased operational efficiency <br />
+Dealing with separate teams, processes and data sets can be challenging <br />
+and time-consuming [(Gartner)](https://wiki2.org/en/Business_intelligence#cite_note-blumberg-18). Having a single source of data will save users' <br />
+time and increase team operational efficiency. <br />
+
+★ Automate parts of the Risk and Legal department <br />
+
+★ Efficient allocation management <br />
+A full data view provides depth and detail - you can move <br />
+from a library view to an individual asset level view. 
 
   ## Status
   [![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/DataGate-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=1&branchName=master) [![Build status](https://ci.appveyor.com/api/projects/status/thvsvj1du6d595m6?svg=true)](https://ci.appveyor.com/project/PhilShishov/datagate)
@@ -146,12 +154,12 @@ https://pharusdatagate.com <br />
  - Create, edit and delete user
  - Have access to view users panel
  
-   ## DataGate Report Processor
+ ## DataGate Report
  
-  [Report Processor](https://github.com/PhilShishov/ReportProcessor) - .NET Core application running on SFTP Server.  </br>
+  [DataGate Report](https://github.com/PhilShishov/DataGate-Report) - .NET Core application running on SFTP Server.  </br>
 
 The main function is automatic feeding of data into an internal database by the Fund Admin (Asset under management, Subscription, Redeption, Net asset value, Fee)
-![Data-Manipulation-Layer](Documentation/Presentation/Data-Manipulation-Layer.JPG)
+![Data-Manipulation-Layer](Documentation/Presentation/Data-Manipulation-Layer.png)
 
 ## Documentation
 
@@ -160,13 +168,14 @@ The main function is automatic feeding of data into an internal database by the 
 [Responsive Web Design](https://github.com/PhilShishov/DataGate/tree/master/Documentation/Screenshots/App/Responsive)
 
 
-![Application-Architecture](Documentation/Presentation/Application-Architecture.JPG)
-![Application-Structure](Documentation/Presentation/Application-Structure.JPG)
+![Business-Layer](Documentation/Presentation/Business-Layer.png)
+![Application-Architecture](Documentation/Presentation/Application-Architecture.png)
+![Application-Structure](Documentation/Presentation/Application-Structure.png)
   
   ## History
 **2020-10-30** Updated to ASP.NET Core 3.1.9
   
-**2020-10-12** SFTP Data Manipulation Layer - [Report Processor](https://github.com/PhilShishov/ReportProcessor)
+**2020-10-12** SFTP Data Manipulation Layer - [DataGate Report](https://github.com/PhilShishov/DataGate-Report)
 
 **2020-09-02** Updated to ASP.NET Core 3.1.7
 
