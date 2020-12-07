@@ -22,6 +22,8 @@
 
                 if (!connMultiplexer.IsConnected)
                 {
+                    // Running in Windows
+
                     this.executor.Execute(dirPath);
                 }
 

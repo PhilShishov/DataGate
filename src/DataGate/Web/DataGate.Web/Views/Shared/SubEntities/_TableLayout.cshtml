@@ -1,5 +1,4 @@
-﻿@model EntitiesViewModel
-
+﻿@model SubEntitiesViewModel
 @{
     var numberPreSelectedColumns = 4;
 }
@@ -12,7 +11,7 @@
             <div class="modal-body">
                 <div>
                     <h2 class="text-center">
-                        @SharedLocalizer.GetHtmlString("selectColumns")
+                        @SharedLocalizer.GetHtmlString("defineLayout")
                     </h2>
                     <select asp-for="PreSelectedColumns" style="width:60%" hidden>
                         @for (int col = 0; col < numberPreSelectedColumns; col++)
@@ -35,15 +34,23 @@
                 </div>
             </div>
             <div class="modal-footer">
+                <div class="modal-footer-save-btn-container">
+                    <input type="submit"
+                           name="Command"
+                           value=@SharedLocalizer.GetHtmlString("Save")
+                           class="btn btn-pharus btn-sm ml-2" />
+                </div>
 
-                <button type="button" class="btn btn-secondary mr-2" data-dismiss="modal">
-                    @SharedLocalizer.GetHtmlString("Close")
-                </button>
+                <div>
+                    <button type="button" class="btn btn-secondary mr-2" data-dismiss="modal">
+                        @SharedLocalizer.GetHtmlString("Close")
+                    </button>
 
-                <input type="submit"
-                       name="Command"
-                       value=@SharedLocalizer.GetHtmlString("Apply")
-                       class="btn btn-pharus ml-2" />
+                    <input type="submit"
+                           name="Command"
+                           value=@SharedLocalizer.GetHtmlString("Apply")
+                           class="btn btn-pharus ml-2" />
+                </div>
             </div>
         </div>
     </div>

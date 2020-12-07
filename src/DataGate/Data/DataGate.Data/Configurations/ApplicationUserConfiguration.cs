@@ -1,9 +1,9 @@
 ﻿namespace DataGate.Data.Configurations
 {
-    using DataGate.Data.Models;
-    using DataGate.Data.Models.Users;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+    using DataGate.Data.Models.Users;
 
     public class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
     {

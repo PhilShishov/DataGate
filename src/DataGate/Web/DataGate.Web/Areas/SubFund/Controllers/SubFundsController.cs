@@ -37,7 +37,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> All([Bind("Date,Values,Headers,IsActive,PreSelectedColumns,SelectedColumns,SelectTerm")] 
+        public async Task<IActionResult> All([Bind("Date,Values,Headers,IsActive,PreSelectedColumns,SelectedColumns")] 
                                               EntitiesViewModel viewModel)
         {
             await EntitiesVMSetup.SetPost(viewModel, this.service, 

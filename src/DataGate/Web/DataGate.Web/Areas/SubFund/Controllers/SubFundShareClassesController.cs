@@ -70,7 +70,7 @@
 
         [HttpPost]
         [Route("sf/{id}/sc")]
-        public async Task<IActionResult> ShareClasses([Bind("Id,Command,Container,Date,Values,Headers,PreSelectedColumns,SelectedColumns,SelectTerm")]
+        public async Task<IActionResult> ShareClasses([Bind("Id,Command,Container,Date,Values,Headers,PreSelectedColumns,SelectedColumns")]
                                                    SubEntitiesViewModel viewModel)
         {
             if (viewModel.Command == GlobalConstants.CommandUpdateTable)

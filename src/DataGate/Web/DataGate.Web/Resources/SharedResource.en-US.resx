@@ -300,6 +300,9 @@
   <data name="dateRequired" xml:space="preserve">
     <value>Date cannot be empty!</value>
   </data>
+  <data name="defineLayout" xml:space="preserve">
+    <value>Define Table Layout</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
@@ -564,6 +567,9 @@
   <data name="roleRequired" xml:space="preserve">
     <value>Role type required</value>
   </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
   <data name="Save changes" xml:space="preserve">
     <value>Save changes</value>
   </data>
@@ -575,9 +581,6 @@
   </data>
   <data name="Select an option..." xml:space="preserve">
     <value>Select an option...</value>
-  </data>
-  <data name="selectColumns" xml:space="preserve">
-    <value>Select Columns</value>
   </data>
   <data name="SELECTION" xml:space="preserve">
     <value>SELECTION</value>

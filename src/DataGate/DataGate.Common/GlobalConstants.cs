@@ -7,7 +7,7 @@
         public const string AuthorName = "Philip Shishov";
         public const string Keywords = 
             "ASP.NET Core, JavaScript, jQuery, " +
-            "MSSQL, Git, GitHub, Fund Management Software, " +
+            "MS SQL, Git, GitHub, Fund Management Software, " +
             "Fund of Funds Software, Alternative Funds, Philip Shishov";
 
         // Application Constants
@@ -81,9 +81,6 @@
         public const int IndexEntityHeadersInTable = 0;
         public const int RowNumberOfHeadersInTable = 1;
         public const int NumberOfAllowedColumnsInPdfView = 17;
-        public const string DefaultAutocompleteSelectTerm = "Select...";
-        public const string UploadTypeProspectusDisplay = "Prospectus";
-        public const string UploadTypeDocumentDisplay = "Document";
 
         // Toolbar Commands
         public const string CommandUpdateTable = "Update";

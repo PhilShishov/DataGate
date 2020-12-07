@@ -6,10 +6,6 @@
 *
 */
 
-#SelectTerm {
-    width: 300px;
-}
-
 .select-div-pharus {
     margin-top: -0.4%
 }
@@ -17,3 +13,8 @@
 #columnModal {
     top: 0%;
 }
+
+.modal-footer-save-btn-container {
+    width: 82%;
+}
+

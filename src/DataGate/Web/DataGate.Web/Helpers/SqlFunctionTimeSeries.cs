@@ -10,10 +10,10 @@
                                                         "providerccy FROM [tb_timeseries_shareclass] tsc " +
                                                         "join tb_dom_timeseries_provider tsp on tsp.id_provider = provider_ts " +
                                                         "join tb_dom_timeseries_type tst on tst.id_ts=tsc.id_ts " +
-                                                        "where id_shareclass = {0}";
+                                                        "where id_shareclass = {0} order by date_ts asc";
 
-        public const string DatesShareClass = "SELECT distinct  date_ts, convert(varchar,date_ts , 103) " +
-                                                         "datechart  FROM [tb_timeseries_shareclass] " +
+        public const string DatesShareClass = "SELECT distinct date_ts, convert(varchar,date_ts , 103) " +
+                                                         "datechart FROM [tb_timeseries_shareclass] " +
                                                          "join tb_dom_timeseries_provider tsp on tsp.id_provider = provider_ts " +
                                                          "where id_shareclass = {0} order by date_ts asc";
 
@@ -25,10 +25,10 @@
                                                         "providerccy FROM [tb_timeseries_subfund] tsc " +
                                                         "join tb_dom_timeseries_provider tsp on tsp.id_provider = provider_ts " +
                                                         "join tb_dom_timeseries_type tst on tst.id_ts=tsc.id_ts " +
-                                                        "where id_subfund = {0}";
+                                                        "where id_subfund = {0} order by date_ts asc";
 
-        public const string DatesSubFund = "SELECT distinct  date_ts, convert(varchar,date_ts , 103) " +
-                                                         "datechart  FROM [tb_timeseries_subfund] " +
+        public const string DatesSubFund = "SELECT distinct date_ts, convert(varchar,date_ts , 103) " +
+                                                         "datechart FROM [tb_timeseries_subfund] " +
                                                          "join tb_dom_timeseries_provider tsp on tsp.id_provider = provider_ts " +
                                                          "where id_subfund = {0} order by date_ts asc";
 

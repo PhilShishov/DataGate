@@ -2,6 +2,11 @@
 {
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Routing;
+    using Microsoft.AspNetCore.Http;
+
     using DataGate.Common;
     using DataGate.Services.Data.Entities;
     using DataGate.Services.Data.ViewSetups;
@@ -9,9 +14,8 @@
     using DataGate.Web.Helpers;
     using DataGate.Web.Resources;
     using DataGate.Web.ViewModels.Entities;
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Routing;
+    using Microsoft.AspNetCore.Identity;
+    using DataGate.Data.Models.Users;
 
     [Area(EndpointsConstants.FundArea)]
     [Authorize]
@@ -19,34 +23,53 @@
     {
         private readonly IEntityService service;
         private readonly SharedLocalizationService sharedLocalizer;
+        private readonly UserManager<ApplicationUser> userManager;
 
         public FundsController(
             IEntityService service,
-            SharedLocalizationService sharedLocalizer)
+            SharedLocalizationService sharedLocalizer,
+            UserManager<ApplicationUser> userManager)
         {
             this.service = service;
             this.sharedLocalizer = sharedLocalizer;
+            this.userManager = userManager;
         }
 
         [HttpGet]
         [Route("funds")]
         public async Task<IActionResult> All()
         {
-            var viewModel = await EntitiesVMSetup
+            var user = await this.userManager.GetUserAsync(this.User);
+
+            var model = await EntitiesVMSetup
                 .SetGet<EntitiesViewModel>(this.service, SqlFunctionDictionary.AllActiveFund);
 
-            return this.View(viewModel);
+            return this.View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> All([Bind("Date,Values,Headers,IsActive,PreSelectedColumns,SelectedColumns,SelectTerm")]
-                                              EntitiesViewModel viewModel)
+        public async Task<IActionResult> All([Bind("Date,Values,Headers,IsActive,Command,PreSelectedColumns,SelectedColumns")]
+                                              EntitiesViewModel model)
         {
-            await EntitiesVMSetup.SetPost(viewModel, this.service, SqlFunctionDictionary.AllFund, SqlFunctionDictionary.AllActiveFund);
+            //var user = await this.userManager.GetUserAsync(this.User);
 
-            if (viewModel.Values != null && viewModel.Values.Count > 0)
+            //var layout = user.UserLayout();
+
+            //if (layout != null)
+            //{
+            //    model.SelectedColumns = layout.SelectedColumns;
+            //}
+
+            //if (model.Command == "Save")
+            //{
+            //    layout.SelectedColumns = model.SelectedColumns;
+            //}
+
+            await EntitiesVMSetup.SetPost(model, this.service, SqlFunctionDictionary.AllFund, SqlFunctionDictionary.AllActiveFund);
+
+            if (model.Values != null && model.Values.Count > 0)
             {
-                return this.View(viewModel);
+                return this.View(model);
             }
 
             return this.ShowError(

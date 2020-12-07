@@ -1,12 +1,11 @@
-﻿// ReSharper disable VirtualMemberCallInConstructor
-namespace DataGate.Data.Models.Users
+﻿namespace DataGate.Data.Models.Users
 {
     using System;
     using System.Collections.Generic;
 
-    using DataGate.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+
+    using DataGate.Data.Common.Models;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
@@ -19,6 +18,7 @@ namespace DataGate.Data.Models.Users
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
             this.LastLoginTime = TimeZoneInfo.ConvertTime(this.now, TimeZoneInfo.Local);
+            this.UserColumns = new HashSet<AspNetUserColumns>();
         }
 
         public DateTimeOffset LastLoginTime { get; set; }
@@ -38,5 +38,7 @@ namespace DataGate.Data.Models.Users
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
+
+        public ICollection<AspNetUserColumns> UserColumns { get; set; }
     }
 }

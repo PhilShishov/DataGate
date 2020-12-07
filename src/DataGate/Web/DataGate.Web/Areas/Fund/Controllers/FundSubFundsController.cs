@@ -71,7 +71,7 @@
         [HttpPost]
         [Route("f/{id}/sf")]
         public async Task<IActionResult> SubFunds([Bind("Id, Command, Container, Date,Values,Headers," +
-                                                        "PreSelectedColumns,SelectedColumns,SelectTerm")]
+                                                        "PreSelectedColumns,SelectedColumns")]
                                                    SubEntitiesViewModel viewModel)
         {
             if (viewModel.Command == GlobalConstants.CommandUpdateTable)

@@ -1,5 +1,4 @@
-﻿// ReSharper disable VirtualMemberCallInConstructor
-namespace DataGate.Data.Models.Users
+﻿namespace DataGate.Data.Models.Users
 {
     using System;
 
