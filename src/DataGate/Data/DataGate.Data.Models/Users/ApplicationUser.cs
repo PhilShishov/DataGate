@@ -6,6 +6,7 @@
     using Microsoft.AspNetCore.Identity;
 
     using DataGate.Data.Common.Models;
+    using DataGate.Data.Models.Columns;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
@@ -18,7 +19,11 @@
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
             this.LastLoginTime = TimeZoneInfo.ConvertTime(this.now, TimeZoneInfo.Local);
-            this.UserColumns = new HashSet<AspNetUserColumns>();
+            this.UserFundColumns = new HashSet<UserFundColumn>();
+            this.UserSubFundColumns = new HashSet<UserSubFundColumn>();
+            this.UserShareClassColumns = new HashSet<UserShareClassColumn>();
+            this.UserFundSubFundsColumns = new HashSet<UserFundSubFundsColumn>();
+            this.UserSubFundShareClassesColumns = new HashSet<UserSubFundShareClassesColumn>();
         }
 
         public DateTimeOffset LastLoginTime { get; set; }
@@ -39,6 +44,14 @@
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
 
-        public ICollection<AspNetUserColumns> UserColumns { get; set; }
+        public ICollection<UserFundColumn> UserFundColumns { get; set; }
+
+        public ICollection<UserSubFundColumn> UserSubFundColumns { get; set; }
+
+        public ICollection<UserShareClassColumn> UserShareClassColumns { get; set; }
+
+        public ICollection<UserFundSubFundsColumn> UserFundSubFundsColumns { get; set; }
+
+        public ICollection<UserSubFundShareClassesColumn> UserSubFundShareClassesColumns { get; set; }
     }
 }
