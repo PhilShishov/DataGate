@@ -2,53 +2,67 @@
 {
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Routing;
+
     using DataGate.Common;
+    using DataGate.Data.Models.Columns;
+    using DataGate.Data.Common.Repositories;
     using DataGate.Services.Data.Entities;
     using DataGate.Services.Data.ViewSetups;
     using DataGate.Web.Controllers;
     using DataGate.Web.Helpers;
     using DataGate.Web.Resources;
     using DataGate.Web.ViewModels.Entities;
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Routing;
 
     [Area(EndpointsConstants.ShareClassArea)]
     [Authorize]
     public class ShareClassesController : BaseController
     {
-        private const int PerPageDefaultValue = 30;
         private readonly IEntityService service;
         private readonly SharedLocalizationService sharedLocalizer;
+        private readonly IUserColumnRepository<UserShareClassColumn> repository;
 
         public ShareClassesController(
             IEntityService service,
-            SharedLocalizationService sharedLocalizer)
+            SharedLocalizationService sharedLocalizer,
+            IUserColumnRepository<UserShareClassColumn> repository)
         {
             this.service = service;
             this.sharedLocalizer = sharedLocalizer;
+            this.repository = repository;
         }
 
         [HttpGet]
         [Route("shareclasses")]
         public async Task<IActionResult> All()
         {
+            var user = await this.service.GetUser(this.User);
+            var userColumns = this.service.GetLayout<UserShareClassColumn>(this.repository, user.Id);
+
             var viewModel = await EntitiesVMSetup
-                .SetGet<EntitiesViewModel>(this.service, SqlFunctionDictionary.AllActiveShareClass);
+                .SetGet<EntitiesViewModel>(this.service, SqlFunctionDictionary.AllActiveShareClass, userColumns);
             return this.View(viewModel);
         }
 
         [HttpPost]
-        public async Task<IActionResult> All([Bind("Date,Values,Headers,IsActive,PreSelectedColumns,SelectedColumns")]
-                                              EntitiesViewModel viewModel)
+        public async Task<IActionResult> All([Bind("Date,Values,Headers,IsActive,Command,PreSelectedColumns,SelectedColumns")]
+                                              EntitiesViewModel model)
         {
-            await EntitiesVMSetup.SetPost(viewModel, this.service,
+            var user = await this.service.GetUser(this.User);
+            var userColumns = this.service.GetLayout<UserShareClassColumn>(this.repository, user.Id);
+
+            var columnsToDb = this.service.SetLayout<UserShareClassColumn>(model, user.Id, userColumns);
+            await this.repository.SaveLayout(user.UserShareClassColumns, columnsToDb);
+
+            await EntitiesVMSetup.SetPost(model, this.service,
                                           SqlFunctionDictionary.AllShareClass,
                                           SqlFunctionDictionary.AllActiveShareClass);
 
-            if (viewModel.Values != null && viewModel.Values.Count > 0)
+            if (model.Values != null && model.Values.Count > 0)
             {
-                return this.View(viewModel);
+                return this.View(model);
             }
 
             return this.ShowError(
