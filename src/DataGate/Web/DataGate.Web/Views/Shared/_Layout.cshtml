@@ -54,8 +54,8 @@
     @*@Html.Raw(JavaScriptSnippet.FullScript)*@
 </head>
 <body>
-    @if (this.User.Identity.IsAuthenticated)
-    {
+    @*@if (this.User.Identity.IsAuthenticated)
+    {*@
         <header>
             <div class="header-pharus">
                 <div class="w-50">
@@ -203,7 +203,7 @@
         </a>
 
         <partial name="_BlockUIPanel" />
-    }
+    @*  *@}
 
 <environment include="Development">
     <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>

@@ -1,5 +1,5 @@
 ﻿@{
-    var controller = this.ViewContext.RouteData.Values["controller"].ToString();
+    var controller = this.ViewContext.RouteData.Values[EndpointsConstants.ControllerRouteDataValue].ToString();
 
     var entityType = (controller == EndpointsConstants.FundArea + EndpointsConstants.ActionDetails) ?
                         "Sub Funds" : "Shares";

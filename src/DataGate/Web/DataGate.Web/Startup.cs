@@ -4,6 +4,7 @@
 
     using DataGate.Common;
     using DataGate.Data;
+    using DataGate.Data.Seeding;
     using DataGate.Services.Mapping;
     using DataGate.Web.Configuration;
     using DataGate.Web.InputModels.Funds;
@@ -62,12 +63,12 @@
             // Seed data on application startup
             //using (var serviceScope = app.ApplicationServices.CreateScope())
             //{
-            //    var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            //    var dbContext = serviceScope.ServiceProvider.GetRequiredService<UsersDbContext>();
 
-            //    //if (env.IsDevelopment())
-            //    //{
-            //    //    dbContext.Database.Migrate();
-            //    //}
+            //    if (env.IsDevelopment())
+            //    {
+            //        dbContext.Database.Migrate();
+            //    }
 
             //    new ApplicationDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
             //}

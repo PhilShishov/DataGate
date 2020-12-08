@@ -4,7 +4,7 @@
     ViewData["Title"] = SharedLocalizer.GetHtmlString("Share Classes");
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    var controller = this.ViewContext.RouteData.Values["controller"].ToString();
+    var controller = this.ViewContext.RouteData.Values[EndpointsConstants.ControllerRouteDataValue].ToString();
 }
 
 <div class="container-all-funds justify-content-between">

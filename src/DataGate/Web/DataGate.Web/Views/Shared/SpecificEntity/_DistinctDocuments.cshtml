@@ -1,6 +1,6 @@
 ﻿@model DistinctOverviewViewModel
 @{
-    var controllerName = this.ViewContext.RouteData.Values["controller"].ToString();
+    var controllerName = this.ViewContext.RouteData.Values[EndpointsConstants.ControllerRouteDataValue].ToString();
 }
 
 <form method="post">

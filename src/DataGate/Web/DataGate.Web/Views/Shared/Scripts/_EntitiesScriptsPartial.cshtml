@@ -1,6 +1,6 @@
 ﻿
 @{
-    var controller = this.ViewContext.RouteData.Values["controller"].ToString();
+    var controller = this.ViewContext.RouteData.Values[EndpointsConstants.ControllerRouteDataValue].ToString();
     IRequestCultureFeature currentCulture = Context.Features.Get<IRequestCultureFeature>();
 }
 
