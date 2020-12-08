@@ -5,9 +5,10 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
+
     using DataGate.Common;
     using DataGate.Data.Common.Repositories;
-    using Microsoft.EntityFrameworkCore;
 
     public class TimeSeriesRepository : ITimeSeriesRepository
     {

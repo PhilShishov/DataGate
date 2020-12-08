@@ -1,9 +1,11 @@
 ﻿namespace DataGate.Services.Data.ViewSetups
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
+    using DataGate.Common;
     using DataGate.Services.Data.Entities;
     using DataGate.Services.Mapping;
     using DataGate.Web.Dtos.Overviews;
@@ -13,19 +15,36 @@
 
     public static class EntitiesVMSetup
     {
-        public static async Task<T> SetGet<T>(IEntityService service, string functionActive)
+        public static async Task<T> SetGet<T>(IEntityService service, string functionActive, IEnumerable<string> userColumns)
         {
+            bool isInLayoutMode = userColumns.Count() > 0 ? true : false;
+
             var today = DateTime.Today;
+            var primeHeaders = await service.All(functionActive, null, today).FirstOrDefaultAsync();
             var headers = await service.All(functionActive, null, today).FirstOrDefaultAsync();
             var values = await service.All(functionActive, null, today, 1).ToListAsync();
+
+            if (isInLayoutMode)
+            {
+                var dtoSelected = new AllSelectedDto
+                {
+                    Date = today,
+                    PreSelectedColumns = headers.Take(GlobalConstants.NumberPreSelectedColumns).ToList(),
+                    SelectedColumns = userColumns,                    
+                };
+
+                headers = await service.AllSelected(functionActive, dtoSelected).FirstOrDefaultAsync();
+                values = await service.AllSelected(functionActive, dtoSelected, 1).ToListAsync();
+            }
 
             var dto = new EntitiesOverviewGetDto()
             {
                 IsActive = true,
                 Date = DateTimeParser.ToWebFormat(today),
-                HeadersSelection = headers,
+                HeadersSelection = primeHeaders,
                 Headers = headers,
                 Values = values,
+                SelectedColumns = userColumns,
             };
 
             return AutoMapperConfig.MapperInstance.Map<T>(dto);

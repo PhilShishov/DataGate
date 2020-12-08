@@ -81,6 +81,7 @@
         public const int IndexEntityHeadersInTable = 0;
         public const int RowNumberOfHeadersInTable = 1;
         public const int NumberOfAllowedColumnsInPdfView = 17;
+        public const int NumberPreSelectedColumns = 4;
 
         // Toolbar Commands
         public const string CommandUpdateTable = "Update";

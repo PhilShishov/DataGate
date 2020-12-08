@@ -13,5 +13,7 @@ namespace DataGate.Web.Dtos.Overviews
         public IEnumerable<string> Headers { get; set; }
 
         public IEnumerable<string> HeadersSelection { get; set; }
+
+        public IEnumerable<string> SelectedColumns { get; set; }
     }
 }

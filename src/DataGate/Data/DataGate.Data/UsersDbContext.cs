@@ -6,10 +6,12 @@
     using System.Threading;
     using System.Threading.Tasks;
 
-    using DataGate.Data.Common.Models;
-    using DataGate.Data.Models.Users;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
+
+    using DataGate.Data.Common.Models;
+    using DataGate.Data.Models.Users;
+    using DataGate.Data.Models.Columns;
 
     public class UsersDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
@@ -22,6 +24,12 @@
             : base(options)
         {
         }
+
+        public DbSet<UserFundColumn> UserFundColumn { get; set; }
+        public DbSet<UserFundSubFundsColumn> UserFundSubFundsColumn { get; set; }
+        public DbSet<UserSubFundColumn> UserSubFundColumn { get; set; }
+        public DbSet<UserSubFundShareClassesColumn> UserSubFundShareClassesColumn { get; set; }
+        public DbSet<UserShareClassColumn> UserShareClassColumn { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

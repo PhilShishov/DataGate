@@ -5,6 +5,8 @@
         public const string EmailNotConfirmed = "emailNotConfirmed";
         public const string InvalidLoginAttempt = "invalidLogin";
 
+        public const string SettingUserLayout = "Unexpected error occurred setting user layout ({0}) for user with ID '{1}'.";
+
         public const string UnsuccessfulUpdate = "unsuccessfulUpdate";
         public const string UnsuccessfulDelete = "Delete was unsuccessful! Please try again.";
         public const string UnsuccessfulCreate = "Create was unsuccessful! Please try again.";
