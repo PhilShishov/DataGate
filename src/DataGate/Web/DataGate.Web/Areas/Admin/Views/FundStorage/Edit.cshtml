@@ -63,7 +63,7 @@
 
                 <div class="column-form">
                     <div class="form-group">
-                        <label asp-for="FACode" ></label><br>
+                        <label asp-for="FACode"></label><br>
                         <input type="text"
                                class="form-control "
                                asp-for="FACode">
@@ -71,7 +71,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="DEPCode" ></label><br>
+                        <label asp-for="DEPCode"></label><br>
                         <input type="text"
                                class="form-control "
                                asp-for="DEPCode">
@@ -79,7 +79,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="TACode" ></label><br>
+                        <label asp-for="TACode"></label><br>
                         <input type="text"
                                class="form-control "
                                asp-for="TACode">
@@ -87,7 +87,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="RegNumber" ></label><br>
+                        <label asp-for="RegNumber"></label><br>
                         <input type="text"
                                class="form-control "
                                asp-for="RegNumber">
@@ -95,7 +95,29 @@
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="CommentTitle" ></label><br>
+                        <label asp-for="VATRegNumber"></label><br>
+                        <input type="text"
+                               class="form-control"
+                               asp-for="VATRegNumber">
+                        <span asp-validation-for="VATRegNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="VATIdentificationNumber"></label><br>
+                        <input type="text"
+                               class="form-control"
+                               asp-for="VATIdentificationNumber">
+                        <span asp-validation-for="VATIdentificationNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="IBICNumber"></label><br>
+                        <input type="text"
+                               class="form-control"
+                               asp-for="IBICNumber">
+                        <span asp-validation-for="IBICNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="CommentTitle"></label><br>
                         <input type="text"
                                class="form-control "
                                asp-for="CommentTitle">
@@ -103,7 +125,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="CommentArea" ></label><br>
+                        <label asp-for="CommentArea"></label><br>
                         <textarea class="form-control "
                                   asp-for="CommentArea">
                 </textarea>

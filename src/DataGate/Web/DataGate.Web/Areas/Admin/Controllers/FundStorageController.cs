@@ -2,13 +2,14 @@
 {
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
     using DataGate.Common;
     using DataGate.Services.Data.Storage.Contracts;
     using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.InputModels.Funds;
     using DataGate.Web.Resources;
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
 
     [Area(EndpointsConstants.AdminAreaName)]
     [Authorize(Roles = GlobalConstants.AdministratorRoleName + "," + GlobalConstants.LegalRoleName)]
@@ -40,8 +41,9 @@
         [Route("f/new")]
         public async Task<IActionResult> Create(
                      [Bind("InitialDate", "EndDate", "FundName", "CSSFCode", "Status",
-                          "LegalForm", "LegalVehicle", "LegalType", "FACode", "DEPCode",
-                          "TACode", "CompanyTypeDesc", "TinNumber", "LEICode", "RegNumber", "RecaptchaValue")] CreateFundInputModel model)
+                           "LegalForm", "LegalVehicle", "LegalType", "FACode", "DEPCode",
+                           "TACode", "CompanyTypeDesc", "TinNumber", "LEICode", "RegNumber",
+                           "VATRegNumber", "VATIdentificationNumber", "IBICNumber",  "RecaptchaValue")] CreateFundInputModel model)
         {
             bool doesExist = await this.service.DoesExist(model.FundName);
 
@@ -81,9 +83,10 @@
         [Route("f/edit/{id}/{date}")]
         public async Task<IActionResult> Edit(
                      [Bind("Id", "InitialDate", "FundName", "CSSFCode", "Status",
-                          "LegalForm", "LegalVehicle", "LegalType", "FACode",
-                          "DEPCode", "TACode", "CompanyTypeDesc", "TinNumber",
-                          "LEICode", "RegNumber", "CommentTitle", "CommentArea", "RecaptchaValue")] EditFundInputModel model)
+                           "LegalForm", "LegalVehicle", "LegalType", "FACode",
+                           "DEPCode", "TACode", "CompanyTypeDesc", "TinNumber",
+                           "LEICode", "RegNumber", "VATRegNumber", "VATIdentificationNumber", "IBICNumber", 
+                           "CommentTitle", "CommentArea", "RecaptchaValue")] EditFundInputModel model)
         {
             bool doesExistAtDate = await this.service.DoesExistAtDate(model.FundName, model.InitialDate);
 

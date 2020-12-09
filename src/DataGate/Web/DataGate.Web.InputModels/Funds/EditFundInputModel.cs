@@ -3,6 +3,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using AutoMapper;
+
     using DataGate.Common;
     using DataGate.Services.Mapping;
     using DataGate.Web.Dtos.Entities;
@@ -46,6 +47,18 @@
         [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = ValidationMessages.UnvalidFormat)]
         [Display(Name = "Reg. Number")]
         public string RegNumber { get; set; }
+
+        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = ValidationMessages.UnvalidFormat)]
+        [Display(Name = "VAT Reg. Number")]
+        public string VATRegNumber { get; set; }
+
+        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = ValidationMessages.UnvalidFormat)]
+        [Display(Name = "VAT Ident. Number")]
+        public string VATIdentificationNumber { get; set; }
+
+        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = ValidationMessages.UnvalidFormat)]
+        [Display(Name = "I.B.I.C. Number")]
+        public string IBICNumber { get; set; }
 
         [Required(ErrorMessage = ValidationMessages.CommentTitleRequired)]
         [Display(Name = "Comment Title")]

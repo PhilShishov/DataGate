@@ -136,6 +136,9 @@
                             new SqlParameter("@f_legal_vehicle", SqlDbType.Int) { Value = dto.LegalVehicle },
                             new SqlParameter("@f_companyType", SqlDbType.Int) { Value = dto.CompanyTypeDesc },
                             new SqlParameter("@f_tinNumber", SqlDbType.NVarChar) { Value = dto.TinNumber },
+                            new SqlParameter("@f_VATRegistrationNumber", SqlDbType.NVarChar) { Value = dto.VATRegNumber },
+                            new SqlParameter("@f_VATIdentificationNumber", SqlDbType.NVarChar) { Value = dto.VATIdentificationNumber },
+                            new SqlParameter("@f_IBICNumber", SqlDbType.NVarChar) { Value = dto.IBICNumber },
                    });
             return command;
         }

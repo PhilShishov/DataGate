@@ -1,11 +1,14 @@
 ﻿//namespace DataGate.Web.Tests.Controllers
 //{
-//    using Xunit;
+//    using System.Linq;
+
 //    using MyTested.AspNetCore.Mvc;
+//    using Xunit;
 
 //    using DataGate.Web.Controllers;
 //    using DataGate.Data;
 //    using DataGate.Web.ViewModels.TimeSeries;
+//    using DataGate.Web.Tests.TestData;
 
 //    public class TimeSeriesControllerTests
 //    {
@@ -15,9 +18,7 @@
 //        public void GetAllTimeSeries_WithValidIdAndArea_ShouldReturnPartialView(int id, string area)
 //        {
 //            var shareClass = ShareClassTestData
-//               .GenerateShareClasses()
-//               .FirstOrDefault(sc => sc.ScIsinCode == searchTerm);
-
+//               .GenerateShareClasses();
 
 //            MyController<TimeSeriesController>
 //                .Instance()
@@ -36,7 +37,7 @@
 //                            //{
 //                            //    Assert.Equal(shareClasses[i].ScId, actual[i].ScId);
 //                            //    Assert.Equal(shareClasses[i].ScOfficialShareClassName, actual[i].ScOfficialShareClassName);
-//                            }
+//                            //}
 //                        }));
 //        }
 //    }

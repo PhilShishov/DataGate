@@ -3,16 +3,17 @@
     using System.IO;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Configuration;
+
     using DataGate.Common;
     using DataGate.Services.Data.Files.Contracts;
     using DataGate.Services.Mapping;
     using DataGate.Web.Helpers;
     using DataGate.Web.InputModels.Files;
     using DataGate.Web.Resources;
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.Configuration;
 
     [Authorize]
     public class UploadController : BaseController

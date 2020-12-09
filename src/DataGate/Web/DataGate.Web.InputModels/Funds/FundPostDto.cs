@@ -46,6 +46,12 @@ namespace DataGate.Web.InputModels.Funds
 
         public string RegNumber { get; set; }
 
+        public string VATRegNumber { get; set; }
+
+        public string VATIdentificationNumber { get; set; }
+
+        public string IBICNumber { get; set; }
+
         public string CommentTitle { get; set; }
 
         public string CommentArea { get; set; }

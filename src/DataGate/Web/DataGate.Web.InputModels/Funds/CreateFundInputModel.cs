@@ -48,5 +48,17 @@
         [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = ValidationMessages.UnvalidFormat)]
         [Display(Name = "Reg. Number")]
         public string RegNumber { get; set; }
+
+        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = ValidationMessages.UnvalidFormat)]
+        [Display(Name = "VAT Reg. Number")]
+        public string VATRegNumber { get; set; }
+
+        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = ValidationMessages.UnvalidFormat)]
+        [Display(Name = "VAT Ident. Number")]
+        public string VATIdentificationNumber { get; set; }
+
+        [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = ValidationMessages.UnvalidFormat)]
+        [Display(Name = "I.B.I.C. Number")]
+        public string IBICNumber { get; set; }
     }
 }
