@@ -141,6 +141,9 @@
   <data name="Access Denied" xml:space="preserve">
     <value>Access Denied</value>
   </data>
+  <data name="accountLocked" xml:space="preserve">
+    <value>User account locked out. Please contact admin.</value>
+  </data>
   <data name="Actions" xml:space="preserve">
     <value>Actions</value>
   </data>

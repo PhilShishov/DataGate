@@ -4,14 +4,14 @@
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
 
-    using DataGate.Common;
-    using DataGate.Data.Models.Users;
-    using DataGate.Services.Messaging;
-
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
+
+    using DataGate.Common;
+    using DataGate.Data.Models.Users;
+    using DataGate.Services.Messaging;
 
     [AllowAnonymous]
     public class ForgotPasswordModel : PageModel

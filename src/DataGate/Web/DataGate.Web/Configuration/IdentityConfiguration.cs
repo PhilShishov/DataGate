@@ -10,7 +10,8 @@
         public static IServiceCollection ConfigureIdentity(this IServiceCollection services)
         {
             services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions)
-                 .AddRoles<ApplicationRole>().AddEntityFrameworkStores<UsersDbContext>();
+                 .AddRoles<ApplicationRole>()
+                 .AddEntityFrameworkStores<UsersDbContext>();
 
             return services;
         }

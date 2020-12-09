@@ -3,6 +3,7 @@
     public class ErrorMessages
     {
         public const string EmailNotConfirmed = "emailNotConfirmed";
+        public const string AccountLocked = "accountLocked";
         public const string InvalidLoginAttempt = "invalidLogin";
 
         public const string SettingUserLayout = "Unexpected error occurred setting user layout ({0}) for user with ID '{1}'.";

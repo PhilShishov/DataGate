@@ -6,16 +6,17 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using DataGate.Common;
-    using DataGate.Data.Models.Users;
-    using DataGate.Web.Infrastructure.Attributes.Validation;
-    using DataGate.Web.Resources;
     using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
     using Microsoft.Extensions.Logging;
+
+    using DataGate.Common;
+    using DataGate.Data.Models.Users;
+    using DataGate.Web.Infrastructure.Attributes.Validation;
+    using DataGate.Web.Resources;
 
     [AllowAnonymous]
     public class LoginModel : PageModel
@@ -75,10 +76,8 @@
 
             if (this.ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 Microsoft.AspNetCore.Identity.SignInResult result = await this.signInManager
-                    .PasswordSignInAsync(this.Input.Username, this.Input.Password, this.Input.RememberMe, lockoutOnFailure: false);
+                    .PasswordSignInAsync(this.Input.Username, this.Input.Password, this.Input.RememberMe, lockoutOnFailure: true);
                 var user = await this.userManager.FindByNameAsync(this.Input.Username);
 
                 if (result.Succeeded)
@@ -116,8 +115,9 @@
 
                 if (result.IsLockedOut)
                 {
-                    this.logger.LogWarning("User account locked out.");
-                    return this.RedirectToPage("./Lockout");
+                    this.ErrorMessage = this.sharedLocalizer.GetHtmlString(ErrorMessages.AccountLocked);
+                    this.logger.LogWarning(ErrorMessages.AccountLocked);
+                    return this.Page();
                 }
                 else
                 {
@@ -127,7 +127,6 @@
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return this.Page();
         }
 
