@@ -116,7 +116,7 @@
             where T : IUserColumn, new()
         {
             var columnsToDb = new HashSet<T>();
-            if (model.Command == "Save")
+            if (model.Command == "Save" && model.SelectedColumns != null)
             {
                 foreach (var column in model.SelectedColumns)
                 {
