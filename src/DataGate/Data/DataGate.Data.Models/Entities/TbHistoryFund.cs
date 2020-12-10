@@ -1,6 +1,7 @@
 ﻿namespace DataGate.Data.Models.Entities
 {
     using System;
+
     using DataGate.Data.Models.Domain;
 
     public partial class TbHistoryFund
@@ -17,6 +18,7 @@
         public string FFaCode { get; set; }
         public string FDepCode { get; set; }
         public string FTaCode { get; set; }
+        public int? FFundAdmin { get; set; }
         public int? FLegalForm { get; set; }
         public int? FLegalType { get; set; }
         public int? FLegalVehicle { get; set; }
@@ -30,5 +32,6 @@
         public virtual TbDomLegalForm FLegalFormNavigation { get; set; }
         public virtual TbDomLegalVehicle FLegalVehicleNavigation { get; set; }
         public virtual TbDomFStatus FStatusNavigation { get; set; }
+        public virtual TbDomFundAdminType FundAdminTypeNavigation { get; set; }
     }
 }

@@ -32,6 +32,10 @@
         [Display(Name = "Legal Type")]
         public string LegalType { get; set; }
 
+        [Required(ErrorMessage = ValidationMessages.NotSelectedValue)]
+        [Display(Name = "Fund Admin")]
+        public string FundAdmin { get; set; }
+
         [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = ValidationMessages.UnvalidFormat)]
         [Display(Name = "Dep. Code")]
         public string DEPCode { get; set; }

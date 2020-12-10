@@ -9,6 +9,8 @@
 
         IReadOnlyCollection<string> AllTbDomFStatus();
 
+        IReadOnlyCollection<string> AllTbDomFundAdmin();
+
         IReadOnlyCollection<string> AllTbDomLegalForm();
 
         IReadOnlyCollection<string> AllTbDomLegalType();

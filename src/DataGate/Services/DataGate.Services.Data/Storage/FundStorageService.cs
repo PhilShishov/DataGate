@@ -46,6 +46,12 @@
                 .ExecuteQueryMapping<EditFundGetDto>(this.sqlFunctionId, id, dateParsed)
                 .FirstOrDefault();
 
+            var fundAdmin = dto.FACode.Contains("CAC") ?
+                "CACEIS" : dto.FACode.Contains("ROT") ? 
+                "Edmond de Rothschild" : "Northern Trust";
+
+            dto.FundAdmin = fundAdmin; 
+
             return AutoMapperConfig.MapperInstance.Map<T>(dto);
         }
 

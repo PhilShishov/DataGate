@@ -131,6 +131,20 @@
                         </select>
                     </div>
                     <span asp-validation-for="Status" class="text-danger"></span>
+
+                      <div class="form-group">
+                        <label asp-for="FundAdmin"></label><br>
+                        <select class="select-pharus" asp-for="FundAdmin">
+                            <option selected disabled>-- Choose Fund Admin --</option>
+                            @foreach (var vehicle in (List<string>)ViewData["FundAdmin"])
+                            {
+                                <option value="@vehicle">@vehicle</option>
+                            }
+                        </select>
+                    </div>
+                    <span asp-validation-for="FundAdmin" class="text-danger"></span>
+
+
                     <div class="form-group">
                         <label asp-for="LegalForm"></label><br>
                         <select class="select-pharus" asp-for="LegalForm">

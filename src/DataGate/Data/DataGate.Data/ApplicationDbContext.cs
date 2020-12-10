@@ -40,6 +40,7 @@
         public virtual DbSet<TbDomFeeFrequency> TbDomFeeFrequency { get; set; }
         public virtual DbSet<TbDomFeeType> TbDomFeeType { get; set; }
         public virtual DbSet<TbDomFileType> TbDomFileType { get; set; }
+        public virtual DbSet<TbDomFundAdminType> TbDomFundAdminType { get; set; }
         public virtual DbSet<TbDomGlobalExposure> TbDomGlobalExposure { get; set; }
         public virtual DbSet<TbDomInvestorType> TbDomInvestorType { get; set; }
         public virtual DbSet<TbDomIsoCountry> TbDomIsoCountry { get; set; }
@@ -244,7 +245,7 @@
             {
                 entity.HasKey(e => e.CtId);
 
-                entity.ToTable("tb_dom_companyType");
+                entity.ToTable("tb_dom_company_type");
 
                 entity.Property(e => e.CtId)
                     .HasColumnName("ct_id")
@@ -509,6 +510,28 @@
                     .HasMaxLength(30);
             });
 
+            modelBuilder.Entity<TbDomFundAdminType>(entity =>
+            {
+                entity.HasKey(e => e.FatId)
+                    .HasName("PK__tb_dom_fund_admin_type");
+
+                entity.ToTable("tb_dom_fund_admin_type");
+
+                entity.Property(e => e.FatId).HasColumnName("fat_id");
+
+                entity.Property(e => e.FatAcronym)
+                    .IsRequired()
+                    .HasColumnName("fat_acronym")
+                    .HasMaxLength(5)
+                    .IsFixedLength();
+
+                entity.Property(e => e.FatDesc)
+                    .IsRequired()
+                    .HasColumnName("fat_desc")
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<TbDomLegalForm>(entity =>
             {
                 entity.HasKey(e => e.LfId);
@@ -530,7 +553,7 @@
             {
                 entity.HasKey(e => e.LtId);
 
-                entity.ToTable("tb_dom_legalType");
+                entity.ToTable("tb_dom_legal_type");
 
                 entity.Property(e => e.LtId)
                     .HasColumnName("lt_id")
@@ -565,7 +588,7 @@
                     .WithMany(p => p.TbDomLegalVehicle)
                     .HasForeignKey(d => d.LvFkLegalType)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_tb_dom_legal_vehicle_tb_dom_legalType");
+                    .HasConstraintName("FK_tb_dom_legal_vehicle_tb_dom_legal_type");
             });
 
             modelBuilder.Entity<TbDomNavFrequency>(entity =>
@@ -823,7 +846,7 @@
                 entity.Property(e => e.FId).HasColumnName("f_id");
 
                 entity.Property(e => e.FInitialDate)
-                    .HasColumnName("f_initialDate")
+                    .HasColumnName("f_initial_date")
                     .HasColumnType("datetime");
 
                 entity.Property(e => e.FChangeComment).HasColumnName("f_change_comment");
@@ -832,54 +855,54 @@
                     .HasColumnName("f_comment_title")
                     .HasMaxLength(50);
 
-                entity.Property(e => e.FCompanyType).HasColumnName("f_companyType");
+                entity.Property(e => e.FCompanyType).HasColumnName("f_company_type");
 
                 entity.Property(e => e.FCssfCode)
-                    .HasColumnName("f_cssfCode")
+                    .HasColumnName("f_cssf_code")
                     .HasMaxLength(100);
 
                 entity.Property(e => e.FDepCode)
-                    .HasColumnName("f_depCode")
+                    .HasColumnName("f_dep_code")
                     .HasMaxLength(100);
 
                 entity.Property(e => e.FEndDate)
-                    .HasColumnName("f_endDate")
+                    .HasColumnName("f_end_date")
                     .HasColumnType("datetime");
 
                 entity.Property(e => e.FFaCode)
-                    .HasColumnName("f_faCode")
+                    .HasColumnName("f_fa_code")
                     .HasMaxLength(100);
 
-                entity.Property(e => e.FLegalForm).HasColumnName("f_legalForm");
+                entity.Property(e => e.FLegalForm).HasColumnName("f_legal_form");
 
-                entity.Property(e => e.FLegalType).HasColumnName("f_legalType");
+                entity.Property(e => e.FLegalType).HasColumnName("f_legal_type");
 
                 entity.Property(e => e.FLegalVehicle).HasColumnName("f_legal_vehicle");
 
                 entity.Property(e => e.FLeiCode)
-                    .HasColumnName("f_leiCode")
+                    .HasColumnName("f_lei_code")
                     .HasMaxLength(100);
 
                 entity.Property(e => e.FOfficialFundName)
-                    .HasColumnName("f_officialFundName")
+                    .HasColumnName("f_official_fund_name")
                     .HasMaxLength(100);
 
                 entity.Property(e => e.FRegistrationNumber)
-                    .HasColumnName("f_registrationNumber")
+                    .HasColumnName("f_registration_number")
                     .HasMaxLength(100);
 
                 entity.Property(e => e.FShortFundName)
-                    .HasColumnName("f_shortFundName")
+                    .HasColumnName("f_short_fund_name")
                     .HasMaxLength(100);
 
                 entity.Property(e => e.FStatus).HasColumnName("f_status");
 
                 entity.Property(e => e.FTaCode)
-                    .HasColumnName("f_taCode")
+                    .HasColumnName("f_ta_code")
                     .HasMaxLength(100);
 
                 entity.Property(e => e.FTinNumber)
-                    .HasColumnName("f_tinNumber")
+                    .HasColumnName("f_tin_number")
                     .HasMaxLength(100);
 
                 entity.HasOne(d => d.FCompanyTypeNavigation)
@@ -892,6 +915,11 @@
                     .HasForeignKey(d => d.FId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tb_historyFund_tb_fund");
+
+                entity.HasOne(d => d.FundAdminTypeNavigation)
+                    .WithMany(p => p.TbHistoryFund)
+                    .HasForeignKey(d => d.FFundAdmin)
+                    .HasConstraintName("FK_tb_historyFund_tb_dom_fund_admin_type");
 
                 entity.HasOne(d => d.FLegalFormNavigation)
                     .WithMany(p => p.TbHistoryFund)

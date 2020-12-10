@@ -41,8 +41,8 @@
         [Route("f/new")]
         public async Task<IActionResult> Create(
                      [Bind("InitialDate", "EndDate", "FundName", "CSSFCode", "Status",
-                           "LegalForm", "LegalVehicle", "LegalType", "FACode", "DEPCode",
-                           "TACode", "CompanyTypeDesc", "TinNumber", "LEICode", "RegNumber",
+                           "LegalForm", "LegalVehicle", "LegalType", "FACode", "FundAdmin", 
+                           "DEPCode", "TACode", "CompanyTypeDesc", "TinNumber", "LEICode", "RegNumber",
                            "VATRegNumber", "VATIdentificationNumber", "IBICNumber",  "RecaptchaValue")] CreateFundInputModel model)
         {
             bool doesExist = await this.service.DoesExist(model.FundName);
@@ -83,9 +83,9 @@
         [Route("f/edit/{id}/{date}")]
         public async Task<IActionResult> Edit(
                      [Bind("Id", "InitialDate", "FundName", "CSSFCode", "Status",
-                           "LegalForm", "LegalVehicle", "LegalType", "FACode",
-                           "DEPCode", "TACode", "CompanyTypeDesc", "TinNumber",
-                           "LEICode", "RegNumber", "VATRegNumber", "VATIdentificationNumber", "IBICNumber", 
+                           "LegalForm", "LegalVehicle", "LegalType", "FACode", "FundAdmin",
+                           "DEPCode", "TACode", "CompanyTypeDesc", "TinNumber", "LEICode", 
+                           "RegNumber", "VATRegNumber", "VATIdentificationNumber", "IBICNumber", 
                            "CommentTitle", "CommentArea", "RecaptchaValue")] EditFundInputModel model)
         {
             bool doesExistAtDate = await this.service.DoesExistAtDate(model.FundName, model.InitialDate);
@@ -113,6 +113,7 @@
         private void SetViewDataValues()
         {
             this.ViewData["Status"] = this.serviceSelect.AllTbDomFStatus();
+            this.ViewData["FundAdmin"] = this.serviceSelect.AllTbDomFundAdmin();
             this.ViewData["LegalForm"] = this.serviceSelect.AllTbDomLegalForm();
             this.ViewData["LegalVehicle"] = this.serviceSelect.AllTbDomLegalVehicle();
             this.ViewData["LegalType"] = this.serviceSelect.AllTbDomLegalType();

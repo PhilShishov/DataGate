@@ -4,15 +4,17 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
+
     using DataGate.Data.Common.Repositories;
     using DataGate.Data.Models.Domain;
     using DataGate.Services.Data.Storage.Contracts;
-    using Microsoft.EntityFrameworkCore;
 
     public class FundSelectListService : IFundSelectListService
     {
         private readonly IRepository<TbDomCompanyType> repositoryCompanyType;
         private readonly IRepository<TbDomFStatus> repositoryFStatus;
+        private readonly IRepository<TbDomFundAdminType> repositoryFAdmin;
         private readonly IRepository<TbDomLegalForm> repositoryLegalForm;
         private readonly IRepository<TbDomLegalType> repositoryLegalType;
         private readonly IRepository<TbDomLegalVehicle> repositoryLegalVehicle;
@@ -20,12 +22,14 @@
         public FundSelectListService(
                           IRepository<TbDomCompanyType> repositoryCompanyType,
                           IRepository<TbDomFStatus> repositoryFStatus,
+                          IRepository<TbDomFundAdminType> repositoryFAdmin,
                           IRepository<TbDomLegalForm> repositoryLegalForm,
                           IRepository<TbDomLegalType> repositoryLegalType,
                           IRepository<TbDomLegalVehicle> repositoryLegalVehicle)
         {
             this.repositoryCompanyType = repositoryCompanyType;
             this.repositoryFStatus = repositoryFStatus;
+            this.repositoryFAdmin = repositoryFAdmin;
             this.repositoryLegalForm = repositoryLegalForm;
             this.repositoryLegalType = repositoryLegalType;
             this.repositoryLegalVehicle = repositoryLegalVehicle;
@@ -40,6 +44,11 @@
             => this.repositoryFStatus.All()
                .Select(tb => tb.StFDesc)
                .ToList();
+
+        public IReadOnlyCollection<string> AllTbDomFundAdmin()
+           => this.repositoryFAdmin.All()
+              .Select(tb => tb.FatDesc)
+              .ToList();
 
         public IReadOnlyCollection<string> AllTbDomLegalForm()
             => this.repositoryLegalForm.All()
