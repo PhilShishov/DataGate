@@ -1,8 +1,7 @@
-﻿@{
-    var controller = this.ViewContext.RouteData.Values[EndpointsConstants.ControllerRouteDataValue].ToString();
-
+﻿@{ 
+    var controller = this.ViewContext.RouteData.Values[EndpointsConstants.ControllerRouteDataValue].ToString();                
     var entityType = (controller == EndpointsConstants.FundArea + EndpointsConstants.ActionDetails) ?
-                        "Sub Funds" : "Shares";
+                                    "Sub Funds" : "Shares"; 
 }
 
 <div class="w-60">
@@ -14,7 +13,7 @@
                     <div class="card-add-info">
                         <button id="btn-open-subentities">@SharedLocalizer.GetHtmlString(entityType)</button>
                     </div>
-                </div>
+                </div>      
             }
 
             @if (controller != EndpointsConstants.FundArea + EndpointsConstants.ActionDetails)
@@ -23,7 +22,7 @@
                     <div class="card-add-info">
                         <button id="btn-open-chart">@SharedLocalizer.GetHtmlString("Charts")</button>
                     </div>
-                </div>
+                </div>      
             }
 
             <div class="column-add-info mb-2">
@@ -52,12 +51,11 @@
 
             @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
-
                 <div class="column-add-info">
                     <div class="card-add-info">
-                        <button id="">@SharedLocalizer.GetHtmlString("countryDistribution")</button>
+                        <button id="btn-open-countries-dist">@SharedLocalizer.GetHtmlString("countryDistribution")</button>
                     </div>
-                </div>
+                </div>   
             }
 
         </div>
@@ -77,5 +75,8 @@
     <div id="allAgreements" class="mt-5 d-none"></div>
 
     <!-- Container for timeline changes selected option-->
-    <div class="container py-5 row d-none" id="timelineChanges"></div>
+    <div id="timelineChanges" class="container py-5 row d-none"></div>
+
+    <!-- Container for countries of distribution selected option-->
+    <div id="countriesDist" class="container py-5 row d-none"></div>
 </div>

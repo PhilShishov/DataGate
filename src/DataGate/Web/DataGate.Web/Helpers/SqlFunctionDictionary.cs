@@ -28,6 +28,7 @@
         public const string ByIdShareClass = "[fn_shareclass_id]";
         public const string ContainerSubFund = "[fn_shareclass_subfund_container]";
         public const string TimelineShareClass = "[fn_timeline_shareclass]";
+        public const string CountryDistShareClass = "[fn_view_country_distibution_shareclass]";
 
         // Documents
         public const int FundFileType = 1;

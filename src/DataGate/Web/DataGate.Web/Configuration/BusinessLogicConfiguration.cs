@@ -1,7 +1,10 @@
 ﻿namespace DataGate.Web.Configuration
 {
+    using Microsoft.Extensions.DependencyInjection;
+
     using DataGate.Services.Data.Agreements;
     using DataGate.Services.Data.Agreements.Contracts;
+    using DataGate.Services.Data.CountriesDist;
     using DataGate.Services.Data.Documents;
     using DataGate.Services.Data.Documents.Contracts;
     using DataGate.Services.Data.Entities;
@@ -15,7 +18,6 @@
     using DataGate.Services.Data.Timelines;
     using DataGate.Services.Data.TimeSeries;
     using DataGate.Services.Slug;
-    using Microsoft.Extensions.DependencyInjection;
 
     public static class BusinessLogicConfiguration
     {
@@ -33,6 +35,7 @@
             services.AddTransient<ITimeSeriesService, TimeSeriesService>();
             services.AddTransient<IAgreementsService, AgreementsService>();
             services.AddTransient<IReportsService, ReportsService>();
+            services.AddTransient<ICountryDistService, CountryDistService>();
 
             // Funds
             services.AddTransient<IFundService, FundService>();

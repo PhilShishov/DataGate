@@ -1,0 +1,49 @@
+﻿@model IEnumerable<DataGate.Web.ViewModels.CountriesDist.CountryDistViewModel>
+
+<form id="form-country-dist" method="post">
+    <div class="table-wrapper-double-scroll">
+        <table class="table table-bordered table-hover tbl-agreements table-view-pharus">
+            <thead>
+                <tr>
+                    <th>
+                        @SharedLocalizer.GetHtmlString("Country of Distribution")
+                    </th>
+                    <th>
+                        @SharedLocalizer.GetHtmlString("Local Representative")
+                    </th>
+                    <th>
+                        @SharedLocalizer.GetHtmlString("Paying Agent")
+                    </th>
+                    <th>
+                        @SharedLocalizer.GetHtmlString("Legal Support")
+                    </th>
+                    <th>
+                        @SharedLocalizer.GetHtmlString("Language")
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var countryDist in Model)
+                {
+                    <tr>
+                        <td class="p-1">
+                            @countryDist.IsoCountry
+                        </td>   
+                         <td class="p-1">
+                            @countryDist.LocalRepresentative
+                        </td>   
+                         <td class="p-1">
+                            @countryDist.PayingAgent
+                        </td>   
+                         <td class="p-1">
+                            @countryDist.LegalSupport
+                        </td>   
+                         <td class="p-1">
+                            @countryDist.Language
+                        </td>   
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</form>

@@ -15,12 +15,14 @@ const HTML_MENU = {
     BTN_TIMELINE: '#btn-open-timeline',
     BTN_DOCUMENTS: '#btn-open-documents',
     BTN_AGREEMENTS: '#btn-open-agreements',
+    BTN_COUNTRIES_DIST: '#btn-open-countries-dist',
     CONTAINER_SUBENTITIES: '#subEntities',
     CONTAINER_DISTINCT: '#distinctDocuments',
     CONTAINER_CHART: '#aumChart',
     CONTAINER_TIMELINES: '#timelineChanges',
     CONTAINER_DOCUMENTS: '#allDocuments',
     CONTAINER_AGREEMENTS: '#allAgreements',
+    CONTAINER_COUNTRIES_DIST: '#countriesDist',
     ICONS_EDITOR: 'icon-edit',
     TABLE_INFO: 'table-info-pharus',
 };
@@ -31,6 +33,7 @@ const URLS = {
     DISTINCT: '/loadDistinct',
     DOCUMENTS: '/loadAllDoc',
     AGREEMENTS: '/loadAllAgr',
+    COUNTRIES_DIST: '/loadCountriesDist',
 };
 
 $(function () {
@@ -81,7 +84,7 @@ $(function () {
 //
 // Menu for fund additional information -
 // subentities, timeline changes, distinct documents,
-// all documents, aum chart
+// all documents, aum chart, countries of distribution
 
 function loadAddInfo(token, urlSubEnt, json) {
     $(HTML_MENU.BTN_SUBENTITIES).on('click', function (event) {
@@ -139,6 +142,12 @@ function loadAddInfo(token, urlSubEnt, json) {
         afterCallStyleHandler(HTML_MENU.CONTAINER_AGREEMENTS, HTML_MENU.BTN_AGREEMENTS);
     });
 
+    $(HTML_MENU.BTN_COUNTRIES_DIST).on('click', function () {
+        beforeCallStyleHandler();
+        getSelectMenuRequestHandler(URLS.COUNTRIES_DIST, HTML_MENU.CONTAINER_COUNTRIES_DIST);
+        afterCallStyleHandler(HTML_MENU.CONTAINER_COUNTRIES_DIST, HTML_MENU.BTN_COUNTRIES_DIST);
+    });
+
     function beforeCallStyleHandler() {
         $('.column-add-info .card-add-info button.clicked-color').removeClass('clicked-color');
         $('.column-add-info .card-add-info.clicked-bg').removeClass('clicked-bg');
@@ -149,6 +158,7 @@ function loadAddInfo(token, urlSubEnt, json) {
         $(HTML_MENU.CONTAINER_TIMELINES).addClass('d-none');
         $(HTML_MENU.CONTAINER_DOCUMENTS).addClass('d-none');
         $(HTML_MENU.CONTAINER_AGREEMENTS).addClass('d-none');
+        $(HTML_MENU.CONTAINER_COUNTRIES_DIST).addClass('d-none');
     }
 
     function getSelectMenuRequestHandler(url, placeholder) {
