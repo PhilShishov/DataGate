@@ -54,8 +54,8 @@
     @*@Html.Raw(JavaScriptSnippet.FullScript)*@
 </head>
 <body>
-    @*@if (this.User.Identity.IsAuthenticated)
-    {*@
+    @if (this.User.Identity.IsAuthenticated)
+    {
         <header>
             <div class="header-pharus">
                 <div class="w-50">
@@ -155,7 +155,8 @@
                                     <li>
                                         <a asp-area=""
                                            asp-route="@EndpointsConstants.RouteReports">
-                                        @SharedLocalizer.GetHtmlString("Reports")</a>
+                                            @SharedLocalizer.GetHtmlString("Reports")
+                                        </a>
                                     </li>
                                     <li>
                                         <a asp-area=""
@@ -170,7 +171,7 @@
                                     </li>
 
                                     <li>
-                                        <a asp-area="@EndpointsConstants.IdentityAreaName" 
+                                        <a asp-area="@EndpointsConstants.IdentityAreaName"
                                            asp-page="/Account/Manage/Email">@this.User.Identity.Name</a>
                                     </li>
 
@@ -179,7 +180,7 @@
                                     </li>
 
                                     <li>
-                                        <a asp-area="@EndpointsConstants.IdentityAreaName" 
+                                        <a asp-area="@EndpointsConstants.IdentityAreaName"
                                            asp-page="/Account/Logout">@SharedLocalizer.GetHtmlString("Logout")</a>
                                     </li>
                                 </ul>
@@ -201,20 +202,19 @@
             <svg aria-hidden="true" class="icon-svg arrow-up" xmlns="http://www.w3.org/2000/svg">
             </svg>
         </a>
-
         <partial name="_BlockUIPanel" />
-    @*  *@}
+    }
 
-<environment include="Development">
-    <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
-    <script src="~/lib/chosen/chosen.jquery.js" asp-append-version="true"></script>
-    <script src="~/lib/datatables/js/jquery.dataTables.js" asp-append-version="true"></script>
-    <script src="~/lib/moment/min/moment.min.js" asp-append-version="true"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/navBar.js" asp-append-version="true"></script>
-    <script src="~/js/plugins.js" asp-append-version="true"></script>
-</environment>
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
+        <script src="~/lib/chosen/chosen.jquery.js" asp-append-version="true"></script>
+        <script src="~/lib/datatables/js/jquery.dataTables.js" asp-append-version="true"></script>
+        <script src="~/lib/moment/min/moment.min.js" asp-append-version="true"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/navBar.js" asp-append-version="true"></script>
+        <script src="~/js/plugins.js" asp-append-version="true"></script>
+    </environment>
 
     <environment include="Production, Staging">
         <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>

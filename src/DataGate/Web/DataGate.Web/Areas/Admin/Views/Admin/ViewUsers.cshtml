@@ -5,7 +5,7 @@
     <h2 class="text-center text-torshia">
         @SharedLocalizer.GetHtmlString("User List")
     </h2>
-    <div>
+    <div class="button-holder">
         <a class="btn btn-pharus text-white mt-2" asp-area="" asp-controller="User" asp-action="Index">@SharedLocalizer.GetHtmlString("Back to Panel")</a>
     </div>
     <hr class="bg-pharus w-50 hr-2" />
@@ -30,7 +30,7 @@
         <td>
             <time datetime="@user.LastLogin.ToString("o")"></time>
         </td>
-        <td>
+        <td class="d-flex justify-content-center">
             <a asp-area="Admin"
                asp-controller="Admin"
                asp-action="EditUser"
