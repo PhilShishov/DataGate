@@ -6,8 +6,11 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
+
     using DataGate.Common.Exceptions;
     using DataGate.Data.Common.Repositories;
+    using DataGate.Data.Common.Repositories.AppContext;
     using DataGate.Data.Models.Entities;
     using DataGate.Services.Data.Storage.Contracts;
     using DataGate.Services.Mapping;
@@ -17,19 +20,17 @@
     using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.InputModels.Funds;
 
-    using Microsoft.EntityFrameworkCore;
-
     public class FundStorageService : IFundStorageService
     {
         private readonly string sqlFunctionId = "[fn_fund_id]";
 
         private readonly ISqlQueryManager sqlManager;
-        private readonly IRepository<TbHistoryFund> repository;
+        private readonly IAppRepository<TbHistoryFund> repository;
         private readonly IFundSelectListService service;
 
         public FundStorageService(
                         ISqlQueryManager sqlQueryManager,
-                        IRepository<TbHistoryFund> repository,
+                        IAppRepository<TbHistoryFund> repository,
                         IFundSelectListService service)
         {
             this.sqlManager = sqlQueryManager;

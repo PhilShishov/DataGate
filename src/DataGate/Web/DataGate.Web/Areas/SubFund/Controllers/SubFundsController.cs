@@ -6,9 +6,9 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Routing;
 
-    using DataGate.Data.Models.Columns;
-    using DataGate.Data.Common.Repositories;
     using DataGate.Common;
+    using DataGate.Data.Common.Repositories.UsersContext;
+    using DataGate.Data.Models.Columns;
     using DataGate.Services.Data.Entities;
     using DataGate.Services.Data.ViewSetups;
     using DataGate.Web.Controllers;
@@ -22,12 +22,12 @@
     {
         private readonly IEntityService service;
         private readonly SharedLocalizationService sharedLocalizer;
-        private readonly IUserColumnRepository<UserSubFundColumn> repository;
+        private readonly IUserRepository<UserSubFundColumn> repository;
 
         public SubFundsController(
             IEntityService service,
             SharedLocalizationService sharedLocalizer,
-            IUserColumnRepository<UserSubFundColumn> repository)
+            IUserRepository<UserSubFundColumn> repository)
         {
             this.service = service;
             this.sharedLocalizer = sharedLocalizer;

@@ -6,19 +6,22 @@
     using System.Threading.Tasks;
 
     using CommandLine;
-    using DataGate.Common;
-    using DataGate.Data;
-    using DataGate.Data.Common;
-    using DataGate.Data.Common.Repositories;
-    using DataGate.Data.Models.Users;
-    using DataGate.Data.Repositories;
-    using DataGate.Data.Seeding;
-    using DataGate.Services.Messaging;
-
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
+
+    using DataGate.Common;
+    using DataGate.Data;
+    using DataGate.Data.Common;
+    using DataGate.Data.Common.Repositories;
+    using DataGate.Data.Common.Repositories.AppContext;
+    using DataGate.Data.Common.Repositories.UsersContext;
+    using DataGate.Data.Models.Users;
+    using DataGate.Data.Repositories.AppContext;
+    using DataGate.Data.Repositories.UsersContext;
+    using DataGate.Data.Seeding;
+    using DataGate.Services.Messaging;
 
     public static class Program
     {
@@ -74,7 +77,8 @@
                 .AddRoles<ApplicationRole>().AddEntityFrameworkStores<UsersDbContext>();
 
             services.AddScoped(typeof(IDeletableEntityRepository<>), typeof(EfDeletableEntityRepository<>));
-            services.AddScoped(typeof(IRepository<>), typeof(EfRepository<>));
+            services.AddScoped(typeof(IAppRepository<>), typeof(EfAppRepository<>));
+            services.AddScoped(typeof(IUserRepository<>), typeof(EfUserRepository<>));
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
             // Application services

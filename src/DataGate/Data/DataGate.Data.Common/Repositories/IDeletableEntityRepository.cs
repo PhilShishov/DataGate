@@ -4,8 +4,9 @@
     using System.Threading.Tasks;
 
     using DataGate.Data.Common.Models;
+    using DataGate.Data.Common.Repositories.AppContext;
 
-    public interface IDeletableEntityRepository<TEntity> : IRepository<TEntity>
+    public interface IDeletableEntityRepository<TEntity> : IAppRepository<TEntity>
         where TEntity : class, IDeletableEntity
     {
         IQueryable<TEntity> AllWithDeleted();

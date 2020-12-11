@@ -4,7 +4,7 @@
     using System.Data.SqlClient;
     using System.Threading.Tasks;
 
-    using DataGate.Data.Common.Repositories;
+    using DataGate.Data.Common.Repositories.AppContext;
     using DataGate.Services.Data.Documents;
     using DataGate.Services.Data.Files.Contracts;
     using DataGate.Services.Mapping;

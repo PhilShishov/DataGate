@@ -12,6 +12,8 @@
 
     using DataGate.Common;
     using DataGate.Common.Settings;
+    using DataGate.Data.Common.Repositories.UsersContext;
+    using DataGate.Data.Models.Columns;
     using DataGate.Data.Models.Users;
     using DataGate.Services.Redis;
     using DataGate.Services.Redis.Configuration;
@@ -20,8 +22,6 @@
     using DataGate.Web.ViewModels.Queries;
     using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.ViewModels.Entities;
-    using DataGate.Data.Models.Columns;
-    using DataGate.Data.Common.Repositories;
 
     public class EntityService : IEntityService
     {
@@ -105,7 +105,7 @@
         public async Task<ApplicationUser> GetUser(ClaimsPrincipal user)
         => await UserExtensions.ByUserFundColumns(this.userManager, user);
 
-        public IEnumerable<string> GetLayout<T>(IUserColumnRepository<T> repository, string id)
+        public IEnumerable<string> GetLayout<T>(IUserRepository<T> repository, string id)
             where T : IUserColumn
         => repository.All()
             .Where(uc => uc.UserId == id)

@@ -13,7 +13,7 @@ namespace DataGate.Services.Data.Entities
     using System.Security.Claims;
     using System.Threading.Tasks;
 
-    using DataGate.Data.Common.Repositories;
+    using DataGate.Data.Common.Repositories.UsersContext;
     using DataGate.Data.Models.Columns;
     using DataGate.Data.Models.Users;
     using DataGate.Web.ViewModels.Entities;
@@ -37,7 +37,7 @@ namespace DataGate.Services.Data.Entities
         HashSet<T> SetLayout<T>(EntitiesViewModel model, string id, IEnumerable<string> userColumns)
             where T : IUserColumn, new();
 
-        IEnumerable<string> GetLayout<T>(IUserColumnRepository<T> repository, string id)
+        IEnumerable<string> GetLayout<T>(IUserRepository<T> repository, string id)
             where T : IUserColumn;
     }
 }

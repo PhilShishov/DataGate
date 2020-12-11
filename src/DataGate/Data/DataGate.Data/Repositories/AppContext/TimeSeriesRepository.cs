@@ -1,4 +1,4 @@
-﻿namespace DataGate.Data.Repositories
+﻿namespace DataGate.Data.Repositories.AppContext
 {
     using System;
     using System.Collections.Generic;
@@ -8,7 +8,7 @@
     using Microsoft.EntityFrameworkCore;
 
     using DataGate.Common;
-    using DataGate.Data.Common.Repositories;
+    using DataGate.Data.Common.Repositories.AppContext;
 
     public class TimeSeriesRepository : ITimeSeriesRepository
     {

@@ -4,9 +4,9 @@
     using System.Collections.Generic;
 
     using DataGate.Data;
-    using DataGate.Data.Common.Repositories;
+    using DataGate.Data.Common.Repositories.AppContext;
     using DataGate.Data.Models.Entities;
-    using DataGate.Data.Repositories;
+    using DataGate.Data.Repositories.AppContext;
     using DataGate.Services.Data.ShareClasses;
 
     public static class ShareClassTestData
@@ -42,7 +42,7 @@
         {
             context.TbPrimeShareClass.AddRangeAsync(testData);
             context.SaveChangesAsync();
-            IRepository<TbPrimeShareClass> repository = new EfRepository<TbPrimeShareClass>(context);
+            IAppRepository<TbPrimeShareClass> repository = new EfAppRepository<TbPrimeShareClass>(context);
             var service = new ShareClassService(repository);
             return service;
         }

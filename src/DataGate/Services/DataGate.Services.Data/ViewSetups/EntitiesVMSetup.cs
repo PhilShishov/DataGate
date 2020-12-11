@@ -78,7 +78,7 @@
                 }
                 else if (!model.IsActive)
                 {
-                    headers = await service.AllSelected(functionAll, dtoSelected, 1).FirstOrDefaultAsync();
+                    headers = await service.AllSelected(functionAll, dtoSelected).FirstOrDefaultAsync();
                     model.Headers = headers.ToList();
                     model.Values = await service.AllSelected(functionAll, dtoSelected, 1).ToListAsync();
                 }

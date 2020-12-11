@@ -3,15 +3,15 @@
     using System.Linq;
 
     using DataGate.Common.Exceptions;
-    using DataGate.Data.Common.Repositories;
+    using DataGate.Data.Common.Repositories.AppContext;
     using DataGate.Data.Models.Entities;
 
     // _____________________________________________________________
     public class SubFundService : ISubFundService
     {
-        private readonly IRepository<TbHistorySubFund> repository;
+        private readonly IAppRepository<TbHistorySubFund> repository;
 
-        public SubFundService(IRepository<TbHistorySubFund> repository)
+        public SubFundService(IAppRepository<TbHistorySubFund> repository)
         {
             this.repository = repository;
         }

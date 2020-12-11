@@ -6,8 +6,11 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
+
     using DataGate.Common.Exceptions;
     using DataGate.Data.Common.Repositories;
+    using DataGate.Data.Common.Repositories.AppContext;
     using DataGate.Data.Models.Entities;
     using DataGate.Services.Data.Storage.Contracts;
     using DataGate.Services.Mapping;
@@ -16,7 +19,6 @@
     using DataGate.Web.Dtos.Entities;
     using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.InputModels.SubFunds;
-    using Microsoft.EntityFrameworkCore;
 
     public class SubFundStorageService : ISubFundStorageService
     {
@@ -24,14 +26,14 @@
 
         private readonly ISqlQueryManager sqlManager;
         private readonly ISubFundRepository repositorySelectList;
-        private readonly IRepository<TbHistorySubFund> repository;
-        private readonly IRepository<TbHistoryFund> repositoryContainer;
+        private readonly IAppRepository<TbHistorySubFund> repository;
+        private readonly IAppRepository<TbHistoryFund> repositoryContainer;
 
         public SubFundStorageService(
                         ISqlQueryManager sqlQueryManager,
-                        IRepository<TbHistorySubFund> repository,
+                        IAppRepository<TbHistorySubFund> repository,
                         ISubFundRepository repositorySelectList,
-                        IRepository<TbHistoryFund> repositoryContainer)
+                        IAppRepository<TbHistoryFund> repositoryContainer)
         {
             this.sqlManager = sqlQueryManager;
             this.repositorySelectList = repositorySelectList;

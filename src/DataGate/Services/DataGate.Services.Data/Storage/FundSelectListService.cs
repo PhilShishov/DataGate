@@ -6,26 +6,26 @@
 
     using Microsoft.EntityFrameworkCore;
 
-    using DataGate.Data.Common.Repositories;
+    using DataGate.Data.Common.Repositories.AppContext;
     using DataGate.Data.Models.Domain;
     using DataGate.Services.Data.Storage.Contracts;
 
     public class FundSelectListService : IFundSelectListService
     {
-        private readonly IRepository<TbDomCompanyType> repositoryCompanyType;
-        private readonly IRepository<TbDomFStatus> repositoryFStatus;
-        private readonly IRepository<TbDomFundAdminType> repositoryFAdmin;
-        private readonly IRepository<TbDomLegalForm> repositoryLegalForm;
-        private readonly IRepository<TbDomLegalType> repositoryLegalType;
-        private readonly IRepository<TbDomLegalVehicle> repositoryLegalVehicle;
+        private readonly IAppRepository<TbDomCompanyType> repositoryCompanyType;
+        private readonly IAppRepository<TbDomFStatus> repositoryFStatus;
+        private readonly IAppRepository<TbDomFundAdminType> repositoryFAdmin;
+        private readonly IAppRepository<TbDomLegalForm> repositoryLegalForm;
+        private readonly IAppRepository<TbDomLegalType> repositoryLegalType;
+        private readonly IAppRepository<TbDomLegalVehicle> repositoryLegalVehicle;
 
         public FundSelectListService(
-                          IRepository<TbDomCompanyType> repositoryCompanyType,
-                          IRepository<TbDomFStatus> repositoryFStatus,
-                          IRepository<TbDomFundAdminType> repositoryFAdmin,
-                          IRepository<TbDomLegalForm> repositoryLegalForm,
-                          IRepository<TbDomLegalType> repositoryLegalType,
-                          IRepository<TbDomLegalVehicle> repositoryLegalVehicle)
+                          IAppRepository<TbDomCompanyType> repositoryCompanyType,
+                          IAppRepository<TbDomFStatus> repositoryFStatus,
+                          IAppRepository<TbDomFundAdminType> repositoryFAdmin,
+                          IAppRepository<TbDomLegalForm> repositoryLegalForm,
+                          IAppRepository<TbDomLegalType> repositoryLegalType,
+                          IAppRepository<TbDomLegalVehicle> repositoryLegalVehicle)
         {
             this.repositoryCompanyType = repositoryCompanyType;
             this.repositoryFStatus = repositoryFStatus;

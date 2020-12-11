@@ -1,18 +1,19 @@
-﻿namespace DataGate.Data.Repositories
+﻿namespace DataGate.Data.Repositories.AppContext
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
-    using DataGate.Common.Exceptions;
-    using DataGate.Data.Common.Repositories;
-
     using Microsoft.EntityFrameworkCore;
 
-    public class EfRepository<TEntity> : IRepository<TEntity>
+    using DataGate.Common.Exceptions;
+    using DataGate.Data.Common.Repositories.AppContext;
+
+    public class EfAppRepository<TEntity> : IAppRepository<TEntity>
         where TEntity : class
     {
-        public EfRepository(ApplicationDbContext context)
+        public EfAppRepository(ApplicationDbContext context)
         {
             this.Context = context ?? throw new ArgumentNullException(nameof(context));
             this.DbSet = this.Context.Set<TEntity>();
@@ -53,7 +54,37 @@
 
         public virtual void Delete(TEntity entity) => this.DbSet.Remove(entity);
 
-        public Task<int> SaveChangesAsync() => this.Context.SaveChangesAsync();
+        public async Task SaveLayout(ICollection<TEntity> entitiesToRemove, HashSet<TEntity> entitiesToUpdate)
+        {
+            if (entitiesToUpdate.Count > 0)
+            {
+                this.DeleteRange(entitiesToRemove);
+                this.UpdateRange(entitiesToUpdate);
+                await this.SaveChangesContext();
+            }
+        }
+
+        public void DeleteRange(ICollection<TEntity> entities)
+        {
+            foreach (var entity in entities)
+            {
+                this.DbSet.Remove(entity);
+            }
+        }
+
+        public void UpdateRange(HashSet<TEntity> entities)
+        {
+            foreach (var entity in entities)
+            {
+                var entry = this.Context.Entry(entity);
+                if (entry.State == EntityState.Detached)
+                {
+                    this.DbSet.Attach(entity);
+                }
+            }
+        }
+
+        public Task<int> SaveChangesContext() => this.Context.SaveChangesAsync();
 
         public void Dispose()
         {

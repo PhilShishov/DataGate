@@ -1,15 +1,15 @@
-﻿namespace DataGate.Data.Repositories
+﻿namespace DataGate.Data.Repositories.AppContext
 {
     using System;
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
+
     using DataGate.Data.Common.Models;
     using DataGate.Data.Common.Repositories;
 
-    using Microsoft.EntityFrameworkCore;
-
-    public class EfDeletableEntityRepository<TEntity> : EfRepository<TEntity>, IDeletableEntityRepository<TEntity>
+    public class EfDeletableEntityRepository<TEntity> : EfAppRepository<TEntity>, IDeletableEntityRepository<TEntity>
         where TEntity : class, IDeletableEntity
     {
         public EfDeletableEntityRepository(ApplicationDbContext context)

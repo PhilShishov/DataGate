@@ -8,7 +8,7 @@
 
     using DataGate.Common;
     using DataGate.Data.Models.Columns;
-    using DataGate.Data.Common.Repositories;
+    using DataGate.Data.Common.Repositories.UsersContext;
     using DataGate.Services.Data.Entities;
     using DataGate.Services.Data.ViewSetups;
     using DataGate.Web.Controllers;
@@ -22,12 +22,12 @@
     {
         private readonly IEntityService service;
         private readonly SharedLocalizationService sharedLocalizer;
-        private readonly IUserColumnRepository<UserShareClassColumn> repository;
+        private readonly IUserRepository<UserShareClassColumn> repository;
 
         public ShareClassesController(
             IEntityService service,
             SharedLocalizationService sharedLocalizer,
-            IUserColumnRepository<UserShareClassColumn> repository)
+            IUserRepository<UserShareClassColumn> repository)
         {
             this.service = service;
             this.sharedLocalizer = sharedLocalizer;

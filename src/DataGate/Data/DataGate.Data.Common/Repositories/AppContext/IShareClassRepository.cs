@@ -1,4 +1,4 @@
-﻿namespace DataGate.Data.Common.Repositories
+﻿namespace DataGate.Data.Common.Repositories.AppContext
 {
     using System;
     using System.Collections.Generic;

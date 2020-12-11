@@ -1,12 +1,13 @@
-namespace DataGate.Data.Repositories
+namespace DataGate.Data.Repositories.AppContext
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
-    using DataGate.Data.Common.Repositories;
     using Microsoft.EntityFrameworkCore;
+
+    using DataGate.Data.Common.Repositories.AppContext;
 
     public class SubFundRepository : ISubFundRepository
     {

@@ -4,15 +4,16 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using DataGate.Data.Common.Repositories;
-    using DataGate.Data.Models.Domain;
     using Microsoft.EntityFrameworkCore;
+
+    using DataGate.Data.Common.Repositories.AppContext;
+    using DataGate.Data.Models.Domain;
 
     public class DocumentService : IDocumentService
     {
-        private readonly IRepository<TbDomFileType> repositoryFileType;
+        private readonly IAppRepository<TbDomFileType> repositoryFileType;
 
-        public DocumentService(IRepository<TbDomFileType> repositoryFileType)
+        public DocumentService(IAppRepository<TbDomFileType> repositoryFileType)
         {
             this.repositoryFileType = repositoryFileType;
         }

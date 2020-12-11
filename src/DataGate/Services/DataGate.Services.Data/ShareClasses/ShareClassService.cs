@@ -14,6 +14,7 @@ namespace DataGate.Services.Data.ShareClasses
 
     using DataGate.Common.Exceptions;
     using DataGate.Data.Common.Repositories;
+    using DataGate.Data.Common.Repositories.AppContext;
     using DataGate.Data.Models.Entities;
     using DataGate.Services.Mapping;
     using DataGate.Web.ViewModels.Search;
@@ -21,9 +22,9 @@ namespace DataGate.Services.Data.ShareClasses
     // _____________________________________________________________
     public class ShareClassService : IShareClassService
     {
-        private readonly IRepository<TbPrimeShareClass> repository;
+        private readonly IAppRepository<TbPrimeShareClass> repository;
 
-        public ShareClassService(IRepository<TbPrimeShareClass> repository)
+        public ShareClassService(IAppRepository<TbPrimeShareClass> repository)
         {
             this.repository = repository;
         }

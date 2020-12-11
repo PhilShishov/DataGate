@@ -3,15 +3,15 @@
     using System.Linq;
 
     using DataGate.Common.Exceptions;
-    using DataGate.Data.Common.Repositories;
+    using DataGate.Data.Common.Repositories.AppContext;
     using DataGate.Data.Models.Entities;
 
     // _____________________________________________________________
     public class FundService : IFundService
     {
-        private readonly IRepository<TbHistoryFund> repository;
+        private readonly IAppRepository<TbHistoryFund> repository;
 
-        public FundService(IRepository<TbHistoryFund> fundRepository)
+        public FundService(IAppRepository<TbHistoryFund> fundRepository)
         {
             this.repository = fundRepository;
         }
