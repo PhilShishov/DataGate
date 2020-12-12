@@ -2,12 +2,13 @@
 {
     using System;
 
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
     using DataGate.Common;
     using DataGate.Common.Exceptions;
     using DataGate.Services.Data.ShareClasses;
     using DataGate.Web.ViewModels.Search;
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
 
     [Authorize]
     public class SearchController : BaseController

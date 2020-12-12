@@ -2,10 +2,11 @@
 {
     using System.IO;
 
-    using DataGate.Common;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Design;
     using Microsoft.Extensions.Configuration;
+
+    using DataGate.Common;
 
     public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<UsersDbContext>
     {

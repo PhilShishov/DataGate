@@ -8,6 +8,10 @@
     {
         IQueryable<TEntity> All();
 
-        Task<int> SaveChangesContext();
+        Task AddAsync(TEntity entity);
+
+        void Delete(TEntity entity);
+
+        Task<int> SaveChangesAsync();
     }
 }

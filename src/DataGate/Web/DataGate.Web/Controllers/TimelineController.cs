@@ -12,8 +12,7 @@
     {
         private readonly ITimelineService service;
 
-        public TimelineController(
-                        ITimelineService service)
+        public TimelineController(ITimelineService service)
         {
             this.service = service;
         }

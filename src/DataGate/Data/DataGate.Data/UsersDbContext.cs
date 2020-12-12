@@ -31,6 +31,8 @@
         public DbSet<UserSubFundShareClassesColumn> UserSubFundShareClassesColumn { get; set; }
         public DbSet<UserShareClassColumn> UserShareClassColumn { get; set; }
 
+        public DbSet<RecentlyViewed> RecentlyViewed { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

@@ -43,6 +43,7 @@
 
         // User Roles
         public const int MaxAdminCount = 3;
+        public const int MaxRecentItemsCount = 10;
         public const string AdministratorRoleName = "Admin";
         public const string RiskRoleName = "Risk";
         public const string LegalRoleName = "Legal";

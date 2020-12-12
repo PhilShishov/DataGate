@@ -13,7 +13,6 @@ namespace DataGate.Services.Data.ShareClasses
     using Microsoft.EntityFrameworkCore;
 
     using DataGate.Common.Exceptions;
-    using DataGate.Data.Common.Repositories;
     using DataGate.Data.Common.Repositories.AppContext;
     using DataGate.Data.Models.Entities;
     using DataGate.Services.Mapping;

@@ -25,32 +25,7 @@
 
         public virtual IQueryable<TEntity> All() => this.DbSet;
 
-        public virtual IQueryable<TEntity> AllAsNoTracking() => this.DbSet.AsNoTracking();
-
         public virtual Task AddAsync(TEntity entity) => this.DbSet.AddAsync(entity).AsTask();
-
-        public virtual async Task<TEntity> FindAsync(object id)
-        {
-            TEntity model = await this.DbSet.FindAsync(id);
-
-            if (model == null)
-            {
-                throw new EntityNotFoundException(typeof(TEntity).Name);
-            }
-
-            return model;
-        }
-
-        public virtual void Update(TEntity entity)
-        {
-            var entry = this.Context.Entry(entity);
-            if (entry.State == EntityState.Detached)
-            {
-                this.DbSet.Attach(entity);
-            }
-
-            entry.State = EntityState.Modified;
-        }
 
         public virtual void Delete(TEntity entity) => this.DbSet.Remove(entity);
 
@@ -60,7 +35,7 @@
             {
                 this.DeleteRange(entitiesToRemove);
                 this.UpdateRange(entitiesToUpdate);
-                await this.SaveChangesContext();
+                await this.SaveChangesAsync();
             }
         }
 
@@ -84,7 +59,7 @@
             }
         }
 
-        public Task<int> SaveChangesContext() => this.Context.SaveChangesAsync();
+        public Task<int> SaveChangesAsync() => this.Context.SaveChangesAsync();
 
         public void Dispose()
         {

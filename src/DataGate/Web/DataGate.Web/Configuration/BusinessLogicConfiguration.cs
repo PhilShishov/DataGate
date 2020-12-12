@@ -10,6 +10,7 @@
     using DataGate.Services.Data.Entities;
     using DataGate.Services.Data.Files.Contracts;
     using DataGate.Services.Data.Funds;
+    using DataGate.Services.Data.Recent;
     using DataGate.Services.Data.Reports;
     using DataGate.Services.Data.ShareClasses;
     using DataGate.Services.Data.Storage;
@@ -36,6 +37,7 @@
             services.AddTransient<IAgreementsService, AgreementsService>();
             services.AddTransient<IReportsService, ReportsService>();
             services.AddTransient<ICountryDistService, CountryDistService>();
+            services.AddTransient<IRecentService, RecentService>();
 
             // Funds
             services.AddTransient<IFundService, FundService>();
