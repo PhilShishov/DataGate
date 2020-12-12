@@ -22,18 +22,15 @@
     public class FundsController : BaseController
     {
         private readonly IEntityService service;
-        private readonly IRecentService serviceRecent;
         private readonly SharedLocalizationService sharedLocalizer;
         private readonly IUserRepository<UserFundColumn> repository;
 
         public FundsController(
             IEntityService service,
-            IRecentService serviceRecent,
             SharedLocalizationService sharedLocalizer,
             IUserRepository<UserFundColumn> repository)
         {
             this.service = service;
-            this.serviceRecent = serviceRecent;
             this.sharedLocalizer = sharedLocalizer;
             this.repository = repository;
         }
@@ -42,8 +39,6 @@
         [Route("funds")]
         public async Task<IActionResult> All()
         {
-            await this.serviceRecent.Save(this.User, Request.Path);
-
             var user = await this.service.GetUser(this.User);
             var userColumns = this.service.GetLayout<UserFundColumn>(this.repository, user.Id);
 

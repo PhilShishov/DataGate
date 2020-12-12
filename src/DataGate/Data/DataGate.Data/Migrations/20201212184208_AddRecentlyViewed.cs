@@ -10,12 +10,14 @@ namespace DataGate.Data.Migrations
                 name: "RecentlyViewed",
                 columns: table => new
                 {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(nullable: false),
                     Link = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RecentlyViewed", x => x.UserId);
+                    table.PrimaryKey("PK_RecentlyViewed", x => x.Id);
                 });
         }
 

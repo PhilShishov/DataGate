@@ -11,6 +11,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Migrations\20201212183856_AddRecentlyViewed.cs" />
+	  <Compile Remove="Migrations\20201212183856_AddRecentlyViewed.Designer.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<None Remove="appsettings.json" />
 	</ItemGroup>
 

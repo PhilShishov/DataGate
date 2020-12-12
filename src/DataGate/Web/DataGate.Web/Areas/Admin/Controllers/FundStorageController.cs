@@ -7,6 +7,7 @@
 
     using DataGate.Common;
     using DataGate.Services.Data.Storage.Contracts;
+    using DataGate.Services.Data.Recent;
     using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.InputModels.Funds;
     using DataGate.Web.Resources;
@@ -15,23 +16,28 @@
     [Authorize(Roles = GlobalConstants.AdministratorRoleName + "," + GlobalConstants.LegalRoleName)]
     public class FundStorageController : BaseController
     {
+        private readonly IRecentService serviceRecent;
         private readonly IFundStorageService service;
         private readonly IFundSelectListService serviceSelect;
         private readonly SharedLocalizationService sharedLocalizer;
 
         public FundStorageController(
+                        IRecentService serviceRecent,
                         IFundStorageService fundService,
                         IFundSelectListService fundServiceSelect,
                         SharedLocalizationService sharedLocalizer)
         {
+            this.serviceRecent = serviceRecent;
             this.service = fundService;
             this.serviceSelect = fundServiceSelect;
             this.sharedLocalizer = sharedLocalizer;
         }
 
         [Route("f/new")]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            await this.serviceRecent.Save(this.User, Request.Path);
+
             this.SetViewDataValues();
             return this.View(new CreateFundInputModel());
         }
@@ -68,8 +74,10 @@
         }
 
         [Route("f/edit/{id}/{date}")]
-        public IActionResult Edit(int id, string date)
+        public async Task<IActionResult> Edit(int id, string date)
         {
+            await this.serviceRecent.Save(this.User, Request.Path);
+
             var model = this.service.ByIdAndDate<EditFundInputModel>(id, date);
             model.InitialDate = model.InitialDate.AddDays(1);
 

@@ -7,6 +7,7 @@
 
     using DataGate.Common;
     using DataGate.Data.Common.Repositories.AppContext;
+    using DataGate.Services.Data.Recent;
     using DataGate.Services.Data.Storage.Contracts;
     using DataGate.Web.Controllers;
     using DataGate.Web.Infrastructure.Extensions;
@@ -17,23 +18,28 @@
     [Authorize(Roles = GlobalConstants.AdministratorRoleName + "," + GlobalConstants.LegalRoleName)]
     public class SubFundStorageController : BaseController
     {
+        private readonly IRecentService serviceRecent;
         private readonly ISubFundStorageService service;
         private readonly ISubFundRepository repository;
         private readonly SharedLocalizationService sharedLocalizer;
 
         public SubFundStorageController(
+                        IRecentService serviceRecent,
                         ISubFundStorageService service,
                         ISubFundRepository repository,
                         SharedLocalizationService sharedLocalizer)
         {
+            this.serviceRecent = serviceRecent;
             this.service = service;
             this.repository = repository;
             this.sharedLocalizer = sharedLocalizer;
         }
 
         [Route("sf/new")]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            await this.serviceRecent.Save(this.User, Request.Path);
+
             this.SetViewDataValues();
             return this.View(new CreateSubFundInputModel());
         }
@@ -74,8 +80,10 @@
         }
 
         [Route("sf/edit/{id}/{date}")]
-        public IActionResult Edit(int id, string date)
+        public async Task<IActionResult> Edit(int id, string date)
         {
+            await this.serviceRecent.Save(this.User, Request.Path);
+
             var model = this.service.ByIdAndDate<EditSubFundInputModel>(id, date);
 
             if (model.Derivatives == "Yes")
