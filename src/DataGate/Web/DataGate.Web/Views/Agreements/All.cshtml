@@ -180,8 +180,8 @@
 
             $('.table').DataTable({
                 "dom": '<"top"lf>rt<"bottom"ip><"clear">',
-                stateSave: true,
                 "autoWidth": false,
+                "scrollX": true,
 
                 initComplete: function () {
                     this.api().columns([0]).every(function () {

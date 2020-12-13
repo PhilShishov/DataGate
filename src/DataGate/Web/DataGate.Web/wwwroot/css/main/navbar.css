@@ -6,7 +6,7 @@
 * ==========================================
 *
 */
-.header-pharus {
+.header-datagate {
     top: 0;
     z-index: 1;
     position: fixed;
@@ -16,7 +16,7 @@
     display: flex;
 }
 
-    .header-pharus a {
+    .header-datagate a {
         font-family: 'Overpass', 'Arial', 'sans-serif';
         font-size: 8px;
         text-transform: uppercase;
@@ -30,7 +30,7 @@
     margin-bottom: auto;
 }
 
-.header-pharus-app-navbar a {
+.header-datagate-app-navbar a {
     margin-top: 2%;
     color: white;
     text-decoration: none;
@@ -98,7 +98,7 @@
 
                 .navbar a:hover,
                 .sidenav-dropdown-btn:hover,
-                .header-pharus-app-navbar a:hover,
+                .header-datagate-app-navbar a:hover,
                 .menu-user-container ul li a:hover {
                     color: #0056b3;
                 }

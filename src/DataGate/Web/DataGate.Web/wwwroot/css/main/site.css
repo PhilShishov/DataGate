@@ -1,6 +1,9 @@
 ﻿
 /* Chosen style to be imported on change*/
 
+#DataTables_Table_0 thead {
+    visibility: collapse;
+}
 
 .container-all-funds {
     width: 100%;

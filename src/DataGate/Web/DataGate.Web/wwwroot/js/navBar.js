@@ -51,9 +51,12 @@ const CLASSES_NAVBAR = {
 })();
 
 
-window.onscroll = function () { showBackToTop() };
+window.addEventListener('scroll', showBackToTop);
+
 function showBackToTop() {
-    if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+    let scrollPos = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+
+    if (scrollPos > 40) {
         document.getElementsByClassName("back-to-top")[0].style.display = "inline";
     } else {
         document.getElementsByClassName("back-to-top")[0].style.display = "none";
@@ -61,5 +64,12 @@ function showBackToTop() {
 }
 
 function backToTop() {
-    this.scrollTo(0, 0);
+    let doc = document.documentElement;
+    let left = (doc.clientLeft || 0);
+    let top = (doc.clientTop || 0);
+    window.scrollTo({
+        top: top,
+        left: left,
+        behavior: 'smooth'
+    });
 }

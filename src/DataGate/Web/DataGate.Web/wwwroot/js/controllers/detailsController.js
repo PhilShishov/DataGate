@@ -47,11 +47,13 @@ $(function () {
 
         function displayIconOnHoverHandler(event) {
             const icon = event.target.getElementsByClassName(HTML_MENU.ICONS_EDITOR)[0];
-            icon.style.visibility = 'visible';
-            icon.addEventListener('click', openEditorHandler);
 
-            function openEditorHandler()
-            {
+            if (icon) {
+                icon.style.visibility = 'visible';
+                icon.addEventListener('click', openEditorHandler);
+            }
+
+            function openEditorHandler() {
                 const divEditor = document.createElement('div');
                 divEditor.classList.add('quick-card-editor');
 
@@ -75,7 +77,10 @@ $(function () {
 
         row.addEventListener('mouseleave', function (event) {
             const icon = event.target.getElementsByClassName(HTML_MENU.ICONS_EDITOR)[0];
-            icon.style.visibility = 'hidden';
+
+            if (icon) {
+                icon.style.visibility = 'hidden';
+            }
         });
     }
 });
