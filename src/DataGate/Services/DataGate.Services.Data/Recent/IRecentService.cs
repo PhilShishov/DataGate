@@ -6,10 +6,12 @@
 
     using Microsoft.AspNetCore.Http;
 
+    using DataGate.Data.Models.Users;
+
     public interface IRecentService
     {
-        Task Save(ClaimsPrincipal user, PathString path);
+        Task Save(ClaimsPrincipal user, PathString path, QueryString? queryString = null);
 
-        IEnumerable<string> ByUserId(ClaimsPrincipal user);
+        IEnumerable<RecentlyViewed> ByUserId(ClaimsPrincipal user);
     }
 }

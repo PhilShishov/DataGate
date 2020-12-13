@@ -13,7 +13,8 @@ namespace DataGate.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<string>(nullable: false),
-                    Link = table.Column<string>(nullable: false)
+                    Link = table.Column<string>(nullable: false),
+                    DisplayLink = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {

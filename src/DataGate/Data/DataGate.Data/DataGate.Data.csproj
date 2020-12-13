@@ -13,6 +13,8 @@
 	<ItemGroup>
 	  <Compile Remove="Migrations\20201212183856_AddRecentlyViewed.cs" />
 	  <Compile Remove="Migrations\20201212183856_AddRecentlyViewed.Designer.cs" />
+	  <Compile Remove="Migrations\20201213195031_AddRecentlyViewed.cs" />
+	  <Compile Remove="Migrations\20201213195031_AddRecentlyViewed.Designer.cs" />
 	</ItemGroup>
 
 	<ItemGroup>

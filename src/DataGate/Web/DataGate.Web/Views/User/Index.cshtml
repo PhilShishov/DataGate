@@ -107,7 +107,7 @@
                 @foreach (var item in Model.RecentlyViewed)
                 {
                     <li>
-                        <a href="@item">@item</a>
+                        <a href="@item.Link">@item.DisplayLink</a>
                     </li>
                 }
             </ul>

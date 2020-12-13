@@ -35,7 +35,7 @@
                 throw new BadRequestException(ErrorMessages.InvalidSearchKeyword);
             }
 
-            await this.serviceRecent.Save(this.User, Request.Path);
+            await this.serviceRecent.Save(this.User, Request.Path, Request.QueryString);
 
             var model = new SearchResultsViewModel
             {

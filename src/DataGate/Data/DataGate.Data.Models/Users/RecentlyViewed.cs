@@ -12,5 +12,8 @@
 
         [Required]
         public string Link { get; set; }
+
+        [Required]
+        public string DisplayLink { get; set; }
     }
 }

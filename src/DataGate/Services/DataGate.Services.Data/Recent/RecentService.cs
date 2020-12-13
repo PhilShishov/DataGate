@@ -26,17 +26,16 @@
             this.userManager = userManager;
         }
 
-        public IEnumerable<string> ByUserId(ClaimsPrincipal user)
+        public IEnumerable<RecentlyViewed> ByUserId(ClaimsPrincipal user)
         {
             var userId = this.userManager.GetUserId(user);
 
             return this.repository.All()
                 .Where(r => r.UserId == userId)
-                .Select(r => r.Link)
                 .ToList();
         }
 
-        public async Task Save(ClaimsPrincipal user, PathString path)
+        public async Task Save(ClaimsPrincipal user, PathString path, QueryString? queryString = null)
         {
             if (user == null)
             {
@@ -45,14 +44,16 @@
 
             var userId = this.userManager.GetUserId(user);
             var list = this.repository.All().ToList();
-            var exists = list.FirstOrDefault(i => i.Link == path && i.UserId == userId);
+            var link = path + queryString;
+            var exists = list.FirstOrDefault(i => i.Link == link && i.UserId == userId);
 
             if (exists == null)
             {
                 var item = new RecentlyViewed
                 {
                     UserId = userId,
-                    Link = path
+                    Link = link,
+                    DisplayLink = link,
                 };
                 await this.repository.AddAsync(item);
             }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataGate.Data.Migrations
 {
     [DbContext(typeof(UsersDbContext))]
-    [Migration("20201212184208_AddRecentlyViewed")]
+    [Migration("20201213195145_AddRecentlyViewed")]
     partial class AddRecentlyViewed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -260,6 +260,10 @@ namespace DataGate.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DisplayLink")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Link")
                         .IsRequired()
