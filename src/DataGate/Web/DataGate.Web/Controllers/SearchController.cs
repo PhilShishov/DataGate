@@ -28,14 +28,14 @@
 
         [HttpGet]
         [Route("search-results")]
-        public async Task<IActionResult> Result(string searchTerm)
+        public IActionResult Result(string searchTerm)
         {
             if (string.IsNullOrWhiteSpace(searchTerm))
             {
                 throw new BadRequestException(ErrorMessages.InvalidSearchKeyword);
             }
 
-            await this.serviceRecent.Save(this.User, Request.Path, Request.QueryString);
+            this.serviceRecent.Save(this.User, Request.Path, Request.QueryString);
 
             var model = new SearchResultsViewModel
             {
