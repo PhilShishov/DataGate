@@ -1,6 +1,7 @@
 ﻿namespace DataGate.Services.Data.Recent
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
@@ -23,6 +24,16 @@
         {
             this.repository = repository;
             this.userManager = userManager;
+        }
+
+        public IEnumerable<string> ByUserId(ClaimsPrincipal user)
+        {
+            var userId = this.userManager.GetUserId(user);
+
+            return this.repository.All()
+                .Where(r => r.UserId == userId)
+                .Select(r => r.Link)
+                .ToList();
         }
 
         public async Task Save(ClaimsPrincipal user, PathString path)

@@ -1,6 +1,7 @@
 ﻿namespace DataGate.Web.Controllers
 {
     using System;
+    using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
@@ -8,26 +9,33 @@
     using DataGate.Common;
     using DataGate.Common.Exceptions;
     using DataGate.Services.Data.ShareClasses;
+    using DataGate.Services.Data.Recent;
     using DataGate.Web.ViewModels.Search;
 
     [Authorize]
     public class SearchController : BaseController
     {
+        private readonly IRecentService serviceRecent;
         private readonly IShareClassService service;
 
-        public SearchController(IShareClassService service)
+        public SearchController(
+            IRecentService serviceRecent,
+            IShareClassService service)
         {
+            this.serviceRecent = serviceRecent;
             this.service = service;
         }
 
         [HttpGet]
         [Route("search-results")]
-        public IActionResult Result(string searchTerm)
+        public async Task<IActionResult> Result(string searchTerm)
         {
             if (string.IsNullOrWhiteSpace(searchTerm))
             {
                 throw new BadRequestException(ErrorMessages.InvalidSearchKeyword);
             }
+
+            await this.serviceRecent.Save(this.User, Request.Path);
 
             var model = new SearchResultsViewModel
             {

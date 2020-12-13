@@ -14,20 +14,24 @@
     using DataGate.Web.Helpers;
     using DataGate.Web.Resources;
     using DataGate.Web.ViewModels.Entities;
+    using DataGate.Services.Data.Recent;
 
     [Area(EndpointsConstants.ShareClassArea)]
     [Authorize]
     public class ShareClassDetailsController : BaseController
     {
+        private readonly IRecentService serviceRecent;
         private readonly IEntityDetailsService service;
         private readonly IShareClassService shareClassService;
         private readonly SharedLocalizationService sharedLocalizer;
 
         public ShareClassDetailsController(
+            IRecentService serviceRecent,
             IEntityDetailsService service,
             IShareClassService shareClassService,
             SharedLocalizationService sharedLocalizer)
         {
+            this.serviceRecent = serviceRecent;
             this.service = service;
             this.shareClassService = shareClassService;
             this.sharedLocalizer = sharedLocalizer;
@@ -37,6 +41,8 @@
         [Route("sc/{id}/{date}")]
         public async Task<IActionResult> ByIdAndDate(int id, string date)
         {
+            await this.serviceRecent.Save(this.User, Request.Path);
+
             var dto = new QueriesToPassDto()
             {
                 SqlFunctionById = SqlFunctionDictionary.ByIdShareClass,

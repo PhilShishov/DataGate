@@ -8,6 +8,7 @@
 
 .container-column-card {
     width: 55%;
+    transform: translateX(-0.3%);
 }
 
 /* Float four columns side by side */

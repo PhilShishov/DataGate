@@ -15,20 +15,24 @@
     using DataGate.Web.Helpers;
     using DataGate.Web.Resources;
     using DataGate.Web.ViewModels.Entities;
+    using DataGate.Services.Data.Recent;
 
     [Area(EndpointsConstants.FundArea)]
     [Authorize]
     public class FundSubFundsController : BaseController
     {
+        private readonly IRecentService serviceRecent;
         private readonly IEntityService service;
         private readonly IFundService fundService;
         private readonly SharedLocalizationService sharedLocalizer;
 
         public FundSubFundsController(
+            IRecentService serviceRecent,
             IEntityService service,
             IFundService fundService,
             SharedLocalizationService sharedLocalizer)
         {
+            this.serviceRecent = serviceRecent;
             this.service = service;
             this.fundService = fundService;
             this.sharedLocalizer = sharedLocalizer;
@@ -55,6 +59,8 @@
         [Route("f/{id}/sf")]
         public async Task<IActionResult> SubFunds(int id, string date, string container)
         {
+            await this.serviceRecent.Save(this.User, Request.Path);
+
             var dto = new SubEntitiesGetDto()
             {
                 Id = id,

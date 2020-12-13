@@ -1,10 +1,13 @@
 ﻿namespace DataGate.Web.Areas.SubFunds.Controllers
 {
-    using System.Linq;
     using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
 
     using DataGate.Common;
     using DataGate.Services.Data.Entities;
+    using DataGate.Services.Data.Recent;
     using DataGate.Services.Data.SubFunds;
     using DataGate.Services.Data.ViewSetups;
     using DataGate.Web.Controllers;
@@ -13,22 +16,22 @@
     using DataGate.Web.Resources;
     using DataGate.Web.ViewModels.Entities;
 
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
-
     [Area(EndpointsConstants.DisplaySub + EndpointsConstants.FundArea)]
     [Authorize]
     public class SubFundDetailsController : BaseController
     {
+        private readonly IRecentService serviceRecent;
         private readonly IEntityDetailsService service;
         private readonly ISubFundService subFundService;
         private readonly SharedLocalizationService sharedLocalizer;
 
         public SubFundDetailsController(
+            IRecentService serviceRecent,
             IEntityDetailsService service,
             ISubFundService subFundService,
             SharedLocalizationService sharedLocalizer)
         {
+            this.serviceRecent = serviceRecent;
             this.service = service;
             this.subFundService = subFundService;
             this.sharedLocalizer = sharedLocalizer;
@@ -38,6 +41,8 @@
         [Route("sf/{id}/{date}")]
         public async Task<IActionResult> ByIdAndDate(int id, string date)
         {
+            await this.serviceRecent.Save(this.User, Request.Path);
+
             var dto = new QueriesToPassDto()
             {
                 SqlFunctionById = SqlFunctionDictionary.ByIdSubFund,

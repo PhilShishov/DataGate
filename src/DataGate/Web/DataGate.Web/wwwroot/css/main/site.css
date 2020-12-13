@@ -1,6 +1,34 @@
 ﻿
 /* Chosen style to be imported on change*/
 
+
+.recent-container {
+    width: 15%;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    margin-right: 30px;
+}
+
+    .recent-container a {
+        color: white;
+    }
+
+    .recent-container ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+        .recent-container ul li {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            text-align: center;
+            background-color: rgba(0, 65, 118, 0.2);
+            border-radius: 0.2rem;
+            margin-bottom: 5px;
+            width: 200px;
+        }
+
 #DataTables_Table_0 thead {
     visibility: collapse;
 }

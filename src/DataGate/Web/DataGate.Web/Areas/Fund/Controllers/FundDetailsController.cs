@@ -2,9 +2,13 @@
 {
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
     using DataGate.Common;
     using DataGate.Services.Data.Entities;
     using DataGate.Services.Data.Funds;
+    using DataGate.Services.Data.Recent;
     using DataGate.Services.Data.ViewSetups;
     using DataGate.Web.Controllers;
     using DataGate.Web.Dtos.Queries;
@@ -12,22 +16,22 @@
     using DataGate.Web.Resources;
     using DataGate.Web.ViewModels.Entities;
 
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
-
     [Area(EndpointsConstants.FundArea)]
     [Authorize]
     public class FundDetailsController : BaseController
     {
+        private readonly IRecentService serviceRecent;
         private readonly IEntityDetailsService service;
         private readonly IFundService fundService;
         private readonly SharedLocalizationService sharedLocalizer;
 
         public FundDetailsController(
+            IRecentService serviceRecent,
             IEntityDetailsService service,
             IFundService fundService,
             SharedLocalizationService sharedLocalizer)
         {
+            this.serviceRecent = serviceRecent;
             this.service = service;
             this.fundService = fundService;
             this.sharedLocalizer = sharedLocalizer;
@@ -37,6 +41,8 @@
         [Route("f/{id}/{date}")]
         public async Task<IActionResult> ByIdAndDate(int id, string date)
         {
+            await this.serviceRecent.Save(this.User, Request.Path);
+
             var dto = new QueriesToPassDto()
             {
                 SqlFunctionById = SqlFunctionDictionary.ByIdFund,

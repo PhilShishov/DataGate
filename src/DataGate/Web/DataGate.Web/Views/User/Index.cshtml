@@ -98,6 +98,21 @@
                 </div>
             }
         </div>
+
+        <div class="recent-container">
+
+            <h2>Recently Viewed</h2>
+
+            <ul>
+                @foreach (var item in Model.RecentlyViewed)
+                {
+                    <li>
+                        <a href="@item">@item</a>
+                    </li>
+                }
+            </ul>
+
+        </div>
     </div>
 </div>
 

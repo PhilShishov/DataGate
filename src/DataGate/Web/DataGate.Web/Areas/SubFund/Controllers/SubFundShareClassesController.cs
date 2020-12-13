@@ -2,8 +2,12 @@
 {
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
     using DataGate.Common;
     using DataGate.Services.Data.Entities;
+    using DataGate.Services.Data.Recent;
     using DataGate.Services.Data.SubFunds;
     using DataGate.Services.Data.ViewSetups;
     using DataGate.Web.Controllers;
@@ -12,23 +16,23 @@
     using DataGate.Web.Helpers;
     using DataGate.Web.Resources;
     using DataGate.Web.ViewModels.Entities;
-    using DataGate.Web.ViewModels.Queries;
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
 
     [Area(EndpointsConstants.DisplaySub + EndpointsConstants.FundArea)]
     [Authorize]
     public class SubFundShareClassesController : BaseController
     {
+        private readonly IRecentService serviceRecent;
         private readonly IEntityService service;
         private readonly ISubFundService subFundService;
         private readonly SharedLocalizationService sharedLocalizer;
 
         public SubFundShareClassesController(
+            IRecentService serviceRecent,
             IEntityService service,
             ISubFundService subFundService,
             SharedLocalizationService sharedLocalizer)
         {
+            this.serviceRecent = serviceRecent;
             this.service = service;
             this.subFundService = subFundService;
             this.sharedLocalizer = sharedLocalizer;
@@ -55,6 +59,8 @@
         [Route("sf/{id}/sc")]
         public async Task<IActionResult> ShareClasses(int id, string date, string container)
         {
+            await this.serviceRecent.Save(this.User, Request.Path);
+
             var dto = new SubEntitiesGetDto()
             {
                 Id = id,
