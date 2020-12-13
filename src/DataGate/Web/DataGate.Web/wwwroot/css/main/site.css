@@ -2,8 +2,20 @@
 /* Chosen style to be imported on change*/
 
 
+.container-all-funds {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 .modal-footer {
     align-items: initial;
+}
+
+.pipe-margin-right {
+    margin-right: 4px;
 }
 
 .dropdown td {
@@ -24,12 +36,19 @@
     background: url(../../images/bg-branch.jpg) no-repeat center center fixed;
     /*    background-size: cover;*/
     overflow: hidden;
-    height: 815px;
+    height: 100vh;
+    border: 15px solid rgba(255, 255, 255, 0.20);
 }
 
     .branch-background h2 {
         color: white;
+        line-height: 2.9;
     }
+
+
+#enable-authenticator, #reset-authenticator {
+    display: inline-block;
+}
 
 .swal-footer, .swal-text {
     text-align: center;
@@ -95,7 +114,7 @@ html {
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-family: BLK Fort,Arial,sans-serif;
     font-size: 16px;
     height: auto;
     line-height: 1.6;
@@ -259,11 +278,11 @@ textarea {
     max-width: 330px;
 }
 
-#div-inputs-to-format input[type=text]:focus, #div-inputs-to-format textarea:focus, #div-inputs-to-format input[type=date]:focus {
-    box-shadow: none;
-    border-color: #80bdff;
-    outline: none;
-}
+    #div-inputs-to-format input[type=text]:focus, #div-inputs-to-format textarea:focus, #div-inputs-to-format input[type=date]:focus {
+        box-shadow: none;
+        border-color: #80bdff;
+        outline: none;
+    }
 
 .column-form {
     float: left;

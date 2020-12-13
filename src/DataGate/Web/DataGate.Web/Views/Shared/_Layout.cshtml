@@ -67,30 +67,30 @@
                             </a>
                         </div>
 
-                        <div class="d-flex align-items-center mt-2 text-white">
-                            <div class="mx-3 mobile-none">
-                                <a asp-area="@EndpointsConstants.FundArea"
+                        <div class="d-flex align-items-center mt-3 text-white">
+                            <div class="mobile-none">
+                                <a class="ml-2 pipe-margin-right" asp-area="@EndpointsConstants.FundArea"
                                    asp-route="@EndpointsConstants.RouteAll@EndpointsConstants.FundsController">
                                     @SharedLocalizer.GetHtmlString("Fund Library")
                                 </a>
+                                |
                             </div>
-                            |
-                            <div class="mx-3 mobile-none">
-                                <a asp-area="@EndpointsConstants.DisplaySub@EndpointsConstants.FundArea"
+                            <div class="mobile-none">
+                                <a class="ml-2 pipe-margin-right" asp-area="@EndpointsConstants.DisplaySub@EndpointsConstants.FundArea"
                                    asp-route="@EndpointsConstants.RouteAll@EndpointsConstants.DisplaySub@EndpointsConstants.FundsController">
                                     @SharedLocalizer.GetHtmlString("Sub Fund Library")
                                 </a>
+                                |
                             </div>
-                            |
-                            <div class="mx-3 mobile-none">
-                                <a asp-area="@EndpointsConstants.ShareClassArea"
+                            <div class="mobile-none">
+                                <a class="ml-2 pipe-margin-right" asp-area="@EndpointsConstants.ShareClassArea"
                                    asp-route="@EndpointsConstants.RouteAll@EndpointsConstants.ShareClassesController">
                                     @SharedLocalizer.GetHtmlString("Share Class Library")
                                 </a>
+                                |
                             </div>
-                            |
-                            <div class="mx-3 mobile-none">
-                                <a asp-area=""
+                            <div class="mobile-none">
+                                <a class="ml-2 pipe-margin-right" asp-area=""
                                    asp-route="@EndpointsConstants.RouteAll@EndpointsConstants.RouteAgreements">@SharedLocalizer.GetHtmlString("Agreements Library")</a>
                             </div>
                         </div>
@@ -194,7 +194,7 @@
             </div>
         </header>
         <main>
-            <div class="container-fluid push-mobile">
+            <div class="push-mobile">
                 <partial name="_NotificationPanelMain" />
 
                 @RenderBody()
