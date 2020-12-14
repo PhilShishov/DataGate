@@ -18,7 +18,6 @@
 
         [Theory]
         [InlineData("/")]
-        [InlineData("/home/index")]
         [InlineData("/account/login")]
         [InlineData("/account/logout")]
         [InlineData("/account/forgot-password")]

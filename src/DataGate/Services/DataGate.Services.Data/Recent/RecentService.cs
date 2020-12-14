@@ -9,9 +9,9 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Http;
 
-    using DataGate.Common;
     using DataGate.Data.Common.Repositories.UsersContext;
     using DataGate.Data.Models.Users;
+    using DataGate.Web.Infrastructure.Extensions;
 
     public class RecentService : IRecentService
     {
@@ -32,7 +32,8 @@
 
             return this.repository.All()
                 .Where(r => r.UserId == userId)
-                .ToList();
+                .ToList()
+                .TakeLast(10);
         }
 
         public async Task Save(ClaimsPrincipal user, PathString path, QueryString? queryString = null)
@@ -53,14 +54,9 @@
                 {
                     UserId = userId,
                     Link = link,
-                    DisplayLink = link,
+                    DisplayLink = StringExtensions.BuildDisplayLink(link),
                 };
                 await this.repository.AddAsync(item);
-            }
-
-            while (list.Count() > GlobalConstants.MaxRecentItemsCount)
-            {
-                this.repository.Delete(list.LastOrDefault());
             }
 
             await this.repository.SaveChangesAsync();

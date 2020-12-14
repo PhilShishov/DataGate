@@ -1,20 +1,13 @@
 ﻿namespace DataGate.Web.Tests.Controllers
 {
-    using DataGate.Web.Controllers;
     using Microsoft.AspNetCore.Mvc;
     using MyTested.AspNetCore.Mvc;
     using Xunit;
 
+    using DataGate.Web.Controllers;
+
     public class HomeControllerTests
     {
-        [Fact]
-        public void Index_ShouldReturnView() =>
-            MyController<HomeController>
-            .Instance()
-            .Calling(c => c.Index())
-            .ShouldReturn()
-            .View();
-
         [Fact]
         public void AccessDenied_ShouldReturnView() =>
             MyController<HomeController>
