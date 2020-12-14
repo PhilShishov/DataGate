@@ -21,7 +21,7 @@
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
-        private const string UserIndexUrl = "/userpanel";
+        private const string UserPanelUrl = "/userpanel";
 
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SharedLocalizationService sharedLocalizer;
@@ -67,7 +67,7 @@
                 return this.Page();
             }
 
-            return this.Redirect(UserIndexUrl);
+            return this.Redirect(UserPanelUrl);
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
