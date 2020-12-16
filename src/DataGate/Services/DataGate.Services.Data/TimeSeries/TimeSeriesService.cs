@@ -18,7 +18,8 @@
         {
             var query = this.sqlManager
                .ExecuteQueryTimeSeriesAsync(string.Format(function, id))
-               .Skip(skip);
+               .Skip(skip)
+               .TakeLast(20);
 
             await foreach (var item in query)
             {
@@ -31,7 +32,8 @@
             var query = this.sqlManager
                 .ExecuteQueryTimeSeriesAsync(string.Format(function, id))
                 .Skip(skip)
-                .Select(ts => ts[1]);
+                .Select(ts => ts[0])
+                .TakeLast(20);
 
             await foreach (var item in query)
             {

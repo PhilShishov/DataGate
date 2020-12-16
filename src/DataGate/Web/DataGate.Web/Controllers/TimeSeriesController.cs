@@ -22,25 +22,21 @@
         [Route("loadTimeseries")]
         public async Task<IActionResult> GetAllTimeSeries(int id, string areaName)
         {
-            string functionDates = StringSwapper.ByArea(
-                        areaName,
-                        null,
-                        SqlFunctionTimeSeries.DatesSubFund,
-                        SqlFunctionTimeSeries.DatesShareClass);
             string functionProviders = StringSwapper.ByArea(
                         areaName,
                         null,
                         SqlFunctionTimeSeries.ProvidersSubFund,
                         SqlFunctionTimeSeries.ProvidersShareClass);
-            string functionPrices = StringSwapper.ByArea(
+
+            string functionTimeSeries = StringSwapper.ByArea(
                         areaName,
                         null,
-                        SqlFunctionTimeSeries.PricesSubFund,
-                        SqlFunctionTimeSeries.PricesShareClass);
+                        SqlFunctionTimeSeries.TimeSeriesSF,
+                        SqlFunctionTimeSeries.TimeSeriesSC);
 
-            var dates = await this.service.GetDates(functionDates, id, 1).TakeLast(20).ToListAsync();
+            var dates = await this.service.GetDates(functionTimeSeries, id, 1).ToListAsync();
             var providers = await this.service.GetProviders(functionProviders, id, 1).ToListAsync();
-            var prices = await this.service.GetPrices(functionPrices, id).TakeLast(20).ToListAsync();
+            var prices = await this.service.GetPrices(functionTimeSeries, id, 1).ToListAsync();
 
             var model = new TimeSeriesViewModel()
             {
