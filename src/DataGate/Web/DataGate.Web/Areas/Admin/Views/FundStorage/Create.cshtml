@@ -1,8 +1,8 @@
 ﻿@model CreateFundInputModel
 
-@{
+@{ 
     ViewData["Title"] = SharedLocalizer.GetHtmlString("New Fund");
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml"; 
 }
 
 <div class="push">
@@ -11,188 +11,226 @@
               asp-action="Create"
               method="post"
               class="d-inline w-75">
-            <h4 class="mb-5">@SharedLocalizer.GetHtmlString("Create New Fund")</h4>
+            <h3 class="mt-2 mb-5">@SharedLocalizer.GetHtmlString("Create New Fund")</h3>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="d-inline" id="div-inputs-to-format">
 
-                <div class="column-form">
-                    <div class="form-group">
-                        <label asp-for="InitialDate"></label><br>
-                        <input asp-for="InitialDate"
-                               type="date"
-                               min="2018-01-01"
-                               class="form-control">
-                        <span asp-validation-for="InitialDate" class="text-danger"></span>
+                <div class="column-form-container">
+                    <div class="column-form-header">
+                        <h4>Identity</h4>
                     </div>
 
-                    <div class="form-group">
-                        <label asp-for="EndDate"></label><br>
-                        <input asp-for="EndDate"
-                               type="date"
-                               class="form-control ">
-                        <span asp-validation-for="EndDate" class="text-danger"></span>
-                    </div>
+                    <div class="column-form-content">
+                        <div class="column-form">
 
-                    <div class="form-group">
-                        <label asp-for="FundName"></label><br>
-                        <input type="text"
-                               class="form-control "
-                               asp-for="FundName">
-                        <span asp-validation-for="FundName" class="text-danger"></span>
-                    </div>
+                            <div class="form-group">
+                                <label asp-for="FundName"></label><br>
+                                <input type="text"
+                                       class="form-control "
+                                       asp-for="FundName">
+                                <span asp-validation-for="FundName" class="text-danger"></span>
+                            </div>
 
-                    <div class="form-group">
-                        <label asp-for="CSSFCode"></label><br>
-                        <input type="text"
-                               class="form-control "
-                               asp-for="CSSFCode">
-                        <span asp-validation-for="CSSFCode" class="text-danger"></span>
-                    </div>
+                            <div class="form-group">
+                                <label asp-for="LegalForm"></label><br>
+                                <select class="select-pharus" asp-for="LegalForm">
+                                    <option selected disabled value="0">-- Choose Form --</option>
+                                    @foreach (var form in (List<string>)ViewData["LegalForm"])
+                                    {                        
+                                        <option value="@form">@form</option>                        
+                                    }
+                                </select>
+                            </div>
+                            <span asp-validation-for="LegalForm" class="text-danger"></span>
 
-                    <div class="form-group">
-                        <label asp-for="LEICode"></label><br>
-                        <input type="text"
-                               class="form-control"
-                               asp-for="LEICode">
-                        <span asp-validation-for="LEICode" class="text-danger"></span>
+                            <div class="form-group">
+                                <label asp-for="LegalVehicle"></label><br>
+                                <select class="select-pharus" asp-for="LegalVehicle">
+                                    <option selected disabled>-- Choose Vehicle --</option>
+                                    @foreach (var vehicle in (List<string>)ViewData["LegalVehicle"])
+                                    {                        
+                                        <option value="@vehicle">@vehicle</option>
+                                    }
+                                </select>
+                            </div>
+                            <span asp-validation-for="LegalVehicle" class="text-danger"></span>
+                            <div class="form-group">
+                                <label asp-for="LegalType"></label><br>
+                                <select class="select-pharus" asp-for="LegalType">
+                                    <option selected disabled value="0">-- Choose Type --</option>
+                                    @foreach (var type in (List<string>)ViewData["LegalType"])
+                                    {                        
+                                        <option value="@type">@type</option>
+                                    }
+                                </select>
+                            </div>
+                            <span asp-validation-for="LegalType" class="text-danger"></span>
+
+
+                            <div class="form-group">
+                                <label asp-for="CompanyTypeDesc"></label><br>
+                                <select class="select-pharus" asp-for="CompanyTypeDesc">
+                                    <option selected disabled value="0">-- Choose Description --</option>
+                                    @foreach (var desc in (List<string>)ViewData["CompanyTypeDesc"])
+                                    {                        
+                                        <option value="@desc">@desc</option>
+                                    }
+                                </select>
+                            </div>
+                            <span asp-validation-for="CompanyTypeDesc" class="text-danger"></span>
+
+                        </div>
+
+                        <div class="column-form">
+
+                            <div class="form-group">
+                                <label asp-for="Status"></label><br>
+                                <select class="select-pharus" asp-for="Status">
+                                    <option selected disabled value="0">-- Choose Status --</option>
+                                    @foreach (var status in (List<string>)ViewData["Status"])
+                                    {                        
+                                        <option value="@status">@status</option>
+                                    }
+                                </select>
+                            </div>
+                            <span asp-validation-for="Status" class="text-danger"></span>
+
+
+                            <div class="form-group">
+                                <label asp-for="CSSFCode"></label><br>
+                                <input type="text"
+                                       class="form-control "
+                                       asp-for="CSSFCode">
+                                <span asp-validation-for="CSSFCode" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="InitialDate"></label><br>
+                                <input asp-for="InitialDate"
+                                       type="date"
+                                       min="2018-01-01"
+                                       class="form-control">
+                                <span asp-validation-for="InitialDate" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="EndDate"></label><br>
+                                <input asp-for="EndDate"
+                                       type="date"
+                                       class="form-control ">
+                                <span asp-validation-for="EndDate" class="text-danger"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="column-form">
-                    <div class="form-group">
-                        <label asp-for="TinNumber"></label><br>
-                        <input type="text"
-                               class="form-control"
-                               asp-for="TinNumber">
-                        <span asp-validation-for="TinNumber" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="FACode"></label><br>
-                        <input type="text"
-                               class="form-control "
-                               asp-for="FACode">
-                        <span asp-validation-for="FACode" class="text-danger"></span>
+                <div class="column-form-container">
+
+                    <div class="column-form-header">
+                        <h4>Third Party</h4>
                     </div>
 
-                    <div class="form-group">
-                        <label asp-for="DEPCode"></label><br>
-                        <input type="text"
-                               class="form-control "
-                               asp-for="DEPCode">
-                        <span asp-validation-for="DEPCode" class="text-danger"></span>
-                    </div>
+                    <div class="column-form-content">
+                        <div class="column-form">
+                            <div class="form-group">
+                                <label asp-for="FundAdmin"></label><br>
+                                <select class="select-pharus" asp-for="FundAdmin">
+                                    <option selected disabled>-- Choose Fund Admin --</option>
+                                    @foreach (var admin in (List<string>)ViewData["FundAdmin"])
+                                    {
+                                        <option value="@admin">@admin</option>
+                                    }
+                                </select>
+                            </div>
+                            <span asp-validation-for="FundAdmin" class="text-danger"></span>
 
-                    <div class="form-group">
-                        <label asp-for="TACode"></label><br>
-                        <input type="text"
-                               class="form-control "
-                               asp-for="TACode">
-                        <span asp-validation-for="TACode" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="RegNumber"></label><br>
-                        <input type="text"
-                               class="form-control"
-                               asp-for="RegNumber">
-                        <span asp-validation-for="RegNumber" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="VATRegNumber"></label><br>
-                        <input type="text"
-                               class="form-control"
-                               asp-for="VATRegNumber">
-                        <span asp-validation-for="VATRegNumber" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="VATIdentificationNumber"></label><br>
-                        <input type="text"
-                               class="form-control"
-                               asp-for="VATIdentificationNumber">
-                        <span asp-validation-for="VATIdentificationNumber" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="IBICNumber"></label><br>
-                        <input type="text"
-                               class="form-control"
-                               asp-for="IBICNumber">
-                        <span asp-validation-for="IBICNumber" class="text-danger"></span>
-                    </div>
+                            <div class="form-group">
+                                <label asp-for="FACode"></label><br>
+                                <input type="text"
+                                       class="form-control "
+                                       asp-for="FACode">
+                                <span asp-validation-for="FACode" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="column-form">
+                            <div class="form-group">
+                                <label asp-for="TACode"></label><br>
+                                <input type="text"
+                                       class="form-control "
+                                       asp-for="TACode">
+                                <span asp-validation-for="TACode" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="DEPCode"></label><br>
+                                <input type="text"
+                                       class="form-control "
+                                       asp-for="DEPCode">
+                                <span asp-validation-for="DEPCode" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>                    
                 </div>
 
-                <div class="column-form">
-                    <div class="form-group">
-                        <label asp-for="Status"></label><br>
-                        <select class="select-pharus" asp-for="Status">
-                            <option selected disabled value="0">-- Choose Status --</option>
-                            @foreach (var status in (List<string>)ViewData["Status"])
-                            {
-                                <option value="@status">@status</option>
-                            }
-                        </select>
-                    </div>
-                    <span asp-validation-for="Status" class="text-danger"></span>
+                <div class="column-form-container">
 
-                      <div class="form-group">
-                        <label asp-for="FundAdmin"></label><br>
-                        <select class="select-pharus" asp-for="FundAdmin">
-                            <option selected disabled>-- Choose Fund Admin --</option>
-                            @foreach (var vehicle in (List<string>)ViewData["FundAdmin"])
-                            {
-                                <option value="@vehicle">@vehicle</option>
-                            }
-                        </select>
+                    <div class="column-form-header">
+                        <h4>Additional Information</h4>
                     </div>
-                    <span asp-validation-for="FundAdmin" class="text-danger"></span>
 
+                    <div class="column-form-content">
+                        <div class="column-form">
+                            <div class="form-group">
+                                <label asp-for="LEICode"></label><br>
+                                <input type="text"
+                                       class="form-control"
+                                       asp-for="LEICode">
+                                <span asp-validation-for="LEICode" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="TinNumber"></label><br>
+                                <input type="text"
+                                       class="form-control"
+                                       asp-for="TinNumber">
+                                <span asp-validation-for="TinNumber" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="RegNumber"></label><br>
+                                <input type="text"
+                                       class="form-control"
+                                       asp-for="RegNumber">
+                                <span asp-validation-for="RegNumber" class="text-danger"></span>
+                            </div>
+                        </div>
 
-                    <div class="form-group">
-                        <label asp-for="LegalForm"></label><br>
-                        <select class="select-pharus" asp-for="LegalForm">
-                            <option selected disabled value="0">-- Choose Form --</option>
-                            @foreach (var form in (List<string>)ViewData["LegalForm"])
-                            {
-                                <option value="@form">@form</option>
-                            }
-                        </select>
-                    </div>
-                    <span asp-validation-for="LegalForm" class="text-danger"></span>
-
-                    <div class="form-group">
-                        <label asp-for="LegalVehicle"></label><br>
-                        <select class="select-pharus" asp-for="LegalVehicle">
-                            <option selected disabled>-- Choose Vehicle --</option>
-                            @foreach (var vehicle in (List<string>)ViewData["LegalVehicle"])
-                            {
-                                <option value="@vehicle">@vehicle</option>
-                            }
-                        </select>
-                    </div>
-                    <span asp-validation-for="LegalVehicle" class="text-danger"></span>
-                    <div class="form-group">
-                        <label asp-for="LegalType"></label><br>
-                        <select class="select-pharus" asp-for="LegalType">
-                            <option selected disabled value="0">-- Choose Type --</option>
-                            @foreach (var type in (List<string>)ViewData["LegalType"])
-                            {
-                                <option value="@type">@type</option>
-                            }
-                        </select>
-                    </div>
-                    <span asp-validation-for="LegalType" class="text-danger"></span>
-                    <div class="form-group">
-                        <label asp-for="CompanyTypeDesc"></label><br>
-                        <select class="select-pharus" asp-for="CompanyTypeDesc">
-                            <option selected disabled value="0">-- Choose Description --</option>
-                            @foreach (var desc in (List<string>)ViewData["CompanyTypeDesc"])
-                            {
-                                <option value="@desc">@desc</option>
-                            }
-                        </select>
-                    </div>
-                    <span asp-validation-for="CompanyTypeDesc" class="text-danger"></span>
-                </div>
+                        <div class="column-form">
+                            <div class="form-group">
+                                <label asp-for="VATRegNumber"></label><br>
+                                <input type="text"
+                                       class="form-control"
+                                       asp-for="VATRegNumber">
+                                <span asp-validation-for="VATRegNumber" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="VATIdentificationNumber"></label><br>
+                                <input type="text"
+                                       class="form-control"
+                                       asp-for="VATIdentificationNumber">
+                                <span asp-validation-for="VATIdentificationNumber" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="IBICNumber"></label><br>
+                                <input type="text"
+                                       class="form-control"
+                                       asp-for="IBICNumber">
+                                <span asp-validation-for="IBICNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>                
             </div>
-
+            
             <div class="button-holder-storage my-4">
                 <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
                 <a class="btn btn-pharus btn-lg" asp-area="@EndpointsConstants.FundArea" asp-route="@EndpointsConstants.RouteAll@EndpointsConstants.FundsController">
@@ -207,6 +245,7 @@
         </form>
     </div>
 </div>
-@section Scripts{
+
+@section Scripts {
     <partial name="Scripts/_CreateEditScriptsPartial">
 }

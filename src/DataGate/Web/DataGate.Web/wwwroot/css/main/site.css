@@ -316,17 +316,30 @@ textarea {
         outline: none;
     }
 
+.column-form-header {
+    text-align: start;
+    border-bottom: 1px solid #0056b3;
+    width: 90%;
+}
+
+    .column-form-header h4 {
+        color: #0056b3;
+    }
+
+.column-form-content {
+    display: flex;
+    margin: 30px 10px;
+}
+
 .column-form {
-    float: left;
-    width: 33.33%;
-    padding: 0 10px;
+    width: 49%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
     .column-form .form-group {
-        width: 75%;
+        width: 55%;
     }
 
 .icon-svg-warning {
