@@ -34,15 +34,17 @@
                         SqlFunctionTimeSeries.TimeSeriesSF,
                         SqlFunctionTimeSeries.TimeSeriesSC);
 
-            var dates = await this.service.GetDates(functionTimeSeries, id, 1).ToListAsync();
-            var providers = await this.service.GetProviders(functionProviders, id, 1).ToListAsync();
-            var prices = await this.service.GetPrices(functionTimeSeries, id, 1).ToListAsync();
+            bool isMainProvider = true;
+
+            var provider = await this.service.GetProviders(string.Format(functionProviders, id), 1, isMainProvider).FirstOrDefaultAsync();
+            var dates = await this.service.GetDates(string.Format(functionTimeSeries, id, provider), 1).ToListAsync();
+            var prices = await this.service.GetPrices(string.Format(functionTimeSeries, id, provider), 1).ToListAsync();
 
             var model = new TimeSeriesViewModel()
             {
                 AreaName = areaName,
                 TSPriceDates = dates,
-                TSTypeProviders = providers,
+                TSTypeProvider = provider,
                 TSAllPriceValues = prices,
                 Id = id,
             };

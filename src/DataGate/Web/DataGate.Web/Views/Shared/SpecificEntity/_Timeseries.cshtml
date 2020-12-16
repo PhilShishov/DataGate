@@ -1,18 +1,12 @@
 ﻿@model DataGate.Web.ViewModels.TimeSeries.TimeSeriesViewModel
 
-@{
-    var dates = @Html.Raw(Json.Serialize(Model.TSPriceDates));
-    var neededProviders = Model.TSTypeProviders.Where(pr => pr.Contains("AuM") || pr.Contains("Price"));
-    var providers = @Html.Raw(Json.Serialize(neededProviders));
-}
-
 <div>
     <canvas id="canvas-chart-aum"></canvas>
 
     <div class="mt-3">
-        <a class="btn btn-pharus" 
-           asp-area="" 
-           asp-route="timeseriesreports" 
+        <a class="btn btn-pharus"
+           asp-area=""
+           asp-route="timeseriesreports"
            asp-route-type="@Model.AreaName"
            asp-route-id="@Model.Id">
             @SharedLocalizer.GetHtmlString("Time Series Reports")
@@ -26,27 +20,39 @@
      // Chart js for Asset under management and share prices
 
     $(function () {
-        const ChartColors = [
-            'rgb(54, 162, 235)',
-            'rgb(255, 159, 64)',
-            'rgb(255, 205, 86)',
-            'rgb(75, 192, 192)',
-            'rgb(153, 102, 255)',
-            'rgb(255, 99, 132)',
-            'rgb(201, 203, 207)'
-        ];
+        //const ChartColors = [
+        //    'rgb(54, 162, 235)',
+        //    'rgb(255, 159, 64)',
+        //    'rgb(255, 205, 86)',
+        //    'rgb(75, 192, 192)',
+        //    'rgb(153, 102, 255)',
+        //    'rgb(255, 99, 132)',
+        //    'rgb(201, 203, 207)'
+        //];
 
         let chartData = [];
-        $.each(@providers, function (index, provider) {
-            let pricesJson = @Json.Serialize(Model.TSAllPriceValues);
-            let pricesArr = pricesJson
-                .filter(ts => ts[2] === provider)
-                .map(ts => parseFloat(ts[1]));
-            console.log(pricesArr);
 
-            //let arr = [5537335.32, 5395388.99, 5532726.53, 5755894.74,
-            //    5033676.81, 5084669.12, 5163553.57, 5205828.06,
-            //    5065253.11, 5111903.57, 4948932.06, 4409094.49, 4655016.69, 4654240.56];
+        const provider = @Html.Raw(Json.Serialize(Model.TSTypeProvider));
+        const dates = @Html.Raw(Json.Serialize(Model.TSPriceDates));
+
+        let pricesJson = @Json.Serialize(Model.TSAllPriceValues);
+        let pricesArr = pricesJson
+            .filter(ts => ts[2] === provider)
+            .map(ts => parseFloat(ts[1]));
+
+        //let arr = [5537335.32, 5395388.99, 5532726.53, 5755894.74,
+        //    5033676.81, 5084669.12, 5163553.57, 5205828.06,
+        //    5065253.11, 5111903.57, 4948932.06, 4409094.49, 4655016.69, 4654240.56];
+
+        chartData.push({
+            data: pricesArr,
+            label: provider,
+            backgroundColor: 'rgb(0, 86, 118)',
+            borderColor: 'rgb(0, 0, 118)',
+            fill: false,
+        });
+
+        @* $.each(@providers, function (index, provider) {
 
             chartData.push({
                 data: pricesArr,
@@ -55,10 +61,10 @@
                 borderColor: ChartColors[index],
                 fill: false,
             });
-        });
+        });*@
 
         let ctx = document.getElementById('canvas-chart-aum').getContext('2d');
-        let chart = new Chart(ctx, setConfigChart(@dates, chartData));
+        let chart = new Chart(ctx, setConfigChart(dates, chartData));
 
         function setConfigChart(dates, chartData) {
             let config = {

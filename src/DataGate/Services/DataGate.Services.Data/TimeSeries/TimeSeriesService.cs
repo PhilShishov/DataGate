@@ -14,10 +14,10 @@
             this.sqlManager = sqlManager;
         }
 
-        public async IAsyncEnumerable<string[]> GetPrices(string function, int id, int skip)
+        public async IAsyncEnumerable<string[]> GetPrices(string function, int skip)
         {
             var query = this.sqlManager
-               .ExecuteQueryTimeSeriesAsync(string.Format(function, id))
+               .ExecuteQueryTimeSeriesAsync(function)
                .Skip(skip)
                .TakeLast(20);
 
@@ -27,10 +27,10 @@
             }
         }
 
-        public async IAsyncEnumerable<string> GetDates(string function, int id, int skip)
+        public async IAsyncEnumerable<string> GetDates(string function, int skip)
         {
             var query = this.sqlManager
-                .ExecuteQueryTimeSeriesAsync(string.Format(function, id))
+                .ExecuteQueryTimeSeriesAsync(function)
                 .Skip(skip)
                 .Select(ts => ts[0])
                 .TakeLast(20);
@@ -41,12 +41,17 @@
             }
         }
 
-        public async IAsyncEnumerable<string> GetProviders(string function, int id, int skip)
+        public async IAsyncEnumerable<string> GetProviders(string function, int skip, bool isMainProvider)
         {
             var query = this.sqlManager
-                .ExecuteQueryTimeSeriesAsync(string.Format(function, id))
+                .ExecuteQueryTimeSeriesAsync(function)
                 .Skip(skip)
                 .Select(tt => tt[0]);
+
+            if (isMainProvider)
+            {
+                query = query.Where(pr => pr.Contains("AuM") || pr.Contains("Price"));
+            }
 
             await foreach (var item in query)
             {

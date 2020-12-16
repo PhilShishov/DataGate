@@ -4,11 +4,12 @@
 
     public interface ITimeSeriesService
     {
-        IAsyncEnumerable<string> GetDates(string function, int id, int skip = 0);
+        IAsyncEnumerable<string> GetDates(string function, int skip = 0);
 
-        IAsyncEnumerable<string> GetProviders(string function, int id, int skip = 0);
+        IAsyncEnumerable<string> GetProviders(string function, int skip = 0, bool isMainProvider = false);
 
-        IAsyncEnumerable<string[]> GetPrices(string function, int id, int skip = 0);
+        IAsyncEnumerable<string[]> GetPrices(string function, int skip = 0);
+
 
         //IAsyncEnumerable<TimeSerieReport> GetAllTSReports(string type, int? id, string timeSeriesType)
     }
