@@ -8,7 +8,7 @@
         <form method="post" class="d-inline w-75">
             <h2>@SharedLocalizer.GetHtmlString("Edit User")</h2>
             <div>
-                <a class="btn btn-pharus text-white mt-2"
+                <a class="btn btn-datagate text-white mt-2"
                    asp-area=""
                    asp-controller="User"
                    asp-action="Index">
@@ -69,7 +69,7 @@
                 <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
                 <button type="submit"
                         asp-page-handler="EditUser"
-                        class="btn btn-pharus text-white btn-confirm-update"
+                        class="btn btn-datagate text-white btn-confirm-update"
                         style="margin-right:40px">
                     @SharedLocalizer.GetHtmlString("Save changes")
                 </button>

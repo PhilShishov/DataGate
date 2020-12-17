@@ -63,7 +63,7 @@
                         <div class="mx-2 mt-2">
                             <a asp-area=""
                                asp-route="@EndpointsConstants.RouteUserPanel">
-                                <img src="~/images/Logo_Pharus_small.jpg" class="img-home-redirect" alt="Pharus Management">
+                                <img src="~/images/Logo_Pharus_small.jpg" class="img-home-redirect" alt="Pharus Management Company">
                             </a>
                         </div>
 
@@ -98,6 +98,27 @@
                 </div>
 
                 <div class="w-50 d-flex responsive-navbar">
+
+                    <div class="badge-notification-container">
+                        <a class="badge" data-count="5">
+                        </a>
+                        <div class="notification-list">
+                            <ul>
+                                <li>
+                                    <a>
+                                        New Fund : {FundName}
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a>
+                                        Update Fund : {FundName}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
                     <div class="search-form-wrapper-responsive">
                         <button class="open-search-box mt-3">
                             <svg class="icon-svg-search-responsive" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

@@ -33,7 +33,7 @@
 
                             <div class="form-group">
                                 <label asp-for="LegalForm"></label><br>
-                                <select class="select-pharus" asp-for="LegalForm">
+                                <select class="select-datagate" asp-for="LegalForm">
                                     <option selected disabled value="0">-- Choose Form --</option>
                                     @foreach (var form in (List<string>)ViewData["LegalForm"])
                                     {                        
@@ -45,7 +45,7 @@
 
                             <div class="form-group">
                                 <label asp-for="LegalVehicle"></label><br>
-                                <select class="select-pharus" asp-for="LegalVehicle">
+                                <select class="select-datagate" asp-for="LegalVehicle">
                                     <option selected disabled>-- Choose Vehicle --</option>
                                     @foreach (var vehicle in (List<string>)ViewData["LegalVehicle"])
                                     {                        
@@ -56,7 +56,7 @@
                             <span asp-validation-for="LegalVehicle" class="text-danger"></span>
                             <div class="form-group">
                                 <label asp-for="LegalType"></label><br>
-                                <select class="select-pharus" asp-for="LegalType">
+                                <select class="select-datagate" asp-for="LegalType">
                                     <option selected disabled value="0">-- Choose Type --</option>
                                     @foreach (var type in (List<string>)ViewData["LegalType"])
                                     {                        
@@ -69,7 +69,7 @@
 
                             <div class="form-group">
                                 <label asp-for="CompanyTypeDesc"></label><br>
-                                <select class="select-pharus" asp-for="CompanyTypeDesc">
+                                <select class="select-datagate" asp-for="CompanyTypeDesc">
                                     <option selected disabled value="0">-- Choose Description --</option>
                                     @foreach (var desc in (List<string>)ViewData["CompanyTypeDesc"])
                                     {                        
@@ -85,7 +85,7 @@
 
                             <div class="form-group">
                                 <label asp-for="Status"></label><br>
-                                <select class="select-pharus" asp-for="Status">
+                                <select class="select-datagate" asp-for="Status">
                                     <option selected disabled value="0">-- Choose Status --</option>
                                     @foreach (var status in (List<string>)ViewData["Status"])
                                     {                        
@@ -134,7 +134,7 @@
                         <div class="column-form">
                             <div class="form-group">
                                 <label asp-for="FundAdmin"></label><br>
-                                <select class="select-pharus" asp-for="FundAdmin">
+                                <select class="select-datagate" asp-for="FundAdmin">
                                     <option selected disabled>-- Choose Fund Admin --</option>
                                     @foreach (var admin in (List<string>)ViewData["FundAdmin"])
                                     {
@@ -233,11 +233,11 @@
             
             <div class="button-holder-storage my-4">
                 <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
-                <a class="btn btn-pharus btn-lg" asp-area="@EndpointsConstants.FundArea" asp-route="@EndpointsConstants.RouteAll@EndpointsConstants.FundsController">
+                <a class="btn btn-datagate btn-lg" asp-area="@EndpointsConstants.FundArea" asp-route="@EndpointsConstants.RouteAll@EndpointsConstants.FundsController">
                     @SharedLocalizer.GetHtmlString("Back to List")
                 </a>
                 <button type="submit"
-                        class="btn btn-pharus btn-lg btn-confirm-create ml-5">
+                        class="btn btn-datagate btn-lg btn-confirm-create ml-5">
                     @SharedLocalizer.GetHtmlString("Create Fund")
                 </button>
             </div>

@@ -8,7 +8,7 @@
         <form class="d-inline w-75" method="post">
             <h2 class="mb-2"> @SharedLocalizer.GetHtmlString("Create User")</h2>
             <div class="button-holder">
-                <a class="btn btn-pharus text-white mt-2" asp-area="" asp-controller="User" asp-action="Index">@SharedLocalizer.GetHtmlString("Back to Panel")</a>
+                <a class="btn btn-datagate text-white mt-2" asp-area="" asp-controller="User" asp-action="Index">@SharedLocalizer.GetHtmlString("Back to Panel")</a>
             </div>
             <hr />
             <div class="form-group-user">
@@ -63,7 +63,7 @@
                 </div>
             </div>
             <div class="form-group-user">
-                <select class="select-pharus" id="roletype" asp-for="RoleType">
+                <select class="select-datagate" id="roletype" asp-for="RoleType">
                     <option selected disabled value="0">
                         @SharedLocalizer.GetHtmlString("-- Choose Role --")
                     </option>
@@ -80,7 +80,7 @@
             <div class="button-holder mt-4">
                 <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
                 <button type="submit"
-                        class="btn btn-pharus text-white btn-confirm-create">
+                        class="btn btn-datagate text-white btn-confirm-create">
                     @SharedLocalizer.GetHtmlString("Create User")
                 </button>
             </div>

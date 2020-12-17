@@ -53,8 +53,10 @@
 
         // Email
         public const string ConfirmEmailSubject = "Action required: Confirm your email";
-        public const string EmailConfirmationMessage = "This is an automatic email sent by Pharus DataGate to authorize your account with chosen username and password.<br>" +
-                                                       "Please confirm your account by <a href='{0}'>clicking here</a>.";
+        public const string EmailConfirmationMessage = "This is an automatic email sent by DataGate to authorize your account with chosen username and password.<br>" +
+                                                       "Username: {0} <br>" +
+                                                       "Password: DataGate2020* <br>" +
+                                                       "Please confirm your account by <a href='{1}'>clicking here</a>.";
 
         public const string ResetPasswordEmailSubject = "Reset your password";
         public const string PasswordResetMessage = "Please reset your password by <a href='{0}'>clicking here</a>.";

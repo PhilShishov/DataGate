@@ -76,7 +76,7 @@
                     <div class="form-group" id="derivMarket" hidden>
                         <label asp-for="DerivMarket"
                                ></label><br>
-                        <select class="select-pharus"
+                        <select class="select-datagate"
                                 asp-for="DerivMarket">
                             <option selected disabled>-- Choose Market --</option>
                             @foreach (var market in (List<string>)ViewData["DerivMarket"])
@@ -96,7 +96,7 @@
 
                     <div class="form-group" id="derivPurpose" hidden>
                         <label asp-for="DerivPurpose"></label><br>
-                        <select class="select-pharus"
+                        <select class="select-datagate"
                                 asp-for="DerivPurpose">
                             <option selected disabled>-- Choose Purpose --</option>
                             @foreach (var purpose in (List<string>)ViewData["DerivPurpose"])
@@ -197,7 +197,7 @@
                 <div class="column-form">
                     <div class="form-group">
                         <label asp-for="Status" ></label><br>
-                        <select class="select-pharus" asp-for="Status">
+                        <select class="select-datagate" asp-for="Status">
                             <option selected disabled>-- Choose Status --</option>
                             @foreach (var status in (List<string>)ViewData["Status"])
                             {
@@ -215,7 +215,7 @@
                     <span asp-validation-for="Status" class="text-danger"></span>
                     <div class="form-group">
                         <label asp-for="CurrencyCode" ></label><br>
-                        <select class="select-pharus" asp-for="CurrencyCode">
+                        <select class="select-datagate" asp-for="CurrencyCode">
                             <option selected disabled>-- Choose Currency --</option>
                             @foreach (var currency in (List<string>)ViewData["CurrencyCode"])
                             {
@@ -233,7 +233,7 @@
                     <span asp-validation-for="CurrencyCode" class="text-danger"></span>
                     <div class="form-group">
                         <label asp-for="CesrClass" ></label><br>
-                        <select class="select-pharus" asp-for="CesrClass">
+                        <select class="select-datagate" asp-for="CesrClass">
                             <option selected disabled>-- Choose Class --</option>
                             @foreach (var cesr in (List<string>)ViewData["CesrClass"])
                             {
@@ -252,7 +252,7 @@
 
                     <div class="form-group">
                         <label asp-for="GeographicalFocus" ></label><br>
-                        <select class="select-pharus" asp-for="GeographicalFocus">
+                        <select class="select-datagate" asp-for="GeographicalFocus">
                             <option selected disabled>-- Choose GeoFocus --</option>
                             @foreach (var focus in (List<string>)ViewData["GeographicalFocus"])
                             {
@@ -271,7 +271,7 @@
 
                     <div class="form-group">
                         <label asp-for="GlobalExposure" ></label><br>
-                        <select class="select-pharus" asp-for="GlobalExposure">
+                        <select class="select-datagate" asp-for="GlobalExposure">
                             <option selected disabled>-- Choose Exposure --</option>
                             @foreach (var expo in (List<string>)ViewData["GlobalExposure"])
                             {
@@ -290,7 +290,7 @@
 
                     <div class="form-group">
                         <label asp-for="NavFrequency" ></label><br>
-                        <select class="select-pharus" asp-for="NavFrequency">
+                        <select class="select-datagate" asp-for="NavFrequency">
                             <option selected disabled>-- Choose Frequency --</option>
                             @foreach (var frequency in (List<string>)ViewData["NavFrequency"])
                             {
@@ -309,7 +309,7 @@
 
                     <div class="form-group">
                         <label asp-for="ValuationDate" ></label><br>
-                        <select class="select-pharus" asp-for="ValuationDate">
+                        <select class="select-datagate" asp-for="ValuationDate">
                             <option selected disabled>-- Choose Valuation --</option>
                             @foreach (var date in (List<string>)ViewData["ValuationDate"])
                             {
@@ -328,7 +328,7 @@
 
                     <div class="form-group">
                         <label asp-for="CalculationDate" ></label><br>
-                        <select class="select-pharus" asp-for="CalculationDate">
+                        <select class="select-datagate" asp-for="CalculationDate">
                             <option selected disabled>-- Choose Calculation --</option>
                             @foreach (var date in (List<string>)ViewData["CalculationDate"])
                             {
@@ -349,7 +349,7 @@
 
                     <div class="form-group">
                         <label asp-for="PrincipalAssetClass" ></label><br>
-                        <select class="select-pharus" asp-for="PrincipalAssetClass">
+                        <select class="select-datagate" asp-for="PrincipalAssetClass">
                             <option selected disabled>-- Choose Class --</option>
                             @foreach (var pac in (List<string>)ViewData["PrincipalAssetClass"])
                             {
@@ -368,7 +368,7 @@
 
                     <div class="form-group">
                         <label asp-for="TypeOfMarket" ></label><br>
-                        <select class="select-pharus" asp-for="TypeOfMarket">
+                        <select class="select-datagate" asp-for="TypeOfMarket">
                             <option selected disabled>-- Choose Market --</option>
                             @foreach (var type in (List<string>)ViewData["TypeOfMarket"])
                             {
@@ -387,7 +387,7 @@
 
                     <div class="form-group">
                         <label asp-for="PrincipalInvestmentStrategy" ></label><br>
-                        <select class="select-pharus" asp-for="PrincipalInvestmentStrategy">
+                        <select class="select-datagate" asp-for="PrincipalInvestmentStrategy">
                             <option selected disabled>-- Choose Strategy --</option>
                             @foreach (var strategy in (List<string>)ViewData["PrincipalInvestmentStrategy"])
                             {
@@ -407,7 +407,7 @@
 
                     <div class="form-group">
                         <label asp-for="SfCatMorningStar" ></label><br>
-                        <select class="select-pharus" asp-for="SfCatMorningStar">
+                        <select class="select-datagate" asp-for="SfCatMorningStar">
                             <option selected disabled>-- Choose Category --</option>
                             @foreach (var ms in (List<string>)ViewData["SfCatMorningStar"])
                             {
@@ -426,7 +426,7 @@
 
                     <div class="form-group">
                         <label asp-for="SfCatSix" ></label><br>
-                        <select class="select-pharus" asp-for="SfCatSix">
+                        <select class="select-datagate" asp-for="SfCatSix">
                             <option selected disabled>-- Choose Category --</option>
                             @foreach (var six in (List<string>)ViewData["SfCatSix"])
                             {
@@ -445,7 +445,7 @@
 
                     <div class="form-group">
                         <label asp-for="SfCatBloomberg" ></label><br>
-                        <select class="select-pharus" asp-for="SfCatBloomberg">
+                        <select class="select-datagate" asp-for="SfCatBloomberg">
                             <option selected disabled>-- Choose Category --</option>
                             @foreach (var bg in (List<string>)ViewData["SfCatBloomberg"])
                             {
@@ -468,13 +468,13 @@
 
             <div class="button-holder-storage my-4">
                 <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
-                <a class="btn btn-pharus btn-lg" 
+                <a class="btn btn-datagate btn-lg" 
                    asp-area="@EndpointsConstants.DisplaySub@EndpointsConstants.FundArea" 
                    asp-route="@EndpointsConstants.RouteAll@EndpointsConstants.DisplaySub@EndpointsConstants.FundsController">
                     @SharedLocalizer.GetHtmlString("Back to List")
                 </a>
                 <button type="submit"
-                        class="btn btn-pharus btn-lg btn-confirm-update ml-5"
+                        class="btn btn-datagate btn-lg btn-confirm-update ml-5"
                         name="update_button">
                     @SharedLocalizer.GetHtmlString("Update Sub Fund")
                 </button>

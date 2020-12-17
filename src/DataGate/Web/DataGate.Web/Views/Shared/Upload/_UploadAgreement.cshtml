@@ -26,7 +26,7 @@
                             }
                         </select>
 
-                        <select class="select-pharus" asp-for="AgrType">
+                        <select class="select-datagate" asp-for="AgrType">
                             <option selected disabled value="">
                                 @SharedLocalizer.GetHtmlString("-- Choose Agreement Type --")
                             </option>
@@ -76,7 +76,7 @@
                             }
                         </select>
 
-                        <select class="select-pharus" asp-for="Status">
+                        <select class="select-datagate" asp-for="Status">
                             <option selected disabled value="">
                                 @SharedLocalizer.GetHtmlString("-- Choose Status --")
                             </option>
@@ -96,7 +96,7 @@
                             }
                         </select>
 
-                        <select class="select-pharus" asp-for="Company">
+                        <select class="select-datagate" asp-for="Company">
                             <option selected disabled value="">
                                 @SharedLocalizer.GetHtmlString("-- Choose Company --")
                             </option>
@@ -146,12 +146,12 @@
                     @SharedLocalizer.GetHtmlString("Close")
                 </button>
                 <button type="button"
-                        class="btn btn-pharus text-white"
+                        class="btn btn-datagate text-white"
                         data-save="modal">
                     @SharedLocalizer.GetHtmlString("Upload Agreement")
                 </button>
                 <button type="button"
-                        class="btn btn-pharus text-white"
+                        class="btn btn-datagate text-white"
                         data-save="modalFees">
                     @SharedLocalizer.GetHtmlString("Upload Agreement + Fees")
                 </button>

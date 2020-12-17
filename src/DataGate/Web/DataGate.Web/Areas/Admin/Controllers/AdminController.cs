@@ -117,7 +117,7 @@
                     values: new { area = "Identity", userId = user.Id, code },
                     protocol: this.Request.Scheme);
 
-                string emailMessage = string.Format(GlobalConstants.EmailConfirmationMessage, HtmlEncoder.Default.Encode(callbackUrl));
+                string emailMessage = string.Format(GlobalConstants.EmailConfirmationMessage, user.UserName, HtmlEncoder.Default.Encode(callbackUrl));
                 await this.emailSender.SendEmailAsync(
                     this.configuration.GetValue<string>($"{AppSettingsSections.EmailSection}:{EmailOptions.Address}"),
                     this.configuration.GetValue<string>($"{AppSettingsSections.EmailSection}:{EmailOptions.Sender}"),

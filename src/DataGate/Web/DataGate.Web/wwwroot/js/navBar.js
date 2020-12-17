@@ -1,8 +1,9 @@
 ﻿const HTML_NAVBAR = {
-    USER_MENU_TOOGLER: 'responsive-menu',
+    NOTIFICATION_MENU_TOOGLER: 'badge-notification-container',
     SEARCH_MENU_PARENT: 'search-form-wrapper-responsive',
     SEARCH_MENU: 'search-form-wrapper',
     SEARCH_MENU_TOOGLER: 'open-search-box',
+    USER_MENU_TOOGLER: 'responsive-menu',
 };
 
 const CLASSES_NAVBAR = {
@@ -16,12 +17,33 @@ const CLASSES_NAVBAR = {
     const searchMenu = document.getElementsByClassName(HTML_NAVBAR.SEARCH_MENU)[0];
     const searchMenuToogler = document.getElementsByClassName(HTML_NAVBAR.SEARCH_MENU_TOOGLER)[0];
     const userMenuToogler = document.getElementsByClassName(HTML_NAVBAR.USER_MENU_TOOGLER)[0];
+    const notifMenuToogler = document.getElementsByClassName(HTML_NAVBAR.NOTIFICATION_MENU_TOOGLER)[0];
+
+    // Toogle search menu
+    if (notifMenuToogler) {
+        notifMenuToogler.addEventListener('click', () => {
+
+            if (userMenuToogler.classList.contains(CLASSES_NAVBAR.OPEN)) {
+                userMenuToogler.classList.toggle(CLASSES_NAVBAR.OPEN);
+            }
+
+            if (!searchMenu.classList.contains('d-none')) {
+                searchMenuParent.classList.toggle(CLASSES_NAVBAR.OPENED);
+                searchMenu.classList.add('d-none');
+            }
+            notifMenuToogler.classList.toggle(CLASSES_NAVBAR.OPEN);
+        })
+    }
 
     // Toogle search menu
     if (searchMenuToogler) {
         searchMenuToogler.addEventListener('click', toggleSearchMenu);
 
         function toggleSearchMenu() {
+
+            if (notifMenuToogler.classList.contains(CLASSES_NAVBAR.OPEN)) {
+                notifMenuToogler.classList.toggle(CLASSES_NAVBAR.OPEN);
+            }
 
             if (userMenuToogler.classList.contains(CLASSES_NAVBAR.OPEN)) {
                 userMenuToogler.classList.toggle(CLASSES_NAVBAR.OPEN);
@@ -45,6 +67,11 @@ const CLASSES_NAVBAR = {
                 searchMenuParent.classList.toggle(CLASSES_NAVBAR.OPENED);
                 searchMenu.classList.add('d-none');
             }
+
+            if (notifMenuToogler.classList.contains(CLASSES_NAVBAR.OPEN)) {
+                notifMenuToogler.classList.toggle(CLASSES_NAVBAR.OPEN);
+            }
+
             userMenuToogler.classList.toggle(CLASSES_NAVBAR.OPEN);
         })
     }

@@ -40,7 +40,7 @@
 
                             <div class="form-group">
                                 <label asp-for="LegalForm" ></label><br>
-                                <select class="select-pharus" asp-for="LegalForm">
+                                <select class="select-datagate" asp-for="LegalForm">
                                     @foreach (var form in (List<string>)ViewData["LegalForm"])
                                     {
                                         if (form == Model.LegalForm)
@@ -58,7 +58,7 @@
 
                             <div class="form-group">
                                 <label asp-for="LegalVehicle" ></label><br>
-                                <select class="select-pharus" asp-for="LegalVehicle">
+                                <select class="select-datagate" asp-for="LegalVehicle">
                                     @foreach (var vehicle in (List<string>)ViewData["LegalVehicle"])
                                     {
                                         if (vehicle == Model.LegalVehicle)
@@ -76,7 +76,7 @@
 
                             <div class="form-group">
                                 <label asp-for="LegalType" ></label><br>
-                                <select class="select-pharus" asp-for="LegalType">
+                                <select class="select-datagate" asp-for="LegalType">
                                     @foreach (var type in (List<string>)ViewData["LegalType"])
                                     {
                                         if (type == Model.LegalType)
@@ -93,7 +93,7 @@
                             <span asp-validation-for="LegalType" class="text-danger"></span>
                             <div class="form-group">
                                 <label asp-for="CompanyTypeDesc" ></label><br>
-                                <select class="select-pharus" asp-for="CompanyTypeDesc">
+                                <select class="select-datagate" asp-for="CompanyTypeDesc">
                                     @foreach (var desc in (List<string>)ViewData["CompanyTypeDesc"])
                                     {
                                         if (desc == Model.CompanyTypeDesc)
@@ -113,7 +113,7 @@
                         <div class="column-form">
                             <div class="form-group">
                                 <label asp-for="Status" ></label><br>
-                                <select class="select-pharus" asp-for="Status">
+                                <select class="select-datagate" asp-for="Status">
                                     @foreach (var status in (List<string>)ViewData["Status"])
                                     {
                                         if (status == Model.Status)
@@ -157,7 +157,7 @@
                         <div class="column-form">                              
                             <div class="form-group">                                
                                 <label asp-for="FundAdmin" ></label><br>
-                                <select class="select-pharus" asp-for="FundAdmin">
+                                <select class="select-datagate" asp-for="FundAdmin">
                                     @foreach (var admin in (List<string>)ViewData["FundAdmin"])
                                     {
                                         if (admin == Model.FundAdmin)
@@ -286,11 +286,11 @@
 
             <div class="button-holder-storage my-4">
                 <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
-                <a class="btn btn-pharus btn-lg" asp-area="@EndpointsConstants.FundArea" asp-route="@EndpointsConstants.RouteAll@EndpointsConstants.FundsController">
+                <a class="btn btn-datagate btn-lg" asp-area="@EndpointsConstants.FundArea" asp-route="@EndpointsConstants.RouteAll@EndpointsConstants.FundsController">
                     @SharedLocalizer.GetHtmlString("Back to List")
                 </a>
                 <button type="submit"
-                        class="btn btn-pharus btn-lg btn-confirm-update ml-5"
+                        class="btn btn-datagate btn-lg btn-confirm-update ml-5"
                         name="update_button">
                     @SharedLocalizer.GetHtmlString("Update Fund")
                 </button>

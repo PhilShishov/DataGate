@@ -18,7 +18,7 @@
     display: flex;
 }
 
-    .button-holder .btn-pharus {
+    .button-holder .btn-datagate {
         font-size: 12px;
         width: 115px;
     }
@@ -29,7 +29,7 @@
     display: flex;
 }
 
-.btn-pharus {
+.btn-datagate {
     color: #fff;
     background-color: rgb(0, 65, 118);
     font-size: 12px;
@@ -45,18 +45,18 @@
     display: table-cell;
 }
 
-    .btn-pharus:hover {
+    .btn-datagate:hover {
         color: #fff;
         background-color: #0069d9;
         border-color: #0062cc;
     }
 
-    .btn-pharus:hover, .btn-pharus:focus, .btn-pharus:active {
+    .btn-datagate:hover, .btn-datagate:focus, .btn-datagate:active {
         -webkit-transform: scale(0.9);
         transform: scale(0.9);
     }
 
-.btn-link-pharus {
+.btn-link-datagate {
     border: 0;
     outline: none;
     background: inherit;
@@ -68,7 +68,7 @@
     color: #0069d9;
 }
 
-    .btn-link-pharus:hover {
+    .btn-link-datagate:hover {
         outline: none;
         text-decoration: underline;
         color: #007bff;

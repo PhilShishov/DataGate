@@ -11,7 +11,7 @@
               class="d-inline w-75">
             <h2 class="mb-2">@SharedLocalizer.GetHtmlString("Delete User")</h2>
             <div>
-                <a class="btn btn-pharus text-white mt-2"
+                <a class="btn btn-datagate text-white mt-2"
                    asp-area=""
                    asp-controller="User"
                    asp-action="Index">
@@ -35,7 +35,7 @@
                 <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
                 <button type="submit"
                         asp-action="DeleteUser"
-                        class="btn btn-pharus text-white btn-confirm-delete">
+                        class="btn btn-datagate text-white btn-confirm-delete">
                     @SharedLocalizer.GetHtmlString("Delete User")
                 </button>
             </div>

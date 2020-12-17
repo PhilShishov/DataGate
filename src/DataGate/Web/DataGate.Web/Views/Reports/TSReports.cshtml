@@ -15,7 +15,7 @@
                             <a asp-area=""
                                asp-route="allreports"
                                asp-route-type="@Model.AreaName"
-                               class="btn btn-pharus btn-sm mb-1">
+                               class="btn btn-datagate btn-sm mb-1">
                                 @SharedLocalizer.GetHtmlString("Back to All")
                             </a>
                         </div>
@@ -25,7 +25,7 @@
                             <div>
                                 <div class="form-group text-center">
                                     <label asp-for="Entity"></label><br>
-                                    <select class="select-pharus" asp-for="Entity">
+                                    <select class="select-datagate" asp-for="Entity">
                                         <option selected disabled>-- Choose Entity Name --</option>
                                         @foreach (var entity in (HashSet<string>)ViewData["Entity"])
                                         {
@@ -44,7 +44,7 @@
 
                                 <div class="form-group text-center">
                                     <label asp-for="TimeSeriesType"></label><br>
-                                    <select class="select-pharus" asp-for="TimeSeriesType">
+                                    <select class="select-datagate" asp-for="TimeSeriesType">
                                         <option selected disabled>-- Choose Time Serie Type --</option>
                                         @foreach (var container in (IEnumerable<string>)ViewData["TimeSeriesType"])
                                         {
@@ -61,13 +61,13 @@
                                 <input asp-for="AreaName" hidden>
 
                                 <input type="submit"
-                                       class="btn btn-pharus btn-sm mb-1 mr-2"
+                                       class="btn btn-datagate btn-sm mb-1 mr-2"
                                        value=@SharedLocalizer.GetHtmlString("Update")></>
                             </div>
                         </form>
                         <form method="post" id="extract-form"></form>
                         <div class="mr-3 m-auto">
-                            <button class="btn btn-sm btn-pharus mb-1"
+                            <button class="btn btn-sm btn-datagate mb-1"
                                     id="btn-extract-excel"
                                     type="button"
                                     value="Excel">
@@ -75,7 +75,7 @@
                             </button>
                         </div>
                         <div class="mx-2 m-auto">
-                            <button class="btn btn-sm btn-pharus mb-1"
+                            <button class="btn btn-sm btn-datagate mb-1"
                                     id="btn-extract-pdf"
                                     type="button"
                                     value="PDF">
@@ -95,7 +95,7 @@
 
         <form id="form-report" method="post">
             <div class="table-responsive mx-auto">
-                <table class="table table-bordered table-hover tbl-reports table-view-pharus table-striped w-100" id="table-to-extract">
+                <table class="table table-bordered table-hover tbl-reports table-view-datagate table-striped w-100" id="table-to-extract">
                 </table>
             </div>
             @*<input type="hidden" name="AreaName" value="@Model.AreaName" />*@
@@ -111,7 +111,7 @@
             console.log(document.getElementById('StartDate').value);
             console.log(document.getElementById('EndDate').value);
 
-            $(".select-pharus").chosen({
+            $(".select-datagate").chosen({
                 disable_search_threshold: 10,
                 width: "269px",
             })

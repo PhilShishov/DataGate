@@ -11,23 +11,9 @@
     height: 20px;
 }
 
-.text-el-switch{
+.text-switch-datagate{
     font-size:14px;
 }
-
-.checkbox-pharus {
-    padding-left: 35px;
-    font-size: 16px;
-}
-
-    /* Hide the browser's default checkbox */
-    .checkbox-pharus input {
-        position: absolute;
-        opacity: 0;
-        cursor: pointer;
-        height: 0;
-        width: 0;
-    }
 
 /* Create a custom checkbox */
 .checkmark {
@@ -39,11 +25,6 @@
     border: 1px solid;
 }
 
-/* When the checkbox is checked, add a blue background */
-.checkbox-pharus input:checked ~ .checkmark {
-    background-color: #2196F3;
-}
-
 /* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
     content: "";
@@ -51,35 +32,17 @@
     display: none;
 }
 
-/* Show the checkmark when checked */
-.checkbox-pharus input:checked ~ .checkmark:after {
-    display: block;
-}
-
-/* Style the checkmark/indicator */
-.checkbox-pharus .checkmark:after {
-    left: 9px;
-    top: 5px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-}
-
 /*switch component*/
 
-.el-switch,
-.el-switch-style,
-.el-switch-style:before {
+.switch-datagate,
+.switch-datagate-style,
+.switch-datagate-style:before {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
-.el-switch {
+.switch-datagate {
     display: inline-block;
     font-size: 100%;
     height: 1.6em;
@@ -87,7 +50,7 @@
     cursor: pointer;
 }
 
-    .el-switch .el-switch-style {
+    .switch-datagate .switch-datagate-style {
         height: 1.6em;
         left: 0;
         background: #C0CCDA;
@@ -102,7 +65,7 @@
         cursor: pointer;
     }
 
-        .el-switch .el-switch-style:before {
+        .switch-datagate .switch-datagate-style:before {
             display: block;
             content: '';
             height: 1.4em;
@@ -117,32 +80,32 @@
             transition: all 0.3s ease-in-out;
         }
 
-    .el-switch > input[type="checkbox"] {
+    .switch-datagate > input[type="checkbox"] {
         display: none;
     }
 
-        .el-switch > input[type="checkbox"][disabled] + .el-switch-style {
+        .switch-datagate > input[type="checkbox"][disabled] + .switch-datagate-style {
             cursor: not-allowed;
             background-color: #D3DCE6;
         }
 
-        .el-switch > input[type="checkbox"]:checked + .el-switch-style {
+        .switch-datagate > input[type="checkbox"]:checked + .switch-datagate-style {
             background-color: #0056b3;
         }
 
-            .el-switch > input[type="checkbox"]:checked + .el-switch-style:before {
+            .switch-datagate > input[type="checkbox"]:checked + .switch-datagate-style:before {
                 left: 49%;
             }
 
     /*define size*/
     .el-radio.el-radio-sm,
     .el-checkbox.el-checkbox-sm,
-    .el-switch.el-switch-sm {
+    .switch-datagate.switch-datagate-sm {
         font-size: 85%;
     }
 
     .el-radio.el-radio-lg,
     .el-checkbox.el-checkbox-lg,
-    .el-switch.el-switch-lg {
+    .switch-datagate.switch-datagate-lg {
         font-size: 125%;
     }

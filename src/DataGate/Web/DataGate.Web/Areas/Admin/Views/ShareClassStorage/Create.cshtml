@@ -207,7 +207,7 @@
                 <div class="column-form">
                     <div class="form-group">
                         <label asp-for="SubFundContainer" ></label><br>
-                        <select class="select-pharus" asp-for="SubFundContainer">
+                        <select class="select-datagate" asp-for="SubFundContainer">
                             <option selected disabled>-- Choose Container --</option>
                             @foreach (var container in (HashSet<string>)ViewData["SubFundContainer"])
                             {
@@ -218,7 +218,7 @@
                     <span asp-validation-for="SubFundContainer" class="text-danger"></span>
                     <div class="form-group">
                         <label asp-for="Status" ></label><br>
-                        <select class="select-pharus" asp-for="Status">
+                        <select class="select-datagate" asp-for="Status">
                             <option selected disabled>-- Choose Status --</option>
                             @foreach (var status in (List<string>)ViewData["Status"])
                             {
@@ -230,7 +230,7 @@
 
                     <div class="form-group">
                         <label asp-for="CurrencyCode" ></label><br>
-                        <select class="select-pharus" asp-for="CurrencyCode">
+                        <select class="select-datagate" asp-for="CurrencyCode">
                             <option selected disabled>-- Choose Currency--</option>
                             @foreach (var currency in (List<string>)ViewData["CurrencyCode"])
                             {
@@ -241,7 +241,7 @@
                     <span asp-validation-for="CurrencyCode" class="text-danger"></span>
                     <div class="form-group">
                         <label asp-for="InvestorType" ></label><br>
-                        <select class="select-pharus" asp-for="InvestorType">
+                        <select class="select-datagate" asp-for="InvestorType">
                             <option selected disabled>-- Choose Investor Type --</option>
                             @foreach (var type in (List<string>)ViewData["InvestorType"])
                             {
@@ -253,7 +253,7 @@
 
                     <div class="form-group">
                         <label asp-for="ShareType" ></label><br>
-                        <select class="select-pharus" asp-for="CurrencyCode">
+                        <select class="select-datagate" asp-for="CurrencyCode">
                             <option selected disabled>-- Choose Share Type--</option>
                             @foreach (var type in (List<string>)ViewData["ShareType"])
                             {
@@ -265,7 +265,7 @@
 
                     <div class="form-group">
                         <label asp-for="CountryIssue" ></label><br>
-                        <select class="select-pharus" asp-for="CountryIssue">
+                        <select class="select-datagate" asp-for="CountryIssue">
                             <option selected disabled>-- Choose Country Issue --</option>
                             @foreach (var issue in (List<string>)ViewData["Country"])
                             {
@@ -277,7 +277,7 @@
 
                     <div class="form-group">
                         <label asp-for="CountryRisk" ></label><br>
-                        <select class="select-pharus" asp-for="CountryRisk">
+                        <select class="select-datagate" asp-for="CountryRisk">
                             <option selected disabled>-- Choose Country Risk --</option>
                             @foreach (var risk in (List<string>)ViewData["Country"])
                             {
@@ -291,13 +291,13 @@
 
             <div class="button-holder-storage my-4">
                 <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
-                <a class="btn btn-pharus btn-lg" 
+                <a class="btn btn-datagate btn-lg" 
                    asp-area="@EndpointsConstants.ShareClassArea" 
                    asp-route="@EndpointsConstants.RouteAll@EndpointsConstants.ShareClassesController">
                     @SharedLocalizer.GetHtmlString("Back to List")
                 </a>
                 <button type="submit"
-                        class="btn btn-pharus btn-lg btn-confirm-create ml-5">
+                        class="btn btn-datagate btn-lg btn-confirm-create ml-5">
                     @SharedLocalizer.GetHtmlString("Create Share Class")
                 </button>
             </div>

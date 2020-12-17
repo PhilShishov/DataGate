@@ -164,7 +164,7 @@ function createEdit(confirmations, messages_btn) {
 })();
 
 $(function () {
-    $(".select-pharus").chosen({
+    $(".select-datagate").chosen({
         disable_search_threshold: 10,
         width: "269px",
     })

@@ -42,23 +42,23 @@
     z-index: 0;
 }
 
-.table-view-pharus {
+.table-view-datagate {
     white-space: nowrap !important;
 }
 
-    .table-view-pharus .th-name {
+    .table-view-datagate .th-name {
         min-width: 410px;
     }
 
-    .table-view-pharus .th-subfund-name {
+    .table-view-datagate .th-subfund-name {
         min-width: 420px;
     }
 
-    .table-view-pharus .th-fund-name {
+    .table-view-datagate .th-fund-name {
         min-width: 140px;
     }
 
-    .table-view-pharus th {
+    .table-view-datagate th {
         text-align: center;
         background-color: rgb(0, 65, 118);
         color: #fff !important;
@@ -66,41 +66,41 @@
         padding-right: 2rem !important;
     }
 
-        .table-view-pharus th.th-padding-fxt {
+        .table-view-datagate th.th-padding-fxt {
             text-align: center;
             background-color: rgb(0, 65, 118);
             color: #fff !important;
             border-right: 2px solid #dee2e6;
         }
 
-    .table-view-pharus th, .table-view-pharus td {
+    .table-view-datagate th, .table-view-datagate td {
         font-size: 13px;
         min-width: 80px;
     }
 
-    .table-view-pharus .td-name-link a {
+    .table-view-datagate .td-name-link a {
         color: #0056b3;
         cursor: pointer;
     }
 
-        .table-view-pharus .td-name-link a:hover {
+        .table-view-datagate .td-name-link a:hover {
             text-decoration: underline;
             color: #007bff;
         }
 
-    /*    .table-view-pharus tbody {
+    /*    .table-view-datagate tbody {
         white-space: nowrap;
     }*/
 
-    .table-view-pharus tbody tr {
+    .table-view-datagate tbody tr {
         height: 50px;
     }
 
-        .table-view-pharus tbody tr:hover {
+        .table-view-datagate tbody tr:hover {
             background-color: #0041760d;
         }
 
-        .table-view-pharus tbody tr td {
+        .table-view-datagate tbody tr td {
             vertical-align: middle;
             text-align: center;
         }
@@ -158,22 +158,22 @@ a.a-underline:hover {
     margin-top: 67px;
 }
 
-#table-info-pharus {
+#table-info-datagate {
     font-size: 14px;
     height: 600px;
 }
 
-    #table-info-pharus th {
+    #table-info-datagate th {
         text-transform: uppercase;
     }
 
-.table-view-pharus tbody .td-aum-container {
+.table-view-datagate tbody .td-aum-container {
     background-color: #eee;
     font-size: 16px;
     font-weight: 500;
 }
 
-.table-view-pharus tbody .th-aum-total-container {
+.table-view-datagate tbody .th-aum-total-container {
     font-size: 16px;
 }
 

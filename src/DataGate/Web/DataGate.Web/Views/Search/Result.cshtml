@@ -17,7 +17,7 @@
 
     @if (Model.Results.Any())
     {
-        <table class="table-bordered table-hover table-view-pharus mx-auto" style="width:50%;">
+        <table class="table-bordered table-hover table-view-datagate mx-auto" style="width:50%;">
             <thead>
                 <tr>
                     <th>
@@ -84,7 +84,7 @@
         }
 
         $(document).ready(function () {
-            $('.table-view-pharus').DataTable({
+            $('.table-view-datagate').DataTable({
                 "language": cultureObj
             });
             $(".dataTables_length select").chosen({

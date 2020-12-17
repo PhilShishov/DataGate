@@ -2,7 +2,7 @@
 
 <form id="form-document" method="post">
     <div class="table-wrapper-double-scroll">
-        <table class="table table-bordered table-hover tbl-documents table-view-pharus">
+        <table class="table table-bordered table-hover tbl-documents table-view-datagate">
             <thead>
                 <tr>
                     <th>
@@ -42,7 +42,7 @@
                             @document.ValidUntil
                         </td>
                         <td class="p-1">
-                            <button class="btn-link-pharus text-left"
+                            <button class="btn-link-datagate text-left"
                                     formtarget="_blank"
                                     type="submit"
                                     asp-area=""
@@ -59,7 +59,7 @@
                         @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.IsInRole(GlobalConstants.LegalRoleName))
                         {
                             <td class="p-1 text-center">
-                                <button type="button" class="btn btn-pharus btn-sm mr-1 btn-delete">
+                                <button type="button" class="btn btn-datagate btn-sm mr-1 btn-delete">
                                     @SharedLocalizer.GetHtmlString("Delete")
                                 </button>
                             </td>

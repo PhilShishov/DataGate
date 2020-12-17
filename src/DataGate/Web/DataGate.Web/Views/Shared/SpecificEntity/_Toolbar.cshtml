@@ -54,7 +54,7 @@
                        min="2018-01-01">
 
                 <input type="submit"
-                       class="btn btn-pharus btn-sm"
+                       class="btn btn-datagate btn-sm"
                        asp-for="Command"
                        asp-action="Update"
                        asp-route-id="@Model.Id"
@@ -65,7 +65,7 @@
 
         <div class="mx-2">
             <a asp-route="@routeAll"
-               class="btn btn-pharus btn-sm mb-2">
+               class="btn btn-datagate btn-sm mb-2">
                 @SharedLocalizer.GetHtmlString("ALL")
             </a>
         </div>
@@ -74,7 +74,7 @@
             <div>
                 <button type="button"
                         id="btn-upload-document"
-                        class="btn btn-pharus btn-sm mb-2"
+                        class="btn btn-datagate btn-sm mb-2"
                         data-toggle="ajax-modal"
                         data-target="#upload-document">
                     @SharedLocalizer.GetHtmlString("Upload Document")
@@ -84,7 +84,7 @@
             <div class="mx-2">
                 <button type="button"
                         id="btn-upload-agreement"
-                        class="btn btn-pharus btn-sm mb-2"
+                        class="btn btn-datagate btn-sm mb-2"
                         data-toggle="ajax-modal"
                         data-target="#upload-agreement">
                     @SharedLocalizer.GetHtmlString("Upload Agreement")
@@ -97,7 +97,7 @@
                    asp-route="@routeEdit"
                    asp-route-id="@Model.Id"
                    asp-route-date="@Model.Date"
-                   class="btn btn-pharus btn-sm mb-2">
+                   class="btn btn-datagate btn-sm mb-2">
                     @SharedLocalizer.GetHtmlString("officialUpdate")
                 </a>
             </div>

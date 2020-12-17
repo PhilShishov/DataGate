@@ -127,7 +127,7 @@ function dataTableReportHandler(type) {
     });
 
     if (type === 'Fund') {
-        $('.table-view-pharus').DataTable({
+        $('.table-view-datagate').DataTable({
             "dom": '<"top">t<"bottom"><"clear">',
             columnDefs: [
                 { type: 'formatted-num', targets: "_all" }
@@ -156,7 +156,7 @@ function dataTableReportHandler(type) {
             }
         });
     } else {
-        $('.table-view-pharus').DataTable({
+        $('.table-view-datagate').DataTable({
             "dom": '<"top"lf>rt<"bottom"ip><"clear">',
             "lengthMenu": [[-1, 10, 25, 50], ["All", 10, 25, 50]],
             "scrollX": true,

@@ -6,11 +6,11 @@
 *
 */
 
-#selectedContainerPharus {
+#container-selected {
     width: 50%;
 }
 
-#availableContainerPharus {
+#container-available {
     width: 50%;
 }
 

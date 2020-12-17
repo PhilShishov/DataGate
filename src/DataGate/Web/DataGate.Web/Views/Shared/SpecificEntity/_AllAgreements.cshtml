@@ -2,7 +2,7 @@
 
 <form id="form-agreement" method="post">
     <div class="table-wrapper-double-scroll">
-        <table class="table table-bordered table-hover tbl-agreements table-view-pharus">
+        <table class="table table-bordered table-hover tbl-agreements table-view-datagate">
             <thead>
                 <tr>
                     <th>
@@ -45,7 +45,7 @@
                             @agreement.ExpirationDate
                         </td>
                         <td class="p-1">
-                            <button class="btn-link-pharus text-left"
+                            <button class="btn-link-datagate text-left"
                                     formtarget="_blank"
                                     type="submit"
                                     asp-area=""
@@ -59,7 +59,7 @@
                         @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName) || this.User.IsInRole(GlobalConstants.LegalRoleName))
                         {
                             <td class="p-1 text-center">
-                                <button class="btn btn-pharus btn-sm mr-1"
+                                <button class="btn btn-datagate btn-sm mr-1"
                                             type="submit"
                                             asp-area=""
                                             asp-route="fees"
@@ -67,7 +67,7 @@
                                         @SharedLocalizer.GetHtmlString("fees")
                                     </button>
                                     |
-                                <button type="button" class="btn btn-pharus btn-sm mx-1 btn-delete">
+                                <button type="button" class="btn btn-datagate btn-sm mx-1 btn-delete">
                                     @SharedLocalizer.GetHtmlString("DELETE")
                                 </button>
                             </td>

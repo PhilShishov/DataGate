@@ -24,7 +24,7 @@ const HTML_MENU = {
     CONTAINER_AGREEMENTS: '#allAgreements',
     CONTAINER_COUNTRIES_DIST: '#countriesDist',
     ICONS_EDITOR: 'icon-edit',
-    TABLE_INFO: 'table-info-pharus',
+    TABLE_INFO: 'table-info-datagate',
 };
 
 const URLS = {

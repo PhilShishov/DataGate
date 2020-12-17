@@ -18,7 +18,7 @@
                             <a asp-area=""
                                asp-route="allreports"
                                asp-route-type="@Model.SelectedType"
-                               class="btn btn-pharus btn-sm mb-1">
+                               class="btn btn-datagate btn-sm mb-1">
                                 @SharedLocalizer.GetHtmlString("Back to All")
                             </a>
                         </div>
@@ -31,13 +31,13 @@
                                 <input asp-for="SelectedType" hidden>
 
                                 <input type="submit"
-                                       class="btn btn-pharus btn-sm mb-1 mr-2"
+                                       class="btn btn-datagate btn-sm mb-1 mr-2"
                                        value=@SharedLocalizer.GetHtmlString("Update")></>
                             </div>
                         </form>
                         <form method="post" id="extract-form"></form>
                         <div class="mr-3">
-                            <button class="btn btn-sm btn-pharus mb-1"
+                            <button class="btn btn-sm btn-datagate mb-1"
                                     id="btn-extract-excel"
                                     type="button"
                                     value="Excel">
@@ -45,7 +45,7 @@
                             </button>
                         </div>
                         <div class="mx-2">
-                            <button class="btn btn-sm btn-pharus mb-1"
+                            <button class="btn btn-sm btn-datagate mb-1"
                                     id="btn-extract-pdf"
                                     type="button"
                                     value="PDF">
@@ -65,7 +65,7 @@
 
         <form id="form-report" method="post">
             <div class="table-responsive mx-auto">
-                <table class="table table-bordered table-hover tbl-reports table-view-pharus table-striped w-100" id="table-to-extract">
+                <table class="table table-bordered table-hover tbl-reports table-view-datagate table-striped w-100" id="table-to-extract">
 
                     @if (Model.SelectedType == EndpointsConstants.FundArea)
                     {

@@ -35,6 +35,7 @@
     .slick-slider,
     .dataTables_wrapper .top,
     .dataTables_wrapper .bottom,
+    .recent-container,
     #aumChart,
     footer {
         display: none;
@@ -88,12 +89,11 @@
         margin-top: 60px;
     }
 
-    #infoAndDocumentsView,
-    #allselect-div-pharus {
+    #infoAndDocumentsView {
         display: flex;
     }
 
-    #table-info-pharus {
+    #table-info-datagate {
         width: 33.6%;
     }
 

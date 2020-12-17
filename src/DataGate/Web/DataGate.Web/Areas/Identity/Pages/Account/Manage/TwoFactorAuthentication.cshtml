@@ -37,13 +37,13 @@
     if (Model.IsMachineRemembered)
     {
         <form method="post" style="display: inline-block">
-            <button type="submit" class="btn btn-pharus">@Localizer["Forget this browser"]</button>
+            <button type="submit" class="btn btn-datagate">@Localizer["Forget this browser"]</button>
         </form>
     }
-    <a asp-page="./Disable2fa" class="btn btn-pharus">
+    <a asp-page="./Disable2fa" class="btn btn-datagate">
         @Localizer["Disable 2FA"]
     </a>
-    <a asp-page="./GenerateRecoveryCodes" class="btn btn-pharus">
+    <a asp-page="./GenerateRecoveryCodes" class="btn btn-datagate">
         @Localizer["Reset recovery codes"]
     </a>
 }
@@ -51,16 +51,16 @@
 <h5>@Localizer["Authenticator app"]</h5>
 @if (!Model.HasAuthenticator)
 {
-    <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-pharus">
+    <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-datagate">
         @Localizer["Add authenticator app"]
     </a>
 }
 else
 {
-    <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-pharus">
+    <a id="enable-authenticator" asp-page="./EnableAuthenticator" class="btn btn-datagate">
         @Localizer["Setup authenticator app"]
     </a>
-    <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="btn btn-pharus">
+    <a id="reset-authenticator" asp-page="./ResetAuthenticator" class="btn btn-datagate">
         @Localizer["Reset authenticator app"]
     </a>
 }
