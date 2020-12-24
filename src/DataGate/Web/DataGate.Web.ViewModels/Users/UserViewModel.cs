@@ -1,9 +1,6 @@
-﻿// Model class for view user
+﻿// Copyright (c) DataGate Project. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-// Created: 09/2019
-// Author:  Philip Shishov
-
-// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace DataGate.Web.ViewModels.Users
 {
     using System;

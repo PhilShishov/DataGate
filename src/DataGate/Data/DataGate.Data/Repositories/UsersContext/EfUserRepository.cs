@@ -5,10 +5,9 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Microsoft.EntityFrameworkCore;
-
-    using DataGate.Common.Exceptions;
     using DataGate.Data.Common.Repositories.UsersContext;
+
+    using Microsoft.EntityFrameworkCore;
 
     public class EfUserRepository<TEntity> : IUserRepository<TEntity>
         where TEntity : class

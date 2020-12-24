@@ -1,4 +1,7 @@
-﻿namespace DataGate.Web.Controllers
+﻿// Copyright (c) DataGate Project. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+namespace DataGate.Web.Controllers
 {
     using System;
     using System.Text.RegularExpressions;
@@ -7,7 +10,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     using DataGate.Common;
-    using DataGate.Services.Data.Agreements.Contracts;
+    using DataGate.Services.Data.Agreements;
     using DataGate.Web.Helpers;
     using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.Resources;

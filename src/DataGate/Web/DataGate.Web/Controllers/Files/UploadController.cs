@@ -1,19 +1,22 @@
-﻿namespace DataGate.Web.Controllers.Files
+﻿// Copyright (c) DataGate Project. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+namespace DataGate.Web.Controllers.Files
 {
     using System.IO;
     using System.Threading.Tasks;
+
+    using DataGate.Common;
+    using DataGate.Services.Data.Files;
+    using DataGate.Services.Mapping;
+    using DataGate.Web.Helpers;
+    using DataGate.Web.InputModels.Files;
+    using DataGate.Web.Resources;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
-
-    using DataGate.Common;
-    using DataGate.Services.Data.Files.Contracts;
-    using DataGate.Services.Mapping;
-    using DataGate.Web.Helpers;
-    using DataGate.Web.InputModels.Files;
-    using DataGate.Web.Resources;
 
     [Authorize]
     public class UploadController : BaseController
@@ -25,10 +28,10 @@
         private readonly string[] permittedExtensions = { GlobalConstants.PdfFileExtension };
         private readonly IWebHostEnvironment environment;
         private readonly SharedLocalizationService sharedLocalizer;
-        private readonly IFileSystemService service;
+        private readonly IFileService service;
 
         public UploadController(
-                       IFileSystemService service,
+                       IFileService service,
                        IWebHostEnvironment environment,
                        IConfiguration config,
                        SharedLocalizationService sharedLocalizer)

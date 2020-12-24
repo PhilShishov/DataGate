@@ -1,4 +1,7 @@
-﻿namespace DataGate.Data
+﻿// Copyright (c) DataGate Project. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+namespace DataGate.Data
 {
     using System;
 
@@ -17,7 +20,6 @@
                 MaxFailedAccessAttempts = MaxFailedAttemptsCount
             };
 
-            // TODO enable options for production
             options.Password.RequireDigit = false;
             options.Password.RequireLowercase = false;
             options.Password.RequireUppercase = false;

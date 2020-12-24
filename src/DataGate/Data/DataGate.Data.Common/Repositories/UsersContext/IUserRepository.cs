@@ -1,4 +1,7 @@
-﻿namespace DataGate.Data.Common.Repositories.UsersContext
+﻿// Copyright (c) DataGate Project. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+namespace DataGate.Data.Common.Repositories.UsersContext
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;

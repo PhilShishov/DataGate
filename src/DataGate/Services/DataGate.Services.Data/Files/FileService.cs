@@ -1,4 +1,7 @@
-﻿namespace DataGate.Services.Data.Funds
+﻿// Copyright (c) DataGate Project. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+namespace DataGate.Services.Data.Files
 {
     using System.Data;
     using System.Data.SqlClient;
@@ -6,14 +9,13 @@
 
     using DataGate.Data.Common.Repositories.AppContext;
     using DataGate.Services.Data.Documents;
-    using DataGate.Services.Data.Files.Contracts;
     using DataGate.Services.Mapping;
     using DataGate.Services.SqlClient;
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.InputModels.Files;
 
-    public class FileService : IFileSystemService
+    public class FileService : IFileService
     {
         private readonly ISqlQueryManager sqlManager;
         private readonly IDocumentService service;

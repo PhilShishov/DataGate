@@ -1,9 +1,14 @@
-﻿using DataGate.Data.Models.Users;
-using MyTested.AspNetCore.Mvc;
-using System;
+﻿// Copyright (c) DataGate Project. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 namespace DataGate.Web.Tests.TestData
 {
+    using System;
+
+    using DataGate.Data.Models.Users;
+
+    using MyTested.AspNetCore.Mvc;
+
     public static class TestApplicationUser
     {
         public const string Id = TestUser.Identifier;
@@ -24,7 +29,7 @@ namespace DataGate.Web.Tests.TestData
         {
             Id = Id,
             UserName = Username,
-            Email = Email,           
+            Email = Email,
             PasswordHash = PasswordHash,
             EmailConfirmed = true,
             NormalizedUserName = Username.ToUpper(),

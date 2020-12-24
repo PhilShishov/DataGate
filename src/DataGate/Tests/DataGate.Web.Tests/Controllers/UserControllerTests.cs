@@ -1,11 +1,17 @@
-﻿namespace DataGate.Web.Tests.Controllers
+﻿// Copyright (c) DataGate Project. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+namespace DataGate.Web.Tests.Controllers
 {
     using System.Linq;
+
     using DataGate.Data;
     using DataGate.Web.Controllers;
     using DataGate.Web.Tests.TestData;
     using DataGate.Web.ViewModels.Users;
+
     using MyTested.AspNetCore.Mvc;
+
     using Xunit;
 
     public class UserControllerTests

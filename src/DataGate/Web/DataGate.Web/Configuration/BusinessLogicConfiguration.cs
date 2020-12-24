@@ -1,14 +1,15 @@
-﻿namespace DataGate.Web.Configuration
+﻿// Copyright (c) DataGate Project. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+namespace DataGate.Web.Configuration
 {
     using Microsoft.Extensions.DependencyInjection;
 
     using DataGate.Services.Data.Agreements;
-    using DataGate.Services.Data.Agreements.Contracts;
     using DataGate.Services.Data.CountriesDist;
     using DataGate.Services.Data.Documents;
     using DataGate.Services.Data.Documents.Contracts;
     using DataGate.Services.Data.Entities;
-    using DataGate.Services.Data.Files.Contracts;
     using DataGate.Services.Data.Funds;
     using DataGate.Services.Data.Recent;
     using DataGate.Services.Data.Reports;
@@ -19,6 +20,7 @@
     using DataGate.Services.Data.Timelines;
     using DataGate.Services.Data.TimeSeries;
     using DataGate.Services.Slug;
+    using DataGate.Services.Data.Files;
 
     public static class BusinessLogicConfiguration
     {
@@ -27,7 +29,7 @@
             // Application services
             services.AddTransient<ISlugGenerator, SlugGenerator>();
 
-            services.AddTransient<IFileSystemService, FileService>();
+            services.AddTransient<IFileService, FileService>();
             services.AddTransient<IDocumentService, DocumentService>();
             services.AddTransient<IEntitiesDocumentService, EntitiesDocumentService>();
             services.AddTransient<IEntityService, EntityService>();

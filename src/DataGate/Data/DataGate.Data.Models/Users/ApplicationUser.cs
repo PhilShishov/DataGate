@@ -1,4 +1,7 @@
-﻿namespace DataGate.Data.Models.Users
+﻿// Copyright (c) DataGate Project. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+namespace DataGate.Data.Models.Users
 {
     using System;
     using System.Collections.Generic;
@@ -24,6 +27,7 @@
             this.UserShareClassColumns = new HashSet<UserShareClassColumn>();
             this.UserFundSubFundsColumns = new HashSet<UserFundSubFundsColumn>();
             this.UserSubFundShareClassesColumns = new HashSet<UserSubFundShareClassesColumn>();
+            this.UserNotifications = new HashSet<UserNotification>();
         }
 
         public DateTimeOffset LastLoginTime { get; set; }
@@ -44,14 +48,16 @@
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
 
-        public ICollection<UserFundColumn> UserFundColumns { get; set; }
+        public virtual ICollection<UserFundColumn> UserFundColumns { get; set; }
+               
+        public virtual ICollection<UserSubFundColumn> UserSubFundColumns { get; set; }
+               
+        public virtual ICollection<UserShareClassColumn> UserShareClassColumns { get; set; }
+               
+        public virtual ICollection<UserFundSubFundsColumn> UserFundSubFundsColumns { get; set; }
+               
+        public virtual ICollection<UserSubFundShareClassesColumn> UserSubFundShareClassesColumns { get; set; }
 
-        public ICollection<UserSubFundColumn> UserSubFundColumns { get; set; }
-
-        public ICollection<UserShareClassColumn> UserShareClassColumns { get; set; }
-
-        public ICollection<UserFundSubFundsColumn> UserFundSubFundsColumns { get; set; }
-
-        public ICollection<UserSubFundShareClassesColumn> UserSubFundShareClassesColumns { get; set; }
+        public virtual ICollection<UserNotification> UserNotifications { get; set; }
     }
 }

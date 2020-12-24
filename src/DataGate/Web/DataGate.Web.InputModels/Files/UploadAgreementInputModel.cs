@@ -1,10 +1,6 @@
-﻿// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-// Binding model for agreement file upload
+﻿// Copyright (c) DataGate Project. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-// Created: 01/2020
-// Author:  Philip Shishov
-
-// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace DataGate.Web.InputModels.Files
 {
     using System.Collections.Generic;

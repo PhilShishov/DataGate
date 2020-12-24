@@ -1,11 +1,6 @@
-﻿// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
-// Base service interface for managing services of
-// different entities - funds, subfunds, shareclasse
+﻿// Copyright (c) DataGate Project. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-// Created: 05/2020
-// Author:  Philip Shishov
-
-// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace DataGate.Services.Data.Entities
 {
     using System;

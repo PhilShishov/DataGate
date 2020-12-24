@@ -1,10 +1,13 @@
-﻿// Model class for viewing
+﻿// Copyright (c) DataGate Project. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+// -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
+// Model class for viewing
 // different independent entities -
 // funds, subfunds, shareclasses
 
-// Created: 10/2019
+// Created: 10/2020
 // Author:  Philip Shishov
-
 // -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 namespace DataGate.Web.ViewModels.Entities
 {

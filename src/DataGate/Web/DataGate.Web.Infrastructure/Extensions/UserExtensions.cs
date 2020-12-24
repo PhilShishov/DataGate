@@ -1,4 +1,7 @@
-﻿namespace DataGate.Web.Infrastructure.Extensions
+﻿// Copyright (c) DataGate Project. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+namespace DataGate.Web.Infrastructure.Extensions
 {
     using System.Security.Claims;
     using System.Threading.Tasks;
@@ -13,21 +16,5 @@
         public static async Task<ApplicationUser> ByUserFundColumns(this UserManager<ApplicationUser> input, ClaimsPrincipal user)
         => await input.Users.Include(u => u.UserFundColumns)
                 .SingleOrDefaultAsync(u => u.NormalizedUserName == user.Identity.Name.ToUpper());
-
-        //public static async Task<ApplicationUser> ByUserSubFundColumns(this UserManager<ApplicationUser> input, ClaimsPrincipal user)
-        //=> await input.Users.Include(u => u.UserSubFundColumns)
-        //        .SingleOrDefaultAsync(u => u.NormalizedUserName == user.Identity.Name.ToUpper());
-
-        //public static async Task<ApplicationUser> ByUserFundSubFundColumns(this UserManager<ApplicationUser> input, ClaimsPrincipal user)
-        //=> await input.Users.Include(u => u.UserFundSubFundsColumns)
-        //        .SingleOrDefaultAsync(u => u.NormalizedUserName == user.Identity.Name.ToUpper());
-
-        //public static async Task<ApplicationUser> ByUserShareClassColumns(this UserManager<ApplicationUser> input, ClaimsPrincipal user)
-        //=> await input.Users.Include(u => u.UserShareClassColumns)
-        //        .SingleOrDefaultAsync(u => u.NormalizedUserName == user.Identity.Name.ToUpper());
-
-        //public static async Task<ApplicationUser> ByUserSubFundShareClassColumns(this UserManager<ApplicationUser> input, ClaimsPrincipal user)
-        //=> await input.Users.Include(u => u.UserSubFundShareClassesColumns)
-        //        .SingleOrDefaultAsync(u => u.NormalizedUserName == user.Identity.Name.ToUpper());
     }
 }

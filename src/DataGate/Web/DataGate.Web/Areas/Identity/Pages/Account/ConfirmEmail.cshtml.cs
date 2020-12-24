@@ -1,4 +1,7 @@
-﻿namespace DataGate.Web.Areas.Identity.Pages.Account
+﻿// Copyright (c) DataGate Project. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+namespace DataGate.Web.Areas.Identity.Pages.Account
 {
     using System;
     using System.Threading.Tasks;
@@ -7,11 +10,11 @@
     using DataGate.Data.Models.Enums;
     using DataGate.Data.Models.Users;
     using DataGate.Web.Resources;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.AspNetCore.Mvc.RazorPages;
-    using Microsoft.Extensions.Localization;
 
     [AllowAnonymous]
     public class ConfirmEmailModel : PageModel
