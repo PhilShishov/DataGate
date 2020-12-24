@@ -2,14 +2,6 @@
 {
     public static class GlobalConstants
     {
-        // Meta data
-        public const string AppName = "DataGate";
-        public const string AuthorName = "Philip Shishov";
-        public const string Keywords = 
-            "ASP.NET Core, JavaScript, jQuery, " +
-            "MS SQL, Git, GitHub, Fund Management Software, " +
-            "Fund of Funds Software, Alternative Funds, Philip Shishov";
-
         // Application Constants
         public const string DataGateFullFooterDisplay = 
             "- Pharus Management Lux SA 16, Avenue de la Gare L-1610 Luxembourg";
@@ -91,5 +83,14 @@
         public const string CommandResetTable = "Reset";
         public const string CommandExtractExcel = "Excel";
         public const string CommandExtractPdf = "PDF";
+
+        // Meta data
+        public const string AppName = "DataGate";
+        public const string AuthorName = "PhilipShishov";
+        public const string Keywords =
+            "ASPNET Core, JavaScript, jQuery, " +
+            "MS SQL, Git, GitHub, Fund Management Software, " +
+            "Alternative Funds, SICAV, ShareClasses, CSSF, " +
+            "Philip Shishov, Pharus Management Lux S.A.";
     }
 }

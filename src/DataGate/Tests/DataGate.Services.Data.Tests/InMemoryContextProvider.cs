@@ -1,10 +1,10 @@
 ﻿namespace DataGate.Services.Data.Tests
 {
-    using Xunit;
-
     using DataGate.Data;
     using DataGate.Services.Data.Tests.ClassFixtures;
     using DataGate.Services.Data.Tests.Factories;
+
+    using Xunit;
 
     public class InMemoryContextProvider : IClassFixture<MappingsProvider>
     {

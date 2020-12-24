@@ -4,10 +4,10 @@
       "wwwroot/css/main/!(*.min).css",
       "wwwroot/css/mediaQuery.css"
     ],
-    "outputFileName": "wwwroot/css/site.min.css"
+    "outputFileName": "wwwroot/css/main/site.min.css"
   },
   {
-    "inputfiles": [
+    "inputFiles": [
       "wwwroot/js/plugins.js",
       "wwwroot/js/navBar.js",
       "wwwroot/js/site.js"
@@ -16,7 +16,7 @@
       "enabled": true,
       "renameLocals": false
     },
-    "outputfilename": "wwwroot/js/site.min.js",
+    "outputFileName": "wwwroot/js/site.min.js",
     "sourceMap": false
   }
 ]

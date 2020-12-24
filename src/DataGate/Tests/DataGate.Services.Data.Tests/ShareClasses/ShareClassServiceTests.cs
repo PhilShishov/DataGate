@@ -1,15 +1,15 @@
 ﻿namespace DataGate.Services.Data.Tests.ShareClasses
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
-
-    using Xunit;
+    using System.Linq;
 
     using DataGate.Common.Exceptions;
     using DataGate.Data.Models.Entities;
-    using DataGate.Services.Data.Tests.TestData;
     using DataGate.Services.Data.ShareClasses;
+    using DataGate.Services.Data.Tests.TestData;
+
+    using Xunit;
 
     public class ShareClassServiceTests : InMemoryContextProvider
     {

@@ -3,10 +3,11 @@
     using System;
     using System.Data.SqlClient;
 
-    using Microsoft.EntityFrameworkCore;
     using DataGate.Data;
 
-     public static class ConnectionFactory
+    using Microsoft.EntityFrameworkCore;
+
+    public static class ConnectionFactory
     {
         public static ApplicationDbContext CreateContextForInMemory()
         {
