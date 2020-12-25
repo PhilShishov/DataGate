@@ -33,8 +33,8 @@ namespace DataGate.Data
         public DbSet<UserSubFundColumn> UserSubFundColumn { get; set; }
         public DbSet<UserSubFundShareClassesColumn> UserSubFundShareClassesColumn { get; set; }
         public DbSet<UserShareClassColumn> UserShareClassColumn { get; set; }
-        //public DbSet<UserNotification> UserNotifications { get; set; }
-        //public DbSet<RecentlyViewed> RecentlyViewed { get; set; }
+        public DbSet<UserNotification> UserNotifications { get; set; }
+        public DbSet<RecentlyViewed> RecentlyViewed { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

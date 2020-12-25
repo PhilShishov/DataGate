@@ -15,6 +15,8 @@
 	  <Compile Remove="Migrations\20201212183856_AddRecentlyViewed.Designer.cs" />
 	  <Compile Remove="Migrations\20201213195031_AddRecentlyViewed.cs" />
 	  <Compile Remove="Migrations\20201213195031_AddRecentlyViewed.Designer.cs" />
+	  <Compile Remove="Migrations\20201225154138_AddUserLayout.cs" />
+	  <Compile Remove="Migrations\20201225154138_AddUserLayout.Designer.cs" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -47,10 +49,6 @@
 		<ProjectReference Include="..\..\DataGate.Common\DataGate.Common.csproj" />
 		<ProjectReference Include="..\DataGate.Data.Common\DataGate.Data.Common.csproj" />
 		<ProjectReference Include="..\DataGate.Data.Models\DataGate.Data.Models.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Migrations\" />
 	</ItemGroup>
 
 </Project>
