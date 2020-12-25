@@ -55,6 +55,7 @@ namespace DataGate.Web
                 .AddEmailSendingService(this.configuration)
                 .AddBusinessLogicServices();
             services.AddApplicationInsightsTelemetry();
+            services.AddSignalR();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
