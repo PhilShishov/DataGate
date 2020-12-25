@@ -1,5 +1,4 @@
-﻿
-namespace DataGate.Services.Notifications
+﻿namespace DataGate.Services.Notifications
 {
     using System;
     using System.Collections.Generic;
@@ -10,6 +9,7 @@ namespace DataGate.Services.Notifications
     using DataGate.Data.Common.Repositories.UsersContext;
     using DataGate.Data.Models.Users;
     using DataGate.Data.Models.Users.Enums;
+    using DataGate.Services.Notifications.Contracts;
 
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
@@ -73,7 +73,7 @@ namespace DataGate.Services.Notifications
             var userId = this.userManager.GetUserId(user);
 
             var count = await this.repository.All()
-                    .CountAsync(x => x.UserId == userId && x.Status == NotificationStatus.Unread);
+                    .CountAsync(un => un.UserId == userId && !un.IsOpened);
             return count;
         }
 

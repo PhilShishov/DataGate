@@ -12,7 +12,7 @@ namespace DataGate.Web.Areas.Administration.Controllers
     using DataGate.Common.Settings;
     using DataGate.Data.Models.Users;
     using DataGate.Services.Messaging;
-    using DataGate.Services.Notifications;
+    using DataGate.Services.Notifications.Contracts;
     using DataGate.Web.Controllers;
     using DataGate.Web.Hubs;
     using DataGate.Web.InputModels.Users;

@@ -8,7 +8,7 @@ namespace DataGate.Web.Controllers.Funds
     using DataGate.Common;
     using DataGate.Services.Data.Recent;
     using DataGate.Services.Data.Storage.Contracts;
-    using DataGate.Services.Notifications;
+    using DataGate.Services.Notifications.Contracts;
     using DataGate.Web.Hubs;
     using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.InputModels.Funds;

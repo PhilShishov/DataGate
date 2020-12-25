@@ -13,7 +13,7 @@ namespace DataGate.Web.Helpers
     using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-    public static class FileHelpers
+    public static class FileHelper
     {
         // private static readonly byte[] AllowedChars = { };
         private static readonly Dictionary<string, List<byte[]>> FileSignature = new Dictionary<string, List<byte[]>>

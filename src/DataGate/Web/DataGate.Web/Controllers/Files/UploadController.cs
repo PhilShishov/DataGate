@@ -53,7 +53,7 @@ namespace DataGate.Web.Controllers.Files
                 return this.PartialView(UploadDocumentPartialView, model);
             }
 
-            string path = await FileHelpers.ProcessFormFile(model.FileToUpload, this.ModelState, this.permittedExtensions,
+            string path = await FileHelper.ProcessFormFile(model.FileToUpload, this.ModelState, this.permittedExtensions,
                                                             this.fileSizeLimit, this.environment.WebRootPath, model.AreaName, false);
 
             if (!this.ModelState.IsValid)
@@ -86,7 +86,7 @@ namespace DataGate.Web.Controllers.Files
                 return this.PartialView(UploadAgreementPartialView, model);
             }
 
-            string path = await FileHelpers.ProcessFormFile(model.FileToUpload, this.ModelState, this.permittedExtensions,
+            string path = await FileHelper.ProcessFormFile(model.FileToUpload, this.ModelState, this.permittedExtensions,
                                                             this.fileSizeLimit, this.environment.WebRootPath, model.AreaName, true);
 
             if (!this.ModelState.IsValid)

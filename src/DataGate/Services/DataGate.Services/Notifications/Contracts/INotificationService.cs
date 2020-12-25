@@ -1,4 +1,4 @@
-﻿namespace DataGate.Services.Notifications
+﻿namespace DataGate.Services.Notifications.Contracts
 {
     using System.Security.Claims;
     using System.Threading.Tasks;

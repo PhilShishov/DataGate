@@ -22,6 +22,7 @@ namespace DataGate.Web.Configuration
     using DataGate.Services.Slug;
     using DataGate.Services.Data.Files;
     using DataGate.Services.Notifications;
+    using DataGate.Services.Notifications.Contracts;
 
     public static class BusinessLogicConfiguration
     {
@@ -29,7 +30,6 @@ namespace DataGate.Web.Configuration
         {
             // Application services
             services.AddTransient<ISlugGenerator, SlugGenerator>();
-
             services.AddTransient<IFileService, FileService>();
             services.AddTransient<IDocumentService, DocumentService>();
             services.AddTransient<IEntitiesDocumentService, EntitiesDocumentService>();
@@ -40,8 +40,11 @@ namespace DataGate.Web.Configuration
             services.AddTransient<IAgreementsService, AgreementsService>();
             services.AddTransient<IReportsService, ReportsService>();
             services.AddTransient<ICountryDistService, CountryDistService>();
+
+            //User Services
             services.AddTransient<IRecentService, RecentService>();
             services.AddTransient<INotificationService, NotificationService>();
+            services.AddTransient<IConnectionManager, ConnectionManager>();
 
             // Funds
             services.AddTransient<IFundService, FundService>();
