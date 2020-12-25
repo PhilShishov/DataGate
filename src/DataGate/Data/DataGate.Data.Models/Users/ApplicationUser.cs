@@ -27,7 +27,6 @@ namespace DataGate.Data.Models.Users
             this.UserShareClassColumns = new HashSet<UserShareClassColumn>();
             this.UserFundSubFundsColumns = new HashSet<UserFundSubFundsColumn>();
             this.UserSubFundShareClassesColumns = new HashSet<UserSubFundShareClassesColumn>();
-            this.UserNotifications = new HashSet<UserNotification>();
         }
 
         public DateTimeOffset LastLoginTime { get; set; }
@@ -57,7 +56,5 @@ namespace DataGate.Data.Models.Users
         public virtual ICollection<UserFundSubFundsColumn> UserFundSubFundsColumns { get; set; }
                
         public virtual ICollection<UserSubFundShareClassesColumn> UserSubFundShareClassesColumns { get; set; }
-
-        public virtual ICollection<UserNotification> UserNotifications { get; set; }
     }
 }

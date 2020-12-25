@@ -29,7 +29,7 @@ namespace DataGate.Web.Controllers
                                                      null,
                                                      SqlFunctionDictionary.CountryDistShareClass);
 
-            var model = this.service.GetCountries<CountryDistViewModel>(function, id);
+            var model = this.service.All<CountryDistViewModel>(function, id);
 
             this.ViewBag.Area = areaName;
             this.ViewBag.Route = StringSwapper.ByArea(areaName,

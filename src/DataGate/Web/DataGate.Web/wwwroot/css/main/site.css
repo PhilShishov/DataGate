@@ -106,7 +106,7 @@
 }
 
 .input-file-custom:after {
-    content: " Select a file / max. 45MB";
+    content: " Select a file - max. 45MB";
     background-color: white;
 }
 
