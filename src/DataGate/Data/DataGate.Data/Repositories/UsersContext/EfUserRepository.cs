@@ -38,6 +38,12 @@
             }
         }
 
+        public async Task AddRangeAsync(IEnumerable<TEntity> entities)
+        {
+            await this.Context.AddRangeAsync(entities);
+            await this.Context.SaveChangesAsync();
+        }
+
         public void DeleteRange(ICollection<TEntity> entities)
         {
             foreach (var entity in entities)

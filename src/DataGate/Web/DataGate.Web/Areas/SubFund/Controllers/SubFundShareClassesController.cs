@@ -62,7 +62,7 @@ namespace DataGate.Web.Areas.SubFunds.Controllers
         [Route("sf/{id}/sc")]
         public async Task<IActionResult> ShareClasses(int id, string date, string container)
         {
-            await this.recentService.Save(this.User, Request.Path);
+            await this.recentService.Save(this.User, this.Request.Path);
 
             var dto = new SubEntitiesGetDto()
             {

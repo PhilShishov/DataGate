@@ -62,7 +62,7 @@ namespace DataGate.Web.Areas.Funds.Controllers
         [Route("f/{id}/sf")]
         public async Task<IActionResult> SubFunds(int id, string date, string container)
         {
-            await this.recentService.Save(this.User, Request.Path);
+            await this.recentService.Save(this.User, this.Request.Path);
 
             var dto = new SubEntitiesGetDto()
             {

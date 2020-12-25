@@ -11,6 +11,6 @@
 }
 
 .modal-footer-save-btn-container {
-    width: 82%;
+    flex:1
 }
 

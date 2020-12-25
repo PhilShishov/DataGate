@@ -62,7 +62,6 @@
         text-align: center;
         text-decoration: none !important;
         cursor: pointer;
-        *cursor: hand;
         border: 1px solid transparent;
         height: 30px;
     }

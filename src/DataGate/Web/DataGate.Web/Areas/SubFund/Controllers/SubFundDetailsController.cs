@@ -44,7 +44,7 @@ namespace DataGate.Web.Areas.SubFunds.Controllers
         [Route("sf/{id}/{date}")]
         public async Task<IActionResult> ByIdAndDate(int id, string date)
         {
-            await this.recentService.Save(this.User, Request.Path);
+            await this.recentService.Save(this.User, this.Request.Path);
 
             var dto = new QueriesToPassDto()
             {

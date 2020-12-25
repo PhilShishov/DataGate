@@ -28,5 +28,13 @@ namespace DataGate.Common
         public const string UpdateUser = "{0} was updated.";
 
         public const string RemoveUser = "{0} was removed.";
+
+        public const string CreateNotification = "{0} was created.";
+
+        public const string CreateUserNotification = "New User: {0}";
+
+        public const string EditNotification = "{0} was edited.";
+
+        public const string EditUserNotification = "Update User: {0}";
     }
 }

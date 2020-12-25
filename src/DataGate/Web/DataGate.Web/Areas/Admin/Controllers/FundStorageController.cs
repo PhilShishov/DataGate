@@ -48,7 +48,7 @@ namespace DataGate.Web.Controllers.Funds
         [Route("f/new")]
         public async Task<IActionResult> Create()
         {
-            await this.recentService.Save(this.User, Request.Path);
+            await this.recentService.Save(this.User, this.Request.Path);
 
             this.SetViewDataValues();
             return this.View(new CreateFundInputModel());
@@ -59,7 +59,7 @@ namespace DataGate.Web.Controllers.Funds
         [Route("f/new")]
         public async Task<IActionResult> Create(
                      [Bind("InitialDate", "EndDate", "FundName", "CSSFCode", "Status",
-                           "LegalForm", "LegalVehicle", "LegalType", "FACode", "FundAdmin", 
+                           "LegalForm", "LegalVehicle", "LegalType", "FACode", "FundAdmin",
                            "DEPCode", "TACode", "CompanyTypeDesc", "TinNumber", "LEICode", "RegNumber",
                            "VATRegNumber", "VATIdentificationNumber", "IBICNumber",  "RecaptchaValue")] CreateFundInputModel model)
         {
@@ -79,10 +79,11 @@ namespace DataGate.Web.Controllers.Funds
             var fundId = await this.service.Create(model);
             var date = DateTimeParser.ToWebFormat(model.InitialDate.AddDays(1));
 
-            //string notifId = await this.notificationService.Create();
+            var message = string.Format(InfoMessages.CreateNotification, model.FundName);
+            await this.notificationService.Add(this.User, message, this.Request.Path);
 
-            //int count =
-            //await this.hubContext.Clients.All.SendAsync("SendNotification", count);
+            int count = await this.notificationService.Count(this.User);
+            await this.hubContext.Clients.All.SendAsync("SendNotification", count);
 
             return this.ShowInfo(
                 this.sharedLocalizer.GetHtmlString(InfoMessages.SuccessfulCreate),
@@ -93,7 +94,7 @@ namespace DataGate.Web.Controllers.Funds
         [Route("f/edit/{id}/{date}")]
         public async Task<IActionResult> Edit(int id, string date)
         {
-            await this.recentService.Save(this.User, Request.Path);
+            await this.recentService.Save(this.User, this.Request.Path);
 
             var model = this.service.ByIdAndDate<EditFundInputModel>(id, date);
             model.InitialDate = model.InitialDate.AddDays(1);
@@ -109,8 +110,8 @@ namespace DataGate.Web.Controllers.Funds
         public async Task<IActionResult> Edit(
                      [Bind("Id", "InitialDate", "FundName", "CSSFCode", "Status",
                            "LegalForm", "LegalVehicle", "LegalType", "FACode", "FundAdmin",
-                           "DEPCode", "TACode", "CompanyTypeDesc", "TinNumber", "LEICode", 
-                           "RegNumber", "VATRegNumber", "VATIdentificationNumber", "IBICNumber", 
+                           "DEPCode", "TACode", "CompanyTypeDesc", "TinNumber", "LEICode",
+                           "RegNumber", "VATRegNumber", "VATIdentificationNumber", "IBICNumber",
                            "CommentTitle", "CommentArea", "RecaptchaValue")] EditFundInputModel model)
         {
             bool doesExistAtDate = await this.service.DoesExistAtDate(model.FundName, model.InitialDate);

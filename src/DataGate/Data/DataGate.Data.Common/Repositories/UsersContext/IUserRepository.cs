@@ -10,6 +10,8 @@ namespace DataGate.Data.Common.Repositories.UsersContext
     {
         Task SaveLayout(ICollection<TEntity> entitiesToRemove, HashSet<TEntity> entitiesToUpdate);
 
+        Task AddRangeAsync(IEnumerable<TEntity> entities);
+
         void DeleteRange(ICollection<TEntity> entities);
 
         void UpdateRange(HashSet<TEntity> entities);

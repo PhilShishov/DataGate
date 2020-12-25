@@ -9,12 +9,11 @@ namespace DataGate.Services.Data.Recent
     using System.Security.Claims;
     using System.Threading.Tasks;
 
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Http;
-
     using DataGate.Data.Common.Repositories.UsersContext;
     using DataGate.Data.Models.Users;
     using DataGate.Web.Infrastructure.Extensions;
+
+    using Microsoft.AspNetCore.Identity;
 
     public class RecentService : IRecentService
     {
@@ -39,7 +38,7 @@ namespace DataGate.Services.Data.Recent
                 .TakeLast(10);
         }
 
-        public async Task Save(ClaimsPrincipal user, PathString path, QueryString? queryString = null)
+        public async Task Save(ClaimsPrincipal user, string link)
         {
             if (user == null)
             {
@@ -48,7 +47,6 @@ namespace DataGate.Services.Data.Recent
 
             var userId = this.userManager.GetUserId(user);
             var list = this.repository.All().ToList();
-            var link = path + queryString;
             var exists = list.FirstOrDefault(i => i.LinkUrl == link && i.UserId == userId);
 
             if (exists == null)

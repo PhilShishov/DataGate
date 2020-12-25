@@ -7,13 +7,11 @@ namespace DataGate.Services.Data.Recent
     using System.Security.Claims;
     using System.Threading.Tasks;
 
-    using Microsoft.AspNetCore.Http;
-
     using DataGate.Data.Models.Users;
 
     public interface IRecentService
     {
-        Task Save(ClaimsPrincipal user, PathString path, QueryString? queryString = null);
+        Task Save(ClaimsPrincipal user, string link);
 
         IEnumerable<RecentlyViewed> ByUserId(ClaimsPrincipal user);
     }

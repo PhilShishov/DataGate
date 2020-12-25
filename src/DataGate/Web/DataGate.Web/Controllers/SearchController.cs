@@ -37,7 +37,7 @@ namespace DataGate.Web.Controllers
                 throw new BadRequestException(ErrorMessages.InvalidSearchKeyword);
             }
 
-            this.recentService.Save(this.User, Request.Path, Request.QueryString);
+            this.recentService.Save(this.User, this.Request.Path + this.Request.QueryString);
 
             var model = new SearchResultsViewModel
             {

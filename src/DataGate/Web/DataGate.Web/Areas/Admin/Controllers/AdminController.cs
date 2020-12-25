@@ -12,7 +12,9 @@ namespace DataGate.Web.Areas.Administration.Controllers
     using DataGate.Common.Settings;
     using DataGate.Data.Models.Users;
     using DataGate.Services.Messaging;
+    using DataGate.Services.Notifications;
     using DataGate.Web.Controllers;
+    using DataGate.Web.Hubs;
     using DataGate.Web.InputModels.Users;
     using DataGate.Web.Resources;
     using DataGate.Web.ViewModels.Users;
@@ -20,6 +22,7 @@ namespace DataGate.Web.Areas.Administration.Controllers
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.SignalR;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Logging;
 
@@ -29,15 +32,19 @@ namespace DataGate.Web.Areas.Administration.Controllers
     {
         private const string EmailConfirmationUrl = "/Account/ConfirmEmail";
         private const string ViewUsersUrl = "/Admin/Admin/ViewUsers";
+
         private readonly RoleManager<ApplicationRole> roleManager;
+        private readonly IHubContext<NotificationHub> hubContext;
+        private readonly INotificationService notificationService;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly ILogger<AdminController> logger;
         private readonly IConfiguration configuration;
         private readonly IEmailSender emailSender;
         private readonly SharedLocalizationService sharedLocalizer;
 
-
         public AdminController(
+            IHubContext<NotificationHub> hubContext,
+            INotificationService notificationService,
             UserManager<ApplicationUser> userManager,
             RoleManager<ApplicationRole> roleManager,
             IEmailSender emailSender,
@@ -45,6 +52,8 @@ namespace DataGate.Web.Areas.Administration.Controllers
             ILogger<AdminController> logger,
             IConfiguration configuration)
         {
+            this.hubContext = hubContext;
+            this.notificationService = notificationService;
             this.userManager = userManager;
             this.roleManager = roleManager;
             this.emailSender = emailSender;
@@ -121,14 +130,19 @@ namespace DataGate.Web.Areas.Administration.Controllers
                     protocol: this.Request.Scheme);
 
                 string emailMessage = string.Format(GlobalConstants.EmailConfirmationMessage, user.UserName, HtmlEncoder.Default.Encode(callbackUrl));
-                await this.emailSender.SendEmailAsync(
-                    this.configuration.GetValue<string>($"{AppSettingsSections.EmailSection}:{EmailOptions.Address}"),
-                    this.configuration.GetValue<string>($"{AppSettingsSections.EmailSection}:{EmailOptions.Sender}"),
-                    inputModel.Email,
-                    GlobalConstants.ConfirmEmailSubject,
-                    emailMessage);
+                //await this.emailSender.SendEmailAsync(
+                //    this.configuration.GetValue<string>($"{AppSettingsSections.EmailSection}:{EmailOptions.Address}"),
+                //    this.configuration.GetValue<string>($"{AppSettingsSections.EmailSection}:{EmailOptions.Sender}"),
+                //    inputModel.Email,
+                //    GlobalConstants.ConfirmEmailSubject,
+                //    emailMessage);
 
-                string infoMessage = string.Format(this.sharedLocalizer.GetHtmlString(InfoMessages.AddUser), user.UserName, inputModel.RoleType);
+                await SendNotification(user);
+
+                string infoMessage = string.Format(this.sharedLocalizer
+                    .GetHtmlString(InfoMessages.AddUser),
+                    user.UserName,
+                    inputModel.RoleType);
 
                 return this.ShowInfoLocal(infoMessage, returnUrl);
             }
@@ -136,6 +150,15 @@ namespace DataGate.Web.Areas.Administration.Controllers
             this.AddErrors(result);
 
             return this.ShowErrorLocal(this.sharedLocalizer.GetHtmlString(ErrorMessages.UnsuccessfulCreate), returnUrl);
+        }
+
+        private async Task SendNotification(ApplicationUser user)
+        {
+            var notifMessage = string.Format(InfoMessages.CreateUserNotification, user.UserName);
+            await this.notificationService.Add(this.User, notifMessage, this.Request.Path);
+
+            int count = await this.notificationService.Count(this.User);
+            await this.hubContext.Clients.All.SendAsync("SendNotification", count);
         }
 
         [HttpGet("/Admin/Admin/EditUser/{id}")]
@@ -188,7 +211,7 @@ namespace DataGate.Web.Areas.Administration.Controllers
                     }
                 }
 
-                PasswordHasher<ApplicationUser> hasher = new PasswordHasher<ApplicationUser>();
+                var hasher = new PasswordHasher<ApplicationUser>();
 
                 if (user.PasswordHash != inputModel.PasswordHash && inputModel.PasswordHash != null)
                 {

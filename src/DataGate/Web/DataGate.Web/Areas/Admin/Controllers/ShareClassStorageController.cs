@@ -41,7 +41,7 @@ namespace DataGate.Web.Areas.Admin.Controllers
         [Route("sc/new")]
         public async Task<IActionResult> Create()
         {
-            await this.recentService.Save(this.User, Request.Path);
+            await this.recentService.Save(this.User, this.Request.Path);
 
             this.SetViewDataValues();
             return this.View(new CreateShareClassInputModel());
@@ -84,7 +84,7 @@ namespace DataGate.Web.Areas.Admin.Controllers
         [Route("sc/edit/{id}/{date}")]
         public async Task<IActionResult> Edit(int id, string date)
         {
-            await this.recentService.Save(this.User, Request.Path);
+            await this.recentService.Save(this.User, this.Request.Path);
 
             var model = this.service.ByIdAndDate<EditShareClassInputModel>(id, date);
 
