@@ -9,12 +9,12 @@ namespace DataGate.Data
     using System.Threading;
     using System.Threading.Tasks;
 
+    using DataGate.Data.Common.Models;
+    using DataGate.Data.Models.Columns;
+    using DataGate.Data.Models.Users;
+
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
-
-    using DataGate.Data.Common.Models;
-    using DataGate.Data.Models.Users;
-    using DataGate.Data.Models.Columns;
 
     public class UsersDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {

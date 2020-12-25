@@ -3,14 +3,20 @@
 
 namespace DataGate.Data.Models.Columns
 {
+    using System;
     using System.ComponentModel.DataAnnotations;
 
     using DataGate.Data.Models.Users;
 
     public class UserFundSubFundsColumn : IUserColumn
     {
+        public UserFundSubFundsColumn()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
+
         [Key]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [Required]
         public string Name { get; set; }
@@ -18,6 +24,6 @@ namespace DataGate.Data.Models.Columns
         [Required]
         public string UserId { get; set; }
 
-        public ApplicationUser User { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }

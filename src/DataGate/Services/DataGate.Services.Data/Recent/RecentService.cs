@@ -49,14 +49,14 @@ namespace DataGate.Services.Data.Recent
             var userId = this.userManager.GetUserId(user);
             var list = this.repository.All().ToList();
             var link = path + queryString;
-            var exists = list.FirstOrDefault(i => i.Link == link && i.UserId == userId);
+            var exists = list.FirstOrDefault(i => i.LinkUrl == link && i.UserId == userId);
 
             if (exists == null)
             {
                 var item = new RecentlyViewed
                 {
                     UserId = userId,
-                    Link = link,
+                    LinkUrl = link,
                     DisplayLink = StringExtensions.BuildDisplayLink(link),
                 };
                 await this.repository.AddAsync(item);
