@@ -56,7 +56,7 @@ namespace DataGate.Services.SqlClient
                     command.Connection = connection;
                     using (command)
                     {
-                        this.SetParametersForDB(command);
+                        this.SetParameters(command);
                         await command.ExecuteScalarAsync();
                     }
                 }
@@ -109,7 +109,7 @@ namespace DataGate.Services.SqlClient
                     }
                 }
 
-                await foreach (var item in ReadSqlHelper.GetStringDataAsync(command))
+                await foreach (var item in SqlHelper.GetStringDataAsync(command))
                 {
                     yield return item;
                 }
@@ -126,7 +126,7 @@ namespace DataGate.Services.SqlClient
 
                 command.CommandText = function;
 
-                await foreach (var item in ReadSqlHelper.GetStringDataAsync(command))
+                await foreach (var item in SqlHelper.GetStringDataAsync(command))
                 {
                     yield return item;
                 }
@@ -137,7 +137,7 @@ namespace DataGate.Services.SqlClient
         {
             using (SqlConnection connection = new SqlConnection())
             {
-                SqlCommand command = this.SetUpSqlConnectionCommand(connection);
+                SqlCommand command = this.SetUpConnection(connection);
 
                 command.CommandText = function;
 
@@ -152,7 +152,7 @@ namespace DataGate.Services.SqlClient
                     command.Parameters.Add(new SqlParameter("@datereport", SqlDbType.Date) { Value = date });
                 }
 
-                await foreach (var item in ReadSqlHelper.GetStringDataAsync(command))
+                await foreach (var item in SqlHelper.GetStringDataAsync(command))
                 {
                     yield return item;
                 }
@@ -168,7 +168,7 @@ namespace DataGate.Services.SqlClient
         {
             using (SqlConnection connection = new SqlConnection())
             {
-                SqlCommand command = this.SetUpSqlConnectionCommand(connection);
+                SqlCommand command = this.SetUpConnection(connection);
                 var sqlDate = DateTimeParser.ToSqlFormat(date);
 
                 if (id.HasValue)
@@ -199,7 +199,7 @@ namespace DataGate.Services.SqlClient
             }
         }
 
-        private SqlCommand SetUpSqlConnectionCommand(SqlConnection connection)
+        private SqlCommand SetUpConnection(SqlConnection connection)
         {
             connection.ConnectionString = this.configuration.GetConnectionString(GlobalConstants.DataGateAppConnection);
             connection.Open();
@@ -207,7 +207,7 @@ namespace DataGate.Services.SqlClient
             return command;
         }
 
-        private void SetParametersForDB(SqlCommand command)
+        private void SetParameters(SqlCommand command)
         {
             var typeInt = DbType.Int32;
             var typeString = DbType.String;

@@ -23,18 +23,18 @@ namespace DataGate.Web.Areas.SubFunds.Controllers
     [Authorize]
     public class SubFundDetailsController : BaseController
     {
-        private readonly IRecentService serviceRecent;
+        private readonly IRecentService recentService;
         private readonly IEntityDetailsService service;
         private readonly ISubFundService subFundService;
         private readonly SharedLocalizationService sharedLocalizer;
 
         public SubFundDetailsController(
-            IRecentService serviceRecent,
+            IRecentService recentService,
             IEntityDetailsService service,
             ISubFundService subFundService,
             SharedLocalizationService sharedLocalizer)
         {
-            this.serviceRecent = serviceRecent;
+            this.recentService = recentService;
             this.service = service;
             this.subFundService = subFundService;
             this.sharedLocalizer = sharedLocalizer;
@@ -44,7 +44,7 @@ namespace DataGate.Web.Areas.SubFunds.Controllers
         [Route("sf/{id}/{date}")]
         public async Task<IActionResult> ByIdAndDate(int id, string date)
         {
-            await this.serviceRecent.Save(this.User, Request.Path);
+            await this.recentService.Save(this.User, Request.Path);
 
             var dto = new QueriesToPassDto()
             {

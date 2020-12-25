@@ -19,7 +19,7 @@ namespace DataGate.Services.Data.SubFunds
             this.repository = repository;
         }
 
-        public bool DoesEntityExist(int id)
+        public bool DoesExist(int id)
         {
             var exists = this.repository.All().Any(x => x.SfId == id);
 

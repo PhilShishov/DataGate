@@ -58,7 +58,7 @@ namespace DataGate.Services.Data.ShareClasses
             return isinList.Any(i => i == searchTerm);
         }
 
-        public bool DoesEntityExist(int id)
+        public bool DoesExist(int id)
         {
             var exists = this.repository.All().Any(x => x.ScId == id);
 

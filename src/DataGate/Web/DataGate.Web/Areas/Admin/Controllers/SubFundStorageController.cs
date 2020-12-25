@@ -21,18 +21,18 @@ namespace DataGate.Web.Areas.Admin.Controllers
     [Authorize(Roles = GlobalConstants.AdministratorRoleName + "," + GlobalConstants.LegalRoleName)]
     public class SubFundStorageController : BaseController
     {
-        private readonly IRecentService serviceRecent;
+        private readonly IRecentService recentService;
         private readonly ISubFundStorageService service;
         private readonly ISubFundRepository repository;
         private readonly SharedLocalizationService sharedLocalizer;
 
         public SubFundStorageController(
-                        IRecentService serviceRecent,
+                        IRecentService recentService,
                         ISubFundStorageService service,
                         ISubFundRepository repository,
                         SharedLocalizationService sharedLocalizer)
         {
-            this.serviceRecent = serviceRecent;
+            this.recentService = recentService;
             this.service = service;
             this.repository = repository;
             this.sharedLocalizer = sharedLocalizer;
@@ -41,7 +41,7 @@ namespace DataGate.Web.Areas.Admin.Controllers
         [Route("sf/new")]
         public async Task<IActionResult> Create()
         {
-            await this.serviceRecent.Save(this.User, Request.Path);
+            await this.recentService.Save(this.User, Request.Path);
 
             this.SetViewDataValues();
             return this.View(new CreateSubFundInputModel());
@@ -85,7 +85,7 @@ namespace DataGate.Web.Areas.Admin.Controllers
         [Route("sf/edit/{id}/{date}")]
         public async Task<IActionResult> Edit(int id, string date)
         {
-            await this.serviceRecent.Save(this.User, Request.Path);
+            await this.recentService.Save(this.User, Request.Path);
 
             var model = this.service.ByIdAndDate<EditSubFundInputModel>(id, date);
 

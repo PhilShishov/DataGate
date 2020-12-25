@@ -28,7 +28,7 @@ namespace DataGate.Services.Data.Tests.ShareClasses
         [Fact]
         public void DoesEntityExist_WithInvalidId_ShouldThrowException()
         {
-            Action act = () => this.service.DoesEntityExist(2000);
+            Action act = () => this.service.DoesExist(2000);
 
             Assert.Throws<EntityNotFoundException>(act);
         }
@@ -36,7 +36,7 @@ namespace DataGate.Services.Data.Tests.ShareClasses
         [Fact]
         public void DoesEntityExist_WithValidId_ShouldReturnTrue()
         {
-            Assert.True(this.service.DoesEntityExist(5));
+            Assert.True(this.service.DoesExist(5));
         }
 
         [Theory]

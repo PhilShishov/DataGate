@@ -5,32 +5,41 @@ namespace DataGate.Web.Controllers.Funds
 {
     using System.Threading.Tasks;
 
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
-
     using DataGate.Common;
-    using DataGate.Services.Data.Storage.Contracts;
     using DataGate.Services.Data.Recent;
+    using DataGate.Services.Data.Storage.Contracts;
+    using DataGate.Services.Notifications;
+    using DataGate.Web.Hubs;
     using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.InputModels.Funds;
     using DataGate.Web.Resources;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.SignalR;
 
     [Area(EndpointsConstants.AdminAreaName)]
     [Authorize(Roles = GlobalConstants.AdministratorRoleName + "," + GlobalConstants.LegalRoleName)]
     public class FundStorageController : BaseController
     {
-        private readonly IRecentService serviceRecent;
+        private readonly IHubContext<NotificationHub> hubContext;
+        private readonly INotificationService notificationService;
+        private readonly IRecentService recentService;
         private readonly IFundStorageService service;
         private readonly IFundSelectListService serviceSelect;
         private readonly SharedLocalizationService sharedLocalizer;
 
         public FundStorageController(
-                        IRecentService serviceRecent,
+                        IHubContext<NotificationHub> hubContext,
+                        INotificationService notificationService,
+                        IRecentService recentService,
                         IFundStorageService fundService,
                         IFundSelectListService fundServiceSelect,
                         SharedLocalizationService sharedLocalizer)
         {
-            this.serviceRecent = serviceRecent;
+            this.hubContext = hubContext;
+            this.notificationService = notificationService;
+            this.recentService = recentService;
             this.service = fundService;
             this.serviceSelect = fundServiceSelect;
             this.sharedLocalizer = sharedLocalizer;
@@ -39,7 +48,7 @@ namespace DataGate.Web.Controllers.Funds
         [Route("f/new")]
         public async Task<IActionResult> Create()
         {
-            await this.serviceRecent.Save(this.User, Request.Path);
+            await this.recentService.Save(this.User, Request.Path);
 
             this.SetViewDataValues();
             return this.View(new CreateFundInputModel());
@@ -70,6 +79,11 @@ namespace DataGate.Web.Controllers.Funds
             var fundId = await this.service.Create(model);
             var date = DateTimeParser.ToWebFormat(model.InitialDate.AddDays(1));
 
+            //string notifId = await this.notificationService.Create();
+
+            //int count =
+            //await this.hubContext.Clients.All.SendAsync("SendNotification", count);
+
             return this.ShowInfo(
                 this.sharedLocalizer.GetHtmlString(InfoMessages.SuccessfulCreate),
                 EndpointsConstants.RouteDetails + EndpointsConstants.FundArea,
@@ -79,7 +93,7 @@ namespace DataGate.Web.Controllers.Funds
         [Route("f/edit/{id}/{date}")]
         public async Task<IActionResult> Edit(int id, string date)
         {
-            await this.serviceRecent.Save(this.User, Request.Path);
+            await this.recentService.Save(this.User, Request.Path);
 
             var model = this.service.ByIdAndDate<EditFundInputModel>(id, date);
             model.InitialDate = model.InitialDate.AddDays(1);

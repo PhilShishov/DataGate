@@ -9,10 +9,7 @@ namespace DataGate.Services.Data.Storage
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Microsoft.EntityFrameworkCore;
-
     using DataGate.Common.Exceptions;
-    using DataGate.Data.Common.Repositories;
     using DataGate.Data.Common.Repositories.AppContext;
     using DataGate.Data.Models.Entities;
     using DataGate.Services.Data.Storage.Contracts;
@@ -22,6 +19,8 @@ namespace DataGate.Services.Data.Storage
     using DataGate.Web.Dtos.Entities;
     using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.InputModels.Funds;
+
+    using Microsoft.EntityFrameworkCore;
 
     public class FundStorageService : IFundStorageService
     {

@@ -10,7 +10,7 @@ namespace DataGate.Services.SqlClient
 
     public class FormatSql
     {
-        public static List<string> FormatColumns(IReadOnlyCollection<string> preSelectedColumns, IEnumerable<string> selectedColumns)
+        public static List<string> Columns(IReadOnlyCollection<string> preSelectedColumns, IEnumerable<string> selectedColumns)
         {
             List<string> resultColumns = new List<string>(preSelectedColumns);
 

@@ -13,14 +13,14 @@ namespace DataGate.Web.Controllers
     [Authorize]
     public class UserController : BaseController
     {
-        private readonly IRecentService serviceRecent;
+        private readonly IRecentService recentService;
         private readonly IShareClassService service;
 
         public UserController(
-            IRecentService serviceRecent,
+            IRecentService recentService,
             IShareClassService service)
         {
-            this.serviceRecent = serviceRecent;
+            this.recentService = recentService;
             this.service = service;
         }
 
@@ -30,7 +30,7 @@ namespace DataGate.Web.Controllers
             var viewModel = new UserPanelViewModel
             {
                 ShareClasses = this.service.ByDate(),
-                RecentlyViewed = this.serviceRecent.ByUserId(this.User),
+                RecentlyViewed = this.recentService.ByUserId(this.User),
             };
 
            return this.View(viewModel);

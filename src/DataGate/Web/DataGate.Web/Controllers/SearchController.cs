@@ -17,14 +17,14 @@ namespace DataGate.Web.Controllers
     [Authorize]
     public class SearchController : BaseController
     {
-        private readonly IRecentService serviceRecent;
+        private readonly IRecentService recentService;
         private readonly IShareClassService service;
 
         public SearchController(
-            IRecentService serviceRecent,
+            IRecentService recentService,
             IShareClassService service)
         {
-            this.serviceRecent = serviceRecent;
+            this.recentService = recentService;
             this.service = service;
         }
 
@@ -37,7 +37,7 @@ namespace DataGate.Web.Controllers
                 throw new BadRequestException(ErrorMessages.InvalidSearchKeyword);
             }
 
-            this.serviceRecent.Save(this.User, Request.Path, Request.QueryString);
+            this.recentService.Save(this.User, Request.Path, Request.QueryString);
 
             var model = new SearchResultsViewModel
             {

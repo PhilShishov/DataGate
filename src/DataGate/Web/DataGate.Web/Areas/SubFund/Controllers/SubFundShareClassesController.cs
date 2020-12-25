@@ -24,18 +24,18 @@ namespace DataGate.Web.Areas.SubFunds.Controllers
     [Authorize]
     public class SubFundShareClassesController : BaseController
     {
-        private readonly IRecentService serviceRecent;
+        private readonly IRecentService recentService;
         private readonly IEntityService service;
         private readonly ISubFundService subFundService;
         private readonly SharedLocalizationService sharedLocalizer;
 
         public SubFundShareClassesController(
-            IRecentService serviceRecent,
+            IRecentService recentService,
             IEntityService service,
             ISubFundService subFundService,
             SharedLocalizationService sharedLocalizer)
         {
-            this.serviceRecent = serviceRecent;
+            this.recentService = recentService;
             this.service = service;
             this.subFundService = subFundService;
             this.sharedLocalizer = sharedLocalizer;
@@ -62,7 +62,7 @@ namespace DataGate.Web.Areas.SubFunds.Controllers
         [Route("sf/{id}/sc")]
         public async Task<IActionResult> ShareClasses(int id, string date, string container)
         {
-            await this.serviceRecent.Save(this.User, Request.Path);
+            await this.recentService.Save(this.User, Request.Path);
 
             var dto = new SubEntitiesGetDto()
             {

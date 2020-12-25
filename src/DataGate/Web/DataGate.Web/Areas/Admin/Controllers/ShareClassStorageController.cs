@@ -21,18 +21,18 @@ namespace DataGate.Web.Areas.Admin.Controllers
     [Authorize(Roles = GlobalConstants.AdministratorRoleName + "," + GlobalConstants.LegalRoleName)]
     public class ShareClassStorageController : BaseController
     {
-        private readonly IRecentService serviceRecent;
+        private readonly IRecentService recentService;
         private readonly IShareClassStorageService service;
         private readonly IShareClassRepository repository;
         private readonly SharedLocalizationService sharedLocalizer;
 
         public ShareClassStorageController(
-                        IRecentService serviceRecent,
+                        IRecentService recentService,
                         IShareClassStorageService service,
                         IShareClassRepository repository,
                         SharedLocalizationService sharedLocalizer)
         {
-            this.serviceRecent = serviceRecent;
+            this.recentService = recentService;
             this.service = service;
             this.repository = repository;
             this.sharedLocalizer = sharedLocalizer;
@@ -41,7 +41,7 @@ namespace DataGate.Web.Areas.Admin.Controllers
         [Route("sc/new")]
         public async Task<IActionResult> Create()
         {
-            await this.serviceRecent.Save(this.User, Request.Path);
+            await this.recentService.Save(this.User, Request.Path);
 
             this.SetViewDataValues();
             return this.View(new CreateShareClassInputModel());
@@ -84,7 +84,7 @@ namespace DataGate.Web.Areas.Admin.Controllers
         [Route("sc/edit/{id}/{date}")]
         public async Task<IActionResult> Edit(int id, string date)
         {
-            await this.serviceRecent.Save(this.User, Request.Path);
+            await this.recentService.Save(this.User, Request.Path);
 
             var model = this.service.ByIdAndDate<EditShareClassInputModel>(id, date);
 

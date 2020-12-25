@@ -7,7 +7,7 @@ namespace DataGate.Services.Slug
 
     public class SlugGenerator : ISlugGenerator
     {
-        public string GenerateSlug(string str)
+        public string Get(string str)
         {
             // Replace spaces with dashes
             str = str.Replace(" ", "-").Replace("--", "-").Replace("--", "-");

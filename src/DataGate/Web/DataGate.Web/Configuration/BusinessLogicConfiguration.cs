@@ -21,6 +21,7 @@ namespace DataGate.Web.Configuration
     using DataGate.Services.Data.TimeSeries;
     using DataGate.Services.Slug;
     using DataGate.Services.Data.Files;
+    using DataGate.Services.Notifications;
 
     public static class BusinessLogicConfiguration
     {
@@ -40,6 +41,7 @@ namespace DataGate.Web.Configuration
             services.AddTransient<IReportsService, ReportsService>();
             services.AddTransient<ICountryDistService, CountryDistService>();
             services.AddTransient<IRecentService, RecentService>();
+            services.AddTransient<INotificationService, NotificationService>();
 
             // Funds
             services.AddTransient<IFundService, FundService>();

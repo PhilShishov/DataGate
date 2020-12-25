@@ -18,7 +18,7 @@ namespace DataGate.Services.Data.CountriesDist
             this.sqlManager = sqlManager;
         }
 
-        public IEnumerable<T> GetCountries<T>(string function, int id)
+        public IEnumerable<T> All<T>(string function, int id)
         {
             var dto = this.sqlManager.ExecuteQueryMapping<CountryDistDto>(function, id);
 

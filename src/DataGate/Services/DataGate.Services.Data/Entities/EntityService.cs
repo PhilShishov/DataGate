@@ -93,7 +93,7 @@ namespace DataGate.Services.Data.Entities
         {
             // Create new collection to store
             // selected without change
-            List<string> resultColumns = FormatSql.FormatColumns(dto.PreSelectedColumns, dto.SelectedColumns);
+            List<string> resultColumns = FormatSql.Columns(dto.PreSelectedColumns, dto.SelectedColumns);
 
             var query = this.sqlManager
                 .ExecuteQueryAsync(function, dto.Date, dto.Id, resultColumns)

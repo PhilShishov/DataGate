@@ -14,7 +14,7 @@ namespace DataGate.Services.Tests.Slug
         public void GenerateSlug_ShouldTrimResultTo100Characters(string fileName)
         {
             var slugGenerator = new SlugGenerator();
-            var fileNameToDisplay = slugGenerator.GenerateSlug(fileName);
+            var fileNameToDisplay = slugGenerator.Get(fileName);
             Assert.True(fileNameToDisplay.Length <= 100);
         }
 
@@ -27,7 +27,7 @@ namespace DataGate.Services.Tests.Slug
                 "2016-07-13-PHARUS-SICAV-Central-Administration-Agreement-EDRA-&-PM-Lux-&-PS-signed.pdf";
 
             var slugGenerator = new SlugGenerator();
-            var actual = slugGenerator.GenerateSlug(fileName);
+            var actual = slugGenerator.Get(fileName);
             Assert.Equal(expected, actual);
         }
     }

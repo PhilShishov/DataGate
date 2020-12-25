@@ -4,6 +4,8 @@
 namespace DataGate.Web.Configuration
 {
     using DataGate.Common;
+    using DataGate.Web.Hubs;
+
     using Microsoft.AspNetCore.Builder;
 
     public static class EndpointsConfiguration
@@ -251,6 +253,7 @@ namespace DataGate.Web.Configuration
                     endpoints.MapControllerRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
                     endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
                     endpoints.MapRazorPages();
+                    endpoints.MapHub<NotificationHub>("/notificationHub");
                 });
 
             return app;

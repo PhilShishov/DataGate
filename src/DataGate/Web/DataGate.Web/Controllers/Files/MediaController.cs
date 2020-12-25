@@ -9,11 +9,12 @@ namespace DataGate.Web.Controllers
     using System.Threading.Tasks;
 
     using DataGate.Common;
-    using DataGate.Services.Data.Files.Contracts;
+    using DataGate.Services.Data.Files;
     using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.Infrastructure.Filters;
     using DataGate.Web.InputModels.Files;
     using DataGate.Web.Utilities.Extract;
+
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
@@ -22,11 +23,11 @@ namespace DataGate.Web.Controllers
     public class MediaController : BaseController
     {
         private readonly IWebHostEnvironment environment;
-        private readonly IFileSystemService service;
+        private readonly IFileService service;
 
         public MediaController(
                     IWebHostEnvironment environment,
-                    IFileSystemService fileService)
+                    IFileService fileService)
         {
             this.environment = environment;
             this.service = fileService;
@@ -105,6 +106,8 @@ namespace DataGate.Web.Controllers
         [Route("media/delete")]
         public async Task<JsonResult> Delete(int fileId, string docValue, string agrValue, string areaName)
         {
+
+
             if (!string.IsNullOrEmpty(areaName))
             {
                 string path = this.GetTargetPath(ref docValue, agrValue, areaName);

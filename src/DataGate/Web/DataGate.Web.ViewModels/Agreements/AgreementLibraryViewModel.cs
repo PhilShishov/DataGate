@@ -23,6 +23,6 @@ namespace DataGate.Web.ViewModels.Agreements
 
         public int FileId { get; set; }
 
-        public string SluggedName => $"{new SlugGenerator().GenerateSlug(this.Name)}";
+        public string SluggedName => $"{new SlugGenerator().Get(this.Name)}";
     }
 }

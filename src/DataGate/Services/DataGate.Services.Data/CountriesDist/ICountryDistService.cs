@@ -7,6 +7,6 @@ namespace DataGate.Services.Data.CountriesDist
 
     public interface ICountryDistService
     {
-        IEnumerable<TDestination> GetCountries<TDestination>(string function, int id);
+        IEnumerable<TDestination> All<TDestination>(string function, int id);
     }
 }

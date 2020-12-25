@@ -8,12 +8,6 @@ namespace DataGate.Web.Areas.Administration.Controllers
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
 
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.Logging;
-
     using DataGate.Common;
     using DataGate.Common.Settings;
     using DataGate.Data.Models.Users;
@@ -22,6 +16,12 @@ namespace DataGate.Web.Areas.Administration.Controllers
     using DataGate.Web.InputModels.Users;
     using DataGate.Web.Resources;
     using DataGate.Web.ViewModels.Users;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.Logging;
 
     [Area(EndpointsConstants.AdminAreaName)]
     [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
