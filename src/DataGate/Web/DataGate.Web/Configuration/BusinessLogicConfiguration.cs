@@ -23,6 +23,7 @@ namespace DataGate.Web.Configuration
     using DataGate.Services.Data.Files;
     using DataGate.Services.Notifications;
     using DataGate.Services.Notifications.Contracts;
+    using DataGate.Services.Data.Users;
 
     public static class BusinessLogicConfiguration
     {
@@ -42,6 +43,7 @@ namespace DataGate.Web.Configuration
             services.AddTransient<ICountryDistService, CountryDistService>();
 
             //User Services
+            services.AddTransient<IUserService, UserService>();
             services.AddTransient<IRecentService, RecentService>();
             services.AddTransient<INotificationService, NotificationService>();
             services.AddTransient<IConnectionManager, ConnectionManager>();

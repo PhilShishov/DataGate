@@ -78,7 +78,6 @@ namespace DataGate.Services.Notifications
                 .OrderByDescending(n => n.CreatedOn)
                 .ToList();
 
-            // Open Notifications
             foreach (var notification in notifications)
             {
                 notification.IsOpened = true;                

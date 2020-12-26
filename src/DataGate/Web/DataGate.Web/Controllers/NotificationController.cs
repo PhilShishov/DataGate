@@ -6,25 +6,24 @@ namespace DataGate.Web.Controllers
     using System.Threading.Tasks;
 
     using DataGate.Services.Notifications.Contracts;
-    using DataGate.Web.Hubs;
+    using DataGate.Web.Hubs.Contracts;
     using DataGate.Web.ViewModels.Notifications;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.SignalR;
 
     [Authorize]
     [ApiController]
     public class NotificationController : Controller
     {
-        private readonly IHubContext<NotificationHub> hubContext;
+        private readonly IHubNotificationHelper notificationHelper;
         private readonly INotificationService notificationService;
 
         public NotificationController(
-            IHubContext<NotificationHub> hubContext,
+            IHubNotificationHelper notificationHelper,
             INotificationService notificationService)
         {
-            this.hubContext = hubContext;
+            this.notificationHelper = notificationHelper;
             this.notificationService = notificationService;
         }
 
@@ -34,7 +33,7 @@ namespace DataGate.Web.Controllers
             var model = this.notificationService.All<NotificationViewModel>(this.User);
 
             int count = await this.notificationService.Count(this.User);
-            await this.hubContext.Clients.All.SendAsync("SendNotification", count);
+            await this.notificationHelper.SendToAll(count);
 
             return this.PartialView("_UserNotificationPartial", model);
         }

@@ -6,24 +6,19 @@ namespace DataGate.Web.Hubs
     using System;
     using System.Threading.Tasks;
 
-    using DataGate.Data.Models.Users;
     using DataGate.Services.Notifications.Contracts;
 
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.SignalR;
 
     public class NotificationHub : Hub
     {
-        private readonly UserManager<ApplicationUser> userManager;
         private readonly INotificationService notificationService;
         private IConnectionManager connectionManager;
 
         public NotificationHub(
-            UserManager<ApplicationUser> userManager,
             INotificationService notificationService,
             IConnectionManager connection)
         {
-            this.userManager = userManager;
             this.notificationService = notificationService;
             this.connectionManager = connection;
         }
