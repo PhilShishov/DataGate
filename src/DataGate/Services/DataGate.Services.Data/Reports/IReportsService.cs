@@ -8,8 +8,6 @@ namespace DataGate.Services.Data.Reports
 
     public interface IReportsService
     {
-        IEnumerable<T> All<T>(string function, DateTime date);
-
         IAsyncEnumerable<string[]> All(string function, DateTime date, int skip = 0);
     }
 }

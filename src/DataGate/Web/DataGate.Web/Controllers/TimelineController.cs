@@ -28,7 +28,7 @@ namespace DataGate.Web.Controllers
                                                      SqlFunctionDictionary.TimelineSubFund,
                                                      SqlFunctionDictionary.TimelineShareClass);
 
-            var model = this.service.GetTimeline<TimelineViewModel>(function, id);
+            var model = this.service.All<TimelineViewModel>(function, id);
 
             this.ViewBag.Area = areaName;
             this.ViewBag.Route = StringSwapper.ByArea(areaName,

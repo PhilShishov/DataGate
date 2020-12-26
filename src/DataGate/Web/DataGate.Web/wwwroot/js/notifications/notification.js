@@ -1,22 +1,30 @@
-﻿"use strict"
+﻿'use strict'
 
 let hubConnect = new signalR.HubConnectionBuilder()
-    .withUrl("/notificationHub")
+    .withUrl('/notificationHub')
     .build();
 
 hubConnect.start()
-    .then(function () {
+    .then(() => {
         console.log('Server Notification: Connected');
 
-        hubConnect.invoke("GetConnectionId").then((identifier) => {
-            console.log(identifier);
+        hubConnect.invoke('GetUserNotificationCount').then((count) => {
+
+            if (count > 0) {
+                document.getElementById("notification-badge").classList.add("display-count");
+                document.getElementById('notification-badge').setAttribute('data-count', count);
+            }
         })
     }).catch(function (err) {
         return console.error(err.toString());
     });
 
-hubConnect.on("SendNotification", function (count) {
+hubConnect.on('SendNotification', function (count) {
 
+    if (count > 0) {
+        document.getElementById("notification-badge").classList.add("display-count");
+        document.getElementById('notification-badge').setAttribute('data-count', count);
+    }
 })
 
 //notificationConnection.on("ReceiveNotification", function (count, isFirstNotificaitonSound) {

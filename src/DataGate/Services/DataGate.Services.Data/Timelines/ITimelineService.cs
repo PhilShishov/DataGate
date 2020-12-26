@@ -7,6 +7,6 @@ namespace DataGate.Services.Data.Timelines
 
     public interface ITimelineService
     {
-        IEnumerable<T> GetTimeline<T>(string function, int id);
+        IEnumerable<T> All<T>(string function, int id);
     }
 }

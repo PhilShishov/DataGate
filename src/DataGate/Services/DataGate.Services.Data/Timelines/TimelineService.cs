@@ -18,7 +18,7 @@ namespace DataGate.Services.Data.Timelines
             this.sqlManager = sqlQueryManager;
         }
 
-        public IEnumerable<T> GetTimeline<T>(string function, int id)
+        public IEnumerable<T> All<T>(string function, int id)
         {
             IEnumerable<TimelineDto> dto = this.sqlManager.ExecuteQueryMapping<TimelineDto>(function, id);
 

@@ -15,8 +15,7 @@ namespace DataGate.Services.Data.Documents
     {
         private readonly ISqlQueryManager sqlManager;
 
-        public EntitiesDocumentService(
-                            ISqlQueryManager sqlQueryManager)
+        public EntitiesDocumentService(ISqlQueryManager sqlQueryManager)
         {
             this.sqlManager = sqlQueryManager;
         }

@@ -6,6 +6,7 @@
     using System.Security.Claims;
     using System.Threading.Tasks;
 
+    using DataGate.Common;
     using DataGate.Data.Common.Repositories.UsersContext;
     using DataGate.Data.Models.Users;
     using DataGate.Data.Models.Users.Enums;
@@ -29,10 +30,7 @@
 
         public async Task Add(ClaimsPrincipal fromUser, string message, string link)
         {
-            if (fromUser == null)
-            {
-                throw new ArgumentNullException(nameof(fromUser));
-            }
+            this.DoesUserExist(fromUser);
 
             var users = this.userManager.Users.ToList();
 
@@ -47,10 +45,7 @@
 
         public async Task AddAdmin(ClaimsPrincipal fromUser, string message, string link)
         {
-            if (fromUser == null)
-            {
-                throw new ArgumentNullException(nameof(fromUser));
-            }
+            this.DoesUserExist(fromUser);
 
             var users = this.userManager.Users.ToList();
 
@@ -60,7 +55,7 @@
             {
                 var roles = await this.userManager.GetRolesAsync(user);
 
-                if (roles[0].ToString() == "Admin")
+                if (roles[0].ToString() == GlobalConstants.AdministratorRoleName)
                 {
                     NotificationTemplate(message, link, notifications, user);
                 }
@@ -70,11 +65,21 @@
 
         public async Task<int> Count(ClaimsPrincipal user)
         {
+            this.DoesUserExist(user);
+
             var userId = this.userManager.GetUserId(user);
 
             var count = await this.repository.All()
                     .CountAsync(un => un.UserId == userId && !un.IsOpened);
             return count;
+        }
+
+        private void DoesUserExist(ClaimsPrincipal user)
+        {
+            if (user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
         }
 
         private static void NotificationTemplate(string message, string link, List<UserNotification> notifications, ApplicationUser user)

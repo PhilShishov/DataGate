@@ -410,21 +410,25 @@ textarea {
     position: relative;
 }
 
-    .badge[data-count]:after {
-        content: attr(data-count);
-        position: absolute;
-        top: -10px;
-        right: -10px;
-        font-size: 1.6em;
-        background: red;
-        color: white;
-        width: 18px;
-        height: 18px;
-        text-align: center;
-        line-height: 18px;
-        border-radius: 50%;
-        box-shadow: 0 0 1px #333;
+    .badge-clicked {
+        filter: invert(50%) sepia(20%) saturate(6550%) hue-rotate(177deg) brightness(80%);
     }
+
+.display-count[data-count]:after {
+    content: attr(data-count);
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 1.6em;
+    background: red;
+    color: white;
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    padding: 4px 1px 0px 0px;
+    border-radius: 50%;
+    box-shadow: 0 0 1px #333;
+}
 
 .notification-list {
     width: 0px;
@@ -436,7 +440,7 @@ textarea {
 }
 
 .badge-notification-container.open .notification-list {
-    width: 200px;
+    width: 300px;
     opacity: 1;
     visibility: visible;
 }

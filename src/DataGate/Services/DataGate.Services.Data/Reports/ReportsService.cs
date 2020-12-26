@@ -7,9 +7,7 @@ namespace DataGate.Services.Data.Reports
     using System.Collections.Generic;
     using System.Linq;
 
-    using DataGate.Services.Mapping;
     using DataGate.Services.SqlClient.Contracts;
-    using DataGate.Web.Dtos.Queries;
 
     public class ReportsService : IReportsService
     {
@@ -18,13 +16,6 @@ namespace DataGate.Services.Data.Reports
         public ReportsService(ISqlQueryManager sqlQueryManager)
         {
             this.sqlManager = sqlQueryManager;
-        }
-
-        public IEnumerable<T> All<T>(string function, DateTime date)
-        {
-            IEnumerable<ReportDto> dto = this.sqlManager.ExecuteQueryMapping<ReportDto>(function, null, date);
-
-            return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
         }
 
         public IAsyncEnumerable<string[]> All(string function, DateTime date, int skip)

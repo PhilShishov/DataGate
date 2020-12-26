@@ -6,17 +6,25 @@ namespace DataGate.Web.Hubs
     using System;
     using System.Threading.Tasks;
 
+    using DataGate.Data.Models.Users;
     using DataGate.Services.Notifications.Contracts;
 
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.SignalR;
 
     public class NotificationHub : Hub
     {
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly INotificationService notificationService;
         private IConnectionManager connectionManager;
 
         public NotificationHub(
+            UserManager<ApplicationUser> userManager,
+            INotificationService notificationService,
             IConnectionManager connection)
         {
+            this.userManager = userManager;
+            this.notificationService = notificationService;
             this.connectionManager = connection;
         }
 
@@ -28,14 +36,13 @@ namespace DataGate.Web.Hubs
             return this.Context.ConnectionId;
         }
 
-        public override Task OnConnectedAsync()
-        {
-            return base.OnConnectedAsync();
-        }
+        public async Task<int> GetUserNotificationCount()
+            => await this.notificationService.Count(this.Context.User);
 
-        public override Task OnDisconnectedAsync(Exception exc)
-        {
-            return base.OnDisconnectedAsync(exc);
-        }
+        public override Task OnConnectedAsync()
+            => base.OnConnectedAsync();
+
+        public override Task OnDisconnectedAsync(Exception ex)
+            => base.OnDisconnectedAsync(ex);
     }
 }

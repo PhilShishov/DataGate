@@ -99,25 +99,7 @@
 
                 <div class="w-50 d-flex responsive-navbar">
 
-                    <div class="badge-notification-container">
-                        <a class="badge" data-count="5">
-                        </a>
-                        <div class="notification-list">
-                            <ul>
-                                <li>
-                                    <a>
-                                        New Fund : {FundName}
-                                    </a>
-                                </li>
-
-                                <li>
-                                    <a>
-                                        Update Fund : {FundName}
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    <partial name="_UserNotificationPartial" />
 
                     <div class="search-form-wrapper-responsive">
                         <button class="open-search-box mt-3">
