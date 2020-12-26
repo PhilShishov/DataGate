@@ -3,28 +3,23 @@
 
 namespace DataGate.Web.Areas.Administration.Controllers
 {
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Text.Encodings.Web;
     using System.Threading.Tasks;
 
     using DataGate.Common;
     using DataGate.Common.Settings;
-    using DataGate.Data.Models.Users;
+    using DataGate.Services.Data.Users;
     using DataGate.Services.Messaging;
     using DataGate.Services.Notifications.Contracts;
     using DataGate.Web.Controllers;
-    using DataGate.Web.Hubs;
+    using DataGate.Web.Hubs.Contracts;
     using DataGate.Web.InputModels.Users;
     using DataGate.Web.Resources;
-    using DataGate.Web.ViewModels.Users;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.SignalR;
     using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.Logging;
 
     [Area(EndpointsConstants.AdminAreaName)]
     [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
@@ -33,289 +28,141 @@ namespace DataGate.Web.Areas.Administration.Controllers
         private const string EmailConfirmationUrl = "/Account/ConfirmEmail";
         private const string ViewUsersUrl = "/Admin/Admin/ViewUsers";
 
-        private readonly RoleManager<ApplicationRole> roleManager;
-        private readonly IHubContext<NotificationHub> hubContext;
+        private readonly IUserService userService;
+        private readonly IHubNotificationHelper notificationHelper;
         private readonly INotificationService notificationService;
-        private readonly UserManager<ApplicationUser> userManager;
-        private readonly ILogger<AdminController> logger;
         private readonly IConfiguration configuration;
         private readonly IEmailSender emailSender;
         private readonly SharedLocalizationService sharedLocalizer;
 
         public AdminController(
-            IHubContext<NotificationHub> hubContext,
+            IUserService userService,
+            IHubNotificationHelper notificationHelper,
             INotificationService notificationService,
-            UserManager<ApplicationUser> userManager,
-            RoleManager<ApplicationRole> roleManager,
             IEmailSender emailSender,
             SharedLocalizationService sharedLocalizer,
-            ILogger<AdminController> logger,
             IConfiguration configuration)
         {
-            this.hubContext = hubContext;
+            this.userService = userService;
+            this.notificationHelper = notificationHelper;
             this.notificationService = notificationService;
-            this.userManager = userManager;
-            this.roleManager = roleManager;
             this.emailSender = emailSender;
             this.sharedLocalizer = sharedLocalizer;
-            this.logger = logger;
             this.configuration = configuration;
         }
 
-        public async Task<IActionResult> ViewUsers()
+        public async Task<IActionResult> All()
+            => this.View(await this.userService.All());
+
+        public IActionResult Create()
         {
-            List<UserViewModel> usersViewList = new List<UserViewModel>();
-
-            var users = this.userManager.Users
-                .OrderByDescending(u => u.LastLoginTime)
-                .ToList();
-
-            foreach (var user in users)
-            {
-                var roles = await this.userManager.GetRolesAsync(user);
-
-                var userView = new UserViewModel
-                {
-                    Id = user.Id,
-                    Username = user.UserName,
-                    Roles = roles,
-                    LastLogin = user.LastLoginTime,
-                };
-
-                usersViewList.Add(userView);
-            }
-
-            return this.View(usersViewList);
-        }
-
-        [HttpGet]
-        public IActionResult CreateUser()
-        {
-            this.ViewData["Roles"] = this.roleManager.Roles.ToList();
-
+            this.ViewData["Roles"] = this.userService.Roles();
             return this.View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateUser(
-                     [Bind("Username", "Email", "Password", "ConfirmPassword", "RoleType", "RecaptchaValue")]
-                     CreateUserInputModel inputModel)
+        public async Task<IActionResult> Create(
+                     [Bind("Username", "Email", "Password", 
+                           "ConfirmPassword", "RoleType", "RecaptchaValue")]
+                            CreateUserInputModel input)
         {
             string returnUrl = ViewUsersUrl;
             if (!this.ModelState.IsValid)
             {
-                this.ViewData["Roles"] = this.roleManager.Roles.ToList();
-                return this.View(inputModel ?? new CreateUserInputModel());
+                this.ViewData["Roles"] = this.userService.Roles();
+                return this.View(input ?? new CreateUserInputModel());
             }
 
-            var user = new ApplicationUser
-            {
-                UserName = inputModel.Username,
-                Email = inputModel.Email,
-            };
+            var result = await this.userService.Create(input);
 
-            var result = await this.userManager.CreateAsync(user, inputModel.Password);
+            if (!result.Succeeded)
+            {
+                this.AddErrors(result);
+                return this.ShowErrorLocal(this.sharedLocalizer.GetHtmlString(ErrorMessages.UnsuccessfulCreate), returnUrl);
+            }
+
+            var user = await this.userService.ByUsername(input.Username);
+            string code = await this.userService.GenerateEmailToken(user);
+            string callbackUrl = this.Url.Page(
+                   EmailConfirmationUrl,
+                   pageHandler: null,
+                   values: new { area = "Identity", userId = user.Id, code },
+                   protocol: this.Request.Scheme);
+
+            //Upon creation send email confirmation to new user
+            string emailMessage = string.Format(GlobalConstants.EmailConfirmationMessage, user.UserName, HtmlEncoder.Default.Encode(callbackUrl));
+            await this.emailSender.SendEmailAsync(
+                this.configuration.GetValue<string>($"{AppSettingsSections.EmailSection}:{EmailOptions.Address}"),
+                this.configuration.GetValue<string>($"{AppSettingsSections.EmailSection}:{EmailOptions.Sender}"),
+                user.Email,
+                GlobalConstants.ConfirmEmailSubject,
+                emailMessage);
+
+            await SendNotification(user.UserName, InfoMessages.CreateUserNotification);
+
+            string infoMessage = string.Format(this.sharedLocalizer
+                .GetHtmlString(InfoMessages.AddUser),
+                user.UserName,
+                input.RoleType);
+
+            return this.ShowInfoLocal(infoMessage, returnUrl);
+        }
+
+        public async Task<IActionResult> Edit(string id)
+            => this.View(await this.userService.ByIdEdit(id));
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(
+                     [Bind("Id", "Username", "Email", "RoleType",
+                           "PasswordHash", "ConfirmPassword", "RecaptchaValue")]
+                            EditUserInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input ?? new EditUserInputModel());
+            }
+
+            var result = await this.userService.Edit(input);
 
             if (result.Succeeded)
             {
-                this.logger.LogInformation("User created a new account with password.");
-                await this.AssignRoleToUser(inputModel, user);
-
-                // Upon creation send email confirmation to new user
-                string code = await this.userManager.GenerateEmailConfirmationTokenAsync(user);
-                string callbackUrl = this.Url.Page(
-                    EmailConfirmationUrl,
-                    pageHandler: null,
-                    values: new { area = "Identity", userId = user.Id, code },
-                    protocol: this.Request.Scheme);
-
-                string emailMessage = string.Format(GlobalConstants.EmailConfirmationMessage, user.UserName, HtmlEncoder.Default.Encode(callbackUrl));
-                //await this.emailSender.SendEmailAsync(
-                //    this.configuration.GetValue<string>($"{AppSettingsSections.EmailSection}:{EmailOptions.Address}"),
-                //    this.configuration.GetValue<string>($"{AppSettingsSections.EmailSection}:{EmailOptions.Sender}"),
-                //    inputModel.Email,
-                //    GlobalConstants.ConfirmEmailSubject,
-                //    emailMessage);
-
-                await SendNotification(user);
-
-                string infoMessage = string.Format(this.sharedLocalizer
-                    .GetHtmlString(InfoMessages.AddUser),
-                    user.UserName,
-                    inputModel.RoleType);
-
-                return this.ShowInfoLocal(infoMessage, returnUrl);
+                await SendNotification(input.Username, InfoMessages.EditUserNotification);
+                string infoMessage = string.Format(this.sharedLocalizer.GetHtmlString(InfoMessages.UpdateUser), input.Username);
+                return this.ShowInfoLocal(infoMessage, ViewUsersUrl);
             }
 
             this.AddErrors(result);
-
-            return this.ShowErrorLocal(this.sharedLocalizer.GetHtmlString(ErrorMessages.UnsuccessfulCreate), returnUrl);
+            return this.ShowErrorLocal(this.sharedLocalizer.GetHtmlString(ErrorMessages.UnsuccessfulUpdate), ViewUsersUrl);
         }
 
-        private async Task SendNotification(ApplicationUser user)
+        public async Task<IActionResult> Delete(string id)
+             => this.View(await this.userService.ByIdDelete(id));
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(
+              [Bind("Id", "Username", "RecaptchaValue")]
+                     DeleteUserInputModel input)
         {
-            var notifMessage = string.Format(InfoMessages.CreateUserNotification, user.UserName);
+            var result = await this.userService.Delete(input);
+
+            if (result.Succeeded)
+            {
+                await SendNotification(input.Username, InfoMessages.EditUserNotification);
+                string infoMessage = string.Format(this.sharedLocalizer.GetHtmlString(InfoMessages.RemoveUser), input.Username);
+                return this.ShowInfoLocal(infoMessage, ViewUsersUrl);
+            }
+
+            this.AddErrors(result);
+            return this.ShowErrorLocal(this.sharedLocalizer.GetHtmlString(ErrorMessages.UnsuccessfulDelete), ViewUsersUrl);
+        }
+
+        private async Task SendNotification(string username, string message)
+        {
+            var notifMessage = string.Format(message, username);
             await this.notificationService.Add(this.User, notifMessage, "/Admin/Admin/ViewUsers");
 
             int count = await this.notificationService.Count(this.User);
-            await this.hubContext.Clients.All.SendAsync("SendNotification", count);
-        }
-
-        [HttpGet("/Admin/Admin/EditUser/{id}")]
-        public async Task<IActionResult> EditUser(string id)
-        {
-            var user = await this.userManager.FindByIdAsync(id);
-            var roles = await this.userManager.GetRolesAsync(user);
-
-            EditUserInputModel editUserModel = new EditUserInputModel
-            {
-                Id = user.Id,
-                Username = user.UserName,
-                Email = user.Email,
-                RoleType = roles.FirstOrDefault(),
-            };
-
-            return this.View(editUserModel);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> EditUser(
-                     [Bind("Id", "Username", "Email", "RoleType", "PasswordHash", "ConfirmPassword", "RecaptchaValue")]
-                     EditUserInputModel inputModel, string returnUrl = null)
-        {
-            returnUrl = ViewUsersUrl;
-
-            if (!this.ModelState.IsValid)
-            {
-                return this.View(inputModel ?? new EditUserInputModel());
-            }
-
-            var user = await this.userManager.FindByIdAsync(inputModel.Id);
-
-            if (user != null)
-            {
-                var roles = await this.userManager.GetRolesAsync(user);
-
-                user.UserName = inputModel.Username;
-                user.Email = inputModel.Email;
-
-                var newRole = inputModel.RoleType;
-                var oldRole = roles.FirstOrDefault();
-
-                if (await this.roleManager.RoleExistsAsync(newRole))
-                {
-                    if (newRole != oldRole)
-                    {
-                        await this.userManager.RemoveFromRoleAsync(user, oldRole);
-                        await this.userManager.AddToRoleAsync(user, newRole);
-                    }
-                }
-
-                var hasher = new PasswordHasher<ApplicationUser>();
-
-                if (user.PasswordHash != inputModel.PasswordHash && inputModel.PasswordHash != null)
-                {
-                    var newPassword = hasher.HashPassword(user, inputModel.PasswordHash);
-                    user.PasswordHash = newPassword;
-                }
-
-                var resultUser = await this.userManager.UpdateAsync(user);
-
-                if (resultUser.Succeeded)
-                {
-                    this.logger.LogInformation("User updated.");
-
-                    string infoMessage = string.Format(this.sharedLocalizer.GetHtmlString(InfoMessages.UpdateUser), user.UserName);
-
-                    return this.ShowInfoLocal(infoMessage, returnUrl);
-                }
-
-                this.AddErrors(resultUser);
-            }
-
-            return this.ShowErrorLocal(this.sharedLocalizer.GetHtmlString(ErrorMessages.UnsuccessfulUpdate), returnUrl);
-        }
-
-        [HttpGet("/Admin/Admin/DeleteUser/{id}")]
-        public async Task<IActionResult> DeleteUser(string id)
-        {
-            var user = await this.userManager.FindByIdAsync(id);
-            var roles = await this.userManager.GetRolesAsync(user);
-
-            DeleteUserInputModel deleteUserModel = new DeleteUserInputModel
-            {
-                Id = user.Id,
-                Username = user.UserName,
-                Email = user.Email,
-                RoleType = roles.FirstOrDefault(),
-            };
-
-            return this.View(deleteUserModel);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> DeleteUser(
-              [Bind("Id", "RecaptchaValue")]
-              DeleteUserInputModel inputModel, string returnUrl = null)
-        {
-            returnUrl = ViewUsersUrl;
-
-            var user = await this.userManager.FindByIdAsync(inputModel.Id);
-
-            if (user != null)
-            {
-                var roles = await this.userManager.GetRolesAsync(user);
-
-                await this.userManager.RemoveFromRoleAsync(user, roles.FirstOrDefault());
-                var result = await this.userManager.DeleteAsync(user);
-                if (result.Succeeded)
-                {
-                    this.logger.LogInformation("User deleted.");
-
-                    string infoMessage = string.Format(this.sharedLocalizer.GetHtmlString(InfoMessages.RemoveUser), user.UserName);
-
-                    return this.ShowInfoLocal(infoMessage, returnUrl);
-                }
-
-                this.AddErrors(result);
-            }
-
-            return this.ShowErrorLocal(this.sharedLocalizer.GetHtmlString(ErrorMessages.UnsuccessfulDelete), returnUrl);
-        }
-
-        private async Task AssignRoleToUser(CreateUserInputModel inputModel, ApplicationUser user)
-        {
-            var role = inputModel.RoleType;
-            var roleExist = await this.roleManager.RoleExistsAsync(role);
-            //var admins = this.userManager.GetUsersInRoleAsync(GlobalConstants.AdministratorRoleName).Result;
-
-            if (roleExist)
-            {
-                if (role == GlobalConstants.AdministratorRoleName /*&& admins.Count <= GlobalConstants.MaxAdminCount*/)
-                {
-                    await this.userManager.AddToRoleAsync(user, GlobalConstants.AdministratorRoleName);
-                }
-                else if (role == GlobalConstants.LegalRoleName)
-                {
-                    await this.userManager.AddToRoleAsync(user, GlobalConstants.LegalRoleName);
-                }
-                else if (role == GlobalConstants.RiskRoleName)
-                {
-                    await this.userManager.AddToRoleAsync(user, GlobalConstants.RiskRoleName);
-                }
-                else if (role == GlobalConstants.InvestmentRoleName)
-                {
-                    await this.userManager.AddToRoleAsync(user, GlobalConstants.InvestmentRoleName);
-                }
-                else if (role == GlobalConstants.ComplianceRoleName)
-                {
-                    await this.userManager.AddToRoleAsync(user, GlobalConstants.ComplianceRoleName);
-                }
-                else if (role == GlobalConstants.GuestRoleName)
-                {
-                    await this.userManager.AddToRoleAsync(user, GlobalConstants.GuestRoleName);
-                }
-            }
+            await this.notificationHelper.SendToAll(count);
         }
 
         private void AddErrors(IdentityResult result)
@@ -330,7 +177,6 @@ namespace DataGate.Web.Areas.Administration.Controllers
                 {
                     this.ModelState.AddModelError(error.Code, error.Description);
                 }
-
             }
         }
     }
