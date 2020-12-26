@@ -3,6 +3,9 @@
 
 /*Recent Items Style*/
 
+.mandatory {
+    background-color: rgb(255, 80, 80);
+}
 
 .btn {
     padding: 7px 7px 3px;

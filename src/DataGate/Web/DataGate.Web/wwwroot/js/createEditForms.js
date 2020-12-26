@@ -17,6 +17,44 @@ function createEdit(confirmations, messages_btn) {
     const CONFIRMATIONS = confirmations;
     const MESSAGES_BTN = messages_btn;
 
+    var mandatory = Array.prototype.slice.call(document.querySelectorAll(".mandatory"));
+
+    mandatory.forEach(function (item) {
+        if (item.value) {
+            item.classList.remove("mandatory");
+        }
+
+        item.addEventListener('input', () => {
+            if (item.value) {
+                item.classList.remove('mandatory');
+            } else {
+                item.classList.add('mandatory');
+            }
+        });
+
+    });
+
+    //(function () {
+    //    const mandatoryFields = document.getElementsByClassName('mandatory');
+
+    //    if (mandatoryFields) {
+    //        for (let field of mandatoryFields) {
+    //            if (field.value) {
+    //                console.log(field.value);
+    //                field.classList.remove('mandatory');
+    //            }
+
+    //            field.addEventListener('input', () => {
+    //                if (field.value) {
+    //                    field.classList.remove('mandatory');
+    //                } else {
+    //                    field.classList.add('mandatory');
+    //                }
+    //            });
+    //        }
+    //    }
+    //})();
+
     // Confirm create
     (function () {
         const buttons = document.getElementsByClassName(HTML_CREATE_EDIT.BTN_CONFIRM_CREATE);
