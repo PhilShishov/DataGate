@@ -22,7 +22,7 @@ namespace DataGate.Services.Data.ViewSetups
                                                     EntitySubEntitiesGetDto dto, string function)
         {
             exceptionService.DoesExist(dto.Id);
-            var date = DateTimeParser.FromWebFormat(dto.Date);
+            var date = DateTimeExtensions.FromWebFormat(dto.Date);
             var entities = await service.All(function, dto.Id, date).ToListAsync();
 
             dto.Entities = entities;
@@ -34,7 +34,7 @@ namespace DataGate.Services.Data.ViewSetups
                                               SubEntitiesGetDto dto, string function)
         {
             exceptionService.DoesExist(dto.Id);
-            var date = DateTimeParser.FromWebFormat(dto.Date);
+            var date = DateTimeExtensions.FromWebFormat(dto.Date);
             var values = await service.All(function, dto.Id, date, 1).ToListAsync();
             var headers = await service.All(function, dto.Id, date).FirstOrDefaultAsync();
 
@@ -47,7 +47,7 @@ namespace DataGate.Services.Data.ViewSetups
 
         public static async Task SetPost(SubEntitiesViewModel model, IEntityService service, string function)
         {
-            var date = DateTimeParser.FromWebFormat(model.Date);
+            var date = DateTimeExtensions.FromWebFormat(model.Date);
             var headers = await service.All(function, model.Id, date).FirstOrDefaultAsync();
             model.Headers = headers.ToList();
             model.HeadersSelection = headers.ToList();

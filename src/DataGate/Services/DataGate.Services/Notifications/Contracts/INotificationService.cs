@@ -14,6 +14,8 @@
 
         Task<int> Count(ClaimsPrincipal user);
 
-        //Task<bool> EditStatus(ApplicationUser currentUser, string newStatus, string id);
+        Task StatusAsync(ClaimsPrincipal user, string notifId);
+
+        string GetNotificationStatus(ClaimsPrincipal user, string notifId);
     }
 }

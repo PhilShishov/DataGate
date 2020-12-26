@@ -1,4 +1,4 @@
-﻿@model DataGate.Web.ViewModels.Users.UserPanelViewModel
+﻿@model UserPanelViewModel
 
 @{
     ViewData["Title"] = SharedLocalizer.GetHtmlString("User Panel");
@@ -23,7 +23,7 @@
                             <a asp-area="@EndpointsConstants.ShareClassArea"
                                asp-route="@EndpointsConstants.RouteDetails@EndpointsConstants.ShareClassArea"
                                asp-route-id="@item.ScId"
-                               asp-route-date="@DateTimeParser.ToWebFormat(DateTime.UtcNow)">
+                               asp-route-date="@DateTimeExtensions.ToWebFormat(DateTime.UtcNow)">
                                 @item.ScOfficialShareClassName
                             </a>
                         </h5>

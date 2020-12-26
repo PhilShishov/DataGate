@@ -48,7 +48,7 @@ namespace DataGate.Services.Data.Storage
         {
             this.ThrowEntityNotFoundExceptionIfIdDoesNotExist(id);
 
-            var dateParsed = DateTimeParser.FromWebFormat(date);
+            var dateParsed = DateTimeExtensions.FromWebFormat(date);
 
             var dto = this.sqlManager
                 .ExecuteQueryMapping<EditSubFundGetDto>(this.sqlFunctionId, id, dateParsed)
@@ -63,7 +63,7 @@ namespace DataGate.Services.Data.Storage
 
             SubFundForeignKeysDto dtoForeignKey = AutoMapperConfig.MapperInstance.Map<SubFundForeignKeysDto>(model);
 
-            dto.EndDate = DateTimeParser.ToSqlFormat(model.EndDate);
+            dto.EndDate = DateTimeExtensions.ToSqlFormat(model.EndDate);
             dto.ContainerId = await this.repositoryContainer.All()
                   .Where(f => f.FOfficialFundName == model.FundContainer)
                   .Select(fc => fc.FId)

@@ -44,7 +44,7 @@ namespace DataGate.Services.Data.Storage
         {
             this.ThrowEntityNotFoundExceptionIfIdDoesNotExist(id);
 
-            var dateParsed = DateTimeParser.FromWebFormat(date);
+            var dateParsed = DateTimeExtensions.FromWebFormat(date);
             var dto = this.sqlManager
                 .ExecuteQueryMapping<EditFundGetDto>(this.sqlFunctionId, id, dateParsed)
                 .FirstOrDefault();
@@ -61,7 +61,7 @@ namespace DataGate.Services.Data.Storage
         public async Task<int> Create(CreateFundInputModel model)
         {
             FundPostDto dto = AutoMapperConfig.MapperInstance.Map<FundPostDto>(model);
-            dto.EndDate = DateTimeParser.ToSqlFormat(model.EndDate);
+            dto.EndDate = DateTimeExtensions.ToSqlFormat(model.EndDate);
 
             await this.SetForeignKeys(dto, model.Status, model.LegalForm, model.LegalVehicle,
                                       model.LegalType, model.CompanyTypeDesc);

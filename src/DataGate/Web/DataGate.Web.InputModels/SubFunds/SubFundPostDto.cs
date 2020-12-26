@@ -96,18 +96,18 @@ namespace DataGate.Web.InputModels.SubFunds
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<EditSubFundInputModel, SubFundPostDto>()
-               .ForMember(dto => dto.InitialDate, action => action.MapFrom(model => DateTimeParser.ToSqlFormat(model.InitialDate)))
-               .ForMember(dto => dto.FirstNavDate, action => action.MapFrom(model => DateTimeParser.ToSqlFormat(model.FirstNavDate)))
-               .ForMember(dto => dto.LastNavDate, action => action.MapFrom(model => DateTimeParser.ToSqlFormat(model.LastNavDate)))
-               .ForMember(dto => dto.CSSFAuthDate, action => action.MapFrom(model => DateTimeParser.ToSqlFormat(model.CSSFAuthDate)))
-               .ForMember(dto => dto.ExpiryDate, action => action.MapFrom(model => DateTimeParser.ToSqlFormat(model.ExpiryDate)));
+               .ForMember(dto => dto.InitialDate, action => action.MapFrom(model => DateTimeExtensions.ToSqlFormat(model.InitialDate)))
+               .ForMember(dto => dto.FirstNavDate, action => action.MapFrom(model => DateTimeExtensions.ToSqlFormat(model.FirstNavDate)))
+               .ForMember(dto => dto.LastNavDate, action => action.MapFrom(model => DateTimeExtensions.ToSqlFormat(model.LastNavDate)))
+               .ForMember(dto => dto.CSSFAuthDate, action => action.MapFrom(model => DateTimeExtensions.ToSqlFormat(model.CSSFAuthDate)))
+               .ForMember(dto => dto.ExpiryDate, action => action.MapFrom(model => DateTimeExtensions.ToSqlFormat(model.ExpiryDate)));
 
             configuration.CreateMap<CreateSubFundInputModel, SubFundPostDto>()
-                .ForMember(dto => dto.InitialDate, action => action.MapFrom(model => DateTimeParser.ToSqlFormat(model.InitialDate)))
-                .ForMember(dto => dto.FirstNavDate, action => action.MapFrom(model => DateTimeParser.ToSqlFormat(model.FirstNavDate)))
-                .ForMember(dto => dto.LastNavDate, action => action.MapFrom(model => DateTimeParser.ToSqlFormat(model.LastNavDate)))
-                .ForMember(dto => dto.CSSFAuthDate, action => action.MapFrom(model => DateTimeParser.ToSqlFormat(model.CSSFAuthDate)))
-                .ForMember(dto => dto.ExpiryDate, action => action.MapFrom(model => DateTimeParser.ToSqlFormat(model.ExpiryDate)));
+                .ForMember(dto => dto.InitialDate, action => action.MapFrom(model => DateTimeExtensions.ToSqlFormat(model.InitialDate)))
+                .ForMember(dto => dto.FirstNavDate, action => action.MapFrom(model => DateTimeExtensions.ToSqlFormat(model.FirstNavDate)))
+                .ForMember(dto => dto.LastNavDate, action => action.MapFrom(model => DateTimeExtensions.ToSqlFormat(model.LastNavDate)))
+                .ForMember(dto => dto.CSSFAuthDate, action => action.MapFrom(model => DateTimeExtensions.ToSqlFormat(model.CSSFAuthDate)))
+                .ForMember(dto => dto.ExpiryDate, action => action.MapFrom(model => DateTimeExtensions.ToSqlFormat(model.ExpiryDate)));
         }
     }
 }

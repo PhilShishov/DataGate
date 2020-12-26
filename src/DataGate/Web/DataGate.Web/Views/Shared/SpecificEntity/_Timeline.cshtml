@@ -4,7 +4,7 @@
     <ul class="timeline">
         @foreach (var timeline in Model)
         {
-            var date = DateTimeParser.FromSqlFormat(timeline.EndDate);
+            var date = DateTimeExtensions.FromSqlFormat(timeline.EndDate);
 
             <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
                 <div class="timeline-arrow"></div>

@@ -74,7 +74,7 @@ namespace DataGate.Web.Areas.Admin.Controllers
             }
 
             var subFundId = await this.service.Create(model);
-            var date = DateTimeParser.ToWebFormat(model.InitialDate.AddDays(1));
+            var date = DateTimeExtensions.ToWebFormat(model.InitialDate.AddDays(1));
 
             return this.ShowInfo(
                 this.sharedLocalizer.GetHtmlString(InfoMessages.SuccessfulCreate),
@@ -125,7 +125,7 @@ namespace DataGate.Web.Areas.Admin.Controllers
             }
 
             var subFundId = await this.service.Edit(model);
-            var date = DateTimeParser.ToWebFormat(model.InitialDate.AddDays(1));
+            var date = DateTimeExtensions.ToWebFormat(model.InitialDate.AddDays(1));
 
             return this.ShowInfo(
                 this.sharedLocalizer.GetHtmlString(InfoMessages.SuccessfulEdit),

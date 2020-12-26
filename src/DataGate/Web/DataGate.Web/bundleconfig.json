@@ -9,7 +9,7 @@
   {
     "inputFiles": [
       "wwwroot/js/plugins.js",
-      "wwwroot/js/navBar.js",
+      "wwwroot/js/navbar.js",
       "wwwroot/js/site.js"
     ],
     "minify": {

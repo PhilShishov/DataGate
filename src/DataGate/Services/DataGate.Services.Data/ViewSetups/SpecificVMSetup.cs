@@ -24,7 +24,7 @@ namespace DataGate.Services.Data.ViewSetups
         {
             exceptionService.DoesExist(id);
 
-            var dateParsed = DateTimeParser.FromWebFormat(date);
+            var dateParsed = DateTimeExtensions.FromWebFormat(date);
             var entity = await service.ByIdAndDate(queryDto.SqlFunctionById, id, dateParsed).ToListAsync();
             string startConnectionString = entity.ToList()[1][IndexStartConnectionInSQLTable];
             string endConnectionString = entity.ToList()[1][IndexEndConnectionInSQLTable];
@@ -32,7 +32,7 @@ namespace DataGate.Services.Data.ViewSetups
 
             if (!string.IsNullOrWhiteSpace(endConnectionString) && endConnectionString != GlobalConstants.EmptyEndConnectionDisplay)
             {
-                endConnection = DateTimeParser.FromSqlFormat(endConnectionString);
+                endConnection = DateTimeExtensions.FromSqlFormat(endConnectionString);
             }
 
             var dto = new DetailsDto()
@@ -40,7 +40,7 @@ namespace DataGate.Services.Data.ViewSetups
                 Id = id,
                 Date = date,
                 Entity = entity,
-                StartConnection = DateTimeParser.FromSqlFormat(startConnectionString),
+                StartConnection = DateTimeExtensions.FromSqlFormat(startConnectionString),
                 EndConnection = endConnection,
             };
 

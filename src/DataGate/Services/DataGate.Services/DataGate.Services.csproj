@@ -20,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\DataGate.Common\DataGate.Common.csproj" />
     <ProjectReference Include="..\..\Web\DataGate.Web.Infrastructure\DataGate.Web.Infrastructure.csproj" />
+    <ProjectReference Include="..\DataGate.Services.Mapping\DataGate.Services.Mapping.csproj" />
   </ItemGroup>
 
 </Project>

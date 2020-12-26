@@ -155,7 +155,7 @@ namespace DataGate.Web.Areas.Administration.Controllers
         private async Task SendNotification(ApplicationUser user)
         {
             var notifMessage = string.Format(InfoMessages.CreateUserNotification, user.UserName);
-            await this.notificationService.Add(this.User, notifMessage, this.Request.Path);
+            await this.notificationService.Add(this.User, notifMessage, "/Admin/Admin/ViewUsers");
 
             int count = await this.notificationService.Count(this.User);
             await this.hubContext.Clients.All.SendAsync("SendNotification", count);

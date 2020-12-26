@@ -1,49 +1,62 @@
-﻿namespace DataGate.Web.Controllers
+﻿// Copyright (c) DataGate Project. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+namespace DataGate.Web.Controllers
 {
-    using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     using DataGate.Services.Notifications.Contracts;
+    using DataGate.Web.Hubs;
     using DataGate.Web.ViewModels.Notifications;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.SignalR;
 
     [Authorize]
-    //[ApiController]
-    //[Route("api/controller")]
+    [ApiController]
     public class NotificationController : Controller
     {
+        private readonly IHubContext<NotificationHub> hubContext;
         private readonly INotificationService notificationService;
 
-        public NotificationController(INotificationService notificationService)
+        public NotificationController(
+            IHubContext<NotificationHub> hubContext,
+            INotificationService notificationService)
         {
+            this.hubContext = hubContext;
             this.notificationService = notificationService;
         }
+
         [Route("loadNotifications")]
-        public IActionResult All()
+        public async Task<IActionResult> All()
         {
-            IEnumerable<NotificationViewModel> model = this.notificationService.All();
+            var model = this.notificationService.All<NotificationViewModel>(this.User);
+
+            int count = await this.notificationService.Count(this.User);
+            await this.hubContext.Clients.All.SendAsync("SendNotification", count);
 
             return this.PartialView("_UserNotificationPartial", model);
         }
 
-      
-        //[HttpPost]
-        //public async Task<ActionResult<VoteResponseModel>> Change(VoteInputModel input)
-        //{
-        //    var userId = this.userManager.GetUserId(this.User);
-        //    await this.votesService.VoteAsync(input.PostId, userId, input.IsUpVote);
-        //    var votes = this.votesService.GetVotes(input.PostId);
-        //    return new VoteResponseModel { VotesCount = votes };
-        //}
+        [HttpGet]
+        [Route("api/notifications")]
+        public async Task<ActionResult<NotificationResponseModel>> Status(string notifId)
+        {
+            await this.notificationService.StatusAsync(this.User, notifId);
+            var status = this.notificationService.GetNotificationStatus(this.User, notifId);
 
-        //[HttpPost]
-        //public async Task<ActionResult<VoteResponseModel>> ChangeAll(VoteInputModel input)
+            return new NotificationResponseModel { Status = status, NotifId = notifId };
+        }
+
+        //[HttpGet]
+        //[Route("api/notifications")]
+        //public async Task<ActionResult<NotificationResponseModel>> StatusAll(string notifId)
         //{
-        //    var userId = this.userManager.GetUserId(this.User);
-        //    await this.votesService.VoteAsync(input.PostId, userId, input.IsUpVote);
-        //    var votes = this.votesService.GetVotes(input.PostId);
-        //    return new VoteResponseModel { VotesCount = votes };
+        //    //await this.notificationService.StatusAsync(this.User, notifId);
+        //    var status = this.notificationService.GetNotificationStatus(this.User, notifId);
+
+        //    return new NotificationResponseModel { Status = status };
         //}
     }
 }

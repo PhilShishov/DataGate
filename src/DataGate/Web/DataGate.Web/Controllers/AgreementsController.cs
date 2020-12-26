@@ -69,7 +69,7 @@ namespace DataGate.Web.Controllers
                                                   SqlFunctionDictionary.AllAgreementsSubFunds,
                                                   SqlFunctionDictionary.AllAgreementsShareClasses);
 
-                var parsedDate = DateTimeParser.FromWebFormat(model.Date);
+                var parsedDate = DateTimeExtensions.FromWebFormat(model.Date);
 
                 model.Agreements = this.service.All<AgreementLibraryViewModel>(function, parsedDate);
             }

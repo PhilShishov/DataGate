@@ -62,10 +62,10 @@ namespace DataGate.Web.InputModels.Funds
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<EditFundInputModel, FundPostDto>()
-                .ForMember(dto => dto.InitialDate, action => action.MapFrom(model => DateTimeParser.ToSqlFormat(model.InitialDate)));
+                .ForMember(dto => dto.InitialDate, action => action.MapFrom(model => DateTimeExtensions.ToSqlFormat(model.InitialDate)));
 
             configuration.CreateMap<CreateFundInputModel, FundPostDto>()
-                .ForMember(dto => dto.InitialDate, action => action.MapFrom(model => DateTimeParser.ToSqlFormat(model.InitialDate)));
+                .ForMember(dto => dto.InitialDate, action => action.MapFrom(model => DateTimeExtensions.ToSqlFormat(model.InitialDate)));
         }
     }
 }

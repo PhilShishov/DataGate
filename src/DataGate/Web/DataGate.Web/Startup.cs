@@ -34,11 +34,11 @@ namespace DataGate.Web
             // ---------------------------------------------------------
             //
             // Database Connection settings
-            services.AddDbContext<UsersDbContext>(
-                options => options.UseSqlServer(this.configuration.GetConnectionString(GlobalConstants.DataGateUsersConnection)));
+            services.AddDbContext<UsersDbContext>(options => 
+                     options.UseSqlServer(this.configuration.GetConnectionString(GlobalConstants.DataGateUsersConnection)));
 
-            services.AddDbContext<ApplicationDbContext>(
-               options => options.UseSqlServer(this.configuration.GetConnectionString(GlobalConstants.DataGateAppConnection)));
+            services.AddDbContext<ApplicationDbContext>(options => 
+                     options.UseSqlServer(this.configuration.GetConnectionString(GlobalConstants.DataGateAppConnection)));
 
             services.ConfigureIdentity()
                 .ConfigureSession()

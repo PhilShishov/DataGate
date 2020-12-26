@@ -63,7 +63,7 @@ namespace DataGate.Web.Controllers.Files
         public IActionResult GetDistinct(int id, string date, string areaName)
         {
             var model = new DistinctOverviewViewModel { AreaName = areaName };
-            var dateParsed = DateTimeParser.FromWebFormat(date);
+            var dateParsed = DateTimeExtensions.FromWebFormat(date);
 
             string functionDoc = StringSwapper.ByArea(areaName,
                                              SqlFunctionDictionary.DistinctDocumentsFund,
@@ -105,7 +105,7 @@ namespace DataGate.Web.Controllers.Files
                 ContainerId = id,
                 Date = date,
             };
-            var dateParsed = DateTimeParser.FromWebFormat(date);
+            var dateParsed = DateTimeExtensions.FromWebFormat(date);
 
             string function = StringSwapper.ByArea(areaName,
                                              SqlFunctionDictionary.AgreementsFund,

@@ -61,7 +61,7 @@ namespace DataGate.Web.Controllers
                         tableHeaders = model.TableValues.FirstOrDefault();
                     }
 
-                    var date = DateTimeParser.FromWebFormat(model.Date);
+                    var date = DateTimeExtensions.FromWebFormat(model.Date);
                     fileName = GenerateFileTemplate.Pdf(tableHeaders, model.TableValues, date, model.ControllerName);
                 }
 

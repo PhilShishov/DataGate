@@ -1,4 +1,7 @@
-﻿namespace DataGate.Services.Notifications
+﻿// Copyright (c) DataGate Project. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+namespace DataGate.Services.Notifications
 {
     using System;
     using System.Collections.Generic;
@@ -10,6 +13,7 @@
     using DataGate.Data.Common.Repositories.UsersContext;
     using DataGate.Data.Models.Users;
     using DataGate.Data.Models.Users.Enums;
+    using DataGate.Services.Mapping;
     using DataGate.Services.Notifications.Contracts;
 
     using Microsoft.AspNetCore.Identity;
@@ -63,6 +67,28 @@
             await this.repository.AddRangeAsync(notifications);
         }
 
+        public IEnumerable<T> All<T>(ClaimsPrincipal user)
+        {
+            this.DoesUserExist(user);
+
+            var userId = this.userManager.GetUserId(user);
+
+            var notifications = this.repository.All()
+                .Where(n => n.UserId == userId)
+                .OrderByDescending(n => n.CreatedOn)
+                .ToList();
+
+            // Open Notifications
+            foreach (var notification in notifications)
+            {
+                notification.IsOpened = true;                
+            }
+
+            this.repository.SaveChangesAsync();          
+
+            return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(notifications);
+        }
+
         public async Task<int> Count(ClaimsPrincipal user)
         {
             this.DoesUserExist(user);
@@ -70,8 +96,32 @@
             var userId = this.userManager.GetUserId(user);
 
             var count = await this.repository.All()
-                    .CountAsync(un => un.UserId == userId && !un.IsOpened);
+                    .CountAsync(n => n.UserId == userId && !n.IsOpened);
             return count;
+        }
+        public async Task StatusAsync(ClaimsPrincipal user, string notifId)
+        {
+            var userId = this.userManager.GetUserId(user);
+
+            var notification = this.repository.All()
+                .FirstOrDefault(n => n.Id == notifId && n.UserId == userId);
+
+            if (notification != null)
+            {
+                notification.Status = NotificationStatus.Read;
+            }
+
+            await this.repository.SaveChangesAsync();
+        }
+
+        public string GetNotificationStatus(ClaimsPrincipal user, string notifId)
+        {
+            var userId = this.userManager.GetUserId(user);
+
+            return this.repository.All()
+                .Where(n => n.UserId == userId && n.Id == notifId)
+                .Select(n => n.Status.ToString("g"))
+                .FirstOrDefault();
         }
 
         private void DoesUserExist(ClaimsPrincipal user)

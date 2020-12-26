@@ -1,17 +1,42 @@
 ﻿@model IEnumerable<NotificationViewModel>
 
-<div class="badge-notification-container">
-    <a class="badge" data-count="" id="notification-badge">
-    </a>
-    <div class="notification-list">
-        <ul>
-            @foreach (var notification in Model)
-            {
-                <li>
-                    <a>
-                    </a>
-                </li>
-            }
-        </ul>
-    </div>
+<div>
+    @foreach (var notification in Model)
+    {
+
+        @if (notification.Status == "Unread")
+        {
+            <div class="notification-card unread">
+                <a href="@notification.LinkUrl">
+                    <div class="notification-content">
+                        <p>
+                            @notification.Content
+                        </p>
+                    </div>
+
+                    <div class="notification-footer">
+                        <p>@notification.CreatedOnFormatted</p>
+                    </div>
+                </a>
+                <span class="dot" data-id="@notification.Id"></span>
+            </div>
+        }
+        else
+        {
+            <div class="notification-card">
+                <a href="@notification.LinkUrl">
+                    <div class="notification-content">
+                        <p>
+                            @notification.Content
+                        </p>
+
+                    </div>
+
+                    <div class="notification-footer">
+                        <p>@notification.CreatedOnFormatted</p>
+                    </div>
+                </a>
+            </div>
+        }
+    }
 </div>

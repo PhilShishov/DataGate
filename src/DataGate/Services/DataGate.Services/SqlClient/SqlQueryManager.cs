@@ -80,7 +80,7 @@ namespace DataGate.Services.SqlClient
                 await connection.OpenAsync();
                 SqlCommand command = connection.CreateCommand();
 
-                var sqlDate = DateTimeParser.ToSqlFormat(date);
+                var sqlDate = DateTimeExtensions.ToSqlFormat(date);
 
                 if (!date.HasValue)
                 {
@@ -143,7 +143,7 @@ namespace DataGate.Services.SqlClient
 
                 if (function.Contains("fn"))
                 {
-                    var sqlDate = DateTimeParser.ToSqlFormat(date);
+                    var sqlDate = DateTimeExtensions.ToSqlFormat(date);
                     command.CommandText = $"select * from {function}('{sqlDate}')";
                 }
                 else
@@ -169,7 +169,7 @@ namespace DataGate.Services.SqlClient
             using (SqlConnection connection = new SqlConnection())
             {
                 SqlCommand command = this.SetUpConnection(connection);
-                var sqlDate = DateTimeParser.ToSqlFormat(date);
+                var sqlDate = DateTimeExtensions.ToSqlFormat(date);
 
                 if (id.HasValue)
                 {

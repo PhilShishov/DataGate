@@ -77,7 +77,7 @@ namespace DataGate.Web.Controllers.Funds
             }
 
             var fundId = await this.service.Create(model);
-            var date = DateTimeParser.ToWebFormat(model.InitialDate.AddDays(1));
+            var date = DateTimeExtensions.ToWebFormat(model.InitialDate.AddDays(1));
 
             var message = string.Format(InfoMessages.CreateNotification, model.FundName);
             await this.notificationService.Add(this.User, message, this.Request.Path);
@@ -128,7 +128,7 @@ namespace DataGate.Web.Controllers.Funds
             }
 
             var fundId = await this.service.Edit(model);
-            var date = DateTimeParser.ToWebFormat(model.InitialDate.AddDays(1));
+            var date = DateTimeExtensions.ToWebFormat(model.InitialDate.AddDays(1));
 
             return this.ShowInfo(
                 this.sharedLocalizer.GetHtmlString(InfoMessages.SuccessfulEdit),

@@ -101,12 +101,12 @@ namespace DataGate.Web.InputModels.ShareClasses
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<EditShareClassGetDto, EditShareClassInputModel>()
-              .ForMember(model => model.InitialDate, action => action.MapFrom(dto => DateTimeParser.FromSqlFormat(dto.InitialDate)))
-              .ForMember(model => model.EmissionDate, action => action.MapFrom(dto => DateTimeParser.FromSqlFormat(dto.EmissionDate)))
-              .ForMember(model => model.ExpiryDate, action => action.MapFrom(dto => DateTimeParser.FromSqlFormat(dto.ExpiryDate)))
-              .ForMember(model => model.InceptionDate, action => action.MapFrom(dto => DateTimeParser.FromSqlFormat(dto.InceptionDate)))
-              .ForMember(model => model.LastNavDate, action => action.MapFrom(dto => DateTimeParser.FromSqlFormat(dto.LastNavDate)))
-              .ForMember(model => model.DateBusinessYear, action => action.MapFrom(dto => DateTimeParser.FromSqlFormat(dto.DateBusinessYear)));
+              .ForMember(model => model.InitialDate, action => action.MapFrom(dto => DateTimeExtensions.FromSqlFormat(dto.InitialDate)))
+              .ForMember(model => model.EmissionDate, action => action.MapFrom(dto => DateTimeExtensions.FromSqlFormat(dto.EmissionDate)))
+              .ForMember(model => model.ExpiryDate, action => action.MapFrom(dto => DateTimeExtensions.FromSqlFormat(dto.ExpiryDate)))
+              .ForMember(model => model.InceptionDate, action => action.MapFrom(dto => DateTimeExtensions.FromSqlFormat(dto.InceptionDate)))
+              .ForMember(model => model.LastNavDate, action => action.MapFrom(dto => DateTimeExtensions.FromSqlFormat(dto.LastNavDate)))
+              .ForMember(model => model.DateBusinessYear, action => action.MapFrom(dto => DateTimeExtensions.FromSqlFormat(dto.DateBusinessYear)));
         }
     }
 }

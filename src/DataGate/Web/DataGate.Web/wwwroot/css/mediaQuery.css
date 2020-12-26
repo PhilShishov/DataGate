@@ -7,7 +7,6 @@
 */
 
 @media only screen and (max-width: 991px) {
-
     .branch-background {
         overflow: scroll;
     }
@@ -61,6 +60,11 @@
 }
 
 @media only screen and (max-width: 1200px) {
+
+    .display-count[data-count]:after {
+        padding: 4px 2px 0px 0px;
+    }
+
     .div-entity-container-wrapper {
         display: none;
     }

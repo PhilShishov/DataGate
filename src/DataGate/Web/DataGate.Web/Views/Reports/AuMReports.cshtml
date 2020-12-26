@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = SharedLocalizer.GetHtmlString("Reports");
 
-    var date = DateTimeParser.ToWebFormat(Model.Date);
+    var date = DateTimeExtensions.ToWebFormat(Model.Date);
     decimal aum;
 }
 

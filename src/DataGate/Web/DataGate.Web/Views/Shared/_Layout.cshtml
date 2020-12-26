@@ -99,7 +99,14 @@
 
                 <div class="w-50 d-flex responsive-navbar">
 
-                    <partial name="_UserNotificationPartial" />
+                    <form id="load-notification-form" method="get"></form>
+                    <div class="badge-notification-container">
+                        <a id="notification-badge"
+                           class="badge"
+                           data-count="">
+                        </a>
+                        <div class="notification-list" id="user-notifications"></div>
+                    </div>
 
                     <div class="search-form-wrapper-responsive">
                         <button class="open-search-box mt-3">
@@ -219,7 +226,7 @@
         <script src="~/lib/moment/min/moment.min.js" asp-append-version="true"></script>
         <script src="~/lib/signalr/dist/browser/signalr.min.js" asp-append-version="true"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
-        <script src="~/js/navBar.js" asp-append-version="true"></script>
+        <script src="~/js/navbar.js" asp-append-version="true"></script>
         <script src="~/js/plugins.js" asp-append-version="true"></script>
         <script src="~/js/notifications/notification.js" asp-append-version="true"></script>
     </environment>

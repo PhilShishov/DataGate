@@ -37,7 +37,7 @@ namespace DataGate.Services.Data.Files
         public async Task UploadDocument(UploadDocumentInputModel model)
         {
             UploadDocumentDto dto = AutoMapperConfig.MapperInstance.Map<UploadDocumentDto>(model);
-            dto.EndConnection = DateTimeParser.ToSqlFormat(model.EndConnection);
+            dto.EndConnection = DateTimeExtensions.ToSqlFormat(model.EndConnection);
             dto.DocumentType = await this.service.ByIdDocumentType(model.DocumentType);
 
             string query = StringSwapper.ByArea(model.AreaName,

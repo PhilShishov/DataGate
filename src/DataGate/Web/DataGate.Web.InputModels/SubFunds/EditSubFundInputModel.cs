@@ -104,11 +104,11 @@ namespace DataGate.Web.InputModels.SubFunds
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<EditSubFundGetDto, EditSubFundInputModel>()
-              .ForMember(model => model.InitialDate, action => action.MapFrom(dto => DateTimeParser.FromSqlFormat(dto.InitialDate)))
-              .ForMember(model => model.CSSFAuthDate, action => action.MapFrom(dto => DateTimeParser.FromSqlFormat(dto.CSSFAuthDate)))
-              .ForMember(model => model.ExpiryDate, action => action.MapFrom(dto => DateTimeParser.FromSqlFormat(dto.ExpiryDate)))
-              .ForMember(model => model.FirstNavDate, action => action.MapFrom(dto => DateTimeParser.FromSqlFormat(dto.FirstNavDate)))
-              .ForMember(model => model.LastNavDate, action => action.MapFrom(dto => DateTimeParser.FromSqlFormat(dto.LastNavDate)));
+              .ForMember(model => model.InitialDate, action => action.MapFrom(dto => DateTimeExtensions.FromSqlFormat(dto.InitialDate)))
+              .ForMember(model => model.CSSFAuthDate, action => action.MapFrom(dto => DateTimeExtensions.FromSqlFormat(dto.CSSFAuthDate)))
+              .ForMember(model => model.ExpiryDate, action => action.MapFrom(dto => DateTimeExtensions.FromSqlFormat(dto.ExpiryDate)))
+              .ForMember(model => model.FirstNavDate, action => action.MapFrom(dto => DateTimeExtensions.FromSqlFormat(dto.FirstNavDate)))
+              .ForMember(model => model.LastNavDate, action => action.MapFrom(dto => DateTimeExtensions.FromSqlFormat(dto.LastNavDate)));
         }
     }
 }

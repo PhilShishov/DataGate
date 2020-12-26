@@ -43,7 +43,7 @@ namespace DataGate.Services.Data.ViewSetups
             var dto = new EntitiesOverviewGetDto()
             {
                 IsActive = true,
-                Date = DateTimeParser.ToWebFormat(today),
+                Date = DateTimeExtensions.ToWebFormat(today),
                 HeadersSelection = primeHeaders,
                 Headers = headers,
                 Values = values,
@@ -55,7 +55,7 @@ namespace DataGate.Services.Data.ViewSetups
 
         public static async Task SetPost(EntitiesViewModel model, IEntityService service, string functionAll, string functionActive)
         {
-            var date = DateTimeParser.FromWebFormat(model.Date);
+            var date = DateTimeExtensions.FromWebFormat(model.Date);
 
             var headers = await service.All(functionActive, null, date).FirstOrDefaultAsync();
             model.Headers = headers.ToList();
