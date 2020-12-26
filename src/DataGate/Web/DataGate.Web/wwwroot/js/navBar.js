@@ -23,6 +23,8 @@ const CLASSES_NAVBAR = {
     if (notifMenuToogler) {
         notifMenuToogler.addEventListener('click', () => {
 
+            var token = $('#load-notification-form input[name=__RequestVerificationToken]').val();
+
             if (userMenuToogler.classList.contains(CLASSES_NAVBAR.OPEN)) {
                 userMenuToogler.classList.toggle(CLASSES_NAVBAR.OPEN);
             }
@@ -31,7 +33,48 @@ const CLASSES_NAVBAR = {
                 searchMenuParent.classList.toggle(CLASSES_NAVBAR.OPENED);
                 searchMenu.classList.add('d-none');
             }
-            notifMenuToogler.classList.toggle(CLASSES_NAVBAR.OPEN);
+
+            $.ajax({
+                url: '/loadNotifications',
+                type: 'GET',
+                contentType: 'application/json; charset=utf-8',
+                headers: { 'X-CSRF-TOKEN': token },
+            }).done(function (data) {
+                if (data) {                    
+                    $('#user-notifications').html(data);
+                    notifMenuToogler.classList.toggle(CLASSES_NAVBAR.OPEN);                   
+
+                    const notifDots = document.getElementsByClassName('dot');
+                    if (notifDots) {
+                        for (var dot of notifDots) {
+                            dot.addEventListener('click', (ev) => {
+                                ev.stopPropagation();
+          
+                                var json = { notifId: dot.getAttribute('data-id') };
+                                $.ajax({
+                                    url: '/api/notifications',
+                                    type: 'GET',
+                                    data: json,
+                                    contentType: 'application/json; charset=utf-8',
+                                    headers: { 'X-CSRF-TOKEN': token },
+                                    dataType: 'json',
+                                }).done((data) => {
+                                    dot.parentElement.classList.remove('unread');  
+                                    dot.remove();
+                                }).fail(function (request, status, error) {
+                                    swal(request.responseText, {
+                                        icon: "error"
+                                    })
+                                });
+                            });
+                        }
+                    }
+                }
+            }).fail(function (request, status, error) {
+                swal(request.responseText, {
+                    icon: "error"
+                })
+            });
         })
     }
 
