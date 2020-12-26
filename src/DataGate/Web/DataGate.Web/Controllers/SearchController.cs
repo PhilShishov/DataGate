@@ -4,15 +4,16 @@
 namespace DataGate.Web.Controllers
 {
     using System;
-
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
+    using System.Linq;
 
     using DataGate.Common;
     using DataGate.Common.Exceptions;
-    using DataGate.Services.Data.ShareClasses;
     using DataGate.Services.Data.Recent;
+    using DataGate.Services.Data.ShareClasses;
     using DataGate.Web.ViewModels.Search;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
 
     [Authorize]
     public class SearchController : BaseController
@@ -37,8 +38,6 @@ namespace DataGate.Web.Controllers
                 throw new BadRequestException(ErrorMessages.InvalidSearchKeyword);
             }
 
-            this.recentService.Save(this.User, this.Request.Path + this.Request.QueryString);
-
             var model = new SearchResultsViewModel
             {
                 Date = DateTime.Today.ToString(GlobalConstants.RequiredWebDateTimeFormat),
@@ -49,12 +48,18 @@ namespace DataGate.Web.Controllers
 
             if (isIsin)
             {
+                this.recentService.Save(this.User, this.Request.Path + this.Request.QueryString);
                 var classId = this.service.ByIsin(model.CleanedSearch);
                 return this.RedirectToRoute(
-                    EndpointsConstants.RouteDetails + EndpointsConstants.ShareClassArea, 
+                    EndpointsConstants.RouteDetails + EndpointsConstants.ShareClassArea,
                     new { area = EndpointsConstants.ShareClassArea, id = classId, date = model.Date });
             }
             model.Results = this.service.ByName(model.CleanedSearch);
+
+            if (model.Results.ToList().Count > 0)
+            {
+                this.recentService.Save(this.User, this.Request.Path + $"?searchTerm={model.CleanedSearch}");
+            }
 
             return this.View(model);
         }

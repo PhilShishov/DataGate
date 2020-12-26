@@ -7,12 +7,18 @@
     <div class="d-flex justify-content-center text-center">
         <form method="post" class="d-inline w-75">
             <h2>@SharedLocalizer.GetHtmlString("Edit User")</h2>
-            <div>
-                <a class="btn btn-datagate text-white mt-2"
+            <div class="button-holder">
+                <a class="btn btn-datagate text-white mt-2 mx-2"
                    asp-area=""
                    asp-controller="User"
                    asp-action="Index">
                     @SharedLocalizer.GetHtmlString("Back to Panel")
+                </a>
+                <a class="btn btn-datagate text-white mt-2 mx-2"
+                   asp-area="Admin"
+                   asp-controller="Admin"
+                   asp-action="All">
+                    @SharedLocalizer.GetHtmlString("Back to Users")
                 </a>
             </div>
             <hr />

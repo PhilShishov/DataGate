@@ -26,7 +26,7 @@ namespace DataGate.Web.Areas.Administration.Controllers
     public class AdminController : BaseController
     {
         private const string EmailConfirmationUrl = "/Account/ConfirmEmail";
-        private const string ViewUsersUrl = "/Admin/Admin/ViewUsers";
+        private const string ViewUsersUrl = "/Admin/Admin/All";
 
         private readonly IUserService userService;
         private readonly IHubNotificationHelper notificationHelper;
@@ -66,7 +66,6 @@ namespace DataGate.Web.Areas.Administration.Controllers
                            "ConfirmPassword", "RoleType", "RecaptchaValue")]
                             CreateUserInputModel input)
         {
-            string returnUrl = ViewUsersUrl;
             if (!this.ModelState.IsValid)
             {
                 this.ViewData["Roles"] = this.userService.Roles();
@@ -78,7 +77,7 @@ namespace DataGate.Web.Areas.Administration.Controllers
             if (!result.Succeeded)
             {
                 this.AddErrors(result);
-                return this.ShowErrorLocal(this.sharedLocalizer.GetHtmlString(ErrorMessages.UnsuccessfulCreate), returnUrl);
+                return this.ShowErrorLocal(this.sharedLocalizer.GetHtmlString(ErrorMessages.UnsuccessfulCreate), ViewUsersUrl);
             }
 
             var user = await this.userService.ByUsername(input.Username);
@@ -105,7 +104,7 @@ namespace DataGate.Web.Areas.Administration.Controllers
                 user.UserName,
                 input.RoleType);
 
-            return this.ShowInfoLocal(infoMessage, returnUrl);
+            return this.ShowInfoLocal(infoMessage, ViewUsersUrl);
         }
 
         public async Task<IActionResult> Edit(string id)
@@ -159,7 +158,7 @@ namespace DataGate.Web.Areas.Administration.Controllers
         private async Task SendNotification(string username, string message)
         {
             var notifMessage = string.Format(message, username);
-            await this.notificationService.Add(this.User, notifMessage, "/Admin/Admin/ViewUsers");
+            await this.notificationService.Add(this.User, notifMessage, ViewUsersUrl);
 
             int count = await this.notificationService.Count(this.User);
             await this.notificationHelper.SendToAll(count);

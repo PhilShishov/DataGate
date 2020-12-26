@@ -216,6 +216,9 @@
   <data name="Back to Panel" xml:space="preserve">
     <value>Indietro al pannello</value>
   </data>
+  <data name="Back to Users" xml:space="preserve">
+    <value>Indietro al Utenti</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Annulla</value>
   </data>
