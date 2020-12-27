@@ -86,6 +86,7 @@ https://pharusdatagate.com <br />
 
 ### Backend
 * C# .NET Core 3.1
+* 5 Areas, 28 Services, 16 Controllers
 * Design Pattern - DAO, DI, TAP, MVC, REST, Repository, SOLID
 * Also build with:
   * SendGrid
@@ -94,6 +95,7 @@ https://pharusdatagate.com <br />
   * EPPlus
   * itext7
   * Full-text search
+  * SignalR
 
 ### Client-side
 * RAZOR, JavaScript ES6, jQuery, Ajax, Bootstrap
@@ -130,14 +132,17 @@ https://pharusdatagate.com <br />
  [Agreements](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Agreements.png), 
  [Timeline](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Timeline.png), 
  Fees
- - Manage tool menu - Layout, Toogle inactive entities, Update views by date
+ - Manage tool menu - Save Layout, Toogle inactive entities, Update views by date
  - Extract view tables as [PDF](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/Extraction/Funds.pdf) 
  and [Excel](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/Extraction/Funds.xlsx)
  - Consult AuM NAV [Fund](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/FundReports.png) / [Sub Fund](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/SubFundReports.png) and Time Series reports
  - Choose and sort header columns for large table views
  - Perform a global [share class search](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/SearchView.png)
- - Slide through recent share classes
- - Two language support - 
+ - Slide through recent share classes and visit recently viewed links
+ - Real-time notifications 
+   - Create, edit, delete entity
+   - Upload/delete document
+ - Multi language support - 
  [English](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/UserPanel.png) and 
  [Italian](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Italian.png)
  ### Users in role "Legal"
