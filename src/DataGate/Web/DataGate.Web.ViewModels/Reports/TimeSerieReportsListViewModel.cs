@@ -8,6 +8,7 @@ namespace DataGate.Web.ViewModels.Reports
     using System.ComponentModel.DataAnnotations;
 
     using DataGate.Common;
+
     public class TimeSerieReportsListViewModel
     {
         //[Required(ErrorMessage = ValidationMessages.DateRequired)]

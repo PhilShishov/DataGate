@@ -48,8 +48,8 @@ namespace DataGate.Web.Tests
         [InlineData("/reports/Fund/aum")]
         [InlineData("/reports/SubFund/aum")]
         [InlineData("/agreements/Fund")]
-        [InlineData("/Admin/Admin/ViewUsers")]
-        [InlineData("/Admin/Admin/CreateUser")]
+        [InlineData("/Admin/Admin/All")]
+        [InlineData("/Admin/Admin/Create")]
         public async Task AccessPrivatePage_WithUnauthorizedUser_ShoudRedirectToLoginPage(string url)
         {
             var client = server.CreateClient(new WebApplicationFactoryClientOptions { AllowAutoRedirect = false });

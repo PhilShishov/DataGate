@@ -5,6 +5,7 @@ namespace DataGate.Web.ViewModels.Queries
 {
     using System;
     using System.Collections.Generic;
+
     using DataGate.Services.Mapping;
     using DataGate.Web.ViewModels.Entities;
 
