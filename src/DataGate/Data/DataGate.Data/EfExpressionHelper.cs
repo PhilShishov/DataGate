@@ -6,6 +6,8 @@
     using System.Linq.Expressions;
     using System.Reflection;
 
+    using DataGate.Common;
+
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata;
     using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -25,10 +27,8 @@
             object[] id)
             where TEntity : class
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException(nameof(id));
-            }
+
+            Validator.ArgumentNullException(id);
 
             var entityType = typeof(TEntity);
             var entityParameter = Expression.Parameter(entityType, "e");

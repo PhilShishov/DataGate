@@ -32,7 +32,7 @@ namespace DataGate.Services.Data.ViewSetups
                 var dtoSelected = new AllSelectedDto
                 {
                     Date = today,
-                    PreSelectedColumns = headers.Take(GlobalConstants.NumberPreSelectedColumns).ToList(),
+                    PreSelectedColumns = headers.Take(GlobalConstants.PreSelectedColumnsCount).ToList(),
                     SelectedColumns = userColumns,                    
                 };
 

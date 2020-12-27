@@ -9,6 +9,7 @@ namespace DataGate.Services.Data.Recent
     using System.Security.Claims;
     using System.Threading.Tasks;
 
+    using DataGate.Common;
     using DataGate.Data.Common.Repositories.UsersContext;
     using DataGate.Data.Models.Users;
     using DataGate.Web.Infrastructure.Extensions;
@@ -41,10 +42,7 @@ namespace DataGate.Services.Data.Recent
 
         public async Task Save(ClaimsPrincipal user, string link)
         {
-            if (user == null)
-            {
-                throw new ArgumentNullException(nameof(user));
-            }
+            Validator.ArgumentNullException(user);
 
             var userId = this.userManager.GetUserId(user);
             var list = this.repository.All().ToList();

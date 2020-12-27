@@ -53,7 +53,7 @@ namespace DataGate.Services.Tests.Redis
         {
             Action act = () => RedisObject.ToRedisValue(value);
 
-            Assert.Throws<ArgumentException>(act);
+            Assert.Throws<ArgumentNullException>(act);
         }
 
         [Theory]
@@ -66,7 +66,7 @@ namespace DataGate.Services.Tests.Redis
 
             Func<Task> task = async () => await this.hashItem.Set(itemName, redisValue);
 
-            await Assert.ThrowsAsync<ArgumentException>(task);
+            await Assert.ThrowsAsync<ArgumentNullException>(task);
         }
 
         [Theory]

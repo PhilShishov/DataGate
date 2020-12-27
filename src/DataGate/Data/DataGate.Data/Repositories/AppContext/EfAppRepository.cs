@@ -4,10 +4,10 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Microsoft.EntityFrameworkCore;
-
-    using DataGate.Common.Exceptions;
+    using DataGate.Common;
     using DataGate.Data.Common.Repositories.AppContext;
+
+    using Microsoft.EntityFrameworkCore;
 
     public class EfAppRepository<TEntity> : IAppRepository<TEntity>
         where TEntity : class
@@ -32,10 +32,7 @@
         {
             TEntity model = await this.DbSet.FindAsync(id);
 
-            if (model == null)
-            {
-                throw new EntityNotFoundException(typeof(TEntity).Name);
-            }
+            Validator.EntityNotFoundException(model);
 
             return model;
         }

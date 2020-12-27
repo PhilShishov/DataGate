@@ -52,10 +52,7 @@ namespace DataGate.Services.Redis
         public T GetKey<T>(string keyName) 
             where T : RedisObject
         {
-            if (string.IsNullOrWhiteSpace(keyName))
-            {
-                throw new ArgumentException(ErrorMessages.InvalidKeyName);
-            }
+            Validator.ArgumentNullExceptionString(keyName, ErrorMessages.InvalidKeyName);
 
             return GetKey(typeof(T), keyName) as T;
         }

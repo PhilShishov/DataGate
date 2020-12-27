@@ -48,12 +48,12 @@ namespace DataGate.Web.Controllers
                 }
                 else if (model.Command == GlobalConstants.CommandExtractPdf)
                 {
-                    if (tableHeaders.ToList().Count > GlobalConstants.NumberOfAllowedColumnsInPdfView)
+                    if (tableHeaders.ToList().Count > GlobalConstants.AllowedColumnsInPdfView)
                     {
                         var tableValues = new List<string[]>();
                         foreach (var row in model.TableValues)
                         {
-                            var tableRow = row.Take(GlobalConstants.NumberOfAllowedColumnsInPdfView).ToArray();
+                            var tableRow = row.Take(GlobalConstants.AllowedColumnsInPdfView).ToArray();
                             tableValues.Add(tableRow);
                         }
 

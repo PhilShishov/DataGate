@@ -3,15 +3,33 @@
 
 namespace DataGate.Common
 {
+    using System;
+
     using DataGate.Common.Exceptions;
 
     public static class Validator
     {
-        public static void NotFoundExceptionIfEntityIsNull(object entity, string name)
+        public static void EntityNotFoundException(object entity)
         {
             if (entity == null)
             {
-                throw new EntityNotFoundException(name);
+                throw new EntityNotFoundException(nameof(entity));
+            }
+        }
+
+        public static void ArgumentNullException(object entity, string message = null)
+        {
+            if (entity == null)
+            {
+                throw new ArgumentNullException(message ?? nameof(entity));
+            }
+        }
+
+        public static void ArgumentNullExceptionString(string value, string message)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                throw new ArgumentNullException(message);
             }
         }
     }

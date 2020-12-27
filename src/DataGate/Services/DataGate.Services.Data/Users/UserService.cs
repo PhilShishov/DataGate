@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+using DataGate.Common;
 using DataGate.Data.Models.Users;
 using DataGate.Web.InputModels.Users;
 using DataGate.Web.ViewModels.Users;
@@ -53,7 +54,7 @@ namespace DataGate.Services.Data.Users
         public async Task<DeleteUserInputModel> ByIdDelete(string id)
         {
             var user = await this.userManager.FindByIdAsync(id);
-            this.DoesUserExist(user);
+            Validator.EntityNotFoundException(user);
             var roles = await this.userManager.GetRolesAsync(user);
 
             DeleteUserInputModel model = new DeleteUserInputModel
@@ -70,7 +71,7 @@ namespace DataGate.Services.Data.Users
         public async Task<EditUserInputModel> ByIdEdit(string id)
         {
             var user = await this.userManager.FindByIdAsync(id);
-            this.DoesUserExist(user);
+            Validator.EntityNotFoundException(user);
             var roles = await this.userManager.GetRolesAsync(user);
 
             var model = new EditUserInputModel
@@ -108,7 +109,7 @@ namespace DataGate.Services.Data.Users
         public async Task<IdentityResult> Delete(DeleteUserInputModel input)
         {
             var user = await this.userManager.FindByIdAsync(input.Id);
-            this.DoesUserExist(user);
+            Validator.EntityNotFoundException(user);
             var roles = await this.userManager.GetRolesAsync(user);
 
             await this.userManager.RemoveFromRoleAsync(user, roles.FirstOrDefault());
@@ -118,7 +119,7 @@ namespace DataGate.Services.Data.Users
         public async Task<IdentityResult> Edit(EditUserInputModel input)
         {
             var user = await this.userManager.FindByIdAsync(input.Id);
-            this.DoesUserExist(user);
+            Validator.EntityNotFoundException(user);
             var roles = await this.userManager.GetRolesAsync(user);
 
             user.UserName = input.Username;
@@ -160,14 +161,6 @@ namespace DataGate.Services.Data.Users
             if (roleExist)
             {
                 await this.userManager.AddToRoleAsync(user, role);
-            }
-        }
-
-        private void DoesUserExist(ApplicationUser user)
-        {
-            if (user == null)
-            {
-                throw new ArgumentNullException(nameof(user));
             }
         }
     }

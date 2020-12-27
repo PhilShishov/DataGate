@@ -34,7 +34,7 @@ namespace DataGate.Services.Notifications
 
         public async Task Add(ClaimsPrincipal fromUser, string message, string link)
         {
-            this.DoesUserExist(fromUser);
+            Validator.EntityNotFoundException(fromUser);
 
             var users = this.userManager.Users.ToList();
 
@@ -49,7 +49,7 @@ namespace DataGate.Services.Notifications
 
         public async Task AddAdmin(ClaimsPrincipal fromUser, string message, string link)
         {
-            this.DoesUserExist(fromUser);
+            Validator.EntityNotFoundException(fromUser);
 
             var users = this.userManager.Users.ToList();
 
@@ -69,7 +69,7 @@ namespace DataGate.Services.Notifications
 
         public IEnumerable<T> All<T>(ClaimsPrincipal user)
         {
-            this.DoesUserExist(user);
+            Validator.EntityNotFoundException(user);
 
             var userId = this.userManager.GetUserId(user);
 
@@ -90,7 +90,7 @@ namespace DataGate.Services.Notifications
 
         public async Task<int> Count(ClaimsPrincipal user)
         {
-            this.DoesUserExist(user);
+            Validator.EntityNotFoundException(user);
 
             var userId = this.userManager.GetUserId(user);
 
@@ -121,14 +121,6 @@ namespace DataGate.Services.Notifications
                 .Where(n => n.UserId == userId && n.Id == notifId)
                 .Select(n => n.Status.ToString("g"))
                 .FirstOrDefault();
-        }
-
-        private void DoesUserExist(ClaimsPrincipal user)
-        {
-            if (user == null)
-            {
-                throw new ArgumentNullException(nameof(user));
-            }
         }
 
         private static void NotificationTemplate(string message, string link, List<UserNotification> notifications, ApplicationUser user)

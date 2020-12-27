@@ -72,7 +72,7 @@ namespace DataGate.Services.Tests.Redis
         {
             Action act = () => container.GetKey<RedisItem<string>>(keyName);
 
-            Assert.Throws<ArgumentException>(act);
+            Assert.Throws<ArgumentNullException>(act);
         }
 
         [Fact]

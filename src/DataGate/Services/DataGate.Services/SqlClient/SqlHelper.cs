@@ -46,7 +46,7 @@ namespace DataGate.Services.SqlClient
                 model.Add(headers);
                 model.AddRange(values);
 
-                Validator.NotFoundExceptionIfEntityIsNull(model, nameof(model));
+                Validator.EntityNotFoundException(model);
 
                 foreach (var item in model)
                 {

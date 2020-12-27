@@ -78,8 +78,8 @@ namespace DataGate.Common
         public const int IndexEntityNameInTable = 3;
         public const int IndexEntityHeadersInTable = 0;
         public const int RowNumberOfHeadersInTable = 1;
-        public const int NumberOfAllowedColumnsInPdfView = 17;
-        public const int NumberPreSelectedColumns = 4;
+        public const int AllowedColumnsInPdfView = 17;
+        public const int PreSelectedColumnsCount = 4;
 
         // Toolbar Commands
         public const string CommandUpdateTable = "Update";

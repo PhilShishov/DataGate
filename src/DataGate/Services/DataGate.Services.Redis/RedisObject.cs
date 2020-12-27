@@ -6,8 +6,10 @@ namespace DataGate.Services.Redis
     using System;
     using System.Text.Json;
     using System.Threading.Tasks;
+
     using DataGate.Common;
     using DataGate.Services.Redis.Contracts;
+
     using StackExchange.Redis;
 
     public abstract class RedisObject
@@ -71,20 +73,15 @@ namespace DataGate.Services.Redis
 
         public static RedisValue ToRedisValue(object element)
         {
-            if (element == null)
-            {
-                throw new ArgumentException(ErrorMessages.InvalidValue);
-            }
+            Validator.ArgumentNullException(element, ErrorMessages.InvalidValue);
+
             if (element is byte[] b)
             {
                 return b;
             }
             if (element is RedisValue val)
             {
-                if (string.IsNullOrWhiteSpace(val.ToString()))
-                {
-                    throw new ArgumentException(ErrorMessages.InvalidValue);
-                }
+                Validator.ArgumentNullExceptionString(val.ToString(), ErrorMessages.InvalidValue);
 
                 return val;
             }
@@ -144,26 +141,25 @@ namespace DataGate.Services.Redis
         {
             switch (value)
             {
-                case RedisValue b: return b;
-                case bool b: return b;
-                case char b: return b.ToString();
-                case DateTime b: return b.Ticks;
-                case decimal b: return (double)b;
-                case double b: return b;
-                case Int16 b: return b;
-                case Int32 b: return b;
-                case Int64 b: return b;
-                case sbyte b: return b;
-                case Single b: return b;
-                case string b:
-                    if (string.IsNullOrWhiteSpace(b))
-                    {
-                        throw new ArgumentException(ErrorMessages.InvalidValue);
-                    }
-                    return b;
-                case UInt16 b: return (uint)b;
-                case UInt32 b: return b;
-                case UInt64 b: return b;
+                case RedisValue x: return x;
+                case bool x: return x;
+                case char x: return x.ToString();
+                case DateTime x: return x.Ticks;
+                case decimal x: return (double)x;
+                case double x: return x;
+                case Int16 x: return x;
+                case Int32 x: return x;
+                case Int64 x: return x;
+                case sbyte x: return x;
+                case Single x: return x;
+                case string x:
+
+                    Validator.ArgumentNullExceptionString(x, ErrorMessages.InvalidValue);
+
+                    return x;
+                case UInt16 x: return (uint)x;
+                case UInt32 x: return x;
+                case UInt64 x: return x;
                 default:
                     throw new Exception(UnsupportedType);
             }
