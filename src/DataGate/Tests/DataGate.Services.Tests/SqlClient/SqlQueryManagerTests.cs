@@ -24,7 +24,7 @@ namespace DataGate.Services.Tests.SqlClient
     using Xunit;
     using Xunit.Abstractions;
 
-    public class SqlQueryManagerTests : SqlServerContextProvider
+    public class SqlQueryManagerTests : SqlServerContextProvider, IDisposable
     {
         private readonly ITestOutputHelper output;
         private readonly ISqlQueryManager sqlQueryManager;
@@ -37,10 +37,10 @@ namespace DataGate.Services.Tests.SqlClient
             //ExecuteSqlFile("create.sql");
         }
 
-        //public void Dispose()
-        //{
-        //    //ExecuteSqlFile("drop.sql");
-        //}
+        public void Dispose()
+        {
+            //ExecuteSqlFile("drop.sql");
+        }
 
         [Fact]
         public void Connection_ShouldConnectToTestDatabase()
@@ -341,7 +341,7 @@ namespace DataGate.Services.Tests.SqlClient
                 Value = DateTimeExtensions.ToSqlFormat(DateTime.Now)
             });
 
-            var result = SqlHelper.GetStringDataAsync(command).ToListAsync().Result;
+            var result = SqlHelper.ExecuteCommand(command).ToListAsync().Result;
 
             Assert.True(result.Count == 14);
             Assert.True(result[0].Length == 10);

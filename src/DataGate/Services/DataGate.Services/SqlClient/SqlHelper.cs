@@ -22,9 +22,10 @@ namespace DataGate.Services.SqlClient
     {
         private const int StartingIndex = 0;
 
-        public static async IAsyncEnumerable<string[]> GetStringDataAsync(SqlCommand command)
+        public static async IAsyncEnumerable<string[]> ExecuteCommand(SqlCommand command)
         {
             Validator.ArgumentNullException(command, ErrorMessages.EmptyCommand);
+            Validator.ArgumentNullExceptionString(command.CommandText, ErrorMessages.EmptyCommand);
 
             using (var reader = await command.ExecuteReaderAsync())
             {
