@@ -1,5 +1,15 @@
+#---------------------------------#
+#      general configuration      #
+#---------------------------------#
 version: 1.0.{build}
 os: Visual Studio 2019
+environment:
+  APPVEYOR_RDP_PASSWORD: DataGate88!
+
+#---------------------------------#
+#       build configuration       #
+#---------------------------------#
+
 before_build:
 - nuget install redis-64 -excludeversion
 - redis-64\tools\redis-server.exe --service-install
@@ -8,10 +18,22 @@ before_build:
 build:
   project: src\DataGate\DataGate.sln
   verbosity: minimal
+  
+#---------------------------------#
+#       tests configuration       #
+#---------------------------------#
 
-environment:
-  APPVEYOR_RDP_PASSWORD: DataGate88!
+test:
+  categories:
+    only:
+      - A
+      
+#---------------------------------#
+#        global handlers          #
+#---------------------------------#
 
 on_finish:
   - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+  - redis-64\tools\redis-server.exe --service-stop
+  
   
