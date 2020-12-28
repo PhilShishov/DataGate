@@ -6,6 +6,7 @@ namespace DataGate.Web.Hubs
     using System;
     using System.Threading.Tasks;
 
+    using DataGate.Common;
     using DataGate.Web.Hubs.Contracts;
 
     using Microsoft.AspNetCore.SignalR;
@@ -24,7 +25,7 @@ namespace DataGate.Web.Hubs
         {
             try
             {
-                await this.context.Clients.All.SendAsync("SendNotfication", count);
+                await this.context.Clients.All.SendAsync(GlobalConstants.SocketSendNotification, count);
                 return Task.CompletedTask;
             }
             catch (Exception ex)

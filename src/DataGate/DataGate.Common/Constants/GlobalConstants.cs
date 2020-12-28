@@ -96,5 +96,8 @@ namespace DataGate.Common
             "MS SQL, Git, GitHub, Fund Management Software, " +
             "Alternative Funds, SICAV, ShareClasses, CSSF, " +
             "Philip Shishov, Pharus Management Lux S.A.";
+
+        // Notifications
+        public const string SocketSendNotification = "SendNotification";
     }
 }

@@ -146,7 +146,7 @@ namespace DataGate.Web.Areas.Administration.Controllers
 
             if (result.Succeeded)
             {
-                await SendNotification(input.Username, InfoMessages.EditUserNotification);
+                await SendNotification(input.Username, InfoMessages.DeleteUserNotification);
                 string infoMessage = string.Format(this.sharedLocalizer.GetHtmlString(InfoMessages.RemoveUser), input.Username);
                 return this.ShowInfoLocal(infoMessage, ViewUsersUrl);
             }

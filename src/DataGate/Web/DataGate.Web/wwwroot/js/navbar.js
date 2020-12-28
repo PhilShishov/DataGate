@@ -64,12 +64,8 @@ const CLASSES_NAVBAR = {
                     icon: "error"
                 })
             });
-
         })
     }
-
-
-
 
     // Toogle notification menu
     if (notifMenuToogler) {

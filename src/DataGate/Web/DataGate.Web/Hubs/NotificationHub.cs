@@ -23,7 +23,7 @@ namespace DataGate.Web.Hubs
             this.connectionManager = connection;
         }
 
-        public string GetConnectionId()
+        public string ConnectionId()
         {
             var username = this.Context.User.Identity.Name;
             this.connectionManager.AddConnection(username, this.Context.ConnectionId);
@@ -31,7 +31,7 @@ namespace DataGate.Web.Hubs
             return this.Context.ConnectionId;
         }
 
-        public async Task<int> GetUserNotificationCount()
+        public async Task<int> NotificationCount()
             => await this.notificationService.Count(this.Context.User);
 
         public override Task OnConnectedAsync()

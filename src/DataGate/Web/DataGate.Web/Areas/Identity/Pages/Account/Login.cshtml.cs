@@ -22,6 +22,7 @@ namespace DataGate.Web.Areas.Identity.Pages.Account
     using DataGate.Web.Resources;
 
     [AllowAnonymous]
+    [ValidateAntiForgeryToken]
     public class LoginModel : PageModel
     {
         private const string UserPanelUrl = "/userpanel";
@@ -53,7 +54,7 @@ namespace DataGate.Web.Areas.Identity.Pages.Account
         [TempData]
         public string ErrorMessage { get; set; }
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(string returnUrl)
         {
             if (!string.IsNullOrEmpty(this.ErrorMessage))
             {
@@ -66,6 +67,7 @@ namespace DataGate.Web.Areas.Identity.Pages.Account
                 await this.HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
                 this.ExternalLogins = (await this.signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+                this.ViewData["ReturnUrl"] = returnUrl;
 
                 return this.Page();
             }
@@ -73,7 +75,7 @@ namespace DataGate.Web.Areas.Identity.Pages.Account
             return this.Redirect(UserPanelUrl);
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(string returnUrl)
         {
             returnUrl = returnUrl ?? this.Url.Content("~/");
 
@@ -108,7 +110,7 @@ namespace DataGate.Web.Areas.Identity.Pages.Account
                             $" ({lastLoginResult.ToString()}) for user with ID '{user.Id}'.");
                     }
 
-                    return this.Redirect(EndpointsConstants.Slash + EndpointsConstants.RouteUserPanel);
+                    return this.Redirect(returnUrl);
                 }
 
                 if (result.RequiresTwoFactor)

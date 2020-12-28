@@ -1,7 +1,10 @@
 ﻿@page "/"
 @model LoginModel
 
-@{ ViewData["Title"] = SharedLocalizer.GetHtmlString("Login"); }
+@{ 
+    ViewData["Title"] = SharedLocalizer.GetHtmlString("Login");
+    var returnUrl = ViewData["ReturnUrl"] as string;
+}
 <section class="login-layout">
     <div class="container-fluid login-layout-container">
         <partial name="Scripts/_CookieConsentPartial" />
@@ -49,6 +52,7 @@
                             <div class="form-group col-md-6 col-lg-6 col-sm-12 col-xs-12">
                                 <div>
                                     <input type="hidden" id="RecaptchaValue" asp-for="Input.RecaptchaValue" />
+                                    <input type="hidden" id="returnUrl" name="returnUrl" value="@returnUrl" />
                                     <button type="submit"
                                             class="btn"
                                             asp-area="Identity"

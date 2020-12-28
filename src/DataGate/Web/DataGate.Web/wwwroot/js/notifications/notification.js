@@ -1,27 +1,39 @@
 ﻿'use strict'
 
+const NOTIFICATION_SOCKETS = {
+    SEND: 'SendNotification',
+    COUNT: 'NotificationCount',
+}
+
+const HTML_NOTIFICATION = {
+    BADGE: 'notification-badge',
+};
+
 let hubConnect = new signalR.HubConnectionBuilder()
     .withUrl('/notificationHub')
     .build();
 
+var badge = document.getElementById(HTML_NOTIFICATION.BADGE);
+
 hubConnect.start()
     .then(() => {
         console.log('Server Notification: Connected');
-        hubConnect.invoke('GetUserNotificationCount').then((count) => {
+        hubConnect.invoke(NOTIFICATION_SOCKETS.COUNT).then((count) => {
             if (count > 0) {
-                document.getElementById("notification-badge").classList.add("display-count");
-                document.getElementById('notification-badge').setAttribute('data-count', count);
+
+                badge.classList.add("display-count");
+                badge.setAttribute('data-count', count);
             }
         })
     }).catch(function (err) {
         return console.error(err.toString());
     });
 
-hubConnect.on('SendNotification', function (count) {
+hubConnect.on(NOTIFICATION_SOCKETS.SEND, function (count) {
     if (count > 0) {
-        document.getElementById("notification-badge").classList.add("display-count");
-        document.getElementById('notification-badge').setAttribute('data-count', count);
+        badge.classList.add("display-count");
+        badge.setAttribute('data-count', count);
     } else {
-        document.getElementById("notification-badge").classList.remove("display-count");
+        badge.classList.remove("display-count");
     }
 })
