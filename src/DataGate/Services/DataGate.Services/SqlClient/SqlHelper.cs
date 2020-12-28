@@ -24,6 +24,8 @@ namespace DataGate.Services.SqlClient
 
         public static async IAsyncEnumerable<string[]> GetStringDataAsync(SqlCommand command)
         {
+            Validator.ArgumentNullException(command, ErrorMessages.EmptyCommand);
+
             using (var reader = await command.ExecuteReaderAsync())
             {
                 var model = new List<string[]>();

@@ -32,5 +32,6 @@ namespace DataGate.Common
         public const string InvalidValue = "Value cannot be empty!";
 
         public const string EmptyFunction = "Function should be provided!";
+        public const string EmptyCommand = "Command has not been provided!";
     }
 }

@@ -15,14 +15,15 @@ namespace DataGate.Services.SqlClient
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
+    using System.Linq;
     using System.Threading.Tasks;
-
-    using Microsoft.Extensions.Configuration;
 
     using DataGate.Common;
     using DataGate.Common.Exceptions;
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.Infrastructure.Extensions;
+
+    using Microsoft.Extensions.Configuration;
 
     // _____________________________________________________________
     public class SqlQueryManager : ISqlQueryManager
@@ -86,10 +87,11 @@ namespace DataGate.Services.SqlClient
                 {
                     command.CommandText = $"select * from {function}({id})";
                 }
-                else if (id.HasValue && id != 0)
+                else if (id.HasValue && id > 0)
                 {
                     if (columns != null)
                     {
+                        //columns = this.FormatColumns(columns);
                         command.CommandText = $"select {string.Join(", ", columns)} from {function}('{sqlDate}', {id})";
                     }
                     else
@@ -101,6 +103,7 @@ namespace DataGate.Services.SqlClient
                 {
                     if (columns != null)
                     {
+                        //columns = this.FormatColumns(columns);
                         command.CommandText = $"select {string.Join(", ", columns)} from {function}('{sqlDate}')";
                     }
                     else
@@ -118,6 +121,8 @@ namespace DataGate.Services.SqlClient
 
         public async IAsyncEnumerable<string[]> ExecuteQueryTimeSeriesAsync(string function)
         {
+            Validator.ArgumentNullExceptionString(function, ErrorMessages.EmptyFunction);
+
             using (SqlConnection connection = new SqlConnection())
             {
                 connection.ConnectionString = this.configuration.GetConnectionString(GlobalConstants.DataGateAppConnection);
@@ -135,6 +140,8 @@ namespace DataGate.Services.SqlClient
 
         public async IAsyncEnumerable<string[]> ExecuteQueryReportsAsync(string function, DateTime date)
         {
+            Validator.ArgumentNullExceptionString(function, ErrorMessages.EmptyFunction);
+
             using (SqlConnection connection = new SqlConnection())
             {
                 SqlCommand command = this.SetUpConnection(connection);
@@ -166,6 +173,8 @@ namespace DataGate.Services.SqlClient
         public IEnumerable<T> ExecuteQueryMapping<T>(string function, int? id, DateTime? date)
             where T : IDataReaderParser, new()
         {
+            Validator.ArgumentNullExceptionString(function, ErrorMessages.EmptyFunction);
+
             using (SqlConnection connection = new SqlConnection())
             {
                 SqlCommand command = this.SetUpConnection(connection);
