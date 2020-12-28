@@ -18,38 +18,27 @@ const CLASSES_NAVBAR = {
     const searchMenuToogler = document.getElementsByClassName(HTML_NAVBAR.SEARCH_MENU_TOOGLER)[0];
     const userMenuToogler = document.getElementsByClassName(HTML_NAVBAR.USER_MENU_TOOGLER)[0];
     const notifMenuToogler = document.getElementsByClassName(HTML_NAVBAR.NOTIFICATION_MENU_TOOGLER)[0];
+    const notifButton = document.getElementById('notification-badge');
 
-    // Toogle search menu
-    if (notifMenuToogler) {
-        notifMenuToogler.addEventListener('click', () => {
-
+    if (notifButton) {
+        notifButton.addEventListener('click', () => {
             var token = $('#load-notification-form input[name=__RequestVerificationToken]').val();
-
-            if (userMenuToogler.classList.contains(CLASSES_NAVBAR.OPEN)) {
-                userMenuToogler.classList.toggle(CLASSES_NAVBAR.OPEN);
-            }
-
-            if (!searchMenu.classList.contains('d-none')) {
-                searchMenuParent.classList.toggle(CLASSES_NAVBAR.OPENED);
-                searchMenu.classList.add('d-none');
-            }
-
             $.ajax({
                 url: '/loadNotifications',
                 type: 'GET',
                 contentType: 'application/json; charset=utf-8',
                 headers: { 'X-CSRF-TOKEN': token },
             }).done(function (data) {
-                if (data) {                    
+                if (data) {
                     $('#user-notifications').html(data);
-                    notifMenuToogler.classList.toggle(CLASSES_NAVBAR.OPEN);                   
+                    notifMenuToogler.classList.toggle(CLASSES_NAVBAR.OPEN);
 
                     const notifDots = document.getElementsByClassName('dot');
                     if (notifDots) {
                         for (var dot of notifDots) {
                             dot.addEventListener('click', (ev) => {
                                 ev.stopPropagation();
-          
+
                                 var json = { notifId: dot.getAttribute('data-id') };
                                 $.ajax({
                                     url: '/api/notifications',
@@ -59,7 +48,7 @@ const CLASSES_NAVBAR = {
                                     headers: { 'X-CSRF-TOKEN': token },
                                     dataType: 'json',
                                 }).done((data) => {
-                                    dot.parentElement.classList.remove('unread');  
+                                    dot.parentElement.classList.remove('unread');
                                     dot.remove();
                                 }).fail(function (request, status, error) {
                                     swal(request.responseText, {
@@ -75,7 +64,25 @@ const CLASSES_NAVBAR = {
                     icon: "error"
                 })
             });
+
         })
+    }
+
+
+
+
+    // Toogle notification menu
+    if (notifMenuToogler) {
+        notifMenuToogler.addEventListener('click', () => {
+            if (userMenuToogler.classList.contains(CLASSES_NAVBAR.OPEN)) {
+                userMenuToogler.classList.toggle(CLASSES_NAVBAR.OPEN);
+            }
+
+            if (!searchMenu.classList.contains('d-none')) {
+                searchMenuParent.classList.toggle(CLASSES_NAVBAR.OPENED);
+                searchMenu.classList.add('d-none');
+            }
+        });
     }
 
     // Toogle search menu
