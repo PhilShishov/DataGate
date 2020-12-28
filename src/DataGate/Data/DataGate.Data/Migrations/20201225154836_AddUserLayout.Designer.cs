@@ -11,7 +11,6 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataGate.Data.Migrations
 {
-    [ExcludeFromCodeCoverage]
     [DbContext(typeof(UsersDbContext))]
     [Migration("20201225154836_AddUserLayout")]
     partial class AddUserLayout

@@ -93,7 +93,7 @@ namespace DataGate.Services.Data.Entities
         {
             // Create new collection to store
             // selected without change
-            List<string> resultColumns = FormatSql.Columns(dto.PreSelectedColumns, dto.SelectedColumns);
+            List<string> resultColumns = this.Columns(dto.PreSelectedColumns, dto.SelectedColumns);
 
             var query = this.sqlManager
                 .ExecuteQueryAsync(function, dto.Date, dto.Id, resultColumns)
@@ -154,5 +154,43 @@ namespace DataGate.Services.Data.Entities
             var data = container.GetKey<RedisHash<string, string[]>>(GlobalConstants.RedisCacheRecords + function);
             return data;
         }
+
+        public List<string> Columns(IReadOnlyCollection<string> preSelectedColumns, IEnumerable<string> selectedColumns)
+        {
+            List<string> resultColumns = new List<string>(preSelectedColumns);
+
+            resultColumns.AddRange(selectedColumns);
+
+            // Prepare items for DB query with []
+            resultColumns = resultColumns.Select(col => string.Format(GlobalConstants.SqlItemFormatRequired, col)).ToList();
+            return resultColumns;
+        }
+
+        //private IEnumerable<string> FormatColumns(IEnumerable<string> columns)
+        //{
+        //    var result = new List<string>();
+
+        //    if (columns == null)
+        //    {
+        //        return result;
+        //    }
+
+        //    var enumerable = columns as string[] ?? Enumerable.ToArray(columns);
+
+        //    if (enumerable.Length <= 0)
+        //    {
+        //        return result;
+        //    }
+
+        //    foreach (var column in enumerable)
+        //    {
+        //        if (!string.IsNullOrEmpty(column))
+        //        {
+        //            result.Add(column.Contains(" ") ? $"[{column.Trim()}]" : $"{column.Trim()}");
+        //        }
+        //    }
+
+        //    return result;
+        //}
     }
 }

@@ -18,7 +18,8 @@
                 .Build();
 
             var builder = new DbContextOptionsBuilder<UsersDbContext>();
-            var connectionString = configuration.GetConnectionString(GlobalConstants.DataGateUsersConnection);
+            //var connectionString = configuration.GetConnectionString(GlobalConstants.DataGateUsersConnection);
+            var connectionString = "Server=.\\SQLEXPRESS;Database=FM86_PharusUsersDb;Trusted_Connection=True";
             builder.UseSqlServer(connectionString);
 
             return new UsersDbContext(builder.Options);

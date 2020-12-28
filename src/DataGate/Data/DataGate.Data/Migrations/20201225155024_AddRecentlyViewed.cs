@@ -1,7 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System.Diagnostics.CodeAnalysis;
+
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataGate.Data.Migrations
 {
+    [ExcludeFromCodeCoverage]
     public partial class AddRecentlyViewed : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

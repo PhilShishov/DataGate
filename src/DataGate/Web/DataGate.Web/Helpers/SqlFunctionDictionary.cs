@@ -56,7 +56,7 @@ namespace DataGate.Web.Helpers
         public const string AllAgreementsShareClasses = "[fn_view_agreements_all_shareclasses]";
 
         // Reports
-        public const string ReportFunds = "[dbo].[getAuM_fund_test]";
+        public const string ReportFunds = "[getAuM_fund_test]";
         public const string ReportSubFunds = "[fn_AuM_subfund_EOM]";
         public const string ReportsShareClasses = "[fn_AuM_shareclass_EOM]";
     }

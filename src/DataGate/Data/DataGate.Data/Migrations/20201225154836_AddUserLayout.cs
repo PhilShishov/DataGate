@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
+
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataGate.Data.Migrations
 {
+    [ExcludeFromCodeCoverage]
     public partial class AddUserLayout : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

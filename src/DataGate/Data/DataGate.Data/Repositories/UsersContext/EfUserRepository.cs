@@ -28,12 +28,12 @@
 
         public virtual void Delete(TEntity entity) => this.DbSet.Remove(entity);
 
-        public async Task SaveLayout(ICollection<TEntity> entitiesToRemove, HashSet<TEntity> entitiesToUpdate)
+        public async Task SaveLayout(ICollection<TEntity> entitiesToRemove, HashSet<TEntity> entitiesToAdd)
         {
-            if (entitiesToUpdate.Count > 0)
+            if (entitiesToAdd.Count > 0)
             {
                 this.DeleteRange(entitiesToRemove);
-                this.UpdateRange(entitiesToUpdate);
+                this.AddRange(entitiesToAdd);
                 await this.SaveChangesAsync();
             }
         }
@@ -52,15 +52,11 @@
             }
         }
 
-        public void UpdateRange(HashSet<TEntity> entities)
+        public void AddRange(HashSet<TEntity> entities)
         {
             foreach (var entity in entities)
             {
-                var entry = this.Context.Entry(entity);
-                if (entry.State == EntityState.Detached)
-                {
-                    this.DbSet.Attach(entity);
-                }
+                this.DbSet.Add(entity);
             }
         }
 

@@ -11,7 +11,6 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DataGate.Data.Migrations
 {
-    [ExcludeFromCodeCoverage]
     [DbContext(typeof(UsersDbContext))]
     [Migration("20201225155024_AddRecentlyViewed")]
     partial class AddRecentlyViewed

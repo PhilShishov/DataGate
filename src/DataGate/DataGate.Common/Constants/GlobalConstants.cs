@@ -21,6 +21,7 @@ namespace DataGate.Common
         public const string TestContainer = "test-container";
         public const string TestHashContainer = "test-hash-container";
         public const string WwwRootPath = "\\src\\DataGate\\Web\\DataGate.Web\\wwwroot";
+        public const string RootPath = "\\src\\DataGate\\Web\\DataGate.Web";
 
         // Tempdata Keys
         public const string SweetAlertKey = "sweetalert";
