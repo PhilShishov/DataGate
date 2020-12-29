@@ -15,5 +15,7 @@ namespace DataGate.Data.Common.Repositories.UsersContext
         void DeleteRange(ICollection<TEntity> entities);
 
         void AddRange(HashSet<TEntity> entities);
+
+        Task RestoreLayout(ICollection<TEntity> entitiesToRemove);
     }
 }

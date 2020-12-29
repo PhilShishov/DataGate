@@ -306,6 +306,9 @@
   <data name="dateRequired" xml:space="preserve">
     <value>Date cannot be empty!</value>
   </data>
+  <data name="Default" xml:space="preserve">
+    <value>Default</value>
+  </data>
   <data name="defineLayout" xml:space="preserve">
     <value>Define Table Layout</value>
   </data>

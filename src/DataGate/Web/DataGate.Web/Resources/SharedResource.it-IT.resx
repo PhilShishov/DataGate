@@ -306,6 +306,9 @@
   <data name="dateRequired" xml:space="preserve">
     <value>La data non può essere vuota!</value>
   </data>
+  <data name="Default" xml:space="preserve">
+    <value>Predefinito</value>
+  </data>
   <data name="defineLayout" xml:space="preserve">
     <value>Definire Il Layout Della Tabella</value>
   </data>

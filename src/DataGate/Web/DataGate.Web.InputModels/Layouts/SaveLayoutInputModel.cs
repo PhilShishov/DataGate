@@ -9,6 +9,6 @@ namespace DataGate.Web.InputModels.Layouts
     {
         public IEnumerable<string> SelectedColumns { get; set; }
 
-        public string Controller { get; set; }
+        public string ControllerName { get; set; }
     }
 }

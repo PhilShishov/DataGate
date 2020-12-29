@@ -1,6 +1,9 @@
 ﻿@model EntitiesViewModel
 
-@{ var numberPreSelectedColumns = GlobalConstants.PreSelectedColumnsCount; }
+@{ 
+    var numberPreSelectedColumns = GlobalConstants.PreSelectedColumnsCount;
+    var controller = this.ViewContext.RouteData.Values[EndpointsConstants.ControllerRouteDataValue].ToString();
+}
 
 <div class="modal"
      id="columnModal"
@@ -15,29 +18,40 @@
                     <select asp-for="PreSelectedColumns" style="width:60%" hidden>
                         @for (int col = 0; col < numberPreSelectedColumns; col++)
                         {
-            <option selected value="@Model.HeadersSelection[col]">
-                @Model.HeadersSelection[col]
-            </option>
-}
+                            <option selected value="@Model.HeadersSelection[col]">
+                                @Model.HeadersSelection[col]
+                            </option>
+                        }
                     </select>
 
                     <select class="multiselect" multiple="multiple" asp-for="SelectedColumns" style="width:60%">
                         @for (int col = numberPreSelectedColumns; col < Model.HeadersSelection.Count; col++)
                         {
-            <option value="@Model.HeadersSelection[col]">
-                @Model.HeadersSelection[col]
-            </option>
-}
+                            <option value="@Model.HeadersSelection[col]">
+                                @Model.HeadersSelection[col]
+                            </option>
+                        }
                     </select>
                     <br />
                 </div>
             </div>
             <div class="modal-footer">
                 <div class="modal-footer-save-btn-container">
-                    <input type="submit"
-                           name="Command"
-                           value=@SharedLocalizer.GetHtmlString("Save")
-                           class="btn btn-datagate btn-sm" />
+                    <a id="btn-save-layout"
+                       class="btn btn-datagate btn-sm mr-2">
+                        @SharedLocalizer.GetHtmlString("Save")
+                    </a>
+
+                    <a asp-area=""
+                       asp-controller="Layout"
+                       asp-action="Default"
+                       asp-route-controllerName="@controller"
+                       
+                       id="btn-default-layout"
+                       class="btn btn-datagate btn-sm ml-2">
+                        @SharedLocalizer.GetHtmlString("Default")
+                    </a>
+
                 </div>
 
                 <div>

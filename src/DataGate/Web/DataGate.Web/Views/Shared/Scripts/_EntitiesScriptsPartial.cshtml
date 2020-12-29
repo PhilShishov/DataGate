@@ -33,11 +33,8 @@
 
     $(function () {
         dataTableInitializationHandler('@controller', '@currentCulture.RequestCulture.Culture.Name');
-        // ________________________________________________________
-        //
-        // Extract view as excel or pdf
-
         extract(model);
+        saveLayout(model);
         submitForm();
     });
 </script>

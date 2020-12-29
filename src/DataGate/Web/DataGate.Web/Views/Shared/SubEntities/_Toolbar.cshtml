@@ -7,10 +7,10 @@
         .ToString();
 
     var containerRoute = StringSwapper.ByController(
-                                                controller,
-                                                EndpointsConstants.RouteDetails + EndpointsConstants.FundArea,
-                                                EndpointsConstants.RouteDetails + EndpointsConstants.DisplaySub + EndpointsConstants.FundArea,
-                                                string.Empty);
+            controller,
+            EndpointsConstants.RouteDetails + EndpointsConstants.FundArea,
+            EndpointsConstants.RouteDetails + EndpointsConstants.DisplaySub + EndpointsConstants.FundArea,
+            string.Empty);
 }
 
 <form class="d-flex"
@@ -34,11 +34,6 @@
                 name="showColumnSelection">
             @SharedLocalizer.GetHtmlString("Layout")
         </button>
-    </div>
-    <div class="ml-4">
-        <input type="button"
-               class="btn btn-datagate btn-sm btn-reset"
-               value="RESET">
     </div>
 
     <div class="vertical mx-3"></div>

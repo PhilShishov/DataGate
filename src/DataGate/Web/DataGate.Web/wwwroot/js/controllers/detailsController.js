@@ -36,55 +36,6 @@ const URLS = {
     COUNTRIES_DIST: '/loadCountriesDist',
 };
 
-$(function () {
-    // ________________________________________________________
-    //
-    // Quick editor text
-    //const rows = document.getElementById(HTML_MENU.TABLE_INFO).getElementsByTagName('tr');
-
-    //for (var row of rows) {
-    //    row.addEventListener('mouseenter', displayIconOnHoverHandler);
-
-    //    function displayIconOnHoverHandler(event) {
-    //        const icon = event.target.getElementsByClassName(HTML_MENU.ICONS_EDITOR)[0];
-
-    //        if (icon) {
-    //            icon.style.visibility = 'visible';
-    //            icon.addEventListener('click', openEditorHandler);
-    //        }
-
-    //        function openEditorHandler() {
-    //            const divEditor = document.createElement('div');
-    //            divEditor.classList.add('quick-card-editor');
-
-    //            const divInputs = document.createElement('div');
-    //            divInputs.classList.add('quick-card-editor-container');
-    //            divInputs.style.top = '14%';
-    //            divInputs.style.left = '18%';
-    //            divInputs.style.width = '16%';
-    //            divEditor.addEventListener('click', function (event) {
-    //                event.preventDefault();
-    //                if (!divInputs.contains(event.target)) {
-    //                    icon.removeEventListener('click', openEditorHandler);
-    //                    divEditor.remove();
-    //                }
-    //            });
-
-    //            divEditor.appendChild(divInputs);
-    //            document.body.appendChild(divEditor);
-    //        };
-    //    };
-
-    //    row.addEventListener('mouseleave', function (event) {
-    //        const icon = event.target.getElementsByClassName(HTML_MENU.ICONS_EDITOR)[0];
-
-    //        if (icon) {
-    //            icon.style.visibility = 'hidden';
-    //        }
-    //    });
-    //}
-});
-
 // ________________________________________________________
 //
 // Menu for fund additional information -
@@ -288,3 +239,52 @@ function uploadModals(token, json) {
         });
     }
 };
+
+$(function () {
+    // ________________________________________________________
+    //
+    // Quick editor text
+    //const rows = document.getElementById(HTML_MENU.TABLE_INFO).getElementsByTagName('tr');
+
+    //for (var row of rows) {
+    //    row.addEventListener('mouseenter', displayIconOnHoverHandler);
+
+    //    function displayIconOnHoverHandler(event) {
+    //        const icon = event.target.getElementsByClassName(HTML_MENU.ICONS_EDITOR)[0];
+
+    //        if (icon) {
+    //            icon.style.visibility = 'visible';
+    //            icon.addEventListener('click', openEditorHandler);
+    //        }
+
+    //        function openEditorHandler() {
+    //            const divEditor = document.createElement('div');
+    //            divEditor.classList.add('quick-card-editor');
+
+    //            const divInputs = document.createElement('div');
+    //            divInputs.classList.add('quick-card-editor-container');
+    //            divInputs.style.top = '14%';
+    //            divInputs.style.left = '18%';
+    //            divInputs.style.width = '16%';
+    //            divEditor.addEventListener('click', function (event) {
+    //                event.preventDefault();
+    //                if (!divInputs.contains(event.target)) {
+    //                    icon.removeEventListener('click', openEditorHandler);
+    //                    divEditor.remove();
+    //                }
+    //            });
+
+    //            divEditor.appendChild(divInputs);
+    //            document.body.appendChild(divEditor);
+    //        };
+    //    };
+
+    //    row.addEventListener('mouseleave', function (event) {
+    //        const icon = event.target.getElementsByClassName(HTML_MENU.ICONS_EDITOR)[0];
+
+    //        if (icon) {
+    //            icon.style.visibility = 'hidden';
+    //        }
+    //    });
+    //}
+});

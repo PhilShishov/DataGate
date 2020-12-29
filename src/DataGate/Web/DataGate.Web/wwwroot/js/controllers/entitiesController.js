@@ -2,21 +2,59 @@
     FORM_EXTRACT: '#extract-form',
     BTN_EXTRACT_EXCEL: '#btn-extract-excel',
     BTN_EXTRACT_PDF: '#btn-extract-pdf',
+    BTN_SAVE_LAYOUT: '#btn-save-layout',
+    BTN_DEFAULT_LAYOUT: '#btn-default-layout',
+    LI_SELECTED_COLUMNS: 'ui-element',
     FORM_UPDATE: 'update-form',
     CHECKBOX_ACTIVE: 'activeCheckBox',
     TABLE_EXTRACT: 'table-to-extract',
     TBODY_UPDATE_INACTIVE: 'tbody-update-inactive',
-    BTN_RESET: 'btn-reset',
 };
 
 const SELECTORS = {
-    INPUT_TOKEN_EXTRACT: `${HTML.FORM_EXTRACT} input[name=__RequestVerificationToken]`
+    INPUT_TOKEN_EXTRACT: `${HTML.FORM_EXTRACT} input[name=__RequestVerificationToken]`,
 };
 
 const CLASSES = {
     INACTIVE: 'inactive-entity'
 };
 
+function saveLayout(model) {
+    const form = document.getElementById(HTML.FORM_UPDATE);
+    const token = $('input[name=__RequestVerificationToken]', form).val();
+
+    $(document).on('click', HTML.BTN_SAVE_LAYOUT, function (event) {
+        event.preventDefault();
+        const selectedColumns = document.getElementById('container-selected').getElementsByClassName(HTML.LI_SELECTED_COLUMNS);
+        let columns = [];
+
+        for (let row of selectedColumns) {
+            columns.push(row.innerText.trim());
+        }
+
+        model.SelectedColumns = columns;
+        $.ajax({
+            url: '/Layout/Save',
+            type: 'POST',
+            data: model,
+            headers: { 'X-CSRF-TOKEN': token },
+        }).done(function (data) {
+            if (data.success) {
+                const url = '/Layout/OnLayoutSaveSuccess?controller=' + data.controller;
+                window.location = url;
+                return;
+            }
+        }).fail(function (request, status, error) {
+            swal(request.responseText, {
+                icon: "error"
+            });
+        });
+    });
+}
+
+// ________________________________________________________
+//
+// Extract view as excel or pdf
 function extract(model) {
     const excelValue = $(HTML.BTN_EXTRACT_EXCEL).attr('value');
     const pdfValue = $(HTML.BTN_EXTRACT_PDF).attr('value');
@@ -106,18 +144,6 @@ function submitForm() {
 
         function submitFormOnChange() {
             updateForm.submit();
-        }
-    }
-};
-
-function reload() {
-    const resetBtns = document.getElementsByClassName(HTML.BTN_RESET);
-
-    if (resetBtns) {
-        for (let btn of resetBtns) {
-            btn.addEventListener('click', () => {
-                document.location.reload(true);
-            });
         }
     }
 };

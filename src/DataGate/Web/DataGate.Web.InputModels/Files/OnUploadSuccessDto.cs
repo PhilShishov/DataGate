@@ -5,7 +5,7 @@ namespace DataGate.Web.InputModels.Files
 {
     using DataGate.Services.Mapping;
 
-    public class UploadOnSuccessDto : IMapFrom<UploadDocumentInputModel>
+    public class OnUploadSuccessDto : IMapFrom<UploadDocumentInputModel>
     {
         public string AreaName { get; set; }
 

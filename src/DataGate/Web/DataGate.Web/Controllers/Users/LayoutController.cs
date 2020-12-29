@@ -12,8 +12,10 @@ namespace DataGate.Web.Controllers.Users
     using DataGate.Web.InputModels.Layouts;
     using DataGate.Web.Resources;
 
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
+    [Authorize]
     public class LayoutController : BaseController
     {
         private readonly ILayoutService layoutService;
@@ -37,11 +39,66 @@ namespace DataGate.Web.Controllers.Users
         }
 
         [HttpPost]
-        public async Task<IActionResult> Save(SaveLayoutInputModel input)
+        [ValidateAntiForgeryToken]
+        public JsonResult Save(SaveLayoutInputModel input)
+        {
+            if (input.SelectedColumns != null)
+            {
+                //await this.SaveLayout(input);
+
+                return this.Json(new { success = true, controller = input.ControllerName });
+            }
+
+            return this.Json(new { success = false });
+        }
+
+        public IActionResult OnSaveLayoutSuccess(string controller)
+        {
+            return this.ShowInfo(
+                   this.sharedLocalizer.GetHtmlString(InfoMessages.LayoutSaved),
+                   EndpointsConstants.ActionAll,
+                   controller);
+        }
+
+        public async Task<IActionResult> Default(string controllerName)
+        {
+            var area = await this.RestoreLayout(controllerName);
+
+            return this.RedirectToAction(
+                EndpointsConstants.ActionAll,
+                controllerName,
+                new { area = area });
+        }
+
+        private async Task<string> RestoreLayout(string controller)
+        {
+            string area = string.Empty;
+            var user = await this.layoutService.UserWithLayouts(this.User);
+
+            switch (controller)
+            {
+                case EndpointsConstants.FundsController:
+                    area = EndpointsConstants.FundArea;
+                    await this.userFRepository.RestoreLayout(user.UserFundColumns);
+                    break;
+                case EndpointsConstants.DisplaySub + EndpointsConstants.FundsController:
+                    area = EndpointsConstants.DisplaySub + EndpointsConstants.FundArea;
+                    await this.userSFRepository.RestoreLayout(user.UserSubFundColumns);
+                    break;
+                case EndpointsConstants.ShareClassesController:
+                    area = EndpointsConstants.ShareClassArea;
+                    await this.userSCRepository.RestoreLayout(user.UserShareClassColumns);
+                    break;
+            }
+
+            return area;
+        }
+
+        private async Task SaveLayout(SaveLayoutInputModel input)
         {
             var user = await this.layoutService.UserWithLayouts(this.User);
 
-            switch (input.Controller)
+            switch (input.ControllerName)
             {
                 case EndpointsConstants.FundsController:
                     var columnsToDbF = this.layoutService.ColumnsToDb<UserFundColumn>(input.SelectedColumns, user.Id);
@@ -56,20 +113,7 @@ namespace DataGate.Web.Controllers.Users
                     await this.userSCRepository.SaveLayout(user.UserShareClassColumns, columnsToDbSC);
                     break;
             }
-
-            return this.ShowInfo(
-                   this.sharedLocalizer.GetHtmlString(InfoMessages.LayoutSaved),
-                   EndpointsConstants.ActionAll,
-                   input.Controller);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Default(SaveLayoutInputModel model)
-        //{
-        //    var user = await this.layoutService.UserWithLayouts(this.User);
-        //    await this.repository.RestoreLayout(user.UserFundColumns);
-
-        //    return View();
-        //}
     }
 }

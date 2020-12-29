@@ -61,7 +61,7 @@ namespace DataGate.Web.Controllers.Files
                 return this.PartialView(UploadDocumentPartialView, model);
             }
 
-            var dto = AutoMapperConfig.MapperInstance.Map<UploadOnSuccessDto>(model);
+            var dto = AutoMapperConfig.MapperInstance.Map<OnUploadSuccessDto>(model);
 
             await this.service.UploadDocument(model);
 
@@ -94,7 +94,7 @@ namespace DataGate.Web.Controllers.Files
                 return this.PartialView(UploadAgreementPartialView, model);
             }
 
-            var dto = AutoMapperConfig.MapperInstance.Map<UploadOnSuccessDto>(model);
+            var dto = AutoMapperConfig.MapperInstance.Map<OnUploadSuccessDto>(model);
             //dto.FileId = 
 
             await this.service.UploadAgreement(model);
@@ -109,7 +109,7 @@ namespace DataGate.Web.Controllers.Files
         }
 
         public IActionResult OnUploadSuccess(
-          [Bind("AreaName, Date, Id, RouteName, IsFee, FileId")] UploadOnSuccessDto dto)
+          [Bind("AreaName, Date, Id, RouteName, IsFee, FileId")] OnUploadSuccessDto dto)
         {
             if (dto.IsFee)
             {

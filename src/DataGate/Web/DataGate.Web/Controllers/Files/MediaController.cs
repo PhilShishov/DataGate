@@ -106,8 +106,6 @@ namespace DataGate.Web.Controllers
         [Route("media/delete")]
         public async Task<JsonResult> Delete(int fileId, string docValue, string agrValue, string areaName)
         {
-
-
             if (!string.IsNullOrEmpty(areaName))
             {
                 string path = this.GetTargetPath(ref docValue, agrValue, areaName);

@@ -11,7 +11,7 @@ namespace DataGate.Web.InputModels.Files
     using DataGate.Web.Infrastructure.Attributes.Validation;
     using Microsoft.AspNetCore.Http;
 
-    public class UploadAgreementInputModel : IMapFrom<LoadAgreementDto>, IMapTo<UploadOnSuccessDto>
+    public class UploadAgreementInputModel : IMapFrom<LoadAgreementDto>, IMapTo<OnUploadSuccessDto>
     {
         [Required(ErrorMessage = ValidationMessages.AgrTypeRequired)]
         [Display(Name = "Agreement Type")]

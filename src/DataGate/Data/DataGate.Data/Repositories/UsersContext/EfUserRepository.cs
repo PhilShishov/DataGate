@@ -12,11 +12,6 @@
     public class EfUserRepository<TEntity> : IUserRepository<TEntity>
         where TEntity : class
     {
-        public EfAppRepository()
-        {
-
-        }
-
         public EfUserRepository(UsersDbContext context)
         {
             this.Context = context ?? throw new ArgumentNullException(nameof(context));
@@ -39,6 +34,15 @@
             {
                 this.DeleteRange(entitiesToRemove);
                 this.AddRange(entitiesToAdd);
+                await this.SaveChangesAsync();
+            }
+        }
+
+        public async Task RestoreLayout(ICollection<TEntity> entitiesToRemove)
+        {
+            if (entitiesToRemove.Count > 0)
+            {
+                this.DeleteRange(entitiesToRemove);
                 await this.SaveChangesAsync();
             }
         }
