@@ -7,6 +7,8 @@ namespace DataGate.Common
     {
         public const string FileUploaded = "File uploaded.";
 
+        public const string LayoutSaved = "Layout Saved.";
+
         public const string FeesAdded = "Fees added";
 
         public const string SuccessfulEdit = "Entity edited.";

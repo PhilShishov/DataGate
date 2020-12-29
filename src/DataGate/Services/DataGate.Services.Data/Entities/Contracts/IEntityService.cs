@@ -5,13 +5,7 @@ namespace DataGate.Services.Data.Entities
 {
     using System;
     using System.Collections.Generic;
-    using System.Security.Claims;
-    using System.Threading.Tasks;
 
-    using DataGate.Data.Common.Repositories.UsersContext;
-    using DataGate.Data.Models.Columns;
-    using DataGate.Data.Models.Users;
-    using DataGate.Web.ViewModels.Entities;
     using DataGate.Web.ViewModels.Queries;
 
     public interface IEntityService
@@ -26,13 +20,5 @@ namespace DataGate.Services.Data.Entities
                                         string function,
                                         AllSelectedDto dto,
                                         int skip = 0);
-
-        Task<ApplicationUser> GetUser(ClaimsPrincipal user);
-
-        HashSet<T> SetLayout<T>(EntitiesViewModel model, string id, IEnumerable<string> userColumns)
-            where T : IUserColumn, new();
-
-        IEnumerable<string> GetLayout<T>(IUserRepository<T> repository, string id)
-            where T : IUserColumn;
     }
 }

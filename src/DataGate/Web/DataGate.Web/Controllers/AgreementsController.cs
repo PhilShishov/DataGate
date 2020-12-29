@@ -6,15 +6,15 @@ namespace DataGate.Web.Controllers
     using System;
     using System.Text.RegularExpressions;
 
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
-
     using DataGate.Common;
     using DataGate.Services.Data.Agreements;
     using DataGate.Web.Helpers;
     using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.Resources;
     using DataGate.Web.ViewModels.Agreements;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
 
     [Authorize]
     public class AgreementsController : BaseController

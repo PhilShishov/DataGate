@@ -8,11 +8,14 @@ namespace DataGate.Services.Redis
     using System.Linq;
     using System.Threading.Tasks;
 
-    using StackExchange.Redis;
-
     using DataGate.Common;
+    using DataGate.Common.Settings;
     using DataGate.Services.Redis.Configuration;
     using DataGate.Services.Redis.Contracts;
+
+    using Microsoft.Extensions.Configuration;
+
+    using StackExchange.Redis;
 
     public class RedisContainer : IProxy
     {
@@ -81,6 +84,23 @@ namespace DataGate.Services.Redis
         public IList<string> TrackedKeys
         {
             get { return this.trackedObjects.Select(x => x.Key).ToList(); }
+        }
+
+
+        public async static Task<RedisHash<string, string[]>> Setup(IConfiguration configuration, string dirPath, string function)
+        {
+            var optionsRedis = configuration
+                .GetSection(AppSettingsSections.RedisSection)
+                .Get<RedisOptions>();
+
+            var connection = new RedisConnection($"{optionsRedis.Host}:{optionsRedis.Port}, {GlobalConstants.AbortConnect}", dirPath);
+            var container = new RedisContainer(connection, optionsRedis.InstanceName);
+
+            var data = container.GetKey<RedisHash<string, string[]>>(GlobalConstants.RedisCacheRecords + function);
+
+            await data.Expire(GlobalConstants.RedisCacheExpirationTimeInSeconds);
+
+            return data;
         }
     }
 }

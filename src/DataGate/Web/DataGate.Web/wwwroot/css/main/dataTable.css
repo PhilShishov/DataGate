@@ -6,6 +6,21 @@
 *
 */
 
+table.dataTable thead .sorting {
+    background-position: 100% 60%;
+}
+
+table.dataTable thead th {
+    padding-top: 1.2rem;
+    padding-bottom: 0.75rem;
+    padding-left: 0.75rem;
+    padding-right: 2rem !important;
+}
+
+table.dataTable thead td {
+    padding: 0.75rem;
+}
+
 .dataTables_wrapper .bottom {
     margin-bottom: 1.5rem !important;
 }
@@ -65,7 +80,3 @@
         border: 1px solid transparent;
         height: 30px;
     }
-
-table.dataTable thead th, table.dataTable thead td {
-    padding: 0.75rem;
-}

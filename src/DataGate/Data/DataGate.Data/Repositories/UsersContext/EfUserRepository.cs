@@ -12,6 +12,11 @@
     public class EfUserRepository<TEntity> : IUserRepository<TEntity>
         where TEntity : class
     {
+        public EfAppRepository()
+        {
+
+        }
+
         public EfUserRepository(UsersDbContext context)
         {
             this.Context = context ?? throw new ArgumentNullException(nameof(context));

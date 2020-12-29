@@ -26,6 +26,7 @@ namespace DataGate.Web.Configuration
     using DataGate.Services.Data.Users;
     using DataGate.Web.Hubs;
     using DataGate.Web.Hubs.Contracts;
+    using DataGate.Services.Data.Layouts;
 
     public static class BusinessLogicConfiguration
     {
@@ -48,6 +49,7 @@ namespace DataGate.Web.Configuration
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IRecentService, RecentService>();
             services.AddTransient<INotificationService, NotificationService>();
+            services.AddTransient<ILayoutService, LayoutService>();
 
             services.AddSingleton<IConnectionManager, ConnectionManager>();
             services.AddSingleton<IHubNotificationHelper, HubNotificationHelper>();

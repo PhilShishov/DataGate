@@ -5,6 +5,7 @@ namespace DataGate.Web.Controllers
 {
     using DataGate.Common;
     using DataGate.Data.Models.Enums;
+
     using Microsoft.AspNetCore.Mvc;
 
     public partial class BaseController : Controller
@@ -23,6 +24,12 @@ namespace DataGate.Web.Controllers
         {
             this.TempData[GlobalConstants.SweetAlertKey] = FormatErrorSweetAlert(errorMessage);
             return this.RedirectToRoute(route, routeValues);
+        }
+
+        public IActionResult ShowInfo(string infoMessage, string action, string controller)
+        {
+            this.TempData[GlobalConstants.SweetAlertKey] = FormatInfoSweetAlert(infoMessage);
+            return this.RedirectToAction(action, controller);
         }
 
         public IActionResult ShowInfo(string infoMessage, string route, object routeValues)

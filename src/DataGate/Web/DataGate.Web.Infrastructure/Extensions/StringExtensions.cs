@@ -6,6 +6,9 @@ namespace DataGate.Web.Infrastructure.Extensions
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
+
+    using DataGate.Common;
 
     public static class StringExtensions
     {
@@ -95,6 +98,40 @@ namespace DataGate.Web.Infrastructure.Extensions
             }
 
             return displayLink;
+        }
+
+
+        public static List<string> FormatColumns(
+            IReadOnlyCollection<string> preSelectedColumns, 
+            IEnumerable<string> selectedColumns)
+        {
+            List<string> resultColumns = new List<string>(preSelectedColumns);
+
+            resultColumns.AddRange(selectedColumns);
+
+            // Prepare items for DB query with []
+            resultColumns = resultColumns.Select(col => string.Format(GlobalConstants.SqlItemFormatRequired, col)).ToList();
+
+            //if (resultColumns == null)
+            //{
+            //    return resultColumns;
+            //}
+            //    var enumerable = columns as string[] ?? Enumerable.ToArray(columns);
+
+            //    if (enumerable.Length <= 0)
+            //    {
+            //        return result;
+            //    }
+
+            //    foreach (var column in enumerable)
+            //    {
+            //        if (!string.IsNullOrEmpty(column))
+            //        {
+            //            result.Add(column.Contains(" ") ? $"[{column.Trim()}]" : $"{column.Trim()}");
+            //        }
+            //    }
+
+            return resultColumns;
         }
     }
 }
