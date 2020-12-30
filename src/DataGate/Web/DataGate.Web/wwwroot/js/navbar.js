@@ -38,7 +38,6 @@ const CLASSES_NAVBAR = {
                         for (var dot of notifDots) {
                             dot.addEventListener('click', (ev) => {
                                 ev.stopPropagation();
-
                                 var json = { notifId: dot.getAttribute('data-id') };
                                 $.ajax({
                                     url: '/api/notifications',
@@ -48,8 +47,8 @@ const CLASSES_NAVBAR = {
                                     headers: { 'X-CSRF-TOKEN': token },
                                     dataType: 'json',
                                 }).done((data) => {
-                                    dot.parentElement.classList.remove('unread');
-                                    dot.remove();
+                                    ev.target.parentElement.classList.remove('unread');
+                                    ev.target.remove();
                                 }).fail(function (request, status, error) {
                                     swal(request.responseText, {
                                         icon: "error"

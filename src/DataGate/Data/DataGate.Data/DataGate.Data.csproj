@@ -17,6 +17,12 @@
 	  <Compile Remove="Migrations\20201213195031_AddRecentlyViewed.Designer.cs" />
 	  <Compile Remove="Migrations\20201225154138_AddUserLayout.cs" />
 	  <Compile Remove="Migrations\20201225154138_AddUserLayout.Designer.cs" />
+	  <Compile Remove="Migrations\20201230202825_AddRecentlyViewed.cs" />
+	  <Compile Remove="Migrations\20201230202825_AddRecentlyViewed.Designer.cs" />
+	  <Compile Remove="Migrations\20201230203653_AddUserNotifications.cs" />
+	  <Compile Remove="Migrations\20201230203653_AddUserNotifications.Designer.cs" />
+	  <Compile Remove="Migrations\20201230204131_AddUserLayout.cs" />
+	  <Compile Remove="Migrations\20201230204131_AddUserLayout.Designer.cs" />
 	</ItemGroup>
 
 	<ItemGroup>

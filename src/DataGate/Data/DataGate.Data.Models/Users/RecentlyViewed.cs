@@ -26,6 +26,6 @@ namespace DataGate.Data.Models.Users
         [Required]
         public string DisplayLink { get; set; }
 
-        //public DateTime VisitedOn { get; set; }
+        public DateTime VisitedOn { get; set; }
     }
 }

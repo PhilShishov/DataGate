@@ -1,44 +1,48 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataGate.Data.Migrations
 {
     [ExcludeFromCodeCoverage]
-    public partial class AddRecentlyViewed : Migration
+    public partial class AddUserNotification : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "RecentlyViewed",
+                name: "UserNotifications",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
                     UserId = table.Column<string>(nullable: false),
+                    Status = table.Column<int>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
                     LinkUrl = table.Column<string>(nullable: false),
-                    DisplayLink = table.Column<string>(nullable: false)
+                    Content = table.Column<string>(nullable: false),
+                    IsOpened = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RecentlyViewed", x => x.Id);
+                    table.PrimaryKey("PK_UserNotifications", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_RecentlyViewed_AspNetUsers_UserId",
+                        name: "FK_UserNotifications_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_RecentlyViewed_UserId",
-                table: "RecentlyViewed",
+                name: "IX_UserNotifications_UserId",
+                table: "UserNotifications",
                 column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "RecentlyViewed");
+                name: "UserNotifications");
         }
     }
 }

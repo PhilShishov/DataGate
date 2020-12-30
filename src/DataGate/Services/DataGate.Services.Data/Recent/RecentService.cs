@@ -35,7 +35,7 @@ namespace DataGate.Services.Data.Recent
 
             return this.repository.All()
                 .Where(r => r.UserId == userId)
-                //.OrderByDescending(r => r.VisitedOn)
+                .OrderByDescending(r => r.VisitedOn)
                 .ToList()
                 .TakeLast(10);
         }
