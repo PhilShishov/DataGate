@@ -23,10 +23,8 @@ build:
 #       tests configuration       #
 #---------------------------------#
 
-test:
-  categories:
-    only:
-      - A
+test_script:
+- run-tests.cmd
       
 #---------------------------------#
 #        global handlers          #
