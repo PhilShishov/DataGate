@@ -27,14 +27,14 @@ namespace DataGate.Services.Tests.Redis
             this.container.DeleteTrackedKeys().Wait();
         }
 
-        [Fact, Trait("Category", "A")]
+        [Fact]
         public async Task DeleteKey_And_KeyExists_WithNonExistantKey_ShouldReturnFalse()
         {
             Assert.False(await container.DeleteKey("not-exists"));
             Assert.False(await container.KeyExists("not-exists"));
         }
 
-        [Theory, Trait("Category", "A")]
+        [Theory]
         [InlineData(TypeCode.String, "stringkey")]
         [InlineData(TypeCode.Int32, "intkey")]
         [InlineData(TypeCode.Boolean, "boolkey")]
@@ -64,7 +64,7 @@ namespace DataGate.Services.Tests.Redis
             Assert.True(await container.KeyExists(keyName));
         }
 
-        [Theory, Trait("Category", "A")]
+        [Theory]
         [InlineData(null)]
         [InlineData("")]
         [InlineData("       ")]
@@ -75,7 +75,7 @@ namespace DataGate.Services.Tests.Redis
             Assert.Throws<ArgumentNullException>(act);
         }
 
-        [Fact, Trait("Category", "A")]
+        [Fact]
         public async Task DeleteKey_WithExistingKey_ShouldReturnTrue()
         {
             var key = container.GetKey<RedisItem<int>>("intkey");
