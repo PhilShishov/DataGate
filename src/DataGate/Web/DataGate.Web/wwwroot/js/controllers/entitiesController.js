@@ -40,7 +40,7 @@ function saveLayout(model) {
             headers: { 'X-CSRF-TOKEN': token },
         }).done(function (data) {
             if (data.success) {
-                const url = '/Layout/OnLayoutSaveSuccess?controller=' + data.controller;
+                const url = '/Layout/OnSaveLayoutSuccess?controllerOrigin=' + data.controller + '&areaOrigin=' + data.area;
                 window.location = url;
                 return;
             }

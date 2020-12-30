@@ -3,6 +3,7 @@
 
 namespace DataGate.Web.Areas.SubFunds.Controllers
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using DataGate.Common;
@@ -56,11 +57,13 @@ namespace DataGate.Web.Areas.SubFunds.Controllers
         public async Task<IActionResult> All([Bind("Date,Values,Headers,IsActive,Command,PreSelectedColumns,SelectedColumns")] 
                                               EntitiesViewModel model)
         {
-            //var user = await this.layoutService.UserWithLayouts(this.User);
-            //var userColumns = this.layoutService.GetLayout<UserSubFundColumn>(this.repository, user.Id);
+            var user = await this.layoutService.UserWithLayouts(this.User);
+            var userColumns = this.layoutService.GetLayout<UserSubFundColumn>(this.repository, user.Id);
 
-            //var columnsToDb = this.layoutService.ColumnsToDb<UserSubFundColumn>(model, user.Id);
-            //await this.repository.SaveLayout(user.UserSubFundColumns, columnsToDb);
+            if (userColumns.Count() > 0)
+            {
+                model.SelectedColumns = userColumns;
+            }
 
             await EntitiesVMSetup.SetPost(model, this.service, 
                                           SqlFunctionDictionary.AllSubFund, 

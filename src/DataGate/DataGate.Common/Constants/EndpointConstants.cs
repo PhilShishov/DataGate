@@ -9,6 +9,7 @@ namespace DataGate.Common
         public const string AdminAreaName = "Admin";
         public const string IdentityAreaName = "Identity";
         public const string ControllerRouteDataValue = "controller";
+        public const string AreaRouteDataValue = "area";
 
         public const string DisplaySub = "Sub";
         public const string DisplayStorage = "Storage";

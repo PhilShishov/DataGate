@@ -26,10 +26,10 @@ namespace DataGate.Web.Controllers
             return this.RedirectToRoute(route, routeValues);
         }
 
-        public IActionResult ShowInfo(string infoMessage, string action, string controller)
+        public IActionResult ShowInfo(string infoMessage, string action, string controller, object routeValues)
         {
             this.TempData[GlobalConstants.SweetAlertKey] = FormatInfoSweetAlert(infoMessage);
-            return this.RedirectToAction(action, controller);
+            return this.RedirectToAction(action, controller, routeValues);
         }
 
         public IActionResult ShowInfo(string infoMessage, string route, object routeValues)

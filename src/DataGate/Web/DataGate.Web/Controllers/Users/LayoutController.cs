@@ -40,24 +40,25 @@ namespace DataGate.Web.Controllers.Users
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public JsonResult Save(SaveLayoutInputModel input)
+        public async Task<JsonResult> Save(SaveLayoutInputModel input)
         {
             if (input.SelectedColumns != null)
             {
-                //await this.SaveLayout(input);
+                await this.SaveLayout(input);
 
-                return this.Json(new { success = true, controller = input.ControllerName });
+                return this.Json(new { success = true, controller = input.ControllerName, area = input.AreaOrigin });
             }
 
             return this.Json(new { success = false });
         }
 
-        public IActionResult OnSaveLayoutSuccess(string controller)
+        public IActionResult OnSaveLayoutSuccess(string controllerOrigin, string areaOrigin)
         {
             return this.ShowInfo(
                    this.sharedLocalizer.GetHtmlString(InfoMessages.LayoutSaved),
                    EndpointsConstants.ActionAll,
-                   controller);
+                   controllerOrigin,
+                   new { area = areaOrigin });
         }
 
         public async Task<IActionResult> Default(string controllerName)

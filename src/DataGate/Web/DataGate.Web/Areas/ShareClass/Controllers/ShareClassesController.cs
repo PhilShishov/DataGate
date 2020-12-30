@@ -3,6 +3,7 @@
 
 namespace DataGate.Web.Areas.ShareClasses.Controllers
 {
+    using System.Linq;
     using System.Threading.Tasks;
 
     using DataGate.Common;
@@ -57,11 +58,13 @@ namespace DataGate.Web.Areas.ShareClasses.Controllers
         public async Task<IActionResult> All([Bind("Date,Values,Headers,IsActive,Command,PreSelectedColumns,SelectedColumns")]
                                               EntitiesViewModel model)
         {
-            //var user = await this.layoutService.UserWithLayouts(this.User);
-            //var userColumns = this.layoutService.GetLayout<UserShareClassColumn>(this.repository, user.Id);
+            var user = await this.layoutService.UserWithLayouts(this.User);
+            var userColumns = this.layoutService.GetLayout<UserShareClassColumn>(this.repository, user.Id);
 
-            //var columnsToDb = this.layoutService.ColumnsToDb<UserShareClassColumn>(model, user.Id);
-            //await this.repository.SaveLayout(user.UserShareClassColumns, columnsToDb);
+            if (userColumns.Count() > 0)
+            {
+                model.SelectedColumns = userColumns;
+            }
 
             await EntitiesVMSetup.SetPost(model, this.service,
                                           SqlFunctionDictionary.AllShareClass,

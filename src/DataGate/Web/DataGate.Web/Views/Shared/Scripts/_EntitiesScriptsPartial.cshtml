@@ -1,6 +1,7 @@
 ﻿
 @{
     var controller = this.ViewContext.RouteData.Values[EndpointsConstants.ControllerRouteDataValue].ToString();
+    var area = this.ViewContext.RouteData.Values[EndpointsConstants.AreaRouteDataValue].ToString();
     IRequestCultureFeature currentCulture = Context.Features.Get<IRequestCultureFeature>();
 }
 
@@ -19,6 +20,7 @@
     let model = {
         Date: '@Model.Date',
         ControllerName: '@controller',
+        AreaOrigin: '@area',
     };
 
     $.blockUI({
