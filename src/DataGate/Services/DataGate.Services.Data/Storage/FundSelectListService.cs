@@ -17,7 +17,6 @@ namespace DataGate.Services.Data.Storage
     {
         private readonly IAppRepository<TbDomCompanyType> repositoryCompanyType;
         private readonly IAppRepository<TbDomFStatus> repositoryFStatus;
-        private readonly IAppRepository<TbDomFundAdminType> repositoryFAdmin;
         private readonly IAppRepository<TbDomLegalForm> repositoryLegalForm;
         private readonly IAppRepository<TbDomLegalType> repositoryLegalType;
         private readonly IAppRepository<TbDomLegalVehicle> repositoryLegalVehicle;
@@ -25,14 +24,12 @@ namespace DataGate.Services.Data.Storage
         public FundSelectListService(
                           IAppRepository<TbDomCompanyType> repositoryCompanyType,
                           IAppRepository<TbDomFStatus> repositoryFStatus,
-                          IAppRepository<TbDomFundAdminType> repositoryFAdmin,
                           IAppRepository<TbDomLegalForm> repositoryLegalForm,
                           IAppRepository<TbDomLegalType> repositoryLegalType,
                           IAppRepository<TbDomLegalVehicle> repositoryLegalVehicle)
         {
             this.repositoryCompanyType = repositoryCompanyType;
             this.repositoryFStatus = repositoryFStatus;
-            this.repositoryFAdmin = repositoryFAdmin;
             this.repositoryLegalForm = repositoryLegalForm;
             this.repositoryLegalType = repositoryLegalType;
             this.repositoryLegalVehicle = repositoryLegalVehicle;
@@ -47,11 +44,6 @@ namespace DataGate.Services.Data.Storage
             => this.repositoryFStatus.All()
                .Select(tb => tb.StFDesc)
                .ToList();
-
-        public IReadOnlyCollection<string> AllTbDomFundAdmin()
-           => this.repositoryFAdmin.All()
-              .Select(tb => tb.FatDesc)
-              .ToList();
 
         public IReadOnlyCollection<string> AllTbDomLegalForm()
             => this.repositoryLegalForm.All()

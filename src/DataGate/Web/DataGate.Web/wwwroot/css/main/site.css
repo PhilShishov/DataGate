@@ -272,6 +272,7 @@ textarea {
 }
 
 #div-inputs-to-format input[type=date] {
+    margin: auto;
     border-width: 0 0 2px;
     border-color: rgb(0, 65, 118);
     max-width: 330px;
@@ -283,6 +284,7 @@ textarea {
     }
 
 #div-inputs-to-format input[type=text] {
+    margin: auto;
     border-width: 0 0 2px;
     border-color: rgb(0, 65, 118);
     max-width: 330px;

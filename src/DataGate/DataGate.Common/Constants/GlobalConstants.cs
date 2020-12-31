@@ -14,14 +14,15 @@ namespace DataGate.Common
         public const string ItalianCultureInfo = "it-IT";
         public const int CultureCookieExpirationTimeInMonths = 5;
         public const int RedisCacheExpirationTimeInSeconds = 60 * 60 * 8;
+        public const string Datasets = "Datasets\\";
+        public const string XmlRootParameters = "Parameters";
+        public const string XmlParameterFileName = "parameters-{0}.xml";
 
         // Redis Constants
         public const string AbortConnect = "abortConnect=false";
         public const string RedisConnectionString = "127.0.0.1:6379,abortConnect=false";
         public const string TestContainer = "test-container";
         public const string TestHashContainer = "test-hash-container";
-        public const string WwwRootPath = "\\src\\DataGate\\Web\\DataGate.Web\\wwwroot";
-        public const string RootPath = "\\src\\DataGate\\Web\\DataGate.Web";
 
         // Tempdata Keys
         public const string SweetAlertKey = "sweetalert";

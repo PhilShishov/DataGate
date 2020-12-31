@@ -32,6 +32,5 @@
         public virtual TbDomLegalForm FLegalFormNavigation { get; set; }
         public virtual TbDomLegalVehicle FLegalVehicleNavigation { get; set; }
         public virtual TbDomFStatus FStatusNavigation { get; set; }
-        public virtual TbDomFundAdminType FundAdminTypeNavigation { get; set; }
     }
 }

@@ -40,7 +40,6 @@
         public virtual DbSet<TbDomFeeFrequency> TbDomFeeFrequency { get; set; }
         public virtual DbSet<TbDomFeeType> TbDomFeeType { get; set; }
         public virtual DbSet<TbDomFileType> TbDomFileType { get; set; }
-        public virtual DbSet<TbDomFundAdminType> TbDomFundAdminType { get; set; }
         public virtual DbSet<TbDomGlobalExposure> TbDomGlobalExposure { get; set; }
         public virtual DbSet<TbDomInvestorType> TbDomInvestorType { get; set; }
         public virtual DbSet<TbDomIsoCountry> TbDomIsoCountry { get; set; }
@@ -510,28 +509,6 @@
                     .HasMaxLength(30);
             });
 
-            modelBuilder.Entity<TbDomFundAdminType>(entity =>
-            {
-                entity.HasKey(e => e.FatId)
-                    .HasName("PK__tb_dom_fund_admin_type");
-
-                entity.ToTable("tb_dom_fund_admin_type");
-
-                entity.Property(e => e.FatId).HasColumnName("fat_id");
-
-                entity.Property(e => e.FatAcronym)
-                    .IsRequired()
-                    .HasColumnName("fat_acronym")
-                    .HasMaxLength(5)
-                    .IsFixedLength();
-
-                entity.Property(e => e.FatDesc)
-                    .IsRequired()
-                    .HasColumnName("fat_desc")
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
-            });
-
             modelBuilder.Entity<TbDomLegalForm>(entity =>
             {
                 entity.HasKey(e => e.LfId);
@@ -915,11 +892,6 @@
                     .HasForeignKey(d => d.FId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_tb_historyFund_tb_fund");
-
-                entity.HasOne(d => d.FundAdminTypeNavigation)
-                    .WithMany(p => p.TbHistoryFund)
-                    .HasForeignKey(d => d.FFundAdmin)
-                    .HasConstraintName("FK_tb_historyFund_tb_dom_fund_admin_type");
 
                 entity.HasOne(d => d.FLegalFormNavigation)
                     .WithMany(p => p.TbHistoryFund)

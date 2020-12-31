@@ -4,14 +4,19 @@
 namespace DataGate.Services.Data.Storage
 {
     using System;
+    using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
+    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
 
+    using DataGate.Common;
     using DataGate.Common.Exceptions;
     using DataGate.Data.Common.Repositories.AppContext;
     using DataGate.Data.Models.Entities;
+    using DataGate.Data.Models.Parameters;
+    using DataGate.Services.Data.DataProcessor;
     using DataGate.Services.Data.Storage.Contracts;
     using DataGate.Services.Mapping;
     using DataGate.Services.SqlClient;
@@ -24,7 +29,7 @@ namespace DataGate.Services.Data.Storage
 
     public class FundStorageService : IFundStorageService
     {
-        private readonly string sqlFunctionId = "[fn_fund_id]";
+        private const string SqlFunctionId = "[fn_fund_id]";
 
         private readonly ISqlQueryManager sqlManager;
         private readonly IAppRepository<TbHistoryFund> repository;
@@ -46,14 +51,8 @@ namespace DataGate.Services.Data.Storage
 
             var dateParsed = DateTimeExtensions.FromWebFormat(date);
             var dto = this.sqlManager
-                .ExecuteQueryMapping<EditFundGetDto>(this.sqlFunctionId, id, dateParsed)
+                .ExecuteQueryMapping<EditFundGetDto>(SqlFunctionId, id, dateParsed)
                 .FirstOrDefault();
-
-            var fundAdmin = dto.FACode.Contains("CAC") ?
-                "CACEIS" : dto.FACode.Contains("ROT") ? 
-                "Edmond de Rothschild" : "Northern Trust";
-
-            dto.FundAdmin = fundAdmin; 
 
             return AutoMapperConfig.MapperInstance.Map<T>(dto);
         }
@@ -66,10 +65,15 @@ namespace DataGate.Services.Data.Storage
             await this.SetForeignKeys(dto, model.Status, model.LegalForm, model.LegalVehicle,
                                       model.LegalType, model.CompanyTypeDesc);
 
-            SqlCommand command = this.AssignBaseParameters(dto, SqlProcedureDictionary.CreateFund);
+            var parameters = Deserializer.ImportParameters(EndpointsConstants.FundArea + EndpointsConstants.ActionCreate);
+
+            var procedure = StringExtensions.BuildProcedure(
+                SqlProcedureDictionary.CreateFund, parameters);
+
+            SqlCommand command = this.AssignBaseParameters(dto, procedure, parameters);
 
             // Assign particular parameters
-            command.Parameters.Add(new SqlParameter("@f_endDate", SqlDbType.NVarChar) { Value = dto.EndDate });
+            command.Parameters.Add(new SqlParameter(parameters[17].Name, SqlDbType.NVarChar) { Value = dto.EndDate });
 
             await this.sqlManager.ExecuteProcedure(command);
 
@@ -88,15 +92,19 @@ namespace DataGate.Services.Data.Storage
             await this.SetForeignKeys(dto, model.Status, model.LegalForm, model.LegalVehicle,
                                       model.LegalType, model.CompanyTypeDesc);
 
-            SqlCommand command = this.AssignBaseParameters(dto, SqlProcedureDictionary.EditFund);
+            var parameters = Deserializer.ImportParameters(EndpointsConstants.FundArea + EndpointsConstants.ActionEdit);
+
+            var procedure = StringExtensions.BuildProcedure(
+                SqlProcedureDictionary.EditFund, parameters);
+
+            SqlCommand command = this.AssignBaseParameters(dto, procedure, parameters);
 
             // Assign particular parameters
             command.Parameters.AddRange(new[]
                    {
-                            new SqlParameter("@f_id", SqlDbType.Int) { Value = dto.Id },
-                            new SqlParameter("@comment", SqlDbType.NVarChar) { Value = dto.CommentArea },
-                            new SqlParameter("@comment_title ", SqlDbType.NVarChar) { Value = dto.CommentTitle },
-                            new SqlParameter("@f_shortFundName", SqlDbType.NVarChar) { Value = dto.FundName },
+                            new SqlParameter(parameters[17].Name, SqlDbType.Int) { Value = dto.Id },
+                            new SqlParameter(parameters[18].Name, SqlDbType.NVarChar) { Value = dto.CommentArea },
+                            new SqlParameter(parameters[19].Name, SqlDbType.NVarChar) { Value = dto.CommentTitle },
                    });
 
             await this.sqlManager.ExecuteProcedure(command);
@@ -125,29 +133,29 @@ namespace DataGate.Services.Data.Storage
             dto.CompanyTypeDesc = await this.service.ByIdCompanyType(companyType);
         }
 
-        private SqlCommand AssignBaseParameters(FundPostDto dto, string procedure)
+        private SqlCommand AssignBaseParameters(FundPostDto dto, string procedure, List<Parameter> parameters)
         {
             SqlCommand command = new SqlCommand(procedure);
 
             command.Parameters.AddRange(new[]
                    {
-                            new SqlParameter("@f_initialDate", SqlDbType.NVarChar) { Value = dto.InitialDate },
-                            new SqlParameter("@f_status", SqlDbType.Int) { Value = dto.Status },
-                            new SqlParameter("@f_registrationNumber", SqlDbType.NVarChar) { Value = dto.RegNumber },
-                            new SqlParameter("@f_officialFundName", SqlDbType.NVarChar) { Value = dto.FundName },
-                            new SqlParameter("@f_leiCode", SqlDbType.NVarChar) { Value = dto.LEICode },
-                            new SqlParameter("@f_cssfCode", SqlDbType.NVarChar) { Value = dto.CSSFCode },
-                            new SqlParameter("@f_faCode", SqlDbType.NVarChar) { Value = dto.FACode },
-                            new SqlParameter("@f_depCode", SqlDbType.NVarChar) { Value = dto.DEPCode },
-                            new SqlParameter("@f_taCode", SqlDbType.NVarChar) { Value = dto.TACode },
-                            new SqlParameter("@f_legalForm", SqlDbType.Int) { Value = dto.LegalForm },
-                            new SqlParameter("@f_legalType", SqlDbType.Int) { Value = dto.LegalType },
-                            new SqlParameter("@f_legal_vehicle", SqlDbType.Int) { Value = dto.LegalVehicle },
-                            new SqlParameter("@f_companyType", SqlDbType.Int) { Value = dto.CompanyTypeDesc },
-                            new SqlParameter("@f_tinNumber", SqlDbType.NVarChar) { Value = dto.TinNumber },
-                            new SqlParameter("@f_VATRegistrationNumber", SqlDbType.NVarChar) { Value = dto.VATRegNumber },
-                            new SqlParameter("@f_VATIdentificationNumber", SqlDbType.NVarChar) { Value = dto.VATIdentificationNumber },
-                            new SqlParameter("@f_IBICNumber", SqlDbType.NVarChar) { Value = dto.IBICNumber },
+                            new SqlParameter(parameters[0].Name, SqlDbType.NVarChar) { Value = dto.InitialDate },
+                            new SqlParameter(parameters[1].Name, SqlDbType.Int) { Value = dto.Status },
+                            new SqlParameter(parameters[2].Name, SqlDbType.NVarChar) { Value = dto.RegNumber },
+                            new SqlParameter(parameters[3].Name, SqlDbType.NVarChar) { Value = dto.FundName },
+                            new SqlParameter(parameters[4].Name, SqlDbType.NVarChar) { Value = dto.LEICode },
+                            new SqlParameter(parameters[5].Name, SqlDbType.NVarChar) { Value = dto.CSSFCode },
+                            new SqlParameter(parameters[6].Name, SqlDbType.NVarChar) { Value = dto.FACode },
+                            new SqlParameter(parameters[7].Name, SqlDbType.NVarChar) { Value = dto.DEPCode },
+                            new SqlParameter(parameters[8].Name, SqlDbType.NVarChar) { Value = dto.TACode },
+                            new SqlParameter(parameters[9].Name, SqlDbType.Int) { Value = dto.LegalForm },
+                            new SqlParameter(parameters[10].Name, SqlDbType.Int) { Value = dto.LegalType },
+                            new SqlParameter(parameters[11].Name, SqlDbType.Int) { Value = dto.LegalVehicle },
+                            new SqlParameter(parameters[12].Name, SqlDbType.Int) { Value = dto.CompanyTypeDesc },
+                            new SqlParameter(parameters[13].Name, SqlDbType.NVarChar) { Value = dto.TinNumber },
+                            new SqlParameter(parameters[14].Name, SqlDbType.NVarChar) { Value = dto.VATRegNumber },
+                            new SqlParameter(parameters[15].Name, SqlDbType.NVarChar) { Value = dto.VATIdentificationNumber },
+                            new SqlParameter(parameters[16].Name, SqlDbType.NVarChar) { Value = dto.IBICNumber },
                    });
             return command;
         }

@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\DataGate.Common\DataGate.Common.csproj" />
+    <ProjectReference Include="..\DataGate.Web.Dtos\DataGate.Web.Dtos.csproj" />
   </ItemGroup>
 
 </Project>

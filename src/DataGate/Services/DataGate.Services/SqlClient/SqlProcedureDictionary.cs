@@ -34,12 +34,7 @@ namespace DataGate.Services.SqlClient
                 "@f_legalForm, @f_legalType, @f_legal_vehicle, @f_companyType, @f_tinNumber, " +
                 "@f_VATRegistrationNumber, @f_VATIdentificationNumber, @f_IBICNumber, @comment, @comment_title";
 
-        public const string CreateFund = "EXEC sp_new_fund " +
-                "@f_initialDate, @f_endDate, @f_status, " +
-                "@f_registrationNumber, @f_officialFundName, " +
-                "@f_leiCode, @f_cssfCode, @f_faCode, @f_depCode, @f_taCode, " +
-                "@f_legalForm, @f_legalType, @f_legal_vehicle, @f_companyType, @f_tinNumber, " +
-                "@f_VATRegistrationNumber, @f_VATIdentificationNumber, @f_IBICNumber";
+        public const string CreateFund = "EXEC sp_new_fund ";
 
         // Create/edit sub fund
         public const string EditSubFund = "EXEC sp_modify_subfund " +

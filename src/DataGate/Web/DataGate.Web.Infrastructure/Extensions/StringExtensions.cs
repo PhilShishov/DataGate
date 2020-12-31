@@ -9,6 +9,7 @@ namespace DataGate.Web.Infrastructure.Extensions
     using System.Linq;
 
     using DataGate.Common;
+    using DataGate.Data.Models.Parameters;
 
     public static class StringExtensions
     {
@@ -100,9 +101,19 @@ namespace DataGate.Web.Infrastructure.Extensions
             return displayLink;
         }
 
+        public static string BuildProcedure(string procedure, IEnumerable<Parameter> parameters)
+        {
+            foreach (var param in parameters)
+            {
+                procedure += param.Name + ", ";
+            }
+
+            return procedure.Remove(procedure.Length - 2, 2);
+
+        }
 
         public static List<string> FormatColumns(
-            IReadOnlyCollection<string> preSelectedColumns, 
+            IReadOnlyCollection<string> preSelectedColumns,
             IEnumerable<string> selectedColumns)
         {
             List<string> resultColumns = new List<string>(preSelectedColumns);

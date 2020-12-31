@@ -155,24 +155,6 @@
 
                     <div class="column-form-content">
                         <div class="column-form">                              
-                            <div class="form-group">                                
-                                <label asp-for="FundAdmin" ></label><br>
-                                <select class="select-datagate" asp-for="FundAdmin">
-                                    @foreach (var admin in (List<string>)ViewData["FundAdmin"])
-                                    {
-                                        if (admin == Model.FundAdmin)
-                                        {
-                                            <option selected value="@admin">@admin</option>
-                                        }
-                                        else
-                                        {
-                                            <option value="@admin">@admin</option>
-                                        }
-                                    }
-                                </select>
-                            </div>
-                            <span asp-validation-for="FundAdmin" class="text-danger"></span>
-
                              <div class="form-group">
                                 <label asp-for="FACode"></label><br>
                                 <input type="text"

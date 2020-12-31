@@ -129,21 +129,8 @@
                     <div class="column-form-header">
                         <h4>Third Party</h4>
                     </div>
-
                     <div class="column-form-content">
                         <div class="column-form">
-                            <div class="form-group">
-                                <label asp-for="FundAdmin"></label><br>
-                                <select class="select-datagate" asp-for="FundAdmin">
-                                    <option selected disabled>-- Choose Fund Admin --</option>
-                                    @foreach (var admin in (List<string>)ViewData["FundAdmin"])
-                                    {
-                                        <option value="@admin">@admin</option>
-                                    }
-                                </select>
-                            </div>
-                            <span asp-validation-for="FundAdmin" class="text-danger"></span>
-
                             <div class="form-group">
                                 <label asp-for="FACode"></label><br>
                                 <input type="text"

@@ -22,7 +22,7 @@ namespace DataGate.Services.Tests.ClassFixtures
 
             this.RedisConnection = new RedisConnection(
                 GlobalConstants.RedisConnectionString,
-                GlobalConstants.WwwRootPath);
+                PathConstants.WwwRootPath);
         }
 
         public RedisConnection RedisConnection { get; set; }

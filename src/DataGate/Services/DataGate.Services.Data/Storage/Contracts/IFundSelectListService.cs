@@ -12,8 +12,6 @@ namespace DataGate.Services.Data.Storage.Contracts
 
         IReadOnlyCollection<string> AllTbDomFStatus();
 
-        IReadOnlyCollection<string> AllTbDomFundAdmin();
-
         IReadOnlyCollection<string> AllTbDomLegalForm();
 
         IReadOnlyCollection<string> AllTbDomLegalType();

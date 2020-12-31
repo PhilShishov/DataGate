@@ -139,7 +139,6 @@ namespace DataGate.Web.Controllers.Funds
         private void SetViewDataValues()
         {
             this.ViewData["Status"] = this.serviceSelect.AllTbDomFStatus();
-            this.ViewData["FundAdmin"] = this.serviceSelect.AllTbDomFundAdmin();
             this.ViewData["LegalForm"] = this.serviceSelect.AllTbDomLegalForm();
             this.ViewData["LegalVehicle"] = this.serviceSelect.AllTbDomLegalVehicle();
             this.ViewData["LegalType"] = this.serviceSelect.AllTbDomLegalType();

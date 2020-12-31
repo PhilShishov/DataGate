@@ -27,8 +27,6 @@ namespace DataGate.Web.Dtos.Entities
 
         public string FACode { get; set; }
 
-        public string FundAdmin { get; set; }
-
         public string DEPCode { get; set; }
 
         public string TACode { get; set; }

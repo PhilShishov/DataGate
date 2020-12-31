@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- names of the column headers to extract from the EDR report-->
+<Providers>
+  <Provider id="1" title="Edmond de Rothschild Asset Management (Luxembourg)">
+    <Headers>
+      <Header>
+        <Name>
+          DATNAV-A8 Datnav
+        </Name>
+      </Header>
+      <Header>
+        <Name>
+          P28-A3 Share Ccy
+        </Name>
+      </Header>
+      <Header>
+        <Name>
+          P21-A50 Isin Code
+        </Name>
+      </Header>
+      <Header>
+        <Id_TS>7</Id_TS>
+        <Name>
+          P29-P20.7C Number Of Shares
+        </Name>
+      </Header>
+      <Header>
+        <Id_TS>5</Id_TS>
+        <Name>
+          P31-P20.8C Share Price
+        </Name>
+      </Header>
+      <Header>
+        <Id_TS>3</Id_TS>
+        <Name>
+          P30-P19.5C Net Asset Value
+        </Name>
+      </Header>
+      <Header>
+        <Id_TS>9</Id_TS>
+        <Name>
+          P40-P20.7C Total Subscription In Share
+        </Name>
+      </Header>
+      <Header>
+        <Id_TS>1</Id_TS>
+        <Name>
+          P38-P19.5C Total Subscription In Amt
+        </Name>
+      </Header>
+      <Header>
+        <Id_TS>8</Id_TS>
+        <Name>
+          P41-P20.7C Total Redemption In Share
+        </Name>
+      </Header>
+      <Header>
+        <Id_TS>2</Id_TS>
+        <Name>
+          P39-P19.5C Total Redemption In Amt
+        </Name>
+      </Header>
+      <Header>
+        <Id_TS>11</Id_TS>
+        <Name>
+          P13-P19.5C Nav Of Sub Fund
+        </Name>
+      </Header>
+      <Header>
+        <Id_TS>6</Id_TS>
+        <Name>
+          P113-P19.5C Net Asset Value Of Share In Subfund Ccy
+        </Name>
+      </Header>
+    </Headers>
+  </Provider>
+</Providers>
