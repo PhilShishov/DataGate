@@ -50,9 +50,9 @@ namespace DataGate.Web.Configuration
             services.AddTransient<IRecentService, RecentService>();
             services.AddTransient<INotificationService, NotificationService>();
             services.AddTransient<ILayoutService, LayoutService>();
+            services.AddTransient<IHubNotificationHelper, HubNotificationHelper>();
 
             services.AddSingleton<IConnectionManager, ConnectionManager>();
-            services.AddSingleton<IHubNotificationHelper, HubNotificationHelper>();
 
             // Funds
             services.AddTransient<IFundService, FundService>();

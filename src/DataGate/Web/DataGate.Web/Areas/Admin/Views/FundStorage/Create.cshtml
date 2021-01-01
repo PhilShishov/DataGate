@@ -32,7 +32,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label asp-for="LegalForm"></label><br>
+                                <label class="required" asp-for="LegalForm"></label><br>
                                 <select class="select-datagate" asp-for="LegalForm">
                                     <option selected disabled value="0">-- Choose Form --</option>
                                     @foreach (var form in (List<string>)ViewData["LegalForm"])
@@ -44,7 +44,7 @@
                             <span asp-validation-for="LegalForm" class="text-danger"></span>
 
                             <div class="form-group">
-                                <label asp-for="LegalVehicle"></label><br>
+                                <label class="required" asp-for="LegalVehicle"></label><br>
                                 <select class="select-datagate" asp-for="LegalVehicle">
                                     <option selected disabled>-- Choose Vehicle --</option>
                                     @foreach (var vehicle in (List<string>)ViewData["LegalVehicle"])
@@ -55,7 +55,7 @@
                             </div>
                             <span asp-validation-for="LegalVehicle" class="text-danger"></span>
                             <div class="form-group">
-                                <label asp-for="LegalType"></label><br>
+                                <label class="required" asp-for="LegalType"></label><br>
                                 <select class="select-datagate" asp-for="LegalType">
                                     <option selected disabled value="0">-- Choose Type --</option>
                                     @foreach (var type in (List<string>)ViewData["LegalType"])
@@ -66,9 +66,8 @@
                             </div>
                             <span asp-validation-for="LegalType" class="text-danger"></span>
 
-
                             <div class="form-group">
-                                <label asp-for="CompanyTypeDesc"></label><br>
+                                <label class="required" asp-for="CompanyTypeDesc"></label><br>
                                 <select class="select-datagate" asp-for="CompanyTypeDesc">
                                     <option selected disabled value="0">-- Choose Description --</option>
                                     @foreach (var desc in (List<string>)ViewData["CompanyTypeDesc"])
@@ -78,13 +77,12 @@
                                 </select>
                             </div>
                             <span asp-validation-for="CompanyTypeDesc" class="text-danger"></span>
-
                         </div>
 
                         <div class="column-form">
 
                             <div class="form-group">
-                                <label asp-for="Status"></label><br>
+                                <label class="required" asp-for="Status"></label><br>
                                 <select class="select-datagate" asp-for="Status">
                                     <option selected disabled value="0">-- Choose Status --</option>
                                     @foreach (var status in (List<string>)ViewData["Status"])

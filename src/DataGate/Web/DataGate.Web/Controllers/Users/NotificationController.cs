@@ -33,7 +33,7 @@ namespace DataGate.Web.Controllers
             var model = this.notificationService.All<NotificationViewModel>(this.User);
 
             int count = await this.notificationService.Count(this.User);
-            await this.notificationHelper.SendToAll(count);
+            await this.notificationHelper.HubToAll(count);
 
             return this.PartialView("_UserNotificationPartial", model);
         }

@@ -6,7 +6,18 @@
         @SharedLocalizer.GetHtmlString("User List")
     </h2>
     <div class="button-holder">
-        <a class="btn btn-datagate text-white mt-2" asp-area="" asp-controller="User" asp-action="Index">@SharedLocalizer.GetHtmlString("Back to Panel")</a>
+        <a class="btn btn-datagate text-white mt-2 mx-2"
+           asp-area=""
+           asp-controller="User"
+           asp-action="Index">
+            @SharedLocalizer.GetHtmlString("Back to Panel")
+        </a>
+        <a class="btn btn-datagate text-white mt-2 mx-2"
+           asp-area="Admin"
+           asp-controller="Admin"
+           asp-action="Create">
+            @SharedLocalizer.GetHtmlString("Create")
+        </a>
     </div>
     <hr class="bg-black w-50 hr-2" />
     <div class="table-responsive border-0 w-50 mx-auto">
@@ -26,7 +37,8 @@
         <th scope="row">@user.Username</th>
         @foreach (var role in user.Roles)
         {
-<td>@role</td>}
+<td>@role</td>
+}
         <td>
             <time datetime="@user.LastLogin.ToString("o")"></time>
         </td>
@@ -43,7 +55,8 @@
                asp-route-id="@user.Id"
                class="btn btn-datagate text-white">@SharedLocalizer.GetHtmlString("Delete")</a>
         </td>
-    </tr>}
+    </tr>
+}
             </tbody>
         </table>
     </div>

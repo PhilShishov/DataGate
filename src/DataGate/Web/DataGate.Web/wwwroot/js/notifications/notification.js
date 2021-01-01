@@ -3,6 +3,7 @@
 const NOTIFICATION_SOCKETS = {
     SEND: 'SendNotification',
     COUNT: 'NotificationCount',
+    JOIN_ADMIN: 'JoinAdmin',
 }
 
 const HTML_NOTIFICATION = {
@@ -24,6 +25,8 @@ hubConnect.start()
                 badge.classList.add("display-count");
                 badge.setAttribute('data-count', count);
             }
+
+            hubConnect.invoke(NOTIFICATION_SOCKETS.JOIN_ADMIN);
         })
     }).catch(function (err) {
         return console.error(err.toString());

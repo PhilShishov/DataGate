@@ -8,8 +8,20 @@
         <form class="d-inline w-75" method="post">
             <h2 class="mb-2"> @SharedLocalizer.GetHtmlString("Create User")</h2>
             <div class="button-holder">
-                <a class="btn btn-datagate text-white mt-2" asp-area="" asp-controller="User" asp-action="Index">@SharedLocalizer.GetHtmlString("Back to Panel")</a>
+                <a class="btn btn-datagate text-white mt-2 mx-2"
+                   asp-area=""
+                   asp-controller="User"
+                   asp-action="Index">
+                    @SharedLocalizer.GetHtmlString("Back to Panel")
+                </a>
+                <a class="btn btn-datagate text-white mt-2 mx-2"
+                   asp-area="Admin"
+                   asp-controller="Admin"
+                   asp-action="All">
+                    @SharedLocalizer.GetHtmlString("Back to Users")
+                </a>
             </div>
+
             <hr />
             <div class="form-group-user">
                 <input type="text"

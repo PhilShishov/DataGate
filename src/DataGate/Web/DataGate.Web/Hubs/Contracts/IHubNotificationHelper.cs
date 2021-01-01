@@ -5,8 +5,14 @@ namespace DataGate.Web.Hubs.Contracts
 {
     using System.Threading.Tasks;
 
+    using DataGate.Web.Dtos.Notifications;
+
     public interface IHubNotificationHelper
     {
-        Task<Task> SendToAll(int count);
+        Task SendToAll(NotificationDto dto);
+
+        Task SendToAdmin(NotificationDto dto);
+
+        Task<Task> HubToAll(int count, bool isAdmin = false);
     }
 }

@@ -10,8 +10,8 @@ namespace DataGate.Web.Areas.Administration.Controllers
     using DataGate.Common.Settings;
     using DataGate.Services.Data.Users;
     using DataGate.Services.Messaging;
-    using DataGate.Services.Notifications.Contracts;
     using DataGate.Web.Controllers;
+    using DataGate.Web.Dtos.Notifications;
     using DataGate.Web.Hubs.Contracts;
     using DataGate.Web.InputModels.Users;
     using DataGate.Web.Resources;
@@ -30,7 +30,6 @@ namespace DataGate.Web.Areas.Administration.Controllers
 
         private readonly IUserService userService;
         private readonly IHubNotificationHelper notificationHelper;
-        private readonly INotificationService notificationService;
         private readonly IConfiguration configuration;
         private readonly IEmailSender emailSender;
         private readonly SharedLocalizationService sharedLocalizer;
@@ -38,14 +37,12 @@ namespace DataGate.Web.Areas.Administration.Controllers
         public AdminController(
             IUserService userService,
             IHubNotificationHelper notificationHelper,
-            INotificationService notificationService,
             IEmailSender emailSender,
             SharedLocalizationService sharedLocalizer,
             IConfiguration configuration)
         {
             this.userService = userService;
             this.notificationHelper = notificationHelper;
-            this.notificationService = notificationService;
             this.emailSender = emailSender;
             this.sharedLocalizer = sharedLocalizer;
             this.configuration = configuration;
@@ -97,7 +94,15 @@ namespace DataGate.Web.Areas.Administration.Controllers
                 GlobalConstants.ConfirmEmailSubject,
                 emailMessage);
 
-            await SendNotification(user.UserName, InfoMessages.CreateUserNotification);
+            var dto = new NotificationDto
+            {
+                Arg = input.Username,
+                Message = InfoMessages.CreateUserNotification,
+                User = this.User,
+                Link = ViewUsersUrl,
+            };
+
+            await this.notificationHelper.SendToAdmin(dto);
 
             string infoMessage = string.Format(this.sharedLocalizer
                 .GetHtmlString(InfoMessages.AddUser),
@@ -125,7 +130,16 @@ namespace DataGate.Web.Areas.Administration.Controllers
 
             if (result.Succeeded)
             {
-                await SendNotification(input.Username, InfoMessages.EditUserNotification);
+                var dto = new NotificationDto
+                {
+                    Arg = input.Username,
+                    Message = InfoMessages.EditUserNotification,
+                    User = this.User,
+                    Link = ViewUsersUrl,
+                };
+
+                await this.notificationHelper.SendToAdmin(dto);
+
                 string infoMessage = string.Format(this.sharedLocalizer.GetHtmlString(InfoMessages.UpdateUser), input.Username);
                 return this.ShowInfoLocal(infoMessage, ViewUsersUrl);
             }
@@ -146,22 +160,22 @@ namespace DataGate.Web.Areas.Administration.Controllers
 
             if (result.Succeeded)
             {
-                await SendNotification(input.Username, InfoMessages.DeleteUserNotification);
+                var dto = new NotificationDto
+                {
+                    Arg = input.Username,
+                    Message = InfoMessages.DeleteUserNotification,
+                    User = this.User,
+                    Link = ViewUsersUrl,
+                };
+
+                await this.notificationHelper.SendToAdmin(dto);
+
                 string infoMessage = string.Format(this.sharedLocalizer.GetHtmlString(InfoMessages.RemoveUser), input.Username);
                 return this.ShowInfoLocal(infoMessage, ViewUsersUrl);
             }
 
             this.AddErrors(result);
             return this.ShowErrorLocal(this.sharedLocalizer.GetHtmlString(ErrorMessages.UnsuccessfulDelete), ViewUsersUrl);
-        }
-
-        private async Task SendNotification(string username, string message)
-        {
-            var notifMessage = string.Format(message, username);
-            await this.notificationService.Add(this.User, notifMessage, ViewUsersUrl);
-
-            int count = await this.notificationService.Count(this.User);
-            await this.notificationHelper.SendToAll(count);
         }
 
         private void AddErrors(IdentityResult result)

@@ -4,14 +4,17 @@
 namespace DataGate.Web.Hubs
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
 
+    using DataGate.Common;
     using DataGate.Services.Notifications.Contracts;
 
     using Microsoft.AspNetCore.SignalR;
 
     public class NotificationHub : Hub
     {
+        private static string[] Admins = { "philip.shishov", "fabio.martis" };
         private readonly INotificationService notificationService;
         private IConnectionManager connectionManager;
 
@@ -34,9 +37,12 @@ namespace DataGate.Web.Hubs
         public async Task<int> NotificationCount()
             => await this.notificationService.Count(this.Context.User);
 
+        public async Task JoinAdmin()
+         => await this.Groups.AddToGroupAsync(this.ConnectionId(), GlobalConstants.AdministratorRoleName);
+
         public override Task OnConnectedAsync()
             => base.OnConnectedAsync();
-
+        
         public override Task OnDisconnectedAsync(Exception ex)
             => base.OnDisconnectedAsync(ex);
     }

@@ -73,10 +73,18 @@ namespace DataGate.Services.Notifications
 
             var userId = this.userManager.GetUserId(user);
 
+            var today = DateTime.UtcNow.Day;
+
             var notifications = this.repository.All()
                 .Where(n => n.UserId == userId)
                 .OrderByDescending(n => n.CreatedOn)
+                .ThenBy(n => n.Status == NotificationStatus.Unread)
                 .ToList();
+
+            if (notifications.Count > 10)
+            {
+                notifications = notifications.Take(10).ToList();
+            }
 
             foreach (var notification in notifications)
             {

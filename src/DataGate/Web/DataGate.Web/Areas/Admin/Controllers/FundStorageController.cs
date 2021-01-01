@@ -8,37 +8,33 @@ namespace DataGate.Web.Controllers.Funds
     using DataGate.Common;
     using DataGate.Services.Data.Recent;
     using DataGate.Services.Data.Storage.Contracts;
-    using DataGate.Services.Notifications.Contracts;
-    using DataGate.Web.Hubs;
+    using DataGate.Web.Dtos.Notifications;
+    using DataGate.Web.Hubs.Contracts;
     using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.InputModels.Funds;
     using DataGate.Web.Resources;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.SignalR;
 
     [Area(EndpointsConstants.AdminAreaName)]
     [Authorize(Roles = GlobalConstants.AdministratorRoleName + "," + GlobalConstants.LegalRoleName)]
     public class FundStorageController : BaseController
     {
-        private readonly IHubContext<NotificationHub> hubContext;
-        private readonly INotificationService notificationService;
+        private readonly IHubNotificationHelper notificationHelper;
         private readonly IRecentService recentService;
         private readonly IFundStorageService service;
         private readonly IFundSelectListService serviceSelect;
         private readonly SharedLocalizationService sharedLocalizer;
 
         public FundStorageController(
-                        IHubContext<NotificationHub> hubContext,
-                        INotificationService notificationService,
+                        IHubNotificationHelper notificationHelper,
                         IRecentService recentService,
                         IFundStorageService fundService,
                         IFundSelectListService fundServiceSelect,
                         SharedLocalizationService sharedLocalizer)
         {
-            this.hubContext = hubContext;
-            this.notificationService = notificationService;
+            this.notificationHelper = notificationHelper;
             this.recentService = recentService;
             this.service = fundService;
             this.serviceSelect = fundServiceSelect;
@@ -79,11 +75,15 @@ namespace DataGate.Web.Controllers.Funds
             var fundId = await this.service.Create(model);
             var date = DateTimeExtensions.ToWebFormat(model.InitialDate.AddDays(1));
 
-            var message = string.Format(InfoMessages.CreateNotification, model.FundName);
-            await this.notificationService.Add(this.User, message, this.Request.Path);
+            var dto = new NotificationDto
+            {
+                Arg = model.FundName,
+                Message = InfoMessages.CreateNotification,
+                User = this.User,
+                Link = $"/f/{fundId}/{date}",
+            };
 
-            int count = await this.notificationService.Count(this.User);
-            await this.hubContext.Clients.All.SendAsync("SendNotification", count);
+            await this.notificationHelper.SendToAll(dto);
 
             return this.ShowInfo(
                 this.sharedLocalizer.GetHtmlString(InfoMessages.SuccessfulCreate),
@@ -129,6 +129,16 @@ namespace DataGate.Web.Controllers.Funds
 
             var fundId = await this.service.Edit(model);
             var date = DateTimeExtensions.ToWebFormat(model.InitialDate.AddDays(1));
+
+            var dto = new NotificationDto
+            {
+                Arg = model.FundName,
+                Message = InfoMessages.EditNotification,
+                User = this.User,
+                Link = $"/f/{fundId}/{date}",
+            };
+
+            await this.notificationHelper.SendToAll(dto);
 
             return this.ShowInfo(
                 this.sharedLocalizer.GetHtmlString(InfoMessages.SuccessfulEdit),
