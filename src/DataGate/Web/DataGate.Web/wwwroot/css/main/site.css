@@ -3,8 +3,9 @@
 
 /*Recent Items Style*/
 
-.mandatory {
-    background-color: rgb(255, 80, 80);
+.required:after {
+    content: " *";
+    color: red;
 }
 
 .btn {

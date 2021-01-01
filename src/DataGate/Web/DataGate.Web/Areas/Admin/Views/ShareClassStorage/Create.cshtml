@@ -110,9 +110,9 @@
 
                 <div class="column-form">
                     <div class="form-group">
-                        <label asp-for="ShareClassName" ></label><br>
+                        <label class="required" asp-for="ShareClassName" ></label><br>
                         <input type="text"
-                               class="form-control maxw-270 mandatory"
+                               class="form-control maxw-270"
                                asp-for="ShareClassName"
                                id="formatName">
                         <span asp-validation-for="ShareClassName" class="text-danger"></span>
@@ -172,9 +172,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="FACode" ></label><br>
+                        <label class="required" asp-for="FACode" ></label><br>
                         <input type="text"
-                               class="form-control maxw-270 mandatory"
+                               class="form-control maxw-270"
                                asp-for="FACode"
                                id="faCodeInput">
                         <span asp-validation-for="FACode" class="text-danger"></span>

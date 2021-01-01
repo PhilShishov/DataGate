@@ -7,7 +7,6 @@ namespace DataGate.Services.Data.Storage
     using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
-    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -113,14 +112,11 @@ namespace DataGate.Services.Data.Storage
         }
 
         public async Task<bool> DoesExist(string name)
-        {
-            return await this.repository.All().AnyAsync(f => f.FOfficialFundName == name);
-        }
+            => await this.repository.All().AnyAsync(f => f.FOfficialFundName == name);
+
 
         public async Task<bool> DoesExistAtDate(string name, DateTime initialDate)
-        {
-            return await this.repository.All().AnyAsync(f => f.FOfficialFundName == name && f.FInitialDate == initialDate);
-        }
+            => await this.repository.All().AnyAsync(f => f.FOfficialFundName == name && f.FInitialDate == initialDate);
 
         private async Task SetForeignKeys(FundPostDto dto, string status,
                                           string legalform, string legalVehicle,

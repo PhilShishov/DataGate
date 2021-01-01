@@ -24,9 +24,9 @@
                         <div class="column-form">
 
                             <div class="form-group">
-                                <label asp-for="FundName"></label><br>
+                                <label class="required" asp-for="FundName"></label><br>
                                 <input type="text"
-                                       class="form-control mandatory"
+                                       class="form-control"
                                        asp-for="FundName">
                                 <span asp-validation-for="FundName" class="text-danger"></span>
                             </div>
@@ -132,9 +132,9 @@
                     <div class="column-form-content">
                         <div class="column-form">
                             <div class="form-group">
-                                <label asp-for="FACode"></label><br>
+                                <label class="required" asp-for="FACode"></label><br>
                                 <input type="text"
-                                       class="form-control mandatory"
+                                       class="form-control"
                                        asp-for="FACode">
                                 <span asp-validation-for="FACode" class="text-danger"></span>
                             </div>

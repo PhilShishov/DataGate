@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<!-- names of the column headers to extract from the EDR report-->
+<!-- name of the parameters in Db procedure -->
 <Parameters>
 	<Parameter>
 		<Id>1</Id>
