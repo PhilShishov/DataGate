@@ -48,14 +48,13 @@ namespace DataGate.Web.Controllers
             return new NotificationResponseModel { Status = status, NotifId = notifId };
         }
 
-        //[HttpGet]
-        //[Route("api/notifications")]
-        //public async Task<ActionResult<NotificationResponseModel>> StatusAll(string notifId)
-        //{
-        //    //await this.notificationService.StatusAsync(this.User, notifId);
-        //    var status = this.notificationService.GetNotificationStatus(this.User, notifId);
+        [HttpGet]
+        [Route("api/notifications/all")]
+        public async Task<ActionResult<NotificationResponseModel>> StatusAll()
+        {
+            await this.notificationService.StatusAllAsync(this.User);
 
-        //    return new NotificationResponseModel { Status = status };
-        //}
+            return new NotificationResponseModel();
+        }
     }
 }

@@ -57,6 +57,31 @@ const CLASSES_NAVBAR = {
                             });
                         }
                     }
+
+                    const markAll = document.getElementsByClassName('mark-all-read')[0];
+
+                    if (markAll) {
+                        markAll.addEventListener('click', (ev) => {
+                            ev.stopPropagation();
+                            $.ajax({
+                                url: '/api/notifications/all',
+                                type: 'GET',
+                                contentType: 'application/json; charset=utf-8',
+                                headers: { 'X-CSRF-TOKEN': token },
+                                dataType: 'json',
+                            }).done((data) => {
+
+                                for (var dot of notifDots) {
+                                    dot.parentElement.classList.remove('unread');
+                                    dot.remove();
+                                }
+                            }).fail(function (request, status, error) {
+                                swal(request.responseText, {
+                                    icon: "error"
+                                })
+                            });
+                        });
+                    }
                 }
             }).fail(function (request, status, error) {
                 swal(request.responseText, {

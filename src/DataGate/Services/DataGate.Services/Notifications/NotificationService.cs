@@ -106,6 +106,17 @@ namespace DataGate.Services.Notifications
                     .CountAsync(n => n.UserId == userId && !n.IsOpened);
             return count;
         }
+
+        public string GetNotificationStatus(ClaimsPrincipal user, string notifId)
+        {
+            var userId = this.userManager.GetUserId(user);
+
+            return this.repository.All()
+                .Where(n => n.UserId == userId && n.Id == notifId)
+                .Select(n => n.Status.ToString("g"))
+                .FirstOrDefault();
+        }
+
         public async Task StatusAsync(ClaimsPrincipal user, string notifId)
         {
             var userId = this.userManager.GetUserId(user);
@@ -121,14 +132,17 @@ namespace DataGate.Services.Notifications
             await this.repository.SaveChangesAsync();
         }
 
-        public string GetNotificationStatus(ClaimsPrincipal user, string notifId)
+        public async Task StatusAllAsync(ClaimsPrincipal user)
         {
             var userId = this.userManager.GetUserId(user);
+            var notifications = this.repository.All().Where(n => n.UserId == userId);
 
-            return this.repository.All()
-                .Where(n => n.UserId == userId && n.Id == notifId)
-                .Select(n => n.Status.ToString("g"))
-                .FirstOrDefault();
+            foreach (var notif in notifications)
+            {
+                notif.Status = NotificationStatus.Read;
+            }
+
+            await this.repository.SaveChangesAsync();
         }
 
         private static void NotificationTemplate(string message, string link, List<UserNotification> notifications, ApplicationUser user)

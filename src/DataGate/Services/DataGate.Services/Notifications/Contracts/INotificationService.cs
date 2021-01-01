@@ -1,4 +1,7 @@
-﻿namespace DataGate.Services.Notifications.Contracts
+﻿// Copyright (c) DataGate Project. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+namespace DataGate.Services.Notifications.Contracts
 {
     using System.Collections.Generic;
     using System.Security.Claims;
@@ -14,8 +17,10 @@
 
         Task<int> Count(ClaimsPrincipal user);
 
+        string GetNotificationStatus(ClaimsPrincipal user, string notifId);
+
         Task StatusAsync(ClaimsPrincipal user, string notifId);
 
-        string GetNotificationStatus(ClaimsPrincipal user, string notifId);
+        Task StatusAllAsync(ClaimsPrincipal user);
     }
 }
