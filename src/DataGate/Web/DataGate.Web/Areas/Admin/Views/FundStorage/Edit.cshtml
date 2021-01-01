@@ -10,7 +10,7 @@
               asp-action="Edit"
               method="post"
               class="d-inline w-75">
-            <h4 class="mt-2 mb-5">@SharedLocalizer.GetHtmlString("Edit Fund") @Model.FundName</h4>
+            <h4 class="my-4">@SharedLocalizer.GetHtmlString("Edit Fund") @Model.FundName</h4>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="d-inline" id="div-inputs-to-format">
 
@@ -253,13 +253,15 @@
                                        asp-for="CommentTitle">
                                 <span asp-validation-for="CommentTitle" class="text-danger"></span>
                             </div>
-
-                            <div class="form-group">
-                                <label asp-for="CommentArea"></label><br>                        
-                                <textarea class="form-control "
-                                          asp-for="CommentArea">
-                                </textarea>
-                                <span asp-validation-for="CommentArea" class="text-danger"></span>
+                              
+                            <div class="column-form">
+                                <div class="form-group">                                    
+                                    <label asp-for="CommentArea"></label><br>                        
+                                    <textarea class="form-control "
+                                              asp-for="CommentArea">
+                                    </textarea>
+                                    <span asp-validation-for="CommentArea" class="text-danger"></span>                            
+                                </div>                            
                             </div>
                         </div>
                     </div>                    

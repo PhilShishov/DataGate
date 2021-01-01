@@ -1,5 +1,6 @@
 ﻿const HTML_NAVBAR = {
     NOTIFICATION_MENU_TOOGLER: 'badge-notification-container',
+    NOTIFICATION_BADGE: 'notification-badge',
     SEARCH_MENU_PARENT: 'search-form-wrapper-responsive',
     SEARCH_MENU: 'search-form-wrapper',
     SEARCH_MENU_TOOGLER: 'open-search-box',
@@ -9,7 +10,8 @@
 const CLASSES_NAVBAR = {
     ACTIVE: 'active',
     OPEN: 'open',
-    OPENED: 'opened'
+    OPENED: 'opened',
+    UNREAD: 'unread'
 };
 
 (function () {
@@ -18,7 +20,7 @@ const CLASSES_NAVBAR = {
     const searchMenuToogler = document.getElementsByClassName(HTML_NAVBAR.SEARCH_MENU_TOOGLER)[0];
     const userMenuToogler = document.getElementsByClassName(HTML_NAVBAR.USER_MENU_TOOGLER)[0];
     const notifMenuToogler = document.getElementsByClassName(HTML_NAVBAR.NOTIFICATION_MENU_TOOGLER)[0];
-    const notifButton = document.getElementById('notification-badge');
+    const notifButton = document.getElementById(HTML_NAVBAR.NOTIFICATION_BADGE);
 
     if (notifButton) {
         notifButton.addEventListener('click', () => {
@@ -47,7 +49,7 @@ const CLASSES_NAVBAR = {
                                     headers: { 'X-CSRF-TOKEN': token },
                                     dataType: 'json',
                                 }).done((data) => {
-                                    ev.target.parentElement.classList.remove('unread');
+                                    ev.target.parentElement.classList.remove(CLASSES_NAVBAR.UNREAD);
                                     ev.target.remove();
                                 }).fail(function (request, status, error) {
                                     swal(request.responseText, {
@@ -72,7 +74,7 @@ const CLASSES_NAVBAR = {
                             }).done((data) => {
 
                                 for (var dot of notifDots) {
-                                    dot.parentElement.classList.remove('unread');
+                                    dot.parentElement.classList.remove(CLASSES_NAVBAR.UNREAD);
                                     dot.remove();
                                 }
                             }).fail(function (request, status, error) {

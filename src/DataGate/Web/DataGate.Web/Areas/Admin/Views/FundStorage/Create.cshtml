@@ -11,7 +11,7 @@
               asp-action="Create"
               method="post"
               class="d-inline w-75">
-            <h3 class="mt-2 mb-5">@SharedLocalizer.GetHtmlString("Create New Fund")</h3>
+            <h3 class="my-4">@SharedLocalizer.GetHtmlString("Create New Fund")</h3>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="d-inline" id="div-inputs-to-format">
 
@@ -22,7 +22,6 @@
 
                     <div class="column-form-content">
                         <div class="column-form">
-
                             <div class="form-group">
                                 <label class="required" asp-for="FundName"></label><br>
                                 <input type="text"

@@ -1,9 +1,7 @@
 ﻿@model CreateSubFundInputModel
 
-@{
-    ViewData["Title"] = SharedLocalizer.GetHtmlString("New Sub Fund");
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+@{ ViewData["Title"] = SharedLocalizer.GetHtmlString("New Sub Fund");
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 <div class="push">
     <div class="d-flex justify-content-center text-center">
@@ -11,356 +9,417 @@
               asp-action="Create"
               method="post"
               class="d-inline w-75">
-            <h4 class="mb-5">@SharedLocalizer.GetHtmlString("Create New Sub Fund")</h4>
+            <h4 class="my-4">@SharedLocalizer.GetHtmlString("Create New Sub Fund")</h4>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="d-inline" id="div-inputs-to-format">
-
-                <div class="column-form">
-                    <div class="form-group">
-                        <label asp-for="InitialDate" ></label><br>
-                        <input asp-for="InitialDate"
-                               type="date"
-                               min="2018-01-01"
-                               class="form-control ">
-                        <span asp-validation-for="InitialDate" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="EndDate" ></label><br>
-                        <input asp-for="EndDate"
-                               type="date"
-                               class="form-control ">
-                        <span asp-validation-for="EndDate" class="text-danger"></span>
+                <div class="column-form-container">
+                    <div class="column-form-header">
+                        <h4>Identity</h4>
                     </div>
 
-                    <div class="form-group">
-                        <label asp-for="FirstNavDate" ></label><br>
-                        <input asp-for="FirstNavDate"
-                               type="date"
-                               class="form-control ">
-                        <span asp-validation-for="FirstNavDate" class="text-danger"></span>
-                    </div>
+                    <div class="column-form-content">
+                        <div class="column-form">
+                            <div class="form-group">
+                                <label class="required" asp-for="SubFundName"></label><br>
+                                <input type="text"
+                                       asp-for="SubFundName"
+                                       class="form-control"
+                                       id="formatName" />
+                                <span asp-validation-for="SubFundName" class="text-danger"></span>
+                            </div>
 
-                    <div class="form-group">
-                        <label asp-for="LastNavDate" ></label><br>
-                        <input asp-for="LastNavDate"
-                               type="date"
-                               class="form-control ">
-                        <span asp-validation-for="LastNavDate" class="text-danger"></span>
-                    </div>
+                            <div class="form-group">
+                                <label class="required" asp-for="FundContainer"></label><br>
+                                <select class="select-datagate" asp-for="FundContainer">
+                                    <option selected disabled>-- Choose Container --</option>
+                                    @foreach (var container in (HashSet<string>)ViewData["FundContainer"])
+                                    {
+                        <option value="@container">@container</option>}
+                                </select>
+                            </div>
+                            <span asp-validation-for="FundContainer" class="text-danger"></span>
 
-                    <div class="form-group">
-                        <label asp-for="CSSFAuthDate" ></label><br>
-                        <input asp-for="CSSFAuthDate"
-                               type="date"
-                               class="form-control ">
-                        <span asp-validation-for="CSSFAuthDate" class="text-danger"></span>
-                    </div>
+                            <div class="form-group">
+                                <label class="required" asp-for="CurrencyCode"></label><br>
+                                <select class="select-datagate" asp-for="CurrencyCode">
+                                    <option selected disabled>-- Choose Currency --</option>
+                                    @foreach (var currency in (List<string>)ViewData["CurrencyCode"])
+                                    {
+                        <option value="@currency">@currency</option>}
+                                </select>
+                            </div>
+                            <span asp-validation-for="CurrencyCode" class="text-danger"></span>
+                        </div>
 
-                    <div class="form-group">
-                        <label asp-for="ExpiryDate" ></label><br>
-                        <input asp-for="ExpiryDate"
-                               type="date"
-                               class="form-control ">
-                        <span asp-validation-for="ExpiryDate" class="text-danger"></span>
-                    </div>
+                        <div class="column-form">
+                            <div class="form-group">
+                                <label class="required" asp-for="Status"></label><br>
+                                <select class="select-datagate" asp-for="Status">
+                                    <option selected disabled>-- Choose Status --</option>
+                                    @foreach (var status in (List<string>)ViewData["Status"])
+                                    {
+                        <option value="@status">@status</option>
+}
+                                </select>
+                            </div>
+                            <span asp-validation-for="Status" class="text-danger"></span>
 
-                    <div class="form-group d-flex justify-content-center">
-                        <label asp-for="AreDerivatives"></label><br>
-                        <input id="derivatives"
-                               type="checkbox"
-                               asp-for="AreDerivatives"
-                               class="checkbox-lg mt-1 ml-2">
-                    </div>
+                            <div class="form-group">
+                                <label asp-for="CSSFCode"></label><br>
+                                <input type="text"
+                                       class="form-control "
+                                       asp-for="CSSFCode">
+                                <span asp-validation-for="CSSFCode" class="text-danger"></span>
+                            </div>
 
-                    <div class="form-group" id="derivMarket" hidden>
-                        <label asp-for="DerivMarket"
-                               ></label><br>
-                        <select class="select-datagate"
-                                asp-for="DerivMarket">
-                            <option selected disabled>-- Choose Market --</option>
-                            @foreach (var market in (List<string>)ViewData["DerivMarket"])
-                            {
-                                if (market == Model.DerivMarket)
-                                {
-                                    <option selected value="@market">@market</option>
-                                }
-                                else
-                                {
-                                    <option value="@market">@market</option>
-                                }
-                            }
-                        </select>
-                    </div>
-                    <span asp-validation-for="DerivMarket" class="text-danger"></span>
-
-                    <div class="form-group" id="derivPurpose" hidden>
-                        <label asp-for="DerivPurpose"
-                               ></label><br>
-                        <select class="select-datagate"
-                                asp-for="DerivPurpose">
-                            <option selected disabled>-- Choose Purpose --</option>
-                            @foreach (var purpose in (List<string>)ViewData["DerivPurpose"])
-                            {
-                                if (purpose == Model.DerivPurpose)
-                                {
-                                    <option selected value="@purpose">@purpose</option>
-                                }
-                                else
-                                {
-                                    <option value="@purpose">@purpose</option>
-                                }
-                            }
-                        </select>
-                    </div>
-                    <span asp-validation-for="DerivPurpose" class="text-danger"></span>
-                </div>
-
-                <div class="column-form">
-                    <div class="form-group">
-                        <label class="required" asp-for="SubFundName" ></label><br>
-                        <input type="text"
-                               asp-for="SubFundName"
-                               class="form-control"
-                               id="formatName" />
-                        <span asp-validation-for="SubFundName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="CSSFCode" ></label><br>
-                        <input type="text"
-                               class="form-control "
-                               asp-for="CSSFCode">
-                        <span asp-validation-for="CSSFCode" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="required" asp-for="FACode" ></label><br>
-                        <input type="text"
-                               class="form-control"
-                               asp-for="FACode"
-                               id="faCodeInput">
-                        <span asp-validation-for="FACode" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="DBCode" ></label><br>
-                        <input type="text"
-                               class="form-control "
-                               asp-for="DBCode"
-                               id="depCodeInput">
-                        <span asp-validation-for="DBCode" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="TACode" ></label><br>
-                        <input type="text"
-                               class="form-control "
-                               asp-for="TACode"
-                               id="taCodeInput">
-                        <span asp-validation-for="TACode" class="text-danger"></span>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label asp-for="LEICode" ></label><br>
-                        <input type="text"
-                               class="form-control "
-                               asp-for="LEICode"
-                               id="leiCodeInput">
-                        <span asp-validation-for="LEICode" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label asp-for="ClearingCode" ></label><br>
-                        <input type="text"
-                               class="form-control "
-                               asp-for="ClearingCode"
-                               id="leiCodeInput">
-                        <span asp-validation-for="ClearingCode" class="text-danger"></span>
+                            <div class="form-group">
+                                <label asp-for="InitialDate"></label><br>
+                                <input asp-for="InitialDate"
+                                       type="date"
+                                       min="2018-01-01"
+                                       class="form-control ">
+                                <span asp-validation-for="InitialDate" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="EndDate"></label><br>
+                                <input asp-for="EndDate"
+                                       type="date"
+                                       class="form-control ">
+                                <span asp-validation-for="EndDate" class="text-danger"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="column-form">
-                    <div class="form-group">
-                        <label asp-for="FundContainer" ></label><br>
-                        <select class="select-datagate" asp-for="FundContainer">
-                            <option selected disabled>-- Choose Container --</option>
-                            @foreach (var container in (HashSet<string>)ViewData["FundContainer"])
-                            {
-                                <option value="@container">@container</option>
-                            }
-                        </select>
+                <div class="column-form-container">
+                    <div class="column-form-header">
+                        <h4>tbd</h4>
                     </div>
-                    <span asp-validation-for="FundContainer" class="text-danger"></span>
-                    <div class="form-group">
-                        <label asp-for="Status" ></label><br>
-                        <select class="select-datagate" asp-for="Status">
-                            <option selected disabled>-- Choose Status --</option>
-                            @foreach (var status in (List<string>)ViewData["Status"])
-                            {
-                                <option value="@status">@status</option>
-                            }
-                        </select>
-                    </div>
-                    <span asp-validation-for="Status" class="text-danger"></span>
-                    <div class="form-group">
-                        <label asp-for="CurrencyCode" ></label><br>
-                        <select class="select-datagate" asp-for="CurrencyCode">
-                            <option selected disabled>-- Choose Currency --</option>
-                            @foreach (var currency in (List<string>)ViewData["CurrencyCode"])
-                            {
-                                <option value="@currency">@currency</option>
-                            }
-                        </select>
-                    </div>
-                    <span asp-validation-for="CurrencyCode" class="text-danger"></span>
-                    <div class="form-group">
-                        <label asp-for="CesrClass" ></label><br>
-                        <select class="select-datagate" asp-for="CesrClass">
-                            <option selected disabled>-- Choose Class --</option>
-                            @foreach (var cesr in (List<string>)ViewData["CesrClass"])
-                            {
-                                <option value="@cesr">@cesr</option>
-                            }
-                        </select>
-                    </div>
-                    <span asp-validation-for="CesrClass" class="text-danger"></span>
-                    <div class="form-group">
-                        <label asp-for="GeographicalFocus" ></label><br>
-                        <select class="select-datagate" asp-for="GeographicalFocus">
-                            <option selected disabled>-- Choose GeoFocus --</option>
-                            @foreach (var focus in (List<string>)ViewData["GeographicalFocus"])
-                            {
-                                <option value="@focus">@focus</option>
-                            }
-                        </select>
-                    </div>
-                    <span asp-validation-for="GeographicalFocus" class="text-danger"></span>
+                    <div class="column-form-content">
+                        <div class="column-form">
+                            <div class="form-group">
+                                <label asp-for="FirstNavDate"></label><br>
+                                <input asp-for="FirstNavDate"
+                                       type="date"
+                                       class="form-control ">
+                                <span asp-validation-for="FirstNavDate" class="text-danger"></span>
+                            </div>
 
-                    <div class="form-group">
-                        <label asp-for="GlobalExposure" ></label><br>
-                        <select class="select-datagate" asp-for="GlobalExposure">
-                            <option selected disabled>-- Choose Exposure --</option>
-                            @foreach (var expo in (List<string>)ViewData["GlobalExposure"])
-                            {
-                                <option value="@expo">@expo</option>
-                            }
-                        </select>
-                    </div>
-                    <span asp-validation-for="GlobalExposure" class="text-danger"></span>
+                            <div class="form-group">
+                                <label asp-for="LastNavDate"></label><br>
+                                <input asp-for="LastNavDate"
+                                       type="date"
+                                       class="form-control ">
+                                <span asp-validation-for="LastNavDate" class="text-danger"></span>
+                            </div>
+                        </div>
 
-                    <div class="form-group">
-                        <label asp-for="NavFrequency" ></label><br>
-                        <select class="select-datagate" asp-for="NavFrequency">
-                            <option selected disabled>-- Choose Frequency --</option>
-                            @foreach (var frequency in (List<string>)ViewData["NavFrequency"])
-                            {
-                                <option value="@frequency">@frequency</option>
-                            }
-                        </select>
-                    </div>
-                    <span asp-validation-for="NavFrequency" class="text-danger"></span>
+                        <div class="column-form">
 
-                    <div class="form-group">
-                        <label asp-for="ValuationDate" ></label><br>
-                        <select class="select-datagate" asp-for="ValuationDate">
-                            <option selected disabled>-- Choose Valuation --</option>
-                            @foreach (var date in (List<string>)ViewData["ValuationDate"])
-                            {
-                                <option value="@date">@date</option>
-                            }
-                        </select>
-                    </div>
-                    <span asp-validation-for="ValuationDate" class="text-danger"></span>
+                            <div class="form-group">
+                                <label asp-for="CSSFAuthDate"></label><br>
+                                <input asp-for="CSSFAuthDate"
+                                       type="date"
+                                       class="form-control ">
+                                <span asp-validation-for="CSSFAuthDate" class="text-danger"></span>
+                            </div>
 
-                    <div class="form-group">
-                        <label asp-for="CalculationDate" ></label><br>
-                        <select class="select-datagate" asp-for="CalculationDate">
-                            <option selected disabled>-- Choose Calculation --</option>
-                            @foreach (var date in (List<string>)ViewData["CalculationDate"])
-                            {
-                                <option value="@date">@date</option>
-                            }
-                        </select>
+                            <div class="form-group">
+                                <label asp-for="ExpiryDate"></label><br>
+                                <input asp-for="ExpiryDate"
+                                       type="date"
+                                       class="form-control ">
+                                <span asp-validation-for="ExpiryDate" class="text-danger"></span>
+                            </div>
+                        </div>
                     </div>
-                    <span asp-validation-for="CalculationDate" class="text-danger"></span>
+                </div>
 
-                    <div class="form-group">
-                        <label asp-for="PrincipalAssetClass" ></label><br>
-                        <select class="select-datagate" asp-for="PrincipalAssetClass">
-                            <option selected disabled>-- Choose Class --</option>
-                            @foreach (var pac in (List<string>)ViewData["PrincipalAssetClass"])
-                            {
-                                <option value="@pac">@pac</option>
-                            }
-                        </select>
+                <div class="column-form-container">
+                    <div class="column-form-header">
+                        <h4>Class Derivatives</h4>
                     </div>
-                    <span asp-validation-for="PrincipalAssetClass" class="text-danger"></span>
 
-                    <div class="form-group">
-                        <label asp-for="TypeOfMarket" ></label><br>
-                        <select class="select-datagate" asp-for="TypeOfMarket">
-                            <option selected disabled>-- Choose Market --</option>
-                            @foreach (var type in (List<string>)ViewData["TypeOfMarket"])
-                            {
-                                <option value="@type">@type</option>
-                            }
-                        </select>
-                    </div>
-                    <span asp-validation-for="TypeOfMarket" class="text-danger"></span>
+                    <div class="column-form-content">
+                        <div class="column-form">
+                            <div class="form-group d-flex justify-content-center">
+                                <label asp-for="AreDerivatives"></label><br>
+                                <input id="derivatives"
+                                       type="checkbox"
+                                       asp-for="AreDerivatives"
+                                       class="checkbox-lg mt-1 ml-2">
+                            </div>
+                        </div>
 
-                    <div class="form-group">
-                        <label asp-for="PrincipalInvestmentStrategy" ></label><br>
-                        <select class="select-datagate" asp-for="PrincipalInvestmentStrategy">
-                            <option selected disabled>-- Choose Strategy --</option>
-                            @foreach (var strategy in (List<string>)ViewData["PrincipalInvestmentStrategy"])
-                            {
-                                <option value="@strategy">@strategy</option>
-                            }
-                        </select>
-                    </div>
-                    <span asp-validation-for="PrincipalInvestmentStrategy" class="text-danger"></span>
-                    <div class="form-group">
-                        <label asp-for="SfCatMorningStar" ></label><br>
-                        <select class="select-datagate" asp-for="SfCatMorningStar">
-                            <option selected disabled>-- Choose Category --</option>
-                            @foreach (var ms in (List<string>)ViewData["SfCatMorningStar"])
-                            {
-                                <option value="@ms">@ms</option>
-                            }
-                        </select>
-                    </div>
-                    <span asp-validation-for="SfCatMorningStar" class="text-danger"></span>
+                        <div class="column-form">
+                            <div class="form-group" id="derivMarket" hidden>
+                                <label asp-for="DerivMarket"></label><br>
+                                <select class="select-datagate"
+                                        asp-for="DerivMarket">
+                                    <option selected disabled>-- Choose Market --</option>
+                                    @foreach (var market in (List<string>)ViewData["DerivMarket"])
+                                    {
+                                        if (market == Model.DerivMarket)
+                                        {
+                        <option selected value="@market">@market</option> }
+                                        else
+                                        {
+                        <option value="@market">@market</option>
+}
+                }
+                                </select>
+                            </div>
+                            <span asp-validation-for="DerivMarket" class="text-danger"></span>
 
-                    <div class="form-group">
-                        <label asp-for="SfCatSix" ></label><br>
-                        <select class="select-datagate" asp-for="SfCatSix">
-                            <option selected disabled>-- Choose Category --</option>
-                            @foreach (var six in (List<string>)ViewData["SfCatSix"])
-                            {
-                                <option value="@six">@six</option>
-                            }
-                        </select>
+                            <div class="form-group" id="derivPurpose" hidden>
+                                <label asp-for="DerivPurpose"></label><br>
+                                <select class="select-datagate"
+                                        asp-for="DerivPurpose">
+                                    <option selected disabled>-- Choose Purpose --</option>
+                                    @foreach (var purpose in (List<string>)ViewData["DerivPurpose"])
+                                    {
+                                        if (purpose == Model.DerivPurpose)
+                                        {
+                        <option selected value="@purpose">@purpose</option> }
+                                        else
+                                        {
+                        <option value="@purpose">@purpose</option>}
+                                    }
+                                </select>
+                            </div>
+                            <span asp-validation-for="DerivPurpose" class="text-danger"></span>
+                        </div>
                     </div>
-                    <span asp-validation-for="SfCatSix" class="text-danger"></span>
+                </div>
 
-                    <div class="form-group">
-                        <label asp-for="SfCatBloomberg" ></label><br>
-                        <select class="select-datagate" asp-for="SfCatBloomberg">
-                            <option selected disabled>-- Choose Category --</option>
-                            @foreach (var bg in (List<string>)ViewData["SfCatBloomberg"])
-                            {
-                                <option value="@bg">@bg</option>
-                            }
-                        </select>
+                <div class="column-form-container">
+                    <div class="column-form-header">
+                        <h4>Third Party</h4>
                     </div>
-                    <span asp-validation-for="SfCatBloomberg" class="text-danger"></span>
+
+                    <div class="column-form-content">
+                        <div class="column-form">
+                            <div class="form-group">
+                                <label class="required" asp-for="FACode"></label><br>
+                                <input type="text"
+                                       class="form-control"
+                                       asp-for="FACode"
+                                       id="faCodeInput">
+                                <span asp-validation-for="FACode" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="column-form">
+                            <div class="form-group">
+                                <label asp-for="DBCode"></label><br>
+                                <input type="text"
+                                       class="form-control "
+                                       asp-for="DBCode"
+                                       id="depCodeInput">
+                                <span asp-validation-for="DBCode" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="TACode"></label><br>
+                                <input type="text"
+                                       class="form-control "
+                                       asp-for="TACode"
+                                       id="taCodeInput">
+                                <span asp-validation-for="TACode" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column-form-container">
+                    <div class="column-form-header">
+                        <h4>Additional Information</h4>
+                    </div>
+
+                    <div class="column-form-content">
+                        <div class="column-form">
+                            <div class="form-group">
+                                <label asp-for="LEICode"></label><br>
+                                <input type="text"
+                                       class="form-control "
+                                       asp-for="LEICode"
+                                       id="leiCodeInput">
+                                <span asp-validation-for="LEICode" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="ClearingCode"></label><br>
+                                <input type="text"
+                                       class="form-control "
+                                       asp-for="ClearingCode"
+                                       id="leiCodeInput">
+                                <span asp-validation-for="ClearingCode" class="text-danger"></span>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label asp-for="CesrClass"></label><br>
+                                <select class="select-datagate" asp-for="CesrClass">
+                                    <option selected disabled>-- Choose Class --</option>
+                                    @foreach (var cesr in (List<string>)ViewData["CesrClass"])
+                                    {
+                        <option value="@cesr">@cesr</option>}
+                                </select>
+                            </div>
+                            <span asp-validation-for="CesrClass" class="text-danger"></span>
+                            <div class="form-group">
+                                <label asp-for="GeographicalFocus"></label><br>
+                                <select class="select-datagate" asp-for="GeographicalFocus">
+                                    <option selected disabled>-- Choose GeoFocus --</option>
+                                    @foreach (var focus in (List<string>)ViewData["GeographicalFocus"])
+                                    {
+                        <option value="@focus">@focus</option>}
+                                </select>
+                            </div>
+                            <span asp-validation-for="GeographicalFocus" class="text-danger"></span>
+
+                        </div>
+
+                        <div class="column-form">
+
+                            <div class="form-group">
+                                <label asp-for="GlobalExposure"></label><br>
+                                <select class="select-datagate" asp-for="GlobalExposure">
+                                    <option selected disabled>-- Choose Exposure --</option>
+                                    @foreach (var expo in (List<string>)ViewData["GlobalExposure"])
+                                    {
+                        <option value="@expo">@expo</option>}
+                                </select>
+                            </div>
+                            <span asp-validation-for="GlobalExposure" class="text-danger"></span>
+
+                            <div class="form-group">
+                                <label asp-for="NavFrequency"></label><br>
+                                <select class="select-datagate" asp-for="NavFrequency">
+                                    <option selected disabled>-- Choose Frequency --</option>
+                                    @foreach (var frequency in (List<string>)ViewData["NavFrequency"])
+                                    {
+                        <option value="@frequency">@frequency</option>}
+                                </select>
+                            </div>
+                            <span asp-validation-for="NavFrequency" class="text-danger"></span>
+
+                            <div class="form-group">
+                                <label asp-for="ValuationDate"></label><br>
+                                <select class="select-datagate" asp-for="ValuationDate">
+                                    <option selected disabled>-- Choose Valuation --</option>
+                                    @foreach (var date in (List<string>)ViewData["ValuationDate"])
+                                    {
+                        <option value="@date">@date</option>}
+                                </select>
+                            </div>
+                            <span asp-validation-for="ValuationDate" class="text-danger"></span>
+
+                            <div class="form-group">
+                                <label asp-for="CalculationDate"></label><br>
+                                <select class="select-datagate" asp-for="CalculationDate">
+                                    <option selected disabled>-- Choose Calculation --</option>
+                                    @foreach (var date in (List<string>)ViewData["CalculationDate"])
+                                    {
+                        <option value="@date">@date</option>}
+                                </select>
+                            </div>
+                            <span asp-validation-for="CalculationDate" class="text-danger"></span>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="column-form-container">
+                    <div class="column-form-header">
+                        <h4>tbd</h4>
+                    </div>
+
+
+                    <div class="column-form-content">
+                        <div class="column-form">
+
+                            <div class="form-group">
+                                <label asp-for="PrincipalAssetClass"></label><br>
+                                <select class="select-datagate" asp-for="PrincipalAssetClass">
+                                    <option selected disabled>-- Choose Class --</option>
+                                    @foreach (var pac in (List<string>)ViewData["PrincipalAssetClass"])
+                                    {
+                        <option value="@pac">@pac</option>}
+                                </select>
+                            </div>
+                            <span asp-validation-for="PrincipalAssetClass" class="text-danger"></span>
+
+                            <div class="form-group">
+                                <label asp-for="TypeOfMarket"></label><br>
+                                <select class="select-datagate" asp-for="TypeOfMarket">
+                                    <option selected disabled>-- Choose Market --</option>
+                                    @foreach (var type in (List<string>)ViewData["TypeOfMarket"])
+                                    {
+                        <option value="@type">@type</option>}
+                                </select>
+                            </div>
+                            <span asp-validation-for="TypeOfMarket" class="text-danger"></span>
+
+                            <div class="form-group">
+                                <label asp-for="PrincipalInvestmentStrategy"></label><br>
+                                <select class="select-datagate" asp-for="PrincipalInvestmentStrategy">
+                                    <option selected disabled>-- Choose Strategy --</option>
+                                    @foreach (var strategy in (List<string>)ViewData["PrincipalInvestmentStrategy"])
+                                    {
+                        <option value="@strategy">@strategy</option>}
+                                </select>
+                            </div>
+                            <span asp-validation-for="PrincipalInvestmentStrategy" class="text-danger"></span>
+
+
+
+                        </div>
+
+                        <div class="column-form">
+
+                            <div class="form-group">
+                                <label asp-for="SfCatMorningStar"></label><br>
+                                <select class="select-datagate" asp-for="SfCatMorningStar">
+                                    <option selected disabled>-- Choose Category --</option>
+                                    @foreach (var ms in (List<string>)ViewData["SfCatMorningStar"])
+                                    {
+                        <option value="@ms">@ms</option>}
+                                </select>
+                            </div>
+                            <span asp-validation-for="SfCatMorningStar" class="text-danger"></span>
+
+                            <div class="form-group">
+                                <label asp-for="SfCatSix"></label><br>
+                                <select class="select-datagate" asp-for="SfCatSix">
+                                    <option selected disabled>-- Choose Category --</option>
+                                    @foreach (var six in (List<string>)ViewData["SfCatSix"])
+                                    {
+                        <option value="@six">@six</option>}
+                                </select>
+                            </div>
+                            <span asp-validation-for="SfCatSix" class="text-danger"></span>
+
+                            <div class="form-group">
+                                <label asp-for="SfCatBloomberg"></label><br>
+                                <select class="select-datagate" asp-for="SfCatBloomberg">
+                                    <option selected disabled>-- Choose Category --</option>
+                                    @foreach (var bg in (List<string>)ViewData["SfCatBloomberg"])
+                                    {
+                        <option value="@bg">@bg</option>}
+                                </select>
+                            </div>
+                            <span asp-validation-for="SfCatBloomberg" class="text-danger"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="button-holder-storage my-4">
                 <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
-                <a class="btn btn-datagate btn-lg" 
-                   asp-area="@EndpointsConstants.DisplaySub@EndpointsConstants.FundArea" 
+                <a class="btn btn-datagate btn-lg"
+                   asp-area="@EndpointsConstants.DisplaySub@EndpointsConstants.FundArea"
                    asp-route="@EndpointsConstants.RouteAll@EndpointsConstants.DisplaySub@EndpointsConstants.FundsController">
                     @SharedLocalizer.GetHtmlString("Back to List")
                 </a>

@@ -19,9 +19,9 @@
         color: white;
     }
 
-a:not([href]):hover {
-    color: white;
-}
+    .modal-footer .btn-datagate:hover{
+        color:white;
+    }
 
 .modal-footer-save-btn-container {
     flex: 1
