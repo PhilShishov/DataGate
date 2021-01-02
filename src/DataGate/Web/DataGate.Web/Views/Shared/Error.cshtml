@@ -20,7 +20,10 @@
             <a href="/shareclasses">@SharedLocalizer.GetHtmlString("Share Classes")</a>
             <a href="/allagreements">@SharedLocalizer.GetHtmlString("Agreements")</a>
             <a href="/reportoverview">@SharedLocalizer.GetHtmlString("Reports")</a>
-            <a href="/account/email">@SharedLocalizer.GetHtmlString("Profile")</a>
+             @if (!this.User.IsInRole(GlobalConstants.GuestRoleName))
+             {
+                <a href="/account/email">@SharedLocalizer.GetHtmlString("Profile")</a>
+             }
         </div>
     </div>
 </div>

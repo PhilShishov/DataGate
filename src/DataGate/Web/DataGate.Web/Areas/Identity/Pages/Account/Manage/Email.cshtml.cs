@@ -10,6 +10,7 @@ namespace DataGate.Web.Areas.Identity.Pages.Account.Manage
 
     using DataGate.Common;
     using DataGate.Data.Models.Users;
+
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.UI.Services;
     using Microsoft.AspNetCore.Mvc;

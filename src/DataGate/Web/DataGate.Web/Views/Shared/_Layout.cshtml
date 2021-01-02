@@ -10,9 +10,9 @@
     <meta name="google-site-verification" content="FW9DrNour5PH4usRUVC2xbURXdVwiyupBHItF763Dvc" />
     <meta name="keywords" content=@GlobalConstants.Keywords />
     <meta name="author" content=@GlobalConstants.AuthorName />
+    <link rel="icon" href="~/images/Logo_Pharus_small.jpg" alt="@GlobalConstants.AppName" type="image/x-icon">
 
     <environment include="Development">
-        <link rel="icon" href="~/images/Logo_Pharus_small.jpg" type="image/x-icon">
         <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" asp-append-version="true" />
         <link type="text/css" rel="stylesheet" href="~/lib/jqueryui/themes/smoothness/jquery-ui.css" asp-append-version="true" />
         <link type="text/css" rel="stylesheet" href="~/lib/datatables/css/jquery.dataTables.css" asp-append-version="true" />
@@ -39,7 +39,6 @@
     </environment>
 
     <environment include="Production, Staging">
-        <link rel="icon" href="~/images/Logo_Pharus_small.jpg" type="image/x-icon">
         <link type="text/css" rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
         <link type="text/css" rel="stylesheet" href="~/lib/jqueryui/themes/smoothness/jquery-ui.min.css" asp-append-version="true" />
         <link type="text/css" rel="stylesheet" href="~/lib/datatables/css/jquery.dataTables.min.css" asp-append-version="true" />
@@ -63,7 +62,7 @@
                         <div class="mx-2 mt-2">
                             <a asp-area=""
                                asp-route="@EndpointsConstants.RouteUserPanel">
-                                <img src="~/images/Logo_Pharus_small.jpg" class="img-home-redirect" alt="Pharus Management Company">
+                                <img src="~/images/Logo_Pharus_small.jpg" class="img-home-redirect" alt="@GlobalConstants.AppName">
                             </a>
                         </div>
 
@@ -182,11 +181,14 @@
                                             @SharedLocalizer.GetHtmlString("Panel")
                                         </a>
                                     </li>
+                                     @if (!this.User.IsInRole(GlobalConstants.GuestRoleName))
+                                     {
+                                        <li>
+                                            <a asp-area="@EndpointsConstants.IdentityAreaName"
+                                               asp-page="/Account/Manage/Email">@this.User.Identity.Name</a>
+                                        </li>
+                                     }
 
-                                    <li>
-                                        <a asp-area="@EndpointsConstants.IdentityAreaName"
-                                           asp-page="/Account/Manage/Email">@this.User.Identity.Name</a>
-                                    </li>
 
                                     <li class="wrapper-language-bar">
                                         <partial name="_SelectLanguagePartial" />

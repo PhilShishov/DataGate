@@ -21,7 +21,7 @@
 
 https://pharusdatagate.com <br />
 
-![UserPanel](Documentation/Screenshots/App/UserPanel.png)
+![UserPanel](Documentation/Views/App/UserPanel.png)
 
 An internal web application for managing more than 250 funds. <br />
 
@@ -37,7 +37,7 @@ A full data view provides depth and detail - you can move <br />
 from a library view to an individual asset level view. 
 
   ## Status
-  [![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/DataGate-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=1&branchName=master) 
+  [![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/DataGate-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=1&branchName=master) [![Build status](https://ci.appveyor.com/api/projects/status/thvsvj1du6d595m6?svg=true)](https://ci.appveyor.com/project/PhilShishov/datagate)
   [![GitHub license](https://img.shields.io/github/license/philshishov/DataGate?color=brightgreen)](https://github.com/PhilShishov/DataGate/blob/master/LICENSE)
 
 ## General Info
@@ -73,20 +73,20 @@ https://pharusdatagate.com <br />
 * Two Databases - Identity Users and App
 * MS SQL Server, mylittleadmin
 * Diagrams -
-[Funds](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/DB-Diagrams/Funds.png),
-[Sub Funds](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/DB-Diagrams/SubFunds.png),
-[Share Classes](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/DB-Diagrams/ShareClasses.png),
-[Fund Sub Fund Connection](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/DB-Diagrams/FundSubFundConnection.png),
-[Sub Fund Share Class Connection](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/DB-Diagrams/SubFundShareClassConnection.png),
-[Agreements](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/DB-Diagrams/Agreements.png),
-[Documents](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/DB-Diagrams/Documents.png),
-[Time Series](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/DB-Diagrams/TimeSeries.png)
+[Funds](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Views/DB-Diagrams/Funds.png),
+[Sub Funds](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Views/DB-Diagrams/SubFunds.png),
+[Share Classes](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Views/DB-Diagrams/ShareClasses.png),
+[Fund Sub Fund Connection](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Views/DB-Diagrams/FundSubFundConnection.png),
+[Sub Fund Share Class Connection](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Views/DB-Diagrams/SubFundShareClassConnection.png),
+[Agreements](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Views/DB-Diagrams/Agreements.png),
+[Documents](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Views/DB-Diagrams/Documents.png),
+[Time Series](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Views/DB-Diagrams/TimeSeries.png)
 * Entity Framework Core 3.1, Scaffold, LINQ
 * Distributed Cache - Redis 3.0.5, StackExchange
 
 ### Backend
 * C# .NET Core 3.1
-* 5 Areas, 28 Services, 16 Controllers
+* 5 Areas, 17 Controllers, 29 Services
 * Design Pattern - DAO, DI, TAP, MVC, REST, Repository, SOLID
 * Also build with:
   * SendGrid
@@ -124,36 +124,38 @@ https://pharusdatagate.com <br />
 
 ## Functionality 
 ### Logged in Users
- - [Manage Account](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/ManageAccount.png)
+ - [Manage Account](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Views/App/ManageAccount.png)
  - Consult libraries - Fund, Sub Fund, Share Class, Agreements
- - Consult particular view - [Sub entities and their connections](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/DetailFundView.png), 
- [Time Series](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/TimeSeries.png), 
- [Documents](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Documents.png), 
- [Agreements](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Agreements.png), 
- [Timeline](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Timeline.png), 
+ - Consult particular view - [Sub entities and their connections](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Views/App/DetailFundView.png), 
+ [Time Series SF](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Views/App/TimeSeriesSF.png), 
+ [Time Series SC](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Views/App/TimeSeriesSC.png), 
+ [Documents](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Views/App/Documents.png), 
+ [Agreements](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Views/App/Agreements.png), 
+ [Timeline](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Views/App/Timeline.png), 
  Fees
  - Manage tool menu - Save Layout, Toogle inactive entities, Update views by date
- - Extract view tables as [PDF](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/Extraction/Funds.pdf) 
- and [Excel](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/Extraction/Funds.xlsx)
- - Consult AuM NAV [Fund](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/FundReports.png) / [Sub Fund](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/SubFundReports.png) and Time Series reports
+ - Extract view tables as [PDF](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Views/Extraction/Funds.pdf) 
+ and [Excel](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Views/Extraction/Funds.xlsx)
+ - Consult AuM NAV [Fund](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Views/App/FundReports.png) / [Sub Fund](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Views/App/SubFundReports.png) and Time Series reports
  - Choose and sort header columns for large table views
- - Perform a global [share class search](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/SearchView.png)
+ - Perform a global [share class search](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Views/App/SearchView.png)
  - Slide through recent share classes and visit recently viewed links
  - Real-time notifications 
    - Create, edit, delete entity
    - Upload/delete document
  - Multi language support - 
- [English](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/UserPanel.png) and 
- [Italian](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Italian.png)
+ [English](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Views/App/UserPanel.png) and 
+ [Italian](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Views/App/Italian.png)
+ - [Error view](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Views/App/Error.png)
  ### Users in role "Legal"
   - All the functionalities of logged in user
   - Upload
-   [document](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/UploadDocument.png),
-   [agreement](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/UploadAgreement.png) and
+   [document](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Views/App/UploadDocument.png),
+   [agreement](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Views/App/UploadAgreement.png) and
    fees
  -  Delete document, agreement
-  - [Create Entity](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/Create.png)
-  / [Official Update](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Screenshots/App/OfficialUpdate.png)
+  - [Create Entity](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Views/App/Create.png)
+  / [Official Update](https://github.com/PhilShishov/DataGate/blob/master/Documentation/Views/App/OfficialUpdate.png)
  ### Administrators
  - All the functionalities of legal user
  - Create, edit and delete user
@@ -170,7 +172,9 @@ The main function is automatic feeding of data into an internal database by the 
 
 [Code Metrics Processor](https://github.com/PhilShishov/DataGate/blob/master/Documentation/DataGate_CodeMetricsAnalyzis_20200720.xlsx)
 
-[Responsive Web Design](https://github.com/PhilShishov/DataGate/tree/master/Documentation/Screenshots/App/Responsive)
+[Responsive Web Design](https://github.com/PhilShishov/DataGate/tree/master/Documentation/Views/App/Responsive)
+
+[All Views](https://github.com/PhilShishov/DataGate/tree/master/Documentation/Views/App)
 
 
 ![Business-Layer](Documentation/Presentation/Business-Layer.png)
@@ -178,6 +182,8 @@ The main function is automatic feeding of data into an internal database by the 
 ![Application-Structure](Documentation/Presentation/Application-Structure.png)
   
   ## History
+**2021-01-02** Published DataGate v2.1 with ASP.NET 5.0.1
+
 **2020-10-30** Updated to ASP.NET Core 3.1.9
   
 **2020-10-12** SFTP Data Manipulation Layer - [DataGate Report](https://github.com/PhilShishov/DataGate-Report)
@@ -186,9 +192,9 @@ The main function is automatic feeding of data into an internal database by the 
 
 **2020-07-14** Updated to ASP.NET Core 3.1.6
 
-**2020-06-22** Released DataGate v2.0
+**2020-06-22** Published DataGate v2.0
 
-**2020-02-28** Released DataGate v1.0 with ASP.NET Core 2.1
+**2020-02-28** Published DataGate v1.0 with ASP.NET Core 2.1
 
 ## License
 This project is licensed under the [MIT License](LICENSE)
