@@ -1588,7 +1588,7 @@
                 entity.ToTable("tb_primeShareClass");
 
                 entity.HasIndex(e => e.ScId)
-                    .HasName("uidx_sc_id")
+                    .HasDatabaseName("uidx_sc_id")
                     .IsUnique();
 
                 entity.Property(e => e.ScId).HasColumnName("sc_id");

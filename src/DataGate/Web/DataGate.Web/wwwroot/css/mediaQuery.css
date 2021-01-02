@@ -11,6 +11,17 @@
         overflow: scroll;
     }
 
+    .container-not-found {
+        width: 80vw;
+        text-align: center;
+        margin-top: 90px;
+    }
+
+        .container-not-found img {
+            margin-bottom: 30px;
+            margin-right: 0;
+        }
+
     .toolbar-view-all, .toolbar-view-details {
         overflow-x: scroll;
     }
@@ -72,6 +83,13 @@
 
 
 @media only screen and (min-width: 990px) {
+
+    .container-not-found {
+        width: 1050px;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
     .toolbar-view-all {
         margin-top: 72px;
     }
@@ -90,7 +108,7 @@
     }
 
     .push {
-        margin-top: 60px;
+        margin-top: 72px;
     }
 
     #infoAndDocumentsView {
@@ -137,5 +155,14 @@
 @media only screen and (min-width: 1054px) {
     .title-responsive {
         display: none;
+    }
+}
+
+
+@media (max-width: 767px) and (min-width: 320px){
+    .container-not-found-links a {
+        width: 100px;
+        display: block;
+        margin: 15px auto;
     }
 }

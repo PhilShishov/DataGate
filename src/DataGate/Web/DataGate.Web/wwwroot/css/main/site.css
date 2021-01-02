@@ -169,7 +169,6 @@ h1, h2, h3, h4 {
 
 h2 {
     font-size: 25px;
-    line-height: 1.9;
 }
 
 h4 {
@@ -510,6 +509,10 @@ textarea {
     align-items: center;
 }
 
+    .notification-list-header p {
+        margin-bottom: 0;
+    }
+
     .notification-list-header svg {
         width: 11px;
         margin: 0 4px;
@@ -524,3 +527,55 @@ textarea {
         font-size: 10px;
         margin-bottom: 0;
     }
+
+
+/*
+*
+* ==========================================
+* Error Page Styling
+* ==========================================
+*
+*/
+
+.container-not-found {
+    margin: 120px auto;
+}
+
+    .container-not-found img {
+        width: 500px;
+        height: 300px;
+        max-width: 100%;
+        border-radius: 15px;
+        margin-right: 50px;
+    }
+
+.container-not-found-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: black;
+}
+
+    .container-not-found-content h2 {
+        line-height: initial;
+    }
+
+.container-not-found-links {
+}
+
+    .container-not-found-links a {
+        background: rgb(0, 65, 118);
+        color: #fff;
+        margin: 7px 0 0 0;
+        padding: 5px 10px 5px 10px;
+        display: inline-block;
+        transition: all .1s ease;
+        -moz-transition: all .1s ease;
+        -webkit-transition: all .1s ease;
+        -o-transition: all .1s ease;
+    }
+
+        .container-not-found-links a:hover {
+            text-decoration: none;
+            background-color: #0069d9;
+        }

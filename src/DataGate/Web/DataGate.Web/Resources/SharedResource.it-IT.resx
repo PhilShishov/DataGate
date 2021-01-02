@@ -465,6 +465,9 @@
   <data name="Logout" xml:space="preserve">
     <value>Disconnetti</value>
   </data>
+  <data name="Looks like we can't find what you're looking for." xml:space="preserve">
+    <value>Sembra che non riusciamo a trovare quello che stai cercando.</value>
+  </data>
   <data name="Main Website" xml:space="preserve">
     <value>Sito Web Principale</value>
   </data>
@@ -473,6 +476,9 @@
   </data>
   <data name="Manage your account" xml:space="preserve">
     <value>Gestisci account</value>
+  </data>
+  <data name="Maybe one of these links will help you." xml:space="preserve">
+    <value>Forse uno di questi link ti aiuterà.</value>
   </data>
   <data name="New email" xml:space="preserve">
     <value>Nuova email</value>
@@ -509,6 +515,9 @@
   </data>
   <data name="Once deleted, you will not be able to recover this file!" xml:space="preserve">
     <value>Una volta eliminato, non sarai in grado di recuperare questo file!</value>
+  </data>
+  <data name="Page not found" xml:space="preserve">
+    <value>Pagina non trovata</value>
   </data>
   <data name="Panel" xml:space="preserve">
     <value>Pannello</value>
@@ -548,6 +557,9 @@
   </data>
   <data name="Privacy Policy" xml:space="preserve">
     <value>Privacy Policy</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profilo</value>
   </data>
   <data name="Projects" xml:space="preserve">
     <value>Progetti</value>
@@ -635,6 +647,9 @@
   </data>
   <data name="Thank you for confirming your email." xml:space="preserve">
     <value>Grazie per aver confermato l'email</value>
+  </data>
+  <data name="The page is not found" xml:space="preserve">
+    <value>La pagina non è stata trovata</value>
   </data>
   <data name="Time Series" xml:space="preserve">
     <value>Serie Storiche</value>

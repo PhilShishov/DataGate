@@ -78,7 +78,7 @@ namespace DataGate.Web
                 await next();
                 if (context.Response.StatusCode == 404)
                 {
-                    context.Request.Path = "/Home";
+                    context.Request.Path = "/Home/Error";
                     await next();
                 }
             });
