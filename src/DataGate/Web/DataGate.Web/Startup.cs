@@ -7,7 +7,6 @@ namespace DataGate.Web
 
     using DataGate.Common;
     using DataGate.Data;
-    using DataGate.Data.Seeding;
     using DataGate.Services.Mapping;
     using DataGate.Web.Configuration;
     using DataGate.Web.InputModels.Funds;
@@ -67,7 +66,6 @@ namespace DataGate.Web
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
             }
             else
             {

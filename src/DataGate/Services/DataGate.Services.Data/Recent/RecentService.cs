@@ -54,6 +54,7 @@ namespace DataGate.Services.Data.Recent
                 {
                     UserId = userId,
                     LinkUrl = link,
+                    VisitedOn = DateTime.UtcNow,
                     DisplayLink = StringExtensions.BuildDisplayLink(link),
                 };
                 await this.repository.AddAsync(item);

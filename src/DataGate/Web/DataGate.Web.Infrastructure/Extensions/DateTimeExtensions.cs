@@ -10,6 +10,8 @@ namespace DataGate.Web.Infrastructure.Extensions
 
     public static class DateTimeExtensions
     {
+        private const int FixedDayNavValue = 5;
+
         public static DateTime FromWebFormat(this string date)
         {
             if (date != null)
@@ -96,6 +98,29 @@ namespace DataGate.Web.Infrastructure.Extensions
             }
 
             return string.Empty;
+        }
+
+        public static DateTime BuildReportDate(this DateTime chosenDate, string type, int previous = 0)
+        {
+            var date = new DateTime();
+
+            if (chosenDate.Month == 1)
+            {
+                int day = (type == EndpointsConstants.FundArea) ?
+                  FixedDayNavValue :
+                  DateTime.DaysInMonth(chosenDate.Year - 1, 12);
+
+                date = new DateTime(chosenDate.Year - 1, 12, day);
+            }
+            else
+            {
+                int day = (type == EndpointsConstants.FundArea) ?
+                  FixedDayNavValue :
+                  DateTime.DaysInMonth(chosenDate.Year, chosenDate.Month - previous);
+                date = new DateTime(chosenDate.Year, chosenDate.Month - previous, day);
+            }
+
+            return date;
         }
 
     }

@@ -4,16 +4,18 @@
 namespace DataGate.Services.Data.Storage
 {
     using System;
+    using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Microsoft.EntityFrameworkCore;
-
+    using DataGate.Common;
     using DataGate.Common.Exceptions;
     using DataGate.Data.Common.Repositories.AppContext;
     using DataGate.Data.Models.Entities;
+    using DataGate.Data.Models.Parameters;
+    using DataGate.Services.Data.DataProcessor;
     using DataGate.Services.Data.Storage.Contracts;
     using DataGate.Services.Mapping;
     using DataGate.Services.SqlClient;
@@ -21,6 +23,8 @@ namespace DataGate.Services.Data.Storage
     using DataGate.Web.Dtos.Entities;
     using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.InputModels.ShareClasses;
+
+    using Microsoft.EntityFrameworkCore;
 
     public class ShareClassStorageService : IShareClassStorageService
     {
@@ -68,13 +72,18 @@ namespace DataGate.Services.Data.Storage
                   .FirstOrDefaultAsync();
 
             await this.SetForeignKeys(dto, dtoForeignKey);
-            SqlCommand command = this.AssignBaseParameters(dto, SqlProcedureDictionary.CreateShareClass);
+            var parameters = Deserializer.ImportParameters(EndpointsConstants.ShareClassArea + EndpointsConstants.ActionCreate);
+
+            var procedure = StringExtensions.BuildProcedure(
+                SqlProcedureDictionary.CreateShareClass, parameters);
+
+            SqlCommand command = this.AssignBaseParameters(dto, procedure, parameters);
 
             // Assign particular parameters
             command.Parameters.AddRange(new[]
                    {
-                             new SqlParameter("@subfundcontainer", SqlDbType.Int) { Value = dto.ContainerId },
-                             new SqlParameter("@sc_endDate", SqlDbType.NVarChar) { Value = dto.EndDate },
+                             new SqlParameter(parameters[26].Name, SqlDbType.Int) { Value = dto.ContainerId },
+                             new SqlParameter(parameters[27].Name, SqlDbType.NVarChar) { Value = dto.EndDate },
                    });
 
             await this.sqlManager.ExecuteProcedure(command);
@@ -93,15 +102,20 @@ namespace DataGate.Services.Data.Storage
             ShareClassForeignKeysDto dtoForeignKey = AutoMapperConfig.MapperInstance.Map<ShareClassForeignKeysDto>(model);
 
             await this.SetForeignKeys(dto, dtoForeignKey);
-            SqlCommand command = this.AssignBaseParameters(dto, SqlProcedureDictionary.EditShareClass);
+
+            var parameters = Deserializer.ImportParameters(EndpointsConstants.ShareClassArea + EndpointsConstants.ActionEdit);
+
+            var procedure = StringExtensions.BuildProcedure(
+                SqlProcedureDictionary.EditShareClass, parameters);
+
+            SqlCommand command = this.AssignBaseParameters(dto, procedure, parameters);
 
             // Assign particular parameters
             command.Parameters.AddRange(new[]
                    {
-                            new SqlParameter("@sc_id", SqlDbType.Int) { Value = dto.Id },
-                            new SqlParameter("@comment", SqlDbType.NVarChar) { Value = dto.CommentArea },
-                            new SqlParameter("@comment_title", SqlDbType.NVarChar) { Value = dto.CommentTitle },
-                            new SqlParameter("@sc_shortShareClassName", SqlDbType.NVarChar) { Value = dto.ShareClassName },
+                            new SqlParameter(parameters[26].Name, SqlDbType.Int) { Value = dto.Id },
+                            new SqlParameter(parameters[27].Name, SqlDbType.NVarChar) { Value = dto.CommentArea },
+                            new SqlParameter(parameters[28].Name, SqlDbType.NVarChar) { Value = dto.CommentTitle },
                    });
 
             await this.sqlManager.ExecuteProcedure(command);
@@ -128,38 +142,38 @@ namespace DataGate.Services.Data.Storage
             dto.CountryRisk = await this.repositorySelectList.ByNameCountry(dtoForeignKey.CountryRisk);
         }
 
-        private SqlCommand AssignBaseParameters(ShareClassPostDto dto, string procedure)
+        private SqlCommand AssignBaseParameters(ShareClassPostDto dto, string procedure, List<Parameter> parameters)
         {
             SqlCommand command = new SqlCommand(procedure);
 
             command.Parameters.AddRange(new[]
                    {
-                        new SqlParameter("@sc_initialDate", SqlDbType.NVarChar) { Value = dto.InitialDate },
-                        new SqlParameter("@sc_officialShareClassName", SqlDbType.NVarChar) { Value = dto.ShareClassName },
-                        new SqlParameter("@sc_investorType", SqlDbType.Int) { Value = dto.InvestorType },
-                        new SqlParameter("@sc_shareType", SqlDbType.Int) { Value = dto.ShareType },
-                        new SqlParameter("@sc_currency", SqlDbType.NChar) { Value = dto.CurrencyCode },
-                        new SqlParameter("@sc_countryIssue", SqlDbType.NChar) { Value = dto.CountryIssue },
-                        new SqlParameter("@sc_ultimateParentCountryRisk", SqlDbType.NChar) { Value = dto.CountryRisk },
-                        new SqlParameter("@sc_emissionDate", SqlDbType.NVarChar) { Value = dto.EmissionDate },
-                        new SqlParameter("@sc_inceptionDate", SqlDbType.NVarChar) { Value = dto.InceptionDate },
-                        new SqlParameter("@sc_lastNav", SqlDbType.NVarChar) { Value = dto.LastNavDate },
-                        new SqlParameter("@sc_expiryDate", SqlDbType.NVarChar) { Value = dto.ExpiryDate },
-                        new SqlParameter("@sc_status", SqlDbType.Int) { Value = dto.Status },
-                        new SqlParameter("@sc_initialPrice", SqlDbType.Float) { Value = dto.InitialPrice },
-                        new SqlParameter("@sc_accountingCode", SqlDbType.NVarChar) { Value = dto.AccountingCode },
-                        new SqlParameter("@sc_hedged", SqlDbType.Bit) { Value = dto.IsHedged },
-                        new SqlParameter("@sc_listed", SqlDbType.Bit) { Value = dto.IsListed },
-                        new SqlParameter("@sc_bloomberMarket", SqlDbType.NVarChar) { Value = dto.BloombergMarket },
-                        new SqlParameter("@sc_bloomberCode", SqlDbType.NVarChar) { Value = dto.BloombergCode },
-                        new SqlParameter("@sc_bloomberId", SqlDbType.NVarChar) { Value = dto.BloombergId },
-                        new SqlParameter("@sc_isinCode", SqlDbType.NChar, 12) { Value = dto.ISINCode },
-                        new SqlParameter("@sc_valorCode", SqlDbType.NVarChar) { Value = dto.ValorCode },
-                        new SqlParameter("@sc_faCode", SqlDbType.NVarChar) { Value = dto.FACode },
-                        new SqlParameter("@sc_taCode", SqlDbType.NVarChar) { Value = dto.TACode },
-                        new SqlParameter("@sc_WKN", SqlDbType.NVarChar) { Value = dto.WKN },
-                        new SqlParameter("@sc_date_business_year", SqlDbType.NVarChar, 100) { Value = dto.DateBusinessYear },
-                        new SqlParameter("@sc_prospectus_code", SqlDbType.NVarChar, 100) { Value = dto.ProspectusCode },
+                        new SqlParameter(parameters[0].Name, SqlDbType.NVarChar) { Value = dto.InitialDate },
+                        new SqlParameter(parameters[1].Name, SqlDbType.NVarChar) { Value = dto.ShareClassName },
+                        new SqlParameter(parameters[2].Name, SqlDbType.Int) { Value = dto.InvestorType },
+                        new SqlParameter(parameters[3].Name, SqlDbType.Int) { Value = dto.ShareType },
+                        new SqlParameter(parameters[4].Name, SqlDbType.NChar) { Value = dto.CurrencyCode },
+                        new SqlParameter(parameters[5].Name, SqlDbType.NChar) { Value = dto.CountryIssue },
+                        new SqlParameter(parameters[6].Name, SqlDbType.NChar) { Value = dto.CountryRisk },
+                        new SqlParameter(parameters[7].Name, SqlDbType.NVarChar) { Value = dto.EmissionDate },
+                        new SqlParameter(parameters[8].Name, SqlDbType.NVarChar) { Value = dto.InceptionDate },
+                        new SqlParameter(parameters[9].Name, SqlDbType.NVarChar) { Value = dto.LastNavDate },
+                        new SqlParameter(parameters[10].Name, SqlDbType.NVarChar) { Value = dto.ExpiryDate },
+                        new SqlParameter(parameters[11].Name, SqlDbType.Int) { Value = dto.Status },
+                        new SqlParameter(parameters[12].Name, SqlDbType.Float) { Value = dto.InitialPrice },
+                        new SqlParameter(parameters[13].Name, SqlDbType.NVarChar) { Value = dto.AccountingCode },
+                        new SqlParameter(parameters[14].Name, SqlDbType.Bit) { Value = dto.IsHedged },
+                        new SqlParameter(parameters[15].Name, SqlDbType.Bit) { Value = dto.IsListed },
+                        new SqlParameter(parameters[16].Name, SqlDbType.NVarChar) { Value = dto.BloombergMarket },
+                        new SqlParameter(parameters[17].Name, SqlDbType.NVarChar) { Value = dto.BloombergCode },
+                        new SqlParameter(parameters[18].Name, SqlDbType.NVarChar) { Value = dto.BloombergId },
+                        new SqlParameter(parameters[19].Name, SqlDbType.NChar, 12) { Value = dto.ISINCode },
+                        new SqlParameter(parameters[20].Name, SqlDbType.NVarChar) { Value = dto.ValorCode },
+                        new SqlParameter(parameters[21].Name, SqlDbType.NVarChar) { Value = dto.FACode },
+                        new SqlParameter(parameters[22].Name, SqlDbType.NVarChar) { Value = dto.TACode },
+                        new SqlParameter(parameters[23].Name, SqlDbType.NVarChar) { Value = dto.WKN },
+                        new SqlParameter(parameters[24].Name, SqlDbType.NVarChar, 100) { Value = dto.DateBusinessYear },
+                        new SqlParameter(parameters[25].Name, SqlDbType.NVarChar, 100) { Value = dto.ProspectusCode },
                    });
             return command;
         }

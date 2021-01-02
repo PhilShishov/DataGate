@@ -146,15 +146,15 @@ namespace DataGate.Services.SqlClient
             {
                 SqlCommand command = this.SetUpConnection(connection);
 
-                command.CommandText = function;
 
                 if (function.Contains("fn"))
                 {
                     var sqlDate = DateTimeExtensions.ToSqlFormat(date);
-                    command.CommandText = $"select * from {function}('{sqlDate}')";
+                    command.CommandText = $"select * from {function} ('{sqlDate}')";
                 }
                 else
                 {
+                    command.CommandText = function;
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.Add(new SqlParameter("@datereport", SqlDbType.Date) { Value = date });
                 }

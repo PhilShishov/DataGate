@@ -20,7 +20,6 @@ namespace DataGate.Web.Controllers
     [Authorize]
     public class ReportsController : BaseController
     {
-        private const int FixedDayNavValue = 5;
         private readonly IReportsService service;
         private readonly ITimeSeriesRepository repository;
 
@@ -60,10 +59,10 @@ namespace DataGate.Web.Controllers
                             SqlFunctionDictionary.ReportFunds,
                             SqlFunctionDictionary.ReportSubFunds,
                             null);
-            int day = (type == EndpointsConstants.FundArea) ?
-                FixedDayNavValue :
-                DateTime.DaysInMonth(DateTime.Today.Year, DateTime.Today.Month - 1);
-            var date = new DateTime(DateTime.Today.Year, DateTime.Today.Month - 1, day);
+
+            var today = DateTime.Today;
+            var date = today.BuildReportDate(type, 1);
+
             var headers = await this.service.All(function, date).FirstOrDefaultAsync();
             var values = await this.service.All(function, date, 1).ToListAsync();
 
@@ -87,10 +86,7 @@ namespace DataGate.Web.Controllers
                             SqlFunctionDictionary.ReportSubFunds,
                             null);
 
-            int day = (model.SelectedType == EndpointsConstants.FundArea) ?
-                FixedDayNavValue :
-                DateTime.DaysInMonth(model.Date.Year, model.Date.Month);
-            var date = new DateTime(model.Date.Year, model.Date.Month, day);
+            var date = model.Date.BuildReportDate(model.SelectedType);
 
             model.Headers = await this.service.All(function, date).FirstOrDefaultAsync();
             model.Values = await this.service.All(function, date, 1).ToListAsync();
@@ -107,10 +103,12 @@ namespace DataGate.Web.Controllers
 
             this.SetViewDataValues(type, typeIndex);
 
+            var today = DateTime.Today;
+
             var viewModel = new TimeSerieReportsListViewModel
             {
                 AreaName = type,
-                StartDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month - 1, DateTime.Today.Day),
+                StartDate = today.BuildReportDate(null, 1),
                 EndDate = DateTime.Today,
             };
 

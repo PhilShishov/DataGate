@@ -4,17 +4,18 @@
 namespace DataGate.Services.Data.Storage
 {
     using System;
+    using System.Collections.Generic;
     using System.Data;
     using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Microsoft.EntityFrameworkCore;
-
+    using DataGate.Common;
     using DataGate.Common.Exceptions;
-    using DataGate.Data.Common.Repositories;
     using DataGate.Data.Common.Repositories.AppContext;
     using DataGate.Data.Models.Entities;
+    using DataGate.Data.Models.Parameters;
+    using DataGate.Services.Data.DataProcessor;
     using DataGate.Services.Data.Storage.Contracts;
     using DataGate.Services.Mapping;
     using DataGate.Services.SqlClient;
@@ -22,6 +23,8 @@ namespace DataGate.Services.Data.Storage
     using DataGate.Web.Dtos.Entities;
     using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.InputModels.SubFunds;
+
+    using Microsoft.EntityFrameworkCore;
 
     public class SubFundStorageService : ISubFundStorageService
     {
@@ -70,14 +73,20 @@ namespace DataGate.Services.Data.Storage
                   .FirstOrDefaultAsync();
 
             await this.SetForeignKeys(dto, dtoForeignKey);
-            SqlCommand command = this.AssignBaseParameters(dto, SqlProcedureDictionary.CreateSubFund);
 
-            // Assign particular parameters
+            var parameters = Deserializer.ImportParameters(
+                           EndpointsConstants.DisplaySub + EndpointsConstants.FundArea + EndpointsConstants.ActionCreate);
+
+            var procedure = StringExtensions.BuildProcedure(
+                SqlProcedureDictionary.CreateSubFund, parameters);
+
+            SqlCommand command = this.AssignBaseParameters(dto, procedure, parameters);
+
             // Assign particular parameters
             command.Parameters.AddRange(new[]
                    {
-                             new SqlParameter("@fundcontainer", SqlDbType.Int) { Value = dto.ContainerId },
-                             new SqlParameter("@sf_endDate", SqlDbType.NVarChar) { Value = dto.EndDate },
+                             new SqlParameter(parameters[29].Name, SqlDbType.Int) { Value = dto.ContainerId },
+                             new SqlParameter(parameters[30].Name, SqlDbType.NVarChar) { Value = dto.EndDate },
                    });
 
             await this.sqlManager.ExecuteProcedure(command);
@@ -97,15 +106,21 @@ namespace DataGate.Services.Data.Storage
             SubFundForeignKeysDto dtoForeignKey = AutoMapperConfig.MapperInstance.Map<SubFundForeignKeysDto>(model);
 
             await this.SetForeignKeys(dto, dtoForeignKey);
-            SqlCommand command = this.AssignBaseParameters(dto, SqlProcedureDictionary.EditSubFund);
+
+            var parameters = Deserializer.ImportParameters(
+                EndpointsConstants.DisplaySub + EndpointsConstants.FundArea + EndpointsConstants.ActionEdit);
+
+            var procedure = StringExtensions.BuildProcedure(
+                SqlProcedureDictionary.EditSubFund, parameters);
+
+            SqlCommand command = this.AssignBaseParameters(dto, procedure, parameters);
 
             // Assign particular parameters
             command.Parameters.AddRange(new[]
                    {
-                            new SqlParameter("@sf_id", SqlDbType.Int) { Value = dto.Id },
-                            new SqlParameter("@comment", SqlDbType.NVarChar) { Value = dto.CommentArea },
-                            new SqlParameter("@comment_title", SqlDbType.NVarChar) { Value = dto.CommentTitle },
-                            new SqlParameter("@sf_shortSubFundName ", SqlDbType.NVarChar) { Value = dto.SubFundName },
+                            new SqlParameter(parameters[29].Name, SqlDbType.Int) { Value = dto.Id },
+                            new SqlParameter(parameters[30].Name, SqlDbType.NVarChar) { Value = dto.CommentArea },
+                            new SqlParameter(parameters[31].Name, SqlDbType.NVarChar) { Value = dto.CommentTitle },
                    });
 
             await this.sqlManager.ExecuteProcedure(command);
@@ -142,41 +157,41 @@ namespace DataGate.Services.Data.Storage
             dto.SfCatBloomberg = await this.repositorySelectList.ByIdCB(dtoForeignKey.SfCatBloomberg);
         }
 
-        private SqlCommand AssignBaseParameters(SubFundPostDto dto, string procedure)
+        private SqlCommand AssignBaseParameters(SubFundPostDto dto, string procedure, List<Parameter> parameters)
         {
             SqlCommand command = new SqlCommand(procedure);
 
             command.Parameters.AddRange(new[]
                    {
-                        new SqlParameter("@sf_initialDate", SqlDbType.NVarChar) { Value = dto.InitialDate },
-                        new SqlParameter("@sf_officialSubFundName", SqlDbType.NVarChar) { Value = dto.SubFundName },
-                        new SqlParameter("@sf_cssfCode", SqlDbType.NVarChar) { Value = dto.CSSFCode },
-                        new SqlParameter("@sf_faCode", SqlDbType.NVarChar) { Value = dto.FACode },
-                        new SqlParameter("@sf_taCode", SqlDbType.NVarChar) { Value = dto.TACode },
-                        new SqlParameter("@sf_depCode", SqlDbType.NVarChar) { Value = dto.DBCode },
-                        new SqlParameter("@sf_firstNavDate", SqlDbType.NVarChar) { Value = dto.FirstNavDate },
-                        new SqlParameter("@sf_lastNavDate", SqlDbType.NVarChar) { Value = dto.LastNavDate },
-                        new SqlParameter("@sf_cssfAuthDate", SqlDbType.NVarChar) { Value = dto.CSSFAuthDate },
-                        new SqlParameter("@sf_expDate", SqlDbType.NVarChar) { Value = dto.ExpiryDate },
-                        new SqlParameter("@sf_status", SqlDbType.Int) { Value = dto.Status },
-                        new SqlParameter("@sf_leiCode", SqlDbType.NVarChar) { Value = dto.LEICode },
-                        new SqlParameter("@sf_cesrClass", SqlDbType.Int) { Value = dto.CesrClass },
-                        new SqlParameter("@sf_cssf_geographical_focus", SqlDbType.Int) { Value = dto.GeographicalFocus },
-                        new SqlParameter("@sf_globalExposure", SqlDbType.Int) { Value = dto.GlobalExposure },
-                        new SqlParameter("@sf_currency", SqlDbType.NChar) { Value = dto.CurrencyCode },
-                        new SqlParameter("@sf_navFrequency", SqlDbType.Int) { Value = dto.NavFrequency },
-                        new SqlParameter("@sf_valutationDate", SqlDbType.Int) { Value = dto.ValuationDate },
-                        new SqlParameter("@sf_calculationDate", SqlDbType.Int) { Value = dto.CalculationDate },
-                        new SqlParameter("@sf_derivatives", SqlDbType.Bit) { Value = dto.AreDerivatives },
-                        new SqlParameter("@sf_derivMarket", SqlDbType.Int) { Value = dto.DerivMarket },
-                        new SqlParameter("@sf_derivPurpose", SqlDbType.Int) { Value = dto.DerivPurpose },
-                        new SqlParameter("@sf_principal_asset_class", SqlDbType.Int) { Value = dto.PrincipalAssetClass },
-                        new SqlParameter("@sf_type_of_market", SqlDbType.Int) { Value = dto.TypeOfMarket },
-                        new SqlParameter("@sf_principal_investment_strategy", SqlDbType.Int) { Value = dto.PrincipalInvestmentStrategy },
-                        new SqlParameter("@sf_clearing_code", SqlDbType.NVarChar) { Value = dto.ClearingCode },
-                        new SqlParameter("@sf_cat_morningstar", SqlDbType.Int) { Value = dto.SfCatMorningStar },
-                        new SqlParameter("@sf_category_six", SqlDbType.Int) { Value = dto.SfCatSix },
-                        new SqlParameter("@sf_category_bloomberg", SqlDbType.Int) { Value = dto.SfCatBloomberg },
+                        new SqlParameter(parameters[0].Name, SqlDbType.NVarChar) { Value = dto.InitialDate },
+                        new SqlParameter(parameters[1].Name, SqlDbType.NVarChar) { Value = dto.SubFundName },
+                        new SqlParameter(parameters[2].Name, SqlDbType.NVarChar) { Value = dto.CSSFCode },
+                        new SqlParameter(parameters[3].Name, SqlDbType.NVarChar) { Value = dto.FACode },
+                        new SqlParameter(parameters[4].Name, SqlDbType.NVarChar) { Value = dto.TACode },
+                        new SqlParameter(parameters[5].Name, SqlDbType.NVarChar) { Value = dto.DBCode },
+                        new SqlParameter(parameters[6].Name, SqlDbType.NVarChar) { Value = dto.FirstNavDate },
+                        new SqlParameter(parameters[7].Name, SqlDbType.NVarChar) { Value = dto.LastNavDate },
+                        new SqlParameter(parameters[8].Name, SqlDbType.NVarChar) { Value = dto.CSSFAuthDate },
+                        new SqlParameter(parameters[9].Name, SqlDbType.NVarChar) { Value = dto.ExpiryDate },
+                        new SqlParameter(parameters[10].Name, SqlDbType.Int) { Value = dto.Status },
+                        new SqlParameter(parameters[11].Name, SqlDbType.NVarChar) { Value = dto.LEICode },
+                        new SqlParameter(parameters[12].Name, SqlDbType.Int) { Value = dto.CesrClass },
+                        new SqlParameter(parameters[13].Name, SqlDbType.Int) { Value = dto.GeographicalFocus },
+                        new SqlParameter(parameters[14].Name, SqlDbType.Int) { Value = dto.GlobalExposure },
+                        new SqlParameter(parameters[15].Name, SqlDbType.NChar) { Value = dto.CurrencyCode },
+                        new SqlParameter(parameters[16].Name, SqlDbType.Int) { Value = dto.NavFrequency },
+                        new SqlParameter(parameters[17].Name, SqlDbType.Int) { Value = dto.ValuationDate },
+                        new SqlParameter(parameters[18].Name, SqlDbType.Int) { Value = dto.CalculationDate },
+                        new SqlParameter(parameters[19].Name, SqlDbType.Bit) { Value = dto.AreDerivatives },
+                        new SqlParameter(parameters[20].Name, SqlDbType.Int) { Value = dto.DerivMarket },
+                        new SqlParameter(parameters[21].Name, SqlDbType.Int) { Value = dto.DerivPurpose },
+                        new SqlParameter(parameters[22].Name, SqlDbType.Int) { Value = dto.PrincipalAssetClass },
+                        new SqlParameter(parameters[23].Name, SqlDbType.Int) { Value = dto.TypeOfMarket },
+                        new SqlParameter(parameters[24].Name, SqlDbType.Int) { Value = dto.PrincipalInvestmentStrategy },
+                        new SqlParameter(parameters[25].Name, SqlDbType.NVarChar) { Value = dto.ClearingCode },
+                        new SqlParameter(parameters[26].Name, SqlDbType.Int) { Value = dto.SfCatMorningStar },
+                        new SqlParameter(parameters[27].Name, SqlDbType.Int) { Value = dto.SfCatSix },
+                        new SqlParameter(parameters[28].Name, SqlDbType.Int) { Value = dto.SfCatBloomberg },
                    });
             return command;
         }

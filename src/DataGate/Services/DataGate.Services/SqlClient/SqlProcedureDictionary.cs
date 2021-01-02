@@ -27,51 +27,15 @@ namespace DataGate.Services.SqlClient
         public const string DeleteAgreementShareClass = "EXEC delete_agreement_shareclassfile_byid @file_id";
 
         // Fund Storage
+        public const string CreateFund = "EXEC sp_new_fund "; 
         public const string EditFund = "EXEC sp_modify_fund ";
 
-        public const string CreateFund = "EXEC sp_new_fund ";
-
         // Sub Fund Storage
-        public const string EditSubFund = "EXEC sp_modify_subfund " +
-               "@sf_id, @sf_initialDate, @sf_officialSubFundName, @sf_shortSubFundName," +
-               "@sf_cssfCode, @sf_faCode, @sf_depCode, @sf_taCode, @sf_firstNavDate, " +
-               "@sf_lastNavDate, @sf_cssfAuthDate, @sf_expDate, @sf_status, @sf_leiCode, " +
-               "@sf_cesrClass, @sf_cssf_geographical_focus, @sf_globalExposure, " +
-               "@sf_currency, @sf_navFrequency, @sf_valutationDate, @sf_calculationDate, " +
-               "@sf_derivatives, @sf_derivMarket, @sf_derivPurpose, @sf_principal_asset_class, " +
-               "@sf_type_of_market, @sf_principal_investment_strategy, @sf_clearing_code, " +
-               "@sf_cat_morningstar, @sf_category_six, @sf_category_bloomberg, @comment, " +
-               "@comment_title";
-
-        public const string CreateSubFund = "EXEC sp_new_subfund " +
-                "@sf_initialDate, @sf_endDate, @sf_officialSubFundName, " +
-                "@sf_cssfCode, @sf_faCode, @sf_depCode, @sf_taCode, @sf_firstNavDate, " +
-                "@sf_lastNavDate, @sf_cssfAuthDate, @sf_expDate, @sf_status, @sf_leiCode, " +
-                "@sf_cesrClass, @sf_cssf_geographical_focus, @sf_globalExposure, " +
-                "@sf_currency, @sf_navFrequency, @sf_valutationDate, @sf_calculationDate, " +
-                "@sf_derivatives, @sf_derivMarket, @sf_derivPurpose, @sf_principal_asset_class, " +
-                "@sf_type_of_market, @sf_principal_investment_strategy, @sf_clearing_code, " +
-                "@sf_cat_morningstar, @sf_category_six, @sf_category_bloomberg, @fundcontainer";
+        public const string CreateSubFund = "EXEC sp_new_subfund ";
+        public const string EditSubFund = "EXEC sp_modify_subfund ";
 
         // Create/edit share class
-        public const string EditShareClass = "EXEC sp_modify_shareclass " +
-                    "@sc_id, @sc_initialDate, @sc_officialShareClassName, " +
-                    "@sc_shortShareClassName, @sc_investorType, @sc_shareType, @sc_currency, " +
-                    "@sc_countryIssue, @sc_ultimateParentCountryRisk, @sc_emissionDate, @sc_inceptionDate, " +
-                    "@sc_lastNav, @sc_expiryDate, @sc_status, @sc_initialPrice, " +
-                    "@sc_accountingCode, @sc_hedged, @sc_listed, @sc_bloomberMarket, " +
-                    "@sc_bloomberCode, @sc_bloomberId, @sc_isinCode, @sc_valorCode, " +
-                    "@sc_faCode, @sc_taCode, @sc_WKN, @sc_date_business_year, " +
-                    "@sc_prospectus_code, @comment, @comment_title";
-
-        public const string CreateShareClass = "EXEC sp_new_shareclass " +
-                "@sc_initialDate, @sc_endDate, @sc_officialShareClassName, " +
-                "@sc_investorType, @sc_shareType, @sc_currency, " +
-                "@sc_countryIssue, @sc_ultimateParentCountryRisk, @sc_emissionDate, @sc_inceptionDate, " +
-                "@sc_lastNav, @sc_expiryDate, @sc_status, @sc_initialPrice, " +
-                "@sc_accountingCode, @sc_hedged, @sc_listed, @sc_bloomberMarket, " +
-                "@sc_bloomberCode, @sc_bloomberId, @sc_isinCode, @sc_valorCode, " +
-                "@sc_faCode, @sc_taCode, @sc_WKN, @sc_date_business_year, " +
-                "@sc_prospectus_code, @subfundcontainer";
+        public const string CreateShareClass = "EXEC sp_new_shareclass ";
+        public const string EditShareClass = "EXEC sp_modify_shareclass ";
     }
 }
