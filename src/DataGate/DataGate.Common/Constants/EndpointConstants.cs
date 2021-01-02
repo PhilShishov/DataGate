@@ -26,9 +26,9 @@ namespace DataGate.Common
         public const string ShareClassNameDisplay = "Share Class";
 
         // Abbreviations
-        public const string FundAbbreviation = "F";
-        public const string SubFundAbbreviation = "SF";
-        public const string ShareClassAbbreviation = "SC";
+        public const string FundAbbreviation = "f";
+        public const string SubFundAbbreviation = "sf";
+        public const string ShareClassAbbreviation = "sc";
 
         // Urls, actions
         public const string Slash = "/";

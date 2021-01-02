@@ -5,9 +5,11 @@ namespace DataGate.Web.Controllers
 {
     using System;
     using System.Text.RegularExpressions;
+    using System.Threading.Tasks;
 
     using DataGate.Common;
     using DataGate.Services.Data.Agreements;
+    using DataGate.Services.Data.Recent;
     using DataGate.Web.Helpers;
     using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.Resources;
@@ -19,13 +21,16 @@ namespace DataGate.Web.Controllers
     [Authorize]
     public class AgreementsController : BaseController
     {
+        private readonly IRecentService recentService;
         private readonly IAgreementsService service;
         private readonly SharedLocalizationService sharedLocalizer;
 
         public AgreementsController(
-            IAgreementsService service,
-            SharedLocalizationService sharedLocalizer)
+             IRecentService recentService,
+             IAgreementsService service,
+             SharedLocalizationService sharedLocalizer)
         {
+            this.recentService = recentService;
             this.service = service;
             this.sharedLocalizer = sharedLocalizer;
         }
@@ -39,7 +44,7 @@ namespace DataGate.Web.Controllers
 
         [HttpGet]
         [Route("agreements/{type}")]
-        public IActionResult All(string type)
+        public async Task<IActionResult> All(string type)
         {
             string function = StringSwapper.ByArea(type,
                                                   SqlFunctionDictionary.AllAgreementsFunds,
@@ -56,6 +61,7 @@ namespace DataGate.Web.Controllers
                 SelectedType = Regex.Replace(type, "(\\B[A-Z])", " $1"),
             };
 
+            await this.recentService.Save(this.User, this.Request.Path);
             return this.View(viewModel);
         }
 

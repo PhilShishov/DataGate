@@ -40,61 +40,62 @@ namespace DataGate.Web.Infrastructure.Extensions
 
                 displayLink = $"Search Results - '{searchTerm}'";
             }
+            else if (link.Contains("/agreements"))
+            {
+                var linkArr = link.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+                var entity = linkArr[1];
+
+                displayLink = string.Format(LinkMessages.Agreements, entity);
+            }
+            else if (link.Contains("/reports"))
+            {
+                var linkArr = link.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+                var entity = linkArr[1];
+                var type = linkArr[2];
+
+                if (type == "aum")
+                {
+                    type = "AuM";
+                }
+                else if (type == "timeseries")
+                {
+                    type = "TimeSeries";
+                }
+
+                displayLink = string.Format(LinkMessages.Reports, entity, type);
+            }
             else
             {
                 var linkArr = link.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
-                var type = linkArr[0];
+                var entity = linkArr[0];
+                var entityToDisplay = StringSwapper.ByArea(entity,
+                        EndpointsConstants.FundArea,
+                        EndpointsConstants.SubFundNameDisplay,
+                        EndpointsConstants.ShareClassNameDisplay);
 
                 if (int.TryParse(linkArr[1], out int id))
                 {
-                    var action = id;
-                    var date = linkArr[2];
+                    var arg = linkArr[2];
 
-                    switch (type)
+                    if (DateTime.TryParse(arg, out _))
                     {
-                        case "f":
-                            displayLink = $"Fund Details for ID:{id} at {date}";
-                            break;
-                        case "sf":
-                            displayLink = $"Sub Fund Details for ID:{id} at {date}";
-                            break;
-                        case "sc":
-                            displayLink = $"Share Class Details for ID:{id} at {date}";
-                            break;
+                        displayLink = string.Format(LinkMessages.Details, entityToDisplay, id, arg);
+                    }
+                    else
+                    {
+                        displayLink = string.Format(LinkMessages.SubEntities, entityToDisplay, id);
                     }
                 }
                 else if (linkArr[1] == "new")
                 {
-                    switch (type)
-                    {
-                        case "f":
-                            displayLink = "Create New Fund";
-                            break;
-                        case "sf":
-                            displayLink = "Create New Sub Fund";
-                            break;
-                        case "sc":
-                            displayLink = "Create New Share Class";
-                            break;
-                    }
+                    displayLink = string.Format(LinkMessages.Create, entityToDisplay);
                 }
                 else if (linkArr[1] == "edit")
                 {
                     var editId = linkArr[2];
-                    var date = linkArr[3];
+                    var arg = linkArr[3];
 
-                    switch (type)
-                    {
-                        case "f":
-                            displayLink = $"Edit Fund ID:{editId} at {date}";
-                            break;
-                        case "sf":
-                            displayLink = $"Edit Sub Fund ID:{editId} at {date}";
-                            break;
-                        case "sc":
-                            displayLink = $"Edit Share Class ID:{editId} at {date}";
-                            break;
-                    }
+                    displayLink = string.Format(LinkMessages.Edit, entityToDisplay, editId, arg);
                 }
             }
 

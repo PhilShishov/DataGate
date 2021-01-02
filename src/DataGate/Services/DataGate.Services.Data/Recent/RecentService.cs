@@ -37,7 +37,7 @@ namespace DataGate.Services.Data.Recent
                 .Where(r => r.UserId == userId)
                 .OrderByDescending(r => r.VisitedOn)
                 .ToList()
-                .TakeLast(10);
+                .TakeLast(8);
         }
 
         public async Task Save(ClaimsPrincipal user, string link)
@@ -45,21 +45,15 @@ namespace DataGate.Services.Data.Recent
             Validator.ArgumentNullException(user);
 
             var userId = this.userManager.GetUserId(user);
-            var list = this.repository.All().ToList();
-            var exists = list.FirstOrDefault(i => i.LinkUrl == link && i.UserId == userId);
 
-            if (exists == null)
+            var item = new RecentlyViewed
             {
-                var item = new RecentlyViewed
-                {
-                    UserId = userId,
-                    LinkUrl = link,
-                    VisitedOn = DateTime.UtcNow,
-                    DisplayLink = StringExtensions.BuildDisplayLink(link),
-                };
-                await this.repository.AddAsync(item);
-            }
-
+                UserId = userId,
+                LinkUrl = link,
+                VisitedOn = DateTime.UtcNow,
+                DisplayLink = link.BuildDisplayLink(),
+            };
+            await this.repository.AddAsync(item);
             await this.repository.SaveChangesAsync();
         }
     }

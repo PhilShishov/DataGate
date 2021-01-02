@@ -5,9 +5,6 @@ namespace DataGate.Web.Areas.Funds.Controllers
 {
     using System.Threading.Tasks;
 
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
-
     using DataGate.Common;
     using DataGate.Services.Data.Entities;
     using DataGate.Services.Data.Funds;
@@ -18,6 +15,9 @@ namespace DataGate.Web.Areas.Funds.Controllers
     using DataGate.Web.Helpers;
     using DataGate.Web.Resources;
     using DataGate.Web.ViewModels.Entities;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
 
     [Area(EndpointsConstants.FundArea)]
     [Authorize]
@@ -44,8 +44,6 @@ namespace DataGate.Web.Areas.Funds.Controllers
         [Route("f/{id}/{date}")]
         public async Task<IActionResult> ByIdAndDate(int id, string date)
         {
-            await this.recentService.Save(this.User, this.Request.Path);
-
             var dto = new QueriesToPassDto()
             {
                 SqlFunctionById = SqlFunctionDictionary.ByIdFund,
@@ -55,6 +53,8 @@ namespace DataGate.Web.Areas.Funds.Controllers
             };
 
             var viewModel = await SpecificVMSetup.SetGet<SpecificEntityViewModel>(id, date, this.service, this.fundService, dto);
+
+            await this.recentService.Save(this.User, this.Request.Path);
             return this.View(viewModel);
         }
 

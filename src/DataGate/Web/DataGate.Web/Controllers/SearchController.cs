@@ -21,7 +21,7 @@ namespace DataGate.Web.Controllers
         private readonly IRecentService recentService;
         private readonly IShareClassService service;
 
-        public SearchController(
+        public SearchController(            
             IRecentService recentService,
             IShareClassService service)
         {

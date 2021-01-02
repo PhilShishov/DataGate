@@ -14,12 +14,15 @@ namespace DataGate.Web.Infrastructure.Extensions
             switch (currentType.Replace(" ", string.Empty))
             {
                 case EndpointsConstants.FundArea:
+                case EndpointsConstants.FundAbbreviation:
                     result = fund;
                     break;
                 case EndpointsConstants.DisplaySub + EndpointsConstants.FundArea:
+                case EndpointsConstants.SubFundAbbreviation:
                     result = subFund;
                     break;
                 case EndpointsConstants.ShareClassArea:
+                case EndpointsConstants.ShareClassAbbreviation:
                     result = shareClass;
                     break;
             }

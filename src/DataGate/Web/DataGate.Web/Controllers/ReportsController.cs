@@ -7,26 +7,30 @@ namespace DataGate.Web.Controllers
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
-
     using DataGate.Common;
     using DataGate.Data.Common.Repositories.AppContext;
+    using DataGate.Services.Data.Recent;
     using DataGate.Services.Data.Reports;
     using DataGate.Web.Helpers;
     using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.ViewModels.Reports;
 
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
     [Authorize]
     public class ReportsController : BaseController
     {
+        private readonly IRecentService recentService;
         private readonly IReportsService service;
         private readonly ITimeSeriesRepository repository;
 
         public ReportsController(
-            IReportsService service,
-            ITimeSeriesRepository entityRepository)
+             IRecentService recentService,            
+             IReportsService service,            
+             ITimeSeriesRepository entityRepository)
         {
+            this.recentService = recentService;
             this.service = service;
             this.repository = entityRepository;
         }
@@ -74,6 +78,7 @@ namespace DataGate.Web.Controllers
                 SelectedType = type,
             };
 
+            await this.recentService.Save(this.User, this.Request.Path);
             return this.View(viewModel);
         }
 
@@ -99,7 +104,7 @@ namespace DataGate.Web.Controllers
         public async Task<IActionResult> TSReports(string type, int? id)
         {
             int typeIndex = (type == EndpointsConstants.DisplaySub + EndpointsConstants.FundArea) ?
-                      2 : 3;  
+                      2 : 3;
 
             this.SetViewDataValues(type, typeIndex);
 
@@ -119,6 +124,7 @@ namespace DataGate.Web.Controllers
                 viewModel.Entity = await this.repository.ByName(type, id);
             }
 
+            await this.recentService.Save(this.User, this.Request.Path);
             return this.View(viewModel);
         }
 
