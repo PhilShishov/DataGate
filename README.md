@@ -62,7 +62,7 @@ https://pharusdatagate.com <br />
  
  ## Technologies
 * IDE - Visual Studio 2019, VS Code
-* Framework - ASP.NET Core 3.1
+* Framework - ASP.NET Core 5.0
 * Version Control - Git, TortoiseGit, GitHub
 * DevOps - Application Insights, Azure Pipelines
 * Hosting and File Storage - GoDaddy WebWiz, Web Deploy
@@ -85,7 +85,7 @@ https://pharusdatagate.com <br />
 * Distributed Cache - Redis 3.0.5, StackExchange
 
 ### Backend
-* C# .NET Core 3.1
+* C# .NET 5.0
 * 5 Areas, 17 Controllers, 29 Services
 * Design Pattern - DAO, DI, TAP, MVC, REST, Repository, SOLID
 * Also build with:

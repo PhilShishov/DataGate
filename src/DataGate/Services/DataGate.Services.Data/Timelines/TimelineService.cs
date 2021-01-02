@@ -3,6 +3,7 @@
 
 namespace DataGate.Services.Data.Timelines
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -23,7 +24,7 @@ namespace DataGate.Services.Data.Timelines
         {
             IEnumerable<TimelineDto> dto = this.sqlManager.ExecuteQueryMapping<TimelineDto>(function, id);
 
-            return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto.OrderByDescending(d => d.InitialDate));
+            return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto.OrderByDescending(d => DateTime.Parse(d.InitialDate)));
         }
     }
 }

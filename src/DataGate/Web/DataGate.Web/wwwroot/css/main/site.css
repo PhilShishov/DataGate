@@ -584,3 +584,18 @@ textarea {
             text-decoration: none;
             background-color: #0069d9;
         }
+
+.access-denied {
+    background-image: url('../../images/Access-denied.png');
+    height: 100vh;
+}
+
+    .access-denied p {
+        color: white;
+        padding-top: 75px;
+        font-weight: bold;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        background-color: rgba(0, 65, 118, 0.2);
+        width: 380px;
+        margin: auto;
+    }
