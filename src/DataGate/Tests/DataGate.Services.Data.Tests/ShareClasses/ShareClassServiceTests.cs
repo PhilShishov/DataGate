@@ -22,7 +22,7 @@ namespace DataGate.Services.Data.Tests.ShareClasses
         public ShareClassServiceTests()
         {
             this.testData = ShareClassTestData.GenerateShareClasses();
-            this.service = ShareClassTestData.CreateShareClassService(testData, base.context);
+            this.service = ShareClassTestData.CreateService(testData, base.context);
         }
 
         [Fact]

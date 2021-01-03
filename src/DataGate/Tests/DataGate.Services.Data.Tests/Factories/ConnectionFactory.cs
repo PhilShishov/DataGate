@@ -6,9 +6,11 @@ namespace DataGate.Services.Data.Tests.Factories
     using System;
     using System.Data.SqlClient;
 
+    using DataGate.Common;
     using DataGate.Data;
 
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
 
     public static class ConnectionFactory
     {
@@ -21,9 +23,9 @@ namespace DataGate.Services.Data.Tests.Factories
             return new ApplicationDbContext(options);
         }
 
-        public static ApplicationDbContext CreateContextForSqlServer()
+        public static ApplicationDbContext CreateContextForSqlServer(IConfiguration configuration)
         {
-            var connection = new SqlConnection("DataSource=:memory:");
+            var connection = new SqlConnection(configuration.GetConnectionString(GlobalConstants.DataGateAppConnection));
             connection.Open();
 
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()

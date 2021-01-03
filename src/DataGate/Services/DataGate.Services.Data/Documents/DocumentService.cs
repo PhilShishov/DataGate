@@ -14,21 +14,21 @@ namespace DataGate.Services.Data.Documents
 
     public class DocumentService : IDocumentService
     {
-        private readonly IAppRepository<TbDomFileType> repositoryFileType;
+        private readonly IAppRepository<TbDomFileType> repository;
 
-        public DocumentService(IAppRepository<TbDomFileType> repositoryFileType)
+        public DocumentService(IAppRepository<TbDomFileType> repository)
         {
-            this.repositoryFileType = repositoryFileType;
+            this.repository = repository;
         }
 
         public IReadOnlyCollection<string> GetDocumentsFileTypes(int fileType)
-         => this.repositoryFileType.All()
+         => this.repository.All()
                 .Where(ft => ft.FiletypeEntity == fileType)
                 .Select(ft => ft.FiletypeDesc)
                 .ToList();
 
         public async Task<int> ByIdDocumentType(string documentType)
-        => await this.repositoryFileType.All()
+        => await this.repository.All()
                         .Where(ft => ft.FiletypeDesc == documentType)
                         .Select(ft => ft.FiletypeId)
                         .FirstOrDefaultAsync();

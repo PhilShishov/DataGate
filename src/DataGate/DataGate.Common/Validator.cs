@@ -32,5 +32,13 @@ namespace DataGate.Common
                 throw new ArgumentNullException(message);
             }
         }
+
+        public static void ArgumentNullExceptionInt(int value, string message)
+        {
+            if (value <= 0)
+            {
+                throw new ArgumentNullException(message);
+            }
+        }
     }
 }

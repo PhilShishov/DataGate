@@ -7,15 +7,33 @@ namespace DataGate.Services.Data.Tests.TestData
     using System.IO;
     using System.Text;
 
+    using DataGate.Data;
+    using DataGate.Data.Models.Domain;
+    using DataGate.Data.Repositories.AppContext;
+    using DataGate.Services.Data.Documents;
+    using DataGate.Services.Data.Files;
+    using DataGate.Services.SqlClient;
     using DataGate.Web.InputModels.Files;
 
     using Microsoft.AspNetCore.Http;
+    using Microsoft.Extensions.Configuration;
 
     public static class FileServiceTestData
     {
-        public static UploadAgreementInputModel GenerateAgreement()
+        public static FileService CreateService(ApplicationDbContext context, IConfiguration configuration)
         {
-            var file = new FormFile(new MemoryStream(Encoding.UTF8.GetBytes("This is a test file")), 0, 0, "Data", "test.pdf")
+            var sqlManager = new SqlQueryManager(configuration);
+            var repositoryFileType = new EfAppRepository<TbDomFileType>(context);
+            var serviceDocument = new DocumentService(repositoryFileType);
+            var repository = new AgreementsRepository(context);
+
+            var service = new FileService(sqlManager, serviceDocument, repository);
+            return service;
+        }
+
+        public static UploadAgreementInputModel GenerateAgreement(int fundId, string agrType, string activationDate)
+        {
+            var file = new FormFile(new MemoryStream(Encoding.UTF8.GetBytes("This is a test agreement")), 0, 0, "Data", "test.pdf")
             {
                 Headers = new HeaderDictionary(),
                 ContentType = "text/plain"
@@ -23,25 +41,22 @@ namespace DataGate.Services.Data.Tests.TestData
 
             var model = new UploadAgreementInputModel()
             {
-                Id = 100,
-                AgrType = null,
-                ContractDate = DateTime.Now.ToString(),
-                ActivationDate = DateTime.Now.ToString(),
-                ExpirationDate = DateTime.Now.ToString(),
-                Company = "Test",
-                Status = "InProgress",
+                Id = fundId,
+                AgrType = agrType,
+                ContractDate = activationDate,
+                ActivationDate = activationDate,
+                Company = "CACEIS Bank Luxembourg",
+                Status = "Active",
                 FileToUpload = file,
-                Date = DateTime.Now.ToString(),
-                RouteName = "",
                 AreaName = "Fund"
             };
 
             return model;
         }
 
-        public static UploadDocumentInputModel GenerateDocument()
+        public static UploadDocumentInputModel GenerateDocument(int fundId, string docType, DateTime startConnection)
         {
-            var file = new FormFile(new MemoryStream(Encoding.UTF8.GetBytes("This is a test file")), 0, 0, "Data", "dummy.pdf")
+            var file = new FormFile(new MemoryStream(Encoding.UTF8.GetBytes("This is a test document")), 0, 0, "Data", "test.pdf")
             {
                 Headers = new HeaderDictionary(),
                 ContentType = "text/plain"
@@ -49,14 +64,11 @@ namespace DataGate.Services.Data.Tests.TestData
 
             UploadDocumentInputModel model = new UploadDocumentInputModel()
             {
-                Id = 100,
-                StartConnection = DateTime.Now,
-                EndConnection = DateTime.Now,
-                DocumentType = ".pdf",
+                Id = fundId,
+                StartConnection = startConnection,
+                DocumentType = docType,
                 FileToUpload = file,
-                Date = "",
-                AreaName = "",
-                RouteName = ""
+                AreaName = "Fund",
             };
 
             return model;

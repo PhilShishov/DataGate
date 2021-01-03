@@ -48,7 +48,7 @@ namespace DataGate.Web.Controllers.Files
             [Bind("DocumentType", "DocumentTypes", "FileToUpload", "StartConnection", "EndConnection",
                   "Date", "Id", "RouteName", "AreaName")] UploadDocumentInputModel model)
         {
-            if (!this.ModelState.IsValid)
+            if (!this.ModelState.IsValid || model.EndConnection <= model.StartConnection)
             {
                 return this.PartialView(UploadDocumentPartialView, model);
             }
@@ -95,8 +95,6 @@ namespace DataGate.Web.Controllers.Files
             }
 
             var dto = AutoMapperConfig.MapperInstance.Map<OnUploadSuccessDto>(model);
-            //dto.FileId = 
-
             await this.service.UploadAgreement(model);
 
             using (var stream = new FileStream(path, FileMode.Create))

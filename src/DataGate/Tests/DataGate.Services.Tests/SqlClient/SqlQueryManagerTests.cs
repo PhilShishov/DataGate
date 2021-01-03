@@ -32,7 +32,7 @@ namespace DataGate.Services.Tests.SqlClient
         public SqlQueryManagerTests(ITestOutputHelper output)
         {
             this.output = output;
-            this.sqlQueryManager = ServiceProvider.GetRequiredService<ISqlQueryManager>();
+            this.sqlQueryManager = base.ServiceProvider.GetRequiredService<ISqlQueryManager>();
 
             //ExecuteSqlFile("create.sql");
         }
@@ -45,8 +45,8 @@ namespace DataGate.Services.Tests.SqlClient
         [Fact]
         public void Connection_ShouldConnectToTestDatabase()
         {
-            Assert.True(Context.Database.IsSqlServer());
-            Assert.True(Context.Database.CanConnect());
+            Assert.True(this.Context.Database.IsSqlServer());
+            Assert.True(this.Context.Database.CanConnect());
         }
 
         #region ExecuteQueryAsync
@@ -54,7 +54,7 @@ namespace DataGate.Services.Tests.SqlClient
         [Fact]
         public void ExecuteQuery_FnAllFundWithValidDate_ShouldReturnResultSet()
         {
-            var result = sqlQueryManager
+            var result = this.sqlQueryManager
                 .ExecuteQueryAsync(SqlFunctionDictionary.AllFund, DateTime.Now)
                 .ToListAsync()
                 .Result;
@@ -68,7 +68,7 @@ namespace DataGate.Services.Tests.SqlClient
         [Fact]
         public void ExecuteQuery_FnAllSubFundWithValidDate_ShouldReturnResultSet()
         {
-            var result = sqlQueryManager
+            var result = this.sqlQueryManager
                 .ExecuteQueryAsync(SqlFunctionDictionary.AllSubFund, DateTime.Now)
                 .ToListAsync()
                 .Result;
@@ -82,7 +82,7 @@ namespace DataGate.Services.Tests.SqlClient
         [Fact]
         public void ExecuteQuery_FnAllShareClassWithValidDate_ShouldReturnResultSet()
         {
-            var result = sqlQueryManager
+            var result = this.sqlQueryManager
                 .ExecuteQueryAsync(SqlFunctionDictionary.AllShareClass, DateTime.Now)
                 .ToListAsync()
                 .Result;
@@ -101,7 +101,7 @@ namespace DataGate.Services.Tests.SqlClient
         {
             string[] columns = new[] { "ID", "NAME" };
 
-            var result = sqlQueryManager
+            var result = this.sqlQueryManager
                 .ExecuteQueryAsync(function, DateTime.Now, null, columns)
                 .ToListAsync()
                 .Result;
@@ -119,7 +119,7 @@ namespace DataGate.Services.Tests.SqlClient
         [InlineData(SqlFunctionDictionary.AllShareClass)]
         public void ExecuteQuery_WithOldDate_ShouldReturnEmptyResultSetWithHeaders(string function)
         {
-            var result = sqlQueryManager
+            var result = this.sqlQueryManager
                 .ExecuteQueryAsync(function, DateTime.Now.AddYears(-50))
                 .ToListAsync()
                 .Result;
@@ -136,7 +136,7 @@ namespace DataGate.Services.Tests.SqlClient
         {
             Action act = () =>
             {
-                var result = sqlQueryManager
+                var result = this.sqlQueryManager
                     .ExecuteQueryAsync(function, date, null, columns)
                     .ToListAsync()
                     .Result;
@@ -148,7 +148,7 @@ namespace DataGate.Services.Tests.SqlClient
         [Fact]
         public void ExecuteQuery_ById_WithValidData_ShouldReturnOneRow()
         {
-            var result = sqlQueryManager
+            var result = this.sqlQueryManager
                 .ExecuteQueryAsync(SqlFunctionDictionary.ByIdShareClass, DateTime.Now, 1)
                 .ToListAsync()
                 .Result;
@@ -162,7 +162,7 @@ namespace DataGate.Services.Tests.SqlClient
         [Fact]
         public void ExecuteQuery_ById_WithValidDataAndNonExistingId_EmptyResultSet()
         {
-            var result = sqlQueryManager
+            var result = this.sqlQueryManager
                 .ExecuteQueryAsync(SqlFunctionDictionary.ByIdShareClass, DateTime.Now, 5000)
                 .ToListAsync()
                 .Result;
@@ -181,7 +181,7 @@ namespace DataGate.Services.Tests.SqlClient
         {
             Action act = () =>
             {
-                var result = sqlQueryManager
+                var result = this.sqlQueryManager
                     .ExecuteQueryAsync(SqlFunctionDictionary.ByIdShareClass, DateTime.Now, id)
                     .ToListAsync()
                     .Result;
@@ -199,7 +199,7 @@ namespace DataGate.Services.Tests.SqlClient
         {
             const string functionName = "select * from tb_timeseries_shareclass";
 
-            var result = sqlQueryManager
+            var result = this.sqlQueryManager
                 .ExecuteQueryTimeSeriesAsync(functionName)
                 .Take(100)
                 .ToListAsync()
@@ -218,7 +218,7 @@ namespace DataGate.Services.Tests.SqlClient
             {
                 const string functionName = "Not a SQL command";
 
-                var result = sqlQueryManager
+                var result = this.sqlQueryManager
                     .ExecuteQueryTimeSeriesAsync(functionName)
                     .Take(100)
                     .ToListAsync()
@@ -236,7 +236,7 @@ namespace DataGate.Services.Tests.SqlClient
         {
             Action act = () =>
             {
-                var result = sqlQueryManager
+                var result = this.sqlQueryManager
                     .ExecuteQueryTimeSeriesAsync(command)
                     .Take(100)
                     .ToListAsync()
@@ -255,7 +255,7 @@ namespace DataGate.Services.Tests.SqlClient
         [InlineData(SqlFunctionDictionary.ReportSubFunds, 1, 9)]
         public void ExecuteQueryReportsAsync_FunctionName_ShouldReturnResultSet(string functionName, int expected1, int expected2)
         {
-            var result = sqlQueryManager
+            var result = this.sqlQueryManager
                 .ExecuteQueryReportsAsync(functionName, DateTime.Now)
                 .ToListAsync()
                 .Result;
@@ -274,7 +274,7 @@ namespace DataGate.Services.Tests.SqlClient
         {
             Action act = () =>
             {
-                var result = sqlQueryManager
+                var result = this.sqlQueryManager
                     .ExecuteQueryReportsAsync(functionName, DateTime.Now)
                     .ToListAsync()
                     .Result;
@@ -290,7 +290,7 @@ namespace DataGate.Services.Tests.SqlClient
         {
             Action act = () =>
             {
-                var result = sqlQueryManager
+                var result = this.sqlQueryManager
                     .ExecuteQueryReportsAsync(functionName, DateTime.Now)
                     .ToListAsync()
                     .Result;
@@ -308,7 +308,7 @@ namespace DataGate.Services.Tests.SqlClient
         [InlineData(SqlFunctionDictionary.ReportSubFunds, "1020-01-01", 1, 9)]
         public void ExecuteQueryReportsAsync_FunctionNameAndDate_ShouldReturnResultSet(string functionName, string date, int expected1, int expected2)
         {
-            var result = sqlQueryManager
+            var result = this.sqlQueryManager
                 .ExecuteQueryReportsAsync(functionName, DateTime.Parse(date))
                 .ToListAsync()
                 .Result;

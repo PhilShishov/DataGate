@@ -6,6 +6,7 @@ namespace DataGate.Services.Data.Tests.ClassFixtures
     using System.Reflection;
 
     using DataGate.Services.Mapping;
+    using DataGate.Web.InputModels.Funds;
     using DataGate.Web.ViewModels;
 
     public class MappingsProvider
@@ -13,7 +14,8 @@ namespace DataGate.Services.Data.Tests.ClassFixtures
         public MappingsProvider()
         {
             AutoMapperConfig.RegisterMappings(
-                typeof(ErrorViewModel).GetTypeInfo().Assembly);
+                typeof(ErrorViewModel).GetTypeInfo().Assembly,
+                typeof(EditFundInputModel).GetTypeInfo().Assembly);
         }
     }
 }

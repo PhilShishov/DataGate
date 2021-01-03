@@ -39,7 +39,7 @@ namespace DataGate.Services.Data.Tests.TestData
             }
         }
 
-        public static ShareClassService CreateShareClassService(
+        public static ShareClassService CreateService(
             IEnumerable<TbPrimeShareClass> testData,                                                                     
             ApplicationDbContext context)
         {

@@ -7,12 +7,10 @@ namespace DataGate.Services.Data.Entities
     using System.Collections.Generic;
     using System.Linq;
 
-    using DataGate.Data.Models.Users;
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.ViewModels.Queries;
 
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Hosting;
 
@@ -20,18 +18,15 @@ namespace DataGate.Services.Data.Entities
     {
         private const int IndexEntityId = 0;
         private readonly ISqlQueryManager sqlManager;
-        private readonly UserManager<ApplicationUser> userManager;
         private readonly IConfiguration configuration;
         private readonly IHostEnvironment env;
 
         public EntityService(
             ISqlQueryManager sqlQueryManager,
-            UserManager<ApplicationUser> userManager,
             IConfiguration configuration,
             IHostEnvironment env)
         {
             this.sqlManager = sqlQueryManager;
-            this.userManager = userManager;
             this.configuration = configuration;
             this.env = env;
         }

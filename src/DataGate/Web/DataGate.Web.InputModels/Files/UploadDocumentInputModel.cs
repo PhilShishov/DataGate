@@ -31,6 +31,7 @@ namespace DataGate.Web.InputModels.Files
         [AllowedExtensions(new string[] { GlobalConstants.PdfFileExtension })]
         public IFormFile FileToUpload { get; set; }
 
+        [Required(ErrorMessage = ValidationMessages.DateRequired)]
         public DateTime StartConnection { get; set; }
 
         public DateTime? EndConnection { get; set; }

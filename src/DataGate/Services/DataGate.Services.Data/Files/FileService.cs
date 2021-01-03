@@ -7,6 +7,7 @@ namespace DataGate.Services.Data.Files
     using System.Data.SqlClient;
     using System.Threading.Tasks;
 
+    using DataGate.Common;
     using DataGate.Data.Common.Repositories.AppContext;
     using DataGate.Services.Data.Documents;
     using DataGate.Services.Mapping;
@@ -39,6 +40,7 @@ namespace DataGate.Services.Data.Files
             UploadDocumentDto dto = AutoMapperConfig.MapperInstance.Map<UploadDocumentDto>(model);
             dto.EndConnection = DateTimeExtensions.ToSqlFormat(model.EndConnection);
             dto.DocumentType = await this.service.ByIdDocumentType(model.DocumentType);
+            Validator.ArgumentNullExceptionInt(dto.DocumentType, ErrorMessages.InvalidDocType);
 
             string query = StringSwapper.ByArea(model.AreaName,
                                                   SqlProcedureDictionary.DocumentFund,
@@ -84,6 +86,10 @@ namespace DataGate.Services.Data.Files
             dto.AgreementType = await this.repository.ByIdAgreementType(model.AgrType);
             dto.Status = await this.repository.ByIdStatus(model.Status);
             dto.Company = await this.repository.ByIdCompany(model.Company);
+
+            Validator.ArgumentNullExceptionInt(dto.AgreementType, ErrorMessages.InvalidAgrType);
+            Validator.ArgumentNullExceptionInt(dto.Status, ErrorMessages.InvalidStatus);
+            Validator.ArgumentNullExceptionInt(dto.Company, ErrorMessages.InvalidStatus);
 
             string query = StringSwapper.ByArea(model.AreaName,
                                                  SqlProcedureDictionary.AgreementFund,
