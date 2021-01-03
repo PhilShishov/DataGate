@@ -9,6 +9,7 @@ namespace DataGate.Services.Data.Tests.TestData
 
     using DataGate.Data;
     using DataGate.Data.Models.Domain;
+    using DataGate.Data.Models.Entities;
     using DataGate.Data.Repositories.AppContext;
     using DataGate.Services.Data.Documents;
     using DataGate.Services.Data.Files;
@@ -25,13 +26,14 @@ namespace DataGate.Services.Data.Tests.TestData
             var sqlManager = new SqlQueryManager(configuration);
             var repositoryFileType = new EfAppRepository<TbDomFileType>(context);
             var serviceDocument = new DocumentService(repositoryFileType);
-            var repository = new AgreementsRepository(context);
+            var repositoryAgrs = new AgreementsRepository(context);
+            var repositoryFile = new EfAppRepository<TbFile>(context);
 
-            var service = new FileService(sqlManager, serviceDocument, repository);
+            var service = new FileService(sqlManager, serviceDocument, repositoryAgrs, repositoryFile);
             return service;
         }
 
-        public static UploadAgreementInputModel GenerateAgreement(int fundId, string agrType, string activationDate)
+        public static UploadAgreementInputModel GenerateAgreement(int fundId, string activationDate, string agrType = "Management Company Agreement")
         {
             var file = new FormFile(new MemoryStream(Encoding.UTF8.GetBytes("This is a test agreement")), 0, 0, "Data", "test.pdf")
             {
@@ -54,7 +56,7 @@ namespace DataGate.Services.Data.Tests.TestData
             return model;
         }
 
-        public static UploadDocumentInputModel GenerateDocument(int fundId, string docType, DateTime startConnection)
+        public static UploadDocumentInputModel GenerateDocument(int fundId, DateTime startConnection, string docType = "Prospectus")
         {
             var file = new FormFile(new MemoryStream(Encoding.UTF8.GetBytes("This is a test document")), 0, 0, "Data", "test.pdf")
             {

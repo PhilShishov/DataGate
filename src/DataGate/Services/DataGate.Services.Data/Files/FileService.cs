@@ -5,10 +5,13 @@ namespace DataGate.Services.Data.Files
 {
     using System.Data;
     using System.Data.SqlClient;
+    using System.Linq;
     using System.Threading.Tasks;
 
     using DataGate.Common;
+    using DataGate.Common.Exceptions;
     using DataGate.Data.Common.Repositories.AppContext;
+    using DataGate.Data.Models.Entities;
     using DataGate.Services.Data.Documents;
     using DataGate.Services.Mapping;
     using DataGate.Services.SqlClient;
@@ -21,15 +24,18 @@ namespace DataGate.Services.Data.Files
         private readonly ISqlQueryManager sqlManager;
         private readonly IDocumentService service;
         private readonly IAgreementsRepository repository;
+        private readonly IAppRepository<TbFile> fileRepository;
 
         public FileService(
                         ISqlQueryManager sqlManager,
                         IDocumentService service,
-                        IAgreementsRepository repository)
+                        IAgreementsRepository repository,
+                        IAppRepository<TbFile> fileRepository)
         {
             this.sqlManager = sqlManager;
             this.service = service;
             this.repository = repository;
+            this.fileRepository = fileRepository;
         }
 
         // ________________________________________________________
@@ -66,6 +72,8 @@ namespace DataGate.Services.Data.Files
 
         public async Task DeleteDocument(int fileId, string areaName)
         {
+            this.DoesExist(fileId);
+
             string query = StringSwapper.ByArea(areaName,
                                                   SqlProcedureDictionary.DeleteDocumentFund,
                                                   SqlProcedureDictionary.DeleteDocumentSubFund,
@@ -118,6 +126,8 @@ namespace DataGate.Services.Data.Files
 
         public async Task DeleteAgreement(int fileId, string areaName)
         {
+            this.DoesExist(fileId);
+
             string query = StringSwapper.ByArea(areaName,
                                                   SqlProcedureDictionary.DeleteAgreementFund,
                                                   SqlProcedureDictionary.DeleteAgreementSubFund,
@@ -127,6 +137,18 @@ namespace DataGate.Services.Data.Files
             command.Parameters.Add(new SqlParameter("@file_id", SqlDbType.Int) { Value = fileId });
 
             await this.sqlManager.ExecuteProcedure(command);
+        }
+
+        private bool DoesExist(int id)
+        {
+            var exists = this.fileRepository.All().Any(x => x.FileId == id);
+
+            if (!exists)
+            {
+                throw new EntityNotFoundException(nameof(TbFile));
+            }
+
+            return exists;
         }
     }
 }
