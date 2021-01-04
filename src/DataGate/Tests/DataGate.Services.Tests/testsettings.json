@@ -1,0 +1,5 @@
+﻿{
+  "ConnectionStrings": {
+    "DataGateAppConnection": "Server=.\\SQLEXPRESS;Integrated Security=True;Trusted_Connection=True;MultipleActiveResultSets=true;"
+  }
+}

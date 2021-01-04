@@ -33,13 +33,12 @@ namespace DataGate.Services.Tests.SqlClient
         {
             this.output = output;
             this.sqlQueryManager = base.ServiceProvider.GetRequiredService<ISqlQueryManager>();
-
-            //ExecuteSqlFile("create.sql");
+            base.ExecuteSqlFile("create.sql");
         }
 
         public void Dispose()
         {
-            //ExecuteSqlFile("drop.sql");
+            base.ExecuteSqlFile("drop.sql");
         }
 
         [Fact]
@@ -250,20 +249,18 @@ namespace DataGate.Services.Tests.SqlClient
 
         #region ExecuteQueryReportsAsync
 
-        [Theory]
-        [InlineData(SqlFunctionDictionary.ReportFunds, 14, 10)]
-        [InlineData(SqlFunctionDictionary.ReportSubFunds, 1, 9)]
-        public void ExecuteQueryReportsAsync_FunctionName_ShouldReturnResultSet(string functionName, int expected1, int expected2)
+        [Fact]
+        public void ExecuteQueryReportsAsync_FunctionName_ShouldReturnResultSet()
         {
             var result = this.sqlQueryManager
-                .ExecuteQueryReportsAsync(functionName, DateTime.Now)
+                .ExecuteQueryReportsAsync(SqlFunctionDictionary.ReportFunds, DateTime.Now)
                 .ToListAsync()
                 .Result;
 
-            Assert.True(result.Count == expected1);
-            Assert.True(result[0].Length == expected2);
+            Assert.True(result.Count == 14);
+            Assert.True(result[0].Length == 10);
 
-            TestsHelper.PrintTableOutput(this.output,functionName, result);
+            TestsHelper.PrintTableOutput(this.output, SqlFunctionDictionary.ReportFunds, result);
         }
 
         [Theory]
@@ -328,7 +325,7 @@ namespace DataGate.Services.Tests.SqlClient
         {
             using var connection = new SqlConnection
             {
-                ConnectionString = this.Configuration.GetConnectionString(GlobalConstants.DataGateAppConnection)
+                ConnectionString = base.Configuration.GetConnectionString(GlobalConstants.DataGateAppConnection)
             };
 
             connection.Open();

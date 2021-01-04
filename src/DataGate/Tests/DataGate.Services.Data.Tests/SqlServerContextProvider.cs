@@ -27,7 +27,8 @@ namespace DataGate.Services.Data.Tests
             var services = new ServiceCollection()
                 .AddEntityFrameworkSqlServer();            
 
-            var configBuilder = new ConfigurationBuilder().AddJsonFile($"dbsettings.json", optional: false);
+            var configBuilder = new ConfigurationBuilder()
+                .AddJsonFile($"testsettings.json", optional: false);
             var config = configBuilder.Build();
 
             services.AddSingleton<IConfiguration>(config);

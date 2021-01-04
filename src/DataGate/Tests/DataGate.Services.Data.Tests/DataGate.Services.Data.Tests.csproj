@@ -10,20 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="dbsettings.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <AdditionalFiles Include="..\..\stylecop.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="dbsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="5.0.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
     <PackageReference Include="Moq" Version="4.15.2" />
@@ -39,5 +25,27 @@
     <ProjectReference Include="..\..\Services\DataGate.Services.Data\DataGate.Services.Data.csproj" />
     <ProjectReference Include="..\..\Web\DataGate.Web\DataGate.Web.csproj" />
   </ItemGroup>
+
+	<ItemGroup>
+		<None Update="SqlClient\create.sql">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="SqlClient\drop.sql">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+
+	<ItemGroup>
+		<None Remove="testsettings.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="testsettings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+	</ItemGroup>	
 
 </Project>

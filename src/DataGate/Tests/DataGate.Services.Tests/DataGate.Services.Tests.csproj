@@ -40,15 +40,17 @@
 		</None>
 	</ItemGroup>
 
+
 	<ItemGroup>
-		<None Remove="dbsettings.json" />
+		<None Remove="testsettings.json" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<Content Include="dbsettings.json">
+		<Content Include="testsettings.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
 			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
 	</ItemGroup>
+	
 </Project>

@@ -23,7 +23,7 @@
             this.output = output;
 
             this.connection = new SqlConnection();
-            this.connection.ConnectionString = this.Configuration.GetConnectionString(GlobalConstants.DataGateAppConnection);
+            this.connection.ConnectionString = base.Configuration.GetConnectionString(GlobalConstants.DataGateAppConnection);
             this.connection.Open();
             this.command = this.connection.CreateCommand();
         }
