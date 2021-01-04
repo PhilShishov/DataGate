@@ -32,6 +32,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Update="timeseries.sql">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 		<None Update="create.sql">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>

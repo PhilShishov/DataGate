@@ -11,7 +11,8 @@ namespace DataGate.Services.Tests.TestData
 
         public const string AllFund = "[fn_all_fund]";        
         public const string ByIdFund = "[fn_fund_id]";
-        
+        public const string TimelineFund = "[fn_timeline_fund]";
+
         public const string AllSubFund = "[fn_all_subfund]";       
         public const string ByIdSubFund = "[fn_subfund_id]";        
 

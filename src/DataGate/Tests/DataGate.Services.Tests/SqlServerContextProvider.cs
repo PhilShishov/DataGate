@@ -3,8 +3,8 @@
 
 namespace DataGate.Services.Tests
 {
-    using System;
     using System.IO;
+    using System.Text.RegularExpressions;
 
     using DataGate.Data;
     using DataGate.Services.SqlClient;
@@ -18,7 +18,7 @@ namespace DataGate.Services.Tests
 
     using Xunit;
 
-    public class SqlServerContextProvider : IClassFixture<MappingsProvider>
+    public class SqlServerContextProvider : IClassFixture<SqlServerFixture>
     {
         protected readonly ApplicationDbContext Context;
         protected readonly IConfiguration Configuration;
@@ -44,11 +44,14 @@ namespace DataGate.Services.Tests
 
         public void ExecuteSqlFile(string fileName)
         {
-            var text = File.ReadAllText(fileName);
-            var parts = text.Split(new string[] { "GO" }, StringSplitOptions.None);
+            var script = File.ReadAllText(fileName);
+            var parts = Regex.Split(script, @"^\s*GO\s*$", RegexOptions.Multiline | RegexOptions.IgnoreCase); ;
             foreach (var part in parts)
             {
-                this.Context.Database.ExecuteSqlRaw(part);
+                if (!string.IsNullOrWhiteSpace(part.Trim()))
+                {
+                    this.Context.Database.ExecuteSqlRaw(part);
+                }
             }
         }
     }

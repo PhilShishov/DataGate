@@ -24,7 +24,7 @@ namespace DataGate.Services.Tests.SqlClient
     using Xunit;
     using Xunit.Abstractions;
 
-    public class SqlQueryManagerTests : SqlServerContextProvider, IDisposable
+    public class SqlQueryManagerTests : SqlServerContextProvider
     {
         private readonly ITestOutputHelper output;
         private readonly ISqlQueryManager sqlQueryManager;
@@ -33,12 +33,6 @@ namespace DataGate.Services.Tests.SqlClient
         {
             this.output = output;
             this.sqlQueryManager = base.ServiceProvider.GetRequiredService<ISqlQueryManager>();
-            base.ExecuteSqlFile("create.sql");
-        }
-
-        public void Dispose()
-        {
-            base.ExecuteSqlFile("drop.sql");
         }
 
         [Fact]
@@ -323,6 +317,7 @@ namespace DataGate.Services.Tests.SqlClient
         [Fact]
         public void ExecuteProcedure_WithValidData_ShouldReturnResultSet()
         {
+            base.ExecuteSqlFile("timeseries.sql");
             using var connection = new SqlConnection
             {
                 ConnectionString = base.Configuration.GetConnectionString(GlobalConstants.DataGateAppConnection)
@@ -400,8 +395,8 @@ namespace DataGate.Services.Tests.SqlClient
         [Fact]
         public void ExecuteQueryMapping_WithDate_ShouldReturnResultSet()
         {
-            var dto = this.sqlQueryManager.ExecuteQueryMapping<AgreementLibraryDto>(
-                SqlFunctionDictionary.AllAgreementsFunds,
+            var dto = this.sqlQueryManager.ExecuteQueryMapping<TimelineDto>(
+                SqlFunctionDictionary.TimelineFund,
                 null,
                 DateTime.Now);
 
