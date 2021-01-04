@@ -5,10 +5,14 @@ namespace DataGate.Services.Data.Tests
 {
     using System;
     using System.IO;
+    using System.Reflection;
 
     using DataGate.Data;
     using DataGate.Services.Data.Tests.ClassFixtures;
     using DataGate.Services.Data.Tests.Factories;
+    using DataGate.Services.Mapping;
+    using DataGate.Web.InputModels.Funds;
+    using DataGate.Web.ViewModels;
 
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
@@ -37,6 +41,10 @@ namespace DataGate.Services.Data.Tests
 
             this.Configuration = config;
             this.Context = ConnectionFactory.CreateContextForSqlServer(this.Configuration);
+
+            AutoMapperConfig.RegisterMappings(
+                typeof(ErrorViewModel).GetTypeInfo().Assembly,
+                typeof(EditFundInputModel).GetTypeInfo().Assembly);
         }
 
         public void ExecuteSqlFile(string fileName)

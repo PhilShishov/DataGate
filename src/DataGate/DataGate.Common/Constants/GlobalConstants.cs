@@ -6,7 +6,7 @@ namespace DataGate.Common
     public static class GlobalConstants
     {
         // Application Constants
-        public const string DataGateFullFooterDisplay = 
+        public const string DataGateFullFooterDisplay =
             "- Pharus Management Lux SA 16, Avenue de la Gare L-1610 Luxembourg";
         public const string FileSizeLimitConfiguration = "FileSizeLimit";
         public const int FileSizeLimit = 45 * 1024 * 1024;
@@ -28,12 +28,14 @@ namespace DataGate.Common
         public const string SweetAlertKey = "sweetalert";
         public const string SweetAlertScript = "<script type='text/javascript'>swal('{0}', '{1}','{2}');</script>";
         public const string AlertifyKey = "alertify";
-        public const string AlertifyScript = 
+        public const string AlertifyScript =
             "<script type='text/javascript'>alertify.set('notifier', 'position', 'top-left'); alertify.notify('{0}', '{1}', 5);</script>";
 
         // Connection Strings
         public const string DataGateUsersConnection = "DataGateUsersConnection";
         public const string DataGateAppConnection = "DataGateAppConnection";
+        public const string SqlServerConnectionWithoutDb =
+            "Server=.\\SQLEXPRESS;Integrated Security=True;Trusted_Connection=True;MultipleActiveResultSets=true;ConnectRetryCount=3";
 
         // Redis Cache
         public const string RedisCacheRecords = "CacheRecords_";

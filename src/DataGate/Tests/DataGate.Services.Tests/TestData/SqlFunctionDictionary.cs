@@ -21,7 +21,6 @@ namespace DataGate.Services.Tests.TestData
 
         public const string ReportFunds = "[getAuM_fund_test]";
         public const string ReportSubFunds = "[fn_AuM_subfund_EOM]";
-        public const string ReportsShareClasses = "[fn_AuM_shareclass_EOM]";
         public const string CountryDistShareClass = "[fn_view_country_distibution_shareclass]";
 
         public const string AllAgreementsFunds = "[fn_view_agreements_all_funds]";

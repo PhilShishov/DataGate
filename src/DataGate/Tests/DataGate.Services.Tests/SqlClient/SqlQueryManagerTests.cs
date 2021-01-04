@@ -194,11 +194,10 @@ namespace DataGate.Services.Tests.SqlClient
 
             var result = this.sqlQueryManager
                 .ExecuteQueryTimeSeriesAsync(functionName)
-                .Take(100)
                 .ToListAsync()
                 .Result;
 
-            Assert.True(result.Count == 100);
+            Assert.True(result.Count == 28);
             Assert.True(result[0].Length == 6);
 
             TestsHelper.PrintTableOutput(this.output,functionName, result);
@@ -245,14 +244,14 @@ namespace DataGate.Services.Tests.SqlClient
 
         [Fact]
         public void ExecuteQueryReportsAsync_FunctionName_ShouldReturnResultSet()
-        {
+        {            
             var result = this.sqlQueryManager
                 .ExecuteQueryReportsAsync(SqlFunctionDictionary.ReportFunds, DateTime.Now)
                 .ToListAsync()
                 .Result;
 
-            Assert.True(result.Count == 14);
-            Assert.True(result[0].Length == 10);
+            Assert.True(result.Count == 13);
+            Assert.True(result[0].Length == 3);
 
             TestsHelper.PrintTableOutput(this.output, SqlFunctionDictionary.ReportFunds, result);
         }
@@ -291,21 +290,19 @@ namespace DataGate.Services.Tests.SqlClient
         }
 
         [Theory]
-        [InlineData(SqlFunctionDictionary.ReportFunds, "2020-01-01", 12, 10)]
-        [InlineData(SqlFunctionDictionary.ReportFunds, "5020-01-01", 14, 10)]
+        [InlineData(SqlFunctionDictionary.ReportFunds, "2020-12-01", 13, 3)]
         [InlineData(SqlFunctionDictionary.ReportFunds, "1020-01-01", 1, 0)]
-        [InlineData(SqlFunctionDictionary.ReportSubFunds, "2020-01-01", 63, 9)]
-        [InlineData(SqlFunctionDictionary.ReportSubFunds, "5020-01-01", 1, 9)]
+        [InlineData(SqlFunctionDictionary.ReportSubFunds, "2020-11-01", 62, 9)]
         [InlineData(SqlFunctionDictionary.ReportSubFunds, "1020-01-01", 1, 9)]
-        public void ExecuteQueryReportsAsync_FunctionNameAndDate_ShouldReturnResultSet(string functionName, string date, int expected1, int expected2)
+        public void ExecuteQueryReportsAsync_FunctionNameAndDate_ShouldReturnResultSet(string functionName, string date, int expectedCount, int expectedHeaderCount)
         {
             var result = this.sqlQueryManager
                 .ExecuteQueryReportsAsync(functionName, DateTime.Parse(date))
                 .ToListAsync()
                 .Result;
 
-            Assert.True(result.Count == expected1);
-            Assert.True(result[0].Length == expected2);
+            Assert.Equal(expectedCount, result.Count);
+            Assert.Equal(expectedHeaderCount, result[0].Length);
 
             TestsHelper.PrintTableOutput(this.output,functionName, result);
         }
@@ -316,8 +313,7 @@ namespace DataGate.Services.Tests.SqlClient
 
         [Fact]
         public void ExecuteProcedure_WithValidData_ShouldReturnResultSet()
-        {
-            base.ExecuteSqlFile("timeseries.sql");
+        {            
             using var connection = new SqlConnection
             {
                 ConnectionString = base.Configuration.GetConnectionString(GlobalConstants.DataGateAppConnection)
@@ -335,8 +331,8 @@ namespace DataGate.Services.Tests.SqlClient
 
             var result = SqlHelper.ExecuteCommand(command).ToListAsync().Result;
 
-            Assert.True(result.Count == 14);
-            Assert.True(result[0].Length == 10);
+            Assert.True(result.Count == 13);
+            Assert.True(result[0].Length == 3);
 
             TestsHelper.PrintTableOutput(this.output, "getAuM_fund_test", result);
             connection.Close();
@@ -391,17 +387,6 @@ namespace DataGate.Services.Tests.SqlClient
         #endregion
 
         #region ExecuteQueryMapping
-
-        [Fact]
-        public void ExecuteQueryMapping_WithDate_ShouldReturnResultSet()
-        {
-            var dto = this.sqlQueryManager.ExecuteQueryMapping<TimelineDto>(
-                SqlFunctionDictionary.TimelineFund,
-                null,
-                DateTime.Now);
-
-            Assert.True(dto != null && dto.ToList().Count > 0);
-        }
 
         [Fact]
         public void ExecuteQueryMapping_WithId_ShouldReturnResultSet()
