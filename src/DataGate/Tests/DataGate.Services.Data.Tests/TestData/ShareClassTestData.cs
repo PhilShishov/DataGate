@@ -14,7 +14,7 @@ namespace DataGate.Services.Data.Tests.TestData
 
     public static class ShareClassTestData
     {
-        public static IEnumerable<TbPrimeShareClass> GenerateShareClasses() 
+        public static IEnumerable<TbPrimeShareClass> Generate() 
         {
             for (int i = 1; i < 10; i++)
             {
@@ -39,7 +39,7 @@ namespace DataGate.Services.Data.Tests.TestData
             }
         }
 
-        public static ShareClassService CreateService(
+        public static ShareClassService Service(
             IEnumerable<TbPrimeShareClass> testData,                                                                     
             ApplicationDbContext context)
         {

@@ -21,7 +21,7 @@ namespace DataGate.Services.Data.Tests.TestData
 
     public static class FileServiceTestData
     {
-        public static FileService CreateService(ApplicationDbContext context, IConfiguration configuration)
+        public static FileService Service(ApplicationDbContext context, IConfiguration configuration)
         {
             var sqlManager = new SqlQueryManager(configuration);
             var repositoryFileType = new EfAppRepository<TbDomFileType>(context);
@@ -33,7 +33,7 @@ namespace DataGate.Services.Data.Tests.TestData
             return service;
         }
 
-        public static UploadAgreementInputModel GenerateAgreement(int fundId, string activationDate, string agrType = "Management Company Agreement")
+        public static UploadAgreementInputModel Generate(int fundId, string activationDate, string agrType = "Management Company Agreement")
         {
             var file = new FormFile(new MemoryStream(Encoding.UTF8.GetBytes("This is a test agreement")), 0, 0, "Data", "test.pdf")
             {
@@ -56,7 +56,7 @@ namespace DataGate.Services.Data.Tests.TestData
             return model;
         }
 
-        public static UploadDocumentInputModel GenerateDocument(int fundId, DateTime startConnection, string docType = "Prospectus")
+        public static UploadDocumentInputModel Generate(int fundId, DateTime startConnection, string docType = "Prospectus")
         {
             var file = new FormFile(new MemoryStream(Encoding.UTF8.GetBytes("This is a test document")), 0, 0, "Data", "test.pdf")
             {

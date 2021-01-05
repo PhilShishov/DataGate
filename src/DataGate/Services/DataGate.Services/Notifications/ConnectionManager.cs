@@ -6,11 +6,12 @@ namespace DataGate.Services.Notifications
     using System;
     using System.Collections.Generic;
 
+    using DataGate.Common;
     using DataGate.Services.Notifications.Contracts;
 
     public class ConnectionManager : IConnectionManager
     {
-        private static Dictionary<string, HashSet<string>> userMap =
+        private static readonly Dictionary<string, HashSet<string>> userMap =
             new Dictionary<string, HashSet<string>>();
 
         public IEnumerable<string> OnlineUsers
@@ -20,6 +21,9 @@ namespace DataGate.Services.Notifications
 
         public void AddConnection(string username, string connectionId)
         {
+            Validator.ArgumentNullExceptionString(username, ErrorMessages.InvalidUsername);
+            Validator.ArgumentNullExceptionString(connectionId,ErrorMessages.InvalidConnectionId );
+
             // Thread-safe access to collections
             lock (userMap)
             {
@@ -33,6 +37,8 @@ namespace DataGate.Services.Notifications
 
         public HashSet<string> GetConnections(string username)
         {
+            Validator.ArgumentNullExceptionString(username, ErrorMessages.InvalidUsername);
+
             var conn = new HashSet<string>();
 
             try
@@ -53,6 +59,8 @@ namespace DataGate.Services.Notifications
 
         public void RemoveConnection(string connectionId)
         {
+            Validator.ArgumentNullExceptionString(connectionId, ErrorMessages.InvalidConnectionId);
+
             // Thread-safe access to collections
             lock (userMap)
             {

@@ -37,6 +37,8 @@ namespace DataGate.Common
         public const string InvalidAgrType = "Agreement type is empty or invalid";
         public const string InvalidStatus = "Status is empty or invalid";
         public const string InvalidFile = "File Id is empty or invalid";
+        public const string InvalidUsername = "Username is empty or invalid";
+        public const string InvalidConnectionId = "Connection Id is empty or invalid";
 
         public const string DbUpload = "Count is higher than 0. Check ids and dates.";
     }

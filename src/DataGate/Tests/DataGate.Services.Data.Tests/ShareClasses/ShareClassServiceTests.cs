@@ -21,8 +21,8 @@ namespace DataGate.Services.Data.Tests.ShareClasses
 
         public ShareClassServiceTests()
         {
-            this.testData = ShareClassTestData.GenerateShareClasses();
-            this.service = ShareClassTestData.CreateService(testData, base.context);
+            this.testData = ShareClassTestData.Generate();
+            this.service = ShareClassTestData.Service(testData, base.context);
         }
 
         [Fact]

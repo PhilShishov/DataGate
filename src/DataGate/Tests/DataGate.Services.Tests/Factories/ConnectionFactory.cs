@@ -3,6 +3,7 @@
 
 namespace DataGate.Services.Tests.Factories
 {
+    using System;
     using System.Data.SqlClient;
 
     using DataGate.Common;
@@ -13,6 +14,15 @@ namespace DataGate.Services.Tests.Factories
 
     public static class ConnectionFactory
     {
+        public static UsersDbContext CreateContextForInMemory()
+        {
+            var options = new DbContextOptionsBuilder<UsersDbContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                .Options;
+
+            return new UsersDbContext(options);
+        }
+
         public static ApplicationDbContext CreateContextForSqlServer(IConfiguration configuration)
         {
             var connection = new SqlConnection(configuration.GetConnectionString(GlobalConstants.DataGateAppConnection));

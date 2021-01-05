@@ -23,7 +23,7 @@ namespace DataGate.Services.Data.Tests.Files
 
         public FileServiceTests()
         {
-            this.service = FileServiceTestData.CreateService(base.Context, base.Configuration);
+            this.service = FileServiceTestData.Service(base.Context, base.Configuration);
             this.tbMapFileFundCount = base.Context.TbMapFilefund.Count();
             this.tbFileCount = base.Context.TbFile.Count();
             this.tbSAFundCount = base.Context.TbServiceAgreementFund.Count();
@@ -60,7 +60,7 @@ namespace DataGate.Services.Data.Tests.Files
         public async Task UploadDocument_Fund_WithUnvalidData_ShouldThrowException(int fundId, string date)
         {
             var startConnection = DateTime.Parse(date);
-            var document = FileServiceTestData.GenerateDocument(fundId, startConnection);
+            var document = FileServiceTestData.Generate(fundId, startConnection);
 
             Func<Task> task = async () => await this.service.UploadDocument(document);
 
@@ -106,7 +106,7 @@ namespace DataGate.Services.Data.Tests.Files
         [InlineData(100000)]
         public async Task UploadAgreement_Fund_WithUnvalidId_ShouldThrowException(int fundId)
         {
-            var agreement = FileServiceTestData.GenerateAgreement(fundId, "20160101");
+            var agreement = FileServiceTestData.Generate(fundId, "20160101");
 
             Func<Task> task = async () => await this.service.UploadAgreement(agreement);
 
@@ -202,7 +202,7 @@ namespace DataGate.Services.Data.Tests.Files
                 .Select(x => x.SaActivationDate)
                 .FirstOrDefault();
 
-            return FileServiceTestData.GenerateAgreement(fundId, activationDate.ToString(), agrType);
+            return FileServiceTestData.Generate(fundId, activationDate.ToString(), agrType);
         }
 
         private UploadDocumentInputModel SetDocumentValues(string docType = "Prospectus")
@@ -214,7 +214,7 @@ namespace DataGate.Services.Data.Tests.Files
                 .Select(x => (DateTime)x.DocEndConnection)
                 .FirstOrDefault();
 
-            return FileServiceTestData.GenerateDocument(fundId, startConnection.AddDays(1), docType);
+            return FileServiceTestData.Generate(fundId, startConnection.AddDays(1), docType);
         }
     }
 }
