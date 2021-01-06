@@ -4,6 +4,8 @@
 namespace DataGate.Services.Tests.TestData
 {
     using System.Collections.Generic;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     using DataGate.Data;
     using DataGate.Data.Common.Repositories.UsersContext;
@@ -12,6 +14,8 @@ namespace DataGate.Services.Tests.TestData
     using DataGate.Services.Notifications;
 
     using Microsoft.AspNetCore.Identity;
+
+    using Moq;
 
     public class NotificationTestData
     {
@@ -33,11 +37,21 @@ namespace DataGate.Services.Tests.TestData
             IEnumerable<UserNotification> testData,
             UsersDbContext context)
         {
-            context.UserNotifications.AddRangeAsync(testData);
-            context.SaveChangesAsync();
+            //context.UserNotifications.AddRangeAsync(testData);
+            //context.SaveChangesAsync();
 
             IUserRepository<UserNotification> repository = new EfUserRepository<UserNotification>(context);
-            UserManager<ApplicationUser> userManager = MockUserManager.Create<ApplicationUser>();
+
+            var store = new Mock<IUserStore<ApplicationUser>>();
+            var user = new ApplicationUser { UserName = "test", Email = "test@test.com"};
+            var userManager = UserTestData.MockUserManager(store.Object);
+            store.Setup(s => s.CreateAsync(user, CancellationToken.None)).ReturnsAsync(IdentityResult.Success).Verifiable();
+            store.Setup(s => s.GetUserNameAsync(user, CancellationToken.None)).Returns(Task.FromResult(user.UserName)).Verifiable();
+            store.Setup(s => s.SetNormalizedUserNameAsync(user, user.UserName.ToUpperInvariant(), CancellationToken.None)).Returns(Task.FromResult(0)).Verifiable();
+
+
+            userManager.CreateAsync(user);
+
             var service = new NotificationService(repository, userManager);
             return service;
         }

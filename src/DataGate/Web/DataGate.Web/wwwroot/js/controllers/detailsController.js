@@ -118,6 +118,9 @@ function loadAddInfo(token, urlSubEnt, json) {
     }
 
     function getSelectMenuRequestHandler(url, placeholder) {
+        console.log(url);
+        console.log(token);
+        console.log(json);
         $.ajax({
             url: url,
             type: 'GET',

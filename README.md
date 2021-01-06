@@ -37,8 +37,10 @@ A full data view provides depth and detail - you can move <br />
 from a library view to an individual asset level view. 
 
   ## Status
-  [![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/DataGate-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=1&branchName=master) [![Build status](https://ci.appveyor.com/api/projects/status/thvsvj1du6d595m6?svg=true)](https://ci.appveyor.com/project/PhilShishov/datagate)
+  [![Build Status](https://dev.azure.com/philshishov/DataGate/_apis/build/status/DataGate-CI?branchName=master)](https://dev.azure.com/philshishov/DataGate/_build/latest?definitionId=1&branchName=master) 
+  [![Build status](https://ci.appveyor.com/api/projects/status/thvsvj1du6d595m6?svg=true)](https://ci.appveyor.com/project/PhilShishov/datagate)
   [![GitHub license](https://img.shields.io/github/license/philshishov/DataGate?color=brightgreen)](https://github.com/PhilShishov/DataGate/blob/master/LICENSE)
+  [![HitCount](http://hits.dwyl.com/philshishov/DataGate.svg)](http://hits.dwyl.com/philshishov/DataGate)
 
 ## General Info
 
@@ -95,7 +97,7 @@ https://pharusdatagate.com <br />
   * EPPlus
   * itext7
   * Full-text search
-  * SignalR
+  * SignalR Core
 
 ### Client-side
 * RAZOR, JavaScript ES6, jQuery, Ajax, Bootstrap

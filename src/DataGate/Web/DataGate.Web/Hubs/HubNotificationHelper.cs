@@ -31,7 +31,7 @@ namespace DataGate.Web.Hubs
             await this.notificationService.Add(dto.User, notifMessage, dto.Link);
             int count = await this.notificationService.Count(dto.User);
 
-            await this.HubToAll(count);
+            //await this.HubToAll(count);
         }
 
         public async Task SendToAdmin(NotificationDto dto)

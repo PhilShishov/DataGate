@@ -30,7 +30,7 @@ namespace DataGate.Web.Controllers
         [Route("loadNotifications")]
         public async Task<IActionResult> All()
         {
-            var model = this.notificationService.All<NotificationViewModel>(this.User);
+            var model = await this.notificationService.All<NotificationViewModel>(this.User);
 
             int count = await this.notificationService.Count(this.User);
             await this.notificationHelper.HubToAll(count);

@@ -67,7 +67,7 @@ namespace DataGate.Services.Notifications
             await this.repository.AddRangeAsync(notifications);
         }
 
-        public IEnumerable<T> All<T>(ClaimsPrincipal user)
+        public async Task<IEnumerable<T>> All<T>(ClaimsPrincipal user)
         {
             Validator.EntityNotFoundException(user);
 
@@ -88,10 +88,10 @@ namespace DataGate.Services.Notifications
 
             foreach (var notification in notifications)
             {
-                notification.IsOpened = true;                
+                notification.IsOpened = true;
             }
 
-            this.repository.SaveChangesAsync();          
+            await this.repository.SaveChangesAsync();
 
             return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(notifications);
         }

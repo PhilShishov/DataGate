@@ -75,15 +75,15 @@ namespace DataGate.Web.Controllers.Funds
             var fundId = await this.service.Create(model);
             var date = DateTimeExtensions.ToWebFormat(model.InitialDate.AddDays(1));
 
-            var dto = new NotificationDto
-            {
-                Arg = model.FundName,
-                Message = InfoMessages.CreateNotification,
-                User = this.User,
-                Link = $"/f/{fundId}/{date}",
-            };
+            //var dto = new NotificationDto
+            //{
+            //    Arg = model.FundName,
+            //    Message = InfoMessages.CreateNotification,
+            //    User = this.User,
+            //    Link = $"/f/{fundId}/{date}",
+            //};
 
-            await this.notificationHelper.SendToAll(dto);
+            //await this.notificationHelper.SendToAll(dto);
 
             return this.ShowInfo(
                 this.sharedLocalizer.GetHtmlString(InfoMessages.SuccessfulCreate),

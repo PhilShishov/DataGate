@@ -13,7 +13,7 @@ namespace DataGate.Services.Notifications.Contracts
 
         Task AddAdmin(ClaimsPrincipal fromUser, string message, string link);
 
-        IEnumerable<T> All<T>(ClaimsPrincipal user);
+        Task<IEnumerable<T>> All<T>(ClaimsPrincipal user);
 
         Task<int> Count(ClaimsPrincipal user);
 

@@ -79,7 +79,7 @@ namespace DataGate.Services.Data.Tests.ShareClasses
                 .ByDate()
                 .ToList();
 
-            Assert.Equal(expected.Count(), actual.Count());
+            Assert.Equal(expected.Count, actual.Count);
 
             for (int i = 0; i < expected.Count; i++)
             {

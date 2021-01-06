@@ -4,18 +4,22 @@
 namespace DataGate.Services.Tests
 {
     using DataGate.Data;
+    using DataGate.Data.Models.Users;
     using DataGate.Services.Tests.ClassFixtures;
     using DataGate.Services.Tests.Factories;
+
+    using Microsoft.Extensions.DependencyInjection;
 
     using Xunit;
 
     public class InMemoryContextProvider : IClassFixture<MappingsProvider>
     {
-        protected readonly UsersDbContext context;
+        protected readonly UsersDbContext Context;
+        protected readonly ServiceProvider ServiceProvider;
 
         public InMemoryContextProvider()
         {
-            context = ConnectionFactory.CreateContextForInMemory();
+            Context = ConnectionFactory.CreateContextForInMemory();
         }
     }
 }
