@@ -12,8 +12,6 @@ namespace DataGate.Services.Tests.Notifications
     using DataGate.Services.Notifications;
     using DataGate.Services.Tests.TestData;
 
-    using Microsoft.AspNetCore.Identity;
-
     using Xunit;
 
     public class NotificationServiceTests : InMemoryContextProvider

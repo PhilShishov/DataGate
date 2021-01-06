@@ -3,10 +3,8 @@
 
 namespace DataGate.Services.Tests.TestData
 {
-    using System;
     using System.Collections.Generic;
     using System.Security.Claims;
-    using System.Threading;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Identity;
@@ -17,10 +15,9 @@ namespace DataGate.Services.Tests.TestData
 
     public class UserTestData
     {
-        public static UserManager<TUser> MockUserManager<TUser>(IUserStore<TUser> store = null)
+        public static UserManager<TUser> TestUserManager<TUser>(IUserStore<TUser> store)
             where TUser : class
         {
-            store = store ?? new Mock<IUserStore<TUser>>().Object;
             var options = new Mock<IOptions<IdentityOptions>>();
             var idOptions = new IdentityOptions();
             idOptions.Lockout.AllowedForNewUsers = false;
