@@ -38,8 +38,9 @@ namespace DataGate.Services.Data.Tests.TestData
         {
             CreateShareClassInputModel model = new CreateShareClassInputModel()
             {
-                SubFundContainer = "1st SICAV - Athena Balanced"
-            };
+                SubFundContainer = "1st SICAV - Athena Balanced",
+                EndDate = DateTime.Parse("2019-01-01")
+        };
 
             return model;
         }

@@ -36,9 +36,21 @@ namespace DataGate.Services.Data.Tests.Storage
 
             await using (base.Context)
             {
+                var existing = this.service.ByIdAndDate<EditShareClassInputModel>(1, "2019-01-01");
                 var newSubFundId = await this.service.Create(document);
-
                 Assert.True(newSubFundId > 0);
+            }
+        }
+
+        [Fact]
+        public async Task Update_ShareClass_ShouldUpdateEntity()
+        {
+            await using (base.Context)
+            {
+                var existing = this.service.ByIdAndDate<EditShareClassInputModel>(1, "2019-01-01");
+                existing.CommentTitle = "Updated";
+                var updatedSubFundId = await this.service.Edit(existing);
+                Assert.True(updatedSubFundId > 0);
             }
         }
 
@@ -110,10 +122,10 @@ namespace DataGate.Services.Data.Tests.Storage
 
         [Theory]
         [InlineData(-1, "2011-07-14")]
-        public async Task ByIdAndDate_WithIncorrectAgrType_ThrowsException(int id, string date)
+        public void ByIdAndDate_WithIncorrectAgrType_ThrowsException(int id, string date)
         {
-            Func<Task> task = async () => this.service.ByIdAndDate<EditShareClassInputModel>(id, date);
-            await Assert.ThrowsAsync<EntityNotFoundException>(task);
+            void Task() => this.service.ByIdAndDate<EditShareClassInputModel>(id, date);
+            Assert.Throws<EntityNotFoundException>((Action) Task);
         }
 
         private CreateShareClassInputModel SetDocumentValues()
