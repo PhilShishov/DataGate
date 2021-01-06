@@ -3,9 +3,6 @@
 
 namespace DataGate.Web.Controllers.Files
 {
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
-
     using DataGate.Common;
     using DataGate.Data.Common.Repositories.AppContext;
     using DataGate.Services.Data.Documents;
@@ -16,6 +13,9 @@ namespace DataGate.Web.Controllers.Files
     using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.InputModels.Files;
     using DataGate.Web.ViewModels.Documents;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
 
     [Authorize]
     public class DocumentController : Controller

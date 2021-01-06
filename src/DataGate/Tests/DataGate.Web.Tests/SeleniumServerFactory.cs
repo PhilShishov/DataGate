@@ -62,6 +62,7 @@ namespace DataGate.Web.Tests
             if (disposing)
             {
                 this.host.Dispose();
+                this.process.Dispose();
                 this.process.CloseMainWindow(); // Be sure to stop Selenium Standalone
             }
         }

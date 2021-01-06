@@ -46,9 +46,9 @@ namespace DataGate.Web.Utilities.Extract
         // and preparing for download
         // in controller as filestreamresult
         public static string Excel(
-                                            IEnumerable<string> headers,
-                                            List<string[]> values,
-                                            string controllerName)
+            IEnumerable<string> headers,
+            List<string[]> values,
+            string controllerName)
         {
             ExcelPackage.LicenseContext = LicenseContext.Commercial;
 
@@ -105,10 +105,10 @@ namespace DataGate.Web.Utilities.Extract
         // and preparing for download
         // in controller as filestreamresult
         public static string Pdf(
-                                            IEnumerable<string> headers,
-                                            List<string[]> entities,
-                                            DateTime? chosenDate,
-                                            string controllerName)
+                IEnumerable<string> headers,
+                List<string[]> entities,
+                DateTime? chosenDate,
+                string controllerName)
         {
             string correctTypeName = GetCorrectTypeName(controllerName);
             int tableLength = entities[0].Length;
