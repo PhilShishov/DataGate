@@ -10,6 +10,7 @@ namespace DataGate.Services.Data.Timelines
     using DataGate.Services.Mapping;
     using DataGate.Services.SqlClient.Contracts;
     using DataGate.Web.Dtos.Queries;
+    using DataGate.Web.Infrastructure.Extensions;
 
     public class TimelineService : ITimelineService
     {
@@ -23,8 +24,10 @@ namespace DataGate.Services.Data.Timelines
         public IEnumerable<T> All<T>(string function, int id)
         {
             IEnumerable<TimelineDto> dto = this.sqlManager.ExecuteQueryMapping<TimelineDto>(function, id);
-
-            return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto.OrderByDescending(d => DateTime.Parse(d.InitialDate)));
+            dto = dto
+                .OrderByDescending(d => DateTimeExtensions.FromSqlFormat(d.InitialDate))
+                .ToList();
+            return AutoMapperConfig.MapperInstance.Map<IEnumerable<T>>(dto);
         }
     }
 }
