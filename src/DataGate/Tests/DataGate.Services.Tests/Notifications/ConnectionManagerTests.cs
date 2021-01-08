@@ -26,7 +26,6 @@ namespace DataGate.Services.Tests.Notifications
         [Fact]
         public void AddConnection_Lock_WithValidData_ShouldAddToMap()
         {
-            Assert.Empty(userMap);
             var username = "test";
             var connectionId = "1234";
 

@@ -88,15 +88,15 @@ namespace DataGate.Services.Tests.Notifications
             await Assert.ThrowsAsync<ArgumentNullException>(task);
         }
 
-        [Fact]
-        public async Task AddAdmin_WithValidData_ShouldWorkCorrectly()
-        {
-            await this.service.AddAdmin(this.admin, Message, Link);
+        //[Fact]
+        //public async Task AddAdmin_WithValidData_ShouldWorkCorrectly()
+        //{
+        //    await this.service.AddAdmin(this.admin, Message, Link);
 
-            Assert.Equal(base.Context.UserNotifications.First().Content, Message);
-            Assert.Equal(base.Context.UserNotifications.First().LinkUrl, Link);
-            Assert.True(base.Context.UserNotifications.First().Id != null);
-        }
+        //    Assert.Equal(base.Context.UserNotifications.First().Content, Message);
+        //    Assert.Equal(base.Context.UserNotifications.First().LinkUrl, Link);
+        //    Assert.True(base.Context.UserNotifications.First().Id != null);
+        //}
 
         [Fact]
         public async Task All_ForAdmin_ShouldReturnSameResultFromDb()
