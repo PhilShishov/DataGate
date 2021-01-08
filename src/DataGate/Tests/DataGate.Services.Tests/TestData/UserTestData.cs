@@ -7,6 +7,8 @@ namespace DataGate.Services.Tests.TestData
     using System.Security.Claims;
     using System.Threading.Tasks;
 
+    using DataGate.Data.Models.Users;
+
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;
@@ -36,15 +38,23 @@ namespace DataGate.Services.Tests.TestData
             return userManager;
         }
 
-        public static ClaimsPrincipal Create()
+        public static ClaimsPrincipal Create(UserManager<ApplicationUser> userManager, string name, string id, string role)
         {
-            var claims = new List<Claim>()                
+            var user = new ApplicationUser { UserName = name, Id = id };
+
+            userManager.CreateAsync(user);
+            userManager.AddToRoleAsync(user, role);
+
+            var claims = new List<Claim>()            
             {
-                new Claim(ClaimTypes.Name, "test"),
-                new Claim("name", "test"),                
+                new Claim(ClaimTypes.Name, name),          
+                new Claim(ClaimTypes.NameIdentifier, id),
+                new Claim(ClaimTypes.Role, role),
             };
 
-            var identity = new ClaimsIdentity(claims, "TestAuthType");
+            userManager.AddClaimsAsync(user, claims);
+
+            var identity = new ClaimsIdentity(claims);
             return new ClaimsPrincipal(identity);
         }
     }

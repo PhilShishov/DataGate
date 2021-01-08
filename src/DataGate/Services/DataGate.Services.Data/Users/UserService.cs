@@ -1,20 +1,19 @@
 ﻿// Copyright (c) DataGate Project. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using DataGate.Common;
-using DataGate.Data.Models.Users;
-using DataGate.Web.InputModels.Users;
-using DataGate.Web.ViewModels.Users;
-
-using Microsoft.AspNetCore.Identity;
-
 namespace DataGate.Services.Data.Users
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using DataGate.Common;
+    using DataGate.Data.Models.Users;
+    using DataGate.Web.InputModels.Users;
+    using DataGate.Web.ViewModels.Users;
+
+    using Microsoft.AspNetCore.Identity;
+
     public class UserService : IUserService
     {
         private readonly UserManager<ApplicationUser> userManager;

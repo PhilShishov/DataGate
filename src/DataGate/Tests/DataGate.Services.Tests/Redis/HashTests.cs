@@ -64,7 +64,7 @@ namespace DataGate.Services.Tests.Redis
         {
             RedisValue redisValue = RedisObject.ToRedisValue(value);
 
-            Func<Task> task = async () => await this.hashItem.Set(itemName, redisValue);
+            async Task task() => await this.hashItem.Set(itemName, redisValue);
 
             await Assert.ThrowsAsync<ArgumentNullException>(task);
         }

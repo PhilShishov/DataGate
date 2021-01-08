@@ -4,45 +4,64 @@
 namespace DataGate.Services.Tests.TestData
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     using DataGate.Data;
     using DataGate.Data.Common.Repositories.UsersContext;
     using DataGate.Data.Models.Users;
+    using DataGate.Data.Models.Users.Enums;
     using DataGate.Data.Repositories.UsersContext;
     using DataGate.Services.Notifications;
 
-    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.AspNetCore.Identity;
 
     public class NotificationTestData
     {
-        public static IEnumerable<UserNotification> GenerateNotifications()
+        public static List<UserNotification> Generate(UsersDbContext context)
         {
-            for (int i = 1; i < 10; i++)
+            var list = new List<UserNotification>();
+
+            for (int i = 1; i < 5; i++)
             {
-                yield return new UserNotification
+                var notification = new UserNotification
                 {
-                    //ScId = i,
-                    //ScOfficialShareClassName = $"pharus#{i}",
-                    //ScIsinCode = $"LU0000{i}",
-                    //ScInitialDate = new DateTime(2020, 01, i),
+                    Content = "TestMessage",
+                    LinkUrl = "/testurl",
+                    UserId = "testAdminId",
+                    Status = NotificationStatus.Unread,
                 };
+                list.Add(notification);
             }
+
+            for (int i = 1; i < 5; i++)
+            {
+                var notification = new UserNotification
+                {
+                    Content = "TestMessage",
+                    LinkUrl = "/testurl",
+                    UserId = "testGuestId",
+                    Status = NotificationStatus.Unread,
+                };
+                list.Add(notification);
+            }
+
+            context.UserNotifications.AddRangeAsync(list);
+            context.SaveChangesAsync();
+
+            return context.UserNotifications.ToList();
         }
 
-        public static NotificationService Service(
-            IEnumerable<UserNotification> testData,
-            UsersDbContext context)
+        public static string ByUserId(UsersDbContext context, string userId)
         {
-            //context.UserNotifications.AddRangeAsync(testData);
-            //context.SaveChangesAsync();
+            var list = context.UserNotifications.ToList();
+            return list.Where(x => x.UserId == userId)
+                .Select(x => x.Id)
+                .FirstOrDefault();
+        }
 
+        public static NotificationService Service(UsersDbContext context, UserManager<ApplicationUser> userManager)
+        {
             IUserRepository<UserNotification> repository = new EfUserRepository<UserNotification>(context);
-
-            var user = new ApplicationUser { UserName = "test", Email = "test@test.com" };
-
-            var userManager = UserTestData.TestUserManager(new UserStore<ApplicationUser>(context));
-            userManager.CreateAsync(user);
-
             var service = new NotificationService(repository, userManager);
             return service;
         }

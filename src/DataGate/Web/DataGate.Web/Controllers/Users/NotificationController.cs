@@ -43,7 +43,7 @@ namespace DataGate.Web.Controllers
         public async Task<ActionResult<NotificationResponseModel>> Status(string notifId)
         {
             await this.notificationService.StatusAsync(this.User, notifId);
-            var status = this.notificationService.GetNotificationStatus(this.User, notifId);
+            var status = this.notificationService.GetStatus(this.User, notifId);
 
             return new NotificationResponseModel { Status = status, NotifId = notifId };
         }

@@ -17,7 +17,7 @@ namespace DataGate.Services.Notifications.Contracts
 
         Task<int> Count(ClaimsPrincipal user);
 
-        string GetNotificationStatus(ClaimsPrincipal user, string notifId);
+        string GetStatus(ClaimsPrincipal user, string notifId);
 
         Task StatusAsync(ClaimsPrincipal user, string notifId);
 

@@ -62,7 +62,7 @@ namespace DataGate.Services.Data.Tests.Files
             var startConnection = DateTime.Parse(date);
             var document = FileServiceTestData.Generate(fundId, startConnection);
 
-            Func<Task> task = async () => await this.service.UploadDocument(document);
+            async Task task() => await this.service.UploadDocument(document);
 
             await Assert.ThrowsAsync<CustomSqlException>(task);
         }
@@ -76,7 +76,7 @@ namespace DataGate.Services.Data.Tests.Files
         {
             var document = this.SetDocumentValues(docType);
 
-            Func<Task> task = async () => await this.service.UploadDocument(document);
+            async Task task() => await this.service.UploadDocument(document);
 
             await Assert.ThrowsAsync<ArgumentNullException>(task);
         }
@@ -108,7 +108,7 @@ namespace DataGate.Services.Data.Tests.Files
         {
             var agreement = FileServiceTestData.Generate(fundId, "20160101");
 
-            Func<Task> task = async () => await this.service.UploadAgreement(agreement);
+            async Task task() => await this.service.UploadAgreement(agreement);
 
             await Assert.ThrowsAsync<CustomSqlException>(task);
         }
@@ -122,7 +122,7 @@ namespace DataGate.Services.Data.Tests.Files
         {
             var agreement = SetAgreementValues(agrType);
 
-            Func<Task> task = async () => await this.service.UploadAgreement(agreement);
+            async Task task() => await this.service.UploadAgreement(agreement);
 
             await Assert.ThrowsAsync<ArgumentNullException>(task);
         }
@@ -155,7 +155,7 @@ namespace DataGate.Services.Data.Tests.Files
         [InlineData(100000)]
         public async Task DeleteDocument_Fund_WithInvalidId_ShouldThrowException(int fileId)
         {
-            Func<Task> task = async () => await this.service.DeleteDocument(fileId, "Fund");
+            async Task task() => await this.service.DeleteDocument(fileId, "Fund");
 
             await Assert.ThrowsAsync<EntityNotFoundException>(task);
         }
@@ -188,7 +188,7 @@ namespace DataGate.Services.Data.Tests.Files
         [InlineData(100000)]
         public async Task DeleteAgreement_Fund_WithInvalidId_ShouldThrowException(int fileId)
         {
-            Func<Task> task = async () => await this.service.DeleteAgreement(fileId, "Fund");
+            async Task task() => await this.service.DeleteAgreement(fileId, "Fund");
 
             await Assert.ThrowsAsync<EntityNotFoundException>(task);
         }

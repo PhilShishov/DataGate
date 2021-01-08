@@ -35,6 +35,8 @@ namespace DataGate.Services.Notifications
         public async Task Add(ClaimsPrincipal fromUser, string message, string link)
         {
             Validator.EntityNotFoundException(fromUser);
+            Validator.ArgumentNullExceptionString(message, ErrorMessages.InvalidMessage);
+            Validator.ArgumentNullExceptionString(link, ErrorMessages.InvalidLink);
 
             var users = this.userManager.Users.ToList();
 
@@ -50,6 +52,8 @@ namespace DataGate.Services.Notifications
         public async Task AddAdmin(ClaimsPrincipal fromUser, string message, string link)
         {
             Validator.EntityNotFoundException(fromUser);
+            Validator.ArgumentNullExceptionString(message, ErrorMessages.InvalidMessage);
+            Validator.ArgumentNullExceptionString(link, ErrorMessages.InvalidLink);
 
             var users = this.userManager.Users.ToList();
 
@@ -72,9 +76,7 @@ namespace DataGate.Services.Notifications
             Validator.EntityNotFoundException(user);
 
             var userId = this.userManager.GetUserId(user);
-
             var today = DateTime.UtcNow.Day;
-
             var notifications = this.repository.All()
                 .Where(n => n.UserId == userId)
                 .OrderByDescending(n => n.CreatedOn)
@@ -107,9 +109,14 @@ namespace DataGate.Services.Notifications
             return count;
         }
 
-        public string GetNotificationStatus(ClaimsPrincipal user, string notifId)
+        public string GetStatus(ClaimsPrincipal user, string notifId)
         {
+            Validator.EntityNotFoundException(user);
+            Validator.ArgumentNullExceptionString(notifId, ErrorMessages.InvalidNotification);
+
             var userId = this.userManager.GetUserId(user);
+
+            var list = repository.All().ToList();
 
             return this.repository.All()
                 .Where(n => n.UserId == userId && n.Id == notifId)
@@ -119,6 +126,9 @@ namespace DataGate.Services.Notifications
 
         public async Task StatusAsync(ClaimsPrincipal user, string notifId)
         {
+            Validator.EntityNotFoundException(user);
+            Validator.ArgumentNullExceptionString(notifId, ErrorMessages.InvalidNotification);
+
             var userId = this.userManager.GetUserId(user);
 
             var notification = this.repository.All()
@@ -134,6 +144,8 @@ namespace DataGate.Services.Notifications
 
         public async Task StatusAllAsync(ClaimsPrincipal user)
         {
+            Validator.EntityNotFoundException(user);
+
             var userId = this.userManager.GetUserId(user);
             var notifications = this.repository.All().Where(n => n.UserId == userId);
 
