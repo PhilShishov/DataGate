@@ -135,7 +135,12 @@ main {
   background-color: white; }
   .right-img-container .right-img {
     width: 100%;
-    height: auto; }
+    height: auto;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0.5px -0.5px 10px rgba(0, 0, 0, 0.5);
+    /*        -webkit-box-shadow: 0px -1px 10px rgba(0, 0, 0, 0.35);
+        box-shadow: 0px -1px 10px rgba(0, 0, 0, 0.35);*/ }
 
 /* Footer Styling */
 .social-icons div {

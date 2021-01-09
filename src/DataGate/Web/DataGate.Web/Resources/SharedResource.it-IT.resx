@@ -204,20 +204,11 @@
   <data name="AuM Reports" xml:space="preserve">
     <value>Report AuM</value>
   </data>
-  <data name="Back to All" xml:space="preserve">
-    <value>Mostra tutti</value>
+  <data name="To Container" xml:space="preserve">
+    <value>Al Contenitore</value>
   </data>
-  <data name="Back to Container" xml:space="preserve">
-    <value>Mostra livello precedente</value>
-  </data>
-  <data name="Back to List" xml:space="preserve">
-    <value>Indietro a lista completa</value>
-  </data>
-  <data name="Back to Panel" xml:space="preserve">
-    <value>Indietro al pannello</value>
-  </data>
-  <data name="Back to Users" xml:space="preserve">
-    <value>Indietro al Utenti</value>
+  <data name="To All" xml:space="preserve">
+    <value>Mostra Tutti</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Annulla</value>
@@ -425,6 +416,9 @@
   </data>
   <data name="Fund Library" xml:space="preserve">
     <value>Libreria Fondi</value>
+  </data>
+  <data name="Fund Management Software" xml:space="preserve">
+    <value>Software per la Gestione dei Fondi</value>
   </data>
   <data name="Fund Reports" xml:space="preserve">
     <value>Report Fondo</value>
@@ -660,8 +654,14 @@
   <data name="Timeline" xml:space="preserve">
     <value>Sequenza Temporale</value>
   </data>
+  <data name="To Panel" xml:space="preserve">
+    <value>Al Pannello</value>
+  </data>
+  <data name="To Users" xml:space="preserve">
+    <value>Al Utenti</value>
+  </data>
   <data name="Total Price:" xml:space="preserve">
-    <value>Prezzo totale</value>
+    <value>Prezzo Totale:</value>
   </data>
   <data name="Two-factor authentication" xml:space="preserve">
     <value>Autenticazione a due fattori</value>

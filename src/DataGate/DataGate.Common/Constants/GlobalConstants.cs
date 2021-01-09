@@ -6,8 +6,8 @@ namespace DataGate.Common
     public static class GlobalConstants
     {
         // Application Constants
-        public const string DataGateFullFooterDisplay =
-            "- Pharus Management Lux SA 16, Avenue de la Gare L-1610 Luxembourg";
+        public const string DataGateFooter =
+            "  DataGate, Inc. All rights reserved.";
         public const string FileSizeLimitConfiguration = "FileSizeLimit";
         public const int FileSizeLimit = 45 * 1024 * 1024;
         public const string DefaultCultureInfo = "en-US";

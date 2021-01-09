@@ -1,8 +1,8 @@
 ﻿@model List<UserViewModel>
 
 @{ ViewData["Title"] = SharedLocalizer.GetHtmlString("View User"); }
-<div class="push text-center">
-    <h2 class="text-center text-torshia">
+<div class="push user-container">
+    <h2 class="text-center my-3">
         @SharedLocalizer.GetHtmlString("User List")
     </h2>
     <div class="button-holder">
@@ -10,7 +10,7 @@
            asp-area=""
            asp-controller="User"
            asp-action="Index">
-            @SharedLocalizer.GetHtmlString("Back to Panel")
+            @SharedLocalizer.GetHtmlString("To Panel")
         </a>
         <a class="btn btn-datagate text-white mt-2 mx-2"
            asp-area="Admin"

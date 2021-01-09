@@ -2,7 +2,7 @@
 @model LoginModel
 
 @{ 
-    ViewData["Title"] = SharedLocalizer.GetHtmlString("Login");
+    ViewData["Title"] = SharedLocalizer.GetHtmlString("Fund Management Software");
     var returnUrl = ViewData["ReturnUrl"] as string;
 }
 <section class="login-layout">
@@ -15,13 +15,12 @@
                     <h2 class="login-brand">@SharedLocalizer.GetHtmlString("DataGate")</h2>
                     <h2 class="login-title">@SharedLocalizer.GetHtmlString("Login")</h2>
                     <div class="login-form">
-                        <form method="POST" autocomplete="on">
+                        <form method="POST">
                             <div class="form-group col-md-12 my-4">
                                 <div>
                                     <input type="text"
                                            asp-for="Input.Username"
                                            autocomplete="on"
-                                           autofocus
                                            class="form-control"
                                            id="username"
                                            placeholder=@SharedLocalizer.GetHtmlString("Username")>
@@ -36,6 +35,7 @@
                                     <input type="password"
                                            asp-for="Input.Password"
                                            autocomplete="off"
+                                           autofocus
                                            class="form-control active"
                                            id="password"
                                            placeholder="Password">

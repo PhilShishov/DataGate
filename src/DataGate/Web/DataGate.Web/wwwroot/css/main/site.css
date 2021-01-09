@@ -7,6 +7,13 @@
     margin-top: 80px;
 }
 
+.user-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+}
+
 .required:after {
     content: " *";
     color: red;

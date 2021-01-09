@@ -4,21 +4,21 @@
     ViewData["Title"] = SharedLocalizer.GetHtmlString("Edit User");
 }
 <div class="push">
-    <div class="d-flex justify-content-center text-center">
+    <div class="user-container">
         <form method="post" class="d-inline w-75">
-            <h2>@SharedLocalizer.GetHtmlString("Edit User")</h2>
+            <h2 class="my-3">@SharedLocalizer.GetHtmlString("Edit User")</h2>
             <div class="button-holder">
                 <a class="btn btn-datagate text-white mt-2 mx-2"
                    asp-area=""
                    asp-controller="User"
                    asp-action="Index">
-                    @SharedLocalizer.GetHtmlString("Back to Panel")
+                    @SharedLocalizer.GetHtmlString("To Panel")
                 </a>
                 <a class="btn btn-datagate text-white mt-2 mx-2"
                    asp-area="Admin"
                    asp-controller="Admin"
                    asp-action="All">
-                    @SharedLocalizer.GetHtmlString("Back to Users")
+                    @SharedLocalizer.GetHtmlString("To Users")
                 </a>
             </div>
             <hr />

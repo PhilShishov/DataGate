@@ -204,20 +204,11 @@
   <data name="AuM Reports" xml:space="preserve">
     <value>AuM Reports</value>
   </data>
-  <data name="Back to All" xml:space="preserve">
-    <value>Back to All</value>
+  <data name="To Container" xml:space="preserve">
+    <value>To Container</value>
   </data>
-  <data name="Back to Container" xml:space="preserve">
-    <value>Back to Container</value>
-  </data>
-  <data name="Back to List" xml:space="preserve">
-    <value>Back to List</value>
-  </data>
-  <data name="Back to Panel" xml:space="preserve">
-    <value>Back to Panel</value>
-  </data>
-  <data name="Back to Users" xml:space="preserve">
-    <value>Back to Users</value>
+  <data name="To All" xml:space="preserve">
+    <value>To All</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
@@ -425,6 +416,9 @@
   </data>
   <data name="Fund Library" xml:space="preserve">
     <value>Fund Library</value>
+  </data>
+  <data name="Fund Management Software" xml:space="preserve">
+    <value>Fund Management Software</value>
   </data>
   <data name="Fund Reports" xml:space="preserve">
     <value>Fund Reports</value>
@@ -659,6 +653,12 @@
   </data>
   <data name="Timeline" xml:space="preserve">
     <value>Timeline</value>
+  </data>
+  <data name="To Panel" xml:space="preserve">
+    <value>To Panel</value>
+  </data>
+  <data name="To Users" xml:space="preserve">
+    <value>To Users</value>
   </data>
   <data name="Total Price:" xml:space="preserve">
     <value>Total Price:</value>
