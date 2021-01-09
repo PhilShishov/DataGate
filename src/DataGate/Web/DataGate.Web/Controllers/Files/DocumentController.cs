@@ -10,6 +10,7 @@ namespace DataGate.Web.Controllers.Files
     using DataGate.Services.Mapping;
     using DataGate.Web.Dtos.Documents;
     using DataGate.Web.Helpers;
+    using DataGate.Web.Infrastructure.Attributes.Validation;
     using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.InputModels.Files;
     using DataGate.Web.ViewModels.Documents;
@@ -35,6 +36,7 @@ namespace DataGate.Web.Controllers.Files
         }
 
         [Route("loadDocUpload")]
+        [AjaxOnly]
         public IActionResult Document(LoadDocumentDto dto)
         {
             var model = AutoMapperConfig.MapperInstance.Map<UploadDocumentInputModel>(dto);
@@ -46,6 +48,7 @@ namespace DataGate.Web.Controllers.Files
         }
 
         [Route("loadAgrUpload")]
+        [AjaxOnly]
         public IActionResult Agreement(LoadAgreementDto dto)
         {
             var model = AutoMapperConfig.MapperInstance.Map<UploadAgreementInputModel>(dto);
@@ -60,6 +63,7 @@ namespace DataGate.Web.Controllers.Files
         }
 
         [Route("loadDistinct")]
+        [AjaxOnly]
         public IActionResult GetDistinct(int id, string date, string areaName)
         {
             var model = new DistinctOverviewViewModel { AreaName = areaName };
@@ -82,6 +86,7 @@ namespace DataGate.Web.Controllers.Files
         }
 
         [Route("loadAllDoc")]
+        [AjaxOnly]
         public IActionResult GetAllDocuments(int id, string areaName)
         {
             var model = new DocumentOverviewViewModel { AreaName = areaName };
@@ -97,6 +102,7 @@ namespace DataGate.Web.Controllers.Files
         }
 
         [Route("loadAllAgr")]
+        [AjaxOnly]
         public IActionResult GetAllAgreements(int id, string date, string areaName)
         {
             var model = new AgreementOverviewViewModel

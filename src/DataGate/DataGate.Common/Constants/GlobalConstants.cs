@@ -35,7 +35,7 @@ namespace DataGate.Common
         public const string DataGateUsersConnection = "DataGateUsersConnection";
         public const string DataGateAppConnection = "DataGateAppConnection";
         public const string SqlServerConnectionWithoutDb =
-            "Server=.\\SQLEXPRESS;Integrated Security=True;Trusted_Connection=True;MultipleActiveResultSets=true;ConnectRetryCount=3";
+            "Server=.\\SQL2019;Integrated Security=True;Trusted_Connection=True;MultipleActiveResultSets=true;ConnectRetryCount=3";
 
         // Redis Cache
         public const string RedisCacheRecords = "CacheRecords_";

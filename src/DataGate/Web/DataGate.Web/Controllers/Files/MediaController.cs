@@ -10,6 +10,7 @@ namespace DataGate.Web.Controllers
 
     using DataGate.Common;
     using DataGate.Services.Data.Files;
+    using DataGate.Web.Infrastructure.Attributes.Validation;
     using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.Infrastructure.Filters;
     using DataGate.Web.InputModels.Files;
@@ -33,7 +34,7 @@ namespace DataGate.Web.Controllers
             this.service = fileService;
         }
 
-        [HttpPost]
+        [HttpPost, AjaxOnly]
         [ValidateAntiForgeryToken]
         public JsonResult GenerateReport(DownloadInputModel model)
         {
@@ -71,7 +72,7 @@ namespace DataGate.Web.Controllers
             return this.Json(new { success = false });
         }
 
-        [HttpGet]
+        [HttpGet, AjaxOnly]
         [DeleteFileAttribute]
         public IActionResult Download(string fileName)
         {
@@ -104,6 +105,7 @@ namespace DataGate.Web.Controllers
 
         [ValidateAntiForgeryToken]
         [Route("media/delete")]
+        [AjaxOnly]
         public async Task<JsonResult> Delete(int fileId, string docValue, string agrValue, string areaName)
         {
             if (!string.IsNullOrEmpty(areaName))

@@ -7,6 +7,7 @@ namespace DataGate.Web.Controllers
 
     using DataGate.Services.Notifications.Contracts;
     using DataGate.Web.Hubs.Contracts;
+    using DataGate.Web.Infrastructure.Attributes.Validation;
     using DataGate.Web.ViewModels.Notifications;
 
     using Microsoft.AspNetCore.Authorization;
@@ -28,6 +29,7 @@ namespace DataGate.Web.Controllers
         }
 
         [Route("loadNotifications")]
+        [AjaxOnly]
         public async Task<IActionResult> All()
         {
             var model = await this.notificationService.All<NotificationViewModel>(this.User);
@@ -38,7 +40,7 @@ namespace DataGate.Web.Controllers
             return this.PartialView("_UserNotificationPartial", model);
         }
 
-        [HttpGet]
+        [HttpGet, AjaxOnly]
         [Route("api/notifications")]
         public async Task<ActionResult<NotificationResponseModel>> Status(string notifId)
         {
@@ -48,7 +50,7 @@ namespace DataGate.Web.Controllers
             return new NotificationResponseModel { Status = status, NotifId = notifId };
         }
 
-        [HttpGet]
+        [HttpGet, AjaxOnly]
         [Route("api/notifications/all")]
         public async Task<ActionResult<NotificationResponseModel>> StatusAll()
         {

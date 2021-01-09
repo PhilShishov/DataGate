@@ -10,6 +10,7 @@ namespace DataGate.Web.Controllers.Files
     using DataGate.Services.Data.Files;
     using DataGate.Services.Mapping;
     using DataGate.Web.Helpers;
+    using DataGate.Web.Infrastructure.Attributes.Validation;
     using DataGate.Web.InputModels.Files;
     using DataGate.Web.Resources;
 
@@ -42,7 +43,7 @@ namespace DataGate.Web.Controllers.Files
             this.sharedLocalizer = sharedLocalizer;
         }
 
-        [HttpPost]
+        [HttpPost, AjaxOnly]
         [ActionName("Document")]
         public async Task<IActionResult> OnPostUploadDocumentAsync(
             [Bind("DocumentType", "DocumentTypes", "FileToUpload", "StartConnection", "EndConnection",
@@ -74,7 +75,7 @@ namespace DataGate.Web.Controllers.Files
             return this.Json(new { success = true, dto = dto });
         }
 
-        [HttpPost]
+        [HttpPost, AjaxOnly]
         [ActionName("Agreement")]
         public async Task<IActionResult> OnPostUploadAgreementAsync(
             [Bind("AgrType", "AgreementsFileTypes", "AgreementsStatus", "Companies", "ContractDate",
@@ -106,6 +107,7 @@ namespace DataGate.Web.Controllers.Files
             return this.Json(new { success = true, dto = dto });
         }
 
+        [AjaxOnly]
         public IActionResult OnUploadSuccess(
           [Bind("AreaName, Date, Id, RouteName, IsFee, FileId")] OnUploadSuccessDto dto)
         {

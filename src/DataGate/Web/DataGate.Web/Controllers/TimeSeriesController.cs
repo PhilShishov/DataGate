@@ -6,12 +6,13 @@ namespace DataGate.Web.Controllers
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Microsoft.AspNetCore.Mvc;
-
     using DataGate.Services.Data.TimeSeries;
     using DataGate.Web.Helpers;
+    using DataGate.Web.Infrastructure.Attributes.Validation;
     using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.ViewModels.TimeSeries;
+
+    using Microsoft.AspNetCore.Mvc;
 
     public class TimeSeriesController : BaseController
     {
@@ -23,6 +24,7 @@ namespace DataGate.Web.Controllers
         }
 
         [Route("loadTimeseries")]
+        [AjaxOnly]
         public async Task<IActionResult> GetAllTimeSeries(int id, string areaName)
         {
             string functionProviders = StringSwapper.ByArea(

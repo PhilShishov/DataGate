@@ -6,6 +6,7 @@ namespace DataGate.Web.Controllers
     using DataGate.Common;
     using DataGate.Services.Data.Timelines;
     using DataGate.Web.Helpers;
+    using DataGate.Web.Infrastructure.Attributes.Validation;
     using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.ViewModels.Timelines;
 
@@ -21,6 +22,7 @@ namespace DataGate.Web.Controllers
         }
 
         [Route("loadTimelines")]
+        [AjaxOnly]
         public IActionResult GetAllTimelines(int id, string areaName)
         {
             string function = StringSwapper.ByArea(areaName,

@@ -10,6 +10,7 @@ namespace DataGate.Web.Controllers
     using DataGate.Web.Infrastructure.Extensions;
     using DataGate.Web.Helpers;
     using DataGate.Web.ViewModels.CountriesDist;
+    using DataGate.Web.Infrastructure.Attributes.Validation;
 
     public class CountryDistController : Controller
     {
@@ -22,6 +23,7 @@ namespace DataGate.Web.Controllers
         }
 
         [Route("loadCountriesDist")]
+        [AjaxOnly]
         public IActionResult GetAllCountriesDist(int id, string areaName)
         {
             string function = StringSwapper.ByArea(areaName,
