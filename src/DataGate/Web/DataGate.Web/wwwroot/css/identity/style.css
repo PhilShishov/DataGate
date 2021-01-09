@@ -114,7 +114,7 @@ main {
 .login-title {
   color: #005596; }
 
-.login-footer {
+.login-footer-container {
   background-color: white; }
 
 .div-legal-text {
@@ -143,11 +143,20 @@ main {
         box-shadow: 0px -1px 10px rgba(0, 0, 0, 0.35);*/ }
 
 /* Footer Styling */
-.social-icons div {
+.login-footer-container {
+  position: relative; }
+
+.login-footer-social-icons div {
   background-color: #edf2f6;
   width: 35px;
   height: 35px;
   display: inline-block; }
+
+@media (max-width: 599px) {
+  .login-footer-social-icons {
+    position: absolute;
+    top: -50px;
+    transform: translateX(35%); } }
 
 body {
   font: 0.8em Arial, Helvetica, sans-serif;
@@ -252,7 +261,8 @@ input::-webkit-input-placeholder {
       margin: 4rem 8rem; } }
 
 .login-content {
-  width: 100%; }
+  width: 100%;
+  height: 533px; }
   @media (max-width: 599px) {
     .login-content {
       padding: 50px 25px 25px 25px; } }
@@ -290,51 +300,62 @@ input::-webkit-input-placeholder {
 .login-footer {
   padding: 5px 25px; }
 
-.social-icons div {
+.login-footer-social-icons div {
   text-align: center;
   border-radius: 50%;
   line-height: 3;
   margin-left: 10px; }
 
 @media (max-width: 599px) {
-  .social-icons {
+  .login-footer-social-icons {
     text-align: center; } }
 
 @media (min-width: 600px) {
-  .social-icons {
+  .login-footer-social-icons {
     text-align: center; } }
 
 @media (min-width: 900px) {
-  .social-icons {
+  .login-footer-social-icons {
     text-align: right; } }
 
 @media (min-width: 1200px) {
-  .social-icons {
+  .login-footer-social-icons {
     text-align: right; } }
 
+.login-footer-container {
+  padding: 5px 35px;
+  display: flex;
+  justify-content: space-between; }
+  @media (max-width: 599px) {
+    .login-footer-container {
+      padding: 5px 15px; } }
+  @media (min-width: 600px) {
+    .login-footer-container {
+      padding: 5px 25px; } }
+
 @media (max-width: 599px) {
-  .footer-text {
+  .login-footer-legal {
     font-size: 0.9em;
     margin-left: 0px;
     line-height: 1.5;
     text-align: center; } }
 
 @media (min-width: 600px) {
-  .footer-text {
+  .login-footer-legal {
     font-size: 0.9em;
     margin-left: 0px;
     line-height: 2;
     text-align: center; } }
 
 @media (min-width: 900px) {
-  .footer-text {
+  .login-footer-legal {
     font-size: 0.9em;
     margin-left: 0px;
     line-height: 2;
     text-align: unset; } }
 
 @media (min-width: 1200px) {
-  .footer-text {
+  .login-footer-legal {
     font-size: 1em;
     line-height: 3;
     text-align: unset; } }
@@ -346,6 +367,10 @@ input::-webkit-input-placeholder {
 * ==========================================
 *
 */
+@media (max-width: 599px) {
+  .forgot-password-text-container {
+    text-align: center; } }
+
 @media only screen and (max-width: 991px) {
   .right-img-container {
     display: none; } }

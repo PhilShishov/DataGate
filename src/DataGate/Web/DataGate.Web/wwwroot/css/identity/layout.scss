@@ -106,7 +106,7 @@ main {
     color: $colorTheme;
 }
 
-.login-footer {
+.login-footer-container {
     background-color: $colorWhite;
 }
 
@@ -146,9 +146,23 @@ main {
 
 /* Footer Styling */
 
-.social-icons div {
-    background-color: #edf2f6;
-    width: 35px;
-    height: 35px;
-    display: inline-block;
+.login-footer-container{
+    position:relative;
 }
+
+.login-footer-social-icons {
+
+    div {
+        background-color: #edf2f6;
+        width: 35px;
+        height: 35px;
+        display: inline-block;
+    }
+
+    @include for-phone-only {
+        position: absolute;
+        top: -50px;
+        transform: translateX(35%);
+    }
+}
+

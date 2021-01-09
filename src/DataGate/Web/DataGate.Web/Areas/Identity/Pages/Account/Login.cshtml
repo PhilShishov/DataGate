@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-xl-4 col-lg-6 col-12 login-content-container">
                 <div class="login-content">
-                    <partial name="Identity/_LoginRedirectPartial" />
+                    <partial name="Identity/_HomeIcon" />
                     <h2 class="login-brand">@SharedLocalizer.GetHtmlString("DataGate")</h2>
                     <h2 class="login-title">@SharedLocalizer.GetHtmlString("Login")</h2>
                     <div class="login-form">
@@ -63,7 +63,7 @@
                             </div>
                             <div class="form-group col-md-12">
                                 <div>
-                                    <div>
+                                    <div class="forgot-password-text-container">
                                         <a asp-area="Identity"
                                            asp-page="/Account/ForgotPassword"
                                            class="forgot-password-text">@SharedLocalizer.GetHtmlString("Forgot Password")</a>
@@ -72,13 +72,12 @@
                             </div>
                         </form>
                     </div>
-                    <partial name="Identity/_FooterMobile" />
                 </div>
             </div>
             <div class="col-lg-2 col-md-2 extra-space-container" style="background-color: #ffffff;"></div>
-            <partial name="Identity/_LoginSideImagePartial" />
+            <partial name="Identity/_SideImage" />
         </div>
-        <partial name="Identity/_FooterPartial" />
+        <partial name="Identity/_FooterIdentity" />
     </div>
 </section>
 

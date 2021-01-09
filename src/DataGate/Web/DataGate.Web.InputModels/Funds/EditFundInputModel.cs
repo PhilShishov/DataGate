@@ -36,7 +36,7 @@ namespace DataGate.Web.InputModels.Funds
         public string LegalType { get; set; }
 
         [RegularExpression(@"^[A-Z0-9]+$", ErrorMessage = ValidationMessages.UnvalidFormat)]
-        [Display(Name = "Departement Code")]
+        [Display(Name = "Depositary Bank Code")]
         public string DEPCode { get; set; }
 
         [Required(ErrorMessage = ValidationMessages.NotSelectedValue)]
