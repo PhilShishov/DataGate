@@ -5,8 +5,10 @@ namespace DataGate.Web.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
 
-    public class HomeController : BaseController
+    public class ErrorController : BaseController
     {
-        public IActionResult AccessDenied() => this.View(); 
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        [Route("/error")]
+        public IActionResult Error() => this.View();
     }
 }

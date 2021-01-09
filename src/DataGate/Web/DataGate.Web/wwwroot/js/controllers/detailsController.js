@@ -60,9 +60,8 @@ function loadAddInfo(token, urlSubEnt, json) {
                 }, 'slow');
             }
         }).fail(function (request, status, error) {
-            swal(request.responseText, {
-                icon: "error"
-            })
+            console.log(request.responseText);
+            window.location = '/error';
         });
 
         afterCallStyleHandler(HTML_MENU.CONTAINER_SUBENTITIES, HTML_MENU.BTN_SUBENTITIES);
@@ -132,9 +131,7 @@ function loadAddInfo(token, urlSubEnt, json) {
                 $(placeholder).html(data);
             }
         }).fail(function (request, status, error) {
-            swal(request.responseText, {
-                icon: "error"
-            })
+            window.location = '/error';
         });
     }
 

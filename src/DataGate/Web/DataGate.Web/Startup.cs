@@ -70,7 +70,7 @@ namespace DataGate.Web
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/error");
                 app.UseHsts();
             }
 
@@ -79,7 +79,7 @@ namespace DataGate.Web
                 await next();
                 if (context.Response.StatusCode == 404)
                 {
-                    context.Request.Path = "/Home/Error";
+                    context.Request.Path = "/error";
                     await next();
                 }
             });
