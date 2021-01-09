@@ -55,6 +55,7 @@ namespace DataGate.Web
                 .AddBusinessLogicServices();
             services.AddApplicationInsightsTelemetry();
             services.AddSignalR();
+            services.AddDatabaseDeveloperPageExceptionFilter();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -13,7 +13,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\Workers\DataGate.Workers.BatchPrograms\DataGate.Workers.BatchPrograms.csproj" />
+		<ProjectReference Include="..\..\Workers\DataGate.Workers.BatchPrograms\DataGate.Workers.BatchPrograms.csproj" />
 	</ItemGroup>
 
 </Project>

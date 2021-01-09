@@ -3,11 +3,9 @@
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<LangVersion>latest</LangVersion>
-	</PropertyGroup>
-
-	<PropertyGroup>
 		<CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
 	</PropertyGroup>
+
 	<ItemGroup>
 		<AdditionalFiles Include="..\..\stylecop.json" />
 	</ItemGroup>
@@ -17,7 +15,7 @@
 		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="5.0.0" />
 		<PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
 		<PackageReference Include="System.Linq.Async" Version="5.0.0" />
-  </ItemGroup>
+	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\DataGate.Common\DataGate.Common.csproj" />

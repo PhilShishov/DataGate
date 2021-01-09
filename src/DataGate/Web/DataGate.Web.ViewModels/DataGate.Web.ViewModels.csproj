@@ -1,27 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
-    <LangVersion>latest</LangVersion>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+	</PropertyGroup>
 
-  <PropertyGroup>
-    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <ItemGroup>
-    <AdditionalFiles Include="..\..\stylecop.json" />
-  </ItemGroup>
+	<ItemGroup>
+		<AdditionalFiles Include="..\..\stylecop.json" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="HtmlSanitizer" Version="5.0.372" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="HtmlSanitizer" Version="5.0.372" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Data\DataGate.Data.Models\DataGate.Data.Models.csproj" />
-    <ProjectReference Include="..\..\Services\DataGate.Services.Mapping\DataGate.Services.Mapping.csproj" />
-    <ProjectReference Include="..\DataGate.Web.Dtos\DataGate.Web.Dtos.csproj" />
-    <ProjectReference Include="..\DataGate.Web.InputModels\DataGate.Web.InputModels.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Data\DataGate.Data.Models\DataGate.Data.Models.csproj" />
+		<ProjectReference Include="..\..\Services\DataGate.Services.Mapping\DataGate.Services.Mapping.csproj" />
+		<ProjectReference Include="..\DataGate.Web.Dtos\DataGate.Web.Dtos.csproj" />
+		<ProjectReference Include="..\DataGate.Web.InputModels\DataGate.Web.InputModels.csproj" />
+	</ItemGroup>
 
 </Project>
