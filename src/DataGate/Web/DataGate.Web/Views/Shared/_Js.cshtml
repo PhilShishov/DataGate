@@ -1,0 +1,31 @@
+﻿<environment include="Development">
+    <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js" asp-append-version="true"></script>
+    <script src="~/lib/chosen/chosen.jquery.js" asp-append-version="true"></script>
+    <script src="~/lib/datatables/js/jquery.dataTables.js" asp-append-version="true"></script>
+    <script src="~/lib/moment/min/moment.min.js" asp-append-version="true"></script>
+    <script src="~/lib/signalr/dist/browser/signalr.min.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/navbar.js" asp-append-version="true"></script>
+    <script src="~/js/plugins.js" asp-append-version="true"></script>
+    <script src="~/js/notifications/notification.js" asp-append-version="true"></script>
+</environment>
+
+<environment include="Production, Staging">
+    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js" asp-append-version="true"></script>
+    <script src="~/lib/datatables/js/jquery.dataTables.min.js" asp-append-version="true"></script>
+    <script src="~/lib/moment/min/moment.min.js" asp-append-version="true"></script>
+    <script src="~/lib/chosen/chosen.jquery.min.js" asp-append-version="true"></script>
+    <script src="~/lib/signalr/dist/browser/signalr.min.js" asp-append-version="true"></script>
+
+    <script src="~/js/site.min.js" asp-append-version="true"></script>
+</environment>
+
+<script>
+        $(function () {
+            // Localization for search box
+            $('input[type=search]').attr('oninvalid', "this.setCustomValidity('@Html.Raw(SharedLocalizer.GetHtmlString("fillSearchBox").Value.ToString())')");
+            $('input[type=search]').attr('oninput', "setCustomValidity('')");
+        });
+</script>

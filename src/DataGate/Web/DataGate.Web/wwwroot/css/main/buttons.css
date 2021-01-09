@@ -75,6 +75,7 @@
 
 
 .back-to-top {
+    cursor:pointer;
     display: none;
     width: 40px;
     height: 40px;

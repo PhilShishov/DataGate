@@ -155,11 +155,14 @@ window.addEventListener('scroll', showBackToTop);
 function showBackToTop() {
     let scrollPos = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
 
+    var scroll = document.getElementsByClassName('back-to-top')[0];
+
     if (scrollPos > 40) {
-        document.getElementsByClassName("back-to-top")[0].style.display = "inline";
+        scroll.style.display = "inline";
     } else {
-        document.getElementsByClassName("back-to-top")[0].style.display = "none";
+        scroll.style.display = "none";
     }
+    scroll.addEventListener('click', backToTop);
 }
 
 function backToTop() {

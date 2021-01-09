@@ -26,6 +26,8 @@ namespace DataGate.Data
             options.Password.RequireNonAlphanumeric = false;
             options.Password.RequiredLength = 8;
             options.SignIn.RequireConfirmedEmail = true;
+            options.User.RequireUniqueEmail = true;
+            options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyz.";
 
             options.Lockout = lockoutOptions;
         }

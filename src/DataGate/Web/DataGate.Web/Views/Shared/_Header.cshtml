@@ -1,0 +1,150 @@
+﻿<header>
+    <div class="header-datagate">
+        <div class="w-50">
+            <div class="header-datagate-app-navbar d-flex">
+                <div class="mx-2 mt-2">
+                    <a asp-area=""
+                       asp-route="@EndpointsConstants.RouteUserPanel">
+                        <img src="~/images/Logo_Pharus_small.jpg" class="img-home-redirect" alt="@GlobalConstants.AppName">
+                    </a>
+                </div>
+
+                <div class="d-flex align-items-center mt-3 text-white">
+                    <div class="mobile-none">
+                        <a class="ml-2 pipe-margin-right" asp-area="@EndpointsConstants.FundArea"
+                           asp-route="@EndpointsConstants.RouteAll@EndpointsConstants.FundsController">
+                            @SharedLocalizer.GetHtmlString("Fund Library")
+                        </a>
+                        |
+                    </div>
+                    <div class="mobile-none">
+                        <a class="ml-2 pipe-margin-right" asp-area="@EndpointsConstants.DisplaySub@EndpointsConstants.FundArea"
+                           asp-route="@EndpointsConstants.RouteAll@EndpointsConstants.DisplaySub@EndpointsConstants.FundsController">
+                            @SharedLocalizer.GetHtmlString("Sub Fund Library")
+                        </a>
+                        |
+                    </div>
+                    <div class="mobile-none">
+                        <a class="ml-2 pipe-margin-right" asp-area="@EndpointsConstants.ShareClassArea"
+                           asp-route="@EndpointsConstants.RouteAll@EndpointsConstants.ShareClassesController">
+                            @SharedLocalizer.GetHtmlString("Share Class Library")
+                        </a>
+                        |
+                    </div>
+                    <div class="mobile-none">
+                        <a class="ml-2 pipe-margin-right" asp-area=""
+                           asp-route="@EndpointsConstants.RouteAll@EndpointsConstants.RouteAgreements">@SharedLocalizer.GetHtmlString("Agreements Library")</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-50 d-flex responsive-navbar">
+
+            <form id="load-notification-form" method="get"></form>
+            <div class="badge-notification-container">
+                <a id="notification-badge"
+                   class="badge"
+                   data-count="">
+                </a>
+                <div class="notification-list" id="user-notifications"></div>
+            </div>
+
+            <div class="search-form-wrapper-responsive">
+                <button class="open-search-box mt-3">
+                    <svg class="icon-svg-search-responsive" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                        <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                    </svg>
+                </button>
+
+                <div class="search-form-wrapper mr-5 d-none">
+                    <form class="w-100" method="get" asp-area="" asp-route="@EndpointsConstants.RouteSearch">
+                        <div class="search-box-responsive">
+                            <input type="search"
+                                   name="searchTerm"
+                                   placeholder="@SharedLocalizer.GetHtmlString("Find a Share Class...")"
+                                   autocomplete="off"
+                                   autocorrect="off"
+                                   autocapitalize="off"
+                                   required />
+
+                            <button type="submit" class="search" title="Search">
+                                <svg class="icon-svg-search" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                                    <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="search-box-wrapper mr-5">
+                <form method="get" asp-area="" asp-route="@EndpointsConstants.RouteSearch">
+                    <div class="search-box">
+                        <input type="search"
+                               name="searchTerm"
+                               placeholder="@SharedLocalizer.GetHtmlString("Find a Share Class...")"
+                               autocomplete="off"
+                               autocorrect="off"
+                               autocapitalize="off"
+                               required />
+
+                        <button type="submit" class="search" title="Search">
+                            <svg class="icon-svg-search" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                                <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="responsive-menu ml-5">
+                <a class="ml-3 open-responsive-menu">
+                </a>
+                <div class="responsive-menu-user">
+                    <div class="menu-user-container">
+                        <ul>
+                            <li>
+                                <a asp-area=""
+                                   asp-route="@EndpointsConstants.RouteReports">
+                                    @SharedLocalizer.GetHtmlString("Reports")
+                                </a>
+                            </li>
+                            <li>
+                                <a asp-area=""
+                                   asp-controller=""
+                                   asp-action="">@SharedLocalizer.GetHtmlString("Projects")</a>
+                            </li>
+                            <li>
+                                <a asp-area=""
+                                   asp-route="@EndpointsConstants.RouteUserPanel">
+                                    @SharedLocalizer.GetHtmlString("Panel")
+                                </a>
+                            </li>
+                            @if (!this.User.IsInRole(GlobalConstants.GuestRoleName))
+                            {
+                                <li>
+                                    <a asp-area="@EndpointsConstants.IdentityAreaName"
+                                       asp-page="/Account/Manage/Email">@this.User.Identity.Name</a>
+                                </li>
+                            }
+
+
+                            <li class="wrapper-language-bar">
+                                <partial name="_SelectLanguagePartial" />
+                            </li>
+
+                            <li>
+                                <a asp-area="@EndpointsConstants.IdentityAreaName"
+                                   asp-page="/Account/Logout">@SharedLocalizer.GetHtmlString("Logout")</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
