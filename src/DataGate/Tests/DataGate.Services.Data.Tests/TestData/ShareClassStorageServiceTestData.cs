@@ -27,20 +27,25 @@ namespace DataGate.Services.Data.Tests.TestData
         public static ShareClassStorageService CreateService(ApplicationDbContext context, IConfiguration configuration)
         {
             var sqlManager = new SqlQueryManager(configuration);
-            var repositoryHistoryShareClass = new EfAppRepository<TbHistoryShareClass>(context);
-            var repositoryHistorySubFund = new EfAppRepository<TbHistorySubFund>(context);
+            var repositorySC = new EfAppRepository<TbHistoryShareClass>(context);
+            var repositorySF = new EfAppRepository<TbHistorySubFund>(context);
             var repositorySelectList = new ShareClassRepository(context);
 
-            var service = new ShareClassStorageService(sqlManager, repositoryHistoryShareClass, repositorySelectList, repositoryHistorySubFund);
+            var service = new ShareClassStorageService(sqlManager, repositorySC, repositorySelectList, repositorySF);
             return service;
         }
         public static CreateShareClassInputModel GenerateDocument()
         {
             CreateShareClassInputModel model = new CreateShareClassInputModel()
             {
-                SubFundContainer = "1st SICAV - Athena Balanced",
-                EndDate = DateTime.Parse("2019-01-01")
-        };
+                EndDate = DateTime.Parse("2019-01-01"),
+                ShareClassName = "Test Share Class",
+                InitialDate = DateTime.Now,
+                Status = "Active",
+                FACode = "test",
+                CurrencyCode = "USD",
+                SubFundContainer = "1st SICAV - Athena Balanced"
+            };
 
             return model;
         }

@@ -42,9 +42,8 @@ namespace DataGate.Services.Data.Tests.Entity
         }
 
         [Theory]
-        [InlineData("2020-01-01", 14, 7)]
-        [InlineData("1800-01-01", 14, 7)]
-        public async Task AllSelected_AllFund_ShouldReturnEntities(string date, int expectedAmount, int expectedLength)
+        [InlineData(14, 7)]
+        public async Task AllSelected_AllFund_ShouldReturnEntities(int expectedAmount, int expectedLength)
         {
             var headers = await service.All(SqlFunctionDictionary.AllFund, null, DateTime.Now, 0).FirstOrDefaultAsync();
 
@@ -164,9 +163,8 @@ namespace DataGate.Services.Data.Tests.Entity
         }
 
         [Theory]
-        [InlineData("2020-01-01", 77, 7)]
-        [InlineData("1800-01-01", 77, 7)]
-        public async Task AllSelected_AllSubFund_ShouldReturnEntities(string date, int expectedAmount, int expectedLength)
+        [InlineData(77, 7)]
+        public async Task AllSelected_AllSubFund_ShouldReturnEntities(int expectedAmount, int expectedLength)
         {
             var headers = await service.All(SqlFunctionDictionary.AllSubFund, null, DateTime.Now, 0).FirstOrDefaultAsync();
 
@@ -195,9 +193,8 @@ namespace DataGate.Services.Data.Tests.Entity
         }
 
         [Theory]
-        [InlineData("2020-01-01", 253, 7)]
-        [InlineData("1800-01-01", 253, 7)]
-        public async Task AllSelected_AllShareClass_ShouldReturnEntities(string date, int expectedAmount, int expectedLength)
+        [InlineData(253, 7)]
+        public async Task AllSelected_AllShareClass_ShouldReturnEntities(int expectedAmount, int expectedLength)
         {
             var headers = await service.All(SqlFunctionDictionary.AllShareClass, null, DateTime.Now, 0).FirstOrDefaultAsync();
 
