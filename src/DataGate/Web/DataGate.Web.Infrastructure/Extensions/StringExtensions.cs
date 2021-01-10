@@ -117,33 +117,16 @@ namespace DataGate.Web.Infrastructure.Extensions
             IReadOnlyCollection<string> preSelectedColumns,
             IEnumerable<string> selectedColumns)
         {
-            List<string> resultColumns = new List<string>(preSelectedColumns);
+            List<string> result = new List<string>(preSelectedColumns);
 
-            resultColumns.AddRange(selectedColumns);
+            result.AddRange(selectedColumns);
 
-            // Prepare items for DB query with []
-            resultColumns = resultColumns.Select(col => string.Format(GlobalConstants.SqlItemFormatRequired, col)).ToList();
+            // Prepare items for DB query with [] and trim spaces
+            result = result
+                .Select(col => string.Format(GlobalConstants.SqlItemFormatRequired, col.Trim()))
+                .ToList();
 
-            //if (resultColumns == null)
-            //{
-            //    return resultColumns;
-            //}
-            //    var enumerable = columns as string[] ?? Enumerable.ToArray(columns);
-
-            //    if (enumerable.Length <= 0)
-            //    {
-            //        return result;
-            //    }
-
-            //    foreach (var column in enumerable)
-            //    {
-            //        if (!string.IsNullOrEmpty(column))
-            //        {
-            //            result.Add(column.Contains(" ") ? $"[{column.Trim()}]" : $"{column.Trim()}");
-            //        }
-            //    }
-
-            return resultColumns;
+            return result;
         }
     }
 }

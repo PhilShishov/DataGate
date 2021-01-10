@@ -10,8 +10,6 @@ namespace DataGate.Services.Tests.TestData
         public ColumnDataGenerator()
         {
             this.Add(new[] { "STATUS", "ID" });
-            //this.Add(new[] { "VALID FROM", "SHARE CLASS NAME" });
-            //this.Add(new[] { "VALID FROM", "          SHARE CLASS NAME          " });
         }
     }
 }

@@ -2,29 +2,39 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using DataGate.Services.Data.Entities;
-using DataGate.Services.Data.Storage;
-using DataGate.Web.InputModels.ShareClasses;
 
 namespace DataGate.Services.Data.Tests.TestData
 {
     using System;
-    using System.IO;
-    using System.Text;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
 
+    using DataGate.Common;
     using DataGate.Data;
-    using DataGate.Data.Models.Domain;
-    using DataGate.Data.Models.Entities;
-    using DataGate.Data.Repositories.AppContext;
-    using DataGate.Services.Data.Documents;
-    using DataGate.Services.Data.Files;
     using DataGate.Services.SqlClient;
-    using DataGate.Web.InputModels.Files;
+    using DataGate.Web.Helpers;
+    using DataGate.Web.ViewModels.Queries;
 
-    using Microsoft.AspNetCore.Http;
     using Microsoft.Extensions.Configuration;
 
     public static class EntityServiceTestData
     {
+
+        public static async Task<AllSelectedDto> Generate(EntityService service, string function)
+        {
+            var headers = await service.All(function, null, DateTime.Now, 0).FirstOrDefaultAsync();
+
+            var dto = new AllSelectedDto
+            {
+                Date = DateTime.Now,
+                PreSelectedColumns = headers?.Take(GlobalConstants.PreSelectedColumnsCount).ToList(),
+                SelectedColumns = new List<string>() { "STATUS" },
+            };
+
+            return dto;
+        }
+
         public static EntityService CreateService(ApplicationDbContext context, IConfiguration configuration)
         {
             var sqlManager = new SqlQueryManager(configuration);

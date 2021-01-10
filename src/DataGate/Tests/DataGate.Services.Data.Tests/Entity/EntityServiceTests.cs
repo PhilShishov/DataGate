@@ -20,6 +20,7 @@ namespace DataGate.Services.Data.Tests.Entity
     public class EntityServiceTests : SqlServerContextProvider
     {
         private readonly EntityService service;
+        private AllSelectedDto dto;
 
         public EntityServiceTests()
         {
@@ -29,93 +30,108 @@ namespace DataGate.Services.Data.Tests.Entity
         [Theory]
         [InlineData("2020-01-01", 11)]
         [InlineData("1800-01-01", 0)]
-        public async Task All_Fund_ShouldReturnCorrectResult(string date, int expectedAmount)
+        public async Task All_Fund_ShouldReturnCorrectResult(string date, int expectedCount)
         {
             var dt = DateTimeExtensions.FromWebFormat(date);
-            var result = await this.service.All(SqlFunctionDictionary.AllFund, null, dt, 1).ToListAsync();
+            var result = await this.service
+                .All(SqlFunctionDictionary.AllFund, null, dt, 1)
+                .ToListAsync();
             Assert.NotNull(result);
-            Assert.True(result.Count == expectedAmount);
-        }
-
-        [Theory]
-        [InlineData(14, 7)]
-        public async Task AllSelected_Fund_ShouldReturnCorrectResult(int expectedAmount, int expectedLength)
-        {
-            var headers = await service.All(SqlFunctionDictionary.AllFund, null, DateTime.Now, 0).FirstOrDefaultAsync();
-
-            var dtoSelected = new AllSelectedDto
-            {
-                Date = DateTime.Now,
-                PreSelectedColumns = headers?.Take(GlobalConstants.PreSelectedColumnsCount).ToList(),
-                SelectedColumns = new List<string>() { "ID", "NAME", "STATUS" },
-            };
-
-            var result = await this.service.AllSelected(SqlFunctionDictionary.AllFund, dtoSelected, 1).ToListAsync();
-            Assert.NotNull(result);
-            Assert.True(result.Count == expectedAmount);
-            Assert.True(result[0].Length == expectedLength);
+            Assert.True(result.Count == expectedCount);
         }
 
         [Fact]
         public async Task All_Fund_WrongDate_ShouldThrowException()
         {
-            Func<Task> a = async () =>
+            Func<Task> task = async () =>
             {
-                await this.service.All(SqlFunctionDictionary.AllFund, null, null, 0).ToListAsync();
+                await this.service
+                .All(SqlFunctionDictionary.AllFund, null, null, 0)
+                .ToListAsync();
             };
 
-            await Assert.ThrowsAsync<System.Data.SqlClient.SqlException>(a);
+            await Assert.ThrowsAsync<System.Data.SqlClient.SqlException>(task);
         }
 
         [Fact]
         public async Task All_Fund_WrongFunction_ShouldThrowException()
         {
-            Func<Task> a = async () =>
+            Func<Task> task = async () =>
             {
-                await this.service.All("NotAFunction", null, null, 0).ToListAsync();
+                await this.service
+                .All("NotAFunction", null, null, 0)
+                .ToListAsync();
             };
 
-            await Assert.ThrowsAsync<System.Data.SqlClient.SqlException>(a);
+            await Assert.ThrowsAsync<System.Data.SqlClient.SqlException>(task);
+        }
+
+        [Theory]
+        [InlineData("2020-01-01", 74)]
+        [InlineData("1800-01-01", 0)]
+        public async Task All_SubFund_ShouldReturnEntities(string date, int expectedCount)
+        {
+            var dt = DateTimeExtensions.FromWebFormat(date);
+            var result = await this.service
+                .All(SqlFunctionDictionary.AllSubFund, null, dt, 1)
+                .ToListAsync();
+            Assert.NotNull(result);
+            Assert.True(result.Count == expectedCount);
+        }
+
+        [Theory]
+        [InlineData("2020-01-01", 241)]
+        [InlineData("1800-01-01", 0)]
+        public async Task All_ShareClass_ShouldReturnEntities(string date, int expectedCount)
+        {
+            var dt = DateTimeExtensions.FromWebFormat(date);
+            var result = await this.service
+                .All(SqlFunctionDictionary.AllShareClass, null, dt, 1)
+                .ToListAsync();
+            Assert.NotNull(result);
+            Assert.True(result.Count == expectedCount);
+        }
+
+        [Theory]
+        [InlineData(14, 5)]
+        public async Task AllSelected_Fund_ShouldReturnCorrectResult(int expectedCount, int expectedHeaders)
+        {
+            this.dto = await EntityServiceTestData.Generate(this.service, SqlFunctionDictionary.AllFund);
+            var result = await this.service.AllSelected(SqlFunctionDictionary.AllFund, this.dto, 1).ToListAsync();
+            Assert.NotNull(result);
+            Assert.True(result.Count == expectedCount);
+            Assert.True(result[0].Length == expectedHeaders);
         }
 
         [Fact]
         public async Task AllSelected_Fund_WrongFunction_ShouldThrowException()
         {
-            var headers = await service.All(SqlFunctionDictionary.AllFund, null, DateTime.Now, 0).FirstOrDefaultAsync();
+            this.dto = await EntityServiceTestData.Generate(this.service, SqlFunctionDictionary.AllFund);
 
-            var dtoSelected = new AllSelectedDto
+            Func<Task> task = async () =>
             {
-                Date = DateTime.Now,
-                PreSelectedColumns = headers?.Take(GlobalConstants.PreSelectedColumnsCount).ToList(),
-                SelectedColumns = new List<string>() { "ID", "NAME", "STATUS" },
+                await this.service.AllSelected("NotAFunction", this.dto, 0).ToListAsync();
             };
 
-            Func<Task> a = async () =>
-            {
-                await this.service.AllSelected("NotAFunction", dtoSelected, 0).ToListAsync();
-            };
-
-            await Assert.ThrowsAsync<System.Data.SqlClient.SqlException>(a);
+            await Assert.ThrowsAsync<System.Data.SqlClient.SqlException>(task);
         }
 
         [Fact]
         public async Task AllSelected_Fund_WrongColumn_ShouldThrowException()
         {
-            var headers = await service.All(SqlFunctionDictionary.AllFund, null, DateTime.Now, 0).FirstOrDefaultAsync();
+            this.dto = await EntityServiceTestData.Generate(this.service, SqlFunctionDictionary.AllFund);
 
-            var dtoSelected = new AllSelectedDto
+            var result = this.dto.SelectedColumns.ToList();
+            result.Add("NOTACOLUMN");
+
+            this.dto.SelectedColumns = result;
+
+            Func<Task> task = async () =>
             {
-                Date = DateTime.Now,
-                PreSelectedColumns = headers?.Take(GlobalConstants.PreSelectedColumnsCount).ToList(),
-                SelectedColumns = new List<string>() { "ID", "NAME", "STATUS", "NOTACOLUMN" },
+                await this.service.AllSelected(SqlFunctionDictionary.AllFund, this.dto, 0).ToListAsync();
             };
 
-            Func<Task> a = async () =>
-            {
-                await this.service.AllSelected(SqlFunctionDictionary.AllFund, dtoSelected, 0).ToListAsync();
-            };
-
-            await Assert.ThrowsAsync<System.Data.SqlClient.SqlException>(a);
+            await Assert.ThrowsAsync<System.Data.SqlClient.SqlException>(task);
         }
 
         [Fact]
@@ -128,83 +144,69 @@ namespace DataGate.Services.Data.Tests.Entity
                 SelectedColumns = null
             };
 
-            Func<Task> a = async () =>
+            Func<Task> task = async () =>
             {
                 await this.service.AllSelected("NotAFunction", dtoSelected, 0).ToListAsync();
             };
 
-            await Assert.ThrowsAsync<System.ArgumentNullException>(a);
+            await Assert.ThrowsAsync<System.ArgumentNullException>(task);
         }
 
         [Fact]
-        public async Task AllSelected_AllFund_WrongArgumentAllSelected_ShouldThrowException()
+        public async Task AllSelected_Fund_WrongArgumentAllSelected_ShouldThrowException()
         {
-            Func<Task> a = async () =>
+            Func<Task> task = async () =>
             {
                 await this.service.AllSelected("NotAFunction", new AllSelectedDto(), 0).ToListAsync();
             };
 
-            await Assert.ThrowsAsync<System.ArgumentNullException>(a);
+            await Assert.ThrowsAsync<System.ArgumentNullException>(task);
         }
 
         [Theory]
-        [InlineData("2020-01-01", 74)]
-        [InlineData("1800-01-01", 0)]
-        public async Task All_SubFund_ShouldReturnEntities(string date, int expectedAmount)
+        [InlineData(77, 5)]
+        public async Task AllSelected_SubFund_ShouldReturnEntities(int expectedCount, int expectedHeaders)
         {
-            var dt = DateTimeExtensions.FromWebFormat(date);
-            var result = await this.service.All(SqlFunctionDictionary.AllSubFund, null, dt, 1).ToListAsync();
+            this.dto = await EntityServiceTestData.Generate(this.service, SqlFunctionDictionary.AllSubFund);
+
+            var result = await this.service.AllSelected(SqlFunctionDictionary.AllSubFund, this.dto, 1).ToListAsync();
             Assert.NotNull(result);
-            Assert.True(result.Count == expectedAmount);
+            Assert.True(result.Count == expectedCount);
+            Assert.True(result[0].Length == expectedHeaders);
         }
 
         [Theory]
-        [InlineData(77, 7)]
-        public async Task AllSelected_SubFund_ShouldReturnEntities(int expectedAmount, int expectedLength)
+        [InlineData(253, 5)]
+        public async Task AllSelected_ShareClass_ShouldReturnEntities(int expectedCount, int expectedHeaders)
         {
-            var headers = await service.All(SqlFunctionDictionary.AllSubFund, null, DateTime.Now, 0).FirstOrDefaultAsync();
+            this.dto = await EntityServiceTestData.Generate(this.service, SqlFunctionDictionary.AllShareClass);
 
-            var dtoSelected = new AllSelectedDto
+            var result = await this.service.AllSelected(SqlFunctionDictionary.AllShareClass, this.dto, 1).ToListAsync();
+            Assert.NotNull(result);
+            Assert.True(result.Count == expectedCount);
+            Assert.True(result[0].Length == expectedHeaders);
+        }
+
+        [Fact]
+        public async Task AllSelected_ShareClassAndColumnsWithSpace_ShouldReturnTrimmedColumns()
+        {
+            AllSelectedDto dto = new AllSelectedDto()
             {
+                PreSelectedColumns = new[] { "STATUS   ", "    VALID FROM" },
+                SelectedColumns = new[] { "         SHARE CLASS NAME             " },
+                Id = 1,
                 Date = DateTime.Now,
-                PreSelectedColumns = headers?.Take(GlobalConstants.PreSelectedColumnsCount).ToList(),
-                SelectedColumns = new List<string>() { "ID", "NAME", "STATUS" },
             };
 
-            var result = await this.service.AllSelected(SqlFunctionDictionary.AllSubFund, dtoSelected, 1).ToListAsync();
-            Assert.NotNull(result);
-            Assert.True(result.Count == expectedAmount);
-            Assert.True(result[0].Length == expectedLength);
-        }
+            var result = await this.service
+                .AllSelected(SqlFunctionDictionary.ByIdShareClass, dto, 0)
+                .ToListAsync();
 
-        [Theory]
-        [InlineData("2020-01-01", 241)]
-        [InlineData("1800-01-01", 0)]
-        public async Task All_ShareClass_ShouldReturnEntities(string date, int expectedAmount)
-        {
-            var dt = DateTimeExtensions.FromWebFormat(date);
-            var result = await this.service.All(SqlFunctionDictionary.AllShareClass, null, dt, 1).ToListAsync();
-            Assert.NotNull(result);
-            Assert.True(result.Count == expectedAmount);
-        }
-
-        [Theory]
-        [InlineData(253, 7)]
-        public async Task AllSelected_ShareClass_ShouldReturnEntities(int expectedAmount, int expectedLength)
-        {
-            var headers = await service.All(SqlFunctionDictionary.AllShareClass, null, DateTime.Now, 0).FirstOrDefaultAsync();
-
-            var dtoSelected = new AllSelectedDto
-            {
-                Date = DateTime.Now,
-                PreSelectedColumns = headers?.Take(GlobalConstants.PreSelectedColumnsCount).ToList(),
-                SelectedColumns = new List<string>() { "ID", "NAME", "STATUS" },
-            };
-
-            var result = await this.service.AllSelected(SqlFunctionDictionary.AllShareClass, dtoSelected, 1).ToListAsync();
-            Assert.NotNull(result);
-            Assert.True(result.Count == expectedAmount);
-            Assert.True(result[0].Length == expectedLength);
+            Assert.True(result.Count == 2);
+            Assert.True(result[0].Length == 3);
+            Assert.Contains(result[0], a => a == dto.PreSelectedColumns.ElementAt(0).Trim());
+            Assert.Contains(result[0], a => a == dto.PreSelectedColumns.ElementAt(1).Trim());
+            Assert.Contains(result[0], a => a == dto.SelectedColumns.ElementAt(0).Trim());
         }
     }
 }
