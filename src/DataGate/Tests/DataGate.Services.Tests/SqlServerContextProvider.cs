@@ -18,7 +18,7 @@ namespace DataGate.Services.Tests
 
     using Xunit;
 
-    public class SqlServerContextProvider : IClassFixture<SqlServerFixture>
+    public class SqlServerContextProvider : IClassFixture<SqlQueryManagerFixture>
     {
         protected readonly ApplicationDbContext Context;
         protected readonly IConfiguration Configuration;

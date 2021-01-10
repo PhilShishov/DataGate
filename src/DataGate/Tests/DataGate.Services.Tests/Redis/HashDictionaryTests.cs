@@ -28,7 +28,16 @@ namespace DataGate.Services.Tests.Redis
 
         public void Dispose()
         {
-            this.container.DeleteTrackedKeys().Wait();
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                this.container.DeleteTrackedKeys().Wait();
+            }
         }
 
         [Fact]
@@ -80,7 +89,7 @@ namespace DataGate.Services.Tests.Redis
             var expected = originalCount - deleted;
 
             Assert.Equal(expected, actual);
-            
+
         }
     }
 }

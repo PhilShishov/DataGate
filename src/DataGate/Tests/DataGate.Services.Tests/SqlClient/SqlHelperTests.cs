@@ -21,7 +21,6 @@
         public SqlHelperTests(ITestOutputHelper output)
         {
             this.output = output;
-
             this.connection = new SqlConnection();
             this.connection.ConnectionString = base.Configuration.GetConnectionString(GlobalConstants.DataGateAppConnection);
             this.connection.Open();
@@ -30,7 +29,18 @@
 
         public void Dispose()
         {
-            this.connection.Close();
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                this.command.Dispose();
+                this.connection.Close();
+                //base.Context?.Dispose();
+            }
         }
 
         [Fact]
@@ -67,7 +77,9 @@
         {
             Action act = () =>
             {
+#pragma warning disable CA2100 // Review SQL queries for security vulnerabilities
                 this.command.CommandText = text;
+#pragma warning restore CA2100 // Review SQL queries for security vulnerabilities
 
                 var result = SqlHelper.ExecuteCommand(this.command).ToListAsync().Result;
             };

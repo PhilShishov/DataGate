@@ -346,7 +346,9 @@ namespace DataGate.Services.Tests.SqlClient
         {
             Action act = () =>
             {
-                SqlCommand command = new SqlCommand(procName);
+                SqlCommand command = new SqlCommand();
+                command.Parameters.Add("@procedure", SqlDbType.NVarChar).Value = procName;
+                command.CommandText = "@procedure";
 
                 var sqlDate = DateTimeExtensions.ToSqlFormat(DateTime.Now);
 
@@ -371,7 +373,9 @@ namespace DataGate.Services.Tests.SqlClient
             Action act = () =>
             {
                 string procName = "getAuM_fund_test @datereport";
-                SqlCommand command = new SqlCommand(procName);
+                SqlCommand command = new SqlCommand();
+                command.Parameters.Add("@procedure", SqlDbType.NVarChar).Value = procName;
+                command.CommandText = "@procedure";
 
                 command.Parameters.AddRange(new[]
                 {
