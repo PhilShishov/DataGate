@@ -1,29 +1,56 @@
-﻿@model ErrorViewModel
-@{
+﻿@{
     this.ViewData["Title"] = SharedLocalizer.GetHtmlString("Page not found");
+
+    if (!this.User.Identity.IsAuthenticated)
+    {
+        this.Layout = "_LayoutIdentity";
+    }
 }
 
-<div class="container-not-found">
-    <img src="/images/Page-not-found.jpg" alt="404 Page Not Found Image" />
+@if (this.User.Identity.IsAuthenticated)
+{
+    <div class="container-not-found">
+        <img src="/images/Page-not-found.jpg" alt="404 Page Not Found Image" />
 
-    <div class="container-not-found-content">
-        <h2>@SharedLocalizer.GetHtmlString("The page is not found")</h2>
-        <p>
-            @SharedLocalizer.GetHtmlString("Looks like we can't find what you're looking for.") <br />
-            @SharedLocalizer.GetHtmlString("Maybe one of these links will help you.")
-        </p>
+        <div class="container-not-found-content">
+            <h2>@SharedLocalizer.GetHtmlString("The page is not found")</h2>
+            <p>
+                @SharedLocalizer.GetHtmlString("Looks like we can't find what you're looking for.") <br />
+                @SharedLocalizer.GetHtmlString("Maybe one of these links will help you.")
+            </p>
 
-        <div class="container-not-found-links">
-            <a href="/">@SharedLocalizer.GetHtmlString("Panel")</a>
-            <a href="/funds">@SharedLocalizer.GetHtmlString("Funds")</a>
-            <a href="/subfunds">@SharedLocalizer.GetHtmlString("Sub Funds")</a>
-            <a href="/shareclasses">@SharedLocalizer.GetHtmlString("Share Classes")</a>
-            <a href="/allagreements">@SharedLocalizer.GetHtmlString("Agreements")</a>
-            <a href="/reportoverview">@SharedLocalizer.GetHtmlString("Reports")</a>
-             @if (!this.User.IsInRole(GlobalConstants.GuestRoleName))
-             {
-                <a href="/account/email">@SharedLocalizer.GetHtmlString("Profile")</a>
-             }
+            <div class="container-not-found-links">
+                <a href="/">@SharedLocalizer.GetHtmlString("Panel")</a>
+                <a href="/funds">@SharedLocalizer.GetHtmlString("Funds")</a>
+                <a href="/subfunds">@SharedLocalizer.GetHtmlString("Sub Funds")</a>
+                <a href="/shareclasses">@SharedLocalizer.GetHtmlString("Share Classes")</a>
+                <a href="/allagreements">@SharedLocalizer.GetHtmlString("Agreements")</a>
+                <a href="/reportoverview">@SharedLocalizer.GetHtmlString("Reports")</a>
+            </div>
         </div>
     </div>
-</div>
+}
+else
+{
+    <section class="login-layout">
+        <div class="container-fluid login-layout-container">
+            <div class="row">
+                <div class="col-xl-4 col-lg-6 col-12 login-content-container">
+                    <div class="login-content">
+                        <partial name="Identity/_HomeIcon" />
+                        <h3 class="login-brand">
+                            @SharedLocalizer.GetHtmlString("The page does not exist")
+                        </h3>
+                        <p>
+                            @SharedLocalizer.GetHtmlString("Please try something else.") <br />
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-2 extra-space-container" style="background-color: #ffffff;"></div>
+                <partial name="Identity/_SideImage" />
+            </div>
+            <partial name="Identity/_FooterIdentity" />
+        </div>
+    </section>
+}
+

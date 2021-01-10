@@ -741,4 +741,10 @@
   <data name="{0} was added as {1}." xml:space="preserve">
     <value>{0} è stato aggiunto come {1}.</value>
   </data>
+  <data name="Please try something else." xml:space="preserve">
+    <value>Per favore prova qualcos'altro.</value>
+  </data>
+  <data name="The page does not exist" xml:space="preserve">
+    <value>La pagina non esiste</value>
+  </data>
 </root>
