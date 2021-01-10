@@ -30,6 +30,13 @@ namespace DataGate.Services.Data.Tests.Storage
         //}
 
         [Fact]
+        public async Task Create_ShareClass_MissingParameters_ShouldThrowException()
+        {
+                Func<Task> task = async () => await this.service.Create(this.SetDocumentValues());
+                await Assert.ThrowsAsync<CustomSqlException>(task);
+        }
+
+        [Fact]
         public async Task Create_ShareClass_ShouldReturnSubFundId()
         {
             var document = this.SetDocumentValues();
