@@ -1,4 +1,7 @@
-﻿namespace DataGate.Services.Tests.SqlClient
+﻿// Copyright (c) DataGate Project. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+namespace DataGate.Services.Tests.SqlClient
 {
     using System;
     using System.Data.SqlClient;
@@ -6,13 +9,12 @@
 
     using DataGate.Common;
     using DataGate.Services.SqlClient;
-
-    using Microsoft.Extensions.Configuration;
+    using DataGate.Services.Tests.ClassFixtures;
 
     using Xunit;
     using Xunit.Abstractions;
 
-    public class SqlHelperTests : SqlServerContextProvider, IDisposable
+    public class SqlHelperTests : IClassFixture<SqlServerFixture>, IDisposable
     {
         private readonly ITestOutputHelper output;
         private readonly SqlConnection connection;
@@ -21,8 +23,10 @@
         public SqlHelperTests(ITestOutputHelper output)
         {
             this.output = output;
-            this.connection = new SqlConnection();
-            this.connection.ConnectionString = base.Configuration.GetConnectionString(GlobalConstants.DataGateAppConnection);
+            this.connection = new SqlConnection
+            {
+                ConnectionString = GlobalConstants.SqlServerConnectionWithDb
+            };
             this.connection.Open();
             this.command = this.connection.CreateCommand();
         }
@@ -39,7 +43,6 @@
             {
                 this.command.Dispose();
                 this.connection.Close();
-                //base.Context?.Dispose();
             }
         }
 

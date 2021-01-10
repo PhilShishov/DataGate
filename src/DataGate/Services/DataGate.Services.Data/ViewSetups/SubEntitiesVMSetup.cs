@@ -52,7 +52,7 @@ namespace DataGate.Services.Data.ViewSetups
             model.Headers = headers.ToList();
             model.HeadersSelection = headers.ToList();
 
-            bool isInSelectionMode = model.SelectedColumns != null ? true : false;
+            bool isInSelectionMode = model.SelectedColumns != null;
 
             if (isInSelectionMode)
             {

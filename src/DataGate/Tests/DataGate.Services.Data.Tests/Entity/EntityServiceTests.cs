@@ -17,7 +17,7 @@ namespace DataGate.Services.Data.Tests.Entity
 
     using Xunit;
 
-    public class EntityServiceTests : SqlServerContextProvider /*IDisposable*/
+    public class EntityServiceTests : SqlServerContextProvider
     {
         private readonly EntityService service;
 
@@ -26,14 +26,10 @@ namespace DataGate.Services.Data.Tests.Entity
             this.service = EntityServiceTestData.CreateService(base.Context, base.Configuration);
         }
 
-        //public void Dispose()
-        //{
-        //}
-
         [Theory]
         [InlineData("2020-01-01", 11)]
         [InlineData("1800-01-01", 0)]
-        public async Task All_AllFund_ShouldReturnEntities(string date, int expectedAmount)
+        public async Task All_Fund_ShouldReturnCorrectResult(string date, int expectedAmount)
         {
             var dt = DateTimeExtensions.FromWebFormat(date);
             var result = await this.service.All(SqlFunctionDictionary.AllFund, null, dt, 1).ToListAsync();
@@ -43,7 +39,7 @@ namespace DataGate.Services.Data.Tests.Entity
 
         [Theory]
         [InlineData(14, 7)]
-        public async Task AllSelected_AllFund_ShouldReturnEntities(int expectedAmount, int expectedLength)
+        public async Task AllSelected_Fund_ShouldReturnCorrectResult(int expectedAmount, int expectedLength)
         {
             var headers = await service.All(SqlFunctionDictionary.AllFund, null, DateTime.Now, 0).FirstOrDefaultAsync();
 
@@ -61,7 +57,7 @@ namespace DataGate.Services.Data.Tests.Entity
         }
 
         [Fact]
-        public async Task All_AllFund_WrongDate_ShouldThrowException()
+        public async Task All_Fund_WrongDate_ShouldThrowException()
         {
             Func<Task> a = async () =>
             {
@@ -72,7 +68,7 @@ namespace DataGate.Services.Data.Tests.Entity
         }
 
         [Fact]
-        public async Task All_AllFund_WrongFunction_ShouldThrowException()
+        public async Task All_Fund_WrongFunction_ShouldThrowException()
         {
             Func<Task> a = async () =>
             {
@@ -83,7 +79,7 @@ namespace DataGate.Services.Data.Tests.Entity
         }
 
         [Fact]
-        public async Task AllSelected_AllFund_WrongFunction_ShouldThrowException()
+        public async Task AllSelected_Fund_WrongFunction_ShouldThrowException()
         {
             var headers = await service.All(SqlFunctionDictionary.AllFund, null, DateTime.Now, 0).FirstOrDefaultAsync();
 
@@ -103,7 +99,7 @@ namespace DataGate.Services.Data.Tests.Entity
         }
 
         [Fact]
-        public async Task AllSelected_AllFund_WrongColumn_ShouldThrowException()
+        public async Task AllSelected_Fund_WrongColumn_ShouldThrowException()
         {
             var headers = await service.All(SqlFunctionDictionary.AllFund, null, DateTime.Now, 0).FirstOrDefaultAsync();
 
@@ -123,7 +119,7 @@ namespace DataGate.Services.Data.Tests.Entity
         }
 
         [Fact]
-        public async Task AllSelected_AllFund_WrongArgumentPreSelectedColumns_ShouldThrowException()
+        public async Task AllSelected_Fund_WrongArgumentPreSelectedColumns_ShouldThrowException()
         {
             var dtoSelected = new AllSelectedDto
             {
@@ -154,7 +150,7 @@ namespace DataGate.Services.Data.Tests.Entity
         [Theory]
         [InlineData("2020-01-01", 74)]
         [InlineData("1800-01-01", 0)]
-        public async Task All_AllSubFund_ShouldReturnEntities(string date, int expectedAmount)
+        public async Task All_SubFund_ShouldReturnEntities(string date, int expectedAmount)
         {
             var dt = DateTimeExtensions.FromWebFormat(date);
             var result = await this.service.All(SqlFunctionDictionary.AllSubFund, null, dt, 1).ToListAsync();
@@ -164,7 +160,7 @@ namespace DataGate.Services.Data.Tests.Entity
 
         [Theory]
         [InlineData(77, 7)]
-        public async Task AllSelected_AllSubFund_ShouldReturnEntities(int expectedAmount, int expectedLength)
+        public async Task AllSelected_SubFund_ShouldReturnEntities(int expectedAmount, int expectedLength)
         {
             var headers = await service.All(SqlFunctionDictionary.AllSubFund, null, DateTime.Now, 0).FirstOrDefaultAsync();
 
@@ -184,7 +180,7 @@ namespace DataGate.Services.Data.Tests.Entity
         [Theory]
         [InlineData("2020-01-01", 241)]
         [InlineData("1800-01-01", 0)]
-        public async Task All_AllShareClass_ShouldReturnEntities(string date, int expectedAmount)
+        public async Task All_ShareClass_ShouldReturnEntities(string date, int expectedAmount)
         {
             var dt = DateTimeExtensions.FromWebFormat(date);
             var result = await this.service.All(SqlFunctionDictionary.AllShareClass, null, dt, 1).ToListAsync();
@@ -194,7 +190,7 @@ namespace DataGate.Services.Data.Tests.Entity
 
         [Theory]
         [InlineData(253, 7)]
-        public async Task AllSelected_AllShareClass_ShouldReturnEntities(int expectedAmount, int expectedLength)
+        public async Task AllSelected_ShareClass_ShouldReturnEntities(int expectedAmount, int expectedLength)
         {
             var headers = await service.All(SqlFunctionDictionary.AllShareClass, null, DateTime.Now, 0).FirstOrDefaultAsync();
 
@@ -210,7 +206,5 @@ namespace DataGate.Services.Data.Tests.Entity
             Assert.True(result.Count == expectedAmount);
             Assert.True(result[0].Length == expectedLength);
         }
-
-
     }
 }

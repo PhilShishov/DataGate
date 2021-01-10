@@ -20,7 +20,7 @@ namespace DataGate.Services.Data.ViewSetups
     {
         public static async Task<T> SetGet<T>(IEntityService service, string functionActive, IEnumerable<string> userColumns)
         {
-            bool isInLayoutMode = userColumns.Count() > 0 ? true : false;
+            bool isInLayoutMode = userColumns.Count() > 0;
 
             var today = DateTime.Today;
             var primeHeaders = await service.All(functionActive, null, today).FirstOrDefaultAsync();
@@ -61,7 +61,7 @@ namespace DataGate.Services.Data.ViewSetups
             model.Headers = headers.ToList();
             model.HeadersSelection = headers.ToList();
 
-            bool isInSelectionMode = model.SelectedColumns != null ? true : false;
+            bool isInSelectionMode = model.SelectedColumns != null;
 
             // ---------------------------------------------------------
             //
