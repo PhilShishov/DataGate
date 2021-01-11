@@ -21,6 +21,20 @@
     <input asp-for="Container" type="hidden">
 
     <div>
+        <label>@SharedLocalizer.GetHtmlString("As of:")</label>
+        <input type="date"
+               asp-for="Date"
+               min="2018-01-01">
+        <input type="submit"
+               class="btn btn-datagate btn-sm mb-1"
+               name="Command"
+               value=@SharedLocalizer.GetHtmlString("Update")></>
+        <span asp-validation-for="Date" class="text-danger"></span>
+    </div>
+
+    <div class="vertical mx-3"></div>
+
+    <div>
         <a class="btn btn-datagate btn-sm mr-2" asp-route="@containerRoute" asp-route-id="@Model.Id" asp-route-date="@Model.Date">
             @SharedLocalizer.GetHtmlString("CONTAINER")
         </a>
@@ -34,19 +48,6 @@
                 name="showColumnSelection">
             @SharedLocalizer.GetHtmlString("Layout")
         </button>
-    </div>
-
-    <div class="vertical mx-3"></div>
-
-    <div>
-        <input type="date"
-               asp-for="Date"
-               min="2018-01-01">
-        <input type="submit"
-               class="btn btn-datagate btn-sm mb-1"
-               name="Command"
-               value=@SharedLocalizer.GetHtmlString("Update")></>
-        <span asp-validation-for="Date" class="text-danger"></span>
     </div>
 
     <partial name="SubEntities/_TableLayout" />

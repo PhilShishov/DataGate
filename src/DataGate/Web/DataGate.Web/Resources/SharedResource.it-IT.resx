@@ -747,4 +747,7 @@
   <data name="The page does not exist" xml:space="preserve">
     <value>La pagina non esiste</value>
   </data>
+  <data name="As of:" xml:space="preserve">
+    <value>Come di:</value>
+  </data>
 </root>

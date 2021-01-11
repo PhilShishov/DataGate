@@ -26,6 +26,13 @@
     clear: both;
     justify-content: center;
     display: flex;
+    background: rgb(1, 35, 63);
+    height: 45px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    align-items: center;
 }
 
 .btn-datagate {
@@ -75,7 +82,7 @@
 
 
 .back-to-top {
-    cursor:pointer;
+    cursor: pointer;
     display: none;
     width: 40px;
     height: 40px;

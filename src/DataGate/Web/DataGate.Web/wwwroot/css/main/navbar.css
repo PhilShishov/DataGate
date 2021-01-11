@@ -11,7 +11,7 @@
     z-index: 1;
     position: fixed;
     width: 100%;
-    background: black;
+    background: rgb(1, 35, 63);
     height: 60px;
     display: flex;
 }
@@ -98,11 +98,14 @@
 
                 .navbar a:hover,
                 .sidenav-dropdown-btn:hover,
-                .header-datagate-app-navbar a:hover,
                 .menu-user-container ul li a:hover {
                     color: #0056b3;
                 }
 
+
+.header-datagate-app-navbar a:hover {
+    color: rgb(163, 214, 255);
+}
 .responsive-menu .open-responsive-menu::before {
     content: '';
     cursor: pointer;

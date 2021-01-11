@@ -5,7 +5,6 @@ namespace DataGate.Services.Data.Tests.Storage
 {
     using System;
     using System.Data.SqlTypes;
-    using System.Linq;
     using System.Threading.Tasks;
 
     using DataGate.Common.Exceptions;

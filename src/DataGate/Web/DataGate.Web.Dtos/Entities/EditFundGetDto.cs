@@ -50,7 +50,7 @@ namespace DataGate.Web.Dtos.Entities
             this.LegalVehicle = reader["LEGAL VEHICLE"] as string;
             this.LegalType = reader["LEGAL TYPE"] as string;
             this.FACode = reader["FUND ADMIN CODE"] as string;
-            this.DEPCode = reader["DEP. CODE"] as string;
+            this.DEPCode = reader["DEPOSITARY BANK CODE"] as string;
             this.TACode = reader["TRANSFER AGENT CODE"] as string;
             this.CompanyTypeDesc = reader["COMPANY DESCRIPTION"] as string;
             this.TinNumber = reader["TIN NUMBER"] as string;

@@ -14,7 +14,7 @@ namespace DataGate.Services.Data.Tests.Files
 
     using Xunit;
 
-    public class FileServiceTests : SqlServerContextProvider /*IDisposable*/
+    public class FileServiceTests : SqlServerContextProvider
     {
         private readonly FileService service;
         private readonly int tbMapFileFundCount;
@@ -29,15 +29,11 @@ namespace DataGate.Services.Data.Tests.Files
             this.tbSAFundCount = base.Context.TbServiceAgreementFund.Count();
         }
 
-        //public void Dispose()
-        //{
-        //}
-
         [Fact]
         public async Task UploadDocument_Fund_ShouldIncreaseCount()
         {
-            var expectedTbMapCount = 31;
-            var expectedTbFileCount = 47;
+            var expectedTbMapCount = 1;
+            var expectedTbFileCount = 2;
 
             Assert.Equal(expectedTbMapCount, this.tbMapFileFundCount);
             Assert.Equal(expectedTbFileCount, this.tbFileCount);
@@ -84,8 +80,8 @@ namespace DataGate.Services.Data.Tests.Files
         [Fact]
         public async Task UploadAgreement_Fund_ShouldIncreaseCount()
         {
-            var expectedTbSAFundCount = 13;
-            var expectedTbFileCount = 47;
+            var expectedTbSAFundCount = 1;
+            var expectedTbFileCount = 2;
 
             Assert.Equal(expectedTbSAFundCount, this.tbSAFundCount);
             Assert.Equal(expectedTbFileCount, this.tbFileCount);
@@ -130,8 +126,8 @@ namespace DataGate.Services.Data.Tests.Files
         [Fact]
         public async Task DeleteDocument_Fund_ShouldDecreaseCount()
         {
-            var expectedTbMapCount = 31;
-            var expectedTbFileCount = 47;
+            var expectedTbMapCount = 1;
+            var expectedTbFileCount = 2;
 
             var document = this.SetDocumentValues();
 
@@ -142,7 +138,7 @@ namespace DataGate.Services.Data.Tests.Files
                 Assert.Equal(expectedTbMapCount + 1, base.Context.TbMapFilefund.Count());
                 Assert.Equal(expectedTbFileCount + 1, base.Context.TbFile.Count());
 
-                await this.service.DeleteDocument(51, "Fund");
+                await this.service.DeleteDocument(3, "Fund");
 
                 Assert.Equal(expectedTbMapCount, base.Context.TbMapFilefund.Count());
                 Assert.Equal(expectedTbFileCount, base.Context.TbFile.Count());
@@ -163,8 +159,8 @@ namespace DataGate.Services.Data.Tests.Files
         [Fact]
         public async Task DeleteAgreement_Fund_ShouldDecreaseCount()
         {
-            var expectedTbSAFundCount = 13;
-            var expectedTbFileCount = 47;
+            var expectedTbSAFundCount = 1;
+            var expectedTbFileCount = 2;
 
             var agreement = SetAgreementValues();
 
@@ -175,7 +171,7 @@ namespace DataGate.Services.Data.Tests.Files
                 Assert.Equal(expectedTbSAFundCount + 1, base.Context.TbServiceAgreementFund.Count());
                 Assert.Equal(expectedTbFileCount + 1, base.Context.TbFile.Count());
 
-                await this.service.DeleteAgreement(51, "Fund");
+                await this.service.DeleteAgreement(3, "Fund");
 
                 Assert.Equal(expectedTbSAFundCount, base.Context.TbServiceAgreementFund.Count());
                 Assert.Equal(expectedTbFileCount, base.Context.TbFile.Count());
@@ -197,24 +193,43 @@ namespace DataGate.Services.Data.Tests.Files
         {
             var fundId = 16;
             var tbSaAgr = base.Context.TbServiceAgreementFund.ToList();
-            var activationDate = tbSaAgr
-                .Where(x => x.SaFundId == fundId)
-                .Select(x => x.SaActivationDate)
-                .FirstOrDefault();
+            var activationDate = DateTime.Now.ToString();
 
-            return FileServiceTestData.Generate(fundId, activationDate.ToString(), agrType);
+            return FileServiceTestData.Generate(fundId, activationDate, agrType);
         }
 
         private UploadDocumentInputModel SetDocumentValues(string docType = "Prospectus")
         {
             var fundId = 16;
             var tbMapFile = base.Context.TbMapFilefund.ToList();
-            var startConnection = tbMapFile
-                .Where(x => x.DocFundId == fundId)
-                .Select(x => (DateTime)x.DocEndConnection)
-                .FirstOrDefault();
+            var startConnection = DateTime.Now;
 
-            return FileServiceTestData.Generate(fundId, startConnection.AddDays(1), docType);
+            return FileServiceTestData.Generate(fundId, startConnection, docType);
         }
+
+        // TODO existing connection
+        //private UploadAgreementInputModel SetAgreementValues(string agrType = "Management Company Agreement")
+        //{
+        //    var fundId = 16;
+        //    var tbSaAgr = base.Context.TbServiceAgreementFund.ToList();
+        //    var activationDate = tbSaAgr
+        //        .Where(x => x.SaFundId == fundId)
+        //        .Select(x => x.SaActivationDate)
+        //        .FirstOrDefault();
+
+        //    return FileServiceTestData.Generate(fundId, activationDate.ToString(), agrType);
+        //}
+
+        //private UploadDocumentInputModel SetDocumentValues(string docType = "Prospectus")
+        //{
+        //    var fundId = 16;
+        //    var tbMapFile = base.Context.TbMapFilefund.ToList();
+        //    var startConnection = tbMapFile
+        //        .Where(x => x.DocFundId == fundId)
+        //        .Select(x => (DateTime)x.DocEndConnection)
+        //        .FirstOrDefault();
+
+        //    return FileServiceTestData.Generate(fundId, startConnection.AddDays(1), docType);
+        //}
     }
 }

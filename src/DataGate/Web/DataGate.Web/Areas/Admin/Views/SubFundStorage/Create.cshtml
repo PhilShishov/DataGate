@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 <div class="push">
-    <div class="d-flex justify-content-center text-center">
+    <div class="storage-container">
         <form asp-controller="SubFundStorage"
               asp-action="Create"
               method="post"
@@ -416,7 +416,7 @@
                 </div>
             </div>
 
-            <div class="button-holder-storage my-4">
+            <div class="button-holder-storage">
                 <input type="hidden" id="RecaptchaValue" asp-for="RecaptchaValue" />
                 <a class="btn btn-datagate btn-lg"
                    asp-area="@EndpointsConstants.DisplaySub@EndpointsConstants.FundArea"

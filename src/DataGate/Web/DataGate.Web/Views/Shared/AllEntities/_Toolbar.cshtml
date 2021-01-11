@@ -17,6 +17,21 @@
       id="update-form">
 
     <div>
+        <label>@SharedLocalizer.GetHtmlString("As of:")</label>
+        <input type="date"
+               asp-for="Date"
+               min="2018-01-01"
+               required>
+        <input type="submit"
+               class="btn btn-datagate btn-sm mb-1"
+               name="Command"
+               value="@SharedLocalizer.GetHtmlString("Update")"></>
+        <span asp-validation-for="Date" class="text-danger"></span>
+    </div>
+
+    <div class="vertical mx-3"></div>
+
+    <div>
         <button type="button"
                 class="btn btn-sm btn-datagate"
                 data-toggle="modal"
@@ -35,20 +50,6 @@
             <span class="d-block text-switch-datagate">@SharedLocalizer.GetHtmlString("Active")</span>
 
         </label>
-    </div>
-
-    <div class="vertical mx-3"></div>
-
-    <div>
-        <input type="date"
-               asp-for="Date"
-               min="2018-01-01"
-               required>
-        <input type="submit"
-               class="btn btn-datagate btn-sm mb-1"
-               name="Command"
-               value="@SharedLocalizer.GetHtmlString("Update")"></>
-        <span asp-validation-for="Date" class="text-danger"></span>
     </div>
 
     <partial name="AllEntities/_TableLayout" />

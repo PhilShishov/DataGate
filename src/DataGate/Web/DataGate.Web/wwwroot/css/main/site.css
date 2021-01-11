@@ -1,8 +1,18 @@
 ﻿
 /* Chosen style to be imported on change*/
 
-/*Recent Items Style*/
+/*d-flex justify-content-center text-center*/
 
+.mb-100 {
+    margin-bottom: 100px;
+}
+
+.storage-container {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+/*Recent Items Style*/
 .manage-account {
     margin-top: 80px;
 }
