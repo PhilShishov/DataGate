@@ -184,7 +184,7 @@ The main function is automatic feeding of data into an internal database by the 
 ![Application-Structure](Documentation/Presentation/Application-Structure.png)
   
   ## History
-**2021-01-02** Published DataGate version 2021.1.0 with ASP.NET 5.0.1
+**2021-01-02** Published DataGate version 2020.2.2 with ASP.NET 5.0.1
 
 **2020-10-30** Updated to ASP.NET Core 3.1.9
   
@@ -194,9 +194,9 @@ The main function is automatic feeding of data into an internal database by the 
 
 **2020-07-14** Updated to ASP.NET Core 3.1.6
 
-**2020-06-22** Published DataGate version 2020.2.0
+**2020-06-22** Published DataGate version 2020.2.1
 
-**2020-02-28** Published DataGate version 2020.1.0 with ASP.NET Core 2.1
+**2020-02-28** Published DataGate version 2020.1.1 with ASP.NET Core 2.1
 
 ## License
 This project is licensed under the [MIT License](LICENSE)

@@ -6,8 +6,6 @@ namespace DataGate.Common
     public static class GlobalConstants
     {
         // Application Constants
-        public const string DataGateFooter =
-            "  DataGate, Inc. All rights reserved.";
         public const string FileSizeLimitConfiguration = "FileSizeLimit";
         public const int FileSizeLimit = 45 * 1024 * 1024;
         public const string DefaultCultureInfo = "en-US";
@@ -96,6 +94,9 @@ namespace DataGate.Common
 
         // Meta data
         public const string AppName = "DataGate";
+        public const string AppFooter =
+           "  DataGate - All rights reserved";
+        public const string AppVersion = "DataGate version 2020.2.2";
         public const string AuthorName = "PhilipShishov";
         public const string Keywords =
             "ASPNET Core, JavaScript, jQuery, " +

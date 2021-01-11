@@ -1,0 +1,23 @@
+﻿
+<div class="modal"
+     id="aboutModal"
+     role="dialog">
+    <div class="modal-dialog model-dialog-about">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="modal-about-content">
+                    <h2>About</h2>
+                    <p>@GlobalConstants.AppVersion</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="modal-footer-content">
+                    <p>&copy; 2020-@DateTime.Now.Year @GlobalConstants.AppFooter</p>
+                    <button type="button" class="btn btn-secondary mr-2" data-dismiss="modal">
+                        @SharedLocalizer.GetHtmlString("Close")
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

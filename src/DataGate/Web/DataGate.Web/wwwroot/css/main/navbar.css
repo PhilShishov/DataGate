@@ -94,6 +94,7 @@
                 text-align: right;
                 font-weight: bold;
                 text-transform: uppercase;
+                cursor: pointer;
             }
 
                 .navbar a:hover,
@@ -106,6 +107,7 @@
 .header-datagate-app-navbar a:hover {
     color: rgb(163, 214, 255);
 }
+
 .responsive-menu .open-responsive-menu::before {
     content: '';
     cursor: pointer;

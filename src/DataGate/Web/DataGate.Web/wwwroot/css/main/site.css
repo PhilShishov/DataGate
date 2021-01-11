@@ -82,14 +82,47 @@
 }
 
 .modal-dialog-document {
-    margin: 0;
-    transform: translateY(100%) translateX(100%) !important;
+    margin: auto;
+    transform: translateY(50%) !important;
 }
 
 .modal-dialog-agreement {
-    margin: 0;
-    transform: translateY(40%) translateX(100%) !important;
+    margin: auto;
+    transform: translateY(22%) !important;
 }
+
+.modal-dialog-about {
+    margin: auto;
+    transform: translateY(22%) !important;
+}
+
+.modal-about-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+    .modal-about-content h2 {
+        color: rgb(0, 65, 118);
+        text-align: start;
+        border-bottom: 1px solid #0056b3;
+    }
+
+    .modal-about-content p {
+        margin: 10px 0;
+        background: aliceblue;
+    }
+
+.modal-footer-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+    .modal-footer-content p {
+        font-size: 12px;
+        margin-bottom: 0;
+    }
 
 .branch-background {
     background: url(../../images/bg-branch.jpg) no-repeat center center fixed;
