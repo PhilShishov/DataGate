@@ -53,6 +53,17 @@
             await this.Context.SaveChangesAsync();
         }
 
+        public virtual void Update(TEntity entity)
+        {
+            var entry = this.Context.Entry(entity);
+            if (entry.State == EntityState.Detached)
+            {
+                this.DbSet.Attach(entity);
+            }
+
+            entry.State = EntityState.Modified;
+        }
+
         public void DeleteRange(ICollection<TEntity> entities)
         {
             foreach (var entity in entities)

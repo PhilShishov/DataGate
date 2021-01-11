@@ -45,15 +45,26 @@ namespace DataGate.Services.Data.Recent
             Validator.ArgumentNullException(user);
 
             var userId = this.userManager.GetUserId(user);
+            var list = this.repository.All().ToList();
+            var exists = list.FirstOrDefault(r => r.LinkUrl == link && r.UserId == userId);
 
-            var item = new RecentlyViewed
+            if (exists == null)
             {
-                UserId = userId,
-                LinkUrl = link,
-                VisitedOn = DateTime.UtcNow,
-                DisplayLink = link.BuildDisplayLink(),
-            };
-            await this.repository.AddAsync(item);
+                var item = new RecentlyViewed
+                {
+                    UserId = userId,
+                    LinkUrl = link,
+                    VisitedOn = DateTime.UtcNow,
+                    DisplayLink = link.BuildDisplayLink(),
+                };
+                await this.repository.AddAsync(item);
+            }
+            else
+            {
+                exists.VisitedOn = DateTime.UtcNow;               
+                this.repository.Update(exists);
+            }
+
             await this.repository.SaveChangesAsync();
         }
     }
