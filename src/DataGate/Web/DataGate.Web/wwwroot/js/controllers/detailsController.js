@@ -44,6 +44,10 @@ const URLS = {
 
 function loadAddInfo(token, urlSubEnt, json) {
     $(HTML_MENU.BTN_SUBENTITIES).on('click', function (event) {
+
+        $('body').css('overflow', 'visible');
+        $('.footer-datagate').eq(0).hide();
+
         beforeCallStyleHandler();
         $.ajax({
             url: urlSubEnt,
@@ -107,6 +111,7 @@ function loadAddInfo(token, urlSubEnt, json) {
         $('.column-add-info .card-add-info button.clicked-color').removeClass('clicked-color');
         $('.column-add-info .card-add-info.clicked-bg').removeClass('clicked-bg');
 
+
         $(HTML_MENU.CONTAINER_SUBENTITIES).addClass('d-none');
         $(HTML_MENU.CONTAINER_DISTINCT).addClass('d-none');
         $(HTML_MENU.CONTAINER_CHART).addClass('d-none');
@@ -120,6 +125,9 @@ function loadAddInfo(token, urlSubEnt, json) {
         console.log(url);
         console.log(token);
         console.log(json);
+
+        $('.footer-datagate').eq(0).show();
+
         $.ajax({
             url: url,
             type: 'GET',

@@ -6,10 +6,43 @@
 *
 */
 
-@media only screen and (max-width: 991px) {
-    .branch-background {
-        overflow: scroll;
+
+@media only screen and (max-width: 620px) {
+
+    #table-info-datagate {
+        margin: 90px 0 40px;
+        overflow: hidden;
+        height: 300px;
     }
+
+    .footer-datagate {
+        position: inherit;
+    }
+
+    .branch-background {
+        height: unset;
+    }
+
+    .badge-notification-container.open .notification-list {
+        width: 265px;
+    }
+
+    .notification-list {
+        right: 1px;
+    }
+
+    .column-add-info {
+        display: flex;
+        justify-content: center;
+    }
+
+    .container-column-add-info {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+
 
     .container-not-found {
         width: 80vw;
@@ -83,6 +116,10 @@
 
 
 @media only screen and (min-width: 990px) {
+
+    body {
+        overflow: hidden;
+    }
 
     .container-not-found {
         width: 1050px;
@@ -159,7 +196,7 @@
 }
 
 
-@media (max-width: 767px) and (min-width: 320px){
+@media (max-width: 767px) and (min-width: 320px) {
     .container-not-found-links a {
         width: 100px;
         display: block;

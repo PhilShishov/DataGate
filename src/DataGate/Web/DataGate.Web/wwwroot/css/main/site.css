@@ -1,10 +1,26 @@
 ﻿
 /* Chosen style to be imported on change*/
 
-/*d-flex justify-content-center text-center*/
+.container-column-add-info {
+    width: 60%;
+}
+
+.footer-datagate {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-top: 1px solid rgb(0, 82, 150);
+}
+
+    .footer-datagate p {
+        margin: 10px 13px;
+        color: black;
+    }
 
 .mb-100 {
     margin-bottom: 100px;
+    color: black;
 }
 
 .storage-container {
@@ -126,7 +142,6 @@
 
 .branch-background {
     background: url(../../images/bg-branch.jpg) no-repeat center center fixed;
-    overflow: hidden;
     height: 100vh;
     border: 15px solid rgba(255, 255, 255, 0.20);
 }

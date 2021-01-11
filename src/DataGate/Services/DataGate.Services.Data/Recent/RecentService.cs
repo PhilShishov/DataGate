@@ -33,11 +33,13 @@ namespace DataGate.Services.Data.Recent
         {
             var userId = this.userManager.GetUserId(user);
 
+            var ok = this.repository.All().OrderByDescending(r => r.VisitedOn).ToList();
+
             return this.repository.All()
                 .Where(r => r.UserId == userId)
                 .OrderByDescending(r => r.VisitedOn)
                 .ToList()
-                .TakeLast(8);
+                .Take(8);
         }
 
         public async Task Save(ClaimsPrincipal user, string link)
