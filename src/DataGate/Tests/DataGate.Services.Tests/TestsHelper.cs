@@ -4,6 +4,11 @@
 namespace DataGate.Services.Tests
 {
     using System.Collections.Generic;
+    using System.Data.SqlClient;
+    using System.IO;
+    using System.Text.RegularExpressions;
+
+    using DataGate.Common;
 
     using Xunit.Abstractions;
 
@@ -16,6 +21,27 @@ namespace DataGate.Services.Tests
             foreach (var line in result)
             {
                 output.WriteLine(string.Join('|', line));
+            }
+        }
+
+        public static void ExecuteSqlFile(string fileName)
+        {
+            var connection = new SqlConnection(GlobalConstants.SqlServerConnectionWithoutDb);
+            connection.Open();
+
+            var script = File.ReadAllText(fileName);
+            var parts = Regex.Split(script, @"^\s*GO\s*$", RegexOptions.Multiline | RegexOptions.IgnoreCase); ;
+            foreach (var part in parts)
+            {
+                if (!string.IsNullOrWhiteSpace(part.Trim()))
+                {
+#pragma warning disable CA2100 // Review SQL queries for security vulnerabilities
+                    using (var command = new SqlCommand(part, connection))
+#pragma warning restore CA2100 // Review SQL queries for security vulnerabilities
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
             }
         }
     }

@@ -31,6 +31,7 @@ namespace DataGate.Common
 
         // Connection Strings
         public const string DataGateUsersConnection = "DataGateUsersConnection";
+        public const string SqlServerCollection = "Sql Server Collection";
         public const string DataGateAppConnection = "DataGateAppConnection";
         public const string SqlServerConnectionWithoutDb =
             "Server=.\\SQL2019;Integrated Security=True;Trusted_Connection=True;MultipleActiveResultSets=true;";

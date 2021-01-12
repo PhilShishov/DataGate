@@ -6,6 +6,7 @@ namespace DataGate.Services.Tests.SqlClient
     using System;
     using System.Data.SqlClient;
     using System.Linq;
+    using System.Threading.Tasks;
 
     using DataGate.Common;
     using DataGate.Services.SqlClient;
@@ -14,36 +15,18 @@ namespace DataGate.Services.Tests.SqlClient
     using Xunit;
     using Xunit.Abstractions;
 
-    public class SqlHelperTests : IClassFixture<SqlServerFixture>, IDisposable
+    [Collection(GlobalConstants.SqlServerCollection)]
+    public class SqlHelperTests
     {
         private readonly ITestOutputHelper output;
-        private readonly SqlConnection connection;
         private readonly SqlCommand command;
 
-        public SqlHelperTests(ITestOutputHelper output)
+        public SqlHelperTests(
+            ITestOutputHelper output,
+            SqlServerFixture fixture)
         {
             this.output = output;
-            this.connection = new SqlConnection
-            {
-                ConnectionString = GlobalConstants.SqlServerConnectionWithDb
-            };
-            this.connection.Open();
-            this.command = this.connection.CreateCommand();
-        }
-
-        public void Dispose()
-        {
-            this.Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                this.command.Dispose();
-                this.connection.Close();
-            }
+            this.command = fixture.Connection.CreateCommand();
         }
 
         [Fact]
@@ -62,45 +45,34 @@ namespace DataGate.Services.Tests.SqlClient
         }
 
         [Fact]
-        public void ExecuteCommand_NullSqlCommand_ShouldThrowAnException()
+        public async Task ExecuteCommand_NullSqlCommand_ShouldThrowAnException()
         {
-            Action act = () =>
-            {
-                var result = SqlHelper.ExecuteCommand(null).ToListAsync().Result;
-            };
+            async Task task() => await SqlHelper.ExecuteCommand(null).ToListAsync();
 
-            Assert.Throws<ArgumentNullException>(act);
+            await Assert.ThrowsAsync<ArgumentNullException>(task);
         }
 
         [Theory]
         [InlineData(null)]
         [InlineData("")]
         [InlineData("       ")]
-        public void ExecuteCommand_WithInvalidCommandText_ShouldThrowAnException(string text)
+        public async Task ExecuteCommand_WithInvalidCommandText_ShouldThrowAnException(string text)
         {
-            Action act = () =>
-            {
 #pragma warning disable CA2100 // Review SQL queries for security vulnerabilities
-                this.command.CommandText = text;
+            this.command.CommandText = text;
 #pragma warning restore CA2100 // Review SQL queries for security vulnerabilities
+            async Task task() => await SqlHelper.ExecuteCommand(this.command).ToListAsync();
 
-                var result = SqlHelper.ExecuteCommand(this.command).ToListAsync().Result;
-            };
-
-            Assert.Throws<ArgumentNullException>(act);
+            await Assert.ThrowsAsync<ArgumentNullException>(task);
         }
 
         [Fact]
-        public void ExecuteCommand_NotACommand_ShouldThrowAnException()
+        public async Task ExecuteCommand_NotACommand_ShouldThrowAnException()
         {
-            Action act = () =>
-            {
-                this.command.CommandText = "NOT A COMMAND";
+            this.command.CommandText = "NOT A COMMAND";
+            async Task task() => await SqlHelper.ExecuteCommand(this.command).ToListAsync();
 
-                var result = SqlHelper.ExecuteCommand(command).ToListAsync().Result;
-            };
-
-            Assert.Throws<SqlException>(act);
+            await Assert.ThrowsAsync<SqlException>(task);
         }
     }
 }

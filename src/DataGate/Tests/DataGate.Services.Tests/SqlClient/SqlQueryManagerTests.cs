@@ -12,34 +12,39 @@ namespace DataGate.Services.Tests.SqlClient
     using DataGate.Common;
     using DataGate.Services.SqlClient;
     using DataGate.Services.SqlClient.Contracts;
+    using DataGate.Services.Tests.ClassFixtures;
     using DataGate.Services.Tests.TestData;
     using DataGate.Web.Dtos.Entities;
     using DataGate.Web.Dtos.Queries;
     using DataGate.Web.Infrastructure.Extensions;
 
     using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
     using Xunit;
     using Xunit.Abstractions;
 
-    public class SqlQueryManagerTests : SqlServerContextProvider
+    [Collection(GlobalConstants.SqlServerCollection)]
+    public class SqlQueryManagerTests
     {
         private readonly ITestOutputHelper output;
+        private readonly SqlServerFixture fixture;
         private readonly ISqlQueryManager sqlQueryManager;
 
-        public SqlQueryManagerTests(ITestOutputHelper output)
+        public SqlQueryManagerTests(
+            ITestOutputHelper output,
+            SqlServerFixture fixture)
         {
             this.output = output;
-            this.sqlQueryManager = base.ServiceProvider.GetRequiredService<ISqlQueryManager>();
+            this.fixture = fixture;
+            this.sqlQueryManager = this.fixture.ServiceProvider.GetRequiredService<ISqlQueryManager>();
         }
 
         [Fact]
         public void Connection_ShouldConnectToTestDatabase()
         {
-            Assert.True(this.Context.Database.IsSqlServer());
-            Assert.True(this.Context.Database.CanConnect());
+            Assert.True(this.fixture.Context.Database.IsSqlServer());
+            Assert.True(this.fixture.Context.Database.CanConnect());
         }
 
         #region ExecuteQueryAsync
@@ -103,7 +108,7 @@ namespace DataGate.Services.Tests.SqlClient
             Assert.Contains(result[0], a => a == columns[0]);
             Assert.Contains(result[0], a => a == columns[1]);
 
-            TestsHelper.PrintTableOutput(this.output,function, result);
+            TestsHelper.PrintTableOutput(this.output, function, result);
         }
 
         [Theory]
@@ -119,7 +124,7 @@ namespace DataGate.Services.Tests.SqlClient
 
             Assert.True(result.Count == 1);
 
-            TestsHelper.PrintTableOutput(this.output,function, result);
+            TestsHelper.PrintTableOutput(this.output, function, result);
         }
 
         [Theory]
@@ -149,7 +154,7 @@ namespace DataGate.Services.Tests.SqlClient
             Assert.True(result.Count == 2);
             Assert.True(result[0].Length == 28);
 
-            TestsHelper.PrintTableOutput(this.output,SqlFunctionDictionary.ByIdShareClass, result);
+            TestsHelper.PrintTableOutput(this.output, SqlFunctionDictionary.ByIdShareClass, result);
         }
 
         [Fact]
@@ -163,7 +168,7 @@ namespace DataGate.Services.Tests.SqlClient
             Assert.True(result.Count == 1);
             Assert.True(result[0].Length == 28);
 
-            TestsHelper.PrintTableOutput(this.output,SqlFunctionDictionary.ByIdShareClass, result);
+            TestsHelper.PrintTableOutput(this.output, SqlFunctionDictionary.ByIdShareClass, result);
         }
 
         [Theory]
@@ -200,7 +205,7 @@ namespace DataGate.Services.Tests.SqlClient
             Assert.True(result.Count == 28);
             Assert.True(result[0].Length == 6);
 
-            TestsHelper.PrintTableOutput(this.output,functionName, result);
+            TestsHelper.PrintTableOutput(this.output, functionName, result);
         }
 
         [Fact]
@@ -244,7 +249,7 @@ namespace DataGate.Services.Tests.SqlClient
 
         [Fact]
         public void ExecuteQueryReportsAsync_FunctionName_ShouldReturnResultSet()
-        {            
+        {
             var result = this.sqlQueryManager
                 .ExecuteQueryReportsAsync(SqlFunctionDictionary.ReportFunds, DateTime.Now)
                 .ToListAsync()
@@ -304,7 +309,7 @@ namespace DataGate.Services.Tests.SqlClient
             Assert.Equal(expectedCount, result.Count);
             Assert.Equal(expectedHeaderCount, result[0].Length);
 
-            TestsHelper.PrintTableOutput(this.output,functionName, result);
+            TestsHelper.PrintTableOutput(this.output, functionName, result);
         }
 
         #endregion
@@ -313,14 +318,8 @@ namespace DataGate.Services.Tests.SqlClient
 
         [Fact]
         public void ExecuteProcedure_WithValidData_ShouldReturnResultSet()
-        {            
-            using var connection = new SqlConnection
-            {
-                ConnectionString = base.Configuration.GetConnectionString(GlobalConstants.DataGateAppConnection)
-            };
-
-            connection.Open();
-            SqlCommand command = connection.CreateCommand();
+        {
+            SqlCommand command = this.fixture.Connection.CreateCommand();
 
             command.CommandText = "getAuM_fund_test @datereport";
 
@@ -335,7 +334,6 @@ namespace DataGate.Services.Tests.SqlClient
             Assert.True(result[0].Length == 3);
 
             TestsHelper.PrintTableOutput(this.output, "getAuM_fund_test", result);
-            connection.Close();
         }
 
         [Theory]

@@ -71,7 +71,8 @@ namespace DataGate.Services.Tests.Notifications
         [Fact]
         public async Task Add_WithNullUser_ShouldThrowException()
         {
-            await Assert.ThrowsAsync<EntityNotFoundException>(() => this.service.Add(null, Message, Link));
+            await Assert.ThrowsAsync<EntityNotFoundException>(() 
+                => this.service.Add(null, Message, Link));
         }
 
         [Theory]
