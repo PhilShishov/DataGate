@@ -32,7 +32,7 @@ build:
 #---------------------------------#
 
 test_script:
-- cmd: dotnet test "src\DataGate\Tests\DataGate.Services.Tests\DataGate.Services.Tests.csproj" --configuration Release --no-build
+- run-tests.cmd
       
 #---------------------------------#
 #        global handlers          #

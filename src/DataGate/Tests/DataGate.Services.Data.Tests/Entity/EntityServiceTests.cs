@@ -4,12 +4,12 @@
 namespace DataGate.Services.Data.Tests.Entity
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
     using DataGate.Common;
     using DataGate.Services.Data.Entities;
+    using DataGate.Services.Data.Tests.ClassFixtures;
     using DataGate.Services.Data.Tests.TestData;
     using DataGate.Web.Helpers;
     using DataGate.Web.Infrastructure.Extensions;
@@ -17,14 +17,15 @@ namespace DataGate.Services.Data.Tests.Entity
 
     using Xunit;
 
-    public class EntityServiceTests : SqlServerContextProvider
+    [Collection(GlobalConstants.SqlServerCollection)]
+    public class EntityServiceTests
     {
         private readonly EntityService service;
         private AllSelectedDto dto;
 
-        public EntityServiceTests()
+        public EntityServiceTests(SqlServerFixture fixture)
         {
-            this.service = EntityServiceTestData.CreateService(base.Context, base.Configuration);
+            this.service = EntityServiceTestData.CreateService(fixture.Context, fixture.Configuration);
         }
 
         [Theory]

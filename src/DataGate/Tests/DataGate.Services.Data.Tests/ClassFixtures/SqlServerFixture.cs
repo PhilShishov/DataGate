@@ -5,24 +5,51 @@ namespace DataGate.Services.Data.Tests.ClassFixtures
 {
     using System;
     using System.Data.SqlClient;
-    using System.IO;
     using System.Reflection;
-    using System.Text.RegularExpressions;
 
     using DataGate.Common;
+    using DataGate.Data;
     using DataGate.Services.Mapping;
     using DataGate.Web.InputModels.Funds;
     using DataGate.Web.ViewModels;
+
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
 
     public class SqlServerFixture : IDisposable
     {
         public SqlServerFixture()
         {
-            ExecuteSqlFile("create.sql");
+            TestsHelper.ExecuteSqlFile("create.sql");
+
+            var services = new ServiceCollection()
+                            .AddEntityFrameworkSqlServer();
+
+            var configBuilder = new ConfigurationBuilder()
+                .AddJsonFile($"testsettings.json", optional: false);
+            var config = configBuilder.Build();
+
+            services.AddSingleton<IConfiguration>(config);
+
+            this.Configuration = config;
+
+            this.ServiceProvider = services.BuildServiceProvider();
+
+            CreateContextForSqlServer(config);
+
             AutoMapperConfig.RegisterMappings(
                typeof(ErrorViewModel).GetTypeInfo().Assembly,
                typeof(EditFundInputModel).GetTypeInfo().Assembly);
         }
+
+        public ApplicationDbContext Context { get; private set; }
+
+        public SqlConnection Connection { get; private set; }
+
+        public IConfiguration Configuration { get; private set; }
+
+        public ServiceProvider ServiceProvider { get; private set; }
 
         public void Dispose()
         {
@@ -34,29 +61,20 @@ namespace DataGate.Services.Data.Tests.ClassFixtures
         {
             if (disposing)
             {
-                ExecuteSqlFile("drop.sql");
+                TestsHelper.ExecuteSqlFile("drop.sql");
+                this.Context.Dispose();
+                this.Connection.Close();
             }
         }
 
-        private static void ExecuteSqlFile(string fileName)
+        private void CreateContextForSqlServer(IConfigurationRoot config)
         {
-            var connection = new SqlConnection(GlobalConstants.SqlServerConnectionWithoutDb);
-            connection.Open();
-
-            var script = File.ReadAllText(fileName);
-            var parts = Regex.Split(script, @"^\s*GO\s*$", RegexOptions.Multiline | RegexOptions.IgnoreCase); ;
-            foreach (var part in parts)
-            {
-                if (!string.IsNullOrWhiteSpace(part.Trim()))
-                {
-#pragma warning disable CA2100 // Review SQL queries for security vulnerabilities
-                    using (var command = new SqlCommand(part, connection))
-#pragma warning restore CA2100 // Review SQL queries for security vulnerabilities
-                    {
-                        command.ExecuteNonQuery();
-                    }
-                }
-            }
+            this.Connection = new SqlConnection(config.GetConnectionString(GlobalConstants.DataGateAppConnection));
+            this.Connection.Open();
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseSqlServer(this.Connection)
+                .Options;
+            this.Context = new ApplicationDbContext(options);
         }
     }
 }
