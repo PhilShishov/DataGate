@@ -9,6 +9,8 @@
 
 @media only screen and (max-width: 620px) {
 
+
+
     #table-info-datagate {
         margin: 90px 0 40px;
         overflow: hidden;
@@ -43,11 +45,14 @@
 
 @media only screen and (max-width: 991px) {
 
+    .manage-account{
+        text-align:center;
+    }
 
     .container-not-found {
         width: 80vw;
         text-align: center;
-        margin-top: 90px;
+        margin: 90px auto 0;
     }
 
         .container-not-found img {
@@ -80,6 +85,7 @@
     .dataTables_wrapper .bottom,
     .recent-container,
     #aumChart,
+    .manage-account h4,
     footer {
         display: none;
     }
@@ -116,6 +122,16 @@
 
 
 @media only screen and (min-width: 990px) {
+
+    .table-search-wrapper {
+        margin: 70px 25px 0;
+    }
+
+    .table-users {
+        border: none;
+        width: 50%;
+        margin: 0 auto;
+    }
 
     body {
         overflow: hidden;

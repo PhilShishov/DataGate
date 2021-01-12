@@ -1,24 +1,23 @@
 ﻿// Copyright (c) DataGate Project. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System.Linq;
-using System.Threading.Tasks;
-using DataGate.Data.Models.Entities;
-using DataGate.Services.Data.Entities;
-using DataGate.Services.Data.Funds;
-using DataGate.Services.Data.Tests.TestData;
-using DataGate.Services.Data.ViewSetups;
-using DataGate.Web.Dtos.Queries;
-using DataGate.Web.Helpers;
-using DataGate.Web.Infrastructure.Extensions;
-using DataGate.Web.ViewModels.Entities;
-using Xunit;
-
 namespace DataGate.Services.Data.Tests.ViewSetups
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using DataGate.Data.Models.Entities;
+    using DataGate.Services.Data.Entities;
+    using DataGate.Services.Data.Funds;
+    using DataGate.Services.Data.Tests.TestData;
+    using DataGate.Services.Data.ViewSetups;
+    using DataGate.Web.Dtos.Queries;
+    using DataGate.Web.Helpers;
+    using DataGate.Web.ViewModels.Entities;
+
+    using Xunit;
 
     public class SpecificVMSetupTests : SqlServerContextProvider
     {

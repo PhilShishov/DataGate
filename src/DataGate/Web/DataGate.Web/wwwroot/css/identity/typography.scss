@@ -80,8 +80,18 @@ h3,
     }
 }
 
-/* Main Styling */
+.alert {
+    margin-bottom: 0;
+}
 
+.row {
+    margin: 0;
+}
+
+.container-fluid {
+    padding: 0;
+}
+/* Main Styling */
 input[type=text], input[type=password] {
     letter-spacing: 1px;
     font-size: 18px;
@@ -133,7 +143,7 @@ input::-webkit-input-placeholder {
 
 .login-content {
     width: 100%;
-    height:533px;
+    height: 533px;
 
     @include for-phone-only {
         padding: 50px 25px 25px 25px;

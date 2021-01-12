@@ -47,7 +47,7 @@ a {
 
 /* Cookie Consent Styling*/
 .alert-dismissible .close-cookie-consent {
-  background: green;
+  background: #005596;
   color: white;
   text-shadow: none;
   border: none;
@@ -55,6 +55,15 @@ a {
 
 .alert-dismissible .close-cookie-consent:hover {
   background: #004176; }
+
+.container-fluid {
+  position: relative; }
+
+@media (min-width: 900px) {
+  #cookieConsent {
+    position: absolute;
+    top: -46px;
+    width: 100%; } }
 
 /* Header Styling */
 .login-redirect-language {
@@ -219,6 +228,15 @@ h3,
   text-align: center; }
   .container-cookie-consent a {
     text-decoration: underline; }
+
+.alert {
+  margin-bottom: 0; }
+
+.row {
+  margin: 0; }
+
+.container-fluid {
+  padding: 0; }
 
 /* Main Styling */
 input[type=text], input[type=password] {

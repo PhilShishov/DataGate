@@ -6,6 +6,7 @@ namespace DataGate.Services.Data.Tests.ViewSetups
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using DataGate.Data.Models.Entities;
     using DataGate.Services.Data.Entities;
     using DataGate.Services.Data.Funds;
@@ -15,6 +16,7 @@ namespace DataGate.Services.Data.Tests.ViewSetups
     using DataGate.Web.Dtos.Queries;
     using DataGate.Web.Helpers;
     using DataGate.Web.ViewModels.Entities;
+
     using Xunit;
 
     public class SubEntitiesVMSetupTests : SqlServerContextProvider
