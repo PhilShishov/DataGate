@@ -13,7 +13,9 @@ namespace DataGate.Services.Data.Tests.Files
     using DataGate.Web.InputModels.Files;
 
     using Xunit;
+    using Xunit.Priority;
 
+    [TestCaseOrderer(PriorityOrderer.Name, PriorityOrderer.Assembly)]
     public class FileServiceTests : SqlServerContextProvider
     {
         private readonly FileService service;
@@ -29,30 +31,104 @@ namespace DataGate.Services.Data.Tests.Files
             this.tbSAFundCount = base.Context.TbServiceAgreementFund.Count();
         }
 
-        [Fact]
-        public async Task UploadDocument_Fund_ShouldIncreaseCount()
+        #region Delete
+
+        [Fact, Priority(0)]
+        public async Task DeleteDocument_Fund_ShouldDecreaseCount()
         {
-            var expectedTbMapCount = 1;
-            var expectedTbFileCount = 2;
-
-            Assert.Equal(expectedTbMapCount, this.tbMapFileFundCount);
-            Assert.Equal(expectedTbFileCount, this.tbFileCount);
-
             var document = this.SetDocumentValues();
 
             using (base.Context)
             {
                 await this.service.UploadDocument(document);
 
-                Assert.Equal(expectedTbMapCount + 1, base.Context.TbMapFilefund.Count());
-                Assert.Equal(expectedTbFileCount + 1, base.Context.TbFile.Count());
+                Assert.Equal(this.tbMapFileFundCount + 1, base.Context.TbMapFilefund.Count());
+                Assert.Equal(this.tbFileCount + 1, base.Context.TbFile.Count());
+
+                await this.service.DeleteDocument(3, "Fund");
+
+                Assert.Equal(this.tbMapFileFundCount, base.Context.TbMapFilefund.Count());
+                Assert.Equal(this.tbFileCount, base.Context.TbFile.Count());
+            }
+        }
+
+        [Theory]
+        [InlineData(-5)]
+        [InlineData(0)]
+        [InlineData(100000)]
+        public async Task DeleteDocument_Fund_WithInvalidId_ShouldThrowException(int fileId)
+        {
+            async Task task() => await this.service.DeleteDocument(fileId, "Fund");
+
+            await Assert.ThrowsAsync<EntityNotFoundException>(task);
+        }
+
+        [Fact, Priority(1)]
+        public async Task DeleteAgreement_Fund_ShouldDecreaseCount()
+        {
+            var agreement = SetAgreementValues();
+
+            using (base.Context)
+            {
+                await this.service.UploadAgreement(agreement);
+
+                Assert.Equal(this.tbSAFundCount + 1, base.Context.TbServiceAgreementFund.Count());
+                Assert.Equal(this.tbFileCount + 1, base.Context.TbFile.Count());
+
+                await this.service.DeleteAgreement(3, "Fund");
+
+                Assert.Equal(this.tbSAFundCount, base.Context.TbServiceAgreementFund.Count());
+                Assert.Equal(this.tbFileCount, base.Context.TbFile.Count());
+            }
+        }
+
+        [Theory]
+        [InlineData(-5)]
+        [InlineData(0)]
+        [InlineData(100000)]
+        public async Task DeleteAgreement_Fund_WithInvalidId_ShouldThrowException(int fileId)
+        {
+            async Task task() => await this.service.DeleteAgreement(fileId, "Fund");
+
+            await Assert.ThrowsAsync<EntityNotFoundException>(task);
+        }
+
+        #endregion
+
+        #region Upload
+
+        [Fact]
+        public async Task UploadDocument_Fund_ShouldIncreaseCount()
+        {
+            var document = this.SetDocumentValues();
+
+            using (base.Context)
+            {
+                await this.service.UploadDocument(document);
+
+                Assert.Equal(this.tbMapFileFundCount + 1, base.Context.TbMapFilefund.Count());
+                Assert.Equal(this.tbFileCount + 1, base.Context.TbFile.Count());
+            }
+        }
+
+        [Fact]
+        public async Task UploadDocument_Fund_ExistingFile_ShouldIncreaseCount()
+        {
+            var document = this.SetDocumentValuesWithExistingFile();
+
+            using (base.Context)
+            {
+                await this.service.UploadDocument(document);
+
+                Assert.Equal(this.tbMapFileFundCount + 1, base.Context.TbMapFilefund.Count());
+                Assert.Equal(this.tbFileCount + 1, base.Context.TbFile.Count());
             }
         }
 
         [Theory]
         [InlineData(-5, "2020-01-01")]
         [InlineData(100, "2020-01-01")]
-        [InlineData(1, "2020-01-01")]
+        [InlineData(11, "2020-01-01")]
         public async Task UploadDocument_Fund_WithUnvalidData_ShouldThrowException(int fundId, string date)
         {
             var startConnection = DateTime.Parse(date);
@@ -80,19 +156,28 @@ namespace DataGate.Services.Data.Tests.Files
         [Fact]
         public async Task UploadAgreement_Fund_ShouldIncreaseCount()
         {
-            var expectedTbSAFundCount = 1;
-            var expectedTbFileCount = 2;
-
-            Assert.Equal(expectedTbSAFundCount, this.tbSAFundCount);
-            Assert.Equal(expectedTbFileCount, this.tbFileCount);
             var agreement = SetAgreementValues();
 
             using (base.Context)
             {
                 await this.service.UploadAgreement(agreement);
 
-                Assert.Equal(expectedTbSAFundCount + 1, base.Context.TbServiceAgreementFund.Count());
-                Assert.Equal(expectedTbFileCount + 1, base.Context.TbFile.Count());
+                Assert.Equal(this.tbSAFundCount + 1, base.Context.TbServiceAgreementFund.Count());
+                Assert.Equal(this.tbFileCount + 1, base.Context.TbFile.Count());
+            }
+        }
+
+        [Fact]
+        public async Task UploadAgreement_Fund_ExistingFile_ShouldIncreaseCount()
+        {
+            var agreement = SetAgreementValuesWithExistingFile();
+
+            using (base.Context)
+            {
+                await this.service.UploadAgreement(agreement);
+
+                Assert.Equal(this.tbSAFundCount + 1, base.Context.TbServiceAgreementFund.Count());
+                Assert.Equal(this.tbFileCount + 1, base.Context.TbFile.Count());
             }
         }
 
@@ -123,71 +208,7 @@ namespace DataGate.Services.Data.Tests.Files
             await Assert.ThrowsAsync<ArgumentNullException>(task);
         }
 
-        [Fact]
-        public async Task DeleteDocument_Fund_ShouldDecreaseCount()
-        {
-            var expectedTbMapCount = 1;
-            var expectedTbFileCount = 2;
-
-            var document = this.SetDocumentValues();
-
-            using (base.Context)
-            {
-                await this.service.UploadDocument(document);
-
-                Assert.Equal(expectedTbMapCount + 1, base.Context.TbMapFilefund.Count());
-                Assert.Equal(expectedTbFileCount + 1, base.Context.TbFile.Count());
-
-                await this.service.DeleteDocument(3, "Fund");
-
-                Assert.Equal(expectedTbMapCount, base.Context.TbMapFilefund.Count());
-                Assert.Equal(expectedTbFileCount, base.Context.TbFile.Count());
-            }
-        }
-
-        [Theory]
-        [InlineData(-5)]
-        [InlineData(0)]
-        [InlineData(100000)]
-        public async Task DeleteDocument_Fund_WithInvalidId_ShouldThrowException(int fileId)
-        {
-            async Task task() => await this.service.DeleteDocument(fileId, "Fund");
-
-            await Assert.ThrowsAsync<EntityNotFoundException>(task);
-        }
-
-        [Fact]
-        public async Task DeleteAgreement_Fund_ShouldDecreaseCount()
-        {
-            var expectedTbSAFundCount = 1;
-            var expectedTbFileCount = 2;
-
-            var agreement = SetAgreementValues();
-
-            using (base.Context)
-            {
-                await this.service.UploadAgreement(agreement);
-
-                Assert.Equal(expectedTbSAFundCount + 1, base.Context.TbServiceAgreementFund.Count());
-                Assert.Equal(expectedTbFileCount + 1, base.Context.TbFile.Count());
-
-                await this.service.DeleteAgreement(3, "Fund");
-
-                Assert.Equal(expectedTbSAFundCount, base.Context.TbServiceAgreementFund.Count());
-                Assert.Equal(expectedTbFileCount, base.Context.TbFile.Count());
-            }
-        }
-
-        [Theory]
-        [InlineData(-5)]
-        [InlineData(0)]
-        [InlineData(100000)]
-        public async Task DeleteAgreement_Fund_WithInvalidId_ShouldThrowException(int fileId)
-        {
-            async Task task() => await this.service.DeleteAgreement(fileId, "Fund");
-
-            await Assert.ThrowsAsync<EntityNotFoundException>(task);
-        }
+        #endregion
 
         private UploadAgreementInputModel SetAgreementValues(string agrType = "Management Company Agreement")
         {
@@ -207,29 +228,28 @@ namespace DataGate.Services.Data.Tests.Files
             return FileServiceTestData.Generate(fundId, startConnection, docType);
         }
 
-        // TODO existing connection
-        //private UploadAgreementInputModel SetAgreementValues(string agrType = "Management Company Agreement")
-        //{
-        //    var fundId = 16;
-        //    var tbSaAgr = base.Context.TbServiceAgreementFund.ToList();
-        //    var activationDate = tbSaAgr
-        //        .Where(x => x.SaFundId == fundId)
-        //        .Select(x => x.SaActivationDate)
-        //        .FirstOrDefault();
+        private UploadAgreementInputModel SetAgreementValuesWithExistingFile(string agrType = "Management Company Agreement")
+        {
+            var fundId = 1;
+            var tbSaAgr = base.Context.TbServiceAgreementFund.ToList();
+            var activationDate = tbSaAgr
+                .Where(x => x.SaFundId == fundId)
+                .Select(x => x.SaActivationDate)
+                .FirstOrDefault();
 
-        //    return FileServiceTestData.Generate(fundId, activationDate.ToString(), agrType);
-        //}
+            return FileServiceTestData.Generate(fundId, activationDate.ToString(), agrType);
+        }
 
-        //private UploadDocumentInputModel SetDocumentValues(string docType = "Prospectus")
-        //{
-        //    var fundId = 16;
-        //    var tbMapFile = base.Context.TbMapFilefund.ToList();
-        //    var startConnection = tbMapFile
-        //        .Where(x => x.DocFundId == fundId)
-        //        .Select(x => (DateTime)x.DocEndConnection)
-        //        .FirstOrDefault();
+        private UploadDocumentInputModel SetDocumentValuesWithExistingFile(string docType = "Prospectus")
+        {
+            var fundId = 11;
+            var tbMapFile = base.Context.TbMapFilefund.ToList();
+            var startConnection = tbMapFile
+                .Where(x => x.DocFundId == fundId)
+                .Select(x => (DateTime)x.DocEndConnection)
+                .FirstOrDefault();
 
-        //    return FileServiceTestData.Generate(fundId, startConnection.AddDays(1), docType);
-        //}
+            return FileServiceTestData.Generate(fundId, startConnection.AddDays(1), docType);
+        }
     }
 }
