@@ -44,6 +44,9 @@ namespace DataGate.Web.Areas.Funds.Controllers
         [Route("f/{id}/{date}")]
         public async Task<IActionResult> ByIdAndDate(int id, string date)
         {
+            //Validator.ArgumentNullExceptionInt(id, ErrorMessages.InvalidEntity);
+            //await this.fundService.DoesExist(id);
+
             var dto = new QueriesToPassDto()
             {
                 SqlFunctionById = SqlFunctionDictionary.ByIdFund,
@@ -52,7 +55,7 @@ namespace DataGate.Web.Areas.Funds.Controllers
                 SqlFunctionDistinctAgreements = SqlFunctionDictionary.DistinctAgreementsFund,
             };
 
-            var viewModel = await SpecificVMSetup.SetGet<SpecificEntityViewModel>(id, date, this.service, this.fundService, dto);
+            var viewModel = await SpecificVMSetup.SetGet<SpecificEntityViewModel>(id, date, this.service, dto);
 
             await this.recentService.Save(this.User, this.Request.Path);
             return this.View(viewModel);

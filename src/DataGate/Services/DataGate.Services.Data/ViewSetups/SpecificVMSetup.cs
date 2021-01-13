@@ -8,7 +8,6 @@ namespace DataGate.Services.Data.ViewSetups
     using System.Threading.Tasks;
 
     using DataGate.Common;
-    using DataGate.Services.Data.Common;
     using DataGate.Services.Data.Entities;
     using DataGate.Services.Mapping;
     using DataGate.Web.Dtos.Queries;
@@ -20,10 +19,8 @@ namespace DataGate.Services.Data.ViewSetups
         private const int IndexStartConnectionInSQLTable = 1;
         private const int IndexEndConnectionInSQLTable = 2;
 
-        public static async Task<T> SetGet<T>(int id, string date, IEntityDetailsService service, IEntityException exceptionService, QueriesToPassDto queryDto)
+        public static async Task<T> SetGet<T>(int id, string date, IEntityDetailsService service, QueriesToPassDto queryDto)
         {
-            exceptionService.DoesExist(id);
-
             var dateParsed = DateTimeExtensions.FromWebFormat(date);
             var entity = await service.ByIdAndDate(queryDto.SqlFunctionById, id, dateParsed).ToListAsync();
             string startConnectionString = entity.ToList()[1][IndexStartConnectionInSQLTable];

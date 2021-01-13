@@ -5,10 +5,12 @@ namespace DataGate.Services.Data.Tests.ViewSetups
 {
     using System;
     using System.Collections.Generic;
+    using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
 
     using DataGate.Common;
+    using DataGate.Common.Exceptions;
     using DataGate.Data.Models.Entities;
     using DataGate.Services.Data.Entities;
     using DataGate.Services.Data.Funds;
@@ -32,11 +34,11 @@ namespace DataGate.Services.Data.Tests.ViewSetups
         {
             this.service = EntityDetailsServiceTestData.CreateService(fixture.Context, fixture.Configuration);
             this.testData = FundServiceTestData.Generate();
-            this.fundService = FundServiceTestData.Service(testData, fixture.Context);
+            //this.fundService = FundServiceTestData.Service(testData, fixture.Context);
         }
 
         [Fact]
-        public async Task EntitiesVMSetup_SetGet_ShouldReturnViewModel()
+        public async Task SpecificVM_SetGet_ShouldReturnViewModel()
         {
             int id = 1;
             string date = "2020-01-01";
@@ -49,32 +51,75 @@ namespace DataGate.Services.Data.Tests.ViewSetups
                 SqlFunctionDistinctAgreements = SqlFunctionDictionary.DistinctAgreementsFund,
             };
 
-            var viewModel = await SpecificVMSetup.SetGet<SpecificEntityViewModel>(id, date, this.service, this.fundService, dto);
+            var viewModel = await SpecificVMSetup
+                .SetGet<SpecificEntityViewModel>(
+                id, 
+                date, 
+                this.service,  
+                dto);
 
             Assert.NotNull(viewModel);
             Assert.Equal(2, viewModel.Entity.Count());
         }
 
-        [Fact]
-        public async Task EntitiesVMSetup_SetGet_InvalidData_ShouldThrowException()
+        [Theory]
+        [InlineData("")]
+        [InlineData(null)]
+        [InlineData("         ")]
+        public async Task SpecificVM_SetGet_InvalidFunction_ShouldThrowException(string function)
         {
-            int id = -1;
-            string date = "2020-01-01";
-
-            var dto = new QueriesToPassDto();
-
-            Func<Task> task = async () =>
+            var dto = new QueriesToPassDto()
             {
-                var viewModel =
-                    await SpecificVMSetup.SetGet<SpecificEntityViewModel>(id, date, this.service, this.fundService,
-                        dto);
+                SqlFunctionById = function,
+                SqlFunctionActiveSE = SqlFunctionDictionary.FundActiveSubFunds,
+                SqlFunctionDistinctDocuments = SqlFunctionDictionary.DistinctDocumentsFund,
+                SqlFunctionDistinctAgreements = SqlFunctionDictionary.DistinctAgreementsFund,
+            };
+
+            async Task task()
+            {
+                var viewModel = await SpecificVMSetup
+                    .SetGet<SpecificEntityViewModel>(
+                    1,
+                    "2020-01-01",
+                    this.service,
+                    dto);
 
                 Assert.NotNull(viewModel);
                 Assert.Equal(2, viewModel.Entity.Count());
+            }
 
+            await Assert.ThrowsAsync<SqlException>(task);
+        }
+
+        [Theory]
+        [InlineData("")]
+        [InlineData("abc")]
+        [InlineData("         ")]
+        public async Task SpecificVM_SetGet_InvalidDate_ShouldThrowException(string date)
+        {
+            var dto = new QueriesToPassDto()
+            {
+                SqlFunctionById = SqlFunctionDictionary.ByIdFund,
+                SqlFunctionActiveSE = SqlFunctionDictionary.FundActiveSubFunds,
+                SqlFunctionDistinctDocuments = SqlFunctionDictionary.DistinctDocumentsFund,
+                SqlFunctionDistinctAgreements = SqlFunctionDictionary.DistinctAgreementsFund,
             };
 
-            await Assert.ThrowsAsync<DataGate.Common.Exceptions.EntityNotFoundException>(task);
+            async Task task()
+            {
+                var viewModel = await SpecificVMSetup
+                    .SetGet<SpecificEntityViewModel>(
+                    1,
+                    date,
+                    this.service,
+                    dto);
+
+                Assert.NotNull(viewModel);
+                Assert.Equal(2, viewModel.Entity.Count());
+            }
+
+            await Assert.ThrowsAsync<FormatException>(task);
         }
     }
 }

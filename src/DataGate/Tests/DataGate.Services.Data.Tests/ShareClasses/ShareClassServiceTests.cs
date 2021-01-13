@@ -6,6 +6,7 @@ namespace DataGate.Services.Data.Tests.ShareClasses
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     using DataGate.Common.Exceptions;
     using DataGate.Data.Models.Entities;
@@ -26,17 +27,16 @@ namespace DataGate.Services.Data.Tests.ShareClasses
         }
 
         [Fact]
-        public void DoesEntityExist_WithInvalidId_ShouldThrowException()
+        public async Task DoesEntityExist_WithInvalidId_ShouldThrowException()
         {
-            Action act = () => this.service.DoesExist(2000);
-
-            Assert.Throws<EntityNotFoundException>(act);
+            await Assert.ThrowsAsync<EntityNotFoundException>(() 
+                => this.service.DoesExist(2000));
         }
 
         [Fact]
-        public void DoesEntityExist_WithValidId_ShouldReturnTrue()
+        public async Task DoesEntityExist_WithValidId_ShouldReturnTrue()
         {
-            Assert.True(this.service.DoesExist(5));
+            Assert.True(await this.service.DoesExist(5));
         }
 
         [Theory]

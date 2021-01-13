@@ -21,7 +21,6 @@ namespace DataGate.Services.Data.ViewSetups
                                                     IEntityException exceptionService,
                                                     EntitySubEntitiesGetDto dto, string function)
         {
-            exceptionService.DoesExist(dto.Id);
             var date = DateTimeExtensions.FromWebFormat(dto.Date);
             var entities = await service.All(function, dto.Id, date).ToListAsync();
 
@@ -33,7 +32,6 @@ namespace DataGate.Services.Data.ViewSetups
         public static async Task<T> SetGet<T>(IEntityService service, IEntityException exceptionService,
                                               SubEntitiesGetDto dto, string function)
         {
-            exceptionService.DoesExist(dto.Id);
             var date = DateTimeExtensions.FromWebFormat(dto.Date);
             var values = await service.All(function, dto.Id, date, 1).ToListAsync();
             var headers = await service.All(function, dto.Id, date).FirstOrDefaultAsync();

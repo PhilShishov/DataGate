@@ -4,6 +4,7 @@
 namespace DataGate.Services.Data.SubFunds
 {
     using System.Linq;
+    using System.Threading.Tasks;
 
     using DataGate.Common.Exceptions;
     using DataGate.Data.Common.Repositories.AppContext;
@@ -19,7 +20,7 @@ namespace DataGate.Services.Data.SubFunds
             this.repository = repository;
         }
 
-        public bool DoesExist(int id)
+        public async Task<bool> DoesExist(int id)
         {
             var exists = this.repository.All().Any(x => x.SfId == id);
 
@@ -28,7 +29,7 @@ namespace DataGate.Services.Data.SubFunds
                 throw new EntityNotFoundException(nameof(TbHistoryFund));
             }
 
-            return exists;
+           return await Task.FromResult(exists);
         }
     }
 }

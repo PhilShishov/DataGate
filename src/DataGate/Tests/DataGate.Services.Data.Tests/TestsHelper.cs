@@ -8,6 +8,10 @@ namespace DataGate.Services.Data.Tests
     using System.Text.RegularExpressions;
 
     using DataGate.Common;
+    using DataGate.Data;
+
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
 
     public static class TestsHelper
     {
@@ -30,6 +34,17 @@ namespace DataGate.Services.Data.Tests
                     }
                 }
             }
+        }
+
+        public static ApplicationDbContext CreateContextForSqlServer(IConfiguration config)
+        {
+            var connection = new SqlConnection(config.GetConnectionString(GlobalConstants.DataGateAppConnection));
+            connection.Open();
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseSqlServer(connection)
+                .Options;
+
+            return new ApplicationDbContext(options);
         }
     }
 }

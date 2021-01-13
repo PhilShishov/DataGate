@@ -4,6 +4,7 @@
 namespace DataGate.Services.Data.Tests.ViewSetups
 {
     using System;
+    using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -28,7 +29,7 @@ namespace DataGate.Services.Data.Tests.ViewSetups
         }
 
         [Fact]
-        public async Task EntitiesVMSetup_SetGet_ShouldReturnViewModel()
+        public async Task EntitiesVM_SetGet_ShouldReturnViewModel()
         {
             string[] userColumns = new[] { "ID", "NAME" };
 
@@ -42,7 +43,22 @@ namespace DataGate.Services.Data.Tests.ViewSetups
         }
 
         [Fact]
-        public async Task EntitiesVMSetup_SetPost_ShouldUpdateModel()
+        public async Task EntitiesVM_SetGet_InvalidData_ShouldThrowException()
+        {
+            string[] userColumns = new[] { "NOT A COLUMN" };
+
+            async Task task()
+            {
+                var viewModel = await EntitiesVMSetup
+                    .SetGet<EntitiesViewModel>(this.service, SqlFunctionDictionary.AllActiveShareClass,
+                        userColumns);
+            }
+
+            await Assert.ThrowsAsync<SqlException>(task);
+        }
+
+        [Fact]
+        public async Task EntitiesVM_SetPost_ShouldUpdateModel()
         {
             EntitiesViewModel model = new EntitiesViewModel();
 
@@ -52,22 +68,6 @@ namespace DataGate.Services.Data.Tests.ViewSetups
 
             Assert.NotNull(model.Values);
             Assert.True(model.Values.Count > 0);
-        }
-
-        [Fact]
-        public async Task EntitiesVMSetup_SetGet_InvalidData_ShouldThrowException()
-        {
-            string[] userColumns = new[] { "NOT A COLUMN" };
-
-            Func<Task> task = async () =>
-            {
-                var viewModel = await EntitiesVMSetup
-                    .SetGet<EntitiesViewModel>(this.service, SqlFunctionDictionary.AllActiveShareClass,
-                        userColumns);
-
-            };
-
-            await Assert.ThrowsAsync<System.Data.SqlClient.SqlException>(task);
         }
     }
 }

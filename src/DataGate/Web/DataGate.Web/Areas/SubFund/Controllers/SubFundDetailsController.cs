@@ -44,6 +44,8 @@ namespace DataGate.Web.Areas.SubFunds.Controllers
         [Route("sf/{id}/{date}")]
         public async Task<IActionResult> ByIdAndDate(int id, string date)
         {
+            //await this.subFundService.DoesExist(id);
+
             var dto = new QueriesToPassDto()
             {
                 SqlFunctionById = SqlFunctionDictionary.ByIdSubFund,
@@ -53,7 +55,7 @@ namespace DataGate.Web.Areas.SubFunds.Controllers
                 SqlFunctionContainer = SqlFunctionDictionary.ContainerFund,
             };
 
-            var viewModel = await SpecificVMSetup.SetGet<SpecificEntityViewModel>(id, date, this.service, this.subFundService, dto);
+            var viewModel = await SpecificVMSetup.SetGet<SpecificEntityViewModel>(id, date, this.service, dto);
 
             await this.recentService.Save(this.User, this.Request.Path);
             return this.View(viewModel);

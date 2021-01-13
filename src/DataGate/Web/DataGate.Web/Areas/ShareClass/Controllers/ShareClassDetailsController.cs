@@ -44,6 +44,8 @@ namespace DataGate.Web.Areas.ShareClasses.Controllers
         [Route("sc/{id}/{date}")]
         public async Task<IActionResult> ByIdAndDate(int id, string date)
         {
+            //await this.shareClassService.DoesExist(id);
+
             var dto = new QueriesToPassDto()
             {
                 SqlFunctionById = SqlFunctionDictionary.ByIdShareClass,
@@ -52,7 +54,7 @@ namespace DataGate.Web.Areas.ShareClasses.Controllers
                 SqlFunctionContainer = SqlFunctionDictionary.ContainerSubFund,
             };
 
-            var viewModel = await SpecificVMSetup.SetGet<SpecificEntityViewModel>(id, date, this.service, this.shareClassService, dto);
+            var viewModel = await SpecificVMSetup.SetGet<SpecificEntityViewModel>(id, date, this.service, dto);
 
             await this.recentService.Save(this.User, this.Request.Path);
             return this.View(viewModel);

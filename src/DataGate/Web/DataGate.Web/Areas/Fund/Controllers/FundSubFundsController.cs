@@ -45,6 +45,7 @@ namespace DataGate.Web.Areas.Funds.Controllers
         [Route("loadSubFunds")]
         public async Task<IActionResult> LoadedSubFunds(int id, string date, string container)
         {
+            //await this.fundService.DoesExist(id);
             var dto = new EntitySubEntitiesGetDto()
             {
                 Id = id,
@@ -62,6 +63,7 @@ namespace DataGate.Web.Areas.Funds.Controllers
         [Route("f/{id}/sf")]
         public async Task<IActionResult> SubFunds(int id, string date, string container)
         {
+            //await this.fundService.DoesExist(id);
             var dto = new SubEntitiesGetDto()
             {
                 Id = id,

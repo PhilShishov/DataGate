@@ -4,10 +4,14 @@
 namespace DataGate.Services.Data.Funds
 {
     using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
 
     using DataGate.Common.Exceptions;
     using DataGate.Data.Common.Repositories.AppContext;
     using DataGate.Data.Models.Entities;
+
+    using Microsoft.EntityFrameworkCore;
 
     // _____________________________________________________________
     public class FundService : IFundService
@@ -19,13 +23,13 @@ namespace DataGate.Services.Data.Funds
             this.repository = fundRepository;
         }
 
-        public bool DoesExist(int id)
+        public async Task<bool> DoesExist(int id)
         {
-            var exists = this.repository.All().Any(x => x.FId == id);
+            var exists = await this.repository.All().AnyAsync(x => x.FId == id);
 
             if (!exists)
             {
-                throw new EntityNotFoundException(nameof(TbHistoryFund));
+               throw new EntityNotFoundException(nameof(TbHistoryFund));
             }
 
             return exists;

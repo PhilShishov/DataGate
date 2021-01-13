@@ -13,6 +13,7 @@ namespace DataGate.Services.Data.ShareClasses
     using DataGate.Data.Models.Entities;
     using DataGate.Services.Mapping;
     using DataGate.Web.ViewModels.Search;
+    using System.Threading.Tasks;
 
     // _____________________________________________________________
     public class ShareClassService : IShareClassService
@@ -58,7 +59,7 @@ namespace DataGate.Services.Data.ShareClasses
             return isinList.Any(i => i == searchTerm);
         }
 
-        public bool DoesExist(int id)
+        public async Task<bool> DoesExist(int id)
         {
             var exists = this.repository.All().Any(x => x.ScId == id);
 
@@ -67,7 +68,7 @@ namespace DataGate.Services.Data.ShareClasses
                 throw new EntityNotFoundException(nameof(TbHistoryFund));
             }
 
-            return exists;
+            return await Task.FromResult(exists);
         }
     }
 }

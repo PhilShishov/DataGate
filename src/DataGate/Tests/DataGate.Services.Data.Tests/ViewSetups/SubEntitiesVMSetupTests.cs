@@ -5,6 +5,7 @@ namespace DataGate.Services.Data.Tests.ViewSetups
 {
     using System;
     using System.Collections.Generic;
+    using System.Data.SqlClient;
     using System.Threading.Tasks;
 
     using DataGate.Common;
@@ -36,102 +37,112 @@ namespace DataGate.Services.Data.Tests.ViewSetups
         }
 
         [Fact]
-        public async Task SubEntitiesVMSetup_SetGet_ShouldReturnViewModel()
+        public async Task SubEntitiesVM_SetGet_ShouldReturnViewModel()
         {
-            int id = 1;
-            string date = "2020-01-01";
-            string container = string.Empty;
-
             var dto = new SubEntitiesGetDto()
             {
-                Id = id,
-                Date = date,
-                Container = container,
+                Id = 1,
+                Date = "2020-01-01",
+                Container = string.Empty,
             };
 
             var viewModel = await SubEntitiesVMSetup
-                .SetGet<SubEntitiesViewModel>(this.service, this.fundService, dto, SqlFunctionDictionary.FundSubFunds);
+                .SetGet<SubEntitiesViewModel>(
+                this.service, 
+                this.fundService, 
+                dto, 
+                SqlFunctionDictionary.FundSubFunds);
 
             Assert.NotNull(viewModel);
             Assert.Equal(31, viewModel.Values.Count);
         }
 
         [Fact]
-        public async Task SubEntitiesVMSetup_SetLoadedGet_ShouldReturnViewModel()
+        public async Task SubEntitiesVM_SetGet_InvalidData_ShouldThrowException()
         {
-            int id = 1;
-            string date = "2020-01-01";
-            string container = string.Empty;
+            async Task task()
+            {
+                var viewModel = await SubEntitiesVMSetup
+                    .SetGet<SubEntitiesViewModel>(
+                    this.service,
+                    this.fundService,
+                    null,
+                    SqlFunctionDictionary.FundSubFunds);
+            }
 
+            await Assert.ThrowsAsync<NullReferenceException>(task);
+        }
+
+        [Fact]
+        public async Task SubEntitiesVM_SetLoadedGet_ShouldReturnViewModel()
+        {
             var dto = new EntitySubEntitiesGetDto()
             {
-                Id = id,
-                Date = date,
-                Container = container,
+                Id = 1,
+                Date = "2020-01-01",
+                Container = string.Empty,
             };
 
             var viewModel = await SubEntitiesVMSetup
-                .SetLoadedGet<EntitySubEntitiesViewModel>(this.service, this.fundService, dto, SqlFunctionDictionary.FundSubFunds);
+                .SetLoadedGet<EntitySubEntitiesViewModel>(
+                this.service, 
+                this.fundService, 
+                dto, 
+                SqlFunctionDictionary.FundSubFunds);
 
             Assert.NotNull(viewModel);
             Assert.Equal(32, viewModel.Entities.Count);
         }
 
         [Fact]
-        public async Task SubEntitiesVMSetup_SetPost_ShouldUpdateModel()
+        public async Task SubEntitiesVM_SetLoadedGet_InvalidData_ShouldThrowException()
+        {
+            var dto = new EntitySubEntitiesGetDto();
+
+            async Task task()
+            {
+                var viewModel = await SubEntitiesVMSetup
+                    .SetLoadedGet<EntitySubEntitiesViewModel>(
+                    this.service,
+                    this.fundService,
+                    dto,
+                    SqlFunctionDictionary.FundSubFunds);
+            }
+
+            await Assert.ThrowsAsync<SqlException>(task);
+        }
+
+        [Fact]
+        public async Task SubEntitiesVM_SetPost_ShouldUpdateModel()
         {
             SubEntitiesViewModel viewModel = new SubEntitiesViewModel
             {
                 Id = 1
             };
 
-            await SubEntitiesVMSetup.SetPost(viewModel, this.service, SqlFunctionDictionary.FundSubFunds);
+            await SubEntitiesVMSetup.SetPost(
+                viewModel, 
+                this.service, 
+                SqlFunctionDictionary.FundSubFunds);
 
             Assert.NotNull(viewModel.Values);
             Assert.True(viewModel.Values.Count > 0);
         }
 
         [Fact]
-        public async Task SubEntitiesVMSetup_SetPost_InvalidData_ShouldThrowException()
+        public async Task SubEntitiesVM_SetPost_InvalidData_ShouldThrowException()
         {
             SubEntitiesViewModel viewModel = new SubEntitiesViewModel();
 
-            Func<Task> task = async () =>
+            async Task task()
             {
-                await SubEntitiesVMSetup.SetPost(viewModel, this.service, SqlFunctionDictionary.FundSubFunds);
-            };
+                await SubEntitiesVMSetup.SetPost(
+                    viewModel,
+                    this.service,
+                    SqlFunctionDictionary.FundSubFunds);
+            }
 
-            await Assert.ThrowsAsync<System.Data.SqlClient.SqlException>(task);
-        }
-
-        [Fact]
-        public async Task SubEntitiesVMSetup_SetLoadedGet_InvalidData_ShouldThrowException()
-        {
-            var dto = new EntitySubEntitiesGetDto();
-
-            Func<Task> task = async () =>
-            {
-                var viewModel = await SubEntitiesVMSetup
-                    .SetLoadedGet<EntitySubEntitiesViewModel>(this.service, this.fundService, dto,
-                        SqlFunctionDictionary.FundSubFunds);
-            };
-
-            await Assert.ThrowsAsync<InvalidOperationException>(task);
-        }
-
-        [Fact]
-        public async Task SubEntitiesVMSetup_SetGet_InvalidData_ShouldThrowException()
-        {
-            var dto = new SubEntitiesGetDto();
-
-            Func<Task> task = async () =>
-            {
-                var viewModel = await SubEntitiesVMSetup
-                    .SetGet<SubEntitiesViewModel>(this.service, this.fundService, dto,
-                        SqlFunctionDictionary.FundSubFunds);
-            };
-
-            await Assert.ThrowsAsync<DataGate.Common.Exceptions.EntityNotFoundException>(task);
+            await Assert.ThrowsAsync<SqlException>(task);
         }
     }
 }

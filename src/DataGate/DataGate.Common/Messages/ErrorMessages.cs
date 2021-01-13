@@ -33,6 +33,8 @@ namespace DataGate.Common
 
         public const string EmptyFunction = "Function should be provided!";
         public const string EmptyCommand = "Command has not been provided!";
+
+        public const string InvalidEntity = "Entity is empty or invalid";
         public const string InvalidDocType = "Document type is empty or invalid";
         public const string InvalidAgrType = "Agreement type is empty or invalid";
         public const string InvalidStatus = "Status is empty or invalid";

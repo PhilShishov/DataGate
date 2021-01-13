@@ -3,7 +3,7 @@
 #---------------------------------#
 version: 1.0.{build}
 os: Visual Studio 2019
-configuration: Release
+configuration: Debug
 branches:
   only:
   - master
