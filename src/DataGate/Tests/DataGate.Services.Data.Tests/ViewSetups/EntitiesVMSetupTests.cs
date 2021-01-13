@@ -7,7 +7,9 @@ namespace DataGate.Services.Data.Tests.ViewSetups
     using System.Linq;
     using System.Threading.Tasks;
 
+    using DataGate.Common;
     using DataGate.Services.Data.Entities;
+    using DataGate.Services.Data.Tests.ClassFixtures;
     using DataGate.Services.Data.Tests.TestData;
     using DataGate.Services.Data.ViewSetups;
     using DataGate.Web.Helpers;
@@ -15,13 +17,14 @@ namespace DataGate.Services.Data.Tests.ViewSetups
 
     using Xunit;
 
-    public class EntitiesVMSetupTests : SqlServerContextProvider
+    [Collection(GlobalConstants.SqlServerCollection)]
+    public class EntitiesVMSetupTests
     {
         private readonly EntityService service;
 
-        public EntitiesVMSetupTests()
+        public EntitiesVMSetupTests(SqlServerFixture fixture)
         {
-            this.service = EntityServiceTestData.CreateService(base.Context, base.Configuration);
+            this.service = EntityServiceTestData.CreateService(fixture.Context, fixture.Configuration);
         }
 
         [Fact]
@@ -29,15 +32,13 @@ namespace DataGate.Services.Data.Tests.ViewSetups
         {
             string[] userColumns = new[] { "ID", "NAME" };
 
-            await using (base.Context)
-            {
-                var viewModel = await EntitiesVMSetup
-                    .SetGet<EntitiesViewModel>(this.service, SqlFunctionDictionary.AllActiveShareClass, userColumns);
+            var viewModel = await EntitiesVMSetup
+                .SetGet<EntitiesViewModel>(this.service, SqlFunctionDictionary.AllActiveShareClass, userColumns);
 
-                Assert.NotNull(viewModel);
-                Assert.True(viewModel.Headers.Count == 6);
-                Assert.True(viewModel.SelectedColumns.Count() == 2);
-            }
+            Assert.NotNull(viewModel);
+            Assert.Equal(6, viewModel.Headers.Count);
+            Assert.Equal(2, viewModel.SelectedColumns.Count());
+
         }
 
         [Fact]
@@ -45,15 +46,12 @@ namespace DataGate.Services.Data.Tests.ViewSetups
         {
             EntitiesViewModel model = new EntitiesViewModel();
 
-            await using (base.Context)
-            {
-                await EntitiesVMSetup.SetPost(model, this.service, 
-                    SqlFunctionDictionary.AllShareClass,
-                    SqlFunctionDictionary.AllActiveShareClass);
+            await EntitiesVMSetup.SetPost(model, this.service,
+                SqlFunctionDictionary.AllShareClass,
+                SqlFunctionDictionary.AllActiveShareClass);
 
-                Assert.NotNull(model.Values);
-                Assert.True(model.Values.Count > 0);
-            }
+            Assert.NotNull(model.Values);
+            Assert.True(model.Values.Count > 0);
         }
 
         [Fact]
@@ -63,12 +61,10 @@ namespace DataGate.Services.Data.Tests.ViewSetups
 
             Func<Task> task = async () =>
             {
-                await using (base.Context)
-                {
-                    var viewModel = await EntitiesVMSetup
-                        .SetGet<EntitiesViewModel>(this.service, SqlFunctionDictionary.AllActiveShareClass,
-                            userColumns);
-                }
+                var viewModel = await EntitiesVMSetup
+                    .SetGet<EntitiesViewModel>(this.service, SqlFunctionDictionary.AllActiveShareClass,
+                        userColumns);
+
             };
 
             await Assert.ThrowsAsync<System.Data.SqlClient.SqlException>(task);

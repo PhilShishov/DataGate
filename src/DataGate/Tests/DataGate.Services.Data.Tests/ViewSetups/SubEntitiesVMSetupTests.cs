@@ -7,9 +7,11 @@ namespace DataGate.Services.Data.Tests.ViewSetups
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using DataGate.Common;
     using DataGate.Data.Models.Entities;
     using DataGate.Services.Data.Entities;
     using DataGate.Services.Data.Funds;
+    using DataGate.Services.Data.Tests.ClassFixtures;
     using DataGate.Services.Data.Tests.TestData;
     using DataGate.Services.Data.ViewSetups;
     using DataGate.Web.Dtos.Overviews;
@@ -19,17 +21,18 @@ namespace DataGate.Services.Data.Tests.ViewSetups
 
     using Xunit;
 
-    public class SubEntitiesVMSetupTests : SqlServerContextProvider
+    [Collection(GlobalConstants.SqlServerCollection)]
+    public class SubEntitiesVMSetupTests
     {
         private readonly EntityService service;
         private readonly IFundService fundService;
         private readonly IEnumerable<TbHistoryFund> testData;
 
-        public SubEntitiesVMSetupTests()
+        public SubEntitiesVMSetupTests(SqlServerFixture fixture)
         {
-            this.service = EntityServiceTestData.CreateService(base.Context, base.Configuration);
-            this.testData = FundServiceTestData.Generate(); 
-            this.fundService = FundServiceTestData.Service(testData, base.Context);
+            this.service = EntityServiceTestData.CreateService(fixture.Context, fixture.Configuration);
+            this.testData = FundServiceTestData.Generate();
+            this.fundService = FundServiceTestData.Service(testData, fixture.Context);
         }
 
         [Fact]
@@ -46,14 +49,11 @@ namespace DataGate.Services.Data.Tests.ViewSetups
                 Container = container,
             };
 
-           // await using (base.Context)
-            {
-                var viewModel = await SubEntitiesVMSetup
-                    .SetGet<SubEntitiesViewModel>(this.service, this.fundService, dto, SqlFunctionDictionary.FundSubFunds);
+            var viewModel = await SubEntitiesVMSetup
+                .SetGet<SubEntitiesViewModel>(this.service, this.fundService, dto, SqlFunctionDictionary.FundSubFunds);
 
-                Assert.NotNull(viewModel);
-                Assert.True(viewModel.Values.Count == 31);
-            }
+            Assert.NotNull(viewModel);
+            Assert.Equal(31, viewModel.Values.Count);
         }
 
         [Fact]
@@ -70,14 +70,11 @@ namespace DataGate.Services.Data.Tests.ViewSetups
                 Container = container,
             };
 
-          //  await using (base.Context)
-            {
-                var viewModel = await SubEntitiesVMSetup
-                    .SetLoadedGet<EntitySubEntitiesViewModel>(this.service, this.fundService, dto, SqlFunctionDictionary.FundSubFunds);
+            var viewModel = await SubEntitiesVMSetup
+                .SetLoadedGet<EntitySubEntitiesViewModel>(this.service, this.fundService, dto, SqlFunctionDictionary.FundSubFunds);
 
-                Assert.NotNull(viewModel);
-                Assert.True(viewModel.Entities.Count == 32);
-            }
+            Assert.NotNull(viewModel);
+            Assert.Equal(32, viewModel.Entities.Count);
         }
 
         [Fact]
@@ -88,13 +85,10 @@ namespace DataGate.Services.Data.Tests.ViewSetups
                 Id = 1
             };
 
-         //   await using (base.Context)
-            {
-                await SubEntitiesVMSetup.SetPost(viewModel, this.service, SqlFunctionDictionary.FundSubFunds);
+            await SubEntitiesVMSetup.SetPost(viewModel, this.service, SqlFunctionDictionary.FundSubFunds);
 
-                Assert.NotNull(viewModel.Values);
-                Assert.True(viewModel.Values.Count > 0);
-            }
+            Assert.NotNull(viewModel.Values);
+            Assert.True(viewModel.Values.Count > 0);
         }
 
         [Fact]
@@ -104,10 +98,7 @@ namespace DataGate.Services.Data.Tests.ViewSetups
 
             Func<Task> task = async () =>
             {
-             //   await using (base.Context)
-                {
-                    await SubEntitiesVMSetup.SetPost(viewModel, this.service, SqlFunctionDictionary.FundSubFunds);
-                }
+                await SubEntitiesVMSetup.SetPost(viewModel, this.service, SqlFunctionDictionary.FundSubFunds);
             };
 
             await Assert.ThrowsAsync<System.Data.SqlClient.SqlException>(task);
@@ -120,12 +111,9 @@ namespace DataGate.Services.Data.Tests.ViewSetups
 
             Func<Task> task = async () =>
             {
-        //        await using (base.Context)
-                {
-                    var viewModel = await SubEntitiesVMSetup
-                        .SetLoadedGet<EntitySubEntitiesViewModel>(this.service, this.fundService, dto,
-                            SqlFunctionDictionary.FundSubFunds);
-                }
+                var viewModel = await SubEntitiesVMSetup
+                    .SetLoadedGet<EntitySubEntitiesViewModel>(this.service, this.fundService, dto,
+                        SqlFunctionDictionary.FundSubFunds);
             };
 
             await Assert.ThrowsAsync<InvalidOperationException>(task);
@@ -138,12 +126,9 @@ namespace DataGate.Services.Data.Tests.ViewSetups
 
             Func<Task> task = async () =>
             {
-          //      await using (base.Context)
-                {
-                    var viewModel = await SubEntitiesVMSetup
-                        .SetGet<SubEntitiesViewModel>(this.service, this.fundService, dto,
-                            SqlFunctionDictionary.FundSubFunds);
-                }
+                var viewModel = await SubEntitiesVMSetup
+                    .SetGet<SubEntitiesViewModel>(this.service, this.fundService, dto,
+                        SqlFunctionDictionary.FundSubFunds);
             };
 
             await Assert.ThrowsAsync<DataGate.Common.Exceptions.EntityNotFoundException>(task);

@@ -8,9 +8,11 @@ namespace DataGate.Services.Data.Tests.ViewSetups
     using System.Linq;
     using System.Threading.Tasks;
 
+    using DataGate.Common;
     using DataGate.Data.Models.Entities;
     using DataGate.Services.Data.Entities;
     using DataGate.Services.Data.Funds;
+    using DataGate.Services.Data.Tests.ClassFixtures;
     using DataGate.Services.Data.Tests.TestData;
     using DataGate.Services.Data.ViewSetups;
     using DataGate.Web.Dtos.Queries;
@@ -19,17 +21,18 @@ namespace DataGate.Services.Data.Tests.ViewSetups
 
     using Xunit;
 
-    public class SpecificVMSetupTests : SqlServerContextProvider
+    [Collection(GlobalConstants.SqlServerCollection)]
+    public class SpecificVMSetupTests
     {
         private readonly IEntityDetailsService service;
         private readonly IFundService fundService;
         private readonly IEnumerable<TbHistoryFund> testData;
 
-        public SpecificVMSetupTests()
+        public SpecificVMSetupTests(SqlServerFixture fixture)
         {
-            this.service = EntityDetailsServiceTestData.CreateService(base.Context, base.Configuration);
+            this.service = EntityDetailsServiceTestData.CreateService(fixture.Context, fixture.Configuration);
             this.testData = FundServiceTestData.Generate();
-            this.fundService = FundServiceTestData.Service(testData, base.Context);
+            this.fundService = FundServiceTestData.Service(testData, fixture.Context);
         }
 
         [Fact]
@@ -46,13 +49,10 @@ namespace DataGate.Services.Data.Tests.ViewSetups
                 SqlFunctionDistinctAgreements = SqlFunctionDictionary.DistinctAgreementsFund,
             };
 
-            await using (base.Context)
-            {
-                var viewModel = await SpecificVMSetup.SetGet<SpecificEntityViewModel>(id, date, this.service, this.fundService, dto);
+            var viewModel = await SpecificVMSetup.SetGet<SpecificEntityViewModel>(id, date, this.service, this.fundService, dto);
 
-                Assert.NotNull(viewModel);
-                Assert.True(viewModel.Entity.Count() == 2);
-            }
+            Assert.NotNull(viewModel);
+            Assert.Equal(2, viewModel.Entity.Count());
         }
 
         [Fact]
@@ -65,15 +65,13 @@ namespace DataGate.Services.Data.Tests.ViewSetups
 
             Func<Task> task = async () =>
             {
-                await using (base.Context)
-                {
-                    var viewModel =
-                        await SpecificVMSetup.SetGet<SpecificEntityViewModel>(id, date, this.service, this.fundService,
-                            dto);
+                var viewModel =
+                    await SpecificVMSetup.SetGet<SpecificEntityViewModel>(id, date, this.service, this.fundService,
+                        dto);
 
-                    Assert.NotNull(viewModel);
-                    Assert.True(viewModel.Entity.Count() == 2);
-                }
+                Assert.NotNull(viewModel);
+                Assert.Equal(2, viewModel.Entity.Count());
+
             };
 
             await Assert.ThrowsAsync<DataGate.Common.Exceptions.EntityNotFoundException>(task);
