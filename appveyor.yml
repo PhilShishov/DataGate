@@ -7,7 +7,6 @@ configuration: Release
 branches:
   only:
   - master
-  - develop
 
 #---------------------------------#
 #    environment configuration    #

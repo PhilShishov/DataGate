@@ -184,8 +184,8 @@ namespace DataGate.Services.Data.Tests.Entity
 
             var result = await this.service.AllSelected(SqlFunctionDictionary.AllShareClass, this.dto, 1).ToListAsync();
             Assert.NotNull(result);
-            Assert.True(result.Count == expectedCount);
-            Assert.True(result[0].Length == expectedHeaders);
+            Assert.Equal(expectedCount, result.Count);
+            Assert.Equal(expectedHeaders, result[0].Length);
         }
 
         [Fact]
@@ -195,7 +195,7 @@ namespace DataGate.Services.Data.Tests.Entity
             {
                 PreSelectedColumns = new[] { "STATUS   ", "    VALID FROM" },
                 SelectedColumns = new[] { "         SHARE CLASS NAME             " },
-                Id = 1,
+                Id = 2,
                 Date = DateTime.Now,
             };
 
@@ -203,8 +203,8 @@ namespace DataGate.Services.Data.Tests.Entity
                 .AllSelected(SqlFunctionDictionary.ByIdShareClass, dto, 0)
                 .ToListAsync();
 
-            Assert.True(result.Count == 2);
-            Assert.True(result[0].Length == 3);
+            Assert.Equal(2, result.Count);
+            Assert.Equal(3, result[0].Length);
             Assert.Contains(result[0], a => a == dto.PreSelectedColumns.ElementAt(0).Trim());
             Assert.Contains(result[0], a => a == dto.PreSelectedColumns.ElementAt(1).Trim());
             Assert.Contains(result[0], a => a == dto.SelectedColumns.ElementAt(0).Trim());
