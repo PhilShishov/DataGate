@@ -48,7 +48,6 @@
     transition-property: transform;
     padding: 7px 7px 3px;
     text-transform: uppercase;
-    display: table-cell;
 }
 
     .btn-datagate:hover {

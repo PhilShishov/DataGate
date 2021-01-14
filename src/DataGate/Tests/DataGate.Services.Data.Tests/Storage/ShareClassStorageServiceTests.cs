@@ -35,7 +35,7 @@ namespace DataGate.Services.Data.Tests.Storage
         [Fact]
         public async Task Create_ShareClass_EmptyModel_ShouldThrowException()
         {
-            Func<Task> task = async () => await this.service.Create(null);
+            async Task task() => await this.service.Create(null);
             await Assert.ThrowsAsync<NullReferenceException>(task);
         }
 
@@ -52,7 +52,7 @@ namespace DataGate.Services.Data.Tests.Storage
         [Fact]
         public async Task Update_ShareClass_EmptyModel_ShouldThrowException()
         {
-            Func<Task> task = async () => await this.service.Edit(null);
+            async Task task() => await this.service.Edit(null);
             await Assert.ThrowsAsync<NullReferenceException>(task);
         }
 
@@ -108,7 +108,7 @@ namespace DataGate.Services.Data.Tests.Storage
         [InlineData(CorrectShareClassName, "0001-01-01")]
         public async Task DoesExistAtDate_WithInvalidData_ShouldThrowException(string shareClassName, string initialDate)
         {
-            Func<Task> task = async () => await this.service
+            async Task task() => await this.service
             .DoesExistAtDate(shareClassName, DateTime.Parse(initialDate));
             await Assert.ThrowsAsync<SqlTypeException>(task);
         }

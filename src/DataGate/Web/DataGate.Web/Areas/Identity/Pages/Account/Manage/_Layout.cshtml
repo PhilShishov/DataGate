@@ -1,8 +1,6 @@
-﻿@{
-    Layout = "/Views/Shared/_Layout.cshtml";
-}
+﻿@{ Layout = "/Views/Shared/_Layout.cshtml"; }
 
-<div class="manage-account mx-5">
+<div class="manage-account">
     <h1>@SharedLocalizer.GetHtmlString("Manage your account")</h1>
 
     <div>
@@ -18,6 +16,7 @@
         </div>
     </div>
 </div>
+<partial name="_Footer" />
 
 @section Scripts {
     @RenderSection("Scripts", required: false)

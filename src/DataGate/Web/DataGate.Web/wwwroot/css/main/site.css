@@ -30,7 +30,7 @@
 }
 /*Recent Items Style*/
 .manage-account {
-    margin-top: 80px;
+    margin: 80px 20px 0;
 }
 
 .user-container {
@@ -506,7 +506,7 @@ textarea {
     position: absolute;
     visibility: hidden;
     opacity: 0;
-    top: 41px;
+    top: 42px;
     right: 0;
 }
 

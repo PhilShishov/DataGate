@@ -12,7 +12,6 @@ namespace DataGate.Services.Data.Layouts
     using DataGate.Data.Models.Columns;
     using DataGate.Data.Models.Users;
     using DataGate.Web.Infrastructure.Extensions;
-    using DataGate.Web.ViewModels.Entities;
 
     using Microsoft.AspNetCore.Identity;
 

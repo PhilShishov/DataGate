@@ -9,7 +9,25 @@
 
 @media only screen and (max-width: 620px) {
 
+    .nav{
+        margin-bottom:30px;
+    }
 
+    #enable-authenticator {
+        margin-bottom: 10px;
+    }
+
+    .manage-account{
+        margin: 80px 10px 20px;
+    }
+
+    .col-md-6, col-md-9 {
+        padding: 0 !important;
+    }
+
+    .back-to-top {
+        right: 25px;
+    }
 
     #table-info-datagate {
         margin: 90px 0 40px;
@@ -26,11 +44,8 @@
     }
 
     .badge-notification-container.open .notification-list {
-        width: 265px;
-    }
-
-    .notification-list {
-        right: 1px;
+        width: 70vw;
+        right: -13px;
     }
 
     .column-add-info {
@@ -45,8 +60,8 @@
 
 @media only screen and (max-width: 991px) {
 
-    .manage-account{
-        text-align:center;
+    .manage-account {
+        text-align: center;
     }
 
     .container-not-found {
@@ -122,6 +137,10 @@
 
 
 @media only screen and (min-width: 990px) {
+
+    #enable-authenticator {
+        margin-right: 10px;
+    }
 
     .table-search-wrapper {
         margin: 70px 25px 0;
