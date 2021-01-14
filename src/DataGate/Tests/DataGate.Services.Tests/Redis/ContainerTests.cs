@@ -6,12 +6,12 @@ namespace DataGate.Services.Tests.Redis
     using System;
     using System.Threading.Tasks;
 
-    using Xunit;
-
     using DataGate.Common;
     using DataGate.Services.Redis;
     using DataGate.Services.Tests.ClassFixtures;
     using DataGate.Web.Infrastructure.Extensions;
+
+    using Xunit;
 
     public class ContainerTests : IClassFixture<RedisFixture>, IDisposable
     {
@@ -36,14 +36,14 @@ namespace DataGate.Services.Tests.Redis
             }
         }
 
-        [Fact]
+        [Fact, Trait("Category", "A")]
         public async Task DeleteKey_And_KeyExists_WithNonExistantKey_ShouldReturnFalse()
         {
             Assert.False(await container.DeleteKey("not-exists"));
             Assert.False(await container.KeyExists("not-exists"));
         }
 
-        [Theory]
+        [Theory, Trait("Category", "A")]
         [InlineData(TypeCode.String, "stringkey")]
         [InlineData(TypeCode.Int32, "intkey")]
         [InlineData(TypeCode.Boolean, "boolkey")]
@@ -73,7 +73,7 @@ namespace DataGate.Services.Tests.Redis
             Assert.True(await container.KeyExists(keyName));
         }
 
-        [Theory]
+        [Theory, Trait("Category", "A")]
         [InlineData(null)]
         [InlineData("")]
         [InlineData("       ")]
@@ -84,7 +84,7 @@ namespace DataGate.Services.Tests.Redis
             Assert.Throws<ArgumentNullException>(act);
         }
 
-        [Fact]
+        [Fact, Trait("Category", "A")]
         public async Task DeleteKey_WithExistingKey_ShouldReturnTrue()
         {
             var key = container.GetKey<RedisItem<int>>("intkey");

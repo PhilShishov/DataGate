@@ -7,12 +7,12 @@ namespace DataGate.Services.Tests.Redis
     using System.Collections;
     using System.Threading.Tasks;
 
-    using Xunit;
-
     using DataGate.Common;
-    using DataGate.Services.Tests.ClassFixtures;
     using DataGate.Services.Redis;
+    using DataGate.Services.Tests.ClassFixtures;
     using DataGate.Web.Tests.TestData;
+
+    using Xunit;
 
     public class HashDictionaryTests : IClassFixture<RedisFixture>, IDisposable
     {
@@ -40,7 +40,7 @@ namespace DataGate.Services.Tests.Redis
             }
         }
 
-        [Fact]
+        [Fact, Trait("Category", "A")]
         public async Task SetRange_ShouldAddDataToHashDictionary()
         {
             var data = HashTestData.GenerateKeyValuePairs();
@@ -50,7 +50,7 @@ namespace DataGate.Services.Tests.Redis
             Assert.True((await this.hashDictionary.Count()) == 10);
         }
 
-        [Fact]
+        [Fact, Trait("Category", "A")]
         public async Task KeysAndValues_ShouldReturnSameCount()
         {
             var data = HashTestData.GenerateKeyValuePairs();
@@ -66,7 +66,7 @@ namespace DataGate.Services.Tests.Redis
             Assert.True(keys.Count == values.Count);
         }
 
-        [Fact]
+        [Fact, Trait("Category", "A")]
         public async Task GetRange_ShouldReturnSameCollection()
         {
             var data = HashTestData.GenerateKeyValuePairs();
@@ -76,7 +76,7 @@ namespace DataGate.Services.Tests.Redis
             Assert.Equal(new[] { 2, 4 }, (ICollection)actual);
         }
 
-        [Fact]
+        [Fact, Trait("Category", "A")]
         public async Task RemoveRange_ShouldDeleteCollectionFromDictionary()
         {
             var data = HashTestData.GenerateKeyValuePairs();

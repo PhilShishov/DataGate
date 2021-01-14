@@ -1,7 +1,7 @@
 ﻿// Copyright (c) DataGate Project. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-namespace DataGate.Services.Data.Tests.Entity
+namespace DataGate.Services.Data.Tests.Entities
 {
     using System;
     using System.Linq;
@@ -18,12 +18,12 @@ namespace DataGate.Services.Data.Tests.Entity
     using Xunit;
 
     [Collection(GlobalConstants.SqlServerCollection)]
-    public class EntityServiceTests
+    public class EntitiesServiceTests
     {
         private readonly EntityService service;
         private AllSelectedDto dto;
 
-        public EntityServiceTests(SqlServerFixture fixture)
+        public EntitiesServiceTests(SqlServerFixture fixture)
         {
             this.service = EntityServiceTestData.CreateService(fixture.Context, fixture.Configuration);
         }

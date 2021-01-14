@@ -6,13 +6,14 @@ namespace DataGate.Services.Tests.Redis
     using System;
     using System.Threading.Tasks;
 
-    using StackExchange.Redis;
-    using Xunit;
-
     using DataGate.Common;
     using DataGate.Services.Redis;
     using DataGate.Services.Tests.ClassFixtures;
     using DataGate.Services.Tests.TestData;
+
+    using StackExchange.Redis;
+
+    using Xunit;
 
     public class HashTests : IClassFixture<RedisFixture>, IDisposable
     {
@@ -40,7 +41,7 @@ namespace DataGate.Services.Tests.Redis
             }
         }
 
-        [Theory]
+        [Theory, Trait("Category", "A")]
         [ClassData(typeof(HashDataGenerator))]
         public async Task Set_WithKeyNameAndValueOfDifferentType_ShouldCreateHashKey(string itemName, object value)
         {
@@ -54,7 +55,7 @@ namespace DataGate.Services.Tests.Redis
             Assert.Equal(expected, actual);
         }
 
-        [Theory]
+        [Theory, Trait("Category", "A")]
         [InlineData(null)]
         [InlineData("")]
         [InlineData("       ")]
@@ -65,7 +66,7 @@ namespace DataGate.Services.Tests.Redis
             Assert.Throws<ArgumentNullException>(act);
         }
 
-        [Theory]
+        [Theory, Trait("Category", "A")]
         [InlineData(null, "emptykey")]
         [InlineData("", "emptykeytext")]
         [InlineData("               ", "largeemptykeytext")]
@@ -78,7 +79,7 @@ namespace DataGate.Services.Tests.Redis
             await Assert.ThrowsAsync<ArgumentNullException>(task);
         }
 
-        [Theory]
+        [Theory, Trait("Category", "A")]
         [InlineData(1)]
         [InlineData(5)]
         public async Task Increment_WithIncreaseValue_ShouldIncrease(long increase)
@@ -92,7 +93,7 @@ namespace DataGate.Services.Tests.Redis
             Assert.Equal(expected, actual);
         }
 
-        [Theory]
+        [Theory, Trait("Category", "A")]
         [InlineData(1)]
         [InlineData(5)]
         public async Task Decrement_WithDecreaseValue_ShouldDecrease(long decrease)
@@ -106,7 +107,7 @@ namespace DataGate.Services.Tests.Redis
             Assert.Equal(expected, actual);
         }
 
-        [Fact]
+        [Fact, Trait("Category", "A")]
         public async Task Remove_ShouldDeleteItemFromContainer()
         {
             var itemName = "todelete";
@@ -119,7 +120,7 @@ namespace DataGate.Services.Tests.Redis
             Assert.False(await hashItem.ContainsKey(itemName));
         }
 
-        [Fact]
+        [Fact, Trait("Category", "A")]
         public async Task Count_ShouldReturnCorrectNumberOfItems()
         {
             await this.hashItem.Set("link", "https://github.com");
