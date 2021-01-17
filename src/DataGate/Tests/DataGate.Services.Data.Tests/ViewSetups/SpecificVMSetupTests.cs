@@ -27,14 +27,12 @@ namespace DataGate.Services.Data.Tests.ViewSetups
     public class SpecificVMSetupTests
     {
         private readonly IEntityDetailsService service;
-        private readonly IFundService fundService;
         private readonly IEnumerable<TbHistoryFund> testData;
 
         public SpecificVMSetupTests(SqlServerFixture fixture)
         {
             this.service = EntityDetailsServiceTestData.CreateService(fixture.Context, fixture.Configuration);
             this.testData = FundServiceTestData.Generate();
-            //this.fundService = FundServiceTestData.Service(testData, fixture.Context);
         }
 
         [Fact]

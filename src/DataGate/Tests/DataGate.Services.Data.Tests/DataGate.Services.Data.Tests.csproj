@@ -24,6 +24,7 @@
 		<ProjectReference Include="..\..\Data\DataGate.Data\DataGate.Data.csproj" />
 		<ProjectReference Include="..\..\Services\DataGate.Services.Data\DataGate.Services.Data.csproj" />
 		<ProjectReference Include="..\..\Web\DataGate.Web\DataGate.Web.csproj" />
+		<ProjectReference Include="..\DataGate.Services.Tests\DataGate.Services.Tests.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
