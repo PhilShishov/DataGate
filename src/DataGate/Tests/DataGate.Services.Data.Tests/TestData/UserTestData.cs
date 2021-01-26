@@ -75,18 +75,22 @@ namespace DataGate.Services.Tests.TestData
             return roleManager;
         }
 
-        public static ClaimsPrincipal Create(UserManager<ApplicationUser> userManager, string name, string id, string role)
+        public static ClaimsPrincipal Create(UserManager<ApplicationUser> userManager, string userName, string userId,
+            RoleManager<ApplicationRole> roleManager, string roleName, string roleId)
         {
-            var user = new ApplicationUser { UserName = name, Id = id };
+            var role = new ApplicationRole { Name = roleName, Id = roleId };
+            roleManager.CreateAsync(role);
+
+            var user = new ApplicationUser { UserName = userName, Id = userId };
 
             userManager.CreateAsync(user);
-            userManager.AddToRoleAsync(user, role);
+            userManager.AddToRoleAsync(user, roleManager.Roles.FirstOrDefault(r => r.Id == roleId)?.Name);
 
             var claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.Name, name),
-                new Claim(ClaimTypes.NameIdentifier, id),
-                new Claim(ClaimTypes.Role, role),
+                new Claim(ClaimTypes.Name, userName),
+                new Claim(ClaimTypes.NameIdentifier, userId),
+                new Claim(ClaimTypes.Role, roleName),
             };
 
             userManager.AddClaimsAsync(user, claims);
@@ -94,26 +98,5 @@ namespace DataGate.Services.Tests.TestData
             var identity = new ClaimsIdentity(claims);
             return new ClaimsPrincipal(identity);
         }
-
-        //public static IEnumerable<RecentlyViewed> Generate(UsersDbContext usersContext)
-        //{
-        //    var list = new List<UserShareClassColumn>();
-
-        //    for (int i = 1; i <= 10; i++)
-        //    {
-        //        var notification = new UserShareClassColumn()
-        //        {
-        //            Name = $"Test{i}",
-        //            UserId = "testUserId",
-        //        };
-
-        //        list.Add(notification);
-        //    }
-
-        //    usersContext.UserShareClassColumn.AddRangeAsync(list);
-        //    usersContext.SaveChangesAsync();
-
-        //    return usersContext.RecentlyViewed.ToList();
-        //}
     }
 }

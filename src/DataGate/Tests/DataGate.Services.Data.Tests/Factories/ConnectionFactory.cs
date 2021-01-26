@@ -41,7 +41,9 @@ namespace DataGate.Services.Data.Tests.Factories
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .Options;
 
-            return new UsersDbContext(options);
+            var ctx = new UsersDbContext(options);
+
+            return ctx;
         }
     }
 }

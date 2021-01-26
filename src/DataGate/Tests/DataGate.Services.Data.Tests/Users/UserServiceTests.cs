@@ -1,6 +1,7 @@
 ﻿// Copyright (c) DataGate Project. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using DataGate.Common;
 using DataGate.Data.Models.Users;
 using DataGate.Services.Data.Users;
 using DataGate.Services.Tests.TestData;
@@ -23,14 +24,18 @@ namespace DataGate.Services.Data.Tests.Users
 
         public UserServiceTests()
         {
-            this.userManager = UserTestData.TestUserManager(new UserStore<ApplicationUser>(base.ApplicationContext));
-            this.roleManager = UserTestData.TestRoleManager(new RoleStore<ApplicationRole>(base.ApplicationContext));
+            this.userManager = UserTestData.TestUserManager(new UserStore<ApplicationUser>(base.UsersContext));
+            this.roleManager = UserTestData.TestRoleManager(new RoleStore<ApplicationRole>(base.UsersContext));
             this.service = UserTestData.Service(this.userManager, this.roleManager);
         }
 
-        [Fact]
-        public async Task UserService_All_ShouldWorkCorrecty()
+        [Theory]
+        [InlineData("testUser")]
+        public async Task UserService_All_ShouldWorkCorrecty(string userName)
         {
+            var testUser = UserTestData.Create(this.userManager, userName, $"{userName}Id",
+                this.roleManager, GlobalConstants.GuestRoleName, "testRoleId");
+
             var result = await this.service.All();
 
             Assert.NotNull(result);

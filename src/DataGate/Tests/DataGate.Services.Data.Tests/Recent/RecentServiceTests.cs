@@ -20,11 +20,13 @@ namespace DataGate.Services.Data.Tests.Recent
         private readonly IEnumerable<RecentlyViewed> testData;
         private readonly RecentService service;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly RoleManager<ApplicationRole> roleManager;
 
         public RecentServiceTests()
         {
             this.testData = RecentTestData.Generate(base.UsersContext);
             this.userManager = UserTestData.TestUserManager(new UserStore<ApplicationUser>(base.ApplicationContext));
+            this.roleManager = UserTestData.TestRoleManager(new RoleStore<ApplicationRole>(base.UsersContext));
             this.service = RecentTestData.Service(base.UsersContext, this.userManager);
         }
 
@@ -34,7 +36,7 @@ namespace DataGate.Services.Data.Tests.Recent
         public void ByUserId_WithValidData_ShouldWorkCorrecty(string userName, int expected)
         {
             var user = UserTestData.Create(this.userManager, userName, $"{userName}Id",
-                GlobalConstants.GuestRoleName);
+                this.roleManager, GlobalConstants.GuestRoleName, $"{GlobalConstants.GuestRoleName}Id");
 
             var result = this.service.ByUserId(user);
 
@@ -60,7 +62,7 @@ namespace DataGate.Services.Data.Tests.Recent
         public async Task Save_WithValidData_ShouldWorkCorrecty(string userName, string link)
         {
             var user = UserTestData.Create(this.userManager, userName, $"{userName}Id",
-                GlobalConstants.GuestRoleName);
+                this.roleManager, GlobalConstants.GuestRoleName, $"{GlobalConstants.GuestRoleName}Id");
 
             await this.service.Save(user, link);
 
@@ -83,7 +85,7 @@ namespace DataGate.Services.Data.Tests.Recent
         public async Task Save_WithInvalidDataLink_ShouldThrowException()
         {
             var user = UserTestData.Create(this.userManager, "testUser", "testUserId",
-                GlobalConstants.GuestRoleName);
+                this.roleManager, GlobalConstants.GuestRoleName, $"{GlobalConstants.GuestRoleName}Id");
 
             async Task act()
             {

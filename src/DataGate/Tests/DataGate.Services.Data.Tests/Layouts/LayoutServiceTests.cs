@@ -23,12 +23,14 @@ namespace DataGate.Services.Data.Tests.Layouts
         private readonly IEnumerable<RecentlyViewed> testData;
         private readonly LayoutService service;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly RoleManager<ApplicationRole> roleManager;
         private readonly IUserRepository<UserShareClassColumn> repository;
 
         public LayoutServiceTests()
         {
             this.testData = LayoutTestData.Generate(base.UsersContext);
-            this.userManager = UserTestData.TestUserManager(new UserStore<ApplicationUser>(base.ApplicationContext));
+            this.userManager = UserTestData.TestUserManager(new UserStore<ApplicationUser>(base.UsersContext));
+            this.roleManager = UserTestData.TestRoleManager(new RoleStore<ApplicationRole>(base.UsersContext));
             this.service = LayoutTestData.Service(this.userManager);
             this.repository = new EfUserRepository<UserShareClassColumn>(base.UsersContext);
         }
@@ -39,7 +41,7 @@ namespace DataGate.Services.Data.Tests.Layouts
         {
             var selectedColumns = new List<string> { "Id, Name" };
             var testUser = UserTestData.Create(this.userManager, userName, $"{userName}Id",
-                GlobalConstants.GuestRoleName);
+                this.roleManager, GlobalConstants.GuestRoleName, $"{GlobalConstants.GuestRoleName}Id");
 
             var result = this.service.ColumnsToDb<UserShareClassColumn>(selectedColumns, $"{userName}Id");
 
@@ -51,7 +53,7 @@ namespace DataGate.Services.Data.Tests.Layouts
         public void ColumnsToDb_WithEmptyColumns_ShouldWorkCorrecty()
         {
             var testUser = UserTestData.Create(this.userManager, "testUser", "testUserId",
-                GlobalConstants.GuestRoleName);
+                this.roleManager, GlobalConstants.GuestRoleName, $"{GlobalConstants.GuestRoleName}Id");
 
             var result = this.service.ColumnsToDb<UserShareClassColumn>(null, $"testUserId");
 
@@ -65,7 +67,7 @@ namespace DataGate.Services.Data.Tests.Layouts
         public void GetLayout_WithValidData_ShouldWorkCorrecty(string userName, int expected)
         {
             var testUser = UserTestData.Create(this.userManager, userName, $"{userName}Id",
-                GlobalConstants.GuestRoleName);
+                this.roleManager, GlobalConstants.GuestRoleName, $"{GlobalConstants.GuestRoleName}Id");
 
             //var user = await this.service.UserWithLayouts(testUser);
             var result = this.service.GetLayout<UserShareClassColumn>(this.repository, $"{userName}Id");
@@ -79,7 +81,7 @@ namespace DataGate.Services.Data.Tests.Layouts
         public async Task UserWithLayouts_WithValidData_ShouldWorkCorrecty(string userName)
         {
             var testUser = UserTestData.Create(this.userManager, userName, $"{userName}Id",
-                GlobalConstants.GuestRoleName);
+                this.roleManager, GlobalConstants.GuestRoleName, $"{GlobalConstants.GuestRoleName}Id");
 
             var user = await this.service.UserWithLayouts(testUser);
 
