@@ -11,11 +11,14 @@ namespace DataGate.Services.Data.Tests
 
     public class InMemoryContextProvider : IClassFixture<MappingsProvider>
     {
-        protected readonly ApplicationDbContext context;
+        protected readonly ApplicationDbContext ApplicationContext;
+        protected readonly UsersDbContext UsersContext;
+
 
         public InMemoryContextProvider()
         {
-            context = ConnectionFactory.CreateContextForInMemory();
+            ApplicationContext = ConnectionFactory.CreateApplicationContextForInMemory();
+            UsersContext = ConnectionFactory.CreateUsersContextForInMemory();
         }
     }
 }

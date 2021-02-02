@@ -14,7 +14,7 @@ namespace DataGate.Services.Data.Tests.Factories
 
     public static class ConnectionFactory
     {
-        public static ApplicationDbContext CreateContextForInMemory()
+        public static ApplicationDbContext CreateApplicationContextForInMemory()
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
@@ -33,6 +33,17 @@ namespace DataGate.Services.Data.Tests.Factories
                 .Options;
 
             return new ApplicationDbContext(options);
+        }
+
+        public static UsersDbContext CreateUsersContextForInMemory()
+        {
+            var options = new DbContextOptionsBuilder<UsersDbContext>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                .Options;
+
+            var ctx = new UsersDbContext(options);
+
+            return ctx;
         }
     }
 }

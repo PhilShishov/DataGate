@@ -177,8 +177,8 @@ namespace DataGate.Services.Data.Tests.Entities
         }
 
         [Theory]
-        [InlineData(253, 5)]
-        public async Task AllSelected_ShareClass_ShouldReturnEntities(int expectedCount, int expectedHeaders)
+        [InlineData(5)]
+        public async Task AllSelected_ShareClass_ShouldReturnEntities(int expectedHeaders)
         {
             this.dto = await EntityServiceTestData.Generate(this.service, SqlFunctionDictionary.AllShareClass);
 
