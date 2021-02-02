@@ -1,45 +1,45 @@
-﻿// Copyright (c) DataGate Project. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+﻿//// Copyright (c) DataGate Project. All rights reserved.
+//// Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using DataGate.Common;
-using DataGate.Data.Models.Users;
-using DataGate.Services.Data.Users;
-using DataGate.Services.Tests.TestData;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Xunit;
+//namespace DataGate.Services.Data.Tests.Users
+//{
+//    using System.Linq;
+//    using System.Threading.Tasks;
 
-namespace DataGate.Services.Data.Tests.Users
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
+//    using DataGate.Common;
+//    using DataGate.Data.Models.Users;
+//    using DataGate.Services.Data.Users;
+//    using DataGate.Services.Tests.TestData;
 
-    public class UserServiceTests : InMemoryContextProvider
-    {
-        private readonly UserManager<ApplicationUser> userManager;
-        private readonly RoleManager<ApplicationRole> roleManager;
-        private readonly UserService service;
+//    using Microsoft.AspNetCore.Identity;
+//    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-        public UserServiceTests()
-        {
-            this.userManager = UserTestData.TestUserManager(new UserStore<ApplicationUser>(base.UsersContext));
-            this.roleManager = UserTestData.TestRoleManager(new RoleStore<ApplicationRole>(base.UsersContext));
-            this.service = UserTestData.Service(this.userManager, this.roleManager);
-        }
+//    using Xunit;
 
-        [Theory]
-        [InlineData("testUser")]
-        public async Task UserService_All_ShouldWorkCorrecty(string userName)
-        {
-            var testUser = UserTestData.Create(this.userManager, userName, $"{userName}Id",
-                this.roleManager, GlobalConstants.GuestRoleName, "testRoleId");
+//    public class UserServiceTests : InMemoryContextProvider
+//    {
+//        private readonly UserManager<ApplicationUser> userManager;
+//        private readonly RoleManager<ApplicationRole> roleManager;
+//        private readonly UserService service;
 
-            var result = await this.service.All();
+//        public UserServiceTests()
+//        {
+//            this.userManager = UserTestData.TestUserManager(new UserStore<ApplicationUser>(base.UsersContext));
+//            this.roleManager = UserTestData.TestRoleManager(new RoleStore<ApplicationRole>(base.UsersContext));
+//            this.service = UserTestData.Service(this.userManager, this.roleManager);
+//        }
 
-            Assert.NotNull(result);
-            Assert.True(!result.Any());
-        }
-    }
-}
+//        [Theory]
+//        [InlineData("testUser")]
+//        public async Task UserService_All_ShouldWorkCorrecty(string userName)
+//        {
+//            var testUser = UserTestData.Create(this.userManager, userName, $"{userName}Id",
+//                this.roleManager, GlobalConstants.GuestRoleName, "testRoleId");
+
+//            var result = await this.service.All();
+
+//            Assert.NotNull(result);
+//            Assert.True(!result.Any());
+//        }
+//    }
+//}

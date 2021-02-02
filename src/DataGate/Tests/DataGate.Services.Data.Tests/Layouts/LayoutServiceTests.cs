@@ -14,8 +14,10 @@ namespace DataGate.Services.Data.Tests.Layouts
     using DataGate.Data.Repositories.UsersContext;
     using DataGate.Services.Data.Layouts;
     using DataGate.Services.Tests.TestData;
+
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
     using Xunit;
 
     public class LayoutServiceTests : InMemoryContextProvider

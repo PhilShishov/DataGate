@@ -97,7 +97,7 @@ namespace DataGate.Common
         public const string AppName = "DataGate";
         public const string AppFooter =
            "  DataGate - All rights reserved";
-        public const string AppVersion = "DataGate version 2020.2.2";
+        public const string AppVersion = "DataGate version 20.2.2";
         public const string AuthorName = "PhilipShishov";
         public const string Keywords =
             "ASPNET Core, JavaScript, jQuery, " +
