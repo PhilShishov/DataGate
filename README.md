@@ -204,7 +204,6 @@ This project is licensed under the [MIT License](LICENSE)
 ## Contact
 :boy: **Philip Shishov**
 
-- Facebook: [@philip.shishov](https://www.facebook.com/philip.shishov/)
 - LinkedIn: [@philshishov](https://www.linkedin.com/in/philshishov/)
 - Github: [@philshishov](https://github.com/philshishov)
 
