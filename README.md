@@ -100,8 +100,8 @@ https://pharusdatagate.com <br />
   * SignalR Core
 
 ### Client-side
-* RAZOR, JavaScript ES6, jQuery, Ajax, Bootstrap
-* JS/jQuery - DataTable, Chart, Chosen, Moment, Slick, SweetAlert, Browser-Update, Cookie
+* RAZOR, JavaScript
+* Libraries - jQuery, Ajax, Bootstrap, DataTable, Chart, Chosen, Moment, Slick, SweetAlert, Browser-Update, Cookie
 * Libman, Bundle, WebCompiler
 * SCSS/CSS3, HTML5 (SVG, Canvas, localStorage)
 
