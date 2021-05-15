@@ -58,8 +58,8 @@ detailed information about the UCITS and AIF handled by the management company s
 Registration is only possible through email invitation and confirmation. <br />
 A guest account has been set-up for free use. <br />
 
-Username: **datagate_guest** <br />
-Password: **datagate_guest** <br />
+Username: **datagate.guest** <br />
+Password: **datagate.guest** <br />
 https://pharusdatagate.com <br />
  
  ## Technologies
