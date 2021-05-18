@@ -103,7 +103,7 @@ https://pharusdatagate.com <br />
 * RAZOR, JavaScript
 * Libraries - jQuery, Ajax, Bootstrap, DataTable, Chart, Chosen, Moment, Slick, SweetAlert, Browser-Update, Cookie
 * Libman, Bundle, WebCompiler
-* SCSS/CSS3, HTML5 (SVG, Canvas, localStorage)
+* SASS/CSS3, HTML5 (SVG, Canvas, localStorage)
 
 ### Testing
 * xUnit
