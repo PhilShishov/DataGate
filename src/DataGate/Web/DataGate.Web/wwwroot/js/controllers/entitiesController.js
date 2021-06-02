@@ -106,7 +106,7 @@ function extract(model) {
             },
         });
         $.ajax({
-            url: '/Media/GenerateReport',
+            url: '/media/generate',
             type: 'POST',
             data: model,
             headers: { 'X-CSRF-TOKEN': token },
@@ -120,7 +120,7 @@ function extract(model) {
             }
             setTimeout($.unblockUI, 1000);
             if (data.fileName != '') {
-                const url = '/Media/Download?fileName=' + data.fileName;
+                const url = '/media/download?fileName=' + data.fileName;
                 window.location = url;
             }
         }).fail(function (request, status, error) {

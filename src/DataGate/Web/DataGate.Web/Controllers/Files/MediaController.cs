@@ -35,6 +35,7 @@ namespace DataGate.Web.Controllers
         }
 
         [HttpPost, AjaxOnly]
+        [Route("media/generate")]
         [ValidateAntiForgeryToken]
         public JsonResult GenerateReport(DownloadInputModel model)
         {
@@ -72,7 +73,7 @@ namespace DataGate.Web.Controllers
             return this.Json(new { success = false });
         }
 
-        [HttpGet, AjaxOnly]
+        [Route("media/download")]
         [DeleteFileAttribute]
         public IActionResult Download(string fileName)
         {

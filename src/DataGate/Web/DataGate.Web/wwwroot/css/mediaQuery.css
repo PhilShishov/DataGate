@@ -152,10 +152,6 @@
         margin: 0 auto;
     }
 
-    body {
-        overflow: hidden;
-    }
-
     .container-not-found {
         width: 1050px;
         display: flex;
