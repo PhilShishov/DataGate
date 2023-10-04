@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
@@ -9,7 +9,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="HtmlSanitizer" Version="5.0.372" />
+		<PackageReference Include="HtmlSanitizer" Version="8.0.723" />
 		<PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.1" />
 		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
 	</ItemGroup>
